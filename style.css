@@ -5,7 +5,7 @@ body {
 
 #container {
   position: relative;
-  width: 55em;
+  width: 50em;
   margin: 2em auto;
 //  background-color: #FF00FF;
 }
@@ -21,24 +21,24 @@ body {
   position: absolute;
   left: 0px;
 //  border: 1px solid black;
-  width: 13em;
+  width: 11em;
 //  top: 8em;
+//  background-color: white;
 }
 
 #content {
   position: absolute;
 //  background-color: #FF0000;
-  left: 14em;
-  padding: 0.5em 1em;
+  left: 12em;
+  padding: 0em 1em;
   border-left: 1px solid gray;
 }
 
 h1, h2 {
   background-color: #eef2ff;
-  text-align: left;
 }
 
-.title {
+.title, #leftnavbar li.section div span {
   font-variant: small-caps;
   background-color: white;
   color: #005aa0;
@@ -57,6 +57,7 @@ tr {
 .news-header {
   font-size: 120%;
   margin-bottom: 1em;
+  background-color: #f4f8ff;
 }
 
 .news-date {
@@ -68,6 +69,7 @@ tr {
 .news-short {
   font-weight: bold;
   font-style: italic;
+  color: #005aa0;
 }
 
 .news-descr > td {
@@ -78,15 +80,22 @@ tr {
 
 #leftnavbar ul {
   display: block;
+  padding: 0 0 0 0;
 }
 
 #leftnavbar li.section {
   font-variant: small-caps;
   list-style: none;
+  margin-bottom: 1em;
+}
+
+#leftnavbar li.section div {
+  background-color: #eef2ff;
 }
 
 #leftnavbar li.section li {
   font-variant: normal;
   list-style: none;
+  padding-left: 1.5em;
 }
 
