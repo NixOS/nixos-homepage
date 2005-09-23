@@ -1,0 +1,92 @@
+body {
+/*  background-color: #e0e0e0;
+  background: url(./cgn4.jpg) no-repeat top left; */
+}
+
+#container {
+  position: relative;
+  width: 55em;
+  margin: 2em auto;
+//  background-color: #FF00FF;
+}
+
+#logo {
+  display: none;
+  position: absolute;
+//  background-color: #00FFF0;
+  border: 1px;
+}
+
+#leftnavbar {
+  position: absolute;
+  left: 0px;
+//  border: 1px solid black;
+  width: 13em;
+//  top: 8em;
+}
+
+#content {
+  position: absolute;
+//  background-color: #FF0000;
+  left: 14em;
+  padding: 0.5em 1em;
+  border-left: 1px solid gray;
+}
+
+h1, h2 {
+  background-color: #eef2ff;
+  text-align: left;
+}
+
+.title {
+  font-variant: small-caps;
+  background-color: white;
+  color: #005aa0;
+  padding-right: 0.3em;
+}
+
+
+.news {
+  padding: 0 0 0 0;
+}
+
+tr {
+  margin-top: 5em;  
+}
+
+.news-header {
+  font-size: 120%;
+  margin-bottom: 1em;
+}
+
+.news-date {
+  font-weight: bold;
+  padding-right: 1em;
+  width: 1%;
+}
+
+.news-short {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.news-descr > td {
+  padding-left: 1em;
+  padding-bottom: 1em;
+}
+
+
+#leftnavbar ul {
+  display: block;
+}
+
+#leftnavbar li.section {
+  font-variant: small-caps;
+  list-style: none;
+}
+
+#leftnavbar li.section li {
+  font-variant: normal;
+  list-style: none;
+}
+
