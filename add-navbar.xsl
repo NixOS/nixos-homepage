@@ -65,13 +65,13 @@
                   <subsection url="docs/papers.html">Research papers</subsection>
                 </section>
                 <section>Projects
-                  <subsection url="foo">Nix Packages</subsection>
+                  <subsection url="nixpkgs.html">Nix Packages</subsection>
                   <subsection url="foo">NixOS</subsection>
                   <subsection url="foo">Services</subsection>
                   <subsection url="foo">Buildfarm</subsection>
                 </section>
                 <section>Resources
-                  <subsection url="https://mail.cs.uu.nl/pipermail/nix-dev/">Mailing list</subsection>
+                  <subsection url="https://mail.cs.uu.nl/mailman/listinfo/nix-dev">Mailing list</subsection>
                   <subsection url="https://bugs.cs.uu.nl/secure/BrowseProject.jspa?id=100a72">Bug tracker</subsection>
                   <subsection url="irc://irc.freenode.net/#trace">IRC channel</subsection>
                 </section>

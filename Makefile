@@ -1,4 +1,5 @@
-HTML = index.html about.html news.html docs/papers.html
+HTML = index.html about.html news.html docs/papers.html \
+  nixpkgs.html
 
 all: $(HTML)
 
