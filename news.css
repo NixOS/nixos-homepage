@@ -9,6 +9,7 @@
 }
 
 .news-date {
+  vertical-align: top;
   font-weight: bold;
   padding-right: 1em;
   width: 1%;

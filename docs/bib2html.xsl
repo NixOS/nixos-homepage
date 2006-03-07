@@ -43,6 +43,9 @@
             <xsl:for-each select="key('years', .)">
 
               <li class="bibitem">
+                <xsl:if test="parent::*/@id">
+                  <xsl:attribute name="id"><xsl:value-of select="parent::*/@id" /></xsl:attribute>
+                </xsl:if>
                 <xsl:apply-templates mode="item" select="parent::*" />
               </li>
 
