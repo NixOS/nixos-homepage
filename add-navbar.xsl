@@ -59,10 +59,10 @@
                   <subsection url="http://nix.cs.uu.nl/dist/nix/nix-unstable-latest">Latest unstable release</subsection>
                   <subsection url="http://nix.cs.uu.nl/dist/nix/">Older releases</subsection>
                 </section>
-                <section url="docs.html">Documentation
+                <section url="docs/index.html">Documentation
                   <subsection url="foo">FAQ</subsection>
                   <subsection url="{$latestNix}/manual/">Manual</subsection>
-                  <subsection url="foo">Research papers</subsection>
+                  <subsection url="docs/papers.html">Research papers</subsection>
                 </section>
                 <section>Projects
                   <subsection url="foo">Nix Packages</subsection>

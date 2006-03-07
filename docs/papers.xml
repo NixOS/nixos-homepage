@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<bibliography svn-id="$Id: pubs.xml 108 2006-02-21 18:14:39Z eelco $"
+              xmlns:h="http://www.w3.org/1999/xhtml">
+
+  <authorURL url="http://www.cs.uu.nl/~eelco/">Eelco Dolstra</authorURL>
+  <authorURL url="http://www.cs.uu.nl/~martin/">Martin Bravenboer</authorURL>
+  <authorURL url="http://www.cs.uu.nl/~visser/">Eelco Visser</authorURL>
+  <authorURL url="http://www.cs.uu.nl/wiki/Main/MerijnDeJonge">Merijn de Jonge</authorURL>
+  <authorURL url="http://www.serc.nl/people/florijn/">Gert Florijn</authorURL>
+
+  <items>
+
+    <phdthesis>
+      <author>Eelco Dolstra</author>
+      <title>The Purely Functional Software Deployment Model</title>
+      <location>Faculty of Science, Utrecht, The Netherlands</location>
+      <month>January</month>
+      <year>2006</year>
+      <isbn>90-393-4130-3</isbn>
+      <link type="pdf" url="phd-thesis.pdf" />
+      <link type="igitur" url="http://igitur-archive.library.uu.nl/dissertations/2006-0118-200031/index.htm" />
+
+      <abstract>
+        <p>Software deployment is the set of activities related to
+        getting software components to work on the machines of end
+        users.  It includes activities such as installation,
+        upgrading, uninstallation, and so on.  Many tools have been
+        developed to support deployment, but they all have serious
+        limitations with respect to correctness.  For instance, the
+        installation of a component can lead to the failure of
+        previously installed components; a component might require
+        other components that are not present; and it is generally
+        difficult to undo deployment actions.  The fundamental causes
+        of these problems are a lack of isolation between components,
+        the difficulty in identifying the dependencies between
+        components, and incompatibilities between versions and
+        variants of components.</p>
+
+        <p>This thesis describes a better approach based on a purely
+        functional deployment model, implemented in a deployment
+        system called Nix.  Components are stored in isolation from
+        each other in a Nix store.  Each component has a name that
+        contains a cryptographic hash of all inputs that contributed
+        to its build process, and the content of a component never
+        changes after it has been built.  Hence the model is purely
+        functional.</p>
+
+        <p>This storage scheme provides several important advantages.
+        First, it ensures isolation between components: if two
+        components differ in any way, they will be stored in different
+        locations and will not overwrite each other.  Second, it
+        allows us to identify component dependencies.  Undeclared
+        build time dependencies are prevented due to the absence of
+        “global” component directories used in other deployment
+        systems.  Runtime dependencies can be found by scanning for
+        cryptographic hashes in the binary contents of components, a
+        technique analogous to conservative garbage collection in
+        programming language implementation.  Since dependency
+        information is complete, complete deployment can be performed
+        by copying closures of components under the dependency
+        relation.</p>
+
+        <p>Developers and users are not confronted with components’
+        cryptographic hashes directly.  Components are built
+        automatically from Nix expressions, which describe how to
+        build and compose arbitrary software components; hashes are
+        computed as part of this process.  Components are
+        automatically made available to users through “user
+        environments”, which are synthesised sets of activated
+        components.  User environments enable atomic upgrades and
+        rollbacks, as well as different sets of activated components
+        for different users.</p>
+
+        <p>Nix expressions provide a source-based deployment model.
+        However, source-based deployment can be transparently
+        optimised into binary deployment by making pre-built binaries
+        (keyed on their cryptographic hashes) available in a shared
+        location such as a network server.  This is referred to as
+        transparent source/binary deployment.</p>
+
+        <p>The purely functional deployment model has been validated
+        by applying it to the deployment of more than 278 existing
+        Unix packages.  In addition, this thesis shows that the model
+        can be applied naturally to the related activities of
+        continuous integration using build farms, service deployment
+        and build management.</p>
+
+      </abstract>
+      
+    </phdthesis>
+
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <title>Secure Sharing Between Untrusted Users in a Transparent
+      Source/Binary Deployment Model</title>
+      <booktitle url="http://www.ase-conference.org/">20th IEEE/ACM
+      International Conference on Automated Software Engineering (ASE
+      2005)</booktitle>
+      <pages first="154" last="163" />
+      <location>Long Beach, California, USA</location>
+      <publisher>ACM Press</publisher>
+      <month>November</month>
+      <year>2005</year>
+      <htmlnote><h:em><h:strong>[9% acceptance
+      rate]</h:strong></h:em></htmlnote>
+      <link type="pdf" url="secsharing-ase2005-final.pdf" />
+      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1101933&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
+
+      <abstract>
+        <p>The Nix software deployment system is based on the paradigm
+        of <h:em>transparent source/binary deployment</h:em>: distributors
+        deploy descriptors that build components from source, while
+        client machines can transparently optimise such source builds
+        by downloading pre-built binaries from remote repositories.
+        This model combines the simplicity and flexibility of source
+        deployment with the efficiency of binary deployment.  A
+        desirable property is <h:em>sharing</h:em> of components: if
+        multiple users install from the same source descriptors,
+        ideally only one remotely built binary should be installed.
+        The problem is that users must trust that remotely downloaded
+        binaries were built from the sources they are claimed to have
+        been built from, while users in general do not have a trust
+        relation with each other or with the same remote
+        repositories.</p>
+
+        <p>This paper presents three models that enable sharing: the
+        <h:em>extensional model</h:em> that requires that all users on a
+        system have the same remote trust relations, the
+        <h:em>intensional model</h:em> that does not have this requirement
+        but may be suboptimal in terms of space use, and the <h:em>mixed
+        model</h:em> that merges the best properties of both.  The
+        latter two models are achieved through a novel technique of
+        {\em hash rewriting} in content-addressable component stores,
+        and were implemented in the context of the Nix system.</p>
+      </abstract>
+      
+    </inproceedings>
+
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <author>Martin Bravenboer</author>
+      <author>Eelco Visser</author>
+      <title>Service Configuration Management</title>
+      <editor>E. James Whitehead, Jr.</editor>
+      <editor>Annita Persson Dahlqvist</editor>
+      <booktitle url="http://www.cs.ucsc.edu/~ejw/scm12/">12th
+      International Workshop on Software Configuration Management
+      (SCM-12)</booktitle>
+      <pages first="83" last="98" />
+      <location>Long Beach, California, USA</location>
+      <month>September</month>
+      <year>2005</year>
+      <link type="pdf" url="servicecm-scm12-final.pdf" />
+
+      <abstract>
+        The deployment of services — sets of running programs that
+        provide some useful facility on a system or network — is
+        typically implemented through a manual, time-consuming and
+        error-prone process.  For instance, system administrators must
+        deploy the necessary software components, edit configuration
+        files, start or stop processes, and so on.  This is often done
+        in an <h:em>ad hoc</h:em> style with no reproducibility, violating
+        proper configuration management practices.  In this paper we
+        show that build management, software deployment and service
+        deployment can be integrated into a single formalism.  We do
+        this in the context of the Nix software deployment system, and
+        show that its advantages — co-existence of versions and
+        variants, atomic upgrades and rollbacks, and component closure
+        — extend naturally to service deployment.  The approach also
+        elegantly extends to distributed services.  In addition, we
+        show that the Nix expression language can simplify the
+        implementation of crosscutting variation points in services.
+      </abstract>
+
+    </inproceedings>
+
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <title>Efficient Upgrading in a Purely Functional Component
+      Deployment Model</title>
+      <editor>George Heineman et al.</editor>
+      <booktitle url="http://www.sei.cmu.edu/pacc/CBSE2005/">Eighth
+      International SIGSOFT Symposium on Component-based Software
+      Engineering (CBSE 2005)</booktitle>
+      <volume url="http://www.springeronline.com/sgw/cda/frontpage/0,11855,5-40109-22-48185705-0,00.html">3489</volume>
+      <series>Lecture Notes in Computer Science</series>
+      <pages first="219" last="234" />
+      <location>St. Louis, Missouri, USA</location>
+      <publisher>Springer-Verlag</publisher>
+      <month>May</month>
+      <year>2005</year>
+      <link type="pdf" url="eupfcdm-cbse2005-final.pdf" />
+      <htmlnote>© Springer-Verlag.</htmlnote>
+
+      <abstract>
+        Safe and efficient deployment of software components is an
+        important aspect of CBSE.  The Nix deployment system enables
+        side-by-side deployment of different versions and variants of
+        components, complete installation, safe upgrades, and safe
+        uninstalls through garbage collection.  It accomplishes this
+        through a purely functional deployment model, meaning that the
+        file system content of a component only depends on the inputs
+        used to build it, and never changes afterwards.  An apparent
+        downside to this model is that upgrading “fundamental”
+        components used as build inputs by many other components
+        becomes expensive, since all of these must be rebuilt and
+        redeployed.  In this paper we show that binary patching
+        between sets of components enables efficient deployment of
+        upgrades in the purely functional model, transparently to
+        users.  Sequences of patches can be combined automatically to
+        enable upgrading between arbitrary versions.  The approach was
+        empirically validated.
+      </abstract>
+        
+    </inproceedings>
+
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <author>Merijn de Jonge</author>
+      <author>Eelco Visser</author>
+      <title>Nix: A Safe and Policy-Free System for Software
+      Deployment</title>
+      <editor>Lee Damon</editor>
+      <booktitle url="http://www.usenix.org/events/lisa04/">18th
+      Large Installation System Administration Conference (LISA
+      '04)</booktitle>
+      <pages first="79" last="92" />
+      <location>Atlanta, Georgia, USA</location>
+      <publisher>USENIX</publisher>
+      <month>November</month>
+      <year>2004</year>
+      <link type="pdf" url="nspfssd-lisa2004-final.pdf" />
+
+      <abstract>
+        Existing systems for software deployment are neither safe nor
+        sufficiently flexible.  Primary safety issues are the
+        inability to enforce reliable specification of component
+        dependencies, and the lack of support for multiple versions or
+        variants of a component.  This renders deployment operations
+        such as upgrading or deleting components dangerous and
+        unpredictable.  A deployment system must also be flexible
+        (i.e., policy-free) enough to support both centralised and
+        local package management, and to allow a variety of mechanisms
+        for transferring components.  In this paper we present Nix, a
+        deployment system that addresses these issues through a simple
+        technique of using cryptographic hashes to compute unique
+        paths for component instances.
+      </abstract>
+      
+    </inproceedings>
+
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <author>Eelco Visser</author>
+      <author>Merijn de Jonge</author>
+      <title>Imposing a Memory Management Discipline on Software
+      Deployment</title>
+      <booktitle url="http://conferences.iee.org/icse2004/">26th
+      International Conference on Software Engineering (ICSE
+      2004)</booktitle>
+      <pages first="583" last="592" />
+      <location>Edinburgh, Scotland</location>
+      <publisher>IEEE Computer Society</publisher>
+      <month>May</month>
+      <year>2004</year>
+      <htmlnote><h:em><h:strong>[13% acceptance
+      rate]</h:strong></h:em></htmlnote>
+      <link type="pdf" url="immdsd-icse2004-final.pdf" />
+      <link type="acm" url="http://portal.acm.org/citation.cfm?id=999463&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
+
+      <abstract>
+        The deployment of software components frequently fails because
+        dependencies on other components are not declared explicitly
+        or are declared imprecisely.  This results in an incomplete
+        reproduction of the environment necessary for proper
+        operation, or in interference between incompatible variants.
+        In this paper we show that these deployment hazards are
+        similar to pointer hazards in memory models of programming
+        languages and can be countered by imposing a memory management
+        discipline on software deployment.  Based on this analysis we
+        have developed a generic, platform and language independent,
+        discipline for deployment that allows precise dependency
+        verification; exact identification of component variants;
+        computation of complete closures containing all components on
+        which a component depends; maximal sharing of components
+        between such closures; and concurrent installation of
+        revisions and variants of components.  We have implemented the
+        approach in the Nix deployment system, and used it for the
+        deployment of a large number of existing Linux packages.  We
+        compare its effectiveness to other deployment systems.
+      </abstract>
+      
+    </inproceedings>
+
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <title>Integrating Software Construction and Software Deployment</title>
+      <editor>Bernhard Westfechtel</editor>
+      <editor>André van der Hoek</editor>
+      <booktitle url="http://www-i3.informatik.rwth-aachen.de/private/bernhard/scm11.html">11th International Workshop on Software Configuration Management (SCM-11)</booktitle>
+      <volume url="http://www.springerlink.com/link.asp?id=vwche2jnnlq4">2649</volume>
+      <series>Lecture Notes in Computer Science</series>
+      <pages first="102" last="117" />
+      <location>Portland, Oregon, USA</location>
+      <month>May</month>
+      <year>2003</year>
+      <link type="pdf" url="iscsd-scm11-final.pdf" />
+
+      <abstract>
+        Classically, software deployment is a process consisting of
+        building the software, packaging it for distribution, and
+        installing it at the target site.  This approach has two
+        problems.  First, a package must be annotated with dependency
+        information and other meta-data.  This to some extent overlaps
+        with component dependencies used in the build process.
+        Second, the same source system can often be built into an
+        often very large number of <h:em>variants</h:em>.  The distributor
+        must decide which element(s) of the variant space will be
+        packaged, reducing the flexibility for the receiver of the
+        package.  In this paper we show how building and deployment
+        can be integrated into a single formalism.  We describe a
+        build manager called <h:em>Maak</h:em> that can handle deployment
+        through a sufficiently general module system.  Through the
+        sharing of generated files, a source distribution
+        <h:em>transparently</h:em> turns into a binary distribution,
+        removing the dichotomy between these two modes of deployment.
+        In addition, the creation and deployment of variants becomes
+        easy through the use of a simple functional language as the
+        build formalism.
+      </abstract>
+      
+    </inproceedings>
+
+  </items>
+
+</bibliography>

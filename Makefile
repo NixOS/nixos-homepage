@@ -1,4 +1,4 @@
-HTML = index.html about.html news.html
+HTML = index.html about.html news.html docs/papers.html
 
 all: $(HTML)
 
@@ -9,3 +9,7 @@ check: all
 	xsltproc --xinclude \
 	    --stringparam fileName "$@" \
 	    --novalid add-navbar.xsl $< > $@ || rm $@
+
+docs/papers-in.html: docs/papers.xml docs/bib2html.xsl lib.xsl
+	xsltproc docs/bib2html.xsl docs/papers.xml > docs/papers-in.html || rm docs/papers-in.html
+
