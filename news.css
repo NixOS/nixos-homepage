@@ -1,0 +1,26 @@
+.news {
+  padding: 0 0 0 0;
+}
+
+.news-header {
+  font-size: 120%;
+  margin-bottom: 1em;
+  background-color: #f4f8ff;
+}
+
+.news-date {
+  font-weight: bold;
+  padding-right: 1em;
+  width: 1%;
+}
+
+.news-short {
+  font-weight: bold;
+  font-style: italic;
+  color: #005aa0;
+}
+
+.news-descr > td {
+  padding-left: 1em;
+  padding-bottom: 1em;
+}

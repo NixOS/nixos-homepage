@@ -1,101 +1,71 @@
-body {
-/*  background-color: #e0e0e0;
-  background: url(./cgn4.jpg) no-repeat top left; */
+body
+{
+    font-family: sans-serif;
+    background: white;
+    margin: 2em 1em 2em 1em;
 }
 
-#container {
-  position: relative;
-  width: 50em;
-  margin: 2em auto;
-//  background-color: #FF00FF;
+h1, h2, h3 {
+    font-weight: bold;
+    color: #005aa0;
 }
 
-#logo {
-  display: none;
-  position: absolute;
-//  background-color: #00FFF0;
-  border: 1px;
+h1 {
+    font-size: 220%;
 }
 
-#leftnavbar {
-  position: absolute;
-  left: 0px;
-//  border: 1px solid black;
-  width: 11em;
-//  top: 8em;
-//  background-color: white;
+h2 {
+    font-size: 130%;
 }
 
-#content {
-  position: absolute;
-//  background-color: #FF0000;
-  left: 12em;
-  padding: 0em 1em;
-  border-left: 1px solid gray;
+h3 {
+    font-size: 100%;
 }
 
 h1, h2 {
-  background-color: #eef2ff;
+    background-color: #eef2ff;
+    font-variant: small-caps;
 }
 
-.title, #leftnavbar li.section div span {
-  font-variant: small-caps;
-  background-color: white;
-  color: #005aa0;
-  padding-right: 0.3em;
+table {
+    border-collapse: collapse;
 }
 
-
-.news {
-  padding: 0 0 0 0;
+th {
+    text-align: center;
+    font-weight: bold;
 }
 
-tr {
-  margin-top: 5em;  
+td, th {
+    padding: 2px 5px;
 }
 
-.news-header {
-  font-size: 120%;
-  margin-bottom: 1em;
-  background-color: #f4f8ff;
+th {
+    background: #ffffc0;
 }
 
-.news-date {
-  font-weight: bold;
-  padding-right: 1em;
-  width: 1%;
+a img {
+    border: 0;
 }
 
-.news-short {
-  font-weight: bold;
-  font-style: italic;
-  color: #005aa0;
+a {
+    text-decoration: none;
 }
 
-.news-descr > td {
-  padding-left: 1em;
-  padding-bottom: 1em;
+a:hover, a:visited:hover {
+    text-decoration: underline;
 }
 
 
-#leftnavbar ul {
-  display: block;
-  padding: 0 0 0 0;
+tr.odd > td {
+    background: #f0f0f0;
 }
 
-#leftnavbar li.section {
-  font-variant: small-caps;
-  list-style: none;
-  margin-bottom: 1em;
+li {
+    margin-bottom: 1em;
+    list-style: square;
 }
 
-#leftnavbar li.section div {
-  background-color: #eef2ff;
+pre {
+    margin-left: 2em;
 }
-
-#leftnavbar li.section li {
-  font-variant: normal;
-  list-style: none;
-  padding-left: 1.5em;
-}
-
