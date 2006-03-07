@@ -14,6 +14,8 @@
   <xsl:param name="fileName" />
   <xsl:param name="toTop" />
 
+  <xsl:param name="latestNix">http://nix.cs.uu.nl/dist/nix/nix-0.9.2</xsl:param>
+
   <xsl:output method='xml' encoding="UTF-8"
               doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
               doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
@@ -47,14 +49,14 @@
                 <section url="index.html">Home</section>
                 <section url="about.html">About</section>
                 <section url="news.html">News</section>
-                <section url="download.html">Download
-                  <subsection url="foo">Latest stable release</subsection>
-                  <subsection url="foo">Latest unstable release</subsection>
-                  <subsection url="foo">Older releases</subsection>
+                <section>Download
+                  <subsection url="{$latestNix}">Latest stable release</subsection>
+                  <subsection url="http://nix.cs.uu.nl/dist/nix/nix-unstable-latest">Latest unstable release</subsection>
+                  <subsection url="http://nix.cs.uu.nl/dist/nix/">Older releases</subsection>
                 </section>
                 <section url="docs.html">Documentation
                   <subsection url="foo">FAQ</subsection>
-                  <subsection url="foo">Manual</subsection>
+                  <subsection url="{$latestNix}/manual/">Manual</subsection>
                   <subsection url="foo">Research papers</subsection>
                 </section>
                 <section>Projects

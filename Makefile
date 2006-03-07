@@ -1,4 +1,4 @@
-HTML = index.html news.html
+HTML = index.html about.html news.html
 
 all: $(HTML)
 
@@ -9,4 +9,4 @@ check: all
 	xsltproc --xinclude \
 	    --stringparam fileName "$@" \
 	    --stringparam toTop "$$(for i in $$(seq 1 $$(echo -n $< | sed 's|[^/]||g' | wc -c)); do echo -n ../; done)" \
-	    --nonet --novalid add-navbar.xsl $< > $@ || rm $@
+	    --novalid add-navbar.xsl $< > $@ || rm $@
