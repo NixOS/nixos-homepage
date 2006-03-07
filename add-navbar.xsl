@@ -12,7 +12,12 @@
                 >
 
   <xsl:param name="fileName" />
-  <xsl:param name="toTop" />
+
+  <xsl:param name="toTop">
+    <xsl:for-each select="str:split($fileName, '')[text() = '/']">
+      <xsl:text>../</xsl:text>
+    </xsl:for-each>
+  </xsl:param>
 
   <xsl:param name="latestNix">http://nix.cs.uu.nl/dist/nix/nix-0.9.2</xsl:param>
 
