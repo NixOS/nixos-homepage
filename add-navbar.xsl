@@ -168,7 +168,7 @@
       <xsl:for-each select="document('news.xml')/news/item[not($foo) or position() &lt;= $foo]">
 
         <tr class="news-header">
-          <td class="news-date"><xsl:value-of select="date" /></td>
+          <td class="news-date"><xsl:value-of select="year" />/<xsl:value-of select="month" />/<xsl:value-of select="day" /></td>
           <td class="news-short">
             <xsl:copy-of select="title/child::node()" />
           </td>
