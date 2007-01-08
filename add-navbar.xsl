@@ -19,7 +19,7 @@
     </xsl:for-each>
   </xsl:param>
 
-  <xsl:param name="latestNix">http://nix.cs.uu.nl/dist/nix/nix-0.9.2</xsl:param>
+  <xsl:param name="latestNix">http://nix.cs.uu.nl/dist/nix/nix-0.10.1</xsl:param>
 
   <xsl:output method='xml' encoding="UTF-8"
               doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -66,7 +66,7 @@
                 </section>
                 <section>Projects
                   <subsection url="nixpkgs.html">Nix Packages</subsection>
-                  <subsection url="foo">NixOS</subsection>
+                  <subsection url="nixos/index.html">NixOS</subsection>
                   <subsection url="foo">Services</subsection>
                   <subsection url="foo">Buildfarm</subsection>
                 </section>
