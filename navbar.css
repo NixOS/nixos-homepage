@@ -1,7 +1,7 @@
 #container {
-  position: relative;
+  //position: relative;
   //width: 55em;
-  margin: 2em auto;
+  //margin: 2em auto;
 }
 
 #leftnavbar {
@@ -19,7 +19,8 @@
 #content {
   position: absolute;
   left: 13em;
-  padding: 0em 1em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 h1 {

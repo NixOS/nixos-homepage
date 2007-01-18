@@ -23,7 +23,7 @@ executables</a>.</p>
 <h2>Description</h2>
 
 <p>ELF executables always specify a so-called
-<emph>interpreter</emph>, which is a program that actually loads the
+<em>interpreter</em>, which is a program that actually loads the
 executable.  (The kernel just loads the interpreter, not the
 executable.)  For example, on a Linux/x86 system the ELF interpreter
 is typically the file <tt>/lib/ld-linux.so.2</tt>.  It is sometimes
@@ -32,47 +32,48 @@ test a version of Glibc installed in a location other than
 <tt>/lib</tt>.  And in the <a href="nixpkgs.html">Nix Packages
 collection</a> we build our own Glibc, which we obviously want to
 use.  Building programs with a different interpreter is a matter of
-using the linker flag <tt>-dynamic-linker</tt>:
+using the linker flag <tt>-dynamic-linker</tt>:</p>
 
 <pre class="code">
 gcc -Wl,-dynamic-linker,/my/lib/ld-linux.so.2 ...
 </pre>
 
-However, this doesn’t work with third-party binaries (such as Adobe
+<p>However, this doesn’t work with third-party binaries (such as Adobe
 Reader in Nixpkgs).  This is where PatchELF comes in.  You can simply
-rewrite the executable:
+rewrite the executable:</p>
 
 <pre class="code">
 patchelf --set-interpreter /my/lib/my-ld-linux.so.2 program
 </pre>
 
-This modifies the interpreter section of <tt>program</tt> to refer to
-the specified file.  This is not quite trivial because the path of the
-new interpreter may be longer than the old one, in which case it won’t
-fit.  PatchELF takes care of “growing” the executable with sufficient
-space at the beginning to containg the new interpreter field.  As a
-result, the resulting program may be one page (4 KiB) larger.</p>
+<p>This modifies the interpreter section of <tt>program</tt> to refer
+to the specified file.  This is not quite trivial because the path of
+the new interpreter may be longer than the old one, in which case it
+won’t fit.  PatchELF takes care of “growing” the executable with
+sufficient space at the beginning to containg the new interpreter
+field.  As a result, the resulting program may be one page (4 KiB)
+larger.</p>
 
-<p>Likewise, you can change the <emph>RPATH</emph>, the linker search
-path embedded into executables and dynamic libraries:
+<p>Likewise, you can change the <em>RPATH</em>, the linker search
+path embedded into executables and dynamic libraries:</p>
 
 <pre class="code">
 patchelf --set-rpath /opt/my-libs/lib:/foo/lib program
 </pre>
 
-This causes the dynamic linker to search in <tt>/opt/my-libs/lib</tt>
+<p>This causes the dynamic linker to search in <tt>/opt/my-libs/lib</tt>
 and <tt>/foo/lib</tt> for the shared libraries needed by
 <tt>program</tt>.  Of course, you could also set the environment
 variable <tt>LD_LIBRARY_PATH</tt>, but that’s often inconvenient as it
 requires a wrapper script to set up the environment.</p>
 
-<p>Finally, it is possible to remove unused paths from the RPATH:
+<p>Finally, it is possible to remove unused paths from the RPATH:</p>
 
 <pre class="code">
 patchelf --shrink-rpath program
 </pre>
 
-A path is considered unused if none of the program’s library
+<p>A path is considered unused if none of the program’s library
 dependencies can be found in that path.  This is primarily useful in
 the standard build environment of Nixpkgs, where it is used to get rid
 of unnecessary runtime dependencies.</p>
