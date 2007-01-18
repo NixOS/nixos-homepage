@@ -29,12 +29,10 @@ h1, h2, h3 {
 
 h1 {
     background-color: #eef2ff;
-    //font-variant: small-caps;
 }
 
 h2 {
     background-color: #f6f8ff;
-    //font-variant: small-caps;
 }
 
 table {
@@ -86,5 +84,8 @@ pre.code {
     padding: 6px 6px;
     color: #600000;
     background: #f4f4f8;
-    font-family: monospace;
+}
+
+ul {
+    padding-left: 1em;
 }
