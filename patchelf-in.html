@@ -22,17 +22,18 @@ executables</a>.</p>
 
 <h2>Description</h2>
 
-<p>ELF executables always specify a so-called
-<em>interpreter</em>, which is a program that actually loads the
-executable.  (The kernel just loads the interpreter, not the
-executable.)  For example, on a Linux/x86 system the ELF interpreter
-is typically the file <tt>/lib/ld-linux.so.2</tt>.  It is sometimes
-necessary to use a different ELF interpreter, say, when you want to
-test a version of Glibc installed in a location other than
-<tt>/lib</tt>.  And in the <a href="nixpkgs.html">Nix Packages
-collection</a> we build our own Glibc, which we obviously want to
-use.  Building programs with a different interpreter is a matter of
-using the linker flag <tt>-dynamic-linker</tt>:</p>
+<p>Dynamically linked ELF executables always specify a dynamic linker
+or <em>interpreter</em>, which is a program that actually loads the
+executable along with all its dynamically linked libraries.  (The
+kernel just loads the interpreter, not the executable.)  For example,
+on a Linux/x86 system the ELF interpreter is typically the file
+<tt>/lib/ld-linux.so.2</tt>.  It is sometimes necessary to use a
+different ELF interpreter, say, when you want to test a version of
+Glibc installed in a location other than <tt>/lib</tt>.  And in the <a
+href="nixpkgs.html">Nix Packages collection</a> we build our own
+Glibc, which we obviously want to use.  Building programs with a
+different interpreter is a matter of using the linker flag
+<tt>-dynamic-linker</tt>:</p>
 
 <pre class="code">
 gcc -Wl,-dynamic-linker,/my/lib/ld-linux.so.2 ...
@@ -50,7 +51,7 @@ patchelf --set-interpreter /my/lib/my-ld-linux.so.2 program
 to the specified file.  This is not quite trivial because the path of
 the new interpreter may be longer than the old one, in which case it
 won’t fit.  PatchELF takes care of “growing” the executable with
-sufficient space at the beginning to containg the new interpreter
+sufficient space at the beginning to contain the new interpreter
 field.  As a result, the resulting program may be one page (4 KiB)
 larger.</p>
 
