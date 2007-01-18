@@ -1,5 +1,5 @@
 HTML = index.html about.html news.html docs/papers.html \
-  nixpkgs.html nixos/index.html
+  nixpkgs.html nixos/index.html patchelf.html
 
 all: $(HTML)
 

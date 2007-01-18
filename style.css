@@ -77,5 +77,14 @@ li {
 }
 
 pre {
-    margin-left: 2em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+}
+
+pre.code {
+    border: 1px solid #6185a0;
+    padding: 6px 6px;
+    color: #600000;
+    background: #f4f4f8;
+    font-family: monospace;
 }
