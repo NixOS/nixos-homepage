@@ -23,11 +23,11 @@ function toggleVis(elem) {
     }
 }
 
-function showAll(tag, class, show) {
+function showAll(tag, className, show) {
     var elems = document.getElementsByTagName(tag);
     for (var i = 0; i != elems.length; i++) {
         var elem = elems[i];
-        if (elem.getAttribute("class") == class) {
+        if (elem.getAttribute("class") == className) {
             if (show) 
                 elem.style.display = 'block';
             else
