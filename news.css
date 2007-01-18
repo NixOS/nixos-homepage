@@ -3,7 +3,9 @@
 }
 
 tr.news-header {
-  font-size: 120%;
+  font-size: 100%;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
   margin-bottom: 1em;
   background-color: #f4f8ff;
 }
@@ -11,6 +13,8 @@ tr.news-header {
 .news-date {
   vertical-align: top;
   font-weight: bold;
+  margin: 0 0 0 0;
+  padding-left: 20px;
   padding-right: 1em;
   width: 1%;
   color: #005aa0;
@@ -24,6 +28,6 @@ tr.news-header {
 
 .news-descr > td {
   padding-top: 0.5em;
-  padding-left: 1em;
+  //padding-left: 1em;
   padding-bottom: 1em;
 }

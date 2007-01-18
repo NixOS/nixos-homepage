@@ -12,20 +12,19 @@ h1, h2, h3 {
 
 h1 {
     font-size: 220%;
-    padding-left: 0.3em;
-    padding-right: 0.3em;
 }
 
 h2 {
     font-size: 130%;
-    padding-left: 0.3em;
-    padding-right: 0.3em;
 }
 
 h3 {
     font-size: 100%;
-    padding-left: 0.3em;
-    padding-right: 0.3em;
+}
+
+h1, h2, h3 {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 h1 {
