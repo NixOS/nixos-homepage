@@ -54,7 +54,7 @@
                 <section>Main
                   <link url="index.html">Home</link>
                   <link url="about.html">About</link>
-                  <section url="news.html">News</section>
+                  <link url="news.html">News</link>
                 </section>
                 <section>Download
                   <link url="{$latestNix}">Latest stable release</link>

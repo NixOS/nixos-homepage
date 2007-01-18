@@ -3,16 +3,47 @@
 <news xmlns:h="http://www.w3.org/1999/xhtml">
 
   <item>
-    <year>2005</year>
-    <month>09</month>
-    <day>21</day>
+    <year>2006</year>
+    <month>10</month>
+    <day>12</day>
     <title>
-      <h:a href="http://nix.cs.uu.nl/dist/nix/nix-0.10/">Nix
-      0.10</h:a> released
+      Nixpkgs 0.10 released
     </title>
     <description>
-      This is a bug fix release that addresses some problems on Mac OS
-      X.
+      <h:a href="http://nix.cs.uu.nl/dist/nix/nixpkgs-0.10/">Nixpkgs
+      0.10</h:a> has been released.  See the <h:a
+      href="http://nix.cs.uu.nl/dist/nix/nixpkgs-0.10/release-notes/">release
+      notes</h:a> for details.
+    </description>      
+  </item>
+
+  <item>
+    <year>2006</year>
+    <month>10</month>
+    <day>11</day>
+    <title>
+      Nix 0.10.1 released
+    </title>
+    <description>
+      <h:a href="http://nix.cs.uu.nl/dist/nix/nix-0.10.1/">Nix
+      0.10.1</h:a> has been released.  It fixes two obscure bugs that
+      shouldn’t affect most users.
+    </description>      
+  </item>
+
+  <item>
+    <year>2006</year>
+    <month>10</month>
+    <day>06</day>
+    <title>
+      Nix 0.10 released
+    </title>
+    <description>
+      <h:a href="http://nix.cs.uu.nl/dist/nix/nix-0.10/">Nix
+      0.10</h:a> has been released.  This release has many
+      improvements and bug fixes; see the <h:a
+      href="http://nix.cs.uu.nl/dist/nix/nix-0.10/release-notes/">release
+      notes</h:a> for details.
     </description>      
   </item>
 
@@ -21,12 +52,12 @@
     <month>01</month>
     <day>31</day>
     <title>
-      <h:a href="http://nix.cs.uu.nl/dist/nix/nixpkgs-0.9/">Nixpkgs
-      0.9</h:a> released
+      Nixpkgs 0.9 released
     </title>
     <description>
-      Announcement is <a
-      href="http://mail.cs.uu.nl/pipermail/nix-dev/2006-January/000121.html">here</a>.
+      <h:a href="http://nix.cs.uu.nl/dist/nix/nixpkgs-0.9/">Nixpkgs
+      0.9</h:a> has been <h:a
+      href="http://mail.cs.uu.nl/pipermail/nix-dev/2006-January/000121.html">released</h:a>.
     </description>      
   </item>
 
@@ -38,9 +69,9 @@
       PhD thesis defended
     </title>
     <description>
-      <a href="http://www.cs.uu.nl/~eelco">Eelco Dolstra</a> defended
-      his <a href="docs/papers.html#dolstra06thesis">PhD thesis</a> on
-      the purely functional deployment model.
+      <h:a href="http://www.cs.uu.nl/~eelco">Eelco Dolstra</h:a>
+      defended his <h:a href="docs/papers.html#dolstra06thesis">PhD
+      thesis</h:a> on the purely functional deployment model.
     </description>      
   </item>
 
@@ -49,12 +80,12 @@
     <month>09</month>
     <day>21</day>
     <title>
-      <h:a href="http://nix.cs.uu.nl/dist/nix/nix-0.9.2/">Nix
-      0.9.2</h:a> released
+      Nix 0.9.2 released
     </title>
     <description>
-      This is a bug fix release that addresses some problems on Mac OS
-      X.
+      <h:a href="http://nix.cs.uu.nl/dist/nix/nix-0.9.2/">Nix
+      0.9.2</h:a> has been released released.  This is a bug fix
+      release that addresses some problems on Mac OS X.
     </description>      
   </item>
 
@@ -63,13 +94,13 @@
     <month>09</month>
     <day>16</day>
     <title>
-      <h:a href="http://nix.cs.uu.nl/dist/nix/nix-0.9/">Nix 0.9</h:a>
-      released
+      Nix 0.9 released
     </title>
     <description>
-      This is a new major release that provides quite a few
-      performance improvements and bug fixes, as well as a number of
-      new features.  Read the <h:a
+      <h:a href="http://nix.cs.uu.nl/dist/nix/nix-0.9/">Nix 0.9</h:a>
+      has been released.  This is a new major release that provides
+      quite a few performance improvements and bug fixes, as well as a
+      number of new features.  Read the <h:a
       href="http://nix.cs.uu.nl/dist/nix/nix-0.9/release-notes/">release
       notes</h:a> for details.
     </description>      
@@ -84,8 +115,8 @@
     </title>
     <description>
       The paper “Secure Sharing Between Untrusted Users in a
-      Transparent Source/Binary Deployment Model” has been accepted
-      at <a href="http://www.ase-conference.org/">ASE 2005</a>.  This
+      Transparent Source/Binary Deployment Model” has been accepted at
+      <h:a href="http://www.ase-conference.org/">ASE 2005</h:a>.  This
       paper describes how a Nix store can be securely shared by
       multiple users who may not trust each other; i.e., how do we
       prevent one user from installing a Trojan horse that is
@@ -126,14 +157,14 @@
     </title>
     <description>
       The paper “Efficient Upgrading in a Purely Functional Component
-      Deployment Model” has been accepted at <a
-      href="http://www.sei.cmu.edu/pacc/CBSE2005/">CBSE 2005</a>.  It
-      describes how we can deploy updates to Nix packages efficiently,
-      even if “fundamental” packages like Glibc are updated (which
-      cause a rebuild of all dependent packages), by deploying binary
-      patches between components in the Nix store.  Includes
-      techniques such as patch chaining and computing deltas between
-      archive files.
+      Deployment Model” has been accepted at <h:a
+      href="http://www.sei.cmu.edu/pacc/CBSE2005/">CBSE 2005</h:a>.
+      It describes how we can deploy updates to Nix packages
+      efficiently, even if “fundamental” packages like Glibc are
+      updated (which cause a rebuild of all dependent packages), by
+      deploying binary patches between components in the Nix store.
+      Includes techniques such as patch chaining and computing deltas
+      between archive files.
     </description>      
   </item>
 

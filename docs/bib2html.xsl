@@ -23,14 +23,14 @@
     <html>
       
       <head>
-        <title>Nix papers</title>
+        <title>Nix Papers</title>
         <link rel="stylesheet" href="bib.css" type="text/css" />
         <xsl:call-template name="emitToggleScripts" />
       </head>
         
       <body>
 
-        <h1>Nix papers</h1>
+        <h1>Nix Papers</h1>
 
         <xsl:call-template name="emitMainToggle" />
 

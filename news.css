@@ -2,7 +2,7 @@
   padding: 0 0 0 0;
 }
 
-.news-header {
+tr.news-header {
   font-size: 120%;
   margin-bottom: 1em;
   background-color: #f4f8ff;
@@ -13,15 +13,17 @@
   font-weight: bold;
   padding-right: 1em;
   width: 1%;
+  color: #005aa0;
 }
 
 .news-short {
-  font-weight: bold;
+  font-weight: normal;
   font-style: italic;
   color: #005aa0;
 }
 
 .news-descr > td {
+  padding-top: 0.5em;
   padding-left: 1em;
   padding-bottom: 1em;
 }
