@@ -1,6 +1,6 @@
 #container {
   position: relative;
-  width: 55em;
+  //width: 55em;
   margin: 2em auto;
 }
 
@@ -26,10 +26,12 @@ h1 {
   margin-top: 0em;
 }
 
+
 #leftnavbar ul {
   display: block;
   padding: 0 0 0 0;
-  margin-left: 0em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 #leftnavbar ul a {
@@ -37,18 +39,57 @@ h1 {
 }
 
 #leftnavbar li.section {
-  font-variant: small-caps;
   list-style: none;
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  margin-bottom: 1.5em;
 }
 
-#leftnavbar li.section li.subsection {
-  list-style: none;
-  padding-left: 1em;
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
+#leftnavbar li.section > div.title {
+  text-align: center;
+  font-weight: bold;
+  border-width: 0px;
+  border-bottom-width: 1px;
+  border-style: solid;
+  border-color: #c0c0c0;
+  padding-bottom: 0.5em;
 }
+
+#leftnavbar li.section ul {
+  padding: 0 0 0 0;
+  margin-left: 0em;
+  margin-right: 0em;
+}
+
+#leftnavbar li.section ul li {
+  font-size: 90%;
+  list-style: none;
+  background-image: url(arrow-right.gif);
+  background-repeat: no-repeat;
+  background-position: 0.3em center;
+  border-width: 0px;
+  border-bottom-width: 1px;
+  border-style: solid;
+  border-color: #c0c0c0;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+
+#leftnavbar li.section ul li.active {
+  background-image: url(arrow-right-active.gif);
+  background-color: #eef2ff;
+  font-weight: bold;
+  color: #606060;
+}
+
+
+#leftnavbar li.section ul li > div.title {
+  margin-left: 1em;
+}
+
 
 #svn-id p {
   font-size: 80%;

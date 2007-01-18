@@ -51,29 +51,34 @@
 
             <ul>
               <xsl:variable name="sections" xmlns="">
-                <section url="index.html">Home</section>
-                <section url="about.html">About</section>
-                <section url="news.html">News</section>
+                <section>Main
+                  <link url="index.html">Home</link>
+                  <link url="about.html">About</link>
+                  <section url="news.html">News</section>
+                </section>
                 <section>Download
-                  <subsection url="{$latestNix}">Latest stable release</subsection>
-                  <subsection url="http://nix.cs.uu.nl/dist/nix/nix-unstable-latest">Latest unstable release</subsection>
-                  <subsection url="http://nix.cs.uu.nl/dist/nix/">Older releases</subsection>
+                  <link url="{$latestNix}">Latest stable release</link>
+                  <link url="http://nix.cs.uu.nl/dist/nix/nix-unstable-latest">Latest unstable release</link>
+                  <link url="http://nix.cs.uu.nl/dist/nix/">Older releases</link>
                 </section>
                 <section>Documentation
-                  <!-- <subsection url="foo">FAQ</subsection> -->
-                  <subsection url="{$latestNix}/manual/">Manual</subsection>
-                  <subsection url="docs/papers.html">Research papers</subsection>
+                  <!-- <link url="foo">FAQ</link> -->
+                  <link url="{$latestNix}/manual/">Manual</link>
+                  <link url="docs/papers.html">Research papers</link>
                 </section>
                 <section>Projects
-                  <subsection url="nixpkgs.html">Nix Packages</subsection>
-                  <subsection url="nixos/index.html">NixOS</subsection>
-                  <subsection url="foo">Services</subsection>
-                  <subsection url="foo">Buildfarm</subsection>
+                  <link url="nixpkgs.html">Nix Packages</link>
+                  <link url="nixos/index.html">NixOS</link>
+                  <!--
+                  <link url="foo">Services</link>
+                  <link url="foo">Buildfarm</link>
+                  -->
+                  <link url="patchelf.html">PatchELF</link>
                 </section>
                 <section>Resources
-                  <subsection url="https://mail.cs.uu.nl/mailman/listinfo/nix-dev">Mailing list</subsection>
-                  <subsection url="https://bugs.cs.uu.nl/secure/BrowseProject.jspa?id=100a72">Bug tracker</subsection>
-                  <subsection url="irc://irc.freenode.net/#trace">IRC channel</subsection>
+                  <link url="https://mail.cs.uu.nl/mailman/listinfo/nix-dev">Mailing list</link>
+                  <link url="https://bugs.cs.uu.nl/browse/NIX">Bug tracker</link>
+                  <link url="irc://irc.freenode.net/#trace">IRC channel</link>
                 </section>
               </xsl:variable>
               <xsl:apply-templates select="exsl:node-set($sections)" />
@@ -118,15 +123,17 @@
           <xsl:apply-templates mode="maybePrefix" select="." />
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="child::text()" />
+          <div class="title">
+            <xsl:value-of select="child::text()" />
+          </div>
         </xsl:otherwise>
       </xsl:choose>
       
-<!--      <xsl:if test="($fileName = @url or subsection[$fileName = @url]) and subsection"> -->
-      <xsl:if test="subsection">
-        <xsl:if test="subsection">
+<!--      <xsl:if test="($fileName = @url or link[$fileName = @url]) and link"> -->
+      <xsl:if test="link">
+        <xsl:if test="link">
           <ul>
-            <xsl:apply-templates select="subsection" />
+            <xsl:apply-templates select="link" />
           </ul>
         </xsl:if>
       </xsl:if>
@@ -134,23 +141,29 @@
   </xsl:template>
 
   
-  <xsl:template match="subsection">
-    <li class="subsection">
-      <xsl:choose>
-        <xsl:when test="$fileName != @url">
-          <xsl:apply-templates mode="maybePrefix" select="." />
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="." />
-        </xsl:otherwise>
-      </xsl:choose>
-    </li>
+  <xsl:template match="link">
+    <xsl:choose>
+      <xsl:when test="$fileName != @url">
+        <li>
+          <div class="title">
+            <xsl:apply-templates mode="maybePrefix" select="." />
+          </div>
+        </li>
+      </xsl:when>
+      <xsl:otherwise>
+        <li class="active">
+          <div class="title">
+            <xsl:value-of select="." />
+          </div>
+        </li>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
 
   <xsl:template mode="maybePrefix" match="*">
     <xsl:choose>
-      <xsl:when test="starts-with(@url, 'http://')">
+      <xsl:when test="contains(@url, '://')">
         <a href="{@url}"><xsl:value-of select="child::text()" /></a>
       </xsl:when>
       <xsl:otherwise>
