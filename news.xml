@@ -3,6 +3,20 @@
 <news xmlns:h="http://www.w3.org/1999/xhtml">
 
   <item>
+    <year>2005</year>
+    <month>09</month>
+    <day>21</day>
+    <title>
+      <h:a href="http://nix.cs.uu.nl/dist/nix/nix-0.10/">Nix
+      0.10</h:a> released
+    </title>
+    <description>
+      This is a bug fix release that addresses some problems on Mac OS
+      X.
+    </description>      
+  </item>
+
+  <item>
     <year>2006</year>
     <month>01</month>
     <day>31</day>
