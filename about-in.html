@@ -113,7 +113,7 @@ $ nix-env --rollback
 <p>When you install a package like this…</p>
 
 <pre class="code">
-$ nix-env -e firefox
+$ nix-env --uninstall firefox
 </pre>
 
 <p>the package isn’t deleted from the system right away (after all,
@@ -131,10 +131,9 @@ by a currently running program.</p>
 
 <h3>Transparent source/binary deployment</h3>
 
-<p>source deployment model (like <a href="http://www.gentoo.org/">Gentoo</a>) and a binary model (like RPM)</p>
-
-
-<h3>Reproducibility</h3>
+<p>source deployment model (like <a
+href="http://www.gentoo.org/">Gentoo</a>) and a binary model (like
+RPM)</p>
 
 
 <h3>Binary patching</h3>
@@ -145,6 +144,9 @@ by a currently running program.</p>
 self-contained etc.
 
 variability through function arguments
+
+
+<h3>Reproducibility</h3>
 
 
 <h3>Service deployment</h3>
