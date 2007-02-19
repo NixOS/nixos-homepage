@@ -90,7 +90,7 @@
       
     </phdthesis>
 
-    <inproceedings>
+    <inproceedings id="securesharing">
       <author>Eelco Dolstra</author>
       <title>Secure Sharing Between Untrusted Users in a Transparent
       Source/Binary Deployment Model</title>
@@ -102,8 +102,6 @@
       <publisher>ACM Press</publisher>
       <month>November</month>
       <year>2005</year>
-      <htmlnote><h:em><h:strong>[9% acceptance
-      rate]</h:strong></h:em></htmlnote>
       <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/secsharing-ase2005-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=1101933&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
 
@@ -137,7 +135,7 @@
       
     </inproceedings>
 
-    <inproceedings>
+    <inproceedings id="servicecm">
       <author>Eelco Dolstra</author>
       <author>Martin Bravenboer</author>
       <author>Eelco Visser</author>
@@ -264,8 +262,6 @@
       <publisher>IEEE Computer Society</publisher>
       <month>May</month>
       <year>2004</year>
-      <htmlnote><h:em><h:strong>[13% acceptance
-      rate]</h:strong></h:em></htmlnote>
       <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/immdsd-icse2004-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=999463&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
 
