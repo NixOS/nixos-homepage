@@ -4,6 +4,33 @@
 
   <item>
     <year>2007</year>
+    <month>2</month>
+    <day>19</day>
+    <title>
+      NixOS manual
+    </title>
+    <description>
+      There is now some <a
+      href="http://nix.cs.uu.nl/dist/nix/nixos-unstable-latest/manual/">basic
+      documentation for NixOS</a>.
+    </description>
+  </item>
+      
+  <item>
+    <year>2007</year>
+    <month>1</month>
+    <day>23</day>
+    <title>
+      NixOS for x86_64
+    </title>
+    <description>
+      NixOS now works on x86_64 machines.  A 64-bit ISO is <h:a
+      href="nixos/#download">available</h:a>.
+    </description>
+  </item>
+  
+  <item>
+    <year>2007</year>
     <month>1</month>
     <day>23</day>
     <title>
