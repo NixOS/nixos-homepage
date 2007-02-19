@@ -6,27 +6,35 @@ tr.news-header {
   font-size: 100%;
   padding: 0 0 0 0;
   margin: 0 0 0 0;
-  margin-bottom: 1em;
-  background-color: #f4f8ff;
+  border-bottom: dotted 1px;
+  //background-color: #f4f8ff;
 }
 
 .news-date {
   vertical-align: top;
-  font-weight: bold;
-  margin: 0 0 0 0;
-  padding-left: 20px;
-  padding-right: 1em;
+  font-weight: normal;
+  font-style: italic;
   width: 1%;
   color: #005aa0;
 }
 
 .news-short {
-  font-weight: normal;
-  font-style: italic;
+  font-weight: bold;
   color: #005aa0;
+  padding-left: 0;
 }
 
 .news-descr > td {
   padding-top: 0.5em;
   padding-bottom: 1em;
+  padding-left: 0;
+}
+
+.news-descr p:first-child {
+  margin-top: 0;
+}
+
+.news-descr p {
+  margin-top: 1em;
+  margin-bottom: 0em;
 }

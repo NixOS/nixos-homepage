@@ -18,21 +18,25 @@ h2 {
     font-size: 130%;
 }
 
-h3 {
-    font-size: 100%;
-}
-
-h1, h2, h3 {
+/*
+h1, h2 {
     padding-left: 20px;
     padding-right: 20px;
 }
+*/
 
 h1 {
-    background-color: #eef2ff;
+    //background-color: #eef2ff;
+    border-bottom: dotted 2px;
 }
 
 h2 {
     background-color: #f6f8ff;
+}
+
+h3 {
+    font-size: 100%;
+    border-bottom: dotted 1px;
 }
 
 table {
@@ -88,4 +92,15 @@ pre.code {
 
 ul {
     padding-left: 1em;
+}
+
+img.inline {
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+a img.inline {
+    border: 2px solid;
+    border-color: blue;
 }

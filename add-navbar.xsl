@@ -79,6 +79,7 @@
                   <link url="https://mail.cs.uu.nl/mailman/listinfo/nix-dev">Mailing list</link>
                   <link url="https://bugs.cs.uu.nl/browse/NIX">Bug tracker</link>
                   <link url="irc://irc.freenode.net/#trace">IRC channel</link>
+                  <link url="people.html">Contributors</link>
                 </section>
               </xsl:variable>
               <xsl:apply-templates select="exsl:node-set($sections)" />
@@ -89,8 +90,8 @@
           <div id="content">
 
             <xsl:apply-templates mode="expandNews"
-                                 select="xhtml:body/*[not(@class = 'svn-id')]" />
-
+                                 select="xhtml:body/child::node()[not(@class = 'svn-id')]" />
+            
             <hr />
 
             <div id="svn-id">
@@ -180,11 +181,11 @@
 
       <xsl:for-each select="document('news.xml')/news/item[not($foo) or position() &lt;= $foo]">
 
-        <tr class="news-header">
-          <td class="news-date"><xsl:value-of select="year" />/<xsl:value-of select="month" />/<xsl:value-of select="day" /></td>
+        <tr class="news-header"> 
           <td class="news-short">
             <xsl:copy-of select="title/child::node()" />
           </td>
+          <td class="news-date"><xsl:value-of select="year" />/<xsl:value-of select="month" />/<xsl:value-of select="day" /></td>
         </tr>
         <tr class="news-descr">
           <td colspan="2">

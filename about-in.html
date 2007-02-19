@@ -13,7 +13,113 @@
 
 <h1>About Nix</h1>
 
-<p>Bla bla bla</p>
+<p>Nix is a <em>purely functional package manager</em>.  This means
+that it treats packages like values in purely functional programming
+languages such as Haskell — they are built by functions that don’t
+have side-effects, and they never change after they have been built.
+Nix stores packages in a <em>Nix store</em>, usually the directory
+<tt>/nix/store</tt>, where each package has its own unique
+subdirectory such as
+
+</p>
+
+<pre class="code">
+/nix/store/r8vvq9kq18pz08v249h8my6r9vs7s0n3-firefox-2.0.0.1/
+</pre>
+
+<p>
+
+where <tt>r8vvq9kq…</tt> is a unique identifier for the package that
+captures all its dependencies (it’s a cryptographic hash of the
+package’s build dependency graph).  This enables many powerful
+features.</p>
+
+<h3>Multiple versions</h3>
+
+<h3>Complete dependencies</h3>
+
+<h3>Multi-user support</h3>
+
+<h3>Atomic upgrades and rollbacks</h3>
+
+<pre class="code">
+$ nix-env -u <em>some-packages</em>
+$ nix-env --rollback
+</pre>
+
+<h3>Garbage collection</h3>
+
+<pre class="code">
+$ nix-collect-garbage -d
+</pre>
+
+<h3>Transparent source/binary deployment</h3>
+
+<p>source deployment model (like <a href="http://www.gentoo.org/">Gentoo</a>) and a binary model (like RPM)</p>
+
+<h3>Reproducibility</h3>
+
+<h3>Binary patching</h3>
+
+<h3>Functional package language</h3>
+
+self-contained etc.
+
+variability through function arguments
+
+<h3>Service deployment</h3>
+
+ref SCM-12, HotOS paper
+
+<h3>Nix Packages collection</h3>
+
+<h3>NixOS</h3>
+
+
+<h3>About us</h3>
+
+<p>Nix was developed at the <a href="http://www.cs.uu.nl/">Department
+of Information and Computing Sciences</a>, Utrecht University by the
+<a href="http://www.cs.uu.nl/wiki/Trace/WebHome">TraCE project</a>.
+The project is funded by the Software Engineering Research Program <a
+href="http://www.jacquard.nl/">Jacquard</a> to improve the support for
+variability in software systems.</p>
+
+<!--
+
+<ul>
+
+  <li>Inherent support for simultaneous installation of multiple
+  versions or variants of the same package.  No more DLL hell.</li>
+
+  <li>Enforcement of package dependency specification: if a package
+  builds, then its dependencies are complete.</li>
+
+  <li>Automatic determination of runtime package dependencies.</li>
+
+  <li>Multi-user support: users can install software without root
+  privileges.  Users can have their own sets of installed software
+  (<em>profiles</em>).</li>
+
+  <li>Atomic upgrades — there is never a time window during a package
+  upgrade in which the system is in an inconsistent state.</li>
+
+  <li>Rollbacks.</li>
+
+  <li>Garbage collection of unused packages.</li>
+
+  <li>Source deployment model (a la Gentoo), but Nix will
+  automatically use binary packages instead of building from source if
+  pre-built binaries are available.</li>
+
+  <li>Reproducibility: Nix expressions describe how to build a package
+  plus all its dependencies, so they are self-contained.</li>
+
+  <li>Efficient upgrading through binary patching.</li>
+
+</ul>
+
+-->
 
 <div class="svn-id">$Id$</div>
 
