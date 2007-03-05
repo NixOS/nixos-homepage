@@ -4,6 +4,38 @@
 
   <item>
     <year>2007</year>
+    <month>3</month>
+    <day>5</day>
+    <title>
+      NixOS progress report
+    </title>
+    <description>
+      <h:a
+          href="nixos/screenshots/nixos-compiz-cube.png"><h:img
+          class="inline"
+          src="nixos/screenshots/nixos-compiz-cube-small.png"
+          alt="NixOS screenshot" /></h:a>
+
+      NixOS is now <h:em>almost</h:em> usable as a desktop OS ;-).  We
+      have an X server, a bunch of Gnome packages, basic wireless
+      support, and of course all the applications in Nixpkgs that we
+      had all along running on other Linux distributions.  Here are a
+      few screenshots:
+      <ul xmlns="http://www.w3.org/1999/xhtml">
+        <li><a href="nixos/screenshots/nixos-compiz-cube.png">X server
+        with Compiz window manager</a>.</li>
+        <li><a href="nixos/screenshots/nixos-terminals.png">Emacs and
+        a few terminals</a> showing off the (near) absence of
+        <tt>/lib</tt>, <tt>/bin</tt> etc.; everything is in the Nix
+        store.</li>
+        <li><a href="nixos/screenshots/nixos-apps.png">Some
+        applications</a>.</li>
+      </ul>
+    </description>
+  </item>
+      
+  <item>
+    <year>2007</year>
     <month>2</month>
     <day>19</day>
     <title>
