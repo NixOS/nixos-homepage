@@ -11,6 +11,54 @@
 
   <items>
 
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <author>Armijn Hemel</author>
+      <title>Purely Functional System Configuration Management</title>
+      <booktitle url="http://www.usenix.org/events/hotos07/">11th Workshop
+      on Hot Topics in Operating Systems (HotOS XI)</booktitle>
+      <location>San Diego, California, USA</location>
+      <publisher>USENIX</publisher>
+      <month>May</month>
+      <year>2007</year>
+      <htmlnote><h:em><h:strong>(To appear.)</h:strong></h:em></htmlnote>
+
+      <abstract>
+        System configuration management is difficult because systems
+        evolve in an undisciplined way: packages are upgraded,
+        configuration files are edited, and so on.  The management of
+        existing operating systems is strongly <h:em>imperative</h:em>
+        in nature, since software packages and configuration data
+        (e.g., <h:tt>/bin</h:tt> and <h:tt>/etc</h:tt> in Unix) can be seen as
+        imperative data structures: they are updated in-place by
+        system administration actions.  In this paper we present an
+        alternative approach to system configuration management: a
+        <h:em>purely functional</h:em> method, analogous to languages
+        like Haskell.  In this approach, the static parts of a
+        configuration — software packages, configuration files,
+        control scripts — are built from pure functions, i.e., the
+        results depend solely on the specified inputs of the function
+        and are immutable.  As a result, realising a system
+        configuration becomes deterministic and reproducible.
+        Upgrading to a new configuration is mostly atomic and doesn’t
+        overwrite anything of the old configuration, thus enabling
+        rollbacks.  We have implemented the purely functional model in
+        a small but realistic Linux-based operating system
+        distribution called NixOS.
+      </abstract>
+    </inproceedings>
+
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <author>Eelco Visser</author>
+      <title>Automated Software Testing and Release with Nix Build Farms</title>
+      <booktitle url="http://www.laquso.com/VVSS2007/">Verification and
+      Validation of Software Systems (VVSS-2007)</booktitle>
+      <location>Eindhoven, The Netherlands</location>
+      <month>March</month>
+      <year>2007</year>
+    </inproceedings>
+
     <phdthesis id="dolstra06thesis">
       <author>Eelco Dolstra</author>
       <title>The Purely Functional Software Deployment Model</title>
