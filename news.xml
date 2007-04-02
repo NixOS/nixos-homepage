@@ -4,6 +4,41 @@
 
   <item>
     <year>2007</year>
+    <month>4</month>
+    <day>2</day>
+    <title>
+      NixOS progress report
+    </title>
+    <description>
+
+      <p xmlns="http://www.w3.org/1999/xhtml">
+
+      <h:a
+          href="http://www.kde.org"><h:img
+          class="inlineNoBorder"
+          src="http://www.kde.org/stuff/clipart/klogo-official-crystal-128x128.png"
+          alt="KDE logo" /></h:a>
+
+      We now have <a href="http://www.kde.org/">KDE</a> running on
+      NixOS (<a href="nixos/screenshots/nixos-kde.png">obligatory
+      screenshot</a>).  Just <tt>kdebase</tt> for now (Martin
+      Bravenboer already added <tt>kdelibs</tt> a long time ago so
+      that we could run the wonderful <a
+      href="http://kcachegrind.sourceforge.net/cgi-bin/show.cgi">KCachegrind</a>),
+      but it contains all the important stuff (Konqueror, KDesktop,
+      Kicker, Konsole, Control Center, etc.).</p>
+      
+      <p xmlns="http://www.w3.org/1999/xhtml">In related news, we can
+      safely say that, rumours to the contrary notwithstanding, NixOS
+      is not an <a
+      href="http://www.osnews.com/comment.php?news_id=17601">April
+      Fools’ Joke</a>.</p>
+      
+    </description>
+  </item>
+      
+  <item>
+    <year>2007</year>
     <month>3</month>
     <day>5</day>
     <title>
