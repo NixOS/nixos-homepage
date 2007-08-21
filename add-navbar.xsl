@@ -31,7 +31,7 @@
     <html xml:lang="en" lang="en">
       
       <head>
-        <xsl:copy-of select="xhtml:head/*" />
+	<xsl:apply-templates select="xhtml:head/*" mode="id"/>
         <link rel="stylesheet" href="{$toTop}style.css" type="text/css" />
         <link rel="stylesheet" href="{$toTop}navbar.css" type="text/css" />
         <link rel="stylesheet" href="{$toTop}news.css" type="text/css" />
@@ -183,13 +183,13 @@
 
         <tr class="news-header"> 
           <td class="news-short">
-            <xsl:copy-of select="title/child::node()" />
+            <xsl:apply-templates select="title/child::node()" mode="id"/>
           </td>
           <td class="news-date"><xsl:value-of select="year" />/<xsl:value-of select="month" />/<xsl:value-of select="day" /></td>
         </tr>
         <tr class="news-descr">
           <td colspan="2">
-            <xsl:copy-of select="description/child::node()" />
+            <xsl:apply-templates select="description/child::node()" mode="id"/>
           </td>
         </tr>
 
@@ -199,8 +199,18 @@
   </xsl:template>
 
   <xsl:template mode="expandNews" match="*">
-    <xsl:copy-of select="." />
+    <xsl:apply-templates select="." mode="id"/>
   </xsl:template>
 
-  
+
+  <xsl:template match="xhtml:*" mode="id">
+    <xsl:element name="{local-name(.)}" namespace="http://www.w3.org/1999/xhtml">
+      <xsl:for-each select="@*">
+	<xsl:attribute name="{name(.)}">
+	  <xsl:value-of select="."/>
+	</xsl:attribute>
+      </xsl:for-each>
+      <xsl:apply-templates mode="id"/>
+    </xsl:element>
+  </xsl:template>
 </xsl:stylesheet>
