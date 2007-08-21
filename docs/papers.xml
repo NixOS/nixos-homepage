@@ -11,7 +11,7 @@
 
   <items>
 
-    <inproceedings>
+    <inproceedings id="hotos07">
       <author>Eelco Dolstra</author>
       <author>Armijn Hemel</author>
       <title>Purely Functional System Configuration Management</title>
@@ -22,7 +22,6 @@
       <month>May</month>
       <year>2007</year>
       <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/hotos-final.pdf" />
-      <htmlnote><h:em><h:strong>(To appear.)</h:strong></h:em></htmlnote>
 
       <abstract>
         System configuration management is difficult because systems

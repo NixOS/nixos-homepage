@@ -4,6 +4,77 @@
 
   <item>
     <year>2007</year>
+    <month>8</month>
+    <day>22</day>
+    <title>
+      NixOS progress report
+    </title>
+    <description>
+      <p xmlns="http://www.w3.org/1999/xhtml">
+        
+      <a href="nixos/screenshots/nixos-games.png"><img
+          class="inline"
+          src="nixos/screenshots/nixos-games-small.png"
+          alt="NixOS screenshot" /></a>
+
+      <a href="http://www.winehq.org/">Wine</a> now runs on NixOS!
+      Finally we can run all those <a
+      href="nixos/screenshots/nixos-games.png">legacy
+      applications</a>...  Thanks to Michael Raskin for adding Wine
+      and a NPTL-enabled Glibc (which Wine seems to need).  This is a
+      nice application of purely functional package composition, by
+      the way: Wine didn’t work with the standard Glibc in Nixpkgs, so
+      we just <a
+      href="https://svn.cs.uu.nl:12443/viewvc/trace/nixpkgs/trunk/pkgs/top-level/all-packages.nix?r1=9165&amp;r2=9164&amp;pathrev=9165">pass
+      it another Glibc at build time</a>.</p>
+
+      <p xmlns="http://www.w3.org/1999/xhtml">In other news, Nix 0.11
+      and Nixpkgs 0.11 will be released soon.</p>
+    </description>
+  </item>
+      
+  <item>
+    <year>2007</year>
+    <month>8</month>
+    <day>14</day>
+    <title>
+      Commits mailing list
+    </title>
+    <description>
+      <p xmlns="http://www.w3.org/1999/xhtml">
+        There is now a <a
+        href="http://mail.cs.uu.nl/mailman/listinfo/nix-commits">mailing
+        list</a> (<tt>nix-commits@cs.uu.nl</tt>) that you can
+        subscribe to if you want to receive automatic commit
+        notifications from the Nix Subversion repository.
+      </p>
+    </description>
+  </item>
+      
+  <item>
+    <year>2007</year>
+    <month>5</month>
+    <day>8</day>
+    <title>
+      HotOS paper on NixOS
+    </title>
+    <description>
+      <p xmlns="http://www.w3.org/1999/xhtml">
+        Eelco Dolstra presented the paper <a
+        href="docs/papers.html#hotos07"><em>Purely Functional System
+        Configuration Management</em></a> at the <a
+        href="http://www.usenix.org/events/hotos07/">11th Workshop on
+        Hot Topics in Operating Systems (HotOS XI)</a>.  It gives an
+        overview of the ideas behind <a href="nixos">NixOS</a>.  The
+        <a
+        href="http://people.cs.uu.nl/eelco/talks/hotos-may-2007.pdf">slides</a>
+        are also available.
+      </p>
+    </description>
+  </item>
+      
+  <item>
+    <year>2007</year>
     <month>4</month>
     <day>2</day>
     <title>
