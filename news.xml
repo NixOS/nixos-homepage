@@ -4,6 +4,38 @@
 
   <item>
     <year>2007</year>
+    <month>9</month>
+    <day>10</day>
+    <title>
+      OpenOffice in Nixpkgs
+    </title>
+    <description>
+      <p xmlns="http://www.w3.org/1999/xhtml">
+        
+      <a href="nixos/screenshots/nixos-openoffice.png"><img
+          class="inline"
+          src="nixos/screenshots/nixos-openoffice-small.png"
+          alt="OpenOffice screenshot" /></a>
+
+      <a href="http://www.openoffice.org/">OpenOffice</a> is now in
+      Nixpkgs (<a
+      href="nixos/screenshots/nixos-openoffice.png">screenshot of
+      OpenOffice 2.2.1 running under NixOS</a>).  Despite being a
+      rather gigantic package (it takes two hours to compile on an
+      Intel Core 2 6700), OpenOffice had only two “impurities”
+      (references to paths outside of the Nix store) in its <a
+      href="https://svn.cs.uu.nl:12443/viewvc/trace/nixpkgs/trunk/pkgs/applications/office/openoffice/">build
+      process</a> that had to be resolved — a reference to
+      <tt>/bin/bash</tt> and one to <tt>/usr/lib/libjpeg.so</tt>.</p>
+
+      <p xmlns="http://www.w3.org/1999/xhtml">Armijn Hemel, Wouter den
+      Breejen and Eelco Dolstra contributed to the Nix expression for
+      OpenOffice.</p>
+    </description>
+  </item>
+      
+  <item>
+    <year>2007</year>
     <month>8</month>
     <day>22</day>
     <title>
