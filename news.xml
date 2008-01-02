@@ -4,6 +4,26 @@
 
   <item>
     <year>2007</year>
+    <month>12</month>
+    <day>31</day>
+    <title>
+      Nix 0.11 released
+    </title>
+    <description>
+      <h:a href="http://nix.cs.uu.nl/dist/nix/nix-0.11/">Nix
+      0.11</h:a> has been released.  This is a major new release
+      representing over a year of development.  The most important
+      improvement is secure multi-user support. It also features many
+      usability enhancements and language extensions, many of them
+      prompted by NixOS, the purely functional Linux distribution
+      based on Nix.  See the <h:a
+      href="http://nix.cs.uu.nl/dist/nix/nix-0.11/release-notes/">release
+      notes</h:a> for details.
+    </description>      
+  </item>
+
+  <item>
+    <year>2007</year>
     <month>9</month>
     <day>12</day>
     <title>
