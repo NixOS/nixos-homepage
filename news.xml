@@ -3,6 +3,36 @@
 <news xmlns:h="http://www.w3.org/1999/xhtml">
 
   <item>
+    <year>2008</year>
+    <month>1</month>
+    <day>6</day>
+    <title>
+      New NixOS ISOs
+    </title>
+    <description>
+      <p xmlns="http://www.w3.org/1999/xhtml">
+        
+      <a href="nixos/screenshots/nixos-installer-help.png"><img
+          class="inline"
+          src="nixos/screenshots/nixos-installer-help-small.png"
+          alt="NixOS installer online help" /></a>
+
+      New NixOS installation CD images for <tt>i686</tt> and
+      <tt>x86_64</tt> are <h:a
+      href="http://nix.cs.uu.nl/dist/nix/nixos-0.1pre10083/">available</h:a>,
+      which is a good thing as the previous ones were already a few
+      months old.  The new images are Nix 0.11-based, contain <h:a
+      href="http://www.memtest.org/">Memtest86+</h:a> as a
+      convenience, should support more SATA drives, and show online
+      help (the <h:a
+      href="http://nix.cs.uu.nl/dist/nix/nixos-unstable-latest/manual/">NixOS
+      manual</h:a>) on virtual console 7.
+      
+      </p>
+    </description>
+  </item>
+  
+  <item>
     <year>2007</year>
     <month>12</month>
     <day>31</day>
