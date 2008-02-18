@@ -77,7 +77,7 @@
                 </section>
                 <section>Resources
                   <link url="https://mail.cs.uu.nl/mailman/listinfo/nix-dev">Mailing list</link>
-                  <link url="https://bugs.cs.uu.nl/browse/NIX">Bug tracker</link>
+                  <link url="http://bugs.strategoxt.org/browse/NIX">Bug tracker</link>
                   <link url="irc://irc.freenode.net/#trace">IRC channel</link>
                   <link url="people.html">Contributors</link>
                 </section>
