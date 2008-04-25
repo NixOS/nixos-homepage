@@ -7,7 +7,7 @@
     <month>2</month>
     <day>14</day>
     <title>
-      
+      Jacquard grant proposal accepted!
     </title>
     <description>
       <p xmlns="http://www.w3.org/1999/xhtml">
@@ -46,13 +46,13 @@
 
       New NixOS installation CD images for <tt>i686</tt> and
       <tt>x86_64</tt> are <h:a
-      href="http://nix.cs.uu.nl/dist/nix/nixos-0.1pre10083/">available</h:a>,
+      href="http://nixos.org/releases/nixos-0.1pre10083/">available</h:a>,
       which is a good thing as the previous ones were already a few
       months old.  The new images are Nix 0.11-based, contain <h:a
       href="http://www.memtest.org/">Memtest86+</h:a> as a
       convenience, should support more SATA drives, and show online
       help (the <h:a
-      href="http://nix.cs.uu.nl/dist/nix/nixos-unstable-latest/manual/">NixOS
+      href="http://nixos.org/releases/nixos-unstable-latest/manual/">NixOS
       manual</h:a>) on virtual console 7.
       
       </p>
@@ -118,7 +118,7 @@
       takes two hours to compile on an Intel Core 2 6700), OpenOffice
       had only two “impurities” (references to paths outside of the
       Nix store) in its <a
-      href="https://svn.cs.uu.nl:12443/viewvc/trace/nixpkgs/trunk/pkgs/applications/office/openoffice/">build
+      href="https://svn.nixos.org/viewvc/nix/nixpkgs/trunk/pkgs/applications/office/openoffice/">build
       process</a> that had to be resolved — a reference to
       <tt>/bin/bash</tt> and one to <tt>/usr/lib/libjpeg.so</tt>.</p>
 
@@ -151,7 +151,7 @@
       nice application of purely functional package composition, by
       the way: Wine didn’t work with the standard Glibc in Nixpkgs, so
       we just <a
-      href="https://svn.cs.uu.nl:12443/viewvc/trace/nixpkgs/trunk/pkgs/top-level/all-packages.nix?r1=9165&amp;r2=9164&amp;pathrev=9165">pass
+      href="https://svn.nixos.org/viewvc/nix/nixpkgs/trunk/pkgs/top-level/all-packages.nix?r1=9165&amp;r2=9164&amp;pathrev=9165">pass
       it another Glibc at build time</a>.</p>
 
       <p xmlns="http://www.w3.org/1999/xhtml">In other news, Nix 0.11
@@ -460,7 +460,7 @@
       International Workshop on Software Configuration
       Management</h:a>) describes how we can rather easily deploy
       “services” (e.g., complete webserver configurations such as our
-      <h:a href="http://svn.cs.uu.nl">Subversion server</h:a>) through
+      <h:a href="http://svn.nixos.org/">Subversion server</h:a>) through
       Nix by treating the non-component parts (such as configuration
       files, control scripts and static data) as components that are
       built by Nix expressions.  The result is that all advantages

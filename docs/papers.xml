@@ -3,13 +3,53 @@
 <bibliography svn-id="$Id$"
               xmlns:h="http://www.w3.org/1999/xhtml">
 
-  <authorURL url="http://www.cs.uu.nl/~eelco/">Eelco Dolstra</authorURL>
-  <authorURL url="http://www.cs.uu.nl/~martin/">Martin Bravenboer</authorURL>
-  <authorURL url="http://www.cs.uu.nl/~visser/">Eelco Visser</authorURL>
+  <authorURL url="http://www.st.ewi.tudelft.nl/~dolstra/">Eelco Dolstra</authorURL>
+  <authorURL url="http://martin.bravenboer.name/index.html">Martin Bravenboer</authorURL>
+  <authorURL url="http://swerl.tudelft.nl/bin/view/EelcoVisser/WebHome">Eelco Visser</authorURL>
   <authorURL url="http://www.cs.uu.nl/wiki/Main/MerijnDeJonge">Merijn de Jonge</authorURL>
   <authorURL url="http://www.serc.nl/people/florijn/">Gert Florijn</authorURL>
 
   <items>
+
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <title>Maximal Laziness — An Efficient Interpretation Technique for Purely Functional DSLs</title>
+      <booktitle url="http://ldta2008.inf.elte.hu/">Eighth Workshop on
+      Language Descriptions, Tools and Applications (LDTA
+      2008)</booktitle>
+      <location>Budapest, Hungary</location>
+      <series url="http://www.sciencedirect.com/science/journal/15710661">Electronic Notes in Theoretical Computer Science</series>
+      <volume>???</volume>
+      <publisher>Elsevier Science Publishers</publisher>
+      <day>5</day>
+      <month>April</month>
+      <year>2008</year>
+      <link type="pdf" url="laziness-ldta2008-final.pdf" />
+      <htmlnote><h:em>To appear.</h:em></htmlnote>
+
+      <abstract>
+        In lazy functional languages, any variable is evaluated at
+        most once.  This paper proposes the notion of <h:em>maximal
+        laziness</h:em>, in which syntactically equal terms are
+        evaluated at most once: if two terms
+        <h:em>e</h:em><h:sub>1</h:sub> and
+        <h:em>e</h:em><h:sub>2</h:sub> arising during the evaluation
+        of a program have the same abstract syntax representation,
+        then only one will be evaluated, while the other will reuse
+        the former’s evaluation result.  Maximal laziness can be
+        implemented easily in interpreters for purely functional
+        languages based on term rewriting systems that have the
+        property of <h:em>maximal sharing</h:em> — if two terms are
+        equal, they have the same address.  It makes it easier to
+        write interpreters, as techniques such as closure updating,
+        which would otherwise be required for efficiency, are not
+        needed.  Instead, a straight-forward translation of
+        call-by-name semantic rules yields a call-by-need interpreter,
+        reducing the gap between the language specification and its
+        implementation.  Moreover, maximal laziness obviates the need
+        for optimisations such as memoisation and let-floating.
+      </abstract>
+    </inproceedings>
 
     <inproceedings id="hotos07">
       <author>Eelco Dolstra</author>

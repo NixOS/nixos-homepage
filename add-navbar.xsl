@@ -58,8 +58,8 @@
                 </section>
                 <section>Download
                   <link url="{$latestNix}">Latest stable release</link>
-                  <link url="http://nix.cs.uu.nl/dist/nix/nix-unstable-latest">Latest unstable release</link>
-                  <link url="http://nix.cs.uu.nl/dist/nix/">Older releases</link>
+                  <link url="http://nixos.org/releases/nix/nix-unstable-latest">Latest unstable release</link>
+                  <link url="http://nixos.org/releases/nix/">Older releases</link>
                 </section>
                 <section>Documentation
                   <!-- <link url="foo">FAQ</link> -->
@@ -77,6 +77,7 @@
                 </section>
                 <section>Resources
                   <link url="https://mail.cs.uu.nl/mailman/listinfo/nix-dev">Mailing list</link>
+                  <link url="https://svn.nixos.org/repoman/info/nix">Subversion repository</link>
                   <link url="http://bugs.strategoxt.org/browse/NIX">Bug tracker</link>
                   <link url="irc://irc.freenode.net/#trace">IRC channel</link>
                   <link url="people.html">Contributors</link>
