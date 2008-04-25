@@ -19,7 +19,7 @@
     </xsl:for-each>
   </xsl:param>
 
-  <xsl:param name="latestNix">http://nix.cs.uu.nl/dist/nix/nix-0.11</xsl:param>
+  <xsl:param name="latestNix">http://nixos.org/releases/nix/nix-0.11</xsl:param>
 
   <xsl:output method='xml' encoding="UTF-8"
               doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -58,7 +58,7 @@
                 </section>
                 <section>Download
                   <link url="{$latestNix}">Latest stable release</link>
-                  <link url="http://nixos.org/releases/nix/nix-unstable-latest">Latest unstable release</link>
+                  <link url="http://nixos.org/releases/nix/nix-unstable">Latest unstable release</link>
                   <link url="http://nixos.org/releases/nix/">Older releases</link>
                 </section>
                 <section>Documentation
