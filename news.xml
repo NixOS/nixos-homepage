@@ -4,6 +4,68 @@
 
   <item>
     <year>2008</year>
+    <month>5</month>
+    <day>6</day>
+    <title>
+      Website back up
+    </title>
+    <description>
+      <p xmlns="http://www.w3.org/1999/xhtml">
+        The Nix website was down for a few days due to cooling
+        problems in the server room causing the machine to overheat.
+        These should be resolved now.  Apologies for the
+        inconvenience.
+      </p>
+    </description>
+  </item>
+  
+  <item>
+    <year>2008</year>
+    <month>4</month>
+    <day>25</day>
+    <title>
+      Website / SVN repositories moved
+    </title>
+    <description>
+      <p xmlns="http://www.w3.org/1999/xhtml">
+        The Nix website has moved to <a
+        href="http://nixos.org/"><tt>nixos.org</tt></a> (hosted at <a
+        href="http://www.tudelft.nl/">TU Delft</a>).  The Subversion
+        repositories have moved to <a
+        href="http://svn.nixos.org/"><tt>svn.nixos.org</tt></a>.  See
+        <a
+        href="http://mail.cs.uu.nl/pipermail/nix-dev/2008-April/000740.html">this
+        mailing list posting</a> for information about moving existing
+        SVN working copies.
+      </p>
+    </description>
+  </item>
+  
+  <item>
+    <year>2008</year>
+    <month>4</month>
+    <day>5</day>
+    <title>
+      LDTA 2008 paper
+    </title>
+    <description>
+      <p xmlns="http://www.w3.org/1999/xhtml">
+      Eelco Dolstra presented the paper <a
+      href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/laziness-ldta2008-final.pdf">“Maximal
+      Laziness — An Efficient Interpretation Technique for Purely
+      Functional DSLs”</a> at <a
+      href="http://ldta2008.inf.elte.hu/">8th Workshop on Language
+      Description, Tools and Applications (LDTA 2008)</a>.  It’s about
+      caching of evaluation results in the Nix expression evaluator as
+      a technique to make a simple term-rewriting evaluator efficient.
+      Slides are <a
+      href="http://www.st.ewi.tudelft.nl/~dolstra/talks/ldta-apr-2008.pdf">here</a>.
+      </p>
+    </description>
+  </item>
+  
+  <item>
+    <year>2008</year>
     <month>2</month>
     <day>14</day>
     <title>
