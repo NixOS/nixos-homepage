@@ -79,7 +79,7 @@
                   <link url="https://mail.cs.uu.nl/mailman/listinfo/nix-dev">Mailing list</link>
                   <link url="https://svn.nixos.org/repoman/info/nix">Subversion repository</link>
                   <link url="http://bugs.strategoxt.org/browse/NIX">Bug tracker</link>
-                  <link url="irc://irc.freenode.net/#trace">IRC channel</link>
+                  <link url="irc://irc.freenode.net/#nixos">IRC channel</link>
                   <link url="people.html">Contributors</link>
                 </section>
               </xsl:variable>
