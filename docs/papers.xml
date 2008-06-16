@@ -8,9 +8,78 @@
   <authorURL url="http://swerl.tudelft.nl/bin/view/EelcoVisser/WebHome">Eelco Visser</authorURL>
   <authorURL url="http://www.cs.uu.nl/wiki/Main/MerijnDeJonge">Merijn de Jonge</authorURL>
   <authorURL url="http://www.serc.nl/people/florijn/">Gert Florijn</authorURL>
+  <authorURL url="http://people.cs.uu.nl/andres/">Andres Löh</authorURL>
 
   <items>
 
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <author>Andres Löh</author>
+      <title>NixOS: A Purely Functional Linux Distribution</title>
+      <booktitle url="http://www.icfpconference.org/icfp2008/">ICFP 2008: 13th ACM SIGPLAN International Conference on Functional Programming</booktitle>
+      <location>Victoria, British Columbia, Canada</location>
+      <day>22—24</day>
+      <month>September</month>
+      <year>2008</year>
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-icfp2008-submitted.pdf" />
+      <htmlnote><h:em>Draft.</h:em></htmlnote>
+
+      <abstract>
+        Existing package and system configuration management tools
+        suffer from an <h:em>imperative model</h:em>, where system
+        administration actions such as upgrading packages or changes
+        to system configuration files are stateful: they destructively
+        update the state of the system.  This leads to many problems,
+        such as the inability to roll back changes easily, to run
+        multiple versions of a package side-by-side, to reproduce a
+        configuration deterministically on another machine, or to
+        reliably upgrade a system.  In this paper we show that we can
+        overcome these problems by moving to a <h:em>purely functional
+        system configuration model</h:em>.  This means that all static
+        parts of a system (such as software packages, configuration
+        files and system startup scripts) are built by pure functions
+        and are immutable, stored in a way analogously to a heap in a
+        purely function language.  We have implemented this model in
+        <h:em>NixOS</h:em>, a non-trivial Linux distribution that uses
+        the <h:em>Nix package manager</h:em> to build the entire
+        system configuration from a purely functional specification.
+      </abstract>
+    </inproceedings>
+
+    <inproceedings>
+      <author>Eelco Dolstra</author>
+      <author>Eelco Visser</author>
+      <title>The Nix Build Farm: A Declarative Approach to Continuous
+      Integration</title>
+      <booktitle
+      url="http://smallwiki.unibe.ch/wasdett2008/">International
+      Workshop on Advanced Software Development Tools and Techniques
+      (WASDeTT 2008)</booktitle>
+      <location>Paphos, Cyprus</location>
+      <day>8</day>
+      <month>July</month>
+      <year>2008</year>
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/buildfarm-wasdett2008-final.pdf" />
+      <htmlnote><h:em>To appear.</h:em></htmlnote>
+
+      <abstract>
+        There are many tools to support continuous integration (the
+        process of automatically and continuously building a project
+        from a version management repository).  However, they do not
+        have good support for variability in the build environment:
+        dependencies such as compilers, libraries or testing tools
+        must typically be installed manually on all machines on which
+        automated builds are performed.  The <h:em>Nix package
+        manager</h:em> solves this problem: it has a purely functional
+        language for describing package build actions and their
+        dependencies, allowing the build environment for projects to
+        be produced automatically and deterministically.  We have used
+        Nix to build a continuous integration tool, the <h:em>Nix
+        build farm</h:em>, that is in use to continuously build and
+        release a large set of projects.
+      </abstract>
+    </inproceedings>
+    
     <inproceedings>
       <author>Eelco Dolstra</author>
       <title>Maximal Laziness — An Efficient Interpretation Technique for Purely Functional DSLs</title>
@@ -24,7 +93,7 @@
       <day>5</day>
       <month>April</month>
       <year>2008</year>
-      <link type="pdf" url="laziness-ldta2008-final.pdf" />
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/laziness-ldta2008-final.pdf" />
       <htmlnote><h:em>To appear.</h:em></htmlnote>
 
       <abstract>
@@ -61,7 +130,7 @@
       <publisher>USENIX</publisher>
       <month>May</month>
       <year>2007</year>
-      <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/hotos-final.pdf" />
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/hotos-final.pdf" />
 
       <abstract>
         System configuration management is difficult because systems
@@ -106,7 +175,7 @@
       <month>January</month>
       <year>2006</year>
       <isbn>90-393-4130-3</isbn>
-      <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/phd-thesis.pdf" />
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/phd-thesis.pdf" />
       <link type="igitur" url="http://igitur-archive.library.uu.nl/dissertations/2006-0118-200031/index.htm" />
 
       <abstract>
@@ -190,7 +259,7 @@
       <publisher>ACM Press</publisher>
       <month>November</month>
       <year>2005</year>
-      <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/secsharing-ase2005-final.pdf" />
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/secsharing-ase2005-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=1101933&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
 
       <abstract>
@@ -237,7 +306,7 @@
       <location>Long Beach, California, USA</location>
       <month>September</month>
       <year>2005</year>
-      <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/servicecm-scm12-final.pdf" />
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/servicecm-scm12-final.pdf" />
 
       <abstract>
         The deployment of services — sets of running programs that
@@ -276,7 +345,7 @@
       <publisher>Springer-Verlag</publisher>
       <month>May</month>
       <year>2005</year>
-      <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/eupfcdm-cbse2005-final.pdf" />
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/eupfcdm-cbse2005-final.pdf" />
       <htmlnote>© Springer-Verlag.</htmlnote>
 
       <abstract>
@@ -316,7 +385,7 @@
       <publisher>USENIX</publisher>
       <month>November</month>
       <year>2004</year>
-      <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/nspfssd-lisa2004-final.pdf" />
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nspfssd-lisa2004-final.pdf" />
 
       <abstract>
         Existing systems for software deployment are neither safe nor
@@ -350,7 +419,7 @@
       <publisher>IEEE Computer Society</publisher>
       <month>May</month>
       <year>2004</year>
-      <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/immdsd-icse2004-final.pdf" />
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/immdsd-icse2004-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=999463&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
 
       <abstract>
@@ -389,7 +458,7 @@
       <location>Portland, Oregon, USA</location>
       <month>May</month>
       <year>2003</year>
-      <link type="pdf" url="http://www.cs.uu.nl/~eelco/pubs/iscsd-scm11-final.pdf" />
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/iscsd-scm11-final.pdf" />
 
       <abstract>
         Classically, software deployment is a process consisting of

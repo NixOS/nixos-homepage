@@ -4,6 +4,38 @@
 
   <item>
     <year>2008</year>
+    <month>6</month>
+    <day>16</day>
+    <title>
+      NixOS paper accepted at ICFP!
+    </title>
+    <description>
+      <p xmlns="http://www.w3.org/1999/xhtml">
+
+      <a href="http://www.icfpconference.org/icfp2008/"><img
+          class="inlineNoBorder"
+          src="http://www.icfpconference.org/icfp2008/icfplarge.gif"
+          alt="ICFP logo" /></a>
+        
+        The paper “NixOS: A Purely Functional Linux Distribution” (by
+        Eelco Dolstra and Andres Löh) has been <a
+        href="http://www.icfpconference.org/icfp2008/accepted/accepted.html">accepted</a>
+        for presentation at the <a
+        href="http://www.icfpconference.org/icfp2008/">2008
+        International Conference on Functional Programming</a> (ICFP).
+        It describes NixOS in much greater detail than last year’s
+        HotOS paper, and argues why the purely functional style and
+        features such as laziness are important for system
+        configuration management.  It also provides some measurements
+        on the actual purity of Nix build actions.  A <a
+        href="http://www.cs.uu.nl/~eelco/pubs/nixos-icfp2008-submitted.pdf">draft
+        of the paper</a> is available.
+      </p>
+    </description>
+  </item>
+  
+  <item>
+    <year>2008</year>
     <month>5</month>
     <day>6</day>
     <title>
