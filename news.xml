@@ -4,6 +4,35 @@
 
   <item>
     <year>2008</year>
+    <month>9</month>
+    <day>9</day>
+    <title>
+      DisNix paper accepted at HotSWUp
+    </title>
+    <description>
+      <p xmlns="http://www.w3.org/1999/xhtml">
+        The paper “Atomic Upgrading of Distributed Systems” (by Sander
+        van der Burg, Eelco Dolstra and Merijn de Jonge) has been
+        accepted for presentation at the <a
+        href="http://www.hotswup.org/">First ACM Workshop on Hot
+        Topics in Software Upgrades (HotSWUp)</a>.  A <a
+        href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/atomic-hotswup2008-submitted.pdf">draft
+        of the paper</a> is available.  It describes Sander’s master’s
+        thesis research on DisNix, an extension to Nix that allows
+        deployment and upgrading of distributed systems from a single
+        declarative description.  We will continue this research in
+        the <a
+        href="http://swerl.tudelft.nl/bin/view/Main/PDS">Jacquard PDS
+        project</a>, which has now started.  (We still have an opening
+        for a PhD student or a postdoc; please <a
+        href="mailto:visser@acm.org">contact us</a> if you’re
+        interested.)
+      </p>
+    </description>
+  </item>
+  
+  <item>
+    <year>2008</year>
     <month>6</month>
     <day>16</day>
     <title>
@@ -28,7 +57,7 @@
         features such as laziness are important for system
         configuration management.  It also provides some measurements
         on the actual purity of Nix build actions.  A <a
-        href="http://www.cs.uu.nl/~eelco/pubs/nixos-icfp2008-submitted.pdf">draft
+        href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-icfp2008-submitted.pdf">draft
         of the paper</a> is available.
       </p>
     </description>
