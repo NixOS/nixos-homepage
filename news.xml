@@ -4,6 +4,23 @@
 
   <item>
     <year>2008</year>
+    <month>11</month>
+    <day>21</day>
+    <title>
+      Nix 0.12 released
+    </title>
+    <description>
+      <h:a href="http://nixos.org/releases/nix/nix-0.12/">Nix
+      0.12</h:a> has been released.  The most important change is that
+      Nix no longer needs Berkeley DB to store metadata, but there are
+      many other improvements.  See the <h:a
+      href="http://nixos.org/releases/nix/nix-0.12/release-notes/">release
+      notes</h:a> for details.
+    </description>      
+  </item>
+
+  <item>
+    <year>2008</year>
     <month>9</month>
     <day>9</day>
     <title>
@@ -197,7 +214,7 @@
       usability enhancements and language extensions, many of them
       prompted by NixOS, the purely functional Linux distribution
       based on Nix.  See the <h:a
-      href="http://nixos.org/releases/nix/nix/nix-0.11/release-notes/">release
+      href="http://nixos.org/releases/nix/nix-0.11/release-notes/">release
       notes</h:a> for details.
     </description>      
   </item>

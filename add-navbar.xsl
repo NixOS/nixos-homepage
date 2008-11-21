@@ -19,7 +19,7 @@
     </xsl:for-each>
   </xsl:param>
 
-  <xsl:param name="latestNix">http://nixos.org/releases/nix/nix-0.11</xsl:param>
+  <xsl:param name="latestNix">http://nixos.org/releases/nix/nix-0.12</xsl:param>
 
   <xsl:output method='xml' encoding="UTF-8"
               doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
