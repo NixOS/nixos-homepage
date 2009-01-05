@@ -3,6 +3,56 @@
 <news xmlns:h="http://www.w3.org/1999/xhtml">
 
   <item>
+    <year>2009</year>
+    <month>1</month>
+    <day>5</day>
+    <title>
+      Hydra
+    </title>
+    <description>
+      <h:a href="http://hydra.nixos.org/">
+      <h:img class="inlineNoBorder" src="hydra.png" alt="Hydra
+      logo"/></h:a>
+
+      <h:a
+      href="http://hydra.nixos.org/releases/nix/unstable">Nix</h:a>
+      and <h:a
+      href="http://hydra.nixos.org/project/nixos/jobstatus">NixOS</h:a>
+      releases are now built in <h:a
+      href="http://hydra.nixos.org/">Hydra</h:a>, the new Nix-based
+      continuous build system.  Hydra replaces our <h:a
+      href="http://buildfarm.st.ewi.tudelft.nl/status">old Nix-based
+      build farm</h:a>, which will be phased out soon.  There are
+      several advantages over the old build farm: the build tasks for
+      a project are scheduled and publushed separately, so that for
+      instance a (fast) tarball build doesn’t have to wait for a
+      (slow) Cygwin build; build results are stored in a database,
+      which will enable all sorts of interesting queries; better error
+      reporting; a better web interface; and much more.  We have
+      written a <h:a
+      href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/hydra-scp-submitted.pdf">draft
+      paper about Hydra</h:a>.  There are some <h:a
+      href="http://hydra.nixos.org/download/614/1/manual/">instructions
+      available</h:a> about how to set up your own Hydra server.
+    </description>
+  </item>
+
+  <item>
+    <year>2008</year>
+    <month>12</month>
+    <day>22</day>
+    <title>
+      Linux.com article about Nix
+    </title>
+    <description>
+      There is an article on <h:a
+      href="http://www.linux.com/">Linux.com</h:a> about Nix: <h:a
+      href="http://www.linux.com/feature/155922">“Nix fixes dependency
+      hell on all Linux distributions”</h:a>.
+    </description>      
+  </item>
+
+  <item>
     <year>2008</year>
     <month>11</month>
     <day>21</day>
