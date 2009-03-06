@@ -58,7 +58,7 @@
                 </section>
                 <section>Download
                   <link url="{$latestNix}">Latest stable release</link>
-                  <link url="http://nixos.org/releases/nix/unstable">Latest unstable release</link>
+                  <link url="http://hydra.nixos.org/release/nix/unstable/latest">Latest unstable release</link>
                   <link url="http://nixos.org/releases/full-index-nix.html">Older releases</link>
                 </section>
                 <section>Documentation
