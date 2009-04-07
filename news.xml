@@ -4,6 +4,38 @@
 
   <item>
     <year>2009</year>
+    <month>4</month>
+    <day>7</day>
+    <title>
+      KDE 4.2 in Nixpkgs/NixOS
+    </title>
+    <description>
+      <h:a
+          href="nixos/screenshots/nixos-kde42-1.png"><h:img
+          class="inlineNoBorder"
+          src="nixos/screenshots/nixos-kde42-1-small.png"
+          alt="KDE 4.2 screenshot" /></h:a>
+
+      We now have a fairly complete set of KDE 4.2 packages in Nixpkgs
+      and NixOS.  Previously we had KDE 3.5, but it was rather
+      incomplete: just <h:tt>kdelibs</h:tt> and <h:tt>kdebase</h:tt>.
+      Now we have all that <h:a
+      href="nixos/screenshots/nixos-kde42-2.png">desktop
+      goodness</h:a>, such as <h:tt>kdemultimedia</h:tt>,
+      <h:tt>kdenetwork</h:tt> and <h:tt>kdegames</h:tt>.  You can
+      enable KDE 4 in NixOS by setting the
+      <h:tt>services.xserver.sessionType</h:tt> option to
+      <h:tt>kde4</h:tt>.  Thanks go to Yury G. Kudryashov, Andrew
+      Morsillo and Sander van der Burg for doing the hard work on
+      adding KDE 4 to Nixpkgs.  (<h:a
+      href="nixos/screenshots/nixos-kde42-1.png">Screenshot 1</h:a>,
+      <h:a href="nixos/screenshots/nixos-kde42-2.png">screenshot
+      2</h:a>.)
+    </description>
+  </item>
+
+  <item>
+    <year>2009</year>
     <month>1</month>
     <day>5</day>
     <title>
