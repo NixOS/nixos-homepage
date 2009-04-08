@@ -63,7 +63,7 @@
                 </section>
                 <section>Documentation
                   <!-- <link url="foo">FAQ</link> -->
-                  <link url="{$latestNix}/manual/">Manual</link>
+                  <link url="http://hydra.nixos.org/job/nix/trunk/build/latest/download-by-type/doc/manual">Manual</link>
                   <link url="docs/papers.html">Research papers</link>
                 </section>
                 <section>Projects
