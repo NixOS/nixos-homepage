@@ -5,6 +5,26 @@
   <item>
     <year>2009</year>
     <month>4</month>
+    <day>21</day>
+    <title>
+      OpenOffice.org 3 in Nixpkgs
+    </title>
+    <description>
+      <h:a
+          href="nixos/screenshots/nixos-openoffice-3.png"><h:img
+          class="inlineNoBorder"
+          src="nixos/screenshots/nixos-openoffice-3-small.png"
+          alt="OpenOffice.org 3.0.1 screenshot" /></h:a>
+
+      Lluís Batlle has updated OpenOffice.org in Nixpkgs to 3.0.1
+      (<h:a
+      href="nixos/screenshots/nixos-openoffice-3.png">screenshot</h:a>.)
+    </description>
+  </item>
+
+  <item>
+    <year>2009</year>
+    <month>4</month>
     <day>7</day>
     <title>
       KDE 4.2 in Nixpkgs/NixOS
