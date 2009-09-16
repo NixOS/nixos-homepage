@@ -1,0 +1,38 @@
+[% WRAPPER layout.tt title="NixOS Downloads" id='$Id: download.tt -1   $' %]
+
+<h1 id="download">NixOS Downloads</h1>
+
+<h2>ISO images</h2>
+
+<p>We provide several ISO images:</p>
+
+<ul>
+  <li><a href="http://hydra.nixos.org/job/nixos/trunk/iso_minimal/latest-for/i686-linux/download">Minimal installation CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
+  <li><a href="http://hydra.nixos.org/job/nixos/trunk/iso_minimal/latest-for/x86_64-linux/download">Minimal installation CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
+  <li><a href="http://hydra.nixos.org/job/nixos/trunk/iso_graphical/latest-for/i686-linux/download">Graphical live CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
+  <li><a href="http://hydra.nixos.org/job/nixos/trunk/iso_graphical/latest-for/x86_64-linux/download">Graphical live CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
+</ul>
+
+<p>The difference between the text and graphical CDs is that the
+latter contains X11, KDE 4 and several other applications.  Both can
+be used to install NixOS.</p>
+
+<p>There is some <a
+href="http://hydra.nixos.org/job/nixos/trunk/manual/latest/download">basic
+documentation</a>.</p>
+
+<p>You can also <a
+href="https://svn.nixos.org/websvn/nix/nixos/trunk/">browse the
+sources</a>, or check them out from our <a
+href="https://svn.nixos.org/repoman/info/nix">Subversion
+repository</a> at <a
+href="https://svn.nixos.org/repos/nix/nixos/trunk">https://svn.nixos.org/repos/nix/nixos/trunk</a>.</p>
+
+<p>There is a <a href="http://bugs.strategoxt.org/browse/NIXOS">bug
+tracker</a> for NixOS.</p>
+
+<p>NixOS is <a
+href="http://hydra.nixos.org/project/nixos">continuously built</a>
+from source in Hydra, the Nix-based continuous build system.</p>
+
+[% END %]

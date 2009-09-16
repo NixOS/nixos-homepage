@@ -1,0 +1,42 @@
+h1 {
+    border-bottom: dotted 2px;
+}
+
+h2 {
+    background-color: #f6f8ff;
+}
+
+h3 {
+    font-size: 100%;
+    border-bottom: dotted 1px;
+}
+
+pre {
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+}
+
+pre.code {
+    border: 1px solid #6185a0;
+    padding: 6px 6px;
+    color: #600000;
+    background: #f4f4f8;
+}
+
+#logo img {
+    width: 8em;
+}
+
+img.inline, img.inlineNoBorder {
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+ul {
+    padding-left: 1em;
+}
+
+li {
+    margin-bottom: 1em;
+}

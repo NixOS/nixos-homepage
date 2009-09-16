@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+    <title>[% title %]</title>
+    <link rel="stylesheet" href="[% root %]css/nix-common.css" type="text/css" />
+    <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
+    <link rel="stylesheet" href="[% root %]css/navbar.css" type="text/css" />
+    <script type="text/javascript" src="[% root %]js/jquery-pack.js"></script>
+  </head>
+  
+  <body> 
+    <div id="container">
+
+      <div id="leftnavbar">
+        <div id="logo"><a class="no-hover" href="index.html"><img src="[% root %]logo-mockup.png" alt="Nix Logo" /></a></div>
+        [% PROCESS navbar.tt %]        
+      </div>
+
+      <div id="content">
+        [% content %]
+        <div id="footer">
+          <hr />
+          <tt>[% id %]</tt>
+        </div>
+      </div>
+
+    </div>
+  </body>
+
+</html>

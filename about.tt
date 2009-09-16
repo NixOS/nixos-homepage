@@ -1,15 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
-<head>
-  <title>About Nix</title>
-</head>
-
-<body>
+[% WRAPPER layout.tt title="About Nix" id='$Id$' %]
 
 <h1>About Nix</h1>
 
@@ -243,9 +232,4 @@ The project is funded by the Software Engineering Research Program <a
 href="http://www.jacquard.nl/">Jacquard</a> to improve the support for
 variability in software systems.</p>
 
-
-<div class="svn-id">$Id$</div>
-
-</body>
-
-</html>
+[% END %]

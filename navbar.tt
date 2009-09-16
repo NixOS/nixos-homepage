@@ -1,0 +1,68 @@
+[% USE HTML -%]
+
+[% BLOCK makeSubMenu %]
+  [% extra = collapsed ? "collapsed" : "" %]
+  <li class="submenu">
+    <div class="title [% extra %]"><a class="[% collapsed ? "submenuToggleCollapsed" : "submenuToggleExpanded" %]"
+      href="javascript:">[% HTML.escape(title) %]</a></div>
+    <ul class="submenu [% extra %]">
+      [% content %]
+    </ul>
+  </li>
+[% END %]
+
+[% BLOCK makeLinkWrapped %]
+  <li [% IF curUri == uri %]class="active"[% END %]>
+    <div class="title"><a href="[% root %][% uri %]">[% title %]</a></div>
+    [% content %]
+  </li>
+[% END %]
+
+[% BLOCK makeLink -%]
+[% INCLUDE makeLinkWrapped content="" -%]
+[% END %]
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.submenuToggleExpanded').toggle(
+      function () { $(".submenu", $(this).parents(".submenu")).slideUp(); },
+      function () { $(".submenu", $(this).parents(".submenu")).slideDown(); }
+    );
+
+    $('.submenuToggleCollapsed').toggle(
+      function () { $(".submenu", $(this).parents(".submenu")).slideDown(); },
+      function () { $(".submenu", $(this).parents(".submenu")).slideUp(); }
+    );
+  });
+</script>
+
+<ul class="menu">
+
+  [% WRAPPER makeSubMenu title="NixOS" collapsed=0  %]
+    [% INCLUDE makeLink uri = "nixos/about.html" title = "About" %]
+    [% INCLUDE makeLink uri = "nixos/news.html" title = "News" %]
+    [% INCLUDE makeLink uri = "nixos/download.html" title = "Download" %]
+    [% INCLUDE makeLink uri = "nixos/docs.html" title = "Documentation" %]
+    [% INCLUDE makeLink uri = "nixos/development.html" title = "Contributing" %]
+  [% END %]
+
+  [% WRAPPER makeSubMenu title="Nix" collapsed=0  %]
+    [% INCLUDE makeLink uri = "about.html" title = "About" %]
+    [% INCLUDE makeLink uri = "download.html" title = "Download" %]
+    [% INCLUDE makeLink uri = "docs.html" title = "Documentation" %]
+    [% INCLUDE makeLink uri = "development.html" title = "Contributing" %]
+  [% END %]
+
+  [% WRAPPER makeSubMenu title="Nixpkgs" collapsed=0  %]
+    [% INCLUDE makeLink uri = "nixpkgs/about.html" title = "About" %]
+    [% INCLUDE makeLink uri = "nixpkgs/download.html" title = "Download" %]
+    [% INCLUDE makeLink uri = "nixpkgs/docs.html" title = "Documentation" %]
+    [% INCLUDE makeLink uri = "nixpkgs/development.html" title = "Contributing" %]
+  [% END %]
+
+  [% WRAPPER makeSubMenu title="Tools" collapsed=(curUri != "hydra.html" && curUri != "patchelf.html") %]
+    [% INCLUDE makeLink uri = "hydra.html" title = "Hydra" %]
+    [% INCLUDE makeLink uri = "patchelf.html" title = "PatchELF" %]
+  [% END %]
+
+</ul>
