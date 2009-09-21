@@ -25,7 +25,9 @@
         [% content %]
         <div id="footer">
           <hr />
-          <tt>[% id %]</tt>
+          [% tokens = id.split %] <p>This page was last updated on [%
+          tokens.3 %] at [% tokens.4 %] by <tt>[% tokens.3 %]</tt>
+          (revision [% tokens.2 %]).</p>
         </div>
       </div>
 
