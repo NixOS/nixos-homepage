@@ -1,0 +1,7 @@
+[% WRAPPER layout.tt title="News" id='$Id$' %]
+
+<h1>News</h1>
+
+[% INSERT "all-news.xhtml" %]
+
+[% END %]

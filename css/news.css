@@ -1,5 +1,9 @@
-.news {
+table.news {
   padding: 0 0 0 0;
+}
+
+table.news td {
+   border: 0px;
 }
 
 tr.news-header {

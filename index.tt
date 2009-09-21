@@ -1,15 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
-<head>
-  <title>Nix</title>
-</head>
-
-<body>
+[% WRAPPER layout.tt title="The Nix/NixOS Project" id='$Id$' %]
 
 <h1>Nix</h1>
 
@@ -25,14 +14,8 @@ systems.  <a href="about.html">Read more…</a></p>
 
 <h2>Latest News</h2>
 
-<div class="news-placeholder">
-  <div class="number">5</div>
-</div>
+[% INSERT "latest-news.xhtml" %]
 
-<a href="news.html">Older news…</a>
+<p><a href="news.html">Older news…</a></p>
 
-<div class="svn-id">$Id$</div>
-
-</body>
-
-</html>
+[% END %]

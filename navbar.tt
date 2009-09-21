@@ -46,18 +46,11 @@
     [% INCLUDE makeLink uri = "nixos/development.html" title = "Contributing" %]
   [% END %]
 
-  [% WRAPPER makeSubMenu title="Nix" collapsed=0  %]
+  [% WRAPPER makeSubMenu title="Nix / Nixpkgs" collapsed=0  %]
     [% INCLUDE makeLink uri = "about.html" title = "About" %]
     [% INCLUDE makeLink uri = "download.html" title = "Download" %]
     [% INCLUDE makeLink uri = "docs.html" title = "Documentation" %]
     [% INCLUDE makeLink uri = "development.html" title = "Contributing" %]
-  [% END %]
-
-  [% WRAPPER makeSubMenu title="Nixpkgs" collapsed=0  %]
-    [% INCLUDE makeLink uri = "nixpkgs/about.html" title = "About" %]
-    [% INCLUDE makeLink uri = "nixpkgs/download.html" title = "Download" %]
-    [% INCLUDE makeLink uri = "nixpkgs/docs.html" title = "Documentation" %]
-    [% INCLUDE makeLink uri = "nixpkgs/development.html" title = "Contributing" %]
   [% END %]
 
   [% WRAPPER makeSubMenu title="Tools" collapsed=(curUri != "hydra.html" && curUri != "patchelf.html") %]
