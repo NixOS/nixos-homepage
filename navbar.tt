@@ -52,8 +52,8 @@
     [% INCLUDE makeLink uri = "development.html" title = "Contributing" %]
   [% END %]
 
-  [% WRAPPER makeSubMenu title="Tools" collapsed=(curUri != "hydra.html" && curUri != "patchelf.html") %]
-    [% INCLUDE makeLink uri = "hydra.html" title = "Hydra" %]
+  [% WRAPPER makeSubMenu title="Tools" collapsed=(curUri != "hydra/index.html" && curUri != "patchelf.html") %]
+    [% INCLUDE makeLink uri = "hydra/index.html" title = "Hydra" %]
     [% INCLUDE makeLink uri = "patchelf.html" title = "PatchELF" %]
   [% END %]
 

@@ -1,0 +1,36 @@
+[% WRAPPER layout.tt title="Hydra" id='$Id$' %]
+
+<h1>Hydra</h1>
+
+<a href="http://www.flickr.com/photos/eelcovisser/367433201/"><img
+class="inline"
+src="http://farm1.static.flickr.com/185/367433201_9ee5ad0986_m.jpg"
+alt="Hydra build farm" /></a>
+
+<h2>About</h2>
+
+<p>Hydra is a Nix-based continuous build system.  It continuously
+checks out sources of software projects from version management
+systems to build, test and release them.  The build tasks are
+described using Nix expressions.  This allows a Hydra build task to
+specify all the dependencies needed to build or test a project.  It
+supports a number of operating systems, such as various Linux
+flavours, Mac OS X, and Windows.</p>
+
+<p>At <a href="http://www.tudelft.nl">Delft University of
+Technology</a> we run a <a href="http://hydra.nixos.org/">Hydra-based
+build farm</a> to build and test the NixOS Linux distribution, the Nix
+Packages collection, the Stratego/XT program transformation system,
+and various other open source projects.  If you want to use our build
+farm for your open source project, <a
+href="mailto:rob.vermaas@gmail.com">please let us know</a>.</p>
+
+<h2>Documentation</h2>
+
+<p>There is a <a
+href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/hydra-scp-submitted.pdf">draft
+paper about Hydra</a>.  There are also some (incomplete) <a
+href="http://hydra.nixos.org/job/hydra/trunk/build/latest/download-by-type/doc/manual">instructions
+available</a> about how to set up your own Hydra server.</p>
+
+[% END %]
