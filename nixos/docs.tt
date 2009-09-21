@@ -1,0 +1,28 @@
+[% WRAPPER layout.tt title="NixOS Documentation" id='$Id$' %]
+
+<h1>NixOS Documentation</h1>
+
+<h2>Manual</h2>
+
+<ul>
+
+  <li>The <a
+  href="http://hydra.nixos.org/job/nixos/trunk/manual/latest/download">NixOS
+  manual</a> describes how install and use NixOS.</li>
+
+  <li>The
+  <a href="http://hydra.nixos.org/job/nix/trunk/tarball/latest/download-by-type/doc/manual">
+  Nix manual</a> describes how to use the Nix package manager.</li>
+
+  <li>The <a
+  href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">Nixpkgs
+  manual</a> describes how to contribute to the Nix Packages
+  collection.</li>
+
+</ul>
+
+<h2>Papers</h2>
+
+<p>TODO</p>
+
+[% END %]

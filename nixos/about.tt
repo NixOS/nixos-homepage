@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="About NixOS" id='$Id: about.tt -1   $' %]
+[% WRAPPER layout.tt title="About NixOS" id='$Id$' %]
 
 <h1>NixOS</h1>
 
@@ -12,8 +12,8 @@ NixOS is a Linux distribution based on <a
 href="../index.html">Nix</a>, a purely functional package management
 system.  NixOS is an experiment to see if we can build an operating
 system in which software packages, configuration files, boot scripts
-and the like are all managed in a purely functional way, that is,
-they are all built by deterministic functions and they never change
+and the like are all managed in a purely functional way.  This means
+that they are all built by deterministic functions and never change
 after they have been built.  Such an operating system should have <a
 href="../about.html">all the nice characteristics</a> that the Nix
 package manager has:</p>

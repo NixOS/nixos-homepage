@@ -16,6 +16,6 @@ systems.  <a href="about.html">Read more…</a></p>
 
 [% INSERT "latest-news.xhtml" %]
 
-<p><a href="news.html">Older news…</a></p>
+<p>[<a href="news.html">Older news…</a>]</p>
 
 [% END %]

@@ -2,7 +2,7 @@ tpage = /nix/var/nix/profiles/per-user/eelco/hydra-deps/bin/tpage
 catalog = $(HOME)/.nix-profile/xml/dtd/xhtml1/catalog.xml
 
 HTML = index.html news.html patchelf.html about.html \
-  nixos/about.html nixos/download.html
+  nixos/about.html nixos/download.html nixos/docs.html nixos/development.html
 
 all: $(HTML)
 

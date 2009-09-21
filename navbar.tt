@@ -40,7 +40,6 @@
 
   [% WRAPPER makeSubMenu title="NixOS" collapsed=0  %]
     [% INCLUDE makeLink uri = "nixos/about.html" title = "About" %]
-    [% INCLUDE makeLink uri = "nixos/news.html" title = "News" %]
     [% INCLUDE makeLink uri = "nixos/download.html" title = "Download" %]
     [% INCLUDE makeLink uri = "nixos/docs.html" title = "Documentation" %]
     [% INCLUDE makeLink uri = "nixos/development.html" title = "Contributing" %]

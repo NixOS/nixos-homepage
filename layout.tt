@@ -17,8 +17,8 @@
     <div id="container">
 
       <div id="leftnavbar">
-        <div id="logo"><a class="no-hover" href="index.html"><img src="[% root %]logo-mockup.png" alt="Nix Logo" /></a></div>
-        [% PROCESS navbar.tt %]        
+        <div id="logo"><a class="no-hover" href="[% root %]index.html"><img src="[% root %]logo-mockup.png" alt="Nix Logo" /></a></div>
+        [% PROCESS navbar.tt %]
       </div>
 
       <div id="content">
