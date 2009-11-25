@@ -17,13 +17,17 @@
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs4035">
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="0 : 526.18109 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="744.09448 : 526.18109 : 1"
-       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
-       id="perspective4041" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2451">
+      <rect
+         style="fill:#4040c0;fill-opacity:1;stroke:#4040c0"
+         id="rect2453"
+         width="13.035714"
+         height="22.053572"
+         x="102.94219"
+         y="410.77362" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -35,11 +39,11 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="150.12843"
-     inkscape:cy="984.18368"
+     inkscape:zoom="15.839192"
+     inkscape:cx="56.703012"
+     inkscape:cy="1009.3848"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g2455"
      showgrid="true"
      inkscape:window-width="1913"
      inkscape:window-height="1128"
@@ -78,10 +82,6 @@
            style="fill:none;fill-rule:evenodd;stroke:#8080ff;stroke-width:2.77110553;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            d="M 110,402.36218 L 110,426.90938"
            id="path4701" />
-        <path
-           style="fill:none;fill-rule:evenodd;stroke:#8080ff;stroke-width:2.77110553;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="M 110,414.63578 L 99.370756,420.77258"
-           id="path4703" />
         <g
            id="g4719"
            style="stroke:#c04040;stroke-width:16;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline"
@@ -92,8 +92,9 @@
              style="fill:none;fill-rule:evenodd;stroke:#4040c0;stroke-width:16;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
           <path
              id="path4705"
-             d="M -214.80158,396.85037 L -276.17346,361.4173"
-             style="fill:none;fill-rule:evenodd;stroke:#4040c0;stroke-width:16;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+             d="M -214.80158,396.85037 L -249.77114,376.66069 L -276.17346,361.4173"
+             style="fill:none;fill-rule:evenodd;stroke:#4040c0;stroke-width:16;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             sodipodi:nodetypes="ccc" />
         </g>
         <g
            id="g4723"
@@ -105,8 +106,9 @@
              style="fill:none;fill-rule:evenodd;stroke:#8080ff;stroke-width:16;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
           <path
              id="path4707"
-             d="M -153.4297,361.4173 L -153.4297,290.55116"
-             style="fill:none;fill-rule:evenodd;stroke:#8080ff;stroke-width:16;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+             d="M -153.4297,361.4173 L -153.4297,328.39296 L -153.4297,290.55116"
+             style="fill:none;fill-rule:evenodd;stroke:#8080ff;stroke-width:16;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             sodipodi:nodetypes="ccc" />
         </g>
         <g
            id="g4727"
@@ -147,11 +149,24 @@
              d="M -153.4297,503.14958 L -153.4297,574.01573"
              style="fill:none;fill-rule:evenodd;stroke:#4040c0;stroke-width:16;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
         </g>
-        <path
-           style="fill:none;fill-rule:evenodd;stroke:#8080ff;stroke-width:2.77110553;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="M 110.10663,410.51101 L 110,422.36218"
-           id="path4633"
-           sodipodi:nodetypes="cc" />
+        <g
+           id="g2455">
+          <g
+             id="g2459">
+            <g
+               id="g2463">
+              <path
+                 id="path4703"
+                 d="M 110,414.63578 L 99.370756,420.77258"
+                 style="fill:none;fill-rule:evenodd;stroke:#8080ff;stroke-width:2.77110553;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+              <path
+                 clip-path="url(#clipPath2451)"
+                 id="path2447"
+                 d="M 110,402.36218 L 110,426.90938"
+                 style="fill:none;fill-rule:evenodd;stroke:#8080ff;stroke-width:2.77110552999999982;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+            </g>
+          </g>
+        </g>
       </g>
       <text
          id="text3293"
