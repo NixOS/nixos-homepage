@@ -1,7 +1,7 @@
 tpage = /nix/var/nix/profiles/per-user/eelco/hydra-deps/bin/tpage
 catalog = $(HOME)/.nix-profile/xml/dtd/xhtml1/catalog.xml
 
-HTML = index.html news.html about.html \
+HTML = index.html news.html about.html download.html \
   nixos/about.html nixos/download.html nixos/docs.html nixos/development.html \
   patchelf.html hydra/index.html
 
@@ -24,3 +24,6 @@ index.html: latest-news.xhtml
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 5 news.xsl news.xml > $@ || rm -f $@
+
+check:
+	checklink $(HTML)

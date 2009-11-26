@@ -24,7 +24,8 @@ pre.code {
 }
 
 #logo img {
-    width: 8em;
+    width: 6em;
+    margin-bottom: 1em;
 }
 
 img.inline, img.inlineNoBorder {
@@ -39,4 +40,16 @@ ul {
 
 li {
     margin-bottom: 1em;
+}
+
+.reldate {
+    font-style: italic;   
+}
+
+table.releases td {
+    border: 0px;
+}
+
+table {
+    margin: 0em 0em 0em 0em;
 }

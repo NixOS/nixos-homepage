@@ -1,16 +1,17 @@
 [% WRAPPER layout.tt title="The Nix/NixOS Project" id='$Id$' %]
 
-<h1>Nix</h1>
+<h1>The Nix/NixOS Project</h1>
 
-<p>Nix is a <a
-href="http://en.wikipedia.org/wiki/Purely_functional">purely
-functional</a> package manager.  It allows multiple versions of a
-package to be installed side-by-side, ensures that dependency
-specifications are complete, supports atomic upgrades and rollbacks,
-allows non-root users to install software, and has many other
-features.  It is the basis of the <a href="nixos/">NixOS</a> Linux
-distribution, but it can be used equally well under other Unix
-systems.  <a href="about.html">Read more…</a></p>
+<p>Welcome to the homepage for <strong>Nix</strong>, an open source,
+<a href="http://en.wikipedia.org/wiki/Purely_functional">purely
+functional</a> package manager, and <strong>NixOS</strong>, a Linux
+distribution that uses Nix.  The Nix package manager allows multiple
+versions of a package to be installed side-by-side, ensures that the
+upgrade of one package doesn’t interfere with others, supports atomic
+upgrades and rollbacks, allows non-root users to install software, and
+has many other features.  You can read more about <a
+href="about.html">Nix</a> and <a
+href="nixos/about.html">NixOS</a>.</p>
 
 <h2>Latest News</h2>
 
