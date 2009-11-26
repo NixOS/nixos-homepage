@@ -1,6 +1,6 @@
 [% WRAPPER layout.tt title="The Nix/NixOS Project" id='$Id$' %]
 
-<h1>The Nix/NixOS Project</h1>
+<h2>The Nix/NixOS Project</h2>
 
 <p>Welcome to the homepage for <strong>Nix</strong>, an open source,
 <a href="http://en.wikipedia.org/wiki/Purely_functional">purely

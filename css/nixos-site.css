@@ -28,12 +28,6 @@ pre.code {
     margin-bottom: 1em;
 }
 
-img.inline, img.inlineNoBorder {
-    float: right;
-    margin-left: 10px;
-    margin-bottom: 10px;
-}
-
 ul {
     padding-left: 1em;
 }

@@ -7,24 +7,44 @@
   <head>
     <title>[% title %]</title>
     <link rel="stylesheet" href="[% root %]css/nix-common.css" type="text/css" />
+    <link rel="stylesheet" href="[% root %]css/test.css" type="text/css" />
+    <!--
     <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/navbar.css" type="text/css" />
+    -->
     <link rel="stylesheet" href="[% root %]css/news.css" type="text/css" />
     <script type="text/javascript" src="[% root %]js/jquery-pack.js"></script>
   </head>
   
   <body> 
-    <div id="container">
+    <div id="page">
 
+      <!--
       <div id="leftnavbar">
         <div id="logo"><a class="no-hover" href="[% root %]index.html"><img src="[% root %]logo-mockup.png" alt="Nix Logo" /></a></div>
         [% PROCESS navbar.tt %]
       </div>
+      -->
+
+      <div id="header">
+        <div id="logo"><a class="no-hover" href="[% root %]index.html"><img src="[% root %]logo/nixos-lores.png" alt="Nix Logo" /></a></div>
+        <ul class="short-menu" id="top-menu">
+          <li><a href="[% root %]nixos/about.html">NixOS</a></li>
+          <li><a href="[% root %]about.html">Nix</a></li>
+          <li><a href="[% root %]nixpkgs.html">Nixpkgs</a></li>
+          <li><a href="[% root %]developers.html">Developers</a></li>
+        </ul>
+      </div>
 
       <div id="content">
         [% content %]
-        <div id="footer">
-          <hr />
+      </div>
+
+      <div id="footer">
+        <ul class="short-menu" id="bottom-menu">
+          <li><a href="[% root %]about-us.html">About us</a></li>
+        </ul>
+        <div id="last-modified">
           [% tokens = id.split %] <p>This page was last updated on [%
           tokens.3 %] at [% tokens.4 %] by <tt>[% tokens.5 %]</tt>
           (revision [% tokens.2 %]).</p>
