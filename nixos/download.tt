@@ -1,8 +1,6 @@
-[% WRAPPER layout.tt title="NixOS Downloads" id='$Id$' %]
+[% WRAPPER layout.tt title="NixOS Downloads" id='$Id$' menu='nixos' %]
 
-<h1>NixOS Downloads</h1>
-
-<h2>ISO images</h2>
+<h2>NixOS ISO images</h2>
 
 <p>We provide several ISO images:</p>
 

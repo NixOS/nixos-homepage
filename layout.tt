@@ -8,23 +8,13 @@
     <title>[% title %]</title>
     <link rel="stylesheet" href="[% root %]css/nix-common.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/test.css" type="text/css" />
-    <!--
-    <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
-    <link rel="stylesheet" href="[% root %]css/navbar.css" type="text/css" />
-    -->
     <link rel="stylesheet" href="[% root %]css/news.css" type="text/css" />
+    <link rel="shortcut icon" href="[% root %]/favicon.ico" />
     <script type="text/javascript" src="[% root %]js/jquery-pack.js"></script>
   </head>
   
   <body> 
     <div id="page">
-
-      <!--
-      <div id="leftnavbar">
-        <div id="logo"><a class="no-hover" href="[% root %]index.html"><img src="[% root %]logo-mockup.png" alt="Nix Logo" /></a></div>
-        [% PROCESS navbar.tt %]
-      </div>
-      -->
 
       <div id="header">
         <div id="logo"><a class="no-hover" href="[% root %]index.html"><img src="[% root %]logo/nixos-lores.png" alt="Nix Logo" /></a></div>
@@ -36,8 +26,25 @@
         </ul>
       </div>
 
-      <div id="content">
-        [% content %]
+      <div id="main">
+
+        [% IF menu == 'nixos' %]
+        <div id="left-bar">
+          <div id="left-title">NixOS</div>
+          <ul id="left-menu">
+            <li><a href="[% root %]nixos/about.html">About</a></li>
+            <li><a href="[% root %]nixos/download.html">Download</a></li>
+            <li><a href="[% root %]nixos/screenshots.html">Screenshots</a></li>
+            <li><a href="http://hydra.nixos.org/job/nixos/trunk/manual/latest/download">Manual</a></li>
+            <li><a href="[% root %]nixos/support.html">Support</a></li>
+          </ul>
+        </div>
+        [% END %]
+
+        <div id="content">
+          [% content %]
+        </div>
+
       </div>
 
       <div id="footer">

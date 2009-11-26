@@ -15,6 +15,8 @@ div#page {
     border-radius: 1em;
     -moz-border-radius: 1em;
     -webkit-border-radius: 1em;
+    -moz-box-shadow: #404040 0px 5px 50px;
+    -webkit-box-shadow: #404040 0px 5px 50px;
 }
 
 /* The header. */
@@ -74,8 +76,50 @@ ul.short-menu li a {
 }
 
 ul.short-menu li a:hover {
+    text-decoration: none;
     border-bottom: 1px dotted black;
     background: white;
+}
+
+/* The left menu. */
+div#main {
+    position: relative;
+}
+
+div#left-bar {
+    position: absolute;
+    left: 0em;
+    width: 8em;
+}
+
+div#left-title {
+    font-weight: bold;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+    border-bottom: 1px dotted black;
+}
+
+ul#left-menu {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+ul#left-menu li {
+    font-size: 90%;
+    list-style: none;
+    padding-left: 1.3em;
+    margin-bottom: 0.5em;
+}
+
+ul#left-menu li {
+    background-image: url(../images/arrow-right.gif);
+    background-repeat: no-repeat;
+    background-position: 0 center;
+}
+
+/* The content. */
+div#left-bar + div#content {
+    margin-left: 9em;
 }
 
 /* Inline (floating) images. */

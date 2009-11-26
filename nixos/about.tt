@@ -1,6 +1,6 @@
-[% WRAPPER layout.tt title="About NixOS" id='$Id$' %]
+[% WRAPPER layout.tt title="About NixOS" id='$Id$' menu='nixos' %]
 
-<h1>NixOS</h1>
+<h2>About NixOS</h2>
 
 <p><a
     href="screenshots/nixos-kde42-1.png"><img
@@ -102,34 +102,6 @@ works quite well.  Current status:</p>
 
   <li>KDE and parts of Gnome work.</li>
 
-</ul>
-
-
-<h2>Screenshots</h2>
-
-<ul>
-  <li><a href="screenshots/nixos-grub.png">Grub boot menu</a> showing
-  the ability to boot into previous system configurations.  Changing
-  the system configuration is non-destructive: previous configurations
-  are still there until you garbage-collect them.</li>
-  <li><a href="screenshots/nixos-compiz-cube.png">X server
-  with Compiz window manager</a>.</li>
-  <li><a href="screenshots/nixos-terminals.png">Emacs and
-  a few terminals</a> showing off the (near) absence of
-  <tt>/lib</tt>, <tt>/bin</tt> etc.; everything is in the Nix
-  store.</li>
-  <li><a href="screenshots/nixos-apps.png">Some
-  applications</a>.</li>
-  <li><a href="screenshots/nixos-kde.png">KDE 3.5</a>.</li>
-  <li>KDE 4.2: <a href="screenshots/nixos-kde42-1.png">switcher</a>,
-  <a href="screenshots/nixos-kde42-2.png">exposé</a>.</li>
-  <li><a href="screenshots/nixos-games.png">Wine, Dosbox, Quake 3,
-  plus a Mega Drive emulator</a>.</li>
-  <li>OpenOffice (<a
-  href="screenshots/nixos-openoffice-3.png">3.0.1</a>, <a
-  href="screenshots/nixos-openoffice.png">2.2.1</a>).</li>
-  <li><a href="screenshots/nixos-virtualbox.png">VirtualBox</a> on
-  NixOS running Vista and NixOS guests.</li>
 </ul>
 
 
