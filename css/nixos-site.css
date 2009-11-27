@@ -146,3 +146,16 @@ img.inline, img.inlineNoBorder {
 table.releases td {
     border: 0px;
 }
+
+/* Screenshot table. */
+table.screenshots {
+    border-style: hidden;
+}
+
+table.screenshots td {
+    vertical-align: middle;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border: 0px;
+    border-bottom: 1px dotted black;
+}

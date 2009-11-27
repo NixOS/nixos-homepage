@@ -21,7 +21,7 @@
     <script type="text/javascript" src="[% root %]js/jquery.imageZoom.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        jQuery(document.body).imageZoom();
+        jQuery(document.body).imageZoom({ hideClicked: 0 });
       })
     </script>
     <link rel="stylesheet" href="[% root %]js/jquery.imageZoom.css" type="text/css" />
