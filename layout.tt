@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 [% BLOCK menuItem %]
-  <li [% IF "${root}${curUri}" == uri %]class="active"[% END %]>
+  <li [% IF "${root}${curUri}" == uri || "${root}${curUri}" == "${uri}index.html" %]class="active"[% END %]>
     <a href="[% uri %]">[% title %]</a>
   </li>
 [% END %]
@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="[% root %]css/nix-common.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/news.css" type="text/css" />
-    <link rel="stylesheet" href="[% root %]js/jquery.imageZoom.css" type="text/css" />
     <link rel="shortcut icon" href="[% root %]/favicon.ico" />
     <script type="text/javascript" src="[% root %]js/jquery-pack.js"></script>
     <script type="text/javascript" src="[% root %]js/jquery.imageZoom.js"></script>
@@ -24,6 +23,7 @@
         jQuery(document.body).imageZoom();
       })
     </script>
+    <link rel="stylesheet" href="[% root %]js/jquery.imageZoom.css" type="text/css" />
   </head>
   
   <body> 
@@ -32,10 +32,10 @@
       <div id="header">
         <div id="logo"><a class="no-hover" href="[% root %]index.html"><img src="[% root %]logo/nixos-lores.png" alt="Nix Logo" /></a></div>
         <ul class="short-menu" id="top-menu">
-          <li><a href="[% root %]nixos/about.html">NixOS</a></li>
-          <li><a href="[% root %]about.html">Nix</a></li>
-          <li><a href="[% root %]nixpkgs.html">Nixpkgs</a></li>
-          <li><a href="[% root %]developers.html">Developers</a></li>
+          <li><a href="[% root %]nixos/">NixOS</a></li>
+          <li><a href="[% root %]nix/">Nix</a></li>
+          <li><a href="[% root %]nixpkgs/">Nixpkgs</a></li>
+          <li><a href="[% root %]developers/">Developers</a></li>
         </ul>
       </div>
 
@@ -45,11 +45,22 @@
         <div id="left-bar">
           <div id="left-title">NixOS</div>
           <ul id="left-menu">
-            [% INCLUDE menuItem uri = "${root}nixos/about.html" title = "About" %]
+            [% INCLUDE menuItem uri = "${root}nixos/" title = "About" %]
             [% INCLUDE menuItem uri = "${root}nixos/download.html" title = "Download" %]
             [% INCLUDE menuItem uri = "${root}nixos/screenshots.html" title = "Screenshots" %]
             [% INCLUDE menuItem uri = "http://hydra.nixos.org/job/nixos/trunk/manual/latest/download" title = "Manual" %]
             [% INCLUDE menuItem uri = "${root}nixos/support.html" title = "Support" %]
+          </ul>
+        </div>
+        [% END %]
+
+        [% IF menu == 'nix' %]
+        <div id="left-bar">
+          <div id="left-title">Nix</div>
+          <ul id="left-menu">
+            [% INCLUDE menuItem uri = "${root}nix/" title = "About" %]
+            [% INCLUDE menuItem uri = "${root}nix/download.html" title = "Download" %]
+            [% INCLUDE menuItem uri = "http://hydra.nixos.org/job/nixos/trunk/manual/latest/download" title = "Manual" %]
           </ul>
         </div>
         [% END %]

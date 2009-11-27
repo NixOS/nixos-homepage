@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="About Nix" id='$Id$' %]
+[% WRAPPER layout.tt title="About Nix" id='$Id$' menu='nix' %]
 
 <h1>About Nix</h1>
 

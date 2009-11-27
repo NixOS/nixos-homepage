@@ -1,8 +1,9 @@
 tpage = /nix/var/nix/profiles/per-user/eelco/hydra-deps/bin/tpage
 catalog = $(HOME)/.nix-profile/xml/dtd/xhtml1/catalog.xml
 
-HTML = index.html news.html about.html download.html \
-  nixos/about.html nixos/download.html nixos/docs.html nixos/development.html \
+HTML = index.html news.html \
+  nix/index.html nix/download.html \
+  nixos/index.html nixos/download.html nixos/docs.html nixos/development.html \
   nixos/screenshots.html \
   patchelf.html hydra/index.html
 
@@ -11,7 +12,7 @@ all: $(HTML)
 docs/papers-in.html: docs/papers.xml docs/bib2html.xsl lib.xsl
 	xsltproc docs/bib2html.xsl docs/papers.xml > docs/papers-in.html || rm docs/papers-in.html
 
-%.html: %.tt layout.tt navbar.tt
+%.html: %.tt layout.tt
 	$(tpage) --define curUri=$@ --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` $< > $@ && \
 	XML_CATALOG_FILES=$(catalog) xmllint --nonet --noout --valid $@ || \
 	(rm -f $@ && exit 1)
