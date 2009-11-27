@@ -15,8 +15,15 @@
     <link rel="stylesheet" href="[% root %]css/nix-common.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/news.css" type="text/css" />
+    <link rel="stylesheet" href="[% root %]js/jquery.imageZoom.css" type="text/css" />
     <link rel="shortcut icon" href="[% root %]/favicon.ico" />
     <script type="text/javascript" src="[% root %]js/jquery-pack.js"></script>
+    <script type="text/javascript" src="[% root %]js/jquery.imageZoom.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        jQuery(document.body).imageZoom();
+      })
+    </script>
   </head>
   
   <body> 
