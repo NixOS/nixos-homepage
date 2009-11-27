@@ -5,7 +5,8 @@ HTML = index.html news.html \
   nix/index.html nix/download.html \
   nixos/index.html nixos/download.html nixos/docs.html nixos/development.html \
   nixos/screenshots.html \
-  patchelf.html hydra/index.html
+  patchelf.html hydra/index.html \
+  developers/index.html
 
 all: $(HTML)
 

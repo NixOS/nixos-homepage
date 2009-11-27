@@ -65,6 +65,16 @@
         </div>
         [% END %]
 
+        [% IF menu == 'developers' %]
+        <div id="left-bar">
+          <div id="left-title">Developers</div>
+          <ul id="left-menu">
+            [% INCLUDE menuItem uri = "${root}developers/" title = "Contributing" %]
+            [% INCLUDE menuItem uri = "${root}patchelf.html" title = "PatchELF" %]
+          </ul>
+        </div>
+        [% END %]
+
         <div id="content">
           [% content %]
         </div>

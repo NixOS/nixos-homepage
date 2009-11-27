@@ -5,7 +5,7 @@ body {
 
 /* The main container element. */
 div#page {
-    width: 55em;
+    max-width: 55em;
     margin: 1em auto;
     background-color: white;
     
@@ -85,6 +85,7 @@ ul.short-menu li a:hover {
 /* The left menu. */
 div#main {
     position: relative;
+    min-height: 10em;
 }
 
 div#left-bar {

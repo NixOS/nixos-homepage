@@ -1,0 +1,17 @@
+[% WRAPPER layout.tt title="Contributing" id='$Id: index.tt 18669 2009-11-27 12:35:08Z eelco $' menu='developers' %]
+
+<h2>Contributing to the Nix project</h2>
+
+docs
+
+repositories
+
+mailing list
+
+irc channel
+
+issue tracker
+
+continuous builds
+
+[% END %]
