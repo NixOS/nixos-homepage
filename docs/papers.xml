@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
-<bibliography svn-id="$Id$"
-              xmlns:h="http://www.w3.org/1999/xhtml">
+<bibliography svn-id="$Id$">
 
   <authorURL url="http://www.st.ewi.tudelft.nl/~dolstra/">Eelco Dolstra</authorURL>
   <authorURL url="http://martin.bravenboer.name/index.html">Martin Bravenboer</authorURL>
@@ -22,11 +20,11 @@
       <month>September</month>
       <year>2008</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-icfp2008-final.pdf" />
-      <htmlnote><h:em>To appear.</h:em></htmlnote>
+      <htmlnote><em>To appear.</em></htmlnote>
 
       <abstract>
         Existing package and system configuration management tools
-        suffer from an <h:em>imperative model</h:em>, where system
+        suffer from an <em>imperative model</em>, where system
         administration actions such as upgrading packages or changes
         to system configuration files are stateful: they destructively
         update the state of the system.  This leads to many problems,
@@ -34,14 +32,14 @@
         multiple versions of a package side-by-side, to reproduce a
         configuration deterministically on another machine, or to
         reliably upgrade a system.  In this paper we show that we can
-        overcome these problems by moving to a <h:em>purely functional
-        system configuration model</h:em>.  This means that all static
+        overcome these problems by moving to a <em>purely functional
+        system configuration model</em>.  This means that all static
         parts of a system (such as software packages, configuration
         files and system startup scripts) are built by pure functions
         and are immutable, stored in a way analogously to a heap in a
         purely function language.  We have implemented this model in
-        <h:em>NixOS</h:em>, a non-trivial Linux distribution that uses
-        the <h:em>Nix package manager</h:em> to build the entire
+        <em>NixOS</em>, a non-trivial Linux distribution that uses
+        the <em>Nix package manager</em> to build the entire
         system configuration from a purely functional specification.
       </abstract>
     </inproceedings>
@@ -60,7 +58,7 @@
       <month>July</month>
       <year>2008</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/buildfarm-wasdett2008-final.pdf" />
-      <htmlnote><h:em>To appear.</h:em></htmlnote>
+      <htmlnote><em>To appear.</em></htmlnote>
 
       <abstract>
         There are many tools to support continuous integration (the
@@ -69,13 +67,13 @@
         have good support for variability in the build environment:
         dependencies such as compilers, libraries or testing tools
         must typically be installed manually on all machines on which
-        automated builds are performed.  The <h:em>Nix package
-        manager</h:em> solves this problem: it has a purely functional
+        automated builds are performed.  The <em>Nix package
+        manager</em> solves this problem: it has a purely functional
         language for describing package build actions and their
         dependencies, allowing the build environment for projects to
         be produced automatically and deterministically.  We have used
-        Nix to build a continuous integration tool, the <h:em>Nix
-        build farm</h:em>, that is in use to continuously build and
+        Nix to build a continuous integration tool, the <em>Nix
+        build farm</em>, that is in use to continuously build and
         release a large set of projects.
       </abstract>
     </inproceedings>
@@ -94,21 +92,21 @@
       <month>April</month>
       <year>2008</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/laziness-ldta2008-final.pdf" />
-      <htmlnote><h:em>To appear.</h:em></htmlnote>
+      <htmlnote><em>To appear.</em></htmlnote>
 
       <abstract>
         In lazy functional languages, any variable is evaluated at
-        most once.  This paper proposes the notion of <h:em>maximal
-        laziness</h:em>, in which syntactically equal terms are
+        most once.  This paper proposes the notion of <em>maximal
+        laziness</em>, in which syntactically equal terms are
         evaluated at most once: if two terms
-        <h:em>e</h:em><h:sub>1</h:sub> and
-        <h:em>e</h:em><h:sub>2</h:sub> arising during the evaluation
+        <em>e</em><sub>1</sub> and
+        <em>e</em><sub>2</sub> arising during the evaluation
         of a program have the same abstract syntax representation,
         then only one will be evaluated, while the other will reuse
         the former’s evaluation result.  Maximal laziness can be
         implemented easily in interpreters for purely functional
         languages based on term rewriting systems that have the
-        property of <h:em>maximal sharing</h:em> — if two terms are
+        property of <em>maximal sharing</em> — if two terms are
         equal, they have the same address.  It makes it easier to
         write interpreters, as techniques such as closure updating,
         which would otherwise be required for efficiency, are not
@@ -136,13 +134,13 @@
         System configuration management is difficult because systems
         evolve in an undisciplined way: packages are upgraded,
         configuration files are edited, and so on.  The management of
-        existing operating systems is strongly <h:em>imperative</h:em>
+        existing operating systems is strongly <em>imperative</em>
         in nature, since software packages and configuration data
-        (e.g., <h:tt>/bin</h:tt> and <h:tt>/etc</h:tt> in Unix) can be seen as
+        (e.g., <tt>/bin</tt> and <tt>/etc</tt> in Unix) can be seen as
         imperative data structures: they are updated in-place by
         system administration actions.  In this paper we present an
         alternative approach to system configuration management: a
-        <h:em>purely functional</h:em> method, analogous to languages
+        <em>purely functional</em> method, analogous to languages
         like Haskell.  In this approach, the static parts of a
         configuration — software packages, configuration files,
         control scripts — are built from pure functions, i.e., the
@@ -264,13 +262,13 @@
 
       <abstract>
         <p>The Nix software deployment system is based on the paradigm
-        of <h:em>transparent source/binary deployment</h:em>: distributors
+        of <em>transparent source/binary deployment</em>: distributors
         deploy descriptors that build components from source, while
         client machines can transparently optimise such source builds
         by downloading pre-built binaries from remote repositories.
         This model combines the simplicity and flexibility of source
         deployment with the efficiency of binary deployment.  A
-        desirable property is <h:em>sharing</h:em> of components: if
+        desirable property is <em>sharing</em> of components: if
         multiple users install from the same source descriptors,
         ideally only one remotely built binary should be installed.
         The problem is that users must trust that remotely downloaded
@@ -280,11 +278,11 @@
         repositories.</p>
 
         <p>This paper presents three models that enable sharing: the
-        <h:em>extensional model</h:em> that requires that all users on a
+        <em>extensional model</em> that requires that all users on a
         system have the same remote trust relations, the
-        <h:em>intensional model</h:em> that does not have this requirement
-        but may be suboptimal in terms of space use, and the <h:em>mixed
-        model</h:em> that merges the best properties of both.  The
+        <em>intensional model</em> that does not have this requirement
+        but may be suboptimal in terms of space use, and the <em>mixed
+        model</em> that merges the best properties of both.  The
         latter two models are achieved through a novel technique of
         {\em hash rewriting} in content-addressable component stores,
         and were implemented in the context of the Nix system.</p>
@@ -315,7 +313,7 @@
         error-prone process.  For instance, system administrators must
         deploy the necessary software components, edit configuration
         files, start or stop processes, and so on.  This is often done
-        in an <h:em>ad hoc</h:em> style with no reproducibility, violating
+        in an <em>ad hoc</em> style with no reproducibility, violating
         proper configuration management practices.  In this paper we
         show that build management, software deployment and service
         deployment can be integrated into a single formalism.  We do
@@ -468,15 +466,15 @@
         information and other meta-data.  This to some extent overlaps
         with component dependencies used in the build process.
         Second, the same source system can often be built into an
-        often very large number of <h:em>variants</h:em>.  The distributor
+        often very large number of <em>variants</em>.  The distributor
         must decide which element(s) of the variant space will be
         packaged, reducing the flexibility for the receiver of the
         package.  In this paper we show how building and deployment
         can be integrated into a single formalism.  We describe a
-        build manager called <h:em>Maak</h:em> that can handle deployment
+        build manager called <em>Maak</em> that can handle deployment
         through a sufficiently general module system.  Through the
         sharing of generated files, a source distribution
-        <h:em>transparently</h:em> turns into a binary distribution,
+        <em>transparently</em> turns into a binary distribution,
         removing the dichotomy between these two modes of deployment.
         In addition, the creation and deployment of variants becomes
         easy through the use of a simple functional language as the

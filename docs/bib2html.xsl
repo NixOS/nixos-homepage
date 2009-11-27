@@ -2,16 +2,12 @@
 
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:xhtml="http://www.w3.org/1999/xhtml"
                 xmlns:sets="http://exslt.org/sets"
                 xmlns:exsl="http://exslt.org/common"
                 xmlns:str="http://exslt.org/strings"
-                xmlns="http://www.w3.org/1999/xhtml"
                 extension-element-prefixes="exsl sets str">
 
-  <xsl:import href="../lib.xsl" />
-
-  <xsl:output method='xml' encoding="utf-8" />
+  <xsl:output method='xml' encoding="UTF-8" omit-xml-declaration="yes" />
 
   <xsl:key name="authorURLs" match="authorURL" use="text()" />
 
@@ -20,20 +16,11 @@
 
   <xsl:template match="bibliography">
 
-    <html>
+      <div class="papers">
+
+        <p id="showAllAbstracts"><a href="#" onclick='$(".abstract").show(); $("#showAllAbstracts").hide(); $("#hideAllAbstracts").show()'>[Show all abstracts]</a></p>
+        <p id="hideAllAbstracts" style="display: none;"><a href="#" onclick='$(".abstract").hide(); $("#showAllAbstracts").show(); $("#hideAllAbstracts").hide()'>[Hide all abstracts]</a></p>
       
-      <head>
-        <title>Nix Papers</title>
-        <link rel="stylesheet" href="bib.css" type="text/css" />
-        <xsl:call-template name="emitToggleScripts" />
-      </head>
-        
-      <body>
-
-        <h1>Nix Papers</h1>
-
-        <xsl:call-template name="emitMainToggle" />
-
         <xsl:for-each select="//year[count(. | key('years', .)[1]) = 1]">
           
           <h2><xsl:value-of select="." /></h2>
@@ -55,13 +42,7 @@
 
         </xsl:for-each>
 
-        <div class="svn-id">
-          <xsl:value-of select="/bibliography/@svn-id" />
-        </div>
-
-      </body>
-
-    </html>
+      </div>
 
   </xsl:template>
 
@@ -171,6 +152,51 @@
 
   <xsl:template match="editor">
     <xsl:value-of select="." />
+  </xsl:template>
+
+
+  <xsl:template match="abstract">
+    
+    <xsl:variable name="id" select="generate-id()" />
+      
+    [<a href="#" onclick='$("#{$id}").toggle()'>abstract</a>]
+      
+    <div class="abstract" id="{$id}" style="display: none;">
+      <xsl:choose>
+        <xsl:when test="p">
+          <em>Abstract: </em>
+          <xsl:copy-of select="p[position() = 1]/child::node()" />
+          <xsl:for-each select="p[position() > 1]">
+            <div class="newpara" />
+            <xsl:copy-of select="child::node()" />
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <em>Abstract: </em>
+          <xsl:copy-of select="child::node()" />
+        </xsl:otherwise>
+      </xsl:choose>
+    </div>
+
+  </xsl:template>
+
+  
+  <xsl:template match="link" >
+    [<a href="{@url}"><xsl:value-of select="@type" /></a>]
+  </xsl:template>
+
+
+  <xsl:template mode="maybeLink" match="*">
+    <xsl:choose>
+      <xsl:when test="@url">
+        <a href="{@url}">
+          <xsl:copy-of select="child::node()" />
+        </a>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:copy-of select="child::node()" />
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   

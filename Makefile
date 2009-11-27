@@ -6,11 +6,12 @@ HTML = index.html news.html \
   nixos/index.html nixos/download.html nixos/docs.html nixos/development.html \
   nixos/screenshots.html \
   patchelf.html hydra/index.html \
-  developers/index.html
+  developers/index.html \
+  docs/papers.html
 
 all: $(HTML)
 
-docs/papers-in.html: docs/papers.xml docs/bib2html.xsl lib.xsl
+docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
 	xsltproc docs/bib2html.xsl docs/papers.xml > docs/papers-in.html || rm docs/papers-in.html
 
 %.html: %.tt layout.tt
@@ -19,6 +20,8 @@ docs/papers-in.html: docs/papers.xml docs/bib2html.xsl lib.xsl
 	(rm -f $@ && exit 1)
 
 news.html: all-news.xhtml
+
+docs/papers.html: docs/papers-in.html
 
 all-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@

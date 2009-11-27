@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="[% root %]css/nix-common.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/news.css" type="text/css" />
+    <link rel="stylesheet" href="[% root %]docs/bib.css" type="text/css" />
     <link rel="shortcut icon" href="[% root %]/favicon.ico" />
     <script type="text/javascript" src="[% root %]js/jquery-pack.js"></script>
     <script type="text/javascript" src="[% root %]js/jquery.imageZoom.js"></script>
@@ -70,6 +71,7 @@
           <div id="left-title">Developers</div>
           <ul id="left-menu">
             [% INCLUDE menuItem uri = "${root}developers/" title = "Contributing" %]
+            [% INCLUDE menuItem uri = "${root}docs/papers.html" title = "Papers" %]
             [% INCLUDE menuItem uri = "${root}patchelf.html" title = "PatchELF" %]
           </ul>
         </div>
