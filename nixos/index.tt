@@ -73,7 +73,7 @@ works quite well.  Current status:</p>
   modified dynamically.</li>
 
   <li>A <a
-  href="https://svn.nixos.org/websvn/nix/nixos/trunk/system/system.nix">single
+  href="https://svn.nixos.org/websvn/nix/nixos/trunk/default.nix">single
   top-level Nix expression</a> builds the entire system configuration.
   The system configuration is parameterised with a Nix expression that
   describes the configuration of your particular system (<a
