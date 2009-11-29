@@ -1,0 +1,9 @@
+[% WRAPPER layout.tt title="Nixpkgs Documentation" id='$Id$' menu='nixpkgs' %]
+
+<h1>Nixpkgs Documentation</h1>
+
+<p>for info on how to use Nixpkgs, see the Nix manual (especially the quick start section)</p>
+
+<p>for info on contributing packages to Nixpkgs, see the developers section (in particular the Nixpkgs manual)</p>
+
+[% END %]

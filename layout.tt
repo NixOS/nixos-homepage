@@ -36,6 +36,7 @@
           <li><a href="[% root %]nixos/">NixOS</a></li>
           <li><a href="[% root %]nix/">Nix</a></li>
           <li><a href="[% root %]nixpkgs/">Nixpkgs</a></li>
+          <li><a href="[% root %]hydra/">Hydra</a></li>
           <li><a href="[% root %]developers/">Developers</a></li>
         </ul>
       </div>
@@ -62,6 +63,17 @@
             [% INCLUDE menuItem uri = "${root}nix/" title = "About" %]
             [% INCLUDE menuItem uri = "${root}nix/download.html" title = "Download" %]
             [% INCLUDE menuItem uri = "http://hydra.nixos.org/job/nixos/trunk/manual/latest/download" title = "Manual" %]
+          </ul>
+        </div>
+        [% END %]
+
+        [% IF menu == 'nixpkgs' %]
+        <div id="left-bar">
+          <div id="left-title">Nixpkgs</div>
+          <ul id="left-menu">
+            [% INCLUDE menuItem uri = "${root}nixpkgs/" title = "About" %]
+            [% INCLUDE menuItem uri = "${root}nixpkgs/download.html" title = "Download" %]
+            [% INCLUDE menuItem uri = "${root}nixpkgs/docs.html" title = "Manual" %]
           </ul>
         </div>
         [% END %]

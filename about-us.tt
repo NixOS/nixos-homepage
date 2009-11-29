@@ -1,0 +1,11 @@
+[% WRAPPER layout.tt title="About the Nix Project" id='$Id$' %]
+
+<h1>About the Nix Project</h1>
+
+<p>main developers</p>
+
+<p>contact email</p>
+
+<p>funding acknowledgments</p>
+
+[% END %]

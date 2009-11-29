@@ -1,0 +1,5 @@
+[% WRAPPER layout.tt title="Nixpkgs" id='$Id$' menu='nixpkgs' %]
+
+<h1>The Nix Packages collection</h1>
+
+[% END %]

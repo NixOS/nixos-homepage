@@ -1,6 +1,6 @@
-[% WRAPPER layout.tt title="Papers" id='$Id: index.tt 18669 2009-11-27 12:35:08Z eelco $' menu='developers' %]
+[% WRAPPER layout.tt title="Papers" id='$Id$' menu='developers' %]
 
-<h2>Nix papers</h2>
+<h1>Nix papers</h1>
 
 <p>Below is a list of conference and workshop papers about Nix and
 NixOS that may be useful to developers.</p>

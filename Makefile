@@ -3,11 +3,13 @@ catalog = $(HOME)/.nix-profile/xml/dtd/xhtml1/catalog.xml
 
 HTML = index.html news.html \
   nix/index.html nix/download.html \
+  nixpkgs/index.html nixpkgs/download.html nixpkgs/docs.html \
   nixos/index.html nixos/download.html nixos/docs.html nixos/development.html \
   nixos/screenshots.html \
   patchelf.html hydra/index.html \
   developers/index.html \
-  docs/papers.html
+  docs/papers.html \
+  about-us.html
 
 all: $(HTML)
 
