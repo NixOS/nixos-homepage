@@ -134,8 +134,8 @@ div#left-bar + div#content {
 /* Inline (floating) images. */
 img.inline, img.inlineNoBorder {
     float: right;
-    margin-left: 10px;
-    margin-bottom: 10px;
+    margin-left: 1em;
+    margin-bottom: 1em;
 }
 
 /* Release tables. */

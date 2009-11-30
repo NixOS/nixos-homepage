@@ -48,7 +48,9 @@
       <author>Nicolas Pierron</author>
       <title>NixOS: A Purely Functional Linux Distribution</title>
       <year>2009</year>
-      <htmlnote><em>Under consideration for the Journal of Functional Programming.</em></htmlnote>
+      <htmlnote><em>Under consideration for the Journal of Functional
+      Programming.</em> <strong>Note:</strong> this is currently the
+      most complete description of NixOS.</htmlnote>  
       <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-submitted.pdf" />
       <tag name="nixos" />
 
