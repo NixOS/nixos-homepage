@@ -322,6 +322,7 @@
       <isbn>90-393-4130-3</isbn>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/phd-thesis.pdf" />
       <link type="igitur" url="http://igitur-archive.library.uu.nl/dissertations/2006-0118-200031/index.htm" />
+      <tag name="nix" />
 
       <abstract>
         <p>Software deployment is the set of activities related to
@@ -406,6 +407,7 @@
       <year>2005</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/secsharing-ase2005-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=1101933&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
+      <tag name="nix" />
 
       <abstract>
         <p>The Nix software deployment system is based on the paradigm
@@ -452,6 +454,7 @@
       <month>September</month>
       <year>2005</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/servicecm-scm12-final.pdf" />
+      <tag name="nix" />
 
       <abstract>
         The deployment of services — sets of running programs that
@@ -492,6 +495,7 @@
       <year>2005</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/eupfcdm-cbse2005-final.pdf" />
       <htmlnote>© Springer-Verlag.</htmlnote>
+      <tag name="nix" />
 
       <abstract>
         Safe and efficient deployment of software components is an
@@ -531,6 +535,7 @@
       <month>November</month>
       <year>2004</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nspfssd-lisa2004-final.pdf" />
+      <tag name="nix" />
 
       <abstract>
         Existing systems for software deployment are neither safe nor
@@ -566,6 +571,7 @@
       <year>2004</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/immdsd-icse2004-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=999463&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
+      <tag name="nix" />
 
       <abstract>
         The deployment of software components frequently fails because

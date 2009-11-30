@@ -1,0 +1,20 @@
+[% WRAPPER layout.tt title="Nix Documentation" id='$Id$' menu='nixos' %]
+
+<h1>Nix documentation</h1>
+
+<h2>Manual</h2>
+
+<p>The <a
+href="http://hydra.nixos.org/job/nix/trunk/tarball/latest/download-by-type/doc/manual">
+Nix manual</a> (<a
+href="http://hydra.nixos.org/job/nix/trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF</a>)
+tells you everything you need to know about installing and using Nix.
+It also describes the Nix expression language.</p>
+
+<h2>Papers</h2>
+
+<p>Following are some research papers about Nix.</p>
+
+[% INSERT "nix/papers-in.html" %]
+
+[% END %]

@@ -1,43 +1,54 @@
-[% WRAPPER layout.tt title="Nix/Nixpkgs Downloads" id='$Id$' menu='nix' %]
+[% WRAPPER layout.tt title="Nix Downloads" id='$Id$' menu='nix' %]
 
-<h1>Nix/Nixpkgs Downloads</h1>
+<h1>Getting Nix</h1>
 
-<h2>Getting Nix and Nixpkgs</h2>
+<h2>Latest release</h2>
 
-<p>To get started with Nix, it’s currently best to grab the latest
-development version of Nix:</p>
+<p>The latest and recommended version of Nix is <strong>0.13</strong>,
+released 5 November 2009.</p>
 
-[% manual = "http://hydra.nixos.org/release/nix/unstable/latest/tarball/download-by-type/doc/manual" %]
+[% manual = "http://hydra.nixos.org/build/118589/download/1/manual/" %]
 
 <ul>
-  <li><a href="http://hydra.nixos.org/release/nix/unstable/latest">The
+
+  <li><a
+  href="http://hydra.nixos.org/release/nix/nix-0.13"><strong>Download
+  page</strong></a>, including the source tarball and RPMs and Debs
+  for several platforms.</li>
+
+  <li><a
+  href="http://hydra.nixos.org/build/118589/download/3/release-notes/">Release
+  notes</a>.</li>
+
+  <li><a href="[%manual%]">Manual</a>.  Please read the <a
+  href="[%manual%]#chap-quick-start">“Quick Start” section of the
+  manual</a> for an overview of how to install and use Nix.</li>
+
+</ul>
+
+<h2>Continuous builds</h2>
+
+<p>You can grab the latest bleeding-edge pre-release from our <a
+href="../hydra">continuous build system</a>:</p>
+
+[% manual = "http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/doc/manual" %]
+
+<ul>
+  <li><a href="http://hydra.nixos.org/view/nix/trunk/latest">The
   latest development release of Nix</a> (<a
-  href="http://hydra.nixos.org/release/nix/unstable/latest/tarball/download-by-type/file/source-dist">source
+  href="http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/file/source-dist">source
   tarball</a>, <a
   href="[% manual %]">manual</a>,
   and RPMs and Debs for several platforms)</li>
 </ul>
 
-<p>Please read the <a href="[% manual %]#chap-quick-start">“Quick
-Start” section of the manual</a> for installation instructions.</p>
-
-<ul>
-  
-  <li><a href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest">The
-  latest development release of Nixpkgs</a> (<a
-  href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/file/source-dist">source
-  tarball</a>, <a
-  href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">manual</a>)</li>
-</ul>
-
-
-
 
 <h2>Old releases</h2>
 
-<p>Older releases of Nix are also available:</p>
+<p>The following old releases of Nix are also available:</p>
 
 <table class="releases">
+  <tr><td class="reldate">2009-11-05</td><td><a href="http://hydra.nixos.org/release/nix/nix-0.13">Nix 0.13</a></td></tr>
   <tr><td class="reldate">2008-11-20</td><td><a href="http://nixos.org/releases/nix/nix-0.12/">Nix 0.12</a></td></tr>
   <tr><td class="reldate">2007-12-31</td><td><a href="http://nixos.org/releases/nix/nix-0.11/">Nix 0.11</a></td></tr>
   <tr><td class="reldate">2006-10-11</td><td><a href="http://nixos.org/releases/nix/nix-0.10.1/">Nix 0.10.1</a></td></tr>
@@ -49,20 +60,6 @@ Start” section of the manual</a> for installation instructions.</p>
   <tr><td class="reldate">2005-04-11</td><td><a href="http://nixos.org/releases/nix/nix-0.8/">Nix 0.8</a></td></tr>
   <tr><td class="reldate">2005-01-12</td><td><a href="http://nixos.org/releases/nix/nix-0.7/">Nix 0.7</a></td></tr>
   <tr><td class="reldate">2004-11-14</td><td><a href="http://nixos.org/releases/nix/nix-0.6/">Nix 0.6</a></td></tr>
-</table>
-
-<p>Likewise, the following stable releases of Nixpkgs are available:</p>
-
-<table class="releases">
-  <tr><td class="reldate">2009-04-24</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.12/">Nixpkgs 0.12</a></td></tr>
-  <tr><td class="reldate">2007-09-11</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.11/">Nixpkgs 0.11</a></td></tr>
-  <tr><td class="reldate">2006-10-12</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.10/">Nixpkgs 0.10</a></td></tr>
-  <tr><td class="reldate">2006-01-31</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.9/">Nixpkgs 0.9</a></td></tr>
-  <tr><td class="reldate">2005-04-11</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.8/">Nixpkgs 0.8</a></td></tr>
-  <tr><td class="reldate">2005-03-14</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.7/">Nixpkgs 0.7</a></td></tr>
-  <tr><td class="reldate">2004-11-14</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.6/">Nixpkgs 0.6</a></td></tr>
-  <tr><td class="reldate">2004-05-03</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.5.1/">Nixpkgs 0.5.1</a></td></tr>
-  <tr><td class="reldate">2004-04-27</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.5/">Nixpkgs 0.5</a></td></tr>
 </table>
 
 [% END %]
