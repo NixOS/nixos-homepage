@@ -1,6 +1,6 @@
 [% WRAPPER layout.tt title="About NixOS" id='$Id$' menu='nixos' %]
 
-<h2>About NixOS</h2>
+<h1>About NixOS</h1>
 
 <p><a
     href="screenshots/nixos-kde42-1.png"><img

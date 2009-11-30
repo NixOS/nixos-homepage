@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="NixOS Documentation" id='$Id$' %]
+[% WRAPPER layout.tt title="NixOS Documentation" id='$Id$' menu='nixos' %]
 
 <h1>NixOS Documentation</h1>
 

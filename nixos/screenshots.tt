@@ -1,6 +1,6 @@
 [% WRAPPER layout.tt title="NixOS Screenshots" id='$Id$' menu='nixos' %]
 
-<h2>NixOS screenshots</h2>
+<h1>NixOS screenshots</h1>
 
 [% BLOCK screenshot %]
 <tr>

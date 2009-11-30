@@ -50,7 +50,7 @@
             [% INCLUDE menuItem uri = "${root}nixos/" title = "About" %]
             [% INCLUDE menuItem uri = "${root}nixos/download.html" title = "Download" %]
             [% INCLUDE menuItem uri = "${root}nixos/screenshots.html" title = "Screenshots" %]
-            [% INCLUDE menuItem uri = "http://hydra.nixos.org/job/nixos/trunk/manual/latest/download" title = "Manual" %]
+            [% INCLUDE menuItem uri = "${root}nixos/docs.html" title = "Manual" %]
             [% INCLUDE menuItem uri = "${root}nixos/support.html" title = "Support" %]
           </ul>
         </div>

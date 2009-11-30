@@ -1,18 +1,37 @@
 [% WRAPPER layout.tt title="NixOS Downloads" id='$Id$' menu='nixos' %]
 
-<h2>NixOS ISO images</h2>
+<h1>Getting NixOS</h1>
 
-<p>We provide several ISO images:</p>
+<p>We provide several ISO images that you can burn onto a CD or run in
+a virtual machine.  These are <a href="[%root%]hydra">generated
+automatically</a> from the NixOS Subversion repository, so they’re
+always up to date.</p>
+
+<h2>Graphical live CD</h2>
+
+<p>This CD contains the NixOS installer as well as X11, KDE 4 and
+several applications.  It’s a <em>live CD</em>, so it allows you to
+get an impression of NixOS (and the Nix package manager) before
+installing it.</p>
+
+<ul>
+  <li><a href="http://hydra.nixos.org/job/nixos/trunk/iso_graphical/latest-for/i686-linux/download">Graphical live CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
+  <li><a href="http://hydra.nixos.org/job/nixos/trunk/iso_graphical/latest-for/x86_64-linux/download">Graphical live CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
+</ul>  
+
+<h2>Minimal installation CD</h2>
+
+<p>This CD does not contain X11, and is therefore a lot smaller.  You
+have to run the installer from the console.  It contains a number of
+rescue tools.</p>
 
 <ul>
   <li><a href="http://hydra.nixos.org/job/nixos/trunk/iso_minimal/latest-for/i686-linux/download">Minimal installation CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
   <li><a href="http://hydra.nixos.org/job/nixos/trunk/iso_minimal/latest-for/x86_64-linux/download">Minimal installation CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
-  <li><a href="http://hydra.nixos.org/job/nixos/trunk/iso_graphical/latest-for/i686-linux/download">Graphical live CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
-  <li><a href="http://hydra.nixos.org/job/nixos/trunk/iso_graphical/latest-for/x86_64-linux/download">Graphical live CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
 </ul>
 
-<p>The difference between the text and graphical CDs is that the
-latter contains X11, KDE 4 and several other applications.  Both can
-be used to install NixOS.</p>
+<h2>Installing NixOS</h2>
+
+<p>For installation instructions, please see the <a href="[%root%]nixos/docs.html">manual</a>.</p>
 
 [% END %]
