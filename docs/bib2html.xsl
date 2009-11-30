@@ -12,36 +12,57 @@
   <xsl:key name="authorURLs" match="authorURL" use="text()" />
 
   <xsl:key name="years" match="year" use="." />
+
+  <xsl:param name="tag" />
   
 
   <xsl:template match="bibliography">
 
       <div class="papers">
 
-        <p id="showAllAbstracts"><a href="#" onclick='$(".abstract").show(); $("#showAllAbstracts").hide(); $("#hideAllAbstracts").show()'>[Show all abstracts]</a></p>
-        <p id="hideAllAbstracts" style="display: none;"><a href="#" onclick='$(".abstract").hide(); $("#showAllAbstracts").show(); $("#hideAllAbstracts").hide()'>[Hide all abstracts]</a></p>
+        <xsl:if test="$tag = ''">
+          <p id="showAllAbstracts"><a href="#" onclick='$(".abstract").show(); $("#showAllAbstracts").hide(); $("#hideAllAbstracts").show()'>[Show all abstracts]</a></p>
+          <p id="hideAllAbstracts" style="display: none;"><a href="#" onclick='$(".abstract").hide(); $("#showAllAbstracts").show(); $("#hideAllAbstracts").hide()'>[Hide all abstracts]</a></p>
       
-        <xsl:for-each select="//year[count(. | key('years', .)[1]) = 1]">
+          <xsl:for-each select="//year[count(. | key('years', .)[1]) = 1]">
           
-          <h2><xsl:value-of select="." /></h2>
+            <h2><xsl:value-of select="." /></h2>
           
+            <ul class="biblist">
+
+              <xsl:for-each select="key('years', .)">
+
+                <li class="bibitem">
+                  <xsl:if test="parent::*/@id">
+                    <xsl:attribute name="id"><xsl:value-of select="parent::*/@id" /></xsl:attribute>
+                  </xsl:if>
+                  <xsl:apply-templates mode="item" select="parent::*" />
+                </li>
+
+              </xsl:for-each>
+
+            </ul>
+
+          </xsl:for-each>
+
+        </xsl:if>
+
+        <xsl:if test="$tag != ''">
+
           <ul class="biblist">
 
-            <xsl:for-each select="key('years', .)">
+            <xsl:for-each select="//tag[@name = $tag]">
 
               <li class="bibitem">
-                <xsl:if test="parent::*/@id">
-                  <xsl:attribute name="id"><xsl:value-of select="parent::*/@id" /></xsl:attribute>
-                </xsl:if>
                 <xsl:apply-templates mode="item" select="parent::*" />
               </li>
 
             </xsl:for-each>
 
           </ul>
-
-        </xsl:for-each>
-
+          
+        </xsl:if>
+        
       </div>
 
   </xsl:template>

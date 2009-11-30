@@ -8,7 +8,7 @@
 
   <li>The <a
   href="http://hydra.nixos.org/job/nixos/trunk/manual/latest/download">NixOS
-  manual</a> describes how install and use NixOS.</li>
+  manual</a> describes how to install and use NixOS.</li>
 
   <li>The
   <a href="http://hydra.nixos.org/job/nix/trunk/tarball/latest/download-by-type/doc/manual">
@@ -16,13 +16,16 @@
 
   <li>The <a
   href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">Nixpkgs
-  manual</a> describes how to contribute to the Nix Packages
+  manual</a> tells you how to contribute to the Nix Packages
   collection.</li>
 
 </ul>
 
 <h2>Papers</h2>
 
-<p>TODO</p>
+<p>The following research papers provide information on the rationale
+and design of NixOS.</p>
+
+[% INSERT "nixos/papers-in.html" %]
 
 [% END %]

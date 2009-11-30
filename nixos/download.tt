@@ -7,6 +7,17 @@ a virtual machine.  These are <a href="[%root%]hydra">generated
 automatically</a> from the NixOS Subversion repository, so they’re
 always up to date.</p>
 
+<p><strong>Warning:</strong> NixOS is a research project, fairly
+bleeding edge, and lacks the QA resources of <a
+href="http://www.ubuntu.com/">more popular Linux distributions</a>.
+It also doesn’t yet have a nice graphical, user-friendly installer.
+Therefore NixOS is currently not intended for novice Linux users, and
+you probably shouldn’t run it on production machines (we do, but we
+have to eat our own dogfood).  Also, Nixpkgs has only a tenth or so of
+the number of packages in (say) Debian, so you may find that your
+favourite package is missing — if so, please consider <a
+href="[%root%]developers">contributing it</a>.</p>
+
 <h2>Graphical live CD</h2>
 
 <p>This CD contains the NixOS installer as well as X11, KDE 4 and

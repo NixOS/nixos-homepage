@@ -14,7 +14,14 @@ HTML = index.html news.html \
 all: $(HTML)
 
 docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
-	xsltproc docs/bib2html.xsl docs/papers.xml > docs/papers-in.html || rm docs/papers-in.html
+	xsltproc docs/bib2html.xsl docs/papers.xml > $@ || rm $@
+
+docs/papers.html: docs/papers-in.html
+
+nixos/papers-in.html: docs/papers.xml docs/bib2html.xsl
+	xsltproc --stringparam tag nixos docs/bib2html.xsl docs/papers.xml > $@ || rm $@
+
+nixos/docs.html: nixos/papers-in.html
 
 %.html: %.tt layout.tt
 	$(tpage) --define curUri=$@ --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` $< > $@ && \
@@ -22,8 +29,6 @@ docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
 	(rm -f $@ && exit 1)
 
 news.html: all-news.xhtml
-
-docs/papers.html: docs/papers-in.html
 
 all-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@

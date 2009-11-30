@@ -7,8 +7,147 @@
   <authorURL url="http://www.cs.uu.nl/wiki/Main/MerijnDeJonge">Merijn de Jonge</authorURL>
   <authorURL url="http://www.serc.nl/people/florijn/">Gert Florijn</authorURL>
   <authorURL url="http://people.cs.uu.nl/andres/">Andres Löh</authorURL>
+  <authorURL url="http://www.st.ewi.tudelft.nl/~sander/">Sander van der Burg</authorURL>
 
   <items>
+
+    <misc>
+      <author>Sander van der Burg</author>
+      <author>Eelco Dolstra</author>
+      <title>Declarative Testing and Deployment of Distributed Systems</title>
+      <year>2009</year>
+      <htmlnote><em>Submitted to ICSE-2010.</em></htmlnote>
+      <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/distributed-icse2010-submitted.pdf" />
+      <tag name="nixos" />
+
+      <abstract>
+        System administrators and developers who deploy distributed
+        systems have to deal with a deployment process that is largely
+        manual and hard to reproduce.  This paper describes how
+        networks of computer systems can be reproducibly and
+        automatically deployed from declarative specifications.
+        Reproducibility also ensures that users can easily instantiate
+        a test environment, before deploying the specification to the
+        production environment.  Furthermore, from the same
+        specifications we can instantiate virtual networks of virtual
+        machines for both interactive and automated testing.  This
+        makes it easy to write automated regression tests that require
+        external machines, need special privileges, or depend on the
+        network topology.  We instantiate machines from the
+        specifications using NixOS, a Linux distribution built from a
+        purely functional specification.  We have applied our approach
+        to a number of representative problems, including automatic
+        regression testing of a Linux distribution and deployment of a
+        continuous integration environment.
+      </abstract>
+    </misc>
+    
+    <misc>
+      <author>Eelco Dolstra</author>
+      <author>Andres Löh</author>
+      <author>Nicolas Pierron</author>
+      <title>NixOS: A Purely Functional Linux Distribution</title>
+      <year>2009</year>
+      <htmlnote><em>Under consideration for the Journal of Functional Programming.</em></htmlnote>
+      <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-submitted.pdf" />
+      <tag name="nixos" />
+
+      <abstract>
+        Existing package and system configuration management tools
+        suffer from an <em>imperative model</em>, where system
+        administration actions such as upgrading packages or changes
+        to system configuration files are stateful: they destructively
+        update the state of the system.  This leads to many problems,
+        such as the inability to roll back changes easily, to run
+        multiple versions of a package side-by-side, to reproduce a
+        configuration deterministically on another machine, or to
+        reliably upgrade a system.  In this article we show that we
+        can overcome these problems by moving to a <em>purely
+        functional system configuration model</em>.  This means that
+        all static parts of a system (such as software packages,
+        configuration files and system startup scripts) are built by
+        pure functions and are immutable, stored in a way analogously
+        to a heap in a purely function language.  We have implemented
+        this model in <em>NixOS</em>, a non-trivial Linux
+        distribution that uses the <em>Nix package manager</em> to
+        build the entire system configuration from a modular, purely
+        functional specification.
+      </abstract>
+    </misc>
+    
+    <inproceedings>
+      <author>Sander van der Burg</author>
+      <author>Eelco Dolstra</author>
+      <author>Merijn de Jonge</author>
+      <author>Eelco Visser</author>
+      <title>Software Deployment in a Dynamic Cloud — From Device to
+      Service Orientation in a Hospital Environment</title>
+      <booktitle url="http://www.icse-cloud09.org/">ICSE 2009 Workshop
+      on Software Engineering Challenges in Cloud
+      Computing</booktitle>
+      <pages first="61" last="66" />
+      <location>Vancouver, British Columbia, Canada</location>
+      <day>23</day>
+      <month>May</month>
+      <year>2009</year>
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/icse-cloud09-final.pdf" />
+      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1564595.1564630" />
+
+      <abstract>
+        Hospital environments are currently primarily
+        <em>device-oriented</em>: software services are installed,
+        often manually, on specific devices.  For instance, an
+        application to view MRI scans may only be available on a
+        limited number of workstations.  The medical world is changing
+        to a <em>service-oriented</em> environment, which means
+        that every software service should be available on every
+        device.  However, these devices have widely varying
+        capabilities, ranging from powerful workstations to PDAs, and
+        high-bandwidth local machines to low-bandwidth remote
+        machines.  To support running applications in such an
+        environment, we need to treat the hospital machines as a
+        <em>cloud</em>, where components of the application are
+        automatically deployed to machines in the cloud with the
+        required capabilities and connectivity.  In this paper, we
+        suggest an architecture for applications in such a cloud, in
+        which components are reliably and automatically deployed on
+        the basis of a declarative model of the application using the
+        Nix package manager.
+      </abstract>
+    </inproceedings>
+
+    <inproceedings>
+      <author>Sander van der Burg</author>
+      <author>Eelco Dolstra</author>
+      <author>Merijn de Jonge</author>
+      <title>Atomic Upgrading of Distributed Systems</title>
+      <booktitle url="http://hotswup.org/">First
+      ACM Workshop on Hot Topics in Software Upgrades
+      (HotSWUp)</booktitle>
+      <location>Nashville, Tennessee, USA</location>
+      <day>20</day>
+      <month>October</month>
+      <year>2008</year>
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/atomic-hotswup2008-final.pdf" />
+      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1490283.1490294" />
+
+      <abstract>
+        Upgrading distributed systems is a complex process.  It
+        requires installing the right services on the right machines,
+        configuring them correctly, and so on, which is error-prone
+        and tedious.  Moreover, since services in a distributed system
+        depend on each other and are updated separately, upgrades
+        typically are not <em>atomic</em>: there is a time window
+        during which some but not all services are updated, and a new
+        version of one service might temporarily talk to an old
+        version of another service.  Previously we implemented the
+        <em>Nix package management system</em>, which allows atomic
+        upgrades and rollbacks on single systems.  In this paper we
+        show an extension to Nix that enables the deployment of
+        distributed systems on the basis of a declarative deployment
+        model, and supports atomic upgrades of such systems.
+      </abstract>
+    </inproceedings>
 
     <inproceedings>
       <author>Eelco Dolstra</author>
@@ -19,8 +158,10 @@
       <day>22—24</day>
       <month>September</month>
       <year>2008</year>
+      <pages first="367" last="378" />
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-icfp2008-final.pdf" />
-      <htmlnote><em>To appear.</em></htmlnote>
+      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1411204.1411255" />
+      <tag name="nixos" />
 
       <abstract>
         Existing package and system configuration management tools
@@ -86,12 +227,15 @@
       2008)</booktitle>
       <location>Budapest, Hungary</location>
       <series url="http://www.sciencedirect.com/science/journal/15710661">Electronic Notes in Theoretical Computer Science</series>
-      <volume>???</volume>
+      <volume>238</volume>
+      <number>5</number>
+      <pages first="81" last="99" />
       <publisher>Elsevier Science Publishers</publisher>
       <day>5</day>
       <month>April</month>
       <year>2008</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/laziness-ldta2008-final.pdf" />
+      <link type="doi" url="http://dx.doi.org/10.1016/j.entcs.2009.09.042" />
       <htmlnote><em>To appear.</em></htmlnote>
 
       <abstract>
@@ -129,6 +273,7 @@
       <month>May</month>
       <year>2007</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/hotos-final.pdf" />
+      <tag name="nixos" />
 
       <abstract>
         System configuration management is difficult because systems
