@@ -32,7 +32,7 @@
     <div id="page">
 
       <div id="header">
-        <div id="logo"><a class="no-hover" href="[% root %]index.html"><img src="[% root %]logo/nixos-lores.png" alt="Nix Logo" /></a></div>
+        <div id="logo"><a class="no-hover" href="[% root %]./"><img src="[% root %]logo/nixos-lores.png" alt="Nix Logo" /></a></div>
         <ul class="short-menu" id="top-menu">
           <li><a href="[% root %]nixos/">NixOS</a></li>
           <li><a href="[% root %]nix/">Nix</a></li>
