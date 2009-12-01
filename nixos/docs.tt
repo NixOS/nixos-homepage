@@ -14,10 +14,8 @@
   <a href="http://hydra.nixos.org/job/nix/trunk/tarball/latest/download-by-type/doc/manual">
   Nix manual</a> describes how to use the Nix package manager.</li>
 
-  <li>The <a
-  href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">Nixpkgs
-  manual</a> tells you how to contribute to the Nix Packages
-  collection.</li>
+  <li>Run <tt>man configuration.nix</tt> to see a list of all
+  supported configuration options in <tt>configuration.nix</tt>.</li>
 
 </ul>
 
