@@ -129,7 +129,7 @@ ul#left-menu li.active {
 
 /* The content. */
 div#left-bar + div#content {
-    margin-left: 9em;
+    margin-left: 9.5em;
 }
 
 /* Inline (floating) images. */

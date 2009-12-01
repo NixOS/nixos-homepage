@@ -51,7 +51,7 @@
             [% INCLUDE menuItem uri = "${root}nixos/" title = "About" %]
             [% INCLUDE menuItem uri = "${root}nixos/download.html" title = "Download" %]
             [% INCLUDE menuItem uri = "${root}nixos/screenshots.html" title = "Screenshots" %]
-            [% INCLUDE menuItem uri = "${root}nixos/docs.html" title = "Manual" %]
+            [% INCLUDE menuItem uri = "${root}nixos/docs.html" title = "Documentation" %]
             [% INCLUDE menuItem uri = "${root}nixos/support.html" title = "Support" %]
           </ul>
         </div>
@@ -63,7 +63,7 @@
           <ul id="left-menu">
             [% INCLUDE menuItem uri = "${root}nix/" title = "About" %]
             [% INCLUDE menuItem uri = "${root}nix/download.html" title = "Download" %]
-            [% INCLUDE menuItem uri = "${root}nix/docs.html" title = "Manual" %]
+            [% INCLUDE menuItem uri = "${root}nix/docs.html" title = "Documentation" %]
           </ul>
         </div>
         [% END %]
@@ -74,7 +74,7 @@
           <ul id="left-menu">
             [% INCLUDE menuItem uri = "${root}nixpkgs/" title = "About" %]
             [% INCLUDE menuItem uri = "${root}nixpkgs/download.html" title = "Download" %]
-            [% INCLUDE menuItem uri = "${root}nixpkgs/docs.html" title = "Manual" %]
+            [% INCLUDE menuItem uri = "${root}nixpkgs/docs.html" title = "Documentation" %]
           </ul>
         </div>
         [% END %]
