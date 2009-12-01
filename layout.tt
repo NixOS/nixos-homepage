@@ -38,7 +38,7 @@
           <li><a href="[% root %]nix/">Nix</a></li>
           <li><a href="[% root %]nixpkgs/">Nixpkgs</a></li>
           <li><a href="[% root %]hydra/">Hydra</a></li>
-          <li><a href="[% root %]developers/">Developers</a></li>
+          <li><a href="[% root %]development/">Development</a></li>
         </ul>
       </div>
 
@@ -79,11 +79,11 @@
         </div>
         [% END %]
 
-        [% IF menu == 'developers' %]
+        [% IF menu == 'development' %]
         <div id="left-bar">
-          <div id="left-title">Developers</div>
+          <div id="left-title">Development</div>
           <ul id="left-menu">
-            [% INCLUDE menuItem uri = "${root}developers/" title = "Contributing" %]
+            [% INCLUDE menuItem uri = "${root}development/" title = "Contributing" %]
             [% INCLUDE menuItem uri = "${root}docs/papers.html" title = "Papers" %]
             [% INCLUDE menuItem uri = "${root}patchelf.html" title = "PatchELF" %]
           </ul>

@@ -7,7 +7,7 @@ HTML = index.html news.html \
   nixos/index.html nixos/download.html nixos/docs.html \
   nixos/screenshots.html nixos/support.html \
   patchelf.html hydra/index.html \
-  developers/index.html \
+  development/index.html \
   docs/papers.html \
   about-us.html
 
