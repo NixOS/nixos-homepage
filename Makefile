@@ -11,7 +11,10 @@ HTML = index.html news.html \
   docs/papers.html \
   about-us.html
 
-all: $(HTML)
+all: $(HTML) favicon.png
+
+favicon.png: logo/nixos-logo-only-hires.png
+	convert -adaptive-resize 16x16! $< $@
 
 docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
 	xsltproc docs/bib2html.xsl docs/papers.xml > $@ || rm $@
