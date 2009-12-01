@@ -5,6 +5,28 @@
   <item>
     <year>2009</year>
     <month>11</month>
+    <day>25</day>
+    <title>
+      Nix logo
+    </title>
+    <description>
+      <a href="logo/nixos-hires.png">
+      <img class="inlineNoBorder" src="logo/nixos-lores.png" alt="Nix
+      logo" /></a> Long overdue, the Nix project finally has a logo!
+      The logo was originally created by <a
+      href="http://arbitrary.name/">Simon Frankau</a> for the <a
+      href="http://www.haskell.org/haskellwiki/Haskell_logos/New_logo_ideas">Haskell
+      logo competition</a>, who kindly gave us permission to use it
+      for the Nix project.  (The snowflake motif is even more
+      appropriate for Nix, because <em>nix</em> is Latin for
+      <em>snow</em>.)  Any further modifications are entirely our
+      fault.
+    </description>      
+  </item>
+
+  <item>
+    <year>2009</year>
+    <month>11</month>
     <day>05</day>
     <title>
       Nix 0.13 released
