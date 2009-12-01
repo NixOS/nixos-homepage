@@ -18,7 +18,7 @@ on a Linux/x86 system the ELF interpreter is typically the file
 <tt>/lib/ld-linux.so.2</tt>.  It is sometimes necessary to use a
 different ELF interpreter, say, when you want to test a version of
 Glibc installed in a location other than <tt>/lib</tt>.  And in the <a
-href="nixpkgs.html">Nix Packages collection</a> we build our own
+href="nixpkgs">Nix Packages collection</a> we build our own
 Glibc, which we obviously want to use.  Building programs with a
 different interpreter is a matter of using the linker flag
 <tt>-dynamic-linker</tt>:</p>

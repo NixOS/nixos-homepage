@@ -2,8 +2,17 @@
 
 <h1>Nixpkgs documentation</h1>
 
-<p>for info on how to use Nixpkgs, see the Nix manual (especially the quick start section)</p>
+<p>Information on how to use Nixpkgs can be found in the <a
+href="../nix/docs.html">Nix manual</a>, especially the <a
+href="http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/doc/manual#chap-quick-start">
+“Quick Start” section</a>.</p>
 
-<p>for info on contributing packages to Nixpkgs, see the developers section (in particular the Nixpkgs manual)</p>
+<h2>Developer information</h2>
+
+<p>The <a
+href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">
+Nixpkgs manual</a> (<a
+href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF</a>)
+contains a lot of information on how to add to or modify Nixpkgs.</p>
 
 [% END %]

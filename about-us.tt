@@ -2,10 +2,34 @@
 
 <h1>About the Nix Project</h1>
 
-<p>main developers</p>
+<p>The Nix project is developed by a group of researchers and hackers
+across the Internet.  For question about the project or this website,
+please contact the <a
+href="https://mail.cs.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev</tt>
+mailing list</a> or the primary maintainer, <a
+href="http://www.st.ewi.tudelft.nl/~dolstra/">Eelco Dolstra</a>.</p>
 
-<p>contact email</p>
+<h2>Acknowledgments</h2>
 
-<p>funding acknowledgments</p>
+<p>The Nix package manager was developed by <a
+href="http://www.st.ewi.tudelft.nl/~dolstra/">Eelco Dolstra</a> as
+part of his PhD research in the <a
+href="http://www.cs.uu.nl/wiki/Trace/WebHome">TraCE project</a>,
+funded by the <a href="http://www.jacquard.nl/">Jacquard programme</a>
+of the <a href="http://www.nwo.nl/">Netherlands Organisation for
+Scientific Research</a> (NWO) and <a
+href="http://www.serc.nl/">SERC</a>.  The first prototype of NixOS was
+developed by <a href="http://www.hackvalue.nl/">Armijn Hemel</a> as
+his master’s thesis project.  Current Nix-related research takes place
+in the <a href="http://swerl.tudelft.nl/bin/view/Main/PDS">PDS
+project</a>, funded by Jacquard and <a
+href="http://www.medical.philips.com/">Philips Healthcare</a>, and the
+LaQuSo Buildfarm project, funded by <a
+href="http://nirict.3tu.nl/">NIRICT</a> / <a
+href="http://www.laquso.com/">LaQuSo</a>.</p>
+
+<img src="logo/tudelft.gif" alt="TU Delft logo" />
+<img src="logo/uu.gif" alt="UU logo" />
+<img src="logo/3tu.jpg" alt="3TU logo" />
 
 [% END %]
