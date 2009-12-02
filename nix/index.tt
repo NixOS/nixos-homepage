@@ -1,15 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
-<head>
-  <title>About Nix</title>
-</head>
-
-<body>
+[% WRAPPER layout.tt title="About Nix" id='$Id$' menu='nix' %]
 
 <h1>About Nix</h1>
 
@@ -87,7 +76,7 @@ it is not possible for one user to inject a Trojan horse into a
 package that might be used by another user.</p>
 
 <p>More details can be found in Section 3 of our <a
-href="docs/papers.html#securesharing">ASE 2005 paper</a>.</p>
+href="../docs/papers.html#securesharing">ASE 2005 paper</a>.</p>
 
 
 <h3>Atomic upgrades and rollbacks</h3>
@@ -184,7 +173,7 @@ upgrades.</p>
 <h3>Nix Packages collection</h3>
 
 <p>We provide a large set of Nix expressions containing hundreds of
-existing Unix packages, the <a href="nixpkgs.html"><em>Nix Packages
+existing Unix packages, the <a href="../nixpkgs"><em>Nix Packages
 collection</em> (Nixpkgs)</a>.</p>
 
 
@@ -205,7 +194,7 @@ functional way from a Nix expression, it is repeatable so you can
 easily reproduce the service on another machine.</p>
 
 <p>You can read more about this in our <a
-href="docs/papers.html#servicecm">SCM-12 paper</a>.</p>
+href="../docs/papers.html#servicecm">SCM-12 paper</a>.</p>
 
 
 <h3>Portability</h3>
@@ -225,27 +214,4 @@ install software without root privileges.  <a href="nixos/">Read
 more…</a></p>
 
 
-<h2>More information</h2>
-
-<p>If you want to use Nix, you’ll want to read the manual (see the
-Documentation links on the left).  Nix is described in detail in <a
-href="docs/papers.html#dolstra06thesis">Eelco Dolstra’s PhD
-thesis</a>, and in <a href="docs/papers.html">a number of
-papers</a>.</p>
-
-
-<h2>About us</h2>
-
-<p>Nix was developed at the <a href="http://www.cs.uu.nl/">Department
-of Information and Computing Sciences</a>, Utrecht University by the
-<a href="http://www.cs.uu.nl/wiki/Trace/WebHome">TraCE project</a>.
-The project is funded by the Software Engineering Research Program <a
-href="http://www.jacquard.nl/">Jacquard</a> to improve the support for
-variability in software systems.</p>
-
-
-<div class="svn-id">$Id$</div>
-
-</body>
-
-</html>
+[% END %]

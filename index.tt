@@ -1,0 +1,38 @@
+[% WRAPPER layout.tt title="Nix Home Page" id='$Id$' %]
+
+<h1>The Nix project</h1>
+
+<p>Welcome to the homepage of the Nix project, which consists of a
+number of related open source subprojects:</p>
+
+<ul>
+  
+  <li><a href="nix/"><strong>Nix</strong></a> is a <em>purely
+  functional</em> package manager.  This means that it can ensure that
+  an upgrade to one package cannot break others, that you can always
+  roll back to previous version, that multiple versions of a package
+  can coexist on the same system, and much more.</li>
+
+  <li><a href="nixpkgs/"><strong>Nixpkgs</strong></a> is a large
+  collection of packages that can be installed with the Nix package
+  manager.</li>
+    
+  <li><a href="nixos/"><strong>NixOS</strong></a> is a Nix-based Linux
+  distribution.  Thanks to Nix, it supports atomic upgrades, rollbacks
+  and multi-user package management, and it has a declarative approach
+  to system configuration management that makes it easy to reproduce a
+  configuration on another machine.</li>
+
+  <li><a href="hydra/"><strong>Hydra</strong></a> is a Nix-based
+  continuous build system.</li>
+
+</ul>
+
+<h2>Latest News</h2>
+
+[% INSERT "latest-news.xhtml" %]
+
+<p><img src="images/arrow-right.gif" alt="Arrow"
+/> <a href="news.html">Older news…</a></p>
+
+[% END %]

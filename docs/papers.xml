@@ -1,16 +1,155 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
-<bibliography svn-id="$Id$"
-              xmlns:h="http://www.w3.org/1999/xhtml">
+<bibliography svn-id="$Id$">
 
   <authorURL url="http://www.st.ewi.tudelft.nl/~dolstra/">Eelco Dolstra</authorURL>
   <authorURL url="http://martin.bravenboer.name/index.html">Martin Bravenboer</authorURL>
   <authorURL url="http://swerl.tudelft.nl/bin/view/EelcoVisser/WebHome">Eelco Visser</authorURL>
-  <authorURL url="http://www.cs.uu.nl/wiki/Main/MerijnDeJonge">Merijn de Jonge</authorURL>
+  <authorURL url="http://www.extra.research.philips.com/hera/people/mdejonge/">Merijn de Jonge</authorURL>
   <authorURL url="http://www.serc.nl/people/florijn/">Gert Florijn</authorURL>
   <authorURL url="http://people.cs.uu.nl/andres/">Andres Löh</authorURL>
+  <authorURL url="http://www.st.ewi.tudelft.nl/~sander/">Sander van der Burg</authorURL>
 
   <items>
+
+    <misc>
+      <author>Sander van der Burg</author>
+      <author>Eelco Dolstra</author>
+      <title>Declarative Testing and Deployment of Distributed Systems</title>
+      <year>2009</year>
+      <htmlnote><em>Submitted to ICSE-2010.</em></htmlnote>
+      <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/distributed-icse2010-submitted.pdf" />
+      <tag name="nixos" />
+
+      <abstract>
+        System administrators and developers who deploy distributed
+        systems have to deal with a deployment process that is largely
+        manual and hard to reproduce.  This paper describes how
+        networks of computer systems can be reproducibly and
+        automatically deployed from declarative specifications.
+        Reproducibility also ensures that users can easily instantiate
+        a test environment, before deploying the specification to the
+        production environment.  Furthermore, from the same
+        specifications we can instantiate virtual networks of virtual
+        machines for both interactive and automated testing.  This
+        makes it easy to write automated regression tests that require
+        external machines, need special privileges, or depend on the
+        network topology.  We instantiate machines from the
+        specifications using NixOS, a Linux distribution built from a
+        purely functional specification.  We have applied our approach
+        to a number of representative problems, including automatic
+        regression testing of a Linux distribution and deployment of a
+        continuous integration environment.
+      </abstract>
+    </misc>
+    
+    <misc>
+      <author>Eelco Dolstra</author>
+      <author>Andres Löh</author>
+      <author>Nicolas Pierron</author>
+      <title>NixOS: A Purely Functional Linux Distribution</title>
+      <year>2009</year>
+      <htmlnote><em>Under consideration for the Journal of Functional
+      Programming.</em> <strong>Note:</strong> this is currently the
+      most complete description of NixOS.</htmlnote>  
+      <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-submitted.pdf" />
+      <tag name="nixos" />
+
+      <abstract>
+        Existing package and system configuration management tools
+        suffer from an <em>imperative model</em>, where system
+        administration actions such as upgrading packages or changes
+        to system configuration files are stateful: they destructively
+        update the state of the system.  This leads to many problems,
+        such as the inability to roll back changes easily, to run
+        multiple versions of a package side-by-side, to reproduce a
+        configuration deterministically on another machine, or to
+        reliably upgrade a system.  In this article we show that we
+        can overcome these problems by moving to a <em>purely
+        functional system configuration model</em>.  This means that
+        all static parts of a system (such as software packages,
+        configuration files and system startup scripts) are built by
+        pure functions and are immutable, stored in a way analogously
+        to a heap in a purely function language.  We have implemented
+        this model in <em>NixOS</em>, a non-trivial Linux
+        distribution that uses the <em>Nix package manager</em> to
+        build the entire system configuration from a modular, purely
+        functional specification.
+      </abstract>
+    </misc>
+    
+    <inproceedings>
+      <author>Sander van der Burg</author>
+      <author>Eelco Dolstra</author>
+      <author>Merijn de Jonge</author>
+      <author>Eelco Visser</author>
+      <title>Software Deployment in a Dynamic Cloud — From Device to
+      Service Orientation in a Hospital Environment</title>
+      <booktitle url="http://www.icse-cloud09.org/">ICSE 2009 Workshop
+      on Software Engineering Challenges in Cloud
+      Computing</booktitle>
+      <pages first="61" last="66" />
+      <location>Vancouver, British Columbia, Canada</location>
+      <day>23</day>
+      <month>May</month>
+      <year>2009</year>
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/icse-cloud09-final.pdf" />
+      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1564595.1564630" />
+
+      <abstract>
+        Hospital environments are currently primarily
+        <em>device-oriented</em>: software services are installed,
+        often manually, on specific devices.  For instance, an
+        application to view MRI scans may only be available on a
+        limited number of workstations.  The medical world is changing
+        to a <em>service-oriented</em> environment, which means
+        that every software service should be available on every
+        device.  However, these devices have widely varying
+        capabilities, ranging from powerful workstations to PDAs, and
+        high-bandwidth local machines to low-bandwidth remote
+        machines.  To support running applications in such an
+        environment, we need to treat the hospital machines as a
+        <em>cloud</em>, where components of the application are
+        automatically deployed to machines in the cloud with the
+        required capabilities and connectivity.  In this paper, we
+        suggest an architecture for applications in such a cloud, in
+        which components are reliably and automatically deployed on
+        the basis of a declarative model of the application using the
+        Nix package manager.
+      </abstract>
+    </inproceedings>
+
+    <inproceedings>
+      <author>Sander van der Burg</author>
+      <author>Eelco Dolstra</author>
+      <author>Merijn de Jonge</author>
+      <title>Atomic Upgrading of Distributed Systems</title>
+      <booktitle url="http://hotswup.org/">First
+      ACM Workshop on Hot Topics in Software Upgrades
+      (HotSWUp)</booktitle>
+      <location>Nashville, Tennessee, USA</location>
+      <day>20</day>
+      <month>October</month>
+      <year>2008</year>
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/atomic-hotswup2008-final.pdf" />
+      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1490283.1490294" />
+
+      <abstract>
+        Upgrading distributed systems is a complex process.  It
+        requires installing the right services on the right machines,
+        configuring them correctly, and so on, which is error-prone
+        and tedious.  Moreover, since services in a distributed system
+        depend on each other and are updated separately, upgrades
+        typically are not <em>atomic</em>: there is a time window
+        during which some but not all services are updated, and a new
+        version of one service might temporarily talk to an old
+        version of another service.  Previously we implemented the
+        <em>Nix package management system</em>, which allows atomic
+        upgrades and rollbacks on single systems.  In this paper we
+        show an extension to Nix that enables the deployment of
+        distributed systems on the basis of a declarative deployment
+        model, and supports atomic upgrades of such systems.
+      </abstract>
+    </inproceedings>
 
     <inproceedings>
       <author>Eelco Dolstra</author>
@@ -21,12 +160,14 @@
       <day>22—24</day>
       <month>September</month>
       <year>2008</year>
+      <pages first="367" last="378" />
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-icfp2008-final.pdf" />
-      <htmlnote><h:em>To appear.</h:em></htmlnote>
+      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1411204.1411255" />
+      <tag name="nixos" />
 
       <abstract>
         Existing package and system configuration management tools
-        suffer from an <h:em>imperative model</h:em>, where system
+        suffer from an <em>imperative model</em>, where system
         administration actions such as upgrading packages or changes
         to system configuration files are stateful: they destructively
         update the state of the system.  This leads to many problems,
@@ -34,14 +175,14 @@
         multiple versions of a package side-by-side, to reproduce a
         configuration deterministically on another machine, or to
         reliably upgrade a system.  In this paper we show that we can
-        overcome these problems by moving to a <h:em>purely functional
-        system configuration model</h:em>.  This means that all static
+        overcome these problems by moving to a <em>purely functional
+        system configuration model</em>.  This means that all static
         parts of a system (such as software packages, configuration
         files and system startup scripts) are built by pure functions
         and are immutable, stored in a way analogously to a heap in a
         purely function language.  We have implemented this model in
-        <h:em>NixOS</h:em>, a non-trivial Linux distribution that uses
-        the <h:em>Nix package manager</h:em> to build the entire
+        <em>NixOS</em>, a non-trivial Linux distribution that uses
+        the <em>Nix package manager</em> to build the entire
         system configuration from a purely functional specification.
       </abstract>
     </inproceedings>
@@ -60,7 +201,7 @@
       <month>July</month>
       <year>2008</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/buildfarm-wasdett2008-final.pdf" />
-      <htmlnote><h:em>To appear.</h:em></htmlnote>
+      <htmlnote><em>To appear.</em></htmlnote>
 
       <abstract>
         There are many tools to support continuous integration (the
@@ -69,13 +210,13 @@
         have good support for variability in the build environment:
         dependencies such as compilers, libraries or testing tools
         must typically be installed manually on all machines on which
-        automated builds are performed.  The <h:em>Nix package
-        manager</h:em> solves this problem: it has a purely functional
+        automated builds are performed.  The <em>Nix package
+        manager</em> solves this problem: it has a purely functional
         language for describing package build actions and their
         dependencies, allowing the build environment for projects to
         be produced automatically and deterministically.  We have used
-        Nix to build a continuous integration tool, the <h:em>Nix
-        build farm</h:em>, that is in use to continuously build and
+        Nix to build a continuous integration tool, the <em>Nix
+        build farm</em>, that is in use to continuously build and
         release a large set of projects.
       </abstract>
     </inproceedings>
@@ -88,27 +229,30 @@
       2008)</booktitle>
       <location>Budapest, Hungary</location>
       <series url="http://www.sciencedirect.com/science/journal/15710661">Electronic Notes in Theoretical Computer Science</series>
-      <volume>???</volume>
+      <volume>238</volume>
+      <number>5</number>
+      <pages first="81" last="99" />
       <publisher>Elsevier Science Publishers</publisher>
       <day>5</day>
       <month>April</month>
       <year>2008</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/laziness-ldta2008-final.pdf" />
-      <htmlnote><h:em>To appear.</h:em></htmlnote>
+      <link type="doi" url="http://dx.doi.org/10.1016/j.entcs.2009.09.042" />
+      <htmlnote><em>To appear.</em></htmlnote>
 
       <abstract>
         In lazy functional languages, any variable is evaluated at
-        most once.  This paper proposes the notion of <h:em>maximal
-        laziness</h:em>, in which syntactically equal terms are
+        most once.  This paper proposes the notion of <em>maximal
+        laziness</em>, in which syntactically equal terms are
         evaluated at most once: if two terms
-        <h:em>e</h:em><h:sub>1</h:sub> and
-        <h:em>e</h:em><h:sub>2</h:sub> arising during the evaluation
+        <em>e</em><sub>1</sub> and
+        <em>e</em><sub>2</sub> arising during the evaluation
         of a program have the same abstract syntax representation,
         then only one will be evaluated, while the other will reuse
         the former’s evaluation result.  Maximal laziness can be
         implemented easily in interpreters for purely functional
         languages based on term rewriting systems that have the
-        property of <h:em>maximal sharing</h:em> — if two terms are
+        property of <em>maximal sharing</em> — if two terms are
         equal, they have the same address.  It makes it easier to
         write interpreters, as techniques such as closure updating,
         which would otherwise be required for efficiency, are not
@@ -131,18 +275,19 @@
       <month>May</month>
       <year>2007</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/hotos-final.pdf" />
+      <tag name="nixos" />
 
       <abstract>
         System configuration management is difficult because systems
         evolve in an undisciplined way: packages are upgraded,
         configuration files are edited, and so on.  The management of
-        existing operating systems is strongly <h:em>imperative</h:em>
+        existing operating systems is strongly <em>imperative</em>
         in nature, since software packages and configuration data
-        (e.g., <h:tt>/bin</h:tt> and <h:tt>/etc</h:tt> in Unix) can be seen as
+        (e.g., <tt>/bin</tt> and <tt>/etc</tt> in Unix) can be seen as
         imperative data structures: they are updated in-place by
         system administration actions.  In this paper we present an
         alternative approach to system configuration management: a
-        <h:em>purely functional</h:em> method, analogous to languages
+        <em>purely functional</em> method, analogous to languages
         like Haskell.  In this approach, the static parts of a
         configuration — software packages, configuration files,
         control scripts — are built from pure functions, i.e., the
@@ -177,6 +322,7 @@
       <isbn>90-393-4130-3</isbn>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/phd-thesis.pdf" />
       <link type="igitur" url="http://igitur-archive.library.uu.nl/dissertations/2006-0118-200031/index.htm" />
+      <tag name="nix" />
 
       <abstract>
         <p>Software deployment is the set of activities related to
@@ -261,16 +407,17 @@
       <year>2005</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/secsharing-ase2005-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=1101933&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
+      <tag name="nix" />
 
       <abstract>
         <p>The Nix software deployment system is based on the paradigm
-        of <h:em>transparent source/binary deployment</h:em>: distributors
+        of <em>transparent source/binary deployment</em>: distributors
         deploy descriptors that build components from source, while
         client machines can transparently optimise such source builds
         by downloading pre-built binaries from remote repositories.
         This model combines the simplicity and flexibility of source
         deployment with the efficiency of binary deployment.  A
-        desirable property is <h:em>sharing</h:em> of components: if
+        desirable property is <em>sharing</em> of components: if
         multiple users install from the same source descriptors,
         ideally only one remotely built binary should be installed.
         The problem is that users must trust that remotely downloaded
@@ -280,11 +427,11 @@
         repositories.</p>
 
         <p>This paper presents three models that enable sharing: the
-        <h:em>extensional model</h:em> that requires that all users on a
+        <em>extensional model</em> that requires that all users on a
         system have the same remote trust relations, the
-        <h:em>intensional model</h:em> that does not have this requirement
-        but may be suboptimal in terms of space use, and the <h:em>mixed
-        model</h:em> that merges the best properties of both.  The
+        <em>intensional model</em> that does not have this requirement
+        but may be suboptimal in terms of space use, and the <em>mixed
+        model</em> that merges the best properties of both.  The
         latter two models are achieved through a novel technique of
         {\em hash rewriting} in content-addressable component stores,
         and were implemented in the context of the Nix system.</p>
@@ -307,6 +454,7 @@
       <month>September</month>
       <year>2005</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/servicecm-scm12-final.pdf" />
+      <tag name="nix" />
 
       <abstract>
         The deployment of services — sets of running programs that
@@ -315,7 +463,7 @@
         error-prone process.  For instance, system administrators must
         deploy the necessary software components, edit configuration
         files, start or stop processes, and so on.  This is often done
-        in an <h:em>ad hoc</h:em> style with no reproducibility, violating
+        in an <em>ad hoc</em> style with no reproducibility, violating
         proper configuration management practices.  In this paper we
         show that build management, software deployment and service
         deployment can be integrated into a single formalism.  We do
@@ -347,6 +495,7 @@
       <year>2005</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/eupfcdm-cbse2005-final.pdf" />
       <htmlnote>© Springer-Verlag.</htmlnote>
+      <tag name="nix" />
 
       <abstract>
         Safe and efficient deployment of software components is an
@@ -386,6 +535,7 @@
       <month>November</month>
       <year>2004</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nspfssd-lisa2004-final.pdf" />
+      <tag name="nix" />
 
       <abstract>
         Existing systems for software deployment are neither safe nor
@@ -421,6 +571,7 @@
       <year>2004</year>
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/immdsd-icse2004-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=999463&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
+      <tag name="nix" />
 
       <abstract>
         The deployment of software components frequently fails because
@@ -468,15 +619,15 @@
         information and other meta-data.  This to some extent overlaps
         with component dependencies used in the build process.
         Second, the same source system can often be built into an
-        often very large number of <h:em>variants</h:em>.  The distributor
+        often very large number of <em>variants</em>.  The distributor
         must decide which element(s) of the variant space will be
         packaged, reducing the flexibility for the receiver of the
         package.  In this paper we show how building and deployment
         can be integrated into a single formalism.  We describe a
-        build manager called <h:em>Maak</h:em> that can handle deployment
+        build manager called <em>Maak</em> that can handle deployment
         through a sufficiently general module system.  Through the
         sharing of generated files, a source distribution
-        <h:em>transparently</h:em> turns into a binary distribution,
+        <em>transparently</em> turns into a binary distribution,
         removing the dichotomy between these two modes of deployment.
         In addition, the creation and deployment of variants becomes
         easy through the use of a simple functional language as the

@@ -1,17 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+[% WRAPPER layout.tt title="PatchELF" id='$Id$' menu='development' %]
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
-<head>
-  <title>PatchELF</title>
-</head>
-
-<body>
-
-  
 <h1>PatchELF</h1>
 
 <p>PatchELF is a small utility to modify the dynamic linker and <a
@@ -30,7 +18,7 @@ on a Linux/x86 system the ELF interpreter is typically the file
 <tt>/lib/ld-linux.so.2</tt>.  It is sometimes necessary to use a
 different ELF interpreter, say, when you want to test a version of
 Glibc installed in a location other than <tt>/lib</tt>.  And in the <a
-href="nixpkgs.html">Nix Packages collection</a> we build our own
+href="nixpkgs">Nix Packages collection</a> we build our own
 Glibc, which we obviously want to use.  Building programs with a
 different interpreter is a matter of using the linker flag
 <tt>-dynamic-linker</tt>:</p>
@@ -92,6 +80,7 @@ platforms, though it does require Glibc’s header file
 
 <h2>Download</h2>
 
+
 <p>The most recent stable release is <a
 href="http://hydra.nixos.org/release/patchelf/patchelf-0.5">PatchELF
 0.5</a>.  The changes are documented in the <a
@@ -109,9 +98,4 @@ pre-release</a>, or view a <a
 href="http://hydra.nixos.org/view/patchelf/trunk">list of all
 prereleases</a> built in our build farm.</p>
 
-
-<div class="svn-id">$Id$</div>
-
-</body>
-
-</html>
+[% END %]

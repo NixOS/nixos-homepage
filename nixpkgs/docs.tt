@@ -1,0 +1,18 @@
+[% WRAPPER layout.tt title="Nixpkgs Documentation" id='$Id$' menu='nixpkgs' %]
+
+<h1>Nixpkgs documentation</h1>
+
+<p>Information on how to use Nixpkgs can be found in the <a
+href="../nix/docs.html">Nix manual</a>, especially the <a
+href="http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/doc/manual#chap-quick-start">
+“Quick Start” section</a>.</p>
+
+<h2>Developer information</h2>
+
+<p>The <a
+href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">
+Nixpkgs manual</a> (<a
+href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF</a>)
+contains a lot of information on how to add to or modify Nixpkgs.</p>
+
+[% END %]

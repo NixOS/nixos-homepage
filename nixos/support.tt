@@ -1,0 +1,22 @@
+[% WRAPPER layout.tt title="NixOS Support" id='$Id$' menu='nixos' %]
+
+<h1>Support</h1>
+
+<p>If you run into problems with NixOS, there are a few ways to get help:</p>
+
+<ul>
+  
+  <li>You can drop by on the <strong>IRC channel</strong> <a
+  href="irc://irc.freenode.net/#nixos"><tt>#nixos</tt></a> on <a
+  href="http://freenode.net/"><tt>irc.freenode.net</tt></a>.</li>
+
+  <li>You can use the <strong>mailing list</strong> <a
+  href="https://mail.cs.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev@cs.uu.nl</tt></a>.</li>
+  
+  <li>You can <strong>report bugs</strong> in the <a
+  href="http://bugs.strategoxt.org/browse/NIXOS">NixOS issue
+  tracker</a>.</li>
+  
+</ul>
+
+[% END %]

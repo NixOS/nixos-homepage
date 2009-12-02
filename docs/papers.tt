@@ -1,0 +1,10 @@
+[% WRAPPER layout.tt title="Papers" id='$Id$' menu='development' %]
+
+<h1>Nix papers</h1>
+
+<p>Below is a list of conference and workshop papers about Nix and
+NixOS that may be useful to developers.</p>
+
+[% INSERT "docs/papers-in.html" %]
+
+[% END %]

@@ -1,0 +1,259 @@
+[% WRAPPER layout.tt title="About NixOS" id='$Id$' menu='nixos' %]
+
+<h1>About NixOS</h1>
+
+
+<p><a href="screenshots/nixos-kde42-1.png"><img class="inlineNoBorder"
+src="screenshots/nixos-kde42-1-small.png" alt="NixOS screenshot"
+/></a>NixOS is an experimental Linux distribution that aims to improve
+the state of the art in system configuration management.  In existing
+distributions, actions such as upgrades are dangerous: upgrading a
+package can cause other packages to break, upgrading an entire system
+is much less reliable than reinstalling from scratch, you can’t safely
+test what the results of a configuration change will be, you cannot
+easily undo changes to the system, and so on.  We want to change
+that.  NixOS has many innovative features:</p>
+
+
+<h3>Declarative system configuration model</h3>
+
+<p>In NixOS, the entire operating system — the kernel, applications,
+system packages, configuration files, and so on — is built by the <a
+href="../nix">Nix package manager</a> from a description in a purely
+functional build language.  The fact that it’s purely functional
+essentially means that building a new configuration cannot overwrite
+previous configurations.  Most of the other features follow from
+this.</p>
+
+<p>You configure a NixOS system by writing a specification of the
+functionality that you want on your machine in
+<tt>/etc/nixos/configuration.nix</tt>.  For instance, here is a
+minimal configuration of a machine running an SSH daemon:</p>
+
+<pre class="code">
+{
+  boot.loader.grub.device = "/dev/sda";
+  
+  fileSystems = [
+    { mountPoint = "/";
+      device = "/dev/sda1";
+    }
+  ];
+
+  services.sshd.enable = true;
+}
+</pre>
+
+<p>After changing <tt>/etc/nixos/configuration.nix</tt>, you realise
+the configuration by running this command:</p>
+
+<pre class="code">
+$ nixos-rebuild switch
+</pre>
+
+<p>This command does everything necessary to make the configuration
+happen, including downloading and compiling OpenSSH, generating the
+configuration files for the SSH server, and so on.</p>
+
+
+<h3>Reliable upgrades</h3>
+
+<p>Another advantage of purely functional package management is that
+<tt>nixos-rebuild switch</tt> will always produce the same result,
+regardless of what packages or configuration files you already had on
+your system.  Thus, upgrading a system is as reliable as reinstalling
+from scratch.</p>
+
+
+<h3>Atomic upgrades</h3>
+
+<p>NixOS has a <em>transactional</em> approach to configuration
+management: configuration changes such as upgrades are
+<em>atomic</em>.  This means that if the upgrade to a new
+configuration is interrupted — say, the power fails half-way through —
+the system will still be in a consistent state: it will either boot in
+the old or the new configuration.  In most other systems, you’ll end
+up in an inconsistent state, and your machine may not even boot
+anymore.</p>
+
+
+<h3>Rollbacks</h3>
+
+<p>Because the files of a new configuration don’t overwrite old ones,
+you can (atomically) roll back to a previous configuration.  For
+instance, if after a <tt>nixos-rebuild switch</tt> you discover that
+you don’t like the new configuration, you can just go back:</p>
+
+<pre class="code">
+$ nixos-rebuild switch --rollback
+</pre>
+
+<a href="screenshots/nixos-grub.png"><img class="inlineNoBorder"
+src="screenshots/nixos-grub-small.png" alt="Grub boot menu" /></a>
+
+<p>In fact, all old system configurations automatically show up in the
+Grub boot menu.  So if the new configuration crashes or doesn’t boot
+properly, you can just roll back by selecting an older configuration
+in the <a href="screenshots/nixos-grub.png">Grub boot menu</a>.
+Rollbacks are very fast: it doesn’t involve lots of files having to be
+restored from copies.</p>
+
+
+<h3>Reproducible system configurations</h3>
+
+<p>NixOS’ declarative configuration model makes it easy to reproduce a
+system configuration on another machine (for instance, to test a
+change in a test environment before doing it on the production
+server).  You just copy the <tt>configuration.nix</tt> file to the
+target NixOS machine and run <tt>nixos-rebuild switch</tt>.  This will
+give you the same configuration (kernel, applications, system
+services, and so on) except for ‘mutable state’ (such as the stuff
+that lives in <tt>/var</tt>).</p>
+
+
+<h3>Safe to test changes</h3>
+
+<p>NixOS makes it safe to test potentially dangerous changes to the
+system, because you can always roll back.  (Unless you screw up the
+boot loader, that is…)  For instance, whether the change is as simple
+as enabling a system service, or as large as rebuilding the entire
+system with a new version of Glibc, you can test it by doing:</p>
+
+<pre class="code">
+$ nixos-rebuild test
+</pre>
+
+<p>This builds and activates the new configuration, but doesn’t make
+it the boot default.  Thus, rebooting the system will take you back to
+the previous, known-good configuration.</p>
+
+<p>An even nicer way to test changes is the following:</p>
+
+<pre class="code">
+$ nixos-rebuild build-vm
+$ ./result/bin/run-*-vm
+</pre>
+
+<p>This builds and starts a virtual machine that contains the new
+system configuration (i.e. a clone of the configuration of the host
+machine, with any changes that you made to
+<tt>configuration.nix</tt>).  The VM doesn’t share any data with the
+host, so you can safely experiment inside the VM.  The
+<tt>build-vm</tt> command is very efficient (it doesn’t require a disk
+image for the VM to be created), so it’s a very effective way to test
+changes.</p>
+
+
+<h3>Source-based model, with binaries</h3>
+
+<p>The Nix build language used by NixOS specifies how to build
+packages from source.  This makes it easy to adapt the system — just
+edit any of the ‘Nix expressions’ for NixOS or Nixpkgs in
+<tt>/etc/nixos</tt>, and run <tt>nixos-rebuild</tt>.  However,
+building from source is also slow.  Therefore Nix automatically
+downloads pre-built binaries from <tt>nixos.org</tt> if they are
+available.  This gives the flexibility of a source-based package
+management model with the efficiency of a binary model.</p>
+
+
+<h3>Consistency</h3>
+
+<p>The Nix package manager ensures that the running system is
+‘consistent’ with the logical specification of the system, meaning
+that it will rebuild all packages that need to be rebuilt.  For
+instance, if you change the kernel, Nix will ensure that external
+kernel modules such as the NVIDIA driver will be rebuilt as well — so
+you never run into an X server that mysteriously fails to start after
+a kernel security upgrade.  And if you update the OpenSSL library, Nix
+ensures that all packages in the system use the new version, even
+packages that statically link against OpenSSL.</p>
+
+
+<h3>Multi-user package management</h3>
+
+<p>On NixOS, you do not need to be root to install software.  In
+addition to the system-wide ‘profile’ (set of installed packages), all
+user have their own profile in which they can install packages.  Nix
+allows multiple versions of a package to coexist, so different users
+can have different versions of the same package installed in their
+respective profiles.  If two users install the same version of a
+package, only one copy will be built or downloaded, and Nix’s security
+model ensures that this is secure.  Users cannot install
+<tt>setuid</tt> binaries.</p>
+
+
+<h2>How does NixOS work?</h2>
+
+<p>NixOS is based on <a href="../nix">Nix</a>, a purely functional
+package management system.  Nix stores all packages in isolation from
+each other under paths such as</p>
+
+<pre class="code">
+/nix/store/5rnfzla9kcx4mj5zdc7nlnv8na1najvg-firefox-3.5.4/
+</pre>
+
+<p>The string <tt>5rnf...</tt> is a cryptographic hash of all input
+used to build the package.  Packages are never overwritten after they
+have been built; instead, if you change the build description of a
+package (its ‘Nix expression’), it’s rebuilt and installed in a
+different path in <tt>/nix/store</tt> so it doesn’t interfere with the
+old version.  NixOS extends this by using Nix not only to build
+packages, but also things like configuration files.  For instance, the
+configuration of the SSH daemon is also built from a Nix expression
+and stored under a path like</p>
+
+<pre class="code">
+/nix/store/s2sjbl85xnrc18rl4fhn56irkxqxyk4p-sshd_config  
+</pre>
+
+<p>By building entire system configurations from a Nix expression,
+NixOS ensures that such configurations don’t overwrite each other, can
+be rolled back, and so on.</p>
+
+<p>A big implication of the way that Nix/NixOS stores packages is that
+there is no <tt>/bin</tt>, <tt>/sbin</tt>, <tt>/lib</tt>,
+<tt>/usr</tt>, and so on.  Instead all packages are kept in
+<tt>/nix/store</tt>.  (The only exception is a symlink
+<tt>/bin/sh</tt> to Bash in the Nix store.)  Not using ‘global’
+directories such as <tt>/bin</tt> is what allows multiple versions of
+a package to coexist.  Nix does have a <tt>/etc</tt> to keep
+system-wide configuration files, but most files in that directory are
+symlinks to generated files in <tt>/nix/store</tt>.</p>
+
+
+<h2>Status</h2>
+
+<p>Though NixOS is a research project, it is <a
+href="download.html">available for download</a> and works quite well.
+However, you should expect certain things to be missing (e.g.,
+packages or support for specific pieces of hardware), so you may need
+to add those yourself.  Here is an overview of what we have:</p>
+
+<ul>
+
+  <li>NixOS provides a complete X11/KDE 4 desktop environment (see the
+  <a href="screenshots.html">screenshots</a>).  Other window managers
+  and part of Gnome are also available.</li>
+
+  <li>NixOS uses <a href="http://upstart.ubuntu.com/">Upstart</a> to
+  manage system services.  It supports quite a few <a
+  href="https://svn.nixos.org/websvn/nix/nixos/trunk/modules/services/">services</a>
+  (e.g., Apache HTTPD, PostgreSQL, and Tomcat) that can be configured
+  declaratively through <tt>configuration.nix</tt>.</li>
+
+  <li>NixOS build on the <a href="../nixpkgs">Nix Packages
+  collection</a> (Nixpkgs), which provides Nix expressions for around
+  2500 packages that you can install under NixOS.</li>
+
+  <li>NixOS has automatic hardware detection: the boot process loads
+  kernel modules for all known devices automatically.  It also has
+  CUPS for printing, support for various wireless cards, and so on.</li>
+
+  <li>NixOS currently runs on 32-bit and 64-bit x86 machines
+  (<tt>i686-linux</tt> and <tt>x86_64-linux</tt>), and experimentally
+  on ARM.</li>
+
+</ul>
+
+
+[% END %]

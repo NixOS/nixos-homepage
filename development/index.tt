@@ -1,0 +1,104 @@
+[% WRAPPER layout.tt title="Contributing" id='$Id$' menu='development' %]
+
+<h1>Contributing to the Nix project</h1>
+
+<p>Contributions to Nix, Nixpkgs or NixOS are welcome.  Below are some
+developer resources.  Please send patches to the <tt>nix-dev</tt>
+mailing list.  If you want to contribute regularly, you may want to
+ask for commit access to our Subversion repository (please ask <a
+href="http://www.st.ewi.tudelft.nl/~dolstra/">Eelco</a>).</p>
+
+<h3>Documentation</h3>
+
+<p>If you want to add or change packages in Nixpkgs:</p>
+
+<ul>
+  
+  <li>The <a
+  href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">Nixpkgs
+  manual</a> has a lot of information about how to write Nix
+  expressions for Nixpkgs.  In particular, you should check out the <a
+  href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual#chap-quick-start">“Quick
+  Start” chapter</a> for an overview of the process of adding a
+  package.</li>
+
+  <li>The Nix manual has <a
+  href="http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/doc/manual#chap-writing-nix-expressions">a
+  chapter on writing Nix expressions</a>, including the syntax and
+  semantic of the Nix expression language.</li>
+  
+</ul>
+
+<p>If you want to hack on NixOS:</p>
+
+<ul>
+
+  <li>There is a <a
+  href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-submitted.pdf">paper
+  on NixOS</a> has a lot of information on the NixOS module
+  system (especially section 6).</li>
+
+  <li>The <a
+  href="http://hydra.nixos.org/job/nixos/trunk/manual/latest/download">NixOS
+  manual</a> has some information on writing NixOS modules.</li>
+
+</ul>
+
+
+<h3>Subversion repository</h3>
+
+<p>The sources of all Nix-related projects are in the <tt>nix</tt>
+Subversion repository on our <a
+href="https://svn.nixos.org/">Subversion server</a>.</p>
+
+<ul>
+  <li><a href="https://svn.nixos.org/repos/nix/nix/trunk/">Nix
+  trunk</a> (<a href="https://svn.nixos.org/websvn/nix/nix/trunk/">WebSVN</a>)</li>
+  <li><a href="https://svn.nixos.org/repos/nix/nixpkgs/trunk/">Nixpkgs
+  trunk</a> (<a href="https://svn.nixos.org/websvn/nix/nixpkgs/trunk/">WebSVN</a>)</li>
+  <li><a href="https://svn.nixos.org/repos/nix/nixos/trunk/">NixOS
+  trunk</a> (<a href="https://svn.nixos.org/websvn/nix/nixos/trunk/">WebSVN</a>)</li>
+  <li><a href="https://svn.nixos.org/repos/nix/hydra/trunk/">Hydra
+  trunk</a> (<a href="https://svn.nixos.org/websvn/nix/hydra/trunk/">WebSVN</a>)</li>
+</ul>
+
+<h3>Mailing list</h3>
+
+<p>Nix development is coordinated on the <a
+href="https://mail.cs.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev</tt>
+mailing list</a> (<a
+href="http://news.gmane.org/gmane.linux.distributions.nixos">archive</a>).</p>
+
+<h3>IRC channel</h3>
+
+<p>The Nix developers hang out on the <a
+href="irc://irc.freenode.net/#nixos"><tt>#nixos</tt> channel</a> on <a
+href="http://freenode.net/"><tt>irc.freenode.net</tt></a>.  This
+channel is <a href="http://nixos.org/irc/logs/">logged</a>.</p>
+
+<h3>Issue tracker</h3>
+
+<p>Bugs or feature requests can be entered in the JIRA issue
+tracker:</p>
+
+<ul>
+  <li><a href="http://bugs.strategoxt.org/browse/NIX">Nix</a></li>
+  <li><a href="http://bugs.strategoxt.org/browse/NIXPKGS">Nixpkgs</a></li>
+  <li><a href="http://bugs.strategoxt.org/browse/NIXOS">NixOS</a></li>
+  <li><a href="http://bugs.strategoxt.org/browse/NIXBF">Hydra</a></li>
+</ul>
+
+<h3>Continuous builds</h3>
+
+<p><a href="../hydra/">Hydra</a> continuously builds all our
+stuff:</p>
+
+<ul>
+  <li><a href="http://hydra.nixos.org/project/nix">Nix</a></li>
+  <li><a href="http://hydra.nixos.org/project/nixpkgs">Nixpkgs</a></li>
+  <li><a href="http://hydra.nixos.org/project/nixos">NixOS</a></li>
+  <li><a href="http://hydra.nixos.org/project/hydra">Hydra</a></li>
+</ul>
+
+
+[% END %]

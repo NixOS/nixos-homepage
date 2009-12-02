@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+[% BLOCK menuItem %]
+  <li [% IF "${root}${curUri}" == uri || "${root}${curUri}" == "${uri}index.html" %]class="active"[% END %]>
+    <a href="[% uri %]">[% title %]</a>
+  </li>
+[% END %]
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+    <title>[% title %]</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="[% root %]css/nix-common.css" type="text/css" />
+    <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
+    <link rel="stylesheet" href="[% root %]css/news.css" type="text/css" />
+    <link rel="stylesheet" href="[% root %]docs/bib.css" type="text/css" />
+    <link rel="shortcut icon" href="[% root %]favicon.png" />
+    <script type="text/javascript" src="[% root %]js/jquery-pack.js"></script>
+    <script type="text/javascript" src="[% root %]js/jquery.imageZoom.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        jQuery(document.body).imageZoom({ hideClicked: 0 });
+      })
+    </script>
+    <link rel="stylesheet" href="[% root %]js/jquery.imageZoom.css" type="text/css" />
+  </head>
+  
+  <body> 
+    <div id="page">
+
+      <div id="header">
+        <div id="logo"><a class="no-hover" href="[% root %]./"><img src="[% root %]logo/nixos-lores.png" alt="Nix Logo" /></a></div>
+        <ul class="short-menu" id="top-menu">
+          <li><a href="[% root %]nixos/">NixOS</a></li>
+          <li><a href="[% root %]nix/">Nix</a></li>
+          <li><a href="[% root %]nixpkgs/">Nixpkgs</a></li>
+          <li><a href="[% root %]hydra/">Hydra</a></li>
+          <li><a href="[% root %]development/">Development</a></li>
+        </ul>
+      </div>
+
+      <div id="main">
+
+        [% IF menu == 'nixos' %]
+        <div id="left-bar">
+          <div id="left-title">NixOS</div>
+          <ul id="left-menu">
+            [% INCLUDE menuItem uri = "${root}nixos/" title = "About" %]
+            [% INCLUDE menuItem uri = "${root}nixos/download.html" title = "Download" %]
+            [% INCLUDE menuItem uri = "${root}nixos/screenshots.html" title = "Screenshots" %]
+            [% INCLUDE menuItem uri = "${root}nixos/docs.html" title = "Documentation" %]
+            [% INCLUDE menuItem uri = "${root}nixos/support.html" title = "Support" %]
+          </ul>
+        </div>
+        [% END %]
+
+        [% IF menu == 'nix' %]
+        <div id="left-bar">
+          <div id="left-title">Nix</div>
+          <ul id="left-menu">
+            [% INCLUDE menuItem uri = "${root}nix/" title = "About" %]
+            [% INCLUDE menuItem uri = "${root}nix/download.html" title = "Download" %]
+            [% INCLUDE menuItem uri = "${root}nix/docs.html" title = "Documentation" %]
+          </ul>
+        </div>
+        [% END %]
+
+        [% IF menu == 'nixpkgs' %]
+        <div id="left-bar">
+          <div id="left-title">Nixpkgs</div>
+          <ul id="left-menu">
+            [% INCLUDE menuItem uri = "${root}nixpkgs/" title = "About" %]
+            [% INCLUDE menuItem uri = "${root}nixpkgs/download.html" title = "Download" %]
+            [% INCLUDE menuItem uri = "${root}nixpkgs/docs.html" title = "Documentation" %]
+          </ul>
+        </div>
+        [% END %]
+
+        [% IF menu == 'development' %]
+        <div id="left-bar">
+          <div id="left-title">Development</div>
+          <ul id="left-menu">
+            [% INCLUDE menuItem uri = "${root}development/" title = "Contributing" %]
+            [% INCLUDE menuItem uri = "${root}docs/papers.html" title = "Papers" %]
+            [% INCLUDE menuItem uri = "${root}patchelf.html" title = "PatchELF" %]
+          </ul>
+        </div>
+        [% END %]
+
+        <div id="content">
+          [% content %]
+        </div>
+
+      </div>
+
+      <div id="footer">
+        <ul class="short-menu" id="bottom-menu">
+          <li><a href="[% root %]about-us.html">About us</a></li>
+        </ul>
+        <div id="last-modified">
+          [% tokens = id.split %] <p>This page was last updated on [%
+          tokens.3 %] at [% tokens.4 %] by <tt>[% tokens.5 %]</tt>
+          (revision [% tokens.2 %]).</p>
+        </div>
+      </div>
+
+    </div>
+  </body>
+
+</html>
