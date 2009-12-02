@@ -524,11 +524,9 @@
 
       <p>
 
-      <a
-          href="http://www.kde.org"><img
-          class="inlineNoBorder"
-          src="nixos/screenshots/klogo-official-crystal-128x128.png"
-          alt="KDE logo" /></a>
+      <a href="http://www.kde.org"><img class="inlineNoBorder"
+      src="nixos/klogo-official-crystal-128x128.png"
+      alt="KDE logo" /></a>
 
       We now have <a href="http://www.kde.org/">KDE</a> running on
       NixOS (<a href="nixos/screenshots/nixos-kde.png">obligatory
