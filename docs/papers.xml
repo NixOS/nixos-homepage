@@ -313,6 +313,47 @@
       <year>2007</year>
     </inproceedings>
 
+    <mastersthesis>
+      <author>Armijn Hemel</author>
+      <title>NixOS: the Nix based operating system</title>
+      <number url="http://www.cs.uu.nl/education/scripties/scriptie.php?SID=INF/SCR-2005-091">INF/SCR-2005-091</number>
+      <location>Institute of Information and Computing Sciences, Utrecht University, Utrecht, The Netherlands</location>
+      <month>August</month>
+      <year>2006</year>
+      <link type="pdf" url="SCR-2005-091.pdf" />
+
+      <abstract>
+        <p>The subject of this thesis is how the Nix package
+        management system can be applied to manage a whole Linux
+        distribution. Many conventional package management systems
+        have drawbacks that Nix ﬁxes. But, Nix has never been used to
+        deploy and manage a whole system.</p>
+
+        <p>In this thesis a proof of concept Linux distribution called
+        NixOS is described.  NixOS uses the Nix package management
+        system to manage all software that is installed on the system,
+        including the Linux kernel, all software and system
+        services.</p>
+
+        <p>Using Nix to manage all software on a system, as is done on
+        NixOS, has several advantages. Developers don’t need to be
+        worried that unwanted dependencies are picked up during the
+        build of a software package, since these are completely
+        eliminated. System administrators get the possibility to
+        deploy services using Nix and how they can immediately use all
+        beneﬁts from Nix, including atomic upgrades and rollbacks,
+        without going through a painful cycle of rolling back a
+        service, with all its, possibly also updated,
+        dependencies.</p>
+
+        <p>This thesis describes the implementation NixOS, including
+        pitfalls that were encountered and choices that were
+        made. Also shown are some concrete results of running NixOS
+        and how NixOS can be bettered.</p>
+      </abstract>
+    </mastersthesis>
+
+
     <phdthesis id="dolstra06thesis">
       <author>Eelco Dolstra</author>
       <title>The Purely Functional Software Deployment Model</title>
