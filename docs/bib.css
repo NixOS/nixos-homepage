@@ -9,6 +9,10 @@ li.bibitem {
     border: solid #005aa0 1px;
 }
 
-.abstract .newpara {
-    margin-top: 1em;
+.abstract p:first-child {
+    margin-top: 0em;
+}
+
+.abstract p {
+    margin-bottom: 0em;
 }

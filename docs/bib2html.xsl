@@ -185,11 +185,14 @@
     <div class="abstract" id="{$id}" style="display: none;">
       <xsl:choose>
         <xsl:when test="p">
+          <p>
           <em>Abstract: </em>
           <xsl:copy-of select="p[position() = 1]/child::node()" />
+          </p>
           <xsl:for-each select="p[position() > 1]">
-            <div class="newpara" />
+            <p>
             <xsl:copy-of select="child::node()" />
+            </p>
           </xsl:for-each>
         </xsl:when>
         <xsl:otherwise>
