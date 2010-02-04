@@ -3,6 +3,23 @@
 <news>
 
   <item>
+    <year>2010</year>
+    <month>2</month>
+    <day>4</day>
+    <title>
+      Nix 0.14 released
+    </title>
+    <description>
+      <a href="http://hydra.nixos.org/release/nix/nix-0.14">Nix
+      0.14</a> has been released.  This is primarily a bug fix
+      release.  See the <a
+      href="http://hydra.nixos.org/build/281118/download/3/release-notes">release
+      notes</a> for details.  For installation information, see the <a
+      href="http://hydra.nixos.org/build/281118/download/1/manual">manual</a>.
+    </description>      
+  </item>
+
+  <item>
     <year>2009</year>
     <month>11</month>
     <day>25</day>
@@ -27,7 +44,7 @@
   <item>
     <year>2009</year>
     <month>11</month>
-    <day>05</day>
+    <day>5</day>
     <title>
       Nix 0.13 released
     </title>

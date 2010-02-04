@@ -1,4 +1,4 @@
-tpage = /nix/var/nix/profiles/per-user/eelco/hydra-deps/bin/tpage
+tpage = tpage
 catalog = $(HOME)/.nix-profile/xml/dtd/xhtml1/catalog.xml
 
 HTML = index.html news.html \
