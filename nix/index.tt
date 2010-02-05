@@ -210,7 +210,7 @@ for package management but also to manage the system configuration
 (e.g., to build configuration files in <tt>/etc</tt>).  This means,
 among other things, that it’s possible to easily roll back the entire
 configuration of the system to an earlier state.  Also, users can
-install software without root privileges.  <a href="nixos/">Read
+install software without root privileges.  <a href="../nixos">Read
 more…</a></p>
 
 
