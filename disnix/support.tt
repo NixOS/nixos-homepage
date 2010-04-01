@@ -1,0 +1,22 @@
+[% WRAPPER layout.tt title="Disnix Support" id='$Id: support.tt 18750 2009-12-02 10:51:10Z sandervanderburg $' menu='disnix' %]
+
+<h1>Support</h1>
+
+<p>If you run into problems with Disnix, there are a few ways to get help:</p>
+
+<ul>
+  
+  <li>You can drop by on the <strong>IRC channel</strong> <a
+  href="irc://irc.freenode.net/#nixos"><tt>#nixos</tt></a> on <a
+  href="http://freenode.net/"><tt>irc.freenode.net</tt></a>.</li>
+
+  <li>You can use the <strong>mailing list</strong> <a
+  href="https://mail.cs.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev@cs.uu.nl</tt></a>.</li>
+  
+  <li>You can <strong>report bugs</strong> in the <a
+  href="http://www.yellowgrass.org/project/Disnix">Disnix issue
+  tracker</a>.</li>
+  
+</ul>
+
+[% END %]

@@ -1,0 +1,56 @@
+[% WRAPPER layout.tt title="Disnix Documentation" id='$Id: support.tt 18750 2009-12-02 10:51:10Z sandervanderburg $' menu='disnix' %]
+
+<h1>Documentation</h1>
+
+<p>
+Currently, the easiest way to use Disnix, is by installing <a href="../nixos">NixOS</a> on every machine
+in a network or by creating virtual machines running NixOS.
+</p>
+
+<ul>
+<li>Every target machine requires the Disnix service running. On NixOS this can be done by
+setting: 
+<pre class="code">
+services.disnix.enable = true;
+</pre>
+in your NixOS configuration</li>
+
+<li>A coordinator machine requires the Disnix client utilities installed. Usually this can be done
+by installing Disnix from <a href="../nixpkgs">Nixpkgs</a>:
+
+<pre class="code">
+nix-env -i disnix
+</pre>
+</li>
+
+<li>
+The Disnix service also needs a wrapper for the execution of remote Disnix operations.
+The simplest wrapper is the SSH wrapper, which can be used by enabling the OpenSSH service
+in the NixOS configuration:
+<pre class="code">
+services.openssh.enable = true;
+</pre>
+</li>
+
+<li>
+  To deploy a system, a user needs to write a <em>services</em>, <em>infrastructure</em> and <em>distribution</em> expression
+  and can deploy the distributed system by typing:
+  <pre class="code">
+disnix-env -s services.nix -i infrastructure.nix -d distribution.nix
+  </pre>
+</li>
+
+<li>
+  Some basic examples can be found in the Subversion repository:
+  <a href="https://svn.nixos.org/repos/nix/disnix/examples">https://svn.nixos.org/repos/nix/disnix/examples</a>
+</li>
+
+<li>
+Observe that the examples include a infrastructure expression, but you need to adapt it to match the configuration
+of the machines you are actually using.
+</li>
+
+<li>More detailed documentation will be available soon!</li>
+</ul>
+
+[% END %]

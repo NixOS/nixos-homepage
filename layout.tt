@@ -38,6 +38,7 @@
           <li><a href="[% root %]nix/">Nix</a></li>
           <li><a href="[% root %]nixpkgs/">Nixpkgs</a></li>
           <li><a href="[% root %]hydra/">Hydra</a></li>
+	  <li><a href="[% root %]disnix/">Disnix</a></li>
           <li><a href="[% root %]development/">Development</a></li>
           <li><a href="http://wiki.nixos.org/">Wiki</a></li>
         </ul>
@@ -76,6 +77,18 @@
             [% INCLUDE menuItem uri = "${root}nixpkgs/" title = "About" %]
             [% INCLUDE menuItem uri = "${root}nixpkgs/download.html" title = "Download" %]
             [% INCLUDE menuItem uri = "${root}nixpkgs/docs.html" title = "Documentation" %]
+          </ul>
+        </div>
+        [% END %]
+
+        [% IF menu == 'disnix' %]
+        <div id="left-bar">
+          <div id="left-title">Disnix</div>
+          <ul id="left-menu">
+            [% INCLUDE menuItem uri = "${root}disnix/" title = "About" %]
+	    [% INCLUDE menuItem uri = "${root}disnix/download.html" title = "Download" %]
+	    [% INCLUDE menuItem uri = "${root}disnix/docs.html" title = "Documentation" %]
+	    [% INCLUDE menuItem uri = "${root}disnix/support.html" title = "Support" %]
           </ul>
         </div>
         [% END %]

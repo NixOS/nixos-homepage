@@ -1,0 +1,42 @@
+[% WRAPPER layout.tt title="Disnix Downloads" id='$Id: download.tt 20699 2010-03-17 13:20:42Z sandervanderburg $' menu='disnix' %]
+
+<h1>Getting Disnix</h1>
+
+<p>
+<strong>Warning:</strong>Disnix is a research project, fairly bleeding edge and
+not yet recommended for use in production environments.
+</p>
+
+<p>
+The easiest way to obtain Disnix is by using NixOS and to activate
+the Disnix module in the Disnix configuration.
+In order to use Disnix on different distributions
+or systems, a release has to be downloaded and installed on a
+system of choice.
+</p>
+
+<h2>Latest release</h2>
+
+<p>The latest version of Disnix is <strong>0.1</strong>,
+released 1 April 2010.</p>
+
+<ul>
+  <li><a
+  href="http://hydra.nixos.org/release/disnix/disnix-0.1"><strong>Download
+  page</strong></a>, including the source tarball and Nix packages
+  for several platforms.</li>
+</ul>
+
+<h2>Continuous builds</h2>
+
+<p>You can grab the latest bleeding-edge pre-release from our <a
+href="../hydra">continuous build system</a>:</p>
+
+<ul>
+  <li><a href="http://hydra.nixos.org/view/disnix/trunk/latest">The
+  latest development release of Disnix</a> (<a
+  href="http://hydra.nixos.org/view/disnix/trunk/latest/tarball/download-by-type/file/source-dist">source
+  tarball</a>)</li>
+</ul>
+
+[% END %]
