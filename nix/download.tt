@@ -4,20 +4,20 @@
 
 <h2>Latest release</h2>
 
-<p>The latest and recommended version of Nix is <strong>0.15</strong>,
-released 17 March 2010.</p>
+<p>The latest and recommended version of Nix is <strong>0.16</strong>,
+released 17 August 2010.</p>
 
-[% manual = "http://hydra.nixos.org/build/326788/download/1/manual/" %]
+[% manual = "http://hydra.nixos.org/build/565033/download/1/manual/" %]
 
 <ul>
 
   <li><a
-  href="http://hydra.nixos.org/release/nix/nix-0.15"><strong>Download
+  href="http://hydra.nixos.org/release/nix/nix-0.16"><strong>Download
   page</strong></a>, including the source tarball and RPMs and Debs
   for several platforms.</li>
 
   <li><a
-  href="http://hydra.nixos.org/build/326788/download/3/release-notes/">Release
+  href="http://hydra.nixos.org/build/565033/download/3/release-notes/">Release
   notes</a>.</li>
 
   <li><a href="[%manual%]">Manual</a>.  Please read the <a
@@ -48,6 +48,7 @@ href="../hydra">continuous build system</a>:</p>
 <p>The following old releases of Nix are also available:</p>
 
 <table class="releases">
+  <tr><td class="reldate">2010-08-17</td><td><a href="http://hydra.nixos.org/release/nix/nix-0.16">Nix 0.16</a></td></tr>
   <tr><td class="reldate">2010-03-17</td><td><a href="http://hydra.nixos.org/release/nix/nix-0.15">Nix 0.15</a></td></tr>
   <tr><td class="reldate">2010-02-04</td><td><a href="http://hydra.nixos.org/release/nix/nix-0.14">Nix 0.14</a></td></tr>
   <tr><td class="reldate">2009-11-05</td><td><a href="http://hydra.nixos.org/release/nix/nix-0.13">Nix 0.13</a></td></tr>

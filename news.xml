@@ -4,6 +4,24 @@
 
   <item>
     <year>2010</year>
+    <month>8</month>
+    <day>17</day>
+    <title>
+      Nix 0.16 released
+    </title>
+    <description>
+      <a href="http://hydra.nixos.org/release/nix/nix-0.16">Nix
+      0.16</a> has been released, featuring a much faster evaluator
+      and support for configurable parallelism inside builders.  See
+      the <a
+      href="http://hydra.nixos.org/build/565033/download/3/release-notes">release
+      notes</a> for details.  For installation information, see the <a
+      href="http://hydra.nixos.org/build/565033/download/1/manual">manual</a>.
+    </description>      
+  </item>
+
+  <item>
+    <year>2010</year>
     <month>7</month>
     <day>9</day>
     <title>
