@@ -5,6 +5,24 @@
   <item>
     <year>2010</year>
     <month>8</month>
+    <day>18</day>
+    <title>
+      Xfce in NixOS
+    </title>
+    <description>
+      <a href="http://www.xfce.org/"><img class="inlineNoBorder" src="logo/xfce-small.png" alt="Xfce screenshot" /></a>
+      NixOS now supports <a href="http://www.xfce.org/">Xfce</a>, a
+      modern, light-weight desktop environment.  It can be enabled by
+      setting the NixOS configuration value
+      <tt>services.xserver.desktopManager.xfce.enable</tt> to
+      <tt>true</tt>.  (<a
+      href="nixos/screenshots/nixos-xfce.png">Screenshot</a>)
+    </description>
+  </item>
+
+  <item>
+    <year>2010</year>
+    <month>8</month>
     <day>17</day>
     <title>
       Nix 0.16 released

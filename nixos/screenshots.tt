@@ -33,6 +33,9 @@
   [% WRAPPER screenshot name="nixos-kde42-2" %]
     KDE 4.2: exposé.
   [% END %]
+  [% WRAPPER screenshot name="nixos-xfce" %]
+    Xfce desktop environment 4.6.2.
+  [% END %]
   [% WRAPPER screenshot name="nixos-kde" %]
     KDE 3.5.
   [% END %]
