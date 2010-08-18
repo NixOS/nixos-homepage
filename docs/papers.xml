@@ -11,6 +11,55 @@
 
   <items>
 
+    <inproceedings id="issre10">
+      <author>Sander van der Burg</author>
+      <author>Eelco Dolstra</author>
+      <title>Automating System Tests Using Declarative Virtual Machines</title>
+      <booktitle url="http://www.issre2010.org/">21st IEEE
+      International Symposium on Software Reliability Engineering
+      (ISSRE 2010)</booktitle>
+      <location>San Jose, California, USA</location>
+      <day>1—4</day>
+      <month>November</month>
+      <year>2010</year>
+      <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/decvms-issre2010-submitted.pdf" />
+      <htmlnote><em>To appear.</em></htmlnote>
+
+      <abstract>
+        <p>Automated regression test suites are an essential
+        software engineering practice: they provide developers with
+        rapid feedback on the impact of changes to a system’s source
+        code.  The inclusion of a test case in an automated test suite
+        requires that the system’s build process can automatically
+        realise all the <em>environmental dependencies</em> of the
+        test.  These are external elements necessary for a test to
+        succeed, such as shared libraries, running programs, and so
+        on.  For some tests (e.g., a compiler’s), these requirements
+        are simple to meet.</p>
+
+        <p>However, many kinds of tests, especially at the
+        integration or system level, have complex dependencies that
+        are hard to provide automatically, such as running database
+        servers, administrative privileges, services on external
+        machines or specific network topologies.  As such dependencies
+        make tests difficult to script, they are often performed only
+        manually, if at all.  This particularly affects distributed
+        systems and system-level software.</p>
+
+        <p>This paper shows how we can automatically instantiate the
+        complex environments necessary for tests by creating (networks
+        of) virtual machines on the fly from declarative
+        specifications.  Building on NixOS, a Linux distribution with
+        a declarative configuration model, these specifications
+        concisely model the required environmental dependencies.  We
+        also describe techniques that allow efficient instantiation of
+        VMs.  As a result, complex system tests become as easy to
+        specify and execute as unit tests.  We evaluate our approach
+        using a number of representative problems, including automated
+        regression testing of a Linux distribution.</p>
+      </abstract>
+    </inproceedings>
+
     <!-- 
     <misc>
       <author>Sander van der Burg</author>
@@ -49,12 +98,9 @@
       <author>Andres Löh</author>
       <author>Nicolas Pierron</author>
       <title>NixOS: A Purely Functional Linux Distribution</title>
-      <year>2009</year>
-      <htmlnote><em>Under consideration for the Journal of Functional
-      Programming.</em> <strong>Note:</strong> this is currently the
-      most complete description of NixOS.</htmlnote>  
-      <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-submitted.pdf" />
-      <tag name="nixos" />
+      <year>2010</year>
+      <htmlnote><em>Under consideration for the Journal of Functional Programming.</em></htmlnote>
+      <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-submitted-v2.pdf" />
 
       <abstract>
         Existing package and system configuration management tools
@@ -62,7 +108,7 @@
         administration actions such as upgrading packages or changes
         to system configuration files are stateful: they destructively
         update the state of the system.  This leads to many problems,
-        such as the inability to roll back changes easily, to run
+        such as the inability to roll back changes easily, to deploy
         multiple versions of a package side-by-side, to reproduce a
         configuration deterministically on another machine, or to
         reliably upgrade a system.  In this article we show that we
@@ -71,8 +117,8 @@
         all static parts of a system (such as software packages,
         configuration files and system startup scripts) are built by
         pure functions and are immutable, stored in a way analogously
-        to a heap in a purely function language.  We have implemented
-        this model in <em>NixOS</em>, a non-trivial Linux
+        to a heap in a purely functional language.  We have
+        implemented this model in <em>NixOS</em>, a non-trivial Linux
         distribution that uses the <em>Nix package manager</em> to
         build the entire system configuration from a modular, purely
         functional specification.

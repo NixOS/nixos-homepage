@@ -7,6 +7,34 @@
     <month>8</month>
     <day>18</day>
     <title>
+      ISSRE paper on NixOS-based system testing
+    </title>
+    <description>
+      The paper <a href="docs/papers.html#issre10">“Automating System
+      Tests Using Declarative Virtual Machines”</a> (by Sander van der
+      Burg and Eelco Dolstra) has been accepted for presentation at
+      the <a href="http://www.issre2010.org/">21st IEEE International
+      Symposium on Software Reliability Engineering (ISSRE 2010)</a>.
+      It describes how system tests with complex requirements on the
+      environment (such as remote machines, network topologies, system
+      services or root privileges) can be written succinctly using <a
+      href="https://svn.nixos.org/websvn/nix/nixos/trunk/tests/bittorrent.nix">declarative
+      specifications</a> of the machines needed by the test
+      environment.  From these specifications we can automatically
+      instantiate (networks of) virtual machines.  This is what we use
+      for <a
+      href="http://hydra.nixos.org/jobset/nixos/trunk/jobstatus">automated
+      regression testing of NixOS itself</a>.  A <a
+      href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/decvms-issre2010-submitted.pdf">draft
+      of the paper</a> is available.
+    </description>
+  </item>
+
+  <item>
+    <year>2010</year>
+    <month>8</month>
+    <day>18</day>
+    <title>
       Xfce in NixOS
     </title>
     <description>
