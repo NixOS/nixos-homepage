@@ -24,6 +24,7 @@
       <year>2010</year>
       <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/decvms-issre2010-submitted.pdf" />
       <htmlnote><em>To appear.</em></htmlnote>
+      <tag name="nixos" />
 
       <abstract>
         <p>Automated regression test suites are an essential
@@ -101,6 +102,7 @@
       <year>2010</year>
       <htmlnote><em>Under consideration for the Journal of Functional Programming.</em></htmlnote>
       <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-submitted-v2.pdf" />
+      <tag name="nixos" />
 
       <abstract>
         Existing package and system configuration management tools
