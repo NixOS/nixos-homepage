@@ -74,8 +74,7 @@ of unnecessary runtime dependencies.</p>
 <tt>x86_64-linux</tt> and <tt>powerpc-linux</tt>.  It should
 definitely work on all 32 or 64-bit, big or little-endian Linux
 platforms.  With minor modifications it should also work on other ELF
-platforms, though it does require Glibc’s header file
-<tt>elf.h</tt>.</p>
+platforms.</p>
 
 
 <h2>Download</h2>
