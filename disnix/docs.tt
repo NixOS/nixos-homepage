@@ -3,54 +3,76 @@
 <h1>Documentation</h1>
 
 <p>
-Currently, the easiest way to use Disnix, is by installing <a href="../nixos">NixOS</a> on every machine
-in a network or by creating virtual machines running NixOS.
+The
+<a href="http://hydra.nixos.org/job/disnix/disnix-trunk/tarball/latest/download-by-type/doc/manual">Disnix manual</a>
+(<a href="http://hydra.nixos.org/job/disnix/disnix-trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF version</a>)
+tells you everything you need to know about installing and using Disnix.
+</p>
+
+<p>
+The documentation of 
+<a href="http://hydra.nixos.org/job/disnix/disnixos-trunk/tarball/latest/download-by-type/doc/manual">DisnixOS</a>
+(<a href="http://hydra.nixos.org/job/disnix/disnixos-trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF version</a>)
+explains additional features for complementary infrastructure deployment.
+</p>
+
+<h1>Research papers</h1>
+
+<p>
+We also have a number of research papers available about Disnix:
 </p>
 
 <ul>
-<li>Every target machine requires the Disnix service running. On NixOS this can be done by
-setting: 
-<pre class="code">
-services.disnix.enable = true;
-</pre>
-in your NixOS configuration</li>
 
-<li>A coordinator machine requires the Disnix client utilities installed. Usually this can be done
-by installing Disnix from <a href="../nixpkgs">Nixpkgs</a>:
-
-<pre class="code">
-nix-env -i disnix
-</pre>
+<li>
+<p>
+Sander van der Burg, <a href="http://www.st.ewi.tudelft.nl/~dolstra">Eelco Dolstra</a>,
+<strong>Disnix: A toolset for distributed deployment</strong>,
+In Mark van den Brand and Kim Mens and Holger Kienle and Anthony Cleve, editors,		
+<a href="http://www.info.fundp.ac.be/wasdett2010">Third International Workshop on Academic Software Development Tools and Techniques (WASDeTT-3)</a>.
+Antwerp, Belgium,
+WASDeTT,
+September 2010.
+[<a href="http://www.st.ewi.tudelft.nl/~sander/pdf/publications/vanderburg10-disnix.pdf">pdf</a>]			
+</p>															    
 </li>
 
 <li>
-The Disnix service also needs a wrapper for the execution of remote Disnix operations.
-The simplest wrapper is the SSH wrapper, which can be used by enabling the OpenSSH service
-in the NixOS configuration:
-<pre class="code">
-services.openssh.enable = true;
-</pre>
+<p>
+Sander van der Burg, <a href="http://www.st.ewi.tudelft.nl/~dolstra">Eelco Dolstra</a>,
+<strong>Automated Deployment of a Heterogeneous Service-Oriented System</strong>,
+In Lisa O'Connor, editors,		
+<a href="http://seaa2010.liacs.nl">36th EUROMICRO Conference on Software Engineering and Advanced Applications (SEAA)</a>.
+Lille, France, IEEE Computer Society,
+September 2010.	
+[<a href="http://www.st.ewi.tudelft.nl/~sander/pdf/publications/vanderburg10-automateddeployment.pdf">pdf</a>]			
+</p>
 </li>
 
 <li>
-  To deploy a system, a user needs to write a <em>services</em>, <em>infrastructure</em> and <em>distribution</em> expression
-  and can deploy the distributed system by typing:
-  <pre class="code">
-disnix-env -s services.nix -i infrastructure.nix -d distribution.nix
-  </pre>
+<p>
+Sander van der Burg, <a href="http://www.st.ewi.tudelft.nl/~dolstra">Eelco Dolstra</a>,
+<a href="http://www.extra.research.philips.com/hera/people/mdejonge">Merijn de Jonge</a>,
+<strong>Atomic Upgrading of Distributed Systems</strong>,
+In Tudor Dumitras and Danny Dig and Iulian Neamtiu, editors,		
+<a href="http://www.hotswup.org/2008">First ACM Workshop on Hot Topics in Software Upgrades (HotSWUp)</a>.
+Nashville, Tennessee, USA,
+ACM,
+October 2008.		
+[<a href="http://www.st.ewi.tudelft.nl/~sander/pdf/publications/vanderburg08-atomic.pdf">pdf</a>]			
+</p>																			    
 </li>
 
 <li>
-  Some basic examples can be found in the Subversion repository:
-  <a href="https://svn.nixos.org/repos/nix/disnix/examples">https://svn.nixos.org/repos/nix/disnix/examples</a>
+<p>
+Sander van der Burg, <strong>Model-driven Distributed Software Deployment</strong>,
+Master's thesis,
+<a href="http://www.tudelft.nl">Delft University of Technology</a>,
+March 2009.
+[<a href="http://www.st.ewi.tudelft.nl/~sander/pdf/publications/vanderburg09-mastersthesis.pdf">pdf</a>]			
+</p>
 </li>
-
-<li>
-Observe that the examples include a infrastructure expression, but you need to adapt it to match the configuration
-of the machines you are actually using.
-</li>
-
-<li>More detailed documentation will be available soon!</li>
+				    
 </ul>
 
 [% END %]
