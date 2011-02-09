@@ -1,0 +1,105 @@
+[% WRAPPER layout.tt title="Disnix examples" id='$Id: index.tt 19828 2010-02-05 10:12:27Z sandervanderburg $' menu='disnix' %]
+
+<h1>Examples</h1>
+
+<p>
+We have a number of examples cases available, which demonstrate various features of Disnix.
+The example cases can be freely used under the MIT license and obtained through the
+<a href="download.html">download</a> page.
+</p>
+
+<p>
+There are various ways to try these examples. The first option is to deploy the system
+in a <strong>heterogeneous</strong> network, which also takes the most effort.
+This requires you to manually install a network of machines,
+configure system services (such as a DBMS and web server), install Disnix and to write
+an infrastructure model matching the properties of the systems in the network.
+</p>
+
+<p>
+Another option is to install a network of NixOS machines running the Disnix service.
+The <strong>DisnixOS</strong> extension can be used to automatically upgrade the underlying infrastructure
+to support the services. Examples of NixOS configurations are included with each example.
+</p>
+
+<p>
+The most convenient way of trying these examples, is by using the <strong>virtualization</strong> tool of
+DisnixOS. This tool can be used on any Linux distribution (not just NixOS) using the
+Nix package manager and KVM. It will automatically generate a network running NixOS
+instances.
+</p>
+
+<h2>StaffTracker (PHP/MySQL version)</h2>
+
+<p>
+This example is a PHP/MySQL web application system to manage staff of a university department.
+The system is composed of various databases; one to store zip codes, another to store room numbers
+and one to store the staff members. A PHP web application front-end allows users to view and
+modify staff members.
+</p>
+
+<ul>
+<li><a href="http://hydra.nixos.org/job/disnix/php-mysql-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+</ul>
+
+<h2>StaffTracker (Web services version)</h2>
+
+<p>
+A more complex variant of the previous example implemented in Java.
+In this variant access to the databases is provided by web services. Moreover, a 
+Geolocation service is included using
+<a href="http://www.maxmind.com/app/ip-location">GeoIP</a> to determine a staff members'
+location from an IP address.
+</p>
+
+<ul>
+<li><a href="http://hydra.nixos.org/job/disnix/WebServicesExample-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+</ul>
+
+<h2>ViewVC</h2>
+<p>
+A system running <a href="http://viewvc.tigris.org">ViewVC</a>, a web-based CVS and Subversion repository viewer.
+In this example we automatically deploy the ViewVC web application front-end, a MySQL
+database storing commit records, and an arbitrary number of Subversion repositories.
+</p>
+
+<ul>
+<li><a href="http://hydra.nixos.org/job/disnix/viewvc-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+</ul>
+
+<h2>Hello World example</h2>
+
+<p>
+A trivial example composed of web services, which show various ways to combine services together.
+In this example four different compositions are shown, such as a dynamic variant using a lookup
+service and a load balancer. This example can be used as a reference for designing services and
+to make them better deployable.
+</p>
+
+<ul>
+<li><a href="http://hydra.nixos.org/job/disnix/HelloWorldExample-simple-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+</ul>
+
+<h2>Disnix proxy example</h2>
+
+<p>
+A trivial example composed of two processes communicating with other through a TCP socket.
+A proxy can be used to drain connections during the upgrade phase, which makes the upgrade
+process completely atomic.
+</p>
+
+<ul>
+<li><a href="http://hydra.nixos.org/job/disnix/disnix-proxy-example-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+</ul>
+
+<h2>NixOS configurations</h2>
+
+<p>
+A trivial example case deploying complete NixOS configurations.
+</p>
+
+<ul>
+<li><a href="http://hydra.nixos.org/job/disnix/nixos-configurations-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+</ul>
+
+[% END %]

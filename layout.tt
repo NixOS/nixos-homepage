@@ -88,6 +88,7 @@
             [% INCLUDE menuItem uri = "${root}disnix/" title = "About" %]
 	    [% INCLUDE menuItem uri = "${root}disnix/docs.html" title = "Documentation" %]
 	    [% INCLUDE menuItem uri = "${root}disnix/extensions.html" title = "Extensions" %]
+	    [% INCLUDE menuItem uri = "${root}disnix/examples.html" title = "Examples" %]
 	    [% INCLUDE menuItem uri = "${root}disnix/download.html" title = "Download" %]
 	    [% INCLUDE menuItem uri = "${root}disnix/support.html" title = "Support" %]
           </ul>
