@@ -22,29 +22,28 @@
       <day>1—4</day>
       <month>November</month>
       <year>2010</year>
-      <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/decvms-issre2010-submitted.pdf" />
-      <htmlnote><em>To appear.</em></htmlnote>
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/decvms-issre2010-final.pdf" />
       <tag name="nixos" />
 
       <abstract>
-        <p>Automated regression test suites are an essential
-        software engineering practice: they provide developers with
-        rapid feedback on the impact of changes to a system’s source
-        code.  The inclusion of a test case in an automated test suite
+        <p>Automated regression test suites are an essential software
+        engineering practice: they provide developers with rapid
+        feedback on the impact of changes to a system’s source code.
+        The inclusion of a test case in an automated test suite
         requires that the system’s build process can automatically
-        realise all the <em>environmental dependencies</em> of the
+        provide all the <em>environmental dependencies</em> of the
         test.  These are external elements necessary for a test to
         succeed, such as shared libraries, running programs, and so
         on.  For some tests (e.g., a compiler’s), these requirements
         are simple to meet.</p>
 
-        <p>However, many kinds of tests, especially at the
-        integration or system level, have complex dependencies that
-        are hard to provide automatically, such as running database
-        servers, administrative privileges, services on external
-        machines or specific network topologies.  As such dependencies
-        make tests difficult to script, they are often performed only
-        manually, if at all.  This particularly affects distributed
+        <p>However, many kinds of tests, especially at the integration
+        or system level, have complex dependencies that are hard to
+        provide automatically, such as running database servers,
+        administrative privileges, services on external machines or
+        specific network topologies.  As such dependencies make tests
+        difficult to script, they are often only performed manually,
+        if at all.  This particularly affects testing of distributed
         systems and system-level software.</p>
 
         <p>This paper shows how we can automatically instantiate the
@@ -61,47 +60,18 @@
       </abstract>
     </inproceedings>
 
-    <!-- 
-    <misc>
-      <author>Sander van der Burg</author>
-      <author>Eelco Dolstra</author>
-      <title>Declarative Testing and Deployment of Distributed Systems</title>
-      <year>2009</year>
-      <htmlnote><em>Submitted to ICSE-2010.</em></htmlnote>
-      <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/distributed-icse2010-submitted.pdf" />
-      <tag name="nixos" />
-
-      <abstract>
-        System administrators and developers who deploy distributed
-        systems have to deal with a deployment process that is largely
-        manual and hard to reproduce.  This paper describes how
-        networks of computer systems can be reproducibly and
-        automatically deployed from declarative specifications.
-        Reproducibility also ensures that users can easily instantiate
-        a test environment, before deploying the specification to the
-        production environment.  Furthermore, from the same
-        specifications we can instantiate virtual networks of virtual
-        machines for both interactive and automated testing.  This
-        makes it easy to write automated regression tests that require
-        external machines, need special privileges, or depend on the
-        network topology.  We instantiate machines from the
-        specifications using NixOS, a Linux distribution built from a
-        purely functional specification.  We have applied our approach
-        to a number of representative problems, including automatic
-        regression testing of a Linux distribution and deployment of a
-        continuous integration environment.
-      </abstract>
-    </misc>
-    -->
-    
     <misc>
       <author>Eelco Dolstra</author>
       <author>Andres Löh</author>
       <author>Nicolas Pierron</author>
       <title>NixOS: A Purely Functional Linux Distribution</title>
+      <series url="http://journals.cambridge.org/action/displayJournal?jid=JFP">Journal of Functional Programming</series>
+      <publisher>Cambridge University Press</publisher>
       <year>2010</year>
-      <htmlnote><em>Under consideration for the Journal of Functional Programming.</em></htmlnote>
-      <link type="draft" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-submitted-v2.pdf" />
+      <volume>?</volume>
+      <htmlnote><em>Accepted for publication.</em></htmlnote>
+      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-final.pdf" />
+      <link type="doi" url="http://dx.doi.org/10.1017/S0956796810000195 " />
       <tag name="nixos" />
 
       <abstract>
