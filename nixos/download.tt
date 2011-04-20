@@ -26,8 +26,8 @@ get an impression of NixOS (and the Nix package manager) before
 installing it.</p>
 
 <ul>
-  <li><a href="http://hydra.nixos.org/view/nixos/tested/latest/iso_graphical-i686-linux/download">Graphical live CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
-  <li><a href="http://hydra.nixos.org/view/nixos/tested/latest/iso_graphical-x86_64-linux/download">Graphical live CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-i686-linux">Graphical live CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
 </ul>  
 
 <h2>Minimal installation CD</h2>
@@ -37,8 +37,8 @@ have to run the installer from the console.  It contains a number of
 rescue tools.</p>
 
 <ul>
-  <li><a href="http://hydra.nixos.org/view/nixos/tested/latest/iso_minimal-i686-linux/download">Minimal installation CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
-  <li><a href="http://hydra.nixos.org/view/nixos/tested/latest/iso_minimal-x86_64-linux/download">Minimal installation CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-i686-linux">Minimal installation CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-x86_64-linux">Minimal installation CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
 </ul>
 
 <h2>Installing NixOS</h2>
