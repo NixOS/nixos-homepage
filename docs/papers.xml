@@ -68,8 +68,9 @@
       <series url="http://journals.cambridge.org/action/displayJournal?jid=JFP">Journal of Functional Programming</series>
       <publisher>Cambridge University Press</publisher>
       <year>2010</year>
-      <volume>?</volume>
-      <htmlnote><em>Accepted for publication.</em></htmlnote>
+      <volume>20</volume>
+      <number>5–6</number>>
+      <pages first="577" last="615" />
       <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-final.pdf" />
       <link type="doi" url="http://dx.doi.org/10.1017/S0956796810000195 " />
       <tag name="nixos" />
