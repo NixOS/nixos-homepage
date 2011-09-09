@@ -3,8 +3,10 @@
 <h1>The Nix Packages collection</h1>
 
 <p>The <em>Nix Packages collection</em> (Nixpkgs) is a set of about
-2,500 packages for the Nix package manager.  It supports a number of
-platforms (though not all packages work on all platforms):</p>
+2,500 packages for the Nix package manager, released under a
+<a href="http://svn.nixos.org/repos/nix/nixos/trunk/COPYING">permissive
+MIT/X11 license</a>.  It supports a number of platforms (though not
+all packages work on all platforms):</p>
 
 <ul>
   <li>GNU/Linux on 32-bit and 64-bit x86 (<tt>i686-linux</tt> and <tt>x86_64-linux</tt>)</li>
@@ -14,8 +16,8 @@ platforms (though not all packages work on all platforms):</p>
   <li>Windows / Cygwin (<tt>i686-cygwin</tt>)</li>
 </ul>
 
-<p>On Linux, the packages in Nixpkgs are ‘pure’, meaning that they
+<p>On GNU/Linux, the packages in Nixpkgs are ‘pure’, meaning that they
 have no dependencies on packages outside of the Nix store.  This means
-that they should work on pretty much any Linux distribution.</p>
+that they should work on pretty much any GNU/Linux distribution.</p>
 
 [% END %]

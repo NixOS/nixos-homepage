@@ -2,6 +2,10 @@
 
 <h1>Getting Nixpkgs</h1>
 
+<p>Nixpkgs is free software, released under a
+  <a href="http://svn.nixos.org/repos/nix/nixpkgs/trunk/COPYING">permissive
+    MIT/X11 license</a>.</p>
+
 <p><strong>Note:</strong> if you are a NixOS user, you already have
 Nixpkgs.  (The files are in <tt>/etc/nixos/nixpkgs</tt>.)  You can
 update your copy of Nixpkgs to the latest version by running
