@@ -2,11 +2,7 @@
 
 <h1>About Nix</h1>
 
-<p>Nix is a <em>purely functional package manager</em>, released under
-  the terms of
-  the <a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU
-    LGPLv2.1 or (at your option) any later version</a>.  <em>Purely
-  functional</em> means
+<p>Nix is a <em>purely functional package manager</em>.  This means
 that it treats packages like values in purely functional programming
 languages such as Haskell — they are built by functions that don’t
 have side-effects, and they never change after they have been built.
@@ -216,6 +212,13 @@ among other things, that it’s possible to easily roll back the entire
 configuration of the system to an earlier state.  Also, users can
 install software without root privileges.  <a href="../nixos">Read
 more…</a></p>
+
+
+<h3>License</h3>
+
+<p>Nix is released under the terms of the <a
+href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU
+LGPLv2.1 or (at your option) any later version</a>.</p>
 
 
 [% END %]

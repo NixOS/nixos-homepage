@@ -5,9 +5,7 @@
 
 <p><a href="screenshots/nixos-kde42-1.png"><img class="inlineNoBorder"
 src="screenshots/nixos-kde42-1-small.png" alt="NixOS screenshot"
-/></a>NixOS is an experimental GNU/Linux distribution released under a
-  <a href="http://svn.nixos.org/repos/nix/nixos/trunk/COPYING">permissive
-    MIT/X11 license</a>.  NixOS aims to improve
+/></a>NixOS is an experimental GNU/Linux distribution that aims to improve
 the state of the art in system configuration management.  In existing
 distributions, actions such as upgrades are dangerous: upgrading a
 package can cause other packages to break, upgrading an entire system
@@ -256,6 +254,10 @@ to add those yourself.  Here is an overview of what we have:</p>
   on ARM.</li>
 
 </ul>
+
+<p>NixOS is released under a <a
+href="http://svn.nixos.org/repos/nix/nixos/trunk/COPYING">permissive
+MIT/X11 license</a>.</p>
 
 
 [% END %]
