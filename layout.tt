@@ -13,6 +13,11 @@
   <head>
     <title>[% title %]</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="NixOS, Nix, functional package
+				   management, GNU/Linux distribution,
+				   Hydra, continuous integration" /> 
+    <meta name="description" content="NixOS, a purely
+				      functional GNU/Linux distribution" />
     <link rel="stylesheet" href="[% root %]css/nix-common.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/news.css" type="text/css" />
