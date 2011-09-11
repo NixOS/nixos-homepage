@@ -1,5 +1,5 @@
 body {
-    font-family: sans-serif;
+    font-family: "Nimbus Sans L", sans-serif;
     background: white;
     margin: 2em 1em 2em 1em;
 }
@@ -82,4 +82,11 @@ pre.code {
     padding: 6px 6px;
     color: #600000;
     background: #f4f4f8;
+}
+
+/* Consistent font size for monospaced elements.  See
+   http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/ */
+tt, code, pre {
+    font-family: monospace, sans-serif;
+    font-size: 95%;
 }
