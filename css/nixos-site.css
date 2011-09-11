@@ -5,7 +5,7 @@ body {
 
 /* The main container element. */
 div#page {
-    max-width: 55em;
+    max-width: 80%;
     margin: 1em auto;
     background-color: white;
     
