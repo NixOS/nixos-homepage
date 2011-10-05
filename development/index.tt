@@ -49,17 +49,17 @@ href="http://www.st.ewi.tudelft.nl/~dolstra/">Eelco</a>).</p>
 
 <p>The sources of all Nix-related projects are in the <tt>nix</tt>
 Subversion repository on our <a
-href="https://svn.nixos.org/">Subversion server</a>.</p>
+href="https://nixos.org/repoman">Subversion server</a>.</p>
 
 <ul>
-  <li><a href="https://svn.nixos.org/repos/nix/nix/trunk/">Nix
-  trunk</a> (<a href="https://svn.nixos.org/websvn/nix/nix/trunk/">WebSVN</a>)</li>
-  <li><a href="https://svn.nixos.org/repos/nix/nixpkgs/trunk/">Nixpkgs
-  trunk</a> (<a href="https://svn.nixos.org/websvn/nix/nixpkgs/trunk/">WebSVN</a>)</li>
-  <li><a href="https://svn.nixos.org/repos/nix/nixos/trunk/">NixOS
-  trunk</a> (<a href="https://svn.nixos.org/websvn/nix/nixos/trunk/">WebSVN</a>)</li>
-  <li><a href="https://svn.nixos.org/repos/nix/hydra/trunk/">Hydra
-  trunk</a> (<a href="https://svn.nixos.org/websvn/nix/hydra/trunk/">WebSVN</a>)</li>
+  <li><a href="https://nixos.org/repos/nix/nix/trunk/">Nix
+  trunk</a> (<a href="https://nixos.org/websvn/nix/nix/trunk/">WebSVN</a>)</li>
+  <li><a href="https://nixos.org/repos/nix/nixpkgs/trunk/">Nixpkgs
+  trunk</a> (<a href="https://nixos.org/websvn/nix/nixpkgs/trunk/">WebSVN</a>)</li>
+  <li><a href="https://nixos.org/repos/nix/nixos/trunk/">NixOS
+  trunk</a> (<a href="https://nixos.org/websvn/nix/nixos/trunk/">WebSVN</a>)</li>
+  <li><a href="https://nixos.org/repos/nix/hydra/trunk/">Hydra
+  trunk</a> (<a href="https://nixos.org/websvn/nix/hydra/trunk/">WebSVN</a>)</li>
 </ul>
 
 <h3>Mailing list</h3>
