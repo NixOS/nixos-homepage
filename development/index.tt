@@ -47,9 +47,10 @@ href="http://www.st.ewi.tudelft.nl/~dolstra/">Eelco</a>).</p>
 
 <h3>Subversion repository</h3>
 
-<p>The sources of all Nix-related projects are in the <tt>nix</tt>
-Subversion repository on our <a
-href="https://nixos.org/repoman">Subversion server</a>.</p>
+<p>The sources of all Nix-related projects are either in the
+<tt>nix</tt> Subversion repository on our <a
+href="https://nixos.org/repoman">Subversion server</a> or in the <a
+href="https://github.com/NixOS/">NixOS organization on GitHub</a>.</p>
 
 <ul>
   <li><a href="https://nixos.org/repos/nix/nix/trunk/">Nix
@@ -58,11 +59,7 @@ href="https://nixos.org/repoman">Subversion server</a>.</p>
   trunk</a> (<a href="https://nixos.org/websvn/nix/nixpkgs/trunk/">WebSVN</a>)</li>
   <li><a href="https://nixos.org/repos/nix/nixos/trunk/">NixOS
   trunk</a> (<a href="https://nixos.org/websvn/nix/nixos/trunk/">WebSVN</a>)</li>
-</ul>
-
-<p>The sources for Hydra are available at GitHub.</p>
-<ul>
-  <li><a href="http://github.com/NixOS/hydra">Hydra</a>
+  <li><a href="http://github.com/NixOS/hydra">Hydra</a></li>
 </ul>
 
 <h3>Mailing list</h3>
