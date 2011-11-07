@@ -4,6 +4,46 @@
 
   <item>
     <year>2011</year>
+    <month>11</month>
+    <day>3</day>
+    <title>Hydra talk at Inria</title>
+    <description>
+      <a href="http://hydra.nixos.org/">
+      <img class="inlineNoBorder" src="hydra.png" alt="Hydra
+      logo"/></a>
+      
+      Ludovic Courtès gave a talk on <a
+      href="http://nixos.org/hydra">Hydra</a> at <a
+      href="http://www.inria.fr/centre/bordeaux">Inria</a> (which has
+      its own Hydra instance for building Inria software) entitled <a
+      href="http://sed.bordeaux.inria.fr/seminars/hydra-ci_20111103.pdf">“Hydra:
+      continuous integration for demanding people”</a>.
+    </description>
+  </item>
+
+  <item>
+    <year>2011</year>
+    <month>10</month>
+    <day>28</day>
+    <title>Moving to GitHub</title>
+    <description>
+      <a href="https://github.com/">
+      <img style="width: 8em;" class="inlineNoBorder" src="https://assets.github.com/images/modules/about_page/octocat.png" alt="GitHub
+      logo"/></a>
+      
+      The NixOS project is (slowly) migrating from Subversion to Git!
+      The master repositories will be hosted in the <a
+      href="https://github.com/NixOS/">NixOS organization</a> on <a
+      href="https://github.com/">GitHub</a>.  For the moment, just a
+      few subprojects have been migrated, such as <a
+      href="https://github.com/NixOS/hydra">Hydra</a> and <a
+      href="https://github.com/NixOS/charon">Charon</a>.  Thanks to
+      Tianyi Cui for donating the NixOS GitHub organization.
+    </description>
+  </item>
+
+  <item>
+    <year>2011</year>
     <month>9</month>
     <day>14</day>
     <title>

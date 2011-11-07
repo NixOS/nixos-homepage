@@ -11,6 +11,33 @@
 
   <items>
 
+    <misc>
+      <author>Joachim Schiele</author>
+      <title>Multi-Platform Software Package Management</title>
+      <day>26</day>
+      <month>March</month>
+      <year>2011</year>
+      <link type="pdf" url="https://github.com/qknight/Multi-PlatformSoftwarePackageManagement/raw/master/Multi-PlatformSoftwarePackageManagement.pdf" />
+      <tag name="nix" />
+      <htmlnote><em>Diplomarbeit</em> at the University of Tübingen.</htmlnote>
+      <abstract>
+        Today's package management is a complex field. This diploma
+        thesis analyses different package management systems in
+        several regards: how the packaging is done; how the user
+        interacts with the package manager; Apt (Debian Linux),
+        Portage (Gentoo Linux) and Nix (Nix OS) are compared in great
+        detail.  To get practical results, the author used the
+        evopedia application, an open source offline Wikipedia reader,
+        to experiment with several different package managers. This
+        diploma thesis also tries to answer why there are no complex
+        package managers for Microsoft Windows. Most package managers
+        use their own terms which can not be generalized to other
+        package managers. This problem was solved by defining
+        meaningful words which describe certain properties of a
+        package manager.
+      </abstract>
+    </misc>
+
     <inproceedings id="issre10">
       <author>Sander van der Burg</author>
       <author>Eelco Dolstra</author>
