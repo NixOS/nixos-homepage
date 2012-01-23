@@ -56,6 +56,12 @@ location from an IP address.
 <li><a href="http://hydra.nixos.org/job/disnix/WebServicesExample-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
 </ul>
 
+<h2>StaffTracker.NET (Web services version)</h2>
+
+<p>
+A port of the previous web services example to .NET technologies, such as C#, WCF, ADO.NET and SQL server.
+</p>
+
 <h2>ViewVC</h2>
 <p>
 A system running <a href="http://viewvc.tigris.org">ViewVC</a>, a web-based CVS and Subversion repository viewer.
