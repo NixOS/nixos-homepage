@@ -41,8 +41,8 @@ on how to set up your own Hydra server.</p>
 
 If you would like to give some feedback, or report some bugs, please visit,
 <ul>
-  <li><a href="http://yellowgrass.org/project/Hydra">yellowgrass.org/project/Hydra</a>: issues, bugs and feature requests for Hydra</li>
-  <li><a href="http://yellowgrass.org/project/hydra.nixos.org">yellowgrass.org/project/hydra.nixos.org</a>: problems with our Hydra instance at <a href="http://hydra.nixos.org/">hydra.nixos.org</a></li>
+  <li><a href="https://github.com/NixOS/hydra/issues">github.com/NixOS/hydra/issues</a>: issues, bugs and feature requests for Hydra</li>
+  <li><a href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev</tt> mailing list</a>: problems with our Hydra instance at <a href="http://hydra.nixos.org/">hydra.nixos.org</a></li>
 </ul>
 
 [% END %]
