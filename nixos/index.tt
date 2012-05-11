@@ -3,7 +3,7 @@
 <h1>About NixOS</h1>
 
 
-<p><a href="screenshots/nixos-kde42-1.png"><img class="inlineNoBorder"
+<p><a href="screenshots/nixos-kde42-1.png"><img class="inline screenshot"
 src="screenshots/nixos-kde42-1-small.png" alt="NixOS screenshot"
 /></a>NixOS is an experimental GNU/Linux distribution that aims to improve
 the state of the art in system configuration management.  In existing
@@ -88,7 +88,7 @@ you don’t like the new configuration, you can just go back:</p>
 $ nixos-rebuild switch --rollback
 </pre>
 
-<a href="screenshots/nixos-grub.png"><img class="inlineNoBorder"
+<a href="screenshots/nixos-grub.png"><img class="inline screenshot"
 src="screenshots/nixos-grub-small.png" alt="Grub boot menu" /></a>
 
 <p>In fact, all old system configurations automatically show up in the

@@ -51,14 +51,8 @@ td.centered {
     text-align: center;
 }
 
-a {
-    text-decoration: none; 
-}
-
-a:hover, a:visited:hover {
-    text-decoration: underline;
-}
-
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
 a:link { color: #0048b3; }
 a:visited { color: #002a6a; }
 a.no-hover:hover { background: none; }
@@ -82,6 +76,8 @@ pre.code {
     padding: 6px 6px;
     color: #600000;
     background: #f4f4f8;
+    border-radius: 0.4em;
+    box-shadow: 0.4em 0.4em 0.5em #e0e0e0;
 }
 
 /* Consistent font size for monospaced elements.  See

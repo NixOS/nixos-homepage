@@ -24,7 +24,7 @@
     <title>Hydra talk at Inria</title>
     <description>
       <a href="http://hydra.nixos.org/">
-      <img class="inlineNoBorder" src="hydra.png" alt="Hydra
+      <img class="inline" src="hydra.png" alt="Hydra
       logo"/></a>
       
       Ludovic Courtès gave a talk on <a
@@ -43,7 +43,7 @@
     <title>Moving to GitHub</title>
     <description>
       <a href="https://github.com/">
-      <img style="width: 8em;" class="inlineNoBorder" src="https://assets.github.com/images/modules/about_page/octocat.png" alt="GitHub
+      <img style="width: 8em;" class="inline" src="https://assets.github.com/images/modules/about_page/octocat.png" alt="GitHub
       logo"/></a>
       
       The NixOS project is (slowly) migrating from Subversion to Git!
@@ -80,7 +80,7 @@
       FOSDEM talk about NixOS
     </title>
     <description>
-      <a href="http://fosdem.org/2011"><img class="inlineNoBorder" src="logo/fosdem-logo.png" alt="Fosdem logo" /></a>
+      <a href="http://fosdem.org/2011"><img class="inline" src="logo/fosdem-logo.png" alt="Fosdem logo" /></a>
       <a href="http://www.st.ewi.tudelft.nl/~sander/">Sander van der
       Burg</a> gave a talk about NixOS at the <a
       href="http://fosdem.org/2011/schedule/track/crossdistro_devroom">CrossDistro
@@ -126,7 +126,7 @@
       Xfce in NixOS
     </title>
     <description>
-      <a href="http://www.xfce.org/"><img class="inlineNoBorder" src="logo/xfce-small.png" alt="Xfce screenshot" /></a>
+      <a href="http://www.xfce.org/"><img class="inline" src="logo/xfce-small.png" alt="Xfce screenshot" /></a>
       NixOS now supports <a href="http://www.xfce.org/">Xfce</a>, a
       modern, light-weight desktop environment.  It can be enabled by
       setting the NixOS configuration value
@@ -214,7 +214,7 @@
     </title>
     <description>
       <a href="logo/nixos-hires.png">
-      <img class="inlineNoBorder" src="logo/nixos-lores.png" alt="Nix
+      <img class="inline" src="logo/nixos-lores.png" alt="Nix
       logo" /></a> Long overdue, the Nix project finally has a logo!
       The logo was originally created by <a
       href="http://arbitrary.name/">Simon Frankau</a> for the <a
@@ -287,7 +287,7 @@
     <description>
       <a
           href="nixos/screenshots/nixos-openoffice-3.png"><img
-          class="inlineNoBorder"
+          class="inline screenshot"
           src="nixos/screenshots/nixos-openoffice-3-small.png"
           alt="OpenOffice.org 3.0.1 screenshot" /></a>
 
@@ -307,7 +307,7 @@
     <description>
       <a
           href="nixos/screenshots/nixos-kde42-1.png"><img
-          class="inlineNoBorder"
+          class="inline screenshot"
           src="nixos/screenshots/nixos-kde42-1-small.png"
           alt="KDE 4.2 screenshot" /></a>
 
@@ -338,7 +338,7 @@
     </title>
     <description>
       <a href="http://hydra.nixos.org/">
-      <img class="inlineNoBorder" src="hydra.png" alt="Hydra
+      <img class="inline" src="hydra.png" alt="Hydra
       logo"/></a>
 
       <a
@@ -436,7 +436,7 @@
       <p>
 
       <a href="http://www.icfpconference.org/icfp2008/"><img
-          class="inlineNoBorder"
+          class="inline"
           src="http://www.icfpconference.org/icfp2008/icfplarge.gif"
           alt="ICFP logo" /></a>
         
@@ -557,7 +557,7 @@
       <p>
         
       <a href="nixos/screenshots/nixos-installer-help.png"><img
-          class="inline"
+          class="inline screenshot"
           src="nixos/screenshots/nixos-installer-help-small.png"
           alt="NixOS installer online help" /></a>
 
@@ -622,7 +622,7 @@
       <p>
         
       <a href="nixos/screenshots/nixos-openoffice.png"><img
-          class="inline"
+          class="inline screenshot"
           src="nixos/screenshots/nixos-openoffice-small.png"
           alt="OpenOffice screenshot" /></a>
 
@@ -656,7 +656,7 @@
       <p>
         
       <a href="nixos/screenshots/nixos-games.png"><img
-          class="inline"
+          class="inline screenshot"
           src="nixos/screenshots/nixos-games-small.png"
           alt="NixOS screenshot" /></a>
 
@@ -727,7 +727,7 @@
 
       <p>
 
-      <a href="http://www.kde.org"><img class="inlineNoBorder"
+      <a href="http://www.kde.org"><img class="inline screenshot"
       src="nixos/klogo-official-crystal-128x128.png"
       alt="KDE logo" /></a>
 
@@ -759,7 +759,7 @@
     <description>
       <a
           href="nixos/screenshots/nixos-compiz-cube.png"><img
-          class="inline"
+          class="inline screenshot"
           src="nixos/screenshots/nixos-compiz-cube-small.png"
           alt="NixOS screenshot" /></a>
 
@@ -818,7 +818,7 @@
     <description>
        <p><a
        href="http://www.flickr.com/photos/eelcovisser/367433201/"><img
-       class="inline"
+       class="inline screenshot"
        src="http://farm1.static.flickr.com/185/367433201_9ee5ad0986_m.jpg"
        alt="New build farm" /></a>To quote Eelco Visser: new
        hardware for buildfarm at Delft University of Technology has
