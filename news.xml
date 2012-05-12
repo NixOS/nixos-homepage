@@ -3,6 +3,24 @@
 <news>
 
   <item>
+    <year>2012</year>
+    <month>5</month>
+    <day>11</day>
+    <title>
+      Nix 1.0 released
+    </title>
+    <description>
+      After almost two years of development, <a
+      href="http://hydra.nixos.org/release/nix/nix-1.0">Nix 1.0</a>
+      has been released.  See the <a
+      href="http://hydra.nixos.org/build/2609700/download/3/release-notes">release
+      notes</a> for an overview of the most important improvements.
+      For installation information, see the <a
+      href="http://hydra.nixos.org/build/2609700/download/1/manual">manual</a>.
+    </description>      
+  </item>
+
+  <item>
     <year>2011</year>
     <month>11</month>
     <day>7</day>
