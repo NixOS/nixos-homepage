@@ -5,6 +5,26 @@
   <item>
     <year>2012</year>
     <month>5</month>
+    <day>24</day>
+    <title>
+      Binary Nix tarballs available
+    </title>
+    <description>
+      Our continuous build system, Hydra, now produces <a
+      href="http://hydra.nixos.org/view/nix/trunk/latest">binary
+      tarball distributions</a> of Nix for Mac OS X (Darwin), FreeBSD
+      and Linux.  The tarballs contain all dependencies of Nix, making
+      it a lot easier to install Nix on those platforms.  To install,
+      download a binary tarball, unpack it in the root directory, then
+      run <tt>nix-finish-install</tt>. See the <a
+      href="http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/doc/manual#chap-installation">manual</a>
+      for more information.
+    </description>      
+  </item>
+
+  <item>
+    <year>2012</year>
+    <month>5</month>
     <day>11</day>
     <title>
       Nix 1.0 released
