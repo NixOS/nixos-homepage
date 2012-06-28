@@ -151,7 +151,7 @@
       for <a
       href="http://hydra.nixos.org/jobset/nixos/trunk/jobstatus">automated
       regression testing of NixOS itself</a>.  A <a
-      href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/decvms-issre2010-submitted.pdf">draft
+      href="http://nixos.org/~eelco/pubs/decvms-issre2010-submitted.pdf">draft
       of the paper</a> is available.
     </description>
   </item>
@@ -395,7 +395,7 @@
       which will enable all sorts of interesting queries; better error
       reporting; a better web interface; and much more.  We have
       written a <a
-      href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/hydra-scp-submitted.pdf">draft
+      href="http://nixos.org/~eelco/pubs/hydra-scp-submitted.pdf">draft
       paper about Hydra</a>.  There are some <a
       href="http://hydra.nixos.org/job/hydra/trunk/build/latest/download-by-type/doc/manual">instructions
       available</a> about how to set up your own Hydra server.
@@ -448,7 +448,7 @@
         accepted for presentation at the <a
         href="http://www.hotswup.org/">First ACM Workshop on Hot
         Topics in Software Upgrades (HotSWUp)</a>.  A <a
-        href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/atomic-hotswup2008-submitted.pdf">draft
+        href="http://nixos.org/~eelco/pubs/atomic-hotswup2008-submitted.pdf">draft
         of the paper</a> is available.  It describes Sander’s master’s
         thesis research on DisNix, an extension to Nix that allows
         deployment and upgrading of distributed systems from a single
@@ -489,7 +489,7 @@
         features such as laziness are important for system
         configuration management.  It also provides some measurements
         on the actual purity of Nix build actions.  A <a
-        href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-icfp2008-submitted.pdf">draft
+        href="http://nixos.org/~eelco/pubs/nixos-icfp2008-submitted.pdf">draft
         of the paper</a> is available.
       </p>
     </description>
@@ -544,7 +544,7 @@
     <description>
       <p>
       Eelco Dolstra presented the paper <a
-      href="http://www.st.ewi.tudelft.nl/~dolstra/pubs/laziness-ldta2008-final.pdf">“Maximal
+      href="http://nixos.org/~eelco/pubs/laziness-ldta2008-final.pdf">“Maximal
       Laziness — An Efficient Interpretation Technique for Purely
       Functional DSLs”</a> at <a
       href="http://ldta2008.inf.elte.hu/">8th Workshop on Language
@@ -552,7 +552,7 @@
       caching of evaluation results in the Nix expression evaluator as
       a technique to make a simple term-rewriting evaluator efficient.
       Slides are <a
-      href="http://www.st.ewi.tudelft.nl/~dolstra/talks/ldta-apr-2008.pdf">here</a>.
+      href="http://nixos.org/~eelco/talks/ldta-apr-2008.pdf">here</a>.
       </p>
     </description>
   </item>
@@ -578,7 +578,7 @@
       and don’t hesitate to contact <a
       href="http://swerl.tudelft.nl/bin/view/EelcoVisser">Eelco
       Visser</a> or <a
-      href="http://www.st.ewi.tudelft.nl/~dolstra/">Eelco Dolstra</a>.
+      href="http://nixos.org/~eelco/">Eelco Dolstra</a>.
       
       </p>
     </description>

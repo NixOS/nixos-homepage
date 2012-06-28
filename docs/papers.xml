@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <bibliography svn-id="$Id$">
 
-  <authorURL url="http://www.st.ewi.tudelft.nl/~dolstra/">Eelco Dolstra</authorURL>
+  <authorURL url="http://nixos.org/~eelco/">Eelco Dolstra</authorURL>
   <authorURL url="http://martin.bravenboer.name/index.html">Martin Bravenboer</authorURL>
   <authorURL url="http://swerl.tudelft.nl/bin/view/EelcoVisser/WebHome">Eelco Visser</authorURL>
   <authorURL url="http://www.extra.research.philips.com/hera/people/mdejonge/">Merijn de Jonge</authorURL>
@@ -49,7 +49,7 @@
       <day>1—4</day>
       <month>November</month>
       <year>2010</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/decvms-issre2010-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/decvms-issre2010-final.pdf" />
       <tag name="nixos" />
 
       <abstract>
@@ -98,7 +98,7 @@
       <volume>20</volume>
       <number>5–6</number>>
       <pages first="577" last="615" />
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-jfp-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/nixos-jfp-final.pdf" />
       <link type="doi" url="http://dx.doi.org/10.1017/S0956796810000195 " />
       <tag name="nixos" />
 
@@ -140,7 +140,7 @@
       <day>23</day>
       <month>May</month>
       <year>2009</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/icse-cloud09-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/icse-cloud09-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=1564595.1564630" />
 
       <abstract>
@@ -178,7 +178,7 @@
       <day>20</day>
       <month>October</month>
       <year>2008</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/atomic-hotswup2008-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/atomic-hotswup2008-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=1490283.1490294" />
 
       <abstract>
@@ -209,7 +209,7 @@
       <month>September</month>
       <year>2008</year>
       <pages first="367" last="378" />
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nixos-icfp2008-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/nixos-icfp2008-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=1411204.1411255" />
       <tag name="nixos" />
 
@@ -248,7 +248,7 @@
       <day>8</day>
       <month>July</month>
       <year>2008</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/buildfarm-wasdett2008-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/buildfarm-wasdett2008-final.pdf" />
       <htmlnote><em>To appear.</em></htmlnote>
 
       <abstract>
@@ -284,7 +284,7 @@
       <day>5</day>
       <month>April</month>
       <year>2008</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/laziness-ldta2008-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/laziness-ldta2008-final.pdf" />
       <link type="doi" url="http://dx.doi.org/10.1016/j.entcs.2009.09.042" />
       <htmlnote><em>To appear.</em></htmlnote>
 
@@ -322,7 +322,7 @@
       <publisher>USENIX</publisher>
       <month>May</month>
       <year>2007</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/hotos-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/hotos-final.pdf" />
       <tag name="nixos" />
 
       <abstract>
@@ -409,7 +409,7 @@
       <month>January</month>
       <year>2006</year>
       <isbn>90-393-4130-3</isbn>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/phd-thesis.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/phd-thesis.pdf" />
       <link type="igitur" url="http://igitur-archive.library.uu.nl/dissertations/2006-0118-200031/index.htm" />
       <tag name="nix" />
 
@@ -494,7 +494,7 @@
       <publisher>ACM Press</publisher>
       <month>November</month>
       <year>2005</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/secsharing-ase2005-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/secsharing-ase2005-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=1101933&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
       <tag name="nix" />
 
@@ -542,7 +542,7 @@
       <location>Long Beach, California, USA</location>
       <month>September</month>
       <year>2005</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/servicecm-scm12-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/servicecm-scm12-final.pdf" />
       <tag name="nix" />
 
       <abstract>
@@ -582,7 +582,7 @@
       <publisher>Springer-Verlag</publisher>
       <month>May</month>
       <year>2005</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/eupfcdm-cbse2005-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/eupfcdm-cbse2005-final.pdf" />
       <htmlnote>© Springer-Verlag.</htmlnote>
       <tag name="nix" />
 
@@ -623,7 +623,7 @@
       <publisher>USENIX</publisher>
       <month>November</month>
       <year>2004</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/nspfssd-lisa2004-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/nspfssd-lisa2004-final.pdf" />
       <tag name="nix" />
 
       <abstract>
@@ -658,7 +658,7 @@
       <publisher>IEEE Computer Society</publisher>
       <month>May</month>
       <year>2004</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/immdsd-icse2004-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/immdsd-icse2004-final.pdf" />
       <link type="acm" url="http://portal.acm.org/citation.cfm?id=999463&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
       <tag name="nix" />
 
@@ -698,7 +698,7 @@
       <location>Portland, Oregon, USA</location>
       <month>May</month>
       <year>2003</year>
-      <link type="pdf" url="http://www.st.ewi.tudelft.nl/~dolstra/pubs/iscsd-scm11-final.pdf" />
+      <link type="pdf" url="http://nixos.org/~eelco/pubs/iscsd-scm11-final.pdf" />
 
       <abstract>
         Classically, software deployment is a process consisting of
