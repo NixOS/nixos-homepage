@@ -77,15 +77,14 @@ channel is <a href="http://nixos.org/irc/logs/">logged</a>.</p>
 
 <h3>Issue tracker</h3>
 
-<p>Bugs or feature requests can be entered in <a
-href="http://yellowgrass.org/">Yellowgrass, the tag-based issue
-tracker</a>:</p>
+<p>Bugs or feature requests can be entered in the following issue
+trackers:</p>
 
 <ul>
-  <li><a href="http://yellowgrass.org/project/Nix">Nix</a></li>
-  <li><a href="http://yellowgrass.org/project/Nixpkgs">Nixpkgs</a></li>
-  <li><a href="http://yellowgrass.org/project/NixOS">NixOS</a></li>
-  <li><a href="http://yellowgrass.org/project/Hydra">Hydra</a></li>
+  <li><a href="https://github.com/NixOS/nix/issues">Nix</a></li>
+  <li><a href="https://github.com/NixOS/nixpkgs/issues">Nixpkgs</a></li>
+  <li><a href="https://github.com/NixOS/nixpkgs/issues">NixOS</a></li>
+  <li><a href="https://github.com/NixOS/hydra/issues">Hydra</a></li>
   <li><a href="http://yellowgrass.org/project/hydra.nixos.org">Hydra
   installation at TU Delft (e.g. hardware problems or
   configuration issues)</a></li>
