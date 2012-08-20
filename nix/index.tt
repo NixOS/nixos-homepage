@@ -180,21 +180,19 @@ collection</em> (Nixpkgs)</a>.</p>
 <h3>Service deployment</h3>
 
 <p>Nix can be used not only for rolling out packages, but also
-complete <em>configurations</em> of services (such as <a
-href="https://nixos.org/repos/nix/services/trunk/configurations/nix.cs.uu.nl/default.nix">this
-web server</a>).  This is done by treating all the static bits of a
-service (such as software packages, configuration files, control
-scripts, static web pages, etc.) as “packages” that can be built by
-Nix expressions.  As a result, all the features above apply to
-services as well: for instance, you can roll back a web server
-configuration if a configuration change turns out to be undesirable,
-you can easily have multiple instances of a service (e.g., a test and
-production server), and because the whole service is built in a purely
-functional way from a Nix expression, it is repeatable so you can
-easily reproduce the service on another machine.</p>
-
-<p>You can read more about this in our <a
-href="../docs/papers.html#servicecm">SCM-12 paper</a>.</p>
+complete <em>configurations</em> of services.  This is done by
+treating all the static bits of a service (such as software packages,
+configuration files, control scripts, static web pages, etc.) as
+“packages” that can be built by Nix expressions.  As a result, all the
+features above apply to services as well: for instance, you can roll
+back a web server configuration if a configuration change turns out to
+be undesirable, you can easily have multiple instances of a service
+(e.g., a test and production server), and because the whole service is
+built in a purely functional way from a Nix expression, it is
+repeatable so you can easily reproduce the service on another machine.
+You can read more about this in our <a
+href="../docs/papers.html#servicecm">SCM-12 paper</a>.  NixOS (see
+below) is essentially an extension of this idea.</p>
 
 
 <h3>Portability</h3>
