@@ -53,11 +53,9 @@ href="https://nixos.org/repoman">Subversion server</a> or in the <a
 href="https://github.com/NixOS/">NixOS organization on GitHub</a>.</p>
 
 <ul>
-  <li><a href="http://github.com/nix/hydra">Nix</a></li>
-  <li><a href="https://nixos.org/repos/nix/nixpkgs/trunk/">Nixpkgs
-  trunk</a> (<a href="https://nixos.org/websvn/nix/nixpkgs/trunk/">WebSVN</a>)</li>
-  <li><a href="https://nixos.org/repos/nix/nixos/trunk/">NixOS
-  trunk</a> (<a href="https://nixos.org/websvn/nix/nixos/trunk/">WebSVN</a>)</li>
+  <li><a href="http://github.com/NixOS/nix">Nix</a></li>
+  <li><a href="http://github.com/NixOS/nixpkgs">Nixpkgs master</a></li>
+  <li><a href="http://github.com/NixOS/nixos">NixOS master</a></li>
   <li><a href="http://github.com/NixOS/hydra">Hydra</a></li>
 </ul>
 
