@@ -4,7 +4,7 @@
 
 <p>The <em>Nix Packages collection</em> (Nixpkgs) is a set of about
 2,500 packages for the Nix package manager, released under a
-<a href="http://nixos.org/repos/nix/nixos/trunk/COPYING">permissive
+<a href="https://github.com/NixOS/nixpkgs/blob/master/COPYING">permissive
 MIT/X11 license</a>.  It supports a number of platforms (though not
 all packages work on all platforms):</p>
 
