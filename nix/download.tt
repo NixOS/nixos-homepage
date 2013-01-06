@@ -10,12 +10,12 @@
 
 <h2>Latest release</h2>
 
-[% latest = "1.2" %]
-[% tarball = "http://hydra.nixos.org/build/3455295" %]
+[% latest = "1.3" %]
+[% tarball = "http://hydra.nixos.org/build/3668901" %]
 [% manual = "${tarball}/download/1/manual" %]
 
 <p>The latest and recommended version of Nix is
-<strong>[%latest%]</strong>, released 6 December 2012.</p>
+<strong>[%latest%]</strong>, released 5 January 2013.</p>
 
 <ul>
 
@@ -56,6 +56,7 @@ href="../hydra">continuous build system</a>:</p>
 <p>The following old releases of Nix are also available:</p>
 
 <table class="releases">
+  <tr><td class="reldate">2013-01-05</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.3">Nix 1.3</a></td></tr>
   <tr><td class="reldate">2012-12-06</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.2">Nix 1.2</a></td></tr>
   <tr><td class="reldate">2012-07-18</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.1">Nix 1.1</a></td></tr>
   <tr><td class="reldate">2012-05-11</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.0">Nix 1.0</a></td></tr>
