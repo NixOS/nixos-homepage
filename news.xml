@@ -5,6 +5,24 @@
   <item>
     <year>2013</year>
     <month>1</month>
+    <day>21</day>
+    <title>
+      NixOS switched to systemd
+    </title>
+    <description>
+      NixOS has switched from Upstart to <a
+      href="http://www.freedesktop.org/wiki/Software/systemd">systemd</a>!
+      Systemd brings many advantages such as better dependency
+      management, socket-based activation of services, per-service
+      logging, cgroup-based process management, and much more.  (Read
+      the <a
+      href="http://lists.science.uu.nl/pipermail/nix-dev/2013-January/010482.html">announcement</a>.)
+    </description>
+  </item>
+
+  <item>
+    <year>2013</year>
+    <month>1</month>
     <day>5</day>
     <title>
       Nix 1.3 released

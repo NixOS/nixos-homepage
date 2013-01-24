@@ -235,7 +235,7 @@ to add those yourself.  Here is an overview of what we have:</p>
   <a href="screenshots.html">screenshots</a>).  Other window managers
   and part of Gnome are also available.</li>
 
-  <li>NixOS uses <a href="http://upstart.ubuntu.com/">Upstart</a> to
+  <li>NixOS uses <a href="http://www.freedesktop.org/wiki/Software/systemd">systemd</a> to
   manage system services.  It supports quite a few <a
   href="https://nixos.org/websvn/nix/nixos/trunk/modules/services/">services</a>
   (e.g., Apache HTTPD, PostgreSQL, and Tomcat) that can be configured
