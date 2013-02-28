@@ -5,6 +5,21 @@
   <item>
     <year>2013</year>
     <month>2</month>
+    <day>27</day>
+    <title>
+      Nix 1.5 released
+    </title>
+    <description>
+      <a href="http://hydra.nixos.org/release/nix/nix-1.5">Nix 1.5</a>
+      has been released.  It fixes a regression introduced in Nix 1.4.  See the <a
+      href="http://hydra.nixos.org/build/4230842/download/3/release-notes">release
+      notes</a> for details.
+    </description>
+  </item>
+
+  <item>
+    <year>2013</year>
+    <month>2</month>
     <day>26</day>
     <title>
       Nix 1.4 released
