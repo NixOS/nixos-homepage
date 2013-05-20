@@ -33,12 +33,8 @@ minimal configuration of a machine running an SSH daemon:</p>
 <pre class="code">
 {
   boot.loader.grub.device = "/dev/sda";
-  
-  fileSystems = [
-    { mountPoint = "/";
-      device = "/dev/sda1";
-    }
-  ];
+
+  fileSystems."/".device = "/dev/sda1";
 
   services.sshd.enable = true;
 }
