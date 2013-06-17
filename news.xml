@@ -5,6 +5,21 @@
   <item>
     <year>2013</year>
     <month>6</month>
+    <day>17</day>
+    <title>
+      Nix 1.5.3 released
+    </title>
+    <description>
+      <a href="http://hydra.nixos.org/release/nix/nix-1.5.3">Nix 1.5.3</a>
+      has been released.  This is primarily a bug fix release.  See the <a
+      href="http://hydra.nixos.org/build/5350096/download/3/release-notes">release
+      notes</a> for details.
+    </description>
+  </item>
+
+  <item>
+    <year>2013</year>
+    <month>6</month>
     <day>3</day>
     <title>
       PhD thesis: A Reference Architecture for Distributed Software Deployment
