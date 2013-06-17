@@ -22,7 +22,7 @@
   <li><a
   href="http://hydra.nixos.org/release/nix/nix-[%latest%]"><strong>Download
   page</strong></a>, including the source tarball and binary packages
-  for several platforms.</li>
+  for several platforms. (<a href="http://nixos.org/releases/nix/nix-[%latest%]">Mirror</a>)</li>
 
   <li><a
   href="[% tarball %]/download/3/release-notes">Release
@@ -30,7 +30,8 @@
 
   <li><a href="[%manual%]">Manual</a>.  Please read the <a
   href="[%manual%]#chap-quick-start">“Quick Start” section of the
-  manual</a> for an overview of how to install and use Nix.</li>
+  manual</a> for an overview of how to install and use Nix.
+  (<a href="http://nixos.org/releases/nix/nix-[%latest%]/manual.pdf">Mirror</a>)</li>
 
 </ul>
 
