@@ -5,6 +5,25 @@
   <item>
     <year>2013</year>
     <month>6</month>
+    <day>25</day>
+    <title>
+      NixOps 1.0 released
+    </title>
+    <description>
+      <a
+      href="http://hydra.nixos.org/release/nixops/nixops-1.0">NixOps
+      1.0</a> has been released, the inaugural release of the NixOS
+      cloud deployment tool.  See the <a
+      href="http://lists.science.uu.nl/pipermail/nix-dev/2013-June/011363.html">announcement</a>
+      and the <a
+      href="http://hydra.nixos.org/build/5426864/download/1/manual/manual.html">manual</a>
+      for details.
+    </description>
+  </item>
+
+  <item>
+    <year>2013</year>
+    <month>6</month>
     <day>17</day>
     <title>
       Nix 1.5.3 released
