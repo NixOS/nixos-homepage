@@ -11,8 +11,8 @@ a virtual machine.  These are <a href="[%root%]hydra">generated
 automatically</a> from the NixOS GitHub repository, so they’re
 always up to date.</p>
 
-<p>NixOS doesn’t have a nice graphical, user-friendly installer yet, 
-therefore NixOS is currently not intended for novice Linux users. 
+<p>NixOS doesn’t have a nice graphical, user-friendly installer yet,
+therefore NixOS is currently not intended for novice Linux users.
 </p>
 
 <h2>Graphical live CD</h2>
@@ -23,9 +23,9 @@ get an impression of NixOS (and the Nix package manager) before
 installing it.</p>
 
 <ul>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-i686-linux">Graphical live CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
-</ul>  
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-i686-linux">Graphical live CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a></li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a></li>
+</ul>
 
 <h2>Minimal installation CD</h2>
 
@@ -34,8 +34,21 @@ have to run the installer from the console.  It contains a number of
 rescue tools.</p>
 
 <ul>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-i686-linux">Minimal installation CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a>.</li>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-x86_64-linux">Minimal installation CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a>.</li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-i686-linux">Minimal installation CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a></li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-x86_64-linux">Minimal installation CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a></li>
+</ul>
+
+<h2>VirtualBox image</h2>
+
+<p>This is a disk image for VirtualBox (in VDI format) that has X11
+and KDE enabled.  VirtualBox guest additions are also installed.  You
+can log in as user <tt>demo</tt>, password <tt>demo</tt>, and run
+<tt>sudo -i</tt> to obtain a root shell.  The image is compressed
+using <tt>xz</tt>; decompress it using <tt>xz -d</tt> before adding
+the image to your VirtualBox VM.</p>
+
+<ul>
+  <li><a href="http://nixos.org/releases/nixos/latest-vdi-x86_64-linux">VirtualBox disk image, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a></li>
 </ul>
 
 <h2>Installing NixOS</h2>
