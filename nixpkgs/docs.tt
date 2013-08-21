@@ -1,4 +1,5 @@
 [% WRAPPER layout.tt title="Nixpkgs Documentation" id='$Id$' menu='nixpkgs' %]
+[% PROCESS common.tt %]
 
 <h1>Nixpkgs documentation</h1>
 
@@ -9,10 +10,8 @@ href="http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/doc/
 
 <h2>Developer information</h2>
 
-<p>The <a
-href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">
-Nixpkgs manual</a> (<a
-href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF</a>)
+<p>The <a href="[% nixpkgsManual %]"> Nixpkgs manual</a>
+(<a href="[% nixpkgsManual %]/manual.pdf">PDF</a>)
 contains a lot of information on how to add to or modify Nixpkgs.</p>
 
 [% END %]
