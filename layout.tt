@@ -14,10 +14,10 @@
     <title>[% title %]</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="NixOS, Nix, functional package
-				   management, GNU/Linux distribution,
-				   Hydra, continuous integration" /> 
+                                   management, GNU/Linux distribution,
+                                   Hydra, continuous integration" />
     <meta name="description" content="NixOS, a purely
-				      functional GNU/Linux distribution" />
+                                      functional GNU/Linux distribution" />
     <link rel="stylesheet" href="[% root %]css/nix-common.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/news.css" type="text/css" />
@@ -32,8 +32,8 @@
     </script>
     <link rel="stylesheet" href="[% root %]js/jquery.imageZoom.css" type="text/css" />
   </head>
-  
-  <body> 
+
+  <body>
     <div id="page">
 
       <div id="header">
@@ -43,7 +43,7 @@
           <li><a href="[% root %]nix/">Nix</a></li>
           <li><a href="[% root %]nixpkgs/">Nixpkgs</a></li>
           <li><a href="[% root %]hydra/">Hydra</a></li>
-	  <li><a href="[% root %]disnix/">Disnix</a></li>
+          <li><a href="[% root %]disnix/">Disnix</a></li>
           <li><a href="[% root %]development/">Development</a></li>
           <li><a href="/wiki">Wiki</a></li>
         </ul>
@@ -91,11 +91,11 @@
           <div id="left-title">Disnix</div>
           <ul id="left-menu">
             [% INCLUDE menuItem uri = "${root}disnix/" title = "About" %]
-	    [% INCLUDE menuItem uri = "${root}disnix/docs.html" title = "Documentation" %]
-	    [% INCLUDE menuItem uri = "${root}disnix/extensions.html" title = "Extensions" %]
-	    [% INCLUDE menuItem uri = "${root}disnix/examples.html" title = "Examples" %]
-	    [% INCLUDE menuItem uri = "${root}disnix/download.html" title = "Download" %]
-	    [% INCLUDE menuItem uri = "${root}disnix/support.html" title = "Support" %]
+            [% INCLUDE menuItem uri = "${root}disnix/docs.html" title = "Documentation" %]
+            [% INCLUDE menuItem uri = "${root}disnix/extensions.html" title = "Extensions" %]
+            [% INCLUDE menuItem uri = "${root}disnix/examples.html" title = "Examples" %]
+            [% INCLUDE menuItem uri = "${root}disnix/download.html" title = "Download" %]
+            [% INCLUDE menuItem uri = "${root}disnix/support.html" title = "Support" %]
           </ul>
         </div>
         [% END %]
