@@ -1,4 +1,5 @@
 [% WRAPPER layout.tt title="NixOS Downloads" id='$Id$' menu='nixos' %]
+[% PROCESS common.tt %]
 
 <h1>Getting NixOS</h1>
 
@@ -53,7 +54,7 @@ the image to your VirtualBox VM.</p>
 
 <h2>Installing NixOS</h2>
 
-<p>For installation instructions, please see the <a href="[%root%]nixos/docs.html">manual</a>.</p>
+<p>For installation instructions, please see the <a href="[%nixosManual%]">manual</a>.</p>
 
 <h2>Old releases</h2>
 

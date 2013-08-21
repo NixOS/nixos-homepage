@@ -5,7 +5,7 @@
 
 <p>Information on how to use Nixpkgs can be found in the <a
 href="../nix/docs.html">Nix manual</a>, especially the <a
-href="http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/doc/manual#chap-quick-start">
+href="[% nixManual %]#chap-quick-start">
 “Quick Start” section</a>.</p>
 
 <h2>Developer information</h2>

@@ -1,4 +1,5 @@
 [% WRAPPER layout.tt title="Nix Downloads" id='$Id$' menu='nix' %]
+[% PROCESS common.tt %]
 
 <h1>Getting Nix</h1>
 
@@ -10,28 +11,25 @@
 
 <h2>Latest release</h2>
 
-[% latest = "1.5.3" %]
-[% tarball = "http://hydra.nixos.org/build/5350096" %]
-[% manual = "${tarball}/download/1/manual" %]
-
 <p>The latest and recommended version of Nix is
-<strong>[%latest%]</strong>, released 17 June 2013.</p>
+<strong>[%latestNixVersion%]</strong>, released 17 June 2013.</p>
 
 <ul>
 
-  <li><a
-  href="http://hydra.nixos.org/release/nix/nix-[%latest%]"><strong>Download
-  page</strong></a>, including the source tarball and binary packages
-  for several platforms. (<a href="http://nixos.org/releases/nix/nix-[%latest%]">Mirror</a>)</li>
+  <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a>.</li>
 
   <li><a
-  href="[% tarball %]/download/3/release-notes">Release
+  href="http://hydra.nixos.org/release/nix/nix-[%latestNixVersion%]">Binary
+  packages for several platforms</a>, including RPMs, Debs and binary
+  tarballs for Mac OS X.</li>
+
+  <li><a href="[%latestNixMirror%]/manual/NEWS.html">Release
   notes</a>.</li>
 
-  <li><a href="[%manual%]">Manual</a>.  Please read the <a
-  href="[%manual%]#chap-quick-start">“Quick Start” section of the
-  manual</a> for an overview of how to install and use Nix.
-  (<a href="http://nixos.org/releases/nix/nix-[%latest%]/manual.pdf">Mirror</a>)</li>
+  <li><a href="[%latestNixMirror%]/manual">Manual</a>.  Please read
+  the <a href="[%latestNixMirror%]/manual#chap-quick-start">“Quick
+  Start” section of the manual</a> for an overview of how to install
+  and use Nix.  (<a href="[%latestNixMirror%]/manual.pdf">PDF</a>)</li>
 
 </ul>
 

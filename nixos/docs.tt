@@ -1,4 +1,5 @@
 [% WRAPPER layout.tt title="NixOS Documentation" id='$Id$' menu='nixos' %]
+[% PROCESS common.tt %]
 
 <h1>NixOS documentation</h1>
 
@@ -6,13 +7,11 @@
 
 <ul>
 
-  <li>The <a
-  href="http://hydra.nixos.org/job/nixos/trunk/manual/latest/download">NixOS
-  manual</a> describes how to install and use NixOS.</li>
+  <li>The <a href="[%nixosManual%]">NixOS manual</a> describes how to
+  install and use NixOS.</li>
 
-  <li>The
-  <a href="http://hydra.nixos.org/job/nix/trunk/tarball/latest/download-by-type/doc/manual">
-  Nix manual</a> describes how to use the Nix package manager.</li>
+  <li>The <a href="[%nixManual%]">Nix manual</a> describes how to use
+  the Nix package manager.</li>
 
   <li>Run <tt>man configuration.nix</tt> to see a list of all
   supported configuration options in <tt>configuration.nix</tt>.</li>

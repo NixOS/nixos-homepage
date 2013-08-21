@@ -1,15 +1,14 @@
 [% WRAPPER layout.tt title="Nix Documentation" id='$Id$' menu='nix' %]
+[% PROCESS common.tt %]
 
 <h1>Nix documentation</h1>
 
 <h2>Manual</h2>
 
-<p>The <a
-href="http://hydra.nixos.org/job/nix/trunk/tarball/latest/download-by-type/doc/manual">
-Nix manual</a> (<a
-href="http://hydra.nixos.org/job/nix/trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF</a>)
-tells you everything you need to know about installing and using Nix.
-It also describes the Nix expression language.</p>
+<p>The <a href="[% nixManual %]"> Nix manual</a> (<a href="[%
+nixManualPDF %]">PDF</a>) tells you everything you need to know about
+installing and using Nix.  It also describes the Nix expression
+language.</p>
 
 <h2>Papers</h2>
 

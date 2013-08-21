@@ -1,4 +1,5 @@
 [% WRAPPER layout.tt title="Contributing" id='$Id$' menu='development' %]
+[% PROCESS common.tt %]
 
 <h1>Contributing to the Nix project</h1>
 
@@ -13,49 +14,44 @@ href="http://nixos.org/~eelco/">Eelco</a>).</p>
 <p>If you want to add or change packages in Nixpkgs:</p>
 
 <ul>
-  
-  <li>The <a
-  href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">Nixpkgs
-  manual</a> has a lot of information about how to write Nix
-  expressions for Nixpkgs.  In particular, you should check out the <a
-  href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual#chap-quick-start">“Quick
-  Start” chapter</a> for an overview of the process of adding a
-  package.</li>
+
+  <li>The <a href="[%nixpkgsManual%]">Nixpkgs manual</a> has a lot of
+  information about how to write Nix expressions for Nixpkgs.  In
+  particular, you should check out the <a
+  href="[%nixpkgsManual%]#chap-quick-start">“Quick Start” chapter</a>
+  for an overview of the process of adding a package.</li>
 
   <li>The Nix manual has <a
-  href="http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/doc/manual#chap-writing-nix-expressions">a
-  chapter on writing Nix expressions</a>, including the syntax and
-  semantic of the Nix expression language.</li>
-  
+  href="[%nixManual%]#chap-writing-nix-expressions">a chapter on
+  writing Nix expressions</a>, including the syntax and semantic of
+  the Nix expression language.</li>
+
 </ul>
 
 <p>If you want to hack on NixOS:</p>
 
 <ul>
 
+  <li>The <a href="[%nixosManual%]">NixOS manual</a> has information
+  on writing NixOS modules.</li>
+
   <li>There is a <a
   href="http://nixos.org/~eelco/pubs/nixos-jfp-submitted.pdf">paper
   on NixOS</a> has a lot of information on the NixOS module
   system (especially section 6).</li>
-
-  <li>The <a
-  href="http://hydra.nixos.org/job/nixos/trunk/manual/latest/download">NixOS
-  manual</a> has some information on writing NixOS modules.</li>
 
 </ul>
 
 
 <h3>Source repositories</h3>
 
-<p>The sources of all Nix-related projects are either in the
-<tt>nix</tt> Subversion repository on our <a
-href="https://nixos.org/repoman">Subversion server</a> or in the <a
+<p>The sources of all Nix-related projects are in the <a
 href="https://github.com/NixOS/">NixOS organization on GitHub</a>.</p>
 
 <ul>
   <li><a href="http://github.com/NixOS/nix">Nix</a></li>
-  <li><a href="http://github.com/NixOS/nixpkgs">Nixpkgs master</a></li>
-  <li><a href="http://github.com/NixOS/nixos">NixOS master</a></li>
+  <li><a href="http://github.com/NixOS/nixpkgs">Nixpkgs</a></li>
+  <li><a href="http://github.com/NixOS/nixos">NixOS</a></li>
   <li><a href="http://github.com/NixOS/hydra">Hydra</a></li>
 </ul>
 
@@ -83,9 +79,11 @@ trackers:</p>
   <li><a href="https://github.com/NixOS/nixpkgs/issues">Nixpkgs</a></li>
   <li><a href="https://github.com/NixOS/nixos/issues">NixOS</a></li>
   <li><a href="https://github.com/NixOS/hydra/issues">Hydra</a></li>
+  <!--
   <li><a href="http://yellowgrass.org/project/hydra.nixos.org">Hydra
   installation at TU Delft (e.g. hardware problems or
   configuration issues)</a></li>
+  -->
 </ul>
 
 <h3>Continuous builds</h3>

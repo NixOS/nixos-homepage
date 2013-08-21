@@ -1,0 +1,8 @@
+[%
+  nixManual = "http://nixos.org/nix/manual"
+  nixManualPDF = "http://nixos.org/releases/nix/latest/manual.pdf"
+  nixpkgsManual = "http://nixos.org/nixpkgs/manual"
+  nixosManual = "http://nixos.org/nixos/manual"
+  latestNixVersion = "1.5.3"
+  latestNixMirror = "http://nixos.org/releases/nix/nix-$latestNixVersion"
+%]
