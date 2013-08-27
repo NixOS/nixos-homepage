@@ -49,6 +49,7 @@ using <tt>xz</tt>; decompress it using <tt>xz -d</tt> before adding
 the image to your VirtualBox VM.</p>
 
 <ul>
+  <li><a href="http://nixos.org/releases/nixos/latest-vdi-i686-linux">VirtualBox disk image, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a></li>
   <li><a href="http://nixos.org/releases/nixos/latest-vdi-x86_64-linux">VirtualBox disk image, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a></li>
 </ul>
 
