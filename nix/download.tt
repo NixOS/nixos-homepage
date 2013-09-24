@@ -12,7 +12,7 @@
 <h2>Latest release</h2>
 
 <p>The latest and recommended version of Nix is
-<strong>[%latestNixVersion%]</strong>, released 17 June 2013.</p>
+<strong>[%latestNixVersion%]</strong>, released 10 September 2013.</p>
 
 <ul>
 
@@ -55,6 +55,7 @@ href="../hydra">continuous build system</a>:</p>
 <p>The following old releases of Nix are also available:</p>
 
 <table class="releases">
+  <tr><td class="reldate">2013-09-10</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.6">Nix 1.6</a></td></tr>
   <tr><td class="reldate">2013-06-17</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.5.3">Nix 1.5.3</a></td></tr>
   <tr><td class="reldate">2013-05-13</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.5.2">Nix 1.5.2</a></td></tr>
   <tr><td class="reldate">2013-02-28</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.5.1">Nix 1.5.1</a></td></tr>
