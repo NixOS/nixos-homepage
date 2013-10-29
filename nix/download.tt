@@ -38,15 +38,11 @@
 <p>You can grab the latest bleeding-edge pre-release from our <a
 href="../hydra">continuous build system</a>:</p>
 
-[% manual = "http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/doc/manual" %]
-
 <ul>
-  <li><a href="http://hydra.nixos.org/view/nix/trunk/latest">The
+  <li><a href="http://hydra.nixos.org/job/nix/trunk/release#tabs-constituents">The
   latest development release of Nix</a> (<a
-  href="http://hydra.nixos.org/view/nix/trunk/latest/tarball/download-by-type/file/source-dist">source
-  tarball</a>, <a
-  href="[% manual %]">manual</a>,
-  and RPMs and Debs for several platforms)</li>
+  href="">source
+  tarball</a>, <a href="http://hydra.nixos.org/job/nix/trunk/release/latest-finished/eval/job/tarball/download-by-type/doc/manual">manual</a>, and RPMs and Debs for several platforms)</li>
 </ul>
 
 

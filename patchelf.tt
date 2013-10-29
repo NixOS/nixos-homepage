@@ -92,9 +92,9 @@ file</a>.</p>
 <p>You can get the latest source code of PatchELF from its <a
 href="https://github.com/NixOS/patchelf">Git
 repository</a>.  You can also download the <a
-href="http://hydra.nixos.org/view/patchelf/trunk/latest">latest
+href="http://hydra.nixos.org/job/patchelf/trunk/release/latest#tabs-constituents">latest
 pre-release</a>, or view a <a
-href="http://hydra.nixos.org/view/patchelf/trunk">list of all
+href="http://hydra.nixos.org/job/patchelf/trunk/release#tabs-constituents">list of all
 prereleases</a> built in our build farm.</p>
 
 [% END %]
