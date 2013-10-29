@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <news>
+
+  <item>
+    <year>2013</year>
+    <month>10</month>
+    <day>10</day>
+    <title>
+      NixOS sources merged into Nixpkgs
+    </title>
+    <description>
+      The NixOS Git tree has been merged into the Nixpkgs tree in
+      order to simplify development.  The sources now live in the <a
+      href="https://github.com/NixOS/nixpkgs/tree/master/nixos"><tt>nixos</tt>
+      subdirectory of the Nixpkgs repository on GitHub</a>.  See the
+      <a href="http://lists.science.uu.nl/pipermail/nix-dev/2013-October/011873.html">announcement</a>
+      for more information.
+    </description>
+  </item>
+
   <item>
     <year>2013</year>
     <month>10</month>
@@ -16,7 +34,6 @@
       for details.
     </description>
   </item>
-
 
   <item>
     <year>2013</year>

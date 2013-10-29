@@ -3,9 +3,9 @@
 
 <h1>Getting NixOS</h1>
 
-<p>NixOS is free software, released under a
-  <a href="https://github.com/NixOS/nixos/blob/master/COPYING">permissive
-    MIT/X11 license</a>.</p>
+<p>NixOS is free software, released under a <a
+  href="https://github.com/NixOS/nixpkgs/blob/master/nixos/COPYING">permissive
+  MIT/X11 license</a>.</p>
 
 <p>We provide several ISO images that you can burn onto a CD or run in
 a virtual machine.  These are <a href="[%root%]hydra">generated

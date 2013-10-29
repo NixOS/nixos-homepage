@@ -51,7 +51,9 @@ href="https://github.com/NixOS/">NixOS organization on GitHub</a>.</p>
 <ul>
   <li><a href="http://github.com/NixOS/nix">Nix</a></li>
   <li><a href="http://github.com/NixOS/nixpkgs">Nixpkgs</a></li>
-  <li><a href="http://github.com/NixOS/nixos">NixOS</a></li>
+  <li>NixOS lives in the <a
+  href="https://github.com/NixOS/nixpkgs/tree/master/nixos">nixos</a> subdirectory of the
+  Nixpkgs repository</li>
   <li><a href="http://github.com/NixOS/hydra">Hydra</a></li>
 </ul>
 
@@ -77,7 +79,8 @@ trackers:</p>
 <ul>
   <li><a href="https://github.com/NixOS/nix/issues">Nix</a></li>
   <li><a href="https://github.com/NixOS/nixpkgs/issues">Nixpkgs</a></li>
-  <li><a href="https://github.com/NixOS/nixos/issues">NixOS</a></li>
+  <li><a href="https://github.com/NixOS/nixpkgs/issues">NixOS</a> (use
+  the <tt>nixos</tt> label)</li>
   <li><a href="https://github.com/NixOS/hydra/issues">Hydra</a></li>
   <!--
   <li><a href="http://yellowgrass.org/project/hydra.nixos.org">Hydra
@@ -93,8 +96,24 @@ stuff:</p>
 
 <ul>
   <li><a href="http://hydra.nixos.org/project/nix">Nix</a></li>
-  <li><a href="http://hydra.nixos.org/project/nixpkgs">Nixpkgs</a></li>
-  <li><a href="http://hydra.nixos.org/project/nixos">NixOS</a></li>
+  <li><a href="http://hydra.nixos.org/project/nixpkgs">Nixpkgs</a>
+    <ul>
+      <li><a
+      href="http://hydra.nixos.org/job/nixpkgs/trunk/unstable#tabs-constituents">Status
+      of the <tt>master</tt> branch</a>, used to update the <a
+      href="http://nixos.org/channels/nixpkgs-unstable/"><tt>nixpkgs-unstable</tt>
+      channel</a></li>
+    </ul>
+  </li>
+  <li><a href="http://hydra.nixos.org/project/nixos">NixOS</a>
+    <ul>
+      <li><a
+      href="http://hydra.nixos.org/job/nixos/trunk-combined/tested#tabs-constituents">Status
+      of the <tt>master</tt> branch</a>, used to update the <a
+      href="http://nixos.org/channels/nixos-unstable/"><tt>nixos-unstable</tt>
+      channel</a></li>
+    </ul>
+  </li>
   <li><a href="http://hydra.nixos.org/project/hydra">Hydra</a></li>
 </ul>
 
