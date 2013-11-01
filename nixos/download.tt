@@ -1,20 +1,21 @@
 [% WRAPPER layout.tt title="NixOS Downloads" id='$Id$' menu='nixos' %]
 [% PROCESS common.tt %]
 
-<h1>Getting NixOS</h1>
+<h1>Getting NixOS [% latestNixOSVersion %]</h1>
+
+<p>The latest stable release series is <strong>[% latestNixOSVersion
+%]</strong>.  Below are links to ISO images and VirtualBox appliances
+containing the <a
+href="http://nixos.org/channels/nixos-[%latestNixOSVersion%]">latest
+release</a> in this series.</p>
+
+<p>NixOS doesn’t have a nice graphical, user-friendly installer yet.
+Therefore installation using the ISO images may not be suitable for
+novice Linux users.</p>
 
 <p>NixOS is free software, released under a <a
   href="https://github.com/NixOS/nixpkgs/blob/master/nixos/COPYING">permissive
   MIT/X11 license</a>.</p>
-
-<p>We provide several ISO images that you can burn onto a CD or run in
-a virtual machine.  These are <a href="[%root%]hydra">generated
-automatically</a> from the NixOS GitHub repository, so they’re
-always up to date.</p>
-
-<p>NixOS doesn’t have a nice graphical, user-friendly installer yet,
-therefore NixOS is currently not intended for novice Linux users.
-</p>
 
 <h2>Graphical live CD</h2>
 
@@ -58,6 +59,13 @@ To obtain a root shell, run <tt>sudo -i</tt> in the KDE terminal
 <h2>Installing NixOS</h2>
 
 <p>For installation instructions, please see the <a href="[%nixosManual%]">manual</a>.</p>
+
+<h2>Unstable releases</h2>
+
+<p>If you are a developer who wants to contribute to NixOS, or if you
+just want the latest and greatest, you can also install the <a
+href="http://nixos.org/channels/nixos-unstable/">most recent unstable
+release</a>.</p>
 
 <h2>Old releases</h2>
 

@@ -5,6 +5,30 @@
   <item>
     <year>2013</year>
     <month>10</month>
+    <day>31</day>
+    <title>
+      NixOS 13.10 released
+    </title>
+    <description>
+      We have released NixOS 13.10, the first stable branch of NixOS.
+      Its goal is to provide a safe branch for production environments
+      that need bug fixes and security updates, but not the
+      potentially destabilising changes that sometimes occur on the
+      unstable branch.  You can get NixOS 13.10 ISOs and VirtualBox
+      appliances from the <a href="nixos/download.html">download
+      page</a>.  See the <a
+      href="http://lists.science.uu.nl/pipermail/nix-dev/2013-October/011941.html">announcement</a>
+      for more information.  For information on how to switch an
+      existing NixOS machine from the unstable channel to 13.10, check
+      out the <a
+      href="http://nixos.org/nixos/manual/#sec-upgrading">manual
+      section on upgrading</a>.
+    </description>
+  </item>
+
+  <item>
+    <year>2013</year>
+    <month>10</month>
     <day>28</day>
     <title>
       Nix 1.6.1 released

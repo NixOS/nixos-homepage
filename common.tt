@@ -5,4 +5,5 @@
   nixosManual = "http://nixos.org/nixos/manual"
   latestNixVersion = "1.6.1"
   latestNixMirror = "http://nixos.org/releases/nix/nix-$latestNixVersion"
+  latestNixOSVersion = "13.10"
 %]
