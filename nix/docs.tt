@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="Nix Documentation" id='$Id$' menu='nix' %]
+[% WRAPPER layout.tt title="Nix Documentation" menu='nix' %]
 [% PROCESS common.tt %]
 
 <h1>Nix documentation</h1>

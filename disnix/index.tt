@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="About Disnix" id='$Id: index.tt 19828 2010-02-05 10:12:27Z sandervanderburg $' menu='disnix' %]
+[% WRAPPER layout.tt title="About Disnix" menu='disnix' %]
 
 <h1>About Disnix</h1>
 

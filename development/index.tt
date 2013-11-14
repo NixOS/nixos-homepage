@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="Contributing" id='$Id$' menu='development' %]
+[% WRAPPER layout.tt title="Contributing" menu='development' %]
 [% PROCESS common.tt %]
 
 <h1>Contributing to the Nix project</h1>
