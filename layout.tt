@@ -122,9 +122,8 @@
           <li><a href="[% root %]about-us.html">About us</a></li>
         </ul>
         <div id="last-modified">
-          [% tokens = id.split %] <p>This page was last updated on [%
-          tokens.3 %] at [% tokens.4 %] by <tt>[% tokens.5 %]</tt>
-          (revision [% tokens.2 %]).</p>
+          <p>This page was last updated on [% modifiedAt %] by
+          [% modifiedBy %] (revision <tt>[% curRev %]</tt>).</p>
         </div>
       </div>
 

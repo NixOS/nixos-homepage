@@ -37,7 +37,12 @@ nixos/docs.html: nixos/papers-in.html
 nix/docs.html: nix/papers-in.html
 
 %.html: %.tt layout.tt common.tt
-	$(tpage) --define curUri=$@ --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` $< > $@ && \
+	$(tpage) \
+	  --define curUri=$@ \
+	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
+	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
+	  --define curRev="`git log -1 --pretty='%h' $<`" \
+	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` $< > $@ && \
 	XML_CATALOG_FILES=$(catalog) xmllint --nonet --noout --valid $@ || \
 	(rm -f $@ && exit 1)
 
