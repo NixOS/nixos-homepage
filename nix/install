@@ -20,7 +20,7 @@ else
     exit 1
 fi
 
-url="http://hydra.nixos.org/job/nix/trunk/binaryTarball.$system/latest/download-by-type/file/binary-dist"
+url="https://hydra.nixos.org/job/nix/trunk/binaryTarball.$system/latest/download-by-type/file/binary-dist"
 
 if ! type -p curl > /dev/null; then
     echo "$0: you do not have \`curl' installed, which I need to download the binary tarball"
