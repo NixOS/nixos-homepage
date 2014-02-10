@@ -11,7 +11,7 @@ machine=$(uname -m)
 
 if [ "$kernel" = Linux -a "$machine" = x86_64 ]; then
     system=x86_64-linux
-elif [ "$kernel" = Linux -a "$machine" = i686 ]; then
+elif [[ "$kernel" = Linux && "$machine" =~ i.86 ]]; then
     system=i686-linux
 elif [ "$kernel" = Darwin -a "$machine" = x86_64 ]; then
     system=x86_64-darwin
