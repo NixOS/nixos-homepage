@@ -43,9 +43,9 @@ nix/docs.html: nix/papers-in.html
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
 	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
 	  --define curRev="`git log -1 --pretty='%h' $<`" \
-	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` $< > $@ && \
-	xmllint --nonet --noout $@ || \
-	(rm -f $@ && exit 1)
+	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` $< > $@.tmp
+	xmllint --nonet --noout $@.tmp
+	mv $@.tmp $@
 
 news.html: all-news.xhtml
 
