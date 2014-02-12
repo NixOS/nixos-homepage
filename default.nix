@@ -10,7 +10,13 @@ stdenv.mkDerivation {
     (cd $sourceRoot && (git ls-files -o | xargs -r rm -v))
   '';
 
-  buildInputs = [ pkgs.perlPackages.TemplateToolkit pkgs.libxslt pkgs.libxml2 pkgs.imagemagick pkgs.git ];
+  buildInputs =
+    [ perl
+      perlPackages.TemplateToolkit
+      perlPackages.TemplatePluginJSONEscape
+      perlPackages.TemplatePluginIOAll
+      libxslt libxml2 imagemagick git
+    ];
 
   makeFlags = "catalog=${pkgs.xhtml1}/xml/dtd/xhtml1/catalog.xml";
 

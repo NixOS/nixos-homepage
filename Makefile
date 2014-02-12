@@ -52,7 +52,7 @@ news.html: all-news.xhtml
 all-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@
 
-index.html: latest-news.xhtml
+index.html: latest-news.xhtml nixpkgs-commits.json
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 5 news.xsl news.xml > $@ || rm -f $@
@@ -64,4 +64,9 @@ nixos/amis.tt: nixos/amis.nix
 	(echo "[% amis => {"; < $< sed 's/.*"\(.*\)"\.ebs.*"\(.*\)".*/  "\1" => \"\2\"/; t; d'; echo "} %]") > $@
 
 nixos/amis.nix:
-	curl https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > nixos/amis.nix
+	curl https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > $@.tmp
+	mv $@.tmp $@
+
+nixpkgs-commits.json:
+	curl https://api.github.com/repos/NixOS/nixpkgs/commits > $@.tmp
+	mv $@.tmp $@

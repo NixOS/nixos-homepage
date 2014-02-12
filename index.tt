@@ -1,4 +1,8 @@
 [% WRAPPER layout.tt title="NixOS Linux" %]
+[% USE JSON.Escape %]
+[% USE IO.All %]
+[% USE HTML %]
+[% USE String %]
 
 
 <div class="jumbotron">
@@ -47,15 +51,42 @@
   <div class="span6">
     <h3>Announcements</h3>
     [% INSERT "latest-news.xhtml" %]
-    <p><a href="news.html"><i class="icon-arrow-right"></i> Older news…</a></p>
+    <p><a href="news.html" class="btn btn-mini">More »</a></p>
   </div>
   <div class="span6">
     <h3>Twitter</h3>
     <p>Bla bla</p>
     <h3>Latest blogs</h3>
     <p>Bla bla</p>
+
     <h3>Latest commits</h3>
-    <p>Bla bla</p>
+    <ul class="nixos-commits">
+      [% FOREACH c IN JSON.Escape.json_decode(IO.All.new('nixpkgs-commits.json').all).first(5) %]
+        <li>
+          <div class="nixos-commit">
+            <img class="nixos-commit-avatar" [% HTML.attributes(src => c.author ? c.author.avatar_url : root _ "images/GitHub-Mark-32px.png", alt => "Avatar") %]/>
+            <div class="nixos-commit-summary">
+              [% IF c.commit.message %]
+                <a [% HTML.attributes(href => c.html_url) %]>[% USE String(HTML.escape(c.commit.message).split('\n').0); String.truncate(60, '…') %]</a>
+              [% ELSE %]
+                <em>No commit message</em>
+              [% END %]
+            </div>
+            <div class="nixos-commit-author-info">
+              <span class="nixos-commit-author">
+                [% IF c.author %]
+                  <a [% HTML.attributes(href => c.author.html_url) %]>[% HTML.escape(c.commit.author.name) %]</a>
+                [% ELSE %]
+                  [% HTML.escape(c.commit.author.name) %]
+                [% END %]
+              </span>
+              <span class="muted">authored [% HTML.escape(c.commit.author.date) %]</span>
+            </div>
+          </div>
+        </li>
+      [% END %]
+    </ul>
+    <p><a href="https://github.com/NixOS/nixpkgs/commits/master" class="btn btn-mini">More »</a></p>
   </div>
 </div>
 
