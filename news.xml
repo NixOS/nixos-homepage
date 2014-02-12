@@ -3,6 +3,40 @@
 <news>
 
   <item>
+    <year>2014</year>
+    <month>2</month>
+    <day>2</day>
+    <title>
+      FOSDEM talks
+    </title>
+    <description>
+      <a href="https://www.domenkozar.com/">Domen Kožar</a> gave <a
+      href="https://fosdem.org/2014/schedule/event/nixos_declarative_configuration_linux_distribution/">a
+      talk at FOSDEM about NixOS</a> (<a
+      href="http://video.fosdem.org/2014/H1309_Van_Rijn/Saturday/NixOS_declarative_configuration_Linux_distribution.webm">video</a>).
+      Also, Ludovic Courtès gave <a
+      href="https://fosdem.org/2014/schedule/event/gnuguix/">a talk on
+      Guix</a>, the Nix- and Guile-based package manager.
+    </description>
+  </item>
+
+  <item>
+    <year>2014</year>
+    <month>1</month>
+    <day>21</day>
+    <title>
+      Stdenv updates branch merged into master
+    </title>
+    <description>
+      The stdenv-updates branch <a
+      href="https://github.com/NixOS/nixpkgs/commit/668310a2b578d57a59dad7481db651ab3a258256">has
+      been merged</a> into the master branch of Nixpkgs.  The main
+      change are that brings is that Nixpkgs/NixOS are now based on
+      GCC 4.8 and Glibc 2.18, in addition to many smaller updates.
+    </description>
+  </item>
+
+  <item>
     <year>2013</year>
     <month>10</month>
     <day>31</day>
