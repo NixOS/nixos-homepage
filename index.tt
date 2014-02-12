@@ -54,8 +54,6 @@
     <p><a href="news.html" class="btn btn-mini">More »</a></p>
   </div>
   <div class="span6">
-    <h3>Twitter</h3>
-    <p>Bla bla</p>
 
     <h3>Blog posts</h3>
     <ul class="nixos-blogs">
@@ -106,7 +104,15 @@
       [% END; END %]
     </ul>
     <p><a href="https://github.com/NixOS/nixpkgs/commits/master" class="btn btn-mini">More »</a></p>
+
+    <h3>Twitter</h3>
+    <p>
+      <a class="twitter-timeline" data-chrome="noheader nofooter transparent" href="https://twitter.com/MLS/teams" data-widget-id="243129802880589824">Tweets from @MLS/teams</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </p>
+
   </div>
+
 </div>
 
 

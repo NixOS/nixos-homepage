@@ -55,7 +55,7 @@ all-news.xhtml: news.xml news.xsl
 index.html: latest-news.xhtml nixpkgs-commits.json blogs.json
 
 latest-news.xhtml: news.xml news.xsl
-	xsltproc --param maxItem 5 news.xsl news.xml > $@ || rm -f $@
+	xsltproc --param maxItem 7 news.xsl news.xml > $@ || rm -f $@
 
 check:
 	checklink $(HTML)
