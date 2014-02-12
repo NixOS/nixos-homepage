@@ -47,6 +47,7 @@
   <div class="span6">
     <h3>Announcements</h3>
     [% INSERT "latest-news.xhtml" %]
+    <p><a href="news.html"><i class="icon-arrow-right"></i> Older news…</a></p>
   </div>
   <div class="span6">
     <h3>Twitter</h3>
@@ -88,13 +89,6 @@ number of related open source subprojects:</p>
   distributed service deployment system.</li>
 
 </ul>
-
-<h2>Latest News</h2>
-
-[% INSERT "latest-news.xhtml" %]
-
-<p><img src="images/arrow-right.gif" alt="Arrow"
-/> <a href="news.html">Older news…</a></p>
 -->
 
 [% END %]
