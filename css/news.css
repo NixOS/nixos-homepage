@@ -10,20 +10,22 @@ tr.news-header {
   font-size: 100%;
   padding: 0 0 0 0;
   margin: 0 0 0 0;
-  border-bottom: dotted 1px;
+  border-bottom: solid #c0c0c0 1px;
 }
 
 .news-date {
+  text-align: right;
   vertical-align: top;
   font-weight: normal;
   font-style: italic;
   width: 1%;
-  color: #005aa0;
+  color: #808080;
 }
 
 .news-short {
-  font-weight: bold;
-  color: #005aa0;
+  font-weight: normal;
+  font-size: 110%;
+  color: #404040;
   padding-left: 0;
 }
 

@@ -1,6 +1,6 @@
 [% WRAPPER layout.tt title="PatchELF" menu='development' %]
 
-<h1>PatchELF</h1>
+<div class="page-header"><h1>PatchELF</h1></div>
 
 <p>PatchELF is a small utility to modify the dynamic linker and <a
 href="http://en.wikipedia.org/wiki/Rpath_%28linking%29">RPATH</a> of

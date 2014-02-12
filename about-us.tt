@@ -1,10 +1,11 @@
 [% WRAPPER layout.tt title="About the Nix Project" %]
 
-<h1>About the Nix Project</h1>
+<div class="page-header">
+  <h1>About the NixOS Project</h1>
+</div>
 
-<p>The Nix project is developed by a group of researchers and hackers
-across the Internet.  For question about the project or this website,
-please contact the <a
+<p>NixOS is developed by a group of hackers across the Internet.  For
+question about the project or this website, please contact the <a
 href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev</tt>
 mailing list</a> or the primary maintainer, <a
 href="http://nixos.org/~eelco/">Eelco Dolstra</a>.</p>
@@ -30,9 +31,19 @@ funded by Jacquard and supported by <a
 href="http://www.medical.philips.com/">Philips Healthcare</a>, and at
 <a href="http://www.logicblox.com/">LogicBlox</a>.</p>
 
-<a href="http://www.logicblox.com/"><img src="logo/lb_logo_small_no_bg.png" alt="LogicBlox logo" /></a>
-<a href="http://www.tudelft.nl/"><img src="logo/tudelft.gif" alt="TU Delft logo" /></a>
-<a href="http://www.uu.nl/"><img src="logo/uu.gif" alt="UU logo" /></a>
-<a href="http://www.3tu.nl/"><img src="logo/3tu.jpg" alt="3TU logo" /></a>
+<div class="row-fluid">
+  <div class="span3 center">
+    <a href="http://www.logicblox.com/"><img src="logo/lb_logo_small_no_bg.png" alt="LogicBlox logo" /></a>
+  </div>
+  <div class="span3 center">
+    <a href="http://www.tudelft.nl/"><img src="logo/tudelft.gif" alt="TU Delft logo" /></a>
+  </div>
+  <div class="span3 center">
+    <a href="http://www.uu.nl/"><img src="logo/uu.gif" alt="UU logo" /></a>
+  </div>
+  <div class="span3 center">
+    <a href="http://www.3tu.nl/"><img src="logo/3tu.jpg" alt="3TU logo" /></a>
+  </div>
+</div>
 
 [% END %]

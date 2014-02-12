@@ -11,7 +11,8 @@ HTML = index.html news.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
   development/index.html \
   docs/papers.html \
-  about-us.html
+  about-us.html \
+  nixops/index.html
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*)))
 
@@ -36,14 +37,14 @@ nixos/docs.html: nixos/papers-in.html
 
 nix/docs.html: nix/papers-in.html
 
-%.html: %.tt layout.tt common.tt
+%.html: %.tt layout.tt common.tt nixos/amis.tt
 	$(tpage) \
 	  --define curUri=$@ \
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
 	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
 	  --define curRev="`git log -1 --pretty='%h' $<`" \
 	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` $< > $@ && \
-	XML_CATALOG_FILES=$(catalog) xmllint --nonet --noout --valid $@ || \
+	xmllint --nonet --noout $@ || \
 	(rm -f $@ && exit 1)
 
 news.html: all-news.xhtml
@@ -58,3 +59,9 @@ latest-news.xhtml: news.xml news.xsl
 
 check:
 	checklink $(HTML)
+
+nixos/amis.tt: nixos/amis.nix
+	(echo "[% amis => {"; < $< sed 's/.*"\(.*\)"\.ebs.*"\(.*\)".*/  "\1" => \"\2\"/; t; d'; echo "} %]") > $@
+
+nixos/amis.nix:
+	curl https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > nixos/amis.nix

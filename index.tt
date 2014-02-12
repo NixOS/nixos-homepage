@@ -1,12 +1,70 @@
-[% WRAPPER layout.tt title="Nix/NixOS Home Page" %]
+[% WRAPPER layout.tt title="NixOS Linux" %]
 
+
+<div class="jumbotron">
+  <img class="right-logo" src="[%root%]logo/nixos-logo-only-hires.png" alt="NixOS Logo"/>
+  <h1>NixOS: The Purely Functional Linux Distribution</h1>
+  <p class="lead">NixOS is a Linux distribution with a unique approach
+  to package and configuration management.  Built on top of the <a
+  href="[%root%]nix">Nix package manager</a>, it is completely
+  declarative, makes upgrading systems a safe experience, and has many
+  other advantages.</p>
+  <a class="btn btn-large btn-success" href="nixos/download.html">Get NixOS</a>
+</div>
+
+<hr />
+
+<div class="row-fluid">
+  <div class="span4">
+    <h2>Declarative</h2>
+    <p>NixOS has a completely <strong>declarative</strong> approach to
+    configuration management: you write a specification of the desired
+    configuration of your system in NixOS’s modular language, and
+    NixOS takes care of making it happen.</p>
+    <p><a class="btn" href="#">Read more »</a></p>
+  </div>
+  <div class="span4">
+    <h2>Reliable</h2>
+    <p>NixOS has <strong>atomic upgrades and rollbacks</strong>.  It’s
+    always safe to try an upgrade or configuration change: if things
+    go wrong, you can always roll back to the previous
+    configuration.</p>
+    <p><a class="btn" href="#">Read more »</a></p>
+  </div>
+  <div class="span4">
+    <h2>DevOps-friendly</h2>
+    <p>Declarative specs and safe upgrades make NixOS a great system
+    for DevOps use.  <strong>NixOps</strong>, the NixOS cloud
+    deployment tool, allows you to provision and manage networks of
+    NixOS machines in environments like Amazon EC2 and VirtualBox.</p>
+    <p><a class="btn" href="https://github.com/NixOS/nixops">Read more »</a></p>
+  </div>
+</div>
+
+<hr />
+
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Announcements</h3>
+    [% INSERT "latest-news.xhtml" %]
+  </div>
+  <div class="span6">
+    <h3>Twitter</h3>
+    <p>Bla bla</p>
+    <h3>Latest blogs</h3>
+    <p>Bla bla</p>
+  </div>
+</div>
+
+
+<!--
 <h1>The Nix project</h1>
 
 <p>Welcome to the homepage of the Nix project, which consists of a
 number of related open source subprojects:</p>
 
 <ul>
-  
+
   <li><a href="nix/"><strong>Nix</strong></a> is a <em>purely
   functional</em> package manager.  This means that it can ensure that
   an upgrade to one package cannot break others, that you can always
@@ -16,7 +74,7 @@ number of related open source subprojects:</p>
   <li><a href="nixpkgs/"><strong>Nixpkgs</strong></a> is a large
   collection of packages that can be installed with the Nix package
   manager.</li>
-    
+
   <li><a href="nixos/"><strong>NixOS</strong></a> is a Nix-based Linux
   distribution.  Thanks to Nix, it supports atomic upgrades, rollbacks
   and multi-user package management, and it has a declarative approach
@@ -25,7 +83,7 @@ number of related open source subprojects:</p>
 
   <li><a href="hydra/"><strong>Hydra</strong></a> is a Nix-based
   continuous build system.</li>
-  
+
   <li><a href="disnix/"><strong>Disnix</strong></a> is a Nix-based
   distributed service deployment system.</li>
 
@@ -37,5 +95,6 @@ number of related open source subprojects:</p>
 
 <p><img src="images/arrow-right.gif" alt="Arrow"
 /> <a href="news.html">Older news…</a></p>
+-->
 
 [% END %]
