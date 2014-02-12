@@ -7,9 +7,9 @@
   <p class="lead">NixOS is a Linux distribution with a unique approach
   to package and configuration management.  Built on top of the <a
   href="[%root%]nix">Nix package manager</a>, it is completely
-  declarative, makes upgrading systems a safe experience, and has many
-  other advantages.</p>
-  <a class="btn btn-large btn-success" href="nixos/download.html">Get NixOS</a>
+  declarative, makes upgrading systems reliable, and has many other
+  advantages.</p>
+  <a class="btn btn-large btn-success" href="nixos/download.html"><i class="fa fa-cloud-download"></i> Get NixOS</a>
 </div>
 
 <hr />
@@ -53,6 +53,8 @@
     <h3>Twitter</h3>
     <p>Bla bla</p>
     <h3>Latest blogs</h3>
+    <p>Bla bla</p>
+    <h3>Latest commits</h3>
     <p>Bla bla</p>
   </div>
 </div>

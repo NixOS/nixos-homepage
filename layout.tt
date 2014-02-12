@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
     <link rel="stylesheet" href="[% root %]css/news.css" type="text/css" />
 
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+
     <style type="text/css">
       div.fnord {
         height: 500px;
@@ -52,6 +54,10 @@
               <li><a href="#">Help</a></li>
               <li><a href="#">Contribute</a></li>
               <li><a href="#">Wiki</a></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li><a href="https://github.com/NixOS/nixpkgs/"><i class="fa fa-github"></i></a></li>
+              <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
             </ul>
           </div>
         </div>
