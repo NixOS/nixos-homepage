@@ -15,7 +15,8 @@ stdenv.mkDerivation {
       perlPackages.TemplateToolkit
       perlPackages.TemplatePluginJSONEscape
       perlPackages.TemplatePluginIOAll
-      libxslt libxml2 imagemagick git
+      perlPackages.XMLSimple
+      libxslt libxml2 imagemagick git curl
     ];
 
   makeFlags = "catalog=${pkgs.xhtml1}/xml/dtd/xhtml1/catalog.xml";

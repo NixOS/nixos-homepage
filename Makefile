@@ -52,7 +52,7 @@ news.html: all-news.xhtml
 all-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@
 
-index.html: latest-news.xhtml nixpkgs-commits.json
+index.html: latest-news.xhtml nixpkgs-commits.json blogs.json
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 5 news.xsl news.xml > $@ || rm -f $@
@@ -69,4 +69,12 @@ nixos/amis.nix:
 
 nixpkgs-commits.json:
 	curl https://api.github.com/repos/NixOS/nixpkgs/commits > $@.tmp
+	mv $@.tmp $@
+
+blogs.xml:
+	curl http://planet.nixos.org/rss20.xml > $@.tmp
+	mv $@.tmp $@
+
+blogs.json: blogs.xml
+	perl -MJSON -MXML::Simple -e 'print encode_json(XMLin("blogs.xml"));' < $< > $@.tmp
 	mv $@.tmp $@

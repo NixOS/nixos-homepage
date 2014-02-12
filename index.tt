@@ -56,12 +56,31 @@
   <div class="span6">
     <h3>Twitter</h3>
     <p>Bla bla</p>
-    <h3>Latest blogs</h3>
-    <p>Bla bla</p>
 
-    <h3>Latest commits</h3>
+    <h3>Blog posts</h3>
+    <ul class="nixos-blogs">
+      [% FOREACH b IN JSON.Escape.json_decode(IO.All.new('blogs.json').all).channel.item.first(5); IF b; %]
+        <li>
+          <div class="nixos-blog">
+            [% author = b.title.split(':').0.trim;
+               title = b.title.remove('^[^:]*:').trim
+            %]
+            <div class="nixos-blog-title">
+              <a [% HTML.attributes(href => b.link) %]>[% HTML.escape(title.ucfirst) %]</a>
+            </div>
+            <div class="nixos-blog-author-info">
+              <span class="nixos-blog-author">[% HTML.escape(author) %]</span>
+              <span class="muted"> wrote on [% HTML.escape(b.pubDate) %]</span>
+            </div>
+          </div>
+        </li>
+      [% END; END %]
+      <p><a href="http://planet.nixos.org/" class="btn btn-mini">More »</a></p>
+    </ul>
+
+    <h3>Commits</h3>
     <ul class="nixos-commits">
-      [% FOREACH c IN JSON.Escape.json_decode(IO.All.new('nixpkgs-commits.json').all).first(5) %]
+      [% FOREACH c IN JSON.Escape.json_decode(IO.All.new('nixpkgs-commits.json').all).first(5); IF c; %]
         <li>
           <div class="nixos-commit">
             <img class="nixos-commit-avatar" [% HTML.attributes(src => c.author ? c.author.avatar_url : root _ "images/GitHub-Mark-32px.png", alt => "Avatar") %]/>
@@ -84,7 +103,7 @@
             </div>
           </div>
         </li>
-      [% END %]
+      [% END; END %]
     </ul>
     <p><a href="https://github.com/NixOS/nixpkgs/commits/master" class="btn btn-mini">More »</a></p>
   </div>

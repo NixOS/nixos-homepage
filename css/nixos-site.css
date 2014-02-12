@@ -82,6 +82,9 @@ table.screenshots img, img.screenshot {
     box-shadow: 0.4em 0.4em 0.5em #a0a0a0;
 }
 
+
+/* List of recent commits. */
+
 ul.nixos-commits {
     list-style-type: none;
     margin-left: 0;
@@ -118,5 +121,39 @@ div.nixos-commit-summary {
 }
 
 div.nixos-commit-author-info {
+    font-size: 90%;
+}
+
+
+/* List of recent blogs. */
+
+ul.nixos-blogs {
+    list-style-type: none;
+    margin-left: 0;
+}
+
+ul.nixos-blogs a {
+    color: inherit;
+}
+
+ul.nixos-blogs > li {
+    border-top: 1px solid rgb(226, 234, 238);
+}
+
+ul.nixos-blogs > li:nth-child(odd) {
+    background-color: rgb(247, 251, 252);
+}
+
+div.nixos-blog {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    min-height: 36px;
+}
+
+div.nixos-blog-title {
+    font-weight: bold;
+}
+
+div.nixos-blog-author-info {
     font-size: 90%;
 }
