@@ -37,7 +37,7 @@ nixos/docs.html: nixos/papers-in.html
 
 nix/docs.html: nix/papers-in.html
 
-%.html: %.tt layout.tt common.tt nixos/amis.tt
+%.html: %.tt layout.tt common.tt
 	$(tpage) \
 	  --define curUri=$@ \
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
@@ -53,6 +53,8 @@ all-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@
 
 index.html: latest-news.xhtml nixpkgs-commits.json blogs.json
+
+nixos/download.html: nixos/amis.tt
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 7 news.xsl news.xml > $@ || rm -f $@
@@ -78,3 +80,7 @@ blogs.xml:
 blogs.json: blogs.xml
 	perl -MJSON -MXML::Simple -e 'print encode_json(XMLin("blogs.xml"));' < $< > $@.tmp
 	mv $@.tmp $@
+
+ifeq ($(UPDATE), 1)
+.PHONY: nixos/amis.nix nixpkgs-commits.json blogs.xml
+endif
