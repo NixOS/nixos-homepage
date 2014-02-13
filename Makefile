@@ -2,9 +2,9 @@ tpage = tpage
 catalog = $(HOME)/.nix-profile/xml/dtd/xhtml1/catalog.xml
 
 HTML = index.html news.html \
-  nix/index.html nix/download.html nix/docs.html \
+  nix/index.html nix/about.html nix/download.html nix/docs.html \
   nixpkgs/index.html nixpkgs/download.html nixpkgs/docs.html \
-  nixos/index.html nixos/download.html nixos/docs.html \
+  nixos/about.html nixos/download.html nixos/docs.html \
   nixos/screenshots.html nixos/support.html \
   patchelf.html hydra/index.html \
   disnix/index.html disnix/download.html disnix/docs.html \

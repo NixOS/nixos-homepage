@@ -1,0 +1,7 @@
+[% WRAPPER layout.tt title="NixOps" %]
+
+<div class="page-header">
+  <h1>NixOps: The NixOS Cloud Deployment Tool</h1>
+</div>
+
+[% END %]

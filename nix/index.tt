@@ -1,222 +1,67 @@
-[% WRAPPER layout.tt title="About Nix" menu='nix' %]
+[% WRAPPER layout.tt title="Nix: The Purely Functional Package Manager" menu='nix' %]
+[% USE HTML %]
 
-<h1>About Nix</h1>
+[% BLOCK makePopover %]
+  <div class="btn btn-large btn-success nixos-popover" data-toggle="popover" data-html="true" [% HTML.attributes('data-content' => content, 'data-placement' => 'right') %]>
+    [% title %]
+  </div>
+[% END %]
 
-<p>Nix is a <em>purely functional package manager</em>.  This means
-that it treats packages like values in purely functional programming
-languages such as Haskell — they are built by functions that don’t
-have side-effects, and they never change after they have been built.
-Nix stores packages in the <em>Nix store</em>, usually the directory
-<tt>/nix/store</tt>, where each package has its own unique
-subdirectory such as
+<div class="jumbotron">
+  <img class="right-logo" src="[%root%]logo/nixos-logo-only-hires.png" alt="NixOS Logo"/>
+  <h1>Nix: The Purely Functional Package Manager</h1>
 
-</p>
+  <p class="lead">Nix is awesome. Lorem ipsum dolor sit amet,
+  consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+  labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+  exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+  esse cillum dolore eu fugiat nulla pariatur.</p>
 
-<pre class="code">
-/nix/store/r8vvq9kq18pz08v249h8my6r9vs7s0n3-firefox-2.0.0.1/
-</pre>
+  [% WRAPPER makePopover title="<i class='fa fa-cloud-download'></i> Get Nix" %]
 
-<p>
+    <p>On Linux and Mac OS X, the <strong>easiest way to
+    install Nix</strong> is to run the following shell command:</p>
 
-where <tt>r8vvq9kq…</tt> is a unique identifier for the package that
-captures all its dependencies (it’s a cryptographic hash of the
-package’s build dependency graph).  This enables many powerful
-features.</p>
+    <pre><span class="muted">$</span> bash <(curl https://nixos.org/nix/install)</pre>
 
+    <p>This script will download a distribution-independent binary
+    tarball containing Nix and its dependencies, and unpack it in
+    <tt>/nix</tt>.</p>
 
-<h3>Multiple versions</h3>
+    <p>Other installation options</a>, including <strong>packages for
+    Ubuntu, Debian and Fedora Linux</strong>, are <a
+    href="[%root%]nix/download.html">also available</a>.</p>
 
-<p>You can have multiple versions or variants of a package installed
-at the same time.  This is especially important when different
-applications have dependencies on different versions of the same
-package — it prevents the “DLL hell”.  Because of the hashing scheme,
-different versions of a package end up in different paths in the Nix
-store, so they don’t interfere with each other.</p>
+  [% END %]
 
-<p>An important consequence is that operations like upgrading or
-uninstalling an application cannot break other applications, since
-these operations never “destructively” update or delete files that are
-used by other packages.</p>
+</div>
 
+<hr />
 
-<h3>Complete dependencies</h3>
-
-<p>Nix helps you make sure that package dependency specifications are
-complete.  In general, when you’re making a package for a package
-management system like RPM, you have to specify for each package what
-its dependencies are, but there are no guarantees that this
-specification is complete.  If you forget a dependency, then the
-component will build and work correctly on <em>your</em> machine if
-you have the dependency installed, but not on the end user's machine
-if it's not there.</p>
-
-<p>Since Nix on the other hand doesn’t install packages in “global”
-locations like <tt>/usr/bin</tt> but in package-specific directories,
-the risk of incomplete dependencies is greatly reduced.  This is
-because tools such as compilers don’t search in per-packages
-directories such as
-<tt>/nix/store/5lbfaxb722zp…-openssl-0.9.8d/include</tt>, so if a
-package builds correctly on your system, this is because you specified
-the dependency explicitly.</p>
-
-<p>Runtime dependencies are found by scanning binaries for the hash
-parts of Nix store paths (such as <tt>r8vvq9kq…</tt>).  This sounds
-risky, but it works extremely well.</p>
-
-
-<h3>Multi-user support</h3>
-
-<p>Starting at version 0.11, Nix has multi-user support.  This means
-that non-privileged users can securely install software.  Each user
-can have a different <em>profile</em>, a set of packages in the Nix
-store that appear in the user’s <tt>PATH</tt>.  If a user installs a
-package that another user has already installed previously, the
-package won’t be built or downloaded a second time.  At the same time,
-it is not possible for one user to inject a Trojan horse into a
-package that might be used by another user.</p>
-
-<p>More details can be found in Section 3 of our <a
-href="../docs/papers.html#securesharing">ASE 2005 paper</a>.</p>
-
-
-<h3>Atomic upgrades and rollbacks</h3>
-
-<p>Since package management operations never overwrite packages in the
-Nix store but just add new versions in different paths, they are
-<em>atomic</em>.  So during a package upgrade, there is no time window
-in which the package has some files from the old version and some
-files from the new version — which would be bad because a program
-might well crash if it’s started during that period.</p>
-
-<p>And since package aren’t overwritten, the old versions are still
-there after an upgrade.  This means that you can <em>roll back</em> to
-the old version:</p>
-
-<pre class="code">
-$ nix-env --upgrade <em>some-packages</em>
-$ nix-env --rollback
-</pre>
-
-
-<h3>Garbage collection</h3>
-
-<p>When you uninstall a package like this…</p>
-
-<pre class="code">
-$ nix-env --uninstall firefox
-</pre>
-
-<p>the package isn’t deleted from the system right away (after all,
-you might want to do a rollback, or it might be in the profiles of
-other users).  Instead, unused packages can be deleted safely by
-running the <em>garbage collector</em>:</p>
-
-<pre class="code">
-$ nix-collect-garbage
-</pre>
-
-<p>This deletes all packages that aren’t in use by any user profile or
-by a currently running program.</p>
-
-
-<h3>Functional package language</h3>
-
-<p>Packages are built from <em>Nix expressions</em>, which is a simple
-functional language.  A Nix expression describes everything that goes
-into a package build action (a “derivation”): other packages, sources,
-the build script, environment variables for the build script, etc.
-Nix tries very hard to ensure that Nix expressions are
-<em>deterministic</em>: building a Nix expression twice should yield
-the same result.</p>
-
-<p>Because it’s a functional language, it’s easy to support building
-variants of a package: turn the Nix expression into a function and
-call it any number of times with the appropriate arguments.  Due to
-the hashing scheme, variants don’t conflict with each other in the Nix
-store.</p>
-
-
-<h3>Transparent source/binary deployment</h3>
-
-<p>Nix expressions generally describe how to build a package from
-source, so an installation action like</p>
-
-<pre class="code">
-$ nix-env --install firefox
-</pre>
-
-<p><em>could</em> cause quite a bit of build activity, as not only
-Firefox but also all its dependencies (all the way up to the C library
-and the compiler) would have to built, at least if they are not
-already in the Nix store.  This is a <em>source deployment model</em>.
-For most users, building from source is not very pleasant as it takes
-far too long.  However, Nix can automatically skip building from
-source and download a pre-built binary instead if it knows about it.
-<em>Nix channels</em> provide Nix expressions along with pre-built
-binaries.</p>
-
-<!--
-<p>source deployment model (like <a
-href="http://www.gentoo.org/">Gentoo</a>) and a binary model (like
-RPM)</p>
--->
-
-
-<h3>Binary patching</h3>
-
-<p>In addition to downloading binaries automatically if they’re
-available, Nix can download binary deltas that patch an existing
-package in the Nix store into a new version.  This speeds up
-upgrades.</p>
-
-
-<h3>Nix Packages collection</h3>
-
-<p>We provide a large set of Nix expressions containing hundreds of
-existing Unix packages, the <a href="../nixpkgs"><em>Nix Packages
-collection</em> (Nixpkgs)</a>.</p>
-
-
-<h3>Service deployment</h3>
-
-<p>Nix can be used not only for rolling out packages, but also
-complete <em>configurations</em> of services.  This is done by
-treating all the static bits of a service (such as software packages,
-configuration files, control scripts, static web pages, etc.) as
-“packages” that can be built by Nix expressions.  As a result, all the
-features above apply to services as well: for instance, you can roll
-back a web server configuration if a configuration change turns out to
-be undesirable, you can easily have multiple instances of a service
-(e.g., a test and production server), and because the whole service is
-built in a purely functional way from a Nix expression, it is
-repeatable so you can easily reproduce the service on another machine.
-You can read more about this in our <a
-href="../docs/papers.html#servicecm">SCM-12 paper</a>.  NixOS (see
-below) is essentially an extension of this idea.</p>
-
-
-<h3>Portability</h3>
-
-<p>Nix should run on most Unix systems, including Linux, FreeBSD and
-Mac OS X.<!--  It is also supported on Windows using Cygwin.--></p>
-
-
-<h3>NixOS</h3>
-
-<p>NixOS is a Linux distribution based on Nix.  It uses Nix not just
-for package management but also to manage the system configuration
-(e.g., to build configuration files in <tt>/etc</tt>).  This means,
-among other things, that it’s possible to easily roll back the entire
-configuration of the system to an earlier state.  Also, users can
-install software without root privileges.  <a href="../nixos">Read
-more…</a></p>
-
-
-<h3>License</h3>
-
-<p>Nix is released under the terms of the <a
-href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU
-LGPLv2.1 or (at your option) any later version</a>.</p>
-
+<div class="row-fluid">
+  <div class="span4">
+    <h2>Reliable</h2>
+    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+    cupidatat non proident, sunt in culpa qui officia deserunt mollit
+    anim id est laborum.</p>
+  </div>
+  <div class="span4">
+    <h2>Great for developers</h2>
+    <p>Nix makes it trivial to set up and share build environments for
+    your projects, regardless of what programming languages and tools
+    you’re using.  For instance, running the command <code>nix-shell
+    '&lt;nixpkgs>' -A firefox</code> gives you a Bash shell in which
+    all of Firefox’s build-time dependencies are present and all
+    necessary environment variables are set.</p>
+  </div>
+  <div class="span4">
+    <h2>Multi-user</h2>
+    <p>Nix supports multi-user package management: multiple users can
+    share a common Nix store securely, and don’t need to have root
+    privileges to install software.</p>
+  </div>
+</div>
 
 [% END %]

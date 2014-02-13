@@ -49,15 +49,40 @@
             NixOS
           </a>
           <div class="nav-collapse collapse">
-            <ul class="nav pull-left">
-              <li><a href="[%root%]nixos/download.html">Download</a></li>
-              <li><a href="#">Help</a></li>
-              <li><a href="#">Contribute</a></li>
-              <li><a href="#">Wiki</a></li>
-            </ul>
-            <ul class="nav pull-right">
-              <li><a href="https://github.com/NixOS/nixpkgs/"><i class="fa fa-github"></i></a></li>
-              <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
+            [% IF menu == 'nixos' %]
+              <ul class="nav pull-left">
+                <li><a href="[%root%]nixos/download.html">Download</a></li>
+                <li><a href="[%root%]nixos/docs.html">Help</a></li>
+                <li><a href="[%root%]nixos/contribute.html">Contribute</a></li>
+                <li><a href="https://nixos.org/wiki/Main_Page">Wiki</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/nixpkgs/"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
+            [% ELSIF menu == 'nix' %]
+              <ul class="nav pull-left">
+                <li><a href="[%root%]nix/download.html">Download</a></li>
+                <li><a href="[%root%]nix/docs.html">Help</a></li>
+                <li><a href="https://nixos.org/wiki/Main_Page">Wiki</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/nix/"><i class="fa fa-github"></i></a></li>
+            [% ELSE %]
+              <ul class="nav pull-right">
+            [% END %]
+              <li class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">Projects<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="[%root%]">NixOS</a></li>
+                  <li><a href="[%root%]/nix">Nix</a></li>
+                  <li><a href="[%root%]/nixpkgs">Nixpkgs</a></li>
+                  <li><a href="[%root%]/nixops">NixOps</a></li>
+                  <li class="divider"></li>
+                  <li><a href="[%root%]/hydra">Hydra</a></li>
+                  <li><a href="[%root%]/patchelf.html">PatchELF</a></li>
+                  <li><a href="[%root%]/disnix">Disnix</a></li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
@@ -79,6 +104,12 @@
       </div>
 
     </div>
+
+    <script>
+      $(document).ready(function() {
+        $(".nixos-popover").popover({});
+      });
+    </script>
 
   </body>
 

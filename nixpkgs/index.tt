@@ -1,10 +1,10 @@
 [% WRAPPER layout.tt title="Nixpkgs" menu='nixpkgs' %]
 
-<h1>The Nix Packages collection</h1>
+<div class="page-header"><h1>The Nix Packages collection</h1></div>
 
-<p>The <em>Nix Packages collection</em> (Nixpkgs) is a set of about
-2,500 packages for the Nix package manager, released under a
-<a href="https://github.com/NixOS/nixpkgs/blob/master/COPYING">permissive
+<p>The <em>Nix Packages collection</em> (Nixpkgs) is a set of nearly
+6,500 packages for the Nix package manager, released under a <a
+href="https://github.com/NixOS/nixpkgs/blob/master/COPYING">permissive
 MIT/X11 license</a>.  It supports a number of platforms (though not
 all packages work on all platforms):</p>
 
@@ -13,7 +13,9 @@ all packages work on all platforms):</p>
   <li>Mac OS X (<tt>i686-darwin</tt> and <tt>x86_64-darwin</tt>)</li>
   <li>FreeBSD (<tt>i686-freebsd</tt> and <tt>x86_64-freebsd</tt>)</li>
   <li>OpenBSD (<tt>i686-openbsd</tt>)</li>
+  <!--
   <li>Windows / Cygwin (<tt>i686-cygwin</tt>)</li>
+  -->
 </ul>
 
 <p>On GNU/Linux, the packages in Nixpkgs are ‘pure’, meaning that they

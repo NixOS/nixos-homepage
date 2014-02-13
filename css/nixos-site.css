@@ -157,3 +157,5 @@ div.nixos-blog-title {
 div.nixos-blog-author-info {
     font-size: 90%;
 }
+
+.popover { max-width: 30em; }

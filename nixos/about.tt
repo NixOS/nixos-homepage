@@ -1,6 +1,8 @@
 [% WRAPPER layout.tt title="About NixOS" menu='nixos' %]
 
-<h1>About NixOS</h1>
+<div class="page-header">
+  <h1>About NixOS</h1>
+</div>
 
 
 <p><a href="screenshots/nixos-kde42-1.png"><img class="inline screenshot"
@@ -199,7 +201,7 @@ configuration of the SSH daemon is also built from a Nix expression
 and stored under a path like</p>
 
 <pre class="code">
-/nix/store/s2sjbl85xnrc18rl4fhn56irkxqxyk4p-sshd_config  
+/nix/store/s2sjbl85xnrc18rl4fhn56irkxqxyk4p-sshd_config
 </pre>
 
 <p>By building entire system configurations from a Nix expression,
@@ -219,11 +221,11 @@ symlinks to generated files in <tt>/nix/store</tt>.</p>
 
 <h2>Status</h2>
 
-<p>Though NixOS is a research project, it is <a
-href="download.html">available for download</a> and works quite well.
-However, you should expect certain things to be missing (e.g.,
-packages or support for specific pieces of hardware), so you may need
-to add those yourself.  Here is an overview of what we have:</p>
+<p>NixOS is <a href="download.html">available for download</a>.  Since
+NixOS is a relatively young Linux distribution, you may find that
+certain things that you need are missing (e.g., certain packages or
+support for specific hardware), so you may need to add those yourself.
+Here are some highlights of what NixOS currently provides:</p>
 
 <ul>
 
@@ -237,9 +239,9 @@ to add those yourself.  Here is an overview of what we have:</p>
   (e.g., Apache HTTPD, PostgreSQL, and Tomcat) that can be configured
   declaratively through <tt>configuration.nix</tt>.</li>
 
-  <li>NixOS build on the <a href="../nixpkgs">Nix Packages
-  collection</a> (Nixpkgs), which provides Nix expressions for around
-  2500 packages that you can install under NixOS.</li>
+  <li>NixOS build on the <a href="[%root%]../nixpkgs">Nix Packages
+  collection</a> (Nixpkgs), which provides Nix expressions for nearly
+  6500 packages that you can install under NixOS.</li>
 
   <li>NixOS has automatic hardware detection: the boot process loads
   kernel modules for all known devices automatically.  It also has
@@ -251,9 +253,11 @@ to add those yourself.  Here is an overview of what we have:</p>
 
 </ul>
 
-<p>NixOS is released under a <a
-href="https://github.com/NixOS/nixpkgs/blob/master/nixos/COPYING">permissive
-MIT/X11 license</a>.</p>
 
+<h2>License</h2>
+
+<p>NixOS is free software, released under a <a
+  href="https://github.com/NixOS/nixpkgs/blob/master/nixos/COPYING">permissive
+  MIT/X11 license</a>.</p>
 
 [% END %]

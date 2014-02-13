@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="NixOS Linux" %]
+[% WRAPPER layout.tt title="NixOS Linux" menu='nixos' %]
 [% USE JSON.Escape %]
 [% USE IO.All %]
 [% USE HTML %]
@@ -8,12 +8,16 @@
 <div class="jumbotron">
   <img class="right-logo" src="[%root%]logo/nixos-logo-only-hires.png" alt="NixOS Logo"/>
   <h1>NixOS: The Purely Functional Linux Distribution</h1>
+
   <p class="lead">NixOS is a Linux distribution with a unique approach
   to package and configuration management.  Built on top of the <a
   href="[%root%]nix">Nix package manager</a>, it is completely
   declarative, makes upgrading systems reliable, and has <a
-  href="[%root%]nixos/index.html">many other advantages</a>.</p>
-  <a class="btn btn-large btn-success" href="nixos/download.html"><i class="fa fa-cloud-download"></i> Get NixOS</a>
+  href="[%root%]nixos/about.html">many other advantages</a>.</p>
+
+  <a class="btn btn-large btn-success"
+  href="[%root%]nixos/download.html"><i class="fa
+  fa-cloud-download"></i> Get NixOS</a>
 </div>
 
 <hr />
@@ -114,39 +118,5 @@
   </div>
 
 </div>
-
-
-<!--
-<h1>The Nix project</h1>
-
-<p>Welcome to the homepage of the Nix project, which consists of a
-number of related open source subprojects:</p>
-
-<ul>
-
-  <li><a href="nix/"><strong>Nix</strong></a> is a <em>purely
-  functional</em> package manager.  This means that it can ensure that
-  an upgrade to one package cannot break others, that you can always
-  roll back to previous version, that multiple versions of a package
-  can coexist on the same system, and much more.</li>
-
-  <li><a href="nixpkgs/"><strong>Nixpkgs</strong></a> is a large
-  collection of packages that can be installed with the Nix package
-  manager.</li>
-
-  <li><a href="nixos/"><strong>NixOS</strong></a> is a Nix-based Linux
-  distribution.  Thanks to Nix, it supports atomic upgrades, rollbacks
-  and multi-user package management, and it has a declarative approach
-  to system configuration management that makes it easy to reproduce a
-  configuration on another machine.</li>
-
-  <li><a href="hydra/"><strong>Hydra</strong></a> is a Nix-based
-  continuous build system.</li>
-
-  <li><a href="disnix/"><strong>Disnix</strong></a> is a Nix-based
-  distributed service deployment system.</li>
-
-</ul>
--->
 
 [% END %]
