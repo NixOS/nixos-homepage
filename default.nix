@@ -5,6 +5,8 @@ stdenv.mkDerivation {
 
   src = ./.;
 
+  postHook = "unset http_proxy"; # hack for nix-shell
+
   postUnpack = ''
     # Clean up when building from a working tree.
     (cd $sourceRoot && (git ls-files -o | xargs -r rm -v))
