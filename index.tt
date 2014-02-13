@@ -111,8 +111,8 @@
 
     <h3>Twitter</h3>
     <p>
-      <a class="twitter-timeline" data-chrome="noheader nofooter transparent" href="https://twitter.com/MLS/teams" data-widget-id="243129802880589824">Tweets from @MLS/teams</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      <a class="twitter-timeline" data-chrome="noheader nofooter transparent" href="https://twitter.com/nixos_org" data-widget-id="433975692670152704">Tweets by @nixos_org</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </p>
 
   </div>
