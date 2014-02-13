@@ -11,8 +11,8 @@
   <p class="lead">NixOS is a Linux distribution with a unique approach
   to package and configuration management.  Built on top of the <a
   href="[%root%]nix">Nix package manager</a>, it is completely
-  declarative, makes upgrading systems reliable, and has many other
-  advantages.</p>
+  declarative, makes upgrading systems reliable, and has <a
+  href="[%root%]nixos/index.html">many other advantages</a>.</p>
   <a class="btn btn-large btn-success" href="nixos/download.html"><i class="fa fa-cloud-download"></i> Get NixOS</a>
 </div>
 
@@ -25,7 +25,6 @@
     configuration management: you write a specification of the desired
     configuration of your system in NixOS’s modular language, and
     NixOS takes care of making it happen.</p>
-    <p><a class="btn" href="#">Read more »</a></p>
   </div>
   <div class="span4">
     <h2>Reliable</h2>
@@ -33,7 +32,6 @@
     always safe to try an upgrade or configuration change: if things
     go wrong, you can always roll back to the previous
     configuration.</p>
-    <p><a class="btn" href="#">Read more »</a></p>
   </div>
   <div class="span4">
     <h2>DevOps-friendly</h2>
@@ -41,7 +39,6 @@
     for DevOps use.  <strong>NixOps</strong>, the NixOS cloud
     deployment tool, allows you to provision and manage networks of
     NixOS machines in environments like Amazon EC2 and VirtualBox.</p>
-    <p><a class="btn" href="https://github.com/NixOS/nixops">Read more »</a></p>
   </div>
 </div>
 
@@ -77,6 +74,9 @@
     </ul>
 
     <h3>Commits</h3>
+    [% stats = JSON.Escape.json_decode(IO.All.new('nixpkgs-commit-stats.json').all).all;
+       nrCommits = 0; FOREACH s IN stats; nrCommits = nrCommits + s; END %]
+    <p class="muted">[% stats.-1 %] commits in the last week, [% nrCommits %] in the last year</p>
     <ul class="nixos-commits">
       [% FOREACH c IN JSON.Escape.json_decode(IO.All.new('nixpkgs-commits.json').all).first(5); IF c; %]
         <li>

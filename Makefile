@@ -52,7 +52,7 @@ news.html: all-news.xhtml
 all-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@
 
-index.html: latest-news.xhtml nixpkgs-commits.json blogs.json
+index.html: latest-news.xhtml nixpkgs-commits.json nixpkgs-commit-stats.json blogs.json
 
 nixos/download.html: nixos/amis.tt
 
@@ -73,6 +73,10 @@ nixpkgs-commits.json:
 	curl https://api.github.com/repos/NixOS/nixpkgs/commits > $@.tmp
 	mv $@.tmp $@
 
+nixpkgs-commit-stats.json:
+	curl https://api.github.com/repos/NixOS/nixpkgs/stats/participation > $@.tmp
+	mv $@.tmp $@
+
 blogs.xml:
 	curl http://planet.nixos.org/rss20.xml > $@.tmp
 	mv $@.tmp $@
@@ -82,5 +86,5 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixpkgs-commits.json blogs.xml
+.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml
 endif
