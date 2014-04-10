@@ -1,5 +1,7 @@
 #! /bin/sh
 
+wrap() {
+
 # This script installs the Nix package manager on your system by
 # downloading a binary distribution and running its installer script
 # (which in turn creates and populates /nix).
@@ -48,3 +50,7 @@ fi
 "$unpack"/*/install
 
 rm -rf "$unpack" "$tarball"
+
+}
+
+wrap
