@@ -8,8 +8,8 @@ wrap() {
 
 set -e
 
-kernel=$(uname -s)
-machine=$(uname -m)
+kernel="$(uname -s)"
+machine="$(uname -m)"
 
 if [ "$kernel" = Linux -a "$machine" = x86_64 ]; then
     system=x86_64-linux
