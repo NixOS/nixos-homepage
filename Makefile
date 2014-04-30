@@ -66,7 +66,7 @@ nixos/amis.tt: nixos/amis.nix
 	(echo "[% amis => {"; < $< sed 's/.*"\(.*\)"\.ebs.*"\(.*\)".*/  "\1" => \"\2\"/; t; d'; echo "} %]") > $@
 
 nixos/amis.nix:
-	curl https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > $@.tmp
+	curl -L https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > $@.tmp
 	mv $@.tmp $@
 
 nixpkgs-commits.json:
