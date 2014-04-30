@@ -57,7 +57,7 @@ index.html: latest-news.xhtml nixpkgs-commits.json nixpkgs-commit-stats.json blo
 nixos/download.html: nixos/amis.tt
 
 latest-news.xhtml: news.xml news.xsl
-	xsltproc --param maxItem 7 news.xsl news.xml > $@ || rm -f $@
+	xsltproc --param maxItem 15 news.xsl news.xml > $@ || rm -f $@
 
 check:
 	checklink $(HTML)
