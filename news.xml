@@ -7,6 +7,28 @@
     <month>4</month>
     <day>30</day>
     <title>
+      NixOS 14.04 released
+    </title>
+    <description>
+      <a href="http://cartoonnetwork.wikia.com/wiki/I.R._Baboon"><img style="width: 8em;" class="inline" src="http://img2.wikia.nocookie.net/__cb20110509221950/cartoonnetwork/images/a/a2/Ir001.gif" alt="Baboon"/></a>
+      NixOS 14.04 “Baboon” has been released, the second stable
+      release branch. It brings Linux 3.12, systemd 212, GCC 4.8,
+      Glibc 2.19, KDE 4.12, light-weight NixOS containers, and much
+      more. See the <a href="/nixos/manual/#sec-release-14.04">release
+      notes</a> for details. You can get NixOS 14.04 ISOs and
+      VirtualBox appliances from the <a
+      href="nixos/download.html">download page</a>. For information on
+      how to upgrade a 13.10 system to 14.04, check out the <a
+      href="/nixos/manual/#sec-upgrading">manual
+      section on upgrading</a>.
+    </description>
+  </item>
+
+  <item>
+    <year>2014</year>
+    <month>4</month>
+    <day>30</day>
+    <title>
       NixOps 1.2 released
     </title>
     <description>
