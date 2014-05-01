@@ -35,11 +35,4 @@ also view the list of all NixOS configuration options:</p>
 
 </ul>
 
-<h3>Papers</h3>
-
-<p>The following research papers provide information on the rationale
-and design of NixOS.</p>
-
-[% INSERT "nixos/papers-in.html" %]
-
 [% END %]

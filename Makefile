@@ -27,16 +27,6 @@ docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
 
 docs/papers.html: docs/papers-in.html
 
-nixos/papers-in.html: docs/papers.xml docs/bib2html.xsl
-	xsltproc --stringparam tag nixos docs/bib2html.xsl docs/papers.xml > $@ || rm $@
-
-nix/papers-in.html: docs/papers.xml docs/bib2html.xsl
-	xsltproc --stringparam tag nix docs/bib2html.xsl docs/papers.xml > $@ || rm $@
-
-nixos/docs.html: nixos/papers-in.html
-
-nix/docs.html: nix/papers-in.html
-
 %.html: %.tt layout.tt common.tt
 	$(tpage) \
 	  --define curUri=$@ \
