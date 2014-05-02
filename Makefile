@@ -56,19 +56,19 @@ nixos/amis.tt: nixos/amis.nix
 	(echo "[% amis => {"; < $< sed 's/.*"\(.*\)"\.ebs.*"\(.*\)".*/  "\1" => \"\2\"/; t; d'; echo "} %]") > $@
 
 nixos/amis.nix:
-	curl -L https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > $@.tmp
+	curl --fail -L https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > $@.tmp
 	mv $@.tmp $@
 
 nixpkgs-commits.json:
-	curl https://api.github.com/repos/NixOS/nixpkgs/commits > $@.tmp
+	curl --fail https://api.github.com/repos/NixOS/nixpkgs/commits > $@.tmp
 	mv $@.tmp $@
 
 nixpkgs-commit-stats.json:
-	curl https://api.github.com/repos/NixOS/nixpkgs/stats/participation > $@.tmp
+	curl --fail https://api.github.com/repos/NixOS/nixpkgs/stats/participation > $@.tmp
 	mv $@.tmp $@
 
 blogs.xml:
-	curl http://planet.nixos.org/rss20.xml > $@.tmp
+	curl --fail http://planet.nixos.org/rss20.xml > $@.tmp
 	mv $@.tmp $@
 
 blogs.json: blogs.xml
