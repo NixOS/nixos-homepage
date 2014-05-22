@@ -1,13 +1,15 @@
 #! /bin/sh
 
+wrap() {
+
 # This script installs the Nix package manager on your system by
 # downloading a binary distribution and running its installer script
 # (which in turn creates and populates /nix).
 
 set -e
 
-kernel=$(uname -s)
-machine=$(uname -m)
+kernel="$(uname -s)"
+machine="$(uname -m)"
 
 if [ "$kernel" = Linux -a "$machine" = x86_64 ]; then
     system=x86_64-linux
@@ -20,7 +22,7 @@ else
     exit 1
 fi
 
-url="https://hydra.nixos.org/job/nix/trunk/binaryTarball.$system/latest/download-by-type/file/binary-dist"
+url="https://nixos.org/releases/nix/nix-1.7/nix-1.7-$system.tar.bz2"
 
 if ! type -p curl > /dev/null; then
     echo "$0: you do not have \`curl' installed, which I need to download the binary tarball"
@@ -48,3 +50,7 @@ fi
 "$unpack"/*/install
 
 rm -rf "$unpack" "$tarball"
+
+}
+
+wrap
