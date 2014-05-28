@@ -1,0 +1,98 @@
+[% WRAPPER layout.tt title="Contributing" menu='nixos' %]
+[% PROCESS common.tt %]
+
+<div class="page-header">
+  <h1>Contributing to NixOS</h1>
+</div>
+
+<p>It’s pretty easy to modify NixOS. All you need to do is get a copy
+of the Nixpkgs repository (which contains the NixOS sources as
+well):</p>
+
+<pre>
+<span class="muted">$</span> git clone git://github.com/NixOS/nixpkgs.git
+</pre>
+
+<p>After making modifications to the sources, you can use them as
+follows:</p>
+
+<pre>
+<span class="muted">$</span> nixos-rebuild switch -I nixpkgs=/path/to/my/nixpkgs
+</pre>
+
+<p>If you think your changes are useful to the rest of humanity, then
+please open a <a
+href="https://github.com/NixOS/nixpkgs/pulls"><strong>pull
+request on GitHub</strong></a>, or <strong>send a patch</strong> to
+the <tt>nix-dev</tt> mailing list. If you want to contribute
+regularly, you may want to ask for commit access to our GitHub
+repositories (please ask <a
+href="http://nixos.org/~eelco/">Eelco</a>)</p>
+
+<h3>Documentation</h3>
+
+<ul>
+
+  <li>The <a href="[%nixosManual%]">NixOS manual</a> has a <a
+  href="[%nixosManual%]#ch-development">whole chapter on NixOS
+  hacking</a>. Also, check out the sections on <a
+  href="[%nixosManual%]#sec-configuration-syntax">the syntax of NixOS
+  modules</a> and on <a href="[%nixosManual%]#sec-custom-packages">how
+  to add your own packages</a>.</li>
+
+  <li>The <a href="[%nixpkgsManual%]">Nixpkgs manual</a> has a lot of
+  information on how to add packages to Nixpkgs.  In particular, you
+  should check out the <a
+  href="[%nixpkgsManual%]#chap-quick-start">“Quick Start” chapter</a>
+  for an overview of the process of adding a package.</li>
+
+  <li>The Nix manual has <a
+  href="[%nixManual%]#chap-writing-nix-expressions">a chapter on
+  writing Nix expressions</a>, including the syntax and semantic of
+  the Nix expression language.</li>
+
+  <li>There is a <a
+  href="http://nixos.org/~eelco/pubs/nixos-jfp-submitted.pdf">paper
+  on NixOS</a> has a lot of information on the NixOS module
+  system (especially section 6).</li>
+
+</ul>
+
+<h3>Source repositories</h3>
+
+<p>The sources of all Nix-related projects are in the <a
+href="https://github.com/NixOS/">NixOS organization on
+GitHub</a>. NixOS lives in the <a
+href="https://github.com/NixOS/nixpkgs/tree/master/nixos">nixos</a>
+subdirectory of the Nixpkgs repository.</p>
+
+<h3>Mailing list</h3>
+
+<p>NixOS development is coordinated on the <a
+href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev</tt>
+mailing list</a> (<a
+href="http://news.gmane.org/gmane.linux.distributions.nixos">archive</a>).</p>
+
+<h3>IRC channel</h3>
+
+<p>The NixOS developers hang out on the <a
+href="irc://irc.freenode.net/#nixos"><tt>#nixos</tt> channel</a> on <a
+href="http://freenode.net/"><tt>irc.freenode.net</tt></a>.  This
+channel is <a href="http://nixos.org/irc/logs/">logged</a>.</p>
+
+<h3>Continuous builds</h3>
+
+<p><a href="[%root%]hydra">Hydra</a> continuously builds NixOS:</p>
+
+<ul>
+  <li><a href="http://hydra.nixos.org/job/nixos/trunk-combined/tested#tabs-constituents">Status
+  of the <tt>master</tt> branch</a>, used to update the <a
+  href="http://nixos.org/channels/nixos-unstable/"><tt>nixos-unstable</tt>
+  channel</a>.</li>
+  <li><a href="http://hydra.nixos.org/job/nixos/release-14.04/tested#tabs-constituents">Status
+  of the <tt>release-14.04</tt> branch</a>, used to update the <a
+  href="http://nixos.org/channels/nixos-14.04/"><tt>nixos-14.04</tt>
+  channel</a>.</li>
+</ul>
+
+[% END %]

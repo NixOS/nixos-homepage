@@ -71,10 +71,6 @@ img.inline {
     font-style: italic;
 }
 
-table.releases td {
-    border: 0px;
-}
-
 /* Screenshot table. */
 table.screenshots {
     border-style: hidden;

@@ -1,7 +1,7 @@
-[% WRAPPER layout.tt title="Nixpkgs Documentation" menu='nixpkgs' %]
+[% WRAPPER layout.tt title="Nixpkgs help" menu='nixpkgs' %]
 
 <div class="page-header">
-  <h1>Nixpkgs documentation</h1>
+  <h1>Nixpkgs help</h1>
 </div>
 
 <p>Information on how to use Nixpkgs can be found in the <a
@@ -14,5 +14,11 @@ href="[% nixManual %]#chap-quick-start">
 <p>The <a href="[% nixpkgsManual %]"> Nixpkgs manual</a>
 (<a href="[% nixpkgsManual %]/manual.pdf">PDF</a>)
 contains a lot of information on how to add to or modify Nixpkgs.</p>
+
+<h3>Bugs</h3>
+
+You can <strong>report bugs</strong> in the <a
+href="https://github.com/NixOS/nixpkgs/issues">Nixpkgs issue
+tracker</a>.
 
 [% END %]
