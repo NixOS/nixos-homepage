@@ -57,10 +57,10 @@ href="[%wikiMain%]">NixOS Wiki</a>.</p>
 
 <ul>
   <li>The <a href="[%nixManual%]">Nix manual</a> describes how to use
-  the <a href="[%root%]/nix">Nix package manager</a>.</li>
+  the <a href="[%root%]nix">Nix package manager</a>.</li>
   <li>The <a href="[%nixopsManual%]">NixOps manual</a> describes how
   to deploy NixOS machine in the cloud using <a
-  href="[%root%]/nixops">NixOps</a>.</li>
+  href="[%root%]nixops">NixOps</a>.</li>
 </ul>
 
 </section>
