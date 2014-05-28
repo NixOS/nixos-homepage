@@ -173,6 +173,42 @@ existing Unix packages, the <a href="../nixpkgs"><em>Nix Packages
 collection</em> (Nixpkgs)</a>.</p>
 
 
+<h3>Managing build environments</h3>
+
+<p>Nix is extremely useful for developers as it makes it easy to
+automatically set up the the build environment for a package. Given a
+Nix expression that describes the dependencies of your package, the
+command <strong>nix-shell</strong> will build or download those
+dependencies if they’re not already in your Nix store, and then start
+a Bash shell in which all necessary environment variables (such as
+compiler search paths) are set.</p>
+
+<p>For example, the following command gets all dependencies of the Pan
+newsreader, as described by <a
+href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/newsreaders/pan/default.nix">its
+Nix expression</a>:</p>
+
+<pre>
+<span class="muted">$</span> nix-shell '&lt;nixpkgs>' -A pan
+</pre>
+
+<p>You’re then dropped into a shell where you can edit, build and test
+the package:</p>
+
+<pre>
+<span class="muted">[nix-shell]$</span> tar xf $src
+<span class="muted">[nix-shell]$</span> cd pan-*
+<span class="muted">[nix-shell]$</span> ./configure
+<span class="muted">[nix-shell]$</span> make
+<span class="muted">[nix-shell]$</span> ./pan/gui/pan
+</pre>
+
+<p>Since Nix packages are reproducible and have complete dependency
+specifications, Nix makes an excellent basis for <a
+href="[%root%]/hydra">a continuous build system</a>.</p>
+
+
+<!--
 <h3>Service deployment</h3>
 
 <p>Nix can be used not only for rolling out packages, but also
@@ -189,6 +225,7 @@ repeatable so you can easily reproduce the service on another machine.
 You can read more about this in our <a
 href="../docs/papers.html#servicecm">SCM-12 paper</a>.  NixOS (see
 below) is essentially an extension of this idea.</p>
+-->
 
 
 <h3>Portability</h3>

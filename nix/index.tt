@@ -11,19 +11,21 @@
   <img class="right-logo" src="[%root%]logo/nixos-logo-only-hires.png" alt="NixOS Logo"/>
   <h1>Nix: The Purely Functional Package Manager</h1>
 
-  <p class="lead">Nix is awesome. Lorem ipsum dolor sit amet,
-  consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-  labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-  exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-  esse cillum dolore eu fugiat nulla pariatur.</p>
+  <p class="lead">Nix is a powerful package manager for Linux and
+  other Unix systems. The way it builds and stores packages makes
+  package management reliable and reproducible. It provides users with
+  atomic upgrades and rollbacks, side-by-side installation of multiple
+  versions of a package, and multi-user package management. For
+  developers, it enables easy setup of build environments and
+  reproducible builds. <a href="[%root%]nix/about.html">Read
+  more…</a></p>
 
   [% WRAPPER makePopover title="<i class='fa fa-cloud-download'></i> Get Nix" %]
 
     <p>On Linux and Mac OS X, the <strong>easiest way to
     install Nix</strong> is to run the following shell command:</p>
 
-    <pre><span class="muted">$</span> bash <(curl https://nixos.org/nix/install)</pre>
+    <pre><span class="muted">$</span> bash &lt;(curl https://nixos.org/nix/install)</pre>
 
     <p>This script will download a distribution-independent binary
     tarball containing Nix and its dependencies, and unpack it in
@@ -42,25 +44,50 @@
 <div class="row-fluid">
   <div class="span4">
     <h2>Reliable</h2>
-    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit
-    anim id est laborum.</p>
+    <p>Nix’s purely functional approach ensures that installing or
+    upgrading one package cannot break other packages. This is because
+    it won’t overwrite dependencies with newer versions that might
+    cause breakage elsewhere. It allows you to roll back to previous
+    versions, and ensures that no package is in an inconsistent state
+    during an upgrade.</p>
+  </div>
+  <div class="span4">
+    <h2>Reproducible</h2>
+    <p>Nix builds packages in isolation from each other. This ensures
+    that they are reproducible and don’t have undeclared dependencies,
+    so if a package works on one machine, it will also work on
+    another.</p>
   </div>
   <div class="span4">
     <h2>Great for developers</h2>
     <p>Nix makes it trivial to set up and share build environments for
     your projects, regardless of what programming languages and tools
-    you’re using.  For instance, running the command <code>nix-shell
-    '&lt;nixpkgs>' -A firefox</code> gives you a Bash shell in which
+    you’re using.  For instance, running the command “<tt>nix-shell
+    '&lt;nixpkgs>' -A firefox</tt>” gives you a Bash shell in which
     all of Firefox’s build-time dependencies are present and all
     necessary environment variables are set.</p>
   </div>
+</div>
+<div class="row-fluid">
   <div class="span4">
-    <h2>Multi-user</h2>
+    <h2>Multi-user, multi-version</h2>
     <p>Nix supports multi-user package management: multiple users can
-    share a common Nix store securely, and don’t need to have root
-    privileges to install software.</p>
+    share a common Nix store securely, don’t need to have root
+    privileges to install software, and can install and use different
+    versions of a package.</p>
+  </div>
+  <div class="span4">
+    <h2>Source/binary model</h2>
+    <p>Conceptually, Nix builds packages from source, but can
+    transparently use binaries from a <emph>binary cache</emph> if
+    available. This combines the flexibility of source package
+    management with the convenience of binary package management.</p>
+  </div>
+  <div class="span4">
+    <h2>Portable</h2>
+    <p>Nix runs on Linux, Mac OS X, FreeBSD, and other systems. <a
+    href="[%root%]/nixpkgs">Nixpkgs</a>, the Nix Packages collection,
+    contains thousands of packages, many pre-compiled.</p>
   </div>
 </div>
 

@@ -7,7 +7,18 @@
 <section><h2>Latest release</h2>
 
 <p>The latest and recommended version of Nix is
-<strong>[%latestNixVersion%]</strong>, released 11 April 2014.</p>
+<strong>[%latestNixVersion%]</strong>, released 11 April 2014. The
+quickest way to install it on Linux and Mac OS X is to run the
+following in a shell:
+
+<pre><span class="muted">$</span> bash &lt;(curl <a href="[%root%]nix/install">https://nixos.org/nix/install</a>)</pre>
+
+This script does require that you have <tt>sudo</tt> access to root
+(since it needs to create the directory <tt>/nix</tt>). See <a
+href="[%nixManual%]#chap-installation">the manual</a> for more
+information.</p>
+
+<p>The following are also available:
 
 <ul>
 
@@ -21,12 +32,14 @@
   <li><a href="[%nixManual%]#ssec-relnotes-[%latestNixVersion%]">Release
   notes</a>.</li>
 
-  <li><a href="[%nixManual%]">Manual</a>.  Please read
-  the <a href="[%nixManual%]#chap-quick-start">“Quick
-  Start” section of the manual</a> for an overview of how to install
-  and use Nix.  (<a href="[%latestNixMirror%]/manual.pdf">PDF</a>)</li>
+  <li><a href="[%nixManual%]">Manual</a> (<a
+  href="[%latestNixMirror%]/manual.pdf">PDF</a>).  Please read the <a
+  href="[%nixManual%]#chap-quick-start">“Quick Start” section of the
+  manual</a> for an overview of how to install and use Nix.</li>
 
 </ul>
+
+</p>
 
 </section>
 
