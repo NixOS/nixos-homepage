@@ -53,6 +53,10 @@
   [% WRAPPER screenshot name="nixos-virtualbox" %]
     VirtualBox on NixOS running Vista and NixOS guests
   [% END %]
+  [% WRAPPER screenshot name="nixos-nixops-vbox" %]
+    <a href="[%root%]nixops">NixOps</a> after having deployed a
+    network of three VirtualBox machines
+  [% END %]
 </table>
 
 [% END %]

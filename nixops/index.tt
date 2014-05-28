@@ -4,6 +4,11 @@
   <h1>NixOps: The NixOS Cloud Deployment Tool</h1>
 </div>
 
+<a href="[%root%]nixos/screenshots/nixos-nixops-vbox.png"><img
+class="inline screenshot"
+src="[%root%]nixos/screenshots/nixos-nixops-vbox-small.png"
+alt="NixOps screenshot" /></a>
+
 <p>NixOps is a tool for deploying sets of <a href="[%root%]">NixOS
 Linux</a> machines, either to real hardware or to virtual machines. It
 extends NixOS’s declarative approach to system configuration
@@ -14,8 +19,7 @@ running Apache httpd, the other serving a file system via NFS:</p>
 <pre>
 {
   webserver =
-    { deployment.targetEnv = "ec2";
-      deployment.region = "eu-west-1";
+    { deployment.targetEnv = "virtualbox";
       services.httpd.enable = true;
       services.httpd.documentRoot = "/data";
       fileSystems."/data" =
@@ -24,8 +28,7 @@ running Apache httpd, the other serving a file system via NFS:</p>
     };
 
   fileserver =
-    { deployment.targetEnv = "ec2";
-      deployment.region = "eu-west-1";
+    { deployment.targetEnv = "virtualbox";
       services.nfs.server.enable = true;
       services.nfs.server.exports = "...";
     };
@@ -35,8 +38,8 @@ running Apache httpd, the other serving a file system via NFS:</p>
 <p>The values of the <tt>webserver</tt> and <tt>fileserver</tt>
 attributes are regular NixOS system specifications, except for the
 <tt>deployment.*</tt> options, which tell NixOps how each machine
-should be instantiated (in this case, as EC2 machines). You can then
-run:</p>
+should be instantiated (in this case, as VirtualBox virtual machines
+running on your desktop). You can then run:</p>
 
 <pre>
 <span class="muted">$</span> nixops create -d simple network.nix
@@ -47,6 +50,16 @@ run:</p>
 activate the NixOS configurations you specified. To change something
 to the configuration, you just edit the specification and run
 <tt>nixops deploy</tt> again.</p>
+
+<p>NixOps makes it easy to abstract over target environments, allowing
+you to use the same “logical” specification for both testing and
+production deployments. For instance, to deploy to Amazon EC2, you
+would just change the <tt>deployment.*</tt> options to:</p>
+
+<pre>
+deployment.targetEnv = "ec2";
+deployment.region = "eu-west-1";
+</pre>
 
 <p>NixOps currently supports provisioning the following resources:</p>
 
