@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="About the Nix Project" %]
+[% WRAPPER layout.tt title="About the Nix Project" menu='nixos' %]
 
 <div class="page-header">
   <h1>About the NixOS Project</h1>
