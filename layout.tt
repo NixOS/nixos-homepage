@@ -74,6 +74,17 @@
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
+            [% ELSIF menu == 'disnix' %]
+              <ul class="nav pull-left">
+                <li><a href="[%root%]disnix/index.html">About</a></li>
+                <li><a href="[%root%]disnix/docs.html">Documentation</a></li>
+                <li><a href="[%root%]disnix/extensions.html">Extensions</a></li>
+                <li><a href="[%root%]disnix/examples.html">Examples</a></li>
+                <li><a href="[%root%]disnix/download.html">Download</a></li>
+                <li><a href="[%root%]disnix/support.html">Support</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/svanderburg/disnix"><i class="fa fa-github"></i></a></li>
             [% ELSE %]
               <ul class="nav pull-right">
             [% END %]

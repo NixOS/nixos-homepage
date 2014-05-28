@@ -1,6 +1,8 @@
 [% WRAPPER layout.tt title="Disnix examples" menu='disnix' %]
 
-<h1>Examples</h1>
+<div class="page-header">
+  <h1>Examples</h1>
+</div>
 
 <p>
 We have a number of examples cases available, which demonstrate various features of Disnix.
@@ -29,7 +31,7 @@ Nix package manager and KVM. It will automatically generate a network running Ni
 instances.
 </p>
 
-<h2>StaffTracker (PHP/MySQL version)</h2>
+<h3>StaffTracker (PHP/MySQL version)</h3>
 
 <p>
 This example is a PHP/MySQL web application system to manage staff of a university department.
@@ -42,7 +44,7 @@ modify staff members.
 <li><a href="http://hydra.nixos.org/job/disnix/php-mysql-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
 </ul>
 
-<h2>StaffTracker (Web services version)</h2>
+<h3>StaffTracker (Web services version)</h3>
 
 <p>
 A more complex variant of the previous example implemented in Java.
@@ -56,13 +58,13 @@ location from an IP address.
 <li><a href="http://hydra.nixos.org/job/disnix/WebServicesExample-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
 </ul>
 
-<h2>StaffTracker.NET (Web services version)</h2>
+<h3>StaffTracker.NET (Web services version)</h3>
 
 <p>
 A port of the previous web services example to .NET technologies, such as C#, WCF, ADO.NET and SQL server.
 </p>
 
-<h2>ViewVC</h2>
+<h3>ViewVC</h3>
 <p>
 A system running <a href="http://viewvc.tigris.org">ViewVC</a>, a web-based CVS and Subversion repository viewer.
 In this example we automatically deploy the ViewVC web application front-end, a MySQL
@@ -73,7 +75,7 @@ database storing commit records, and an arbitrary number of Subversion repositor
 <li><a href="http://hydra.nixos.org/job/disnix/viewvc-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
 </ul>
 
-<h2>Hello World example</h2>
+<h3>Hello World example</h3>
 
 <p>
 A trivial example composed of web services, which show various ways to combine services together.
@@ -86,7 +88,7 @@ to make them better deployable.
 <li><a href="http://hydra.nixos.org/job/disnix/HelloWorldExample-simple-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
 </ul>
 
-<h2>Disnix proxy example</h2>
+<h3>Disnix proxy example</h3>
 
 <p>
 A trivial example composed of two processes communicating with other through a TCP socket.
@@ -98,7 +100,7 @@ process completely atomic.
 <li><a href="http://hydra.nixos.org/job/disnix/disnix-proxy-example-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
 </ul>
 
-<h2>NixOS configurations</h2>
+<h3>NixOS configurations</h3>
 
 <p>
 A trivial example case deploying complete NixOS configurations.

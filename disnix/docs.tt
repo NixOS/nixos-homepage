@@ -1,6 +1,8 @@
 [% WRAPPER layout.tt title="Disnix Documentation" menu='disnix' %]
 
-<h1>Documentation</h1>
+<div class="page-header">
+  <h1>Documentation</h1>
+</div>
 
 <p>
 The
@@ -16,7 +18,7 @@ The documentation of
 explains additional features for complementary infrastructure deployment.
 </p>
 
-<h2>Research papers</h2>
+<h3>Research papers</h3>
 
 <p>
 We also have a number of research papers available about Disnix:

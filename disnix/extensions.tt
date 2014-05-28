@@ -1,6 +1,8 @@
 [% WRAPPER layout.tt title="Disnix extensions" menu='disnix' %]
 
-<h1>Extensions</h1>
+<div class="page-header">
+  <h1>Extensions</h1>
+</div>
 
 <p>
 Although the Disnix toolset itself provides useful features to make automated deployment
@@ -14,7 +16,7 @@ they are specific to the domain in which the system has to be used.
 On this page we give some information about Disnix extensions we have available.
 </p>
 
-<h2>DisnixWebService</h2>
+<h3>DisnixWebService</h3>
 
 <p>
 By default Disnix includes a SSH wrapper for communication with the Disnix service or
@@ -25,7 +27,7 @@ This package serves as an example cases, demonstrating how custom communication 
 can be supported in Disnix.
 </p>
 
-<h2>DisnixOS</h2>
+<h3>DisnixOS</h3>
 
 <p>
 Disnix is designed for deployment of services in heterogeneous environments and
@@ -42,7 +44,7 @@ also offers developers to deploy a system in a network of virtual machines, whic
 are automatically generated.
 </p>
 
-<h2>Dynamic Disnix</h2>
+<h3>Dynamic Disnix</h3>
 
 <p>
 The basic Disnix toolset requires users to manually specify an infrastructure model reflecting
