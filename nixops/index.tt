@@ -4,4 +4,88 @@
   <h1>NixOps: The NixOS Cloud Deployment Tool</h1>
 </div>
 
+<p>NixOps is a tool for deploying sets of <a href="[%root%]">NixOS
+Linux</a> machines, either to real hardware or to virtual machines. It
+extends NixOS’s declarative approach to system configuration
+management to networks and adds provisioning. For example, here is a
+NixOps specification of a network consisting of two machines — one
+running Apache httpd, the other serving a file system via NFS:</p>
+
+<pre>
+{
+  webserver =
+    { deployment.targetEnv = "ec2";
+      deployment.region = "eu-west-1";
+      services.httpd.enable = true;
+      services.httpd.documentRoot = "/data";
+      fileSystems."/data" =
+        { fsType = "nfs4";
+          device = "fileserver:/"; };
+    };
+
+  fileserver =
+    { deployment.targetEnv = "ec2";
+      deployment.region = "eu-west-1";
+      services.nfs.server.enable = true;
+      services.nfs.server.exports = "...";
+    };
+}
+</pre>
+
+<p>The values of the <tt>webserver</tt> and <tt>fileserver</tt>
+attributes are regular NixOS system specifications, except for the
+<tt>deployment.*</tt> options, which tell NixOps how each machine
+should be instantiated (in this case, as EC2 machines). You can then
+run:</p>
+
+<pre>
+<span class="muted">$</span> nixops create -d simple network.nix
+<span class="muted">$</span> nixops deploy -d simple
+</pre>
+
+<p>This will create the EC2 instances, and then build, upload and
+activate the NixOS configurations you specified. To change something
+to the configuration, you just edit the specification and run
+<tt>nixops deploy</tt> again.</p>
+
+<p>NixOps currently supports provisioning the following resources:</p>
+
+<ul>
+  <li>Amazon EC2 instances.</li>
+  <li>VirtualBox virtual machines.</li>
+  <li>Hetzner machines.</li>
+  <li>NixOS containers.</li>
+  <li>Many Amazon resources, such as S3 buckets, EC2 key pairs,
+  elastic IPs, and so on.</li>
+</ul>
+
+<section><h2>Getting it</h2>
+
+<p>If you already have Nix or NixOS installed, you can get NixOps by
+running:</p>
+
+<pre>
+<span class="muted">$</span> nix-env -i nixops
+</pre>
+
+<p>You can also get the latest development version; see the <a
+href="[%nixopsManual#chap-installation%]">manual</a> for details.</p>
+
+</section>
+
+<section><h2>Documentation</h2>
+
+<ul>
+  <li>The <a href="[%nixopsManual%]">NixOps manual</a> tells you
+  everything you need to know about using NixOps.</li>
+
+  <li>There is <a
+  href="http://nixos.org/~eelco/pubs/charon-releng2013-final.pdf">a
+  short paper</a> that gives an overview of NixOps (called
+  <em>Charon</em> back then).</li>
+
+</ul>
+
+</section>
+
 [% END %]

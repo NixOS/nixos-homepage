@@ -79,7 +79,7 @@
   <div class="span4">
     <h2>Source/binary model</h2>
     <p>Conceptually, Nix builds packages from source, but can
-    transparently use binaries from a <emph>binary cache</emph> if
+    transparently use binaries from a <em>binary cache</em> if
     available. This combines the flexibility of source package
     management with the convenience of binary package management.</p>
   </div>

@@ -50,6 +50,8 @@
             <a class="brand" href="[%root%]nix">Nix</a>
           [% ELSIF menu == 'nixpkgs' %]
             <a class="brand" href="[%root%]nixpkgs">Nixpkgs</a>
+          [% ELSIF menu == 'nixops' %]
+            <a class="brand" href="[%root%]nixops">NixOps</a>
           [% ELSIF menu == 'disnix' %]
             <a class="brand" href="[%root%]disnix">Disnix</a>
           [% ELSE %]
@@ -81,6 +83,9 @@
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
+            [% ELSIF menu == 'nixops' %]
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/nixops"><i class="fa fa-github"></i></a></li>
             [% ELSIF menu == 'disnix' %]
               <ul class="nav pull-left">
                 <li></li>
