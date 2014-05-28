@@ -43,7 +43,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="/">
+          <a class="brand" href="[%root%]">
             <img src="[% root %]logo/nix-wiki.png" alt="NixOS" class="logo" />
           </a>
           [% IF menu == 'nix' %]
