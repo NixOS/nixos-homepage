@@ -40,7 +40,8 @@
   <div class="span4">
     <h2>DevOps-friendly</h2>
     <p>Declarative specs and safe upgrades make NixOS a great system
-    for DevOps use.  <strong>NixOps</strong>, the NixOS cloud
+    for DevOps use.  <a
+    href="[%root%]nixops"><strong>NixOps</strong></a>, the NixOS cloud
     deployment tool, allows you to provision and manage networks of
     NixOS machines in environments like Amazon EC2 and VirtualBox.</p>
   </div>
