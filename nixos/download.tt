@@ -1,5 +1,4 @@
 [% WRAPPER layout.tt title="NixOS Downloads" menu='nixos' %]
-[% PROCESS common.tt %]
 [% PROCESS nixos/amis.tt %]
 
 <div class="page-header">
@@ -12,7 +11,7 @@ appliances containing the <a
 href="http://nixos.org/channels/nixos-[%latestNixOSVersion%]">latest
 release</a> in this series.</p>
 
-<h2>Installation CDs/DVDs</h2>
+<section><h2>Installation CDs/DVDs</h2>
 
 <p>You can install NixOS on physical hardware by burning one of the CD
 images onto a blank CD/DVD disk, or <a
@@ -32,7 +31,8 @@ installer as well as X11, KDE 4 and several applications.  It’s a
 the Nix package manager) before installing it.</p>
 
 <ul>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD</a> <strong>Recommended for most users</strong></li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD</a>
+    <span class="label label-info">Recommended for most users</span></li>
   <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-i686-linux">Graphical live CD, 32-bit Intel/AMD</a></li>
 </ul>
 
@@ -45,7 +45,9 @@ the console.  It contains a number of rescue tools.</p>
   <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-i686-linux">Minimal installation CD, 32-bit Intel/AMD</a></li>
 </ul>
 
-<h2>VirtualBox appliances</h2>
+</section>
+
+<section><h2>VirtualBox appliances</h2>
 
 <p>This is a demo appliance for VirtualBox (in OVA format) that has
 X11 and KDE enabled, as well as the VirtualBox guest additions.  To
@@ -61,7 +63,9 @@ To obtain a root shell, run <tt>sudo -i</tt> in the KDE terminal
   <li><a href="http://nixos.org/releases/nixos/latest-ova-i686-linux">VirtualBox appliance, 32-bit Intel/AMD</a></li>
 </ul>
 
-<h2>Amazon EC2 AMIs</h2>
+</section>
+
+<section><h2>Amazon EC2 AMIs</h2>
 
 <p>If you are an EC2 user, you can fire up a NixOS instance instantly
 by using one of the AMIs listed below.</p>
@@ -85,12 +89,16 @@ by using one of the AMIs listed below.</p>
 $ ec2-run-instances [% amis.$region %] --region [% region %] -k <em>my-key-pair</em>
 </pre>
 
-<h2>Unstable releases</h2>
+</section>
+
+<section><h2>Unstable releases</h2>
 
 <p>If you are a developer who wants to contribute to NixOS, or if you
 just want the latest and greatest, you can also install the <a
 href="http://nixos.org/channels/nixos-unstable/">most recent unstable
 release</a>.</p>
+
+</section>
 
 <!--
 <h2>Old releases</h2>

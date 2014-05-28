@@ -1,6 +1,8 @@
 [% WRAPPER layout.tt title="Nixpkgs Downloads" menu='nixpkgs' %]
 
-<h1>Getting Nixpkgs</h1>
+<div class="page-header">
+  <h1>Getting Nixpkgs</h1>
+</div>
 
 <p>Nixpkgs is free software, released under a <a
   href="https://github.com/NixOS/nixpkgs/blob/master/COPYING">permissive
@@ -11,22 +13,24 @@ Nixpkgs.  You can update your copy of Nixpkgs to the latest version by
 running <tt>nixos-checkout</tt>.</p>
 
 
-<h2>Channel</h2>
+<section><h2>Channel</h2>
 
 <p>The usual way to obtain Nixpkgs is to subscribe to the Nixpkgs
 channel, which always contains the latest version of Nixpkgs:</p>
 
 <pre class="code">
-$ nix-channel --add http://nixos.org/channels/nixpkgs-unstable
+$ nix-channel --add https://nixos.org/channels/nixpkgs-unstable
 $ nix-channel --update
 </pre>
 
 <p>After this, you can <a
-href="http://nixos.org/nixpkgs/manual#chap-quick-start">
+href="[%nixpkgsManual%]#chap-quick-start">
 use <tt>nix-env</tt> to install available packages</a>.</p>
 
+</section>
 
-<h2>Download</h2>
+
+<section><h2>Download</h2>
 
 <p>If you want a source tarball, you can download one from our
 continuous build system:</p>
@@ -39,8 +43,10 @@ continuous build system:</p>
   href="http://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">manual</a>)</li>
 </ul>
 
+</section>
 
-<h2>Old releases</h2>
+
+<section><h2>Old releases</h2>
 
 <p>The following old releases of Nixpkgs are available:</p>
 
@@ -56,5 +62,7 @@ continuous build system:</p>
   <tr><td class="reldate">2004-05-03</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.5.1/">Nixpkgs 0.5.1</a></td></tr>
   <tr><td class="reldate">2004-04-27</td><td><a href="http://nixos.org/releases/nixpkgs/nixpkgs-0.5/">Nixpkgs 0.5</a></td></tr>
 </table>
+
+</section>
 
 [% END %]

@@ -8,7 +8,7 @@ href="http://en.wikipedia.org/wiki/Rpath_%28linking%29">RPATH</a> of
 href="http://en.wikipedia.org/wiki/Executable_and_Linkable_Format">ELF
 executables</a>.</p>
 
-<h2>Description</h2>
+<section><h2>Description</h2>
 
 <p>Dynamically linked ELF executables always specify a dynamic linker
 or <em>interpreter</em>, which is a program that actually loads the
@@ -67,8 +67,10 @@ dependencies can be found in that path.  This is primarily useful in
 the standard build environment of Nixpkgs, where it is used to get rid
 of unnecessary runtime dependencies.</p>
 
+</section>
 
-<h2>Compatibility</h2>
+
+<section><h2>Compatibility</h2>
 
 <p>PatchELF has been tested on <tt>i386-linux</tt>,
 <tt>x86_64-linux</tt> and <tt>powerpc-linux</tt>.  It should
@@ -76,9 +78,10 @@ definitely work on all 32 or 64-bit, big or little-endian Linux
 platforms.  With minor modifications it should also work on other ELF
 platforms.</p>
 
+</section>
 
-<h2>Download</h2>
 
+<section><h2>Download</h2>
 
 <p>The most recent stable release is <a
 href="http://hydra.nixos.org/release/patchelf/patchelf-0.8">PatchELF
@@ -87,8 +90,10 @@ The changes are documented in the <a
 href="http://hydra.nixos.org/build/8066907/download/1/README">README
 file</a>.</p>
 
+</section>
 
-<h2>Unstable releases</h2>
+
+<section><h2>Unstable releases</h2>
 
 <p>You can get the latest source code of PatchELF from its <a
 href="https://github.com/NixOS/patchelf">Git
@@ -97,5 +102,7 @@ href="http://hydra.nixos.org/job/patchelf/trunk/release/latest#tabs-constituents
 pre-release</a>, or view a <a
 href="http://hydra.nixos.org/job/patchelf/trunk/release#tabs-constituents">list of all
 prereleases</a> built in our build farm.</p>
+
+</section>
 
 [% END %]

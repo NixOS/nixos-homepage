@@ -1,11 +1,10 @@
 [% WRAPPER layout.tt title="Nix Downloads" menu='nix' %]
-[% PROCESS common.tt %]
 
 <div class="page-header">
   <h1>Getting Nix</h1>
 </div>
 
-<h2>Latest release</h2>
+<section><h2>Latest release</h2>
 
 <p>The latest and recommended version of Nix is
 <strong>[%latestNixVersion%]</strong>, released 11 April 2014.</p>
@@ -29,7 +28,10 @@
 
 </ul>
 
-<h2>Continuous builds</h2>
+</section>
+
+
+<section><h2>Continuous builds</h2>
 
 <p>You can grab the latest bleeding-edge pre-release from our <a
 href="../hydra">continuous build system</a>:</p>
@@ -41,12 +43,17 @@ href="../hydra">continuous build system</a>:</p>
   tarball</a>, <a href="http://hydra.nixos.org/job/nix/trunk/release/latest-finished/eval/job/tarball/download-by-type/doc/manual">manual</a>, and RPMs and Debs for several platforms)</li>
 </ul>
 
+</section>
 
-<h2>Old releases</h2>
 
-<p>The following old releases of Nix are also available:</p>
+<section><h2>Old releases</h2>
 
-<table class="releases">
+<div class="row">
+<table class="table span3">
+  <thead>
+    <tr><th>Date</th><th>Version</th></tr>
+  </thead>
+  <tbody>
   <tr><td class="reldate">2014-04-11</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.7">Nix 1.7</a></td></tr>
   <tr><td class="reldate">2013-10-28</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.6.1">Nix 1.6.1</a></td></tr>
   <tr><td class="reldate">2013-09-10</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.6">Nix 1.6</a></td></tr>
@@ -74,6 +81,10 @@ href="../hydra">continuous build system</a>:</p>
   <tr><td class="reldate">2005-04-11</td><td><a href="http://nixos.org/releases/nix/nix-0.8/">Nix 0.8</a></td></tr>
   <tr><td class="reldate">2005-01-12</td><td><a href="http://nixos.org/releases/nix/nix-0.7/">Nix 0.7</a></td></tr>
   <tr><td class="reldate">2004-11-14</td><td><a href="http://nixos.org/releases/nix/nix-0.6/">Nix 0.6</a></td></tr>
+  </tbody>
 </table>
+</div>
+
+</section>
 
 [% END %]

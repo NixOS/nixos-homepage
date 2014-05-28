@@ -1,6 +1,8 @@
 [% WRAPPER layout.tt title="NixOS Screenshots" menu='nixos' %]
 
-<h1>NixOS screenshots</h1>
+<div class="page-header">
+  <h1>NixOS screenshots</h1>
+</div>
 
 [% BLOCK screenshot %]
 <tr>
@@ -52,5 +54,5 @@
     VirtualBox on NixOS running Vista and NixOS guests
   [% END %]
 </table>
-  
+
 [% END %]

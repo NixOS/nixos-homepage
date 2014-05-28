@@ -51,36 +51,44 @@
           <div class="nav-collapse collapse">
             [% IF menu == 'nixos' %]
               <ul class="nav pull-left">
+                <li><a href="[%root%]nixos/about.html">About</a></li>
                 <li><a href="[%root%]nixos/download.html">Download</a></li>
-                <li><a href="[%root%]nixos/docs.html">Help</a></li>
+                <li><a href="[%root%]nixos/help.html">Help</a></li>
                 <li><a href="[%root%]nixos/contribute.html">Contribute</a></li>
-                <li><a href="https://nixos.org/wiki/Main_Page">Wiki</a></li>
               </ul>
               <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/nixpkgs/"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
                 <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
             [% ELSIF menu == 'nix' %]
               <ul class="nav pull-left">
+                <li><a href="[%root%]nix/about.html">About</a></li>
                 <li><a href="[%root%]nix/download.html">Download</a></li>
                 <li><a href="[%root%]nix/docs.html">Help</a></li>
-                <li><a href="https://nixos.org/wiki/Main_Page">Wiki</a></li>
               </ul>
               <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/nix/"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
+            [% ELSIF menu == 'nixpkgs' %]
+              <ul class="nav pull-left">
+                <li><a href="[%root%]nixpkgs/download.html">Download</a></li>
+                <li><a href="[%root%]nixpkgs/docs.html">Help</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
             [% ELSE %]
               <ul class="nav pull-right">
             [% END %]
+              <li><a href="[%wikiMain%]">Wiki</a></li>
               <li class="dropdown">
                 <a class="dropdown-toggle" href="#" data-toggle="dropdown">Projects<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="[%root%]">NixOS</a></li>
                   <li><a href="[%root%]/nix">Nix</a></li>
-                  <li><a href="[%root%]/nixpkgs">Nixpkgs</a></li>
                   <li><a href="[%root%]/nixops">NixOps</a></li>
+                  <li><a href="[%root%]/nixpkgs">Nixpkgs</a></li>
                   <li class="divider"></li>
                   <li><a href="[%root%]/hydra">Hydra</a></li>
-                  <li><a href="[%root%]/patchelf.html">PatchELF</a></li>
                   <li><a href="[%root%]/disnix">Disnix</a></li>
+                  <li><a href="[%root%]/patchelf.html">PatchELF</a></li>
                 </ul>
               </li>
             </ul>
@@ -89,18 +97,20 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container main">
       <div class="skip-topbar"></div>
 
       [% content %]
 
       <div class="footer">
         <hr />
-        <small>
-          This page was last updated on [% modifiedAt %] by [%
-          modifiedBy %] (revision <tt>[% curRev %]</tt>).
-          <a href="[% root %]about-us.html">About us…</a>
+        <center>
+        <small class="muted">
+          Last changed on [% modifiedAt.substr(0, 10) %] by [% modifiedBy %]
+          · <a href="https://github.com/NixOS/nixos-homepage/blob/master/[%fileName%]">Page source</a>
+          · <a href="[% root %]about-us.html">About us</a>
         </small>
+        </center>
       </div>
 
     </div>

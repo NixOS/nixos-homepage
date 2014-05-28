@@ -7,7 +7,7 @@ class="inline"
 src="http://farm1.static.flickr.com/185/367433201_9ee5ad0986_m.jpg"
 alt="Hydra build farm" /></a>
 
-<h2>About</h2>
+<section><h2>About</h2>
 
 <p>Hydra is a Nix-based continuous build system, released under
 the terms of the <a href="http://www.gnu.org/licenses/gpl.html">GNU
@@ -27,7 +27,9 @@ and various other open source projects.  If you want to use our build
 farm for your open source project, <a
 href="mailto:rob.vermaas@gmail.com">please let us know</a>.</p>
 
-<h2>Documentation</h2>
+</section>
+
+<section><h2>Documentation</h2>
 
 <p>There is a <a
 href="http://nixos.org/~eelco/pubs/hydra-scp-submitted.pdf">draft
@@ -37,12 +39,16 @@ available</a>
 (<a href="http://hydra.nixos.org/job/hydra/trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF</a>)
 on how to set up your own Hydra server.</p>
 
-<h2>Feedback</h2>
+</section>
 
-If you would like to give some feedback, or report some bugs, please visit,
+<section><h2>Feedback</h2>
+
+If you would like to give some feedback, or report some bugs, please visit:
 <ul>
   <li><a href="https://github.com/NixOS/hydra/issues">github.com/NixOS/hydra/issues</a>: issues, bugs and feature requests for Hydra</li>
   <li><a href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev</tt> mailing list</a>: problems with our Hydra instance at <a href="http://hydra.nixos.org/">hydra.nixos.org</a></li>
 </ul>
+
+</section>
 
 [% END %]

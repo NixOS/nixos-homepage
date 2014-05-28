@@ -180,7 +180,7 @@ model ensures that this is secure.  Users cannot install
 <tt>setuid</tt> binaries.</p>
 
 
-<h2>How does NixOS work?</h2>
+<section><h2>How does NixOS work?</h2>
 
 <p>NixOS is based on <a href="../nix">Nix</a>, a purely functional
 package management system.  Nix stores all packages in isolation from
@@ -218,8 +218,10 @@ a package to coexist.  Nix does have a <tt>/etc</tt> to keep
 system-wide configuration files, but most files in that directory are
 symlinks to generated files in <tt>/nix/store</tt>.</p>
 
+</section>
 
-<h2>Status</h2>
+
+<section><h2>Status</h2>
 
 <p>NixOS is <a href="download.html">available for download</a>.  Since
 NixOS is a relatively young Linux distribution, you may find that
@@ -229,9 +231,8 @@ Here are some highlights of what NixOS currently provides:</p>
 
 <ul>
 
-  <li>NixOS provides a complete X11/KDE 4 desktop environment (see the
-  <a href="screenshots.html">screenshots</a>).  Other window managers
-  and part of Gnome are also available.</li>
+  <li>NixOS provides a complete X11/KDE 4 desktop environment.  Other
+  window managers and part of Gnome are also available.</li>
 
   <li>NixOS uses <a href="http://www.freedesktop.org/wiki/Software/systemd">systemd</a> to
   manage system services.  It supports quite a few <a
@@ -253,11 +254,18 @@ Here are some highlights of what NixOS currently provides:</p>
 
 </ul>
 
+<p>There are some <a href="screenshots.html">screenshots of NixOS in
+action</a>.</p>
 
-<h2>License</h2>
+</section>
+
+
+<section><h2>License</h2>
 
 <p>NixOS is free software, released under a <a
   href="https://github.com/NixOS/nixpkgs/blob/master/nixos/COPYING">permissive
   MIT/X11 license</a>.</p>
+
+</section>
 
 [% END %]

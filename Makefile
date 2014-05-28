@@ -4,8 +4,8 @@ catalog = $(HOME)/.nix-profile/xml/dtd/xhtml1/catalog.xml
 HTML = index.html news.html \
   nix/index.html nix/about.html nix/download.html nix/docs.html \
   nixpkgs/index.html nixpkgs/download.html nixpkgs/docs.html \
-  nixos/about.html nixos/download.html nixos/docs.html \
-  nixos/screenshots.html nixos/support.html \
+  nixos/about.html nixos/download.html nixos/help.html \
+  nixos/screenshots.html \
   patchelf.html hydra/index.html \
   disnix/index.html disnix/download.html disnix/docs.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
@@ -33,7 +33,9 @@ docs/papers.html: docs/papers-in.html
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
 	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
 	  --define curRev="`git log -1 --pretty='%h' $<`" \
-	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` $< > $@.tmp
+	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
+	  --define fileName=$< \
+	  --pre_process=common.tt $< > $@.tmp
 	xmllint --nonet --noout $@.tmp
 	mv $@.tmp $@
 
@@ -53,7 +55,8 @@ check:
 	checklink $(HTML)
 
 nixos/amis.tt: nixos/amis.nix
-	(echo "[% amis => {"; < $< sed 's/.*"\(.*\)"\.ebs.*"\(.*\)".*/  "\1" => \"\2\"/; t; d'; echo "} %]") > $@
+	latest=$$(sed 's/.*latestNixOSVersion.*"\(.*\)".*/\1/; t; d' common.tt); \
+	(echo "[% amis => {"; < $< sed 's/.*'$$latest'.*"\(.*\)"\.ebs.*"\(.*\)".*/  "\1" => \"\2\"/; t; d'; echo "} %]") > $@
 
 nixos/amis.nix:
 	curl --fail -L https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > $@.tmp

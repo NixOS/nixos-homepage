@@ -25,20 +25,26 @@ body {
     margin-right: 4em;
 }
 
-h1 {
-    //color: #4040c0;
-}
-
 h2 {
+    font-weight: normal;
     font-size: 200%;
-    //color: #404040;
-    margin-top: 1.0em;
-    margin-bottom: 0.3em;
 }
 
 h3 {
-    //color: #404040;
     font-weight: normal;
+    font-size: 150%;
+}
+
+div.page-header {
+    //margin-bottom: 1em;
+}
+
+section {
+    margin-top: 1.5em;
+}
+
+section h2 {
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .center {
@@ -46,7 +52,11 @@ h3 {
 }
 
 pre {
-    box-shadow: 0.2em 0.2em 0.5em #e0e0e0;
+    box-shadow: 0.1em 0.1em 0.5em #e0e0e0;
+}
+
+div.main li {
+    margin-bottom: 0.5em;
 }
 
 /* Inline (floating) images. */
@@ -72,14 +82,15 @@ table.screenshots {
 
 table.screenshots td {
     vertical-align: middle;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-top: 1.0em;
+    padding-bottom: 1.0em;
     border: 0px;
-    border-bottom: 1px dotted black;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 table.screenshots img, img.screenshot {
     box-shadow: 0.4em 0.4em 0.5em #a0a0a0;
+    margin-right: 2em;
 }
 
 
@@ -96,6 +107,7 @@ ul.nixos-commits a {
 
 ul.nixos-commits > li {
     border-top: 1px solid rgb(226, 234, 238);
+    margin-bottom: 0em;
 }
 
 ul.nixos-commits > li:nth-child(odd) {
@@ -138,6 +150,7 @@ ul.nixos-blogs a {
 
 ul.nixos-blogs > li {
     border-top: 1px solid rgb(226, 234, 238);
+    margin-bottom: 0em;
 }
 
 ul.nixos-blogs > li:nth-child(odd) {
