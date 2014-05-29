@@ -86,6 +86,13 @@ table.screenshots td {
 
 table.screenshots img, img.screenshot {
     box-shadow: 0.4em 0.4em 0.5em #a0a0a0;
+}
+
+img.screenshot {
+    margin-right: 0.4em;
+}
+
+table.screenshots img {
     margin-right: 2em;
 }
 

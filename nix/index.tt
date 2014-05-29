@@ -12,13 +12,11 @@
   <h1>Nix: The Purely Functional Package Manager</h1>
 
   <p class="lead">Nix is a powerful package manager for Linux and
-  other Unix systems. The way it builds and stores packages makes
-  package management reliable and reproducible. It provides users with
-  atomic upgrades and rollbacks, side-by-side installation of multiple
-  versions of a package, and multi-user package management. For
-  developers, it enables easy setup of build environments and
-  reproducible builds. <a href="[%root%]nix/about.html">Read
-  more…</a></p>
+  other Unix systems that makes package management reliable and
+  reproducible. It provides atomic upgrades and rollbacks,
+  side-by-side installation of multiple versions of a package,
+  multi-user package management and easy setup of build
+  environments. <a href="[%root%]nix/about.html">Read more…</a></p>
 
   [% WRAPPER makePopover title="<i class='fa fa-cloud-download'></i> Get Nix" %]
 

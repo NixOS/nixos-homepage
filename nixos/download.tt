@@ -8,7 +8,7 @@
 <p>The latest stable release series is <strong>[% latestNixOSVersion
 %]</strong>.  Below are links to CD/DVD images and VirtualBox
 appliances containing the <a
-href="http://nixos.org/channels/nixos-[%latestNixOSVersion%]">latest
+href="https://nixos.org/channels/nixos-[%latestNixOSVersion%]">latest
 release</a> in this series.</p>
 
 <section><h2>Installation CDs/DVDs</h2>
@@ -95,7 +95,7 @@ $ ec2-run-instances [% amis.$region %] --region [% region %] -k <em>my-key-pair<
 
 <p>If you are a developer who wants to contribute to NixOS, or if you
 just want the latest and greatest, you can also install the <a
-href="http://nixos.org/channels/nixos-unstable/">most recent unstable
+href="https://nixos.org/channels/nixos-unstable/">most recent unstable
 release</a>.</p>
 
 </section>

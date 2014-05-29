@@ -55,7 +55,7 @@
           [% ELSIF menu == 'disnix' %]
             <a class="brand" href="[%root%]disnix">Disnix</a>
           [% ELSE %]
-            <a class="brand" href="/">NixOS</a>
+            <a class="brand" href="[%root%]">NixOS</a>
           [% END %]
           <div class="nav-collapse collapse">
             [% IF menu == 'nixos' %]

@@ -6,7 +6,7 @@
 
 
 <p><a href="[%root%]nixos/screenshots.html"><img class="inline
-screenshot" src="screenshots/nixos-kde42-1-small.png" alt="NixOS
+screenshot" src="[%root%]nixos/screenshots/nixos-kde42-1-small.png" alt="NixOS
 screenshot" /></a>NixOS is a GNU/Linux distribution that aims to
 improve the state of the art in system configuration management.  In
 existing distributions, actions such as upgrades are dangerous:
@@ -21,7 +21,7 @@ to change that.  NixOS has many innovative features:</p>
 
 <p>In NixOS, the entire operating system — the kernel, applications,
 system packages, configuration files, and so on — is built by the <a
-href="../nix">Nix package manager</a> from a description in a purely
+href="[%root%]nix">Nix package manager</a> from a description in a purely
 functional build language.  The fact that it’s purely functional
 essentially means that building a new configuration cannot overwrite
 previous configurations.  Most of the other features follow from
@@ -86,15 +86,15 @@ you don’t like the new configuration, you can just go back:</p>
 $ nixos-rebuild switch --rollback
 </pre>
 
-<a href="screenshots/nixos-grub.png"><img class="inline screenshot"
-src="screenshots/nixos-grub-small.png" alt="Grub boot menu" /></a>
+<a href="[%root%]nixos/screenshots/nixos-grub.png"><img class="inline screenshot"
+src="[%root%]nixos/screenshots/nixos-grub-small.png" alt="Grub boot menu" /></a>
 
 <p>In fact, all old system configurations automatically show up in the
 Grub boot menu.  So if the new configuration crashes or doesn’t boot
 properly, you can just roll back by selecting an older configuration
-in the <a href="screenshots/nixos-grub.png">Grub boot menu</a>.
-Rollbacks are very fast: it doesn’t involve lots of files having to be
-restored from copies.</p>
+in the <a href="[%root%]nixos/screenshots/nixos-grub.png">Grub boot
+menu</a>.  Rollbacks are very fast: it doesn’t involve lots of files
+having to be restored from copies.</p>
 
 
 <h3>Reproducible system configurations</h3>
@@ -182,7 +182,7 @@ model ensures that this is secure.  Users cannot install
 
 <section><h2>How does NixOS work?</h2>
 
-<p>NixOS is based on <a href="../nix">Nix</a>, a purely functional
+<p>NixOS is based on <a href="[%root%]nix">Nix</a>, a purely functional
 package management system.  Nix stores all packages in isolation from
 each other under paths such as</p>
 
@@ -240,7 +240,7 @@ Here are some highlights of what NixOS currently provides:</p>
   (e.g., Apache HTTPD, PostgreSQL, and Tomcat) that can be configured
   declaratively through <tt>configuration.nix</tt>.</li>
 
-  <li>NixOS build on the <a href="[%root%]../nixpkgs">Nix Packages
+  <li>NixOS build on the <a href="[%root%]nixpkgs">Nix Packages
   collection</a> (Nixpkgs), which provides Nix expressions for nearly
   6500 packages that you can install under NixOS.</li>
 
