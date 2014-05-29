@@ -5,16 +5,19 @@
   <h1>Contributing to NixOS</h1>
 </div>
 
-<p>It’s pretty easy to modify NixOS. All you need to do is get a copy
-of the Nixpkgs repository (which contains the NixOS sources as
-well):</p>
+
+<div class="row-fluid">
+  <div class="span8">
+    <p>It’s pretty easy to modify NixOS. All you need to do is get a copy
+    of the Nixpkgs repository (which contains the NixOS sources as
+    well):</p>
 
 <pre>
 <span class="muted">$</span> git clone git://github.com/NixOS/nixpkgs.git
 </pre>
 
-<p>After making modifications to the sources, you can use them as
-follows:</p>
+    <p>After making modifications to the sources, you can use them as
+    follows:</p>
 
 <pre>
 <span class="muted">$</span> nixos-rebuild switch -I nixpkgs=/path/to/my/nixpkgs
@@ -28,6 +31,11 @@ the <tt>nix-dev</tt> mailing list. If you want to contribute
 regularly, you may want to ask for commit access to our GitHub
 repositories (please ask <a
 href="http://nixos.org/~eelco/">Eelco</a>).</p>
+  </div>
+  <div class="span4">
+    <script type="text/javascript" src="http://www.ohloh.net/p/25550/widgets/project_basic_stats.js"></script>
+  </div>
+</div>
 
 <h3>Documentation</h3>
 
