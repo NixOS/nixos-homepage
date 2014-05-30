@@ -123,7 +123,8 @@ href="http://www.laquso.com/">LaQuSo</a>.</p>
 <p>The NixOS community has been supported by various companies and institutes over
 the years, for which we are very grateful. The following companies and institutes have
 supported the development of NixOS and the infrastructure that is needed to support it.
-</p>
+If you would like to support us as well, please contact <a href="mailto:rob.vermaas@gmail.com">
+Rob Vermaas</a></p>
 
 <div class="row-fluid">
   <div class="span3 center">
@@ -145,8 +146,5 @@ supported the development of NixOS and the infrastructure that is needed to supp
     <a href="http://status.io"><img src="[% root %]logo/statusio.png" alt="Status.io logo" /></a>
   </div>
 </div>
-
-<p>If you would like to support us as well, please contact <a href="mailto:rob.vermaas@gmail.com">
-Rob Vermaas</a></p>
 
 [% END %]
