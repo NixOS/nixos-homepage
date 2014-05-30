@@ -1,46 +1,53 @@
 [% WRAPPER layout.tt title="NixOS Downloads" menu='nixos' %]
-[% PROCESS common.tt %]
+[% PROCESS nixos/amis.tt %]
 
-<h1>Getting NixOS [% latestNixOSVersion %]</h1>
+<div class="page-header">
+  <h1>Getting NixOS [% latestNixOSVersion %]</h1>
+</div>
 
 <p>The latest stable release series is <strong>[% latestNixOSVersion
-%]</strong>.  Below are links to ISO images and VirtualBox appliances
-containing the <a
-href="http://nixos.org/channels/nixos-[%latestNixOSVersion%]">latest
+%]</strong>.  Below are links to CD/DVD images and VirtualBox
+appliances containing the <a
+href="https://nixos.org/channels/nixos-[%latestNixOSVersion%]">latest
 release</a> in this series.</p>
 
-<p>NixOS doesn’t have a nice graphical, user-friendly installer yet.
-Therefore installation using the ISO images may not be suitable for
-novice Linux users.</p>
+<section><h2>Installation CDs/DVDs</h2>
 
-<p>NixOS is free software, released under a <a
-  href="https://github.com/NixOS/nixpkgs/blob/master/nixos/COPYING">permissive
-  MIT/X11 license</a>.</p>
+<p>You can install NixOS on physical hardware by burning one of the CD
+images onto a blank CD/DVD disk, or <a
+href="https://nixos.org/wiki/Installing_NixOS_from_a_USB_stick">by
+copying it onto a USB stick</a>.  For <strong>installation
+instructions</strong>, please see the <a
+href="[%nixosManual%]">manual</a>.</p>
 
-<h2>Graphical live CD</h2>
+<div class="alert alert-block">
+Please note that NixOS at the moment lacks a nice, user-friendly
+graphical installer.  Therefore this form of installation may not be
+suitable for novice Linux users.</div>
 
-<p>This CD contains the NixOS installer as well as X11, KDE 4 and
-several applications.  It’s a <em>live CD</em>, so it allows you to
-get an impression of NixOS (and the Nix package manager) before
-installing it.</p>
-
-<ul>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-i686-linux">Graphical live CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a></li>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a></li>
-</ul>
-
-<h2>Minimal installation CD</h2>
-
-<p>This CD does not contain X11, and is therefore a lot smaller.  You
-have to run the installer from the console.  It contains a number of
-rescue tools.</p>
+<p>The <strong>graphical installation CD</strong> contains the NixOS
+installer as well as X11, KDE 4 and several applications.  It’s a
+<em>live CD</em>, so it allows you to get an impression of NixOS (and
+the Nix package manager) before installing it.</p>
 
 <ul>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-i686-linux">Minimal installation CD, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a></li>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-x86_64-linux">Minimal installation CD, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a></li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD</a>
+    <span class="label label-info">Recommended for most users</span></li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-i686-linux">Graphical live CD, 32-bit Intel/AMD</a></li>
 </ul>
 
-<h2>VirtualBox appliance</h2>
+<p>The <strong>minimal installation CD</strong> does not contain X11,
+and is therefore a lot smaller.  You have to run the installer from
+the console.  It contains a number of rescue tools.</p>
+
+<ul>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-x86_64-linux">Minimal installation CD, 64-bit Intel/AMD</a></li>
+  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-i686-linux">Minimal installation CD, 32-bit Intel/AMD</a></li>
+</ul>
+
+</section>
+
+<section><h2>VirtualBox appliances</h2>
 
 <p>This is a demo appliance for VirtualBox (in OVA format) that has
 X11 and KDE enabled, as well as the VirtualBox guest additions.  To
@@ -52,23 +59,51 @@ To obtain a root shell, run <tt>sudo -i</tt> in the KDE terminal
 (<tt>konsole</tt>).</p>
 
 <ul>
-  <li><a href="http://nixos.org/releases/nixos/latest-ova-i686-linux">VirtualBox appliance, 32-bit Intel/AMD (<tt>i686-linux</tt>)</a></li>
-  <li><a href="http://nixos.org/releases/nixos/latest-ova-x86_64-linux">VirtualBox appliance, 64-bit Intel/AMD (<tt>x86_64-linux</tt>)</a></li>
+  <li><a href="http://nixos.org/releases/nixos/latest-ova-x86_64-linux">VirtualBox appliance, 64-bit Intel/AMD</a></li>
+  <li><a href="http://nixos.org/releases/nixos/latest-ova-i686-linux">VirtualBox appliance, 32-bit Intel/AMD</a></li>
 </ul>
 
-<h2>Installing NixOS</h2>
+</section>
 
-<p>For installation instructions, please see the <a href="[%nixosManual%]">manual</a>.</p>
+<section><h2>Amazon EC2 AMIs</h2>
 
-<h2>Unstable releases</h2>
+<p>If you are an EC2 user, you can fire up a NixOS instance instantly
+by using one of the AMIs listed below.</p>
+
+<div class="row">
+<table class="table span3">
+  <thead>
+    <tr><th>Region</th><th>AMI</th></tr>
+  </thead>
+  <tbody>
+    [% FOREACH region IN amis.keys.sort %]
+      <tr><td><tt>[% region %]</tt></td><td><tt>[% amis.$region %]</tt></td></tr>
+    [% END %]
+  </tbody>
+</table>
+</div>
+
+<p>For instance, to create a NixOS instance in region <tt>[% region = amis.keys.sort.0; region %]</tt> using the EC2 API tools, just do:</p>
+
+<pre>
+$ ec2-run-instances [% amis.$region %] --region [% region %] -k <em>my-key-pair</em>
+</pre>
+
+</section>
+
+<section><h2>Unstable releases</h2>
 
 <p>If you are a developer who wants to contribute to NixOS, or if you
 just want the latest and greatest, you can also install the <a
-href="http://nixos.org/channels/nixos-unstable/">most recent unstable
+href="https://nixos.org/channels/nixos-unstable/">most recent unstable
 release</a>.</p>
 
+</section>
+
+<!--
 <h2>Old releases</h2>
 
 <p>ISO images of previous versions are also <a href="http://nixos.org/releases/nixos">available</a>.</p>
+-->
 
 [% END %]

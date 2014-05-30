@@ -5,12 +5,21 @@ stdenv.mkDerivation {
 
   src = ./.;
 
+  postHook = "unset http_proxy"; # hack for nix-shell
+
   postUnpack = ''
     # Clean up when building from a working tree.
     (cd $sourceRoot && (git ls-files -o | xargs -r rm -v))
   '';
 
-  buildInputs = [ pkgs.perlPackages.TemplateToolkit pkgs.libxslt pkgs.libxml2 pkgs.imagemagick pkgs.git ];
+  buildInputs =
+    [ perl
+      perlPackages.TemplateToolkit
+      perlPackages.TemplatePluginJSONEscape
+      perlPackages.TemplatePluginIOAll
+      perlPackages.XMLSimple
+      libxslt libxml2 imagemagick git curl
+    ];
 
   makeFlags = "catalog=${pkgs.xhtml1}/xml/dtd/xhtml1/catalog.xml";
 

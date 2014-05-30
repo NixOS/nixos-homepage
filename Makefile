@@ -2,16 +2,15 @@ tpage = tpage
 catalog = $(HOME)/.nix-profile/xml/dtd/xhtml1/catalog.xml
 
 HTML = index.html news.html \
-  nix/index.html nix/download.html nix/docs.html \
+  nix/index.html nix/about.html nix/download.html nix/docs.html \
   nixpkgs/index.html nixpkgs/download.html nixpkgs/docs.html \
-  nixos/index.html nixos/download.html nixos/docs.html \
-  nixos/screenshots.html nixos/support.html \
+  nixos/about.html nixos/download.html nixos/help.html nixos/community.html \
+  nixos/screenshots.html \
   patchelf.html hydra/index.html \
   disnix/index.html disnix/download.html disnix/docs.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
-  development/index.html \
   docs/papers.html \
-  about-us.html
+  nixops/index.html
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*)))
 
@@ -26,35 +25,57 @@ docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
 
 docs/papers.html: docs/papers-in.html
 
-nixos/papers-in.html: docs/papers.xml docs/bib2html.xsl
-	xsltproc --stringparam tag nixos docs/bib2html.xsl docs/papers.xml > $@ || rm $@
-
-nix/papers-in.html: docs/papers.xml docs/bib2html.xsl
-	xsltproc --stringparam tag nix docs/bib2html.xsl docs/papers.xml > $@ || rm $@
-
-nixos/docs.html: nixos/papers-in.html
-
-nix/docs.html: nix/papers-in.html
-
 %.html: %.tt layout.tt common.tt
 	$(tpage) \
 	  --define curUri=$@ \
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
 	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
 	  --define curRev="`git log -1 --pretty='%h' $<`" \
-	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` $< > $@ && \
-	XML_CATALOG_FILES=$(catalog) xmllint --nonet --noout --valid $@ || \
-	(rm -f $@ && exit 1)
+	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
+	  --define fileName=$< \
+	  --pre_process=common.tt $< > $@.tmp
+	xmllint --nonet --noout $@.tmp
+	mv $@.tmp $@
 
 news.html: all-news.xhtml
 
 all-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@
 
-index.html: latest-news.xhtml
+index.html: latest-news.xhtml nixpkgs-commits.json nixpkgs-commit-stats.json blogs.json
+
+nixos/download.html: nixos/amis.tt
 
 latest-news.xhtml: news.xml news.xsl
-	xsltproc --param maxItem 5 news.xsl news.xml > $@ || rm -f $@
+	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
 
 check:
 	checklink $(HTML)
+
+nixos/amis.tt: nixos/amis.nix
+	latest=$$(sed 's/.*latestNixOSVersion.*"\(.*\)".*/\1/; t; d' common.tt); \
+	(echo "[% amis => {"; < $< sed 's/.*'$$latest'.*"\(.*\)"\.ebs.*"\(.*\)".*/  "\1" => \"\2\"/; t; d'; echo "} %]") > $@
+
+nixos/amis.nix:
+	curl --fail -L https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > $@.tmp
+	mv $@.tmp $@
+
+nixpkgs-commits.json:
+	curl --fail https://api.github.com/repos/NixOS/nixpkgs/commits > $@.tmp
+	mv $@.tmp $@
+
+nixpkgs-commit-stats.json:
+	curl --fail https://api.github.com/repos/NixOS/nixpkgs/stats/participation > $@.tmp
+	mv $@.tmp $@
+
+blogs.xml:
+	curl --fail http://planet.nixos.org/rss20.xml > $@.tmp
+	mv $@.tmp $@
+
+blogs.json: blogs.xml
+	perl -MJSON -MXML::Simple -e 'print encode_json(XMLin("blogs.xml"));' < $< > $@.tmp
+	mv $@.tmp $@
+
+ifeq ($(UPDATE), 1)
+.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml
+endif

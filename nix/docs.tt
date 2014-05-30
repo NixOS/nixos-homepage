@@ -1,7 +1,8 @@
 [% WRAPPER layout.tt title="Nix Documentation" menu='nix' %]
-[% PROCESS common.tt %]
 
-<h1>Nix documentation</h1>
+<div class="page-header">
+  <h1>Nix documentation</h1>
+</div>
 
 <h2>Manual</h2>
 
@@ -9,11 +10,5 @@
 nixManualPDF %]">PDF</a>) tells you everything you need to know about
 installing and using Nix.  It also describes the Nix expression
 language.</p>
-
-<h2>Papers</h2>
-
-<p>Following are some research papers about Nix.</p>
-
-[% INSERT "nix/papers-in.html" %]
 
 [% END %]

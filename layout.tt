@@ -1,133 +1,151 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-[% BLOCK menuItem %]
-  <li [% IF "${root}${curUri}" == uri || "${root}${curUri}" == "${uri}index.html" %]class="active"[% END %]>
-    <a href="[% uri %]">[% title %]</a>
-  </li>
-[% END %]
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en">
 
   <head>
     <title>[% title %]</title>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="NixOS, Nix, functional package
-                                   management, GNU/Linux distribution,
-                                   Hydra, continuous integration" />
-    <meta name="description" content="NixOS, a purely
-                                      functional GNU/Linux distribution" />
-    <link rel="stylesheet" href="[% root %]css/nix-common.css" type="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script type="text/javascript" src="[% root %]bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="[% root %]bootstrap/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="[% root %]bootstrap/css/bootstrap-responsive.min.css" />
+
     <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
-    <link rel="stylesheet" href="[% root %]css/news.css" type="text/css" />
-    <link rel="stylesheet" href="[% root %]docs/bib.css" type="text/css" />
-    <link rel="shortcut icon" href="[% root %]favicon.png" />
-    <script type="text/javascript" src="[% root %]js/jquery-pack.js"></script>
-    <script type="text/javascript" src="[% root %]js/jquery.imageZoom.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        jQuery(document.body).imageZoom({ hideClicked: 0 });
-      })
-    </script>
-    <link rel="stylesheet" href="[% root %]js/jquery.imageZoom.css" type="text/css" />
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+
+    <style type="text/css">
+      div.fnord {
+        height: 500px;
+        overflow: hidden;
+        display: block;
+        //border: 1px solid red;
+      }
+    </style>
+
   </head>
 
   <body>
-    <div id="page">
 
-      <div id="header">
-        <div id="logo"><a class="no-hover" href="[% root %]./"><img src="[% root %]logo/nixos-lores.png" alt="Nix Logo" /></a></div>
-        <ul class="short-menu" id="top-menu">
-          <li><a href="[% root %]nixos/">NixOS</a></li>
-          <li><a href="[% root %]nix/">Nix</a></li>
-          <li><a href="[% root %]nixpkgs/">Nixpkgs</a></li>
-          <li><a href="[% root %]hydra/">Hydra</a></li>
-          <li><a href="[% root %]disnix/">Disnix</a></li>
-          <li><a href="[% root %]development/">Development</a></li>
-          <li><a href="/wiki">Wiki</a></li>
-        </ul>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="[%root%]">
+            <img src="[% root %]logo/nix-wiki.png" alt="NixOS" class="logo" />
+          </a>
+          [% IF menu == 'nix' %]
+            <a class="brand" href="[%root%]nix">Nix</a>
+          [% ELSIF menu == 'nixpkgs' %]
+            <a class="brand" href="[%root%]nixpkgs">Nixpkgs</a>
+          [% ELSIF menu == 'nixops' %]
+            <a class="brand" href="[%root%]nixops">NixOps</a>
+          [% ELSIF menu == 'disnix' %]
+            <a class="brand" href="[%root%]disnix">Disnix</a>
+          [% ELSE %]
+            <a class="brand" href="[%root%]">NixOS</a>
+          [% END %]
+          <div class="nav-collapse collapse">
+            [% IF menu == 'nixos' %]
+              <ul class="nav pull-left">
+                <li><a href="[%root%]nixos/about.html">About</a></li>
+                <li><a href="[%root%]nixos/download.html">Download</a></li>
+                <li><a href="[%root%]nixos/help.html">Help</a></li>
+                <li><a href="[%root%]nixos/community.html">Community</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
+            [% ELSIF menu == 'nix' %]
+              <ul class="nav pull-left">
+                <li><a href="[%root%]nix/about.html">About</a></li>
+                <li><a href="[%root%]nix/download.html">Download</a></li>
+                <li><a href="[%root%]nix/docs.html">Help</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
+            [% ELSIF menu == 'nixpkgs' %]
+              <ul class="nav pull-left">
+                <li><a href="[%root%]nixpkgs/download.html">Download</a></li>
+                <li><a href="[%root%]nixpkgs/docs.html">Help</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
+            [% ELSIF menu == 'nixops' %]
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/nixops"><i class="fa fa-github"></i></a></li>
+            [% ELSIF menu == 'disnix' %]
+              <ul class="nav pull-left">
+                <li></li>
+                <li><a href="[%root%]disnix/docs.html">Documentation</a></li>
+                <li><a href="[%root%]disnix/extensions.html">Extensions</a></li>
+                <li><a href="[%root%]disnix/examples.html">Examples</a></li>
+                <li><a href="[%root%]disnix/download.html">Download</a></li>
+                <li><a href="[%root%]disnix/support.html">Support</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/svanderburg/disnix"><i class="fa fa-github"></i></a></li>
+            [% ELSIF menu == 'patchelf' %]
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/patchelf"><i class="fa fa-github"></i></a></li>
+            [% ELSE %]
+              <ul class="nav pull-right">
+            [% END %]
+              <li><a href="[%wikiMain%]">Wiki</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">Projects<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="[%root%]">NixOS</a></li>
+                  <li><a href="[%root%]nix">Nix</a></li>
+                  <li><a href="[%root%]nixops">NixOps</a></li>
+                  <li><a href="[%root%]nixpkgs">Nixpkgs</a></li>
+                  <li class="divider"></li>
+                  <li><a href="[%root%]hydra">Hydra</a></li>
+                  <li><a href="[%root%]disnix">Disnix</a></li>
+                  <li><a href="[%root%]patchelf.html">PatchELF</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <div id="main">
+    <div class="container main">
+      <div class="skip-topbar"></div>
 
-        [% IF menu == 'nixos' %]
-        <div id="left-bar">
-          <div id="left-title">NixOS</div>
-          <ul id="left-menu">
-            [% INCLUDE menuItem uri = "${root}nixos/" title = "About" %]
-            [% INCLUDE menuItem uri = "${root}nixos/download.html" title = "Download" %]
-            [% INCLUDE menuItem uri = "${root}nixos/screenshots.html" title = "Screenshots" %]
-            [% INCLUDE menuItem uri = "${root}nixos/docs.html" title = "Documentation" %]
-            [% INCLUDE menuItem uri = "${root}nixos/support.html" title = "Support" %]
-          </ul>
-        </div>
-        [% END %]
+      [% content %]
 
-        [% IF menu == 'nix' %]
-        <div id="left-bar">
-          <div id="left-title">Nix</div>
-          <ul id="left-menu">
-            [% INCLUDE menuItem uri = "${root}nix/" title = "About" %]
-            [% INCLUDE menuItem uri = "${root}nix/download.html" title = "Download" %]
-            [% INCLUDE menuItem uri = "${root}nix/docs.html" title = "Documentation" %]
-          </ul>
-        </div>
-        [% END %]
-
-        [% IF menu == 'nixpkgs' %]
-        <div id="left-bar">
-          <div id="left-title">Nixpkgs</div>
-          <ul id="left-menu">
-            [% INCLUDE menuItem uri = "${root}nixpkgs/" title = "About" %]
-            [% INCLUDE menuItem uri = "${root}nixpkgs/download.html" title = "Download" %]
-            [% INCLUDE menuItem uri = "${root}nixpkgs/docs.html" title = "Documentation" %]
-          </ul>
-        </div>
-        [% END %]
-
-        [% IF menu == 'disnix' %]
-        <div id="left-bar">
-          <div id="left-title">Disnix</div>
-          <ul id="left-menu">
-            [% INCLUDE menuItem uri = "${root}disnix/" title = "About" %]
-            [% INCLUDE menuItem uri = "${root}disnix/docs.html" title = "Documentation" %]
-            [% INCLUDE menuItem uri = "${root}disnix/extensions.html" title = "Extensions" %]
-            [% INCLUDE menuItem uri = "${root}disnix/examples.html" title = "Examples" %]
-            [% INCLUDE menuItem uri = "${root}disnix/download.html" title = "Download" %]
-            [% INCLUDE menuItem uri = "${root}disnix/support.html" title = "Support" %]
-          </ul>
-        </div>
-        [% END %]
-
-        [% IF menu == 'development' %]
-        <div id="left-bar">
-          <div id="left-title">Development</div>
-          <ul id="left-menu">
-            [% INCLUDE menuItem uri = "${root}development/" title = "Contributing" %]
-            [% INCLUDE menuItem uri = "${root}docs/papers.html" title = "Papers" %]
-            [% INCLUDE menuItem uri = "${root}patchelf.html" title = "PatchELF" %]
-          </ul>
-        </div>
-        [% END %]
-
-        <div id="content">
-          [% content %]
-        </div>
-
-      </div>
-
-      <div id="footer">
-        <ul class="short-menu" id="bottom-menu">
-          <li><a href="[% root %]about-us.html">About us</a></li>
-        </ul>
-        <div id="last-modified">
-          <p>This page was last updated on [% modifiedAt %] by
-          [% modifiedBy %] (revision <tt>[% curRev %]</tt>).</p>
-        </div>
+      <div class="footer">
+        <hr />
+        <center>
+        <small class="muted">
+          Last changed on [% modifiedAt.substr(0, 10) %] by [% modifiedBy %]
+          · <a href="https://github.com/NixOS/nixos-homepage/blob/master/[%fileName%]">Page source</a>·
+        </small>
+        </center>
       </div>
 
     </div>
+
+    <script>
+      $(document).ready(function() {
+        $(".nixos-popover").popover({});
+      });
+    </script>
+
   </body>
 
 </html>

@@ -1,25 +1,27 @@
 [% WRAPPER layout.tt title="About NixOS" menu='nixos' %]
 
-<h1>About NixOS</h1>
+<div class="page-header">
+  <h1>About NixOS</h1>
+</div>
 
 
-<p><a href="screenshots/nixos-kde42-1.png"><img class="inline screenshot"
-src="screenshots/nixos-kde42-1-small.png" alt="NixOS screenshot"
-/></a>NixOS is a GNU/Linux distribution that aims to improve
-the state of the art in system configuration management.  In existing
-distributions, actions such as upgrades are dangerous: upgrading a
-package can cause other packages to break, upgrading an entire system
-is much less reliable than reinstalling from scratch, you can’t safely
-test what the results of a configuration change will be, you cannot
-easily undo changes to the system, and so on.  We want to change
-that.  NixOS has many innovative features:</p>
+<p><a href="[%root%]nixos/screenshots.html"><img class="inline
+screenshot" src="[%root%]nixos/screenshots/nixos-kde42-1-small.png" alt="NixOS
+screenshot" /></a>NixOS is a GNU/Linux distribution that aims to
+improve the state of the art in system configuration management.  In
+existing distributions, actions such as upgrades are dangerous:
+upgrading a package can cause other packages to break, upgrading an
+entire system is much less reliable than reinstalling from scratch,
+you can’t safely test what the results of a configuration change will
+be, you cannot easily undo changes to the system, and so on.  We want
+to change that.  NixOS has many innovative features:</p>
 
 
 <h3>Declarative system configuration model</h3>
 
 <p>In NixOS, the entire operating system — the kernel, applications,
 system packages, configuration files, and so on — is built by the <a
-href="../nix">Nix package manager</a> from a description in a purely
+href="[%root%]nix">Nix package manager</a> from a description in a purely
 functional build language.  The fact that it’s purely functional
 essentially means that building a new configuration cannot overwrite
 previous configurations.  Most of the other features follow from
@@ -84,15 +86,15 @@ you don’t like the new configuration, you can just go back:</p>
 $ nixos-rebuild switch --rollback
 </pre>
 
-<a href="screenshots/nixos-grub.png"><img class="inline screenshot"
-src="screenshots/nixos-grub-small.png" alt="Grub boot menu" /></a>
+<a href="[%root%]nixos/screenshots/nixos-grub.png"><img class="inline screenshot"
+src="[%root%]nixos/screenshots/nixos-grub-small.png" alt="Grub boot menu" /></a>
 
 <p>In fact, all old system configurations automatically show up in the
 Grub boot menu.  So if the new configuration crashes or doesn’t boot
 properly, you can just roll back by selecting an older configuration
-in the <a href="screenshots/nixos-grub.png">Grub boot menu</a>.
-Rollbacks are very fast: it doesn’t involve lots of files having to be
-restored from copies.</p>
+in the <a href="[%root%]nixos/screenshots/nixos-grub.png">Grub boot
+menu</a>.  Rollbacks are very fast: it doesn’t involve lots of files
+having to be restored from copies.</p>
 
 
 <h3>Reproducible system configurations</h3>
@@ -178,9 +180,9 @@ model ensures that this is secure.  Users cannot install
 <tt>setuid</tt> binaries.</p>
 
 
-<h2>How does NixOS work?</h2>
+<section><h2>How does NixOS work?</h2>
 
-<p>NixOS is based on <a href="../nix">Nix</a>, a purely functional
+<p>NixOS is based on <a href="[%root%]nix">Nix</a>, a purely functional
 package management system.  Nix stores all packages in isolation from
 each other under paths such as</p>
 
@@ -199,7 +201,7 @@ configuration of the SSH daemon is also built from a Nix expression
 and stored under a path like</p>
 
 <pre class="code">
-/nix/store/s2sjbl85xnrc18rl4fhn56irkxqxyk4p-sshd_config  
+/nix/store/s2sjbl85xnrc18rl4fhn56irkxqxyk4p-sshd_config
 </pre>
 
 <p>By building entire system configurations from a Nix expression,
@@ -216,20 +218,21 @@ a package to coexist.  Nix does have a <tt>/etc</tt> to keep
 system-wide configuration files, but most files in that directory are
 symlinks to generated files in <tt>/nix/store</tt>.</p>
 
+</section>
 
-<h2>Status</h2>
 
-<p>Though NixOS is a research project, it is <a
-href="download.html">available for download</a> and works quite well.
-However, you should expect certain things to be missing (e.g.,
-packages or support for specific pieces of hardware), so you may need
-to add those yourself.  Here is an overview of what we have:</p>
+<section><h2>Status</h2>
+
+<p>NixOS is <a href="download.html">available for download</a>.  Since
+NixOS is a relatively young Linux distribution, you may find that
+certain things that you need are missing (e.g., certain packages or
+support for specific hardware), so you may need to add those yourself.
+Here are some highlights of what NixOS currently provides:</p>
 
 <ul>
 
-  <li>NixOS provides a complete X11/KDE 4 desktop environment (see the
-  <a href="screenshots.html">screenshots</a>).  Other window managers
-  and part of Gnome are also available.</li>
+  <li>NixOS provides a complete X11/KDE 4 desktop environment.  Other
+  window managers and part of Gnome are also available.</li>
 
   <li>NixOS uses <a href="http://www.freedesktop.org/wiki/Software/systemd">systemd</a> to
   manage system services.  It supports quite a few <a
@@ -237,9 +240,9 @@ to add those yourself.  Here is an overview of what we have:</p>
   (e.g., Apache HTTPD, PostgreSQL, and Tomcat) that can be configured
   declaratively through <tt>configuration.nix</tt>.</li>
 
-  <li>NixOS build on the <a href="../nixpkgs">Nix Packages
-  collection</a> (Nixpkgs), which provides Nix expressions for around
-  2500 packages that you can install under NixOS.</li>
+  <li>NixOS build on the <a href="[%root%]nixpkgs">Nix Packages
+  collection</a> (Nixpkgs), which provides Nix expressions for nearly
+  6500 packages that you can install under NixOS.</li>
 
   <li>NixOS has automatic hardware detection: the boot process loads
   kernel modules for all known devices automatically.  It also has
@@ -251,9 +254,18 @@ to add those yourself.  Here is an overview of what we have:</p>
 
 </ul>
 
-<p>NixOS is released under a <a
-href="https://github.com/NixOS/nixpkgs/blob/master/nixos/COPYING">permissive
-MIT/X11 license</a>.</p>
+<p>There are some <a href="[%root%]nixos/screenshots.html">screenshots
+of NixOS in action</a>.</p>
 
+</section>
+
+
+<section><h2>License</h2>
+
+<p>NixOS is free software, released under a <a
+  href="https://github.com/NixOS/nixpkgs/blob/master/nixos/COPYING">permissive
+  MIT/X11 license</a>.</p>
+
+</section>
 
 [% END %]

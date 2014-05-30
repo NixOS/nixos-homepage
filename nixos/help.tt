@@ -1,0 +1,68 @@
+[% WRAPPER layout.tt title="NixOS Documentation" menu='nixos' %]
+
+<div class="page-header">
+  <h1>NixOS help</h1>
+</div>
+
+<section><h2>Manual</h2>
+
+<p>The main source of information about installing and using NixOS is
+the manual, which is <a href="[%nixosManual%]">available
+online</a>. In NixOS, you can also read it by running:</p>
+
+<pre class="code">
+<span class="muted">$</span> nixos-help
+</pre>
+
+<p>You can also view the list of <a
+href="[%nixosManual%]#ch-options">all NixOS configuration
+options</a>:</p>
+
+<pre class="code">
+<span class="muted">$</span> man configuration.nix
+</pre>
+
+</section>
+
+<section><h2>Wiki</h2>
+
+<p>A lot of information can be found on the <a
+href="[%wikiMain%]">NixOS Wiki</a>.</p>
+
+</section>
+
+<section><h2>Support</h2>
+
+<p>If you run into problems with NixOS, there are a few ways to get help:</p>
+
+<ul>
+
+  <li>You can drop by on the <strong>IRC channel</strong> <a
+  href="irc://irc.freenode.net/#nixos"><tt>#nixos</tt></a> on <a
+  href="http://freenode.net/"><tt>irc.freenode.net</tt></a>.</li>
+
+  <li>You can use the <strong>mailing list</strong> <a
+  href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev@lists.science.uu.nl</tt></a>
+  (<a href="http://lists.science.uu.nl/pipermail/nix-dev/">archives</a>).</li>
+
+  <li>You can <strong>report bugs</strong> in the <a
+  href="https://github.com/NixOS/nixpkgs/issues">Nixpkgs issue
+  tracker</a> (please use the <tt>nixos</tt> label).</li>
+
+</ul>
+
+</section>
+
+<section><h2>Other resources</h2>
+
+<ul>
+  <li>The <a href="[%nixManual%]">Nix manual</a> describes how to use
+  the <a href="[%root%]nix">Nix package manager</a>.</li>
+  <li>The <a href="[%nixopsManual%]">NixOps manual</a> describes how
+  to deploy NixOS machine in the cloud using <a
+  href="[%root%]nixops">NixOps</a>.</li>
+</ul>
+
+</section>
+
+[% END %]

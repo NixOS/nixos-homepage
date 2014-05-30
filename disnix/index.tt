@@ -1,6 +1,8 @@
 [% WRAPPER layout.tt title="About Disnix" menu='disnix' %]
 
-<h1>About Disnix</h1>
+<div class="page-header">
+  <h1>About Disnix</h1>
+</div>
 
 <p>
 Disnix is a distributed deployment extension for Nix,

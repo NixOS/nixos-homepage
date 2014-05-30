@@ -1,9 +1,11 @@
 [% WRAPPER layout.tt title="Disnix Downloads" menu='disnix' %]
 
-<h1>Getting Disnix</h1>
+<div class="page-header">
+  <h1>Getting Disnix</h1>
+</div>
 
 <p>
-<strong>Warning:</strong>Disnix is a research project, fairly bleeding edge and
+<strong>Warning:</strong> Disnix is a research project, fairly bleeding edge and
 not yet recommended for use in production environments.
 </p>
 
@@ -15,7 +17,7 @@ or systems, a release has to be downloaded and installed on a
 system of choice.
 </p>
 
-<h2>Latest release</h2>
+<h3>Latest release</h3>
 
 <p>The latest version of Disnix is <strong>0.2</strong>,
 released 14 February 2011.</p>
@@ -28,7 +30,7 @@ released 14 February 2011.</p>
   can be obtained here.</li>
 </ul>
 
-<h2>Continuous builds</h2>
+<h3>Continuous builds</h3>
 
 <p>You can grab the latest bleeding-edge pre-release from our <a
 href="../hydra">continuous build system</a>:</p>

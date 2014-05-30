@@ -1,9 +1,11 @@
 [%
-  nixManual = "http://nixos.org/nix/manual"
-  nixManualPDF = "http://nixos.org/releases/nix/latest/manual.pdf"
-  nixpkgsManual = "http://nixos.org/nixpkgs/manual"
-  nixosManual = "http://nixos.org/nixos/manual"
-  latestNixVersion = "1.6.1"
+  nixManual = "/nix/manual"
+  nixManualPDF = "/releases/nix/latest/manual.pdf"
+  nixpkgsManual = "/nixpkgs/manual"
+  nixosManual = "/nixos/manual"
+  nixopsManual = "/nixops/manual"
+  latestNixVersion = "1.7"
   latestNixMirror = "http://nixos.org/releases/nix/nix-$latestNixVersion"
-  latestNixOSVersion = "13.10"
+  latestNixOSVersion = "14.04"
+  wikiMain = "https://nixos.org/wiki/Main_Page"
 %]

@@ -1,18 +1,24 @@
 [% WRAPPER layout.tt title="Nix Downloads" menu='nix' %]
-[% PROCESS common.tt %]
 
-<h1>Getting Nix</h1>
+<div class="page-header">
+  <h1>Getting Nix</h1>
+</div>
 
-<p>
-  Nix is free software, released under the terms of
-  the <a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU
-  LGPLv2.1 or (at your option) any later version</a>.
-</p>
-
-<h2>Latest release</h2>
+<section><h2>Latest release</h2>
 
 <p>The latest and recommended version of Nix is
-<strong>[%latestNixVersion%]</strong>, released 28 October 2013.</p>
+<strong>[%latestNixVersion%]</strong>, released 11 April 2014. The
+quickest way to install it on Linux and Mac OS X is to run the
+following in a shell:
+
+<pre><span class="muted">$</span> bash &lt;(curl <a href="[%root%]nix/install">https://nixos.org/nix/install</a>)</pre>
+
+This script does require that you have <tt>sudo</tt> access to root
+(since it needs to create the directory <tt>/nix</tt>). See <a
+href="[%nixManual%]#chap-installation">the manual</a> for more
+information.</p>
+
+<p>The following are also available:
 
 <ul>
 
@@ -23,17 +29,22 @@
   packages for several platforms</a>, including RPMs, Debs and binary
   tarballs for Mac OS X.</li>
 
-  <li><a href="[%latestNixMirror%]/manual/NEWS.html">Release
+  <li><a href="[%nixManual%]#ssec-relnotes-[%latestNixVersion%]">Release
   notes</a>.</li>
 
-  <li><a href="[%latestNixMirror%]/manual">Manual</a>.  Please read
-  the <a href="[%latestNixMirror%]/manual#chap-quick-start">“Quick
-  Start” section of the manual</a> for an overview of how to install
-  and use Nix.  (<a href="[%latestNixMirror%]/manual.pdf">PDF</a>)</li>
+  <li><a href="[%nixManual%]">Manual</a> (<a
+  href="[%latestNixMirror%]/manual.pdf">PDF</a>).  Please read the <a
+  href="[%nixManual%]#chap-quick-start">“Quick Start” section of the
+  manual</a> for an overview of how to install and use Nix.</li>
 
 </ul>
 
-<h2>Continuous builds</h2>
+</p>
+
+</section>
+
+
+<section><h2>Continuous builds</h2>
 
 <p>You can grab the latest bleeding-edge pre-release from our <a
 href="../hydra">continuous build system</a>:</p>
@@ -41,16 +52,22 @@ href="../hydra">continuous build system</a>:</p>
 <ul>
   <li><a href="http://hydra.nixos.org/job/nix/trunk/release#tabs-constituents">The
   latest development release of Nix</a> (<a
-  href="">source
+  href="http://hydra.nixos.org/job/nix/trunk/release/latest-finished/eval/job/tarball/download-by-type/file/source-dist">source
   tarball</a>, <a href="http://hydra.nixos.org/job/nix/trunk/release/latest-finished/eval/job/tarball/download-by-type/doc/manual">manual</a>, and RPMs and Debs for several platforms)</li>
 </ul>
 
+</section>
 
-<h2>Old releases</h2>
 
-<p>The following old releases of Nix are also available:</p>
+<section><h2>Old releases</h2>
 
-<table class="releases">
+<div class="row">
+<table class="table span3">
+  <thead>
+    <tr><th>Date</th><th>Version</th></tr>
+  </thead>
+  <tbody>
+  <tr><td class="reldate">2014-04-11</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.7">Nix 1.7</a></td></tr>
   <tr><td class="reldate">2013-10-28</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.6.1">Nix 1.6.1</a></td></tr>
   <tr><td class="reldate">2013-09-10</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.6">Nix 1.6</a></td></tr>
   <tr><td class="reldate">2013-06-17</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.5.3">Nix 1.5.3</a></td></tr>
@@ -77,6 +94,10 @@ href="../hydra">continuous build system</a>:</p>
   <tr><td class="reldate">2005-04-11</td><td><a href="http://nixos.org/releases/nix/nix-0.8/">Nix 0.8</a></td></tr>
   <tr><td class="reldate">2005-01-12</td><td><a href="http://nixos.org/releases/nix/nix-0.7/">Nix 0.7</a></td></tr>
   <tr><td class="reldate">2004-11-14</td><td><a href="http://nixos.org/releases/nix/nix-0.6/">Nix 0.6</a></td></tr>
+  </tbody>
 </table>
+</div>
+
+</section>
 
 [% END %]
