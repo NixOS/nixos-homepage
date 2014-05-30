@@ -1,11 +1,11 @@
-[% WRAPPER layout.tt title="Contributing" menu='nixos' %]
+[% WRAPPER layout.tt title="Community" menu='nixos' %]
 [% PROCESS common.tt %]
 
 <div class="page-header">
-  <h1>Contributing to NixOS</h1>
+  <h1>NixOS community</h1>
 </div>
 
-
+<h3>Contributing to NixOS</h3>
 <div class="row-fluid">
   <div class="span8">
     <p>It’s pretty easy to modify NixOS. All you need to do is get a copy
