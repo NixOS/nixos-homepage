@@ -124,7 +124,7 @@
         <center>
         <small class="muted">
           Last changed on [% modifiedAt.substr(0, 10) %] by [% modifiedBy %]
-          · <a href="https://github.com/NixOS/nixos-homepage/blob/master/[%fileName%]">Page source</a>·
+          · <a href="https://github.com/NixOS/nixos-homepage/blob/master/[%fileName%]">Page source</a>
         </small>
         </center>
       </div>
