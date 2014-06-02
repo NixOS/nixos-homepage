@@ -1,6 +1,3 @@
-tpage = tpage
-catalog = $(HOME)/.nix-profile/xml/dtd/xhtml1/catalog.xml
-
 HTML = index.html news.html \
   nix/index.html nix/about.html nix/download.html nix/docs.html \
   nixpkgs/index.html nixpkgs/download.html nixpkgs/docs.html \
@@ -26,7 +23,7 @@ docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
 docs/papers.html: docs/papers-in.html
 
 %.html: %.tt layout.tt common.tt
-	$(tpage) \
+	tpage \
 	  --define curUri=$@ \
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
 	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
