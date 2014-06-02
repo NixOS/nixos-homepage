@@ -3,7 +3,7 @@ with import <nixpkgs> {};
 stdenv.mkDerivation {
   name = "nixos.org-homepage";
 
-  src = ./.;
+  src = if lib.inNixShell then null else ./.;
 
   postHook = "unset http_proxy"; # hack for nix-shell
 
