@@ -205,16 +205,23 @@ function showPackage() {
   ).attr('expanded', 1);
 };
 
-$(document).ready(function() {
-  refilter();
+$.ajax({
+  url: '[%root%]nixpkgs/packages.json.gz',
+  type: 'GET',
+  dataType: 'json',
+  error: function(a, b, c) { alert('Failed to get package data.'); },
+  success: function(data) {
+    packageData = data;
 
-  $('#search').on('input', function() {
     refilter();
-  });
+
+    $('#search').on('input', function() {
+      refilter();
+    });
+  }
 });
+
 //]]>
 </script>
-
-<script src='[%root%]nixpkgs/packages.json'></script>
 
 [% END %]
