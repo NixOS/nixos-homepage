@@ -68,11 +68,11 @@ function updateTable() {
 
   res.forEach(function(attr) {
     var info = packageData[attr];
-    var row = $('<tr/>');
-    $('<td/>', { text: info["name"] }).appendTo(row);
-    $('<td/>', { text: attr }).appendTo(row);
-    $('<td/>', { text: info["meta"]["description"] }).appendTo(row);
-    row.appendTo(body);
+    body.append($('<tr/>')
+      .append($('<td/>', { text: info["name"] }))
+      .append($('<td/>', { text: attr }))
+      .append($('<td/>', { text: info["meta"]["description"] }))
+      );
   });
 
   $('#search-results').show();
