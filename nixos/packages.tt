@@ -128,10 +128,10 @@ function refilter() {
     var description = info['meta']['description'] || '';
     var longDescription = info['meta']['longDescription'] || '';
     if (filter == ''
-        || attr.toLowerCase().contains(filter)
-        || info['name'].toLowerCase().contains(filter)
-        || description.toLowerCase().contains(filter)
-        || longDescription.toLowerCase().contains(filter)
+        || attr.toLowerCase().indexOf(filter) != -1
+        || info['name'].toLowerCase().indexOf(filter) != -1
+        || description.toLowerCase().indexOf(filter) != -1
+        || longDescription.toLowerCase().indexOf(filter) != -1
         )
       attrs.push(attr);
   });
