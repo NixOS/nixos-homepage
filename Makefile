@@ -76,3 +76,9 @@ blogs.json: blogs.xml
 ifeq ($(UPDATE), 1)
 .PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml
 endif
+
+nixpkgs/packages.json.gz:
+	nix-env -f '<nixpkgs>' -qa --json --arg config '{}' \
+	  | sed "s|$$(nix-instantiate --find-file nixpkgs)/||g" | gzip -9 > $@.tmp
+	gunzip < $@.tmp | python -mjson.tool > /dev/null
+	mv $@.tmp $@
