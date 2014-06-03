@@ -10,7 +10,7 @@ div.skip-topbar {
     }
 }
 
-body {
+p {
     text-align: justify;
 }
 
@@ -211,6 +211,7 @@ tr.news-header {
 }
 
 .news-descr > td {
+  text-align: justify;
   padding-top: 0.5em;
   padding-bottom: 1em;
   padding-left: 0;
