@@ -1,18 +1,18 @@
-[% WRAPPER layout.tt title="Search packages" menu='nixos' %]
+[% WRAPPER layout.tt title='Search packages' menu='nixos' %]
 
-<div class="page-header">
+<div class='page-header'>
   <h1>Search packages</h1>
 </div>
 
 <p>
-  <input name="query" type="text" class="search-query span2" placeholder="Search" id="search" value="" autofocus="autofocus"/>
+  <input name='query' type='text' class='search-query span2' placeholder='Search' id='search' value='' autofocus='autofocus'/>
 </p>
 
 <hr />
 
-<p><em id="how-many">Loading…</em></p>
+<p><em id='how-many'>Loading…</em></p>
 
-<table class="table table-striped" id="search-results">
+<table class='table table-hover' id='search-results'>
   <thead>
     <tr>
       <th>Package name</th>
@@ -24,12 +24,41 @@
   </tbody>
 </table>
 
-<ul class="pager">
-  <li class='back'><a href="javascript:void(0)" onclick="curPage = 0; updateTable();">« First</a></li>
-  <li class='back'><a href="javascript:void(0)" onclick="curPage--; updateTable();">‹ Previous</a></li>
-  <li class='forward'><a href="javascript:void(0)" onclick="curPage++; updateTable();">Next ›</a></li>
-  <li class='forward'><a href="javascript:void(0)" onclick="curPage = lastPage; updateTable();">Last »</a></li>
+<ul class='pager'>
+  <li class='back'><a href='javascript:void(0)' onclick='curPage = 0; updateTable();'>« First</a></li>
+  <li class='back'><a href='javascript:void(0)' onclick='curPage--; updateTable();'>‹ Previous</a></li>
+  <li class='forward'><a href='javascript:void(0)' onclick='curPage++; updateTable();'>Next ›</a></li>
+  <li class='forward'><a href='javascript:void(0)' onclick='curPage = lastPage; updateTable();'>Last »</a></li>
 </ul>
+
+<div id='details-template' class='package-details hide'>
+  <table>
+    <tr>
+      <th>Nix expression</th>
+      <td class='nix-expr'><em>Not specified</em></td>
+    </tr>
+    <tr>
+      <th>Platforms</th>
+      <td class='platforms'><em>Not specified</em></td>
+    </tr>
+    <tr>
+      <th>Homepage</th>
+      <td class='homepage'><em>Not specified</em></td>
+    </tr>
+    <tr>
+      <th>License</th>
+      <td class='license'><em>Not specified</em></td>
+    </tr>
+    <tr>
+      <th>Maintainers</th>
+      <td class='maintainers'><em>Not specified</em></td>
+    </tr>
+    <tr>
+      <th>Long description</th>
+      <td class='long-description'><em>Not specified</em></td>
+    </tr>
+  </table>
+</div>
 
 <script>
 //<![CDATA[
@@ -46,8 +75,8 @@ function updateTable() {
   if (0 > curPage) curPage = 0;
   if (curPage > lastPage) curPage = lastPage;
 
-  var body = $("#search-results tbody");
-  $("tr", body).remove();
+  var body = $('#search-results tbody');
+  $('tr', body).remove();
 
   $('.back').toggleClass('disabled', curPage == 0);
   $('.forward').toggleClass('disabled', curPage >= lastPage);
@@ -59,20 +88,25 @@ function updateTable() {
 
   if (results.length == 0) {
     $('#search-results').hide();
-    $('#how-many').text("No matching packages were found.");
+    $('#how-many').text('No matching packages were found.');
     return;
   }
 
   $('#how-many').text(
-    "Showing results " + (start + 1) + "-" + end + " of " + results.length + ".");
+    'Showing results ' + (start + 1) + '-' + end + ' of ' + results.length + '.');
 
+  var odd = true;
   res.forEach(function(attr) {
     var info = packageData[attr];
-    body.append($('<tr/>')
-      .append($('<td/>', { text: info["name"] }))
+    body.append($('<tr/>', { pkg: attr })
+      .addClass('package')
+      .addClass(odd ? 'odd' : 'even')
+      .click(showPackage)
+      .append($('<td/>', { text: info['name'] }))
       .append($('<td/>', { text: attr }))
-      .append($('<td/>', { text: info["meta"]["description"] }))
-      );
+      .append($('<td/>', { text: info['meta']['description'] }))
+    );
+    odd = !odd;
   });
 
   $('#search-results').show();
@@ -104,6 +138,65 @@ function refilter() {
   updateTable();
 };
 
+function showPackage() {
+  var attr = $(this).attr('pkg');
+  var info = packageData[attr];
+
+  if ($(this).attr('expanded')) {
+    $(this).removeAttr('expanded').next().remove();
+    return;
+  }
+
+  var details = $('#details-template').clone().removeAttr('id').show();
+
+  var nixExpr = info['meta']['position'];
+  if (typeof nixExpr == 'string') {
+    var n = nixExpr.lastIndexOf(':');
+    var file = nixExpr.slice(0, n);
+    var line = nixExpr.slice(n + 1);
+    // FIXME: link to correct revision.
+    var url = 'https://github.com/NixOS/nixpkgs/blob/master/' + file + '#L' + line;
+    $('.nix-expr', details).empty().append($('<a/>', { href: url }).text(file));
+  }
+
+  var platforms = info['meta']['platforms'];
+  if (Array.isArray(platforms) && platforms.length > 0) {
+    var p = $('.platforms', details).empty();
+    var first = true;
+    platforms.forEach(function (system) {
+      if (system != 'i686-linux' && system != 'x86_64-linux' && system != 'x86_64-darwin') return;
+      if (!first) p.append(document.createTextNode(', '));
+      first = false;
+      var url = 'http://hydra.nixos.org/job/nixpkgs/trunk/' + attr + '.' + system;
+      p.append($('<a/>', { href: url }).append($('<tt/>').text(system)));
+    });
+  }
+
+  var homepage = info['meta']['homepage'];
+  if (typeof homepage == 'string')
+    $('.homepage', details).empty().append($('<a/>', { href: homepage }).text(homepage));
+
+  // FIXME: hande lists and attrsets of licenses.
+  var license = info['meta']['license'];
+  if (typeof license == 'string')
+    $('.license', details).empty().text(license);
+
+  var maintainers = info['meta']['maintainers'];
+  if (Array.isArray(maintainers) && maintainers.length > 0)
+    // FIXME: check whether elements are strings.
+    $('.maintainers', details).empty().text(maintainers.join(', '));
+
+  var longDescription = info['meta']['longDescription'];
+  if (typeof longDescription == 'string')
+    $('.long-description', details).empty().addClass("pre").text(longDescription);
+
+  $(this).after($('<tr/>')
+    .addClass('details')
+    .append($('<td/>', { colspan: 3 })
+      .append(details))
+  ).attr('expanded', 1);
+};
+
 $(document).ready(function() {
   refilter();
 
@@ -114,6 +207,6 @@ $(document).ready(function() {
 //]]>
 </script>
 
-<script src="[%root%]nixpkgs/packages.json"></script>
+<script src='[%root%]nixpkgs/packages.json'></script>
 
 [% END %]

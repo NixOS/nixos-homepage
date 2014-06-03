@@ -224,3 +224,27 @@ tr.news-header {
   margin-top: 1em;
   margin-bottom: 0em;
 }
+
+
+/* Package search. */
+
+table#search-results tbody tr.package {
+    cursor: pointer;
+}
+
+table#search-results tr.odd > td {
+    background-color: #f5f5f5;
+}
+
+table#search-results tr.details > td:hover {
+    background-color: white;
+}
+
+div.package-details th, div.package-details td {
+    border-top: 0;
+}
+
+div.package-details td.pre {
+    white-space: pre-wrap;
+    font-family: monospace;
+}
