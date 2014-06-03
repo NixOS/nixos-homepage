@@ -1,0 +1,119 @@
+[% WRAPPER layout.tt title="Search packages" menu='nixos' %]
+
+<div class="page-header">
+  <h1>Search packages</h1>
+</div>
+
+<p>
+  <input name="query" type="text" class="search-query span2" placeholder="Search" id="search" value="" autofocus="autofocus"/>
+</p>
+
+<hr />
+
+<p><em id="how-many">Loading…</em></p>
+
+<table class="table table-striped" id="search-results">
+  <thead>
+    <tr>
+      <th>Package name</th>
+      <th>Attribute name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<ul class="pager">
+  <li class='back'><a href="javascript:void(0)" onclick="curPage = 0; updateTable();">« First</a></li>
+  <li class='back'><a href="javascript:void(0)" onclick="curPage--; updateTable();">‹ Previous</a></li>
+  <li class='forward'><a href="javascript:void(0)" onclick="curPage++; updateTable();">Next ›</a></li>
+  <li class='forward'><a href="javascript:void(0)" onclick="curPage = lastPage; updateTable();">Last »</a></li>
+</ul>
+
+<script>
+//<![CDATA[
+var packageData = [];
+
+var results = [];
+
+var resultsPerPage = 15;
+
+var curPage = 0;
+var lastPage = 0;
+
+function updateTable() {
+  if (0 > curPage) curPage = 0;
+  if (curPage > lastPage) curPage = lastPage;
+
+  var body = $("#search-results tbody");
+  $("tr", body).remove();
+
+  $('.back').toggleClass('disabled', curPage == 0);
+  $('.forward').toggleClass('disabled', curPage >= lastPage);
+
+  var start = curPage * resultsPerPage;
+  var end = start + resultsPerPage;
+  if (end > results.length) end = results.length;
+  res = results.slice(start, end);
+
+  if (results.length == 0) {
+    $('#search-results').hide();
+    $('#how-many').text("No matching packages were found.");
+    return;
+  }
+
+  $('#how-many').text(
+    "Showing results " + (start + 1) + "-" + end + " of " + results.length + ".");
+
+  res.forEach(function(attr) {
+    var info = packageData[attr];
+    var row = $('<tr/>');
+    $('<td/>', { text: info["name"] }).appendTo(row);
+    $('<td/>', { text: attr }).appendTo(row);
+    $('<td/>', { text: info["meta"]["description"] }).appendTo(row);
+    row.appendTo(body);
+  });
+
+  $('#search-results').show();
+};
+
+function refilter() {
+  var attrs = [];
+
+  var filter = $('#search').val().trim().toLowerCase();
+
+  Object.keys(packageData).forEach(function (attr) {
+    var info = packageData[attr];
+    var description = info['meta']['description'] || '';
+    var longDescription = info['meta']['longDescription'] || '';
+    if (filter == ''
+        || attr.toLowerCase().contains(filter)
+        || info['name'].toLowerCase().contains(filter)
+        || description.toLowerCase().contains(filter)
+        || longDescription.toLowerCase().contains(filter)
+        )
+      attrs.push(attr);
+  });
+
+  results = attrs.sort();
+
+  curPage = 0;
+  lastPage = (results.length - 1) / resultsPerPage >> 0;
+
+  updateTable();
+};
+
+$(document).ready(function() {
+  refilter();
+
+  $('#search').on('input', function() {
+    refilter();
+  });
+});
+//]]>
+</script>
+
+<script src="[%root%]nixpkgs/packages.json"></script>
+
+[% END %]
