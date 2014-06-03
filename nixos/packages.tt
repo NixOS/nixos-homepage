@@ -5,7 +5,9 @@
 </div>
 
 <p>
-  <input name='query' type='text' class='search-query span2' placeholder='Search' id='search' value='' autofocus='autofocus'/>
+  <input name='query' type='text' class='search-query span3'
+         placeholder='Search by name or description'
+         id='search' value='' autofocus='autofocus'/>
 </p>
 
 <hr />
@@ -130,7 +132,13 @@ function refilter() {
       attrs.push(attr);
   });
 
-  results = attrs.sort();
+  results = attrs.sort(function(a, b) {
+    var ia = packageData[a]['name'].toLowerCase();
+    var ib = packageData[b]['name'].toLowerCase();
+    if (ia < ib) return -1;
+    if (ia > ib) return 1;
+    return 0;
+  });
 
   curPage = 0;
   lastPage = (results.length - 1) / resultsPerPage >> 0;
