@@ -14,6 +14,8 @@
 
 <p><em id='how-many'>Loading…</em></p>
 
+<div id='results-wrapper' class='hide'>
+
 <table class='table table-hover' id='search-results'>
   <thead>
     <tr>
@@ -32,6 +34,8 @@
   <li class='forward'><a href='javascript:void(0)' onclick='curPage++; updateTable();'>Next ›</a></li>
   <li class='forward'><a href='javascript:void(0)' onclick='curPage = lastPage; updateTable();'>Last »</a></li>
 </ul>
+
+</div>
 
 <div id='details-template' class='package-details hide'>
   <table>
@@ -89,7 +93,7 @@ function updateTable() {
   res = results.slice(start, end);
 
   if (results.length == 0) {
-    $('#search-results').hide();
+    $('#results-wrapper').hide();
     $('#how-many').text('No matching packages were found.');
     return;
   }
@@ -111,7 +115,7 @@ function updateTable() {
     odd = !odd;
   });
 
-  $('#search-results').show();
+  $('#results-wrapper').show();
 };
 
 function refilter() {
