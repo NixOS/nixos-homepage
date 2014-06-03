@@ -9,7 +9,8 @@
 
 <div class="jumbotron">
   <img class="right-logo" src="[%root%]logo/nixos-logo-only-hires.png" alt="NixOS Logo"/>
-  <h1>Nix: The Purely Functional Package Manager</h1>
+  <h1>Nix</h1>
+  <h2>The Purely Functional Package Manager</h2>
 
   <p class="lead">Nix is a powerful package manager for Linux and
   other Unix systems that makes package management reliable and

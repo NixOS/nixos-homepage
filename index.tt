@@ -7,7 +7,8 @@
 
 <div class="jumbotron">
   <img class="right-logo" src="[%root%]logo/nixos-logo-only-hires.png" alt="NixOS Logo"/>
-  <h1>NixOS: The Purely Functional Linux Distribution</h1>
+  <h1>NixOS</h1>
+  <h2>The Purely Functional Linux Distribution</h2>
 
   <p class="lead">NixOS is a Linux distribution with a unique approach
   to package and configuration management.  Built on top of the <a
