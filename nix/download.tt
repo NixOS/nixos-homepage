@@ -9,11 +9,11 @@
 <p>The latest and recommended version of Nix is
 <strong>[%latestNixVersion%]</strong>, released 11 April 2014. The
 quickest way to install it on Linux and Mac OS X is to run the
-following in a shell:
+following in a shell (as a user other than 'root'):
 
 <pre><span class="muted">$</span> bash &lt;(curl <a href="[%root%]nix/install">https://nixos.org/nix/install</a>)</pre>
 
-This script does require that you have <tt>sudo</tt> access to root
+This script does require that you have <tt>sudo</tt> access to 'root'
 (since it needs to create the directory <tt>/nix</tt>). See <a
 href="[%nixManual%]#chap-installation">the manual</a> for more
 information.</p>
