@@ -127,22 +127,26 @@ function updateTable() {
 };
 
 function refilter() {
-  var attrs = [];
+  var attrs = Object.keys(packageData);
 
-  var filter = $('#search').val().trim().toLowerCase();
+  var words = $('#search').val().toLowerCase().split(/ +/).filter(Boolean);
 
-  Object.keys(packageData).forEach(function (attr) {
-    var info = packageData[attr];
-    var description = info['meta']['description'] || '';
-    var longDescription = info['meta']['longDescription'] || '';
-    if (filter == ''
-        || attr.toLowerCase().indexOf(filter) != -1
-        || info['name'].toLowerCase().indexOf(filter) != -1
-        || description.toLowerCase().indexOf(filter) != -1
-        || longDescription.toLowerCase().indexOf(filter) != -1
-        )
-      attrs.push(attr);
-  });
+  if (words.length > 0) {
+    attrs = attrs.filter(function (attr) {
+      var info = packageData[attr];
+      var description = info['meta']['description'] || '';
+      var longDescription = info['meta']['longDescription'] || '';
+
+      function match(word) {
+        return (attr.toLowerCase().indexOf(word) != -1
+          || info['name'].toLowerCase().indexOf(word) != -1
+          || description.toLowerCase().indexOf(word) != -1
+          || longDescription.toLowerCase().indexOf(word) != -1);
+      };
+
+      return words.every(match);
+    });
+  }
 
   results = attrs.sort(function(a, b) {
     var ia = packageData[a]['name'].toLowerCase();
