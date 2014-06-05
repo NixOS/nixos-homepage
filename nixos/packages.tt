@@ -40,6 +40,14 @@
 <div id='details-template' class='package-details hide'>
   <table>
     <tr>
+      <th>Install command</th>
+      <td>
+        <tt><span class="muted">$</span> nix-env -iA nixos.pkgs.<span class='attrname'></span></tt> <em class='muted'>(NixOS channel)</em>
+        <br/>
+        <tt><span class="muted">$</span> nix-env -iA nixpkgs.<span class='attrname'></span></tt> <em class='muted'>(Nixpkgs channel)</em>
+      </td>
+    </tr>
+    <tr>
       <th>Nix expression</th>
       <td class='nix-expr'><em>Not specified</em></td>
     </tr>
@@ -161,6 +169,8 @@ function showPackage() {
 
   var details = $('#details-template').clone().removeAttr('id').show();
 
+  $('.attrname', details).text(attr);
+
   var nixExpr = info['meta']['position'];
   if (typeof nixExpr == 'string') {
     var n = nixExpr.lastIndexOf(':');
@@ -176,7 +186,7 @@ function showPackage() {
     var p = $('.platforms', details).empty();
     var first = true;
     platforms.forEach(function (system) {
-      if (system != 'i686-linux' && system != 'x86_64-linux' && system != 'x86_64-darwin') return;
+      if (system != 'i686-linux' && system != 'x86_64-linux') return;
       if (!first) p.append(document.createTextNode(', '));
       first = false;
       var url = 'http://hydra.nixos.org/job/nixpkgs/trunk/' + attr + '.' + system;
