@@ -46,7 +46,7 @@
           [% ELSIF menu == 'disnix' %]
             <a class="brand" href="[%root%]disnix">Disnix</a>
           [% ELSE %]
-            <a class="brand" href="[%root%]">NixOS</a>
+            <a class="brand" href="[% (root == '' ? '/' : root) %]">NixOS</a>
           [% END %]
           <div class="nav-collapse collapse">
             [% IF menu == 'nixos' %]
@@ -129,7 +129,7 @@
         <hr />
         <center>
         <small class="muted">
-          Last changed on [% modifiedAt.substr(0, 10) %] by [% modifiedBy %]
+          Last changed on [% modifiedAt.substr(0, 10) %]
           · <a href="https://github.com/NixOS/nixos-homepage/blob/master/[%fileName%]">Page source</a>
         </small>
         </center>
