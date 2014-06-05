@@ -43,8 +43,6 @@
       <th>Install command:</th>
       <td>
         <tt><span class="muted">$</span> nix-env -iA nixos.pkgs.<span class='attrname'></span></tt> <em class='muted'>(NixOS channel)</em>
-        <br/>
-        <tt><span class="muted">$</span> nix-env -iA nixpkgs.<span class='attrname'></span></tt> <em class='muted'>(Nixpkgs channel)</em>
       </td>
     </tr>
     <tr>
