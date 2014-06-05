@@ -162,10 +162,10 @@ function showPackage() {
   var attr = $(this).attr('pkg');
   var info = packageData[attr];
 
-  if ($(this).attr('expanded')) {
-    $(this).removeAttr('expanded').next().remove();
-    return;
-  }
+  var expanded = $(this).attr('expanded');
+  $('tr.details', $(this).parent()).remove();
+  $('tr', $(this).parent()).removeAttr('expanded');
+  if (expanded) return;
 
   var details = $('#details-template').clone().removeAttr('id').show();
 
