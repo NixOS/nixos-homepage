@@ -40,7 +40,7 @@
 <div id='details-template' class='package-details hide'>
   <table>
     <tr>
-      <th>Install command</th>
+      <th>Install command:</th>
       <td>
         <tt><span class="muted">$</span> nix-env -iA nixos.pkgs.<span class='attrname'></span></tt> <em class='muted'>(NixOS channel)</em>
         <br/>
@@ -48,27 +48,27 @@
       </td>
     </tr>
     <tr>
-      <th>Nix expression</th>
+      <th>Nix expression:</th>
       <td class='nix-expr'><em>Not specified</em></td>
     </tr>
     <tr>
-      <th>Platforms</th>
+      <th>Platforms:</th>
       <td class='platforms'><em>Not specified</em></td>
     </tr>
     <tr>
-      <th>Homepage</th>
+      <th>Homepage:</th>
       <td class='homepage'><em>Not specified</em></td>
     </tr>
     <tr>
-      <th>License</th>
+      <th>License:</th>
       <td class='license'><em>Not specified</em></td>
     </tr>
     <tr>
-      <th>Maintainers</th>
+      <th>Maintainers:</th>
       <td class='maintainers'><em>Not specified</em></td>
     </tr>
     <tr>
-      <th>Long description</th>
+      <th style='width: 10em'>Long description:</th>
       <td class='long-description'><em>Not specified</em></td>
     </tr>
   </table>

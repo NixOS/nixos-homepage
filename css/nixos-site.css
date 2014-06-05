@@ -241,6 +241,11 @@ table#search-results tr.details > td:hover {
     background-color: white;
 }
 
+div.package-details {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
 div.package-details th, div.package-details td {
     border-top: 0;
 }
