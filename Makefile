@@ -86,6 +86,6 @@ nixpkgs/packages.json.gz:
 
 nixos/manual/index.html: nixos/manual/manual.html.incl
 
-nixos/manual/manual.html.incl: nixos/manual/manual.html
+nixos/manual/manual.html.incl: nixos/manual/manual.html strip-docbook.xsl
 	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
 	mv $@.tmp $@

@@ -28,6 +28,11 @@
         </div>
       </div>
     </div>
+    <script>
+      $(document).ready(function(){
+        $("body").scrollspy({target: "#sidebar", offset: 90});
+      });
+    </script>
   </xsl:template>
 
   <xsl:template match="@*|node()">

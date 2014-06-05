@@ -1,14 +1,23 @@
-div.skip-topbar {
-    padding-top: 40px;
-    margin-bottom: 1.5em;
+/* Account for the top navbar. */
+
+body {
+    padding-top: 50px;
 }
 
 @media (max-width: 979px) {
-    div.skip-topbar {
+    body {
         padding-top: 0;
-        margin-bottom: 0;
     }
 }
+
+@media (min-width: 980px) {
+    :target {
+        padding-top: 80px;
+        margin-top: -80px;
+        display: inline-block; /* required for webkit browsers */
+    }
+}
+
 
 p {
     text-align: justify;
@@ -294,4 +303,15 @@ div.docbook code {
     background-color: inherit;
     color: inherit;
     font-size: 100%;
+}
+
+
+/* Move the side bar to the top on small screens. */
+
+@media (max-width: 767px){
+    .affix {
+        position: static;
+        width: auto;
+        top: 0;
+    }
 }

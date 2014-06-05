@@ -24,7 +24,7 @@
 
   </head>
 
-  <body [% IF spy %] data-spy="scroll" data-target="#sidebar" [% END %]>
+  <body>
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -116,8 +116,6 @@
     </div>
 
     <div class="container main">
-      <div class="skip-topbar"></div>
-
       [% IF !hideTitle %]
         <div class="page-header">
           <h1>[% title %]</h1>
