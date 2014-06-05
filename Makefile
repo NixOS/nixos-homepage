@@ -24,6 +24,7 @@ docs/papers.html: docs/papers-in.html
 
 %.html: %.tt layout.tt common.tt
 	tpage \
+	  --pre_chomp --post_chomp \
 	  --define curUri=$@ \
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
 	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
