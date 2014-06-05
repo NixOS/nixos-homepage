@@ -1,7 +1,7 @@
 HTML = index.html news.html \
   nix/index.html nix/about.html nix/download.html nix/docs.html \
   nixpkgs/index.html nixpkgs/download.html nixpkgs/docs.html \
-  nixos/about.html nixos/download.html nixos/help.html nixos/community.html nixos/packages.html \
+  nixos/about.html nixos/download.html nixos/manual/index.html nixos/help.html nixos/community.html nixos/packages.html \
   nixos/screenshots.html \
   patchelf.html hydra/index.html \
   disnix/index.html disnix/download.html disnix/docs.html \
@@ -82,4 +82,10 @@ nixpkgs/packages.json.gz:
 	nix-env -f '<nixpkgs>' -qa --json --arg config '{}' \
 	  | sed "s|$$(nix-instantiate --find-file nixpkgs)/||g" | gzip -9 > $@.tmp
 	gunzip < $@.tmp | python -mjson.tool > /dev/null
+	mv $@.tmp $@
+
+nixos/manual/index.html: nixos/manual/manual.html.incl
+
+nixos/manual/manual.html.incl: nixos/manual/manual.html
+	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
 	mv $@.tmp $@

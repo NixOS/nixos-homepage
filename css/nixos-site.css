@@ -25,14 +25,24 @@ p {
     margin-right: 3em;
 }
 
-h2 {
+h2, div.docbook h1 {
     font-weight: normal;
     font-size: 200%;
 }
 
-h3 {
+h3, div.docbook h2 {
     font-weight: normal;
     font-size: 150%;
+}
+
+h4, div.docbook h3 {
+    font-weight: normal;
+    font-size: 140%;
+}
+
+div.docbook h4 {
+    font-weight: normal;
+    font-size: 130%;
 }
 
 div.page-header {
@@ -253,4 +263,35 @@ div.package-details th, div.package-details td {
 div.package-details td.pre {
     white-space: pre-wrap;
     font-family: monospace;
+}
+
+
+/* Manual. */
+
+div.docbook section {
+    margin-top: 2em;
+}
+
+div.docbook div.example {
+    margin-top: 1.5em;
+}
+
+div.docbook br.example-break {
+    display: none;
+}
+
+div.docbook div.footnotes > br {
+    display: none;
+}
+
+div.docbook dt {
+    margin-top: 1em;
+}
+
+div.docbook code {
+    padding: 0;
+    border: 0;
+    background-color: inherit;
+    color: inherit;
+    font-size: 100%;
 }
