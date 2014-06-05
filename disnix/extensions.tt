@@ -1,9 +1,5 @@
 [% WRAPPER layout.tt title="Disnix extensions" menu='disnix' %]
 
-<div class="page-header">
-  <h1>Extensions</h1>
-</div>
-
 <p>
 Although the Disnix toolset itself provides useful features to make automated deployment
 of a distributed system possible and properties to make

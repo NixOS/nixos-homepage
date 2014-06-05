@@ -1,8 +1,4 @@
-[% WRAPPER layout.tt title="NixOS Documentation" menu='nixos' %]
-
-<div class="page-header">
-  <h1>NixOS help</h1>
-</div>
+[% WRAPPER layout.tt title="NixOS help" menu='nixos' %]
 
 <section><h2>Manual</h2>
 

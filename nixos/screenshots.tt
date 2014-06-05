@@ -1,8 +1,4 @@
-[% WRAPPER layout.tt title="NixOS Screenshots" menu='nixos' %]
-
-<div class="page-header">
-  <h1>NixOS screenshots</h1>
-</div>
+[% WRAPPER layout.tt title="NixOS screenshots" menu='nixos' %]
 
 [% BLOCK screenshot %]
 <tr>

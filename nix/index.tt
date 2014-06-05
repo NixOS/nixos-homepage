@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="Nix: The Purely Functional Package Manager" menu='nix' %]
+[% WRAPPER layout.tt title="Nix: The Purely Functional Package Manager" hideTitle=1 menu='nix' %]
 [% USE HTML %]
 
 [% BLOCK makePopover %]

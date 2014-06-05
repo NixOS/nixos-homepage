@@ -1,9 +1,5 @@
 [% WRAPPER layout.tt title="News" menu='nixos' %]
 
-<div class="page-header">
-  <h1>News</h1>
-</div>
-
 [% INSERT "all-news.xhtml" %]
 
 [% END %]

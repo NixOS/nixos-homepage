@@ -1,8 +1,4 @@
-[% WRAPPER layout.tt title="Disnix Downloads" menu='disnix' %]
-
-<div class="page-header">
-  <h1>Getting Disnix</h1>
-</div>
+[% WRAPPER layout.tt title="Getting Disnix" menu='disnix' %]
 
 <p>
 <strong>Warning:</strong> Disnix is a research project, fairly bleeding edge and

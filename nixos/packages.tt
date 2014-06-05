@@ -1,8 +1,4 @@
-[% WRAPPER layout.tt title='Search packages' menu='nixos' %]
-
-<div class='page-header'>
-  <h1>Search packages</h1>
-</div>
+[% WRAPPER layout.tt title='Search NixOS packages' menu='nixos' %]
 
 <p>
   <input name='query' type='text' class='search-query span3'

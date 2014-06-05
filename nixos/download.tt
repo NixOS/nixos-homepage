@@ -1,9 +1,5 @@
-[% WRAPPER layout.tt title="NixOS Downloads" menu='nixos' %]
+[% WRAPPER layout.tt title="Getting NixOS " _ latestNixOSVersion menu='nixos' %]
 [% PROCESS nixos/amis.tt %]
-
-<div class="page-header">
-  <h1>Getting NixOS [% latestNixOSVersion %]</h1>
-</div>
 
 <p>The latest stable release series is <strong>[% latestNixOSVersion
 %]</strong>.  Below are links to CD/DVD images and VirtualBox

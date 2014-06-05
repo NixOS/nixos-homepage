@@ -1,10 +1,5 @@
 [% WRAPPER layout.tt title="About NixOS" menu='nixos' %]
 
-<div class="page-header">
-  <h1>About NixOS</h1>
-</div>
-
-
 <p><a href="[%root%]nixos/screenshots.html"><img class="inline
 screenshot" src="[%root%]nixos/screenshots/nixos-kde42-1-small.png" alt="NixOS
 screenshot" /></a>NixOS is a GNU/Linux distribution that aims to

@@ -1,8 +1,4 @@
-[% WRAPPER layout.tt title="Disnix Support" menu='disnix' %]
-
-<div class="page-header">
-  <h1>Support</h1>
-</div>
+[% WRAPPER layout.tt title="Disnix support" menu='disnix' %]
 
 <p>If you run into problems with Disnix, there are a few ways to get help:</p>
 

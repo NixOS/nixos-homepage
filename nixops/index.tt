@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="NixOps" menu='nixops' %]
+[% WRAPPER layout.tt title="NixOps" hideTitle=1 menu='nixops' %]
 
 <div class="page-header">
   <h1>NixOps</h1>

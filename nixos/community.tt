@@ -1,9 +1,5 @@
-[% WRAPPER layout.tt title="Community" menu='nixos' %]
+[% WRAPPER layout.tt title="NixOS community" menu='nixos' %]
 [% PROCESS common.tt %]
-
-<div class="page-header">
-  <h1>NixOS community</h1>
-</div>
 
 <h3>Contributing to NixOS</h3>
 <div class="row-fluid">

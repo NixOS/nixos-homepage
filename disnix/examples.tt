@@ -1,9 +1,5 @@
 [% WRAPPER layout.tt title="Disnix examples" menu='disnix' %]
 
-<div class="page-header">
-  <h1>Examples</h1>
-</div>
-
 <p>
 We have a number of examples cases available, which demonstrate various features of Disnix.
 The example cases can be freely used under the MIT license and obtained through the

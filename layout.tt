@@ -118,6 +118,12 @@
     <div class="container main">
       <div class="skip-topbar"></div>
 
+      [% IF !hideTitle %]
+        <div class="page-header">
+          <h1>[% title %]</h1>
+        </div>
+      [% END %]
+
       [% content %]
 
       <div class="footer">

@@ -1,8 +1,4 @@
-[% WRAPPER layout.tt title="Nix Downloads" menu='nix' %]
-
-<div class="page-header">
-  <h1>Getting Nix</h1>
-</div>
+[% WRAPPER layout.tt title="Getting Nix" menu='nix' %]
 
 <section><h2>Latest release</h2>
 

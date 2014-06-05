@@ -1,9 +1,5 @@
 [% WRAPPER layout.tt title="About Nix" menu='nix' %]
 
-<div class="page-header">
-  <h1>About Nix</h1>
-</div>
-
 <p>Nix is a <em>purely functional package manager</em>.  This means
 that it treats packages like values in purely functional programming
 languages such as Haskell — they are built by functions that don’t
