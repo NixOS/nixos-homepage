@@ -12,5 +12,6 @@ stdenv.mkDerivation {
       perlPackages.TemplatePluginIOAll
       perlPackages.XMLSimple
       libxslt libxml2 imagemagick git curl
+      pkgs.xhtml1
     ];
 }
