@@ -22,7 +22,8 @@
   [% WRAPPER makePopover title="<i class='fa fa-cloud-download'></i> Get Nix" %]
 
     <p>On Linux and Mac OS X, the <strong>easiest way to
-    install Nix</strong> is to run the following shell command:</p>
+    install Nix</strong> is to run the following shell command
+    (as a user other than 'root'):</p>
 
     <pre><span class="muted">$</span> bash &lt;(curl https://nixos.org/nix/install)</pre>
 
