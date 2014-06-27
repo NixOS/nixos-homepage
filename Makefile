@@ -7,7 +7,8 @@ HTML = index.html news.html \
   disnix/index.html disnix/download.html disnix/docs.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
   docs/papers.html \
-  nixops/index.html
+  nixops/index.html \
+  nixpkgs/packages.json.gz
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*)))
 
@@ -75,7 +76,7 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml
+.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz
 endif
 
 nixpkgs/packages.json.gz:

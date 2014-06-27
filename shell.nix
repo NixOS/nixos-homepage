@@ -7,6 +7,7 @@ stdenv.mkDerivation {
 
   buildInputs =
     [ perl
+      python
       perlPackages.TemplateToolkit
       perlPackages.TemplatePluginJSONEscape
       perlPackages.TemplatePluginIOAll
