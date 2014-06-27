@@ -305,13 +305,11 @@ div.docbook code {
     font-size: 100%;
 }
 
+div.docbook div.toc {
+    margin-bottom: 3em;
+    border-bottom: 1px solid #f0f0f0;
+}
 
-/* Move the side bar to the top on small screens. */
-
-@media (max-width: 767px){
-    .affix {
-        position: static;
-        width: auto;
-        top: 0;
-    }
+div.docbook div.toc dd {
+    margin-left: 2em;
 }
