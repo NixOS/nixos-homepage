@@ -1,0 +1,5 @@
+[% WRAPPER layout.tt title="NixOps manual" menu='nixops' hideTitle=1 %]
+
+[% INSERT "nixops/manual/manual.html.incl" %]
+
+[% END %]
