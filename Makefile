@@ -8,6 +8,7 @@ HTML = index.html news.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
   docs/papers.html \
   nixops/index.html \
+  nixops/manual/index.html \
   nixpkgs/packages.json.gz
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*)))
@@ -88,5 +89,11 @@ nixpkgs/packages.json.gz:
 nixos/manual/index.html: nixos/manual/manual.html.incl
 
 nixos/manual/manual.html.incl: nixos/manual/manual.html strip-docbook.xsl
+	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
+	mv $@.tmp $@
+
+nixops/manual/index.html: nixops/manual/manual.html.incl
+
+nixops/manual/manual.html.incl: nixops/manual/manual.html strip-docbook.xsl
 	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
 	mv $@.tmp $@

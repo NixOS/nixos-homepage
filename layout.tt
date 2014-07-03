@@ -43,6 +43,9 @@
             <a class="brand" href="[%root%]nixpkgs">Nixpkgs</a>
           [% ELSIF menu == 'nixops' %]
             <a class="brand" href="[%root%]nixops">NixOps</a>
+              <ul class="nav pull-left">
+                <li><a href="[%root%]nixops/manual/">Manual</a></li>
+              </ul>
           [% ELSIF menu == 'disnix' %]
             <a class="brand" href="[%root%]disnix">Disnix</a>
           [% ELSE %]
