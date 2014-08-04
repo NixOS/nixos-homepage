@@ -44,7 +44,7 @@ all-news.xhtml: news.xml news.xsl
 
 index.html: latest-news.xhtml nixpkgs-commits.json nixpkgs-commit-stats.json blogs.json
 
-nixos/download.html: nixos/amis.tt
+nixos/download.html: nixos/amis.json
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
@@ -52,9 +52,9 @@ latest-news.xhtml: news.xml news.xsl
 check:
 	checklink $(HTML)
 
-nixos/amis.tt: nixos/amis.nix
-	latest=$$(sed 's/.*latestNixOSVersion.*"\(.*\)".*/\1/; t; d' common.tt); \
-	(echo "[% amis => {"; < $< sed 's/.*'$$latest'.*"\(.*\)"\.ebs.*"\(.*\)".*/  "\1" => \"\2\"/; t; d'; echo "} %]") > $@
+nixos/amis.json: nixos/amis.nix
+	nix-instantiate --eval --strict --json $< > $@.tmp
+	mv $@.tmp $@
 
 nixos/amis.nix:
 	curl --fail -L https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > $@.tmp

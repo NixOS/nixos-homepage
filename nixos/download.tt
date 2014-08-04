@@ -1,5 +1,6 @@
 [% WRAPPER layout.tt title="Getting NixOS " _ latestNixOSVersion menu='nixos' %]
-[% PROCESS nixos/amis.tt %]
+[% USE IO.All %]
+[% USE JSON.Escape %]
 
 <p>The latest stable release series is <strong>[% latestNixOSVersion
 %]</strong>.  Below are links to CD/DVD images and VirtualBox
@@ -69,15 +70,19 @@ by using one of the AMIs listed below.</p>
 <div class="row">
 <table class="table span3">
   <thead>
-    <tr><th>Region</th><th>AMI</th><th></th></tr>
+    <tr><th>Region</th><th>Type</th><th>AMI</th><th></th></tr>
   </thead>
   <tbody>
+    [% amis = JSON.Escape.json_decode(IO.All.new('nixos/amis.json').all).$latestNixOSVersion %]
     [% FOREACH region IN amis.keys.sort %]
-      <tr>
-        <td><tt>[% region %]</tt></td>
-        <td><tt>[% amis.$region %]</tt></td>
-        <td><a href="https://console.aws.amazon.com/ec2/home?region=[%region%]#launchAmi=[%amis.$region%]" class="btn btn-primary btn-mini">Launch</a></td>
-      </tr>
+      [% FOREACH type IN amis.$region.keys.sort; ami = amis.$region.$type %]
+        <tr>
+          <td><tt>[% region %]</tt></td>
+          <td>[% type %]</td>
+          <td><tt>[% ami %]</tt></td>
+        <td><a href="https://console.aws.amazon.com/ec2/home?region=[%region%]#launchAmi=[%ami%]" class="btn btn-primary btn-mini">Launch</a></td>
+        </tr>
+      [% END %]
     [% END %]
   </tbody>
 </table>
@@ -86,11 +91,11 @@ by using one of the AMIs listed below.</p>
 <p>You can create an instance using the AWS Management Console by
 clicking one of the Launch buttons. You can also create an instance
 from the command line. For instance, to create an instance in region
-<tt>[% region = amis.keys.sort.0; region %]</tt> using the EC2 API
+<tt>[% region = "eu-west-1"; region %]</tt> using the EC2 API
 tools, just run:</p>
 
 <pre>
-$ ec2-run-instances [% amis.$region %] --region [% region %] -k <em>my-key-pair</em>
+$ ec2-run-instances [% amis.$region.ebs %] --region [% region %] -k <em>my-key-pair</em>
 </pre>
 
 </section>
