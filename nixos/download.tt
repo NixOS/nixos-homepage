@@ -27,10 +27,12 @@ installer as well as X11, KDE 4 and several applications.  It’s a
 <em>live CD</em>, so it allows you to get an impression of NixOS (and
 the Nix package manager) before installing it.</p>
 
+[% prefix = "https://nixos.org/releases/nixos/latest-" %]
+
 <ul>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD</a>
+  <li><a href="[%prefix%]iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]iso-graphical-x86_64-linux-sha256">SHA-256</a>)
     <span class="label label-info">Recommended for most users</span></li>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-graphical-i686-linux">Graphical live CD, 32-bit Intel/AMD</a></li>
+  <li><a href="[%prefix%]iso-graphical-i686-linux">Graphical live CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]iso-graphical-i686-linux-sha256">SHA-256</a>)</li>
 </ul>
 
 <p>The <strong>minimal installation CD</strong> does not contain X11,
@@ -38,8 +40,8 @@ and is therefore a lot smaller.  You have to run the installer from
 the console.  It contains a number of rescue tools.</p>
 
 <ul>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-x86_64-linux">Minimal installation CD, 64-bit Intel/AMD</a></li>
-  <li><a href="http://nixos.org/releases/nixos/latest-iso-minimal-i686-linux">Minimal installation CD, 32-bit Intel/AMD</a></li>
+  <li><a href="[%prefix%]iso-minimal-x86_64-linux">Minimal installation CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]iso-minimal-x86_64-linux-sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]iso-minimal-i686-linux">Minimal installation CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]iso-minimal-i686-linux-sha256">SHA-256</a>)</li>
 </ul>
 
 </section>
@@ -56,8 +58,8 @@ To obtain a root shell, run <tt>sudo -i</tt> in the KDE terminal
 (<tt>konsole</tt>).</p>
 
 <ul>
-  <li><a href="http://nixos.org/releases/nixos/latest-ova-x86_64-linux">VirtualBox appliance, 64-bit Intel/AMD</a></li>
-  <li><a href="http://nixos.org/releases/nixos/latest-ova-i686-linux">VirtualBox appliance, 32-bit Intel/AMD</a></li>
+  <li><a href="[%prefix%]ova-x86_64-linux">VirtualBox appliance, 64-bit Intel/AMD</a> (<a href="[%prefix%]ova-x86_64-linux-sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]ova-i686-linux">VirtualBox appliance, 32-bit Intel/AMD</a> (<a href="[%prefix%]ova-i686-linux-sha256">SHA-256</a>)</li>
 </ul>
 
 </section>
