@@ -15,7 +15,7 @@ running <tt>nixos-checkout</tt>.</p>
 channel, which always contains the latest version of Nixpkgs:</p>
 
 <pre class="code">
-$ nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+$ nix-channel --add http://nixos.org/channels/nixpkgs-unstable
 $ nix-channel --update
 </pre>
 
