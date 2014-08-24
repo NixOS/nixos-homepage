@@ -8,7 +8,7 @@ appliances containing the <a
 href="https://nixos.org/channels/nixos-[%latestNixOSVersion%]">latest
 release</a> in this series.</p>
 
-<section><h2>Installation CDs/DVDs</h2>
+<section><h2 id="installation-isos">Installation CDs/DVDs</h2>
 
 <p>You can install NixOS on physical hardware by burning one of the CD
 images onto a blank CD/DVD disk, or <a
@@ -46,7 +46,7 @@ the console.  It contains a number of rescue tools.</p>
 
 </section>
 
-<section><h2>VirtualBox appliances</h2>
+<section><h2 id="virtualbox-appliances">VirtualBox appliances</h2>
 
 <p>This is a demo appliance for VirtualBox (in OVA format) that has
 X11 and KDE enabled, as well as the VirtualBox guest additions.  To
@@ -64,7 +64,7 @@ To obtain a root shell, run <tt>sudo -i</tt> in the KDE terminal
 
 </section>
 
-<section><h2>Amazon EC2 AMIs</h2>
+<section><h2 id="amazon-ec2">Amazon EC2 AMIs</h2>
 
 <p>If you are an EC2 user, you can fire up a NixOS instance instantly
 by using one of the AMIs listed below.</p>
