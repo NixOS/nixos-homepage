@@ -1,15 +1,40 @@
+default: all
+
+
 HTML = index.html news.html \
   nix/index.html nix/about.html nix/download.html nix/docs.html \
   nixpkgs/index.html nixpkgs/download.html nixpkgs/docs.html \
-  nixos/about.html nixos/download.html nixos/manual/index.html nixos/help.html nixos/community.html nixos/packages.html \
+  nixos/about.html nixos/download.html nixos/help.html nixos/community.html nixos/packages.html \
   nixos/screenshots.html \
   patchelf.html hydra/index.html \
   disnix/index.html disnix/download.html disnix/docs.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
   docs/papers.html \
   nixops/index.html \
-  nixops/manual/index.html \
   nixpkgs/packages.json.gz
+
+
+ifneq ($(wildcard nixos/manual/manual.html),)
+HTML += nixos/manual/index.html
+
+nixos/manual/index.html: nixos/manual/manual.html.incl
+
+nixos/manual/manual.html.incl: nixos/manual/manual.html strip-docbook.xsl
+	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
+	mv $@.tmp $@
+endif
+
+
+ifneq ($(wildcard nixops/manual/manual.html),)
+HTML +=  nixops/manual/index.html
+
+nixops/manual/index.html: nixops/manual/manual.html.incl
+
+nixops/manual/manual.html.incl: nixops/manual/manual.html strip-docbook.xsl
+	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
+	mv $@.tmp $@
+endif
+
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*)))
 
@@ -84,16 +109,4 @@ nixpkgs/packages.json.gz:
 	nix-env -f '<nixpkgs>' -qa --json --arg config '{}' \
 	  | sed "s|$$(nix-instantiate --find-file nixpkgs)/||g" | gzip -9 > $@.tmp
 	gunzip < $@.tmp | python -mjson.tool > /dev/null
-	mv $@.tmp $@
-
-nixos/manual/index.html: nixos/manual/manual.html.incl
-
-nixos/manual/manual.html.incl: nixos/manual/manual.html strip-docbook.xsl
-	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
-	mv $@.tmp $@
-
-nixops/manual/index.html: nixops/manual/manual.html.incl
-
-nixops/manual/manual.html.incl: nixops/manual/manual.html strip-docbook.xsl
-	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
 	mv $@.tmp $@
