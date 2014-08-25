@@ -127,15 +127,18 @@
 
       [% content %]
 
+      [% IF modifiedAt %]
       <div class="footer">
         <hr />
         <center>
         <small class="muted">
           Last changed on [% modifiedAt.substr(0, 10) %]
           · <a href="https://github.com/NixOS/nixos-homepage/blob/master/[%fileName%]">Page source</a>
+          · <a href="https://github.com/NixOS/nixos-homepage/edit/master/[%fileName%]">Edit</a>
         </small>
         </center>
       </div>
+      [% END %]
 
     </div>
 
