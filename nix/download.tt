@@ -7,7 +7,7 @@
 quickest way to install it on Linux and Mac OS X is to run the
 following in a shell (as a user other than <tt>root</tt>):
 
-<pre><span class="muted">$</span> bash &lt;(curl <a href="[%root%]nix/install">https://nixos.org/nix/install</a>)</pre>
+<pre><span class="muted">$</span> curl <a href="[%root%]nix/install">https://nixos.org/nix/install</a> | sh</pre>
 
 This script does require that you have <tt>sudo</tt> access to
 <tt>root</tt> (since it needs to create the directory
