@@ -3,17 +3,12 @@
 <p>The <em>Nix Packages collection</em> (Nixpkgs) is a set of nearly
 6,500 packages for the Nix package manager, released under a <a
 href="https://github.com/NixOS/nixpkgs/blob/master/COPYING">permissive
-MIT/X11 license</a>.  It supports a number of platforms (though not
+MIT/X11 license</a>.  It supports the following platforms (though not
 all packages work on all platforms):</p>
 
 <ul>
   <li>GNU/Linux on 32-bit and 64-bit x86 (<tt>i686-linux</tt> and <tt>x86_64-linux</tt>)</li>
-  <li>Mac OS X (<tt>i686-darwin</tt> and <tt>x86_64-darwin</tt>)</li>
-  <li>FreeBSD (<tt>i686-freebsd</tt> and <tt>x86_64-freebsd</tt>)</li>
-  <li>OpenBSD (<tt>i686-openbsd</tt>)</li>
-  <!--
-  <li>Windows / Cygwin (<tt>i686-cygwin</tt>)</li>
-  -->
+  <li>Mac OS X (<tt>x86_64-darwin</tt>)</li>
 </ul>
 
 <p>On GNU/Linux, the packages in Nixpkgs are ‘pure’, meaning that they
