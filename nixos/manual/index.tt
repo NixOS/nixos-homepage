@@ -1,5 +1,0 @@
-[% WRAPPER layout.tt title="NixOS manual" menu='nixos' hideTitle=1 %]
-
-[% INSERT "nixos/manual/manual.html.incl" %]
-
-[% END %]

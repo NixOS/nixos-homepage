@@ -1,3 +1,5 @@
+rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
+
 default: all
 
 
@@ -14,25 +16,29 @@ HTML = index.html news.html \
   nixpkgs/packages.json.gz
 
 
-ifneq ($(wildcard nixos/manual/manual.html),)
-HTML += nixos/manual/index.html
+NIXOS_MANUAL_IN = nixos/manual-raw/share/doc/nixos
+NIXOS_MANUAL_OUT = nixos/manual
 
-nixos/manual/index.html: nixos/manual/manual.html.incl
+ifneq ($(wildcard $(NIXOS_MANUAL_IN)),)
 
-nixos/manual/manual.html.incl: nixos/manual/manual.html strip-docbook.xsl
-	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
-	mv $@.tmp $@
+all: $(NIXOS_MANUAL_OUT)
+
+$(NIXOS_MANUAL_OUT): $(call rwildcard, $(NIXOS_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT)
+
 endif
 
 
 ifneq ($(wildcard nixops/manual/manual.html),)
-HTML +=  nixops/manual/index.html
+
+HTML += nixops/manual/index.html
 
 nixops/manual/index.html: nixops/manual/manual.html.incl
 
 nixops/manual/manual.html.incl: nixops/manual/manual.html strip-docbook.xsl
 	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
 	mv $@.tmp $@
+
 endif
 
 
@@ -52,10 +58,8 @@ docs/papers.html: docs/papers-in.html
 %.html: %.tt layout.tt common.tt
 	tpage \
 	  --pre_chomp --post_chomp \
-	  --define curUri=$@ \
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
 	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
-	  --define curRev="`git log -1 --pretty='%h' $<`" \
 	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
 	  --define fileName=$< \
 	  --pre_process=common.tt $< > $@.tmp

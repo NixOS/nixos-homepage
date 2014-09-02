@@ -10,13 +10,54 @@
   <xsl:output method="html" omit-xml-declaration="yes" indent="no"/>
 
   <xsl:template match="/">
+    <xsl:apply-templates select="/x:html/x:body/x:div[@class!='navheader' and @class!='navfooter']" mode="top" />
+  </xsl:template>
+
+  <xsl:template match="*" mode="top">
+
     <div class="page-header">
-      <h1><xsl:apply-templates select="//x:div[@class='book']/x:div[@class='titlepage']//x:h1/node()"/></h1>
-      <h2><xsl:apply-templates select="//x:div[@class='book']/x:div[@class='titlepage']//x:h2/node()"/></h2>
+      <xsl:if test="@class='book'">
+        <h1><xsl:apply-templates select="//x:div[@class='titlepage']//x:h1/node()"/></h1>
+        <h2><xsl:apply-templates select="//x:div[@class='titlepage']//x:h2/node()"/></h2>
+      </xsl:if>
+      <xsl:if test="@class!='book'">
+        <h1>NixOS Manual</h1>
+      </xsl:if>
     </div>
+
+    <xsl:if test="//x:link/@rel">
+      <ul class="pager">
+        <xsl:if test="@class='book'">
+          <xsl:attribute name="class">hidden</xsl:attribute>
+        </xsl:if>
+        <xsl:if test="@class!='book'">
+          <xsl:attribute name="class">pager</xsl:attribute>
+        </xsl:if>
+        <xsl:if test="//x:link[@rel='prev']">
+          <li class="previous">
+            <a accesskey="p"><xsl:attribute name="href"><xsl:value-of select="//x:link[@rel='prev']/@href"/></xsl:attribute>
+            ← <xsl:value-of select="//x:link[@rel='prev']/@title" /></a>
+          </li>
+        </xsl:if>
+        <xsl:if test="//x:link[@rel='up']">
+          <li class="up">
+            <a accesskey="u"><xsl:attribute name="href"><xsl:value-of select="//x:link[@rel='up']/@href"/></xsl:attribute>
+            ↑ <xsl:value-of select="//x:link[@rel='up']/@title" /></a>
+          </li>
+        </xsl:if>
+        <xsl:if test="//x:link[@rel='next']">
+          <li class="next">
+            <a accesskey="n"><xsl:attribute name="href"><xsl:value-of select="//x:link[@rel='next']/@href"/></xsl:attribute>
+            <xsl:value-of select="//x:link[@rel='next']/@title" /> →</a>
+          </li>
+        </xsl:if>
+      </ul>
+    </xsl:if>
+
     <div class="docbook">
-      <xsl:apply-templates select="//x:div[@class='book']"/>
+      <xsl:apply-templates />
     </div>
+
   </xsl:template>
 
   <xsl:template match="@*|node()">
@@ -25,7 +66,9 @@
     </xsl:copy>
   </xsl:template>
 
+  <!--
   <xsl:template match="x:div[@class='chapter' or @class='appendix']//x:div[@class='toc']" />
+  -->
 
   <xsl:template match="x:div[@class='list-of-examples' or @class='author']" />
 
