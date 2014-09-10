@@ -4,14 +4,15 @@ default: all
 HTML = index.html news.html \
   nix/index.html nix/about.html nix/download.html nix/docs.html \
   nixpkgs/index.html nixpkgs/download.html nixpkgs/docs.html \
-  nixos/about.html nixos/download.html nixos/support.html nixos/community.html nixos/packages.html \
+  nixos/about.html nixos/download.html nixos/support.html nixos/community.html nixos/packages.html nixos/options.html \
   nixos/screenshots.html \
   patchelf.html hydra/index.html \
   disnix/index.html disnix/download.html disnix/docs.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
   docs/papers.html \
   nixops/index.html \
-  nixpkgs/packages.json.gz
+  nixpkgs/packages.json.gz \
+  nixos/options.json.gz
 
 
 ifneq ($(wildcard nixos/manual/manual.html),)
@@ -102,7 +103,7 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz
+.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz
 endif
 
 nixpkgs/packages.json.gz:
@@ -110,3 +111,8 @@ nixpkgs/packages.json.gz:
 	  | sed "s|$$(nix-instantiate --find-file nixpkgs)/||g" | gzip -9 > $@.tmp
 	gunzip < $@.tmp | python -mjson.tool > /dev/null
 	mv $@.tmp $@
+
+nixos/options.json.gz:
+	wget https://nixcloud.io/options.json.gz
+	mv options.json.gz nixos/
+	echo "FIXME, please correct this source ASAP"
