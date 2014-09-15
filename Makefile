@@ -14,6 +14,7 @@ HTML = index.html news.html \
   nixpkgs/packages.json.gz \
   nixos/options.json.gz
 
+DOCDIR=$(shell nix-build -A config.system.build.manual.options -o manual /nix/var/nix/profiles/per-user/root/channels/nixos/nixos/)
 
 ifneq ($(wildcard nixos/manual/manual.html),)
 HTML += nixos/manual/index.html
@@ -113,6 +114,4 @@ nixpkgs/packages.json.gz:
 	mv $@.tmp $@
 
 nixos/options.json.gz:
-	wget https://nixcloud.io/options.json.gz
-	mv options.json.gz nixos/
-	echo "FIXME, please correct this source ASAP"
+	cat $(DOCDIR)/share/doc/nixos/options.json | gzip > $@
