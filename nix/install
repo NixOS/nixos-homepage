@@ -4,6 +4,8 @@
 # downloading a binary distribution and running its installer script
 # (which in turn creates and populates /nix).
 
+{ # Prevent execution if this script was only partially downloaded
+
 unpack=nix-binary-tarball-unpack
 
 require_util() {
@@ -39,3 +41,5 @@ curl -L "$url" | bzcat | tar x -C "$unpack" || oops "failed to unpack \`$url'"
 
 "$unpack"/*/install
 rm -rf "$unpack"
+
+} # End of wrapping
