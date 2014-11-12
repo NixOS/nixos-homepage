@@ -14,8 +14,6 @@ HTML = index.html news.html \
   nixpkgs/packages.json.gz \
   nixos/options.json.gz
 
-OPTIONSDIR=$(shell nix-build -A config.system.build.manual.options -o manual '<nixpkgs/nixos>')
-
 ifneq ($(wildcard nixos/manual/manual.html),)
 HTML += nixos/manual/index.html
 
@@ -114,4 +112,5 @@ nixpkgs/packages.json.gz:
 	mv $@.tmp $@
 
 nixos/options.json.gz:
-	cat $(OPTIONSDIR)/share/doc/nixos/options.json | gzip > $@
+	gzip -9 < $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -A options)/share/doc/nixos/options.json > $@.tmp
+	mv $@.tmp $@
