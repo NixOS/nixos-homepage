@@ -1,0 +1,340 @@
+[% WRAPPER layout.tt title='Search NixOS options' menu='nixos' %]
+
+<style type="text/css">
+code.option {
+   color: #08c;
+}
+
+#info {
+   display: inline-block;
+   padding: 2px 4px;
+   font-size: 11.844px;
+   font-weight: bold;
+   line-height: 14px;
+   color: #fff;
+   background-color: #468847;
+   text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+   white-space: nowrap;
+   vertical-align: baseline;
+}
+</style>
+<p>
+<form class="form-inline">
+<input name="query" type="text" class="search-query span3" placeholder="Search NixOS options" id="search" value="" autofocus="autofocus"/> 
+<div id="info">?</div> (options in selection)
+</form>
+
+<form class="form-inline">
+<input type="checkbox" name="search" value="nameCB" checked="checked" id="nameCB" onchange="update()"/>
+<label for="nameCB">path</label>
+<input type="checkbox" name="search" value="descriptionCB" checked="checked" id="descriptionCB" onchange="update()"/>
+<label for="descriptionCB">description</label>
+<input type="checkbox" name="search" value="defaultCB" checked="checked" id="defaultCB" onchange="update()"/>
+<label for="defaultCB">default</label>
+
+<input type="checkbox" name="search" value="exampleCB" checked="checked" id="exampleCB" onchange="update()"/>
+<label for="exampleCB">example</label>
+
+<input type="checkbox" name="search" value="declarationsCB" checked="checked" id="declarationsCB" onchange="update()"/>
+<label for="declarationsCB">declarations</label>
+</form>
+
+</p>
+
+<hr />
+
+<div id="result">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+var optionsList;
+
+var optionsJSON = "./options.json.gz";
+var nixpkgsRepo = "https://github.com/NixOS/nixpkgs/tree/master/";
+var searchField;
+
+function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == '')
+          e.style.display = 'none';
+       else
+          e.style.display = '';
+}
+
+// This function is used for pretty printing Nix values which have been
+// exported into JSON, and read as JavaScript objects.  Nix is exported to
+// JSON, but JavaScript has terrible serialisation of its internal values.
+function ppNix(indent, v) {
+  var len = 0;
+  var outerIndent = indent;
+  indent += "  ";
+
+  function ppRec(v) {
+    return ppNix(indent, v)
+  }
+  function ppIndent(i, firstLine) {
+    return i ? indent : firstLine;
+  }
+  function ppNL(i) {
+    return len <= i ? ' ' : '\n';
+  }
+  function needIndentation(v) {
+    if (typeof v == "object") {
+      if (Array.isArray(v)) {
+        if (v.some(needIndentation))
+          return true;
+        return false;
+      }
+      if (Object.keys(v).some(propNeedIndentation(v)))
+        return true;
+      return false;
+    }
+    if (typeof v == "string")
+      return v.indexOf('"') != -1 || v.indexOf('\n') != -1;
+    return false;
+  }
+  function propNeedIndentation(obj) {
+    return function (key) {
+      return needIndentation(obj[key]);
+    }
+  }
+
+  // JavaScript consider both objects and arrays as objects.
+  if (typeof v == "object") {
+
+    if (Array.isArray(v)) {
+      len = v.length;
+      // If none of the element inside it need to have indentation levels, then
+      // we can just print the whole array on one line.
+      if (!v.some(needIndentation)) {
+        if (len == 0)
+          return '[]';
+        var res = '[ ';
+        for (var i = 0; i < v.length; i++)
+          res += ppNix(indent, v[i]) + ' ';
+        return res + ']';
+      }
+
+      // Print an array on multiple lines as it contains some complex elements.
+      var res = '[';
+      for (var i = 0; i < v.length; i++)
+        res += ppIndent(i, ' ') + ppNix(indent, v[i]) + ppNL(1);
+      return res + ']';
+    }
+
+    // Some example attribute are using the literalExample function to wrap
+    // their content as it cannot be serialize properly. So if we detect such
+    // example, escape characters and return the text without pretty-printing.
+    if (v._type == "literalExample") {
+      v = ((v.text || '') + '').replace('<', '&lt;').replace('>', '&gt;');
+      return v;
+    }
+
+    // Print an attribute set.  Always indent the first line
+    var attrset = Object.keys(v);
+    len = attrset.length;
+    if (!attrset.some(propNeedIndentation(v))) {
+      var res = '{ ';
+      for (var i = 0; i < len; i++) {
+        var attrName = attrset[i];
+        var value = v[attrName];
+        res += attrName + ' = ';
+        res += ppNix(indent, value);
+        res += '; ';
+      }
+      return res + '}'
+    }
+
+    var res = '{\n';
+    for (var i = 0; i < len; i++) {
+      var attrName = attrset[i];
+      var value = v[attrName];
+      var ni = needIndentation(value);
+      res += indent;
+      res += attrName + ' =' + (ni ? '\n' + indent + '  ' : ' ')
+      res += ppNix(indent + '  ', value);
+      res += ';\n';
+    }
+    return res + outerIndent + '}';
+  }
+
+  if (typeof v == "string") {
+    v = v.replace('<', '&lt;').replace('>', '&gt;');
+    if (v.indexOf('"') == -1 && v.indexOf('\n') == -1) {
+      if (v.startsWith("pkgs."))
+        return '' + v;
+      return '"' + v + '"';
+    }
+    var lines = v.split('\n');
+    var res = "''\n";
+    for (var i = 0; i < lines.length; i++)
+      res += indent + lines[i] + '\n';
+    return res + outerIndent + "''";
+  }
+
+  return '' + v;
+}
+
+function populate() {
+    var dom = "";
+    optionsList.forEach(function(value) {
+
+      var innerTagId = value.name + '-inner';
+      var name = value.name.replace('<', '&lt;').replace('>', '&gt;');
+      dom += '' +
+        '<div id="' + value.name + '">' +
+          '<dt><span class="term">' +
+            '<a class="term" href="javascript:void(0);" shape="rect" onclick="toggle_visibility(\'' + innerTagId + '\')"><code class="option">' +
+              name +
+            '</code></a>' +
+          '</span></dt>' +
+          '<dd id="' + innerTagId + '">' +
+            '<p>' + value.description + '</p>';
+
+      // Write the default value if it exists.
+      if (value.default)
+        dom += '' +
+            '<p><span class="emphasis"><em>Default:</em></span> <code class="literal"><pre>' + ppNix('', value.default) + '</pre></code></p>';
+
+      // Write the example value if it exists.
+      if (value.example)
+        dom += '' +
+            '<p><span class="emphasis"><em>Example:</em></span> <code class="literal"><pre>' + ppNix('', value.example) + '</pre></code></p>';
+
+      // If we know any of the files in which this option is declared.
+      if (value.declarations.length) {
+        dom += '' +
+            '<table class="simplelist" border="0" summary="Simple list"><tbody>';
+        // Then list and align all the declarations.
+        for (var i = 0; i < value.declarations.length; i++) {
+          dom += '' +
+              '<tr><td rowspan="1" colspan="1"><code class="filename">' +
+                 '<a class="filename" href="' + nixpkgsRepo + value.declarations[i] + '" target="_top" shape="rect">' +
+                   ' &lt;' + value.declarations[i] + '&gt; ' +
+                 '</a>' +
+              '</code></td></tr>';
+        }
+        dom += '' +
+            '</tbody></table>';
+      }
+      dom += '' +
+          '</dd> ' +
+        '</div>';
+    });
+
+    document.getElementById("result").innerHTML = dom;
+
+    optionsList.forEach(function(value) {
+      var n = value.name + "-inner";
+      document.getElementById(n).style.display = "none";
+    });
+}
+
+function init() {
+  // see http://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string
+  if (typeof String.prototype.startsWith != 'function') {
+    // see below for better implementation!
+    String.prototype.startsWith = function (str){
+      return this.indexOf(str) == 0;
+    };
+  }
+
+  // Find the search field in the document.
+  searchField = document.getElementById("search");
+
+  function onError(e) {
+    console.log( "error downloading or parsing json" );
+  }
+
+  function onLoad(e) {
+    console.log("received json");
+    optionsList = JSON.parse(req.responseText);
+    console.log("parsed json");
+
+    // Convert the content of the JSON file into DOM elements.
+    populate();
+
+    // Once the content is available, call the update function when the search
+    // field content is changed.
+    searchField.oninput = update;
+
+    // In case the user has already typed some input, call the update function
+    // to update the output.
+    update();
+  }
+
+  // Request the JSON file produced while generating nixos manual.
+  var req = new XMLHttpRequest();
+  req.open("GET", optionsJSON, true);
+  req.onload = onLoad;
+  req.onerror = onError;
+  req.send(null);
+}
+
+function partitionSearch() {
+  var words = searchField.value.toLowerCase().split(/ +/).filter(Boolean);
+
+  if (!words.length)
+    return { match: optionsList, miss: [] };
+
+  var match = [];
+  var miss = [];
+
+  var nameCB = (document.getElementById("nameCB").checked == true);
+  var descriptionCB = (document.getElementById("descriptionCB").checked == true);
+  var defaultCB = (document.getElementById("defaultCB").checked == true);
+  var exampleCB = (document.getElementById("exampleCB").checked == true);
+  var declarationsCB = (document.getElementById("declarationsCB").checked == true);
+
+  var len = optionsList.length;
+  for (var i = 0; i < len; i++) {
+    var value = optionsList[i];
+
+    var name = value.name + "";
+    var description = (value.description || "") + "";
+    var default_ = (value["default"] || "") + "";
+    var example = (value.example || "") + "";
+    var declarations = (value.declarations || "") + "";
+
+    function matchWord(word) {
+      return((nameCB && (name.toLowerCase().indexOf(word) != -1))
+          || (descriptionCB && (description.toLowerCase().indexOf(word) != -1))
+          || (defaultCB && (default_.toLowerCase().indexOf(word) != -1))
+          || (exampleCB && (example.toLowerCase().indexOf(word) != -1))
+          || (declarationsCB && (declarations.toLowerCase().indexOf(word) != -1)));
+    };
+
+    if (words.every(matchWord))
+      match.push(value);
+    else
+      miss.push(value);
+  }
+
+  return { match: match, miss: miss };
+}
+
+function update() {
+    var partition = partitionSearch();
+
+    // finally display those left
+    partition.miss.forEach(function(value) {
+      document.getElementById(value.name).style.display = "none";
+    });
+
+    partition.match.forEach(function(value) {
+      document.getElementById(value.name).style.display = "";
+    });
+
+    document.getElementById("info").innerHTML = partition.match.length;
+}
+
+// Call the init function once the body is loaded.
+document.getElementsByTagName("body")[0].onload = init;
+
+//]]>
+</script>
+
+[% END %]
+
