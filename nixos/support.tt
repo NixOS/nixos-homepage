@@ -9,7 +9,8 @@
     manual</strong></a>. Inside a NixOS system, you can read the
     manual by running the command <tt>nixos-help</tt>, and you can see
     the list of configuration options by running <tt>man
-    configuration.nix</tt>.</p>
+    configuration.nix</tt>. You can also <a href="options.html">search
+    the list of options online</a>.</p>
   </div>
 
   <div class="span4">
