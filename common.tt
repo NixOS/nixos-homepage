@@ -7,5 +7,16 @@
   latestNixVersion = "1.7"
   latestNixMirror = "http://nixos.org/releases/nix/nix-$latestNixVersion"
   latestNixOSVersion = "14.04"
-  wikiMain = "https://nixos.org/wiki/Main_Page"
+  latestNixOSBranch = "release-" _ latestNixOSVersion
+  wikiMain = "https://nixos.org/wiki/Main_Page";
+
+BLOCK renderPager %]
+<ul class='pager'>
+  <li class='back'><a href='javascript:void(0)' onclick='curPage = 0; updateTable();'>« First</a></li>
+  <li class='back'><a href='javascript:void(0)' onclick='curPage--; updateTable();'>‹ Previous</a></li>
+  <li class='forward'><a href='javascript:void(0)' onclick='curPage++; updateTable();'>Next ›</a></li>
+  <li class='forward'><a href='javascript:void(0)' onclick='curPage = lastPage; updateTable();'>Last »</a></li>
+</ul>
+[% END;
+
 %]

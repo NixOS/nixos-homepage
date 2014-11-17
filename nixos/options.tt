@@ -1,67 +1,134 @@
 [% WRAPPER layout.tt title='Search NixOS options' menu='nixos' %]
 
-<style type="text/css">
-code.option {
-   color: #08c;
-}
-
-#info {
-   display: inline-block;
-   padding: 2px 4px;
-   font-size: 11.844px;
-   font-weight: bold;
-   line-height: 14px;
-   color: #fff;
-   background-color: #468847;
-   text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-   white-space: nowrap;
-   vertical-align: baseline;
-}
-</style>
 <p>
-<form class="form-inline">
-<input name="query" type="text" class="search-query span3" placeholder="Search NixOS options" id="search" value="" autofocus="autofocus"/> 
-<div id="info">?</div> (options in selection)
-</form>
-
-<form class="form-inline">
-<input type="checkbox" name="search" value="nameCB" checked="checked" id="nameCB" onchange="update()"/>
-<label for="nameCB">path</label>
-<input type="checkbox" name="search" value="descriptionCB" checked="checked" id="descriptionCB" onchange="update()"/>
-<label for="descriptionCB">description</label>
-<input type="checkbox" name="search" value="defaultCB" checked="checked" id="defaultCB" onchange="update()"/>
-<label for="defaultCB">default</label>
-
-<input type="checkbox" name="search" value="exampleCB" checked="checked" id="exampleCB" onchange="update()"/>
-<label for="exampleCB">example</label>
-
-<input type="checkbox" name="search" value="declarationsCB" checked="checked" id="declarationsCB" onchange="update()"/>
-<label for="declarationsCB">declarations</label>
-</form>
-
+  <input name='query' type='text' class='search-query span3'
+         placeholder='Search by name or description'
+         id='search' value='' autofocus='autofocus'/>
 </p>
 
 <hr />
 
-<div id="result">
+<p><em id='how-many'>Loading…</em></p>
+
+<div id='results-wrapper' class='hide'>
+
+<table class='table table-hover' id='search-results'>
+  <thead>
+    <tr>
+      <th>Option name</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+[% INCLUDE renderPager %]
+
 </div>
 
-<script type="text/javascript">
+<div id='details-template' class='search-details hide'>
+  <table>
+    <tr>
+      <th>Description:</th>
+      <td>
+      <td class='description docbook'><em>Not given</em></td>
+      </td>
+    </tr>
+    <tr>
+      <th>Default value:</th>
+      <td>
+      <td class='default'><em>Not given</em></td>
+      </td>
+    </tr>
+    <tr>
+      <th>Example value:</th>
+      <td>
+      <td class='example'><em>Not given</em></td>
+      </td>
+    </tr>
+    <tr>
+      <th>Declared in:</th>
+      <td>
+      <td class='declared-in'><em>Unknown</em></td>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script>
 //<![CDATA[
+var optionData = [];
 
-var optionsList;
+var results = [];
 
-var optionsJSON = "./options.json.gz";
-var nixpkgsRepo = "https://github.com/NixOS/nixpkgs/tree/master/";
-var searchField;
+var resultsPerPage = 15;
 
-function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == '')
-          e.style.display = 'none';
-       else
-          e.style.display = '';
-}
+var curPage = 0;
+var lastPage = 0;
+
+function updateTable() {
+  if (0 > curPage) curPage = 0;
+  if (curPage > lastPage) curPage = lastPage;
+
+  var body = $('#search-results tbody');
+  $('tr', body).remove();
+
+  $('.back').toggleClass('disabled', curPage == 0);
+  $('.forward').toggleClass('disabled', curPage >= lastPage);
+
+  var start = curPage * resultsPerPage;
+  var end = start + resultsPerPage;
+  if (end > results.length) end = results.length;
+  res = results.slice(start, end);
+
+  if (results.length == 0) {
+    $('#results-wrapper').hide();
+    $('#how-many').text('No matching options were found.');
+    return;
+  }
+
+  $('#how-many').text(
+    'Showing results ' + (start + 1) + '-' + end + ' of ' + results.length + '.');
+
+  var odd = true;
+  res.forEach(function(optName) {
+    var opt = optionData[optName];
+    body.append($('<tr/>', { optName: optName })
+      .addClass('result')
+      .addClass(odd ? 'odd' : 'even')
+      .click(showOption)
+      .append($('<td/>', { class: 'option', text: optName }))
+    );
+    odd = !odd;
+  });
+
+  $('#results-wrapper').show();
+};
+
+function refilter() {
+  var options = Object.keys(optionData);
+
+  results = options;
+
+  var words = $('#search').val().toLowerCase().split(/ +/).filter(Boolean);
+
+  if (words.length > 0) {
+    results = results.filter(function (optName) {
+      var opt = optionData[optName];
+      function match(word) {
+        return (optName.toLowerCase().indexOf(word) != -1
+          || (opt.description || '').toLowerCase().indexOf(word) != -1);
+      };
+
+      return words.every(match);
+    });
+  }
+
+  curPage = 0;
+  lastPage = (results.length - 1) / resultsPerPage >> 0;
+
+  updateTable();
+};
 
 // This function is used for pretty printing Nix values which have been
 // exported into JSON, and read as JavaScript objects.  Nix is exported to
@@ -177,164 +244,61 @@ function ppNix(indent, v) {
   return '' + v;
 }
 
-function populate() {
-    var dom = "";
-    optionsList.forEach(function(value) {
+function showOption() {
+  var optName = $(this).attr('optName');
+  var opt = optionData[optName];
 
-      var innerTagId = value.name + '-inner';
-      var name = value.name.replace('<', '&lt;').replace('>', '&gt;');
-      dom += '' +
-        '<div id="' + value.name + '">' +
-          '<dt><span class="term">' +
-            '<a class="term" href="javascript:void(0);" shape="rect" onclick="toggle_visibility(\'' + innerTagId + '\')"><code class="option">' +
-              name +
-            '</code></a>' +
-          '</span></dt>' +
-          '<dd id="' + innerTagId + '">' +
-            '<p>' + value.description + '</p>';
+  var expanded = $(this).attr('expanded');
+  $('tr.details', $(this).parent()).remove();
+  $('tr', $(this).parent()).removeAttr('expanded');
+  if (expanded) return;
 
-      // Write the default value if it exists.
-      if (value.default)
-        dom += '' +
-            '<p><span class="emphasis"><em>Default:</em></span> <code class="literal"><pre>' + ppNix('', value.default) + '</pre></code></p>';
+  var details = $('#details-template').clone().removeAttr('id').show();
 
-      // Write the example value if it exists.
-      if (value.example)
-        dom += '' +
-            '<p><span class="emphasis"><em>Example:</em></span> <code class="literal"><pre>' + ppNix('', value.example) + '</pre></code></p>';
+  var x = $.parseXML("<div>" + opt.description + "</div>");
+  $('.description', details).empty().append($(x).text());
 
-      // If we know any of the files in which this option is declared.
-      if (value.declarations.length) {
-        dom += '' +
-            '<table class="simplelist" border="0" summary="Simple list"><tbody>';
-        // Then list and align all the declarations.
-        for (var i = 0; i < value.declarations.length; i++) {
-          dom += '' +
-              '<tr><td rowspan="1" colspan="1"><code class="filename">' +
-                 '<a class="filename" href="' + nixpkgsRepo + value.declarations[i] + '" target="_top" shape="rect">' +
-                   ' &lt;' + value.declarations[i] + '&gt; ' +
-                 '</a>' +
-              '</code></td></tr>';
-        }
-        dom += '' +
-            '</tbody></table>';
-      }
-      dom += '' +
-          '</dd> ' +
-        '</div>';
+  if ('default' in opt)
+    $('.default', details).empty().addClass('pre').text(ppNix('', opt.default));
+
+  if ('example' in opt)
+    $('.example', details).empty().addClass('pre').text(ppNix('', opt.example));
+
+  if (opt.declarations.length > 0) {
+    var res = $('.declared-in', details);
+    res.empty();
+    var first = true;
+    opt.declarations.forEach(function(module) {
+      var url = "https://github.com/NixOS/nixpkgs/tree/[%latestNixOSBranch%]/" + module;
+      if (!first) res.append(', '); first = false;
+      res.append($('<a/>', { href: url }).append($('<tt/>').text(module)));
     });
-
-    document.getElementById("result").innerHTML = dom;
-
-    optionsList.forEach(function(value) {
-      var n = value.name + "-inner";
-      document.getElementById(n).style.display = "none";
-    });
-}
-
-function init() {
-  // see http://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string
-  if (typeof String.prototype.startsWith != 'function') {
-    // see below for better implementation!
-    String.prototype.startsWith = function (str){
-      return this.indexOf(str) == 0;
-    };
   }
 
-  // Find the search field in the document.
-  searchField = document.getElementById("search");
+  $(this).after($('<tr/>')
+    .addClass('details')
+    .append($('<td/>', { colspan: 3 })
+      .append(details))
+  ).attr('expanded', 1);
+};
 
-  function onError(e) {
-    console.log( "error downloading or parsing json" );
-  }
+$.ajax({
+  url: '[%root%]nixos/options.json.gz',
+  type: 'GET',
+  dataType: 'json',
+  error: function(a, b, c) { alert('Failed to get option data.'); },
+  success: function(data) {
+    optionData = data;
 
-  function onLoad(e) {
-    console.log("received json");
-    optionsList = JSON.parse(req.responseText);
-    console.log("parsed json");
+    refilter();
 
-    // Convert the content of the JSON file into DOM elements.
-    populate();
-
-    // Once the content is available, call the update function when the search
-    // field content is changed.
-    searchField.oninput = update;
-
-    // In case the user has already typed some input, call the update function
-    // to update the output.
-    update();
-  }
-
-  // Request the JSON file produced while generating nixos manual.
-  var req = new XMLHttpRequest();
-  req.open("GET", optionsJSON, true);
-  req.onload = onLoad;
-  req.onerror = onError;
-  req.send(null);
-}
-
-function partitionSearch() {
-  var words = searchField.value.toLowerCase().split(/ +/).filter(Boolean);
-
-  if (!words.length)
-    return { match: optionsList, miss: [] };
-
-  var match = [];
-  var miss = [];
-
-  var nameCB = (document.getElementById("nameCB").checked == true);
-  var descriptionCB = (document.getElementById("descriptionCB").checked == true);
-  var defaultCB = (document.getElementById("defaultCB").checked == true);
-  var exampleCB = (document.getElementById("exampleCB").checked == true);
-  var declarationsCB = (document.getElementById("declarationsCB").checked == true);
-
-  var len = optionsList.length;
-  for (var i = 0; i < len; i++) {
-    var value = optionsList[i];
-
-    var name = value.name + "";
-    var description = (value.description || "") + "";
-    var default_ = (value["default"] || "") + "";
-    var example = (value.example || "") + "";
-    var declarations = (value.declarations || "") + "";
-
-    function matchWord(word) {
-      return((nameCB && (name.toLowerCase().indexOf(word) != -1))
-          || (descriptionCB && (description.toLowerCase().indexOf(word) != -1))
-          || (defaultCB && (default_.toLowerCase().indexOf(word) != -1))
-          || (exampleCB && (example.toLowerCase().indexOf(word) != -1))
-          || (declarationsCB && (declarations.toLowerCase().indexOf(word) != -1)));
-    };
-
-    if (words.every(matchWord))
-      match.push(value);
-    else
-      miss.push(value);
-  }
-
-  return { match: match, miss: miss };
-}
-
-function update() {
-    var partition = partitionSearch();
-
-    // finally display those left
-    partition.miss.forEach(function(value) {
-      document.getElementById(value.name).style.display = "none";
+    $('#search').on('input', function() {
+      refilter();
     });
-
-    partition.match.forEach(function(value) {
-      document.getElementById(value.name).style.display = "";
-    });
-
-    document.getElementById("info").innerHTML = partition.match.length;
-}
-
-// Call the init function once the body is loaded.
-document.getElementsByTagName("body")[0].onload = init;
+  }
+});
 
 //]]>
 </script>
 
 [% END %]
-

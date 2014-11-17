@@ -24,16 +24,11 @@
   </tbody>
 </table>
 
-<ul class='pager'>
-  <li class='back'><a href='javascript:void(0)' onclick='curPage = 0; updateTable();'>« First</a></li>
-  <li class='back'><a href='javascript:void(0)' onclick='curPage--; updateTable();'>‹ Previous</a></li>
-  <li class='forward'><a href='javascript:void(0)' onclick='curPage++; updateTable();'>Next ›</a></li>
-  <li class='forward'><a href='javascript:void(0)' onclick='curPage = lastPage; updateTable();'>Last »</a></li>
-</ul>
+[% INCLUDE renderPager %]
 
 </div>
 
-<div id='details-template' class='package-details hide'>
+<div id='details-template' class='search-details hide'>
   <table>
     <tr>
       <th>Install command:</th>
@@ -104,14 +99,14 @@ function updateTable() {
     'Showing results ' + (start + 1) + '-' + end + ' of ' + results.length + '.');
 
   var odd = true;
-  res.forEach(function(attr) {
-    var info = packageData[attr];
-    body.append($('<tr/>', { pkg: attr })
-      .addClass('package')
+  res.forEach(function(pkgName) {
+    var info = packageData[pkgName];
+    body.append($('<tr/>', { pkgName: pkgName })
+      .addClass('result')
       .addClass(odd ? 'odd' : 'even')
       .click(showPackage)
       .append($('<td/>', { text: info['name'] }))
-      .append($('<td/>', { text: attr }))
+      .append($('<td/>', { text: pkgName }))
       .append($('<td/>', { text: info['meta']['description'] }))
     );
     odd = !odd;
@@ -157,8 +152,8 @@ function refilter() {
 };
 
 function showPackage() {
-  var attr = $(this).attr('pkg');
-  var info = packageData[attr];
+  var pkgName = $(this).attr('pkgName');
+  var info = packageData[pkgName];
 
   var expanded = $(this).attr('expanded');
   $('tr.details', $(this).parent()).remove();
@@ -167,7 +162,7 @@ function showPackage() {
 
   var details = $('#details-template').clone().removeAttr('id').show();
 
-  $('.attrname', details).text(attr);
+  $('.attrname', details).text(pkgName);
 
   var nixExpr = info['meta']['position'];
   if (typeof nixExpr == 'string') {
@@ -175,7 +170,7 @@ function showPackage() {
     var file = nixExpr.slice(0, n);
     var line = nixExpr.slice(n + 1);
     // FIXME: link to correct revision.
-    var url = 'https://github.com/NixOS/nixpkgs/blob/master/' + file + '#L' + line;
+    var url = 'https://github.com/NixOS/nixpkgs/blob/[%latestNixOSBranch%]/' + file + '#L' + line;
     $('.nix-expr', details).empty().append($('<a/>', { href: url }).text(file));
   }
 
@@ -187,7 +182,7 @@ function showPackage() {
       if (system != 'i686-linux' && system != 'x86_64-linux') return;
       if (!first) p.append(document.createTextNode(', '));
       first = false;
-      var url = 'http://hydra.nixos.org/job/nixpkgs/trunk/' + attr + '.' + system;
+      var url = 'http://hydra.nixos.org/job/nixos/[%latestNixOSBranch%]/nixpkgs.' + pkgName + '.' + system;
       p.append($('<a/>', { href: url }).append($('<tt/>').text(system)));
     });
   }
