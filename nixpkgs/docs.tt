@@ -7,9 +7,8 @@ href="[% nixManual %]#chap-quick-start">
 
 <h3>Developer information</h3>
 
-<p>The <a href="[% nixpkgsManual %]"> Nixpkgs manual</a>
-(<a href="[% nixpkgsManual %]/manual.pdf">PDF</a>)
-contains a lot of information on how to add to or modify Nixpkgs.</p>
+<p>The <a href="[% nixpkgsManual %]">Nixpkgs manual</a> contains a lot
+of information on how to add to or modify Nixpkgs.</p>
 
 <h3>Bugs</h3>
 
