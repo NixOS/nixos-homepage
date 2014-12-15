@@ -4,7 +4,7 @@
   nixpkgsManual = "/nixpkgs/manual"
   nixosManual = "/nixos/manual"
   nixopsManual = "/nixops/manual"
-  latestNixVersion = "1.7"
+  latestNixVersion = "1.8"
   latestNixMirror = "http://nixos.org/releases/nix/nix-$latestNixVersion"
   latestNixOSVersion = "14.04"
   latestNixOSBranch = "release-" _ latestNixOSVersion
