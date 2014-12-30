@@ -44,15 +44,16 @@ $(NIX_MANUAL_OUT): $(call rwildcard, $(NIX_MANUAL_IN), *) bootstrapify-docbook.s
 endif
 
 
-ifneq ($(wildcard nixops/manual/manual.html),)
+NIXOPS_MANUAL_IN = nixops/manual-raw
+NIXOPS_MANUAL_OUT = nixops/manual
 
-HTML += nixops/manual/index.html
+ifneq ($(wildcard $(NIXOPS_MANUAL_IN)),)
 
-nixops/manual/index.html: nixops/manual/manual.html.incl
+all: $(NIXOPS_MANUAL_OUT)
 
-nixops/manual/manual.html.incl: nixops/manual/manual.html strip-docbook.xsl
-	xsltproc --nonet strip-docbook.xsl $< > $@.tmp
-	mv $@.tmp $@
+$(NIXOPS_MANUAL_OUT): $(call rwildcard, $(NIXOPS_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	./bootstrapify-docbook.sh $(NIXOPS_MANUAL_IN) $(NIXOPS_MANUAL_OUT) 'NixOps manual' nixops https://github.com/NixOS/nixops/tree/master/doc/manual
+	ln -sfn manual.html $(NIXOPS_MANUAL_OUT)/index.html
 
 endif
 
