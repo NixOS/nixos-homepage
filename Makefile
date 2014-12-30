@@ -16,6 +16,7 @@ HTML = index.html news.html \
   nixpkgs/packages.json.gz \
   nixos/options.json.gz
 
+
 NIXOS_MANUAL_IN = nixos/manual-raw/share/doc/nixos
 NIXOS_MANUAL_OUT = nixos/manual
 
@@ -106,7 +107,7 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz
+.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz $(NIXOS_MANUAL_OUT)
 endif
 
 nixpkgs/packages.json.gz:

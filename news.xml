@@ -5,6 +5,27 @@
   <item>
     <year>2014</year>
     <month>12</month>
+    <day>30</day>
+    <title>
+      NixOS 14.12 released
+    </title>
+    <description>
+      NixOS 14.12 “Caterpillar” has been released, the third stable
+      release branch. It brings Linux 3.14, systemd 217, Glibc 2.20,
+      KDE 4.14.1, and much more. See the <a
+      href="/nixos/manual/sec-release-14.12.html">release notes</a>
+      for details. You can get NixOS 14.12 ISOs and VirtualBox
+      appliances from the <a href="nixos/download.html">download
+      page</a>. For information on how to upgrade from older release
+      branches to 14.04, check out the <a
+      href="/nixos/manual/sec-upgrading.html">manual section on
+      upgrading</a>.
+    </description>
+  </item>
+
+  <item>
+    <year>2014</year>
+    <month>12</month>
     <day>14</day>
     <title>
       Nix 1.8 released
