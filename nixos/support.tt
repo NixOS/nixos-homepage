@@ -1,0 +1,68 @@
+[% WRAPPER layout.tt title="NixOS support" menu='nixos' %]
+
+<div class="row-fluid">
+
+  <div class="span4">
+    <h2><a href="[%nixosManual%]">Manual</a></h2>
+    <p>The main source of information about installing and using NixOS
+    is the <a href="[%nixosManual%]"><strong>NixOS
+    manual</strong></a>. Inside a NixOS system, you can read the
+    manual by running the command <tt>nixos-help</tt>, and you can see
+    the list of configuration options by running <tt>man
+    configuration.nix</tt>. You can also <a href="options.html">search
+    the list of options online</a>.</p>
+  </div>
+
+  <div class="span4">
+    <h2><a href="[%wikiMain%]">Wiki</a></h2>
+    <p>A lot of information can be found on the <a
+    href="[%wikiMain%]"><strong>NixOS Wiki</strong></a>, which can be
+    edited by anybody.</p>
+  </div>
+
+  <div class="span4">
+    <h2><a href="http://lists.science.uu.nl/mailman/listinfo/nix-dev">Mailing list</a></h2>
+    <p>There is a mailing list, <a
+    href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt><strong>nix-dev@<wbr/>lists<wbr/>.science<wbr/>.uu<wbr/>.nl</strong></tt></a>,
+    which can be used for user and development questions and
+    discussions. You can also browse the <a
+    href="http://lists.science.uu.nl/pipermail/nix-dev/">mailing list
+    archives</a>.</p>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+
+  <div class="span4">
+    <h2><a href="irc://irc.freenode.net/#nixos">IRC</a></h2>
+    <p>You can drop by on the IRC channel <a
+    href="irc://irc.freenode.net/#nixos"><strong><tt>#nixos</tt></strong></a>
+    on <a href="http://freenode.net/"><tt>irc.freenode.net</tt></a> to
+    chat with the developers or other users.</p>
+  </div>
+
+  <div class="span4">
+    <h2><a href="https://github.com/NixOS/nixpkgs/issues">Bugs</a></h2>
+    <p>If you think you’ve found a bug, please report it in the <a
+    href="https://github.com/NixOS/nixpkgs/issues"><strong>Nixpkgs
+    issue tracker</strong></a> (please use the <strong>nixos</strong>
+    label).</p>
+  </div>
+
+  <div class="span4">
+    <h2>Other resources</h2>
+    <p>There are several other manuals:</p>
+    <ul>
+      <li>The <a href="[%nixManual%]"><strong>Nix manual</strong></a>
+      describes how to use the <a href="[%root%]nix">Nix package
+      manager</a>.</li>
+      <li>The <a href="[%nixopsManual%]"><strong>NixOps
+      manual</strong></a> describes how to deploy NixOS machine in the
+      cloud using <a href="[%root%]nixops">NixOps</a>.</li>
+    </ul>
+  </div>
+
+</div>
+
+[% END %]

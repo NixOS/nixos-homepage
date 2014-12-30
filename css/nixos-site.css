@@ -246,9 +246,9 @@ tr.news-header {
 }
 
 
-/* Package search. */
+/* Package/option search. */
 
-table#search-results tbody tr.package {
+table#search-results tbody tr.result {
     cursor: pointer;
 }
 
@@ -260,16 +260,25 @@ table#search-results tr.details > td:hover {
     background-color: white;
 }
 
-div.package-details {
+div.search-details {
     margin-left: 1em;
     margin-right: 1em;
 }
 
-div.package-details th, div.package-details td {
+div.search-details th, div.search-details td {
     border-top: 0;
 }
 
-div.package-details td.pre {
+div.search-details td.pre {
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+td.option {
+    font-family: monospace;
+}
+
+div.search-details td.nix {
     white-space: pre-wrap;
     font-family: monospace;
 }

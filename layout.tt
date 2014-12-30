@@ -58,14 +58,17 @@
               <ul class="nav pull-left">
                 <li><a href="[%root%]nixos/about.html">About</a></li>
                 <li><a href="[%root%]nixos/download.html">Download</a></li>
-                <li><a href="[%root%]nixos/manual/">Manual</a></li>
-                <li><a href="[%root%]nixos/help.html">Help</a></li>
+                <li><a href="[%root%]nixos/support.html">Support</a></li>
                 <li><a href="[%root%]nixos/packages.html">Packages</a></li>
+                <li><a href="[%root%]nixos/options.html">Options</a></li>
                 <li><a href="[%root%]nixos/community.html">Community</a></li>
+                <li><a href="[%wikiMain%]">Wiki</a></li>
               </ul>
               <ul class="nav pull-right">
+                <!--
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
                 <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
+                -->
             [% ELSIF menu == 'nix' %]
               <ul class="nav pull-left">
                 <li><a href="[%root%]nix/about.html">About</a></li>
@@ -101,11 +104,7 @@
             [% ELSE %]
               <ul class="nav pull-right">
             [% END %]
-              <li><a href="[%wikiMain%]">Wiki</a></li>
-              <form class="navbar-search" method="get" action="http://www.google.com/search">
-                <input name="q" type="text" class="search-query span2" placeholder="Search nixos.org"/>
-                <input name="sitesearch" type="hidden" value="nixos.org"/>
-              </form>
+              <!--
               <li class="dropdown">
                 <a class="dropdown-toggle" href="#" data-toggle="dropdown">Projects<b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -118,6 +117,11 @@
                   <li><a href="[%root%]disnix">Disnix</a></li>
                 </ul>
               </li>
+              -->
+              <form class="navbar-search" method="get" action="http://www.google.com/search">
+                <input name="q" type="text" class="search-query span2" placeholder="Search nixos.org"/>
+                <input name="sitesearch" type="hidden" value="nixos.org"/>
+              </form>
             </ul>
           </div>
         </div>

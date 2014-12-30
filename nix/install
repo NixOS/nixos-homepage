@@ -1,56 +1,45 @@
-#! /usr/bin/env bash
-
-wrap() {
+#!/bin/sh
 
 # This script installs the Nix package manager on your system by
 # downloading a binary distribution and running its installer script
 # (which in turn creates and populates /nix).
 
-set -e
+{ # Prevent execution if this script was only partially downloaded
 
-kernel="$(uname -s)"
-machine="$(uname -m)"
-
-if [ "$kernel" = Linux -a "$machine" = x86_64 ]; then
-    system=x86_64-linux
-elif [[ "$kernel" = Linux && "$machine" =~ i.86 ]]; then
-    system=i686-linux
-elif [ "$kernel" = Darwin -a "$machine" = x86_64 ]; then
-    system=x86_64-darwin
-else
-    echo "$0: sorry, there is no binary distribution of Nix for your platform"
-    exit 1
-fi
-
-url="https://nixos.org/releases/nix/nix-1.7/nix-1.7-$system.tar.bz2"
-
-if ! type -p curl > /dev/null; then
-    echo "$0: you do not have \`curl' installed, which I need to download the binary tarball"
-    exit 1
-fi
-
-echo "downloading Nix binary tarball for $system from \`$url'..."
-tarball=nix-binary-tarball.tar.bz2
-if ! curl -L -o "$tarball" "$url"; then
-    echo "$0: failed to download \`$url'"
-    exit 1
-fi
-
-echo "unpacking binary tarball..."
 unpack=nix-binary-tarball-unpack
-rm -rf "$unpack"
-mkdir "$unpack"
-tar xf "$tarball" -C "$unpack"
 
-if ! [ -e "$unpack"/*/install ]; then
-    echo "$0: installation script is missing from the binary tarball!"
-    exit 1
-fi
-
-"$unpack"/*/install
-
-rm -rf "$unpack" "$tarball"
-
+require_util() {
+    type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1 ||
+        oops "you do not have \`$1' installed, which i need to $2"
 }
 
-wrap
+oops() {
+    echo "$0: $@" >&2
+    rm -rf "$unpack"
+    exit 1
+}
+
+case "$(uname -s).$(uname -m)" in
+    Linux.x86_64) system=x86_64-linux;;
+    Linux.i?86) system=i686-linux;;
+    Darwin.x86_64) system=x86_64-darwin;;
+    *) oops "sorry, there is no binary distribution of Nix for your platform";;
+esac
+
+url="https://nixos.org/releases/nix/nix-1.8/nix-1.8-$system.tar.bz2"
+
+require_util curl "download the binary tarball"
+require_util bzcat "decompress the binary tarball"
+require_util tar "unpack the binary tarball"
+
+echo "unpacking Nix binary tarball for $system from \`$url'..."
+mkdir "$unpack" || oops "failed to create \`$unpack' directory"
+curl -L "$url" | bzcat | tar x -C "$unpack" || oops "failed to unpack \`$url'"
+
+[ -e "$unpack"/*/install ] ||
+    oops "installation script is missing from the binary tarball!"
+
+"$unpack"/*/install
+rm -rf "$unpack"
+
+} # End of wrapping
