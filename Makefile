@@ -25,7 +25,21 @@ ifneq ($(wildcard $(NIXOS_MANUAL_IN)),)
 all: $(NIXOS_MANUAL_OUT)
 
 $(NIXOS_MANUAL_OUT): $(call rwildcard, $(NIXOS_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT)
+	./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) 'NixOS manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+
+endif
+
+
+NIX_MANUAL_IN = nix/manual-raw
+NIX_MANUAL_OUT = nix/manual
+
+ifneq ($(wildcard $(NIX_MANUAL_IN)),)
+
+all: $(NIX_MANUAL_OUT)
+
+$(NIX_MANUAL_OUT): $(call rwildcard, $(NIX_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	./bootstrapify-docbook.sh $(NIX_MANUAL_IN) $(NIX_MANUAL_OUT) 'Nix manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+	ln -sfn manual.html $(NIX_MANUAL_OUT)/index.html
 
 endif
 
@@ -107,7 +121,7 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz $(NIXOS_MANUAL_OUT)
+.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT)
 endif
 
 nixpkgs/packages.json.gz:

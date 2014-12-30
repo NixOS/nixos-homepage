@@ -4,6 +4,9 @@ set -e
 
 inDir="$1"
 outDir="$2"
+title="$3"
+menu="$4"
+source="$5"
 
 outDirTmp="${outDir}.tmp"
 rm -rf "$outDirTmp"
@@ -17,7 +20,7 @@ for fn in $(cd $inDir && find -type f); do
             --define root=`echo "$outDir/$fn" | sed -e 's|[^/]||g' -e 's|/|../|g'` \
             --pre_process=common.tt \
             > "$outDirTmp/$fn" <<EOF
-[% WRAPPER layout.tt title="NixOS manual" menu='nixos' hideTitle=1 sourceLink='https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual' %]
+[% WRAPPER layout.tt title="$title" menu='$menu' hideTitle=1 sourceLink='$source' %]
 
 [% INSERT "$outDirTmp/$fn.in" %]
 

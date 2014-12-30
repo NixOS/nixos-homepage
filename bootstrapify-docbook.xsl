@@ -17,8 +17,8 @@
 
     <div class="page-header">
       <xsl:if test="@class='book'">
-        <h1><xsl:apply-templates select="//x:div[@class='titlepage']//x:h1/node()"/></h1>
-        <h2><xsl:apply-templates select="//x:div[@class='titlepage']//x:h2/node()"/></h2>
+        <h1><xsl:apply-templates select="//x:div[@class='book']/x:div[@class='titlepage']//x:h1/node()"/></h1>
+        <h2><xsl:apply-templates select="//x:div[@class='book']/x:div[@class='titlepage']//x:h2/node()"/></h2>
       </xsl:if>
       <xsl:if test="@class!='book'">
         <h1>NixOS Manual</h1>
