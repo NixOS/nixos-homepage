@@ -1,7 +1,7 @@
 [% WRAPPER layout.tt title="Nixpkgs help" menu='nixpkgs' %]
 
 <p>Information on how to use Nixpkgs can be found in the <a
-href="../nix/docs.html">Nix manual</a>, especially the <a
+href="[% nixManual %]">Nix manual</a>, especially the <a
 href="[% nixManual %]#chap-quick-start">
 “Quick Start” section</a>.</p>
 
