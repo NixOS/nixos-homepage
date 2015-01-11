@@ -64,7 +64,6 @@
       NixOS 14.04 released
     </title>
     <description>
-      <a href="http://cartoonnetwork.wikia.com/wiki/I.R._Baboon"><img style="width: 8em;" class="inline" src="http://img2.wikia.nocookie.net/__cb20110509221950/cartoonnetwork/images/a/a2/Ir001.gif" alt="Baboon"/></a>
       NixOS 14.04 “Baboon” has been released, the second stable
       release branch. It brings Linux 3.12, systemd 212, GCC 4.8,
       Glibc 2.19, KDE 4.12, light-weight NixOS containers, and much
@@ -566,10 +565,6 @@ $ nix-store -qR /run/current-system | grep openssl
     <day>28</day>
     <title>Moving to GitHub</title>
     <description>
-      <a href="https://github.com/">
-      <img style="width: 8em;" class="inline" src="https://assets.github.com/images/modules/about_page/octocat.png" alt="GitHub
-      logo"/></a>
-
       The NixOS project is (slowly) migrating from Subversion to Git!
       The master repositories will be hosted in the <a
       href="https://github.com/NixOS/">NixOS organization</a> on <a
@@ -958,12 +953,6 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       <p>
-
-      <a href="http://www.icfpconference.org/icfp2008/"><img
-          class="inline"
-          src="http://www.icfpconference.org/icfp2008/icfplarge.gif"
-          alt="ICFP logo" /></a>
-
         The paper “NixOS: A Purely Functional Linux Distribution” (by
         Eelco Dolstra and Andres Löh) has been <a
         href="http://www.icfpconference.org/icfp2008/accepted/accepted.html">accepted</a>
@@ -1341,9 +1330,9 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
        <p><a
-       href="http://www.flickr.com/photos/eelcovisser/367433201/"><img
+       href="https://www.flickr.com/photos/eelcovisser/367433201/"><img
        class="inline screenshot"
-       src="http://farm1.static.flickr.com/185/367433201_9ee5ad0986_m.jpg"
+       src="https://farm1.static.flickr.com/185/367433201_9ee5ad0986_m.jpg"
        alt="New build farm" /></a>To quote Eelco Visser: new
        hardware for buildfarm at Delft University of Technology has
        arrived.</p>
