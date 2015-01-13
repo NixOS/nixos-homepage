@@ -21,6 +21,9 @@ body {
 
 p {
     text-align: justify;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
 }
 
 .logo {
