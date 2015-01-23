@@ -230,7 +230,7 @@ function ppNix(indent, v) {
   if (typeof v == "string") {
     v = v.replace('<', '&lt;').replace('>', '&gt;');
     if (v.indexOf('"') == -1 && v.indexOf('\n') == -1) {
-      if (v.startsWith("pkgs."))
+      if (/^pkgs\./.test(v))
         return '' + v;
       return '"' + v + '"';
     }
