@@ -17,7 +17,7 @@ HTML = index.html news.html \
   nixos/options.json.gz
 
 
-NIXOS_MANUAL_IN = nixos/manual-raw/share/doc/nixos
+NIXOS_MANUAL_IN = nixos/manual-raw
 NIXOS_MANUAL_OUT = nixos/manual
 
 ifneq ($(wildcard $(NIXOS_MANUAL_IN)),)
