@@ -6,6 +6,8 @@ The example cases can be freely used under the MIT license and obtained through 
 <a href="download.html">download</a> page.
 </p>
 
+<h2>Deploying in heterogeneous networks</h2>
+
 <p>
 There are various ways to try these examples. The first option is to deploy the system
 in a <strong>heterogeneous</strong> network, which also takes the most effort.
@@ -15,16 +17,55 @@ an infrastructure model matching the properties of the systems in the network.
 </p>
 
 <p>
+Services in a heterogeneous network can be deployed by running:
+</p>
+
+<pre>
+$ disnix-env -s services.nix -i infrastructure.nix -d distribution.nix
+</pre>
+
+<h2>Deploying in a NixOS network using NixOps</h2>
+
+<p>
 Another option is to install a network of NixOS machines running the Disnix service.
-The <strong>DisnixOS</strong> extension can be used to automatically upgrade the underlying infrastructure
-to support the services. Examples of NixOS configurations are included with each example.
+The <strong>DisnixOS</strong> extension can be used to automatically upgrade the
+underlying infrastructure to support the services.
 </p>
 
 <p>
-The most convenient way of trying these examples, is by using the <strong>virtualization</strong> tool of
-DisnixOS. This tool can be used on any Linux distribution (not just NixOS) using the
+With the following command you can use <a href="/nixops">NixOps</a> to deploy a network
+of VirtualBox machines, and deploy the services with Disnix to them:
+</p>
+
+<pre>
+$ nixops create ./network.nix ./network-virtualbox.nix -d vbox
+$ nixops deploy -d vbox
+$ export NIXOPS_DEPLOYMENT=vbox
+$ disnixos-env -s services.nix -n network.nix -d distribution.nix --use-nixops
+</pre>
+
+<h2>Deploying in a NixOS network with the NixOS test driver</h2>
+
+<p>
+The most convenient way of trying these examples, is by using the <strong>NixOS test driver</strong>
+integration feature of DisnixOS. This tool can be used on any Linux distribution (not just NixOS) using the
 Nix package manager and KVM. It will automatically generate a network running NixOS
 instances.
+</p>
+
+<p>
+Running the following command automatically generates a network of QEMU virtual machines and
+deploys the services inside them:
+</p>
+
+<pre>
+$ disnixos-vm-env -s services.nix -n network.nix -d distribution.nix
+</pre>
+
+<h2>Examples</h2>
+
+<p>
+Currently, we have the following example systems available:
 </p>
 
 <h3>StaffTracker (PHP/MySQL version)</h3>
@@ -37,7 +78,7 @@ modify staff members.
 </p>
 
 <ul>
-<li><a href="http://hydra.nixos.org/job/disnix/php-mysql-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+<li><a href="https://github.com/svanderburg/disnix-stafftracker-php-example">GitHub repository</a></li>
 </ul>
 
 <h3>StaffTracker (Web services version)</h3>
@@ -51,7 +92,7 @@ location from an IP address.
 </p>
 
 <ul>
-<li><a href="http://hydra.nixos.org/job/disnix/WebServicesExample-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+<li><a href="https://github.com/svanderburg/disnix-stafftracker-java-example">GitHub repository</a></li>
 </ul>
 
 <h3>StaffTracker.NET (Web services version)</h3>
@@ -59,6 +100,10 @@ location from an IP address.
 <p>
 A port of the previous web services example to .NET technologies, such as C#, WCF, ADO.NET and SQL server.
 </p>
+
+<ul>
+<li><a href="https://github.com/svanderburg/disnix-stafftracker-dotnet-example">GitHub repository</a></li>
+</ul>
 
 <h3>ViewVC</h3>
 <p>
@@ -68,7 +113,7 @@ database storing commit records, and an arbitrary number of Subversion repositor
 </p>
 
 <ul>
-<li><a href="http://hydra.nixos.org/job/disnix/viewvc-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+<li><a href="https://github.com/svanderburg/disnix-viewvc-example">GitHub repository</a></li>
 </ul>
 
 <h3>Hello World example</h3>
@@ -81,7 +126,7 @@ to make them better deployable.
 </p>
 
 <ul>
-<li><a href="http://hydra.nixos.org/job/disnix/HelloWorldExample-simple-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+<li><a href="https://github.com/svanderburg/disnix-composition-example">GitHub repository</a></li>
 </ul>
 
 <h3>Disnix proxy example</h3>
@@ -93,17 +138,7 @@ process completely atomic.
 </p>
 
 <ul>
-<li><a href="http://hydra.nixos.org/job/disnix/disnix-proxy-example-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
-</ul>
-
-<h3>NixOS configurations</h3>
-
-<p>
-A trivial example case deploying complete NixOS configurations.
-</p>
-
-<ul>
-<li><a href="http://hydra.nixos.org/job/disnix/nixos-configurations-trunk/doc/latest/download-by-type/doc/manual">Documentation</a></li>
+<li><a href="https://github.com/svanderburg/disnix-proxy-example">GitHub repository</a></li>
 </ul>
 
 [% END %]

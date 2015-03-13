@@ -1,21 +1,13 @@
 [% WRAPPER layout.tt title="About Disnix" menu='disnix' %]
 
 <p>
-Disnix is a distributed deployment extension for Nix,
-a purely functional package manager.
-</p>
-
-<p>
-Nix has various advantages
-over conventional package managers, such as the option to install
-multiple versions or variants of components safely next to each
-other, a declarative language to specify how to build a component,
-support for complete dependencies and atomic upgrades and rollbacks.
-</p>
-
-<p>
-Disnix reuses the Nix package manager for local deployment and
-extends the deployment concepts to distributed systems.
+Disnix is a distributed service deployment toolset which main
+purpose is to deploy service oriented systems (i.e. systems
+that can be decomposed into "distributable units") into networks
+of machines having various characteristics (such as operating
+systems) and is built on top of Nix; a package manager which
+has some unique features compared to conventional package
+managers to make deployment safe and reliable. 
 </p>
 
 <h2>Features</h2>
@@ -65,22 +57,22 @@ relationship.
 
 <p>
 Like the standard Nix package manager, which support atomic upgrades,
-Disnix uses a two-phase commit variant mapped onto Nix deployment
-operations to upgrade a distributed system atomically.
-Since the Nix package manager always stores components next to each
-other in a Nix store and never overwrites existing files,
-upgrading a distributed system is also very safe and we can almost
-always perform a rollback.
+Disnix extends this concept to service-oriented systems by mapping the
+concepts of the two-phase commit protocol onto Nix deployment operations
+to upgrade a distributed system (almost) atomically. Since the Nix
+package manager always stores components next to each other in a
+Nix store and never overwrites existing files, upgrading a distributed
+system is very safe and we can almost always perform a rollback.
 </p>
 
 <p>
-The only impure step involved in upgrading is the activation of obsolete
+The only impure step while upgrading, is the activation of obsolete
 services and activation of newly installed services, a phase in which
-users may observe that the system is changing. To make this process truly
-atomic, Disnix has an extension mechanism that can be used to temporary
-queue/block incoming connections until the transition is finished.
-We developed a simple example with stateful TCP connections to demonstrate
-this.
+users may observe that the system is changing. To make this process
+truly atomic, Disnix has an extension mechanism that can be used to
+temporary queue/block incoming connections until the transition is
+finished. We have developed a simple prototype example with stateful
+TCP connections to demonstrate this. 
 </p>
 
 <h3>Garbage collection</h3>
@@ -100,30 +92,35 @@ using Cygwin.
 </p>
 
 <p>
-Except for the portability of Disnix itself, Disnix also allows a user to deploy
-a distributed system into a heterogeneous network (i.e. a network consisting
-of various types of machines, running different operating systems). Disnix reuses
-Nix to automatically build a component for the given target platform.
+Apart from the portability of Disnix itself, Disnix also allows a user to
+deploy a service oriented system into a heterogeneous network (i.e. a network
+consisting of various types of machines, running various operating systems).
+Disnix reuses Nix's delegation mechanism to build a component for an alien
+target platform. Optionally, it can also delegate builds to target
+machines in the network.
 </p>
 
 <h3>Extensibility</h3>
 
 <p>
-Since distributed systems can be deployed in heterogeneous networks
+Since service-oriented systems can be deployed in heterogeneous networks
 consisting of various platforms and using various communication protocols,
-and distributed system components can have basically any form,
-not all operations can be solved in a generic manner. 
-The architecture of Disnix is therefore very modular and provides
-a plugin architecture which can be used to integrate
-custom developed components used for the activation and deactivation of services,
-and a custom plugin that provides access to deployment operations through
-a specific interfaces.
+and their components can have basically any form, not all operations can be
+solved in a generic manner.
+</p>
+
+<p>
+The architecture of the Disnix toolset is very modular. Disnix uses a
+plugin system called Dysnomia to integrate customly developed modules
+used for the activation and deactivation of services, and a plugin
+system that provides remote access through various RPC protocols.
 </p>
 
 <p>
 Currently, Disnix includes a SSH wrapper which can be used to access
-remote machines through a SSH connection. A seperate extension that uses
-SOAP + MTOM is also available. A custom extension can be developed trivially.
+remote machines through a SSH connection. A seperate extension that
+uses SOAP + MTOM is also available. A custom extension can be developed
+in a straight forward manner. 
 </p>
 
 <h3>License</h3>

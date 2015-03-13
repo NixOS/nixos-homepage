@@ -6,21 +6,26 @@ not yet recommended for use in production environments.
 </p>
 
 <p>
-The easiest way to obtain Disnix is by using NixOS and to activate
-the Disnix module in the Disnix configuration.
-In order to use Disnix on different distributions
+The easiest way to obtain Disnix is to use NixOS and by activating
+the Disnix module in the NixOS configuration file:
+</p>
+<pre>
+services.disnix.enable = true;
+</pre>
+<p>
+To use Disnix on different distributions
 or systems, a release has to be downloaded and installed on a
 system of choice.
 </p>
 
 <h3>Latest release</h3>
 
-<p>The latest version of Disnix is <strong>0.2</strong>,
-released 14 February 2011.</p>
+<p>The latest version of Disnix is <strong>0.3</strong>,
+released 13 March 2015.</p>
 
 <ul>
   <li><a
-  href="http://hydra.nixos.org/release/disnix/disnix-0.2"><strong>Download
+  href="http://hydra.nixos.org/release/disnix/disnix-0.3"><strong>Download
   page</strong></a>, including the source tarball and Nix packages
   for several platforms. Also the Disnix extensions and example cases
   can be obtained here.</li>
@@ -28,14 +33,7 @@ released 14 February 2011.</p>
 
 <h3>Continuous builds</h3>
 
-<p>You can grab the latest bleeding-edge pre-release from our <a
-href="../hydra">continuous build system</a>:</p>
-
-<ul>
-  <li><a href="http://hydra.nixos.org/view/disnix/trunk/latest">The
-  latest development release of Disnix</a> (<a
-  href="http://hydra.nixos.org/view/disnix/trunk/latest/tarball/download-by-type/file/source-dist">source
-  tarball</a>)</li>
-</ul>
+<p>You can grab the latest bleeding-edge pre-releases from our <a
+href="http://hydra.nixos.org/project/disnix">continuous build system</a>.</p>
 
 [% END %]
