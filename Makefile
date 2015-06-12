@@ -14,7 +14,8 @@ HTML = index.html news.html \
   docs/papers.html \
   nixops/index.html \
   nixpkgs/packages.json.gz \
-  nixos/options.json.gz
+  nixos/options.json.gz \
+  nix/install
 
 
 NIXOS_MANUAL_IN = nixos/manual-raw
@@ -80,6 +81,11 @@ docs/papers.html: docs/papers-in.html
 	  --define fileName=$< \
 	  --pre_process=common.tt $< > $@.tmp
 	xmllint --nonet --noout $@.tmp
+	mv $@.tmp $@
+
+%: %.in common.tt
+	tpage \
+	  --pre_process=common.tt $< > $@.tmp
 	mv $@.tmp $@
 
 news.html: all-news.xhtml
