@@ -72,7 +72,7 @@ docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
 
 docs/papers.html: docs/papers-in.html
 
-%.html: %.tt layout.tt common.tt
+%.html: %.tt layout.tt common.tt donation.tt
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
