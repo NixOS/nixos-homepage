@@ -1,6 +1,25 @@
 [% WRAPPER layout.tt title="Stichting NixOS Foundation" menu='nixos' %]
 [% PROCESS common.tt %]
 
+<h2>General</h2>
+
+<p>The NixOS Foundation is a registered non-profit organisation at the Chamber of
+commerce (Kamer van Koophandel) in Utrecht, The Netherlands. The KvK number is 63520583.
+</p>
+
+<p>The purpose of the foundation, is to help support the infrastructure and projects
+that are implementing the purely function deployment model, such as NixOS, Nix
+and NixOps.</p>
+
+<p>There are currently 3 boardmembers:</p>
+
+<ul>
+  <li>Eelco Dolstra - Chairman</li>
+  <li>Armijn Hemel - Secretary</li>
+  <li>Rob Vermaas - Treasurer</li>
+</ul>
+
+
 <h2>Donations</h2>
 
 <p>
