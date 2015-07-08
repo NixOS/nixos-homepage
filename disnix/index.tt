@@ -123,6 +123,20 @@ uses SOAP + MTOM is also available. A custom extension can be developed
 in a straight forward manner. 
 </p>
 
+<h3>Data migration and backups</h3>
+
+<p>
+Disnix can also optionally take and restore snapshots of the state of deployed
+services for backup and migration purposes, e.g. when a service is moved from
+one machine to another.
+</p>
+
+<p>
+Since the snapshot and restore operations differ among component types,
+Dysnomia's plugin system is consulted to execute the required snapshot and
+restore operations for a given service type.
+</p>
+
 <h3>License</h3>
 
 <p>
