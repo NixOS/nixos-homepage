@@ -168,6 +168,8 @@ function ppNix(indent, v) {
     }
   }
 
+  if (v == null) return "null";
+
   // JavaScript consider both objects and arrays as objects.
   if (typeof v == "object") {
 
