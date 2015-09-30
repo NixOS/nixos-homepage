@@ -136,8 +136,9 @@ ifeq ($(UPDATE), 1)
 endif
 
 nixpkgs/packages.json.gz:
+	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS)); \
 	nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config '{}' \
-	  | sed "s|$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS))/||g" | gzip -9 > $@.tmp
+	  | sed "s|$$nixpkgs/||g" | gzip -9 > $@.tmp
 	gunzip < $@.tmp | python -mjson.tool > /dev/null
 	mv $@.tmp $@
 
