@@ -6,7 +6,7 @@
   nixopsManual = "/nixops/manual"
   latestNixVersion = "1.10"
   latestNixMirror = "http://nixos.org/releases/nix/nix-$latestNixVersion"
-  latestNixOSVersion = "14.12"
+  latestNixOSVersion = "15.09"
   latestNixOSBranch = "release-" _ latestNixOSVersion
   wikiMain = "https://nixos.org/wiki/Main_Page";
 

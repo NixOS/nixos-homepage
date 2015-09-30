@@ -70,9 +70,9 @@ To obtain a root shell, run <tt>sudo -i</tt> in the KDE terminal
 by using one of the AMIs listed below.</p>
 
 <div class="row">
-<table class="table span3">
+<table class="table span5">
   <thead>
-    <tr><th>Region</th><th>Type</th><th>AMI</th><th></th></tr>
+    <tr><th>Region</th><th>Root storage</th><th>Virtualisation</th><th>AMI</th><th></th></tr>
   </thead>
   <tbody>
     [% amis = JSON.Escape.json_decode(IO.All.new('nixos/amis.json').all).$latestNixOSVersion %]
@@ -80,7 +80,8 @@ by using one of the AMIs listed below.</p>
       [% FOREACH type IN amis.$region.keys.sort; ami = amis.$region.$type %]
         <tr>
           <td><tt>[% region %]</tt></td>
-          <td>[% type %]</td>
+          <td>[% IF type.search("ebs"); THEN; "EBS"; ELSE; "Instance"; END; %]</td>
+          <td>[% IF type.search("hvm"); THEN; "Hardware"; ELSE; "Para"; END; %]</td>
           <td><tt>[% ami %]</tt></td>
         <td><a href="https://console.aws.amazon.com/ec2/home?region=[%region%]#launchAmi=[%ami%]" class="btn btn-primary btn-mini">Launch</a></td>
         </tr>
@@ -93,11 +94,12 @@ by using one of the AMIs listed below.</p>
 <p>You can create an instance using the AWS Management Console by
 clicking one of the Launch buttons. You can also create an instance
 from the command line. For instance, to create an instance in region
-<tt>[% region = "eu-west-1"; region %]</tt> using the EC2 API
-tools, just run:</p>
+<tt>[% region = "eu-west-1"; type = "pv-ebs"; ami =
+amis.$region.$type; region %]</tt> using the EC2 API tools, just
+run:</p>
 
 <pre>
-$ ec2-run-instances [% amis.$region.ebs %] --region [% region %] -k <em>my-key-pair</em>
+$ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em>
 </pre>
 
 </section>
