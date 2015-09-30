@@ -1,3 +1,6 @@
+NIXOS_VERSION = 15.09
+NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_VERSION)/nixexprs.tar.xz
+
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
 default: all
@@ -21,14 +24,15 @@ HTML = index.html news.html \
 NIXOS_MANUAL_IN = nixos/manual-raw
 NIXOS_MANUAL_OUT = nixos/manual
 
-ifneq ($(wildcard $(NIXOS_MANUAL_IN)),)
-
 all: $(NIXOS_MANUAL_OUT)
 
-$(NIXOS_MANUAL_OUT): $(call rwildcard, $(NIXOS_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) 'NixOS manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+$(NIXOS_MANUAL_OUT): $(NIXOS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN)/share/doc/nixos $(NIXOS_MANUAL_OUT) 'NixOS manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
-endif
+$(NIXOS_MANUAL_IN):
+	@echo rm -f $@
+	nix-build -o $@ '<nixpkgs/nixos>' -I nixpkgs=$(NIXPKGS) \
+	  -A config.system.build.manual.manual --arg configuration '{ fileSystems."/".device = "/dummy"; }'
 
 
 NIX_MANUAL_IN = nix/manual-raw
@@ -128,15 +132,15 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT)
+.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT)
 endif
 
 nixpkgs/packages.json.gz:
-	nix-env -f '<nixpkgs>' -qa --json --arg config '{}' \
-	  | sed "s|$$(nix-instantiate --find-file nixpkgs)/||g" | gzip -9 > $@.tmp
+	nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config '{}' \
+	  | sed "s|$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS))/||g" | gzip -9 > $@.tmp
 	gunzip < $@.tmp | python -mjson.tool > /dev/null
 	mv $@.tmp $@
 
 nixos/options.json.gz:
-	gzip -9 < $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -A options)/share/doc/nixos/options.json > $@.tmp
+	gzip -9 < $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(NIXPKGS) -A options)/share/doc/nixos/options.json > $@.tmp
 	mv $@.tmp $@
