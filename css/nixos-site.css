@@ -289,6 +289,10 @@ div.search-details td.nix {
 
 /* Manual. */
 
+div.docbook div.page-header {
+    margin-top: 4em;
+}
+
 div.docbook section {
     margin-top: 2em;
 }
