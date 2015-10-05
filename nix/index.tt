@@ -31,9 +31,8 @@
     tarball containing Nix and its dependencies, and unpack it in
     <tt>/nix</tt>.</p>
 
-    <p>Other installation options</a>, including <strong>packages for
-    Ubuntu, Debian and Fedora Linux</strong>, are <a
-    href="[%root%]nix/download.html">also available</a>.</p>
+    <p>Source tarballs and more installation information are <a
+    href="[%root%]nix/download.html">available</a>.</p>
 
   [% END %]
 

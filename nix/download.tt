@@ -9,9 +9,10 @@ following in a shell (as a user other than <tt>root</tt>):
 
 <pre><span class="muted">$</span> curl <a href="[%root%]nix/install">https://nixos.org/nix/install</a> | sh</pre>
 
-This script does require that you have <tt>sudo</tt> access to
-<tt>root</tt> (since it needs to create the directory
-<tt>/nix</tt>). See <a href="[%nixManual%]#chap-installation">the
+This script requires that you have <tt>sudo</tt> access to
+<tt>root</tt>, unless the directory <tt>/nix</tt> already exists and
+is writable by you. You can uninstall Nix simply by running <tt>rm -rf
+/nix</tt>. See <a href="[%nixManual%]#chap-installation">the
 manual</a> for more information.</p>
 
 <p>The following are also available:
@@ -20,10 +21,12 @@ manual</a> for more information.</p>
 
   <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a>.</li>
 
+  <!--
   <li><a
   href="http://hydra.nixos.org/release/nix/nix-[%latestNixVersion%]">Binary
   packages for several platforms</a>, including RPMs, Debs and binary
   tarballs for Mac OS X.</li>
+  -->
 
   <li><a href="[%nixManual%]#ssec-relnotes-[%latestNixVersion%]">Release
   notes</a>.</li>
@@ -46,10 +49,12 @@ manual</a> for more information.</p>
 href="../hydra">continuous build system</a>:</p>
 
 <ul>
-  <li><a href="http://hydra.nixos.org/job/nix/trunk/release#tabs-constituents">The
+  <li><a
+  href="http://hydra.nixos.org/job/nix/trunk/release#tabs-constituents">The
   latest development release of Nix</a> (<a
   href="http://hydra.nixos.org/job/nix/trunk/release/latest-finished/eval/job/tarball/download-by-type/file/source-dist">source
-  tarball</a>, <a href="http://hydra.nixos.org/job/nix/trunk/release/latest-finished/eval/job/tarball/download-by-type/doc/manual">manual</a>, and RPMs and Debs for several platforms)</li>
+  tarball</a> and <a
+  href="http://hydra.nixos.org/job/nix/trunk/release/latest-finished/eval/job/tarball/download-by-type/doc/manual">manual</a>)</li>
 </ul>
 
 </section>
