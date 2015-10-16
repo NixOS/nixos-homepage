@@ -66,7 +66,7 @@ endif
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*)))
 
 favicon.png: logo/nixos-logo-only-hires.png
-	convert -adaptive-resize 16x16! $< $@
+	convert -resize 16x16 -background none -gravity center -extent 16x16 $< $@
 
 %-small.png: %.png
 	convert -resize 200 $< $@
