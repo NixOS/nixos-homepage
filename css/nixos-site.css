@@ -26,8 +26,20 @@ p {
     hyphens: auto;
 }
 
+.brand > a {
+    color: #777;
+    text-decoration: none;
+}
+
+.brand > a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
 .logo {
     margin-top: -5px;
+    padding-right: 5px;
+    line-height: 25px;
     height: 25px;
 }
 
