@@ -5,19 +5,22 @@
 # (which in turn creates and populates /nix).
 
 { # Prevent execution if this script was only partially downloaded
-
-unpack=nix-binary-tarball-unpack
+oops() {
+    echo "$0: $@" >&2
+    exit 1
+}
+unpack="$(mktemp -d nix-binary-tarball-unpack.XXXXXXXXXX || \
+          oops "Can't create tempdir for unpacking")"
+cleanup() {
+    rm -rf "$unpack"
+}
+trap cleanup EXIT
 
 require_util() {
     type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1 ||
         oops "you do not have \`$1' installed, which i need to $2"
 }
 
-oops() {
-    echo "$0: $@" >&2
-    rm -rf "$unpack"
-    exit 1
-}
 
 case "$(uname -s).$(uname -m)" in
     Linux.x86_64) system=x86_64-linux;;
@@ -33,13 +36,11 @@ require_util bzcat "decompress the binary tarball"
 require_util tar "unpack the binary tarball"
 
 echo "unpacking Nix binary tarball for $system from \`$url'..."
-mkdir "$unpack" || oops "failed to create \`$unpack' directory"
 curl -L "$url" | bzcat | tar x -C "$unpack" || oops "failed to unpack \`$url'"
 
 [ -e "$unpack"/*/install ] ||
     oops "installation script is missing from the binary tarball!"
 
 "$unpack"/*/install
-rm -rf "$unpack"
 
 } # End of wrapping
