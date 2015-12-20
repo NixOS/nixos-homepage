@@ -31,6 +31,7 @@ url="https://nixos.org/releases/nix/nix-[%latestNixVersion%]/nix-[%latestNixVers
 require_util curl "download the binary tarball"
 require_util bzcat "decompress the binary tarball"
 require_util tar "unpack the binary tarball"
+require_util bash "run the installation script from the binary tarball"
 
 echo "unpacking Nix binary tarball for $system from \`$url'..."
 mkdir "$unpack" || oops "failed to create \`$unpack' directory"
