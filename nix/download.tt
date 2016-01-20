@@ -3,7 +3,7 @@
 <section><h2>Latest release</h2>
 
 <p>The latest and recommended version of Nix is
-<strong>[%latestNixVersion%]</strong>, released 19 January 2016. The
+<strong>[%latestNixVersion%]</strong>, released 20 January 2016. The
 quickest way to install it on Linux and Mac OS X is to run the
 following in a shell (as a user other than <tt>root</tt>):
 
@@ -68,6 +68,7 @@ href="../hydra">continuous build system</a>:</p>
     <tr><th>Date</th><th>Version</th></tr>
   </thead>
   <tbody>
+  <tr><td class="reldate">2016-01-20</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.11.1">Nix 1.11.1</a></td></tr>
   <tr><td class="reldate">2016-01-19</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.11">Nix 1.11</a></td></tr>
   <tr><td class="reldate">2015-09-03</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.10">Nix 1.10</a></td></tr>
   <tr><td class="reldate">2015-06-12</td><td><a href="http://hydra.nixos.org/release/nix/nix-1.9">Nix 1.9</a></td></tr>
