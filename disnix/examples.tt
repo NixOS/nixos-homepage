@@ -141,4 +141,15 @@ process completely atomic.
 <li><a href="https://github.com/svanderburg/disnix-proxy-example">GitHub repository</a></li>
 </ul>
 
+<h3>Virtual hosts example</h3>
+
+<p>
+An example that delegates requests per virtual hosts to specific web applications hosted on a
+machine. It uses target-specific services to optimize the deployment process.
+</p>
+
+<ul>
+<li><a href="https://github.com/svanderburg/disnix-virtualhosts-example">GitHub repository</a></li>
+</ul>
+
 [% END %]
