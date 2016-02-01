@@ -169,10 +169,8 @@ function showPackage() {
     var n = nixExpr.lastIndexOf(':');
     var file = nixExpr.slice(0, n);
     var line = nixExpr.slice(n + 1);
-    // cut string after 5. '/'
-    var path = file.replace(/([^\/]*\/){5}/, '');
     // FIXME: link to correct revision.
-    var url = 'https://github.com/NixOS/nixpkgs/blob/[%latestNixOSBranch%]/' + path + '#L' + line;
+    var url = 'https://github.com/NixOS/nixpkgs/blob/[%latestNixOSBranch%]/' + file + '#L' + line;
     $('.nix-expr', details).empty().append($('<a/>', { href: url }).text(file));
   }
 
