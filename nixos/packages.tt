@@ -218,7 +218,7 @@ $.ajax({
   url: '[%root%]nixpkgs/packages.json.gz',
   type: 'GET',
   dataType: 'json',
-  error: function(a, b, c) { alert('Failed to get package data.'); },
+  error: function(a, status, error) { alert('Failed to get package data [' + status + ']: ' + error); },
   success: function(data) {
     packageData = data;
 
