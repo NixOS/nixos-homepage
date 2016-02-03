@@ -66,7 +66,7 @@ system is very safe and we can almost always perform a rollback.
 </p>
 
 <p>
-The only impure step while upgrading, is the activation of obsolete
+The only impure step while upgrading, is the deactivation of obsolete
 services and activation of newly installed services, a phase in which
 users may observe that the system is changing. To make this process
 truly atomic, Disnix has an extension mechanism that can be used to
