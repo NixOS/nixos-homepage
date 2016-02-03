@@ -6,7 +6,12 @@
 %]</strong>.  Below are links to CD/DVD images and VirtualBox
 appliances containing the <a
 href="https://nixos.org/channels/nixos-[%latestNixOSVersion%]">latest
-release</a> in this series.</p>
+release</a> in this series.
+<a class="btn btn-large btn-success pull-right" href="[%root%]nixos/manual/">
+  Next Step: Manual
+  <i class="fa fa-arrow-right"></i>
+</a>
+</p>
 
 <section><h2 id="installation-isos">Installation CDs/DVDs</h2>
 
