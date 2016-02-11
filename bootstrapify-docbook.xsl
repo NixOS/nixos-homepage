@@ -82,15 +82,21 @@
     </section>
   </xsl:template>
 
-  <xsl:template match="x:h1">
-    <div class='page-header'><h1><xsl:apply-templates select="@*|node()" /></h1></div>
+  <xsl:template match="x:h1[x:a/@id]">
+    <div class='page-header'>
+      <h1>
+        <xsl:attribute name="id"><xsl:value-of select="x:a/@id" /></xsl:attribute>
+        <xsl:apply-templates select="@*|node()[not(self::x:a)]" />
+      </h1>
+    </div>
   </xsl:template>
 
-  <!--
-  <xsl:template match="x:h2">
-    <div class='page-header'><h2><xsl:apply-templates select="@*|node()" /></h2></div>
+  <xsl:template match="x:h2[x:a/@id]|x:h3[x:a/@id]">
+    <xsl:element name="{name(.)}">
+      <xsl:attribute name="id"><xsl:value-of select="x:a/@id" /></xsl:attribute>
+      <xsl:apply-templates select="@*|node()[not(self::x:a)]" />
+    </xsl:element>
   </xsl:template>
-  -->
 
   <xsl:template match="x:div[@class='titlepage' and ../@class = 'book']" />
 

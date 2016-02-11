@@ -20,7 +20,7 @@ for fn in $(cd $inDir && find -type f); do
             --define root=`echo "$outDir/$fn" | sed -e 's|[^/]||g' -e 's|/|../|g'` \
             --pre_process=common.tt \
             > "$outDirTmp/$fn" <<EOF
-[% WRAPPER layout.tt title="$title" menu='$menu' hideTitle=1 sourceLink='$source' %]
+[% WRAPPER layout.tt title="$title" menu='$menu' hideTitle=1 sourceLink='$source' anchors=1 %]
 
 [% INSERT "$outDirTmp/$fn.in" %]
 

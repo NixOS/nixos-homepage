@@ -162,6 +162,13 @@
       });
     </script>
 
+    [% IF anchors %]
+      <script src="[% root %]js/anchor.min.js"></script>
+      <script>
+        anchors.add('h1,h2,h3');
+      </script>
+    [% END %]
+
   </body>
 
 </html>
