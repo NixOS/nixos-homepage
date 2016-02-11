@@ -8,7 +8,7 @@ default: all
 
 HTML = index.html news.html \
   nix/index.html nix/about.html nix/download.html \
-  nixpkgs/index.html nixpkgs/download.html nixpkgs/docs.html \
+  nixpkgs/index.html nixpkgs/download.html \
   nixos/about.html nixos/download.html nixos/support.html nixos/community.html nixos/packages.html nixos/options.html \
   nixos/screenshots.html nixos/foundation.html \
   patchelf.html hydra/index.html \
@@ -77,7 +77,7 @@ NIXPKGS_MANUAL_OUT = nixpkgs/manual
 all: $(NIXPKGS_MANUAL_OUT)
 
 $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT) 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/manual
+	./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT) 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
 	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
 
 $(NIXPKGS_MANUAL_IN):
