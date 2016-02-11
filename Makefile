@@ -21,6 +21,8 @@ HTML = index.html news.html \
   nix/install
 
 
+### Prettify the NixOS manual.
+
 NIXOS_MANUAL_IN = nixos/manual-raw
 NIXOS_MANUAL_OUT = nixos/manual
 
@@ -34,6 +36,8 @@ $(NIXOS_MANUAL_IN):
 	nix-build -o $@ '<nixpkgs/nixos>' -I nixpkgs=$(NIXPKGS) \
 	  -A config.system.build.manual.manual --arg configuration '{ fileSystems."/".device = "/dummy"; }'
 
+
+### Prettify the Nix manual.
 
 NIX_MANUAL_IN = nix/manual-raw
 NIX_MANUAL_OUT = nix/manual
@@ -49,6 +53,8 @@ $(NIX_MANUAL_OUT): $(call rwildcard, $(NIX_MANUAL_IN), *) bootstrapify-docbook.s
 endif
 
 
+### Prettify the NixOps manual.
+
 NIXOPS_MANUAL_IN = nixops/manual-raw
 NIXOPS_MANUAL_OUT = nixops/manual
 
@@ -61,6 +67,22 @@ $(NIXOPS_MANUAL_OUT): $(call rwildcard, $(NIXOPS_MANUAL_IN), *) bootstrapify-doc
 	ln -sfn manual.html $(NIXOPS_MANUAL_OUT)/index.html
 
 endif
+
+
+### Prettify the Nixpkgs manual.
+
+NIXPKGS_MANUAL_IN = nixpkgs/manual-raw
+NIXPKGS_MANUAL_OUT = nixpkgs/manual
+
+all: $(NIXPKGS_MANUAL_OUT)
+
+$(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT) 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/manual
+	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
+
+$(NIXPKGS_MANUAL_IN):
+	@echo rm -f $@
+	nix-build -o $@ '<nixpkgs/doc>' -I nixpkgs=$(NIXPKGS)
 
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*)))
@@ -132,7 +154,8 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT)
+.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz \
+  $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN)
 endif
 
 nixpkgs/packages.json.gz:
