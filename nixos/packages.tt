@@ -192,7 +192,7 @@ function showPackage() {
   if (typeof homepage == 'string')
     $('.homepage', details).empty().append($('<a/>', { href: homepage }).text(homepage));
 
-  // FIXME: hande lists and attrsets of licenses.
+  // FIXME #49: hande lists and attrsets of licenses.
   var license = info['meta']['license'];
   if (typeof license == 'string')
     $('.license', details).empty().text(license);
