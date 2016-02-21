@@ -60,6 +60,10 @@
       <th style='width: 10em'>Long description:</th>
       <td class='long-description'><em>Not specified</em></td>
     </tr>
+    <tr>
+      <th>Parameters</th>
+      <td class='parameters'><em>Not specified</em></td>
+    </tr>
   </table>
 </div>
 
@@ -205,7 +209,23 @@ function showPackage() {
   var longDescription = info['meta']['longDescription'];
   if (typeof longDescription == 'string')
     $('.long-description', details).empty().addClass("pre").text(longDescription);
+    
+  var parameters = info['meta']['parameters'];
+  if (typeof parameters == 'object') {
+    var detailsP = [];
 
+    for (var param in parameters) {
+      if (parameters.hasOwnProperty(param)) {
+        detailsP.push($('<tr/>').append($('<td/>').text(param)).append($('<td/>').text(parameters[param])));
+      }
+    }
+    
+    $('.parameters', details).empty().append($('<table/>', {colspan: 2}).addClass('table').append($('<tr/>').append($('<th/>').text('Name')).append($('<th/>').text('Value'))).append(detailsP));
+    
+
+    
+ }
+    
   $(this).after($('<tr/>')
     .addClass('details')
     .append($('<td/>', { colspan: 3 })
