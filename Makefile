@@ -161,7 +161,10 @@ endif
 
 nixpkgs/packages.json.gz:
 	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS)); \
-	(echo -n '{ "commit": "' && cat $$nixpkgs/.git-revision && echo -n '","packages":' \
+	cp -R $$nixpkgs ../home/nixpkgs; \
+	patch -d ../home/nixpkgs < nixpkgs/nixpkgs.patch; \
+	find ../home/nixpkgs -type f -print0 | xargs -0 perl -pi.back -e 's/assert(.*?);/(if $$1 then builtins.trace "failed assertion" else (x: x))/g'; \
+	(echo -n '{ "commit": "' && cat ../home/nixpkgs/.git-revision && echo -n '","packages":' \
 	  && nix-env -f './nixpkgs/addAttrs.nix' -I nixpkgs=$(NIXPKGS) -qa --json --arg config '{}' \
 	  && echo -n '}') \
 	  | sed "s|$$nixpkgs/||g" | gzip -9 > $@.tmp
