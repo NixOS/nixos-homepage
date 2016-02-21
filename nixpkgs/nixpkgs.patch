@@ -1,0 +1,19 @@
+diff --git a/lib/customisation.nix b/lib/customisation.nix
+index 5854954..57995a4 100644
+--- a/lib/customisation.nix
++++ b/lib/customisation.nix
+@@ -60,9 +60,14 @@ rec {
+         { override = newArgs: makeOverridable f (overrideWith newArgs);
+           overrideDerivation = fdrv:
+             makeOverridable (args: overrideDerivation (f args) fdrv) origArgs;
++          inherit origArgs;
++          _function = if lib.isFunction f then f else f._function;
++
+         })
+       else if builtins.isFunction ff then
+         { override = newArgs: makeOverridable f (overrideWith newArgs);
++          inherit origArgs;
++          _function = if lib.isFunction f then f else f._function;
+           __functor = self: ff;
+           overrideDerivation = throw "overrideDerivation not yet supported for functors";
+         }
