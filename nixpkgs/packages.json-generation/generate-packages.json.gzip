@@ -1,0 +1,19 @@
+#!/bin/sh
+nixpkgs=$(nix-instantiate --find-file nixpkgs -I nixpkgs=$2); \
+pushd nixpkgs/packages.json-generation; \
+rm -rf nixpkgs
+cp -R $nixpkgs nixpkgs
+chmod u+w -R nixpkgs
+patch -p1 -d nixpkgs < nixpkgs.patch
+(echo -n '{ "commit": "' && cat nixpkgs/.git-revision && echo -n '","packages":' \
+ && ~/src/working-nix/inst/bin/nix-instantiate --expr --eval 'import ./addAttrs.nix {}' --strict --json --show-trace \
+ && echo -n '}') \
+| sed "s|$(pwd)/nixpkgs/||g" | sed "s|__elim__.||g" | gzip -9 > ../../$1.tmp
+popd
+echo "Written $1.tmp"
+# gunzip < $1.tmp | python -mjson.tool
+
+# I haven't gotten my system configured so it
+# does the gzipping right
+# mv $1.tmp $1
+gunzip < $1.tmp > $1

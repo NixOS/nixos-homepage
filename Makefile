@@ -160,19 +160,7 @@ ifeq ($(UPDATE), 1)
 endif
 
 nixpkgs/packages.json.gz:
-	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS)); \
-	cp -R $$nixpkgs ../home/nixpkgs/*xz; \
-	chmod u+w -R ../home/nixpkgs; \
-	patch -p1 -d ../home/nixpkgs < nixpkgs/nixpkgs.patch; \
-	find ../home/nixpkgs -type f -print0 | xargs -0 perl -pi.back -e 's/assert(.*?);/(if $$1 then builtins.trace "failed assertion" else (x: x))/g'; \
-	(echo -n '{ "commit": "' && cat ../home/nixpkgs/.git-revision && echo -n '","packages":' \
-	  && nix-env -f './nixpkgs/addAttrs.nix' -I nixpkgs=$(NIXPKGS) -qa --json --arg config '{}' \
-	  && echo -n '}') \
-	  | sed "s|$$nixpkgs/||g" | gzip -9 > $@.tmp
-	gunzip < $@.tmp | python -mjson.tool > /dev/null
-	# I haven't gotten nginx configured to transfer the gzip file
-	# mv $@.tmp $@
-	gunzip < $@.tmp > $@
+	nixpkgs/packages.json-generation/generate-packages.json.gzip $@ $(NIXPKGS)
 
 nixos/options.json.gz:
 	gzip -9 < $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(NIXPKGS) -A options)/share/doc/nixos/options.json > $@.tmp
