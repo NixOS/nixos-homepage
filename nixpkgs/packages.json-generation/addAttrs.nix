@@ -8,7 +8,7 @@
 
 let inherit (nixpkgs) lib;
     forceCatch = error-handler: x:
-      let result = builtins.catch (builtins.deepSeq x x); in
+      let result = builtins.catch "EvalError" (builtins.deepSeq x x); in
       if lib.isAttrs result && result ? type && result.type == "error" then error-handler result else result;
     get-attribute = package: import ./get-attributes.nix { inherit (nixpkgs) lib; inherit package; };
     info = x: forceCatch (x:x) {
@@ -18,7 +18,7 @@ let inherit (nixpkgs) lib;
       parameters = get-attribute x;
     };
     mapRecursively = n: x:
-      forceCatch (error: [ ({ ${n + "(error)"} = { name = n; meta = { longDescription = error.message; }; }; }) ])
+      forceCatch (error: [ ({ ${n + "(error)"} = { name = n; inherit error; meta = { longDescription = error.message; }; }; }) ])
       (if lib.isDerivation x then
         [(lib.setAttrByPath [n] (info x))]
       else if lib.isAttrs x then

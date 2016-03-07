@@ -1,5 +1,6 @@
 NIXOS_VERSION = 16.03
 NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_VERSION)/nixexprs.tar.xz
+NIXPKGS_UNSTABLE = https://nixos.org/channels/nixos-16.03-beta/nixexprs.tar.xz
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
@@ -15,7 +16,11 @@ HTML = index.html news.html \
   disnix/index.html disnix/download.html disnix/docs.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
   docs/papers.html \
-  nixops/index.html
+  nixops/index.html \
+  nixpkgs/packages.json.gz \
+  nixpkgs/packages-unstable.json.gz \
+  nixos/options.json.gz \
+  nix/install
 
 
 ### Prettify the NixOS manual.
@@ -161,6 +166,10 @@ endif
 
 nixpkgs/packages.json.gz:
 	nixpkgs/packages.json-generation/generate-packages.json.gzip $@ $(NIXPKGS)
+
+nixpkgs/packages-unstable.json.gz:
+	nixpkgs/packages.json-generation/generate-packages.json.gzip $@ $(NIXPKGS_UNSTABLE)
+
 
 nixos/options.json.gz:
 	gzip -9 < $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(NIXPKGS) -A options)/share/doc/nixos/options.json > $@.tmp
