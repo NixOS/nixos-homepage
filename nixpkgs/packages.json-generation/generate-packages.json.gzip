@@ -3,7 +3,6 @@ set -e
 set -o pipefail
 # hack to build nix
 unset IN_NIX_SHELL
-alias curl="curl --insecure"
 # download nixpkgs and patch
 nixpkgs=$(nix-instantiate --find-file nixpkgs -I nixpkgs=$2); \
 pushd nixpkgs/packages.json-generation; \
@@ -12,9 +11,6 @@ cp -R $nixpkgs nixpkgs
 chmod u+w -R nixpkgs
 patch -p1 -d nixpkgs < nixpkgs.patch
 # download and build patched nix version
-rm -rf nix
-curl -L https://github.com/fkz/nix/archive/generate-nixos-packages.tar.gz | tar xz
-mv nix-generate-nixos-packages nix
 nix-build -A nixUnstable ./nixpkgs --arg config 'import ./nixUnstable.nix'
 (echo -n '{ "commit": "' && cat nixpkgs/.git-revision && echo -n '","packages":' \
  && ./result/bin/nix-instantiate --eval --expr 'import ./addAttrs.nix {}'  --strict --json --show-trace \
