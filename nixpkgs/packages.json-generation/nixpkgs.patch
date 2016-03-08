@@ -2,29 +2,25 @@ diff --git a/lib/customisation.nix b/lib/customisation.nix
 index 5854954..57995a4 100644
 --- a/lib/customisation.nix
 +++ b/lib/customisation.nix
-@@ -60,9 +60,15 @@ rec {
+@@ -60,9 +60,13 @@ rec {
          { override = newArgs: makeOverridable f (overrideWith newArgs);
            overrideDerivation = fdrv:
              makeOverridable (args: overrideDerivation (f args) fdrv) origArgs;
 +          inherit origArgs;
-+          _function = if lib.isFunction f then f else f._function;
 +          _functionArgs = builtins.functionArgs f;
          })
        else if builtins.isFunction ff then
          { override = newArgs: makeOverridable f (overrideWith newArgs);
 +          inherit origArgs;
-+          _function = if lib.isFunction f then f else f._function;
 +          _functionArgs = builtins.functionArgs f;
 +          __functor = self: args: let result = makeOverridable ff args; in result // { origArgs = origArgs // result.origArgs; _functionArgs = builtins.functionArgs f // result._functionArgs; };
 -          __functor = self: ff;
            overrideDerivation = throw "overrideDerivation not yet supported for functors";
          }
-@@ -112,5 +119,9 @@
+@@ -112,5 +119,7 @@
        pkgs = f finalArgs;
        mkAttrOverridable = name: pkg: pkg // {
          override = newArgs: mkAttrOverridable name (f (finalArgs // newArgs)).${name};
-+        _function = if lib.isFunction f then f else f._function;
-+        _functionArgs = builtins.functionArgs f;
 +        _functionArgs = builtins.functionArgs f;
 +        origArgs = finalArgs;
        };

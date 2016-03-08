@@ -4,6 +4,17 @@
   <input name='query' type='text' class='search-query span3'
          placeholder='Search by name or description'
          id='search' value='' autofocus='autofocus'/>
+
+  <div class="btn-group" data-toggle="buttons">
+    <label class="btn btn-primary">
+      <input type="radio" name="releases" id="release-stable" checked="checked" /> 15.09
+    </label>
+    <label class="btn btn-primary">
+      <input type="radio" name="releases" id="release-unstable" /> 16.03 (beta)
+    </label>
+    <label><input type="checkbox" id="search-in-parameters" />Search in parameters</label>
+    <label><input type="checkbox" id="show-failing-packages" />Show failing packages</label>
+  </div>
 </p>
 
 <hr />
@@ -125,6 +136,13 @@ function refilter() {
   var attrs = Object.keys(packageData);
 
   var words = $('#search').val().toLowerCase().split(/ +/).filter(Boolean);
+  var searchParameters = $('#search-in-parameters').prop('checked');
+  var showFailing = $('#show-failing-packages').prop('checked');
+  if (!showFailing) {
+    attrs = attrs.filter(function(attr) {
+      return !('error' in packageData[attr]);
+    });
+  }
 
   if (words.length > 0) {
     attrs = attrs.filter(function (attr) {
@@ -136,7 +154,10 @@ function refilter() {
         return (attr.toLowerCase().indexOf(word) != -1
           || info['name'].toLowerCase().indexOf(word) != -1
           || description.toLowerCase().indexOf(word) != -1
-          || longDescription.toLowerCase().indexOf(word) != -1);
+          || longDescription.toLowerCase().indexOf(word) != -1
+          || (searchParameters && Object.keys(info['parameters']).some(function(val) {
+            return val.toLowerCase().indexOf(word) != -1;
+          })));
       };
 
       return words.every(match);
@@ -209,8 +230,8 @@ function showPackage() {
   var longDescription = info['meta']['longDescription'];
   if (typeof longDescription == 'string')
     $('.long-description', details).empty().addClass("pre").text(longDescription);
-    
-  var parameters = info['meta']['parameters'];
+
+  var parameters = info['parameters'];
   if (typeof parameters == 'object') {
     var detailsP = [];
 
@@ -219,13 +240,13 @@ function showPackage() {
         detailsP.push($('<tr/>').append($('<td/>').text(param)).append($('<td/>').text(parameters[param])));
       }
     }
-    
-    $('.parameters', details).empty().append($('<table/>', {colspan: 2}).addClass('table').append($('<tr/>').append($('<th/>').text('Name')).append($('<th/>').text('Value'))).append(detailsP));
-    
 
-    
+    $('.parameters', details).empty().append($('<table/>', {colspan: 2}).addClass('table').append($('<tr/>').append($('<th/>').text('Name')).append($('<th/>').text('Value'))).append(detailsP));
+
+
+
  }
-    
+
   $(this).after($('<tr/>')
     .addClass('details')
     .append($('<td/>', { colspan: 3 })
@@ -233,8 +254,11 @@ function showPackage() {
   ).attr('expanded', 1);
 };
 
-$.ajax({
-  url: '[%root%]nixpkgs/packages.json.gz',
+function download(name) {
+if (request) request.abort();
+$("#how-many").text("Loading...");
+request = $.ajax({
+  url: '[%root%]nixpkgs/' + name + '.json.gz',
   type: 'GET',
   dataType: 'json',
   error: function(a, status, error) { alert('Failed to get package data [' + status + ']: ' + error); },
@@ -250,6 +274,25 @@ $.ajax({
   }
 });
 
+}
+
+$().ready(function() {
+  $("#release-stable").change(function() {
+    download("packages");
+  });
+  $("#release-unstable").change(function() {
+    download("packages-unstable");
+  });
+  $("#search-in-parameters").change(function() {
+    refilter();
+  });
+  $("#show-failing-packages").change(function() {
+    refilter();
+  });
+});
+
+request = null;
+download("packages");
 //]]>
 </script>
 
