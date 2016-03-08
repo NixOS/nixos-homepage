@@ -254,6 +254,25 @@ function showPackage() {
   ).attr('expanded', 1);
 };
 
+function initializeEvents() {
+  $("#release-stable").change(function() {
+    download("packages");
+  });
+  $("#release-unstable").change(function() {
+    download("packages-unstable");
+  });
+
+  $("#search-in-parameters").change(function() {
+    refilter();
+  });
+  $("#show-failing-packages").change(function() {
+    refilter();
+  });
+  $('#search').on('input', function() {
+    refilter();
+  });
+}s;
+
 function download(name) {
 if (request) request.abort();
 $("#how-many").text("Loading...");
@@ -263,35 +282,19 @@ request = $.ajax({
   dataType: 'json',
   error: function(a, status, error) { alert('Failed to get package data [' + status + ']: ' + error); },
   success: function(data) {
+    var firstTime = request === null;
     nixpkgsCommit = data.commit;
     packageData = data.packages;
-
     refilter();
-
-    $('#search').on('input', function() {
-      refilter();
-    });
+    if (firstTime) {
+      initializeEvents();
+    }
   }
 });
-
 }
 
-$().ready(function() {
-  $("#release-stable").change(function() {
-    download("packages");
-  });
-  $("#release-unstable").change(function() {
-    download("packages-unstable");
-  });
-  $("#search-in-parameters").change(function() {
-    refilter();
-  });
-  $("#show-failing-packages").change(function() {
-    refilter();
-  });
-});
-
 request = null;
+packageData = null;
 download("packages");
 //]]>
 </script>
