@@ -23,8 +23,4 @@ nix-build -A nixUnstable ./nixpkgs --arg config 'import ./nixUnstable.nix'
 popd
 echo "Written $1.tmp"
 # gunzip < $1.stmp | python -mjson.tool
-
-# I haven't gotten my system configured so it
-# does the gzipping right
-# mv $1.tmp $1
-gunzip < $1.tmp > $1
+mv $1.tmp $1
