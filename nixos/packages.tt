@@ -271,24 +271,28 @@ function initializeEvents() {
   $('#search').on('input', function() {
     refilter();
   });
-}s;
+};
 
 function download(name) {
 if (request) request.abort();
-$("#how-many").text("Loading...");
+$(function() {
+  $("#how-many").text("Loading...");
+});
 request = $.ajax({
   url: '[%root%]nixpkgs/' + name + '.json.gz',
   type: 'GET',
   dataType: 'json',
   error: function(a, status, error) { alert('Failed to get package data [' + status + ']: ' + error); },
   success: function(data) {
-    var firstTime = request === null;
+    $(function() {
+    var firstTime = packageData === null;
     nixpkgsCommit = data.commit;
     packageData = data.packages;
     refilter();
     if (firstTime) {
       initializeEvents();
     }
+    });
   }
 });
 }
