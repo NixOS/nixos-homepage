@@ -37,7 +37,6 @@ the Nix package manager) before installing it.</p>
 <ul>
   <li><a href="[%prefix%]iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]iso-graphical-x86_64-linux-sha256">SHA-256</a>)
     <span class="label label-info">Recommended for most users</span></li>
-  <li><a href="[%prefix%]iso-graphical-i686-linux">Graphical live CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]iso-graphical-i686-linux-sha256">SHA-256</a>)</li>
 </ul>
 
 <p>The <strong>minimal installation CD</strong> does not contain X11,
@@ -64,7 +63,6 @@ To obtain a root shell, run <tt>sudo -i</tt> in the KDE terminal
 
 <ul>
   <li><a href="[%prefix%]ova-x86_64-linux">VirtualBox appliance, 64-bit Intel/AMD</a> (<a href="[%prefix%]ova-x86_64-linux-sha256">SHA-256</a>)</li>
-  <li><a href="[%prefix%]ova-i686-linux">VirtualBox appliance, 32-bit Intel/AMD</a> (<a href="[%prefix%]ova-i686-linux-sha256">SHA-256</a>)</li>
 </ul>
 
 </section>
