@@ -1,4 +1,4 @@
-NIXOS_VERSION = 15.09
+NIXOS_VERSION = 16.03
 NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_VERSION)/nixexprs.tar.xz
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))

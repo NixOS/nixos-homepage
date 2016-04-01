@@ -4,6 +4,26 @@
 
   <item>
     <year>2016</year>
+    <month>4</month>
+    <day>1</day>
+    <title>
+      NixOS 16.03 released
+    </title>
+    <description>
+      NixOS 16.03 “Emu” has been released, the fourth stable release
+      branch. See the <a
+      href="/nixos/manual/release-notes.html#sec-release-16.03">release notes</a>
+      for details. You can get NixOS 16.03 ISOs and VirtualBox
+      appliances from the <a href="nixos/download.html">download
+      page</a>. For information on how to upgrade from older release
+      branches to 16.03, check out the <a
+      href="/nixos/manual/index.html#sec-upgrading">manual section on
+      upgrading</a>.
+    </description>
+  </item>
+
+  <item>
+    <year>2016</year>
     <month>1</month>
     <day>19</day>
     <title>
