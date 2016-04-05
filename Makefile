@@ -134,7 +134,7 @@ nixos/amis.json: nixos/amis.nix
 	mv $@.tmp $@
 
 nixos/amis.nix:
-	curl --fail -L https://raw.github.com/NixOS/nixops/master/nix/ec2-amis.nix > $@.tmp
+	curl --fail -L https://raw.github.com/NixOS/nixpkgs/master/nixos/modules/virtualisation/ec2-amis.nix > $@.tmp
 	mv $@.tmp $@
 
 nixpkgs-commits.json:
