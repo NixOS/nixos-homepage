@@ -1,9 +1,9 @@
 [% WRAPPER layout.tt title="PatchELF" menu='patchelf' %]
 
 <p>PatchELF is a small utility to modify the dynamic linker and <a
-href="http://en.wikipedia.org/wiki/Rpath_%28linking%29">RPATH</a> of
+href="https://en.wikipedia.org/wiki/Rpath_%28linking%29">RPATH</a> of
 <a
-href="http://en.wikipedia.org/wiki/Executable_and_Linkable_Format">ELF
+href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format">ELF
 executables</a>.</p>
 
 <section><h2>Description</h2>
@@ -82,7 +82,7 @@ platforms.</p>
 <section><h2>Download</h2>
 
 <p>The most recent stable release is <a
-href="http://nixos.org/releases/patchelf/patchelf-0.9/">PatchELF
+href="https://nixos.org/releases/patchelf/patchelf-0.9/">PatchELF
 0.9</a>.</p>
 
 </section>
@@ -93,9 +93,9 @@ href="http://nixos.org/releases/patchelf/patchelf-0.9/">PatchELF
 <p>You can get the latest source code of PatchELF from its <a
 href="https://github.com/NixOS/patchelf">Git
 repository</a>.  You can also download the <a
-href="http://hydra.nixos.org/job/patchelf/trunk/release/latest#tabs-constituents">latest
+href="https://hydra.nixos.org/job/patchelf/trunk/release/latest#tabs-constituents">latest
 pre-release</a>, or view a <a
-href="http://hydra.nixos.org/job/patchelf/trunk/release#tabs-constituents">list of all
+href="https://hydra.nixos.org/job/patchelf/trunk/release#tabs-constituents">list of all
 prereleases</a> built in our build farm.</p>
 
 </section>

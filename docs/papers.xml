@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <bibliography>
 
-  <authorURL url="http://nixos.org/~eelco/">Eelco Dolstra</authorURL>
+  <authorURL url="https://nixos.org/~eelco/">Eelco Dolstra</authorURL>
   <authorURL url="http://martin.bravenboer.name/index.html">Martin Bravenboer</authorURL>
   <authorURL url="http://swerl.tudelft.nl/bin/view/EelcoVisser/WebHome">Eelco Visser</authorURL>
   <authorURL url="http://www.extra.research.philips.com/hera/people/mdejonge/">Merijn de Jonge</authorURL>
@@ -49,7 +49,7 @@
       <day>1—4</day>
       <month>November</month>
       <year>2010</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/decvms-issre2010-final.pdf" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/decvms-issre2010-final.pdf" />
       <tag name="nixos" />
 
       <abstract>
@@ -92,14 +92,14 @@
       <author>Andres Löh</author>
       <author>Nicolas Pierron</author>
       <title>NixOS: A Purely Functional Linux Distribution</title>
-      <series url="http://journals.cambridge.org/action/displayJournal?jid=JFP">Journal of Functional Programming</series>
+      <series url="https://journals.cambridge.org/action/displayJournal?jid=JFP">Journal of Functional Programming</series>
       <publisher>Cambridge University Press</publisher>
       <year>2010</year>
       <volume>20</volume>
       <number>5–6</number>>
       <pages first="577" last="615" />
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/nixos-jfp-final.pdf" />
-      <link type="doi" url="http://dx.doi.org/10.1017/S0956796810000195 " />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/nixos-jfp-final.pdf" />
+      <link type="doi" url="https://dx.doi.org/10.1017/S0956796810000195 " />
       <tag name="nixos" />
 
       <abstract>
@@ -140,8 +140,8 @@
       <day>23</day>
       <month>May</month>
       <year>2009</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/icse-cloud09-final.pdf" />
-      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1564595.1564630" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/icse-cloud09-final.pdf" />
+      <link type="acm" url="https://portal.acm.org/citation.cfm?id=1564595.1564630" />
 
       <abstract>
         Hospital environments are currently primarily
@@ -178,8 +178,8 @@
       <day>20</day>
       <month>October</month>
       <year>2008</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/atomic-hotswup2008-final.pdf" />
-      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1490283.1490294" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/atomic-hotswup2008-final.pdf" />
+      <link type="acm" url="https://portal.acm.org/citation.cfm?id=1490283.1490294" />
 
       <abstract>
         Upgrading distributed systems is a complex process.  It
@@ -209,8 +209,8 @@
       <month>September</month>
       <year>2008</year>
       <pages first="367" last="378" />
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/nixos-icfp2008-final.pdf" />
-      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1411204.1411255" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/nixos-icfp2008-final.pdf" />
+      <link type="acm" url="https://portal.acm.org/citation.cfm?id=1411204.1411255" />
       <tag name="nixos" />
 
       <abstract>
@@ -248,7 +248,7 @@
       <day>8</day>
       <month>July</month>
       <year>2008</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/buildfarm-wasdett2008-final.pdf" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/buildfarm-wasdett2008-final.pdf" />
       <htmlnote><em>To appear.</em></htmlnote>
 
       <abstract>
@@ -284,8 +284,8 @@
       <day>5</day>
       <month>April</month>
       <year>2008</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/laziness-ldta2008-final.pdf" />
-      <link type="doi" url="http://dx.doi.org/10.1016/j.entcs.2009.09.042" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/laziness-ldta2008-final.pdf" />
+      <link type="doi" url="https://dx.doi.org/10.1016/j.entcs.2009.09.042" />
       <htmlnote><em>To appear.</em></htmlnote>
 
       <abstract>
@@ -316,13 +316,13 @@
       <author>Eelco Dolstra</author>
       <author>Armijn Hemel</author>
       <title>Purely Functional System Configuration Management</title>
-      <booktitle url="http://www.usenix.org/events/hotos07/">11th Workshop
+      <booktitle url="https://www.usenix.org/events/hotos07/">11th Workshop
       on Hot Topics in Operating Systems (HotOS XI)</booktitle>
       <location>San Diego, California, USA</location>
       <publisher>USENIX</publisher>
       <month>May</month>
       <year>2007</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/hotos-final.pdf" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/hotos-final.pdf" />
       <tag name="nixos" />
 
       <abstract>
@@ -354,7 +354,7 @@
       <author>Eelco Dolstra</author>
       <author>Eelco Visser</author>
       <title>Automated Software Testing and Release with Nix Build Farms</title>
-      <booktitle url="http://web.archive.org/web/20081202033839/http://www.laquso.com/VVSS2007/">Verification
+      <booktitle url="https://web.archive.org/web/20081202033839/http://www.laquso.com/VVSS2007/">Verification
       and Validation of Software Systems (VVSS-2007)</booktitle>
       <location>Eindhoven, The Netherlands</location>
       <month>March</month>
@@ -410,7 +410,7 @@
       <month>January</month>
       <year>2006</year>
       <isbn>90-393-4130-3</isbn>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/phd-thesis.pdf" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/phd-thesis.pdf" />
       <link type="igitur" url="http://igitur-archive.library.uu.nl/dissertations/2006-0118-200031/index.htm" />
       <tag name="nix" />
 
@@ -495,8 +495,8 @@
       <publisher>ACM Press</publisher>
       <month>November</month>
       <year>2005</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/secsharing-ase2005-final.pdf" />
-      <link type="acm" url="http://portal.acm.org/citation.cfm?id=1101933&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/secsharing-ase2005-final.pdf" />
+      <link type="acm" url="https://portal.acm.org/citation.cfm?id=1101933&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
       <tag name="nix" />
 
       <abstract>
@@ -536,14 +536,14 @@
       <title>Service Configuration Management</title>
       <editor>E. James Whitehead, Jr.</editor>
       <editor>Annita Persson Dahlqvist</editor>
-      <booktitle url="http://www.cs.ucsc.edu/~ejw/scm12/">12th
+      <booktitle url="https://users.soe.ucsc.edu/~ejw/scm12/">12th
       International Workshop on Software Configuration Management
       (SCM-12)</booktitle>
       <pages first="83" last="98" />
       <location>Long Beach, California, USA</location>
       <month>September</month>
       <year>2005</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/servicecm-scm12-final.pdf" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/servicecm-scm12-final.pdf" />
       <tag name="nix" />
 
       <abstract>
@@ -576,14 +576,14 @@
       <booktitle url="http://www.sei.cmu.edu/pacc/CBSE2005/">Eighth
       International SIGSOFT Symposium on Component-based Software
       Engineering (CBSE 2005)</booktitle>
-      <volume url="http://www.springeronline.com/sgw/cda/frontpage/0,11855,5-40109-22-48185705-0,00.html">3489</volume>
+      <volume url="https://www.springer.com/book/9783540258773">3489</volume>
       <series>Lecture Notes in Computer Science</series>
       <pages first="219" last="234" />
       <location>St. Louis, Missouri, USA</location>
       <publisher>Springer-Verlag</publisher>
       <month>May</month>
       <year>2005</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/eupfcdm-cbse2005-final.pdf" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/eupfcdm-cbse2005-final.pdf" />
       <htmlnote>© Springer-Verlag.</htmlnote>
       <tag name="nix" />
 
@@ -616,7 +616,7 @@
       <title>Nix: A Safe and Policy-Free System for Software
       Deployment</title>
       <editor>Lee Damon</editor>
-      <booktitle url="http://www.usenix.org/events/lisa04/">18th
+      <booktitle url="https://www.usenix.org/events/lisa04/">18th
       Large Installation System Administration Conference (LISA
       '04)</booktitle>
       <pages first="79" last="92" />
@@ -624,7 +624,7 @@
       <publisher>USENIX</publisher>
       <month>November</month>
       <year>2004</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/nspfssd-lisa2004-final.pdf" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/nspfssd-lisa2004-final.pdf" />
       <tag name="nix" />
 
       <abstract>
@@ -659,8 +659,8 @@
       <publisher>IEEE Computer Society</publisher>
       <month>May</month>
       <year>2004</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/immdsd-icse2004-final.pdf" />
-      <link type="acm" url="http://portal.acm.org/citation.cfm?id=999463&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/immdsd-icse2004-final.pdf" />
+      <link type="acm" url="https://portal.acm.org/citation.cfm?id=999463&amp;jmp=cit&amp;coll=ACM&amp;dl=ACM&amp;CFID=69373357&amp;CFTOKEN=14664181#CIT" />
       <tag name="nix" />
 
       <abstract>
@@ -693,13 +693,13 @@
       <editor>Bernhard Westfechtel</editor>
       <editor>André van der Hoek</editor>
       <booktitle url="http://www-i3.informatik.rwth-aachen.de/private/bernhard/scm11.html">11th International Workshop on Software Configuration Management (SCM-11)</booktitle>
-      <volume url="http://www.springerlink.com/link.asp?id=vwche2jnnlq4">2649</volume>
+      <volume url="https://link.springer.com/book/10.1007%2F3-540-39195-9">2649</volume>
       <series>Lecture Notes in Computer Science</series>
       <pages first="102" last="117" />
       <location>Portland, Oregon, USA</location>
       <month>May</month>
       <year>2003</year>
-      <link type="pdf" url="http://nixos.org/~eelco/pubs/iscsd-scm11-final.pdf" />
+      <link type="pdf" url="https://nixos.org/~eelco/pubs/iscsd-scm11-final.pdf" />
 
       <abstract>
         Classically, software deployment is a process consisting of

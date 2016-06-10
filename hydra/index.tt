@@ -1,14 +1,14 @@
 [% WRAPPER layout.tt title="Hydra" %]
 
-<a href="http://www.flickr.com/photos/eelcovisser/367433201/"><img
+<a href="https://www.flickr.com/photos/eelcovisser/367433201/"><img
 class="inline"
-src="http://farm1.static.flickr.com/185/367433201_9ee5ad0986_m.jpg"
+src="https://farm1.static.flickr.com/185/367433201_9ee5ad0986_m.jpg"
 alt="Hydra build farm" /></a>
 
 <section><h2>About</h2>
 
 <p>Hydra is a Nix-based continuous build system, released under
-the terms of the <a href="http://www.gnu.org/licenses/gpl.html">GNU
+the terms of the <a href="https://www.gnu.org/licenses/gpl.html">GNU
 GPLv3 or (at your option) any later version</a>.  It continuously
 checks out sources of software projects from version management
 systems to build, test and release them.  The build tasks are
@@ -18,7 +18,7 @@ supports a number of operating systems, such as various GNU/Linux
 flavours, Mac OS X, and Windows.</p>
 
 <p>At <a href="http://www.tudelft.nl">Delft University of
-Technology</a> we run a <a href="http://hydra.nixos.org/">Hydra-based
+Technology</a> we run a <a href="https://hydra.nixos.org/">Hydra-based
 build farm</a> to build and test the NixOS GNU/Linux distribution, the Nix
 Packages collection, the Stratego/XT program transformation system,
 and various other open source projects.  If you want to use our build
@@ -30,11 +30,11 @@ href="mailto:rob.vermaas@gmail.com">please let us know</a>.</p>
 <section><h2>Documentation</h2>
 
 <p>There is a <a
-href="http://nixos.org/~eelco/pubs/hydra-scp-submitted.pdf">draft
+href="https://nixos.org/~eelco/pubs/hydra-scp-submitted.pdf">draft
 paper about Hydra</a>.  There are also some (incomplete) <a
-href="http://hydra.nixos.org/job/hydra/trunk/tarball/latest/download-by-type/doc/manual">instructions
+href="https://hydra.nixos.org/job/hydra/trunk/tarball/latest/download-by-type/doc/manual">instructions
 available</a>
-(<a href="http://hydra.nixos.org/job/hydra/trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF</a>)
+(<a href="https://hydra.nixos.org/job/hydra/trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF</a>)
 on how to set up your own Hydra server.</p>
 
 </section>
@@ -46,7 +46,7 @@ please visit:</p>
 
 <ul>
   <li><a href="https://github.com/NixOS/hydra/issues">github.com/NixOS/hydra/issues</a>: issues, bugs and feature requests for Hydra</li>
-  <li><a href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev</tt> mailing list</a>: problems with our Hydra instance at <a href="http://hydra.nixos.org/">hydra.nixos.org</a></li>
+  <li><a href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev</tt> mailing list</a>: problems with our Hydra instance at <a href="https://hydra.nixos.org/">hydra.nixos.org</a></li>
 </ul>
 
 </section>

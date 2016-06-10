@@ -2,22 +2,22 @@
 
 <p>
 The
-<a href="http://hydra.nixos.org/job/disnix/disnix-trunk/tarball/latest/download-by-type/doc/manual">Disnix manual</a>
-(<a href="http://hydra.nixos.org/job/disnix/disnix-trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF version</a>)
+<a href="https://hydra.nixos.org/job/disnix/disnix-trunk/tarball/latest/download-by-type/doc/manual">Disnix manual</a>
+(<a href="https://hydra.nixos.org/job/disnix/disnix-trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF version</a>)
 tells you everything you need to know about installing and using Disnix.
 </p>
 
 <p>
 The documentation of 
-<a href="http://hydra.nixos.org/job/disnix/disnixos-trunk/tarball/latest/download-by-type/doc/manual">DisnixOS</a>
-(<a href="http://hydra.nixos.org/job/disnix/disnixos-trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF version</a>)
+<a href="https://hydra.nixos.org/job/disnix/disnixos-trunk/tarball/latest/download-by-type/doc/manual">DisnixOS</a>
+(<a href="https://hydra.nixos.org/job/disnix/disnixos-trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF version</a>)
 explains additional features for complementary infrastructure deployment.
 </p>
 
 <p>
 To use SOAP instead of SSH as a communication protocol consult the
-<a href="http://hydra.nixos.org/job/disnix/DisnixWebService-trunk/tarball/latest/download-by-type/doc/manual">DisnixWebService</a>
-(<a href="http://hydra.nixos.org/job/disnix/DisnixWebService-trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF version</a>)
+<a href="https://hydra.nixos.org/job/disnix/DisnixWebService-trunk/tarball/latest/download-by-type/doc/manual">DisnixWebService</a>
+(<a href="https://hydra.nixos.org/job/disnix/DisnixWebService-trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF version</a>)
 manual that provides a SOAP communication layer.
 </p>
 
@@ -28,17 +28,17 @@ There are various blog posts available describing Disnix's purpose, its extensio
 </p>
 
 <ul>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2015/11/deploying-services-to-heterogeneous.html"><strong>Deploying services to a heterogeneous network of machines with Disnix</strong></a>, November 2015.</li>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2015/08/deploying-target-specific-services-with.html"><strong>Deploying target-specific services with Disnix</strong></a>, August 2015.</li>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2015/07/assigning-port-numbers-to-microservices.html"><strong>Assigning port numbers to (micro)services in Disnix deployment models</strong></a>, August 2015.</li>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2015/07/deploying-state-with-disnix.html"><strong>Deploying state with Disnix</strong></a>, July 2015.</li>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2015/03/disnix-03-release-announcement.html"><strong>Disnix 0.3 release announcement</strong></a>, March 2015.</li>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2015/03/on-nixops-disnix-service-deployment-and.html"><strong>On NixOps, Disnix, service deployment and infrastructure deployment</strong></a>, March 2015.</li>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2013/05/a-reference-architecture-for.html"><strong>A Reference Architecture for Distributed Software Deployment</strong></a>, May 2013.</li>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2012/03/deployment-of-mutable-components.html"><strong>Deployment of mutable components</strong></a>, March 2012.</li>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2011/10/deploying-net-services-with-disnix.html"><strong>Deploying .NET services with Disnix</strong></a>, October 2011.</li>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2011/03/self-adaptive-deployment-with-disnix.html"><strong>Self-adaptive deployment with Disnix</strong></a>, March 2011.</li>
-<li>Sander van der Burg, <a href="http://sandervanderburg.blogspot.com/2011/02/disnix-toolset-for-distributed.html"><strong>Disnix: A toolset for distributed deployment</strong></a>, February 2011.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2015/11/deploying-services-to-heterogeneous.html"><strong>Deploying services to a heterogeneous network of machines with Disnix</strong></a>, November 2015.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2015/08/deploying-target-specific-services-with.html"><strong>Deploying target-specific services with Disnix</strong></a>, August 2015.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2015/07/assigning-port-numbers-to-microservices.html"><strong>Assigning port numbers to (micro)services in Disnix deployment models</strong></a>, August 2015.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2015/07/deploying-state-with-disnix.html"><strong>Deploying state with Disnix</strong></a>, July 2015.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2015/03/disnix-03-release-announcement.html"><strong>Disnix 0.3 release announcement</strong></a>, March 2015.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2015/03/on-nixops-disnix-service-deployment-and.html"><strong>On NixOps, Disnix, service deployment and infrastructure deployment</strong></a>, March 2015.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2013/05/a-reference-architecture-for.html"><strong>A Reference Architecture for Distributed Software Deployment</strong></a>, May 2013.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2012/03/deployment-of-mutable-components.html"><strong>Deployment of mutable components</strong></a>, March 2012.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2011/10/deploying-net-services-with-disnix.html"><strong>Deploying .NET services with Disnix</strong></a>, October 2011.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2011/03/self-adaptive-deployment-with-disnix.html"><strong>Self-adaptive deployment with Disnix</strong></a>, March 2011.</li>
+<li>Sander van der Burg, <a href="https://sandervanderburg.blogspot.com/2011/02/disnix-toolset-for-distributed.html"><strong>Disnix: A toolset for distributed deployment</strong></a>, February 2011.</li>
 </ul>
 
 <h3>Research papers</h3>
@@ -60,7 +60,7 @@ June 2013.
 </li>
 
 <li>
-Sander van der Burg, <a href="http://nixos.org/~eelco">Eelco Dolstra</a>,
+Sander van der Burg, <a href="https://nixos.org/~eelco">Eelco Dolstra</a>,
 <strong>Disnix: A toolset for distributed deployment</strong>,
 In volume 79 of
 <a href="http://www.journals.elsevier.com/science-of-computer-programming">Science of Computer Programming (SCP)</a>,
@@ -86,10 +86,10 @@ June 2012.
 
 <li>
 <p>
-Sander van der Burg, <a href="http://nixos.org/~eelco">Eelco Dolstra</a>,
+Sander van der Burg, <a href="https://nixos.org/~eelco">Eelco Dolstra</a>,
 <strong>A Self-Adaptive Deployment Framework for Service-Oriented Systems</strong>
 In
-<a href="http://2011.seams-symposia.org">6th International Symposium on Software Engineering for Adaptive and Self-Managing Systems (SEAMS)</a>.
+<a href="https://www.hpi.uni-potsdam.de/giese/events/seams2011/">6th International Symposium on Software Engineering for Adaptive and Self-Managing Systems (SEAMS)</a>.
 Waikiki, Honolulu, Hawaii, USA,
 ACM,
 May 2011.
@@ -99,7 +99,7 @@ May 2011.
 
 <li>
 <p>
-Sander van der Burg, <a href="http://nixos.org/~eelco">Eelco Dolstra</a>,
+Sander van der Burg, <a href="https://nixos.org/~eelco">Eelco Dolstra</a>,
 <strong>Disnix: A toolset for distributed deployment</strong>,
 In Mark van den Brand and Kim Mens and Holger Kienle and Anthony Cleve, editors,
 <a href="http://www.info.fundp.ac.be/wasdett2010">Third International Workshop on Academic Software Development Tools and Techniques (WASDeTT-3)</a>.
@@ -112,7 +112,7 @@ September 2010.
 
 <li>
 <p>
-Sander van der Burg, <a href="http://nixos.org/~eelco">Eelco Dolstra</a>,
+Sander van der Burg, <a href="https://nixos.org/~eelco">Eelco Dolstra</a>,
 <strong>Automated Deployment of a Heterogeneous Service-Oriented System</strong>,
 In
 <a href="http://seaa2010.liacs.nl">36th EUROMICRO Conference on Software Engineering and Advanced Applications (SEAA)</a>.
@@ -124,8 +124,8 @@ September 2010.
 
 <li>
 <p>
-Sander van der Burg, <a href="http://nixos.org/~eelco">Eelco Dolstra</a>,
-<a href="http://jongem.home.xs4all.nl">Merijn de Jonge</a>,
+Sander van der Burg, <a href="https://nixos.org/~eelco">Eelco Dolstra</a>,
+<a href="https://jongem.home.xs4all.nl">Merijn de Jonge</a>,
 <a href="http://www.eelcovisser.org">Eelco Visser</a>,
 <strong>Software Deployment in a Dynamic Cloud: From Device to Service Orientation in a Hospital Environment</strong>,
 In
@@ -140,8 +140,8 @@ May 2009.
 
 <li>
 <p>
-Sander van der Burg, <a href="http://nixos.org/~eelco">Eelco Dolstra</a>,
-<a href="http://jongem.home.xs4all.nl/">Merijn de Jonge</a>,
+Sander van der Burg, <a href="https://nixos.org/~eelco">Eelco Dolstra</a>,
+<a href="https://jongem.home.xs4all.nl/">Merijn de Jonge</a>,
 <strong>Atomic Upgrading of Distributed Systems</strong>,
 In Tudor Dumitras and Danny Dig and Iulian Neamtiu, editors,
 <a href="http://www.hotswup.org/2008">First ACM Workshop on Hot Topics in Software Upgrades (HotSWUp)</a>.

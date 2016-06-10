@@ -87,7 +87,7 @@ modify staff members.
 A more complex variant of the previous example implemented in Java.
 In this variant access to the databases is provided by web services. Moreover, a 
 Geolocation service is included using
-<a href="http://www.maxmind.com/app/ip-location">GeoIP</a> to determine a staff members'
+<a href="https://www.maxmind.com/app/ip-location">GeoIP</a> to determine a staff members'
 location from an IP address.
 </p>
 
