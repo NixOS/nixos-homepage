@@ -183,7 +183,7 @@ function showPackage() {
       if (system != 'i686-linux' && system != 'x86_64-linux') return;
       if (!first) p.append(document.createTextNode(', '));
       first = false;
-      var url = 'http://hydra.nixos.org/job/nixos/[%latestNixOSBranch%]/nixpkgs.' + pkgName + '.' + system;
+      var url = 'https://hydra.nixos.org/job/nixos/[%latestNixOSBranch%]/nixpkgs.' + pkgName + '.' + system;
       p.append($('<a/>', { href: url }).append($('<tt/>').text(system)));
     });
   }

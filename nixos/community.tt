@@ -26,7 +26,7 @@ request on GitHub</strong></a>, or <strong>send a patch</strong> to
 the <tt>nix-dev</tt> mailing list. If you want to contribute
 regularly, you may want to ask for commit access to our GitHub
 repositories (please ask <a
-href="http://nixos.org/~eelco/">Eelco</a>, or on the <tt>#nixos</tt> IRC channel).</p>
+href="https://nixos.org/~eelco/">Eelco</a>, or on the <tt>#nixos</tt> IRC channel).</p>
   </div>
   <div class="span4">
     <script type="text/javascript" src="https://www.openhub.net/p/25550/widgets/project_basic_stats.js"></script>
@@ -56,7 +56,7 @@ href="http://nixos.org/~eelco/">Eelco</a>, or on the <tt>#nixos</tt> IRC channel
   the Nix expression language.</li>
 
   <li>There is a <a
-  href="http://nixos.org/~eelco/pubs/nixos-jfp-submitted.pdf">paper
+  href="https://nixos.org/~eelco/pubs/nixos-jfp-submitted.pdf">paper
   on NixOS</a> has a lot of information on the NixOS module
   system (especially section 6).</li>
 
@@ -81,19 +81,19 @@ href="http://news.gmane.org/gmane.linux.distributions.nixos">archive</a>).</p>
 
 <p>The NixOS developers hang out on the <a
 href="irc://irc.freenode.net/#nixos"><tt>#nixos</tt> channel</a> on <a
-href="http://freenode.net/"><tt>irc.freenode.net</tt></a>.  This
-channel is <a href="http://nixos.org/irc/logs/">logged</a>.</p>
+href="https://freenode.net/"><tt>irc.freenode.net</tt></a>.  This
+channel is <a href="https://nixos.org/irc/logs/">logged</a>.</p>
 
 <h3>Continuous builds</h3>
 
 <p><a href="[%root%]hydra">Hydra</a> continuously builds NixOS:</p>
 
 <ul>
-  <li><a href="http://hydra.nixos.org/job/nixos/trunk-combined/tested#tabs-constituents">Status
+  <li><a href="https://hydra.nixos.org/job/nixos/trunk-combined/tested#tabs-constituents">Status
   of the <tt>master</tt> branch</a>, used to update the <a
   href="https://nixos.org/channels/nixos-unstable/"><tt>nixos-unstable</tt>
   channel</a>.</li>
-  <li><a href="http://hydra.nixos.org/job/nixos/release-[%latestNixOSVersion%]/tested#tabs-constituents">Status
+  <li><a href="https://hydra.nixos.org/job/nixos/release-[%latestNixOSVersion%]/tested#tabs-constituents">Status
   of the <tt>release-[%latestNixOSVersion%]</tt> branch</a>, used to update the <a
   href="https://nixos.org/channels/nixos-[%latestNixOSVersion%]"><tt>nixos-[%latestNixOSVersion%]</tt>
   channel</a>.</li>
@@ -113,7 +113,7 @@ infrastructure, we are looking for donations to our organization.
 <h2>Acknowledgments</h2>
 
 <p>The Nix package manager was developed by <a
-href="http://nixos.org/~eelco/">Eelco Dolstra</a> as
+href="https://nixos.org/~eelco/">Eelco Dolstra</a> as
 part of his PhD research in the <a
 href="http://www.cs.uu.nl/wiki/Trace/WebHome">TraCE project</a>,
 funded by the <a href="http://www.jacquard.nl/">Jacquard programme</a>
@@ -123,7 +123,7 @@ href="http://www.serc.nl/">SERC</a>.  The first prototype of NixOS was
 developed by <a href="http://www.tjaldur.nl/">Armijn Hemel</a> as
 his master’s thesis project.  Hydra, the Nix-based continuous build
 system, was developed as part of the LaQuSo Buildfarm project, funded
-by <a href="http://nirict.3tu.nl/">NIRICT</a> / <a
+by <a href="https://www.4tu.nl/nirict/">NIRICT</a> / <a
 href="http://www.laquso.com/">LaQuSo</a>.</p>
 
 <p>The NixOS community has been supported by various companies and institutes over
@@ -143,13 +143,13 @@ Rob Vermaas</a>.</p>
     <a href="http://www.uu.nl/"><img src="[% root %]logo/uu.gif" alt="UU logo" /></a>
   </div>
   <div class="span3 center">
-    <a href="http://www.3tu.nl/"><img src="[% root %]logo/3tu.jpg" alt="3TU logo" /></a>
+    <a href="https://www.3tu.nl/"><img src="[% root %]logo/3tu.jpg" alt="3TU logo" /></a>
   </div>
   <div class="span3 center">
     <a href="https://www.rackspace.com/cloud"><img src="[% root %]logo/rackspace.jpg" alt="Rackspace Cloud logo" /></a>
   </div>
   <div class="span3 center">
-    <a href="http://status.io"><img src="[% root %]logo/statusio.png" alt="Status.io logo" /></a>
+    <a href="https://status.io"><img src="[% root %]logo/statusio.png" alt="Status.io logo" /></a>
   </div>
   <div class="span3 center">
     <a href="https://snabb.co"><img src="[% root %]logo/snabb.png" alt="Snabb.co logo" 
