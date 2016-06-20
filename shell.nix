@@ -15,5 +15,6 @@ stdenv.mkDerivation {
       libxslt libxml2 imagemagick git curl
       xhtml1
       nixUnstable
+      gnupg
     ];
 }

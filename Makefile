@@ -85,7 +85,7 @@ $(NIXPKGS_MANUAL_IN):
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
   nixpkgs/packages.json.gz \
   nixos/options.json.gz \
-  nix/install
+  nix/install nix/install.sig
 
 
 favicon.png: logo/nixos-logo-only-hires.png
@@ -171,3 +171,10 @@ nixpkgs/packages.json.gz:
 nixos/options.json.gz:
 	gzip -9 < $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(NIXPKGS) -A options)/share/doc/nixos/options.json > $@.tmp
 	mv $@.tmp $@
+
+nix/install.sig: nix/install
+	if ! gpg2 --verify $@ $<; then \
+		gpg2 --detach-sign --armor < $< > $@.tmp; \
+		mv $@.tmp $@; \
+	fi
+	touch $@
