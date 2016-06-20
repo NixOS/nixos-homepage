@@ -18,7 +18,7 @@ trap cleanup EXIT INT QUIT TERM
 
 require_util() {
     type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1 ||
-        oops "you do not have \`$1' installed, which i need to $2"
+        oops "you do not have \`$1' installed, which I need to $2"
 }
 
 
