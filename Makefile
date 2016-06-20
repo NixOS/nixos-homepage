@@ -15,10 +15,7 @@ HTML = index.html news.html \
   disnix/index.html disnix/download.html disnix/docs.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
   docs/papers.html \
-  nixops/index.html \
-  nixpkgs/packages.json.gz \
-  nixos/options.json.gz \
-  nix/install
+  nixops/index.html
 
 
 ### Prettify the NixOS manual.
@@ -85,7 +82,11 @@ $(NIXPKGS_MANUAL_IN):
 	nix-build -o $@ '<nixpkgs/doc>' -I nixpkgs=$(NIXPKGS)
 
 
-all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*)))
+all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
+  nixpkgs/packages.json.gz \
+  nixos/options.json.gz \
+  nix/install
+
 
 favicon.png: logo/nixos-logo-only-hires.png
 	convert -resize 16x16 -background none -gravity center -extent 16x16 $< $@
