@@ -9,38 +9,50 @@ oops() {
     echo "$0: $@" >&2
     exit 1
 }
-unpack="$(mktemp -d nix-binary-tarball-unpack.XXXXXXXXXX || \
-          oops "Can't create tempdir for unpacking")"
+
+tmpDir="$(mktemp -d -t nix-binary-tarball-unpack.XXXXXXXXXX || \
+          oops "Can\'t create temporary directory for downloading the Nix binary tarball")"
 cleanup() {
-    rm -rf "$unpack"
+    rm -rf "$tmpDir"
 }
 trap cleanup EXIT INT QUIT TERM
 
 require_util() {
     type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1 ||
-        oops "you do not have \`$1' installed, which I need to $2"
+        oops "you do not have '$1' installed, which I need to $2"
 }
 
-
 case "$(uname -s).$(uname -m)" in
-    Linux.x86_64) system=x86_64-linux;;
-    Linux.i?86) system=i686-linux;;
-    Darwin.x86_64) system=x86_64-darwin;;
+    Linux.x86_64) system=x86_64-linux; hash=3934610bdc68b276a362b9079b18dd6d28221a727ec71ed3a3a11fddcee59dd2fa1ac401b3a25d668e880c04bcd4c971cf82861820b5ff678353f7e7ba1bfc41;;
+    Linux.i?86) system=i686-linux; hash=fa52b31a63603be5370c2a25ca9b192fbb8f50038904a9a4d590a6abefdb3b46c362d1f49dbee5fa09175ebdcbb84317615a3d647197da1485f5543d7ff7fc0a;;
+    Darwin.x86_64) system=x86_64-darwin; hash=0af3f2ca025fae9e026ce0ad53852d05faa0f11cf2a3be239d5dfec1a2c7f47cb9a43a17cd4c5894064fa9e99b444ab80b9ca0659011a21dc79269758c631ef6;;
     *) oops "sorry, there is no binary distribution of Nix for your platform";;
 esac
 
 url="https://nixos.org/releases/nix/nix-[%latestNixVersion%]/nix-[%latestNixVersion%]-$system.tar.bz2"
 
+tarball="$tmpDir/$(basename $tmpDir/nix-[%latestNixVersion%]-$system.tar.bz2)"
+
 require_util curl "download the binary tarball"
 require_util bzcat "decompress the binary tarball"
 require_util tar "unpack the binary tarball"
+require_util shasum "verify the binary tarball"
 
-echo "unpacking Nix binary tarball for $system from \`$url'..."
-curl -L "$url" | bzcat | tar x -C "$unpack" || oops "failed to unpack \`$url'"
+echo "downloading Nix binary tarball for $system from '$url' to '$tmpDir'..."
+curl -L "$url" -o "$tarball" || oops "failed to download '$url'"
 
-[ -e "$unpack"/*/install ] ||
-    oops "installation script is missing from the binary tarball!"
+hash2="$(shasum -a 512 -b "$tarball" | cut -c1-128)"
 
-"$unpack"/*/install
+if [[ $hash != $hash2 ]]; then
+    oops "SHA-512 hash mismatch in '$url'; expected $hash, got $hash2"
+fi
+
+unpack=$tmpDir/unpack
+mkdir -p "$unpack"
+< "$tarball" bzcat | tar x -C "$unpack" || oops "failed to unpack '$url'"
+
+script=$(echo "$unpack"/*/install)
+
+[ -e "$script" ] || oops "installation script is missing from the binary tarball!"
 
 } # End of wrapping
