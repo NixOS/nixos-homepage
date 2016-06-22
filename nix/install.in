@@ -5,22 +5,40 @@
 # (which in turn creates and populates /nix).
 
 { # Prevent execution if this script was only partially downloaded
+require_util() {
+    type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1 ||
+        oops "you do not have '$1' installed, which I need to $2"
+}
+require_util curl "download the binary tarball"
+require_util bzcat "decompress the binary tarball"
+require_util tar "unpack the binary tarball"
+require_util shasum "verify the binary tarball"
+
 oops() {
     echo "$0: $@" >&2
     exit 1
 }
 
-tmpDir="$(mktemp -d -t nix-binary-tarball-unpack.XXXXXXXXXX || \
-          oops "Can\'t create temporary directory for downloading the Nix binary tarball")"
+retain=
+if [ -n "$NIX_DL" ] && [ -d "$NIX_DL" ]; then
+    tmpDir="$NIX_DL"
+    retain="true"
+    echo "Reusing data at $tmpDir"
+else
+    tmpDir="$(mktemp -d -t nix-binary-tarball-unpack.XXXXXXXXXX || \
+        oops "Can\'t create temporary directory for downloading the Nix binary tarball")"
+fi
 cleanup() {
-    rm -rf "$tmpDir"
+    if [ "$retain" == "true" ]; then
+        exec 1>&2
+        echo ">>> Failed. Retaining download at $tmpDir"
+        echo ">>> To try again, run 'export NIX_DL=\"$tmpDir\"' before running the install"
+        echo ">>> otherwise, please remove $tmpDir manually."
+    else
+        rm -rf "$tmpDir"
+    fi
 }
 trap cleanup EXIT INT QUIT TERM
-
-require_util() {
-    type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1 ||
-        oops "you do not have '$1' installed, which I need to $2"
-}
 
 case "$(uname -s).$(uname -m)" in
     Linux.x86_64) system=x86_64-linux; hash=3934610bdc68b276a362b9079b18dd6d28221a727ec71ed3a3a11fddcee59dd2fa1ac401b3a25d668e880c04bcd4c971cf82861820b5ff678353f7e7ba1bfc41;;
@@ -33,27 +51,36 @@ url="https://nixos.org/releases/nix/nix-[%latestNixVersion%]/nix-[%latestNixVers
 
 tarball="$tmpDir/$(basename $tmpDir/nix-[%latestNixVersion%]-$system.tar.bz2)"
 
-require_util curl "download the binary tarball"
-require_util bzcat "decompress the binary tarball"
-require_util tar "unpack the binary tarball"
-require_util shasum "verify the binary tarball"
+checkTar() {
+    if [ -r "$tarball" ]; then
+        hash2="$(shasum -a 512 -b "$tarball" | cut -c1-128)"
+        [[ $hash == $hash2 ]]
+    else
+        false
+    fi
+}
+if ! checkTar; then
+    echo "downloading Nix binary tarball for $system from '$url' to '$tmpDir'..."
+    curl -L "$url" -o "$tarball" || oops "failed to download '$url'"
 
-echo "downloading Nix binary tarball for $system from '$url' to '$tmpDir'..."
-curl -L "$url" -o "$tarball" || oops "failed to download '$url'"
-
-hash2="$(shasum -a 512 -b "$tarball" | cut -c1-128)"
-
-if [[ $hash != $hash2 ]]; then
-    oops "SHA-512 hash mismatch in '$url'; expected $hash, got $hash2"
+    checkTar || oops "SHA-512 hash mismatch in '$url'; expected $hash, got $hash2"
 fi
 
+retain=true
+
 unpack=$tmpDir/unpack
-mkdir -p "$unpack"
-< "$tarball" bzcat | tar x -C "$unpack" || oops "failed to unpack '$url'"
+checkScript() {
+    script=$(echo "$unpack"/*/install)
+    [ -e "$script" ]
+}
+if ! checkScript; then
+    mkdir -p "$unpack"
+    < "$tarball" bzcat | tar x -C "$unpack" || oops "failed to unpack '$url'"
 
-script=$(echo "$unpack"/*/install)
+	checkScript || oops "installation script is missing from the binary tarball!"
+fi
 
-[ -e "$script" ] || oops "installation script is missing from the binary tarball!"
-"$script"
-
+if "$script"; then
+    retain=false
+fi
 } # End of wrapping
