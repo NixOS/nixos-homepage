@@ -6,7 +6,7 @@
 
 { # Prevent execution if this script was only partially downloaded
 oops() {
-    echo "$0: $@" >&2
+    echo "$0:" "$@" >&2
     exit 1
 }
 
@@ -31,7 +31,7 @@ esac
 
 url="https://nixos.org/releases/nix/nix-[%latestNixVersion%]/nix-[%latestNixVersion%]-$system.tar.bz2"
 
-tarball="$tmpDir/$(basename $tmpDir/nix-[%latestNixVersion%]-$system.tar.bz2)"
+tarball="$tmpDir/$(basename "$tmpDir/nix-[%latestNixVersion%]-$system.tar.bz2")"
 
 require_util curl "download the binary tarball"
 require_util bzcat "decompress the binary tarball"
@@ -43,7 +43,7 @@ curl -L "$url" -o "$tarball" || oops "failed to download '$url'"
 
 hash2="$(shasum -a 512 -b "$tarball" | cut -c1-128)"
 
-if [[ $hash != $hash2 ]]; then
+if [ "$hash" != "$hash2" ]; then
     oops "SHA-512 hash mismatch in '$url'; expected $hash, got $hash2"
 fi
 
