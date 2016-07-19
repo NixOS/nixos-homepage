@@ -4,6 +4,7 @@
 [% USE HTML %]
 [% USE String %]
 
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 
 <div class="jumbotron">
   <img class="right-logo" src="[%root%]logo/nixos-logo-only-hires.png" alt="NixOS Logo"/>
