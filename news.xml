@@ -3,9 +3,7 @@
 <news>
 
   <item>
-    <year>2016</year>
-    <month>4</month>
-    <day>1</day>
+    <pubDate>Sun May 01 2016 00:00:00 GMT</pubDate>
     <title>
       NixOS 16.03 released
     </title>
@@ -23,9 +21,7 @@
   </item>
 
   <item>
-    <year>2016</year>
-    <month>1</month>
-    <day>19</day>
+    <pubDate>Fri Feb 19 2016 00:00:00 GMT</pubDate>
     <title>
       Nix 1.11 released
     </title>
@@ -38,9 +34,7 @@
   </item>
 
   <item>
-    <year>2015</year>
-    <month>9</month>
-    <day>30</day>
+    <pubDate>Fri Oct 30 2015 00:00:00 GMT</pubDate>
     <title>
       NixOS 15.09 released
     </title>
@@ -58,9 +52,7 @@
   </item>
 
   <item>
-    <year>2015</year>
-    <month>9</month>
-    <day>3</day>
+    <pubDate>Sat Oct 03 2015 00:00:00 GMT</pubDate>
     <title>
       Nix 1.10 released
     </title>
@@ -73,9 +65,7 @@
   </item>
 
   <item>
-    <year>2015</year>
-    <month>8</month>
-    <day>3</day>
+    <pubDate>Thu Sep 03 2015 00:00:00 GMT</pubDate>
     <title>
       NixCon 2015
     </title>
@@ -92,9 +82,7 @@
   </item>
 
   <item>
-    <year>2015</year>
-    <month>7</month>
-    <day>9</day>
+    <pubDate>Sun Aug 09 2015 00:00:00 GMT</pubDate>
     <title>
       NixOS Foundation
     </title>
@@ -107,9 +95,7 @@
   </item>
 
   <item>
-    <year>2015</year>
-    <month>6</month>
-    <day>12</day>
+    <pubDate>Sun Jul 12 2015 00:00:00 GMT</pubDate>
     <title>
       Nix 1.9 released
     </title>
@@ -122,9 +108,7 @@
   </item>
 
   <item>
-    <year>2014</year>
-    <month>12</month>
-    <day>30</day>
+    <pubDate>Fri Jan 30 2015 00:00:00 GMT</pubDate>
     <title>
       NixOS 14.12 released
     </title>
@@ -143,9 +127,7 @@
   </item>
 
   <item>
-    <year>2014</year>
-    <month>12</month>
-    <day>14</day>
+    <pubDate>Wed Jan 14 2015 00:00:00 GMT</pubDate>
     <title>
       Nix 1.8 released
     </title>
@@ -158,9 +140,7 @@
   </item>
 
   <item>
-    <year>2014</year>
-    <month>7</month>
-    <day>30</day>
+    <pubDate>Sat Aug 30 2014 00:00:00 GMT</pubDate>
     <title>
       NixOS sprint in Ljubljana
     </title>
@@ -176,9 +156,7 @@
   </item>
 
   <item>
-    <year>2014</year>
-    <month>4</month>
-    <day>30</day>
+    <pubDate>Fri May 30 2014 00:00:00 GMT</pubDate>
     <title>
       NixOS 14.04 released
     </title>
@@ -197,9 +175,7 @@
   </item>
 
   <item>
-    <year>2014</year>
-    <month>4</month>
-    <day>30</day>
+    <pubDate>Fri May 30 2014 00:00:00 GMT</pubDate>
     <title>
       NixOps 1.2 released
     </title>
@@ -213,9 +189,7 @@
   </item>
 
   <item>
-    <year>2014</year>
-    <month>4</month>
-    <day>11</day>
+    <pubDate>Sun May 11 2014 00:00:00 GMT</pubDate>
     <title>
       Nix 1.7 released
     </title>
@@ -228,9 +202,7 @@
   </item>
 
   <item>
-    <year>2014</year>
-    <month>4</month>
-    <day>9</day>
+    <pubDate>Fri May 09 2014 00:00:00 GMT</pubDate>
     <title>
       Heartbleed vulnerability in OpenSSL
     </title>
@@ -254,9 +226,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2014</year>
-    <month>2</month>
-    <day>2</day>
+    <pubDate>Sun Mar 02 2014 00:00:00 GMT</pubDate>
     <title>
       FOSDEM talks
     </title>
@@ -272,9 +242,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2014</year>
-    <month>1</month>
-    <day>21</day>
+    <pubDate>Fri Feb 21 2014 00:00:00 GMT</pubDate>
     <title>
       Stdenv updates branch merged into master
     </title>
@@ -288,9 +256,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>10</month>
-    <day>31</day>
+    <pubDate>Sun Dec 01 2013 00:00:00 GMT</pubDate>
     <title>
       NixOS 13.10 released
     </title>
@@ -312,9 +278,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>10</month>
-    <day>28</day>
+    <pubDate>Thu Nov 28 2013 00:00:00 GMT</pubDate>
     <title>
       Nix 1.6.1 released
     </title>
@@ -328,9 +292,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>10</month>
-    <day>10</day>
+    <pubDate>Sun Nov 10 2013 00:00:00 GMT</pubDate>
     <title>
       NixOS sources merged into Nixpkgs
     </title>
@@ -345,9 +307,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>10</month>
-    <day>2</day>
+    <pubDate>Sat Nov 02 2013 00:00:00 GMT</pubDate>
     <title>
       NixOps 1.1.1 released
     </title>
@@ -361,9 +321,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>9</month>
-    <day>10</day>
+    <pubDate>Thu Oct 10 2013 00:00:00 GMT</pubDate>
     <title>
       Nix 1.6 released
     </title>
@@ -376,9 +334,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>9</month>
-    <day>9</day>
+    <pubDate>Wed Oct 09 2013 00:00:00 GMT</pubDate>
     <title>
       NixOps 1.1 released
     </title>
@@ -394,9 +350,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>7</month>
-    <day>15</day>
+    <pubDate>Thu Aug 15 2013 00:00:00 GMT</pubDate>
     <title>
       NixOS sprint in Slovenia
     </title>
@@ -411,9 +365,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>7</month>
-    <day>11</day>
+    <pubDate>Sun Aug 11 2013 00:00:00 GMT</pubDate>
     <title>
       NixOps 1.0.1 released
     </title>
@@ -427,9 +379,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>7</month>
-    <day>5</day>
+    <pubDate>Mon Aug 05 2013 00:00:00 GMT</pubDate>
     <title>
       NixOS presentation at EuroPython
     </title>
@@ -443,9 +393,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>6</month>
-    <day>25</day>
+    <pubDate>Thu Jul 25 2013 00:00:00 GMT</pubDate>
     <title>
       NixOps 1.0 released
     </title>
@@ -462,9 +410,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>6</month>
-    <day>17</day>
+    <pubDate>Wed Jul 17 2013 00:00:00 GMT</pubDate>
     <title>
       Nix 1.5.3 released
     </title>
@@ -477,9 +423,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>6</month>
-    <day>3</day>
+    <pubDate>Wed Jul 03 2013 00:00:00 GMT</pubDate>
     <title>
       PhD thesis: A Reference Architecture for Distributed Software Deployment
     </title>
@@ -495,9 +439,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>5</month>
-    <day>13</day>
+    <pubDate>Thu Jun 13 2013 00:00:00 GMT</pubDate>
     <title>
       Nix 1.5.2 released
     </title>
@@ -508,9 +450,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>2</month>
-    <day>28</day>
+    <pubDate>Thu Mar 28 2013 00:00:00 GMT</pubDate>
     <title>
       Nix 1.5.1 released
     </title>
@@ -523,9 +463,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>2</month>
-    <day>26</day>
+    <pubDate>Tue Mar 26 2013 00:00:00 GMT</pubDate>
     <title>
       Nix 1.4 released
     </title>
@@ -540,9 +478,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>1</month>
-    <day>21</day>
+    <pubDate>Thu Feb 21 2013 00:00:00 GMT</pubDate>
     <title>
       NixOS switched to systemd
     </title>
@@ -558,9 +494,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2013</year>
-    <month>1</month>
-    <day>5</day>
+    <pubDate>Tue Feb 05 2013 00:00:00 GMT</pubDate>
     <title>
       Nix 1.3 released
     </title>
@@ -575,9 +509,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2012</year>
-    <month>12</month>
-    <day>6</day>
+    <pubDate>Sun Jan 06 2013 00:00:00 GMT</pubDate>
     <title>
       Nix 1.2 released
     </title>
@@ -591,9 +523,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2012</year>
-    <month>7</month>
-    <day>18</day>
+    <pubDate>Sat Aug 18 2012 00:00:00 GMT</pubDate>
     <title>
       Nix 1.1 released
     </title>
@@ -607,9 +537,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2012</year>
-    <month>5</month>
-    <day>24</day>
+    <pubDate>Sun Jun 24 2012 00:00:00 GMT</pubDate>
     <title>
       Binary Nix tarballs available
     </title>
@@ -627,9 +555,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2012</year>
-    <month>5</month>
-    <day>11</day>
+    <pubDate>Mon Jun 11 2012 00:00:00 GMT</pubDate>
     <title>
       Nix 1.0 released
     </title>
@@ -645,9 +571,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2011</year>
-    <month>11</month>
-    <day>7</day>
+    <pubDate>Wed Dec 07 2011 00:00:00 GMT</pubDate>
     <title>PatchELF 0.6 released</title>
     <description>
       <a
@@ -660,9 +584,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2011</year>
-    <month>11</month>
-    <day>3</day>
+    <pubDate>Sat Dec 03 2011 00:00:00 GMT</pubDate>
     <title>Hydra talk at Inria</title>
     <description>
       <a href="https://hydra.nixos.org/">
@@ -679,9 +601,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2011</year>
-    <month>10</month>
-    <day>28</day>
+    <pubDate>Mon Nov 28 2011 00:00:00 GMT</pubDate>
     <title>Moving to GitHub</title>
     <description>
       The NixOS project is (slowly) migrating from Subversion to Git!
@@ -696,9 +616,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2011</year>
-    <month>9</month>
-    <day>14</day>
+    <pubDate>Fri Oct 14 2011 00:00:00 GMT</pubDate>
     <title>
       Nix-dev mailing list moved
     </title>
@@ -711,9 +629,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2011</year>
-    <month>2</month>
-    <day>5</day>
+    <pubDate>Sat Mar 05 2011 00:00:00 GMT</pubDate>
     <title>
       FOSDEM talk about NixOS
     </title>
@@ -729,9 +645,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2010</year>
-    <month>8</month>
-    <day>18</day>
+    <pubDate>Sat Sep 18 2010 00:00:00 GMT</pubDate>
     <title>
       ISSRE paper on NixOS-based system testing
     </title>
@@ -757,9 +671,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2010</year>
-    <month>8</month>
-    <day>18</day>
+    <pubDate>Sat Sep 18 2010 00:00:00 GMT</pubDate>
     <title>
       Xfce in NixOS
     </title>
@@ -775,9 +687,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2010</year>
-    <month>8</month>
-    <day>17</day>
+    <pubDate>Fri Sep 17 2010 00:00:00 GMT</pubDate>
     <title>
       Nix 0.16 released
     </title>
@@ -793,9 +703,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2010</year>
-    <month>7</month>
-    <day>9</day>
+    <pubDate>Mon Aug 09 2010 00:00:00 GMT</pubDate>
     <title>
       NixOS talk at LSM
     </title>
@@ -810,9 +718,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2010</year>
-    <month>3</month>
-    <day>17</day>
+    <pubDate>Sat Apr 17 2010 00:00:00 GMT</pubDate>
     <title>
       Nix 0.15 released
     </title>
@@ -827,9 +733,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2010</year>
-    <month>2</month>
-    <day>4</day>
+    <pubDate>Thu Mar 04 2010 00:00:00 GMT</pubDate>
     <title>
       Nix 0.14 released
     </title>
@@ -844,9 +748,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2009</year>
-    <month>11</month>
-    <day>25</day>
+    <pubDate>Fri Dec 25 2009 00:00:00 GMT</pubDate>
     <title>
       Nix logo
     </title>
@@ -866,9 +768,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2009</year>
-    <month>11</month>
-    <day>5</day>
+    <pubDate>Sat Dec 05 2009 00:00:00 GMT</pubDate>
     <title>
       Nix 0.13 released
     </title>
@@ -883,9 +783,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2009</year>
-    <month>6</month>
-    <day>26</day>
+    <pubDate>Sun Jul 26 2009 00:00:00 GMT</pubDate>
     <title>
       LWN.net article on NixOS
     </title>
@@ -897,9 +795,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2009</year>
-    <month>4</month>
-    <day>24</day>
+    <pubDate>Sun May 24 2009 00:00:00 GMT</pubDate>
     <title>
       Nixpkgs 0.12 released
     </title>
@@ -916,9 +812,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2009</year>
-    <month>4</month>
-    <day>21</day>
+    <pubDate>Thu May 21 2009 00:00:00 GMT</pubDate>
     <title>
       OpenOffice.org 3 in Nixpkgs
     </title>
@@ -936,9 +830,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2009</year>
-    <month>4</month>
-    <day>7</day>
+    <pubDate>Thu May 07 2009 00:00:00 GMT</pubDate>
     <title>
       KDE 4.2 in Nixpkgs/NixOS
     </title>
@@ -968,9 +860,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2009</year>
-    <month>1</month>
-    <day>5</day>
+    <pubDate>Thu Feb 05 2009 00:00:00 GMT</pubDate>
     <title>
       Hydra
     </title>
@@ -1003,9 +893,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2008</year>
-    <month>12</month>
-    <day>22</day>
+    <pubDate>Thu Jan 22 2009 00:00:00 GMT</pubDate>
     <title>
       Linux.com article about Nix
     </title>
@@ -1018,9 +906,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2008</year>
-    <month>11</month>
-    <day>21</day>
+    <pubDate>Sun Dec 21 2008 00:00:00 GMT</pubDate>
     <title>
       Nix 0.12 released
     </title>
@@ -1035,9 +921,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2008</year>
-    <month>9</month>
-    <day>9</day>
+    <pubDate>Thu Oct 09 2008 00:00:00 GMT</pubDate>
     <title>
       DisNix paper accepted at HotSWUp
     </title>
@@ -1064,9 +948,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2008</year>
-    <month>6</month>
-    <day>16</day>
+    <pubDate>Wed Jul 16 2008 00:00:00 GMT</pubDate>
     <title>
       NixOS paper accepted at ICFP!
     </title>
@@ -1090,9 +972,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2008</year>
-    <month>5</month>
-    <day>6</day>
+    <pubDate>Fri Jun 06 2008 00:00:00 GMT</pubDate>
     <title>
       Website back up
     </title>
@@ -1107,9 +987,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2008</year>
-    <month>4</month>
-    <day>25</day>
+    <pubDate>Sun May 25 2008 00:00:00 GMT</pubDate>
     <title>
       Website / SVN repositories moved
     </title>
@@ -1129,9 +1007,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2008</year>
-    <month>4</month>
-    <day>5</day>
+    <pubDate>Mon May 05 2008 00:00:00 GMT</pubDate>
     <title>
       LDTA 2008 paper
     </title>
@@ -1152,9 +1028,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2008</year>
-    <month>2</month>
-    <day>14</day>
+    <pubDate>Fri Mar 14 2008 00:00:00 GMT</pubDate>
     <title>
       Jacquard grant proposal accepted!
     </title>
@@ -1179,9 +1053,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2008</year>
-    <month>1</month>
-    <day>6</day>
+    <pubDate>Wed Feb 06 2008 00:00:00 GMT</pubDate>
     <title>
       New NixOS ISOs
     </title>
@@ -1209,9 +1081,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>12</month>
-    <day>31</day>
+    <pubDate>Thu Jan 31 2008 00:00:00 GMT</pubDate>
     <title>
       Nix 0.11 released
     </title>
@@ -1229,9 +1099,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>9</month>
-    <day>12</day>
+    <pubDate>Fri Oct 12 2007 00:00:00 GMT</pubDate>
     <title>
       Nixpkgs 0.11 released
     </title>
@@ -1244,9 +1112,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>9</month>
-    <day>10</day>
+    <pubDate>Wed Oct 10 2007 00:00:00 GMT</pubDate>
     <title>
       OpenOffice in Nixpkgs
     </title>
@@ -1278,9 +1144,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>8</month>
-    <day>22</day>
+    <pubDate>Sat Sep 22 2007 00:00:00 GMT</pubDate>
     <title>
       NixOS progress report
     </title>
@@ -1309,9 +1173,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>8</month>
-    <day>14</day>
+    <pubDate>Fri Sep 14 2007 00:00:00 GMT</pubDate>
     <title>
       Commits mailing list
     </title>
@@ -1327,9 +1189,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>5</month>
-    <day>8</day>
+    <pubDate>Fri Jun 08 2007 00:00:00 GMT</pubDate>
     <title>
       HotOS paper on NixOS
     </title>
@@ -1349,9 +1209,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>4</month>
-    <day>2</day>
+    <pubDate>Wed May 02 2007 00:00:00 GMT</pubDate>
     <title>
       NixOS progress report
     </title>
@@ -1382,9 +1240,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>3</month>
-    <day>5</day>
+    <pubDate>Thu Apr 05 2007 00:00:00 GMT</pubDate>
     <title>
       NixOS progress report
     </title>
@@ -1414,9 +1270,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>2</month>
-    <day>19</day>
+    <pubDate>Mon Mar 19 2007 00:00:00 GMT</pubDate>
     <title>
       NixOS manual
     </title>
@@ -1428,9 +1282,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>1</month>
-    <day>23</day>
+    <pubDate>Fri Feb 23 2007 00:00:00 GMT</pubDate>
     <title>
       NixOS for x86_64
     </title>
@@ -1441,9 +1293,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2007</year>
-    <month>1</month>
-    <day>23</day>
+    <pubDate>Fri Feb 23 2007 00:00:00 GMT</pubDate>
     <title>
       New build farm hardware at TUD
     </title>
@@ -1473,9 +1323,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2006</year>
-    <month>10</month>
-    <day>12</day>
+    <pubDate>Sun Nov 12 2006 00:00:00 GMT</pubDate>
     <title>
       Nixpkgs 0.10 released
     </title>
@@ -1488,9 +1336,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2006</year>
-    <month>10</month>
-    <day>11</day>
+    <pubDate>Sat Nov 11 2006 00:00:00 GMT</pubDate>
     <title>
       Nix 0.10.1 released
     </title>
@@ -1502,9 +1348,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2006</year>
-    <month>10</month>
-    <day>06</day>
+    <pubDate>Mon Nov 06 2006 00:00:00 GMT</pubDate>
     <title>
       Nix 0.10 released
     </title>
@@ -1518,9 +1362,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2006</year>
-    <month>01</month>
-    <day>31</day>
+    <pubDate>Fri Mar 03 2006 00:00:00 GMT</pubDate>
     <title>
       Nixpkgs 0.9 released
     </title>
@@ -1532,9 +1374,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2006</year>
-    <month>01</month>
-    <day>18</day>
+    <pubDate>Sat Feb 18 2006 00:00:00 GMT</pubDate>
     <title>
       PhD thesis defended
     </title>
@@ -1546,9 +1386,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2005</year>
-    <month>09</month>
-    <day>21</day>
+    <pubDate>Fri Oct 21 2005 00:00:00 GMT</pubDate>
     <title>
       Nix 0.9.2 released
     </title>
@@ -1560,9 +1398,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2005</year>
-    <month>09</month>
-    <day>16</day>
+    <pubDate>Sun Oct 16 2005 00:00:00 GMT</pubDate>
     <title>
       Nix 0.9 released
     </title>
@@ -1577,9 +1413,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2005</year>
-    <month>07</month>
-    <day>28</day>
+    <pubDate>Sun Aug 28 2005 00:00:00 GMT</pubDate>
     <title>
       Secure sharing paper accepted for ASE 2005
     </title>
@@ -1595,9 +1429,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2005</year>
-    <month>07</month>
-    <day>22</day>
+    <pubDate>Mon Aug 22 2005 00:00:00 GMT</pubDate>
     <title>
       Service deployment paper accepted for SCM-12
     </title>
@@ -1619,9 +1451,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2005</year>
-    <month>02</month>
-    <day>17</day>
+    <pubDate>Thu Mar 17 2005 00:00:00 GMT</pubDate>
     <title>
       Patching paper accepted for CBSE 2005
     </title>
@@ -1639,9 +1469,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <year>2003</year>
-    <month>12</month>
-    <day>16</day>
+    <pubDate>Fri Jan 16 2004 00:00:00 GMT</pubDate>
     <title>
       Paper “Imposing a Memory Management Discipline on Software
       Deployment” accepted for presentation at ICSE 2004!
@@ -1652,3 +1480,4 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
 </news>
+
