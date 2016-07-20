@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <news>
+  <item>
+    <year>2016</year>
+    <month>7</month>
+    <day>20</day>
+    <title>
+      NixOps 1.4 released
+    </title>
+    <description>
+      <a
+      href="https://hydra.nixos.org/release/nixops/nixops-1.4">NixOps
+      1.4</a> has been released. This release contains contains many nice new features. See the <a
+      href="https://nixos.org/nixops/manual#ssec-relnotes-1.4">manual</a>
+      for details.
+    </description>
+  </item>
+
 
   <item>
     <year>2016</year>
