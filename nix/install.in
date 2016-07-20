@@ -41,12 +41,12 @@ require_util shasum "verify the binary tarball"
 echo "downloading Nix binary tarball for $system from '$url' to '$tmpDir'..."
 curl -L "$url" -o "$tarball" || oops "failed to download '$url'"
 
-if type openssl > /dev/null 2>&1; then
-    hash2="$(openssl dgst -r -sha512 "$tarball" | cut -c1-128)"
-elif type sha512sum > /dev/null 2>&1; then
+if type sha512sum > /dev/null 2>&1; then
     hash2="$(sha512sum -b "$tarball" | cut -c1-128)"
 elif type shasum > /dev/null 2>&1; then
     hash2="$(shasum -a 512 -b "$tarball" | cut -c1-128)"
+elif type openssl > /dev/null 2>&1; then
+    hash2="$(openssl dgst -r -sha512 "$tarball" | cut -c1-128)"
 else
     oops "cannot verify the SHA-512 hash of '$url'; you need one of 'shasum', 'sha512sum', or 'openssl'"
 fi
