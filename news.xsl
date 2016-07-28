@@ -20,11 +20,11 @@
 
       <xsl:for-each select="item[position() &lt;= $maxItem]">
 
-        <tr class="news-header"> 
+        <tr class="news-header">
           <td class="news-short">
             <xsl:apply-templates select="title/child::node()" mode="id"/>
           </td>
-          <td class="news-date"><xsl:value-of select="year" />/<xsl:value-of select="month" />/<xsl:value-of select="day" /></td>
+          <td class="news-date"><xsl:value-of select="substring(pubDate, 4, 12)" /></td>
         </tr>
         <tr class="news-descr">
           <td colspan="2">
@@ -35,7 +35,7 @@
       </xsl:for-each>
 
     </table>
-      
+
   </xsl:template>
 
 </xsl:stylesheet>
