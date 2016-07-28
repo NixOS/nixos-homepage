@@ -20,12 +20,13 @@
     <rss version="2.0" xmlns:blogChannel="http://backend.userland.com/blogChannelModule">
       <channel>
         <title>NixOS News</title>
-        <link>http://nixos.org</link>
+        <link>https://nixos.org</link>
         <description>News for NixOS, the purely functional Linux distribution.</description>
 
         <image>
           <title>NixOS</title>
-          <url>http://nixos.org/logo/nixos-logo-only-hires.png</url>
+          <url>https://nixos.org/logo/nixos-logo-only-hires.png</url>
+          <link>https://nixos.org/</link>
         </image>
 
         <xsl:for-each select="item[position() &lt;= $maxItem]">
