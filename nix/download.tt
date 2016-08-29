@@ -12,8 +12,8 @@ other than <tt>root</tt>):
 You may want to verify the integrity of the installation script using GPG:
 
 <pre>
-<span class="muted">$</span> wget <a href="[%root%]nix/install">[%root%]nix/install</a>
-<span class="muted">$</span> wget <a href="[%root%]nix/install.sig">[%root%]nix/install.sig</a>
+<span class="muted">$</span> wget <a href="[%root%]nix/install">https://nixos.org/nix/install</a>
+<span class="muted">$</span> wget <a href="[%root%]nix/install.sig">https://nixos.org/nix/install.sig</a>
 <span class="muted">$</span> gpg2 --verify ./install.sig
 <span class="muted">$</span> sh ./install
 </pre>
