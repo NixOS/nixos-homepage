@@ -23,9 +23,9 @@ require_util() {
 }
 
 case "$(uname -s).$(uname -m)" in
-    Linux.x86_64) system=x86_64-linux; hash=3934610bdc68b276a362b9079b18dd6d28221a727ec71ed3a3a11fddcee59dd2fa1ac401b3a25d668e880c04bcd4c971cf82861820b5ff678353f7e7ba1bfc41;;
-    Linux.i?86) system=i686-linux; hash=fa52b31a63603be5370c2a25ca9b192fbb8f50038904a9a4d590a6abefdb3b46c362d1f49dbee5fa09175ebdcbb84317615a3d647197da1485f5543d7ff7fc0a;;
-    Darwin.x86_64) system=x86_64-darwin; hash=0af3f2ca025fae9e026ce0ad53852d05faa0f11cf2a3be239d5dfec1a2c7f47cb9a43a17cd4c5894064fa9e99b444ab80b9ca0659011a21dc79269758c631ef6;;
+    Linux.x86_64) system=x86_64-linux; hash=[%nix_hash_x86_64_linux%];;
+    Linux.i?86) system=i686-linux; hash=[%nix_hash_i686_linux%];;
+    Darwin.x86_64) system=x86_64-darwin; hash=[%nix_hash_x86_64_darwin%];;
     *) oops "sorry, there is no binary distribution of Nix for your platform";;
 esac
 
@@ -37,7 +37,7 @@ require_util curl "download the binary tarball"
 require_util bzcat "decompress the binary tarball"
 require_util tar "unpack the binary tarball"
 
-echo "downloading Nix binary tarball for $system from '$url' to '$tmpDir'..."
+echo "downloading Nix [%latestNixVersion%] binary tarball for $system from '$url' to '$tmpDir'..."
 curl -L "$url" -o "$tarball" || oops "failed to download '$url'"
 
 if type sha256sum > /dev/null 2>&1; then

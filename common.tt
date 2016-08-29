@@ -4,13 +4,12 @@
   nixpkgsManual = "/nixpkgs/manual"
   nixosManual = "/nixos/manual"
   nixopsManual = "/nixops/manual"
-  latestNixVersion = "1.11.2"
   latestNixMirror = "https://nixos.org/releases/nix/nix-$latestNixVersion"
   latestNixOSVersion = "16.03"
   latestNixOSBranch = "release-" _ latestNixOSVersion
   wikiMain = "https://nixos.org/wiki/Main_Page";
 
-BLOCK renderPager %]
+  BLOCK renderPager %]
 <ul class='pager'>
   <li class='back'><a href='javascript:void(0)' onclick='curPage = 0; updateTable();'>« First</a></li>
   <li class='back'><a href='javascript:void(0)' onclick='curPage--; updateTable();'>‹ Previous</a></li>

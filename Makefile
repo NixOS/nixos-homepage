@@ -99,20 +99,21 @@ docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
 
 docs/papers.html: docs/papers-in.html
 
-%.html: %.tt layout.tt common.tt donation.tt
+%.html: %.tt layout.tt common.tt nix-release.tt donation.tt
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
 	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
 	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
 	  --define fileName=$< \
-	  --pre_process=common.tt $< > $@.tmp
+	  --pre_process=nix-release.tt \
+	  $< > $@.tmp
 	xmllint --nonet --noout $@.tmp
 	mv $@.tmp $@
 
-%: %.in common.tt
+%: %.in common.tt nix-release.tt
 	tpage \
-	  --pre_process=common.tt $< > $@.tmp
+	  --pre_process=common.tt --pre_process=nix-release.tt $< > $@.tmp
 	mv $@.tmp $@
 
 news.html: all-news.xhtml
