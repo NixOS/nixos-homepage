@@ -106,7 +106,7 @@ docs/papers.html: docs/papers-in.html
 	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
 	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
 	  --define fileName=$< \
-	  --pre_process=nix-release.tt \
+	  --pre_process=common.tt --pre_process=nix-release.tt \
 	  $< > $@.tmp
 	xmllint --nonet --noout $@.tmp
 	mv $@.tmp $@
