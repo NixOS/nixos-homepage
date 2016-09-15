@@ -100,7 +100,7 @@ by using one of the AMIs listed below.</p>
 
 <p>You can create an instance using the AWS Management Console by
 clicking one of the Launch buttons. You can also create an instance
-from the command line. For instance, to create an instance in region
+from the command line. For example, to create an instance in region
 <tt>[% region = "eu-west-1"; type = "pv-ebs"; ami =
 amis.$region.$type; region %]</tt> using the EC2 API tools, just
 run:</p>
@@ -111,7 +111,79 @@ $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em>
 
 </section>
 
-<section><h2>Unstable releases</h2>
+<section><h2 id="microsoft-azure">Microsoft Azure BLOBs</h2>
+
+<p>If you are an Azure user, you can manually create a NixOS instance
+by using one of the bootstrap BLOBs listed below.</p>
+
+<div class="row">
+<table class="table span2">
+  <thead>
+    <tr><th>NixOS version</th><th>BLOB URL</th></tr>
+  </thead>
+  <tbody>
+    [% blobs = JSON.Escape.json_decode(IO.All.new('nixos/azure-blobs.json').all) %]
+    [% FOREACH version IN blobs.keys.sort; blob = blobs.$version %]
+      <tr>
+        <td><tt>[% version %]</tt></td>
+        <td><a href="[% blob %]"><tt>[% blob %]</tt></a></td>
+      </tr>
+    [% END %]
+  </tbody>
+</table>
+</div>
+
+<p>You can create an instance from the command line.
+For example, to create an instance of version 
+<tt>[% blob = blobs.$latestNixOSVersion; latestNixOSVersion %]</tt>
+of NixOS  using azure-cli, just run:</p>
+
+<pre>
+# settings
+# vm name must be lowercase and letters/numbers only because it's also used as the domain name
+$ export VM=nixvm005
+$ export GROUP=test-group
+$ export LOCATION=westus
+$ export STORAGE=testst004
+$ export SOURCE_URI=<tt>[% blob %]</tt>
+
+# create group
+$ azure config mode arm
+$ azure group create $GROUP --location $LOCATION
+
+# create storage
+$ azure storage account create $STORAGE -g $GROUP -l $LOCATION --type LRS
+$ azure storage account keys list $STORAGE -g $GROUP
+
+# export one of the storage access keys
+$ export KEY=
+$ echo $KEY
+
+$ azure storage container create -a $STORAGE -k $KEY vm-images
+
+# copy the image blob
+$ azure storage blob copy start --source-uri $SOURCE_URI --dest-account-name $STORAGE --dest-account-key $KEY \
+    --dest-container vm-images --dest-blob nixos-unstable-nixops.vhd
+
+# wait for blob copy status to change pending->success
+$ azure storage blob copy show --container vm-images  --blob nixos-unstable-nixops.vhd -a $STORAGE -k $KEY
+
+# create vm
+$ azure vm create $GROUP $VM $LOCATION Linux --storage-account-name $STORAGE \
+    -d https://"$STORAGE".blob.core.windows.net/vm-images/root.vhd \
+    --image-urn https://"$STORAGE".blob.core.windows.net/vm-images/nixos-unstable-nixops.vhd \
+    --nic-name $VM --vnet-name $VM --vnet-address-prefix 10.0.0.1/16 --vnet-subnet-name $VM \
+    --vnet-subnet-address-prefix 10.0.1.1/24 --public-ip-name $VM --public-ip-domain-name $VM \
+    --admin-username azureuser
+
+# show machine properties and log in
+$ azure vm show $GROUP $VM
+$ ssh azureuser@"$VM"."$LOCATION".cloudapp.azure.com
+</pre>
+
+</section>
+
+<section><h2 id="unstable-releases">Unstable releases</h2>
 
 <p>If you are a developer who wants to contribute to NixOS, or if you
 just want the latest and greatest, you can also install the <a
