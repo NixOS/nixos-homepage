@@ -57,12 +57,8 @@ X11 and KDE enabled, as well as the VirtualBox guest additions.  To
 use it, download the OVA file, open VirtualBox, run “File → Import
 Appliance” from the menu, select the OVA file, and click “Import”.
 You can then start the virtual machine.  When the KDE login screen
-appears, you can log in as...</p>
-
-<p>user <tt>demo</tt>,</p>
-<p>password <tt>demo</tt>.</p>
-
-<p>To obtain a root shell, run <tt>sudo -i</tt> in the KDE terminal
+appears, you can log in as user <tt>demo</tt>, password <tt>demo</tt>.
+To obtain a root shell, run <tt>sudo -i</tt> in the KDE terminal
 (<tt>konsole</tt>).</p>
 
 <ul>
