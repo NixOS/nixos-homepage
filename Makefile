@@ -127,7 +127,7 @@ news-rss.xml: news.xml news.xsl
 
 index.html: news-rss.xml latest-news.xhtml nixpkgs-commits.json nixpkgs-commit-stats.json blogs.json
 
-nixos/download.html: nixos/amis.json
+nixos/download.html: nixos/amis.json nixos/azure-blobs.json
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
@@ -141,6 +141,14 @@ nixos/amis.json: nixos/amis.nix
 
 nixos/amis.nix:
 	curl --fail -L https://raw.github.com/NixOS/nixpkgs/master/nixos/modules/virtualisation/ec2-amis.nix > $@.tmp
+	mv $@.tmp $@
+
+nixos/azure-blobs.json: nixos/azure-blobs.nix
+	nix-instantiate --eval --strict --json $< > $@.tmp
+	mv $@.tmp $@
+
+nixos/azure-blobs.nix:
+	curl --fail -L https://raw.github.com/NixOS/nixpkgs/master/nixos/modules/virtualisation/azure-bootstrap-blobs.nix > $@.tmp
 	mv $@.tmp $@
 
 nixpkgs-commits.json:
@@ -160,7 +168,7 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz \
+.PHONY: nixos/amis.nix nixos/azure-blobs.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz \
   $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN)
 endif
 
