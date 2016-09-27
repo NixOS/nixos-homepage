@@ -7,7 +7,7 @@
   latestNixMirror = "https://nixos.org/releases/nix/nix-$latestNixVersion"
   latestNixOSVersion = "16.03"
   latestNixOSBranch = "release-" _ latestNixOSVersion
-  wikiMain = "https://nixos.org/wiki/Main_Page";
+  ;
 
   BLOCK renderPager %]
 <ul class='pager'>

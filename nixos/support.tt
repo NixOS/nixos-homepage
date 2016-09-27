@@ -14,13 +14,6 @@
   </div>
 
   <div class="span4">
-    <h2><a href="[%wikiMain%]">Wiki</a></h2>
-    <p>A lot of information can be found on the <a
-    href="[%wikiMain%]"><strong>NixOS Wiki</strong></a>, which can be
-    edited by anybody.</p>
-  </div>
-
-  <div class="span4">
     <h2><a href="http://lists.science.uu.nl/mailman/listinfo/nix-dev">Mailing list</a></h2>
     <p>There is a mailing list, <a
     href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt><strong>nix-dev@<wbr/>lists<wbr/>.science<wbr/>.uu<wbr/>.nl</strong></tt></a>,
@@ -30,10 +23,6 @@
     archives</a>.</p>
   </div>
 
-</div>
-
-<div class="row-fluid">
-
   <div class="span4">
     <h2><a href="irc://irc.freenode.net/#nixos">IRC</a></h2>
     <p>You can drop by on the IRC channel <a
@@ -42,13 +31,16 @@
     chat with the developers or other users.</p>
   </div>
 
-  <div class="span4">
-    <h2><a href="https://github.com/NixOS/nixpkgs/issues">Bugs</a></h2>
-    <p>If you think you’ve found a bug, please report it in the <a
+</div>
+
+<div class="row-fluid">
+
+  <div class="span4"> <h2><a
+    href="https://github.com/NixOS/nixpkgs/issues">Bugs</a></h2> <p>If
+    you think you’ve found a bug, please report it in the <a
     href="https://github.com/NixOS/nixpkgs/issues"><strong>Nixpkgs
-    issue tracker</strong></a> (please use the <strong>nixos</strong>
-    label).</p>
-  </div>
+    issue tracker</strong></a> (please use the label <strong>6.topic:
+    nixos</strong>).</p>  </div>
 
   <div class="span4">
     <h2>Other resources</h2>
