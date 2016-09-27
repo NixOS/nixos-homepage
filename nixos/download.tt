@@ -183,15 +183,9 @@ $ ssh azureuser@"$VM"."$LOCATION".cloudapp.azure.com
 
 <p>If you are a developer who wants to contribute to NixOS, or if you
 just want the latest and greatest, you can also install the <a
-href="https://nixos.org/channels/nixos-unstable/">most recent unstable
+href="https://nixos.org/channels/nixos-unstable">most recent unstable
 release</a>.</p>
 
 </section>
-
-<!--
-<h2>Old releases</h2>
-
-<p>ISO images of previous versions are also <a href="https://nixos.org/releases/nixos">available</a>.</p>
--->
 
 [% END %]
