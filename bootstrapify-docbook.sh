@@ -12,9 +12,11 @@ outDirTmp="${outDir}.tmp"
 rm -rf "$outDirTmp"
 mkdir -p "$outDirTmp"
 
-for fn in $(cd $inDir && find -type f); do
+(cd $inDir && find -type f -print) | while read fn; do
     echo "$fn"
-    if [[ "$fn" =~ .html$ ]]; then
+    if [[ $fn =~ epub ]]; then
+        true
+    elif [[ "$fn" =~ .html$ ]]; then
         xsltproc --nonet bootstrapify-docbook.xsl "$inDir/$fn" > "$outDirTmp/$fn.in"
         tpage --pre_chomp --post_chomp \
             --define root=`echo "$outDir/$fn" | sed -e 's|[^/]||g' -e 's|/|../|g'` \
