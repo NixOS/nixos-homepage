@@ -43,7 +43,7 @@ the console.  It contains a number of rescue tools.</p>
 
 <ul>
   <li><a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso">Minimal installation CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)</li>
-  <li><a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso">Minimal installation CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-i686-linux.iso">Minimal installation CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-i686-linux.iso.sha256">SHA-256</a>)</li>
 </ul>
 
 </section>
