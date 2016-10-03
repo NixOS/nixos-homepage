@@ -1,17 +1,15 @@
-[% WRAPPER layout.tt title="Getting NixOS " _ latestNixOSVersion menu='nixos' %]
+[% WRAPPER layout.tt title="Getting NixOS " _ latestNixOSSeries menu='nixos' %]
 [% USE IO.All %]
 [% USE JSON.Escape %]
 
-<p>The latest stable release series is <strong>[% latestNixOSVersion
-%]</strong>.  Below are links to CD/DVD images and VirtualBox
-appliances containing the <a
-href="https://nixos.org/channels/nixos-[%latestNixOSVersion%]">latest
-release</a> in this series.
-<a class="btn btn-large btn-success pull-right" href="[%root%]nixos/manual/">
-  Next Step: Manual
-  <i class="fa fa-arrow-right"></i>
-</a>
-</p>
+<p>The latest stable release series is
+<strong>[%latestNixOSSeries%]</strong> and the latest release in that
+series is <strong>[%latestNixOSRelease%]</strong>.  Below are links to
+CD/DVD images and VirtualBox appliances containing the <a
+href="https://nixos.org/channels/nixos-[%latestNixOSSeries%]">latest
+release</a> in this series.  <a class="btn btn-large btn-success
+pull-right" href="[%root%]nixos/manual/"> Next Step: Manual <i
+class="fa fa-arrow-right"></i> </a> </p>
 
 <section><h2 id="installation-isos">Installation CDs/DVDs</h2>
 
@@ -32,10 +30,10 @@ installer as well as X11, KDE 4 and several applications.  It’s a
 <em>live CD</em>, so it allows you to get an impression of NixOS (and
 the Nix package manager) before installing it.</p>
 
-[% prefix = "https://nixos.org/releases/nixos/latest-" %]
+[% prefix = "https://d3g5gsiof5omrk.cloudfront.net/nixos/" _ latestNixOSSeries _ "/nixos-" _ latestNixOSRelease %]
 
 <ul>
-  <li><a href="[%prefix%]iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]iso-graphical-x86_64-linux-sha256">SHA-256</a>)
+  <li><a href="[%prefix%]/nixos-graphical-[%latestNixOSRelease%]-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-graphical-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)
     <span class="label label-info">Recommended for most users</span></li>
 </ul>
 
@@ -44,8 +42,8 @@ and is therefore a lot smaller.  You have to run the installer from
 the console.  It contains a number of rescue tools.</p>
 
 <ul>
-  <li><a href="[%prefix%]iso-minimal-x86_64-linux">Minimal installation CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]iso-minimal-x86_64-linux-sha256">SHA-256</a>)</li>
-  <li><a href="[%prefix%]iso-minimal-i686-linux">Minimal installation CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]iso-minimal-i686-linux-sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso">Minimal installation CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso">Minimal installation CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)</li>
 </ul>
 
 </section>
@@ -62,7 +60,7 @@ appears, you can log in as <strong>user <tt>demo</tt></strong>,
 <tt>sudo -i</tt> in the KDE terminal (<tt>konsole</tt>).</p>
 
 <ul>
-  <li><a href="[%prefix%]ova-x86_64-linux">VirtualBox appliance, 64-bit Intel/AMD</a> (<a href="[%prefix%]ova-x86_64-linux-sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]/nixos-[%latestNixOSRelease%]-x86_64-linux.ova">VirtualBox appliance, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-[%latestNixOSRelease%]-x86_64-linux.ova.sha256">SHA-256</a>)</li>
 </ul>
 
 </section>
@@ -78,7 +76,7 @@ by using one of the AMIs listed below.</p>
     <tr><th>Region</th><th>Root storage</th><th>Virtualisation</th><th>AMI</th><th></th></tr>
   </thead>
   <tbody>
-    [% amis = JSON.Escape.json_decode(IO.All.new('nixos/amis.json').all).$latestNixOSVersion %]
+    [% amis = JSON.Escape.json_decode(IO.All.new('nixos/amis.json').all).$latestNixOSSeries %]
     [% FOREACH region IN amis.keys.sort %]
       [% FOREACH type IN amis.$region.keys.sort; ami = amis.$region.$type %]
         <tr>
@@ -131,7 +129,7 @@ by using one of the bootstrap BLOBs listed below.</p>
 
 <p>You can create an instance from the command line.
 For example, to create an instance of version 
-<tt>[% blob = blobs.$latestNixOSVersion; latestNixOSVersion %]</tt>
+<tt>[% blob = blobs.$latestNixOSSeries; latestNixOSSeries %]</tt>
 of NixOS  using azure-cli, just run:</p>
 
 <pre>

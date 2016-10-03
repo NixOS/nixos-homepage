@@ -1,5 +1,5 @@
-NIXOS_VERSION = 16.03
-NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_VERSION)/nixexprs.tar.xz
+NIXOS_SERIES = 16.09
+NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_SERIES)/nixexprs.tar.xz
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
@@ -99,17 +99,23 @@ docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
 
 docs/papers.html: docs/papers-in.html
 
-%.html: %.tt layout.tt common.tt nix-release.tt donation.tt
+%.html: %.tt layout.tt common.tt nix-release.tt nixos-release.tt donation.tt
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
 	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
 	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
 	  --define fileName=$< \
-	  --pre_process=nix-release.tt --pre_process=common.tt \
+	  --pre_process=nix-release.tt --pre_process=nixos-release.tt --pre_process=common.tt \
 	  $< > $@.tmp
 	xmllint --nonet --noout $@.tmp
 	mv $@.tmp $@
+
+# FIXME: hacky. The channel generator should put up a JSON file.
+nixos-release.tt:
+	uri=$$(curl --fail --silent -o /dev/null -w %{redirect_url} https://nixos.org/channels/nixos-${NIXOS_SERIES}); \
+	version=$$(echo $$uri | sed 's|.*/nixos-||'); \
+	echo "[%- latestNixOSSeries = \"${NIXOS_SERIES}\"; latestNixOSRelease = \"$$version\" -%]" > $@
 
 %: %.in common.tt nix-release.tt
 	tpage \
@@ -169,7 +175,7 @@ blogs.json: blogs.xml
 
 ifeq ($(UPDATE), 1)
 .PHONY: nixos/amis.nix nixos/azure-blobs.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz \
-  $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN)
+  $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN) nixos-release.tt
 endif
 
 nixpkgs/packages.json.gz:

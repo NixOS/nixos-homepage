@@ -2,6 +2,24 @@
 
 <news>
   <item>
+    <pubDate>Mon Oct 03 2016 00:00:00 GMT</pubDate>
+    <title>
+      NixOS 16.09 released
+    </title>
+    <description>
+      NixOS 16.09 “Flounder” has been released, the fifth stable release
+      branch. See the <a
+      href="/nixos/manual/release-notes.html#sec-release-16.09">release notes</a>
+      for details. You can get NixOS 16.09 ISOs and VirtualBox
+      appliances from the <a href="nixos/download.html">download
+      page</a>. For information on how to upgrade from older release
+      branches to 16.09, check out the <a
+      href="/nixos/manual/index.html#sec-upgrading">manual section on
+      upgrading</a>.
+    </description>
+  </item>
+
+  <item>
     <pubDate>Wed Jul 20 2016 00:00:00 GMT</pubDate>
     <title>
       NixOps 1.4 released
@@ -14,7 +32,6 @@
       for details.
     </description>
   </item>
-
 
   <item>
     <pubDate>Sun May 01 2016 00:00:00 GMT</pubDate>

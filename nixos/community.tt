@@ -112,9 +112,9 @@ channel is <a href="https://nixos.org/irc/logs/">logged</a>.</p>
   of the <tt>master</tt> branch</a>, used to update the <a
   href="https://nixos.org/channels/nixos-unstable/"><tt>nixos-unstable</tt>
   channel</a>.</li>
-  <li><a href="https://hydra.nixos.org/job/nixos/release-[%latestNixOSVersion%]/tested#tabs-constituents">Status
-  of the <tt>release-[%latestNixOSVersion%]</tt> branch</a>, used to update the <a
-  href="https://nixos.org/channels/nixos-[%latestNixOSVersion%]"><tt>nixos-[%latestNixOSVersion%]</tt>
+  <li><a href="https://hydra.nixos.org/job/nixos/release-[%latestNixOSSeries%]/tested#tabs-constituents">Status
+  of the <tt>release-[%latestNixOSSeries%]</tt> branch</a>, used to update the <a
+  href="https://nixos.org/channels/nixos-[%latestNixOSSeries%]"><tt>nixos-[%latestNixOSSeries%]</tt>
   channel</a>.</li>
 </ul>
 

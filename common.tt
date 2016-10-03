@@ -5,8 +5,7 @@
   nixosManual = "/nixos/manual"
   nixopsManual = "/nixops/manual"
   latestNixMirror = "https://nixos.org/releases/nix/nix-$latestNixVersion"
-  latestNixOSVersion = "16.03"
-  latestNixOSBranch = "release-" _ latestNixOSVersion
+  latestNixOSBranch = "release-" _ latestNixOSSeries
   ;
 
   BLOCK renderPager %]
