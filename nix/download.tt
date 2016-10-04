@@ -9,6 +9,8 @@ other than <tt>root</tt>):
 
 <pre><span class="muted">$</span> curl <a href="[%root%]nix/install">https://nixos.org/nix/install</a> | sh</pre>
 
+Make sure to follow the instructions output by the script.
+
 You may want to verify the integrity of the installation script using GPG:
 
 <pre>
