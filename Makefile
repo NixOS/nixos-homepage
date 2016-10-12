@@ -96,7 +96,7 @@ HYDRA_MANUAL_OUT = hydra/manual
 all: $(HYDRA_MANUAL_OUT)
 
 $(HYDRA_MANUAL_OUT): $(HYDRA_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(HYDRA_MANUAL_IN) $(HYDRA_MANUAL_OUT) 'Nix manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+	./bootstrapify-docbook.sh $(HYDRA_MANUAL_IN) $(HYDRA_MANUAL_OUT) 'Hydra manual' hydra https://github.com/NixOS/hydra/tree/master/doc/manual
 	ln -sfn manual.html $(HYDRA_MANUAL_OUT)/index.html
 
 $(HYDRA_MANUAL_IN):
