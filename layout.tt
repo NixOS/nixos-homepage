@@ -49,6 +49,8 @@
                 NixOps
               [% ELSIF menu == 'disnix' %]
                 Disnix
+              [% ELSIF menu == 'hydra' %]
+                Hydra
               [% ELSE %]
                 NixOS
               [% END %]
