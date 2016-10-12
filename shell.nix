@@ -16,5 +16,6 @@ stdenv.mkDerivation {
       xhtml1
       nix
       gnupg
+      jq
     ];
 }
