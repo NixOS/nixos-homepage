@@ -88,6 +88,23 @@ all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wild
   nix/install nix/install.sig
 
 
+### Prettify the Hydra manual.
+
+HYDRA_MANUAL_IN = hydra/manual-raw
+HYDRA_MANUAL_OUT = hydra/manual
+
+all: $(HYDRA_MANUAL_OUT)
+
+$(HYDRA_MANUAL_OUT): $(HYDRA_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	./bootstrapify-docbook.sh $(HYDRA_MANUAL_IN) $(HYDRA_MANUAL_OUT) 'Nix manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+	ln -sfn manual.html $(HYDRA_MANUAL_OUT)/index.html
+
+$(HYDRA_MANUAL_IN):
+	path=$$(curl -H 'Accept: application/json' http://hydra.nixos.org/build/41892729 | jq -re '.buildoutputs.out.path') && \
+	nix-store -r $$path && \
+	ln -sfn $$path/share/doc/hydra $(HYDRA_MANUAL_IN)
+
+
 favicon.png: logo/nixos-logo-only-hires.png
 	convert -resize 16x16 -background none -gravity center -extent 16x16 $< $@
 
@@ -175,7 +192,7 @@ blogs.json: blogs.xml
 
 ifeq ($(UPDATE), 1)
 .PHONY: nixos/amis.nix nixos/azure-blobs.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json.gz nixos/options.json.gz \
-  $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN) nixos-release.tt
+  $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN) $(HYDRA_MANUAL_IN) nixos-release.tt
 endif
 
 nixpkgs/packages.json.gz:

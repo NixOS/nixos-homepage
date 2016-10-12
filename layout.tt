@@ -88,6 +88,12 @@
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
+            [% ELSIF menu == 'hydra' %]
+              <ul class="nav pull-left">
+                <li><a href="[%root%]hydra/manual/">Manual</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/hydra"><i class="fa fa-github"></i></a></li>
             [% ELSIF menu == 'nixpkgs' %]
               <ul class="nav pull-left">
                 <li><a href="[%root%]nixpkgs/download.html">Download</a></li>
