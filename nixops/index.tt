@@ -65,12 +65,11 @@ deployment.region = "eu-west-1";
 <p>NixOps currently supports provisioning the following resources:</p>
 
 <ul>
-  <li>Amazon EC2 instances.</li>
+  <li>Amazon EC2 instances and other resources (such as S3 buckets, EC2 key pairs, elastic IPs, etc.).</li>
+  <li>Google Cloud Engine instances and other resources (such as networks, firewalls, IPs, disks, etc.).</li>
   <li>VirtualBox virtual machines.</li>
   <li>Hetzner machines.</li>
   <li>NixOS containers.</li>
-  <li>Many Amazon resources, such as S3 buckets, EC2 key pairs,
-  elastic IPs, and so on.</li>
 </ul>
 
 <section><h2>Getting it</h2>
