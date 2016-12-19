@@ -6,7 +6,7 @@
 
 <p><strong>Note:</strong> if you are a NixOS user, you already have
 Nixpkgs.  You can update your copy of Nixpkgs to the latest version by
-running <tt>nixos-checkout</tt>.</p>
+running <tt>nix-channel --update</tt>.</p>
 
 
 <section><h2>Channel</h2>
