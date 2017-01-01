@@ -122,6 +122,8 @@ function refilter() {
 
       return words.every(match);
     });
+
+    document.location.hash = words.join(' ').replace(/ +/, '+');
   }
 
   curPage = 0;
@@ -292,6 +294,8 @@ $.ajax({
   success: function(data) {
     optionData = data;
 
+    var query = document.location.hash.replace(/^#/, '').replace(/\+/, ' ');
+    if (query.length && query.length > 0 ){ $('#search').val(query); }
     refilter();
 
     $('#search').on('input', function() {
