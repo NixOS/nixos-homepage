@@ -1,0 +1,48 @@
+[% WRAPPER layout.tt title="NixOS Security" menu='nixos' %]
+[% PROCESS common.tt %]
+
+<h3>Security Announcements</h3>
+<div class="row-fluid">
+  <p>There is a dedicated mailing list to keep track of security
+  releases. To subscribe either visit the <a
+  href="https://groups.google.com/forum/#!forum/nix-security-announce">nix-security-announce
+  Google Group</a> or send an email to <a
+  href="mailto:nix-security-announce+subscribe@googlegroups.com">nix-security-announce+subscribe@googlegroups.com</a>
+  with the subject "subscribe".</p>
+
+  <p>These announcements will be signed by a member of the NixOS
+  Security Team:</p>
+
+  <ul>
+    <li>
+      <p>Graham Christensen
+         <a href="mailto:graham@grahamc.com">graham@grahamc.com</a>
+         <br />
+         <strong>GPG Key:</strong><tt>
+            <a href="https://pgp.mit.edu/pks/lookup?op=get&amp;search=0xFE918C3A98C1030F">0xFE918C3A98C1030F</a>
+         </tt><br />
+         <strong>GPG Fingerprint:</strong>
+         <tt>BA94 FDF1 1DA4 0521 2864  C121 FE91 8C3A 98C1 030F</tt>
+      </p>
+    </li>
+    <li>
+      <p>Domen Kožar
+         <a href="mailto:domen@dev.si">domen@dev.si</a>
+      </p>
+    </li>
+    <li>
+      <p>Rob Vermaas
+         <a href="mailto:rob.vermaas@gmail.com">rob.vermaas@gmail.com</a>
+      </p>
+    </li>
+  </ul>
+</div>
+
+<h3>Security Disclosures</h3>
+<div class="row-fluid">
+  <p>To privately report a security issue with NixOS, Nix, and its
+  ecosystem, please mail anyone (or everyone) on the NixOS Security
+  Team and we will ensure the issue is handled.</p>
+</div>
+
+[% END %]
