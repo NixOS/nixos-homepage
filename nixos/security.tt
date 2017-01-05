@@ -1,0 +1,71 @@
+[% WRAPPER layout.tt title="NixOS Security" menu='nixos' %]
+[% PROCESS common.tt %]
+
+<h3>Security Announcements</h3>
+<div class="row-fluid">
+  <p>There is a dedicated mailing list to keep track of security
+  releases. To subscribe either visit the <a
+  href="https://groups.google.com/forum/#!forum/nix-security-announce">nix-security-announce
+  Google Group</a> or send an email to <a
+  href="mailto:nix-security-announce+subscribe@googlegroups.com">nix-security-announce+subscribe@googlegroups.com</a>
+  with the subject "subscribe".</p>
+
+  <p>These announcements will be signed by a member of the NixOS
+  Security Team:</p>
+
+  <ul>
+    <li>
+      <p>Graham Christensen
+         <a href="mailto:graham@grahamc.com">graham@grahamc.com</a>
+         <br />
+         <strong>GPG Key:</strong><tt>
+            <a href="https://pgp.mit.edu/pks/lookup?op=get&amp;search=0xFE918C3A98C1030F">0xFE918C3A98C1030F</a>
+         </tt><br />
+         <strong>GPG Fingerprint:</strong>
+         <tt>BA94 FDF1 1DA4 0521 2864  C121 FE91 8C3A 98C1 030F</tt>
+      </p>
+    </li>
+    <li>
+      <p>Franz Pletz
+         <a href="mailto:fpletz@fnordicwalking.de">fpletz@fnordicwalking.de</a>
+         <br />
+         <strong>GPG Key:</strong><tt>
+            <a href="https://pgp.mit.edu/pks/lookup?op=get&amp;search=0x846FDED7792617B4">0x846FDED7792617B4</a>
+         </tt><br />
+         <strong>GPG Fingerprint:</strong>
+         <tt>8A39 615D CE78 AF08 2E23  F303 846F DED7 7926 17B4</tt>
+      </p>
+    </li>
+    <li>
+      <p>Domen Kožar
+         <a href="mailto:domen@dev.si">domen@dev.si</a>
+         <br />
+         <strong>GPG Key:</strong><tt>
+            <a href="https://pgp.mit.edu/pks/lookup?op=get&amp;search=0xC2FFBCAFD2C24246">0xC2FFBCAFD2C24246</a>
+         </tt><br />
+         <strong>GPG Fingerprint:</strong>
+         <tt>E96C 15A0 8D17 CE3B 17B0  C7AB C2FF BCAF D2C2 4246</tt>
+      </p>
+    </li>
+    <li>
+      <p>Rob Vermaas
+         <a href="mailto:rob.vermaas@gmail.com">rob.vermaas@gmail.com</a>
+         <br />
+         <strong>GPG Key:</strong><tt>
+            <a href="https://pgp.mit.edu/pks/lookup?op=get&amp;search=0xE114A5F264A8AE8E">0xE114A5F264A8AE8E</a>
+         </tt><br />
+         <strong>GPG Fingerprint:</strong>
+         <tt>96BF 75A5 3DEE 1F21 5F0C  979C E114 A5F2 64A8 AE8E</tt>
+      </p>
+    </li>
+  </ul>
+</div>
+
+<h3>Security Disclosures</h3>
+<div class="row-fluid">
+  <p>To privately report a security issue with NixOS, Nix, and its
+  ecosystem, please mail anyone (or everyone) on the NixOS Security
+  Team and we will ensure the issue is handled.</p>
+</div>
+
+[% END %]
