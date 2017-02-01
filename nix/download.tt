@@ -20,7 +20,7 @@ You may want to verify the integrity of the installation script using GPG:
 <span class="muted">$</span> sh ./install
 </pre>
 
-The signing key has fingerprint <tt>B541 D553 0127 0E0B CF15  CA5D 8170 B472 6D71 98DE</tt>.</p>
+The <a href="[%root%]edolstra.gpg">signing key</a> has fingerprint <tt>B541 D553 0127 0E0B CF15  CA5D 8170 B472 6D71 98DE</tt>.</p>
 
 <p>The installation script requires that you have <tt>sudo</tt> access
 to <tt>root</tt>, unless the directory <tt>/nix</tt> already exists
