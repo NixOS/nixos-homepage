@@ -1,7 +1,7 @@
 [% WRAPPER layout.tt title="About Disnix" menu='disnix' %]
 
 <p>
-Disnix is a distributed service deployment toolset which main
+Disnix is a distributed service deployment toolset whose main
 purpose is to deploy service oriented systems (i.e. systems
 that can be decomposed into "distributable units") into networks
 of machines having various characteristics (such as operating
@@ -34,7 +34,7 @@ in the network.
 The standard Nix package manager ensures that package dependency
 specifications are complete on a single system, i.e. <em>intra-dependencies</em>.
 Components of a distributed system may have dependencies on other components
-running of different machines in the network, i.e. <em>inter-dependencies</em>.
+running on different machines in the network, i.e. <em>inter-dependencies</em>.
 </p>
 
 <p>
@@ -46,7 +46,7 @@ before deploying the system.
 </p>
 
 <p>
-Moreover, Disnix uses inter-dependency specifcations for the installation
+Moreover, Disnix uses inter-dependency specifications for the installation
 or upgrade process of a distributed system to ensure that every service
 is activated or deactivated in the right order and that the system will
 not fail due to a missing inter-dependency or a broken inter-dependency
