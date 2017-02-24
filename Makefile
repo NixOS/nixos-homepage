@@ -135,6 +135,7 @@ nixos-release.tt:
 	echo "[%- latestNixOSSeries = \"${NIXOS_SERIES}\"; latestNixOSRelease = \"$$version\" -%]" > $@
 
 %: %.in common.tt nix-release.tt
+	echo $$PATH
 	tpage \
 	  --pre_process=nix-release.tt --pre_process=common.tt $< > $@.tmp
 	mv $@.tmp $@
