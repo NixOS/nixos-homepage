@@ -341,3 +341,21 @@ div.docbook div.toc {
 div.docbook div.toc dd {
     margin-left: 2em;
 }
+
+.license ul {
+    margin-left: 0px;
+}
+
+.license li {
+    display: inline;
+    list-style: none;
+    content: ", ";
+}
+
+.license li:after {
+    content: ", ";
+}
+
+.license li:last-child:after {
+    content: "";
+}
