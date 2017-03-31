@@ -26,7 +26,7 @@ graphical installer.  Therefore this form of installation may not be
 suitable for novice Linux users.</div>
 
 <p>The <strong>graphical installation CD</strong> contains the NixOS
-installer as well as X11, Plasma 5 Desktop and several applications.  It’s a
+installer as well as X11, KDE 4 and several applications.  It’s a
 <em>live CD</em>, so it allows you to get an impression of NixOS (and
 the Nix package manager) before installing it.</p>
 
@@ -51,7 +51,7 @@ the console.  It contains a number of rescue tools.</p>
 <section><h2 id="virtualbox-appliances">VirtualBox appliances</h2>
 
 <p>This is a demo appliance for VirtualBox (in OVA format) that has
-X11 and Plasma 5 enabled, as well as the VirtualBox guest additions.  To
+X11 and KDE enabled, as well as the VirtualBox guest additions.  To
 use it, download the OVA file, open VirtualBox, run “File → Import
 Appliance” from the menu, select the OVA file, and click “Import”.
 You can then start the virtual machine.  When the KDE login screen

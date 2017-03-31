@@ -1,4 +1,4 @@
-NIXOS_SERIES = 17.03
+NIXOS_SERIES = 16.09
 NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_SERIES)/nixexprs.tar.xz
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
