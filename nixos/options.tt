@@ -259,7 +259,7 @@ function showOption() {
 
   var details = $('#details-template').clone().removeAttr('id').show();
 
-  var x = $.parseXML('<xml xmlns:xlink="http://www.w3.org/1999/xlink"><div>' + opt.description + '</div></xml>');
+  var x = $.parseXML('<xml xmlns:xlink="http://www.w3.org/1999/xlink"><para>' + opt.description + '</para></xml>');
   $('.description', details).empty().append($(x).text());
 
   if ('default' in opt)
