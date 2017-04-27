@@ -70,6 +70,7 @@ deployment.region = "eu-west-1";
   <li>VirtualBox virtual machines.</li>
   <li>Hetzner machines.</li>
   <li>NixOS containers.</li>
+  <li>Any machine already running NixOS.</li>
 </ul>
 
 <section><h2>Getting it</h2>
