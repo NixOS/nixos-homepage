@@ -1,5 +1,6 @@
 NIXOS_SERIES = 17.03
 NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_SERIES)/nixexprs.tar.xz
+NIXPKGS_UNSTABLE = https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
@@ -84,6 +85,7 @@ $(NIXPKGS_MANUAL_IN):
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
   nixpkgs/packages.json.gz \
+  nixpkgs/packages-unstable.json.gz \
   nixos/options.json.gz \
   nix/install nix/install.sig
 
@@ -200,6 +202,15 @@ nixpkgs/packages.json.gz:
 	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS)); \
 	(echo -n '{ "commit": "' && cat $$nixpkgs/.git-revision && echo -n '","packages":' \
 	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config '{}' \
+	  && echo -n '}') \
+	  | sed "s|$$nixpkgs/||g" | gzip -9 > $@.tmp
+	gunzip < $@.tmp | python -mjson.tool > /dev/null
+	mv $@.tmp $@
+
+nixpkgs/packages-unstable.json.gz:
+	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS_UNSTABLE)); \
+	(echo -n '{ "commit": "' && cat $$nixpkgs/.git-revision && echo -n '","packages":' \
+	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS_UNSTABLE) -qa --json --arg config '{}' \
 	  && echo -n '}') \
 	  | sed "s|$$nixpkgs/||g" | gzip -9 > $@.tmp
 	gunzip < $@.tmp | python -mjson.tool > /dev/null
