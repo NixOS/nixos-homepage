@@ -3,7 +3,10 @@
 <section><h2>Latest release</h2>
 
 <p>The latest and recommended version of Nix is
-<strong>[%latestNixVersion%]</strong>. The quickest way to install it
+<strong>[%latestNixVersion%]</strong>. 
+You can find packages for a variety of Linux distributions 
+<a href="https://nixos.org/releases/nix/nix-[%latestNixVersion%]/">here</a>.
+Another way to install it
 on Linux and Mac OS X is to run the following in a shell (as a user
 other than <tt>root</tt>):
 
