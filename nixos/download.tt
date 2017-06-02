@@ -15,7 +15,7 @@ class="fa fa-arrow-right"></i> </a> </p>
 
 <p>You can install NixOS on physical hardware by burning one of the CD
 images onto a blank CD/DVD disk, or <a
-href="https://nixos.org/wiki/Installing_NixOS_from_a_USB_stick">by
+href="https://nixos.org/nixos/manual/index.html#sec-booting-from-usb">by
 copying it onto a USB stick</a>.  For <strong>installation
 instructions</strong>, please see the <a
 href="[%nixosManual%]">manual</a>.</p>
