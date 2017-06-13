@@ -2,6 +2,20 @@
 
 <news>
   <item>
+    <pubDate>Thu May 25 2017 00:00:00 GMT</pubDate>
+    <title>
+      NixCon 2017
+    </title>
+    <description>
+      NixCon 2017 will take place in Munich on October 28-31.
+      There will be talks, workshops and a hackathon.
+      More information can be found at the <a
+      href="http://nixcon2017.org">NixCon 2017 website</a>.
+      Please submit your proposals until July 31!
+    </description>
+  </item>
+
+  <item>
     <pubDate>Fri Mar 31 2017 00:00:00 GMT</pubDate>
     <title>
       NixOS 17.03 released
@@ -1529,4 +1543,3 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
 </news>
-
