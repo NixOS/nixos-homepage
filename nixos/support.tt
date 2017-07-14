@@ -13,19 +13,26 @@
     the list of options online</a>.</p>
   </div>
 
-  <div class="span4">
-    <h2><a href="http://lists.science.uu.nl/mailman/listinfo/nix-dev">Mailing list</a></h2>
-    <p>There is a mailing list, <a
-    href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt><strong>nix-dev@<wbr/>lists<wbr/>.science<wbr/>.uu<wbr/>.nl</strong></tt></a>,
-    which can be used for user and development questions and
-    discussions. You can also browse the <a
-    href="http://lists.science.uu.nl/pipermail/nix-dev/">mailing list
-    archives</a>.</p>
-    <p>There is also a separate mailing list to keep track of security
-    releases. To subscribe either visit the <a
+  <div class="span4" id="mailing-list">
+    <h2><a href="https://groups.google.com/forum/#!forum/nix-devel">Mailing lists</a></h2>
+
+    <ul>
+
+    <li><a href="https://groups.google.com/forum/#!forum/nix-devel"><tt><strong>nix-devel@<wbr/>googlegroups<wbr/>.com</strong></tt></a>
+    is for all user and development questions and discussions. To
+    subscribe, visit the <a
+    href="https://groups.google.com/forum/#!forum/nix-devel">nix-devel
+    Google Group</a> send an email to <a
+    href="mailto:nix-devel+subscribe@googlegroups.com">nix-devel+subscribe@googlegroups.com</a>.</li>
+
+    <li><a href="https://groups.google.com/forum/#!forum/nix-security-announce"><tt><strong>nix-security-announce@<wbr/>googlegroups<wbr/>.com</strong></tt></a>
+    is for security-related announcements. To subscribe, visit the <a
     href="https://groups.google.com/forum/#!forum/nix-security-announce">nix-security-announce
     Google Group</a> or send an email to <a
-    href="mailto:nix-security-announce+subscribe@googlegroups.com">nix-security-announce+subscribe@googlegroups.com</a>.</p>
+    href="mailto:nix-security-announce+subscribe@googlegroups.com">nix-security-announce+subscribe@googlegroups.com</a>.</li>
+
+    </ul>
+
   </div>
 
   <div class="span4">
