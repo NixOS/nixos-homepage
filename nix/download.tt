@@ -7,17 +7,17 @@
 on Linux and Mac OS X is to run the following in a shell (as a user
 other than <tt>root</tt>):
 
-<pre><span class="muted">$</span> curl <a href="[%root%]nix/install">https://nixos.org/nix/install</a> | sh</pre>
+<pre><span class="command">curl <a href="[%root%]nix/install">https://nixos.org/nix/install</a> | sh</span></pre>
 
 Make sure to follow the instructions output by the script.
 
 You may want to verify the integrity of the installation script using GPG:
 
 <pre>
-<span class="muted">$</span> curl -O <a href="[%root%]nix/install">https://nixos.org/nix/install</a>
-<span class="muted">$</span> curl -O <a href="[%root%]nix/install.sig">https://nixos.org/nix/install.sig</a>
-<span class="muted">$</span> gpg2 --verify ./install.sig
-<span class="muted">$</span> sh ./install
+<span class="command">curl -O <a href="[%root%]nix/install">https://nixos.org/nix/install</a></span>
+<span class="command">curl -O <a href="[%root%]nix/install.sig">https://nixos.org/nix/install.sig</a></span>
+<span class="command">gpg2 --verify ./install.sig</span>
+<span class="command">sh ./install</span>
 </pre>
 
 The <a href="[%root%]edolstra.gpg">signing key</a> has fingerprint <tt>B541 D553 0127 0E0B CF15  CA5D 8170 B472 6D71 98DE</tt>.</p>
