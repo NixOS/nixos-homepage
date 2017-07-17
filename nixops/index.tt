@@ -43,8 +43,8 @@ should be instantiated (in this case, as VirtualBox virtual machines
 running on your desktop). You can then run:</p>
 
 <pre>
-<span class="muted">$</span> nixops create -d simple network.nix
-<span class="muted">$</span> nixops deploy -d simple
+<span class="command">nixops create -d simple network.nix</span>
+<span class="command">nixops deploy -d simple</span>
 </pre>
 
 <p>This will create the EC2 instances, and then build, upload and
@@ -79,7 +79,7 @@ deployment.region = "eu-west-1";
 running:</p>
 
 <pre>
-<span class="muted">$</span> nix-env -i nixops
+<span class="command">nix-env -i nixops</span>
 </pre>
 
 <p>You can also get the latest development version; see the <a

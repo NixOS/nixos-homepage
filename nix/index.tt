@@ -21,17 +21,20 @@
 
   [% WRAPPER makePopover title="<i class='fa fa-cloud-download'></i> Get Nix" %]
 
-    <p>On Linux and Mac OS X, the <strong>easiest way to install
+    <p>On Linux and macOS, the <strong>easiest way to install
     Nix</strong> is to run the following shell command (as a user
     other than <tt>root</tt>):</p>
 
-    <pre><span class="muted">$</span> curl https://nixos.org/nix/install | sh</pre>
+    <pre><span class="command">curl https://nixos.org/nix/install | sh</span></pre>
 
     <p>This script will download a distribution-independent binary
     tarball containing Nix and its dependencies, and unpack it in
     <tt>/nix</tt>.</p>
 
-    <p>Source tarballs and more installation information are <a
+    <p><strong>Want a GPG signature?</strong></p>
+
+    <p>GPG verification instructions, source tarballs and more
+    installation information are <a
     href="[%root%]nix/download.html">available</a>.</p>
 
   [% END %]

@@ -9,14 +9,14 @@
     well):</p>
 
 <pre>
-<span class="muted">$</span> git clone git://github.com/NixOS/nixpkgs.git
+<span class="command">git clone git://github.com/NixOS/nixpkgs.git</span>
 </pre>
 
     <p>After making modifications to the sources, you can use them as
     follows:</p>
 
 <pre>
-<span class="muted">$</span> nixos-rebuild switch -I nixpkgs=/path/to/my/nixpkgs
+<span class="command">nixos-rebuild switch -I nixpkgs=/path/to/my/nixpkgs</span>
 </pre>
 
 <p>If you think your changes are useful to the rest of humanity, then

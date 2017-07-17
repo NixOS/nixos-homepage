@@ -89,6 +89,16 @@ pre {
     box-shadow: 0.1em 0.1em 0.5em #e0e0e0;
 }
 
+.command:before {
+    color: #999;
+    content: " $ ";
+}
+
+.nix-shell-command:before {
+    color: #999;
+    content: " [nix-shell]$ ";
+}
+
 div.main li {
     margin-bottom: 0.5em;
 }
