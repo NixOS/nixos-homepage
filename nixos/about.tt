@@ -1,8 +1,6 @@
 [% WRAPPER layout.tt title="About NixOS" menu='nixos' %]
 
-<p><a href="[%root%]nixos/screenshots.html"><img class="inline
-screenshot" src="[%root%]nixos/screenshots/nixos-kde42-1-small.png" alt="NixOS
-screenshot" /></a>NixOS is a GNU/Linux distribution that aims to
+<p>NixOS is a GNU/Linux distribution that aims to
 improve the state of the art in system configuration management.  In
 existing distributions, actions such as upgrades are dangerous:
 upgrading a package can cause other packages to break, upgrading an
@@ -248,9 +246,6 @@ Here are some highlights of what NixOS currently provides:</p>
   on ARM.</li>
 
 </ul>
-
-<p>There are some <a href="[%root%]nixos/screenshots.html">screenshots
-of NixOS in action</a>.</p>
 
 </section>
 
