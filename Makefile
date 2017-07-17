@@ -16,7 +16,6 @@ HTML = index.html news.html \
   patchelf.html hydra/index.html \
   disnix/index.html disnix/download.html disnix/docs.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
-  docs/papers.html \
   nixops/index.html
 
 
@@ -113,11 +112,6 @@ favicon.png: logo/nixos-logo-only-hires.png
 
 %-small.png: %.png
 	convert -resize 200 $< $@
-
-docs/papers-in.html: docs/papers.xml docs/bib2html.xsl
-	xsltproc docs/bib2html.xsl docs/papers.xml > $@ || rm $@
-
-docs/papers.html: docs/papers-in.html
 
 %.html: %.tt layout.tt common.tt nix-release.tt nixos-release.tt donation.tt
 	tpage \
