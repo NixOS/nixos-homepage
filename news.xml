@@ -2,6 +2,18 @@
 
 <news>
   <item>
+    <pubDate>Wed Jul 12 2017 00:00:00 GMT</pubDate>
+    <title>
+      Nix-dev mailing list moved
+    </title>
+    <description>
+      The <tt>nix-dev</tt> mailing list has moved to
+      <a href="https://groups.google.com/forum/#!forum/nix-devel"><tt>nix-devel</tt></a>
+      on Google Groups.
+    </description>
+  </item>
+
+  <item>
     <pubDate>Sun Jun 18 2017 00:00:00 GMT</pubDate>
     <title>
       NixCon 2017
@@ -332,7 +344,7 @@ $ nix-store -qR /run/current-system | grep openssl
       unstable branch.  You can get NixOS 13.10 ISOs and VirtualBox
       appliances from the <a href="nixos/download.html">download
       page</a>.  See the <a
-      href="http://lists.science.uu.nl/pipermail/nix-dev/2013-October/011941.html">announcement</a>
+      href="https://nixos.org/nix-dev/2013-October/011941.html">announcement</a>
       for more information.  For information on how to switch an
       existing NixOS machine from the unstable channel to 13.10, check
       out the <a
@@ -365,7 +377,7 @@ $ nix-store -qR /run/current-system | grep openssl
       order to simplify development.  The sources now live in the <a
       href="https://github.com/NixOS/nixpkgs/tree/master/nixos"><tt>nixos</tt>
       subdirectory of the Nixpkgs repository on GitHub</a>.  See the
-      <a href="http://lists.science.uu.nl/pipermail/nix-dev/2013-October/011873.html">announcement</a>
+      <a href="https://nixos.org/nix-dev/2013-October/011873.html">announcement</a>
       for more information.
     </description>
   </item>
@@ -466,7 +478,7 @@ $ nix-store -qR /run/current-system | grep openssl
       href="https://hydra.nixos.org/release/nixops/nixops-1.0">NixOps
       1.0</a> has been released, the inaugural release of the NixOS
       cloud deployment tool.  See the <a
-      href="http://lists.science.uu.nl/pipermail/nix-dev/2013-June/011363.html">announcement</a>
+      href="https://nixos.org/nix-dev/2013-June/011363.html">announcement</a>
       and the <a
       href="https://hydra.nixos.org/build/5426864/download/1/manual/manual.html">manual</a>
       for details.
@@ -553,7 +565,7 @@ $ nix-store -qR /run/current-system | grep openssl
       management, socket-based activation of services, per-service
       logging, cgroup-based process management, and much more.  (Read
       the <a
-      href="http://lists.science.uu.nl/pipermail/nix-dev/2013-January/010482.html">announcement</a>.)
+      href="https://nixos.org/nix-dev/2013-January/010482.html">announcement</a>.)
     </description>
   </item>
 
@@ -1544,4 +1556,3 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
 </news>
-
