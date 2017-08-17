@@ -19,7 +19,7 @@ mkdir -p "$outDirTmp"
     elif [[ "$fn" =~ .html$ ]]; then
         xsltproc --nonet bootstrapify-docbook.xsl "$inDir/$fn" > "$outDirTmp/$fn.in"
         tpage --pre_chomp --post_chomp \
-            --define root=`echo "$outDir/$fn" | sed -e 's|[^/]||g' -e 's|/|../|g'` \
+            --define root=`realpath --relative-to="$(pwd)" "$outDir/$fn" | sed -e 's|[^/]||g' -e 's|/|../|g'` \
             --pre_process=common.tt \
             > "$outDirTmp/$fn" <<EOF
 [% WRAPPER layout.tt title="$title" menu='$menu' hideTitle=1 sourceLink='$source' anchors=1 %]
