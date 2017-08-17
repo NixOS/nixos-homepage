@@ -57,6 +57,35 @@
     <div class="docbook">
       <xsl:apply-templates />
     </div>
+    <xsl:if test="//x:link/@rel">
+      <ul class="pager">
+        <xsl:if test="@class='book'">
+          <xsl:attribute name="class">hidden</xsl:attribute>
+        </xsl:if>
+        <xsl:if test="@class!='book'">
+          <xsl:attribute name="class">pager</xsl:attribute>
+        </xsl:if>
+        <xsl:if test="//x:link[@rel='prev']">
+          <li class="previous">
+            <a accesskey="p"><xsl:attribute name="href"><xsl:value-of select="//x:link[@rel='prev']/@href"/></xsl:attribute>
+            ← <xsl:value-of select="//x:link[@rel='prev']/@title" /></a>
+          </li>
+        </xsl:if>
+        <xsl:if test="//x:link[@rel='up']">
+          <li class="up">
+            <a accesskey="u"><xsl:attribute name="href"><xsl:value-of select="//x:link[@rel='up']/@href"/></xsl:attribute>
+            ↑ <xsl:value-of select="//x:link[@rel='up']/@title" /></a>
+          </li>
+        </xsl:if>
+        <xsl:if test="//x:link[@rel='next']">
+          <li class="next">
+            <a accesskey="n"><xsl:attribute name="href"><xsl:value-of select="//x:link[@rel='next']/@href"/></xsl:attribute>
+            <xsl:value-of select="//x:link[@rel='next']/@title" /> →</a>
+          </li>
+        </xsl:if>
+      </ul>
+    </xsl:if>
+
 
   </xsl:template>
 
