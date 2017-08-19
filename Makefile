@@ -117,7 +117,7 @@ $(HYDRA_MANUAL_OUT): $(HYDRA_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-doc
 	ln -sfn manual.html $(HYDRA_MANUAL_OUT)/index.html
 
 $(HYDRA_MANUAL_IN):
-	path=$$(curl -H 'Accept: application/json' http://hydra.nixos.org/build/41892729 | jq -re '.buildoutputs.out.path') && \
+	path=$$(curl -LH 'Accept: application/json' https://hydra.nixos.org/build/41892729 | jq -re '.buildoutputs.out.path') && \
 	nix-store -r $$path && \
 	ln -sfn $$path/share/doc/hydra $(HYDRA_MANUAL_IN)
 
