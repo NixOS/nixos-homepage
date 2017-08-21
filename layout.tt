@@ -45,8 +45,6 @@
                 Nix
               [% ELSIF menu == 'nixpkgs' %]
                 Nixpkgs
-              [% ELSIF menu == 'nix-pills' %]
-                Nix Pills
               [% ELSIF menu == 'nixops' %]
                 NixOps
               [% ELSIF menu == 'disnix' %]
@@ -61,7 +59,6 @@
             <ul class="dropdown-menu">
               <li><a href="[%root%]">NixOS</a></li>
               <li><a href="[%root%]nix">Nix</a></li>
-              <li><a href="[%root%]nix-pills">Nix Pills</a></li>
               <li><a href="[%root%]nixops">NixOps</a></li>
               <li><a href="[%root%]nixpkgs">Nixpkgs</a></li>
               <li class="divider"></li>

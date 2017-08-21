@@ -4,6 +4,7 @@
   nixpkgsManual = "/nixpkgs/manual"
   nixosManual = "/nixos/manual"
   nixopsManual = "/nixops/manual"
+  nixPills = "/nixos/nix-pills"
   latestNixMirror = "https://nixos.org/releases/nix/nix-$latestNixVersion"
   latestNixOSBranch = "release-" _ latestNixOSSeries
   ;

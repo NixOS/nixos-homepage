@@ -36,13 +36,13 @@ $(NIXOS_MANUAL_IN):
 
 ### Prettify the Nix Pills
 
-NIX_PILLS_MANUAL_IN = nix-pills-raw
-NIX_PILLS_MANUAL_OUT = nix-pills
+NIX_PILLS_MANUAL_IN = nixos/nix-pills-raw
+NIX_PILLS_MANUAL_OUT = nixos/nix-pills
 
 all: $(NIX_PILLS_MANUAL_OUT)
 
 $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nix-pills https://github.com/NixOS/nix-pills
+	./bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nixos https://github.com/NixOS/nix-pills
 
 $(NIX_PILLS_MANUAL_IN):
 	path=$$(curl -LH 'Accept: application/json' https://hydra.nixos.org/job/nix-pills/master/html-split/latest | jq -re '.buildoutputs.out.path') && \
