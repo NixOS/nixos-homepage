@@ -21,7 +21,7 @@
         <h2><xsl:apply-templates select="//x:div[@class='book']/x:div[@class='titlepage']//x:h2/node()"/></h2>
       </xsl:if>
       <xsl:if test="@class!='book'">
-        <h1>NixOS Manual</h1>
+        <h1><xsl:value-of select="//x:link[@rel='home']/@title"/></h1>
       </xsl:if>
     </div>
 
