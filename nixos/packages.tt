@@ -24,6 +24,8 @@
   </tbody>
 </table>
 
+All packages present here are defined in [nixpkgs/pkgs/top-level/all-packages.nix](https://github.com/NixOS/nixpkgs/blob/51a83266d164195698f04468d90d2c6238ed3491/pkgs/top-level/all-packages.nix)
+
 [% INCLUDE renderPager %]
 
 </div>
