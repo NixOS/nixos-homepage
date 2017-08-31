@@ -196,7 +196,7 @@ nixpkgs-commit-stats.json:
 	mv $@.tmp $@
 
 blogs.xml:
-	curl --fail http://planet.nixos.org/rss20.xml > $@.tmp
+	curl --fail https://planet.nixos.org/rss20.xml > $@.tmp
 	mv $@.tmp $@
 
 blogs.json: blogs.xml
