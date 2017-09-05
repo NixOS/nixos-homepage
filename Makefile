@@ -236,3 +236,11 @@ nix/install.sig: nix/install
 		mv $@.tmp $@; \
 	fi
 	touch $@
+
+nixos/options.html: elm
+
+elm: elm-src/index.elm
+	nix-build ./elm-src --out-link ./elm
+
+%.elm:
+	true
