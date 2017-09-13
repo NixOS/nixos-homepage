@@ -5,6 +5,7 @@ let
   hashes = {
     "crazymykl/ex-em-elm-1.4.0" = "0qxp7kfqap4n8b2pv88v5a4j8vd0azbr1gf6bv54svycmyn2ghs0";
     "NoRedInk/elm-decode-pipeline-3.0.0" = "11dpynbv90b3yh33dvpx2c09sb6hxj6ffjq6f8a4wyf7lv2vb8nm";
+    "bcardiff/elm-debounce-1.1.3" = "0drklpkxvsddg3fkj1hjlmx4215yy58g0ig45i3h8hp6aix8ycfh";
     "Bogdanp/elm-querystring-1.0.0" = "0895hmaz7cmqi7k1zb61y0hmarbhzg8k5p792sm0az8myqkicjs1";
     "Bogdanp/elm-combine-3.1.1" = "0cpd50qab54hlnc1c3pf2j7j45cr3y4nhkf53p8d1w7rm7kyqssb";
     "elm-community/list-extra-6.1.0" = "082rxwicx4ndah48bv49w53fkp5dmcdgraz9z2z2lkr5fkwgcrvx";
@@ -69,6 +70,11 @@ stdenv.mkDerivation {
     cp -r ${elm_env} elm-stuff
     chmod a+w ./elm-stuff
     elm-make ./index.elm --output "$out/options.js"
+  '';
+
+  shellHook = ''
+    elm-package install
+    elm-reactor
   '';
 
   installPhase = ''

@@ -17,7 +17,7 @@ import Maybe
 import Array
 import ExEmElm.Parser
 import ExEmElm.Traverse
-
+import Debounce
 
 
 main =
@@ -41,14 +41,14 @@ type alias Model =
     , page : Int
     , location : Navigation.Location
     , selected : Maybe String
+    , status : PageStatus
+    , debounce_state : Debounce.State
     }
 
 
 clamped : Model -> Model
 clamped model =
     { model | page = (clamp 1 (total_pages model.matchingOptions) model.page) }
-
-
 
 
 update_options : Model -> NixOptions -> Model
@@ -78,6 +78,7 @@ update_options model unsorted_options =
                 | options = options
                 , matchingOptions = matchingOptions
                 , page = page
+                , status = Loaded
              }
             )
 
@@ -91,6 +92,15 @@ update_query model query =
         , page = 1
         , selected = Nothing
     }
+
+
+update_page : Model -> Int -> Model
+update_page model newPage =
+    clamped
+        { model
+            | page = newPage
+            , selected = Nothing
+        }
 
 
 select_option : Model -> String -> Model
@@ -122,7 +132,7 @@ init location =
         selected =
             QueryString.one QueryString.string "selected" qs
     in
-        ( Model query (splitQuery query) [] [] page location selected
+        ( Model query (splitQuery query) [] [] page location selected Loading Debounce.init
         , getOptions
         )
 
@@ -134,6 +144,29 @@ splitQuery query =
 
 
 -- UPDATE
+
+
+updateFromUrl : Navigation.Location -> Model -> Model
+updateFromUrl location model =
+    let
+        qs =
+            QueryString.parse location.search
+
+        query =
+            Maybe.withDefault "" (QueryString.one QueryString.string "query" qs)
+
+        page =
+            Maybe.withDefault 1 (QueryString.one QueryString.int "page" qs)
+
+        selected =
+            QueryString.one QueryString.string "selected" qs
+    in
+        case selected of
+            Just opt ->
+                select_option model opt
+
+            Nothing ->
+                (update_page (update_query model query) page)
 
 
 updateUrl : Model -> Cmd Msg
@@ -163,6 +196,14 @@ type Msg
     | FetchedOptions (Result Http.Error NixOptions)
     | SelectOption String
     | DeselectOption
+    | Bounce (Debounce.Msg Msg)
+    | SyncQueryToUrl
+
+
+type PageStatus
+    = Loading
+    | Loaded
+    | Error String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -176,12 +217,7 @@ update msg model =
                 ( newModel, updateUrl newModel )
 
         FetchedOptions (Err e) ->
-            case e of
-                Http.BadPayload str _ ->
-                    ( { model | query = str }, Cmd.none )
-
-                otherwise ->
-                    ( { model | query = ":/" }, Cmd.none )
+            ( { model | status = Error (toString e) }, Cmd.none )
 
         SelectOption option_name ->
             let
@@ -198,25 +234,31 @@ update msg model =
                 ( newModel, updateUrl newModel )
 
         ChangeUrl location ->
-            ( model, Cmd.none )
+            let
+                newModel =
+                    updateFromUrl location model
+            in
+                ( newModel, Cmd.none )
 
         ChangePage newPage ->
             let
                 newModel =
-                    clamped
-                        { model
-                            | page = newPage
-                            , selected = Nothing
-                        }
+                    update_page model newPage
             in
                 ( newModel, updateUrl newModel )
+
+        Bounce bouncer ->
+            (Debounce.update debounce_cfg bouncer model)
 
         ChangeQuery newQuery ->
             let
                 newModel =
                     update_query model newQuery
             in
-                ( newModel, updateUrl newModel )
+                ( newModel, debounce <| SyncQueryToUrl )
+
+        SyncQueryToUrl ->
+            ( model, updateUrl model )
 
 
 
@@ -351,7 +393,35 @@ changePageIf cond page txt =
 
 view : Model -> Html Msg
 view model =
-    div [ ]
+    if List.length model.options > 0 then
+        viewOptions model
+    else
+        div [] [ h1 [] [ text (toString model.status) ] ]
+
+
+debounce =
+    Debounce.debounceCmd debounce_cfg
+
+
+debounce_cfg : Debounce.Config Model Msg
+debounce_cfg =
+    Debounce.config
+        .debounce_state
+        -- getState   : Model -> Debounce.State
+        (\model s -> { model | debounce_state = s })
+        -- setState   : Debounce.State -> Model -> Debounce.State
+        Bounce
+        -- msgWrapper : Msg a -> Msg
+        200
+
+
+
+-- timeout ms : Float
+
+
+viewOptions : Model -> Html Msg
+viewOptions model =
+    div []
         [ p []
             [ input [ id "search", class "search-query span3", autofocus True, value model.query, onInput ChangeQuery ] []
             ]
@@ -409,6 +479,7 @@ subscriptions model =
 
 -- HTTP
 
+
 getOptions : Cmd Msg
 getOptions =
-    Http.send FetchedOptions (Http.get "./options.json.gz" decodeOptions)
+    Http.send FetchedOptions (Http.get "./options.json" decodeOptions)
