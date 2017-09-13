@@ -429,15 +429,19 @@ viewOptions model =
         , p [ id "how-many" ]
             [ em []
                 [ text
-                    (String.concat
-                        [ "Showing results "
-                        , (toString (((model.page - 1) * 15) + 1))
-                        , "-"
-                        , (toString (min (List.length model.matchingOptions) ((model.page) * 15)))
-                        , " of "
-                        , (toString (List.length model.matchingOptions))
-                        , "."
-                        ]
+                    (if (List.length model.matchingOptions) == 0 then
+                        "Showing no results"
+                     else
+                        (String.concat
+                            [ "Showing results "
+                            , (toString (((model.page - 1) * 15) + 1))
+                            , "-"
+                            , (toString (min (List.length model.matchingOptions) ((model.page) * 15)))
+                            , " of "
+                            , (toString (List.length model.matchingOptions))
+                            , "."
+                            ]
+                        )
                     )
                 ]
             ]
@@ -452,7 +456,7 @@ viewOptions model =
             ]
         , ul [ class "pager" ]
             [ li []
-                [ (changePageIf (not (model.page == 1)) 1 "« First")
+                [ (changePageIf (not (model.page <= 1)) 1 "« First")
                 ]
             , li []
                 [ (changePageIf (model.page > 1) (model.page - 1) "‹ Previous")
