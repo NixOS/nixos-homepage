@@ -22,8 +22,8 @@ option_sort_key ( name, option ) =
 
 option_filter : List String -> ( String, Option ) -> Bool
 option_filter terms ( name, option ) =
-    List.any (term_matches name) terms
-        || List.any (term_matches option.description) terms
+    List.all (term_matches name) terms
+        || List.all (term_matches option.description) terms
 
 term_matches : String -> String -> Bool
 term_matches name term =
