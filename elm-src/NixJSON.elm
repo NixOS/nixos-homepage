@@ -40,31 +40,29 @@ nixFromGson gson =
             nix_list list
 
         GDict dict ->
-            if ((Dict.member "_type" dict) && ((Dict.get "_type" dict) == Just (GString "literalExample")) && (Dict.member "text" dict)) then
-                case Dict.get "text" dict of
-                    Just (GString txt) ->
-                        txt
-
-                    otherwise ->
-                        "Literal example failed to produce text"
-            else
-                let
-                    entries =
-                        Dict.toList dict
-                in
-                    if List.length entries == 0 then
-                        "{ }"
-                    else
-                        String.concat
-                            (List.concat
-                                [ [ "{\n" ]
-                                , indent
-                                    (List.concat
-                                        (List.map nix_enc_dict entries)
-                                    )
-                                , [ "}" ]
-                                ]
-                            )
+            case (Dict.get "_type" dict, Dict.get "text" dict) of
+                (Just (GString "literalExample"), Just (GString txt)) ->
+                    txt
+                (Just (GString "literalExample"), _) ->
+                    "Error: Literal Example did not contain plain text"
+                otherwise ->
+                  let
+                      entries =
+                          Dict.toList dict
+                  in
+                      if List.length entries == 0 then
+                          "{ }"
+                      else
+                          String.concat
+                              (List.concat
+                                   [ [ "{\n" ]
+                                   , indent
+                                         (List.concat
+                                              (List.map nix_enc_dict entries)
+                                         )
+                                   , [ "}" ]
+                                   ]
+                              )
 
 
 nix_string : String -> String
