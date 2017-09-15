@@ -394,10 +394,10 @@ changePageIf cond page txt =
 
 view : Model -> Html Msg
 view model =
-    if List.length model.options > 0 then
-        viewOptions model
-    else
+    if List.isEmpty model.options then
         div [] [ h1 [] [ text (toString model.status) ] ]
+    else
+        viewOptions model
 
 
 debounce =
