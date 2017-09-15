@@ -9,7 +9,6 @@ import Html.Events exposing (onInput, onClick)
 import Http
 import Json.Encode exposing (encode, Value, null)
 import Dict exposing (Dict, empty, foldr, filter)
-import List
 import Navigation
 import QueryString
 import Debug
@@ -429,7 +428,7 @@ viewOptions model =
         , p [ id "how-many" ]
             [ em []
                 [ text
-                    (if (List.length model.matchingOptions) == 0 then
+                    (if List.isEmpty model.matchingOptions then
                         "Showing no results"
                      else
                         (String.concat

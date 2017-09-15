@@ -50,15 +50,15 @@ nixFromGson gson =
                       entries =
                           Dict.toList dict
                   in
-                      if List.length entries == 0 then
+                      if List.isEmpty entries then
                           "{ }"
                       else
                           String.concat
                               (List.concat
                                    [ [ "{\n" ]
                                    , indent
-                                         (List.concat
-                                              (List.map nix_enc_dict entries)
+                                         (List.concatMap
+                                              nix_enc_dict entries
                                          )
                                    , [ "}" ]
                                    ]
@@ -83,9 +83,9 @@ nix_string x =
 
 nix_list : List Gson -> String
 nix_list list =
-    if List.length list == 0 then
+    if List.isEmpty list then
         "[]"
-    else if List.length list == 1 then
+    else if List.isEmpty list then
         String.concat
             [ "[ "
             , (nixFromGson (Maybe.withDefault GNull (List.head list)))
