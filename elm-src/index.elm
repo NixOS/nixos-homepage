@@ -407,12 +407,12 @@ debounce =
 debounce_cfg : Debounce.Config Model Msg
 debounce_cfg =
     Debounce.config
-        .debounce_state
         -- getState   : Model -> Debounce.State
-        (\model s -> { model | debounce_state = s })
+        .debounce_state
         -- setState   : Debounce.State -> Model -> Debounce.State
-        Bounce
+        (\model s -> { model | debounce_state = s })
         -- msgWrapper : Msg a -> Msg
+        Bounce
         200
 
 
