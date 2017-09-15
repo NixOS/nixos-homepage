@@ -1,7 +1,9 @@
 module NixOptions exposing (..)
+
 import NixJSON exposing (Gson, gnull, gsonDecoder)
 import Json.Decode as Decode
 import Json.Decode.Pipeline exposing (decode, required, hardcoded, optional)
+
 
 type alias Option =
     { declarations : List String
@@ -16,14 +18,21 @@ type alias Option =
 type alias NixOptions =
     List ( String, Option )
 
+
 option_sort_key : ( String, Option ) -> String
 option_sort_key ( name, option ) =
     name
 
+
 option_filter : List String -> ( String, Option ) -> Bool
 option_filter terms ( name, option ) =
-    List.all (\term -> term_matches name term
-             || term_matches option.description term) terms
+    List.all
+        (\term ->
+            term_matches name term
+                || term_matches option.description term
+        )
+        terms
+
 
 term_matches : String -> String -> Bool
 term_matches name term =
@@ -33,6 +42,7 @@ term_matches name term =
 filtered : NixOptions -> List String -> NixOptions
 filtered options terms =
     List.filter (option_filter terms) options
+
 
 optionDecoder : Decode.Decoder Option
 optionDecoder =

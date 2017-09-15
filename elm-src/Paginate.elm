@@ -2,6 +2,7 @@ module Paginate exposing (..)
 
 import List.Extra
 
+
 which_page : List a -> (a -> Bool) -> Maybe Int
 which_page options matcher =
     let
