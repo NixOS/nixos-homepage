@@ -44,32 +44,7 @@ nixFromGson gson =
             nix_list list
 
         GDict dict ->
-            case ( Dict.get "_type" dict, Dict.get "text" dict ) of
-                ( Just (GString "literalExample"), Just (GString txt) ) ->
-                    txt
-
-                ( Just (GString "literalExample"), _ ) ->
-                    "Error: Literal Example did not contain plain text"
-
-                otherwise ->
-                    let
-                        entries =
-                            Dict.toList dict
-                    in
-                        if List.isEmpty entries then
-                            "{ }"
-                        else
-                            String.concat
-                                (List.concat
-                                    [ [ "{\n" ]
-                                    , indent
-                                        (List.concatMap
-                                            nix_enc_dict
-                                            entries
-                                        )
-                                    , [ "}" ]
-                                    ]
-                                )
+            nix_dict dict
 
 
 nix_string : String -> String
@@ -106,6 +81,36 @@ nix_list list =
                 , [ "]" ]
                 ]
             )
+
+
+nix_dict : Dict String Gson -> String
+nix_dict dict =
+    case ( Dict.get "_type" dict, Dict.get "text" dict ) of
+        ( Just (GString "literalExample"), Just (GString txt) ) ->
+            txt
+
+        ( Just (GString "literalExample"), _ ) ->
+            "Error: Literal Example did not contain plain text"
+
+        otherwise ->
+            let
+                entries =
+                    Dict.toList dict
+            in
+                if List.isEmpty entries then
+                    "{ }"
+                else
+                    String.concat
+                        (List.concat
+                            [ [ "{\n" ]
+                            , indent
+                                (List.concatMap
+                                    nix_enc_dict
+                                    entries
+                                )
+                            , [ "}" ]
+                            ]
+                        )
 
 
 indent : List String -> List String
