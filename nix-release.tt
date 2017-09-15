@@ -1,6 +1,6 @@
 [%-
-latestNixVersion = "1.11.14"
-nix_hash_i686_linux = "ebeec1e79b83e83d8566f79dd4002e6520aba96be681ddd1094791fdea0c4e2b"
-nix_hash_x86_64_linux = "a05643e3738776d004eb44268f820332b975109b8401fd369652739ed503a88d"
-nix_hash_x86_64_darwin = "1bbf5940ea3ce04f44004ad0e734fa2f1f52b034301d6ea0c7b33cbb7ad36f0a"
+latestNixVersion = "1.11.15"
+nix_hash_i686_linux = "2a3a2797b6eeed1b241daf8cd56a4e5a4d8339153c80be65006eed5c068e8416"
+nix_hash_x86_64_linux = "5dd0ee58a816c958466a461f25e56dccfbf1b55edd1bcbca7a3aee21e5fa5169"
+nix_hash_x86_64_darwin = "d2414c6142f1162cc8b1c02bedcbff4c70142618301a643ddaa76e8991f915ed"
 -%]
