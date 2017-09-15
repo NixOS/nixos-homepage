@@ -456,18 +456,10 @@ viewOptions model =
                 (List.concat (List.map (optionToTd model.selected) (fetch_page model.page model.matchingOptions)))
             ]
         , ul [ class "pager" ]
-            [ li []
-                [ (changePageIf (not (model.page <= 1)) 1 "« First")
-                ]
-            , li []
-                [ (changePageIf (model.page > 1) (model.page - 1) "‹ Previous")
-                ]
-            , li []
-                [ (changePageIf (model.page < (total_pages model.matchingOptions)) (model.page + 1) "Next ›")
-                ]
-            , li []
-                [ (changePageIf (model.page < (total_pages model.matchingOptions)) (total_pages model.matchingOptions) "Last »")
-                ]
+            [ li [] [ (changePageIf (not (model.page <= 1)) 1 "« First") ]
+            , li [] [ (changePageIf (model.page > 1) (model.page - 1) "‹ Previous") ]
+            , li [] [ (changePageIf (model.page < (total_pages model.matchingOptions)) (model.page + 1) "Next ›") ]
+            , li [] [ (changePageIf (model.page < (total_pages model.matchingOptions)) (total_pages model.matchingOptions) "Last »") ]
             ]
         ]
 
