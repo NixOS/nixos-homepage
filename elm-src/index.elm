@@ -45,6 +45,13 @@ type alias Model =
     }
 
 
+type alias UrlState =
+    { query : String
+    , page : Int
+    , selected : Maybe String
+    }
+
+
 clamped : Model -> Model
 clamped model =
     { model | page = (clamp 1 (total_pages model.matchingOptions) model.page) }
@@ -53,6 +60,7 @@ clamped model =
 update_options : Model -> NixOptions -> Model
 update_options model unsorted_options =
     let
+        options : NixOptions
         options =
             List.sortBy option_sort_key unsorted_options
 
@@ -119,19 +127,10 @@ deselect_option model =
 init : Navigation.Location -> ( Model, Cmd Msg )
 init location =
     let
-        qs =
-            QueryString.parse location.search
-
-        query =
-            Maybe.withDefault "" (QueryString.one QueryString.string "query" qs)
-
-        page =
-            Maybe.withDefault 1 (QueryString.one QueryString.int "page" qs)
-
-        selected =
-            QueryString.one QueryString.string "selected" qs
+        state =
+            url_state_from_location location
     in
-        ( Model query (splitQuery query) [] [] page location selected Loading Debounce.init
+        ( Model state.query (splitQuery state.query) [] [] state.page location state.selected Loading Debounce.init
         , getOptions
         )
 
@@ -145,27 +144,30 @@ splitQuery query =
 -- UPDATE
 
 
-updateFromUrl : Navigation.Location -> Model -> Model
-updateFromUrl location model =
+url_state_from_location : Navigation.Location -> UrlState
+url_state_from_location location =
     let
         qs =
             QueryString.parse location.search
-
-        query =
-            Maybe.withDefault "" (QueryString.one QueryString.string "query" qs)
-
-        page =
-            Maybe.withDefault 1 (QueryString.one QueryString.int "page" qs)
-
-        selected =
-            QueryString.one QueryString.string "selected" qs
     in
-        case selected of
+        UrlState
+            (Maybe.withDefault "" (QueryString.one QueryString.string "query" qs))
+            (Maybe.withDefault 1 (QueryString.one QueryString.int "page" qs))
+            (QueryString.one QueryString.string "selected" qs)
+
+
+updateFromUrl : Navigation.Location -> Model -> Model
+updateFromUrl location model =
+    let
+        state =
+            url_state_from_location location
+    in
+        case state.selected of
             Just opt ->
                 select_option model opt
 
             Nothing ->
-                (update_page (update_query model query) page)
+                (update_page (update_query model state.query) state.page)
 
 
 updateUrl : Model -> Cmd Msg
