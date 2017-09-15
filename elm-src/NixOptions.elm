@@ -38,9 +38,9 @@ optionDecoder : Decode.Decoder Option
 optionDecoder =
     decode Option
         |> required "declarations" (Decode.list Decode.string)
-        |> optional "default" (Decode.lazy (\_ -> gsonDecoder)) gnull
+        |> optional "default" gsonDecoder gnull
         |> required "description" Decode.string
-        |> optional "example" (Decode.lazy (\_ -> gsonDecoder)) gnull
+        |> optional "example" gsonDecoder gnull
         |> required "readOnly" Decode.bool
         |> required "type" Decode.string
 
