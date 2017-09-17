@@ -66,16 +66,19 @@ nix_string x =
 nix_list : List Gson -> String
 nix_list list =
     let
-      present : List String -> String
-      present strings =
-          case strings of
-              [] -> ""
-              [ x ] -> " " ++ x ++ " "
-              _ -> "\n" ++ (indent strings |> String.join "\n") ++ "\n"
+        present : List String -> String
+        present strings =
+            case strings of
+                [] ->
+                    ""
 
+                [ x ] ->
+                    " " ++ x ++ " "
+
+                _ ->
+                    "\n" ++ (indent strings |> String.join "\n") ++ "\n"
     in
         "[" ++ (List.map nixFromGson list |> present) ++ "]"
-
 
 
 nix_dict : Dict String Gson -> String

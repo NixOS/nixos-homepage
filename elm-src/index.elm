@@ -294,11 +294,9 @@ description_to_text : String -> String
 description_to_text input =
     let
         text =
-            String.concat
-                [ "<xml xmlns:xlink=\"http://www.w3.org/1999/xlink\"><para>"
-                , input
-                , "</para></xml>"
-                ]
+            "<xml xmlns:xlink=\"http://www.w3.org/1999/xlink\"><para>"
+                ++ input
+                ++ "</para></xml>"
     in
         case ExEmElm.Parser.parse text of
             Ok doc ->
@@ -433,16 +431,13 @@ viewOptions model =
                     (if List.isEmpty model.matchingOptions then
                         "Showing no results"
                      else
-                        (String.concat
-                            [ "Showing results "
-                            , (toString (((model.page - 1) * 15) + 1))
-                            , "-"
-                            , (toString (min (List.length model.matchingOptions) ((model.page) * 15)))
-                            , " of "
-                            , (toString (List.length model.matchingOptions))
-                            , "."
-                            ]
-                        )
+                        "Showing results "
+                            ++ (toString (((model.page - 1) * 15) + 1))
+                            ++ "-"
+                            ++ (toString (min (List.length model.matchingOptions) ((model.page) * 15)))
+                            ++ " of "
+                            ++ (toString (List.length model.matchingOptions))
+                            ++ "."
                     )
                 ]
             ]
