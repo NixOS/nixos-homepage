@@ -60,27 +60,22 @@ nix_string x =
                 ]
             )
     else
-        String.concat [ "\"", x, "\"" ]
+        "\"" ++ x ++ "\""
 
 
 nix_list : List Gson -> String
 nix_list list =
-    if List.isEmpty list then
-        "[]"
-    else if List.isEmpty list then
-        String.concat
-            [ "[ "
-            , (nixFromGson (Maybe.withDefault GNull (List.head list)))
-            , " ]"
-            ]
-    else
-        String.concat
-            (List.concat
-                [ [ "[\n" ]
-                , indent (List.map (\x -> String.append (nixFromGson x) "\n") list)
-                , [ "]" ]
-                ]
-            )
+    let
+      present : List String -> String
+      present strings =
+          case strings of
+              [] -> ""
+              [ x ] -> " " ++ x ++ " "
+              _ -> "\n" ++ (indent strings |> String.join "\n") ++ "\n"
+
+    in
+        "[" ++ (List.map nixFromGson list |> present) ++ "]"
+
 
 
 nix_dict : Dict String Gson -> String
