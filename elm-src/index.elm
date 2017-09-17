@@ -474,4 +474,4 @@ subscriptions model =
 
 getOptions : Cmd Msg
 getOptions =
-    Http.send FetchedOptions (Http.get "./options.json" decodeOptions)
+    Http.send FetchedOptions (Http.get "./options.json.gz" decodeOptions)
