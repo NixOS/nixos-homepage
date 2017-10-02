@@ -2,6 +2,24 @@
 
 <news>
   <item>
+    <pubDate>Mon Oct 02 2017 00:00:00 GMT</pubDate>
+    <title>
+      NixOS 17.09 released
+    </title>
+    <description>
+      NixOS 17.09 “Hummingbird” has been released, the eigth stable release
+      branch. See the <a
+      href="/nixos/manual/release-notes.html#sec-release-17.09">release notes</a>
+      for details. You can get NixOS 17.09 ISOs and VirtualBox
+      appliances from the <a href="nixos/download.html">download
+      page</a>. For information on how to upgrade from older release
+      branches to 17.09, check out the <a
+      href="/nixos/manual/index.html#sec-upgrading">manual section on
+      upgrading</a>.
+    </description>
+  </item>
+
+  <item>
     <pubDate>Wed Jul 12 2017 00:00:00 GMT</pubDate>
     <title>
       Nix-dev mailing list moved
