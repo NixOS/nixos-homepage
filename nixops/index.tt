@@ -47,7 +47,7 @@ running on your desktop). You can then run:</p>
 <span class="command">nixops deploy -d simple</span>
 </pre>
 
-<p>This will create the EC2 instances, and then build, upload and
+<p>This will create the virtual machines, then build and
 activate the NixOS configurations you specified. To change something
 to the configuration, you just edit the specification and run
 <tt>nixops deploy</tt> again.</p>
