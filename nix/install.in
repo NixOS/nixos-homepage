@@ -25,6 +25,7 @@ require_util() {
 case "$(uname -s).$(uname -m)" in
     Linux.x86_64) system=x86_64-linux; hash=[%nix_hash_x86_64_linux%];;
     Linux.i?86) system=i686-linux; hash=[%nix_hash_i686_linux%];;
+    Linux.aarch64) system=aarch64-linux; hash=[%nix_hash_aarch64_linux%];;
     Darwin.x86_64) system=x86_64-darwin; hash=[%nix_hash_x86_64_darwin%];;
     *) oops "sorry, there is no binary distribution of Nix for your platform";;
 esac
