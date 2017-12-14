@@ -139,6 +139,17 @@ function refilter() {
 
       return words.every(match);
     });
+
+    var encodedWords = words.map(function(value) {
+      return encodeURIComponent(value);
+    });
+    var hash = encodedWords.join('+');
+    while (document.getElementById(hash)) {
+      hash = '+' + hash;
+    }
+    history.replaceState({}, '', '#' + hash);
+  } else {
+    history.replaceState({}, '', '#');
   }
 
   results = attrs.sort(function(a, b) {
@@ -263,10 +274,33 @@ $.ajax({
     nixpkgsCommit = data.commit;
     packageData = data.packages;
 
-    refilter();
+    var lastHash;
+    var hashChanged = true;
+
+    function updateQuery() {
+      var query = decodeURIComponent(document.location.hash.replace(/^#\+*/, '').replace(/\+/g, ' '));
+      if (query.length && query.length > 0 ){ $('#search').val(query); } else { $('#search').val('') };
+      refilter();
+      lastHash = location.hash || '#';
+    }
+
+    $(window).on('popstate', updateQuery);
+
+    updateQuery();
 
     $("#search").on("input", function() {
+      if (hashChanged) {
+        history.pushState({}, '', location.hash || '#');
+        hashChanged = false;
+      }
       refilter();
+    });
+    $('#search').on('change', function() {
+      var hash = location.hash || '#';
+      if (lastHash != hash) {
+        hashChanged = true;
+        lastHash = hash;
+      }
     });
   }
 });
