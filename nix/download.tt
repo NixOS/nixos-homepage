@@ -29,9 +29,9 @@ using GPG:</p>
 It is also available <a href="https://github.com/NixOS/nixos-homepage/blob/master/edolstra.gpg">on GitHub</a>.</p>
 
 <p>The installation script requires that you have <tt>sudo</tt> access
-to <tt>root</tt>. You can uninstall Nix simply by running <tt>rm
--rf /nix</tt>. See <a href="[%nixManual%]#chap-installation">the
-manual</a> for more information.</p>
+to <tt>root</tt>. You can uninstall Nix simply by running <tt>rm -rf /nix</tt>.
+(For uninstalling Nix on MacOS, see <a href="https://github.com/NixOS/nix/issues/1551">.)
+See <a href="[%nixManual%]#chap-installation">the manual</a> for more information.</p>
 
 <p>The following are also available:</p>
 
