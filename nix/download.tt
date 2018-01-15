@@ -8,7 +8,7 @@ on Linux and macOS is to run the following in a shell (as a user
 other than <tt>root</tt>):</p>
 
 <pre>
-<span class="command">curl https://nixos.org/nix/install | sh</span>
+<span class="nix-command">curl https://nixos.org/nix/install | sh</span>
 </pre>
 
 <p>Make sure to follow the instructions output by the script.</p>
@@ -18,11 +18,11 @@ other than <tt>root</tt>):</p>
 using GPG:</p>
 
 <pre>
-<span class="command">curl -o install-nix-[%latestNixVersion%] https://nixos.org/nix/install</span>
-<span class="command">curl -o install-nix-[%latestNixVersion%].sig https://nixos.org/nix/install.sig</span>
-<span class="command">gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE</span>
-<span class="command">gpg2 --verify ./install-nix-[%latestNixVersion%].sig</span>
-<span class="command">sh ./install-nix-[%latestNixVersion%]</span>
+<span class="nix-command">curl -o install-nix-[%latestNixVersion%] https://nixos.org/nix/install</span>
+<span class="nix-command">curl -o install-nix-[%latestNixVersion%].sig https://nixos.org/nix/install.sig</span>
+<span class="nix-command">gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE</span>
+<span class="nix-command">gpg2 --verify ./install-nix-[%latestNixVersion%].sig</span>
+<span class="nix-command">sh ./install-nix-[%latestNixVersion%]</span>
 </pre>
 
 <p>The <a href="[%root%]edolstra.gpg">signing key</a> has fingerprint <tt>B541 D553 0127 0E0B CF15  CA5D 8170 B472 6D71 98DE</tt>.
