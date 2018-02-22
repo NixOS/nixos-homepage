@@ -1,7 +1,7 @@
 [%-
-latestNixVersion = "1.11.16"
-nix_hash_i686_linux = "c9f5c41bea715b72eeab83dd70d5cb42c84469a4b419f918df39ebb8597ffec1"
-nix_hash_x86_64_linux = "d7e3cba2103c051b17d2a49dc6389f96ebe46dca72dac8473cfb87af8b67ef03"
-nix_hash_aarch64_linux = "6b60342fb430a2842b300a72a9cf179dace569713fb27520513c9fcdf94ba0c4"
-nix_hash_x86_64_darwin = "b3e1a7316053fda14b4c69142c9f432aab2742e3a5febaed805a316450d6360d"
+latestNixVersion = "2.0"
+nix_hash_i686_linux = "5333384cf1b2f0d9b66d3c4db2643649f0c20d1ed5a0f0dac47ad0092a5874a3"
+nix_hash_x86_64_linux = "6312837aee33306cdbb351b75ba1638b89d21b30f0caf0346f9a742425f197ee"
+nix_hash_aarch64_linux = "ffe6c5c014c47ca8476c696a55bbd96beffb71f32c5d1a5da66d338a2aebbf17"
+nix_hash_x86_64_darwin = "6a1f0cabbab18acc8f864b8847e4a44fbb0fadabbbf8940149903af635652be8"
 -%]
