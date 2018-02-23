@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <news>
+
+  <item>
+    <pubDate>Thu Feb 22 2018 00:00:00 GMT</pubDate>
+    <title>
+      Nix 2.0 released
+    </title>
+    <description>
+      <a href="/nix/download.html">Nix 2.0</a>
+      has been released.  See the <a
+      href="/nix/manual#ssec-relnotes-2.0">release
+      notes</a> for a list of changes and new features.
+    </description>
+  </item>
+
   <item>
     <pubDate>Mon Oct 02 2017 00:00:00 GMT</pubDate>
     <title>
