@@ -10,17 +10,18 @@ oops() {
     exit 1
 }
 
-tmpDir="$(mktemp -d -t nix-binary-tarball-unpack.XXXXXXXXXX || \
-          oops "Can\'t create temporary directory for downloading the Nix binary tarball")"
-cleanup() {
-    rm -rf "$tmpDir"
-}
-trap cleanup EXIT INT QUIT TERM
-
 require_util() {
     type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1 ||
         oops "you do not have '$1' installed, which I need to $2"
 }
+
+require_util curl "download the binary tarball"
+require_util bzcat "decompress the binary tarball"
+require_util tar "unpack the binary tarball"
+require_util mktemp "find a temp directory"
+require_util dirname "find a temp directory"
+require_util mkdir "create directories"
+require_util uname "determine your platform"
 
 case "$(uname -s).$(uname -m)" in
     Linux.x86_64) system=x86_64-linux; hash=[%nix_hash_x86_64_linux%];;
@@ -30,32 +31,39 @@ case "$(uname -s).$(uname -m)" in
     *) oops "sorry, there is no binary distribution of Nix for your platform";;
 esac
 
+tmpDir="$(dirname "$(mktemp -u)")/nix-binary-tarball-unpack"
+mkdir -p "$tmpDir"
+
 url="https://nixos.org/releases/nix/nix-[%latestNixVersion%]/nix-[%latestNixVersion%]-$system.tar.bz2"
 
-tarball="$tmpDir/$(basename "$tmpDir/nix-[%latestNixVersion%]-$system.tar.bz2")"
+tarball="$tmpDir/$(basename "$tmpDir/$hash-nix-[%latestNixVersion%]-$system.tar.bz2")"
 
-require_util curl "download the binary tarball"
-require_util bzcat "decompress the binary tarball"
-require_util tar "unpack the binary tarball"
+computesha() {
+    file="$1"
+    if type sha256sum > /dev/null 2>&1; then
+        sha256sum -b "$file" | cut -c1-64
+    elif type shasum > /dev/null 2>&1; then
+        shasum -a 256 -b "$file" | cut -c1-64
+    elif type openssl > /dev/null 2>&1; then
+        openssl dgst -r -sha256 "$file" | cut -c1-64
+    else
+        oops "cannot verify the SHA-256 hash of '$file'; you need one of 'shasum', 'sha256sum', or 'openssl'"
+    fi
+}
 
-echo "downloading Nix [%latestNixVersion%] binary tarball for $system from '$url' to '$tmpDir'..."
-curl -L "$url" -o "$tarball" || oops "failed to download '$url'"
-
-if type sha256sum > /dev/null 2>&1; then
-    hash2="$(sha256sum -b "$tarball" | cut -c1-64)"
-elif type shasum > /dev/null 2>&1; then
-    hash2="$(shasum -a 256 -b "$tarball" | cut -c1-64)"
-elif type openssl > /dev/null 2>&1; then
-    hash2="$(openssl dgst -r -sha256 "$tarball" | cut -c1-64)"
-else
-    oops "cannot verify the SHA-256 hash of '$url'; you need one of 'shasum', 'sha256sum', or 'openssl'"
+if [ ! -f "$tarball" ] || [ "$(computesha "$tarball")" != "$hash" ]; then
+    echo "downloading Nix [%latestNixVersion%] binary tarball for $system from '$url' to '$tmpDir'..."
+    curl -L "$url" -o "$tarball" || oops "failed to download '$url'"
 fi
+
+hash2="$(computesha "$tarball")"
 
 if [ "$hash" != "$hash2" ]; then
     oops "SHA-256 hash mismatch in '$url'; expected $hash, got $hash2"
 fi
 
-unpack=$tmpDir/unpack
+unpack="$tmpDir/$hash-unpack"
+rm -rf "$unpack"
 mkdir -p "$unpack"
 < "$tarball" bzcat | tar x -C "$unpack" || oops "failed to unpack '$url'"
 
