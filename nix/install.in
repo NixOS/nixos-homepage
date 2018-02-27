@@ -31,12 +31,13 @@ case "$(uname -s).$(uname -m)" in
     *) oops "sorry, there is no binary distribution of Nix for your platform";;
 esac
 
-tmpDir="$(dirname "$(mktemp -u)")/nix-binary-tarball-unpack"
-mkdir -p "$tmpDir"
+cacheDir="$(dirname "$(mktemp -u)")/nix-binary-tarball-unpack"
+mkdir -p "$cacheDir"
 
 url="https://nixos.org/releases/nix/nix-[%latestNixVersion%]/nix-[%latestNixVersion%]-$system.tar.bz2"
 
-tarball="$tmpDir/$(basename "$tmpDir/$hash-nix-[%latestNixVersion%]-$system.tar.bz2")"
+tarballBasename="$hash-nix-[%latestNixVersion%]-$system.tar.bz2"
+cachedTarball="$cacheDir/$tarballBasename"
 
 computesha() {
     file="$1"
@@ -51,10 +52,15 @@ computesha() {
     fi
 }
 
-if [ ! -f "$tarball" ] || [ "$(computesha "$tarball")" != "$hash" ]; then
-    echo "downloading Nix [%latestNixVersion%] binary tarball for $system from '$url' to '$tmpDir'..."
-    curl -L "$url" -o "$tarball" || oops "failed to download '$url'"
+if [ ! -f "$cachedTarball" ] || [ "$(computesha "$cachedTarball")" != "$hash" ]; then
+    echo "downloading Nix [%latestNixVersion%] binary tarball for $system from '$url' to '$cachedTarball'..."
+    curl -L "$url" -o "$cachedTarball" || oops "failed to download '$url'"
 fi
+
+tmpDir="$(mktemp -d)"
+tarball="$tmpDir/$tarballBasename"
+
+cp "$cachedTarball" "$tarball"
 
 hash2="$(computesha "$tarball")"
 
@@ -63,7 +69,6 @@ if [ "$hash" != "$hash2" ]; then
 fi
 
 unpack="$tmpDir/$hash-unpack"
-rm -rf "$unpack"
 mkdir -p "$unpack"
 < "$tarball" bzcat | tar x -C "$unpack" || oops "failed to unpack '$url'"
 
