@@ -1,7 +1,7 @@
 /* Account for the top navbar. */
 
 body {
-    padding-top: 50px;
+    padding-top: 70px;
 }
 
 @media (max-width: 979px) {
@@ -352,4 +352,67 @@ div.docbook div.toc dd {
     max-width: 196px;
     text-align: center;
   }
+}
+
+/**
+ * Main navbar uses "brand" font styles.
+ */
+.nav.nav-main {
+    font-size: 20px;
+    font-weight: 200;
+}
+
+/**
+ * Secondary navbar is under the main navbar.
+ */
+.navbar-fixed-top.navbar-secondary {
+    top: 40px;
+}
+
+/**
+ * Secondary navbar is smaller.
+ */
+.navbar-secondary.navbar .nav>li>a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.navbar-secondary .navbar-inner {
+    min-height: 30px
+}
+
+
+/**
+ * Fixes logo metrics on desktop.
+ */
+@media (min-width: 980px) {
+    .navbar-primary .nav.nav-main {
+        margin-right: 0;
+    }
+    .navbar-primary .nav.nav-main .dropdown-brand a {
+        padding-left: 10px;
+        padding-right: 5px;
+    }
+}
+
+
+/**
+ * Fixes secondary nav for mobile.
+ */
+@media (max-width: 979px) {
+    .navbar-fixed-top {
+        margin-bottom: 0px;
+    }
+    .navbar-primary .navbar-inner {
+        position: relative;
+        z-index: 5;
+    }
+    .navbar-secondary .navbar-inner {
+        position: relative;
+        min-height: 0;
+        margin-top: -15px;
+        z-index: 3;
+    }
+    .navbar-secondary .nav {
+        margin-top: 15px;
+    }
 }
