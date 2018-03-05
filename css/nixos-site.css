@@ -381,6 +381,24 @@ div.docbook div.toc dd {
 }
 
 /**
+ * Makes a divider
+ */
+@media (min-width: 980px) {
+	.nav.nav-main .divider {
+		border-left: 1px solid #dddddd;
+		border-right: 1px solid #ffffff;
+		margin-right: -1px;
+		min-height: 40px;
+	}
+}
+@media (max-width: 979px) {
+	.nav.nav-main .divider {
+		border-top: 1px solid #dddddd;
+		border-bottom: 1px solid #ffffff;
+	}
+}
+
+/**
  * Fixes searchbar on larger mobile responsive breakpoints.
  */
 @media (max-width: 979px) {
