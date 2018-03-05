@@ -283,6 +283,12 @@ function showOption() {
     $($("<a></a>").html(inner).attr("href", link)).replaceAll(el);
   });
 
+  // For each [option, literal], replace with equivalent `<code>`.
+  $(x).find("option, literal").each(function (i, el) {
+    var inner = el.innerHTML;
+    $($("<code></code>").html(inner)).replaceAll(el);
+  });
+
   $('.description', details).empty().append($(x).find("para").contents());
 
   if ('default' in opt)
