@@ -270,8 +270,20 @@ function showOption() {
 
   var details = $('#details-template').clone().removeAttr('id').show();
 
+  // Parses the XML fragment
   var x = $.parseXML('<xml xmlns:xlink="http://www.w3.org/1999/xlink"><para>' + opt.description + '</para></xml>');
-  $('.description', details).empty().append($(x).text());
+
+  // For each xlink, replace with equivalent `<a>`.
+  $(x).find("link").each(function (i, el) {
+    var link = $(el).attr("xlink:href");
+    var inner = el.innerHTML;
+    if (inner === "" || !inner) {
+      inner = link;
+    }
+    $($("<a></a>").html(inner).attr("href", link)).replaceAll(el);
+  });
+
+  $('.description', details).empty().append($(x).find("para").contents());
 
   if ('default' in opt)
     $('.default', details).empty().addClass('pre').text(ppNix('', opt.default));
