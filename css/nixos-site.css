@@ -380,6 +380,17 @@ div.docbook div.toc dd {
     min-height: 30px
 }
 
+/**
+ * Fixes searchbar on larger mobile responsive breakpoints.
+ */
+@media (max-width: 979px) {
+	.navbar.navbar-primary .search-query {
+		box-sizing: border-box;
+		display: block;
+		width: 100%;
+		height: 30px;
+	}
+}
 
 /**
  * Fixes logo metrics on desktop.
