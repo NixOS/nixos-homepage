@@ -266,7 +266,7 @@ function showPackage() {
 };
 
 $.ajax({
-  url: "[%root%]nixpkgs/packages.json.gz",
+  url: ((document.domain == 'nixos.org') ? '[%root%]nixpkgs/packages.json.gz' : '[%root%]nixpkgs/packages.json'),
   type: "GET",
   dataType: "json",
   error: function(a, status, error) { alert("Failed to get package data [" + status + "]: " + error); },

@@ -298,7 +298,7 @@ function showOption() {
 };
 
 $.ajax({
-  url: '[%root%]nixos/options.json.gz',
+  url: ((document.domain == 'nixos.org') ? '[%root%]nixos/options.json.gz' : '[%root%]nixos/options.json'),
   type: 'GET',
   dataType: 'json',
   error: function(a, b, c) { alert('Failed to get option data.'); },

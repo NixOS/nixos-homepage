@@ -6,11 +6,8 @@ build it:
 
     $ git clone git@github.com:NixOS/nixos-homepage.git
     $ cd nixos-homepage
-    $ nix-shell --command make
+    $ nix-shell
+    [nix-shell]$ make
+    [nix-shell]$ python2 -m SimpleHTTPServer 8000
 
-To make the 'packages' page work via file:///, you must unzip the
-packages.json and start your browser with CORS disabled for local files:
-
-    $ gzip -d nixpkgs/packages.json.gz
-    $ mv nixpkgs/packages.json nixpkgs/packages.json.gz
-    $ chromium --allow-file-access-from-files
+then open http://127.0.0.1:8000/index.html
