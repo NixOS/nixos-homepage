@@ -208,26 +208,31 @@ ifeq ($(UPDATE), 1)
   $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN) $(HYDRA_MANUAL_IN) $(NIX_PILLS_MANUAL_IN) nixos-release.tt
 endif
 
-nixpkgs/packages.json.gz:
+
+%.json.gz: %.json
+	gzip -9 < $^ > $@.tmp
+	mv $@.tmp $@
+
+nixpkgs/packages.json:
 	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS)); \
 	(echo -n '{ "commit": "' && cat $$nixpkgs/.git-revision && echo -n '","packages":' \
 	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config '{}' \
 	  && echo -n '}') \
-	  | sed "s|$$nixpkgs/||g" | gzip -9 > $@.tmp
-	gunzip < $@.tmp | python -mjson.tool > /dev/null
+	  | sed "s|$$nixpkgs/||g" > $@.tmp
+	python -mjson.tool < $@.tmp > /dev/null
 	mv $@.tmp $@
 
-nixpkgs/packages-unstable.json.gz:
+nixpkgs/packages-unstable.json:
 	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS_UNSTABLE)); \
 	(echo -n '{ "commit": "' && cat $$nixpkgs/.git-revision && echo -n '","packages":' \
 	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS_UNSTABLE) -qa --json --arg config '{}' \
 	  && echo -n '}') \
-	  | sed "s|$$nixpkgs/||g" | gzip -9 > $@.tmp
-	gunzip < $@.tmp | python -mjson.tool > /dev/null
+	  | sed "s|$$nixpkgs/||g" > $@.tmp
+	python -mjson.tool < $@.tmp > /dev/null
 	mv $@.tmp $@
 
-nixos/options.json.gz:
-	gzip -9 < $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(NIXPKGS) -A options)/share/doc/nixos/options.json > $@.tmp
+nixos/options.json:
+	cat $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(NIXPKGS) -A options)/share/doc/nixos/options.json > $@.tmp
 	mv $@.tmp $@
 
 nix/install.sig: nix/install
