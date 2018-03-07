@@ -19,6 +19,7 @@
   multi-user package management and easy setup of build
   environments. <a href="[%root%]nix/about.html">Read more…</a></p>
 
+  <div class="get-nix get-button">
   [% WRAPPER makePopover title="<i class='fa fa-cloud-download'></i> Get Nix" %]
 
     <p>On Linux and macOS, the <strong>easiest way to install
@@ -38,6 +39,7 @@
     href="[%root%]nix/download.html">available</a>.</p>
 
   [% END %]
+  </div>
 
 </div>
 
