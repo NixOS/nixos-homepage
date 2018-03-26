@@ -14,7 +14,8 @@
   </xsl:template>
 
   <xsl:template match="*" mode="top">
-
+    <xsl:apply-templates select="//x:script[@type='text/javascript']"/>
+    <xsl:apply-templates select="//x:link[@rel='stylesheet' and @href!='style.css']"/>
     <div class="page-header">
       <xsl:if test="@class='book'">
         <h1><xsl:apply-templates select="//x:div[@class='book']/x:div[@class='titlepage']//x:h1/node()"/></h1>
