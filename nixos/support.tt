@@ -64,6 +64,8 @@
     <h2>Other resources</h2>
     <p>There are several other manuals:</p>
     <ul>
+      <li>The <a href="https://nixos.wiki"><strong>NixOS Wiki</strong></a>
+      is an unofficial wiki maintained by the community.</li>
       <li>The <a href="[%nixManual%]"><strong>Nix manual</strong></a>
       describes how to use the <a href="[%root%]nix">Nix package
       manager</a>.</li>
