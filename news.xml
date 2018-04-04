@@ -3,6 +3,25 @@
 <news>
 
   <item>
+    <pubDate>Wed Apr 04 2018 00:00:00 GMT</pubDate>
+    <title>
+      NixOS 18.03 released
+    </title>
+    <description>
+      <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/18.03-impala/impala.png">
+        <img class="inline" src="logo/nixos-logo-18.03-impala-lores.png" alt="18.03 Impala logo" />
+      </a>
+      NixOS 18.03 “Impala” has been released, the ninth stable release branch.
+      See the <a href="/nixos/manual/release-notes.html#sec-release-18.03">release notes</a>
+      for details. You can get NixOS 18.03 ISOs and VirtualBox appliances
+      from the <a href="nixos/download.html">download page</a>.
+      For information on how to upgrade from older release branches
+      to 18.03, check out the
+      <a href="/nixos/manual/index.html#sec-upgrading">manual section on upgrading</a>.
+    </description>
+  </item>
+
+  <item>
     <pubDate>Thu Feb 22 2018 00:00:00 GMT</pubDate>
     <title>
       Nix 2.0 released
