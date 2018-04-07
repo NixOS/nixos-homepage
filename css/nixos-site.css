@@ -326,6 +326,10 @@ div.docbook div.toc dd {
     margin-left: 2em;
 }
 
+div.docbook pre.hljs {
+    overflow-x: visible;
+}
+
 .license ul {
     margin-left: 0px;
 }
