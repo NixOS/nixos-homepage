@@ -315,6 +315,7 @@ div.docbook code {
     background-color: inherit;
     color: inherit;
     font-size: 100%;
+    white-space: normal;
 }
 
 div.docbook div.toc {
