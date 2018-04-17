@@ -295,6 +295,14 @@ function showOption() {
     $($("<code></code>").html(inner)).replaceAll(el);
   });
 
+  // Fixes manpage references.
+  $(x).find("citerefentry manvolnum").each(function (i, el) {
+	var el = $(el).parent();
+	var title = el.children("refentrytitle")[0].innerHTML;
+	var volnum = el.children("manvolnum")[0].innerHTML;
+    $($("<tt class='man_page'></tt>").html(title + "(" + volnum + ")")).replaceAll(el);
+  });
+
   $('.description', details).empty().append($(x).find("para").contents());
 
   if ('default' in opt)
