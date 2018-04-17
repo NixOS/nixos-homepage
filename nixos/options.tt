@@ -303,7 +303,23 @@ function showOption() {
     $($("<tt class='man_page'></tt>").html(title + "(" + volnum + ")")).replaceAll(el);
   });
 
-  $('.description', details).empty().append($(x).find("para").contents());
+  // Since `<para>` can be inside a `<para>`, we have to do this ugly loop.
+  // Well, unless someone else has something more elegant.
+  var paras = []
+  while ((paras = $(x).find("para")).length > 0) {
+    paras.each(function (i, el) {
+      var inner = el.innerHTML;
+      $($("<p></p>").html(inner)).replaceAll(el);
+    });
+  }
+
+  // For each [option, literal], replace with equivalent `<code>`.
+  $(x).find("important").each(function (i, el) {
+    var inner = el.innerHTML;
+    $($("<div class='docbook-important'></div>").html(inner)).replaceAll(el);
+  });
+
+  $('.description', details).empty().append($(x).contents());
 
   if ('default' in opt)
     $('.default', details).empty().addClass('pre').text(ppNix('', opt.default));
