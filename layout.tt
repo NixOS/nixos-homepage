@@ -101,6 +101,7 @@
               <ul class="nav pull-left">
                 <li><a href="[%root%]nixpkgs/download.html">Download</a></li>
                 <li><a href="[%root%]nixpkgs/manual">Manual</a></li>
+                <li><a href="[%root%]nixpkgs/packages.html">Packages</a></li>
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
