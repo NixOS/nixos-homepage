@@ -270,8 +270,56 @@ function showOption() {
 
   var details = $('#details-template').clone().removeAttr('id').show();
 
+  // Parses the XML fragment
   var x = $.parseXML('<xml xmlns:xlink="http://www.w3.org/1999/xlink"><para>' + opt.description + '</para></xml>');
-  $('.description', details).empty().append($(x).text());
+
+  // For each xlink, replace with equivalent `<a>`.
+  $(x).find("link").each(function (i, el) {
+    var link = $(el).attr("xlink:href");
+    var inner = el.innerHTML;
+    if (inner === "" || !inner) {
+      inner = link;
+    }
+    $($("<a></a>").html(inner).attr("href", link)).replaceAll(el);
+  });
+
+  // For each [filename], replace with equivalent `<tt>`.
+  $(x).find("filename").each(function (i, el) {
+    var inner = el.innerHTML;
+    $($("<tt></tt>").html(inner)).replaceAll(el);
+  });
+
+  // For each [option, literal], replace with equivalent `<code>`.
+  $(x).find("option, literal").each(function (i, el) {
+    var inner = el.innerHTML;
+    $($("<code></code>").html(inner)).replaceAll(el);
+  });
+
+  // Fixes manpage references.
+  $(x).find("citerefentry manvolnum").each(function (i, el) {
+	var el = $(el).parent();
+	var title = el.children("refentrytitle")[0].innerHTML;
+	var volnum = el.children("manvolnum")[0].innerHTML;
+    $($("<tt class='man_page'></tt>").html(title + "(" + volnum + ")")).replaceAll(el);
+  });
+
+  // Since `<para>` can be inside a `<para>`, we have to do this ugly loop.
+  // Well, unless someone else has something more elegant.
+  var paras = []
+  while ((paras = $(x).find("para")).length > 0) {
+    paras.each(function (i, el) {
+      var inner = el.innerHTML;
+      $($("<p></p>").html(inner)).replaceAll(el);
+    });
+  }
+
+  // For each [option, literal], replace with equivalent `<code>`.
+  $(x).find("important").each(function (i, el) {
+    var inner = el.innerHTML;
+    $($("<div class='docbook-important'></div>").html(inner)).replaceAll(el);
+  });
+
+  $('.description', details).empty().append($(x).contents());
 
   if ('default' in opt)
     $('.default', details).empty().addClass('pre').text(ppNix('', opt.default));
