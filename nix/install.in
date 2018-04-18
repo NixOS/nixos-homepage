@@ -5,22 +5,40 @@
 # (which in turn creates and populates /nix).
 
 { # Prevent execution if this script was only partially downloaded
+require_util() {
+    type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1 ||
+        oops "you do not have '$1' installed, which I need to $2"
+}
+require_util curl "download the binary tarball"
+require_util bzcat "decompress the binary tarball"
+require_util tar "unpack the binary tarball"
+require_util shasum "verify the binary tarball"
+
 oops() {
     echo "$0:" "$@" >&2
     exit 1
 }
 
-tmpDir="$(mktemp -d -t nix-binary-tarball-unpack.XXXXXXXXXX || \
-          oops "Can\'t create temporary directory for downloading the Nix binary tarball")"
+retain=
+if [ -n "$NIX_DL" ] && [ -d "$NIX_DL" ]; then
+    tmpDir="$NIX_DL"
+    retain="true"
+    echo "Reusing data at $tmpDir"
+else
+    tmpDir="$(mktemp -d -t nix-binary-tarball-unpack.XXXXXXXXXX || \
+        oops "Can\'t create temporary directory for downloading the Nix binary tarball")"
+fi
 cleanup() {
-    rm -rf "$tmpDir"
+    if [ "$retain" == "true" ]; then
+        exec 1>&2
+        echo ">>> Failed. Retaining download at $tmpDir"
+        echo ">>> To try again, run 'export NIX_DL=\"$tmpDir\"' before running the install"
+        echo ">>> otherwise, please remove $tmpDir manually."
+    else
+        rm -rf "$tmpDir"
+    fi
 }
 trap cleanup EXIT INT QUIT TERM
-
-require_util() {
-    type "$1" > /dev/null 2>&1 || which "$1" > /dev/null 2>&1 ||
-        oops "you do not have '$1' installed, which I need to $2"
-}
 
 case "$(uname -s).$(uname -m)" in
     Linux.x86_64) system=x86_64-linux; hash=[%nix_hash_x86_64_linux%];;
@@ -59,9 +77,21 @@ unpack=$tmpDir/unpack
 mkdir -p "$unpack"
 < "$tarball" bzcat | tar -xf - -C "$unpack" || oops "failed to unpack '$url'"
 
-script=$(echo "$unpack"/*/install)
+retain=true
 
-[ -e "$script" ] || oops "installation script is missing from the binary tarball!"
-"$script"
+unpack=$tmpDir/unpack
+checkScript() {
+    script=$(echo "$unpack"/*/install)
+    [ -e "$script" ]
+}
+if ! checkScript; then
+    mkdir -p "$unpack"
+    < "$tarball" bzcat | tar x -C "$unpack" || oops "failed to unpack '$url'"
 
+	checkScript || oops "installation script is missing from the binary tarball!"
+fi
+
+if "$script"; then
+    retain=false
+fi
 } # End of wrapping
