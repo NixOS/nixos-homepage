@@ -49,6 +49,8 @@
                 NixOps
               [% ELSIF menu == 'disnix' %]
                 Disnix
+              [% ELSIF menu == 'hydra' %]
+                Hydra
               [% ELSE %]
                 NixOS
               [% END %]
@@ -74,7 +76,7 @@
                 <li><a href="[%root%]nixos/packages.html">Packages</a></li>
                 <li><a href="[%root%]nixos/options.html">Options</a></li>
                 <li><a href="[%root%]nixos/community.html">Community</a></li>
-                <!-- <li><a href="[%wikiMain%]">Wiki</a></li> -->
+                <li><a href="[%root%]nixos/security.html">Security</a></li>
               </ul>
               <ul class="nav pull-right">
                 <!--
@@ -89,6 +91,12 @@
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
+            [% ELSIF menu == 'hydra' %]
+              <ul class="nav pull-left">
+                <li><a href="[%root%]hydra/manual/">Manual</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/hydra"><i class="fa fa-github"></i></a></li>
             [% ELSIF menu == 'nixpkgs' %]
               <ul class="nav pull-left">
                 <li><a href="[%root%]nixpkgs/download.html">Download</a></li>

@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="Hydra" %]
+[% WRAPPER layout.tt title="Hydra" menu='hydra' %]
 
 <a href="https://www.flickr.com/photos/eelcovisser/367433201/"><img
 class="inline"
@@ -29,13 +29,11 @@ href="mailto:rob.vermaas@gmail.com">please let us know</a>.</p>
 
 <section><h2>Documentation</h2>
 
-<p>There is a <a
-href="https://nixos.org/~eelco/pubs/hydra-scp-submitted.pdf">draft
-paper about Hydra</a>.  There are also some (incomplete) <a
-href="https://hydra.nixos.org/job/hydra/trunk/tarball/latest/download-by-type/doc/manual">instructions
-available</a>
-(<a href="https://hydra.nixos.org/job/hydra/trunk/tarball/latest/download-by-type/doc-pdf/manual">PDF</a>)
-on how to set up your own Hydra server.</p>
+<p>Hydra has a work-in-progress <a
+href="[%root%]/hydra/manual">manual</a>. There also is an ancient,
+totally outdated <a
+href="https://nixos.org/~eelco/pubs/hydra-scp-submitted.pdf">paper
+about Hydra</a>.</p>
 
 </section>
 
@@ -46,7 +44,7 @@ please visit:</p>
 
 <ul>
   <li><a href="https://github.com/NixOS/hydra/issues">github.com/NixOS/hydra/issues</a>: issues, bugs and feature requests for Hydra</li>
-  <li><a href="http://lists.science.uu.nl/mailman/listinfo/nix-dev"><tt>nix-dev</tt> mailing list</a>: problems with our Hydra instance at <a href="https://hydra.nixos.org/">hydra.nixos.org</a></li>
+  <li><a href="[%root%]nixos/support.html#mailing-list"><tt>nix-devel</tt> mailing list</a>: problems with our Hydra instance at <a href="https://hydra.nixos.org/">hydra.nixos.org</a></li>
 </ul>
 
 </section>

@@ -88,8 +88,8 @@ there after an upgrade.  This means that you can <em>roll back</em> to
 the old version:</p>
 
 <pre class="code">
-<span class="muted">$</span> nix-env --upgrade <em>some-packages</em>
-<span class="muted">$</span> nix-env --rollback
+<span class="nix-command">nix-env --upgrade <em>some-packages</em></span>
+<span class="nix-command">nix-env --rollback</span>
 </pre>
 
 
@@ -98,7 +98,7 @@ the old version:</p>
 <p>When you uninstall a package like this…</p>
 
 <pre class="code">
-<span class="muted">$</span> nix-env --uninstall firefox
+<span class="nix-command">nix-env --uninstall firefox</span>
 </pre>
 
 <p>the package isn’t deleted from the system right away (after all,
@@ -107,7 +107,7 @@ other users).  Instead, unused packages can be deleted safely by
 running the <em>garbage collector</em>:</p>
 
 <pre class="code">
-<span class="muted">$</span> nix-collect-garbage
+<span class="nix-command">nix-collect-garbage</span>
 </pre>
 
 <p>This deletes all packages that aren’t in use by any user profile or
@@ -137,7 +137,7 @@ store.</p>
 source, so an installation action like</p>
 
 <pre class="code">
-<span class="muted">$</span> nix-env --install firefox
+<span class="nix-command">nix-env --install firefox</span>
 </pre>
 
 <p><em>could</em> cause quite a bit of build activity, as not only
@@ -188,18 +188,18 @@ href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/
 Nix expression</a>:</p>
 
 <pre>
-<span class="muted">$</span> nix-shell '&lt;nixpkgs>' -A pan
+<span class="nix-command">nix-shell '&lt;nixpkgs&gt;' -A pan</span>
 </pre>
 
 <p>You’re then dropped into a shell where you can edit, build and test
 the package:</p>
 
 <pre>
-<span class="muted">[nix-shell]$</span> tar xf $src
-<span class="muted">[nix-shell]$</span> cd pan-*
-<span class="muted">[nix-shell]$</span> ./configure
-<span class="muted">[nix-shell]$</span> make
-<span class="muted">[nix-shell]$</span> ./pan/gui/pan
+<span class="nix-shell-command">tar xf $src</span>
+<span class="nix-shell-command">cd pan-*</span>
+<span class="nix-shell-command">./configure</span>
+<span class="nix-shell-command">make</span>
+<span class="nix-shell-command">./pan/gui/pan</span>
 </pre>
 
 <p>Since Nix packages are reproducible and have complete dependency

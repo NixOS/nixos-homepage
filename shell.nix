@@ -1,4 +1,4 @@
-with import <nixpkgs> {};
+with import (fetchTarball channel:nixos-18.03) {};
 
 stdenv.mkDerivation {
   name = "nixos.org-homepage";
@@ -14,7 +14,8 @@ stdenv.mkDerivation {
       perlPackages.XMLSimple
       libxslt libxml2 imagemagick git curl
       xhtml1
-      nixUnstable
+      nixStable
       gnupg
+      jq
     ];
 }

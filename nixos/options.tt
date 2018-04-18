@@ -12,6 +12,8 @@
 
 <div id='results-wrapper' class='hide'>
 
+[% INCLUDE renderPager %]
+
 <table class='table table-hover' id='search-results'>
   <thead>
     <tr>
@@ -122,6 +124,17 @@ function refilter() {
 
       return words.every(match);
     });
+
+    var encodedWords = words.map(function(value) {
+      return encodeURIComponent(value);
+    });
+    var hash = encodedWords.join('+');
+    while (document.getElementById(hash)) {
+      hash = '+' + hash;
+    }
+    history.replaceState({}, '', '#' + hash);
+  } else {
+    history.replaceState({}, '', '#');
   }
 
   curPage = 0;
@@ -257,8 +270,56 @@ function showOption() {
 
   var details = $('#details-template').clone().removeAttr('id').show();
 
-  var x = $.parseXML("<div>" + opt.description + "</div>");
-  $('.description', details).empty().append($(x).text());
+  // Parses the XML fragment
+  var x = $.parseXML('<xml xmlns:xlink="http://www.w3.org/1999/xlink"><para>' + opt.description + '</para></xml>');
+
+  // For each xlink, replace with equivalent `<a>`.
+  $(x).find("link").each(function (i, el) {
+    var link = $(el).attr("xlink:href");
+    var inner = el.innerHTML;
+    if (inner === "" || !inner) {
+      inner = link;
+    }
+    $($("<a></a>").html(inner).attr("href", link)).replaceAll(el);
+  });
+
+  // For each [filename], replace with equivalent `<tt>`.
+  $(x).find("filename").each(function (i, el) {
+    var inner = el.innerHTML;
+    $($("<tt></tt>").html(inner)).replaceAll(el);
+  });
+
+  // For each [option, literal], replace with equivalent `<code>`.
+  $(x).find("option, literal").each(function (i, el) {
+    var inner = el.innerHTML;
+    $($("<code></code>").html(inner)).replaceAll(el);
+  });
+
+  // Fixes manpage references.
+  $(x).find("citerefentry manvolnum").each(function (i, el) {
+	var el = $(el).parent();
+	var title = el.children("refentrytitle")[0].innerHTML;
+	var volnum = el.children("manvolnum")[0].innerHTML;
+    $($("<tt class='man_page'></tt>").html(title + "(" + volnum + ")")).replaceAll(el);
+  });
+
+  // Since `<para>` can be inside a `<para>`, we have to do this ugly loop.
+  // Well, unless someone else has something more elegant.
+  var paras = []
+  while ((paras = $(x).find("para")).length > 0) {
+    paras.each(function (i, el) {
+      var inner = el.innerHTML;
+      $($("<p></p>").html(inner)).replaceAll(el);
+    });
+  }
+
+  // For each [option, literal], replace with equivalent `<code>`.
+  $(x).find("important").each(function (i, el) {
+    var inner = el.innerHTML;
+    $($("<div class='docbook-important'></div>").html(inner)).replaceAll(el);
+  });
+
+  $('.description', details).empty().append($(x).contents());
 
   if ('default' in opt)
     $('.default', details).empty().addClass('pre').text(ppNix('', opt.default));
@@ -285,17 +346,40 @@ function showOption() {
 };
 
 $.ajax({
-  url: '[%root%]nixos/options.json.gz',
+  url: ((document.domain == 'nixos.org') ? '[%root%]nixos/options.json.gz' : '[%root%]nixos/options.json'),
   type: 'GET',
   dataType: 'json',
   error: function(a, b, c) { alert('Failed to get option data.'); },
   success: function(data) {
     optionData = data;
 
-    refilter();
+    var lastHash;
+    var hashChanged = true;
+
+    function updateQuery() {
+      var query = decodeURIComponent(document.location.hash.replace(/^#\+*/, '').replace(/\+/g, ' '));
+      if (query.length && query.length > 0 ){ $('#search').val(query); } else { $('#search').val('') };
+      refilter();
+      lastHash = location.hash || '#';
+    }
+
+    $(window).on('popstate', updateQuery);
+
+    updateQuery();
 
     $('#search').on('input', function() {
+      if (hashChanged) {
+        history.pushState({}, '', location.hash || '#');
+        hashChanged = false;
+      }
       refilter();
+    });
+    $('#search').on('change', function() {
+      var hash = location.hash || '#';
+      if (lastHash != hash) {
+        hashChanged = true;
+        lastHash = hash;
+      }
     });
   }
 });

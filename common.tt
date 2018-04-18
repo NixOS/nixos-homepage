@@ -1,16 +1,14 @@
 [%
   nixManual = "/nix/manual"
-  nixManualPDF = "/releases/nix/latest/manual.pdf"
   nixpkgsManual = "/nixpkgs/manual"
   nixosManual = "/nixos/manual"
   nixopsManual = "/nixops/manual"
-  latestNixVersion = "1.11.2"
+  nixPills = "/nixos/nix-pills"
   latestNixMirror = "https://nixos.org/releases/nix/nix-$latestNixVersion"
-  latestNixOSVersion = "16.03"
-  latestNixOSBranch = "release-" _ latestNixOSVersion
-  wikiMain = "https://nixos.org/wiki/Main_Page";
+  latestNixOSBranch = "release-" _ latestNixOSSeries
+  ;
 
-BLOCK renderPager %]
+  BLOCK renderPager %]
 <ul class='pager'>
   <li class='back'><a href='javascript:void(0)' onclick='curPage = 0; updateTable();'>« First</a></li>
   <li class='back'><a href='javascript:void(0)' onclick='curPage--; updateTable();'>‹ Previous</a></li>

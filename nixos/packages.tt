@@ -1,18 +1,20 @@
-[% WRAPPER layout.tt title='Search NixOS packages' menu='nixos' %]
+[% WRAPPER layout.tt title="Search NixOS packages" menu="nixos" %]
 
 <p>
-  <input name='query' type='text' class='search-query span3'
-         placeholder='Search by name or description'
-         id='search' value='' autofocus='autofocus'/>
+  <input name="query" type="text" class="search-query span3"
+         placeholder="Search by name or description"
+         id="search" value="" autofocus="autofocus"/>
 </p>
 
 <hr />
 
-<p><em id='how-many'>Loading…</em></p>
+<p><em id="how-many">Loading…</em></p>
 
-<div id='results-wrapper' class='hide'>
+<div id="results-wrapper" class="hide">
 
-<table class='table table-hover' id='search-results'>
+[% INCLUDE renderPager %]
+
+<table class="table table-hover" id="search-results">
   <thead>
     <tr>
       <th>Package name</th>
@@ -28,37 +30,37 @@
 
 </div>
 
-<div id='details-template' class='search-details hide'>
+<div id="details-template" class="search-details hide">
   <table>
     <tr>
       <th>Install command:</th>
       <td>
-        <tt><span class="muted">$</span> nix-env -iA nixos.<span class='attrname'></span></tt> <em class='muted'>(NixOS channel)</em>
+        <tt><span class="nix-command">nix-env -iA nixos.<span class="attrname"></span></span></tt> <em class="muted">(NixOS channel)</em>
       </td>
     </tr>
     <tr>
       <th>Nix expression:</th>
-      <td class='nix-expr'><em>Not specified</em></td>
+      <td class="nix-expr"><em>Not specified</em></td>
     </tr>
     <tr>
       <th>Platforms:</th>
-      <td class='platforms'><em>Not specified</em></td>
+      <td class="platforms"><em>Not specified</em></td>
     </tr>
     <tr>
       <th>Homepage:</th>
-      <td class='homepage'><em>Not specified</em></td>
+      <td class="homepage"><em>Not specified</em></td>
     </tr>
     <tr>
       <th>License:</th>
-      <td class='license'><em>Not specified</em></td>
+      <td class="license"><em>Not specified</em></td>
     </tr>
     <tr>
       <th>Maintainers:</th>
-      <td class='maintainers'><em>Not specified</em></td>
+      <td class="maintainers"><em>Not specified</em></td>
     </tr>
     <tr>
-      <th style='width: 10em'>Long description:</th>
-      <td class='long-description'><em>Not specified</em></td>
+      <th style="width: 10em">Long description:</th>
+      <td class="long-description"><em>Not specified</em></td>
     </tr>
   </table>
 </div>
@@ -80,11 +82,11 @@ function updateTable() {
   if (0 > curPage) curPage = 0;
   if (curPage > lastPage) curPage = lastPage;
 
-  var body = $('#search-results tbody');
-  $('tr', body).remove();
+  var body = $("#search-results tbody");
+  $("tr", body).remove();
 
-  $('.back').toggleClass('disabled', curPage == 0);
-  $('.forward').toggleClass('disabled', curPage >= lastPage);
+  $(".back").toggleClass("disabled", curPage == 0);
+  $(".forward").toggleClass("disabled", curPage >= lastPage);
 
   var start = curPage * resultsPerPage;
   var end = start + resultsPerPage;
@@ -92,56 +94,67 @@ function updateTable() {
   res = results.slice(start, end);
 
   if (results.length == 0) {
-    $('#results-wrapper').hide();
-    $('#how-many').text('No matching packages were found.');
+    $("#results-wrapper").hide();
+    $("#how-many").text("No matching packages were found.");
     return;
   }
 
-  $('#how-many').text(
-    'Showing results ' + (start + 1) + '-' + end + ' of ' + results.length + '.');
+  $("#how-many").text(
+    "Showing results " + (start + 1) + "-" + end + " of " + results.length + ".");
 
   var odd = true;
   res.forEach(function(pkgName) {
     var info = packageData[pkgName];
-    body.append($('<tr/>', { pkgName: pkgName })
-      .addClass('result')
-      .addClass(odd ? 'odd' : 'even')
+    body.append($("<tr/>", { pkgName: pkgName })
+      .addClass("result")
+      .addClass(odd ? "odd" : "even")
       .click(showPackage)
-      .append($('<td/>', { text: info['name'] }))
-      .append($('<td/>', { text: pkgName }))
-      .append($('<td/>', { text: info['meta']['description'] }))
+      .append($("<td/>", { text: info["name"] }))
+      .append($("<td/>", { text: pkgName }))
+      .append($("<td/>", { text: info["meta"]["description"] }))
     );
     odd = !odd;
   });
 
-  $('#results-wrapper').show();
+  $("#results-wrapper").show();
 };
 
 function refilter() {
   var attrs = Object.keys(packageData);
 
-  var words = $('#search').val().toLowerCase().split(/ +/).filter(Boolean);
+  var words = $("#search").val().toLowerCase().split(/ +/).filter(Boolean);
 
   if (words.length > 0) {
     attrs = attrs.filter(function (attr) {
       var info = packageData[attr];
-      var description = info['meta']['description'] || '';
-      var longDescription = info['meta']['longDescription'] || '';
+      var description = info["meta"]["description"] || "";
+      var longDescription = info["meta"]["longDescription"] || "";
 
       function match(word) {
         return (attr.toLowerCase().indexOf(word) != -1
-          || info['name'].toLowerCase().indexOf(word) != -1
+          || info["name"].toLowerCase().indexOf(word) != -1
           || description.toLowerCase().indexOf(word) != -1
           || longDescription.toLowerCase().indexOf(word) != -1);
       };
 
       return words.every(match);
     });
+
+    var encodedWords = words.map(function(value) {
+      return encodeURIComponent(value);
+    });
+    var hash = encodedWords.join('+');
+    while (document.getElementById(hash)) {
+      hash = '+' + hash;
+    }
+    history.replaceState({}, '', '#' + hash);
+  } else {
+    history.replaceState({}, '', '#');
   }
 
   results = attrs.sort(function(a, b) {
-    var ia = packageData[a]['name'].toLowerCase();
-    var ib = packageData[b]['name'].toLowerCase();
+    var ia = packageData[a]["name"].toLowerCase();
+    var ib = packageData[b]["name"].toLowerCase();
     if (ia < ib) return -1;
     if (ia > ib) return 1;
     return 0;
@@ -153,79 +166,141 @@ function refilter() {
   updateTable();
 };
 
-function showPackage() {
-  var pkgName = $(this).attr('pkgName');
-  var info = packageData[pkgName];
+// Try to figure out a human-readable name for a license object.
+// Use the SPDX ID if present; failing that try the long or short names. If all
+// else fails fall back on URL.
+function licenseName(license) {
+  return license.spdxId
+    || license.fullName
+    || license.shortName
+    || license.url
+    || "Licence name missing!";
+}
 
-  var expanded = $(this).attr('expanded');
-  $('tr.details', $(this).parent()).remove();
-  $('tr', $(this).parent()).removeAttr('expanded');
-  if (expanded) return;
-
-  var details = $('#details-template').clone().removeAttr('id').show();
-
-  $('.attrname', details).text(pkgName);
-
-  var nixExpr = info['meta']['position'];
-  if (typeof nixExpr == 'string') {
-    var n = nixExpr.lastIndexOf(':');
-    var file = nixExpr.slice(0, n);
-    var line = nixExpr.slice(n + 1);
-    var url = 'https://github.com/NixOS/nixpkgs/blob/' + nixpkgsCommit + '/' + file + '#L' + line;
-    $('.nix-expr', details).empty().append($('<a/>', { href: url }).text(file));
+// Given a license, or array of licenses, generate and return a DOM node
+// containing information about it/them.
+// A license can be a plain string (in which case it returns the string itself
+// as a text node), or a license object, in which case it attempts to construct
+// a link to the license's URL (if specified).
+function licenseInfo(license) {
+  if (typeof license == "string") {
+    return document.createTextNode(license);
+  }
+  if (Array.isArray(license)) {
+    return license
+      .map(licenseInfo)
+      .map(function(license) { return $("<li>").append(license) })
+      .reduce(function(ul, li) {
+        return ul.append(li);
+      }, $("<ul>"));
   }
 
-  var platforms = info['meta']['platforms'];
+  if (license.url) {
+    return $("<a>", {
+      text: licenseName(license),
+      href: license.url,
+    });
+  } else {
+    return document.createTextNode(licenseName(license));
+  }
+}
+
+function showPackage() {
+  var pkgName = $(this).attr("pkgName");
+  var info = packageData[pkgName];
+
+  var expanded = $(this).attr("expanded");
+  $("tr.details", $(this).parent()).remove();
+  $("tr", $(this).parent()).removeAttr("expanded");
+  if (expanded) return;
+
+  var details = $("#details-template").clone().removeAttr("id").show();
+
+  $(".attrname", details).text(pkgName);
+
+  var nixExpr = info["meta"]["position"];
+  if (typeof nixExpr == "string") {
+    var n = nixExpr.lastIndexOf(":");
+    var file = nixExpr.slice(0, n);
+    var line = nixExpr.slice(n + 1);
+    var url = "https://github.com/NixOS/nixpkgs/blob/" + nixpkgsCommit + "/" + file + "#L" + line;
+    $(".nix-expr", details).empty().append($("<a/>", { href: url }).text(file));
+  }
+
+  var platforms = info["meta"]["platforms"];
   if (Array.isArray(platforms) && platforms.length > 0) {
-    var p = $('.platforms', details).empty();
+    var p = $(".platforms", details).empty();
     var first = true;
     platforms.forEach(function (system) {
-      if (system != 'i686-linux' && system != 'x86_64-linux') return;
-      if (!first) p.append(document.createTextNode(', '));
+      if (system != "i686-linux" && system != "x86_64-linux") return;
+      if (!first) p.append(document.createTextNode(", "));
       first = false;
-      var url = 'https://hydra.nixos.org/job/nixos/[%latestNixOSBranch%]/nixpkgs.' + pkgName + '.' + system;
-      p.append($('<a/>', { href: url }).append($('<tt/>').text(system)));
+      var url = "https://hydra.nixos.org/job/nixos/[%latestNixOSBranch%]/nixpkgs." + pkgName + "." + system;
+      p.append($("<a/>", { href: url }).append($("<tt/>").text(system)));
     });
   }
 
-  var homepage = info['meta']['homepage'];
-  if (typeof homepage == 'string')
-    $('.homepage', details).empty().append($('<a/>', { href: homepage }).text(homepage));
+  var homepage = info["meta"]["homepage"];
+  if (typeof homepage == "string")
+    $(".homepage", details).empty().append($("<a/>", { href: homepage }).text(homepage));
 
-  // FIXME #49: hande lists and attrsets of licenses.
-  var license = info['meta']['license'];
-  if (typeof license == 'string')
-    $('.license', details).empty().text(license);
+  var license = info["meta"]["license"];
+  if (license) {
+    $(".license", details).empty().append(licenseInfo(license));
+  }
 
-  var maintainers = info['meta']['maintainers'];
+  var maintainers = info["meta"]["maintainers"];
   if (Array.isArray(maintainers) && maintainers.length > 0)
     // FIXME: check whether elements are strings.
-    $('.maintainers', details).empty().text(maintainers.join(', '));
+    $(".maintainers", details).empty().text(maintainers.join(", "));
 
-  var longDescription = info['meta']['longDescription'];
-  if (typeof longDescription == 'string')
-    $('.long-description', details).empty().addClass("pre").text(longDescription);
+  var longDescription = info["meta"]["longDescription"];
+  if (typeof longDescription == "string")
+    $(".long-description", details).empty().addClass("pre").text(longDescription);
 
-  $(this).after($('<tr/>')
-    .addClass('details')
-    .append($('<td/>', { colspan: 3 })
+  $(this).after($("<tr/>")
+    .addClass("details")
+    .append($("<td/>", { colspan: 3 })
       .append(details))
-  ).attr('expanded', 1);
+  ).attr("expanded", 1);
 };
 
 $.ajax({
-  url: '[%root%]nixpkgs/packages.json.gz',
-  type: 'GET',
-  dataType: 'json',
-  error: function(a, status, error) { alert('Failed to get package data [' + status + ']: ' + error); },
+  url: ((document.domain == 'nixos.org') ? '[%root%]nixpkgs/packages.json.gz' : '[%root%]nixpkgs/packages.json'),
+  type: "GET",
+  dataType: "json",
+  error: function(a, status, error) { alert("Failed to get package data [" + status + "]: " + error); },
   success: function(data) {
     nixpkgsCommit = data.commit;
     packageData = data.packages;
 
-    refilter();
+    var lastHash;
+    var hashChanged = true;
 
-    $('#search').on('input', function() {
+    function updateQuery() {
+      var query = decodeURIComponent(document.location.hash.replace(/^#\+*/, '').replace(/\+/g, ' '));
+      if (query.length && query.length > 0 ){ $('#search').val(query); } else { $('#search').val('') };
       refilter();
+      lastHash = location.hash || '#';
+    }
+
+    $(window).on('popstate', updateQuery);
+
+    updateQuery();
+
+    $("#search").on("input", function() {
+      if (hashChanged) {
+        history.pushState({}, '', location.hash || '#');
+        hashChanged = false;
+      }
+      refilter();
+    });
+    $('#search').on('change', function() {
+      var hash = location.hash || '#';
+      if (lastHash != hash) {
+        hashChanged = true;
+        lastHash = hash;
+      }
     });
   }
 });

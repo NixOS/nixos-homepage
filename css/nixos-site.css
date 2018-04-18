@@ -89,6 +89,16 @@ pre {
     box-shadow: 0.1em 0.1em 0.5em #e0e0e0;
 }
 
+.nix-command:before {
+    color: #999;
+    content: " $ ";
+}
+
+.nix-shell-command:before {
+    color: #999;
+    content: " [nix-shell]$ ";
+}
+
 div.main li {
     margin-bottom: 0.5em;
 }
@@ -104,32 +114,6 @@ img.inline {
 .reldate {
     font-style: italic;
 }
-
-/* Screenshot table. */
-table.screenshots {
-    border-style: hidden;
-}
-
-table.screenshots td {
-    vertical-align: middle;
-    padding-top: 1.0em;
-    padding-bottom: 1.0em;
-    border: 0px;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-table.screenshots img, img.screenshot {
-    box-shadow: 0.4em 0.4em 0.5em #a0a0a0;
-}
-
-img.screenshot {
-    margin-right: 0.4em;
-}
-
-table.screenshots img {
-    margin-right: 2em;
-}
-
 
 /* List of recent commits. */
 
@@ -233,7 +217,7 @@ tr.news-header {
   vertical-align: top;
   font-weight: normal;
   font-style: italic;
-  width: 1%;
+  width: 25%;
   color: #808080;
 }
 
@@ -298,6 +282,14 @@ div.search-details td.nix {
     font-family: monospace;
 }
 
+#search-results .description.docbook p > .docbook-important {
+	margin-top: 0.5rem;
+}
+
+#search-results .description.docbook .docbook-important {
+	border-left: #F89406 solid 0.3rem;
+	padding-left: 0.5rem;
+}
 
 /* Manual. */
 
@@ -331,6 +323,7 @@ div.docbook code {
     background-color: inherit;
     color: inherit;
     font-size: 100%;
+    white-space: normal;
 }
 
 div.docbook div.toc {
@@ -340,4 +333,36 @@ div.docbook div.toc {
 
 div.docbook div.toc dd {
     margin-left: 2em;
+}
+
+div.docbook pre.hljs {
+    overflow-x: visible;
+}
+
+.license ul {
+    margin-left: 0px;
+}
+
+.license li {
+    display: inline;
+    list-style: none;
+    content: ", ";
+}
+
+.license li:after {
+    content: ", ";
+}
+
+.license li:last-child:after {
+    content: "";
+}
+
+/* Centers the `get` button with the image.
+ * 196px is the width of the image.
+ */
+@media (min-width: 980px) {
+  .get-button {
+    max-width: 196px;
+    text-align: center;
+  }
 }

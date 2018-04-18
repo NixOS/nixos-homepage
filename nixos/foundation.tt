@@ -24,4 +24,62 @@ and NixOps.</p>
 
 [% PROCESS donation.tt %]
 
+<h2>Donations/expenses history</h2>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+  google.charts.load('current', {packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawBasic);
+
+  function drawBasic() {
+        var data = google.visualization.arrayToDataTable([
+           ['Period', 'Monthly', 'One-time', 'Sponsorship'],
+
+           [ "2015-07", 215, 931, 0 ],
+           [ "2015-08", 240, 266, 0 ],
+           [ "2015-09", 230, 90, 0 ],
+           [ "2015-10", 230, 5, 0 ],
+           [ "2015-11", 235, 221, 0 ],
+           [ "2015-12", 235, 174, 5000 ],
+           [ "2016-01", 270, 130, 0 ],
+           [ "2016-02", 245, 130, 7000 ],
+           [ "2016-03", 240, 1920, 0 ],
+           [ "2016-04", 240, 105, 0 ],
+           [ "2016-05", 240, 40, 0 ],
+           [ "2016-06", 245, 10, 0 ],
+           [ "2016-07", 245, 21, 0 ],
+           [ "2016-08", 235, 126, 0 ],
+           [ "2016-09", 235, 96, 0 ],
+           [ "2016-10", 240, 89, 0 ],
+           [ "2016-11", 240, 211, 0 ],
+           [ "2016-12", 240, 6, 0 ],
+           [ "2017-01", 230, 1, 0 ],
+           [ "2017-02", 95, 721, 0 ],
+           [ "2017-03", 100, 187, 0 ],
+           [ "2017-04", 75, 1, 0 ],
+           [ "2017-05", 75, 61, 0 ],
+           [ "2017-06", 70, 16, 0 ],
+           [ "2017-07", 65, 51, 0 ],
+           [ "2017-08", 70, 168, 0 ],
+           [ "2017-09", 70, 307, 0 ],
+           [ "2017-10", 70, 379, 0 ],
+           [ "2017-11", 115, 616, 0 ],
+           [ "2017-12", 105, 175, 0 ],
+        ]);
+        var options = {
+          title: 'Donations per month (euro)',
+          isStacked: true
+        };
+
+        var chart = new google.visualization.ColumnChart(
+          document.getElementById('donations'));
+
+        chart.draw(data, options);
+      }
+
+</script>
+
+<div id="donations" style="height:  600px;"></div>
+
 [% END %]

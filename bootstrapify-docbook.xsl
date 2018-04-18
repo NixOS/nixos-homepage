@@ -14,14 +14,15 @@
   </xsl:template>
 
   <xsl:template match="*" mode="top">
-
+    <xsl:apply-templates select="//x:script[@type='text/javascript']"/>
+    <xsl:apply-templates select="//x:link[@rel='stylesheet' and @href!='style.css']"/>
     <div class="page-header">
       <xsl:if test="@class='book'">
         <h1><xsl:apply-templates select="//x:div[@class='book']/x:div[@class='titlepage']//x:h1/node()"/></h1>
         <h2><xsl:apply-templates select="//x:div[@class='book']/x:div[@class='titlepage']//x:h2/node()"/></h2>
       </xsl:if>
       <xsl:if test="@class!='book'">
-        <h1>NixOS Manual</h1>
+        <h1><xsl:value-of select="//x:link[@rel='home']/@title"/></h1>
       </xsl:if>
     </div>
 
@@ -57,6 +58,35 @@
     <div class="docbook">
       <xsl:apply-templates />
     </div>
+    <xsl:if test="//x:link/@rel">
+      <ul class="pager">
+        <xsl:if test="@class='book'">
+          <xsl:attribute name="class">hidden</xsl:attribute>
+        </xsl:if>
+        <xsl:if test="@class!='book'">
+          <xsl:attribute name="class">pager</xsl:attribute>
+        </xsl:if>
+        <xsl:if test="//x:link[@rel='prev']">
+          <li class="previous">
+            <a accesskey="p"><xsl:attribute name="href"><xsl:value-of select="//x:link[@rel='prev']/@href"/></xsl:attribute>
+            ← <xsl:value-of select="//x:link[@rel='prev']/@title" /></a>
+          </li>
+        </xsl:if>
+        <xsl:if test="//x:link[@rel='up']">
+          <li class="up">
+            <a accesskey="u"><xsl:attribute name="href"><xsl:value-of select="//x:link[@rel='up']/@href"/></xsl:attribute>
+            ↑ <xsl:value-of select="//x:link[@rel='up']/@title" /></a>
+          </li>
+        </xsl:if>
+        <xsl:if test="//x:link[@rel='next']">
+          <li class="next">
+            <a accesskey="n"><xsl:attribute name="href"><xsl:value-of select="//x:link[@rel='next']/@href"/></xsl:attribute>
+            <xsl:value-of select="//x:link[@rel='next']/@title" /> →</a>
+          </li>
+        </xsl:if>
+      </ul>
+    </xsl:if>
+
 
   </xsl:template>
 

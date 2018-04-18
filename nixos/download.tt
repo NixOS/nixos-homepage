@@ -1,23 +1,21 @@
-[% WRAPPER layout.tt title="Getting NixOS " _ latestNixOSVersion menu='nixos' %]
+[% WRAPPER layout.tt title="Getting NixOS " _ latestNixOSSeries menu='nixos' %]
 [% USE IO.All %]
 [% USE JSON.Escape %]
 
-<p>The latest stable release series is <strong>[% latestNixOSVersion
-%]</strong>.  Below are links to CD/DVD images and VirtualBox
-appliances containing the <a
-href="https://nixos.org/channels/nixos-[%latestNixOSVersion%]">latest
-release</a> in this series.
-<a class="btn btn-large btn-success pull-right" href="[%root%]nixos/manual/">
-  Next Step: Manual
-  <i class="fa fa-arrow-right"></i>
-</a>
-</p>
+<p>The latest stable release series is
+<strong>[%latestNixOSSeries%]</strong> and the latest release in that
+series is <strong>[%latestNixOSRelease%]</strong>.  Below are links to
+CD/DVD images and VirtualBox appliances containing the <a
+href="https://nixos.org/channels/nixos-[%latestNixOSSeries%]">latest
+release</a> in this series.  <a class="btn btn-large btn-success
+pull-right" href="[%root%]nixos/manual/"> Next Step: Manual <i
+class="fa fa-arrow-right"></i> </a> </p>
 
-<section><h2 id="installation-isos">Installation CDs/DVDs</h2>
+<section><h2 id="installation-isos">Installation CDs/DVDs/USB Sticks</h2>
 
 <p>You can install NixOS on physical hardware by burning one of the CD
 images onto a blank CD/DVD disk, or <a
-href="https://nixos.org/wiki/Installing_NixOS_from_a_USB_stick">by
+href="https://nixos.org/nixos/manual/index.html#sec-booting-from-usb">by
 copying it onto a USB stick</a>.  For <strong>installation
 instructions</strong>, please see the <a
 href="[%nixosManual%]">manual</a>.</p>
@@ -28,14 +26,14 @@ graphical installer.  Therefore this form of installation may not be
 suitable for novice Linux users.</div>
 
 <p>The <strong>graphical installation CD</strong> contains the NixOS
-installer as well as X11, KDE 4 and several applications.  It’s a
+installer as well as X11, Plasma 5 Desktop and several applications.  It’s a
 <em>live CD</em>, so it allows you to get an impression of NixOS (and
 the Nix package manager) before installing it.</p>
 
-[% prefix = "https://nixos.org/releases/nixos/latest-" %]
+[% prefix = "https://d3g5gsiof5omrk.cloudfront.net/nixos/" _ latestNixOSSeries _ "/nixos-" _ latestNixOSRelease %]
 
 <ul>
-  <li><a href="[%prefix%]iso-graphical-x86_64-linux">Graphical live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]iso-graphical-x86_64-linux-sha256">SHA-256</a>)
+  <li><a href="[%prefix%]/nixos-graphical-[%latestNixOSRelease%]-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-graphical-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)
     <span class="label label-info">Recommended for most users</span></li>
 </ul>
 
@@ -44,8 +42,8 @@ and is therefore a lot smaller.  You have to run the installer from
 the console.  It contains a number of rescue tools.</p>
 
 <ul>
-  <li><a href="[%prefix%]iso-minimal-x86_64-linux">Minimal installation CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]iso-minimal-x86_64-linux-sha256">SHA-256</a>)</li>
-  <li><a href="[%prefix%]iso-minimal-i686-linux">Minimal installation CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]iso-minimal-i686-linux-sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso">Minimal installation CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-i686-linux.iso">Minimal installation CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-i686-linux.iso.sha256">SHA-256</a>)</li>
 </ul>
 
 </section>
@@ -53,20 +51,16 @@ the console.  It contains a number of rescue tools.</p>
 <section><h2 id="virtualbox-appliances">VirtualBox appliances</h2>
 
 <p>This is a demo appliance for VirtualBox (in OVA format) that has
-X11 and KDE enabled, as well as the VirtualBox guest additions.  To
+X11 and Plasma 5 enabled, as well as the VirtualBox guest additions.  To
 use it, download the OVA file, open VirtualBox, run “File → Import
 Appliance” from the menu, select the OVA file, and click “Import”.
 You can then start the virtual machine.  When the KDE login screen
-appears, you can log in as...</p>
-
-<p>user <tt>demo</tt>,</p>
-<p>password <tt>demo</tt>.</p>
-
-<p>To obtain a root shell, run <tt>sudo -i</tt> in the KDE terminal
-(<tt>konsole</tt>).</p>
+appears, you can log in as <strong>user <tt>demo</tt></strong>,
+<strong>password <tt>demo</tt></strong>.  To obtain a root shell, run
+<tt>sudo -i</tt> in the KDE terminal (<tt>konsole</tt>).</p>
 
 <ul>
-  <li><a href="[%prefix%]ova-x86_64-linux">VirtualBox appliance, 64-bit Intel/AMD</a> (<a href="[%prefix%]ova-x86_64-linux-sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]/nixos-[%latestNixOSRelease%]-x86_64-linux.ova">VirtualBox appliance, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-[%latestNixOSRelease%]-x86_64-linux.ova.sha256">SHA-256</a>)</li>
 </ul>
 
 </section>
@@ -82,7 +76,7 @@ by using one of the AMIs listed below.</p>
     <tr><th>Region</th><th>Root storage</th><th>Virtualisation</th><th>AMI</th><th></th></tr>
   </thead>
   <tbody>
-    [% amis = JSON.Escape.json_decode(IO.All.new('nixos/amis.json').all).$latestNixOSVersion %]
+    [% amis = JSON.Escape.json_decode(IO.All.new('nixos/amis.json').all).$latestNixOSSeries %]
     [% FOREACH region IN amis.keys.sort %]
       [% FOREACH type IN amis.$region.keys.sort; ami = amis.$region.$type %]
         <tr>
@@ -100,7 +94,7 @@ by using one of the AMIs listed below.</p>
 
 <p>You can create an instance using the AWS Management Console by
 clicking one of the Launch buttons. You can also create an instance
-from the command line. For instance, to create an instance in region
+from the command line. For example, to create an instance in region
 <tt>[% region = "eu-west-1"; type = "pv-ebs"; ami =
 amis.$region.$type; region %]</tt> using the EC2 API tools, just
 run:</p>
@@ -111,19 +105,85 @@ $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em>
 
 </section>
 
-<section><h2>Unstable releases</h2>
+<section><h2 id="microsoft-azure">Microsoft Azure BLOBs</h2>
 
-<p>If you are a developer who wants to contribute to NixOS, or if you
-just want the latest and greatest, you can also install the <a
-href="https://nixos.org/channels/nixos-unstable/">most recent unstable
-release</a>.</p>
+<p>If you are an Azure user, you can manually create a NixOS instance
+by using one of the bootstrap BLOBs listed below.</p>
+
+<div class="row">
+<table class="table span2">
+  <thead>
+    <tr><th>NixOS version</th><th>BLOB URL</th></tr>
+  </thead>
+  <tbody>
+    [% blobs = JSON.Escape.json_decode(IO.All.new('nixos/azure-blobs.json').all) %]
+    [% FOREACH version IN blobs.keys.sort; blob = blobs.$version %]
+      <tr>
+        <td><tt>[% version %]</tt></td>
+        <td><a href="[% blob %]"><tt>[% blob %]</tt></a></td>
+      </tr>
+    [% END %]
+  </tbody>
+</table>
+</div>
+
+<p>You can create an instance from the command line.
+For example, to create an instance of version 
+<tt>[% blob = blobs.$latestNixOSSeries; latestNixOSSeries %]</tt>
+of NixOS  using azure-cli, just run:</p>
+
+<pre>
+# settings
+# vm name must be lowercase and letters/numbers only because it's also used as the domain name
+$ export VM=nixvm005
+$ export GROUP=test-group
+$ export LOCATION=westus
+$ export STORAGE=testst004
+$ export SOURCE_URI=<tt>[% blob %]</tt>
+
+# create group
+$ azure config mode arm
+$ azure group create $GROUP --location $LOCATION
+
+# create storage
+$ azure storage account create $STORAGE -g $GROUP -l $LOCATION --type LRS
+$ azure storage account keys list $STORAGE -g $GROUP
+
+# export one of the storage access keys
+$ export KEY=
+$ echo $KEY
+
+$ azure storage container create -a $STORAGE -k $KEY vm-images
+
+# copy the image blob
+$ azure storage blob copy start --source-uri $SOURCE_URI --dest-account-name $STORAGE --dest-account-key $KEY \
+    --dest-container vm-images --dest-blob nixos-unstable-nixops.vhd
+
+# wait for blob copy status to change pending->success
+$ azure storage blob copy show --container vm-images  --blob nixos-unstable-nixops.vhd -a $STORAGE -k $KEY
+
+# create vm
+$ azure vm create $GROUP $VM $LOCATION Linux --storage-account-name $STORAGE \
+    -d https://"$STORAGE".blob.core.windows.net/vm-images/root.vhd \
+    --image-urn https://"$STORAGE".blob.core.windows.net/vm-images/nixos-unstable-nixops.vhd \
+    --nic-name $VM --vnet-name $VM --vnet-address-prefix 10.0.0.1/16 --vnet-subnet-name $VM \
+    --vnet-subnet-address-prefix 10.0.1.1/24 --public-ip-name $VM --public-ip-domain-name $VM \
+    --admin-username azureuser
+
+# show machine properties and log in
+$ azure vm show $GROUP $VM
+$ ssh azureuser@"$VM"."$LOCATION".cloudapp.azure.com
+</pre>
 
 </section>
 
-<!--
-<h2>Old releases</h2>
+<section><h2 id="unstable-releases">Unstable releases</h2>
 
-<p>ISO images of previous versions are also <a href="https://nixos.org/releases/nixos">available</a>.</p>
--->
+<p>If you are a developer who wants to contribute to NixOS, or if you
+just want the latest and greatest, you can also install the <a
+href="https://nixos.org/channels/nixos-unstable">most recent unstable
+release</a>.</p>
+
+</section>
 
 [% END %]
