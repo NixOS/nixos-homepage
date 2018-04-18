@@ -57,7 +57,7 @@ fi
 
 unpack=$tmpDir/unpack
 mkdir -p "$unpack"
-< "$tarball" bzcat | tar x -C "$unpack" || oops "failed to unpack '$url'"
+< "$tarball" bzcat | tar -xf - -C "$unpack" || oops "failed to unpack '$url'"
 
 script=$(echo "$unpack"/*/install)
 
