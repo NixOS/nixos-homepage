@@ -62,6 +62,6 @@ mkdir -p "$unpack"
 script=$(echo "$unpack"/*/install)
 
 [ -e "$script" ] || oops "installation script is missing from the binary tarball!"
-"$script"
+"$script" "$@"
 
 } # End of wrapping
