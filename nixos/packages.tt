@@ -252,7 +252,13 @@ function showPackage() {
   var maintainers = info["meta"]["maintainers"];
   if (Array.isArray(maintainers) && maintainers.length > 0)
     // FIXME: check whether elements are strings.
-    $(".maintainers", details).empty().text(maintainers.join(", "));
+    $(".maintainers", details)
+      .empty()
+      .text(
+        $.map(maintainers, function(element) {
+          return typeof element === 'object' ? element.name + ' <' + element.email + '>' : element;
+        })
+      .join(", "));
 
   var longDescription = info["meta"]["longDescription"];
   if (typeof longDescription == "string")
