@@ -234,17 +234,3 @@ nixpkgs/packages-unstable.json:
 nixos/options.json:
 	cat $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(NIXPKGS) -A options)/share/doc/nixos/options.json > $@.tmp
 	mv $@.tmp $@
-
-nix/install.sig: nix/install
-	if ! gpg2 --verify $@ $<; then \
-		gpg2 --detach-sign --armor < $< > $@.tmp; \
-		mv $@.tmp $@; \
-	fi
-	touch $@
-
-NIX_VERSION=2.0.1
-nix/nix-$(NIX_VERSION)-%.tar.bz2:
-	curl https://nixos.org/releases/nix/nix-$(NIX_VERSION)/$(notdir $@) -o $@
-nix/install-%: nix/nix-$(NIX_VERSION)-%.tar.bz2
-	arx tmpx --shared -o ./$@ ./$< // 'cd * && sh install'
-	chmod +x $@
