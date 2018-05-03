@@ -241,3 +241,10 @@ nix/install.sig: nix/install
 		mv $@.tmp $@; \
 	fi
 	touch $@
+
+NIX_VERSION=2.0.1
+nix/nix-$(NIX_VERSION)-%.tar.bz2:
+	curl https://nixos.org/releases/nix/nix-$(NIX_VERSION)/$(notdir $@) -o $@
+nix/install-%: nix/nix-$(NIX_VERSION)-%.tar.bz2
+	arx tmpx --shared -o ./$@ ./$< // 'cd * && sh install'
+	chmod +x $@
