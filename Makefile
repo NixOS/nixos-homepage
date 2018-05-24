@@ -213,19 +213,19 @@ endif
 	gzip -9 < $^ > $@.tmp
 	mv $@.tmp $@
 
-nixpkgs/packages.json:
+nixpkgs/packages.json: discover-more-packages-config.nix
 	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS)); \
 	(echo -n '{ "commit": "' && cat $$nixpkgs/.git-revision && echo -n '","packages":' \
-	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config '{}' \
+	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config 'import ./discover-more-packages-config.nix' \
 	  && echo -n '}') \
 	  | sed "s|$$nixpkgs/||g" > $@.tmp
 	python -mjson.tool < $@.tmp > /dev/null
 	mv $@.tmp $@
 
-nixpkgs/packages-unstable.json:
+nixpkgs/packages-unstable.json: discover-more-packages-config.nix
 	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS_UNSTABLE)); \
 	(echo -n '{ "commit": "' && cat $$nixpkgs/.git-revision && echo -n '","packages":' \
-	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS_UNSTABLE) -qa --json --arg config '{}' \
+	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS_UNSTABLE) -qa --json --arg config 'import ./discover-more-packages-config.nix' \
 	  && echo -n '}') \
 	  | sed "s|$$nixpkgs/||g" > $@.tmp
 	python -mjson.tool < $@.tmp > /dev/null
