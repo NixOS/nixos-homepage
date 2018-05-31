@@ -1,11 +1,1 @@
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCAAdFiEEtUHVUwEnDgvPFcpdgXC0cm1xmN4FAlrsQ4IACgkQgXC0cm1x
-mN5mmggAneasEWKCpVxIIWdlwA+3lK6u0Ywi1WLDDqQxFF9ntdaylqpvRDCjsfTG
-/vy+Hr1qReZlhMboBb2kP5DKClzlrl6mfxSYxHr4hHbnwuxS4nSs5edKo+lU4EE3
-30ABVyotiSPdA15AQGPPjPIj1cDMpEM2z02MgeR3acZ0+7gqQh3lv0GSADYh06eg
-mnecDz67CpwMoAXfjvygZwchltaFq2drAqv5WMOrmkCvgyX8gy6WcbLTLEcJE1De
-8Pw8VP/0+9IL29NmT12O7Z2mlMgCxLULGDg5RM1+C0oiF640Ow1Aok2KXeuykoPQ
-x9KKDkRyAquYrL3RdpG7pPgzLtrpGw==
-=lWLM
------END PGP SIGNATURE-----
+/releases/nix/latest/install.asc
