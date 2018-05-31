@@ -1,7 +1,3 @@
 [%-
-latestNixVersion = "2.0.2"
-nix_hash_i686_linux = "01d5da9fad80c3282c5c7d9a7913b505c4c789940d021a1b21cb49df8ae081f8"
-nix_hash_x86_64_linux = "d0c2492d7d8f824e3b1ace15a1a58f64a0a8faacc59936ebedfe18905d982d7c"
-nix_hash_aarch64_linux = "97397dad4c57031f2e5be37f49c8d610aa98620c971cf99eff8e4c8354d38615"
-nix_hash_x86_64_darwin = "3c22d1591b4b39c69054839311cb024ea531d8a57019ec18ff60449a596962a0"
+latestNixVersion = "2.0.4"
 -%]
