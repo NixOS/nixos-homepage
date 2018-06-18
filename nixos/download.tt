@@ -146,7 +146,7 @@ $ azure config mode arm
 $ azure group create $GROUP --location $LOCATION
 
 # create storage
-$ azure storage account create $STORAGE -g $GROUP -l $LOCATION --type LRS
+$ azure storage account create $STORAGE -g $GROUP -l $LOCATION --sku-name LRS
 $ azure storage account keys list $STORAGE -g $GROUP
 
 # export one of the storage access keys
@@ -166,8 +166,8 @@ $ azure storage blob copy show --container vm-images  --blob nixos-unstable-nixo
 $ azure vm create $GROUP $VM $LOCATION Linux --storage-account-name $STORAGE \
     -d https://"$STORAGE".blob.core.windows.net/vm-images/root.vhd \
     --image-urn https://"$STORAGE".blob.core.windows.net/vm-images/nixos-unstable-nixops.vhd \
-    --nic-name $VM --vnet-name $VM --vnet-address-prefix 10.0.0.1/16 --vnet-subnet-name $VM \
-    --vnet-subnet-address-prefix 10.0.1.1/24 --public-ip-name $VM --public-ip-domain-name $VM \
+    --nic-name $VM --vnet-name $VM --vnet-address-prefix 10.0.0.0/16 --vnet-subnet-name $VM \
+    --vnet-subnet-address-prefix 10.0.1.0/24 --public-ip-name $VM --public-ip-domain-name $VM \
     --admin-username azureuser
 
 # show machine properties and log in
