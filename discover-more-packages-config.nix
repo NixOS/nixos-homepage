@@ -4,12 +4,16 @@
 
 {
 
-  packageOverrides = super: {
-
-    haskellPackages = super.recurseIntoAttrs super.haskellPackages;
-
-    rPackages = super.recurseIntoAttrs super.rPackages;
-
-  };
-
+  packageOverrides = super:
+    builtins.foldl'
+     (s: packageSet: s //
+       { "${packageSet}" = super.recurseIntoAttrs super."${packageSet}"; })
+     {} [
+          "coqPackages"
+          "haskellPackages"
+          "idrisPackages"
+          "nodePackages"
+          "quicklispPackages"
+          "rPackages"
+        ];
 }
