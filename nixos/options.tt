@@ -210,7 +210,7 @@ function ppNix(indent, v) {
     // their content as it cannot be serialize properly. So if we detect such
     // example, escape characters and return the text without pretty-printing.
     if (v._type == "literalExample") {
-      v = ((v.text || '') + '').replace('<', '&lt;').replace('>', '&gt;');
+      v = ((v.text || '') + '');
       return v;
     }
 
@@ -243,7 +243,6 @@ function ppNix(indent, v) {
   }
 
   if (typeof v == "string") {
-    v = v.replace('<', '&lt;').replace('>', '&gt;');
     if (v.indexOf('"') == -1 && v.indexOf('\n') == -1) {
       if (/^pkgs\./.test(v))
         return '' + v;
