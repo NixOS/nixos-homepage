@@ -214,7 +214,7 @@ endif
 
 nixpkgs/packages.json: discover-more-packages-config.nix
 	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS)); \
-	(echo -n '{ "commit": "' && cat $$nixpkgs/.git-revision && echo -n '","packages":' \
+	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
 	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config 'import ./discover-more-packages-config.nix' \
 	  && echo -n '}') \
 	  | sed "s|$$nixpkgs/||g" > $@.tmp
@@ -223,7 +223,7 @@ nixpkgs/packages.json: discover-more-packages-config.nix
 
 nixpkgs/packages-unstable.json: discover-more-packages-config.nix
 	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS_UNSTABLE)); \
-	(echo -n '{ "commit": "' && cat $$nixpkgs/.git-revision && echo -n '","packages":' \
+	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
 	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS_UNSTABLE) -qa --json --arg config 'import ./discover-more-packages-config.nix' \
 	  && echo -n '}') \
 	  | sed "s|$$nixpkgs/||g" > $@.tmp
