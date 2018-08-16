@@ -76,11 +76,15 @@
       [% FOREACH b IN JSON.Escape.json_decode(IO.All.new('blogs.json').all).channel.item.first(5); IF b; %]
         <li>
           <div class="nixos-blog">
-            [% author = b.title.split(':').0.trim;
-               title = b.title.remove('^[^:]*:').trim
+            [%
+              USE title = String(HTML.escape(b.title.remove('^[^:]*:').trim));
+              title = title.replace('^[a-z]', title.copy.truncate(1).upper)
+              author = b.title.split(':').0.trim;
+            %]
+            [%
             %]
             <div class="nixos-blog-title">
-              <a [% HTML.attributes(href => b.link) %]>[% HTML.escape(title.ucfirst) %]</a>
+              <a [% HTML.attributes(href => b.link) %]>[% title %]</a>
             </div>
             <div class="nixos-blog-author-info">
               <span class="nixos-blog-author">[% HTML.escape(author) %]</span>
