@@ -13,26 +13,13 @@
     the list of options online</a>.</p>
   </div>
 
-  <div class="span4" id="mailing-list">
-    <h2><a href="https://groups.google.com/forum/#!forum/nix-devel">Mailing lists</a></h2>
+  <div class="span4" id="discourse">
+    <h2><a href="https://discourse.nixos.org/">Discourse forum</a></h2>
 
-    <ul>
-
-    <li><a href="https://groups.google.com/forum/#!forum/nix-devel"><tt><strong>nix-devel@<wbr/>googlegroups<wbr/>.com</strong></tt></a>
-    is for all user and development questions and discussions. To
-    subscribe, visit the <a
-    href="https://groups.google.com/forum/#!forum/nix-devel">nix-devel
-    Google Group</a> or send an email to <a
-    href="mailto:nix-devel+subscribe@googlegroups.com">nix-devel+subscribe@googlegroups.com</a>.</li>
-
-    <li><a href="https://groups.google.com/forum/#!forum/nix-security-announce"><tt><strong>nix-security-announce@<wbr/>googlegroups<wbr/>.com</strong></tt></a>
-    is for security-related announcements. To subscribe, visit the <a
-    href="https://groups.google.com/forum/#!forum/nix-security-announce">nix-security-announce
-    Google Group</a> or send an email to <a
-    href="mailto:nix-security-announce+subscribe@googlegroups.com">nix-security-announce+subscribe@googlegroups.com</a>.</li>
-
-    </ul>
-
+    <p>Discourse is a forum where we have discussions and help users out with their questions.
+    Visit the page and register with GitHub or email/password:
+    <a href="https://discourse.nixos.org/">https://discourse.nixos.org/</a>.
+    </p>
   </div>
 
   <div class="span4">
@@ -53,6 +40,16 @@
   formal documents, in short digestable pieces.</p>
   </div>
 
+  <div class="span4" id="mailing-list">
+    <h2>Mailing lists</h2>
+
+    <p><a href="https://groups.google.com/forum/#!forum/nix-security-announce"><tt><strong>nix-security-announce@<wbr/>googlegroups<wbr/>.com</strong></tt></a>
+    is for security-related announcements. To subscribe, visit the <a
+    href="https://groups.google.com/forum/#!forum/nix-security-announce">nix-security-announce
+    Google Group</a> or send an email to <a
+    href="mailto:nix-security-announce+subscribe@googlegroups.com">nix-security-announce+subscribe@googlegroups.com</a>.</p>
+  </div>
+
   <div class="span4"> <h2><a
     href="https://github.com/NixOS/nixpkgs/issues">Bugs</a></h2> <p>If
     you think you’ve found a bug, please report it in the <a
@@ -60,6 +57,9 @@
     issue tracker</strong></a> (please use the label <strong>6.topic:
     nixos</strong>).</p>  </div>
 
+</div>
+
+<div class="row-fluid">
   <div class="span4">
     <h2>Other resources</h2>
     <p>There are several other manuals:</p>
@@ -74,10 +74,6 @@
       cloud using <a href="[%root%]nixops">NixOps</a>.</li>
     </ul>
   </div>
-
-</div>
-
-<div class="row-fluid">
 
   <div class="span4">
     <h2>Commercial support</h2>
