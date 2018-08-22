@@ -1,11 +1,1 @@
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCAAdFiEEtUHVUwEnDgvPFcpdgXC0cm1xmN4FAlsOc0YACgkQgXC0cm1x
-mN4OCAgAzuSen5PDSHFJVgSecn12tH7kgdVLRcMC1HgbGX9QUz9EwiJGyQFy8Cu8
-wSeLR7QKGw1PnP/i6XVlNutUPWYpISiuFWUko/FB/GxGs7EaIm7KmTyKLfTbGFac
-AHSVpYoNhQl0D2a+IWKpCh4Y5vnVUmH6eZIqN84fjZBhxL6+uJ7T7j4fuzrRluIl
-vETrVNsbCiPz+v29upYY/XRCjWGAqTzm45h8ZiIQ0FifXQj88ygAorPwXeI5/Y5X
-qTAUtkpStrzil5L+prDdE7ncM9eQ21nXdWkjlaDAylzmgy3xf8JboigZZ63gxMfI
-5vlyyiiceSlX97FcBqEwbTcjBoCYOA==
-=zvEo
------END PGP SIGNATURE-----
+/releases/nix/nix-2.0.3/install.asc
