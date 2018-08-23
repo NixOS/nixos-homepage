@@ -1,7 +1,7 @@
 [% WRAPPER layout.tt title="The Nix Packages collection" menu='nixpkgs' %]
 
-<p>The <em>Nix Packages collection</em> (Nixpkgs) is a set of nearly
-6,500 packages for the Nix package manager, released under a <a
+<p>The <em>Nix Packages collection</em> (Nixpkgs) is a set of over
+40.000 packages for the Nix package manager, released under a <a
 href="https://github.com/NixOS/nixpkgs/blob/master/COPYING">permissive
 MIT/X11 license</a>.  It supports the following platforms (though not
 all packages work on all platforms):</p>
