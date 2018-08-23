@@ -234,8 +234,8 @@ Here are some highlights of what NixOS currently provides:</p>
   declaratively through <tt>configuration.nix</tt>.</li>
 
   <li>NixOS build on the <a href="[%root%]nixpkgs">Nix Packages
-  collection</a> (Nixpkgs), which provides Nix expressions for nearly
-  6500 packages that you can install under NixOS.</li>
+  collection</a> (Nixpkgs), which provides Nix expressions for over
+  40.000 packages that you can install under NixOS.</li>
 
   <li>NixOS has automatic hardware detection: the boot process loads
   kernel modules for all known devices automatically.  It also has
