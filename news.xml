@@ -321,7 +321,7 @@
   </item>
 
   <item>
-    <pubDate>Fri, 30 May 2014 00:00:00 GMT</pubDate>
+    <pubDate>Fri, 30 May 2014 00:00:01 GMT</pubDate>
     <title>
       NixOS 14.04 released
     </title>
@@ -810,7 +810,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <pubDate>Sat, 18 Sep 2010 00:00:00 GMT</pubDate>
+    <pubDate>Sat, 18 Sep 2010 00:00:01 GMT</pubDate>
     <title>
       ISSRE paper on NixOS-based system testing
     </title>
@@ -1447,7 +1447,7 @@ $ nix-store -qR /run/current-system | grep openssl
   </item>
 
   <item>
-    <pubDate>Fri, 23 Feb 2007 00:00:00 GMT</pubDate>
+    <pubDate>Fri, 23 Feb 2007 00:00:01 GMT</pubDate>
     <title>
       NixOS for x86_64
     </title>

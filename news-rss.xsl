@@ -33,9 +33,9 @@
         <xsl:for-each select="item[position() &lt;= $maxItem]">
           <item>
             <title><xsl:apply-templates select="title/child::node()" mode="id" /></title>
-            <link>https://nixos.org/news.html</link>
             <description><xsl:apply-templates select="description/child::node()" mode="serialize" /></description>
             <pubDate><xsl:value-of select="pubDate" /></pubDate>
+            <guid isPermaLink="false"><xsl:value-of select="pubDate" /></guid>
           </item>
         </xsl:for-each>
       </channel>
