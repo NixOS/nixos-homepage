@@ -12,8 +12,6 @@
 
   <xsl:output method='xml' encoding="UTF-8" omit-xml-declaration="no" />
 
-  <xsl:param name="maxItem" />
-
   <xsl:template match="news">
 
     <!--<?xml version="1.0" encoding="UTF-8"?>-->
@@ -23,6 +21,7 @@
         <link>https://nixos.org/news.html</link>
         <atom:link href="https://nixos.org/news-rss.xml" rel="self" type="application/rss+xml" />
         <description>News for NixOS, the purely functional Linux distribution.</description>
+        <fh:complete xmlns:fh="http://purl.org/syndication/history/1.0"/>
 
         <image>
           <title>NixOS News</title>
@@ -30,7 +29,7 @@
           <link>https://nixos.org/news.html</link>
         </image>
 
-        <xsl:for-each select="item[position() &lt;= $maxItem]">
+        <xsl:for-each select="item">
           <item>
             <title><xsl:apply-templates select="title/child::node()" mode="id" /></title>
             <description><xsl:apply-templates select="description/child::node()" mode="serialize" /></description>
