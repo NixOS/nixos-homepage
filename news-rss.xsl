@@ -17,16 +17,17 @@
   <xsl:template match="news">
 
     <!--<?xml version="1.0" encoding="UTF-8"?>-->
-    <rss version="2.0">
+    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
       <channel>
         <title>NixOS News</title>
-        <link>https://nixos.org</link>
+        <link>https://nixos.org/news.html</link>
+        <atom:link href="https://nixos.org/news-rss.xml" rel="self" type="application/rss+xml" />
         <description>News for NixOS, the purely functional Linux distribution.</description>
 
         <image>
-          <title>NixOS</title>
+          <title>NixOS News</title>
           <url>https://nixos.org/logo/nixos-logo-only-hires.png</url>
-          <link>https://nixos.org/</link>
+          <link>https://nixos.org/news.html</link>
         </image>
 
         <xsl:for-each select="item[position() &lt;= $maxItem]">
