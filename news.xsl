@@ -24,7 +24,7 @@
           <td class="news-short">
             <xsl:apply-templates select="title/child::node()" mode="id"/>
           </td>
-          <td class="news-date"><xsl:value-of select="substring(pubDate, 4, 12)" /></td>
+          <td class="news-date"><xsl:value-of select="substring(pubDate, 6, 11)" /></td>
         </tr>
         <tr class="news-descr">
           <td colspan="2">
