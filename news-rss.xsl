@@ -17,7 +17,7 @@
   <xsl:template match="news">
 
     <!--<?xml version="1.0" encoding="UTF-8"?>-->
-    <rss version="2.0" xmlns:blogChannel="http://backend.userland.com/blogChannelModule">
+    <rss version="2.0">
       <channel>
         <title>NixOS News</title>
         <link>https://nixos.org</link>
