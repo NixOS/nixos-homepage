@@ -2,6 +2,19 @@
 
 <news>
   <item>
+    <pubDate>Thu Oct 04 2018 00:00:00 GMT</pubDate>
+    <title>
+      Fastly supports NixOS
+    </title>
+    <description>
+        We are happy to announce that we have moved our binary cache to <a href="https://fastly.com">Fastly</a>. Fastly
+        is a big supporter of open source projects and now NixOS is one of them! Fastly provides us with CDN capability,
+        which previously was running on AWS CloudFront. Big thanks go to Fastly, in particular Tom Denniston and Elaine
+        Greenberg, our friends at <a href="https://packet.net">Packet.net</a> and Graham Christensen for making this possible.
+    </description>
+  </item>
+
+  <item>
     <pubDate>Sun Sep 02 2018 00:00:00 GMT</pubDate>
     <title>
       Nix 2.1 released
