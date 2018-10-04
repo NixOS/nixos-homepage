@@ -10,7 +10,8 @@
         We are happy to announce that we have moved our binary cache to <a href="https://fastly.com">Fastly</a>. Fastly
         is a big supporter of open source projects and now NixOS is one of them! Fastly provides us with CDN capability,
         which previously was running on AWS CloudFront. Big thanks go to Fastly, in particular Tom Denniston and Elaine
-        Greenberg, our friends at <a href="https://packet.net">Packet.net</a> and Graham Christensen for making this possible.
+        Greenberg, our friends at <a href="https://www.infor.com">Infor</a> and <a href="https://packet.net">Packet.net</a>
+        and Graham Christensen for making this possible.
     </description>
   </item>
 
