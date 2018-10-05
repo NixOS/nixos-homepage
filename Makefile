@@ -1,4 +1,4 @@
-NIXOS_SERIES = 18.03
+NIXOS_SERIES = 18.09
 NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_SERIES)/nixexprs.tar.xz
 NIXPKGS_UNSTABLE = https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz
 
