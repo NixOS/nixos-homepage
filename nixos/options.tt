@@ -99,7 +99,8 @@ function updateTable() {
       .addClass('result')
       .addClass(odd ? 'odd' : 'even')
       .click(showOption)
-      .append($('<td/>', { class: 'option', text: optName }))
+      .append($('<td/>', { class: 'option' }).append($('<a/>', { text: optName })))
+
     );
     odd = !odd;
   });
