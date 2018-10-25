@@ -374,6 +374,19 @@ copyHashToSearch();
 $(window).on('popstate', copyHashToSearch);
 $search.on('input', copySearchToHash);
 
+var debouncedRefilterTimer = null;
+
+function debouncedRefilter() {
+  if (debouncedRefilterTimer) {
+    window.clearTimeout(debouncedRefilterTimer);
+  }
+
+  debouncedRefilterTimer = window.setTimeout(function() {
+    refilter();
+    debouncedRefilterTimer = null;
+  }, 100);
+}
+
 $.ajax({
   url: ((document.domain == 'nixos.org') ? '[%root%]nixos/options.json.gz' : '[%root%]nixos/options.json'),
   type: 'GET',
@@ -382,7 +395,7 @@ $.ajax({
   success: function(data) {
     optionData = data;
 
-    $search.on("input", refilter);
+    $search.on("input", debouncedRefilter);
 
     if ($search.val() !== "") {
       $search.trigger("input");

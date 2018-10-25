@@ -305,6 +305,19 @@ copyHashToSearch();
 $(window).on('popstate', copyHashToSearch);
 $search.on('input', copySearchToHash);
 
+var debouncedRefilterTimer = null;
+
+function debouncedRefilter() {
+  if (debouncedRefilterTimer) {
+    window.clearTimeout(debouncedRefilterTimer);
+  }
+
+  debouncedRefilterTimer = window.setTimeout(function() {
+    refilter();
+    debouncedRefilterTimer = null;
+  }, 100);
+}
+
 $.ajax({
   url: ((document.domain == 'nixos.org') ? '[%root%]nixpkgs/packages.json.gz' : '[%root%]nixpkgs/packages.json'),
   type: "GET",
@@ -314,7 +327,7 @@ $.ajax({
     nixpkgsCommit = data.commit;
     packageData = data.packages;
 
-    $search.on("input", refilter);
+    $search.on("input", debouncedRefilter);
 
     if ($search.val() !== "") {
       $search.trigger("input");
