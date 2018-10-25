@@ -140,14 +140,8 @@ function refilter() {
       return words.every(match);
     });
 
-    var encodedWords = words.map(function(value) {
-      return encodeURIComponent(value);
-    });
-    var hash = encodedWords.join('+');
-    while (document.getElementById(hash)) {
-      hash = '+' + hash;
-    }
-    history.replaceState({}, '', '#' + hash);
+    var hash = words.join(" ");
+    history.replaceState({}, '', '#' + encodeURIComponent(hash));
   } else {
     history.replaceState({}, '', '#');
   }
@@ -271,6 +265,46 @@ function showPackage() {
   ).attr("expanded", 1);
 };
 
+var $search = $('#search');
+
+function copySearchToHash() {
+  var query = $search.val();
+
+  if (!query && !document.location.hash) {
+    return;
+  }
+
+  var hash = query.split(/ +/).map(encodeURIComponent).join('+');
+
+  while (document.getElementById(hash)) {
+    hash = '+' + hash;
+  }
+
+  hash = '#' + hash;
+
+  if (hash !== document.location.hash) {
+    history.replaceState({}, '', hash);
+  }
+}
+
+function copyHashToSearch() {
+  if (!document.location.hash) {
+    return;
+  }
+
+  var query = decodeURIComponent(document.location.hash.replace(/^#\+*/, '').replace(/\+/g, ' '));
+
+  if (query !== $search.val()) {
+    $search
+      .val(query)
+      .trigger('input');
+  }
+}
+
+copyHashToSearch();
+$(window).on('popstate', copyHashToSearch);
+$search.on('input', copySearchToHash);
+
 $.ajax({
   url: ((document.domain == 'nixos.org') ? '[%root%]nixpkgs/packages.json.gz' : '[%root%]nixpkgs/packages.json'),
   type: "GET",
@@ -280,34 +314,11 @@ $.ajax({
     nixpkgsCommit = data.commit;
     packageData = data.packages;
 
-    var lastHash;
-    var hashChanged = true;
+    $search.on("input", refilter);
 
-    function updateQuery() {
-      var query = decodeURIComponent(document.location.hash.replace(/^#\+*/, '').replace(/\+/g, ' '));
-      if (query.length && query.length > 0 ){ $('#search').val(query); } else { $('#search').val('') };
-      refilter();
-      lastHash = location.hash || '#';
+    if ($search.val() !== "") {
+      $search.trigger("input");
     }
-
-    $(window).on('popstate', updateQuery);
-
-    updateQuery();
-
-    $("#search").on("input", function() {
-      if (hashChanged) {
-        history.pushState({}, '', location.hash || '#');
-        hashChanged = false;
-      }
-      refilter();
-    });
-    $('#search').on('change', function() {
-      var hash = location.hash || '#';
-      if (lastHash != hash) {
-        hashChanged = true;
-        lastHash = hash;
-      }
-    });
   }
 });
 
