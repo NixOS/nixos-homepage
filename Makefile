@@ -186,6 +186,14 @@ nixos/azure-blobs.nix:
 	curl --fail -L https://raw.github.com/NixOS/nixpkgs/master/nixos/modules/virtualisation/azure-bootstrap-blobs.nix > $@.tmp
 	mv $@.tmp $@
 
+nixos/gce-images.json: nixos/gce-images.nix
+	nix-instantiate --eval --strict --json $< > $@.tmp
+	mv $@.tmp $@
+
+nixos/gce-images.nix:
+	curl --fail -L https://raw.github.com/NixOS/nixpkgs/master/nixos/modules/virtualisation/gce-images.nix > $@.tmp
+	mv $@.tmp $@
+
 nixpkgs-commits.json:
 	curl --fail https://api.github.com/repos/NixOS/nixpkgs/commits > $@.tmp
 	mv $@.tmp $@
