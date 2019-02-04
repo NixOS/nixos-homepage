@@ -29,7 +29,6 @@
     on <a href="https://freenode.net/"><tt>irc.freenode.net</tt></a> to
     chat with the developers or other users.</p>
   </div>
-
 </div>
 
 <div class="row-fluid">
@@ -62,7 +61,7 @@
 <div class="row-fluid">
   <div class="span4">
     <h2>Other resources</h2>
-    <p>There are several other manuals:</p>
+    <p>There are several other manuals and support groups:</p>
     <ul>
       <li>The <a href="https://nixos.wiki"><strong>NixOS Wiki</strong></a>
       is an unofficial wiki maintained by the community.</li>
@@ -72,6 +71,8 @@
       <li>The <a href="[%nixopsManual%]"><strong>NixOps
       manual</strong></a> describes how to deploy NixOS machine in the
       cloud using <a href="[%root%]nixops">NixOps</a>.</li>
+      <li>A <a href="https://t.me/ru_nixos"><strong>Telegram community
+      </strong></a> exists. Main languages are russian and english.</li>
     </ul>
   </div>
 
