@@ -217,7 +217,7 @@ nixpkgs/packages.json: packages-config.nix
 	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
 	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config 'import ./packages-config.nix' \
 	  && echo -n '}') \
-	  | sed "s|$$nixpkgs/||g" > $@.tmp
+	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
 	python -mjson.tool < $@.tmp > /dev/null
 	mv $@.tmp $@
 
@@ -226,7 +226,7 @@ nixpkgs/packages-unstable.json: packages-config.nix
 	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
 	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS_UNSTABLE) -qa --json --arg config 'import ./packages-config.nix' \
 	  && echo -n '}') \
-	  | sed "s|$$nixpkgs/||g" > $@.tmp
+	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
 	python -mjson.tool < $@.tmp > /dev/null
 	mv $@.tmp $@
 
