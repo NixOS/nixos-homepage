@@ -43,6 +43,12 @@
       </td>
     </tr>
     <tr>
+      <th>Type:</th>
+      <td>
+      <td class='type'><em>Not given</em></td>
+      </td>
+    </tr>
+    <tr>
       <th>Example value:</th>
       <td>
       <td class='example'><em>Not given</em></td>
@@ -99,7 +105,8 @@ function updateTable() {
       .addClass('result')
       .addClass(odd ? 'odd' : 'even')
       .click(showOption)
-      .append($('<td/>', { class: 'option', text: optName }))
+      .append($('<td/>', { class: 'option' }).append($('<a/>', { text: optName })))
+
     );
     odd = !odd;
   });
@@ -322,6 +329,9 @@ function showOption() {
 
   if ('default' in opt)
     $('.default', details).empty().addClass('pre').text(ppNix('', opt.default));
+
+  if ('type' in opt)
+    $('.type', details).empty().addClass('pre').text(opt.type);
 
   if ('example' in opt)
     $('.example', details).empty().addClass('pre').text(ppNix('', opt.example));

@@ -1,4 +1,4 @@
-NIXOS_SERIES = 18.03
+NIXOS_SERIES = 18.09
 NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_SERIES)/nixexprs.tar.xz
 NIXPKGS_UNSTABLE = https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz
 
@@ -212,21 +212,21 @@ endif
 	gzip -9 < $^ > $@.tmp
 	mv $@.tmp $@
 
-nixpkgs/packages.json: discover-more-packages-config.nix
+nixpkgs/packages.json: packages-config.nix
 	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS)); \
 	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
-	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config 'import ./discover-more-packages-config.nix' \
+	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config 'import ./packages-config.nix' \
 	  && echo -n '}') \
-	  | sed "s|$$nixpkgs/||g" > $@.tmp
+	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
 	python -mjson.tool < $@.tmp > /dev/null
 	mv $@.tmp $@
 
-nixpkgs/packages-unstable.json: discover-more-packages-config.nix
+nixpkgs/packages-unstable.json: packages-config.nix
 	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS_UNSTABLE)); \
 	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
-	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS_UNSTABLE) -qa --json --arg config 'import ./discover-more-packages-config.nix' \
+	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS_UNSTABLE) -qa --json --arg config 'import ./packages-config.nix' \
 	  && echo -n '}') \
-	  | sed "s|$$nixpkgs/||g" > $@.tmp
+	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
 	python -mjson.tool < $@.tmp > /dev/null
 	mv $@.tmp $@
 

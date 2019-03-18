@@ -1,18 +1,37 @@
 [% WRAPPER layout.tt title="NixOS Security" menu='nixos' %]
 [% PROCESS common.tt %]
 
-<h3>Security Announcements</h3>
-<div class="row-fluid">
-  <p>There is a dedicated mailing list to keep track of security
-  releases. To subscribe either visit the <a
-  href="https://groups.google.com/forum/#!forum/nix-security-announce">nix-security-announce
-  Google Group</a> or send an email to <a
-  href="mailto:nix-security-announce+subscribe@googlegroups.com">nix-security-announce+subscribe@googlegroups.com</a>
-  with the subject "subscribe".</p>
+<h2>Sources of Security Information</h2>
 
-  <p>These announcements will be signed by a member of the NixOS
-  Security Team:</p>
+<div class="row-fluid" id="preamble">
+Security is a priority for the NixOS community. A variety of channels are used
+to coordinate development in this vein. Three of the main modes of communication
+about NixOS security are:
+</div>
 
+<div class="row-fluid" id="security-sources">
+<ul>
+  <li>The issues tagged "Security" on <a href="https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%221.severity%3A+security%22">GitHub/NixOS</a>
+  </li>
+  <li>The #nixos-security IRC channel on FreeNode
+  </li>
+  <li>The NixOS security <a href="https://discourse.nixos.org/c/dev/security">discourse</a>
+  </li>
+</ul>
+</div>
+
+<h2>Security Team</h2>
+
+<div class="row-fluid" id="security-team-blurb">
+<p>In addition to community-sourced developments, NixOS has a dedicated security
+team. If the above sources are not enough to answer your question, please reach
+out to a member of the team listed below.
+</p>
+</div>
+
+
+<h3>Personnel</h3>
+<div id="personnel">
   <ul>
     <li>
       <p>Graham Christensen
@@ -48,24 +67,21 @@
       </p>
     </li>
     <li>
-      <p>Rob Vermaas
+      <p>Rob Vermaas (emeritus)
          <a href="mailto:rob.vermaas@gmail.com">rob.vermaas@gmail.com</a>
          <br />
-         <strong>GPG Key:</strong><tt>
-            <a href="https://pgp.mit.edu/pks/lookup?op=get&amp;search=0xE114A5F264A8AE8E">0xE114A5F264A8AE8E</a>
-         </tt><br />
-         <strong>GPG Fingerprint:</strong>
-         <tt>96BF 75A5 3DEE 1F21 5F0C  979C E114 A5F2 64A8 AE8E</tt>
       </p>
     </li>
   </ul>
 </div>
 
 <h3>Security Disclosures</h3>
-<div class="row-fluid">
-  <p>To privately report a security issue with NixOS, Nix, and its
-  ecosystem, please mail anyone (or everyone) on the NixOS Security
-  Team and we will ensure the issue is handled.</p>
+<div class="row-fluid" id="security-disclosures">
+  <p>
+  To privately report a security issue with NixOS, Nix, and its ecosystem,
+  please email a member of the NixOS Security Team and we will ensure the issue
+  is handled. Our responses will be signed with our GPG keys.
+  </p>
 </div>
 
 [% END %]
