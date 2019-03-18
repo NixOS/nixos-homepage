@@ -156,8 +156,8 @@ news.html: all-news.xhtml
 all-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@
 
-news-rss.xml: news.xml news.xsl
-	xsltproc --param maxItem 1000 news-rss.xsl news.xml > $@.tmp
+news-rss.xml: news.xml news-rss.xsl
+	xsltproc news-rss.xsl news.xml > $@.tmp
 	mv $@.tmp $@
 
 index.html: news-rss.xml latest-news.xhtml nixpkgs-commits.json nixpkgs-commit-stats.json blogs.json
