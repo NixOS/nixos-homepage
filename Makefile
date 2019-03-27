@@ -31,11 +31,18 @@ NIXOS_MANUAL_OUT = nixos/manual
 all: $(NIXOS_MANUAL_OUT)
 
 $(NIXOS_MANUAL_OUT): $(NIXOS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN)/share/doc/nixos $(NIXOS_MANUAL_OUT) 'NixOS manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+	@echo rm -rf $@
+	./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN)/stable/share/doc/nixos $(NIXOS_MANUAL_OUT)/stable 'NixOS manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+	# put unstable manual under $(NIXOS_MANUAL_OUT)/unstable
+	./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN)/unstable/share/doc/nixos $(NIXOS_MANUAL_OUT)/unstable 'NixOS manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+	# alias for stable
+	ln -sfn stable/index.html $(NIXOS_MANUAL_OUT)/index.html
 
 $(NIXOS_MANUAL_IN):
-	@echo rm -f $@
-	nix-build -o $@ '<nixpkgs/nixos>' -I nixpkgs=$(NIXPKGS) \
+	@echo rm -f $@ ; mkdir -p $@
+	nix-build -o $@/stable '<nixpkgs/nixos>' -I nixpkgs=$(NIXPKGS) \
+	  -A config.system.build.manual.manual --arg configuration '{ fileSystems."/".device = "/dummy"; }'
+	nix-build -o $@/unstable '<nixpkgs/nixos>' -I nixpkgs=$(NIXPKGS_UNSTABLE) \
 	  -A config.system.build.manual.manual --arg configuration '{ fileSystems."/".device = "/dummy"; }'
 
 ### Prettify the Nix Pills
@@ -94,12 +101,19 @@ NIXPKGS_MANUAL_OUT = nixpkgs/manual
 all: $(NIXPKGS_MANUAL_OUT)
 
 $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT) 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
-	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
+	@echo rm -rf $@
+	./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/stable/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT)/stable 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/stable/index.html
+	# put unstable manual under $(NIXOS_MANUAL_OUT)/unstable
+	./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/unstable/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT)/unstable 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/unstable/index.html
+	# alias for stable
+	ln -sfn stable/index.html $(NIXPKGS_MANUAL_OUT)/index.html
 
 $(NIXPKGS_MANUAL_IN):
-	@echo rm -f $@
-	nix-build -o $@ '<nixpkgs/doc>' -I nixpkgs=$(NIXPKGS)
+	@echo rm -f $@ ; mkdir -p $@
+	nix-build -o $@/stable '<nixpkgs/doc>' -I nixpkgs=$(NIXPKGS)
+	nix-build -o $@/unstable '<nixpkgs/doc>' -I nixpkgs=$(NIXPKGS_UNSTABLE)
 
 
 all: nixpkgs/packages.json.gz \
