@@ -6,6 +6,7 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 
 default: all
 
+# HTML stuff
 
 HTML = index.html news.html \
   nix/index.html nix/about.html nix/download.html \
@@ -18,6 +19,9 @@ HTML = index.html news.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
   nixops/index.html
 
+html: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
+
+all: html
 
 ### Prettify the NixOS manual.
 
@@ -98,10 +102,9 @@ $(NIXPKGS_MANUAL_IN):
 	nix-build -o $@ '<nixpkgs/doc>' -I nixpkgs=$(NIXPKGS)
 
 
-all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
-  nixpkgs/packages.json.gz \
-  nixpkgs/packages-unstable.json.gz \
-  nixos/options.json.gz
+all: nixpkgs/packages.json.gz \
+     nixpkgs/packages-unstable.json.gz \
+     nixos/options.json.gz
 
 
 ### Prettify the Hydra manual.
