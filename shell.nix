@@ -1,4 +1,4 @@
-with import (fetchTarball channel:nixos-18.09) {};
+with import (fetchTarball channel:nixos-19.03) {};
 
 stdenv.mkDerivation {
   name = "nixos.org-homepage";
