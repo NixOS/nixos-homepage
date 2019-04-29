@@ -2,6 +2,8 @@
 
 body {
     padding-top: 50px;
+    /* a bit more mobile friendly */
+    font-size: 16px;
 }
 
 @media (max-width: 979px) {
@@ -97,6 +99,11 @@ pre {
 .nix-shell-command:before {
     color: #999;
     content: " [nix-shell]$ ";
+}
+
+/* mobile friendly */
+div.main {
+    word-wrap: break-all;
 }
 
 div.main li {
