@@ -103,7 +103,7 @@ pre {
 
 /* mobile friendly */
 div.main {
-    word-wrap: break-all;
+    overflow-wrap: break-word;
 }
 
 div.main li {
