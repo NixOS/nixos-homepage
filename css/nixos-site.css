@@ -283,12 +283,12 @@ div.search-details td.nix {
 }
 
 #search-results .description.docbook p > .docbook-important {
-	margin-top: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 #search-results .description.docbook .docbook-important {
-	border-left: #F89406 solid 0.3rem;
-	padding-left: 0.5rem;
+    border-left: #F89406 solid 0.3rem;
+    padding-left: 0.5rem;
 }
 
 /* Manual. */
