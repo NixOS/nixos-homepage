@@ -6,6 +6,99 @@
 
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 
+<div class="nixos-org-index">
+  [%# Title for the site, used to keep the document tree rooted at h1. %]
+  <h1>NixOS</h1>
+  
+  <div class="jumbotron-two"><div>
+    <div class="intro-nix">
+      <h2>What is Nix?</h2>
+    
+      <p>
+      Nix is a powerful package manager for Linux and other Unix systems
+      that makes package management reliable and reproducible.  It
+      provides atomic upgrades and rollbacks, side-by-side installation
+      of multiple versions of a package, multi-user package management
+      and easy setup of build environments.
+      </p>
+    
+      <div class="learn-more">
+        <a class="btn btn-success" href="[%root%]nix/">
+          <i class="fa fa-chevron-right"></i> Learn more about Nix
+        </a>
+      </div>
+    </div>
+    <div class="intro-nixos">
+      <h2>What is NixOS?</h2>
+    
+      <p>NixOS is a Linux distribution with a unique approach
+      to package and configuration management.  Built on top of the <a
+      href="[%root%]nix">Nix package manager</a>, it is completely
+      declarative, makes upgrading systems reliable, and has <a
+      href="[%root%]nixos/about.html">many other advantages</a>.</p>
+    
+      <div class="learn-more">
+        <a class="btn btn-success" href="[%root%]nixos/">
+          <i class="fa fa-chevron-right"></i> Learn more about NixOS
+        </a>
+      </div>
+    </div>
+  </div></div>
+  
+  <hr />
+  
+  <h2>More about NixOS</h2>
+  
+  <div class="row-fluid more-about">
+    <div class="span4">
+      <h3>Nixpkgs</h3>
+      <p>
+        The Nix Packages collection (Nixpkgs) is the ever growing
+        packages collection for the Nix package manager, released
+        under a permissive MIT/X11 license.
+      </p>
+      <a class="learn-more" href="[%root%]/nixpkgs">
+        More about Nixpkgs
+        <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+    <div class="span4">
+      <h3>NixOps</h3>
+      <p>
+        NixOps is a tool for deploying sets of NixOS Linux machines,
+        bare-metal or to the cloud. It extends NixOS’s declarative
+        approach to system configura-tion management to networks and
+        provisioning.
+      </p>
+      <a class="learn-more" href="[%root%]/nixops">
+        More about NixOps
+        <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+    <div class="span4 and-more">
+      <h3>About the community</h3>
+      <p>
+        Sometimes, it helps to talk with someone.  Our community
+        is there whether you want to help or get support.
+      </p>
+      <ul>
+        <li>
+          <a href="[%root%]/nixos/community.html">
+            Get in touch
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="[%root%]/nixos/support.html">
+            Getting support
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <hr />
 
 <div class="row-fluid">

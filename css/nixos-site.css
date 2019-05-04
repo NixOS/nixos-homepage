@@ -58,6 +58,77 @@ p {
     margin: 1em 3em 1em 0em;
 }
 
+/* Holds semantic titles on the main page. */
+.nixos-org-index > h1,
+.nixos-org-index > h2 {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    text-indent: -999em;
+}
+.nixos-org-index > hr {
+    margin-bottom: 0;
+}
+
+.nixos-org-index .more-about .learn-more {
+    display: block;
+    /*text-align: right;*/
+}
+
+.nixos-org-index .and-more ul {
+	list-style-type: none;
+	margin: 0;
+}
+.nixos-org-index .and-more ul li {
+	margin: 0;
+}
+
+@media (max-width: 767px) {
+    .jumbotron-two > div > div::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    .jumbotron-two .learn-more {
+        float: right;
+    }
+}
+@media (min-width: 768px) {
+    /* Punny name, as it is both the second jumobtron implementation
+       and a two elements side-by-side thing. */
+    .jumbotron-two {
+        display: table;
+		/* 14px/20px equivalent */
+		line-height: 1.429;
+    }
+    .jumbotron-two p {
+		font-size: 1.2em;
+	}
+    .jumbotron-two > div {
+        display: table-row;
+    }
+    .jumbotron-two > div > div {
+        width: 50%;
+        position: relative;
+        display: table-cell;
+        padding-bottom: 35px;
+    }
+    .jumbotron-two > div > div:not(:first-child) {
+        padding-left: 15px;
+    }
+    .jumbotron-two > div > div:not(:last-child) {
+        padding-right: 15px;
+    }
+    .jumbotron-two .learn-more {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+    .jumbotron-two div:not(:last-child) > .learn-more {
+        right: 15px;
+    }
+}
+
 h2, div.docbook h1 {
     font-weight: normal;
     font-size: 200%;
