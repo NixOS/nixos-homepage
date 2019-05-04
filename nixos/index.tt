@@ -1,0 +1,54 @@
+[% WRAPPER layout.tt title="NixOS Linux" hideTitle=1 menu='nixos' %]
+[% USE JSON.Escape %]
+[% USE IO.All %]
+[% USE HTML %]
+[% USE String %]
+
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
+
+<div class="jumbotron">
+  <img class="right-logo" src="[%root%]logo/nixos-logo-only-hires.png" alt="NixOS Logo"/>
+  <h1>NixOS</h1>
+  <h2>The Purely Functional Linux Distribution</h2>
+
+  <p class="lead">NixOS is a Linux distribution with a unique approach
+  to package and configuration management.  Built on top of the <a
+  href="[%root%]nix">Nix package manager</a>, it is completely
+  declarative, makes upgrading systems reliable, and has <a
+  href="[%root%]nixos/about.html">many other advantages</a>.</p>
+
+  <div class="get-nixos get-button">
+  <a class="btn btn-large btn-success"
+  href="[%root%]nixos/download.html"><i class="fa
+  fa-cloud-download"></i> Get NixOS</a>
+  </div>
+</div>
+
+<hr />
+
+<div class="row-fluid">
+  <div class="span4">
+    <h2>Declarative</h2>
+    <p>NixOS has a completely <strong>declarative</strong> approach to
+    configuration management: you write a specification of the desired
+    configuration of your system in NixOS’s modular language, and
+    NixOS takes care of making it happen.</p>
+  </div>
+  <div class="span4">
+    <h2>Reliable</h2>
+    <p>NixOS has <strong>atomic upgrades and rollbacks</strong>.  It’s
+    always safe to try an upgrade or configuration change: if things
+    go wrong, you can always roll back to the previous
+    configuration.</p>
+  </div>
+  <div class="span4">
+    <h2>DevOps-friendly</h2>
+    <p>Declarative specs and safe upgrades make NixOS a great system
+    for DevOps use.  <a
+    href="[%root%]nixops"><strong>NixOps</strong></a>, the NixOS cloud
+    deployment tool, allows you to provision and manage networks of
+    NixOS machines in environments like Amazon EC2 and VirtualBox.</p>
+  </div>
+</div>
+
+[% END %]
