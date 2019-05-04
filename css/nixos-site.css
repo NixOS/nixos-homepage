@@ -36,6 +36,11 @@ p {
     text-decoration: none;
 }
 
+.dropdown .caret {
+	vertical-align: middle;
+	margin-top: -3px;
+}
+
 .logo {
     margin-top: -5px;
     padding-right: 5px;
