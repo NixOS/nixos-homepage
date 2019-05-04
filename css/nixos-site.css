@@ -36,6 +36,10 @@ p {
     text-decoration: none;
 }
 
+.navbar .brand {
+	padding-bottom: 0;
+}
+
 .dropdown .caret {
 	vertical-align: middle;
 	margin-top: -3px;
