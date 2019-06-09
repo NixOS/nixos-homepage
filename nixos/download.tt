@@ -135,44 +135,74 @@ of NixOS  using azure-cli, just run:</p>
 <pre>
 # settings
 # vm name must be lowercase and letters/numbers only because it's also used as the domain name
-$ export VM=nixvm005
-$ export GROUP=test-group
-$ export LOCATION=westus
-$ export STORAGE=testst004
-$ export SOURCE_URI=<tt>[% blob %]</tt>
+export VM_NAME="nixosvm"
+export RESOURCE_GROUP="rg-nixosvm"
+export LOCATION="eastus"
+export STORAGE="nixosvm"
+export SOURCE_URI="<tt>[% blob %]</tt>"
 
 # create group
-$ azure config mode arm
-$ azure group create $GROUP --location $LOCATION
+az group create \
+    --name "$RESOURCE_GROUP" \
+    --location "$LOCATION
 
 # create storage
-$ azure storage account create $STORAGE -g $GROUP -l $LOCATION --type LRS
-$ azure storage account keys list $STORAGE -g $GROUP
+az storage account create \
+    --name "$STORAGE_ACCOUNT" \
+    --group "$RESOURCE_GROUP" \
+    --location "$LOCATION" \
+    --sku Standard_LRS
+
+az storage account keys list \
+    --name "$STORAGE_ACCOUNT" \
+    --group $RESOURCE_GROUP
 
 # export one of the storage access keys
-$ export KEY=
-$ echo $KEY
+export STORAGE_ACCOUNT_KEY="..."
+echo $STORAGE_ACCOUNT_KEY
 
-$ azure storage container create -a $STORAGE -k $KEY vm-images
+az storage container create \
+    --account-name "$STORAGE_ACCOUNT"
+    --account-key "$STORAGE_ACCOUNT_KEY"
+    --name vm-images
 
 # copy the image blob
-$ azure storage blob copy start --source-uri $SOURCE_URI --dest-account-name $STORAGE --dest-account-key $KEY \
-    --dest-container vm-images --dest-blob nixos-unstable-nixops.vhd
+az storage blob copy start \
+    --source-uri "$SOURCE_URI" \
+    --destination-blob "nixos-unstable-nixops.vhd" \
+    --destination-container "vm-images" \
+    --account-name "$STORAGE_ACCOUNT" \
+    --account-key "$STORAGE_ACCOUNT_KEY"
 
 # wait for blob copy status to change pending->success
-$ azure storage blob copy show --container vm-images  --blob nixos-unstable-nixops.vhd -a $STORAGE -k $KEY
+az storage blob show \
+    --name "nixos-unstable-nixops.vhd" \
+    --container-name "vm-images" \
+    --account-name "$STORAGE_ACCOUNT" \
+    --account-key "$STORAGE_ACCOUNT_KEY"
+
 
 # create vm
-$ azure vm create $GROUP $VM $LOCATION Linux --storage-account-name $STORAGE \
-    -d https://"$STORAGE".blob.core.windows.net/vm-images/root.vhd \
-    --image-urn https://"$STORAGE".blob.core.windows.net/vm-images/nixos-unstable-nixops.vhd \
-    --nic-name $VM --vnet-name $VM --vnet-address-prefix 10.0.0.1/16 --vnet-subnet-name $VM \
-    --vnet-subnet-address-prefix 10.0.1.1/24 --public-ip-name $VM --public-ip-domain-name $VM \
-    --admin-username azureuser
+az vm create \
+    --name "$VM_NAME" \
+    --resource-group "$RESOURCE_GROUP" \
+    --location "$LOCATION" \
+    --public-ip-address-dns-name "$VM_NAME" \
+    --image "https://$STORAGE_ACCOUNT.blob.core.windows.net/vm-images/nixos-unstable-nixops.vhd" \
+    --storage-account "$STORAGE_ACCOUNT" \
+    --storage-container-name "$VM_NAME" \
+    --use-unmanaged-disk \
+    --os-disk-size-gb "32" \
+    --os-type linux \
+    --admin-username "azureuser" \
+    --generate-ssh-keys
 
 # show machine properties and log in
-$ azure vm show $GROUP $VM
-$ ssh azureuser@"$VM"."$LOCATION".cloudapp.azure.com
+az vm show \
+    --name "$VM" \
+    --resource-group "$GROUP"
+
+ssh azureuser@"$VM_NAME"."$LOCATION".cloudapp.azure.com
 </pre>
 
 </section>
