@@ -138,7 +138,7 @@ of NixOS  using azure-cli, just run:</p>
 export VM_NAME="nixosvm"
 export RESOURCE_GROUP="rg-nixosvm"
 export LOCATION="eastus"
-export STORAGE="nixosvm"
+export STORAGE_ACCOUNT="nixosvm"
 export SOURCE_URI="<tt>[% blob %]</tt>"
 
 # create group
