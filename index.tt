@@ -32,10 +32,10 @@
       <h2>What is NixOS?</h2>
     
       <p>NixOS is a Linux distribution with a unique approach
-      to package and configuration management.  Built on top of the <a
-      href="[%root%]nix">Nix package manager</a>, it is completely
-      declarative, makes upgrading systems reliable, and has <a
-      href="[%root%]nixos/about.html">many other advantages</a>.</p>
+      to package and configuration management. Built on top of the
+      Nix package manager, it is completely declarative, makes
+      upgrading systems reliable, and has
+      <a href="[%root%]nixos/about.html">many other advantages</a>.</p>
     
       <div class="learn-more">
         <a class="btn btn-success" href="[%root%]nixos/">
