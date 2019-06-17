@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="News" menu='nixos' %]
+[% WRAPPER layout.tt title="News" menu='organization' %]
 
 [% INSERT "all-news.xhtml" %]
 

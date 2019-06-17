@@ -10,7 +10,8 @@ default: all
 HTML = index.html news.html \
   nix/index.html nix/about.html nix/download.html \
   nixpkgs/index.html nixpkgs/download.html \
-  nixos/about.html nixos/download.html nixos/support.html nixos/community.html nixos/packages.html nixos/options.html \
+  nixos/index.html nixos/about.html nixos/download.html nixos/support.html \
+  nixos/community.html nixos/packages.html nixos/options.html \
   nixos/security.html nixos/foundation.html \
   nixos/wiki.html \
   patchelf.html hydra/index.html \

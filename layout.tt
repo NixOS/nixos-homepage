@@ -59,7 +59,9 @@
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="[%root%]">NixOS</a></li>
+              [%# Using %root% for / will not work as expected. %]
+              <li><a href="/">Site Home</a></li>
+              <li><a href="[%root%]nixos">NixOS</a></li>
               <li><a href="[%root%]nix">Nix</a></li>
               <li><a href="[%root%]nixops">NixOps</a></li>
               <li><a href="[%root%]nixpkgs">Nixpkgs</a></li>
@@ -126,6 +128,10 @@
             [% ELSIF menu == 'patchelf' %]
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/patchelf"><i class="fa fa-github"></i></a></li>
+            [% ELSIF menu == 'organization' %]
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
             [% ELSE %]
               <ul class="nav pull-right">
             [% END %]
