@@ -1,0 +1,1984 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+
+<channel>
+	<title>NixOS Planet</title>
+	<link>http://planet.nixos.org</link>
+	<language>en</language>
+	<description>NixOS Planet - http://planet.nixos.org</description>
+	<atom:link rel="self" href="http://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
+
+<item>
+	<title>Munich NixOS Meetup: NixOS Munich Community Meetup</title>
+	<guid isPermaLink="true">https://www.meetup.com/Munich-NixOS-Meetup/events/262224658/</guid>
+	<link>https://www.meetup.com/Munich-NixOS-Meetup/events/262224658/</link>
+	<description>&lt;p&gt;&lt;img alt=&quot;photo&quot; class=&quot;photo&quot; src=&quot;https://secure.meetupstatic.com/photos/event/a/9/9/2/event_454123410.jpeg&quot; style=&quot;float: left; margin-right: 4px;&quot; /&gt;Munich NixOS Meetup&lt;/p&gt; &lt;p&gt;&lt;/p&gt;&lt;p&gt;The theme of this meetup is: How do you use the Nix ecosystem in your projects?&lt;/p&gt; &lt;p&gt;We (Mayflower) will showcase how we use Gitlab, Hydra &amp;amp; nixops for Continuous Integration and Deployment. If you want to share your setup with us, just show up and show us. :-)&lt;/p&gt; &lt;p&gt;ATTENTION: The Mayflower Munich office has moved to Laim! Please note the new address!&lt;/p&gt; &lt;p&gt;Food and beverages will be provided. We will probably BBQ on our new rooftop terrace depending on the weather. More details will follow a few days before the meetup.&lt;/p&gt; &lt;p&gt;&lt;/p&gt; &lt;p&gt;München  80687 - Germany&lt;/p&gt; &lt;p&gt;Thursday, July 4 at 6:30 PM&lt;/p&gt; &lt;p&gt;27&lt;/p&gt; &lt;p&gt;https://www.meetup.com/Munich-NixOS-Meetup/events/262224658/&lt;/p&gt;</description>
+	<pubDate>Tue, 11 Jun 2019 18:11:20 +0000</pubDate>
+</item>
+<item>
+	<title>Hercules Labs: gitignore for Nix</title>
+	<guid isPermaLink="true">https://blog.hercules-ci.com/nix/2019/05/15/nix-gitignore/</guid>
+	<link>https://blog.hercules-ci.com/nix/2019/05/15/nix-gitignore/</link>
+	<description>&lt;h3 id=&quot;abstract&quot;&gt;Abstract&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nixos.org/nix&quot;&gt;Nix&lt;/a&gt;, when &lt;a href=&quot;https://builtwithnix.org/&quot;&gt;used&lt;/a&gt; as a development build tool, needs to solve the same problem that git does: ignore some files.
+We’ve &lt;a href=&quot;https://github.com/hercules-ci/gitignore/&quot;&gt;extended&lt;/a&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;nix-gitignore&lt;/code&gt; so that Nix can more reliably use the configuration that you’ve already written for git.&lt;/p&gt;
+
+&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;When you tell Nix to build your project, you need to tell it which source files
+to build. This is done by using path syntax in a derivation or string interpolation.&lt;/p&gt;
+
+&lt;div class=&quot;language-nix highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;mkDerivation&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;./vendored/cowsay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;postPatch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    # Contrived example of using a file in string interpolation&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    # The patch file is put in /nix/store and the interpolation&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    # produces the appropriate store path.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    patch -lR &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;./cowsay-remove-alpaca.patch&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;  ''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This works well, until you find that Nix unexpectedly rebuilds your derivation
+because a temporary, hidden file has changed. One of those files you filtered
+out of your git tree with a ‘gitignore’ file…&lt;/p&gt;
+
+&lt;p&gt;Nix, as a build tool or package manager, was not designed with any specific version
+control system in mind. In fact it predates any dominance of git, because Nix’s
+general solution to the file ignoring problem, &lt;a href=&quot;https://nixos.org/nix/manual/#builtin-filterSource&quot;&gt;filterSource&lt;/a&gt;, was already
+implemented in 2007.&lt;/p&gt;
+
+&lt;p&gt;Over the last two to three years, various people have written functions to reuse these gitignore files.
+We have been using an &lt;a href=&quot;https://github.com/siers/nix-gitignore&quot;&gt;implementation&lt;/a&gt; by &lt;a href=&quot;https://github.com/siers&quot;&gt;@siers&lt;/a&gt;
+over the last couple of months and it has served us well, until we had a gitignore
+file that wasn’t detected because it was in a parent directory of the source directory we wanted to use.&lt;/p&gt;
+
+&lt;p&gt;I was &lt;a href=&quot;https://xkcd.com/356/&quot;&gt;nerd sniped&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Two months later, I finally got around to the implementation and I’m happy to announce
+that it solves some other problems as well. It reuses the tested rules by siers,
+doesn’t use &lt;a href=&quot;https://nixos.wiki/wiki/Import_From_Derivation&quot;&gt;import from derivation&lt;/a&gt; and can read all the files that it needs to.&lt;/p&gt;
+
+&lt;h1 id=&quot;usage&quot;&gt;Usage&lt;/h1&gt;
+
+&lt;p&gt;You can import the &lt;code class=&quot;highlighter-rouge&quot;&gt;gitignoreSource&lt;/code&gt; function &lt;a href=&quot;https://github.com/hercules-ci/gitignore#README&quot;&gt;from the repo&lt;/a&gt; like below, or use your &lt;a href=&quot;https://github.com/nmattia/niv&quot;&gt;favorite&lt;/a&gt; 
+&lt;a href=&quot;https://nixos.wiki/wiki/FAQ/Pinning_Nixpkgs&quot;&gt;pinning&lt;/a&gt; method.&lt;/p&gt;
+
+&lt;div class=&quot;language-nix highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pkgs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;nixpkgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;inherit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pkgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;stdenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mkDerivation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;inherit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;builtins&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;fetchTarball&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://github.com/hercules-ci/gitignore/archive/master.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;gitignoreSource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;in&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mkDerivation&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;gitignoreSource&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;./vendored/cowsay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;postPatch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    patch -lR &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;./cowsay-remove-alpaca.patch&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;  ''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s all there is to it.&lt;/p&gt;
+
+&lt;p&gt;It also composes with &lt;code class=&quot;highlighter-rouge&quot;&gt;cleanSourceWith&lt;/code&gt; if you like to filter out some other files as well.&lt;/p&gt;
+
+&lt;h1 id=&quot;comparison&quot;&gt;Comparison&lt;/h1&gt;
+
+&lt;p&gt;Here’s a comparison with the pre-existing implementation I found.&lt;/p&gt;
+
+&lt;p&gt;The latest &lt;a href=&quot;https://github.com/hercules-ci/gitignore#comparison&quot;&gt;up to date comparison table&lt;/a&gt; is available on the repo.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Feature \ Implementation&lt;/th&gt;
+      &lt;th&gt;cleanSource&lt;/th&gt;
+      &lt;th&gt;&lt;a href=&quot;https://github.com/siers/nix-gitignore&quot;&gt;siers&lt;/a&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;a href=&quot;https://github.com/siers/nix-gitignore&quot;&gt;siers recursive&lt;/a&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;a href=&quot;https://github.com/icetan/nix-git-ignore-source&quot;&gt;icetan&lt;/a&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;a href=&quot;https://github.com/Profpatsch/nixperiments/blob/master/filterSourceGitignore.nix&quot;&gt;Profpatsch&lt;/a&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;a href=&quot;https://github.com/numtide/nix-gitignore&quot;&gt;numtide&lt;/a&gt;&lt;/th&gt;
+      &lt;th&gt;this project&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ignores .git&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;No special Nix configuration&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;No import from derivation&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Uses subdirectory gitignores&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Uses parent gitignores&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;✔️ ?&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Uses user gitignores&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Has a test suite&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;?&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Works with &lt;code class=&quot;highlighter-rouge&quot;&gt;restrict-eval&lt;/code&gt; / Hydra&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Included in nixpkgs&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Legend&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;✔️&lt;/td&gt;
+      &lt;td&gt;Supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;✔️ ?&lt;/td&gt;
+      &lt;td&gt;Probably supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Not supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;?&lt;/td&gt;
+      &lt;td&gt;Probably not supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;Not applicable or depends&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&quot;inclusion-in-nixpkgs&quot;&gt;Inclusion in Nixpkgs&lt;/h1&gt;
+
+&lt;p&gt;I think it would be really nice to have this function in Nixpkgs, but it needs to be tested in practice first. This is where you can help out! Please give the &lt;a href=&quot;https://github.com/hercules-ci/gitignore/&quot;&gt;project (GitHub)&lt;/a&gt; a spin and &lt;a href=&quot;https://github.com/hercules-ci/gitignore/issues/6&quot;&gt;leave a thumbs up if it worked for you (issue)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h1&gt;
+
+&lt;p&gt;I am happy to contribute to the friendly and inventive Nix community. Even though this gitignore project is just a small contribution, it wouldn’t have been possible without the ideas and work of siers, icetan, and everyone behind Nix and Nixpkgs in general.&lt;/p&gt;
+
+&lt;p&gt;As a company we are working hard to make good products to support the community and companies that want to use Nix. One of our goals is to keep making contributions like this, so please try our &lt;a href=&quot;https://cachix.org/&quot;&gt;binary cache as a service&lt;/a&gt;, which is free for open source and just as easy to set up privately for companies. If you have an interest in &lt;a href=&quot;https://hercules-ci.com&quot;&gt;our Nix CI, please subscribe&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;– Robert&lt;/p&gt;</description>
+	<pubDate>Wed, 15 May 2019 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Hercules Labs: Hercules CI #3 development update</title>
+	<guid isPermaLink="true">https://blog.hercules-ci.com/sprints,/hercules-ci/2019/05/14/sprint-3-report/</guid>
+	<link>https://blog.hercules-ci.com/sprints,/hercules-ci/2019/05/14/sprint-3-report/</link>
+	<description>&lt;p&gt;What’s new?&lt;/p&gt;
+
+&lt;h2 id=&quot;precise-derivations-improvements&quot;&gt;Precise derivations improvements&lt;/h2&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Dependency failure tree&quot; src=&quot;https://blog.hercules-ci.com/images/dependency-failure-tree.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If a &lt;strong&gt;dependency failed for an attribute&lt;/strong&gt;, you can now explore the
+dependency stack down to the actual build failure.&lt;/p&gt;
+
+&lt;p&gt;There’s also a &lt;strong&gt;rebuild button&lt;/strong&gt; to retry the build for the whole stack, from the failed dependency down up to and including the build you clicked.
+We’ve addressed some of the styling issues visible on smaller screens.&lt;/p&gt;
+
+&lt;h2 id=&quot;fixed-an-issue-where-users-would-end-up-being-logged-out&quot;&gt;Fixed an issue where users would &lt;a href=&quot;https://github.com/hercules-ci/support/issues/13&quot;&gt;end up being logged out&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h2 id=&quot;hercules-ci-agent-02&quot;&gt;&lt;a href=&quot;https://github.com/hercules-ci/hercules-ci-agent/releases/tag/hercules-ci-agent-0.2&quot;&gt;hercules-ci-agent 0.2&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;use &lt;a href=&quot;https://github.com/hercules-ci/gitignore&quot;&gt;gitignore&lt;/a&gt; instead of &lt;a href=&quot;https://github.com/siers/nix-gitignore&quot;&gt;nix-gitignore&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;fix build on Darwin&lt;/li&gt;
+  &lt;li&gt;limit internal concurrency to max eight OS threads for beefier machines&lt;/li&gt;
+  &lt;li&gt;show version on &lt;code class=&quot;highlighter-rouge&quot;&gt;--help&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;build against NixOS 19.03 as default&lt;/li&gt;
+  &lt;li&gt;propagate agent information to agent view: Nix version, substituters,
+platform and Nix features&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;focus-for-the-next-sprint&quot;&gt;Focus for the next sprint&lt;/h1&gt;
+
+&lt;h2 id=&quot;cachix-and-thus-darwin-support&quot;&gt;Cachix and thus Darwin support&lt;/h2&gt;
+
+&lt;p&gt;The last bits missing (besides testing) are sharing derivations and artifacts between agents using
+&lt;a href=&quot;https://github.com/hercules-ci/hercules-ci-agent/pull/52&quot;&gt;cachix&lt;/a&gt; and the ease of
+Darwin agent deployment with accompanying documentation.&lt;/p&gt;
+
+&lt;h2 id=&quot;stuck-jobs-when-restarting-the-agent&quot;&gt;Stuck jobs when restarting the agent&lt;/h2&gt;
+
+&lt;p&gt;Currently when you restart an agent that is doing work, jobs claimed by the agent
+will appear stuck in the queue. This sprint is &lt;a href=&quot;https://github.com/hercules-ci/support/issues/19&quot;&gt;planned&lt;/a&gt;
+to ship a way to remedy the issue manually via the UI. Later on it will be automatically
+handled by agent ping-alive.&lt;/p&gt;
+
+&lt;h1 id=&quot;preview-phase&quot;&gt;Preview phase&lt;/h1&gt;
+
+&lt;p&gt;Once we’re done with Darwin and Cachix support, we’ll hand out preview access
+to everyone who will have &lt;a href=&quot;https://hercules-ci.com&quot;&gt;signed up for preview access&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can also &lt;a href=&quot;https://twitter.com/hercules_ci&quot;&gt;receive our latest updates via Twitter&lt;/a&gt; or
+read &lt;a href=&quot;https://blog.hercules-ci.com/sprints,/hercules-ci/2019/04/30/sprint-2-report/&quot;&gt;the previous development update&lt;/a&gt;.&lt;/p&gt;</description>
+	<pubDate>Tue, 14 May 2019 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Matthew Bauer: Nixpkgs macOS Stdenv Updates</title>
+	<guid isPermaLink="true">https://matthewbauer.us/blog/darwin-stdenv-update.html</guid>
+	<link>https://matthewbauer.us/blog/darwin-stdenv-update.html</link>
+	<description>&lt;p&gt;
+Over the past couple of months, I have been working on updating the
+macOS stdenv in Nixpkgs. This has significant impact on users of
+Nix/Nixpkgs on macOS. So, I want to explain what’s being updated, what
+the benefits are, and how we can minimize breakages.
+&lt;/p&gt;
+
+&lt;div class=&quot;outline-2&quot; id=&quot;outline-container-orga945576&quot;&gt;
+&lt;h2 id=&quot;orga945576&quot;&gt;&lt;span class=&quot;section-number-2&quot;&gt;1&lt;/span&gt; macOS/Darwin stdenv changes&lt;/h2&gt;
+&lt;div class=&quot;outline-text-2&quot; id=&quot;text-1&quot;&gt;
+&lt;p&gt;
+First, to summarize the changes that impact stdenv and the Darwin
+infrastructure. The PR is available at &lt;a href=&quot;https://github.com/NixOS/nixpkgs/pull/56744&quot;&gt;NixOS/nixpkgs PR #56744&lt;/a&gt;. This
+update has been in the works for the last few months, and is currently
+in the staging-next branch, waiting to be merged in &lt;a href=&quot;https://github.com/NixOS/nixpkgs/pull/60491&quot;&gt;NixOS/nixpkgs PR
+#60491&lt;/a&gt;. It should land on master and nixpkgs-unstable in the next few
+days. The main highlights are —
+&lt;/p&gt;
+
+&lt;ul class=&quot;org-ul&quot;&gt;
+&lt;li&gt;Change default LLVM toolchain from 5 to 7. LLVM 5 stdenv is still
+available through &lt;code&gt;llvmPackages_5.stdenv&lt;/code&gt; attribute path.&lt;/li&gt;
+&lt;li&gt;Upgrade Apple SDK from 10.10 to 10.12.&lt;/li&gt;
+&lt;li&gt;Update libSystem symbols from 10.10 (XNU 3789.1.32) to 10.12 (XNU
+3789.1.32).&lt;/li&gt;
+&lt;li&gt;Removed old patches to support old stdenv in Qt 5 and elsewhere.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+These macOS SDK upgrades are equivalent to setting
+&lt;code&gt;-mmacosx-version-min&lt;/code&gt; to 10.12 in XCode. As a result, we will break
+compatibility with macOS before 10.12.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-2&quot; id=&quot;outline-container-org8fa4e66&quot;&gt;
+&lt;h2 id=&quot;org8fa4e66&quot;&gt;&lt;span class=&quot;section-number-2&quot;&gt;2&lt;/span&gt; Why do we need to set a minimum macOS version?&lt;/h2&gt;
+&lt;div class=&quot;outline-text-2&quot; id=&quot;text-2&quot;&gt;
+&lt;p&gt;
+Without knowing internals of Nixpkgs, it might not be clear why we
+need to set a minimum macOS version. For instance with Linux, we are
+able to support any Linux kernel in Nixpkgs without any problem. The
+answer to this requires some understanding of how the kernel and
+userspace function.
+&lt;/p&gt;
+
+&lt;p&gt;
+Nixpkgs is able to support multiple Linux kernels because we can use
+multiple Libc’s at one time. For any executable, a Nix closure will
+include both its own Libc and the dynamic linker in its closure. This
+works in Linux where multiple Libc’s can be used, but not on macOS
+where only one Libc is available.
+&lt;/p&gt;
+
+&lt;p&gt;
+In short, Linux and macOS deal with compatibility between built
+binaries in different ways. They represent two opposite ends in how
+Unix-like kernels maintain compatibility with their userspace binaries.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org97271c0&quot;&gt;
+&lt;h3 id=&quot;org97271c0&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;2.1&lt;/span&gt; Linux syscall compatibility&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-2-1&quot;&gt;
+&lt;p&gt;
+The kernel is responsible for managing core operating system functions
+such as start-up, memory management, device abstractions, and process
+isolation. For it to function, the kernel needs to interact with the
+rest of the operating system which is collectively referred to as
+“userspace”. Executables in userspace use “syscalls” to tell the
+kernel what to do. These syscalls are very low-level and usually not
+called directly by a process. Instead, an abstraction layer is
+provided by the standard C library, or Libc.
+&lt;/p&gt;
+
+&lt;p&gt;
+Linux is unique among operating systems due to the fact that the
+Kernel and Libc are developed independently. Linux is maintained by
+creator Linus Torvalds and a community of contributors. Glibc, the
+most popular Libc for Linux, is maintained by the GNU project. As a
+result, Linux has a strong separation between Syscalls and Libc.
+&lt;/p&gt;
+
+&lt;p&gt;
+Linux does not tie itself to any specific Libc. Even though Glibc is
+used in almost all distros, many alternatives are available. For
+instance, Musl provides a more lightweight version of Glibc, while
+Bionic is the Libc used in the Android operating system. In addition,
+multiple versions of each of these Libc’s can be used on any one
+kernel, even at the same time. This can become very common when using
+multiple Nixpkgs versions at one time.
+&lt;/p&gt;
+
+&lt;p&gt;
+To accomplish this, Linux provides a stable list of syscalls that it
+has maintained across many versions. This is specified for i386 at
+&lt;a href=&quot;https://github.com/torvalds/linux/blob/master/arch/x86/entry/syscalls/syscall_32.tbl&quot;&gt;arch/x86/entry/syscalls/syscall_32.tbl&lt;/a&gt; in the kernel tree. The
+syscalls specified here are the interface through which the Libc
+communicates with the kernel. As a result, applications built in 1992
+can run on a modern kernel, provided it comes with copies of all its
+libraries&lt;sup&gt;&lt;a class=&quot;footref&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fn.1&quot; id=&quot;fnr.1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-orgdb21355&quot;&gt;
+&lt;h3 id=&quot;orgdb21355&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;2.2&lt;/span&gt; macOS Libc compatibility&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-2-2&quot;&gt;
+&lt;p&gt;
+The macOS Libc is called libSystem. It is available on all macOS
+systems at &lt;code&gt;/usr/lib/libSystem.B.dylib&lt;/code&gt;. This library is the main
+interface that binary compatibility is maintained in macOS. Unlike
+Linux, macOS maintains a stable interface in libSystem that all
+executables are expected to link to. This interface is guaranteed by
+Apple to be stable between versions.
+&lt;/p&gt;
+
+&lt;p&gt;
+In Nixpkgs, we maintain this compatibility through a list of symbols
+that are exported by libSystem. This is a simple text list and is
+available for viewing at
+&lt;a href=&quot;https://github.com/NixOS/nixpkgs/blob/master/pkgs/os-specific/darwin/apple-source-releases/Libsystem/system_c_symbols&quot;&gt;NixOS/nixpkgs/pkgs/os-specific/darwin/apple-source-releases/Libsystem/system_c_symbols&lt;/a&gt;.
+The symbol list is created by listing symbols (&lt;code&gt;nm&lt;/code&gt;) on the minimum
+macOS version that we support (for my PR, 10.12). We do some linking
+tricks to ensure that everything that we build in Nixpkgs only
+contains those symbols. This means that we can reproducibly build on
+newer versions of macOS, while maintaining compatibility with older
+macOS versions. Unfortunately, newer symbols introduced in later
+versions cannot be used even on systems that have those symbols.
+&lt;/p&gt;
+
+&lt;p&gt;
+A side effect of macOS design, is that fully static executables are
+not supported in macOS as they are on Linux. Without a stable syscall
+interface, there is nothing to provide compatibility between versions.
+As a result, Apple does not support this type of linking&lt;sup&gt;&lt;a class=&quot;footref&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fn.2&quot; id=&quot;fnr.2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+There is no mandated reason why we need to use libSystem directly. In
+fact, some languages like Go have attempted to instead use the syscall
+interface directly. There is no reason why this couldn’t work,
+however, upgrades between versions will almost certainly break
+binaries. Go eventually &lt;a href=&quot;https://github.com/golang/go/issues/17490&quot;&gt;abandoned this scheme in time for Go 1.12&lt;/a&gt;
+(proposed by Nixpkgs macOS contributor copumpkin!)
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org8a04bff&quot;&gt;
+&lt;h3 id=&quot;org8a04bff&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;2.3&lt;/span&gt; Others&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-2-3&quot;&gt;
+&lt;p&gt;
+Some other examples may be useful. They mostly fall on one side or the
+other of the Syscall / Libc divide —
+&lt;/p&gt;
+
+&lt;ul class=&quot;org-ul&quot;&gt;
+&lt;li&gt;FreeBSD - breaks syscall compatibility between major releases,
+should use Libc for longterm binary compatibility.&lt;/li&gt;
+&lt;li&gt;OpenBSD - similarly, changes syscall interface, perhaps even more
+often than FreeBSD&lt;sup&gt;&lt;a class=&quot;footref&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fn.3&quot; id=&quot;fnr.3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+&lt;li&gt;NetBSD - apparently has maintained syscall compatibility
+since 1992. &lt;sup&gt;&lt;a class=&quot;footref&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fn.4&quot; id=&quot;fnr.4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;li&gt;Windows, Solaris, Fuchsia - I cannot find any information on these
+and how they handle binary compatibility.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org137f925&quot;&gt;
+&lt;h3 id=&quot;org137f925&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;2.4&lt;/span&gt; LLVM triple&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-2-4&quot;&gt;
+&lt;p&gt;
+As a side note, this difference can be clearly seen in how we specify
+target systems. The LLVM triple is a 3 or 4-part string specifying
+what we want to build for. The parts of the triple correspond to:
+&lt;/p&gt;
+
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-text&quot;&gt;&amp;lt;cpu&amp;gt;-&amp;lt;vendor&amp;gt;-&amp;lt;kernel&amp;gt;-&amp;lt;abi&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul class=&quot;org-ul&quot;&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;cpu&amp;gt;&lt;/code&gt; — the CPU architecture that we are building for. Examples
+include &lt;code&gt;x86_64&lt;/code&gt;, &lt;code&gt;aarch64&lt;/code&gt;, &lt;code&gt;armv7l&lt;/code&gt;, etc.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;vendor&amp;gt;&lt;/code&gt; — an arbitrary string specifying the vendor for the
+toolchain. In Nixpkgs, this should always be &lt;code&gt;unknown&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;kernel&amp;gt;&lt;/code&gt; — the kernel to build for (&lt;code&gt;linux&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;abi&amp;gt;&lt;/code&gt; — the kernel ABI to use. On Linux, this corresponds to the
+Libc we are using (&lt;code&gt;gnu&lt;/code&gt; for Glibc, &lt;code&gt;musl&lt;/code&gt; for Musl, &lt;code&gt;android&lt;/code&gt; for
+Bionic).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+When building for Linux, we can build for any version of Linux at one
+time. No version information is required. In addition, we must specify
+what “ABI” we want to use. In Nix, this is not very important because
+the Libc is provided by the closure. In fact, Nix has its own version
+of the LLVM triple called a Nix system tuple that omits the &lt;code&gt;&amp;lt;abi&amp;gt;&lt;/code&gt;
+portion altogether! It corresponds to &lt;code&gt;&amp;lt;cpu&amp;gt;-&amp;lt;kernel&amp;gt;&lt;/code&gt; from the LLVM
+triple.
+&lt;/p&gt;
+
+&lt;p&gt;
+In comparison, when building for BSDs, we must specify which
+version of the kernel we are building for. In addition, we leave off
+the &lt;code&gt;&amp;lt;abi&amp;gt;&lt;/code&gt; portion, because there is only one Libc available for
+these platforms. They are even included in the same tree as the
+kernel. Examples of BSD triples include,
+&lt;/p&gt;
+
+&lt;ul class=&quot;org-ul&quot;&gt;
+&lt;li&gt;&lt;code&gt;aarch64-apple-darwin16.0.0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x86_64-unknown-freebsd12.0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;i386-unknown-openbsd5.8&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;armv7l-unknown-netbsd7.99&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-2&quot; id=&quot;outline-container-org7ec308c&quot;&gt;
+&lt;h2 id=&quot;org7ec308c&quot;&gt;&lt;span class=&quot;section-number-2&quot;&gt;3&lt;/span&gt; Compatibility table&lt;/h2&gt;
+&lt;div class=&quot;outline-text-2&quot; id=&quot;text-3&quot;&gt;
+&lt;p&gt;
+Looking through the old versions, I’ve compiled a list of what I think
+are the corresponding macOS versions for each Nixpkgs release. As you
+can see, we try to support at least 3 previous macOS releases. This
+also happens to be about what Apple supports through security
+updates&lt;sup&gt;&lt;a class=&quot;footref&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fn.5&quot; id=&quot;fnr.5&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;.
+&lt;/p&gt;
+
+&lt;table&gt;
+
+
+&lt;colgroup&gt;
+&lt;col class=&quot;org-right&quot; /&gt;
+
+&lt;col class=&quot;org-left&quot; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th class=&quot;org-right&quot; scope=&quot;col&quot;&gt;Nixpkgs release&lt;/th&gt;
+&lt;th class=&quot;org-left&quot; scope=&quot;col&quot;&gt;macOS version&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;org-right&quot;&gt;19.09&lt;/td&gt;
+&lt;td class=&quot;org-left&quot;&gt;10.12, 10.13, 10.14, 10.15?&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class=&quot;org-right&quot;&gt;19.03&lt;/td&gt;
+&lt;td class=&quot;org-left&quot;&gt;10.11&lt;sup&gt;&lt;a class=&quot;footref&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fn.6&quot; id=&quot;fnr.6&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;, 10.12, 10.13, 10.14&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class=&quot;org-right&quot;&gt;18.09&lt;/td&gt;
+&lt;td class=&quot;org-left&quot;&gt;10.11, 10.12, 10.13, 10.14&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class=&quot;org-right&quot;&gt;18.03&lt;/td&gt;
+&lt;td class=&quot;org-left&quot;&gt;10.11, 10.12, 10.13, 10.14&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class=&quot;org-right&quot;&gt;17.09&lt;/td&gt;
+&lt;td class=&quot;org-left&quot;&gt;10.10, 10.11, 10.12, 10.13&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class=&quot;org-right&quot;&gt;17.03&lt;/td&gt;
+&lt;td class=&quot;org-left&quot;&gt;10.10, 10.11, 10.12&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class=&quot;org-right&quot;&gt;16.09&lt;/td&gt;
+&lt;td class=&quot;org-left&quot;&gt;10.10, 10.11, 10.12&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class=&quot;org-right&quot;&gt;16.03&lt;/td&gt;
+&lt;td class=&quot;org-left&quot;&gt;10.9?, 10.10, 10.11, 10.12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+We know that some users are stuck on older versions of macOS due to
+reasons outside of their control. As a result, we will try to support
+the 19.03 branch for a little bit longer than is usually done. If your
+organization uses 10.11, it might be a good idea to update to a newer
+version along with your update to Nixpkgs 19.09.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-2&quot; id=&quot;outline-container-org41e26b8&quot;&gt;
+&lt;h2 id=&quot;org41e26b8&quot;&gt;&lt;span class=&quot;section-number-2&quot;&gt;4&lt;/span&gt; Conclusion&lt;/h2&gt;
+&lt;div class=&quot;outline-text-2&quot; id=&quot;text-4&quot;&gt;
+&lt;p&gt;
+My main goal has been to show better how Nixpkgs and macOS system
+interact. I got a little bit sidetracked exploring differences in
+binary compatibility between different operating systems. But, this
+should help users to better understand the differences in how macOS
+and Linux works in relation to Nixpkgs.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&quot;footnotes&quot;&gt;
+&lt;h2 class=&quot;footnotes&quot;&gt;Footnotes: &lt;/h2&gt;
+&lt;div id=&quot;text-footnotes&quot;&gt;
+
+&lt;div class=&quot;footdef&quot;&gt;&lt;sup&gt;&lt;a class=&quot;footnum&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fnr.1&quot; id=&quot;fn.1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;div class=&quot;footpara&quot;&gt;&lt;p class=&quot;footpara&quot;&gt;
+It would be interesting to test this in practice. Finding a
+Libc that would work might be the hardest part. Even better if we
+could use Nix’s closures!
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;footdef&quot;&gt;&lt;sup&gt;&lt;a class=&quot;footnum&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fnr.2&quot; id=&quot;fn.2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; &lt;div class=&quot;footpara&quot;&gt;&lt;p class=&quot;footpara&quot;&gt;
+StackOverflow question at
+&lt;a href=&quot;https://stackoverflow.com/questions/844819/how-to-static-link-on-os-x&quot;&gt;https://stackoverflow.com/questions/844819/how-to-static-link-on-os-x&lt;/a&gt;.
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;footdef&quot;&gt;&lt;sup&gt;&lt;a class=&quot;footnum&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fnr.3&quot; id=&quot;fn.3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; &lt;div class=&quot;footpara&quot;&gt;&lt;p class=&quot;footpara&quot;&gt;
+According to the_why_of_y on Hacker News,
+&lt;a href=&quot;https://news.ycombinator.com/item?id=14011662&quot;&gt;https://news.ycombinator.com/item?id=14011662&lt;/a&gt;
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;footdef&quot;&gt;&lt;sup&gt;&lt;a class=&quot;footnum&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fnr.4&quot; id=&quot;fn.4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; &lt;div class=&quot;footpara&quot;&gt;&lt;p class=&quot;footpara&quot;&gt;
+Some more details on NetBSD’s ABI are available at
+&lt;a href=&quot;http://www.jp.netbsd.org/gallery/presentations/joerg/asiabsdcon2016/asiabsdcon2016.pdf&quot;&gt;http://www.jp.netbsd.org/gallery/presentations/joerg/asiabsdcon2016/asiabsdcon2016.pdf&lt;/a&gt;
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;footdef&quot;&gt;&lt;sup&gt;&lt;a class=&quot;footnum&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fnr.5&quot; id=&quot;fn.5&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; &lt;div class=&quot;footpara&quot;&gt;&lt;p class=&quot;footpara&quot;&gt;
+macOS updates come out about every year and Apple offers about
+3 months support. More information is available at
+&lt;a href=&quot;https://apple.stackexchange.com/questions/47664/what-is-apples-policy-for-supporting-security-updates-on-older-versions-of-os-x&quot;&gt;https://apple.stackexchange.com/questions/47664/what-is-apples-policy-for-supporting-security-updates-on-older-versions-of-os-x&lt;/a&gt;.
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;footdef&quot;&gt;&lt;sup&gt;&lt;a class=&quot;footnum&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fnr.6&quot; id=&quot;fn.6&quot;&gt;6&lt;/a&gt;&lt;/sup&gt; &lt;div class=&quot;footpara&quot;&gt;&lt;p class=&quot;footpara&quot;&gt;
+There is an issue with building on 10.11 with the new
+swift-corelibs derivation. As a result, you need to use prebuilt
+version to avoid this issue.
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+
+&lt;/div&gt;
+&lt;/div&gt;</description>
+	<pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Hercules Labs: Sprint #2 development update</title>
+	<guid isPermaLink="true">https://blog.hercules-ci.com/sprints,/hercules-ci/2019/04/30/sprint-2-report/</guid>
+	<link>https://blog.hercules-ci.com/sprints,/hercules-ci/2019/04/30/sprint-2-report/</link>
+	<description>&lt;h1 id=&quot;whats-new-in-sprint-2&quot;&gt;What’s new in sprint #2?&lt;/h1&gt;
+
+&lt;h2 id=&quot;precise-derivations&quot;&gt;Precise derivations&lt;/h2&gt;
+
+&lt;p&gt;Agent 0.2 will communicate the structure of the derivation closure to the service,
+which allows us to traverse the derivation tree and dispatch each derivation to multiple agents.&lt;/p&gt;
+
+&lt;p&gt;Neither source or binary data used by Nix on the agent is ever sent to
+the service.&lt;/p&gt;
+
+&lt;p&gt;We will &lt;a href=&quot;https://github.com/hercules-ci/hercules-ci-agent/releases&quot;&gt;release&lt;/a&gt; agent 0.2 after more testing and UI improvements.
+as we’re still doing testing and UI improvements.&lt;/p&gt;
+
+&lt;h2 id=&quot;git-rich-metadata&quot;&gt;Git-rich metadata&lt;/h2&gt;
+
+&lt;p&gt;Each job now includes a branch name, commit message and the committer:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Job rich metadata&quot; src=&quot;https://blog.hercules-ci.com/images/sprint_2_git_rich.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;job-page-information&quot;&gt;Job page information&lt;/h2&gt;
+
+&lt;p&gt;The job page shows information that triggered the build and timing information:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Job page&quot; src=&quot;https://blog.hercules-ci.com/images/sprint_2_job.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;focus-for-sprint-3&quot;&gt;Focus for sprint #3&lt;/h1&gt;
+
+&lt;h2 id=&quot;cachix-support&quot;&gt;Cachix support&lt;/h2&gt;
+
+&lt;p&gt;We’ve already made progress of parsing Cachix configuration, but
+there’s the actual pushing of derivations to be done.&lt;/p&gt;
+
+&lt;h2 id=&quot;darwin--features-support&quot;&gt;Darwin / Features support&lt;/h2&gt;
+
+&lt;p&gt;Now that precise derivations are working, they need to get aware of platforms for Darwin support.
+Same goes for infamous Nix “features”, which work like labels that can be used to dispatch individual derivations to specific groups of agents.&lt;/p&gt;
+
+&lt;h1 id=&quot;preview-phase&quot;&gt;Preview phase&lt;/h1&gt;
+
+&lt;p&gt;You’re still in time to &lt;a href=&quot;https://hercules-ci.com&quot;&gt;sign up for preview access&lt;/a&gt; or follow us on 
+&lt;a href=&quot;https://twitter.com/hercules_ci&quot;&gt;Twitter&lt;/a&gt; as we will be expanding access in the coming weeks.&lt;/p&gt;</description>
+	<pubDate>Tue, 30 Apr 2019 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Hercules Labs: Sprint #1 development update</title>
+	<guid isPermaLink="true">https://blog.hercules-ci.com/sprints,/hercules-ci/2019/04/16/sprint-1-report/</guid>
+	<link>https://blog.hercules-ci.com/sprints,/hercules-ci/2019/04/16/sprint-1-report/</link>
+	<description>&lt;p&gt;Two weeks ago we launched preview access of &lt;a href=&quot;https://hercules-ci.com&quot;&gt;our CI&lt;/a&gt; for &lt;a href=&quot;https://nixos.org/nix/&quot;&gt;Nix&lt;/a&gt; users.
+Thank you all for giving us the feedback through the poll and individually.
+We are overwhelmed with the support we got.&lt;/p&gt;
+
+&lt;p&gt;Focus of the preview launch was to build a fast, reliable, easy to use CI.
+Today you can connect your github repository in a few clicks, deploy an agent and all your commits
+are being tested with their status reported to GitHub.&lt;/p&gt;
+
+&lt;p&gt;In our latest sprint we have fixed a few issues, mainly centered around usability and clarity
+of what’s going on with your projects.&lt;/p&gt;
+
+&lt;p&gt;The following features were shipped:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://status.hercules-ci.com&quot;&gt;The status page&lt;/a&gt;
+for insight into the availability of the service&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Agent support for &lt;a href=&quot;https://github.com/hercules-ci/hercules-ci-agent/pull/36&quot;&gt;building &lt;code class=&quot;highlighter-rouge&quot;&gt;nix/ci.nix&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ci.nix&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;default.nix&lt;/code&gt;&lt;/a&gt;
+from your repository&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Agent support for &lt;a href=&quot;https://github.com/hercules-ci/hercules-ci-agent/pull/37&quot;&gt;reporting non-attribute evaluation errors&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://docs.hercules-ci.com&quot;&gt;Documentation&lt;/a&gt; about
+how evaluation is performed&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The following bugs fixes were shipped:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;When there is no agent available, enqueued jobs will show instructions to setup one&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To prevent CSRF we’ve tightened &lt;code class=&quot;highlighter-rouge&quot;&gt;SameSite&lt;/code&gt; cookie from &lt;code class=&quot;highlighter-rouge&quot;&gt;Lax&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Strict&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/hercules-ci/support/issues/11&quot;&gt;CDN used to serve stale assets due to caching misconfiguration&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Numerous fixes to the UI:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;breadcrumbs now allow user to switch account or just navigate to it&lt;/li&gt;
+      &lt;li&gt;no more flickering when switching pages&lt;/li&gt;
+      &lt;li&gt;some jobs used to be stuck in Building phase&lt;/li&gt;
+      &lt;li&gt;more minor improvements&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In our upcoming sprint, #2 we will focus on:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fine-grained dispatch of individual derivations (instead of just top-level derivation closures from
+attributes as we shipped in the preview) - what follows is testing and
+presenting derivations in the UI&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Currently we only store the git revision for each job, which will be expanded to include more metadata like
+branch name, commit message, author, etc&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If time allows, preliminary &lt;a href=&quot;https://github.com/hercules-ci/support/issues/2&quot;&gt;cachix support&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You’re still in time to &lt;a href=&quot;https://hercules-ci.com&quot;&gt;sign up for preview access&lt;/a&gt; as we
+will be expanding access in the following weeks.&lt;/p&gt;</description>
+	<pubDate>Tue, 16 Apr 2019 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Hercules Labs: Announcing Cachix private binary caches and 0.2.0 release</title>
+	<guid isPermaLink="true">https://blog.hercules-ci.com/cachix/nix/2019/03/07/announcing-private-cachix/</guid>
+	<link>https://blog.hercules-ci.com/cachix/nix/2019/03/07/announcing-private-cachix/</link>
+	<description>&lt;p&gt;In March 2018 we’ve set on a mission to streamline Nix usage in teams.
+Today we are shipping Nix private binary cache support to &lt;a href=&quot;https://cachix.org&quot;&gt;Cachix&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can now share an unlimited number of binary caches in your group of developers,
+protected from public use with just a few clicks.&lt;/p&gt;
+
+&lt;p&gt;Authorization is based on GitHub organizations/teams (if this is a blocker for you,
+&lt;a href=&quot;https://github.com/cachix/cachix/issues/181&quot;&gt;let us know what you need&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;To get started, head over to &lt;a href=&quot;https://cachix.org&quot;&gt;https://cachix.org&lt;/a&gt; and choose a plan that suits your
+private binary cache needs:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Create Nix private binary cache&quot; src=&quot;https://blog.hercules-ci.com/images/cachix-nix-create-private-cache.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At the same time &lt;a href=&quot;https://github.com/cachix/cachix/blob/master/cachix/CHANGELOG.md#020---2019-03-04&quot;&gt;cachix 0.2.0&lt;/a&gt;
+cli is out with major improvements to NixOS usage.
+If you run the following as root you’ll get:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cachix use hie-nix
+Cachix configuration written to /etc/nixos/cachix.nix.
+Binary cache hie-nix configuration written to /etc/nixos/cachix/hie-nix.nix.
+
+To start using cachix add the following to your /etc/nixos/configuration.nix:
+
+    imports &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; ./cachix.nix &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+Then run:
+
+    &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nixos-rebuild switch
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Thank you for your feedback in the poll answers. It’s clear what we should do next:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/cachix/cachix/issues/146&quot;&gt;Multiple signing keys (key rotation, multiple trusted users, …)&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/cachix/cachix/issues/182&quot;&gt;Search over binary cache contents&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/cachix/cachix/issues/19&quot;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Happy cache sharing!&lt;/p&gt;</description>
+	<pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Sander van der Burg: Generating functional architecture documentation from Disnix service models</title>
+	<guid isPermaLink="false">tag:blogger.com,1999:blog-1397115249631682228.post-4105606183532683430</guid>
+	<link>http://sandervanderburg.blogspot.com/2019/02/generating-functional-architecture.html</link>
+	<description>In &lt;a href=&quot;https://sandervanderburg.blogspot.com/2019/01/a-minimalistic-discovery-and.html&quot;&gt;my previous blog post&lt;/a&gt;, I have described a minimalistic architecture documentation approach for service-oriented systems based on &lt;a href=&quot;https://sandervanderburg.blogspot.com/2015/10/setting-up-basic-software-configuration.html&quot;&gt;my earlier experiences with setting up basic configuration management repositories&lt;/a&gt;. I used this approach to construct a documentation catalog for the platform I have been developing at Mendix.&lt;br /&gt;&lt;br /&gt;I also explained my motivation -- it improves developer effectiveness, team consensus and the on-boarding of new team members. Moreover, it is a crucial ingredient in improving the quality of a system.&lt;br /&gt;&lt;br /&gt;Although we are quite happy with the documentation, my biggest inconvenience is that I had to derive it &lt;strong&gt;entirely by hand&lt;/strong&gt; -- I consulted various kinds of sources, but since existing documentation and information provided by people may be incomplete or inconsistent, I considered the source code and deployment configuration files the &lt;strong&gt;ultimate source of truth&lt;/strong&gt;, because no matter how elegantly a diagram is drawn, it is useless if it does not match the actual implementation.&lt;br /&gt;&lt;br /&gt;Because a manual documentation process is very costly and time consuming, a more ideal situation would be to have an &lt;strong&gt;automated&lt;/strong&gt; approach that automatically derives architecture documentation from deployment specifications.&lt;br /&gt;&lt;br /&gt;Since I am developing a deployment framework for service-oriented systems myself (&lt;a href=&quot;https://sandervanderburg.blogspot.com/2011/02/disnix-toolset-for-distributed.html&quot;&gt;Disnix&lt;/a&gt;), I have decided to extend it with a &lt;strong&gt;generator&lt;/strong&gt; that can derive architecture diagrams and supplemental descriptions from the deployment models using the conventions I have described in my previous blog post.&lt;br /&gt;&lt;br /&gt;&lt;h2&gt;Visualizing deployment architectures in Disnix&lt;/h2&gt;&lt;br /&gt;As explained in my previous blog post, the notation that I used for the diagrams was not something I invented from scratch, but something I borrowed from Disnix.&lt;br /&gt;&lt;br /&gt;Disnix already has a feature (for quite some time) that can visualize &lt;strong&gt;deployment architectures&lt;/strong&gt; referring to a description that shows how the functional parts (the services/components) are mapped to physical resources (e.g. machines/containers) in a network.&lt;br /&gt;&lt;br /&gt;For example, after deploying a service-oriented system, such as &lt;a href=&quot;https://sandervanderburg.blogspot.com/2018/02/a-more-realistic-public-disnix-example.html&quot;&gt;my example web application system&lt;/a&gt;, by running:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ disnix-env -s services.nix -i infrastructure.nix \&lt;br /&gt;  -d distribution-bundles.nix&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;You can visualize the corresponding deployment architecture of the system, by running:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ disnix-visualize &amp;gt; out.dot&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;The above command-line instruction generates a directed graph in the &lt;a href=&quot;https://www.graphviz.org/doc/info/lang.html&quot;&gt;DOT language&lt;/a&gt;. The resulting dot file can be converted into a displayable image (such as a PNG or SVG file) by running:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ dot -Tpng out.dot &amp;gt; out.png&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;Resulting in a diagram of the deployment architecture that may look as follows:&lt;br /&gt;&lt;br /&gt;&lt;div class=&quot;separator&quot; style=&quot;clear: both; text-align: center;&quot;&gt;&lt;a href=&quot;https://1.bp.blogspot.com/-thivY_Ic-eQ/XHbqLvvUKiI/AAAAAAAAHjk/x1qdBjwKb0UiwUzst7DWGGPcG9wSqH1qgCLcBGAs/s1600/deployment.png&quot; style=&quot;margin-left: 1em; margin-right: 1em;&quot;&gt;&lt;img border=&quot;0&quot; src=&quot;https://1.bp.blogspot.com/-thivY_Ic-eQ/XHbqLvvUKiI/AAAAAAAAHjk/x1qdBjwKb0UiwUzst7DWGGPcG9wSqH1qgCLcBGAs/s400/deployment.png&quot; width=&quot;510&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;br /&gt;The above diagram uses the following notation:&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;&lt;li&gt;The &lt;strong&gt;light grey boxes&lt;/strong&gt; denote machines in a network. In the above deployment scenario, we have two them.&lt;/li&gt;&lt;li&gt;The &lt;strong&gt;ovals&lt;/strong&gt; denote services (more specifically: in a Disnix-context, they reflect any kind of distributable deployment unit). Services can have almost any shape, such as web services, web applications, and databases. Disnix uses &lt;a href=&quot;https://sandervanderburg.blogspot.com/2015/07/deploying-state-with-disnix.html&quot;&gt;a plugin system called Dysnomia&lt;/a&gt; to make sure that the appropriate deployment steps are carried out for a particular type of service.&lt;/li&gt;&lt;li&gt;The arrows denote &lt;strong&gt;inter-dependencies&lt;/strong&gt;. When a service points to another service means that the latter is an inter-dependency of the former service. Inter-dependency relationships ensure that the dependent service gets all configuration properties so that it knows how to reach the dependency and the deployment system makes sure that inter-dependencies of a specific service are deployed first.&lt;br /&gt;&lt;br /&gt;In some cases, enforcing the right activation order of activation may be expensive. It is also possible to drop the ordering requirement, as denoted by the dashed arrows. This is acceptable for redirects from the portal application, but not acceptable for database connections.&lt;/li&gt;&lt;li&gt;The &lt;strong&gt;dark grey boxes&lt;/strong&gt; denote containers. Containers can be any kind of runtime environment that hosts zero or more distributable deployment units. For example, the container service of a MySQL database is a MySQL DBMS, whereas the container service of a Java web application archive can be a Java Servlet container, such as Apache Tomcat.&lt;/li&gt;&lt;/ul&gt;&lt;br /&gt;&lt;h2&gt;Visualizing the functional architecture of service-oriented systems&lt;/h2&gt;&lt;br /&gt;The services of which a service-oriented systems is composed are &lt;strong&gt;flexible&lt;/strong&gt; -- they can be deployed to various kinds of environments, such a test environment, a second fail-over production environment or a local machine.&lt;br /&gt;&lt;br /&gt;Because services can be deployed to a variety of targets, it may also be desired to get an architectural view of the &lt;strong&gt;functional&lt;/strong&gt; parts only.&lt;br /&gt;&lt;br /&gt;I created a new tool called: &lt;i&gt;dydisnix-visualize-services&lt;/i&gt; that can be used to generate &lt;strong&gt;functional architecture diagrams&lt;/strong&gt; by visualizing the services in the Disnix services model:&lt;br /&gt;&lt;br /&gt;&lt;div class=&quot;separator&quot; style=&quot;clear: both; text-align: center;&quot;&gt;&lt;a href=&quot;https://1.bp.blogspot.com/-pojjht7JRAs/XHbmV77KC6I/AAAAAAAAHjY/KZV-7PCCDvYwQaOc87hUEwQOFn5ySZVngCLcBGAs/s1600/services-raw.png&quot; style=&quot;margin-left: 1em; margin-right: 1em;&quot;&gt;&lt;img border=&quot;0&quot; src=&quot;https://1.bp.blogspot.com/-pojjht7JRAs/XHbmV77KC6I/AAAAAAAAHjY/KZV-7PCCDvYwQaOc87hUEwQOFn5ySZVngCLcBGAs/s400/services-raw.png&quot; width=&quot;510&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;br /&gt;The above diagram is a visual representation of the services model of the example web application system, using a similar notation as the deployment architecture without showing any environment characteristics:&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Ovals&lt;/strong&gt; denote services and &lt;strong&gt;arrows&lt;/strong&gt; denote inter-dependency relationships.&lt;/li&gt;&lt;li&gt;Every service is &lt;strong&gt;annotated&lt;/strong&gt; with its type, so that it becomes clear what kind of a shape a service has and what kind of deployment procedures need to be carried out.&lt;/li&gt;&lt;/ul&gt;&lt;br /&gt;Despite the fact that the above diagram is focused on the functional parts, it may still look quite detailed, even from a functional point of view.&lt;br /&gt;&lt;br /&gt;Essentially, the architecture of my example web application system is a &quot;&lt;strong&gt;system of sub systems&lt;/strong&gt;&quot; -- each sub system provides an isolated piece of functionality consisting of a database backend and web application front-end bundle. The portal sub system is the entry point and responsible for guiding the users to the sub systems implementing the functionality that they want to use.&lt;br /&gt;&lt;br /&gt;It is also possible to annotate services in the Disnix services model with a group and description property:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;{distribution, invDistribution, pkgs, system}:&lt;br /&gt;&lt;br /&gt;let&lt;br /&gt;  customPkgs = import ../top-level/all-packages.nix {&lt;br /&gt;    inherit pkgs system;&lt;br /&gt;  };&lt;br /&gt;&lt;br /&gt;  groups = {&lt;br /&gt;    homework = &quot;Homework&quot;;&lt;br /&gt;    literature = &quot;Literature&quot;;&lt;br /&gt;    ...&lt;br /&gt;  };&lt;br /&gt;in&lt;br /&gt;{&lt;br /&gt;  homeworkdb = {&lt;br /&gt;    name = &quot;homeworkdb&quot;;&lt;br /&gt;    pkg = customPkgs.homeworkdb;&lt;br /&gt;    type = &quot;mysql-database&quot;;&lt;br /&gt;    group = groups.homework;&lt;br /&gt;    description = &quot;Database backend of the Homework subsystem&quot;;&lt;br /&gt;  };&lt;br /&gt;&lt;br /&gt;  homework = {&lt;br /&gt;    name = &quot;homework&quot;;&lt;br /&gt;    pkg = customPkgs.homework;&lt;br /&gt;    dependsOn = {&lt;br /&gt;      inherit usersdb homeworkdb;&lt;br /&gt;    };&lt;br /&gt;    type = &quot;apache-webapplication&quot;;&lt;br /&gt;    appName = &quot;Homework&quot;;&lt;br /&gt;    group = groups.homework;&lt;br /&gt;    description = &quot;Front-end of the Homework subsystem&quot;;&lt;br /&gt;  };&lt;br /&gt;&lt;br /&gt;  ...&lt;br /&gt;}&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;In the above services model, I have grouped every database and web application front-end bundle in a group that represents a sub system (such as &lt;i&gt;Homework&lt;/i&gt;). By adding the &lt;i&gt;--group-subservices&lt;/i&gt; parameter to the &lt;i&gt;dydisnix-visualize-services&lt;/i&gt; command invocation, we can simplify the diagram to only show the sub systems and how these sub systems are inter-connected:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ dydisnix-visualize-services -s services.nix -f png \&lt;br /&gt;  --group-subservices&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;resulting in the following functional architecture diagram:&lt;br /&gt;&lt;br /&gt;&lt;div class=&quot;separator&quot; style=&quot;clear: both; text-align: center;&quot;&gt;&lt;a href=&quot;https://4.bp.blogspot.com/-hx3XDVMZvhI/XHbt-9TkcKI/AAAAAAAAHjw/hnLWlk_zQfIP9rB7MvEC9t5ffUG4rAJEwCLcBGAs/s1600/services-grouped.png&quot; style=&quot;margin-left: 1em; margin-right: 1em;&quot;&gt;&lt;img border=&quot;0&quot; src=&quot;https://4.bp.blogspot.com/-hx3XDVMZvhI/XHbt-9TkcKI/AAAAAAAAHjw/hnLWlk_zQfIP9rB7MvEC9t5ffUG4rAJEwCLcBGAs/s400/services-grouped.png&quot; width=&quot;510&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;br /&gt;As may be observed in the picture above, all services have been grouped. The service groups are denoted by ovals with dashed borders.&lt;br /&gt;&lt;br /&gt;We can also query sub architecture diagrams of every group/sub system. For example, the following command generates a sub architecture diagram for the &lt;i&gt;Homework&lt;/i&gt; group:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ dydisnix-visualize-services -s services.nix -f png \&lt;br /&gt;  --group Homework --group-subservices&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;resulting in the following diagram:&lt;br /&gt;&lt;br /&gt;&lt;div class=&quot;separator&quot; style=&quot;clear: both; text-align: center;&quot;&gt;&lt;a href=&quot;https://2.bp.blogspot.com/-ihokzNcVLdg/XHbv2_-h5lI/AAAAAAAAHj8/B1VcDmd1UHgceYzBHfG15yyu0MbblCrfACLcBGAs/s1600/services-homework.png&quot; style=&quot;margin-left: 1em; margin-right: 1em;&quot;&gt;&lt;img border=&quot;0&quot; src=&quot;https://2.bp.blogspot.com/-ihokzNcVLdg/XHbv2_-h5lI/AAAAAAAAHj8/B1VcDmd1UHgceYzBHfG15yyu0MbblCrfACLcBGAs/s400/services-homework.png&quot; width=&quot;478&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;br /&gt;The above diagram will only show the the services in the &lt;i&gt;Homework&lt;/i&gt; group and their context -- i.e. non-transitive dependencies and services that have a dependency on any service in the requested group.&lt;br /&gt;&lt;br /&gt;Services that exactly fit the group or any of its parent groups will be displayed verbatim (e.g. the homework database back-end and front-end). The other services will be categorized into in the lowest common sub group (the &lt;i&gt;Users&lt;/i&gt; and &lt;i&gt;Portal&lt;/i&gt; sub systems).&lt;br /&gt;&lt;br /&gt;For more complex architectures consisting of many layers, you may probably want to generate all available architecture diagrams in one command invocation. It is also possible to run the visualization tool in &lt;strong&gt;batch mode&lt;/strong&gt;. In batch mode, it will recursively generate diagrams for the top-level architecture and every possible sub group and stores them in a specified output folder:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ dydisnix-visualize-services --batch -s services.nix -f svg \&lt;br /&gt;  --output-dir out&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;&lt;h2&gt;Generating supplemental documentation&lt;/h2&gt;&lt;br /&gt;Another thing I have explained in my previous blog post is that providing diagrams is useful, but they cannot clear up all confusion -- you also need to document and clarify additional details, such as the purposes of the services.&lt;br /&gt;&lt;br /&gt;It also possible to generate a documentation page for each group showing a table of services with their descriptions and types:&lt;br /&gt;&lt;br /&gt;The following command generates a documentation page for the &lt;i&gt;Homework&lt;/i&gt; group:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ dydisnix-document-services -s services.nix --group Homework&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;It is also possible to adjust the generation process by providing a documentation configuration file (by using the &lt;i&gt;--docs&lt;/i&gt; parameter):&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ dydisnix-document-services -f services.nix --docs docs.nix \&lt;br /&gt;  --group Homework&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;The are a variety of settings that can be provided in a documentation configuration file:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;{&lt;br /&gt;  groups = {&lt;br /&gt;    Homework = &quot;Homework subsystem&quot;;&lt;br /&gt;    Literature = &quot;Literature subsystem&quot;;&lt;br /&gt;    ...&lt;br /&gt;  };&lt;br /&gt;&lt;br /&gt;  fields = [ &quot;description&quot; &quot;type&quot; ];&lt;br /&gt;&lt;br /&gt;  descriptions = {&lt;br /&gt;    type = &quot;Type&quot;;&lt;br /&gt;    description = &quot;Description&quot;;&lt;br /&gt;  };&lt;br /&gt;}&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;The above configuration file specifies the following properties:&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;&lt;li&gt;The descriptions for every group.&lt;/li&gt;&lt;li&gt;Which fields should be displayed in the overview table. It is possible to display any property of a service.&lt;/li&gt;&lt;li&gt;A description of every field in the services model.&lt;/li&gt;&lt;/ul&gt;&lt;br /&gt;Like the visualization tool, the documentation tool can also be used in batch mode to generate pages for all possible groups and sub groups.&lt;br /&gt;&lt;br /&gt;&lt;h2&gt;Generating a documentation catalog&lt;/h2&gt;&lt;br /&gt;In addition to generating architecture diagrams and descriptions, it is also possible to combine both tools to automatically generate a &lt;strong&gt;complete&lt;/strong&gt; documentation &lt;strong&gt;catalog&lt;/strong&gt; for a service-oriented system, such as the web application example system:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ dydisnix-generate-services-docs -s services.nix --docs docs.nix \&lt;br /&gt;  -f svg --output-dir out&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;By opening the entry page in the output folder, you will get an overview of the top-level architecture, with a description of the groups.&lt;br /&gt;&lt;br /&gt;&lt;div class=&quot;separator&quot; style=&quot;clear: both; text-align: center;&quot;&gt;&lt;a href=&quot;https://2.bp.blogspot.com/-nJnw7K03daI/XHb6SaeN6zI/AAAAAAAAHkI/50AJpkO1GJEtN52kKiBrQZ6IEaAheM7bgCLcBGAs/s1600/catalog-root.png&quot; style=&quot;margin-left: 1em; margin-right: 1em;&quot;&gt;&lt;img border=&quot;0&quot; src=&quot;https://2.bp.blogspot.com/-nJnw7K03daI/XHb6SaeN6zI/AAAAAAAAHkI/50AJpkO1GJEtN52kKiBrQZ6IEaAheM7bgCLcBGAs/s320/catalog-root.png&quot; width=&quot;500&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;br /&gt;By clicking on a group hyperlink, you can inspect the sub architecture of the corresponding group, such as the 'Homework' sub system:&lt;br /&gt;&lt;br /&gt;&lt;div class=&quot;separator&quot; style=&quot;clear: both; text-align: center;&quot;&gt;&lt;a href=&quot;https://1.bp.blogspot.com/-QVvx0gj-Fu4/XHb6-e9slNI/AAAAAAAAHkQ/4Ec9zDH1vPkVp3TuIUe4FDRPgQaFrzT4wCLcBGAs/s1600/catalog-homework.png&quot; style=&quot;margin-left: 1em; margin-right: 1em;&quot;&gt;&lt;img border=&quot;0&quot; src=&quot;https://1.bp.blogspot.com/-QVvx0gj-Fu4/XHb6-e9slNI/AAAAAAAAHkQ/4Ec9zDH1vPkVp3TuIUe4FDRPgQaFrzT4wCLcBGAs/s320/catalog-homework.png&quot; width=&quot;500&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;br /&gt;The above page displays the sub architecture diagram of the 'Homework' subsystem and a description of all services belonging to that group.&lt;br /&gt;&lt;br /&gt;Another particularly interesting aspect is the 'Portal' sub system:&lt;br /&gt;&lt;br /&gt;&lt;div class=&quot;separator&quot; style=&quot;clear: both; text-align: center;&quot;&gt;&lt;a href=&quot;https://2.bp.blogspot.com/-UHZUqtsjwrA/XHb7uBKNKGI/AAAAAAAAHkY/kLiZXCabJwolzDRQv1ZWlZChd1XidUssQCLcBGAs/s1600/catalog-portal.png&quot; style=&quot;margin-left: 1em; margin-right: 1em;&quot;&gt;&lt;img border=&quot;0&quot; src=&quot;https://2.bp.blogspot.com/-UHZUqtsjwrA/XHb7uBKNKGI/AAAAAAAAHkY/kLiZXCabJwolzDRQv1ZWlZChd1XidUssQCLcBGAs/s320/catalog-portal.png&quot; width=&quot;500&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;br /&gt;The portal's purpose is to redirect users to functionality provided by the other sub systems. The above architecture diagram displays all the sub systems in grouped form to illustrate that there is a dependency relationship, but without revealing all their internal details that clutters the diagram with unnecessary implementation details.&lt;br /&gt;&lt;br /&gt;&lt;h2&gt;Other features&lt;/h2&gt;&lt;br /&gt;The tools support more use cases than those described in this blog post -- it is also possible, for example, to create arbitrary layers of sub groups by using the '/' character as a delimiter in the group identifier. I also used the company platform as an example case, that can be decomposed into four layers.&lt;br /&gt;&lt;br /&gt;&lt;h2&gt;Availability&lt;/h2&gt;&lt;br /&gt;The tools described in this blog post are part of the latest development version of &lt;a href=&quot;https://sandervanderburg.blogspot.com/2011/03/self-adaptive-deployment-with-disnix.html&quot;&gt;Dynamic Disnix&lt;/a&gt; -- a very experimental extension framework built on top of Disnix that can be used to make service-oriented systems self-adaptive by redeploying their services in case of events.&lt;br /&gt;&lt;br /&gt;The reason why I have added these tools to Dynamic Disnix (and not the core Disnix toolset) is because the extension toolset has an infrastructure to parse and reflect over individual Disnix models.&lt;br /&gt;&lt;br /&gt;Although I promised to make an official release of Dynamic Disnix a very long time ago, this still has not happened yet. However, the documentation feature is a compelling reason to stabilize the code and make the framework more usable.&lt;br /&gt;</description>
+	<pubDate>Wed, 27 Feb 2019 23:09:00 +0000</pubDate>
+	<author>noreply@blogger.com (Sander van der Burg)</author>
+</item>
+<item>
+	<title>Matthew Bauer: Static Nix: a command-line swiss army knife</title>
+	<guid isPermaLink="true">https://matthewbauer.us/blog/static-nix.html</guid>
+	<link>https://matthewbauer.us/blog/static-nix.html</link>
+	<description>&lt;p&gt;
+Nix is an extremely useful package manager. But, not all systems have
+it installed. Without root priveleges, you cannot create the
+&lt;code&gt;/nix&lt;/code&gt; directory required for it to work.
+&lt;/p&gt;
+
+&lt;p&gt;
+With static linking, and some new features added in Nix 2.0, you can
+fairly easily use the Nix package manager in these unpriveleged
+context&lt;sup&gt;&lt;a class=&quot;footref&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fn.1&quot; id=&quot;fnr.1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. To make this even easier, I am publishing prebuilt a
+&lt;code&gt;x86_64&lt;/code&gt; binary on my personal website. It will reside permanently at
+&lt;a href=&quot;https://matthewbauer.us/nix&quot;&gt;https://matthewbauer.us/nix&lt;/a&gt; (5M download).
+&lt;/p&gt;
+
+&lt;div class=&quot;outline-2&quot; id=&quot;outline-container-org25c633a&quot;&gt;
+&lt;h2 id=&quot;org25c633a&quot;&gt;&lt;span class=&quot;section-number-2&quot;&gt;1&lt;/span&gt; Trying it out&lt;/h2&gt;
+&lt;div class=&quot;outline-text-2&quot; id=&quot;text-1&quot;&gt;
+&lt;p&gt;
+You can use it like this,
+&lt;/p&gt;
+
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;&lt;span class=&quot;org-whitespace-line&quot;&gt;$ curl https://matthewbauer.us/nix | sh -s run --store $&lt;/span&gt;&lt;span class=&quot;org-variable-name&quot;&gt;&lt;span class=&quot;org-whitespace-line&quot;&gt;HOME&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;org-whitespace-line&quot;&gt;/.cache/nix/store -f channel:nixpkgs-unstable hello -c hello&lt;/span&gt;
+Hello World!
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+You can use any package provided by &lt;a href=&quot;https://nixos.org/nixos/packages.html&quot;&gt;Nixpkgs&lt;/a&gt; (using the attribute
+name). This gives you a swiss army knife of command line tools. I have
+compiled some cool commands to try out. There examples of various
+tools, games and demos that you can use through Nix, without
+installing anything! Everything is put into temporary
+directories&lt;sup&gt;&lt;a class=&quot;footref&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fn.2&quot; id=&quot;fnr.2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org45017a1&quot;&gt;
+&lt;h3 id=&quot;org45017a1&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.1&lt;/span&gt; Dev tools&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-1&quot;&gt;
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ &lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt;=$(mktemp); &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  curl https://matthewbauer.us/nix &amp;gt; $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  chmod +x $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; run --store $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.cache/nix/store -f channel:nixpkgs-unstable &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  bashInteractive curl git htop imagemagick file findutils jq nix openssh pandoc
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-orgd6b41ff&quot;&gt;
+&lt;h3 id=&quot;orgd6b41ff&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.2&lt;/span&gt; Emacs&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-2&quot;&gt;
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ &lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt;=$(mktemp); &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  curl https://matthewbauer.us/nix &amp;gt; $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  chmod +x $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; run --store $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.cache/nix/store -f channel:nixpkgs-unstable &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  emacs -c emacs
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-orgd6d7635&quot;&gt;
+&lt;h3 id=&quot;orgd6d7635&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.3&lt;/span&gt; File manager&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-3&quot;&gt;
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ &lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt;=$(mktemp); &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  curl https://matthewbauer.us/nix &amp;gt; $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  chmod +x $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; run --store $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.cache/nix/store -f channel:nixpkgs-unstable &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  ranger -c ranger
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org90aa970&quot;&gt;
+&lt;h3 id=&quot;org90aa970&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.4&lt;/span&gt; Fire&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-4&quot;&gt;
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ curl https://matthewbauer.us/nix | &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  sh -s run --store $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.cache/nix/store -f channel:nixpkgs-unstable &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  aalib -c aafire
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-orgb053e05&quot;&gt;
+&lt;h3 id=&quot;orgb053e05&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.5&lt;/span&gt; Fortune&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-5&quot;&gt;
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ curl https://matthewbauer.us/nix | &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  sh -s run --store $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.cache/nix/store -f channel:nixpkgs-unstable &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  bash cowsay fortune -c sh -c &lt;span class=&quot;org-string&quot;&gt;'cowsay $(fortune)'&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-orgd9d66af&quot;&gt;
+&lt;h3 id=&quot;orgd9d66af&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.6&lt;/span&gt; Nethack&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-6&quot;&gt;
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ &lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt;=$(mktemp); &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  curl https://matthewbauer.us/nix &amp;gt; $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  chmod +x $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; &amp;amp;&amp;amp; &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  $&lt;span class=&quot;org-variable-name&quot;&gt;nix&lt;/span&gt; run --store $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.cache/nix/store -f channel:nixpkgs-unstable &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  nethack -c nethack
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org5a5640c&quot;&gt;
+&lt;h3 id=&quot;org5a5640c&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.7&lt;/span&gt; Weather&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-7&quot;&gt;
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ curl https://matthewbauer.us/nix | &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  sh -s run --store $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.cache/nix/store -f channel:nixpkgs-unstable &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  bash curl cowsay -c sh -c &lt;span class=&quot;org-string&quot;&gt;'cowsay $(curl wttr.in/?format=3)'&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org5089ff5&quot;&gt;
+&lt;h3 id=&quot;org5089ff5&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.8&lt;/span&gt; World map&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-8&quot;&gt;
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ curl https://matthewbauer.us/nix | &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  sh -s run --store $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.cache/nix/store -f channel:nixpkgs-unstable &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  bash coreutils curl libcaca ncurses -c bash -c &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;org-string&quot;&gt;'img=$(mktemp ${TMPDIR:-/tmp}/XXX.jpg); \&lt;/span&gt;
+&lt;span class=&quot;org-string&quot;&gt;&lt;span class=&quot;org-whitespace-line&quot;&gt;  curl -k https://www.cia.gov/library/publications/the-world-factbook/attachments/images/large/world-physical.jpg &amp;gt; $img \&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;org-string&quot;&gt;  &amp;amp;&amp;amp; img2txt -W $(tput cols) -f utf8 $img'&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org7996c03&quot;&gt;
+&lt;h3 id=&quot;org7996c03&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.9&lt;/span&gt; Youtube&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-9&quot;&gt;
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ curl https://matthewbauer.us/nix | &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  sh -s run --store $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.cache/nix/store -f channel:nixpkgs-unstable &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+  bash youtube-dl mplayer -c sh -c &lt;span class=&quot;org-sh-escaped-newline&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;org-whitespace-line&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;org-string&quot;&gt;&lt;span class=&quot;org-whitespace-line&quot;&gt;'mplayer -vo caca $(youtube-dl --no-check-certificate -g https://www.youtube.com/watch?v=dQw4w9WgXcQ)'&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org544fdbf&quot;&gt;
+&lt;h3 id=&quot;org544fdbf&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.10&lt;/span&gt; And more…&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-10&quot;&gt;
+&lt;p&gt;
+Lots more cool things are possible. Look through &lt;a href=&quot;https://nixos.org/nixos/packages.html&quot;&gt;the packages provided
+by Nixpkgs&lt;/a&gt; if you need inspiration.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-2&quot; id=&quot;outline-container-org1431755&quot;&gt;
+&lt;h2 id=&quot;org1431755&quot;&gt;&lt;span class=&quot;section-number-2&quot;&gt;2&lt;/span&gt; Avoid installing and extracting each time&lt;/h2&gt;
+&lt;div class=&quot;outline-text-2&quot; id=&quot;text-2&quot;&gt;
+&lt;p&gt;
+This method of using Nix has some upfront cost. This is because
+&lt;a href=&quot;https://matthewbauer.us/nix&quot;&gt;https://matthewbauer.us/nix&lt;/a&gt; must be downloaded each time and the
+embedded .tar.gz file extracted. If you want Nix to stay around
+permanently, you have to follow a few tricks. Total install size is
+about 11M. Using this method, you will reduce startup and keep Nix in
+your path at each login.
+&lt;/p&gt;
+
+&lt;p&gt;
+I have two ways of doing this. One the “easy” way is just running
+this script.
+&lt;/p&gt;
+
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ curl https://matthewbauer.us/nix.sh | sh
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+The other is the “safe” way and involves running some commands in
+order. These are the same commands run by the script, but this lets
+you audit everything being done line by line.
+&lt;/p&gt;
+
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ &lt;span class=&quot;org-variable-name&quot;&gt;t&lt;/span&gt;=$(mktemp -d)
+$ curl https://matthewbauer.us/nix &amp;gt; $&lt;span class=&quot;org-variable-name&quot;&gt;t&lt;/span&gt;/nix.sh
+$ pushd $&lt;span class=&quot;org-variable-name&quot;&gt;t&lt;/span&gt;
+$ sh nix.sh --extract
+$ popd
+$ mkdir -p $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/bin/ $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/share/nix/corepkgs/
+$ mv $&lt;span class=&quot;org-variable-name&quot;&gt;t&lt;/span&gt;/dat/nix $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/bin/
+$ mv $&lt;span class=&quot;org-variable-name&quot;&gt;t&lt;/span&gt;/dat/share/nix/corepkgs/* $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/share/nix/corepkgs/
+$ echo export &lt;span class=&quot;org-string&quot;&gt;'PATH=$HOME/bin:$PATH'&lt;/span&gt; &amp;gt;&amp;gt; $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.profile
+$ echo export &lt;span class=&quot;org-string&quot;&gt;'NIX_DATA_DIR=$HOME/share'&lt;/span&gt; &amp;gt;&amp;gt; $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.profile
+$ source $&lt;span class=&quot;org-variable-name&quot;&gt;HOME&lt;/span&gt;/.profile
+$ rm -rf $&lt;span class=&quot;org-variable-name&quot;&gt;t&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+You can now run the Nix commands above as you need to, and it will be
+available on each login. Remember to always add the arguments &lt;code&gt;-f
+channel:nixpkgs-unstable&lt;/code&gt; and &lt;code&gt;--store $HOME/.cache/nix/store&lt;/code&gt;,
+otherwise Nix will be confused on how to handle the missing
+&lt;code&gt;/nix/store&lt;/code&gt; and other environment variables.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-2&quot; id=&quot;outline-container-org14c8f86&quot;&gt;
+&lt;h2 id=&quot;org14c8f86&quot;&gt;&lt;span class=&quot;section-number-2&quot;&gt;3&lt;/span&gt; Build it yourself&lt;/h2&gt;
+&lt;div class=&quot;outline-text-2&quot; id=&quot;text-3&quot;&gt;
+&lt;p&gt;
+This is certainly a security vulnerability so you may want to build
+static Nix for youself from &lt;a href=&quot;https://github.com/NixOS/nixpkgs/pull/56281&quot;&gt;my pull request&lt;/a&gt;. Of course you can’t build
+static Nix without Nix, so this would need to be done from a system
+that has Nix installed. You can build it yourself, provided you have
+git and nix installed, like this,
+&lt;/p&gt;
+
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ git clone https://github.com/matthewbauer/nixpkgs.git
+$ cd nixpkgs
+$ git checkout static-nix
+$ nix-build -A pkgsStatic.nix
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+Then, copy it to your machine without Nix installed (provided you have
+ssh installed), like this,
+&lt;/p&gt;
+
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;$ scp ./result/bin/nix your-machine:
+$ ssh your-machine
+$ ./nix ...
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&quot;footnotes&quot;&gt;
+&lt;h2 class=&quot;footnotes&quot;&gt;Footnotes: &lt;/h2&gt;
+&lt;div id=&quot;text-footnotes&quot;&gt;
+
+&lt;div class=&quot;footdef&quot;&gt;&lt;sup&gt;&lt;a class=&quot;footnum&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fnr.1&quot; id=&quot;fn.1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;div class=&quot;footpara&quot;&gt;&lt;p class=&quot;footpara&quot;&gt;
+Note that you will need to be able to set up a private
+namespace. This is enabled by default on Linux, but some distros have
+specifically disabled it. See &lt;a href=&quot;https://github.com/NixOS/nix/issues/2404&quot;&gt;this issue&lt;/a&gt; for more discussion.
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;footdef&quot;&gt;&lt;sup&gt;&lt;a class=&quot;footnum&quot; href=&quot;https://matthewbauer.us/blog/feed.xml#fnr.2&quot; id=&quot;fn.2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; &lt;div class=&quot;footpara&quot;&gt;&lt;p class=&quot;footpara&quot;&gt;
+While ideally we would not need temporary directories at all,
+some of these commands require it. This is because they check whether
+they are in a pipe and refuse to run if so. Your temporary directory
+should be cleaned each time your reboot anyway. The Nix packages will
+be installed in &lt;code&gt;$HOME/.cache/nix/store&lt;/code&gt; but they can be removed at
+any time.
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+
+
+&lt;/div&gt;
+&lt;/div&gt;</description>
+	<pubDate>Sun, 24 Feb 2019 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Matthew Bauer: Call for proofreaders and beta testers for 19.03</title>
+	<guid isPermaLink="true">https://matthewbauer.us/blog/proofreaders.html</guid>
+	<link>https://matthewbauer.us/blog/proofreaders.html</link>
+	<description>&lt;p&gt;
+This was originally published on &lt;a href=&quot;https://discourse.nixos.org/t/call-for-proofreaders-and-beta-testers-for-19-03/&quot;&gt;Discourse&lt;/a&gt;. I am putting it here for
+posterity reasons.
+&lt;/p&gt;
+
+&lt;p&gt;
+We get lots of contributors in Nixpkgs and NixOS who modify our source
+code. They are the most common type of contribution we receive. But,
+there is actually a great need for other types of contributions that
+don’t involve programming at all! For the benefit of new users, I am
+going to outline how you can easily contribute to the community and
+help make 19.03 the best NixOS release yet.
+&lt;/p&gt;
+
+&lt;div class=&quot;outline-2&quot; id=&quot;outline-container-org355eacc&quot;&gt;
+&lt;h2 id=&quot;org355eacc&quot;&gt;&lt;span class=&quot;section-number-2&quot;&gt;1&lt;/span&gt; Proofreading&lt;/h2&gt;
+&lt;div class=&quot;outline-text-2&quot; id=&quot;text-1&quot;&gt;
+&lt;p&gt;
+We have two different manuals in the NixOS/nixpkgs repo. One is for
+Nixpkgs, the set of all software. And the other is for NixOS, our
+Linux distro. Proofreading these manuals is important in helping new
+users learn about how our software works.
+&lt;/p&gt;
+
+&lt;ul class=&quot;org-ul&quot;&gt;
+&lt;li&gt;&lt;a href=&quot;https://hydra.nixos.org/job/nixos/trunk-combined/nixos.manual.x86_64-linux/latest/download-by-type/doc/manual&quot;&gt;NixOS unstable manual&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://hydra.nixos.org/job/nixpkgs/trunk/manual/latest/download-by-type/doc/manual&quot;&gt;Nixpkgs unstable manual&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+When you find an issue, you can do one of two things. The first and
+most encouraged is to open a PR on GitHub fixing the documentation.
+Both manuals are written in docbook. You can see the source for each
+here:
+&lt;/p&gt;
+
+&lt;ul class=&quot;org-ul&quot;&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual&quot;&gt;NixOS manual source code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/NixOS/nixpkgs/tree/master/doc&quot;&gt;Nixpkgs manual source code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+GitHub allows you to edit these files directly on the web. You can
+also always use your own Git client. For reference on writing in
+DocBook, I recommend reading through &lt;a href=&quot;https://docbook.rocks&quot;&gt;docbook.rocks&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+An alternative if you are unable to fix the documentation yourself is
+to open an issue. We use the same issue tracker includes any issues
+with Nixpkgs/NixOS and can be accessed through
+&lt;a href=&quot;https://github.com/NixOS/nixpkgs/issues&quot;&gt;GitHub Issues&lt;/a&gt;. Please be
+sure to provide a link to where in the manual the issue is as well as
+what is incorrect or otherwise confusing.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-2&quot; id=&quot;outline-container-org0744710&quot;&gt;
+&lt;h2 id=&quot;org0744710&quot;&gt;&lt;span class=&quot;section-number-2&quot;&gt;2&lt;/span&gt; Beta testing&lt;/h2&gt;
+&lt;div class=&quot;outline-text-2&quot; id=&quot;text-2&quot;&gt;
+&lt;p&gt;
+An alternative to proofreading is beta testing. There are a number of
+ways to do this, but I would suggest using VirtualBox. Some
+information on installing VirtualBox can be found online, but you
+should just need to set these NixOS options:
+&lt;/p&gt;
+
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-nix&quot;&gt;&lt;span class=&quot;org-nix-attribute&quot;&gt;virtualisation.virtualbox.host.enable&lt;/span&gt; = &lt;span class=&quot;org-nix-builtin&quot;&gt;true&lt;/span&gt;;
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+and add your user to the vboxusers group:
+&lt;/p&gt;
+
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-nix&quot;&gt;users.users.&lt;span class=&quot;org-nix-constant&quot;&gt;&amp;lt;user&amp;gt;&lt;/span&gt;.&lt;span class=&quot;org-nix-attribute&quot;&gt;extraGroups&lt;/span&gt; = [ &lt;span class=&quot;org-string&quot;&gt;&quot;vboxusers&quot;&lt;/span&gt; ];
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+then rebuild your NixOS machine (&lt;code&gt;sudo nixos-rebuild switch&lt;/code&gt;), and run
+this command to start virtualbox:
+&lt;/p&gt;
+
+&lt;div class=&quot;org-src-container&quot;&gt;
+&lt;pre class=&quot;src src-sh&quot;&gt;VirtualBox
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+Other distros have their own ways of installing VirtualBox, see
+&lt;a href=&quot;https://www.virtualbox.org/wiki/Downloads&quot;&gt;Download VirtualBox&lt;/a&gt; for more info.
+&lt;/p&gt;
+
+&lt;p&gt;
+You can download an unstable NixOS .ova file directly here.
+(&lt;b&gt;&lt;b&gt;WARNING&lt;/b&gt;&lt;/b&gt;: this will be a large file, a little below 1GB).
+&lt;/p&gt;
+
+&lt;ul class=&quot;org-ul&quot;&gt;
+&lt;li&gt;&lt;a href=&quot;https://hydra.nixos.org/job/nixos/trunk-combined/nixos.ova.x86_64-linux/latest/download-by-type/file/ova&quot;&gt;nixos-19.03pre-x86&lt;sub&gt;64&lt;/sub&gt;-linux.ova&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+Once downloaded, you can import this .ova file directly into
+VirtualBox using “File” -&amp;gt; “Import Appliance…”. Select the .ova file
+downloaded from above and click through a series of Next dialogs,
+using the provided defaults. After this, you can boot your NixOS
+machine by selecting it from the list on the left and clicking
+“Start”.
+&lt;/p&gt;
+
+&lt;p&gt;
+The next step is to just play around with the NixOS machine and try to
+break it! You can report any issues you find on &lt;a href=&quot;https://github.com/NixOS/nixpkgs/issues&quot;&gt;the GitHub Issues
+tracker&lt;/a&gt;. We use the same issue tracker for both NixOS and Nixpkgs.
+Just try to make your issues as easy to reproduce as possible. Be
+specific on where the problem is and how someone else could recreate
+the problem for themselves.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+	<pubDate>Fri, 08 Feb 2019 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Hercules Labs: elm2nix 0.1</title>
+	<guid isPermaLink="true">https://blog.hercules-ci.com/elm/2019/01/03/elm2nix-0.1/</guid>
+	<link>https://blog.hercules-ci.com/elm/2019/01/03/elm2nix-0.1/</link>
+	<description>&lt;p&gt;Our frontend is written in &lt;a href=&quot;http://elm-lang.org&quot;&gt;Elm&lt;/a&gt; and our deployments are
+done with &lt;a href=&quot;https://nixos.org/nix&quot;&gt;Nix&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are many benefits to using Nix for packaging: like reproducible
+installation with binaries, being able to diff for changes, rollback
+ support, etc, with a single generic tool.&lt;/p&gt;
+
+&lt;p&gt;We benefit most once the whole deployment is Nixified,
+which is what we’ve done to our frontend in last December.&lt;/p&gt;
+
+&lt;h1 id=&quot;history&quot;&gt;History&lt;/h1&gt;
+
+&lt;p&gt;Back in November 2016 I’ve &lt;a href=&quot;https://github.com/NixOS/nixpkgs/issues/20601&quot;&gt;written down some ideas&lt;/a&gt;
+ on how elm2nix could work. In December 2017 the first prototype of elm2nix was born,
+ but it required a fork of the Elm compiler to gathering your project’s dependencies.
+ &lt;a href=&quot;https://elm-lang.org/blog/small-assets-without-the-headache&quot;&gt;Elm 0.19&lt;/a&gt; came out with pinning for
+  all dependencies, making it feasible for other packaging software
+to build Elm projects.&lt;/p&gt;
+
+&lt;h1 id=&quot;installation-and-usage&quot;&gt;Installation and usage&lt;/h1&gt;
+
+&lt;p&gt;Today we’re releasing &lt;a href=&quot;https://github.com/hercules-ci/elm2nix&quot;&gt;elm2nix 0.1&lt;/a&gt; and it’s
+already available in nixpkgs unstable and stable channels. The easiest way to install it is:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# install Nix
+$ curl https://nixos.org/nix/install | sh
+
+# activate Nix environment
+$ source ~/.nix-profile/etc/profile.d/nix.sh
+
+# install elm2nix binary
+$ nix-env -i elm2nix
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Given your current directory with an Elm 0.19 project, here are three commands to
+get Elm project build with Nix.&lt;/p&gt;
+
+&lt;p&gt;First, we need to generate a Nix file with metadata about dependencies:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ elm2nix convert &amp;gt; elm-srcs.nix
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Second, since Elm 0.19 packaging maintains a snapshot of http://package.elm-lang.org&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ elm2nix snapshot &amp;gt; versions.dat
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And last, we generate a Nix expression by template, which ties everything together:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ elm2nix init &amp;gt; default.nix
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;By default, the template will use just plain &lt;code class=&quot;highlighter-rouge&quot;&gt;elm-make&lt;/code&gt; to compile your project.&lt;/p&gt;
+
+&lt;p&gt;To build using Nix and see the generated output in Chromium:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ nix-build
+$ chromium ./result/Main.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;what-could-be-improved-in-elm&quot;&gt;What could be improved in Elm&lt;/h1&gt;
+
+&lt;p&gt;You may notice that &lt;code class=&quot;highlighter-rouge&quot;&gt;elm2nix convert&lt;/code&gt; output includes sha256 hashes. Nix will require hashes
+for anything that’s fetched from the internet. Elm package index does &lt;a href=&quot;https://package.elm-lang.org/packages/elm/time/latest/endpoint.json&quot;&gt;provide an
+endpoint&lt;/a&gt; with
+hashes, but then Nix needs to know what’s the hash of the endpoint response.&lt;/p&gt;
+
+&lt;p&gt;To address this issue it would be ideal if there would be &lt;code class=&quot;highlighter-rouge&quot;&gt;elm.lock&lt;/code&gt; file or similar
+with all dependencies pinned including their hashes - then Nix would have everything
+available locally. Other package managers for various languages are slowly going towards
+outputing metadata file that explains the whole build process. This can be considered an API
+between build planning and the actual builder.&lt;/p&gt;
+
+&lt;p&gt;Another minor issue comes from &lt;code class=&quot;highlighter-rouge&quot;&gt;versions.dat&lt;/code&gt;. Ideally instead of committing to git repository
+a few megabytes of serialized JSON, one would be able to point to an url that would
+present binary file pinned at some specific time - allowing it to always be verifiable
+with upfront known hash.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-could-be-improved-in-nix&quot;&gt;What could be improved in Nix&lt;/h1&gt;
+
+&lt;p&gt;Nix expression generated by &lt;code class=&quot;highlighter-rouge&quot;&gt;elm2nix init&lt;/code&gt; could be upstreamed to nixpkgs or another Nix
+repository. This would allow for small footprint in an application and stable documentation.&lt;/p&gt;
+
+&lt;p&gt;Default expression might not be enough for everyone, as you can use Parcel, Webpack or any other
+asset management tool for building the project. There’s room for all common
+environments.&lt;/p&gt;
+
+&lt;h1 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h1&gt;
+
+&lt;p&gt;Stay tuned for another post on how to develop Elm applications with Parcel and Nix.&lt;/p&gt;
+
+&lt;p&gt;Since you’re here, we’re building next-generation CI and binary
+caching services, take a look at &lt;a href=&quot;https://hercules-ci.com&quot;&gt;Hercules CI&lt;/a&gt; and
+&lt;a href=&quot;https://cachix.org&quot;&gt;Cachix&lt;/a&gt;.&lt;/p&gt;</description>
+	<pubDate>Thu, 03 Jan 2019 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Ollie Charles: Solving Planning Problems with Fast Downward and Haskell</title>
+	<guid isPermaLink="true">http://ocharles.org.uk/blog/posts/2018-12-25-fast-downward.html</guid>
+	<link>http://ocharles.org.uk/blog/posts/2018-12-25-fast-downward.html</link>
+	<description>&lt;p&gt;In this post I’ll demonstrate my new &lt;a href=&quot;https://hackage.haskell.org/package/fast-downward&quot;&gt;&lt;code&gt;fast-downward&lt;/code&gt;&lt;/a&gt; library and show how it can be used to solve planning problems. The name comes from the use of the backend solver - &lt;a href=&quot;http://fast-downward.org&quot;&gt;Fast Downward&lt;/a&gt;. But what’s a planning problem?&lt;/p&gt;
+&lt;p&gt;Roughly speaking, planning problems are a subclass of AI problems where we need to work out a &lt;em&gt;plan&lt;/em&gt; that moves us from an initial state to some goal state. Typically, we have:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A known &lt;em&gt;starting state&lt;/em&gt; - information about the world we know to be true right now.&lt;/li&gt;
+&lt;li&gt;A set of possible &lt;em&gt;effects&lt;/em&gt; - deterministic ways we can change the world.&lt;/li&gt;
+&lt;li&gt;A &lt;em&gt;goal&lt;/em&gt; state that we wish to reach.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With this, we need to find a plan:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;em&gt;solution&lt;/em&gt; to a planning problem is a &lt;em&gt;plan&lt;/em&gt; - a totally ordered sequence of steps that converge the starting state into the goal state.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Planning problems are essentially &lt;a href=&quot;https://en.wikipedia.org/wiki/State_space_search&quot;&gt;state space search&lt;/a&gt; problems, and crop up in all sorts of places. The common examples are that of moving a robot around, planning logistics problems, and so on, but they can be used for plenty more! For example, the &lt;a href=&quot;http://tathougies.github.io/beam/&quot;&gt;Beam&lt;/a&gt; library uses state space search to work out how to converge a database from one state to another (automatic migrations) by adding/removing columns.&lt;/p&gt;
+&lt;p&gt;State space search is an intuitive approach - simply build a graph where nodes are states and edges are state transitions (effects), and find a path (possibly shortest) that gets you from the starting state to a state that satisfies some predicates. However, naive enumeration of all states rapidly grinds to a halt. Forming optimal plans (least cost, least steps, etc) is an extremely difficult problem, and there is a &lt;em&gt;lot&lt;/em&gt; of literature on the topic (see &lt;a href=&quot;http://icaps-conference.org&quot;&gt;ICAPS&lt;/a&gt; - the International Conference on Automated Planning and Scheduling and recent &lt;a href=&quot;https://ipc2018.bitbucket.io/&quot;&gt;International Planning Competitions&lt;/a&gt; for an idea of the state of the art). The &lt;code&gt;fast-downward&lt;/code&gt; library uses the state of the art Fast Downward solver and provides a small DSL to interface to it with Haskell.&lt;/p&gt;
+&lt;p&gt;In this post, we’ll look at using &lt;code&gt;fast-downward&lt;/code&gt; in the context of solving a small planning problem - moving balls between rooms via a robot. This post is literate Haskell, here’s the context we’ll be working in:&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb1-1&quot;&gt;&lt;span class=&quot;ot&quot;&gt;{-# language DisambiguateRecordFields #-}&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb1-2&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb1-3&quot;&gt;&lt;span class=&quot;kw&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;FastDownward.Examples.Gripper&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;where&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb1-4&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb1-5&quot;&gt;&lt;span class=&quot;kw&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Control.Monad&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb1-6&quot;&gt;&lt;span class=&quot;kw&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;qualified&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;FastDownward.Exec&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Exec&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb1-7&quot;&gt;&lt;span class=&quot;kw&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;FastDownward.Problem&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you’d rather see the Haskell in it’s entirety without comments, simply head to the end of this post.&lt;/p&gt;
+&lt;h2 id=&quot;modelling-the-problem&quot;&gt;Modelling The Problem&lt;/h2&gt;
+&lt;h3 id=&quot;defining-the-domain&quot;&gt;Defining the Domain&lt;/h3&gt;
+&lt;p&gt;As mentioned, in this example, we’ll consider the problem of transporting balls between rooms via a robot. The robot has two grippers and can move between rooms. Each gripper can hold zero or one balls. Our initial state is that everything is in room A, and our goal is to move all balls to room B.&lt;/p&gt;
+&lt;p&gt;First, we’ll introduce some domain specific types and functions to help model the problem. The &lt;code&gt;fast-downward&lt;/code&gt; DSL can work with any type that is an instance of &lt;code&gt;Ord&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb2&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-1&quot;&gt;&lt;span class=&quot;kw&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Room&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-2&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;deriving&lt;/span&gt; (&lt;span class=&quot;dt&quot;&gt;Eq&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Ord&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Show&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-3&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-4&quot;&gt;&lt;span class=&quot;ot&quot;&gt;adjacent ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Room&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Room&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-5&quot;&gt;adjacent &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-6&quot;&gt;adjacent &lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-7&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-8&quot;&gt;&lt;span class=&quot;kw&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;BallLocation&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;InRoom&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Room&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;InGripper&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-9&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;deriving&lt;/span&gt; (&lt;span class=&quot;dt&quot;&gt;Eq&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Ord&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Show&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-10&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-11&quot;&gt;&lt;span class=&quot;kw&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;GripperState&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Empty&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;HoldingBall&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb2-12&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;deriving&lt;/span&gt; (&lt;span class=&quot;dt&quot;&gt;Eq&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Ord&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Show&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A ball in our model is modelled by its current location. As this changes over time, it is a &lt;code&gt;Var&lt;/code&gt; - a state variable.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb3&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb3-1&quot;&gt;&lt;span class=&quot;kw&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Ball&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Var&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;BallLocation&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A gripper in our model is modelled by its state - whether or not it’s holding a ball.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb4&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb4-1&quot;&gt;&lt;span class=&quot;kw&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Gripper&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Var&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;GripperState&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, we’ll introduce a type of all possible actions that can be taken:&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb5&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb5-1&quot;&gt;&lt;span class=&quot;kw&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Action&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;PickUpBall&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;SwitchRooms&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;DropBall&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb5-2&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;deriving&lt;/span&gt; (&lt;span class=&quot;dt&quot;&gt;Show&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With this, we can now begin modelling the specific &lt;em&gt;instance&lt;/em&gt; of the problem. We do this by working in the &lt;code&gt;Problem&lt;/code&gt; monad, which lets us introduce variables (&lt;code&gt;Var&lt;/code&gt;s) and specify their initial state.&lt;/p&gt;
+&lt;h3 id=&quot;setting-the-initial-state&quot;&gt;Setting the Initial State&lt;/h3&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb6&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb6-1&quot;&gt;&lt;span class=&quot;ot&quot;&gt;problem ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Problem&lt;/span&gt; (&lt;span class=&quot;dt&quot;&gt;SolveResult&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Action&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb6-2&quot;&gt;problem &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First, we introduce a state variable for each of the 4 balls. As in the problem description, all balls are initially in room A.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb7&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb7-1&quot;&gt;  balls &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; replicateM &lt;span class=&quot;dv&quot;&gt;4&lt;/span&gt; (newVar (&lt;span class=&quot;dt&quot;&gt;InRoom&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt;))&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, introduce a variable for the room the robot is in - which also begins in room A.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb8&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb8-1&quot;&gt;  robotLocation &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; newVar &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We also introduce variables to track the state of each gripper.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb9&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb9-1&quot;&gt;  grippers &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; replicateM &lt;span class=&quot;dv&quot;&gt;2&lt;/span&gt; (newVar &lt;span class=&quot;dt&quot;&gt;Empty&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is sufficient to model our problem. Next, we’ll define some effects to change the state of the world.&lt;/p&gt;
+&lt;h3 id=&quot;defining-effects&quot;&gt;Defining Effects&lt;/h3&gt;
+&lt;p&gt;Effects are computations in the &lt;code&gt;Effect&lt;/code&gt; monad - a monad that allows us to read and write to variables, and also fail (via &lt;code&gt;MonadPlus&lt;/code&gt;). We could define these effects as top-level definitions (which might be better if we were writing a library), but here I’ll just define them inline so they can easily access the above state variables.&lt;/p&gt;
+&lt;p&gt;Effects may be used at any time by the solver. Indeed, that’s what solving planning problems is all about! The hard part is choosing effects intelligently, rather than blindly trying everything. Fortunately, you don’t need to worry about that - Fast Downward will take care of that for you!&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb10&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb10-1&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;let&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&quot;picking-up-balls&quot;&gt;Picking Up Balls&lt;/h4&gt;
+&lt;p&gt;The first effect takes a ball and a gripper, and attempts to pick up that ball with that gripper.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb11&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-1&quot;&gt;&lt;span class=&quot;ot&quot;&gt;    pickUpBallWithGripper ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Ball&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Gripper&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Effect&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Action&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-2&quot;&gt;    pickUpBallWithGripper b gripper &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-3&quot;&gt;      &lt;span class=&quot;dt&quot;&gt;Empty&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar gripper                  &lt;span class=&quot;co&quot;&gt;-- (1)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-4&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-5&quot;&gt;      robotRoom &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar robotLocation        &lt;span class=&quot;co&quot;&gt;-- (2)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-6&quot;&gt;      ballLocation &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar b&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-7&quot;&gt;      guard (ballLocation &lt;span class=&quot;fu&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;InRoom&lt;/span&gt; robotRoom)  &lt;span class=&quot;co&quot;&gt;-- (3)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-8&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-9&quot;&gt;      writeVar b &lt;span class=&quot;dt&quot;&gt;InGripper&lt;/span&gt;                      &lt;span class=&quot;co&quot;&gt;-- (4)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-10&quot;&gt;      writeVar gripper &lt;span class=&quot;dt&quot;&gt;HoldingBall&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-11&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb11-12&quot;&gt;      return &lt;span class=&quot;dt&quot;&gt;PickUpBall&lt;/span&gt;                         &lt;span class=&quot;co&quot;&gt;-- (5)&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;&lt;p&gt;First we check that the gripper is empty. This can be done concisely by using an incomplete pattern match. &lt;code&gt;do&lt;/code&gt; notation desugars incomplete pattern matches to a call to &lt;code&gt;fail&lt;/code&gt;, which in the &lt;code&gt;Effect&lt;/code&gt; monad simply means “this effect can’t currently be used”.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Next, we check where the ball and robot are, and make sure they are both in the same room.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Here we couldn’t choose a particular pattern match to use, because picking up a ball should be possible in either room. Instead, we simply observe the location of both the ball and the robot, and use an equality test with &lt;code&gt;guard&lt;/code&gt; to make sure they match.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;If we got this far then we can pick up the ball. The act of picking up the ball is to say that the ball is now in a gripper, and that the gripper is now holding a ball.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Finally, we return some domain specific information to use if the solver chooses this effect. This has no impact on the final plan, but it’s information we can use to execute the plan in the real world (e.g., sending actual commands to the robot).&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&quot;moving-between-rooms&quot;&gt;Moving Between Rooms&lt;/h4&gt;
+&lt;p&gt;This effect moves the robot to the room adjacent to its current location.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb12&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb12-1&quot;&gt;&lt;span class=&quot;ot&quot;&gt;    moveRobotToAdjacentRoom ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Effect&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Action&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb12-2&quot;&gt;    moveRobotToAdjacentRoom &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb12-3&quot;&gt;      modifyVar robotLocation adjacent&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb12-4&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb12-5&quot;&gt;      return &lt;span class=&quot;dt&quot;&gt;SwitchRooms&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is an “unconditional” effect as we don’t have any explicit guards or pattern matches. We simply flip the current location by an adjacency function.&lt;/p&gt;
+&lt;p&gt;Again, we finish by returning some information to use when this effect is chosen.&lt;/p&gt;
+&lt;h4 id=&quot;dropping-balls&quot;&gt;Dropping Balls&lt;/h4&gt;
+&lt;p&gt;Finally, we have an effect to drop a ball from a gripper.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb13&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb13-1&quot;&gt;&lt;span class=&quot;ot&quot;&gt;    dropBall ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Ball&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Gripper&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Effect&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Action&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb13-2&quot;&gt;    dropBall b gripper &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb13-3&quot;&gt;      &lt;span class=&quot;dt&quot;&gt;HoldingBall&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar gripper     &lt;span class=&quot;co&quot;&gt;-- (1)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb13-4&quot;&gt;      &lt;span class=&quot;dt&quot;&gt;InGripper&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar b&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb13-5&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb13-6&quot;&gt;      robotRoom &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar robotLocation &lt;span class=&quot;co&quot;&gt;-- (2)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb13-7&quot;&gt;      writeVar gripper &lt;span class=&quot;dt&quot;&gt;Empty&lt;/span&gt;             &lt;span class=&quot;co&quot;&gt;-- (3)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb13-8&quot;&gt;      writeVar b (&lt;span class=&quot;dt&quot;&gt;InRoom&lt;/span&gt; robotRoom)      &lt;span class=&quot;co&quot;&gt;-- (4)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb13-9&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb13-10&quot;&gt;      return &lt;span class=&quot;dt&quot;&gt;DropBall&lt;/span&gt;                    &lt;span class=&quot;co&quot;&gt;-- (5)&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;&lt;p&gt;First we check that the given gripper is holding a ball, and the given ball is in a gripper.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;If we got here then those assumptions hold. We’ll update the location of the ball to be the location of the robot, so first read out the robot’s location.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Empty the gripper&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Move the ball.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;And we’re done! We’ll just return a tag to indicate that this effect was chosen.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;solving-problems&quot;&gt;Solving Problems&lt;/h2&gt;
+&lt;p&gt;With our problem modelled, we can now attempt to solve it. We invoke &lt;code&gt;solve&lt;/code&gt; with a particular search engine (in this case A* with landmark counting heuristics). We give the solver two bits of information:&lt;/p&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;A list of all effects - all possible actions the solver can use. These are precisely the effects we defined above, but instantiated for all balls and grippers.&lt;/li&gt;
+&lt;li&gt;A goal state. Here we’re using a list comprehension which enumerates all balls, adding the condition that the ball location must be &lt;code&gt;InRoom RoomB&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb14&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb14-1&quot;&gt;  solve&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb14-2&quot;&gt;    cfg&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb14-3&quot;&gt;    ( [ pickUpBallWithGripper b g &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; b &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; balls, g &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; grippers ]&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb14-4&quot;&gt;        &lt;span class=&quot;fu&quot;&gt;++&lt;/span&gt; [ dropBall b g &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; b &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; balls, g &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; grippers ]&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb14-5&quot;&gt;        &lt;span class=&quot;fu&quot;&gt;++&lt;/span&gt; [ moveRobotToAdjacentRoom ]&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb14-6&quot;&gt;    )&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb14-7&quot;&gt;    [ b &lt;span class=&quot;fu&quot;&gt;?=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;InRoom&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; b &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; balls ]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So far we’ve been working in the &lt;code&gt;Problem&lt;/code&gt; monad. We can escape this monad by using &lt;code&gt;runProblem :: Problem a -&amp;gt; IO a&lt;/code&gt;. In our case, &lt;code&gt;a&lt;/code&gt; is &lt;code&gt;SolveResult Action&lt;/code&gt;, so running the problem might give us a plan (courtesy of &lt;code&gt;solve&lt;/code&gt;). If it did, we’ll print the plan.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb15&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-1&quot;&gt;&lt;span class=&quot;ot&quot;&gt;main ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;IO&lt;/span&gt; ()&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-2&quot;&gt;main &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-3&quot;&gt;  res &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; runProblem problem&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-4&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;case&lt;/span&gt; res &lt;span class=&quot;kw&quot;&gt;of&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-5&quot;&gt;    &lt;span class=&quot;dt&quot;&gt;Solved&lt;/span&gt; plan &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-6&quot;&gt;      putStrLn &lt;span class=&quot;st&quot;&gt;&quot;Found a plan!&quot;&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-7&quot;&gt;      zipWithM_ &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-8&quot;&gt;        ( \i step &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; putStrLn ( show i &lt;span class=&quot;fu&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;: &quot;&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;++&lt;/span&gt; show step ) ) &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-9&quot;&gt;        [ &lt;span class=&quot;dv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;ot&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;dt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;..&lt;/span&gt; ] &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-10&quot;&gt;        ( totallyOrderedPlan plan )&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-11&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-12&quot;&gt;    _ &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb15-13&quot;&gt;      putStrLn &lt;span class=&quot;st&quot;&gt;&quot;Couldn't find a plan!&quot;&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;fast-downward&lt;/code&gt; allows you to extract a totally ordered plan from a solution, but can also provide a &lt;code&gt;partiallyOrderedPlan&lt;/code&gt;. This type of plan is a graph (partial order) rather than a list (total order), and attempts to recover some concurrency. For example, if two effects do not interact with each other, they will be scheduled in parallel.&lt;/p&gt;
+&lt;h2 id=&quot;well-did-it-work&quot;&gt;Well, Did it Work?!&lt;/h2&gt;
+&lt;p&gt;All that’s left is to run the problem!&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; main
+Found a plan!
+1: PickUpBall
+2: PickUpBall
+3: SwitchRooms
+4: DropBall
+5: DropBall
+6: SwitchRooms
+7: PickUpBall
+8: PickUpBall
+9: SwitchRooms
+10: DropBall
+11: DropBall&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Woohoo! Not bad for 0.02 secs, too :)&lt;/p&gt;
+&lt;h2 id=&quot;behind-the-scenes&quot;&gt;Behind The Scenes&lt;/h2&gt;
+&lt;p&gt;It might be interesting to some readers to understand what’s going on behind the scenes. Fast Downward is a C++ program, yet somehow it seems to be running Haskell code with nothing but an &lt;code&gt;Ord&lt;/code&gt; instance - there are no marshalling types involved!&lt;/p&gt;
+&lt;p&gt;First, let’s understand the input to Fast Downward. Fast Downward requires an encoding in its own SAS format. This format has a list of variables, where each variable contains a list of values. The contents of the values aren’t actually used by the solver, rather it just works with indices into the list of values for a variable. This observations means we can just invent values on the Haskell side and careful manage mapping indices back and forward.&lt;/p&gt;
+&lt;p&gt;Next, Fast Downward needs a list of operators which are ground instantiations of our effects above. Ground instantiations of operators mention exact values of variables. Recounting our gripper example, &lt;code&gt;pickUpBallWithGripper b gripper&lt;/code&gt; actually produces 2 operators - one for each room. However, we didn’t have to be this specific in the Haskell code, so how are we going to recover this information?&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;fast-downward&lt;/code&gt; actually performs expansion on the given effects to find out &lt;em&gt;all&lt;/em&gt; possible ways they could be called, by non-deterministically evaluating them to find a fixed point.&lt;/p&gt;
+&lt;p&gt;A small example can be seen in the &lt;code&gt;moveRobotToAdjacentRoom&lt;/code&gt; &lt;code&gt;Effect&lt;/code&gt;. This will actually produce two operators - one to move from room A to room B, and one to move from room B to room A. The body of this &lt;code&gt;Effect&lt;/code&gt; is (once we inline the definition of &lt;code&gt;modifyVar&lt;/code&gt;)&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb17&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb17-1&quot;&gt;  readVar robotLocation &lt;span class=&quot;fu&quot;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; writeVar robotLocation &lt;span class=&quot;fu&quot;&gt;.&lt;/span&gt; adjacent&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Initially, we only know that &lt;code&gt;robotLocation&lt;/code&gt; can take the value &lt;code&gt;RoomA&lt;/code&gt;, as that is what the variable was initialised with. So we pass this in, and see what the rest of the computation produces. This means we evaluate &lt;code&gt;adjacent RoomA&lt;/code&gt; to yield &lt;code&gt;RoomB&lt;/code&gt;, and write &lt;code&gt;RoomB&lt;/code&gt; into &lt;code&gt;robotLocation&lt;/code&gt;. We’re done for the first pass through this effect, but we gained new information - namely that &lt;code&gt;robotLocation&lt;/code&gt; &lt;em&gt;might&lt;/em&gt; at some point contain &lt;code&gt;RoomB&lt;/code&gt;. Knowing this, we then rerun the effect, but the first &lt;code&gt;readVar&lt;/code&gt; gives us two paths:&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb18&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb18-1&quot;&gt;readVar robotLocation &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb18-2&quot;&gt;  &lt;span class=&quot;fu&quot;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; \&lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; writeVar robotLocation &lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt;                     &lt;span class=&quot;co&quot;&gt;-- If we read RoomA&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb18-3&quot;&gt;  &lt;span class=&quot;fu&quot;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; \&lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; writeVar robotLocation (adjacent &lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt;) &lt;span class=&quot;co&quot;&gt;-- If we read RoomB&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This shows us that &lt;code&gt;robotLocation&lt;/code&gt; might also be set to &lt;code&gt;RoomA&lt;/code&gt;. However, we already knew this, so at this point we’ve reached a fixed point.&lt;/p&gt;
+&lt;p&gt;In practice, this process is ran over all &lt;code&gt;Effect&lt;/code&gt;s at the same time because they may interact - a change in one &lt;code&gt;Effect&lt;/code&gt; might cause new paths to be found in another &lt;code&gt;Effect&lt;/code&gt;. However, because &lt;code&gt;fast-downward&lt;/code&gt; only works with finite domain representations, this algorithm always terminates. Unfortunately, I have no way of enforcing this that I can see, which means a user &lt;em&gt;could&lt;/em&gt; infinitely loop this normalisation process by writing &lt;code&gt;modifyVar v succ&lt;/code&gt;, which would produce an infinite number of variable assignments.&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;CircuitHub are using this in production (and I mean real, physical production!) to coordinate activities in its factories. By using AI, we have a declarative interface to the production process – rather than saying what steps are to be performed, we can instead say what state we want to end up in and we can trust the planner to find a suitable way to make it so.&lt;/p&gt;
+&lt;p&gt;Haskell really shines here, giving a very powerful way to present problems to the solver. The industry standard is PDDL, a Lisp-like language that I’ve found in practice is less than ideal to actually encode problems. By using Haskell, we:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Can easily feed the results of the planner into a scheduler to execute the plan, with no messy marshalling.&lt;/li&gt;
+&lt;li&gt;Use well known means of abstraction to organise the problem. For example, in the above we use Haskell as a type of macro language – using do notation to help us succinctly formulate the problem.&lt;/li&gt;
+&lt;li&gt;Abstract out the details of planning problems so the rest of the team can focus on the domain specific details – i.e., what options are available to the solver, and the domain specific constraints they are subject to.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://hackage.haskell.org/package/fast-downward&quot;&gt;&lt;code&gt;fast-downward&lt;/code&gt;&lt;/a&gt; is available on Hackage now, and I’d like to express a huge thank you to CircuitHub for giving me the time to explore this large space and to refine my work into the best solution I could think of. This work is the result of numerous iterations, but I think it was worth the wait!&lt;/p&gt;
+&lt;h2 id=&quot;appendix-code-without-comments&quot;&gt;Appendix: Code Without Comments&lt;/h2&gt;
+&lt;p&gt;Here is the complete example, as a single Haskell block:&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb19&quot;&gt;&lt;pre class=&quot;sourceCode haskell&quot;&gt;&lt;code class=&quot;sourceCode haskell&quot;&gt;&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-1&quot;&gt;&lt;span class=&quot;ot&quot;&gt;{-# language DisambiguateRecordFields #-}&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-2&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-3&quot;&gt;&lt;span class=&quot;kw&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;FastDownward.Examples.Gripper&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;where&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-4&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-5&quot;&gt;&lt;span class=&quot;kw&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Control.Monad&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-6&quot;&gt;&lt;span class=&quot;kw&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;qualified&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;FastDownward.Exec&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Exec&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-7&quot;&gt;&lt;span class=&quot;kw&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;FastDownward.Problem&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-8&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-9&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-10&quot;&gt;&lt;span class=&quot;kw&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Room&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-11&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;deriving&lt;/span&gt; (&lt;span class=&quot;dt&quot;&gt;Eq&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Ord&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Show&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-12&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-13&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-14&quot;&gt;&lt;span class=&quot;ot&quot;&gt;adjacent ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Room&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Room&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-15&quot;&gt;adjacent &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-16&quot;&gt;adjacent &lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-17&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-18&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-19&quot;&gt;&lt;span class=&quot;kw&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;BallLocation&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;InRoom&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Room&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;InGripper&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-20&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;deriving&lt;/span&gt; (&lt;span class=&quot;dt&quot;&gt;Eq&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Ord&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Show&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-21&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-22&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-23&quot;&gt;&lt;span class=&quot;kw&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;GripperState&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Empty&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;HoldingBall&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-24&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;deriving&lt;/span&gt; (&lt;span class=&quot;dt&quot;&gt;Eq&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Ord&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;Show&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-25&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-26&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-27&quot;&gt;&lt;span class=&quot;kw&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Ball&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Var&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;BallLocation&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-28&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-29&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-30&quot;&gt;&lt;span class=&quot;kw&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Gripper&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Var&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;GripperState&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-31&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-32&quot;&gt;  &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-33&quot;&gt;&lt;span class=&quot;kw&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Action&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;PickUpBall&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;SwitchRooms&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;DropBall&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-34&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;deriving&lt;/span&gt; (&lt;span class=&quot;dt&quot;&gt;Show&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-35&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-36&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-37&quot;&gt;&lt;span class=&quot;ot&quot;&gt;problem ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Problem&lt;/span&gt; (&lt;span class=&quot;dt&quot;&gt;Maybe&lt;/span&gt; [&lt;span class=&quot;dt&quot;&gt;Action&lt;/span&gt;])&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-38&quot;&gt;problem &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-39&quot;&gt;  balls &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; replicateM &lt;span class=&quot;dv&quot;&gt;4&lt;/span&gt; (newVar (&lt;span class=&quot;dt&quot;&gt;InRoom&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt;))&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-40&quot;&gt;  robotLocation &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; newVar &lt;span class=&quot;dt&quot;&gt;RoomA&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-41&quot;&gt;  grippers &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; replicateM &lt;span class=&quot;dv&quot;&gt;2&lt;/span&gt; (newVar &lt;span class=&quot;dt&quot;&gt;Empty&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-42&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-43&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;let&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-44&quot;&gt;&lt;span class=&quot;ot&quot;&gt;    pickUpBallWithGripper ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Ball&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Gripper&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Effect&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Action&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-45&quot;&gt;    pickUpBallWithGripper b gripper &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-46&quot;&gt;      &lt;span class=&quot;dt&quot;&gt;Empty&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar gripper&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-47&quot;&gt;  &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-48&quot;&gt;      robotRoom &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar robotLocation&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-49&quot;&gt;      ballLocation &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar b&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-50&quot;&gt;      guard (ballLocation &lt;span class=&quot;fu&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;InRoom&lt;/span&gt; robotRoom)&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-51&quot;&gt;  &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-52&quot;&gt;      writeVar b &lt;span class=&quot;dt&quot;&gt;InGripper&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-53&quot;&gt;      writeVar gripper &lt;span class=&quot;dt&quot;&gt;HoldingBall&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-54&quot;&gt;  &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-55&quot;&gt;      return &lt;span class=&quot;dt&quot;&gt;PickUpBall&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-56&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-57&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-58&quot;&gt;&lt;span class=&quot;ot&quot;&gt;    moveRobotToAdjacentRoom ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Effect&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Action&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-59&quot;&gt;    moveRobotToAdjacentRoom &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-60&quot;&gt;      modifyVar robotLocation adjacent&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-61&quot;&gt;      return &lt;span class=&quot;dt&quot;&gt;SwitchRooms&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-62&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-63&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-64&quot;&gt;&lt;span class=&quot;ot&quot;&gt;    dropBall ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Ball&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Gripper&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Effect&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Action&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-65&quot;&gt;    dropBall b gripper &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-66&quot;&gt;      &lt;span class=&quot;dt&quot;&gt;HoldingBall&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar gripper&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-67&quot;&gt;      &lt;span class=&quot;dt&quot;&gt;InGripper&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar b&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-68&quot;&gt;  &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-69&quot;&gt;      robotRoom &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; readVar robotLocation&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-70&quot;&gt;      writeVar b (&lt;span class=&quot;dt&quot;&gt;InRoom&lt;/span&gt; robotRoom)&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-71&quot;&gt;  &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-72&quot;&gt;      writeVar gripper &lt;span class=&quot;dt&quot;&gt;Empty&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-73&quot;&gt;  &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-74&quot;&gt;      return &lt;span class=&quot;dt&quot;&gt;DropBall&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-75&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-76&quot;&gt;  &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-77&quot;&gt;  solve&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-78&quot;&gt;    cfg&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-79&quot;&gt;    ( [ pickUpBallWithGripper b g &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; b &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; balls, g &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; grippers ]&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-80&quot;&gt;        &lt;span class=&quot;fu&quot;&gt;++&lt;/span&gt; [ dropBall b g &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; b &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; balls, g &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; grippers ]&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-81&quot;&gt;        &lt;span class=&quot;fu&quot;&gt;++&lt;/span&gt; [ moveRobotToAdjacentRoom ]&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-82&quot;&gt;    )&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-83&quot;&gt;    [ b &lt;span class=&quot;fu&quot;&gt;?=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;InRoom&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;RoomB&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;|&lt;/span&gt; b &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; balls ]&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-84&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-85&quot;&gt;  &lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-86&quot;&gt;&lt;span class=&quot;ot&quot;&gt;main ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;IO&lt;/span&gt; ()&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-87&quot;&gt;main &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-88&quot;&gt;  plan &lt;span class=&quot;ot&quot;&gt;&amp;lt;-&lt;/span&gt; runProblem problem&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-89&quot;&gt;  &lt;span class=&quot;kw&quot;&gt;case&lt;/span&gt; plan &lt;span class=&quot;kw&quot;&gt;of&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-90&quot;&gt;    &lt;span class=&quot;dt&quot;&gt;Nothing&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-91&quot;&gt;      putStrLn &lt;span class=&quot;st&quot;&gt;&quot;Couldn't find a plan!&quot;&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-92&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-93&quot;&gt;    &lt;span class=&quot;dt&quot;&gt;Just&lt;/span&gt; steps &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;do&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-94&quot;&gt;      putStrLn &lt;span class=&quot;st&quot;&gt;&quot;Found a plan!&quot;&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-95&quot;&gt;      zipWithM_ (\i step &lt;span class=&quot;ot&quot;&gt;-&amp;gt;&lt;/span&gt; putStrLn &lt;span class=&quot;fu&quot;&gt;$&lt;/span&gt; show i &lt;span class=&quot;fu&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;: &quot;&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;++&lt;/span&gt; show step) [&lt;span class=&quot;dv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;ot&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;dt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;..&lt;/span&gt;] steps&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-96&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-97&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-98&quot;&gt;&lt;span class=&quot;ot&quot;&gt;cfg ::&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Exec.SearchEngine&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-99&quot;&gt;cfg &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-100&quot;&gt;  &lt;span class=&quot;dt&quot;&gt;Exec.AStar&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Exec.AStarConfiguration&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-101&quot;&gt;    { evaluator &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-102&quot;&gt;        &lt;span class=&quot;dt&quot;&gt;Exec.LMCount&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Exec.LMCountConfiguration&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-103&quot;&gt;          { lmFactory &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-104&quot;&gt;              &lt;span class=&quot;dt&quot;&gt;Exec.LMExhaust&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Exec.LMExhaustConfiguration&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-105&quot;&gt;                { reasonableOrders &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;False&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-106&quot;&gt;                , onlyCausalLandmarks &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;False&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-107&quot;&gt;                , disjunctiveLandmarks &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;True&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-108&quot;&gt;                , conjunctiveLandmarks &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;True&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-109&quot;&gt;                , noOrders &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;False&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-110&quot;&gt;                }&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-111&quot;&gt;          , admissible &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;False&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-112&quot;&gt;          , optimal &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;False&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-113&quot;&gt;          , pref &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;True&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-114&quot;&gt;          , alm &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;True&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-115&quot;&gt;          , lpSolver &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Exec.CPLEX&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-116&quot;&gt;          , transform &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Exec.NoTransform&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-117&quot;&gt;          , cacheEstimates &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;True&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-118&quot;&gt;          }&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-119&quot;&gt;    , lazyEvaluator &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Nothing&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-120&quot;&gt;    , pruning &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Exec.Null&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-121&quot;&gt;    , costType &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Exec.Normal&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-122&quot;&gt;    , bound &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Nothing&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-123&quot;&gt;    , maxTime &lt;span class=&quot;fu&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;Nothing&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;sourceLine&quot; id=&quot;cb19-124&quot;&gt;    }&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+	<pubDate>Tue, 25 Dec 2018 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Hercules Labs: Hercules CI Development Update</title>
+	<guid isPermaLink="true">https://blog.hercules-ci.com/hercules-ci/2018/12/18/hercules-ci-development-update/</guid>
+	<link>https://blog.hercules-ci.com/hercules-ci/2018/12/18/hercules-ci-development-update/</link>
+	<description>&lt;p&gt;We’ve been making good progress since our &lt;a href=&quot;https://www.youtube.com/watch?v=py26iM26Qg4&quot;&gt;October 25th NixCon demo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Some of the things we’ve built and worked on since NixCon:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Realise the derivations and show their status&lt;/li&gt;
+  &lt;li&gt;Minimal build logs&lt;/li&gt;
+  &lt;li&gt;Keeping track of agent state&lt;/li&gt;
+  &lt;li&gt;GitHub build statuses&lt;/li&gt;
+  &lt;li&gt;Improved agent logging&lt;/li&gt;
+  &lt;li&gt;Work on Cachix private caches&lt;/li&gt;
+  &lt;li&gt;Incorporating&lt;/li&gt;
+  &lt;li&gt;Plenty of small fixes, improvements and some open source work&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here you can see attributes being streamed as they are evaluated
+and CI immediately starts to build each attribute and shows cached derivation statuses:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;evaluating&quot; src=&quot;https://blog.hercules-ci.com/images/evaluating.gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Since we’ve started dogfooding a few weeks ago, we’ve been getting valuable insight. There’s plenty of things to do and bugs to fix. 
+Once we’re happy with the user experience for the minimal workflow, we’ll contact email subscribers and start handing out early access.&lt;/p&gt;
+
+&lt;p&gt;If you’d like to be part of early adopters or just be notified of development, make sure to subscribe to &lt;a href=&quot;https://hercules-ci.com&quot;&gt;Hercules CI&lt;/a&gt;.&lt;/p&gt;</description>
+	<pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Matthew Bauer: Subjective ranking of build systems</title>
+	<guid isPermaLink="true">https://matthewbauer.us/blog/build-systems.html</guid>
+	<link>https://matthewbauer.us/blog/build-systems.html</link>
+	<description>&lt;div class=&quot;outline-2&quot; id=&quot;outline-container-org6e664e2&quot;&gt;
+&lt;h2 id=&quot;org6e664e2&quot;&gt;&lt;span class=&quot;section-number-2&quot;&gt;1&lt;/span&gt; My subjective ranking of build systems&lt;/h2&gt;
+&lt;div class=&quot;outline-text-2&quot; id=&quot;text-1&quot;&gt;
+&lt;p&gt;
+Very few of us are happy with our choices of build systems. There
+are a lot out there and none feel quite right to many people. I
+wanted to offer my personal opinions on build systems. Every build
+system is “bad” in its own way. But some are much worse than
+others.
+&lt;/p&gt;
+
+&lt;p&gt;
+As a maintainer for Nixpkgs, we have to deal with . I’ve avoided
+build systems that are language-specific. Those build systems are
+usually the only choice for your language, so ranking them will
+inevitably include opinions on the language itself. So, I’ve
+included in this list only language neutral build systems. In
+addition, I’ve filtered out any build systems that are not included
+in Nixpkgs. This perspective is going to prioritize features that
+make your project easiest to package in cross-platform ways. It’s
+very subjective, so I only speak for myself here.
+&lt;/p&gt;
+
+&lt;p&gt;
+I separate two kinds of software used for packages. One is the
+“meta” build system that provides an abstract interface to create
+build rules. The other is the build runner that will run the rules.
+Most meta build systems support targeting multiple backends.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-orgc7cae77&quot;&gt;
+&lt;h3 id=&quot;orgc7cae77&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.1&lt;/span&gt; What makes a good build system?&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-1&quot;&gt;
+&lt;p&gt;
+Some criteria I have for these build systems.
+&lt;/p&gt;
+
+&lt;ul class=&quot;org-ul&quot;&gt;
+&lt;li&gt;Good defaults builtin. By default, packages should support
+specifying “prefix” and “destination directory”.&lt;/li&gt;
+&lt;li&gt;Works with widely available software. Being able to generate
+Makefiles is a big bonus. Everyone has access to make - not
+everyone has Ninja. This is often needed for bootstrapping.&lt;/li&gt;
+&lt;li&gt;Supports cross compilation concepts. A good separation between
+buildtime and runtime is a must have! In addition you should be
+able to set build, host, and target from the command line. This
+makes things much easier for packaging and bootstrapping.&lt;/li&gt;
+&lt;li&gt;Detection of dependencies reuses existing solutions. Pkgconfig
+provides an easy way to detect absolute directories. No need to
+reinvent the wheel here.&lt;/li&gt;
+&lt;li&gt;The less dependencies the better! Requiring a Java or Python
+runtime means it takes longer to rebuild the world. They
+introduce bottlenecks where every package needs to wait for these
+runtimes to be built before we can start running things in
+parallel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org0908b83&quot;&gt;
+&lt;h3 id=&quot;org0908b83&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.2&lt;/span&gt; Ranking of meta build systems from bad to worse&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-2&quot;&gt;
+&lt;ol class=&quot;org-ol&quot;&gt;
+&lt;li&gt;GNU Autotools (Automake &amp;amp; autoconf)&lt;/li&gt;
+&lt;li&gt;Meson&lt;/li&gt;
+&lt;li&gt;CMake&lt;/li&gt;
+&lt;li&gt;gyp&lt;/li&gt;
+&lt;li&gt;qmake&lt;/li&gt;
+&lt;li&gt;imake&lt;/li&gt;
+&lt;li&gt;premake&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
+GNU Autotools comes in at the top. It has the best support for
+cross compilation of any meta build system. It has been around for
+a while and means that the classic “./configure &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make
+install” work. Because the configure script is just a simple bash
+script, packages don’t have to depend directly on GNU Autotools at
+build time. This is a big plus in bootstrapping software. I think
+Meson has made a lot of progress in improving its cross
+compilation support. It’s not quite there in my opinion, as it
+requires you to create cross tool files instead of using command
+line arguments.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org67f64c2&quot;&gt;
+&lt;h3 id=&quot;org67f64c2&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.3&lt;/span&gt; Ranking of build runners from bad to worse&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-3&quot;&gt;
+&lt;ol class=&quot;org-ol&quot;&gt;
+&lt;li&gt;GNU Make&lt;/li&gt;
+&lt;li&gt;Ninja&lt;/li&gt;
+&lt;li&gt;Bazel&lt;/li&gt;
+&lt;li&gt;boost.build&lt;/li&gt;
+&lt;li&gt;SCons&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
+GNU Make is still the top choice in my personal opinion. It has
+been around for a while, but Makefiles are widely understood and
+GNU Make is included everywhere. In addition, the Makefile build
+rule format is easy to parallelize. Ninja still requires Python to
+build itself. This adds to the Nixpkgs bottleneck because Python
+is not included in the bootstrap tools. While there are some
+speedups in Ninja, they don’t appear to be significant enough to
+be worth switching at this time. At the same time, Ninja is still
+a perfectly good choice if you value performance over legacy
+support.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;outline-3&quot; id=&quot;outline-container-org79b73bf&quot;&gt;
+&lt;h3 id=&quot;org79b73bf&quot;&gt;&lt;span class=&quot;section-number-3&quot;&gt;1.4&lt;/span&gt; Conclusion&lt;/h3&gt;
+&lt;div class=&quot;outline-text-3&quot; id=&quot;text-1-4&quot;&gt;
+&lt;p&gt;
+In Nixpkgs, we have made an attempt to support whatever build
+system you are using. But, some are definitely better than others.
+&lt;/p&gt;
+
+&lt;p&gt;
+My main goal here is to try to get software authors to think more
+critically about what build system they are using. In my opinion,
+it is better to use well known software over more obscure systems.
+These shouldn’t be taken as a universal truth. Everyone has their
+own wants and needs. But, if your build system comes in at the
+bottom of this list, you might want to consider switching to
+something else!
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+	<pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Hercules Labs: Using Elm and Parcel for zero configuration web asset management</title>
+	<guid isPermaLink="true">https://blog.hercules-ci.com/elm/2018/11/21/using-elm-and-parcel-for-zero-configuration-web-asset-management/</guid>
+	<link>https://blog.hercules-ci.com/elm/2018/11/21/using-elm-and-parcel-for-zero-configuration-web-asset-management/</link>
+	<description>&lt;p&gt;At some point our frontend had ~200 lines of Webpack configuration and
+it was going to grow by at least another 200 lines for a simple change of having
+two top-level html outptus. My mind went
+“what happened to &lt;a href=&quot;https://en.wikipedia.org/wiki/Convention_over_configuration&quot;&gt;convention over configuration&lt;/a&gt;
+ in the frontend sphere”? I discovered Parcel.&lt;/p&gt;
+
+&lt;p&gt;In this short post I’ll show you how to get started with &lt;a href=&quot;https://parceljs.org&quot;&gt;Parcel&lt;/a&gt;
+and &lt;a href=&quot;https://elm-lang.org/&quot;&gt;Elm&lt;/a&gt; to achieve zero configuration for managing your assets.&lt;/p&gt;
+
+&lt;p&gt;With very little configuration you get:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;live Elm reloading&lt;/li&gt;
+  &lt;li&gt;~100ms rebuilds with a warm cache (measured using ~1500 loc)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--debug&lt;/code&gt; when using a server (this change hasn’t been released yet)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--optimize&lt;/code&gt; when using a build&lt;/li&gt;
+  &lt;li&gt;importing an asset (from &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; or relatively) just does the right thing&lt;/li&gt;
+  &lt;li&gt;bundling and minification of assets&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;bootstrapping&quot;&gt;Bootstrapping&lt;/h2&gt;
+
+&lt;p&gt;Using &lt;strong&gt;yarn&lt;/strong&gt; or &lt;strong&gt;npm&lt;/strong&gt; (btw, &lt;a href=&quot;https://pnpm.js.org/&quot;&gt;pnpm&lt;/a&gt; is currently the
+most sane Node package manager):&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir parcel-elm-demo &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;parcel-elm-demo
+yarn add parcel-bundler elm
+yarn run elm init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ll create a minimal Elm program to start with in &lt;strong&gt;src/Main.elm&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-elm&quot;&gt;import Html exposing (..)
+
+main = text &quot;Hello world&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next we create a top-level asset that Parcel will build, &lt;strong&gt;index.html&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width=device-width, initial-scale=1.0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;X-UA-Compatible&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ie=edge&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;./index.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note how we’re including &lt;code class=&quot;highlighter-rouge&quot;&gt;src&lt;/code&gt; as relative path to a JavaScript file. The general idea
+in Parcel is that you import files of any asset type, and Parcel will
+know how to process and bundle it.&lt;/p&gt;
+
+&lt;p&gt;The gist of glueing Elm and Parcel together is in &lt;strong&gt;index.js&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Elm&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./src/Main.elm'&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;Elm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'main'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;At the &lt;code class=&quot;highlighter-rouge&quot;&gt;import&lt;/code&gt; Parcel will detect that it’s an Elm asset,
+so it will use Elm to compile it and then exports the &lt;code class=&quot;highlighter-rouge&quot;&gt;Elm&lt;/code&gt; Javascript object as we use it
+to initialize Elm in the DOM.&lt;/p&gt;
+
+&lt;h2 id=&quot;running-parcel&quot;&gt;Running Parcel&lt;/h2&gt;
+
+&lt;p&gt;There are two main operations in Parcel. First, you have a development mode via
+live-reloading server:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ yarn run parcel index.html
+yarn run v1.9.4
+$ /home/ielectric/dev/parcel-demo/node_modules/.bin/parcel index.html
+Server running at http://localhost:1234
+✨  Built in 456ms.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Open http://localhost:1234 and modify &lt;strong&gt;src/Main.elm&lt;/strong&gt;. You should see on the terminal&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;✨  Built in 123ms.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;and your page will be refreshed automatically.&lt;/p&gt;
+
+&lt;p&gt;To produce a final bundle for production, you use parcel with a command, &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ yarn run parcel build index.html
+yarn run v1.9.4
+$ /home/ielectric/dev/parcel-demo/node_modules/.bin/parcel build index.html
+✨  Built in 2.07s.
+
+dist/parcel-demo.bc110dbc.js     7.93 KB    1.55s
+dist/parcel-demo.4f74f229.map      373 B      3ms
+dist/index.html                    288 B    442ms
+Done in 2.87s.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Your minified, bundled Elm project is now ready to be deployed.&lt;/p&gt;
+
+&lt;h2 id=&quot;parcel-isnt-perfect-yet&quot;&gt;Parcel isn’t perfect (yet!)&lt;/h2&gt;
+
+&lt;p&gt;There are a few issues still around.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sometimes (I haven’t been able to figure out when exactly, not often)
+&lt;a href=&quot;https://github.com/parcel-bundler/parcel/issues/2147&quot;&gt;live reloading doesn’t work&lt;/a&gt;.
+The good news is Matt recently figured out what is going on so I’m confident
+the fix is imminent. &lt;strong&gt;UPDATE&lt;/strong&gt;:
+&lt;a href=&quot;https://github.com/parcel-bundler/parcel/pull/2475&quot;&gt;going to be part of upcoming Parcel 1.11.1 release&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;There is &lt;a href=&quot;https://github.com/parcel-bundler/parcel/issues/1562&quot;&gt;no support for proxying request to your backend&lt;/a&gt;
+and it’s not planned. I actually like that Parcel is focusing on one thing, but
+you’ll have to figure out how to glue frontend and backend on your own. We run
+a reverse proxy in front of the live reloading server, which closely resembles
+a production deployment. &lt;strong&gt;UPDATE:&lt;/strong&gt;
+&lt;a href=&quot;https://github.com/parcel-bundler/parcel/pull/2477&quot;&gt;there’s a promising PR in discussion&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://parceljs.org/getting_started.html&quot;&gt;Documentation&lt;/a&gt; is a quite succinct,
+mostly because you just keep importing assets and adding post-processing configuration
+like &lt;code class=&quot;highlighter-rouge&quot;&gt;.postcssrc&lt;/code&gt; and Parcel will use that when processing CSS. However, getting the
+mental model how to assemble everything or when things break, your best bet is
+&lt;a href=&quot;https://github.com/parcel-bundler/parcel/issues&quot;&gt;the issue tracker&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://parceljs.org/hmr.html&quot;&gt;HMR&lt;/a&gt; is possible via a
+&lt;a href=&quot;https://github.com/ktosiek/parcel-plugin-elm-hot&quot;&gt;parcel plugin&lt;/a&gt;, hopefully it
+will one day just ship with Parcel. &lt;strong&gt;UPDATE:&lt;/strong&gt;
+&lt;a href=&quot;https://github.com/parcel-bundler/parcel/blob/parcel-bundler%401.11.0/CHANGELOG.md#1110---2018-12-18&quot;&gt;now part of Parcel 1.11.0 release&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s it. Last but not least, we’re building next-generation CI and binary
+caching services, take a look at &lt;a href=&quot;https://hercules-ci.com&quot;&gt;Hercules CI&lt;/a&gt; and
+&lt;a href=&quot;https://cachix.org&quot;&gt;Cachix&lt;/a&gt;.&lt;/p&gt;</description>
+	<pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
+</item>
+
+</channel>
+</rss>

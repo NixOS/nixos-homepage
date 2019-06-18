@@ -25,7 +25,7 @@ HTML = index.html news.html \
 NIXOS_MANUAL_IN = nixos/manual-raw
 NIXOS_MANUAL_OUT = nixos/manual
 
-all: $(NIXOS_MANUAL_OUT)
+#all: $(NIXOS_MANUAL_OUT)
 
 $(NIXOS_MANUAL_OUT): $(NIXOS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
 	./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN)/share/doc/nixos $(NIXOS_MANUAL_OUT) 'NixOS manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
@@ -40,7 +40,7 @@ $(NIXOS_MANUAL_IN):
 NIX_PILLS_MANUAL_IN = nixos/nix-pills-raw
 NIX_PILLS_MANUAL_OUT = nixos/nix-pills
 
-all: $(NIX_PILLS_MANUAL_OUT)
+#all: $(NIX_PILLS_MANUAL_OUT)
 
 $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
 	./bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nixos https://github.com/NixOS/nix-pills
@@ -58,7 +58,7 @@ NIX_MANUAL_OUT = nix/manual
 
 ifneq ($(wildcard $(NIX_MANUAL_IN)),)
 
-all: $(NIX_MANUAL_OUT)
+#all: $(NIX_MANUAL_OUT)
 
 $(NIX_MANUAL_OUT): $(call rwildcard, $(NIX_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
 	./bootstrapify-docbook.sh $(NIX_MANUAL_IN) $(NIX_MANUAL_OUT) 'Nix manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
@@ -74,7 +74,7 @@ NIXOPS_MANUAL_OUT = nixops/manual
 
 ifneq ($(wildcard $(NIXOPS_MANUAL_IN)),)
 
-all: $(NIXOPS_MANUAL_OUT)
+#all: $(NIXOPS_MANUAL_OUT)
 
 $(NIXOPS_MANUAL_OUT): $(call rwildcard, $(NIXOPS_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
 	./bootstrapify-docbook.sh $(NIXOPS_MANUAL_IN) $(NIXOPS_MANUAL_OUT) 'NixOps manual' nixops https://github.com/NixOS/nixops/tree/master/doc/manual
@@ -88,7 +88,7 @@ endif
 NIXPKGS_MANUAL_IN = nixpkgs/manual-raw
 NIXPKGS_MANUAL_OUT = nixpkgs/manual
 
-all: $(NIXPKGS_MANUAL_OUT)
+#all: $(NIXPKGS_MANUAL_OUT)
 
 $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
 	./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT) 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
@@ -100,9 +100,9 @@ $(NIXPKGS_MANUAL_IN):
 
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
-  nixpkgs/packages.json.gz \
-  nixpkgs/packages-unstable.json.gz \
-  nixos/options.json.gz
+  #nixpkgs/packages.json.gz \
+  #nixpkgs/packages-unstable.json.gz \
+  #nixos/options.json.gz
 
 
 ### Prettify the Hydra manual.
@@ -110,7 +110,7 @@ all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wild
 HYDRA_MANUAL_IN = hydra/manual-raw
 HYDRA_MANUAL_OUT = hydra/manual
 
-all: $(HYDRA_MANUAL_OUT)
+#all: $(HYDRA_MANUAL_OUT)
 
 $(HYDRA_MANUAL_OUT): $(HYDRA_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
 	./bootstrapify-docbook.sh $(HYDRA_MANUAL_IN) $(HYDRA_MANUAL_OUT) 'Hydra manual' hydra https://github.com/NixOS/hydra/tree/master/doc/manual
@@ -131,8 +131,6 @@ favicon.png: logo/nixos-logo-only-hires.png
 %.html: %.tt layout.tt common.tt nix-release.tt nixos-release.tt donation.tt
 	tpage \
 	  --pre_chomp --post_chomp \
-	  --define modifiedAt="`git log -1 --pretty='%ai' $<`" \
-	  --define modifiedBy="`git log -1 --pretty='%an' $<`" \
 	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
 	  --define fileName=$< \
 	  --pre_process=nix-release.tt --pre_process=nixos-release.tt --pre_process=common.tt \
