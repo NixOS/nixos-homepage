@@ -13,6 +13,7 @@
 
     defaultPackage =
       with import inputs.nixpkgs { system = "x86_64-linux"; };
+
       stdenv.mkDerivation {
         name = "nixos-homepage";
 
@@ -32,6 +33,8 @@
             nix
             imagemagick
             xhtml1
+            jq
+            python3
           ];
 
         preHook = ''
@@ -45,6 +48,9 @@
             "NIXPKGS_MANUAL_IN=${inputs.nixpkgs.htmlDocs.nixpkgsManual}"
             "NIXOPS_MANUAL_IN=${inputs.nixpkgs.legacyPackages.nixops}/share/doc/nixops"
             "HYDRA_MANUAL_IN=${inputs.hydra.defaultPackage}/share/doc/hydra"
+            "NIXPKGS=${inputs.nixpkgs}"
+            "NIXPKGS_UNSTABLE=${inputs.nixpkgs}" # FIXME: use other nixpkgs flake
+            "NIXOS_OPTIONS=${(import (inputs.nixpkgs + "/nixos/release.nix") { inherit (inputs) nixpkgs; }).options}/share/doc/nixos/options.json"
           ];
 
         installPhase = ''

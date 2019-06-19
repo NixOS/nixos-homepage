@@ -84,9 +84,9 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
-  #nixpkgs/packages.json.gz \
-  #nixpkgs/packages-unstable.json.gz \
-  #nixos/options.json.gz
+  nixpkgs/packages.json.gz \
+  nixpkgs/packages-unstable.json.gz \
+  nixos/options.json.gz
 
 
 ### Prettify the Hydra manual.
@@ -208,6 +208,7 @@ nixpkgs/packages-unstable.json: packages-config.nix
 	python -mjson.tool < $@.tmp > /dev/null
 	mv $@.tmp $@
 
+NIXOS_OPTIONS = /no-such-path
+
 nixos/options.json:
-	cat $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(NIXPKGS) -A options)/share/doc/nixos/options.json > $@.tmp
-	mv $@.tmp $@
+	ln -sfn $(NIXOS_OPTIONS) $@
