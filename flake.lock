@@ -1,11 +1,56 @@
 {
     "inputs": {
+        "hydra": {
+            "id": "hydra",
+            "inputs": {
+                "nix": {
+                    "id": "nix",
+                    "inputs": {
+                        "nixpkgs": {
+                            "id": "nixpkgs",
+                            "inputs": {},
+                            "narHash": "sha256-HQ/wXOy6POACr5BIDoUeFYThgqHxtVfrXVQi95yIljw=",
+                            "nonFlakeInputs": {},
+                            "uri": "github:edolstra/nixpkgs/a0e1f50e6f72e5037d71a0b65c67cf0605349a06"
+                        }
+                    },
+                    "narHash": "sha256-R74Dilfb/aRjIUMJh60U/zDYbe8yt+Bm+0e5QOX/JyQ=",
+                    "nonFlakeInputs": {},
+                    "uri": "github:NixOS/nix/e75ffbf04abb39e7835d3ab3150065a1581d2388"
+                },
+                "nixpkgs": {
+                    "id": "nixpkgs",
+                    "inputs": {},
+                    "narHash": "sha256-HQ/wXOy6POACr5BIDoUeFYThgqHxtVfrXVQi95yIljw=",
+                    "nonFlakeInputs": {},
+                    "uri": "github:edolstra/nixpkgs/a0e1f50e6f72e5037d71a0b65c67cf0605349a06"
+                }
+            },
+            "narHash": "sha256-qogalFDmy4ebizDdBzlyUZfnAHL8Bt4gy1doAoD7MRA=",
+            "nonFlakeInputs": {},
+            "uri": "github:NixOS/hydra/d834ac9c1446bf84c516bf33b65047e7e37e98e5"
+        },
+        "nix": {
+            "id": "nix",
+            "inputs": {
+                "nixpkgs": {
+                    "id": "nixpkgs",
+                    "inputs": {},
+                    "narHash": "sha256-HQ/wXOy6POACr5BIDoUeFYThgqHxtVfrXVQi95yIljw=",
+                    "nonFlakeInputs": {},
+                    "uri": "github:edolstra/nixpkgs/a0e1f50e6f72e5037d71a0b65c67cf0605349a06"
+                }
+            },
+            "narHash": "sha256-R74Dilfb/aRjIUMJh60U/zDYbe8yt+Bm+0e5QOX/JyQ=",
+            "nonFlakeInputs": {},
+            "uri": "github:NixOS/nix/e75ffbf04abb39e7835d3ab3150065a1581d2388"
+        },
         "nixpkgs": {
             "id": "nixpkgs",
             "inputs": {},
-            "narHash": "sha256-5/HXWs25BLukwG9VaxmdmUf/9o79e32aW/tmhcWEbKk=",
+            "narHash": "sha256-HQ/wXOy6POACr5BIDoUeFYThgqHxtVfrXVQi95yIljw=",
             "nonFlakeInputs": {},
-            "uri": "github:edolstra/nixpkgs/62ac6f7f504c8d3998558d9b269d22d26f13f1f0"
+            "uri": "github:edolstra/nixpkgs/a0e1f50e6f72e5037d71a0b65c67cf0605349a06"
         }
     },
     "nonFlakeInputs": {},

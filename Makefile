@@ -22,18 +22,14 @@ HTML = index.html news.html \
 
 ### Prettify the NixOS manual.
 
-NIXOS_MANUAL_IN = nixos/manual-raw
+NIXOS_MANUAL_IN = /no-such-path
 NIXOS_MANUAL_OUT = nixos/manual
 
-#all: $(NIXOS_MANUAL_OUT)
+all: $(NIXOS_MANUAL_OUT)
 
 $(NIXOS_MANUAL_OUT): $(NIXOS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN)/share/doc/nixos $(NIXOS_MANUAL_OUT) 'NixOS manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+	bash ./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN)/share/doc/nixos $(NIXOS_MANUAL_OUT) 'NixOS manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
-$(NIXOS_MANUAL_IN):
-	@echo rm -f $@
-	nix-build -o $@ '<nixpkgs/nixos>' -I nixpkgs=$(NIXPKGS) \
-	  -A config.system.build.manual.manual --arg configuration '{ fileSystems."/".device = "/dummy"; }'
 
 ### Prettify the Nix Pills
 
@@ -43,7 +39,7 @@ NIX_PILLS_MANUAL_OUT = nixos/nix-pills
 #all: $(NIX_PILLS_MANUAL_OUT)
 
 $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nixos https://github.com/NixOS/nix-pills
+	bash ./bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nixos https://github.com/NixOS/nix-pills
 
 $(NIX_PILLS_MANUAL_IN):
 	path=$$(curl -LH 'Accept: application/json' https://hydra.nixos.org/job/nix-pills/master/html-split/latest | jq -re '.buildoutputs.out.path') && \
@@ -53,50 +49,38 @@ $(NIX_PILLS_MANUAL_IN):
 
 ### Prettify the Nix manual.
 
-NIX_MANUAL_IN = nix/manual-raw
+NIX_MANUAL_IN = /no-such-path
 NIX_MANUAL_OUT = nix/manual
 
-ifneq ($(wildcard $(NIX_MANUAL_IN)),)
-
-#all: $(NIX_MANUAL_OUT)
+all: $(NIX_MANUAL_OUT)
 
 $(NIX_MANUAL_OUT): $(call rwildcard, $(NIX_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIX_MANUAL_IN) $(NIX_MANUAL_OUT) 'Nix manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+	bash ./bootstrapify-docbook.sh $(NIX_MANUAL_IN) $(NIX_MANUAL_OUT) 'Nix manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
 	ln -sfn manual.html $(NIX_MANUAL_OUT)/index.html
-
-endif
 
 
 ### Prettify the NixOps manual.
 
-NIXOPS_MANUAL_IN = nixops/manual-raw
+NIXOPS_MANUAL_IN = /no-such-path
 NIXOPS_MANUAL_OUT = nixops/manual
 
-ifneq ($(wildcard $(NIXOPS_MANUAL_IN)),)
-
-#all: $(NIXOPS_MANUAL_OUT)
+all: $(NIXOPS_MANUAL_OUT)
 
 $(NIXOPS_MANUAL_OUT): $(call rwildcard, $(NIXOPS_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIXOPS_MANUAL_IN) $(NIXOPS_MANUAL_OUT) 'NixOps manual' nixops https://github.com/NixOS/nixops/tree/master/doc/manual
+	bash ./bootstrapify-docbook.sh $(NIXOPS_MANUAL_IN) $(NIXOPS_MANUAL_OUT) 'NixOps manual' nixops https://github.com/NixOS/nixops/tree/master/doc/manual
 	ln -sfn manual.html $(NIXOPS_MANUAL_OUT)/index.html
-
-endif
 
 
 ### Prettify the Nixpkgs manual.
 
-NIXPKGS_MANUAL_IN = nixpkgs/manual-raw
+NIXPKGS_MANUAL_IN = /no-such-path
 NIXPKGS_MANUAL_OUT = nixpkgs/manual
 
-#all: $(NIXPKGS_MANUAL_OUT)
+all: $(NIXPKGS_MANUAL_OUT)
 
 $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT) 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+	bash ./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT) 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
 	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
-
-$(NIXPKGS_MANUAL_IN):
-	@echo rm -f $@
-	nix-build -o $@ '<nixpkgs/doc>' -I nixpkgs=$(NIXPKGS)
 
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
@@ -107,19 +91,14 @@ all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wild
 
 ### Prettify the Hydra manual.
 
-HYDRA_MANUAL_IN = hydra/manual-raw
+HYDRA_MANUAL_IN = /no-such-path
 HYDRA_MANUAL_OUT = hydra/manual
 
-#all: $(HYDRA_MANUAL_OUT)
+all: $(HYDRA_MANUAL_OUT)
 
 $(HYDRA_MANUAL_OUT): $(HYDRA_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	./bootstrapify-docbook.sh $(HYDRA_MANUAL_IN) $(HYDRA_MANUAL_OUT) 'Hydra manual' hydra https://github.com/NixOS/hydra/tree/master/doc/manual
+	bash ./bootstrapify-docbook.sh $(HYDRA_MANUAL_IN) $(HYDRA_MANUAL_OUT) 'Hydra manual' hydra https://github.com/NixOS/hydra/tree/master/doc/manual
 	ln -sfn manual.html $(HYDRA_MANUAL_OUT)/index.html
-
-$(HYDRA_MANUAL_IN):
-	path=$$(curl -LH 'Accept: application/json' https://hydra.nixos.org/build/41892729 | jq -re '.buildoutputs.out.path') && \
-	nix-store -r $$path && \
-	ln -sfn $$path/share/doc/hydra $(HYDRA_MANUAL_IN)
 
 
 favicon.png: logo/nixos-logo-only-hires.png
