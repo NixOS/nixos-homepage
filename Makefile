@@ -1,6 +1,6 @@
 NIXOS_SERIES = 19.03
-NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_SERIES)/nixexprs.tar.xz
-NIXPKGS_UNSTABLE = https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz
+NIXPKGS_STABLE = /no-such-path
+NIXPKGS_UNSTABLE = /no-such-path
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
@@ -181,7 +181,7 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixos/azure-blobs.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml nixpkgs/packages.json nixpkgs/packages-unstable.json nixos/options.json \
+.PHONY: nixos/amis.nix nixos/azure-blobs.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml \
   $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN) $(HYDRA_MANUAL_IN) $(NIX_PILLS_MANUAL_IN) nixos-release.tt
 endif
 
@@ -190,25 +190,21 @@ endif
 	gzip -9 < $^ > $@.tmp
 	mv $@.tmp $@
 
-nixpkgs/packages.json: packages-config.nix
-	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS)); \
-	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
-	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config 'import ./packages-config.nix' \
-	  && echo -n '}') \
-	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
-	python -mjson.tool < $@.tmp > /dev/null
-	mv $@.tmp $@
+.PHONY: nixpkgs/packages.json nixpkgs/packages.json.gz
 
-nixpkgs/packages-unstable.json: packages-config.nix
-	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS_UNSTABLE)); \
-	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
-	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS_UNSTABLE) -qa --json --arg config 'import ./packages-config.nix' \
-	  && echo -n '}') \
-	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
-	python -mjson.tool < $@.tmp > /dev/null
-	mv $@.tmp $@
+nixpkgs/packages.json nixpkgs/packages.json.gz:
+	@ln -sfn $(NIXPKGS_STABLE)/packages.json nixpkgs/packages.json
+	@ln -sfn $(NIXPKGS_STABLE)/packages.json.gz nixpkgs/packages.json.gz
+
+.PHONY: nixpkgs/packages-unstable.json nixpkgs/packages-unstable.json.gz
+
+nixpkgs/packages-unstable.json nixpkgs/packages-unstable.json.gz:
+	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json nixpkgs/packages-unstable.json
+	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json.gz nixpkgs/packages-unstable.json.gz
 
 NIXOS_OPTIONS = /no-such-path
 
+.PHONY: nixos/options.json
+
 nixos/options.json:
-	ln -sfn $(NIXOS_OPTIONS) $@
+	@ln -sfn $(NIXOS_OPTIONS) $@
