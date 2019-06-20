@@ -20,7 +20,7 @@
       ''
         export NIX_DB_DIR=$TMPDIR
         export NIX_STATE_DIR=$TMPDIR
-        echo -n '{ "commit": "unknown", "packages":' > tmp
+        echo -n '{ "commit": "${src.rev}", "packages":' > tmp
         nix-env -f '<nixpkgs>' -I nixpkgs=${src} -qa --json --arg config 'import ${./packages-config.nix}' >> tmp
         echo -n '}' >> tmp
         mkdir $out
