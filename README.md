@@ -11,3 +11,7 @@ build it:
     [nix-shell]$ python2 -m SimpleHTTPServer 8000
 
 then open http://127.0.0.1:8000/index.html
+
+To automatically rebuild on every change:
+
+    [nix-shell]$ git ls-files | entr make

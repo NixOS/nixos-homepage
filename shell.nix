@@ -17,5 +17,6 @@ stdenv.mkDerivation {
       nixStable
       gnupg
       jq
+      entr
     ];
 }
