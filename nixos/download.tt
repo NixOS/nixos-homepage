@@ -33,7 +33,7 @@ the Nix package manager) before installing it.</p>
 [% prefix = "https://releases.nixos.org/nixos/" _ latestNixOSSeries _ "/nixos-" _ latestNixOSRelease %]
 
 <ul>
-  <li><a href="[%prefix%]/nixos-graphical-[%latestNixOSRelease%]-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-graphical-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)
+  <li><a href="[%prefix%]/nixos-plasma5-[%latestNixOSRelease%]-x86_64-linux.iso">Plasma5 live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-plasma5-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)
     <span class="label label-info">Recommended for most users</span></li>
 </ul>
 
@@ -128,7 +128,7 @@ by using one of the bootstrap BLOBs listed below.</p>
 </div>
 
 <p>You can create an instance from the command line.
-For example, to create an instance of version 
+For example, to create an instance of version
 <tt>[% blob = blobs.$latestNixOSSeries; latestNixOSSeries %]</tt>
 of NixOS  using azure-cli, just run:</p>
 
