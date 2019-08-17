@@ -252,3 +252,11 @@ nixpkgs/packages-channels.json: Makefile
 nixos/options.json:
 	cat $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(CHANNEL_NIXOS_STABLE) -A options)/share/doc/nixos/options.json > $@.tmp
 	mv $@.tmp $@
+
+# This is a fine enough approximation of the dependencies
+# The `node_modules` folder will not be present at deployment, only for development.
+EXPLORER_JS = $(shell find packages-explorer/ -not -path 'packages-explorer/node_modules/*')
+
+nixos/packages-explorer.js: $(EXPLORER_JS)
+	(cd packages-explorer ; nix-build -I nixpkgs=$(CHANNEL_NIXOS_STABLE))
+	cat packages-explorer/result/bundle.js > $@
