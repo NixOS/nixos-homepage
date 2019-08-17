@@ -18,10 +18,8 @@
 
 /nixpkgs/manual/
 /nixpkgs/manual-raw
-/nixpkgs/packages-unstable.json.gz
-/nixpkgs/packages.json.gz
-/nixpkgs/packages-unstable.json
-/nixpkgs/packages.json
+/nixpkgs/*.json.gz
+/nixpkgs/*.json
 
 /blogs.json
 /blogs.xml
