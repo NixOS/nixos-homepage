@@ -213,7 +213,7 @@ const ResultDetails = ({
 				</table>
 				<div class="result--permalink">
 					<Link merge={true} state={{attr}}>
-						Link to <tt>{attr}</tt>
+						Permalink to <tt>{attr}</tt>
 					</Link>
 				</div>
 			</div>
