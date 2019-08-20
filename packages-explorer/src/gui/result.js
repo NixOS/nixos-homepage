@@ -58,7 +58,6 @@ const Install = use(["channel"], [], ({result, channel}) =>
 					nix-env -iA {channel.replace(/-.*/, "")}.<span class="attrname">{result["attr"]}</span>
 				</span>
 			</tt>
-			{" "}<em class="muted">(NixOS channel)</em>
 		</td>
 	</tr>
 );
