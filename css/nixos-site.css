@@ -419,6 +419,10 @@ div.docbook pre.hljs {
     overflow-x: visible;
 }
 
+div.docbook span.command {
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace; /* from bootstrap*/
+}
+
 .license ul {
     margin-left: 0px;
 }
