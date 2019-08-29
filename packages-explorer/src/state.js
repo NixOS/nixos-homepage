@@ -4,14 +4,14 @@
 import React, {Component} from "react";
 import pick from "lodash/pick";
 import queryString from "query-string";
-import debounce from "lodash/debounce";
 import fromPairs from "lodash/fromPairs";
 import isEqual from "lodash/isEqual";
 import mapValues from "lodash/mapValues";
+import throttle from "lodash/throttle";
 import {PER_PAGE} from "./conf";
 import refilter from "./refilter";
 
-const DEBOUNCE = 300;
+const THROTTLE = 300;
 
 const SYNCHRONIZED = [
 	"attr",
@@ -69,7 +69,7 @@ class State extends Component {
 			.concat(CALLBACKS)
 			.forEach((fn) => { this[fn] = this[fn].bind(this); });
 
-		this.refilter = debounce(this.refilter, DEBOUNCE);
+		this.refilter = throttle(this.refilter, THROTTLE);
 	}
 
 	handle_popstate(e) {
