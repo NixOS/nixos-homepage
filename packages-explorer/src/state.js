@@ -18,6 +18,7 @@ const SYNCHRONIZED = [
 	"channel",
 	"page",
 	"query",
+	"unfree",
 ];
 
 const CALLBACKS = [
@@ -26,6 +27,7 @@ const CALLBACKS = [
 	"select_attr",
 	"set_channel",
 	"set_query",
+	"set_unfree",
 	"url_for_state",
 ];
 
@@ -37,6 +39,7 @@ const INITIAL_STATE = {
 	channel: null,
 	page: 1,
 	query: "",
+	unfree: false,
 };
 
 /**
@@ -136,7 +139,8 @@ class State extends Component {
 
 		const {state} = this;
 		if (
-			state["query"] !== prev_state["query"]
+			state["query"] !== prev_state["query"] ||
+			state["unfree"] !== prev_state["unfree"]
 		) {
 			this.refilter();
 		}
@@ -225,6 +229,10 @@ class State extends Component {
 		this.setState({query}, {push});
 	}
 
+	set_unfree(unfree) {
+		this.setState({unfree});
+	}
+
 	select_attr(attr) {
 		const {selected} = this.state;
 		if (attr === selected) {
@@ -250,8 +258,8 @@ class State extends Component {
 		if (!this.state.channel_data) {
 			return;
 		}
-		const {query, channel_data: {packages}} = this.state;
-		const filtered_packages = refilter(query, packages);
+		const {query, channel_data: {packages}, unfree} = this.state;
+		const filtered_packages = refilter(query, packages, {withUnfree: unfree});
 		this.setState({
 			filtered_packages,
 			loading: 0

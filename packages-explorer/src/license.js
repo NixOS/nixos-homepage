@@ -45,3 +45,7 @@ const License = ({license}) => {
 };
 
 export default License;
+
+const isUnfree = (license) => license && license.free === false;
+
+export {isUnfree};

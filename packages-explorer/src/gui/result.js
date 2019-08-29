@@ -1,7 +1,7 @@
 import React from "react";
 import get from "lodash/get";
 import {use} from "../state";
-import FormattedLicense from "../license";
+import FormattedLicense, {isUnfree} from "../license";
 import Link from "../link";
 
 /**
@@ -27,6 +27,7 @@ const Result = ({
 			"result",
 			even ? "even" : "odd",
 			selected === attr ? "is-selected" : "is-not-selected",
+			isUnfree(result["meta"]["license"]) ? "is-unfree" : "is-free",
 		].join(" ")}
 		onClick={() => select_attr(attr)}
 	>
@@ -61,6 +62,20 @@ const Install = use(["channel"], [], ({result, channel}) =>
 		</td>
 	</tr>
 );
+
+const Unfree = ({result}) => {
+	if (isUnfree(get(result, "meta.license"))) {
+		return (
+			<tr>
+				<td colspan="2" class="unfree-note">
+					<em>
+						This package is unfree, and requires <a href="https://nixos.org/nixpkgs/manual/#sec-allow-unfree">extra steps</a> to install.
+					</em>
+				</td>
+			</tr>
+		);
+	}
+};
 
 const Position = use(["channel_data"], [], ({channel_data: {commit}, result: {meta: {position}}}) =>
 	<tr>
@@ -182,6 +197,7 @@ const LongDescription = ({result: {meta: {longDescription}}}) =>
 
 const ROWS = [
 	Install,
+	Unfree,
 	Position,
 	Platforms,
 	Homepage,
@@ -202,6 +218,7 @@ const ResultDetails = ({
 			"details",
 			even ? "even" : "odd",
 			selected === attr ? "is-selected" : "is-hidden",
+			isUnfree(result["meta"]["license"]) ? "is-unfree" : "is-free",
 		].join(" ")}
 	>
 		<td colspan={3}>

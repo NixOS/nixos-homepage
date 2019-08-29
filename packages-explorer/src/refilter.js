@@ -1,5 +1,6 @@
 import escapeRegExp from "lodash/escapeRegExp";
 import find from "lodash/find";
+import {isUnfree} from "./license";
 
 
 const WHITESPACES = / +/;
@@ -8,7 +9,7 @@ const STARTS_AND_ENDS_WITH_START_AND_ENDS = /^\^.*\$$/;
 /**
  * Finds packages matching search terms and returns a subset as an array.
  */
-const refilter = (search = "", packages) => {
+const refilter = (search = "", packages, {withUnfree = false} = {}) => {
 	let attrs = Object.keys(packages);
 	let words = search
 		.toLowerCase()
@@ -50,6 +51,9 @@ const refilter = (search = "", packages) => {
 
 		let kept = true;
 		kept = kept && words.every(match);
+		if (!withUnfree) {
+			kept = kept && !isUnfree(info["meta"]["license"]);
+		}
 
 		return kept;
 	});
