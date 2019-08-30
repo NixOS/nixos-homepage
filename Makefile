@@ -1,6 +1,7 @@
 NIXOS_SERIES = 19.03
-NIXPKGS = https://nixos.org/channels/nixos-$(NIXOS_SERIES)/nixexprs.tar.xz
-NIXPKGS_UNSTABLE = https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz
+CHANNEL_NIXOS_STABLE = https://nixos.org/channels/nixos-$(NIXOS_SERIES)/nixexprs.tar.xz
+CHANNEL_NIXOS_UNSTABLE = https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz
+CHANNEL_NIXPKGS_UNSTABLE = https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
@@ -32,7 +33,7 @@ $(NIXOS_MANUAL_OUT): $(NIXOS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-doc
 
 $(NIXOS_MANUAL_IN):
 	@echo rm -f $@
-	nix-build -o $@ '<nixpkgs/nixos>' -I nixpkgs=$(NIXPKGS) \
+	nix-build -o $@ '<nixpkgs/nixos>' -I nixpkgs=$(CHANNEL_NIXOS_STABLE) \
 	  -A config.system.build.manual.manual --arg configuration '{ fileSystems."/".device = "/dummy"; }'
 
 ### Prettify the Nix Pills
@@ -96,12 +97,15 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 
 $(NIXPKGS_MANUAL_IN):
 	@echo rm -f $@
-	nix-build -o $@ '<nixpkgs/doc>' -I nixpkgs=$(NIXPKGS)
+	nix-build -o $@ '<nixpkgs/doc>' -I nixpkgs=$(CHANNEL_NIXOS_STABLE)
 
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
-  nixpkgs/packages.json.gz \
-  nixpkgs/packages-unstable.json.gz \
+  nixos/packages-explorer.js \
+  nixpkgs/packages-channels.json.gz \
+  nixpkgs/packages-nixos-$(NIXOS_SERIES).json.gz \
+  nixpkgs/packages-nixos-unstable.json.gz \
+  nixpkgs/packages-nixpkgs-unstable.json.gz \
   nixos/options.json.gz
 
 
@@ -213,24 +217,46 @@ endif
 	gzip -9 < $^ > $@.tmp
 	mv $@.tmp $@
 
-nixpkgs/packages.json: packages-config.nix
-	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS)); \
+nixpkgs/packages-nixos-$(NIXOS_SERIES).json: packages-config.nix
+	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(CHANNEL_NIXOS_STABLE)); \
 	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
-	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS) -qa --json --arg config 'import ./packages-config.nix' \
+	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(CHANNEL_NIXOS_STABLE) -qa --json --arg config 'import ./packages-config.nix' \
 	  && echo -n '}') \
 	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
 	python -mjson.tool < $@.tmp > /dev/null
 	mv $@.tmp $@
 
-nixpkgs/packages-unstable.json: packages-config.nix
-	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(NIXPKGS_UNSTABLE)); \
+nixpkgs/packages-nixos-unstable.json: packages-config.nix
+	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(CHANNEL_NIXOS_UNSTABLE)); \
 	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
-	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(NIXPKGS_UNSTABLE) -qa --json --arg config 'import ./packages-config.nix' \
+	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(CHANNEL_NIXOS_UNSTABLE) -qa --json --arg config 'import ./packages-config.nix' \
 	  && echo -n '}') \
 	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
 	python -mjson.tool < $@.tmp > /dev/null
 	mv $@.tmp $@
+
+nixpkgs/packages-nixpkgs-unstable.json: packages-config.nix
+	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(CHANNEL_NIXPKGS_UNSTABLE)); \
+	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
+	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(CHANNEL_NIXPKGS_UNSTABLE) -qa --json --arg config 'import ./packages-config.nix' \
+	  && echo -n '}') \
+	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
+	python -mjson.tool < $@.tmp > /dev/null
+	mv $@.tmp $@
+
+# Cute hack, this allows future expansion if desired
+# Mainly, this allows tracking NIXOS_SERIES
+nixpkgs/packages-channels.json: Makefile
+	echo '["nixos-$(NIXOS_SERIES)", "nixos-unstable", "nixpkgs-unstable"]' > $@
 
 nixos/options.json:
-	cat $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(NIXPKGS) -A options)/share/doc/nixos/options.json > $@.tmp
+	cat $$(nix-build --no-out-link '<nixpkgs/nixos/release.nix>' -I nixpkgs=$(CHANNEL_NIXOS_STABLE) -A options)/share/doc/nixos/options.json > $@.tmp
 	mv $@.tmp $@
+
+# This is a fine enough approximation of the dependencies
+# The `node_modules` folder will not be present at deployment, only for development.
+EXPLORER_JS = $(shell find packages-explorer/ -not -path 'packages-explorer/node_modules/*')
+
+nixos/packages-explorer.js: $(EXPLORER_JS)
+	(cd packages-explorer ; nix-build -I nixpkgs=$(CHANNEL_NIXOS_STABLE))
+	cat packages-explorer/result/bundle.js > $@
