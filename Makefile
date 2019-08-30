@@ -85,8 +85,9 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
   nixos/packages-explorer.js \
   nixpkgs/packages-channels.json.gz \
+  nixpkgs/packages-nixos-$(NIXOS_SERIES).json \
   nixpkgs/packages-nixos-$(NIXOS_SERIES).json.gz \
-  nixpkgs/packages-nixos-unstable.json.gz \
+  nixpkgs/packages-nixpkgs-unstable.json \
   nixpkgs/packages-nixpkgs-unstable.json.gz \
   nixos/options.json.gz
 
@@ -192,62 +193,34 @@ endif
 	gzip -9 < $^ > $@.tmp
 	mv $@.tmp $@
 
-.PHONY: nixpkgs/packages.json nixpkgs/packages.json.gz
+.PHONY: nixpkgs/packages-nixos-$(NIXOS_SERIES).json nixpkgs/packages-nixos-$(NIXOS_SERIES).json.gz
 
-nixpkgs/packages.json nixpkgs/packages.json.gz:
-	@ln -sfn $(NIXPKGS_STABLE)/packages.json nixpkgs/packages.json
-	@ln -sfn $(NIXPKGS_STABLE)/packages.json.gz nixpkgs/packages.json.gz
+nixpkgs/packages-nixos-$(NIXOS_SERIES).json:
+	@ln -sfn $(NIXPKGS_STABLE)/packages.json $@
 
-.PHONY: nixpkgs/packages-unstable.json nixpkgs/packages-unstable.json.gz
+nixpkgs/packages-nixos-$(NIXOS_SERIES).json.gz:
+	@ln -sfn $(NIXPKGS_STABLE)/packages.json.gz $@
 
-nixpkgs/packages-unstable.json nixpkgs/packages-unstable.json.gz:
-	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json nixpkgs/packages-unstable.json
-	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json.gz nixpkgs/packages-unstable.json.gz
+.PHONY: nixpkgs/packages-nixpkgs-unstable.json nixpkgs/packages-nixpkgs-unstable.json.gz
+
+nixpkgs/packages-nixpkgs-unstable.json:
+	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json $@
+
+nixpkgs/packages-nixpkgs-unstable.json.gz:
+	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json.gz $@
 
 NIXOS_OPTIONS = /no-such-path
 
 .PHONY: nixos/options.json
 
-#nixpkgs/packages-nixos-$(NIXOS_SERIES).json: packages-config.nix
-#	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(CHANNEL_NIXOS_STABLE)); \
-#	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
-#	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(CHANNEL_NIXOS_STABLE) -qa --json --arg config 'import ./packages-config.nix' \
-#	  && echo -n '}') \
-#	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
-#	python -mjson.tool < $@.tmp > /dev/null
-#	mv $@.tmp $@
-
-#nixpkgs/packages-nixos-unstable.json: packages-config.nix
-#	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(CHANNEL_NIXOS_UNSTABLE)); \
-#	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
-#	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(CHANNEL_NIXOS_UNSTABLE) -qa --json --arg config 'import ./packages-config.nix' \
-#	  && echo -n '}') \
-#	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
-#	python -mjson.tool < $@.tmp > /dev/null
-#	mv $@.tmp $@
-
-#nixpkgs/packages-nixpkgs-unstable.json: packages-config.nix
-#	nixpkgs=$$(nix-instantiate --find-file nixpkgs -I nixpkgs=$(CHANNEL_NIXPKGS_UNSTABLE)); \
-#	(echo -n '{ "commit": "' && (cat $$nixpkgs/.git-revision || printf "unknown") && echo -n '","packages":' \
-#	  && nix-env -f '<nixpkgs>' -I nixpkgs=$(CHANNEL_NIXPKGS_UNSTABLE) -qa --json --arg config 'import ./packages-config.nix' \
-#	  && echo -n '}') \
-#	  | sed "s|$$nixpkgs/||g" | jq -c . > $@.tmp
-#	python -mjson.tool < $@.tmp > /dev/null
-#	mv $@.tmp $@
-
 # Cute hack, this allows future expansion if desired
 # Mainly, this allows tracking NIXOS_SERIES
 nixpkgs/packages-channels.json: Makefile
-	echo '["nixos-$(NIXOS_SERIES)", "nixos-unstable", "nixpkgs-unstable"]' > $@
+	echo '["nixos-$(NIXOS_SERIES)", "nixpkgs-unstable"]' > $@
 
 nixos/options.json:
 	@ln -sfn $(NIXOS_OPTIONS) $@
 
-# This is a fine enough approximation of the dependencies
-# The `node_modules` folder will not be present at deployment, only for development.
-#EXPLORER_JS = $(shell find packages-explorer/ -not -path 'packages-explorer/node_modules/*')
-
-#nixos/packages-explorer.js: $(EXPLORER_JS)
-#	(cd packages-explorer ; nix-build -I nixpkgs=$(CHANNEL_NIXOS_STABLE))
-#	cat packages-explorer/result/bundle.js > $@
+nixos/packages-explorer.js:
+	@ln -sfn $(PACKAGES_EXPLORER) $@
 

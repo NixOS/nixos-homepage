@@ -1,58 +1,48 @@
 {
     "inputs": {
         "hydra": {
-            "id": "hydra",
             "inputs": {
                 "nix": {
-                    "id": "nix",
                     "inputs": {
                         "nixpkgs": {
-                            "id": "nixpkgs",
                             "inputs": {},
-                            "narHash": "sha256-HQ/wXOy6POACr5BIDoUeFYThgqHxtVfrXVQi95yIljw=",
-                            "nonFlakeInputs": {},
-                            "uri": "github:edolstra/nixpkgs/a0e1f50e6f72e5037d71a0b65c67cf0605349a06"
+                            "narHash": "sha256-TrLhI3xPkTTznE9gcMHhkHirGNN7N02zM4DxJ/U3WRs=",
+                            "uri": "github:edolstra/nixpkgs/24bf27fc215e8300877dfa1c426b9966bbfbd150"
                         }
                     },
-                    "narHash": "sha256-R74Dilfb/aRjIUMJh60U/zDYbe8yt+Bm+0e5QOX/JyQ=",
-                    "nonFlakeInputs": {},
-                    "uri": "github:NixOS/nix/e75ffbf04abb39e7835d3ab3150065a1581d2388"
+                    "narHash": "sha256-oj3c5cpfoiwoKEaevSfOLGdcyS3LynAZkM9tuUNWcdE=",
+                    "uri": "github:NixOS/nix/80c36d4562af71a90c67b3adb886a1003834890e"
                 },
                 "nixpkgs": {
-                    "id": "nixpkgs",
                     "inputs": {},
-                    "narHash": "sha256-HQ/wXOy6POACr5BIDoUeFYThgqHxtVfrXVQi95yIljw=",
-                    "nonFlakeInputs": {},
-                    "uri": "github:edolstra/nixpkgs/a0e1f50e6f72e5037d71a0b65c67cf0605349a06"
+                    "narHash": "sha256-TrLhI3xPkTTznE9gcMHhkHirGNN7N02zM4DxJ/U3WRs=",
+                    "uri": "github:edolstra/nixpkgs/24bf27fc215e8300877dfa1c426b9966bbfbd150"
                 }
             },
-            "narHash": "sha256-qogalFDmy4ebizDdBzlyUZfnAHL8Bt4gy1doAoD7MRA=",
-            "nonFlakeInputs": {},
-            "uri": "github:NixOS/hydra/d834ac9c1446bf84c516bf33b65047e7e37e98e5"
+            "narHash": "sha256-5DNB1crwt/tzhFM+2XPM2vZCnxH5D4ghBeyGH+YtPXM=",
+            "uri": "github:NixOS/hydra/ada640d340b15658eab38dc1c1d79924dd10e2d2"
         },
         "nix": {
-            "id": "nix",
             "inputs": {
                 "nixpkgs": {
-                    "id": "nixpkgs",
                     "inputs": {},
-                    "narHash": "sha256-HQ/wXOy6POACr5BIDoUeFYThgqHxtVfrXVQi95yIljw=",
-                    "nonFlakeInputs": {},
-                    "uri": "github:edolstra/nixpkgs/a0e1f50e6f72e5037d71a0b65c67cf0605349a06"
+                    "narHash": "sha256-TrLhI3xPkTTznE9gcMHhkHirGNN7N02zM4DxJ/U3WRs=",
+                    "uri": "github:edolstra/nixpkgs/24bf27fc215e8300877dfa1c426b9966bbfbd150"
                 }
             },
-            "narHash": "sha256-R74Dilfb/aRjIUMJh60U/zDYbe8yt+Bm+0e5QOX/JyQ=",
-            "nonFlakeInputs": {},
-            "uri": "github:NixOS/nix/e75ffbf04abb39e7835d3ab3150065a1581d2388"
+            "narHash": "sha256-09ZHwpxf9pRDacCSGTHYx+fnKYgxKx8G37Jqb4wl1xI=",
+            "uri": "github:NixOS/nix/a49b6761a54984669bc622edfe3e693244868425"
         },
-        "nixpkgs": {
-            "id": "nixpkgs",
+        "nixpkgsStable": {
             "inputs": {},
-            "narHash": "sha256-HQ/wXOy6POACr5BIDoUeFYThgqHxtVfrXVQi95yIljw=",
-            "nonFlakeInputs": {},
-            "uri": "github:edolstra/nixpkgs/a0e1f50e6f72e5037d71a0b65c67cf0605349a06"
+            "narHash": "sha256-Zc03v25SkzGGdndXVcgNc4k9tgZ5eqGcpDEjDgSHHk8=",
+            "uri": "github:edolstra/nixpkgs/207fd63df13b9f5b6117c8c5bec0042a8a30fe72"
+        },
+        "nixpkgsUnstable": {
+            "inputs": {},
+            "narHash": "sha256-TrLhI3xPkTTznE9gcMHhkHirGNN7N02zM4DxJ/U3WRs=",
+            "uri": "github:edolstra/nixpkgs/24bf27fc215e8300877dfa1c426b9966bbfbd150"
         }
     },
-    "nonFlakeInputs": {},
     "version": 2
 }

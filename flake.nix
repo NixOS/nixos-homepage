@@ -1,21 +1,20 @@
 {
-  name = "nixos-homepage";
-
-  epoch = 201906;
+  epoch = 201909;
 
   description = "The nixos.org homepage";
 
-  inputs = [ "nixpkgs" "nix" "hydra" ];
+  inputs.nixpkgsStable.uri = "nixpkgs/release-19.03";
+  inputs.nixpkgsUnstable.uri = "nixpkgs/master";
 
-  outputs = inputs:
-    with import inputs.nixpkgs { system = "x86_64-linux"; };
+  outputs = { self, nixpkgsUnstable, nixpkgsStable, nix, hydra }:
+    with import nixpkgsStable { system = "x86_64-linux"; };
     rec {
 
     checks.build = defaultPackage;
 
     # Generate a JSON file listing the packages in Nixpkgs.
     lib.nixpkgsToJSON = { src }: runCommand "nixpkgs-json"
-      { buildInputs = [ nix jq ];
+      { buildInputs = [ pkgs.nix jq ];
       }
       ''
         export NIX_DB_DIR=$TMPDIR
@@ -30,22 +29,24 @@
 
     packages = {
 
-      nixosOptions = (import (inputs.nixpkgs + "/nixos/release.nix") {
-        inherit (inputs) nixpkgs;
+      nixosOptions = (import (nixpkgsStable + "/nixos/release.nix") {
+        nixpkgs = nixpkgsStable;
       }).options;
 
       stablePackagesList = lib.nixpkgsToJSON {
-        src = inputs.nixpkgs;
+        src = nixpkgsStable;
       };
 
       unstablePackagesList = lib.nixpkgsToJSON {
-        src = inputs.nixpkgs; # FIXME
+        src = nixpkgsUnstable;
       };
 
-      homepage = stdenv.mkDerivation {
-        name = "nixos-homepage-${inputs.self.lastModified}";
+      packagesExplorer = import ./packages-explorer nixpkgsStable;
 
-        src = inputs.self;
+      homepage = stdenv.mkDerivation {
+        name = "nixos-homepage-${self.lastModified}";
+
+        src = self;
 
         enableParallelBuilding = true;
 
@@ -58,7 +59,7 @@
             perlPackages.TemplateToolkit
             perlPackages.TemplatePluginJSONEscape
             perlPackages.TemplatePluginIOAll
-            nix
+            pkgs.nix
             imagemagick
             xhtml1
             jq
@@ -71,15 +72,15 @@
         '';
 
         makeFlags =
-          [ "NIX_MANUAL_IN=${inputs.nix.defaultPackage}/share/doc/nix/manual"
-            "NIXOS_MANUAL_IN=${inputs.nixpkgs.htmlDocs.nixosManual}"
-            "NIXPKGS_MANUAL_IN=${inputs.nixpkgs.htmlDocs.nixpkgsManual}"
-            "NIXOPS_MANUAL_IN=${inputs.nixpkgs.legacyPackages.nixops}/share/doc/nixops"
-            "HYDRA_MANUAL_IN=${inputs.hydra.defaultPackage}/share/doc/hydra"
-            "NIXPKGS=${inputs.nixpkgs}"
+          [ "NIX_MANUAL_IN=${nix.defaultPackage}/share/doc/nix/manual"
+            "NIXOS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixosManual}"
+            "NIXPKGS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixpkgsManual}"
+            "NIXOPS_MANUAL_IN=${nixpkgsStable.legacyPackages.nixops}/share/doc/nixops"
+            "HYDRA_MANUAL_IN=${hydra.defaultPackage}/share/doc/hydra"
             "NIXPKGS_STABLE=${packages.stablePackagesList}"
             "NIXPKGS_UNSTABLE=${packages.unstablePackagesList}"
             "NIXOS_OPTIONS=${packages.nixosOptions}/share/doc/nixos/options.json"
+            "PACKAGES_EXPLORER=${packages.packagesExplorer}/bundle.js"
           ];
 
         installPhase = ''
