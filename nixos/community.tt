@@ -94,12 +94,20 @@ channel is <a href="https://logs.nix.samueldr.com/nixos/">logged</a>.</p>
 by the community and <a href="https://www.reddit.com/r/NixOS/">/r/NixOS</a>
 also contains useful resources.</p>
 
+<p>To add yourself to <a href="https://planet.nixos.org/">Planet NixOS</a>,
+fork the <a
+href="https://github.com/NixOS/nixos-org-configurations">nixos-org-configurations</a>
+repo and add the feed source to <a
+href="https://github.com/NixOS/nixos-org-configurations/blob/master/nixos-org/planet-feeds.nix">planet-feeds.nix</a>
+then make a pull request.</p>
+
 <h3>Meetups</h3>
 
 <p>Europe:</p>
 <ul>
 <li><a href="http://www.meetup.com/Amsterdam-Nix-Meetup/">Amsterdam Nix Meetup</a></li>
 <li><a href="http://www.meetup.com/Berlin-NixOS-Meetup/">Berlin NixOS Meetup</a></li>
+<li><a href="https://www.meetup.com/Greater-Copenhagen-NixOS-User-Group">Greater Copenhagen NixOS User Group</a></li>
 <li><a href="https://www.meetup.com/NixOS-London/">London NixOS Meetup</a></li>
 <li><a href="http://www.meetup.com/Munich-NixOS-Meetup/">Munich NixOS Meetup</a></li>
 <li><a href="https://blog.shackspace.de/?p=5829">Stuttgart NixOS Meetup</a></li>
@@ -108,6 +116,7 @@ also contains useful resources.</p>
 <p>America:</p>
 <ul>
 <li><a href="http://www.meetup.com/Bay-Area-Nix-NixOS-User-Group/">Bay Area Nix/NixOS User Group</a></li>
+<li><a href="https://www.meetup.com/New-York-Nix-Users-Group/">New York Nix Users Group</a></li>
 </ul>
 
 <p>Asia:</p>
