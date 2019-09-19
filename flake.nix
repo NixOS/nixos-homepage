@@ -94,5 +94,21 @@
 
     defaultPackage = packages.homepage;
 
+    nixosConfigurations.container = nixpkgsStable.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules =
+        [ { system.configurationRevision = self.rev;
+            boot.isContainer = true;
+            networking.useDHCP = false;
+            networking.firewall.allowedTCPPorts = [ 80 ];
+            services.httpd = {
+              enable = true;
+              adminAddr = "admin@example.org";
+              documentRoot = self.packages.homepage;
+            };
+          }
+        ];
+    };
+
   };
 }
