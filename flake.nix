@@ -105,6 +105,11 @@
               enable = true;
               adminAddr = "admin@example.org";
               documentRoot = self.packages.homepage;
+              extraConfig = ''
+                # Serve the package/option databases as automatically
+                # decompressed JSON.
+                AddEncoding x-gzip gz
+              '';
             };
           }
         ];
