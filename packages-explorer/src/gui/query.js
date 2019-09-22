@@ -12,6 +12,7 @@ const Query = ({query, set_query}) =>
 			defaultValue={query}
 			onChange={(event) => set_query(event.target.value)}
 			onBlur={(event) => set_query(event.target.value, true)}
+			autofocus="autofocus"
 		/>
 	</div>
 ;
