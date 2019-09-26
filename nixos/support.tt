@@ -66,6 +66,10 @@
     <ul>
       <li>The <a href="https://nixos.wiki"><strong>NixOS Wiki</strong></a>
       is an unofficial wiki maintained by the community.</li>
+      <li>The <a href="[%nixpkgsManual%]"><strong>Nixpkgs
+      manual</strong></a> describes how to use the
+      <a href="[%root%]nixpkgs">package collection</a> that NixOS is
+      built on.</li>
       <li>The <a href="[%nixManual%]"><strong>Nix manual</strong></a>
       describes how to use the <a href="[%root%]nix">Nix package
       manager</a>.</li>
