@@ -1,4 +1,4 @@
-NIXOS_SERIES = 19.03
+NIXOS_SERIES = 19.09
 CHANNEL_NIXOS_STABLE = https://nixos.org/channels/nixos-$(NIXOS_SERIES)/nixexprs.tar.xz
 CHANNEL_NIXOS_UNSTABLE = https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz
 CHANNEL_NIXPKGS_UNSTABLE = https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz
