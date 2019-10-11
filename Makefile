@@ -209,9 +209,9 @@ blogs.json: blogs.xml
 
 ifeq ($(UPDATE), 1)
 .PHONY: nixos/amis.nix nixos/azure-blobs.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml \
-  nixpkgs/packages-nixos-$(NIXOS_SERIES).json.gz \
-  nixpkgs/packages-nixos-unstable.json.gz \
-  nixpkgs/packages-nixpkgs-unstable.json.gz \
+  nixpkgs/packages-nixos-$(NIXOS_SERIES).json \
+  nixpkgs/packages-nixos-unstable.json \
+  nixpkgs/packages-nixpkgs-unstable.json \
   nixos/options.json \
   $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN) $(HYDRA_MANUAL_IN) $(NIX_PILLS_MANUAL_IN) nixos-release.tt
 endif
