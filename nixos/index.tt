@@ -32,7 +32,7 @@
     <p>NixOS has a completely <strong>declarative</strong> approach to
     configuration management: you write a specification of the desired
     configuration of your system in NixOS’s modular language, and
-    NixOS takes care of making it happen.</p>
+    NixOS takes care of making it happen. More in <a href="[%root%]nixos/manual">Manual</a></p>
   </div>
   <div class="span4">
     <h2>Reliable</h2>
