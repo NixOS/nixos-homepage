@@ -3,14 +3,14 @@
 
   description = "The nixos.org homepage";
 
-  inputs.nixpkgsStable.uri = "nixpkgs/release-19.03";
+  inputs.nixpkgsStable.uri = "nixpkgs/release-19.09";
   inputs.nixpkgsUnstable.uri = "nixpkgs/master";
 
   outputs = { self, nixpkgsUnstable, nixpkgsStable, nix, hydra }:
     with import nixpkgsStable { system = "x86_64-linux"; };
     rec {
 
-    checks.build = defaultPackage;
+    checks.x86_64-linux.build = defaultPackage.x86_64-linux;
 
     # Generate a JSON file listing the packages in Nixpkgs.
     lib.nixpkgsToJSON = { src }: runCommand "nixpkgs-json"
@@ -27,7 +27,7 @@
         gzip -k $out/packages.json
       '';
 
-    packages = {
+    packages.x86_64-linux = {
 
       nixosOptions = (import (nixpkgsStable + "/nixos/release.nix") {
         nixpkgs = nixpkgsStable;
@@ -72,15 +72,15 @@
         '';
 
         makeFlags =
-          [ "NIX_MANUAL_IN=${nix.defaultPackage}/share/doc/nix/manual"
+          [ "NIX_MANUAL_IN=${nix.defaultPackage.x86_64-linux}/share/doc/nix/manual"
             "NIXOS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixosManual}"
             "NIXPKGS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixpkgsManual}"
-            "NIXOPS_MANUAL_IN=${nixpkgsStable.legacyPackages.nixops}/share/doc/nixops"
-            "HYDRA_MANUAL_IN=${hydra.defaultPackage}/share/doc/hydra"
-            "NIXPKGS_STABLE=${packages.stablePackagesList}"
-            "NIXPKGS_UNSTABLE=${packages.unstablePackagesList}"
-            "NIXOS_OPTIONS=${packages.nixosOptions}/share/doc/nixos/options.json"
-            "PACKAGES_EXPLORER=${packages.packagesExplorer}/bundle.js"
+            "NIXOPS_MANUAL_IN=${nixpkgsStable.legacyPackages.x86_64-linux.nixops}/share/doc/nixops"
+            "HYDRA_MANUAL_IN=${hydra.defaultPackage.x86_64-linux}/share/doc/hydra"
+            "NIXPKGS_STABLE=${packages.x86_64-linux.stablePackagesList}"
+            "NIXPKGS_UNSTABLE=${packages.x86_64-linux.unstablePackagesList}"
+            "NIXOS_OPTIONS=${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"
+            "PACKAGES_EXPLORER=${packages.x86_64-linux.packagesExplorer}/bundle.js"
           ];
 
         installPhase = ''
@@ -92,7 +92,7 @@
 
     };
 
-    defaultPackage = packages.homepage;
+    defaultPackage.x86_64-linux = packages.x86_64-linux.homepage;
 
     nixosConfigurations.container = nixpkgsStable.lib.nixosSystem {
       system = "x86_64-linux";
@@ -104,7 +104,7 @@
             services.httpd = {
               enable = true;
               adminAddr = "admin@example.org";
-              documentRoot = self.packages.homepage;
+              documentRoot = self.packages.x86_64-linux.homepage;
               extraConfig = ''
                 # Serve the package/option databases as automatically
                 # decompressed JSON.
