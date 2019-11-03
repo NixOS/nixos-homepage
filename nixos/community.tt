@@ -32,6 +32,14 @@ type="text/javascript"
 src="https://www.openhub.net/p/25550/widgets/project_basic_stats.js"></script>
 </div> </div>
 
+<h3><a href="https://github.com/NixOS/nixpkgs/issues">Bugs</a></h3>
+<p>If
+    you think you’ve found a bug, please report it in the <a
+    href="https://github.com/NixOS/nixpkgs/issues"><strong>Nixpkgs
+    issue tracker</strong></a> (please use the label <strong>6.topic:
+    nixos</strong>).
+</p>
+
 <h3>Documentation</h3>
 
 <ul>
