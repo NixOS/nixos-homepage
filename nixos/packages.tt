@@ -1,5 +1,9 @@
 [% WRAPPER layout.tt title="Search NixOS packages" menu="nixos" %]
 
+If you have already installed NixOS, you can use <code>nix search</code> on the commandline to search for packages.
+
+<hr/>
+
 <div id="packages-explorer">
 	<div class="app">
 		<noscript>Sorry, you need to enable JavaScript to run this app.</noscript>
