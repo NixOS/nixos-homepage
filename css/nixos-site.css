@@ -404,6 +404,9 @@ div.docbook code {
     color: inherit;
     font-size: 100%;
     white-space: normal;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
 }
 
 div.docbook div.toc {
@@ -421,6 +424,9 @@ div.docbook pre.hljs {
 
 div.docbook span.command {
     font-family: Monaco, Menlo, Consolas, "Courier New", monospace; /* from bootstrap*/
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
 }
 
 .license ul {
