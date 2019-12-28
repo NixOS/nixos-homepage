@@ -39,7 +39,9 @@ the new interpreter may be longer than the old one, in which case it
 won’t fit.  PatchELF takes care of “growing” the executable with
 sufficient space at the beginning to contain the new interpreter
 field.  As a result, the resulting program may be one page (4 KiB)
-larger.  To get it from the current NixOS GCC wrapper:</p>
+larger.  To get it from the current gcc wrapper when inside
+a <code>stdenv.mkDerivation</code> or
+<a href="https://nixos.org/nix/manual/#sec-nix-shell">nix-shell</a> do:</p>
 
 <pre class="code">
 patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" program
