@@ -1,4 +1,4 @@
-NIXOS_SERIES = 19.03
+NIXOS_SERIES = 19.09
 NIXPKGS_STABLE = /no-such-path
 NIXPKGS_UNSTABLE = /no-such-path
 
@@ -10,7 +10,7 @@ default: all
 HTML = index.html news.html \
   nix/index.html nix/about.html nix/download.html \
   nixpkgs/index.html nixpkgs/download.html \
-  nixos/index.html nixos/about.html nixos/download.html nixos/support.html \
+  nixos/index.html nixos/about.html nixos/download.html nixos/learn.html \
   nixos/community.html nixos/packages.html nixos/options.html \
   nixos/security.html nixos/foundation.html \
   nixos/wiki.html \

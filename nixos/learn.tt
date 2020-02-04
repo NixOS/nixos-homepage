@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="NixOS support" menu='nixos' %]
+[% WRAPPER layout.tt title="Learning resources" menu='nixos' %]
 
 <div class="row-fluid">
 
@@ -49,44 +49,22 @@
     Google Group</a> or send an email to <a
     href="mailto:nix-security-announce+subscribe@googlegroups.com">nix-security-announce+subscribe@googlegroups.com</a>.</p>
   </div>
-
-  <div class="span4"> <h2><a
-    href="https://github.com/NixOS/nixpkgs/issues">Bugs</a></h2> <p>If
-    you think you’ve found a bug, please report it in the <a
-    href="https://github.com/NixOS/nixpkgs/issues"><strong>Nixpkgs
-    issue tracker</strong></a> (please use the label <strong>6.topic:
-    nixos</strong>).</p>  </div>
-
-</div>
-
-<div class="row-fluid">
   <div class="span4">
     <h2>Other resources</h2>
     <p>There are several other manuals:</p>
     <ul>
       <li>The <a href="https://nixos.wiki"><strong>NixOS Wiki</strong></a>
       is an unofficial wiki maintained by the community.</li>
+      <li>The <a href="[%nixpkgsManual%]"><strong>Nixpkgs
+      manual</strong></a> describes how to use the
+      <a href="[%root%]nixpkgs">package collection</a> that NixOS is
+      built on.</li>
       <li>The <a href="[%nixManual%]"><strong>Nix manual</strong></a>
       describes how to use the <a href="[%root%]nix">Nix package
       manager</a>.</li>
       <li>The <a href="[%nixopsManual%]"><strong>NixOps
       manual</strong></a> describes how to deploy NixOS machine in the
       cloud using <a href="[%root%]nixops">NixOps</a>.</li>
-    </ul>
-  </div>
-
-  <div class="span4">
-    <h2>Commercial support</h2>
-    <!-- Please submit a PR to add your company -->
-    <p>For professional support, a number of consulting companies are
-    available (sorted in alphabetical order):</p>
-    <ul>
-      <li><a href="https://www.enlambda.com/">Enlambda</a></li>
-      <li><a href="https://nixos.mayflower.consulting">Mayflower</a></li>
-      <li><a href="https://nixcloud.io/">nixcloud</a></li>
-      <li><a href="https://www.numtide.com/">NumTide Ltd</a></li>
-      <li><a href="https://obsidian.systems">Obsidian Systems</a></li>
-      <li><a href="https://serokell.io/">Serokell</a></li>
     </ul>
   </div>
 

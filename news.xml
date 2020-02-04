@@ -2,6 +2,25 @@
 
 <news>
   <item>
+    <pubDate>Wed, Oct 09 2019 00:00:00 GMT</pubDate>
+    <title>
+      NixOS 19.09 released
+    </title>
+    <description>
+      <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/19.09-loris/loris.png">
+        <img class="inline" src="logo/nixos-logo-19.09-loris-lores.png" alt="19.09 Loris logo" with="100" height="87" />
+      </a>
+      NixOS 19.09 “Loris” has been released, the twelfth stable release branch.
+      See the <a href="/nixos/manual/release-notes.html#sec-release-19.09">release notes</a>
+      for details. You can get NixOS 19.09 ISOs and VirtualBox appliances
+      from the <a href="nixos/download.html">download page</a>.
+      For information on how to upgrade from older release branches
+      to 19.09, check out the
+      <a href="/nixos/manual/index.html#sec-upgrading">manual section on upgrading</a>.
+    </description>
+  </item>
+
+  <item>
     <pubDate>Wed, Apr 10 2019 00:00:00 GMT</pubDate>
     <title>
       NixOS 19.03 released

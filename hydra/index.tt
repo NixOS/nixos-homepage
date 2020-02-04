@@ -30,7 +30,7 @@ href="mailto:rob.vermaas@gmail.com">please let us know</a>.</p>
 <section><h2>Documentation</h2>
 
 <p>Hydra has a work-in-progress <a
-href="[%root%]/hydra/manual">manual</a>. There also is an ancient,
+href="[%root%]hydra/manual">manual</a>. There also is an ancient,
 totally outdated <a
 href="https://nixos.org/~eelco/pubs/hydra-scp-submitted.pdf">paper
 about Hydra</a>.</p>
@@ -44,7 +44,7 @@ please visit:</p>
 
 <ul>
   <li><a href="https://github.com/NixOS/hydra/issues">github.com/NixOS/hydra/issues</a>: issues, bugs and feature requests for Hydra</li>
-  <li><a href="[%root%]nixos/support.html#discourse"><tt>Discourse</tt> forum</a>: problems with our Hydra instance at <a href="https://hydra.nixos.org/">hydra.nixos.org</a></li>
+  <li><a href="[%root%]nixos/learn.html#discourse"><tt>Discourse</tt> forum</a>: problems with our Hydra instance at <a href="https://hydra.nixos.org/">hydra.nixos.org</a></li>
 </ul>
 
 </section>
