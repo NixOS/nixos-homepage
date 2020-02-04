@@ -3,8 +3,8 @@
 
   description = "The nixos.org homepage";
 
-  inputs.nixpkgsStable.uri = "nixpkgs/release-19.09";
-  inputs.nixpkgsUnstable.uri = "nixpkgs/master";
+  inputs.nixpkgsStable.url = "nixpkgs/release-19.09";
+  inputs.nixpkgsUnstable.url = "nixpkgs/master";
 
   outputs = { self, nixpkgsUnstable, nixpkgsStable, nix, hydra }:
     with import nixpkgsStable { system = "x86_64-linux"; };
