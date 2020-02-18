@@ -6,12 +6,11 @@ env:
     - LC_CTYPE="en_US.UTF-8"
     - LANG="en_US.UTF-8"
 install:
-  - nix-shell -p nodejs jq --command "npm install netlify-cli"
-  - nix-shell shell.nix --command "echo INSTALLED-DEPENDENCIES"
+  - nix-shell shell.nix --command "echo DEPENDENCIES-INSTALLED"
 script:
   - nix-shell shell.nix --command "make"
 deploy:
   - provider: script
-    script: nix-shell -p nodejs --command "./node_modules/.bin/netlify deploy --json --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --dir ./ --prod"
+    script: nix-shell -p nodejs --command "pwd && env && npm install netlify-cli && ./node_modules/.bin/netlify deploy --json --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --dir ./ --prod"
     on:
       branch: master
