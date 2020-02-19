@@ -15,7 +15,7 @@ HTML = index.html news.html \
   nixos/community.html nixos/packages.html nixos/options.html \
   nixos/security.html nixos/foundation.html \
   nixos/wiki.html \
-  patchelf.html hydra/index.html \
+  hydra/index.html \
   disnix/index.html disnix/download.html disnix/docs.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
   nixops/index.html

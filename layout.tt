@@ -125,9 +125,6 @@
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/svanderburg/disnix"><i class="fa fa-github"></i></a></li>
-            [% ELSIF menu == 'patchelf' %]
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/patchelf"><i class="fa fa-github"></i></a></li>
             [% ELSIF menu == 'organization' %]
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
