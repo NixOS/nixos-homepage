@@ -1,4 +1,5 @@
 language: nix
+os: linux
 env:
   global:
     - NIX_VERSION="2.3.3"
@@ -17,7 +18,7 @@ script:
   - nix-shell shell.nix --command "make"
 deploy:
   - provider: script
-    skip_cleanup: true
+    cleanup: false
     script: nix-shell -p nodejs --command "pwd && env && npm install netlify-cli && ./node_modules/.bin/netlify deploy --json --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --dir ./ --prod"
     on:
       branch: master
