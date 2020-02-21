@@ -1,6 +1,8 @@
 language: nix
 env:
   global:
+    - NIX_VERSION="2.3.3"
+    - NIXOPS_VERSION="1.7"
     - LANGUAGE="en_US.UTF-8"
     - LC_ALL="en_US.UTF-8"
     - LC_CTYPE="en_US.UTF-8"
@@ -8,6 +10,10 @@ env:
 install:
   - nix-shell shell.nix --command "echo DEPENDENCIES-INSTALLED"
 script:
+  # TODO: this should be moved into Makefile
+  - git clone https://github.com/nixos/nix.git /tmp/nix && git --work-tree=/tmp/nix checkout $NIX_VERSION && cd nix && ln -s /tmp/nix/doc/manual manual-raw
+  # TODO: this should be moved into Makefile
+  - git clone https://github.com/nixos/nixops.git /tmp/nixops && git --work-tree=/tmp/nixops checkout $NIXOPS_VERSION && cd nixops && ln -s /tmp/nixops/doc/manual manual-raw
   - nix-shell shell.nix --command "make"
 deploy:
   - provider: script

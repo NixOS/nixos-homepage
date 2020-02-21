@@ -18,6 +18,12 @@
 /nixpkgs/*.json.gz
 /nixpkgs/*.json
 
+/nix/manual/
+/nix/manual-raw
+
+/nixops/manual/
+/nixops/manual-raw
+
 /blogs.json
 /blogs.xml
 /favicon.png
