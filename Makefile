@@ -159,8 +159,9 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: blogs.xml \
-  $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN) $(HYDRA_MANUAL_IN) $(NIX_PILLS_MANUAL_IN) nixos-release.tt
+.PHONY: blogs.xml nixos-release.tt
+update: blogs.xml nixos-release.tt
+	@true
 endif
 
 
