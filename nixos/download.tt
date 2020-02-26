@@ -76,7 +76,7 @@ by using one of the AMIs listed below.</p>
     <tr><th>Region</th><th>Root storage</th><th>Virtualisation</th><th>AMI</th><th></th></tr>
   </thead>
   <tbody>
-    [% amis = JSON.Escape.json_decode(IO.All.new('nixos/amis.json').all).$latestNixOSSeries %]
+    [% amis = JSON.Escape.json_decode(IO.All.new(nixosAmis).all).$latestNixOSSeries %]
     [% FOREACH region IN amis.keys.sort %]
       [% FOREACH type IN amis.$region.keys.sort; ami = amis.$region.$type %]
         <tr>

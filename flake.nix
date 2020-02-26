@@ -43,6 +43,10 @@
 
       packagesExplorer = import ./packages-explorer nixpkgsStable;
 
+      nixosAmis = writeText "ec2-amis.json"
+        (builtins.toJSON (
+          import (nixpkgsStable + "/nixos/modules/virtualisation/ec2-amis.nix")));
+
       homepage = stdenv.mkDerivation {
         name = "nixos-homepage-${self.lastModified}";
 
@@ -80,6 +84,7 @@
             "NIXPKGS_STABLE=${packages.x86_64-linux.stablePackagesList}"
             "NIXPKGS_UNSTABLE=${packages.x86_64-linux.unstablePackagesList}"
             "NIXOS_OPTIONS=${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"
+            "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
             "PACKAGES_EXPLORER=${packages.x86_64-linux.packagesExplorer}/bundle.js"
           ];
 

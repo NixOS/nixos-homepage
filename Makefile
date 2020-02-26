@@ -114,6 +114,7 @@ favicon.png: logo/nixos-logo-only-hires.png
 	  --pre_chomp --post_chomp \
 	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
 	  --define fileName=$< \
+	  --define nixosAmis=$(NIXOS_AMIS) \
 	  --pre_process=nix-release.tt --pre_process=nixos-release.tt --pre_process=common.tt \
 	  $< > $@.tmp
 	xmllint --nonet --noout $@.tmp
@@ -142,21 +143,13 @@ news-rss.xml: news.xml news-rss.xsl
 
 index.html: news-rss.xml latest-news.xhtml blogs.json
 
-nixos/download.html: nixos/amis.json nixos/azure-blobs.json
+nixos/download.html: nixos/azure-blobs.json
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
 
 check:
 	checklink $(HTML)
-
-nixos/amis.json: nixos/amis.nix
-	nix-instantiate --eval --strict --json $< > $@.tmp
-	mv $@.tmp $@
-
-nixos/amis.nix:
-	curl --fail -L https://raw.github.com/NixOS/nixpkgs/master/nixos/modules/virtualisation/ec2-amis.nix > $@.tmp
-	mv $@.tmp $@
 
 nixos/azure-blobs.json: nixos/azure-blobs.nix
 	nix-instantiate --eval --strict --json $< > $@.tmp
@@ -175,7 +168,7 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixos/azure-blobs.nix blogs.xml \
+.PHONY: nixos/azure-blobs.nix blogs.xml \
   $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN) $(HYDRA_MANUAL_IN) $(NIX_PILLS_MANUAL_IN) nixos-release.tt
 endif
 
