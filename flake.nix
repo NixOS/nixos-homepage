@@ -47,6 +47,10 @@
         (builtins.toJSON (
           import (nixpkgsStable + "/nixos/modules/virtualisation/ec2-amis.nix")));
 
+      nixosAzureBlobs = writeText "azure-blobs.json"
+        (builtins.toJSON (
+          import (nixpkgsStable + "/nixos/modules/virtualisation/azure-bootstrap-blobs.nix")));
+
       homepage = stdenv.mkDerivation {
         name = "nixos-homepage-${self.lastModified}";
 
@@ -85,6 +89,7 @@
             "NIXPKGS_UNSTABLE=${packages.x86_64-linux.unstablePackagesList}"
             "NIXOS_OPTIONS=${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"
             "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
+            "NIXOS_AZURE_BLOBS=${packages.x86_64-linux.nixosAzureBlobs}"
             "PACKAGES_EXPLORER=${packages.x86_64-linux.packagesExplorer}/bundle.js"
           ];
 

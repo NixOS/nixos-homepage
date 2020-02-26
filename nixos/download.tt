@@ -116,7 +116,7 @@ by using one of the bootstrap BLOBs listed below.</p>
     <tr><th>NixOS version</th><th>BLOB URL</th></tr>
   </thead>
   <tbody>
-    [% blobs = JSON.Escape.json_decode(IO.All.new('nixos/azure-blobs.json').all) %]
+    [% blobs = JSON.Escape.json_decode(IO.All.new(nixosAzureBlobs).all) %]
     [% FOREACH version IN blobs.keys.sort; blob = blobs.$version %]
       <tr>
         <td><tt>[% version %]</tt></td>
