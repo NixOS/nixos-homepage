@@ -140,7 +140,7 @@ news-rss.xml: news.xml news-rss.xsl
 	xsltproc news-rss.xsl news.xml > $@.tmp
 	mv $@.tmp $@
 
-index.html: news-rss.xml latest-news.xhtml nixpkgs-commits.json nixpkgs-commit-stats.json blogs.json
+index.html: news-rss.xml latest-news.xhtml blogs.json
 
 nixos/download.html: nixos/amis.json nixos/azure-blobs.json
 
@@ -166,14 +166,6 @@ nixos/azure-blobs.nix:
 	curl --fail -L https://raw.github.com/NixOS/nixpkgs/master/nixos/modules/virtualisation/azure-bootstrap-blobs.nix > $@.tmp
 	mv $@.tmp $@
 
-nixpkgs-commits.json:
-	curl --fail https://api.github.com/repos/NixOS/nixpkgs/commits > $@.tmp
-	mv $@.tmp $@
-
-nixpkgs-commit-stats.json:
-	curl --fail https://api.github.com/repos/NixOS/nixpkgs/stats/participation > $@.tmp
-	mv $@.tmp $@
-
 blogs.xml:
 	curl --fail https://planet.nixos.org/rss20.xml > $@.tmp
 	mv $@.tmp $@
@@ -183,7 +175,7 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: nixos/amis.nix nixos/azure-blobs.nix nixpkgs-commits.json nixpkgs-commit-stats.json blogs.xml \
+.PHONY: nixos/amis.nix nixos/azure-blobs.nix blogs.xml \
   $(NIXOS_MANUAL_IN) $(NIXOS_MANUAL_OUT) $(NIX_MANUAL_OUT) $(NIXPKGS_MANUAL_IN) $(HYDRA_MANUAL_IN) $(NIX_PILLS_MANUAL_IN) nixos-release.tt
 endif
 
