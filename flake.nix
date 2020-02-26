@@ -97,7 +97,8 @@
     nixosConfigurations.container = nixpkgsStable.lib.nixosSystem {
       system = "x86_64-linux";
       modules =
-        [ { system.configurationRevision = self.rev;
+        [ ({ lib, ... }:
+          { system.configurationRevision = lib.mkIf (self ? rev) self.rev;
             boot.isContainer = true;
             networking.useDHCP = false;
             networking.firewall.allowedTCPPorts = [ 80 ];
@@ -111,7 +112,7 @@
                 AddEncoding x-gzip gz
               '';
             };
-          }
+          })
         ];
     };
 
