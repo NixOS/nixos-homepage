@@ -2,7 +2,7 @@ language: nix
 os: linux
 install:
   - nix-env -iA nixpkgs.nixFlakes
-  - echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
+  - sudo echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
 script:
   - nix build
 after_success:
