@@ -3,7 +3,10 @@
 
 npm install netlify-cli
 
-echo "Deploying website to Netlify"
-./node_modules/.bin/netlify deploy --json --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --dir $(realpath ./result) --prod
-#RESULT=$(./node_modules/.bin/netlify deploy --json --auth $NETLIFY_AUTH_TOKEN --site $NETLIFY_SITE_ID --dir ./result/ --prod | tee /dev/tty)
-
+echo "Deploying results to Netlify"
+./node_modules/.bin/netlify deploy \
+  --auth $NETLIFY_AUTH_TOKEN \
+  --site $NETLIFY_SITE_ID \
+  --dir $(realpath ./result) \
+  --message "This was triggered by https://github.com/NixOS/nixos-homepage/commit/$(TRAVIS_COMMIT) commit." \
+  --prod

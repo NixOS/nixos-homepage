@@ -7,5 +7,4 @@ script:
   - nix build
 after_success:
   # direct push to master
-  #- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then ./publish.sh; fi
-  - ./publish.sh
+  - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then ./publish.sh; fi
