@@ -11,11 +11,11 @@ jobs:
     - name: Installing Nix
       uses: cachix/install-nix-action@v7
     - name: Building nixos.org
-      run: nix-build
+      run: nix-build && mkdir build && cp ./result/* ./build/ -R
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.0.5
       with:
-        publish-dir: './result'
+        publish-dir: './build'
         production-branch: master
         github-token: ${{ secrets.GITHUB_TOKEN }}
         deploy-message: "Deploy from GitHub Actions"
