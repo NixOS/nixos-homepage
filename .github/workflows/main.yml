@@ -2,6 +2,8 @@ name: "Build & Deploy to Netlify"
 on:
   pull_request:
   push:
+  schedule:
+  - cron: '0 * * * *'
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
