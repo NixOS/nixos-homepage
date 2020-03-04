@@ -1,17 +1,23 @@
 [[redirects]]
-  from = "/channels"
+  from = "https://nixos-homepage.netlify.com"
+  to = "https://nixos.org"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/channels*"
   to = "https://channels.nixos.org"
   status = 302
   force = true
 
 [[redirects]]
-  from = "/releases/channels"
+  from = "/releases/channels*"
   to = "https://channels.nixos.org"
   status = 302
   force = true
 
 [[redirects]]
-  from = "/releases"
+  from = "/releases*"
   to = "https://releases.nixos.org"
   status = 302
   force = true
