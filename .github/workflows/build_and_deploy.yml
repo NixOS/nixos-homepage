@@ -13,7 +13,7 @@ jobs:
     - name: Building nixos.org
       run: nix-build
     - name: Deploy to Netlify
-      uses: nwtgck/actions-netlify@v1.0
+      uses: nwtgck/actions-netlify@v1.0.5
       with:
         publish-dir: './result'
         production-branch: master
