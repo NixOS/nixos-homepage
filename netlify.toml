@@ -1,0 +1,17 @@
+[[redirects]]
+  from = "/channels"
+  to = "https://channels.nixos.org"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/releases/channels"
+  to = "https://channels.nixos.org"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/releases"
+  to = "https://releases.nixos.org"
+  status = 302
+  force = true
