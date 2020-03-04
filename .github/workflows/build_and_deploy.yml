@@ -10,10 +10,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Installing Nix
       uses: cachix/install-nix-action@v7
-    - name: Installing NixFlakes
-      run: nix-env -iA nixpkgs.nixFlakes
-    - name: Turning ON Flakes feature
-      run: echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf && cat /etc/nix/nix.conf
-    - name: Building
-      run: nix build
+    - name: Building nixos.org
+      run: nix-build
 
