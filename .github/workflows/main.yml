@@ -1,4 +1,4 @@
-name: "Test"
+name: "Build & Deploy to Netlify"
 on:
   pull_request:
   push:
@@ -11,7 +11,9 @@ jobs:
     - name: Installing Nix
       uses: cachix/install-nix-action@v7
     - name: Installing NixFlakes
-      run: nix-env -iA nixpkgs.nixFlakes && echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
+      run: nix-env -iA nixpkgs.nixFlakes
+    - name: Turning ON Flakes feature
+      run: echo "experimental-features = nix-command flakes" | tee -a /etc/nix/nix.conf
     - name: Building
       run: nix build
 
