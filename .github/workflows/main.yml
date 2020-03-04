@@ -10,6 +10,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Installing Nix
       uses: cachix/install-nix-action@v7
+    - name: Update content
+      run: UPDATE=1 nix run nixpkgs#gnumake nixpkgs#curl -c make update
     - name: Building nixos.org
       run: nix-build && mkdir build && cp ./result/* ./build/ -R
     - name: Deploy to Netlify
