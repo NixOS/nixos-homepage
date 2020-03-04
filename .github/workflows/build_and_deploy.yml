@@ -13,7 +13,7 @@ jobs:
     - name: Installing NixFlakes
       run: nix-env -iA nixpkgs.nixFlakes
     - name: Turning ON Flakes feature
-      run: cat /etc/nix/nix.conf
+      run: echo "experimental-features = nix-command flakes" | sudo tee -e /etc/nix/nix.conf && cat /etc/nix/nix.conf
     - name: Building
       run: nix build
 
