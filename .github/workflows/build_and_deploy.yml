@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
 jobs:
-  tests:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checking out the repository
@@ -13,7 +13,7 @@ jobs:
     - name: Installing NixFlakes
       run: nix-env -iA nixpkgs.nixFlakes
     - name: Turning ON Flakes feature
-      run: echo "experimental-features = nix-command flakes" | tee -a /etc/nix/nix.conf
+      run: echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
     - name: Building
       run: nix build
 
