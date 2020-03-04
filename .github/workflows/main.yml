@@ -11,7 +11,7 @@ jobs:
     - name: Installing Nix
       uses: cachix/install-nix-action@v7
     - name: Update content
-      run: UPDATE=1 nix run nixpkgs#gnumake nixpkgs#curl -c make update
+      run: UPDATE=1 nix-shell -p gnumake -p curl --command "make update"
     - name: Building nixos.org
       run: nix-build && mkdir build && cp ./result/* ./build/ -R
     - name: Deploy to Netlify
