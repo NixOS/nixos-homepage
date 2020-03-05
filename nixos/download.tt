@@ -76,7 +76,7 @@ by using one of the AMIs listed below.</p>
     <tr><th>Region</th><th>Root storage</th><th>Virtualisation</th><th>AMI</th><th></th></tr>
   </thead>
   <tbody>
-    [% amis = JSON.Escape.json_decode(IO.All.new('nixos/amis.json').all).$latestNixOSSeries %]
+    [% amis = JSON.Escape.json_decode(IO.All.new(nixosAmis).all).$latestNixOSSeries %]
     [% FOREACH region IN amis.keys.sort %]
       [% FOREACH type IN amis.$region.keys.sort; ami = amis.$region.$type %]
         <tr>
@@ -116,7 +116,7 @@ by using one of the bootstrap BLOBs listed below.</p>
     <tr><th>NixOS version</th><th>BLOB URL</th></tr>
   </thead>
   <tbody>
-    [% blobs = JSON.Escape.json_decode(IO.All.new('nixos/azure-blobs.json').all) %]
+    [% blobs = JSON.Escape.json_decode(IO.All.new(nixosAzureBlobs).all) %]
     [% FOREACH version IN blobs.keys.sort; blob = blobs.$version %]
       <tr>
         <td><tt>[% version %]</tt></td>

@@ -4,10 +4,6 @@
 /hydra/manual/
 /hydra/manual-raw
 
-/nixos/amis.nix
-/nixos/amis.json
-/nixos/azure-blobs.nix
-/nixos/azure-blobs.json
 /nixos/manual/
 /nixos/manual-raw
 /nixos/nix-pills/
@@ -27,5 +23,3 @@
 /favicon.png
 /news-rss.xml
 /nixos-release.tt
-/nixpkgs-commits.json
-/nixpkgs-commit-stats.json

@@ -1,0 +1,149 @@
+{
+  "inputs": {
+    "hydra": {
+      "info": {
+        "lastModified": 1582143022,
+        "narHash": "sha256-AZB2nAoNjD7NUANUDCW1SfDv2n260aU2bUHazjk81K4="
+      },
+      "inputs": {
+        "nix": {
+          "info": {
+            "lastModified": 1582125169,
+            "narHash": "sha256-rgoyhvUVM78gLkvviTA/9f6esC7ZJtnDLt1hzAaq2Ds="
+          },
+          "inputs": {
+            "nixpkgs": {
+              "info": {
+                "lastModified": 1580555706,
+                "narHash": "sha256-ly5Gxl9yZgW2w1F3aDU5bvg34Ct+juUaOg8vue+Mkbo="
+              },
+              "inputs": {},
+              "locked": {
+                "owner": "edolstra",
+                "repo": "nixpkgs",
+                "rev": "43e283790fbe330b723ac44b584824cf6d85c1ee",
+                "type": "github"
+              },
+              "original": {
+                "id": "nixpkgs",
+                "ref": "release-19.09",
+                "type": "indirect"
+              }
+            }
+          },
+          "locked": {
+            "owner": "NixOS",
+            "repo": "nix",
+            "rev": "4ad5826a182f8eeb4cbc61e27d2128b08050b0d4",
+            "type": "github"
+          },
+          "original": {
+            "id": "nix",
+            "type": "indirect"
+          }
+        },
+        "nixpkgs": {
+          "info": {
+            "lastModified": 1581348815,
+            "narHash": "sha256-ZYGphR59gsdFhtZYDoeuCtULm8ym/qJSHIslih9b1s8="
+          },
+          "inputs": {},
+          "locked": {
+            "owner": "edolstra",
+            "repo": "nixpkgs",
+            "rev": "d959778e0934c4c93896d509a65de798909c7cdd",
+            "type": "github"
+          },
+          "original": {
+            "id": "nixpkgs",
+            "ref": "release-19.09",
+            "type": "indirect"
+          }
+        }
+      },
+      "locked": {
+        "owner": "NixOS",
+        "repo": "hydra",
+        "rev": "be8eb9d00d6a3fcac520bc7dfd5740c0b3ade746",
+        "type": "github"
+      },
+      "original": {
+        "id": "hydra",
+        "type": "indirect"
+      }
+    },
+    "nix": {
+      "info": {
+        "lastModified": 1582238822,
+        "narHash": "sha256-QMm+HqYMZM+krNF/Q/nLGMCUOuDdHD/PWZ5p2fwJMZs="
+      },
+      "inputs": {
+        "nixpkgs": {
+          "info": {
+            "lastModified": 1580555706,
+            "narHash": "sha256-ly5Gxl9yZgW2w1F3aDU5bvg34Ct+juUaOg8vue+Mkbo="
+          },
+          "inputs": {},
+          "locked": {
+            "owner": "edolstra",
+            "repo": "nixpkgs",
+            "rev": "43e283790fbe330b723ac44b584824cf6d85c1ee",
+            "type": "github"
+          },
+          "original": {
+            "id": "nixpkgs",
+            "ref": "release-19.09",
+            "type": "indirect"
+          }
+        }
+      },
+      "locked": {
+        "owner": "NixOS",
+        "repo": "nix",
+        "rev": "4a4521f46253e87a06af9333381c050e983b3c2f",
+        "type": "github"
+      },
+      "original": {
+        "id": "nix",
+        "type": "indirect"
+      }
+    },
+    "nixpkgsStable": {
+      "info": {
+        "lastModified": 1582636453,
+        "narHash": "sha256-IDCGqxxpb3g1HSoAlX4g+ZTrVNje6J2rR7IFU/RqaWI="
+      },
+      "inputs": {},
+      "locked": {
+        "owner": "edolstra",
+        "repo": "nixpkgs",
+        "rev": "581caef4f5d58573c96ab6e9dbf1160209372029",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "release-19.09",
+        "type": "indirect"
+      }
+    },
+    "nixpkgsUnstable": {
+      "info": {
+        "lastModified": 1582716763,
+        "narHash": "sha256-RtHQvRa3yY1tj2ZCLfKeSakxC6qTyKEAnBEFbrZS1TM="
+      },
+      "inputs": {},
+      "locked": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bee470ef9a8dc8af085e89135be94875552198f7",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "master",
+        "type": "indirect"
+      }
+    }
+  },
+  "version": 4
+}
