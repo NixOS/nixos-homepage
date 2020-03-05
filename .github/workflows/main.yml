@@ -15,7 +15,7 @@ jobs:
     - name: Update content
       run: UPDATE=1 nix-shell -p gnumake -p curl --command "make update"
     - name: Building nixos.org
-      run: nix-build && mkdir build && cp ./result/* ./build/ -R
+      run: nix-build && mkdir build && cp -RL ./result/* ./build/
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.0.5
       with:
