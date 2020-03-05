@@ -7,25 +7,31 @@
 [[redirects]]
   from = "/channels/*"
   to = "https://channels.nixos.org/:splat"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from = "/releases/channels/*"
   to = "https://channels.nixos.org/:splat"
-  status = 302
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/releases/nixos/channels/*"
+  to = "https://channels.nixos.org/nixos/:splat"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/releases/*"
   to = "https://releases.nixos.org/:splat"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from  = "/nix/install"
   to = "https://releases.nixos.org/nix/latest/install"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
@@ -39,53 +45,53 @@
 [[redirects]]
   from = "/nix/install-2.0"
   to = "https://releases.nixos.org/nix/nix-2.0/install"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from = "/nix/install-2.0.1"
   to = "https://releases.nixos.org/nix/nix-2.0.1/install"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from = "/nix/install-2.0.1.sig"
   to = "https://releases.nixos.org/nix/nix-2.0.1/install.asc"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from = "/nix/install-2.0.2"
   to = "https://releases.nixos.org/nix/nix-2.0.2/install"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from = "/nix/install-2.0.2.sig"
   to = "https://releases.nixos.org/nix/nix-2.0.2/install.asc"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from = "/nix/install-2.0.3"
   to = "https://releases.nixos.org/nix/nix-2.0.3/install"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from = "/nix/install-2.0.3.sig"
   to = "https://releases.nixos.org/nix/nix-2.0.3/install.asc"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from = "/nix/install-2.0.sig"
   to = "https://releases.nixos.org/nix/nix-2.0/install.asc"
-  status = 302
+  status = 301
   force = true
 
 [[redirects]]
   from = "/nix/install.sig"
   to = "https://releases.nixos.org/nix/latest/install.asc"
-  status = 302
+  status = 301
   force = true
