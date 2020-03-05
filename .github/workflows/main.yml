@@ -18,12 +18,12 @@ jobs:
       run: nix-build && mkdir build && cp -RL ./result/* ./build/
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.0.5
-      with:
-        publish-dir: './build'
-        production-branch: master
-        github-token: ${{ secrets.GH_TOKEN }}
-        deploy-message: "Deploy from GitHub Actions"
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-
+      with:
+        publish-dir: './build'
+        production-branch: 'master'
+        github-token: ${{ secrets.GH_TOKEN }}
+        deploy-message: 'Deploy from GitHub Actions'
+      if: github.repository == 'NixOS/nixos-homepage'
