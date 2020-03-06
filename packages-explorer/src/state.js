@@ -145,7 +145,7 @@ class State extends Component {
 	fetch_channels() {
 		this.setState({loading: this.state.loading + 1});
 
-		return fetch("/nixpkgs/packages-channels.json", {mode: "cors"})
+		return fetch("../nixpkgs/packages-channels.json", {mode: "cors"})
 			.then((response) => response.json())
 			.then((channels) => {
 				this.setState({
@@ -171,7 +171,7 @@ class State extends Component {
 		// Some (most?) development environment don't really like to serve .gz files.
 		const dev = window.DEVELOPMENT || hostname === "localhost" || hostname === "127.0.0.1";
 		const ext = dev ? "json" : "json.gz";
-		fetch(`/nixpkgs/packages-${channel}.${ext}`, {mode: "cors"})
+		fetch(`../nixpkgs/packages-${channel}.${ext}`, {mode: "cors"})
 			.then((response) => response.json())
 			.then((channel_data) => {
 				// Ensures we update only for the currently selected channel.
