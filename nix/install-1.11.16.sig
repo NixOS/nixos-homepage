@@ -1,1 +1,0 @@
-/releases/nix/nix-1.11.16/install.asc
