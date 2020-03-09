@@ -125,7 +125,7 @@ favicon.png: logo/nixos-logo-only-hires.png
 nixos-release.tt:
 	uri=$$(curl --fail --silent -o /dev/null -w %{redirect_url} https://nixos.org/channels/nixos-${NIXOS_SERIES}); \
 	version=$$(echo $$uri | sed 's|.*/nixos-||'); \
-	echo "[%- latestNixOSSeries = \"${NIXOS_SERIES}\"; latestNixOSRelease = \"$$version\" -%]" > $@
+	echo "[%- latestNixOSSeries = \"${NIXOS_SERIES}\"; -%]" > $@
 
 %: %.in common.tt nix-release.tt
 	echo $$PATH
