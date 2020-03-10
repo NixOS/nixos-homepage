@@ -1,10 +1,4 @@
 [[redirects]]
-  from = "https://nixos-homepage.netlify.com"
-  to = "https://nixos.org"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "/channels/*"
   to = "https://channels.nixos.org/:splat"
   status = 301
