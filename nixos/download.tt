@@ -29,7 +29,7 @@ installer as well as X11, Plasma 5 Desktop and several applications.  It’s a
 <em>live CD</em>, so it allows you to get an impression of NixOS (and
 the Nix package manager) before installing it.</p>
 
-[% prefix = "https://channels.nixos.org/nixos" %]
+[% prefix = "https://channels.nixos.org/nixos-" _ latestNixOSSeries %]
 
 <ul>
   <li><a href="[%prefix%]/latest-nixos-graphical-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/latest-nixos-graphical-x86_64-linux.iso.sha256">SHA-256</a>)
