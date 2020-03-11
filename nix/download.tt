@@ -8,7 +8,7 @@ on Linux and macOS is to run the following in a shell (as a user
 other than <tt>root</tt>):</p>
 
 <pre>
-<span class="nix-command">curl https://nixos.org/nix/install | sh</span>
+<span class="nix-command">curl -L https://nixos.org/nix/install | sh</span>
 </pre>
 
 <p>Make sure to follow the instructions output by the script.</p>
