@@ -18,10 +18,10 @@ other than <tt>root</tt>):</p>
 using GPG:</p>
 
 <pre>
-<span class="nix-command">curl -o install-nix-[%latestNixVersion%] https://nixos.org/nix/install</span>
-<span class="nix-command">curl -o install-nix-[%latestNixVersion%].sig https://nixos.org/nix/install.sig</span>
+<span class="nix-command">curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install</span>
+<span class="nix-command">curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc</span>
 <span class="nix-command">gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE</span>
-<span class="nix-command">gpg2 --verify ./install-nix-[%latestNixVersion%].sig</span>
+<span class="nix-command">gpg2 --verify ./install-nix-[%latestNixVersion%].asc</span>
 <span class="nix-command">sh ./install-nix-[%latestNixVersion%]</span>
 </pre>
 
