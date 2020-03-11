@@ -1,9 +1,5 @@
-name: "Build & Deploy to Netlify"
+name: "Hourly Build & Deploy to Netlify"
 on:
-  pull_request:
-  push:
-    branches:
-      - master
   schedule:
   - cron: '0 * * * *'
 jobs:
@@ -26,6 +22,6 @@ jobs:
       with:
         publish-dir: './build'
         production-branch: 'master'
-        github-token: ${{ secrets.GITHUB_TOKEN }}
         deploy-message: 'Deploy from GitHub Actions'
       if: github.repository == 'NixOS/nixos-homepage'
+
