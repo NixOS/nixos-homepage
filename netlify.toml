@@ -17,6 +17,12 @@
   force = true
 
 [[redirects]]
+  from = "/releases/*/install"
+  to = "https://releases.nixos.org/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/releases/*"
   to = "https://releases.nixos.org/:splat"
   status = 301
