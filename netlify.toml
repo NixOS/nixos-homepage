@@ -22,8 +22,8 @@
   status = 301
   force = true
 
-[[redirects]]
-  from  = "/nix/install"
-  to = "https://channels.nixos.org/nix-latest/install"
-  status = 301
-  force = true
+# [[redirects]]
+#   from  = "/nix/install"
+#   to = "https://channels.nixos.org/nix-latest/install"
+#   status = 301
+#   force = true
