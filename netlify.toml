@@ -33,3 +33,9 @@
   to = "https://github.com/NixOS/hydra"
   status = 301
   force = true
+
+[[redirects]]
+  from  = "/nixops"
+  to = "https://github.com/NixOS/nixops"
+  status = 301
+  force = true

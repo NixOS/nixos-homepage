@@ -15,8 +15,7 @@ HTML = index.html news.html \
   nixos/security.html nixos/foundation.html \
   nixos/wiki.html \
   disnix/index.html disnix/download.html disnix/docs.html \
-  disnix/extensions.html disnix/examples.html disnix/support.html \
-  nixops/index.html
+  disnix/extensions.html disnix/examples.html disnix/support.html
 
 
 ### Prettify the NixOS manual.
@@ -56,18 +55,6 @@ all: $(NIX_MANUAL_OUT)
 $(NIX_MANUAL_OUT): $(call rwildcard, $(NIX_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
 	bash ./bootstrapify-docbook.sh $(NIX_MANUAL_IN) $(NIX_MANUAL_OUT) 'Nix manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
 	ln -sfn manual.html $(NIX_MANUAL_OUT)/index.html
-
-
-### Prettify the NixOps manual.
-
-NIXOPS_MANUAL_IN = /no-such-path
-NIXOPS_MANUAL_OUT = nixops/manual
-
-all: $(NIXOPS_MANUAL_OUT)
-
-$(NIXOPS_MANUAL_OUT): $(call rwildcard, $(NIXOPS_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIXOPS_MANUAL_IN) $(NIXOPS_MANUAL_OUT) 'NixOps manual' nixops https://github.com/NixOS/nixops/tree/master/doc/manual
-	ln -sfn manual.html $(NIXOPS_MANUAL_OUT)/index.html
 
 
 ### Prettify the Nixpkgs manual.
