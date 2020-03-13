@@ -14,7 +14,6 @@ HTML = index.html news.html \
   nixos/community.html nixos/packages.html nixos/options.html \
   nixos/security.html nixos/foundation.html \
   nixos/wiki.html \
-  hydra/index.html \
   disnix/index.html disnix/download.html disnix/docs.html \
   disnix/extensions.html disnix/examples.html disnix/support.html \
   nixops/index.html
@@ -91,17 +90,6 @@ all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wild
   nixpkgs/packages-nixpkgs-unstable.json.gz \
   nixos/options.json.gz
 
-
-### Prettify the Hydra manual.
-
-HYDRA_MANUAL_IN = /no-such-path
-HYDRA_MANUAL_OUT = hydra/manual
-
-all: $(HYDRA_MANUAL_OUT)
-
-$(HYDRA_MANUAL_OUT): $(HYDRA_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(HYDRA_MANUAL_IN) $(HYDRA_MANUAL_OUT) 'Hydra manual' hydra https://github.com/NixOS/hydra/tree/master/doc/manual
-	ln -sfn manual.html $(HYDRA_MANUAL_OUT)/index.html
 
 favicon.png: logo/nixos-logo-only-hires.png
 	convert -resize 16x16 -background none -gravity center -extent 16x16 $< $@

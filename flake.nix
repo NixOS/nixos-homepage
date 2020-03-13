@@ -6,7 +6,7 @@
   inputs.nixpkgsStable.url = "nixpkgs/release-19.09";
   inputs.nixpkgsUnstable.url = "nixpkgs/master";
 
-  outputs = { self, nixpkgsUnstable, nixpkgsStable, nix, hydra }:
+  outputs = { self, nixpkgsUnstable, nixpkgsStable, nix }:
     with import nixpkgsStable { system = "x86_64-linux"; };
     rec {
 
@@ -84,7 +84,6 @@
             "NIXOS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixosManual}"
             "NIXPKGS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixpkgsManual}"
             "NIXOPS_MANUAL_IN=${nixpkgsStable.legacyPackages.x86_64-linux.nixops}/share/doc/nixops"
-            "HYDRA_MANUAL_IN=${hydra.defaultPackage.x86_64-linux}/share/doc/hydra"
             "NIXPKGS_STABLE=${packages.x86_64-linux.stablePackagesList}"
             "NIXPKGS_UNSTABLE=${packages.x86_64-linux.unstablePackagesList}"
             "NIXOS_OPTIONS=${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"

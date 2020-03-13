@@ -134,7 +134,7 @@ then make a pull request.</p>
 
 <h3>Continuous builds</h3>
 
-<p><a href="[%root%]hydra">Hydra</a> continuously builds NixOS:</p>
+<p><a href="https://github.com/NixOS/hydra">Hydra</a> continuously builds NixOS:</p>
 
 <ul>
   <li><a href="https://hydra.nixos.org/job/nixos/trunk-combined/tested#tabs-constituents">Status

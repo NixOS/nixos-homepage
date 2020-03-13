@@ -27,3 +27,9 @@
 #   to = "https://channels.nixos.org/nix-latest/install"
 #   status = 301
 #   force = true
+
+[[redirects]]
+  from  = "/hydra"
+  to = "https://github.com/NixOS/hydra"
+  status = 301
+  force = true
