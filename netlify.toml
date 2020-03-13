@@ -17,16 +17,24 @@
   force = true
 
 [[redirects]]
+  from = "/releases/nix/:release/install"
+  to = "https://releases.nixos.org/nix/:release/install"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/releases/*"
   to = "https://releases.nixos.org/:splat"
   status = 301
   force = true
 
-# [[redirects]]
-#   from  = "/nix/install"
-#   to = "https://channels.nixos.org/nix-latest/install"
-#   status = 301
-#   force = true
+[[redirects]]
+  from  = "/nix/install"
+  to = "https://releases.nixos.org/nix/nix-2.3.3/install"
+  status = 200
+  #to = "https://channels.nixos.org/nix-latest/install"
+  #status = 301
+  force = true
 
 [[redirects]]
   from  = "/hydra"
