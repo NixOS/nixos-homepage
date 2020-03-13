@@ -37,7 +37,7 @@ from a declarative specification of NixOS configurations.
 
 <p>
 DisnixOS combines the infrastructure deployment features of NixOS with Disnix.
-With DisnixOS you can first deploy a network of machines with <a href="/nixops">NixOps</a>
+With DisnixOS you can first deploy a network of machines with <a href="https://github.com/NixOS/nixops">NixOps</a>
 and deploy services inside them with Disnix. You can also deploy services in
 a network of generated virtual machines machines using the NixOS test driver
 and run testcases inside them.

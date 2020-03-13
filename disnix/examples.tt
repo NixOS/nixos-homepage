@@ -33,7 +33,7 @@ underlying infrastructure to support the services.
 </p>
 
 <p>
-With the following command you can use <a href="/nixops">NixOps</a> to deploy a network
+With the following command you can use <a href="https://github.com/NixOS/nixops">NixOps</a> to deploy a network
 of VirtualBox machines, and deploy the services with Disnix to them:
 </p>
 

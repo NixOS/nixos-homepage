@@ -83,7 +83,6 @@
           [ "NIX_MANUAL_IN=${nix.defaultPackage.x86_64-linux}/share/doc/nix/manual"
             "NIXOS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixosManual}"
             "NIXPKGS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixpkgsManual}"
-            "NIXOPS_MANUAL_IN=${nixpkgsStable.legacyPackages.x86_64-linux.nixops}/share/doc/nixops"
             "NIXPKGS_STABLE=${packages.x86_64-linux.stablePackagesList}"
             "NIXPKGS_UNSTABLE=${packages.x86_64-linux.unstablePackagesList}"
             "NIXOS_OPTIONS=${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"

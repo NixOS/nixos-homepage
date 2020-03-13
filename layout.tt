@@ -47,8 +47,6 @@
                 Nix
               [% ELSIF menu == 'nixpkgs' %]
                 Nixpkgs
-              [% ELSIF menu == 'nixops' %]
-                NixOps
               [% ELSIF menu == 'disnix' %]
                 Disnix
               [% ELSE %]
@@ -61,7 +59,6 @@
               <li><a href="/">Site Home</a></li>
               <li><a href="[%root%]nixos">NixOS</a></li>
               <li><a href="[%root%]nix">Nix</a></li>
-              <li><a href="[%root%]nixops">NixOps</a></li>
               <li><a href="[%root%]nixpkgs">Nixpkgs</a></li>
               <li class="divider"></li>
               <li><a href="[%root%]disnix">Disnix</a></li>
@@ -99,12 +96,6 @@
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-            [% ELSIF menu == 'nixops' %]
-              <ul class="nav pull-left">
-                <li><a href="[%root%]nixops/manual/">Manual</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/nixops"><i class="fa fa-github"></i></a></li>
             [% ELSIF menu == 'disnix' %]
               <ul class="nav pull-left">
                 <li></li>

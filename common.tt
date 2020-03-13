@@ -2,7 +2,7 @@
   nixManual = "/nix/manual"
   nixpkgsManual = "/nixpkgs/manual"
   nixosManual = "/nixos/manual"
-  nixopsManual = "/nixops/manual"
+  nixopsManual = "https://hydra.nixos.org/job/nixops/master/tarball/latest/download-by-type/doc/manual"
   nixPills = "/nixos/nix-pills"
   latestNixMirror = "https://nixos.org/releases/nix/nix-$latestNixVersion"
   latestNixOSBranch = "release-" _ latestNixOSSeries
