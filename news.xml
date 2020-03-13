@@ -823,12 +823,8 @@ $ nix-store -qR /run/current-system | grep openssl
     <pubDate>Sat, 03 Dec 2011 00:00:00 GMT</pubDate>
     <title>Hydra talk at Inria</title>
     <description>
-      <a href="https://hydra.nixos.org/">
-      <img class="inline" src="images/hydra.png" alt="Hydra
-      logo"/></a>
-
       Ludovic Courtès gave a talk on <a
-      href="https://nixos.org/hydra">Hydra</a> at <a
+      href="https://github.com/NixOS/hydra">Hydra</a> at <a
       href="https://www.inria.fr/centre/bordeaux">Inria</a> (which has
       its own Hydra instance for building Inria software) entitled <a
       href="http://sed.bordeaux.inria.fr/seminars/hydra-ci_20111103.pdf">“Hydra:
@@ -1101,16 +1097,12 @@ $ nix-store -qR /run/current-system | grep openssl
       Hydra
     </title>
     <description>
-      <a href="https://hydra.nixos.org/">
-      <img class="inline" src="images/hydra.png" alt="Hydra
-      logo"/></a>
-
       <a
       href="https://hydra.nixos.org/releases/nix/unstable">Nix</a>
       and <a
       href="https://hydra.nixos.org/project/nixos/jobstatus">NixOS</a>
       releases are now built in <a
-      href="https://hydra.nixos.org/">Hydra</a>, the new Nix-based
+      href="https://github.com/NixOS/hydra">Hydra</a>, the new Nix-based
       continuous build system.  Hydra replaces our <a
       href="http://buildfarm.st.ewi.tudelft.nl/status">old Nix-based
       build farm</a>, which will be phased out soon.  There are

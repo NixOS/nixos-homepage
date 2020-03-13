@@ -39,13 +39,6 @@ manual</a> for more information.</p>
 
   <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a>.</li>
 
-  <!--
-  <li><a
-  href="https://hydra.nixos.org/release/nix/nix-[%latestNixVersion%]">Binary
-  packages for several platforms</a>, including RPMs, Debs and binary
-  tarballs for Mac OS X.</li>
-  -->
-
   <li><a href="[%nixManual%]#ssec-relnotes-[%latestNixVersion%]">Release
   notes</a>.</li>
 
@@ -53,20 +46,6 @@ manual</a> for more information.</p>
   href="[%nixManual%]#chap-quick-start">“Quick Start” section of the
   manual</a> for an overview of how to install and use Nix.</li>
 
-</ul>
-
-</section>
-
-
-<section><h2>Continuous builds</h2>
-
-<p>You can grab the latest bleeding-edge pre-release from our <a
-href="../hydra">continuous build system</a>:</p>
-
-<ul>
-  <li><a
-  href="https://hydra.nixos.org/job/nix/trunk/release#tabs-constituents">The
-  latest development release of Nix</a></li>
 </ul>
 
 </section>
