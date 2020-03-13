@@ -18,7 +18,7 @@
 
 [[redirects]]
   from = "/releases/*/install"
-  to = "https://releases.nixos.org/:splat"
+  to = "https://releases.nixos.org/:splat/install"
   status = 200
   force = true
 
