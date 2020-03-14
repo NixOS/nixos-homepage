@@ -70,12 +70,10 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
   nixos/packages-explorer.js \
-  nixpkgs/packages-channels.json.gz \
+  nixpkgs/packages-channels.json \
   nixpkgs/packages-nixos-$(NIXOS_SERIES).json \
-  nixpkgs/packages-nixos-$(NIXOS_SERIES).json.gz \
   nixpkgs/packages-nixpkgs-unstable.json \
-  nixpkgs/packages-nixpkgs-unstable.json.gz \
-  nixos/options.json.gz
+  nixos/options.json
 
 
 favicon.png: logo/nixos-logo-only-hires.png
@@ -140,25 +138,15 @@ update: blogs.xml nixos-release.tt
 endif
 
 
-%.json.gz: %.json
-	gzip -9 < $^ > $@.tmp
-	mv $@.tmp $@
-
-.PHONY: nixpkgs/packages-nixos-$(NIXOS_SERIES).json nixpkgs/packages-nixos-$(NIXOS_SERIES).json.gz
+.PHONY: nixpkgs/packages-nixos-$(NIXOS_SERIES).json
 
 nixpkgs/packages-nixos-$(NIXOS_SERIES).json:
 	@ln -sfn $(NIXPKGS_STABLE)/packages.json $@
 
-nixpkgs/packages-nixos-$(NIXOS_SERIES).json.gz:
-	@ln -sfn $(NIXPKGS_STABLE)/packages.json.gz $@
-
-.PHONY: nixpkgs/packages-nixpkgs-unstable.json nixpkgs/packages-nixpkgs-unstable.json.gz
+.PHONY: nixpkgs/packages-nixpkgs-unstable.json
 
 nixpkgs/packages-nixpkgs-unstable.json:
 	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json $@
-
-nixpkgs/packages-nixpkgs-unstable.json.gz:
-	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json.gz $@
 
 NIXOS_OPTIONS = /no-such-path
 

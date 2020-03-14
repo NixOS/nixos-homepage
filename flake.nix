@@ -24,7 +24,6 @@
         echo -n '}' >> tmp
         mkdir $out
         < tmp sed "s|$$nixpkgs/||g" | jq -c . > $out/packages.json
-        gzip -k $out/packages.json
       '';
 
     packages.x86_64-linux = {
@@ -114,11 +113,6 @@
               enable = true;
               adminAddr = "admin@example.org";
               documentRoot = self.packages.x86_64-linux.homepage;
-              extraConfig = ''
-                # Serve the package/option databases as automatically
-                # decompressed JSON.
-                AddEncoding x-gzip gz
-              '';
             };
           })
         ];
