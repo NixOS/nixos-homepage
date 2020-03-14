@@ -13,7 +13,7 @@ jobs:
     - name: Installing Nix
       uses: cachix/install-nix-action@v8
     - name: Update content
-      run: UPDATE=1 nix-shell -p gnumake -p curl --command "make update"
+      run: ./update.sh
     - name: Building nixos.org
       run: nix-build && mkdir build && cp -RL ./result/* ./build/
     - name: Deploy to Netlify
