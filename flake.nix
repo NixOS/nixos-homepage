@@ -5,8 +5,9 @@
 
   inputs.nixpkgsStable.url = "nixpkgs/release-19.09";
   inputs.nixpkgsUnstable.url = "nixpkgs/master";
+  inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
 
-  outputs = { self, nixpkgsUnstable, nixpkgsStable, nix }:
+  outputs = { self, nixpkgsUnstable, nixpkgsStable, nix, nix-pills }:
     with import nixpkgsStable { system = "x86_64-linux"; };
     rec {
 
@@ -50,6 +51,12 @@
         (builtins.toJSON (
           import (nixpkgsStable + "/nixos/modules/virtualisation/azure-bootstrap-blobs.nix")));
 
+      nixPills = import nix-pills {
+        inherit pkgs;
+        revCount = nix-pills.lastModified; # FIXME
+        shortRev = nix-pills.shortRev;
+      };
+
       homepage = stdenv.mkDerivation {
         name = "nixos-homepage-${self.lastModified}";
 
@@ -88,6 +95,7 @@
             "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
             "NIXOS_AZURE_BLOBS=${packages.x86_64-linux.nixosAzureBlobs}"
             "PACKAGES_EXPLORER=${packages.x86_64-linux.packagesExplorer}/bundle.js"
+            "NIX_PILLS_MANUAL_IN=${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
           ];
 
         installPhase = ''

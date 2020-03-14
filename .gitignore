@@ -2,19 +2,15 @@
 *.xhtml
 
 /nixos/manual/
-/nixos/manual-raw
 /nixos/nix-pills/
-/nixos/nix-pills-raw
 /nixos/options.json
 /nixos/screenshots/nixos-*-small.png
 /nixos/packages-explorer.js
 
 /nixpkgs/manual/
-/nixpkgs/manual-raw
 /nixpkgs/*.json
 
 /nix/manual/
-/nix/manual-raw
 
 /blogs.json
 /blogs.xml

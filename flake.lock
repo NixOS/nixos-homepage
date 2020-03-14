@@ -36,6 +36,24 @@
         "type": "indirect"
       }
     },
+    "nix-pills": {
+      "info": {
+        "lastModified": 1583819478,
+        "narHash": "sha256-hXQv5HmU9rJ+LOQVvUjfN2jbn1TfUMhZu+SY8sub4XE="
+      },
+      "inputs": {},
+      "locked": {
+        "owner": "NixOS",
+        "repo": "nix-pills",
+        "rev": "c3a2df2160be35ed2a511ad52b240a20ee527f43",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nix-pills",
+        "type": "github"
+      }
+    },
     "nixpkgsStable": {
       "info": {
         "lastModified": 1582636453,
