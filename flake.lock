@@ -1,41 +1,5 @@
 {
   "inputs": {
-    "nix": {
-      "info": {
-        "lastModified": 1584121007,
-        "narHash": "sha256-ZJoWby4j2vhWxnZeIv9wM3SOVYhO0m1jN97BY1InScY="
-      },
-      "inputs": {
-        "nixpkgs": {
-          "info": {
-            "lastModified": 1580555706,
-            "narHash": "sha256-ly5Gxl9yZgW2w1F3aDU5bvg34Ct+juUaOg8vue+Mkbo="
-          },
-          "inputs": {},
-          "locked": {
-            "owner": "edolstra",
-            "repo": "nixpkgs",
-            "rev": "43e283790fbe330b723ac44b584824cf6d85c1ee",
-            "type": "github"
-          },
-          "original": {
-            "id": "nixpkgs",
-            "ref": "release-19.09",
-            "type": "indirect"
-          }
-        }
-      },
-      "locked": {
-        "owner": "NixOS",
-        "repo": "nix",
-        "rev": "7304f9f145456d53b9f7adcb6ba8ccc7b9885f23",
-        "type": "github"
-      },
-      "original": {
-        "id": "nix",
-        "type": "indirect"
-      }
-    },
     "nix-pills": {
       "flake": false,
       "info": {

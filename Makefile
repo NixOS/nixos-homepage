@@ -31,7 +31,7 @@ $(NIXOS_MANUAL_OUT): $(NIXOS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-doc
 
 ### Prettify the Nix Pills
 
-NIX_PILLS_MANUAL_IN = nixos/nix-pills-raw
+NIX_PILLS_MANUAL_IN = /no-such-path
 NIX_PILLS_MANUAL_OUT = nixos/nix-pills
 
 all: $(NIX_PILLS_MANUAL_OUT)

@@ -7,7 +7,7 @@
   inputs.nixpkgsUnstable.url = "nixpkgs/master";
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
 
-  outputs = { self, nixpkgsUnstable, nixpkgsStable, nix, nix-pills }:
+  outputs = { self, nixpkgsUnstable, nixpkgsStable, nix-pills }:
     with import nixpkgsStable { system = "x86_64-linux"; };
     rec {
 
@@ -86,7 +86,7 @@
         '';
 
         makeFlags =
-          [ "NIX_MANUAL_IN=${nix.defaultPackage.x86_64-linux}/share/doc/nix/manual"
+          [ "NIX_MANUAL_IN=${nix.doc}/share/doc/nix/manual"
             "NIXOS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixosManual}"
             "NIXPKGS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixpkgsManual}"
             "NIXPKGS_STABLE=${packages.x86_64-linux.stablePackagesList}"
