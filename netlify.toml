@@ -43,6 +43,12 @@
   force = true
 
 [[redirects]]
+  from  = "/hydra/manual"
+  to = "https://hydra.nixos.org/job/hydra/master/manual/latest/download-by-type/doc/manual"
+  status = 200
+  force = true
+
+[[redirects]]
   from  = "/nixops"
   to = "https://github.com/NixOS/nixops"
   status = 301
