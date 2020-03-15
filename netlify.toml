@@ -53,3 +53,9 @@
   to = "https://github.com/NixOS/nixops"
   status = 301
   force = true
+
+[[redirects]]
+  from  = "/nixops/manual"
+  to = "https://hydra.nixos.org/job/nixops/master/tarball/latest/download-by-type/doc/manual"
+  status = 200
+  force = true
