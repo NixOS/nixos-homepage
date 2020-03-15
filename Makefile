@@ -15,7 +15,8 @@ HTML = index.html news.html \
   nixos/security.html nixos/foundation.html \
   nixos/wiki.html \
   disnix/index.html disnix/download.html disnix/docs.html \
-  disnix/extensions.html disnix/examples.html disnix/support.html
+  disnix/extensions.html disnix/examples.html disnix/support.html \
+  404.html
 
 
 ### Prettify the NixOS manual.
