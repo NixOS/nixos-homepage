@@ -59,3 +59,9 @@
   to = "https://hydra.nixos.org/job/nixops/master/tarball/latest/download-by-type/doc/manual"
   status = 302
   force = true
+
+[[redirects]]
+  from  = "/disnix"
+  to = "https://github.com/svanderburg/disnix"
+  status = 301
+  force = true
