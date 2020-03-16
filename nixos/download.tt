@@ -70,7 +70,7 @@ appears, you can log in as <strong>user <tt>demo</tt></strong>,
 by using one of the AMIs listed below.</p>
 
 <div class="row">
-<table class="table span5">
+<table class="table">
   <thead>
     <tr><th>Region</th><th>Root storage</th><th>Virtualisation</th><th>AMI</th><th></th></tr>
   </thead>
@@ -110,7 +110,7 @@ $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em>
 by using one of the bootstrap BLOBs listed below.</p>
 
 <div class="row">
-<table class="table span2">
+<table class="table">
   <thead>
     <tr><th>NixOS version</th><th>BLOB URL</th></tr>
   </thead>
@@ -211,7 +211,7 @@ ssh azureuser@"$VM_NAME"."$LOCATION".cloudapp.azure.com
 <p>If you are Google Cloud Platform user, you can create a NixOS image using one of the raw disks listed below. You can then create a NixOS instance using the image.</p>
 
 <div class="row">
-<table class="table span2">
+<table class="table">
   <thead>
     <tr><th>NixOS version</th><th>URL</th></tr>
   </thead>
