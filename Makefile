@@ -118,14 +118,6 @@ latest-news.xhtml: news.xml news.xsl
 check:
 	checklink $(HTML)
 
-nixos/gce-images.json: nixos/gce-images.nix
-	nix-instantiate --eval --strict --json $< > $@.tmp
-	mv $@.tmp $@
-
-nixos/gce-images.nix:
-	curl --fail -L https://raw.github.com/NixOS/nixpkgs/master/nixos/modules/virtualisation/gce-images.nix > $@.tmp
-	mv $@.tmp $@
-
 blogs.xml:
 	curl --fail https://planet.nixos.org/rss20.xml > $@.tmp
 	mv $@.tmp $@
