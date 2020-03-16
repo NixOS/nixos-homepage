@@ -1,0 +1,16 @@
+[% WRAPPER layout.tt title="Not found" menu='nixos' %]
+
+<p>
+  The requested content <span class="at_url"></span> could not be found.
+</p>
+
+<script>
+// Enhance the error message with the URL when possible.
+$(function() {
+  var url = window.location.pathname;
+  $(".at_url").html(" at <tt class='url'></tt> ")
+  	.children(".url").text(url)
+})
+</script>
+
+[% END %]
