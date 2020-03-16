@@ -23,7 +23,7 @@
 please open a <a
 href="https://github.com/NixOS/nixpkgs/pulls"><strong>pull request on
 GitHub</strong></a>, or <strong>send a patch</strong> to the <a
-href="[%root%]nixos/support.html#discourse"><tt>Discourse</tt> forum</a>. If you
+href="[%root%]nixos/learn.html#discourse"><tt>Discourse</tt> forum</a>. If you
 want to contribute regularly, you may want to ask for commit access to
 our GitHub repositories (please ask <a
 href="https://nixos.org/~eelco/">Eelco</a>, or on the <tt>#nixos</tt>
@@ -31,6 +31,14 @@ IRC channel).</p>  </div> <div class="span4"> <script
 type="text/javascript"
 src="https://www.openhub.net/p/25550/widgets/project_basic_stats.js"></script>
 </div> </div>
+
+<h3><a href="https://github.com/NixOS/nixpkgs/issues">Bugs</a></h3>
+<p>If
+    you think you’ve found a bug, please report it in the <a
+    href="https://github.com/NixOS/nixpkgs/issues"><strong>Nixpkgs
+    issue tracker</strong></a> (please use the label <strong>6.topic:
+    nixos</strong>).
+</p>
 
 <h3>Documentation</h3>
 
@@ -94,12 +102,20 @@ channel is <a href="https://logs.nix.samueldr.com/nixos/">logged</a>.</p>
 by the community and <a href="https://www.reddit.com/r/NixOS/">/r/NixOS</a>
 also contains useful resources.</p>
 
+<p>To add yourself to <a href="https://planet.nixos.org/">Planet NixOS</a>,
+fork the <a
+href="https://github.com/NixOS/nixos-org-configurations">nixos-org-configurations</a>
+repo and add the feed source to <a
+href="https://github.com/NixOS/nixos-org-configurations/blob/master/nixos-org/planet-feeds.nix">planet-feeds.nix</a>
+then make a pull request.</p>
+
 <h3>Meetups</h3>
 
 <p>Europe:</p>
 <ul>
 <li><a href="http://www.meetup.com/Amsterdam-Nix-Meetup/">Amsterdam Nix Meetup</a></li>
 <li><a href="http://www.meetup.com/Berlin-NixOS-Meetup/">Berlin NixOS Meetup</a></li>
+<li><a href="https://www.meetup.com/Greater-Copenhagen-NixOS-User-Group">Greater Copenhagen NixOS User Group</a></li>
 <li><a href="https://www.meetup.com/NixOS-London/">London NixOS Meetup</a></li>
 <li><a href="http://www.meetup.com/Munich-NixOS-Meetup/">Munich NixOS Meetup</a></li>
 <li><a href="https://blog.shackspace.de/?p=5829">Stuttgart NixOS Meetup</a></li>
@@ -108,6 +124,7 @@ also contains useful resources.</p>
 <p>America:</p>
 <ul>
 <li><a href="http://www.meetup.com/Bay-Area-Nix-NixOS-User-Group/">Bay Area Nix/NixOS User Group</a></li>
+<li><a href="https://www.meetup.com/New-York-Nix-Users-Group/">New York Nix Users Group</a></li>
 </ul>
 
 <p>Asia:</p>
@@ -117,7 +134,7 @@ also contains useful resources.</p>
 
 <h3>Continuous builds</h3>
 
-<p><a href="[%root%]hydra">Hydra</a> continuously builds NixOS:</p>
+<p><a href="https://github.com/NixOS/hydra">Hydra</a> continuously builds NixOS:</p>
 
 <ul>
   <li><a href="https://hydra.nixos.org/job/nixos/trunk-combined/tested#tabs-constituents">Status
@@ -128,6 +145,19 @@ also contains useful resources.</p>
   of the <tt>release-[%latestNixOSSeries%]</tt> branch</a>, used to update the <a
   href="https://nixos.org/channels/nixos-[%latestNixOSSeries%]"><tt>nixos-[%latestNixOSSeries%]</tt>
   channel</a>.</li>
+</ul>
+
+<h3>Commercial support</h3>
+<!-- Please submit a PR to add your company -->
+<p>For professional support, a number of consulting companies are
+available (sorted in alphabetical order):</p>
+<ul>
+  <li><a href="https://www.enlambda.com/">Enlambda</a></li>
+  <li><a href="https://nixos.mayflower.consulting">Mayflower</a></li>
+  <li><a href="https://nixcloud.io/">nixcloud</a></li>
+  <li><a href="https://www.numtide.com/">NumTide Ltd</a></li>
+  <li><a href="https://obsidian.systems">Obsidian Systems</a></li>
+  <li><a href="https://serokell.io/">Serokell</a></li>
 </ul>
 
 <h2>Donations</h2>
@@ -177,7 +207,7 @@ Rob Vermaas</a>.</p>
     <a href="https://www.3tu.nl/"><img src="[% root %]logo/3tu.jpg" alt="3TU logo" /></a>
   </div>
   <div class="span3 center">
-    <a href="https://www.packet.net"><img src="[% root %]logo/packet.net.svg" alt="Premium Bare Metal Servers and Cloud  Hosting" /></a>
+    <a href="https://www.packet.com"><img src="[% root %]logo/packet.net.svg" alt="Premium Bare Metal Servers and Cloud Hosting" /></a>
   </div>
   <div class="span3 center">
     <a href="https://snabb.co"><img src="[% root %]logo/snabb.png" alt="Snabb.co logo" /></a>

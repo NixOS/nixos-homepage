@@ -8,7 +8,7 @@ on Linux and macOS is to run the following in a shell (as a user
 other than <tt>root</tt>):</p>
 
 <pre>
-<span class="nix-command">curl https://nixos.org/nix/install | sh</span>
+<span class="nix-command">curl -L https://nixos.org/nix/install | sh</span>
 </pre>
 
 <p>Make sure to follow the instructions output by the script.</p>
@@ -18,10 +18,10 @@ other than <tt>root</tt>):</p>
 using GPG:</p>
 
 <pre>
-<span class="nix-command">curl -o install-nix-[%latestNixVersion%] https://nixos.org/nix/install</span>
-<span class="nix-command">curl -o install-nix-[%latestNixVersion%].sig https://nixos.org/nix/install.sig</span>
+<span class="nix-command">curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install</span>
+<span class="nix-command">curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc</span>
 <span class="nix-command">gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE</span>
-<span class="nix-command">gpg2 --verify ./install-nix-[%latestNixVersion%].sig</span>
+<span class="nix-command">gpg2 --verify ./install-nix-[%latestNixVersion%].asc</span>
 <span class="nix-command">sh ./install-nix-[%latestNixVersion%]</span>
 </pre>
 
@@ -39,13 +39,6 @@ manual</a> for more information.</p>
 
   <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a>.</li>
 
-  <!--
-  <li><a
-  href="https://hydra.nixos.org/release/nix/nix-[%latestNixVersion%]">Binary
-  packages for several platforms</a>, including RPMs, Debs and binary
-  tarballs for Mac OS X.</li>
-  -->
-
   <li><a href="[%nixManual%]#ssec-relnotes-[%latestNixVersion%]">Release
   notes</a>.</li>
 
@@ -53,20 +46,6 @@ manual</a> for more information.</p>
   href="[%nixManual%]#chap-quick-start">“Quick Start” section of the
   manual</a> for an overview of how to install and use Nix.</li>
 
-</ul>
-
-</section>
-
-
-<section><h2>Continuous builds</h2>
-
-<p>You can grab the latest bleeding-edge pre-release from our <a
-href="../hydra">continuous build system</a>:</p>
-
-<ul>
-  <li><a
-  href="https://hydra.nixos.org/job/nix/trunk/release#tabs-constituents">The
-  latest development release of Nix</a></li>
 </ul>
 
 </section>

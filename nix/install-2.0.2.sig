@@ -1,1 +1,0 @@
-/releases/nix/nix-2.0.2/install.asc
