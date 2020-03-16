@@ -47,8 +47,6 @@
                 Nix
               [% ELSIF menu == 'nixpkgs' %]
                 Nixpkgs
-              [% ELSIF menu == 'disnix' %]
-                Disnix
               [% ELSE %]
                 NixOS
               [% END %]
@@ -60,8 +58,6 @@
               <li><a href="[%root%]nixos">NixOS</a></li>
               <li><a href="[%root%]nix">Nix</a></li>
               <li><a href="[%root%]nixpkgs">Nixpkgs</a></li>
-              <li class="divider"></li>
-              <li><a href="[%root%]disnix">Disnix</a></li>
             </ul>
           </li>
 
@@ -96,17 +92,6 @@
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-            [% ELSIF menu == 'disnix' %]
-              <ul class="nav pull-left">
-                <li></li>
-                <li><a href="[%root%]disnix/docs.html">Documentation</a></li>
-                <li><a href="[%root%]disnix/extensions.html">Extensions</a></li>
-                <li><a href="[%root%]disnix/examples.html">Examples</a></li>
-                <li><a href="[%root%]disnix/download.html">Download</a></li>
-                <li><a href="[%root%]disnix/support.html">Support</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/svanderburg/disnix"><i class="fa fa-github"></i></a></li>
             [% ELSIF menu == 'organization' %]
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
