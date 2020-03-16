@@ -1,19 +1,19 @@
 [[redirects]]
   from = "/channels/*"
   to = "https://channels.nixos.org/:splat"
-  status = 301
+  status = 302
   force = true
 
 [[redirects]]
   from = "/releases/channels/*"
   to = "https://channels.nixos.org/:splat"
-  status = 301
+  status = 302
   force = true
 
 [[redirects]]
   from = "/releases/nixos/channels/*"
   to = "https://channels.nixos.org/nixos/:splat"
-  status = 301
+  status = 302
   force = true
 
 [[redirects]]
@@ -25,7 +25,7 @@
 [[redirects]]
   from = "/releases/*"
   to = "https://releases.nixos.org/:splat"
-  status = 301
+  status = 302
   force = true
 
 [[redirects]]
@@ -33,7 +33,7 @@
   to = "https://releases.nixos.org/nix/nix-2.3.3/install"
   status = 200
   #to = "https://channels.nixos.org/nix-latest/install"
-  #status = 301
+  #status = 302
   force = true
 
 [[redirects]]
@@ -63,5 +63,5 @@
 [[redirects]]
   from  = "/disnix"
   to = "https://github.com/svanderburg/disnix"
-  status = 301
+  status = 302
   force = true
