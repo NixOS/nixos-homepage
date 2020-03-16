@@ -51,6 +51,10 @@
         (builtins.toJSON (
           import (nixpkgsStable + "/nixos/modules/virtualisation/azure-bootstrap-blobs.nix")));
 
+      nixosGCE = writeText "gce-images.json"
+        (builtins.toJSON (
+          import (nixpkgsStable + "/nixos/modules/virtualisation/gce-images.nix")));
+
       nixPills = import nix-pills {
         inherit pkgs;
         revCount = nix-pills.lastModified; # FIXME
@@ -94,6 +98,7 @@
             "NIXPKGS_UNSTABLE=${packages.x86_64-linux.unstablePackagesList}"
             "NIXOS_OPTIONS=${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"
             "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
+            "NIXOS_GCE=${packages.x86_64-linux.nixosGCE}"
             "NIXOS_AZURE_BLOBS=${packages.x86_64-linux.nixosAzureBlobs}"
             "PACKAGES_EXPLORER=${packages.x86_64-linux.packagesExplorer}/bundle.js"
             "NIX_PILLS_MANUAL_IN=${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
