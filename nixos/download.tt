@@ -216,7 +216,7 @@ ssh azureuser@"$VM_NAME"."$LOCATION".cloudapp.azure.com
     <tr><th>NixOS version</th><th>URL</th></tr>
   </thead>
   <tbody>
-    [% images = JSON.Escape.json_decode(IO.All.new('nixos/gce-images.json').all) %]
+    [% images = JSON.Escape.json_decode(IO.All.new(nixosGCE).all) %]
     [% FOREACH version IN images.keys.sort; url = images.$version %]
       <tr>
         <td><tt>[% version %]</tt></td>
@@ -232,7 +232,7 @@ ssh azureuser@"$VM_NAME"."$LOCATION".cloudapp.azure.com
 <pre>
 image=my-nixos-image
 source_uri=https://storage.googleapis.com/nixos-cloud-images/nixos-image-18.09.1228.a4c4cbb613c-x86_64-linux.raw.tar.gz
-source_uri=$(sed 's%gs:/%https://storage.googleapis.com%' <<< $source_uri)
+source_uri=$(sed 's%gs:/%https://storage.googleapis.com%' &lt;&lt;&lt; $source_uri)
 gcloud compute images create $image --source-uri=$source_uri
 gcloud compute instances create instance-1 --image=$image
 </pre>
