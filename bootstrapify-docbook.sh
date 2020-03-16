@@ -12,6 +12,8 @@ outDirTmp="${outDir}.tmp"
 rm -rf "$outDirTmp"
 mkdir -p "$outDirTmp"
 
+[[ -d $inDir ]]
+
 (cd $inDir && find -type f -print) | while read fn; do
     echo "$fn"
     if [[ $fn =~ epub ]]; then

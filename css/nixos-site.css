@@ -169,6 +169,10 @@ pre {
     box-shadow: 0.1em 0.1em 0.5em #e0e0e0;
 }
 
+.nix-command {
+    white-space: nowrap;
+}
+
 .nix-command:before {
     color: #999;
     content: " $ ";
@@ -194,49 +198,6 @@ img.inline {
 .reldate {
     font-style: italic;
 }
-
-/* List of recent commits. */
-
-ul.nixos-commits {
-    list-style-type: none;
-    margin-left: 0;
-}
-
-ul.nixos-commits a {
-    color: inherit;
-}
-
-ul.nixos-commits > li {
-    border-top: 1px solid rgb(226, 234, 238);
-    margin-bottom: 0em;
-}
-
-ul.nixos-commits > li:nth-child(odd) {
-    background-color: rgb(247, 251, 252);
-}
-
-div.nixos-commit {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    min-height: 36px;
-}
-
-img.nixos-commit-avatar {
-    float: left;
-    width: 36px;
-    height: 36px;
-    border-radius: 4px;
-    margin-right: 0.5em;
-}
-
-div.nixos-commit-summary {
-    font-weight: bold;
-}
-
-div.nixos-commit-author-info {
-    font-size: 90%;
-}
-
 
 /* List of recent blogs. */
 

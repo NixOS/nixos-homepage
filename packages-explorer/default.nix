@@ -1,10 +1,12 @@
+nixpkgs:
+
 let
-  pkgs = import ./pkgs.nix;
+  pkgs = import ./pkgs.nix nixpkgs;
   inherit (pkgs) lib;
 in
 pkgs.yarn2nix.mkYarnPackage {
   name = "nixos-packages-explorer";
-  src = lib.cleanSource ./.;
+  src = ./.;
   packageJson = ./package.json;
   yarnLock = ./yarn.lock;
 

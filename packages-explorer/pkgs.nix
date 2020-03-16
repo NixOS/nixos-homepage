@@ -1,4 +1,5 @@
-import <nixpkgs> {
+nixpkgs: import nixpkgs {
+  system = "x86_64-linux";
   overlays = [(self: super: {
     yarn2nix = import (self.fetchFromGitHub {
       owner = "moretea";

@@ -70,7 +70,7 @@
         approach to system configuration management to networks and
         provisioning.
       </p>
-      <a class="learn-more" href="[%root%]/nixops">
+      <a class="learn-more" href="https://github.com/NixOS/nixops">
         More about NixOps
         <i class="fa fa-angle-right"></i>
       </a>
@@ -143,38 +143,6 @@
       [% END; END %]
       <p><a href="https://planet.nixos.org/" class="btn btn-mini">More »</a></p>
     </ul>
-
-    <h3>Commits</h3>
-    [% stats = JSON.Escape.json_decode(IO.All.new('nixpkgs-commit-stats.json').all).all;
-       nrCommits = 0; FOREACH s IN stats; nrCommits = nrCommits + s; END %]
-    <p class="muted">[% stats.-1 %] commits in the last week, [% nrCommits %] in the last year</p>
-    <ul class="nixos-commits">
-      [% FOREACH c IN JSON.Escape.json_decode(IO.All.new('nixpkgs-commits.json').all).first(5); IF c; %]
-        <li>
-          <div class="nixos-commit">
-            <img class="nixos-commit-avatar" [% HTML.attributes(src => c.author ? c.author.avatar_url : root _ "images/GitHub-Mark-32px.png", alt => "Avatar") %]/>
-            <div class="nixos-commit-summary">
-              [% IF c.commit.message %]
-                <a [% HTML.attributes(href => c.html_url) %]>[% USE msg = String(c.commit.message.split('\n').0); HTML.escape(msg.truncate(60, '…')) %]</a>
-              [% ELSE %]
-                <em>No commit message</em>
-              [% END %]
-            </div>
-            <div class="nixos-commit-author-info">
-              <span class="nixos-commit-author">
-                [% IF c.author %]
-                  <a [% HTML.attributes(href => c.author.html_url) %]>[% HTML.escape(c.commit.author.name) %]</a>
-                [% ELSE %]
-                  [% HTML.escape(c.commit.author.name) %]
-                [% END %]
-              </span>
-              <span class="muted">authored [% HTML.escape(c.commit.author.date) %]</span>
-            </div>
-          </div>
-        </li>
-      [% END; END %]
-    </ul>
-    <p><a href="https://github.com/NixOS/nixpkgs/commits/master" class="btn btn-mini">More »</a></p>
 
     <h3>Twitter</h3>
     <p>
