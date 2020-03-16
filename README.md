@@ -12,6 +12,10 @@ build it:
 
 then open http://127.0.0.1:8000/index.html
 
+To automatically rebuild on every change:
+
+    [nix-shell]$ git ls-files | entr make
+
 ## License
 
 The content of the website is licensed under the [Creative Commons Attribution Share Alike 4.0 International](LICENSES/CC-BY-SA-4.0.txt) license.
