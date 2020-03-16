@@ -83,6 +83,7 @@ favicon.png: logo/nixos-logo-only-hires.png
 	  --define fileName=$< \
 	  --define nixosAmis=$(NIXOS_AMIS) \
 	  --define nixosAzureBlobs=$(NIXOS_AZURE_BLOBS) \
+	  --define nixosGCE=$(NIXOS_GCE) \
 	  --pre_process=nix-release.tt --pre_process=nixos-release.tt --pre_process=common.tt \
 	  $< > $@.tmp
 	xmllint --nonet --noout $@.tmp
