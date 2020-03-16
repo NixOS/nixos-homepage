@@ -1,6 +1,6 @@
 NIXOS_SERIES = 19.09
-NIXPKGS_STABLE = /no-such-path
-NIXPKGS_UNSTABLE = /no-such-path
+NIXPKGS_STABLE ?= /no-such-path
+NIXPKGS_UNSTABLE ?= /no-such-path
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
@@ -19,7 +19,7 @@ HTML = index.html news.html \
 
 ### Prettify the NixOS manual.
 
-NIXOS_MANUAL_IN = /no-such-path
+NIXOS_MANUAL_IN ?= /no-such-path
 NIXOS_MANUAL_OUT = nixos/manual
 
 all: $(NIXOS_MANUAL_OUT)
@@ -30,7 +30,7 @@ $(NIXOS_MANUAL_OUT): $(NIXOS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-doc
 
 ### Prettify the Nix Pills
 
-NIX_PILLS_MANUAL_IN = /no-such-path
+NIX_PILLS_MANUAL_IN ?= /no-such-path
 NIX_PILLS_MANUAL_OUT = nixos/nix-pills
 
 all: $(NIX_PILLS_MANUAL_OUT)
@@ -41,7 +41,7 @@ $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) bootstrapify-docbook.sh bootstra
 
 ### Prettify the Nix manual.
 
-NIX_MANUAL_IN = /no-such-path
+NIX_MANUAL_IN ?= /no-such-path
 NIX_MANUAL_OUT = nix/manual
 
 all: $(NIX_MANUAL_OUT)
@@ -53,7 +53,7 @@ $(NIX_MANUAL_OUT): $(call rwildcard, $(NIX_MANUAL_IN), *) bootstrapify-docbook.s
 
 ### Prettify the Nixpkgs manual.
 
-NIXPKGS_MANUAL_IN = /no-such-path
+NIXPKGS_MANUAL_IN ?= /no-such-path
 NIXPKGS_MANUAL_OUT = nixpkgs/manual
 
 all: $(NIXPKGS_MANUAL_OUT)
@@ -142,7 +142,7 @@ nixpkgs/packages-nixos-$(NIXOS_SERIES).json:
 nixpkgs/packages-nixpkgs-unstable.json:
 	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json $@
 
-NIXOS_OPTIONS = /no-such-path
+NIXOS_OPTIONS ?= /no-such-path
 
 .PHONY: nixos/options.json
 

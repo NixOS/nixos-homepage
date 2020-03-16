@@ -103,6 +103,20 @@
           mkdir $out
           cp -prd . $out/
         '';
+
+        shellHook = ''
+          export NIX_MANUAL_IN="${nix.doc}/share/doc/nix/manual"
+          export NIXOS_MANUAL_IN="${nixpkgsStable.htmlDocs.nixosManual}"
+          export NIXPKGS_MANUAL_IN="${nixpkgsStable.htmlDocs.nixpkgsManual}"
+          export NIXPKGS_STABLE="${packages.x86_64-linux.stablePackagesList}"
+          export NIXPKGS_UNSTABLE="${packages.x86_64-linux.unstablePackagesList}"
+          export NIXOS_OPTIONS="${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"
+          export NIXOS_AMIS="${packages.x86_64-linux.nixosAmis}"
+          export NIXOS_GCE="${packages.x86_64-linux.nixosGCE}"
+          export NIXOS_AZURE_BLOBS="${packages.x86_64-linux.nixosAzureBlobs}"
+          export PACKAGES_EXPLORER="${packages.x86_64-linux.packagesExplorer}/bundle.js"
+          export NIX_PILLS_MANUAL_IN="${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
+        '';
       };
 
 
