@@ -24,7 +24,7 @@
         nix-env -f '<nixpkgs>' -I nixpkgs=${src} -qa --json --arg config 'import ${./packages-config.nix}' >> tmp
         echo -n '}' >> tmp
         mkdir $out
-        < tmp sed "s|$$nixpkgs/||g" | jq -c . > $out/packages.json
+        < tmp sed "s|${src}/||g" | jq -c . > $out/packages.json
       '';
 
     packages.x86_64-linux = {
