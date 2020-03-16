@@ -25,6 +25,15 @@
         echo -n '}' >> tmp
         mkdir $out
         < tmp sed "s|${src}/||g" | jq -c . > $out/packages.json
+
+        # Validate we don't keep references.
+        # The [^/] part of the expression could be changed for a better
+        # representation of a nix store path.
+        if jq < $out/packages.json | grep '/nix/store/[^/]+/'; then
+          echo "Errant nix store paths in packages.json output."
+          echo "See previous output as grepped."
+          exit 1
+        fi
       '';
 
     packages.x86_64-linux = {
