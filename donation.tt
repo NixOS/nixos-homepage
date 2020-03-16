@@ -1,38 +1,9 @@
-<p>You can donate to the NixOS foundation by using the PayPal button below:</p>
+[%# Fragment imported in other pages. %]
+<p>You can donate to the NixOS foundation by using Open Collective:</p>
 
-<p>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick"/>
-<input type="hidden" name="hosted_button_id" value="AR3G7EP9QNZYS"/>
-<input type="image" src="https://www.paypalobjects.com/en_US/NL/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
-<img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1"/>
-</form>
-</p>
+<object type="image/svg+xml" data="https://opencollective.com/nixos/tiers/supporter.svg?avatarHeight=80&amp;width=1000"></object>
 
-<p>It is also possible to set up a monthly donation:</p>
-
-<p>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick"/>
-<input type="hidden" name="hosted_button_id" value="CJTT5J5NWCQRA"/>
-<table>
-<tr><td><input type="hidden" name="on0" value=""/></td></tr><tr><td><select name="os0">
-	<option value="Bronze">Bronze : €5,00 EUR - monthly</option>
-	<option value="Silver">Silver : €10,00 EUR - monthly</option>
-	<option value="Gold">Gold : €25,00 EUR - monthly</option>
-	<option value="Platinum">Platinum : €50,00 EUR - monthly</option>
-	<option value="Diamond">Diamond : €100,00 EUR - monthly</option>
-</select> </td></tr>
-</table>
-<input type="hidden" name="currency_code" value="EUR"/>
-<input type="image" src="https://www.paypalobjects.com/en_US/NL/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
-<img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1"/>
-</form>
-</p>
-
-<p><i>PayPal charges per transaction: €0.35 + 1.5% of the transaction</i></p>
-
-<p>The NixOS Foundation also accepts donations via bank transfer. Please send payments to:</p>
+<p>The NixOS Foundation also accepts donations via SEPA bank transfer. Please send payments to:</p>
 
 <pre class="code">
 Stichting NixOS Foundation, De Meern, The Netherlands
@@ -43,5 +14,6 @@ BIC:  KNABNL2H
 
 <p>Please add your name and purpose (donation) in the description of the transfer!</p>
 
-<p>If you would like to support us for amounts above 2000 euro per year, please contact us at <a 
-href="mailto:foundation@nixos.org">foundation@nixos.org</a>, as this will have tax implications.</p>
+<i>If you would like to support us for amounts above 2000 euro per year, please contact us at 
+<a href="mailto:foundation@nixos.org">foundation@nixos.org</a>, as this will have tax implications.
+</i>

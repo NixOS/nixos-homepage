@@ -36,7 +36,7 @@ continuous build system:</p>
   latest development release of Nixpkgs</a> (<a
   href="https://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/file/source-dist">source
   tarball</a>, <a
-  href="https://hydra.nixos.org/job/nixpkgs/trunk/tarball/latest/download-by-type/doc/manual">manual</a>, <a href="https://hydra.nixos.org/job/nixpkgs/trunk/unstable#tabs-constituents">status</a>)</li>
+  href="https://hydra.nixos.org/job/nixpkgs/trunk/manual/latest/download/nixpkgs/manual.html">manual</a>, <a href="https://hydra.nixos.org/job/nixpkgs/trunk/unstable#tabs-constituents">status</a>)</li>
 </ul>
 
 </section>
@@ -44,27 +44,7 @@ continuous build system:</p>
 
 <section><h2>Old releases</h2>
 
-<p>The following old releases of Nixpkgs are available:</p>
-
-<div class="row">
-<table class="table span3">
-  <thead>
-    <tr><th>Date</th><th>Version</th></tr>
-  </thead>
-  <tbody>
-  <tr><td class="reldate">2010-02-05</td><td><a href="https://hydra.nixos.org/release/nixpkgs/nixpkgs-0.13/">Nixpkgs 0.13</a></td></tr>
-  <tr><td class="reldate">2009-04-24</td><td><a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.12/">Nixpkgs 0.12</a></td></tr>
-  <tr><td class="reldate">2007-09-11</td><td><a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.11/">Nixpkgs 0.11</a></td></tr>
-  <tr><td class="reldate">2006-10-12</td><td><a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.10/">Nixpkgs 0.10</a></td></tr>
-  <tr><td class="reldate">2006-01-31</td><td><a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.9/">Nixpkgs 0.9</a></td></tr>
-  <tr><td class="reldate">2005-04-11</td><td><a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.8/">Nixpkgs 0.8</a></td></tr>
-  <tr><td class="reldate">2005-03-14</td><td><a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.7/">Nixpkgs 0.7</a></td></tr>
-  <tr><td class="reldate">2004-11-14</td><td><a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.6/">Nixpkgs 0.6</a></td></tr>
-  <tr><td class="reldate">2004-05-03</td><td><a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.5.1/">Nixpkgs 0.5.1</a></td></tr>
-  <tr><td class="reldate">2004-04-27</td><td><a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.5/">Nixpkgs 0.5</a></td></tr>
-  </tbody>
-</table>
-</div>
+<p>All releases of Nixpkgs can be found on <a href="https://github.com/NixOS/nixpkgs/releases">GitHub</a>.</p>
 
 </section>
 

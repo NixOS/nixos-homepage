@@ -36,6 +36,15 @@ p {
     text-decoration: none;
 }
 
+.navbar .brand {
+	padding-bottom: 0;
+}
+
+.dropdown .caret {
+	vertical-align: middle;
+	margin-top: -3px;
+}
+
 .logo {
     margin-top: -5px;
     padding-right: 5px;
@@ -47,6 +56,77 @@ p {
     width: 14em;
     float: left;
     margin: 1em 3em 1em 0em;
+}
+
+/* Holds semantic titles on the main page. */
+.nixos-org-index > h1,
+.nixos-org-index > h2 {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    text-indent: -999em;
+}
+.nixos-org-index > hr {
+    margin-bottom: 0;
+}
+
+.nixos-org-index .more-about .learn-more {
+    display: block;
+    /*text-align: right;*/
+}
+
+.nixos-org-index .and-more ul {
+	list-style-type: none;
+	margin: 0;
+}
+.nixos-org-index .and-more ul li {
+	margin: 0;
+}
+
+@media (max-width: 767px) {
+    .jumbotron-two > div > div::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    .jumbotron-two .learn-more {
+        float: right;
+    }
+}
+@media (min-width: 768px) {
+    /* Punny name, as it is both the second jumobtron implementation
+       and a two elements side-by-side thing. */
+    .jumbotron-two {
+        display: table;
+		/* 14px/20px equivalent */
+		line-height: 1.429;
+    }
+    .jumbotron-two p {
+		font-size: 1.2em;
+	}
+    .jumbotron-two > div {
+        display: table-row;
+    }
+    .jumbotron-two > div > div {
+        width: 50%;
+        position: relative;
+        display: table-cell;
+        padding-bottom: 35px;
+    }
+    .jumbotron-two > div > div:not(:first-child) {
+        padding-left: 15px;
+    }
+    .jumbotron-two > div > div:not(:last-child) {
+        padding-right: 15px;
+    }
+    .jumbotron-two .learn-more {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+    .jumbotron-two div:not(:last-child) > .learn-more {
+        right: 15px;
+    }
 }
 
 h2, div.docbook h1 {
@@ -114,49 +194,6 @@ img.inline {
 .reldate {
     font-style: italic;
 }
-
-/* List of recent commits. */
-
-ul.nixos-commits {
-    list-style-type: none;
-    margin-left: 0;
-}
-
-ul.nixos-commits a {
-    color: inherit;
-}
-
-ul.nixos-commits > li {
-    border-top: 1px solid rgb(226, 234, 238);
-    margin-bottom: 0em;
-}
-
-ul.nixos-commits > li:nth-child(odd) {
-    background-color: rgb(247, 251, 252);
-}
-
-div.nixos-commit {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    min-height: 36px;
-}
-
-img.nixos-commit-avatar {
-    float: left;
-    width: 36px;
-    height: 36px;
-    border-radius: 4px;
-    margin-right: 0.5em;
-}
-
-div.nixos-commit-summary {
-    font-weight: bold;
-}
-
-div.nixos-commit-author-info {
-    font-size: 90%;
-}
-
 
 /* List of recent blogs. */
 
@@ -282,6 +319,14 @@ div.search-details td.nix {
     font-family: monospace;
 }
 
+#search-results .description.docbook p > .docbook-important {
+    margin-top: 0.5rem;
+}
+
+#search-results .description.docbook .docbook-important {
+    border-left: #F89406 solid 0.3rem;
+    padding-left: 0.5rem;
+}
 
 /* Manual. */
 
@@ -315,6 +360,10 @@ div.docbook code {
     background-color: inherit;
     color: inherit;
     font-size: 100%;
+    white-space: normal;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
 }
 
 div.docbook div.toc {
@@ -324,6 +373,17 @@ div.docbook div.toc {
 
 div.docbook div.toc dd {
     margin-left: 2em;
+}
+
+div.docbook pre.hljs {
+    overflow-x: visible;
+}
+
+div.docbook span.command {
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace; /* from bootstrap*/
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
 }
 
 .license ul {

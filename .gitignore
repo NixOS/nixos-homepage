@@ -1,31 +1,21 @@
 *.html
 *.xhtml
 
-/hydra/manual/
-/hydra/manual-raw
-
-/nix/install
-
-/nixos/amis.nix
-/nixos/amis.json
-/nixos/azure-blobs.nix
-/nixos/azure-blobs.json
 /nixos/manual/
-/nixos/manual-raw
 /nixos/nix-pills/
-/nixos/nix-pills-raw
-/nixos/options.json.gz
+/nixos/options.json
 /nixos/screenshots/nixos-*-small.png
+/nixos/packages-explorer.js
 
 /nixpkgs/manual/
-/nixpkgs/manual-raw
-/nixpkgs/packages-unstable.json.gz
-/nixpkgs/packages.json.gz
+/nixpkgs/*.json
+
+/nix/manual/
 
 /blogs.json
 /blogs.xml
 /favicon.png
 /news-rss.xml
 /nixos-release.tt
-/nixpkgs-commits.json
-/nixpkgs-commit-stats.json
+
+/result*

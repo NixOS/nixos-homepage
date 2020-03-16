@@ -3,8 +3,7 @@
 [% USE JSON.Escape %]
 
 <p>The latest stable release series is
-<strong>[%latestNixOSSeries%]</strong> and the latest release in that
-series is <strong>[%latestNixOSRelease%]</strong>.  Below are links to
+<strong>[%latestNixOSSeries%]</strong>.  Below are links to
 CD/DVD images and VirtualBox appliances containing the <a
 href="https://nixos.org/channels/nixos-[%latestNixOSSeries%]">latest
 release</a> in this series.  <a class="btn btn-large btn-success
@@ -30,10 +29,10 @@ installer as well as X11, Plasma 5 Desktop and several applications.  It’s a
 <em>live CD</em>, so it allows you to get an impression of NixOS (and
 the Nix package manager) before installing it.</p>
 
-[% prefix = "https://d3g5gsiof5omrk.cloudfront.net/nixos/" _ latestNixOSSeries _ "/nixos-" _ latestNixOSRelease %]
+[% prefix = "https://channels.nixos.org/nixos-" _ latestNixOSSeries %]
 
 <ul>
-  <li><a href="[%prefix%]/nixos-graphical-[%latestNixOSRelease%]-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-graphical-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)
+  <li><a href="[%prefix%]/latest-nixos-graphical-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/latest-nixos-graphical-x86_64-linux.iso.sha256">SHA-256</a>)
     <span class="label label-info">Recommended for most users</span></li>
 </ul>
 
@@ -42,8 +41,8 @@ and is therefore a lot smaller.  You have to run the installer from
 the console.  It contains a number of rescue tools.</p>
 
 <ul>
-  <li><a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso">Minimal installation CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-x86_64-linux.iso.sha256">SHA-256</a>)</li>
-  <li><a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-i686-linux.iso">Minimal installation CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-minimal-[%latestNixOSRelease%]-i686-linux.iso.sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Minimal installation CD, 64-bit Intel/AMD</a> (<a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso.sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso">Minimal installation CD, 32-bit Intel/AMD</a> (<a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso.sha256">SHA-256</a>)</li>
 </ul>
 
 </section>
@@ -60,7 +59,7 @@ appears, you can log in as <strong>user <tt>demo</tt></strong>,
 <tt>sudo -i</tt> in the KDE terminal (<tt>konsole</tt>).</p>
 
 <ul>
-  <li><a href="[%prefix%]/nixos-[%latestNixOSRelease%]-x86_64-linux.ova">VirtualBox appliance, 64-bit Intel/AMD</a> (<a href="[%prefix%]/nixos-[%latestNixOSRelease%]-x86_64-linux.ova.sha256">SHA-256</a>)</li>
+  <li><a href="[%prefix%]/latest-nixos-x86_64-linux.ova">VirtualBox appliance, 64-bit Intel/AMD</a> (<a href="[%prefix%]/latest-nixos-x86_64-linux.ova.sha256">SHA-256</a>)</li>
 </ul>
 
 </section>
@@ -76,7 +75,7 @@ by using one of the AMIs listed below.</p>
     <tr><th>Region</th><th>Root storage</th><th>Virtualisation</th><th>AMI</th><th></th></tr>
   </thead>
   <tbody>
-    [% amis = JSON.Escape.json_decode(IO.All.new('nixos/amis.json').all).$latestNixOSSeries %]
+    [% amis = JSON.Escape.json_decode(IO.All.new(nixosAmis).all).$latestNixOSSeries %]
     [% FOREACH region IN amis.keys.sort %]
       [% FOREACH type IN amis.$region.keys.sort; ami = amis.$region.$type %]
         <tr>
@@ -116,7 +115,7 @@ by using one of the bootstrap BLOBs listed below.</p>
     <tr><th>NixOS version</th><th>BLOB URL</th></tr>
   </thead>
   <tbody>
-    [% blobs = JSON.Escape.json_decode(IO.All.new('nixos/azure-blobs.json').all) %]
+    [% blobs = JSON.Escape.json_decode(IO.All.new(nixosAzureBlobs).all) %]
     [% FOREACH version IN blobs.keys.sort; blob = blobs.$version %]
       <tr>
         <td><tt>[% version %]</tt></td>
@@ -135,44 +134,74 @@ of NixOS  using azure-cli, just run:</p>
 <pre>
 # settings
 # vm name must be lowercase and letters/numbers only because it's also used as the domain name
-$ export VM=nixvm005
-$ export GROUP=test-group
-$ export LOCATION=westus
-$ export STORAGE=testst004
-$ export SOURCE_URI=<tt>[% blob %]</tt>
+export VM_NAME="nixosvm"
+export RESOURCE_GROUP="rg-nixosvm"
+export LOCATION="eastus"
+export STORAGE_ACCOUNT="nixosvm"
+export SOURCE_URI="<tt>[% blob %]</tt>"
 
 # create group
-$ azure config mode arm
-$ azure group create $GROUP --location $LOCATION
+az group create \
+    --name "$RESOURCE_GROUP" \
+    --location "$LOCATION
 
 # create storage
-$ azure storage account create $STORAGE -g $GROUP -l $LOCATION --type LRS
-$ azure storage account keys list $STORAGE -g $GROUP
+az storage account create \
+    --name "$STORAGE_ACCOUNT" \
+    --group "$RESOURCE_GROUP" \
+    --location "$LOCATION" \
+    --sku Standard_LRS
+
+az storage account keys list \
+    --name "$STORAGE_ACCOUNT" \
+    --group $RESOURCE_GROUP
 
 # export one of the storage access keys
-$ export KEY=
-$ echo $KEY
+export STORAGE_ACCOUNT_KEY="..."
+echo $STORAGE_ACCOUNT_KEY
 
-$ azure storage container create -a $STORAGE -k $KEY vm-images
+az storage container create \
+    --account-name "$STORAGE_ACCOUNT"
+    --account-key "$STORAGE_ACCOUNT_KEY"
+    --name vm-images
 
 # copy the image blob
-$ azure storage blob copy start --source-uri $SOURCE_URI --dest-account-name $STORAGE --dest-account-key $KEY \
-    --dest-container vm-images --dest-blob nixos-unstable-nixops.vhd
+az storage blob copy start \
+    --source-uri "$SOURCE_URI" \
+    --destination-blob "nixos-unstable-nixops.vhd" \
+    --destination-container "vm-images" \
+    --account-name "$STORAGE_ACCOUNT" \
+    --account-key "$STORAGE_ACCOUNT_KEY"
 
 # wait for blob copy status to change pending->success
-$ azure storage blob copy show --container vm-images  --blob nixos-unstable-nixops.vhd -a $STORAGE -k $KEY
+az storage blob show \
+    --name "nixos-unstable-nixops.vhd" \
+    --container-name "vm-images" \
+    --account-name "$STORAGE_ACCOUNT" \
+    --account-key "$STORAGE_ACCOUNT_KEY"
+
 
 # create vm
-$ azure vm create $GROUP $VM $LOCATION Linux --storage-account-name $STORAGE \
-    -d https://"$STORAGE".blob.core.windows.net/vm-images/root.vhd \
-    --image-urn https://"$STORAGE".blob.core.windows.net/vm-images/nixos-unstable-nixops.vhd \
-    --nic-name $VM --vnet-name $VM --vnet-address-prefix 10.0.0.1/16 --vnet-subnet-name $VM \
-    --vnet-subnet-address-prefix 10.0.1.1/24 --public-ip-name $VM --public-ip-domain-name $VM \
-    --admin-username azureuser
+az vm create \
+    --name "$VM_NAME" \
+    --resource-group "$RESOURCE_GROUP" \
+    --location "$LOCATION" \
+    --public-ip-address-dns-name "$VM_NAME" \
+    --image "https://$STORAGE_ACCOUNT.blob.core.windows.net/vm-images/nixos-unstable-nixops.vhd" \
+    --storage-account "$STORAGE_ACCOUNT" \
+    --storage-container-name "$VM_NAME" \
+    --use-unmanaged-disk \
+    --os-disk-size-gb "32" \
+    --os-type linux \
+    --admin-username "azureuser" \
+    --generate-ssh-keys
 
 # show machine properties and log in
-$ azure vm show $GROUP $VM
-$ ssh azureuser@"$VM"."$LOCATION".cloudapp.azure.com
+az vm show \
+    --name "$VM" \
+    --resource-group "$GROUP"
+
+ssh azureuser@"$VM_NAME"."$LOCATION".cloudapp.azure.com
 </pre>
 
 </section>
