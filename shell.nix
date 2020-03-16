@@ -1,22 +1,3 @@
-with import (fetchTarball channel:nixos-19.03) {};
-
-stdenv.mkDerivation {
-  name = "nixos.org-homepage";
-
-  postHook = "unset http_proxy"; # hack for nix-shell
-
-  buildInputs =
-    [ perl
-      python
-      perlPackages.TemplateToolkit
-      perlPackages.TemplatePluginJSONEscape
-      perlPackages.TemplatePluginIOAll
-      perlPackages.XMLSimple
-      libxslt libxml2 imagemagick git curl
-      xhtml1
-      nixStable
-      gnupg
-      jq
-      entr
-    ];
-}
+(import (fetchTarball https://github.com/edolstra/flake-compat/archive/master.tar.gz) {
+  src = builtins.fetchGit ./.;
+}).shellNix
