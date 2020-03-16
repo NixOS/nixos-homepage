@@ -47,12 +47,6 @@
                 Nix
               [% ELSIF menu == 'nixpkgs' %]
                 Nixpkgs
-              [% ELSIF menu == 'nixops' %]
-                NixOps
-              [% ELSIF menu == 'disnix' %]
-                Disnix
-              [% ELSIF menu == 'hydra' %]
-                Hydra
               [% ELSE %]
                 NixOS
               [% END %]
@@ -63,11 +57,7 @@
               <li><a href="/">Site Home</a></li>
               <li><a href="[%root%]nixos">NixOS</a></li>
               <li><a href="[%root%]nix">Nix</a></li>
-              <li><a href="[%root%]nixops">NixOps</a></li>
               <li><a href="[%root%]nixpkgs">Nixpkgs</a></li>
-              <li class="divider"></li>
-              <li><a href="[%root%]hydra">Hydra</a></li>
-              <li><a href="[%root%]disnix">Disnix</a></li>
             </ul>
           </li>
 
@@ -76,7 +66,7 @@
               <ul class="nav pull-left">
                 <li><a href="[%root%]nixos/about.html">About</a></li>
                 <li><a href="[%root%]nixos/download.html">Download</a></li>
-                <li><a href="[%root%]nixos/support.html">Support</a></li>
+                <li><a href="[%root%]nixos/learn.html">Learn</a></li>
                 <li><a href="[%root%]nixos/packages.html">Packages</a></li>
                 <li><a href="[%root%]nixos/options.html">Options</a></li>
                 <li><a href="[%root%]nixos/community.html">Community</a></li>
@@ -95,12 +85,6 @@
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
-            [% ELSIF menu == 'hydra' %]
-              <ul class="nav pull-left">
-                <li><a href="[%root%]hydra/manual/">Manual</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/hydra"><i class="fa fa-github"></i></a></li>
             [% ELSIF menu == 'nixpkgs' %]
               <ul class="nav pull-left">
                 <li><a href="[%root%]nixpkgs/download.html">Download</a></li>
@@ -108,26 +92,6 @@
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-            [% ELSIF menu == 'nixops' %]
-              <ul class="nav pull-left">
-                <li><a href="[%root%]nixops/manual/">Manual</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/nixops"><i class="fa fa-github"></i></a></li>
-            [% ELSIF menu == 'disnix' %]
-              <ul class="nav pull-left">
-                <li></li>
-                <li><a href="[%root%]disnix/docs.html">Documentation</a></li>
-                <li><a href="[%root%]disnix/extensions.html">Extensions</a></li>
-                <li><a href="[%root%]disnix/examples.html">Examples</a></li>
-                <li><a href="[%root%]disnix/download.html">Download</a></li>
-                <li><a href="[%root%]disnix/support.html">Support</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/svanderburg/disnix"><i class="fa fa-github"></i></a></li>
-            [% ELSIF menu == 'patchelf' %]
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/patchelf"><i class="fa fa-github"></i></a></li>
             [% ELSIF menu == 'organization' %]
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
@@ -159,11 +123,7 @@
         <hr />
         <center>
         <small class="muted">
-          [% IF modifiedAt %]
-            Last changed on [% modifiedAt.substr(0, 10) %]
-            · <a href="https://github.com/NixOS/nixos-homepage/blob/master/[%fileName%]">Page source</a>
-            · <a href="https://github.com/NixOS/nixos-homepage/edit/master/[%fileName%]">Edit</a>
-          [% ELSIF sourceLink %]
+          [% IF sourceLink %]
             <a [% HTML.attributes(href => sourceLink) %]>Source</a>
           [% END %]
         </small>

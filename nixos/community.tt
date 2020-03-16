@@ -23,7 +23,7 @@
 please open a <a
 href="https://github.com/NixOS/nixpkgs/pulls"><strong>pull request on
 GitHub</strong></a>, or <strong>send a patch</strong> to the <a
-href="[%root%]nixos/support.html#discourse"><tt>Discourse</tt> forum</a>. If you
+href="[%root%]nixos/learn.html#discourse"><tt>Discourse</tt> forum</a>. If you
 want to contribute regularly, you may want to ask for commit access to
 our GitHub repositories (please ask <a
 href="https://nixos.org/~eelco/">Eelco</a>, or on the <tt>#nixos</tt>
@@ -31,6 +31,14 @@ IRC channel).</p>  </div> <div class="span4"> <script
 type="text/javascript"
 src="https://www.openhub.net/p/25550/widgets/project_basic_stats.js"></script>
 </div> </div>
+
+<h3><a href="https://github.com/NixOS/nixpkgs/issues">Bugs</a></h3>
+<p>If
+    you think you’ve found a bug, please report it in the <a
+    href="https://github.com/NixOS/nixpkgs/issues"><strong>Nixpkgs
+    issue tracker</strong></a> (please use the label <strong>6.topic:
+    nixos</strong>).
+</p>
 
 <h3>Documentation</h3>
 
@@ -126,7 +134,7 @@ then make a pull request.</p>
 
 <h3>Continuous builds</h3>
 
-<p><a href="[%root%]hydra">Hydra</a> continuously builds NixOS:</p>
+<p><a href="https://github.com/NixOS/hydra">Hydra</a> continuously builds NixOS:</p>
 
 <ul>
   <li><a href="https://hydra.nixos.org/job/nixos/trunk-combined/tested#tabs-constituents">Status
@@ -137,6 +145,19 @@ then make a pull request.</p>
   of the <tt>release-[%latestNixOSSeries%]</tt> branch</a>, used to update the <a
   href="https://nixos.org/channels/nixos-[%latestNixOSSeries%]"><tt>nixos-[%latestNixOSSeries%]</tt>
   channel</a>.</li>
+</ul>
+
+<h3>Commercial support</h3>
+<!-- Please submit a PR to add your company -->
+<p>For professional support, a number of consulting companies are
+available (sorted in alphabetical order):</p>
+<ul>
+  <li><a href="https://www.enlambda.com/">Enlambda</a></li>
+  <li><a href="https://nixos.mayflower.consulting">Mayflower</a></li>
+  <li><a href="https://nixcloud.io/">nixcloud</a></li>
+  <li><a href="https://www.numtide.com/">NumTide Ltd</a></li>
+  <li><a href="https://obsidian.systems">Obsidian Systems</a></li>
+  <li><a href="https://serokell.io/">Serokell</a></li>
 </ul>
 
 <h2>Donations</h2>

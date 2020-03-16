@@ -83,7 +83,7 @@ in which the package has some files from the old version and some
 files from the new version — which would be bad because a program
 might well crash if it’s started during that period.</p>
 
-<p>And since package aren’t overwritten, the old versions are still
+<p>And since packages aren’t overwritten, the old versions are still
 there after an upgrade.  This means that you can <em>roll back</em> to
 the old version:</p>
 
@@ -204,7 +204,7 @@ the package:</p>
 
 <p>Since Nix packages are reproducible and have complete dependency
 specifications, Nix makes an excellent basis for <a
-href="[%root%]hydra">a continuous build system</a>.</p>
+href="https://github.com/NixOS/hydra">a continuous build system</a>.</p>
 
 
 <h3>Portability</h3>

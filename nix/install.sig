@@ -1,1 +1,0 @@
-/releases/nix/latest/install.asc
