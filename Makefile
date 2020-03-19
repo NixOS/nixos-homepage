@@ -7,10 +7,10 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 default: all
 
 
-HTML = index.html news.html \
+HTML = index.html news.html learn.html \
   nix/index.html nix/about.html nix/download.html \
   nixpkgs/index.html nixpkgs/download.html \
-  nixos/index.html nixos/about.html nixos/download.html nixos/learn.html \
+  nixos/index.html nixos/about.html nixos/download.html \
   nixos/community.html nixos/packages.html nixos/options.html \
   nixos/security.html nixos/foundation.html \
   nixos/wiki.html \
