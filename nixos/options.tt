@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title='Search NixOS options' menu='nixos' %]
+[% WRAPPER layout.tt title='Search NixOS options' menu='nixos' hideSearch=1 %]
 
 <p>
   <input name='query' type='text' class='search-query span3'
