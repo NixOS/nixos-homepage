@@ -40,6 +40,10 @@ p {
 	padding-bottom: 0;
 }
 
+.navbar .navbar-search .input-append {
+  margin: 0px;
+}
+
 .dropdown .caret {
 	vertical-align: middle;
 	margin-top: -3px;

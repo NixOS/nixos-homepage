@@ -6,152 +6,54 @@
 
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 
-<div class="nixos-org-index">
-  [%# Title for the site, used to keep the document tree rooted at h1. %]
-  <h1>NixOS</h1>
-  
-  <div class="jumbotron-two"><div>
-    <div class="intro-nix">
-      <h2>What is Nix?</h2>
-    
-      <p>
-      Nix is a powerful package manager for Linux and other Unix systems
-      that makes package management reliable and reproducible.  It
-      provides atomic upgrades and rollbacks, side-by-side installation
-      of multiple versions of a package, multi-user package management
-      and easy setup of build environments.
-      </p>
-    
-      <div class="learn-more">
-        <a class="btn btn-success" href="[%root%]nix/">
-          <i class="fa fa-chevron-right"></i> Learn more about Nix
-        </a>
-      </div>
-    </div>
-    <div class="intro-nixos">
-      <h2>What is NixOS?</h2>
-    
-      <p>NixOS is a Linux distribution with a unique approach
-      to package and configuration management. Built on top of the
-      Nix package manager, it is completely declarative, makes
-      upgrading systems reliable, and has
-      <a href="[%root%]nixos/about.html">many other advantages</a>.</p>
-    
-      <div class="learn-more">
-        <a class="btn btn-success" href="[%root%]nixos/">
-          <i class="fa fa-chevron-right"></i> Learn more about NixOS
-        </a>
-      </div>
-    </div>
-  </div></div>
-  
-  <hr />
-  
-  <h2>More about NixOS</h2>
-  
-  <div class="row-fluid more-about">
-    <div class="span4">
-      <h3>Nixpkgs</h3>
-      <p>
-        The Nix Packages collection (Nixpkgs) is the ever growing
-        packages collection for the Nix package manager, released
-        under a permissive MIT/X11 license.
-      </p>
-      <a class="learn-more" href="[%root%]nixpkgs">
-        More about Nixpkgs
-        <i class="fa fa-angle-right"></i>
-      </a>
-    </div>
-    <div class="span4">
-      <h3>NixOps</h3>
-      <p>
-        NixOps is a tool for deploying sets of NixOS Linux machines,
-        bare-metal or to the cloud. It extends NixOS’s declarative
-        approach to system configuration management to networks and
-        provisioning.
-      </p>
-      <a class="learn-more" href="https://github.com/NixOS/nixops">
-        More about NixOps
-        <i class="fa fa-angle-right"></i>
-      </a>
-    </div>
-    <div class="span4 and-more">
-      <h3>About the community</h3>
-      <p>
-        Sometimes, it helps to talk with someone.  Our community
-        is there whether you want to help or get support.
-      </p>
-      <ul>
-        <li>
-          <a href="[%root%]nixos/community.html">
-            Get in touch
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </li>
-        <li>
-          <a href="[%root%]learn.html">
-            Learning resources
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<hr />
-
 <div class="row-fluid">
-  <div class="span6">
-    <h2>
-      <a href="/news-rss.xml">
-        <img src="/logo/rss.png"/>
-      </a>
-      News
-    </h2>
-    [% INSERT "latest-news.xhtml" %]
-    <p><a href="news.html" class="btn btn-mini">More »</a></p>
-  </div>
-  <div class="span6">
 
-    <h2>
-      <a href="/blogs.xml">
-        <img src="/logo/rss.png"/>
-      </a>
-      Blog Posts
-    </h2>
-    <ul class="nixos-blogs">
-      [% FOREACH b IN JSON.Escape.json_decode(IO.All.new('blogs.json').all).channel.item.first(5); IF b; %]
-        <li>
-          <div class="nixos-blog">
-            [%
-              USE title = String(HTML.escape(b.title.remove('^[^:]*:').trim));
-              title = title.replace('^[a-z]', title.copy.truncate(1).upper)
-              author = b.title.split(':').0.trim;
-            %]
-            [%
-            %]
-            <div class="nixos-blog-title">
-              <a [% HTML.attributes(href => b.link) %]>[% title %]</a>
-            </div>
-            <div class="nixos-blog-author-info">
-              <span class="nixos-blog-author">[% HTML.escape(author) %]</span>
-              <span class="muted"> wrote on [% HTML.escape(b.pubDate) %]</span>
-            </div>
-          </div>
-        </li>
-      [% END; END %]
-      <p><a href="https://planet.nixos.org/" class="btn btn-mini">More »</a></p>
-    </ul>
-
-    <h3>Twitter</h3>
-    <p>
-      <a class="twitter-timeline" data-chrome="noheader nofooter transparent" href="https://twitter.com/nixos_org" data-widget-id="433975692670152704">Tweets by @nixos_org</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  <div class="span6">
+    <h1>Reproducible builds and deployments.</h1>
+    <p class="lead">
+      NixOS is an open source set of tools that help you package and deliver
+      any application in a <strong>reproducible</strong> way.
+      TODO: what we build reproducibly
     </p>
-
+    <a class="btn btn-large btn-success" href="[% root %]download.html">Get started</a>
   </div>
+
+  <div class="span6">
+    <h4>TODO: A video / picture of NixOS in action!</h4>
+  </div>
+</div>
+
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs">
+    <li><a href="#">Declarative development environemt</a></li>
+    <li><a href="#">Adhoc scripts</a></li>
+  </ul>
+  <div class="tab-content">
+    ...
+  </div>
+</div>
+
+<!--
+<div class="hero-unit">
+  <h2>Install Nix</h2>
+  <pre class="well" style="margin-top:1em">
+<span class="nix-command">curl -L https://nixos.org/nix/install | sh</span></pre>
+
+  Declarative development environemt
+  nix-shell
+
+  Adhoc scripts
+  nix-shell
+
+  Build docker
+  nix-build docker.nix
+
+  Build AMI image
+  nix-build
 
 </div>
+NixOS for
+-->
+
 
 [% END %]

@@ -73,46 +73,28 @@
             <li><a href="[%root%]governance.html">Governance</a></li>
             <li><a href="[%root%]donate.html">Donate</a></li>
           </ul>
-          <ul class="nav pull-right">
-            <!--
-                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-                <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
-                -->
-            [% ELSIF menu == 'nix' %]
-            <ul class="nav pull-left">
-              <li><a href="[%root%]nix/about.html">About</a></li>
-              <li><a href="[%root%]download.html">Download</a></li>
-              <li><a href="[%root%]learn.html">Learn</a></li>
-              <li><a href="[%root%]governance.html">Governance</a></li>
-              <li><a href="[%root%]donate.html">Donate</a></li>
-            </ul>
-            <ul class="nav pull-right">
-              <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
-              [% ELSIF menu == 'nixpkgs' %]
-              <ul class="nav pull-left">
-                <li><a href="[%root%]download.html">Download</a></li>
-                <li><a href="[%root%]learn.html">Learn</a></li>
-                <li><a href="[%root%]governance.html">Governance</a></li>
-                <li><a href="[%root%]donate.html">Donate</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-                [% ELSIF menu == 'organization' %]
-                <ul class="nav pull-right">
-                  <li><a href="[%root%]learn.html">Learn</a></li>
-                  <li><a href="[%root%]governance.html">Governance</a></li>
-                  <li><a href="[%root%]donate.html">Donate</a></li>
-                  <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-                  <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
-                  [% ELSE %]
-                  <ul class="nav pull-right">
-                    [% END %]
-
-                  </ul>
+          [% IF !hideSearch %]
+          <form class="navbar-search pull-right">
+            <div class="input-append">
+              <input class="span2" id="appendedDropdownButton" type="text" />
+              <div class="btn-group">
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                  Search
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                  <li><a href="#">Packages</a></li>
+                  <li><a href="#">Options</a></li>
+                </ul>
+              </div>
+            </div>
+          </form>
+          [% END %]
         </div>
       </div>
     </div>
   </div>
+
 
   <div class="container main">
     [% IF !hideTitle %]
@@ -136,12 +118,7 @@
 
   </div>
 
-  <script>
-    $(document).ready(function () {
-      $(".nixos-popover").popover({});
-    });
-  </script>
-
+  <script src="[% root %]js/nixos-site.js"></script>
   [% IF anchors %]
   <script src="[% root %]js/anchor.min.js"></script>
   <script>

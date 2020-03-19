@@ -1,91 +1,225 @@
-[% WRAPPER layout.tt hideTitle=1 title="NixOS Community" menu='nixos' %]
+[% WRAPPER layout.tt title="NixOS community" menu='nixos' %]
+[% PROCESS common.tt %]
 
-<h1>NixOS Community</h1>
+<h3>Contributing to NixOS</h3>
+<div class="row-fluid">
+  <div class="span8">
+    <p>It’s pretty easy to modify NixOS. All you need to do is get a copy
+    of the Nixpkgs repository (which contains the NixOS sources as
+    well):</p>
 
-<p class="lead">Nix and NixOS are developed and used by a diverse and welcoming community from all around the world.</p>
+<pre>
+<span class="nix-command">git clone git://github.com/NixOS/nixpkgs.git</span>
+</pre>
 
-<p><strong>Check out what the community has made recently in the <a href="https://weekly.nixos.org/">NixOS Weekly</a> newsletter.</strong></p>
+    <p>After making modifications to the sources, you can use them as
+    follows:</p>
 
-<h2>Communication</h2>
+<pre>
+<span class="nix-command">nixos-rebuild switch -I nixpkgs=/path/to/my/nixpkgs</span>
+</pre>
+
+<p>If you think your changes are useful to the rest of humanity, then
+please open a <a
+href="https://github.com/NixOS/nixpkgs/pulls"><strong>pull request on
+GitHub</strong></a>, or <strong>send a patch</strong> to the <a
+href="[%root%]learn.html#discourse"><tt>Discourse</tt> forum</a>. If you
+want to contribute regularly, you may want to ask for commit access to
+our GitHub repositories (please ask <a
+href="https://nixos.org/~eelco/">Eelco</a>, or on the <tt>#nixos</tt>
+IRC channel).</p>  </div> <div class="span4"> <script
+type="text/javascript"
+src="https://www.openhub.net/p/25550/widgets/project_basic_stats.js"></script>
+</div> </div>
+
+<h3><a href="https://github.com/NixOS/nixpkgs/issues">Bugs</a></h3>
+<p>If
+    you think you’ve found a bug, please report it in the <a
+    href="https://github.com/NixOS/nixpkgs/issues"><strong>Nixpkgs
+    issue tracker</strong></a> (please use the label <strong>6.topic:
+    nixos</strong>).
+</p>
+
+<h3>Documentation</h3>
+
+<ul>
+
+  <li>The <a href="[%nixosManual%]">NixOS manual</a> has a <a
+  href="[%nixosManual%]#ch-development">whole chapter on NixOS
+  hacking</a>. Also, check out the sections on <a
+  href="[%nixosManual%]#sec-configuration-syntax">the syntax of NixOS
+  modules</a> and on <a href="[%nixosManual%]#sec-custom-packages">how
+  to add your own packages</a>.</li>
+
+  <li>The <a href="[%nixpkgsManual%]">Nixpkgs manual</a> has a lot of
+  information on how to add packages to Nixpkgs.  In particular, you
+  should check out the <a
+  href="[%nixpkgsManual%]#chap-quick-start">“Quick Start” chapter</a>
+  for an overview of the process of adding a package.</li>
+
+  <li>The Nix manual has <a
+  href="[%nixManual%]#chap-writing-nix-expressions">a chapter on
+  writing Nix expressions</a>, including the syntax and semantic of
+  the Nix expression language.</li>
+
+  <li>There is a <a
+  href="https://nixos.org/~eelco/pubs/nixos-jfp-submitted.pdf">paper
+  on NixOS</a> has a lot of information on the NixOS module
+  system (especially section 6).</li>
+
+</ul>
+
+<h3>Source repositories</h3>
+
+<p>The sources of all Nix-related projects are in the <a
+href="https://github.com/NixOS/">NixOS organization on
+GitHub</a>. NixOS lives in the <a
+href="https://github.com/NixOS/nixpkgs/tree/master/nixos">nixos</a>
+subdirectory of the Nixpkgs repository.</p>
+
+<h3>Discourse</h3>
+
+<p><a href="https://discourse.nixos.org">discourse.nixos.org</a> hosts
+a community of Nix developers and users, providing resources to help
+you:</p>
+
+<ul>
+<li>find answers to your Nix/Nixpkgs/NixOS/NixOps questions</li>
+<li>discuss current and future directions of the project</li>
+<li>evangelise and promote Nix in your community</li>
+</ul>
+
+<h3>IRC channel</h3>
+
+<p>The NixOS developers hang out on the <a
+href="irc://irc.freenode.net/#nixos"><tt>#nixos</tt> channel</a> on <a
+href="https://freenode.net/"><tt>irc.freenode.net</tt></a>.  This
+channel is <a href="https://logs.nix.samueldr.com/nixos/">logged</a>.</p>
+
+<h3>Blogs</h3>
+
+<p><a href="https://planet.nixos.org/">Planet</a> aggregates blog posts written
+by the community and <a href="https://www.reddit.com/r/NixOS/">/r/NixOS</a>
+also contains useful resources.</p>
+
+<p>To add yourself to <a href="https://planet.nixos.org/">Planet NixOS</a>,
+fork the <a
+href="https://github.com/NixOS/nixos-org-configurations">nixos-org-configurations</a>
+repo and add the feed source to <a
+href="https://github.com/NixOS/nixos-org-configurations/blob/master/nixos-org/planet-feeds.nix">planet-feeds.nix</a>
+then make a pull request.</p>
+
+<h3>Meetups</h3>
+
+<p>Europe:</p>
+<ul>
+<li><a href="http://www.meetup.com/Amsterdam-Nix-Meetup/">Amsterdam Nix Meetup</a></li>
+<li><a href="http://www.meetup.com/Berlin-NixOS-Meetup/">Berlin NixOS Meetup</a></li>
+<li><a href="https://www.meetup.com/Greater-Copenhagen-NixOS-User-Group">Greater Copenhagen NixOS User Group</a></li>
+<li><a href="https://www.meetup.com/NixOS-London/">London NixOS Meetup</a></li>
+<li><a href="http://www.meetup.com/Munich-NixOS-Meetup/">Munich NixOS Meetup</a></li>
+<li><a href="https://blog.shackspace.de/?p=5829">Stuttgart NixOS Meetup</a></li>
+</ul>
+
+<p>America:</p>
+<ul>
+<li><a href="http://www.meetup.com/Bay-Area-Nix-NixOS-User-Group/">Bay Area Nix/NixOS User Group</a></li>
+<li><a href="https://www.meetup.com/New-York-Nix-Users-Group/">New York Nix Users Group</a></li>
+</ul>
+
+<p>Asia:</p>
+<ul>
+<li><a href="http://www.meetup.com/Tokyo-NixOS-Meetup/">Tokyo NixOS Meetup</a></li>
+</ul>
+
+<h3>Continuous builds</h3>
+
+<p><a href="https://github.com/NixOS/hydra">Hydra</a> continuously builds NixOS:</p>
+
+<ul>
+  <li><a href="https://hydra.nixos.org/job/nixos/trunk-combined/tested#tabs-constituents">Status
+  of the <tt>master</tt> branch</a>, used to update the <a
+  href="https://nixos.org/channels/nixos-unstable/"><tt>nixos-unstable</tt>
+  channel</a>.</li>
+  <li><a href="https://hydra.nixos.org/job/nixos/release-[%latestNixOSSeries%]/tested#tabs-constituents">Status
+  of the <tt>release-[%latestNixOSSeries%]</tt> branch</a>, used to update the <a
+  href="https://nixos.org/channels/nixos-[%latestNixOSSeries%]"><tt>nixos-[%latestNixOSSeries%]</tt>
+  channel</a>.</li>
+</ul>
+
+<h3>Commercial support</h3>
+<!-- Please submit a PR to add your company -->
+<p>For professional support, a number of consulting companies are
+available (sorted in alphabetical order):</p>
+<ul>
+  <li><a href="https://www.enlambda.com/">Enlambda</a></li>
+  <li><a href="https://nixos.mayflower.consulting">Mayflower</a></li>
+  <li><a href="https://nixcloud.io/">nixcloud</a></li>
+  <li><a href="https://www.numtide.com/">NumTide Ltd</a></li>
+  <li><a href="https://obsidian.systems">Obsidian Systems</a></li>
+  <li><a href="https://serokell.io/">Serokell</a></li>
+</ul>
+
+<h2>Donations</h2>
+
+<p>
+The infrastructure for NixOS and related projects is maintained by a nonprofit organization,
+the <a href="foundation.html">NixOS Foundation</a>. To ensure the continuity and expansion of the NixOS
+infrastructure, we are looking for donations to our organization.
+</p>
+
+[% PROCESS donation.tt %]
+
+
+<h2>Acknowledgments</h2>
+
+<p>The Nix package manager was developed by <a
+href="https://nixos.org/~eelco/">Eelco Dolstra</a> as
+part of his PhD research in the <a
+href="http://www.cs.uu.nl/wiki/Trace/WebHome">TraCE project</a>,
+funded by the <a href="http://www.jacquard.nl/">Jacquard programme</a>
+of the <a href="http://www.nwo.nl/">Netherlands Organisation for
+Scientific Research</a> (NWO) and <a
+href="http://www.serc.nl/">SERC</a>.  The first prototype of NixOS was
+developed by <a href="http://www.tjaldur.nl/">Armijn Hemel</a> as
+his master’s thesis project.  Hydra, the Nix-based continuous build
+system, was developed as part of the LaQuSo Buildfarm project, funded
+by <a href="https://www.4tu.nl/nirict/">NIRICT</a> / <a
+href="http://www.laquso.com/">LaQuSo</a>.</p>
+
+<p>The NixOS community has been supported by various companies and institutes over
+the years, for which we are very grateful. The following companies and institutes have
+supported the development of NixOS and the infrastructure that is needed to support it.
+If you would like to support us as well, please contact <a href="mailto:rob.vermaas@gmail.com">
+Rob Vermaas</a>.</p>
 
 <div class="row-fluid">
-  <div class="span4">
-    <h3>Forum</h3>
-    <p>The official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.</p>
-    <div class="text-center">
-      <a class="btn btn-block btn-success"
-      href="https://discourse.nixos.org/">Go to Discourse Forum</a>
-    </div>
+  <div class="span3 center">
+    <a href="http://www.logicblox.com/"><img src="[% root %]logo/lb_logo_small_no_bg.png" alt="LogicBlox logo" /></a>
   </div>
-  <div class="span4">
-    <h3>Chat</h3>
-    <p>Another place to get in contact with other users is the official IRC channel:</p>
-    <p><a href="irc://irc.freenode.net/#nixos">#nixos</a> on the <a href="https://freenode.net/">freenode network</a> (<a href="https://logs.nix.samueldr.com/nixos/">logs</a> are available)</p>
-    <div class="text-center">
-      <a class="btn btn-block btn-success"
-       href="https://webchat.freenode.net/#nixos">Open Webchat</a>
-    </div>
+  <div class="span3 center">
+    <a href="http://www.tudelft.nl/"><img src="[% root %]logo/tudelft.gif" alt="TU Delft logo" /></a>
   </div>
-  <div class="span4">
-    <h3>Unofficial Platforms</h3>
-    <p>The community is also active on other platforms.</p>
-    <ul>
-      <li><a href="https://www.reddit.com/r/NixOS/">reddit</a></li>
-      <li><a href="https://discord.gg/RbvHtGa">Discord</a></li>
-      <li>stackoverflow: see tags <a href="https://stackoverflow.com/questions/tagged/nix">nix</a>, <a href="https://stackoverflow.com/questions/tagged/nixos">nixos</a>, <a href="https://stackoverflow.com/questions/tagged/nixops">nixops</a> and <a href="https://stackoverflow.com/questions/tagged/nixpkgs">nixpkgs</a></li>
-      <li>Twitter: see the hashtag <a href="https://twitter.com/hashtag/NixOS">#nixos</a> (#nix is too ambiguous)</li>
-      <li>Mastodon/Fediverse: see the hashtag <a href="https://mastodon.social/tags/nixos">#nixos</a></li>
-    </ul>
+  <div class="span3 center">
+    <a href="http://www.uu.nl/"><img src="[% root %]logo/uu.gif" alt="UU logo" /></a>
   </div>
-</div>
-
-<h2>Events</h2>
-
-<div class="row-fluid">
-  <div class="span4">
-    <h3>NixCon</h3>
-    <p>The <a href="[%root%]teams/nixcon.html">NixCon Team</a> organizes a conference once a year.</p>
-    <p>You can find announcements on <a href="https://twitter.com/nixconf">Twitter</a> or in the <a href="https://discourse.nixos.org/c/events/13">Forum</a>.</p>
-    <h4>Previous Conferences</h4>
-    <ul>
-    <li><a href="https://blog.hackeriet.no/oslo-nixos-minicon-2020/">Oslo NixOS MiniCon 2020</a> (<a href="https://www.youtube.com/channel/UCyZKWsKG3uVEfgjNwzfPhhQ">Recorded Talks</a>)</li>
-    <li><a href="https://2019.nixcon.org/">NixCon 2019</a>, Brno (<a href="https://www.youtube.com/watch?v=pfg9ykBo9oM&amp;list=PLgknCdxP89Re9oFsLnAb5iLO0XG_rMuAo">Recorded Talks</a>)</li>
-    <li><a href="http://nixcon2018.org/">NixCon 2018</a>, London (<a href="https://www.youtube.com/watch?v=rzjMif6wvMk&amp;list=PLgknCdxP89ReJKWX3sthcsbBYsoihzSQX">Recorded Talks</a>)</li>
-    <li><a href="http://nixcon2017.org/">NixCon 2017</a>, Munich (<a href="https://www.youtube.com/watch?v=fdj9tzRaLn4&amp;list=PLgknCdxP89ReQzhfKwMYjLdwWsc7us8ns">Recorded Talks</a>)</li>
-    <li><a href="https://conf.nixos.org/">NixCon 2015</a>, Berlin (<a href="https://media.ccc.de/c/nixcon2015">Recorded Talks</a>)</li>
-    </ul>
+  <div class="span3 center">
+    <a href="https://www.3tu.nl/"><img src="[% root %]logo/3tu.jpg" alt="3TU logo" /></a>
   </div>
-  <div class="span4">
-    <h3>Meetups</h3>
-    <h4>Europe</h4>
-    <ul>
-      <li><a href="http://www.meetup.com/Amsterdam-Nix-Meetup/">Amsterdam (Netherlands)</a></li>
-      <li><a href="http://www.meetup.com/Berlin-NixOS-Meetup/">Berlin (Germany)</a></li>
-      <li><a href="https://www.meetup.com/Greater-Copenhagen-NixOS-User-Group">Copenhagen (Denmark)</a></li>
-      <li><a href="https://www.meetup.com/Suisse-Romande-NixOS-User-Group/">Lausanne (Switzerland)</a></li>
-      <li><a href="https://www.meetup.com/NixOS-London/">London (United Kingdom)</a></li>
-      <li><a href="https://www.meetup.com/Meetup-NixOS-Montpellier/">Montpellier (France)</a></li>
-      <li><a href="http://www.meetup.com/Munich-NixOS-Meetup/">Munich (Germany)</a></li>
-      <li><a href="https://www.meetup.com/Oslo-NixOS-User-Group/">Oslo (Norway)</a></li>
-      <li><a href="https://blog.shackspace.de/?p=5829">Stuttgart (Germany)</a></li>
-      <li><a href="https://www.meetup.com/NixOS-User-Group-Zurich/">Zürich (Switzerland)</a></li>
-    </ul>
-
+  <div class="span3 center">
+    <a href="https://www.packet.com"><img src="[% root %]logo/packet.net.svg" alt="Premium Bare Metal Servers and Cloud Hosting" /></a>
   </div>
-  <div class="span4">
-    <h3> </h3> <!-- dirty hack to fix layout -->
-    <h4>America</h4>
-    <ul>
-      <li><a href="https://www.meetup.com/New-York-Nix-Users-Group/">New York (New York)</a></li>
-      <li><a href="https://www.meetup.com/Nova-Nix-NixOS-NixOps-Meetup/">Reston (Virginia)</a></li>
-      <li><a href="http://www.meetup.com/Bay-Area-Nix-NixOS-User-Group/">San Francisco (California)</a></li>
-      <li><a href="https://www.meetup.com/Seattle-Nix-NixOS-and-Guix-GuixSD-Users/">Seattle (Washington)</a></li>
-    </ul>
-    <h4>Asia</h4>
-    <ul>
-      <li><a href="https://www.meetup.com/Singapore-NixOS-Nix-User-Group/">Singapore (Singapore)</a></li>
-      <li><a href="http://www.meetup.com/Tokyo-NixOS-Meetup/">Tokyo (Japan)</a></li>
-    </ul>
+  <div class="span3 center">
+    <a href="https://snabb.co"><img src="[% root %]logo/snabb.png" alt="Snabb.co logo" /></a>
+  </div>
+  <div class="span3 center">
+    <a href="https://www.macstadium.com/"><img src="[% root %]logo/macstadium.png" alt="MacStadium logo" /></a>
+  </div>
+  <div class="span3 center">
+    <a href="https://www.fastly.com/"><img src="[% root %]logo/fastly.png" alt="Fastly" /></a>
+  </div>
+  <div class="span3 center">
+    <a href="https://www.hetzner.de/"><img src="[% root %]logo/hetzner-online.svg" alt="Hetzner Online GmbH" /></a>
   </div>
 </div>
 
