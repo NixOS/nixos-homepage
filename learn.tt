@@ -101,7 +101,7 @@
 
   <div class="span4">
     <h2>Learn NixOS</h2>
-    <p>How to install, use and extend NixOS, a Linux distribution based on Nix package manager.</p>
+    <p>NixOS is a Linux distribution based on Nix package manager.</p>
     <ul>
       <li><a href="[%root%]/nixos/manual/#sec-installation">Installing NixOS</a></li>
       <li><a href="[%root%]/nixos/manual/#sec-changing-config">Changing the Configuration</a></li>
