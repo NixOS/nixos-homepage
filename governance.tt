@@ -1,0 +1,96 @@
+[% WRAPPER layout.tt hideTitle=1 title="Governance" menu='nixos' %]
+
+<h1>Governance</h1>
+
+<p class="lead">Nix and NixOS are built by its community.</p>
+
+<div class="row-fluid">
+  <div class="span8">
+    <div class="hero-unit">
+      <h2>RFC Process</h2>
+      <p>The "RFC" (request for comments) process is intended to provide a
+         consistent and controlled path for new features to enter the Nix language,
+         packages and OS, so that all community can be confident about the
+         direction the ecosystem is evolving in.
+      </p>
+      <a class="btn btn-block btn-large btn-inverse">Learn more</a>
+    </div>
+  </div>
+  <div class="span4">
+    <a href="#rfc-process-modal" class="thumbnail" data-toggle="modal">
+      <img src="https://raw.githubusercontent.com/NixOS/rfcs/master/rfcs/0036-review-process.png" alt="rfc process" />
+    </a>
+    <div id="rfc-process-modal" class="modal hide fade" tabindex="-1" role="dialog" data-backdrop="false" style="width: 700px; left:45%;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body" style="max-height: 600px;">
+        <img src="https://raw.githubusercontent.com/NixOS/rfcs/master/rfcs/0036-review-process.png" alt="rfc process" style="width: 100%"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Teams</h2>
+
+<div class="row-fluid">
+  <div class="span4">
+    <h3>RFC Steering Committee</h3>
+    <p>Responsible for forming an RFC Shepherd team from the available
+       nominations on each RFC. RFC Shepherd team is then responsible for
+       accepting or rejecting a specific RFC.
+    </p>
+    <a class="btn btn-block btn-inverse" href="[%root%]/teams/rfc-steering-committee.html">Members &amp; Contacts</a>
+  </div>
+  <div class="span4">
+    <h3>Security Team</h3>
+    <p>TODO: Responsible to keep everybody safe!
+    </p>
+    <a class="btn btn-block btn-inverse" href="[%root%]/teams/security.html">Members &amp; Contacts</a>
+  </div>
+  <div class="span4">
+    <h3>Marketing Team</h3>
+    <p>Main responsibility is this website and the content on it. Apart from
+       that team looks for ways to help and improve general communication of
+       the project.
+    </p>
+    <a class="btn btn-block btn-inverse" href="[%root%]/teams/marketing.html">Members &amp; Contacts</a>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <h2>NixOS Foundation</h2>
+
+    <p>The mission of the foundation is to support the Nix ecosystem's
+    infrastructure, and projects implementing the purely functional
+    deployment model.</p>
+
+    <p>In particular, the foundation supports Nix, Nixpkgs, NixOS, and
+    operates:</p>
+
+    <ul>
+      <li><a href="https://cache.nixos.org">cache.nixos.org</a> - the
+      NixOS binary cache, containing over 120TB of prebuilt Nix packages.</li>
+
+      <li><a href="https://hydra.nixos.org">hydra.nixos.org</a> - a Nix
+      build farm, consisting of hundreds of macOS, x86-64 (Linux) and
+      aarch64 (Linux) build cores. Hydra executes over 350,000 builds each
+      week.</li>
+    </ul>
+
+    <p>The NixOS Foundation is a registered non-profit organisation at the Chamber of
+    commerce (Kamer van Koophandel) in Utrecht, The Netherlands. The KvK number is 63520583.
+    </p>
+
+    <p>The board members are:</p>
+
+    <ul>
+      <li>Eelco Dolstra - Chairman</li>
+      <li>Armijn Hemel - Secretary</li>
+      <li>Rob Vermaas - Treasurer</li>
+    </ul>
+  </div>
+</div>
+
+[% END %]

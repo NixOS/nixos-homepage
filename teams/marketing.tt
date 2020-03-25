@@ -1,0 +1,136 @@
+[% WRAPPER layout.tt hideTitle=1 title="Marketing team" menu='nixos' %]
+[% PROCESS common.tt %]
+
+<h1>Marketing team</h1>
+
+<p class="lead">
+</p>
+
+<h2>Members</h2>
+
+<ul>
+  <li>Rok Garbas (garbas)</li>
+  <li>Samuel Dionne-Riel (samueldr)</li>
+  <li>Eelco Dolstra (niksnut)</li>
+  <li>Graham Christensen (gchristensen)</li>
+</ul>
+
+<h2>Contact</h2>
+
+<ul>
+  <li><a href="https://discourse.nixos.org/c/dev/marketing-team/28">Discourse</a></li>
+  <li><a href="https://www.youtube.com/playlist?list=PLt4-_lkyRrOOO8CYo5XPx6UI05q8kwhj0">Youtube</a></li>
+  <li><a href="irc://irc.freenode.net/#nixos-marketing">IRC</a></li>
+  <li><a href="mailto:webmaster@nixos.org">Email</a></li>
+</ul>
+
+<h2>Responsibilities</h2>
+
+<ul>
+  <li>
+    Main tool (and responsibility) is https://nixos.org 2 and the content on
+    it.
+  </li>
+  <li>
+    Research market / ecosystems where Nix/NixOS compete. How Nix/NixOS fits
+    in it and where it stands out.
+  </li>
+  <li>
+    Listen to the community, connect with companies that offer Nix/NixOS
+    consulting how nixos.org could better help them promote their services.
+  </li>
+</ul>
+
+<h2>How to participate and help?</h2>
+
+<p>
+  Clearly the topics that the marketing team will discuss are very
+  bikesheddey. We would like to see the team being assembled from every corner
+  of a Nix community. To join the team please write an email to 
+  <a href="mailto:webmaster@nixos.org">webmaster@nixos.org</a> trying to
+  answer the following questions:
+</p>
+
+<ul>
+  <li>Why would you like to join the team?</li>
+  <li>Why are you interested in marketing Nix?</li>
+  <li>What drives you?</li>
+  <li>How would you contribute to the marketing team?</li>
+  <li>What is your idea what marketing team will work on, this year? Next year?
+      Next 5 years?</li>
+  <li>What could be few easy fixes to the website that would solve problems
+      that you heard others complain about Nix/NixOS?</li>
+</ul>
+
+<p>
+  The answers are actually not used to judge people if they are good enough to
+  join, but to understand the person joining, their intent and their vision.
+  Since we will discuss many things that could be very bikeshedding it is
+  important that we understand each other’s position and the context they are
+  arguing from.
+</p>
+
+<h2>Meetings</h2>
+
+<p>
+  You can expect at meetings to discuss things first in an abstract manner
+  (what are our goals) and only then get into more concrete proposals (how do
+  we achieve goals). Meetings will be scheduled as needed and as much as the
+  team has time, but at least once a month. Initially it might happen that we
+  will meet more often until the whole idea of what a marketing team is/does
+  is bootstrapped. Minutes of the meetings will be published with the potential
+  agenda and the date of the next meeting.
+</p>
+
+<h2>FAQ</h2>
+
+<p>I tried to anticipate some questions/reactions:</p>
+
+<ul>
+  <li>
+    <p>
+      <strong>
+        What’s with all the corporate lingo? We are an open source community
+        and not a company?
+      </strong>
+    </p>
+    <p>
+      It is the language I’m familiar with and I know few others are as well.
+      If there are things that bother you please contact any of us and propose
+      ways in which we can improve.
+    </p>
+  </li>
+  <li>
+    <p><strong>Why not use the RFC process?</strong></p>
+    <p>
+      The RFC process targets changes to the Nix ecosystem. Technical changes,
+      not social changes. Going through the RFC process would expose this
+      endeavor to unneeded bikeshedding.
+    </p>
+  </li>
+  <li>
+    <p>
+      <strong>
+        How will you avoid bikeshedding? How will you get anything done?
+      </strong>
+    </p>
+    <p>We will try to do our best. Patience is the key :)</p>
+  </li>
+  <li>
+    <p><strong>How will you handle controversial topics?</strong></p>
+    <p>
+      When a controversial topic comes to be discussed we will look at it from
+      all the sides and provide a summary. We will try to invite the
+      community (especially the concerned part of the community) to get
+      involved more and try to clarify in as much as clear way as possible.
+      Experience shows that most of the time problem is in communication and
+      this is what we will always try to do better.
+    </p>
+  </li>
+  <li>
+    <p><strong>I don’t like that the community is becoming professional, can we just hack?</strong></p>
+    <p>We always avoid success, but let’s try for once to plan it :)</p>
+  </li>
+</ul>
+
+[% END %]

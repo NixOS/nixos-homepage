@@ -1,0 +1,81 @@
+[% WRAPPER layout.tt hideTitle=1 title="Security Team" menu='nixos' %]
+[% PROCESS common.tt %]
+
+<h1>Security Team</h1>
+
+<div class="lead">
+  In addition to community-sourced developments, NixOS has a dedicated security
+  team. If the above sources are not enough to answer your question, please reach
+  out to a member of the team listed below.
+</div>
+
+<h3>Security Disclosures</h3>
+
+<p>
+  To privately report a security issue with NixOS, Nix, and its ecosystem,
+  please email a member of the NixOS Security Team and we will ensure the issue
+  is handled. Our responses will be signed with our GPG keys.
+</p>
+
+<h2>Sources of Security Information</h2>
+
+<p>
+  Security is a priority for the NixOS community. A variety of channels are used
+  to coordinate development in this vein. Three of the main modes of communication
+  about NixOS security are:
+</p>
+
+<ul>
+  <li>The issues tagged "Security" on <a href="https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%221.severity%3A+security%22">GitHub/NixOS</a>
+  </li>
+  <li>The #nixos-security IRC channel on FreeNode
+  </li>
+  <li>The NixOS security <a href="https://discourse.nixos.org/c/dev/security">discourse</a>
+  </li>
+</ul>
+
+<h2>Members</h2>
+
+<ul>
+  <li>
+    <p>Graham Christensen
+       <a href="mailto:graham@grahamc.com">graham@grahamc.com</a>
+       <br />
+       <strong>GPG Key:</strong><tt>
+          <a href="https://pgp.mit.edu/pks/lookup?op=get&amp;search=0xFE918C3A98C1030F">0xFE918C3A98C1030F</a>
+       </tt><br />
+       <strong>GPG Fingerprint:</strong>
+       <tt>BA94 FDF1 1DA4 0521 2864  C121 FE91 8C3A 98C1 030F</tt>
+    </p>
+  </li>
+  <li>
+    <p>Franz Pletz
+       <a href="mailto:fpletz@fnordicwalking.de">fpletz@fnordicwalking.de</a>
+       <br />
+       <strong>GPG Key:</strong><tt>
+          <a href="https://pgp.mit.edu/pks/lookup?op=get&amp;search=0x846FDED7792617B4">0x846FDED7792617B4</a>
+       </tt><br />
+       <strong>GPG Fingerprint:</strong>
+       <tt>8A39 615D CE78 AF08 2E23  F303 846F DED7 7926 17B4</tt>
+    </p>
+  </li>
+  <li>
+    <p>Domen Kožar
+       <a href="mailto:domen@dev.si">domen@dev.si</a>
+       <br />
+       <strong>GPG Key:</strong><tt>
+          <a href="https://pgp.mit.edu/pks/lookup?op=get&amp;search=0xC2FFBCAFD2C24246">0xC2FFBCAFD2C24246</a>
+       </tt><br />
+       <strong>GPG Fingerprint:</strong>
+       <tt>E96C 15A0 8D17 CE3B 17B0  C7AB C2FF BCAF D2C2 4246</tt>
+    </p>
+  </li>
+  <li>
+    <p>Rob Vermaas (emeritus)
+       <a href="mailto:rob.vermaas@gmail.com">rob.vermaas@gmail.com</a>
+       <br />
+    </p>
+  </li>
+</ul>
+
+[% END %]
