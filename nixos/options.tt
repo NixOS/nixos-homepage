@@ -355,7 +355,7 @@ function showOption() {
 };
 
 $.ajax({
-  url: '[%root%]nixos/options.json',
+  url: 'https://channels.nixos.org/nixos-[%latestNixOSSeries%]/options.json.br',
   type: 'GET',
   dataType: 'json',
   error: function(a, b, c) { alert('Failed to get option data.'); },

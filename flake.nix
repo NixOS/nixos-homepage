@@ -38,10 +38,6 @@
 
     packages.x86_64-linux = {
 
-      nixosOptions = (import (nixpkgsStable + "/nixos/release.nix") {
-        nixpkgs = nixpkgsStable;
-      }).options;
-
       stablePackagesList = lib.nixpkgsToJSON {
         src = nixpkgsStable;
       };
@@ -105,7 +101,6 @@
             "NIXPKGS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixpkgsManual}"
             "NIXPKGS_STABLE=${packages.x86_64-linux.stablePackagesList}"
             "NIXPKGS_UNSTABLE=${packages.x86_64-linux.unstablePackagesList}"
-            "NIXOS_OPTIONS=${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"
             "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
             "NIXOS_GCE=${packages.x86_64-linux.nixosGCE}"
             "NIXOS_AZURE_BLOBS=${packages.x86_64-linux.nixosAzureBlobs}"
@@ -124,7 +119,6 @@
           export NIXPKGS_MANUAL_IN="${nixpkgsStable.htmlDocs.nixpkgsManual}"
           export NIXPKGS_STABLE="${packages.x86_64-linux.stablePackagesList}"
           export NIXPKGS_UNSTABLE="${packages.x86_64-linux.unstablePackagesList}"
-          export NIXOS_OPTIONS="${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"
           export NIXOS_AMIS="${packages.x86_64-linux.nixosAmis}"
           export NIXOS_GCE="${packages.x86_64-linux.nixosGCE}"
           export NIXOS_AZURE_BLOBS="${packages.x86_64-linux.nixosAzureBlobs}"

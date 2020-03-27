@@ -66,8 +66,7 @@ all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wild
   nixos/packages-explorer.js \
   nixpkgs/packages-channels.json \
   nixpkgs/packages-nixos-$(NIXOS_SERIES).json \
-  nixpkgs/packages-nixpkgs-unstable.json \
-  nixos/options.json
+  nixpkgs/packages-nixpkgs-unstable.json
 
 
 favicon.png: logo/nixos-logo-only-hires.png
@@ -143,17 +142,10 @@ nixpkgs/packages-nixos-$(NIXOS_SERIES).json:
 nixpkgs/packages-nixpkgs-unstable.json:
 	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json $@
 
-NIXOS_OPTIONS ?= /no-such-path
-
-.PHONY: nixos/options.json
-
 # Cute hack, this allows future expansion if desired
 # Mainly, this allows tracking NIXOS_SERIES
 nixpkgs/packages-channels.json: Makefile
 	echo '["nixos-$(NIXOS_SERIES)", "nixpkgs-unstable"]' > $@
-
-nixos/options.json:
-	@ln -sfn $(NIXOS_OPTIONS) $@
 
 nixos/packages-explorer.js:
 	@ln -sfn $(PACKAGES_EXPLORER) $@
