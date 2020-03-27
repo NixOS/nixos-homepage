@@ -4,51 +4,15 @@
   description = "The nixos.org homepage";
 
   inputs.nixpkgsStable.url = "nixpkgs/release-19.09";
-  inputs.nixpkgsUnstable.url = "nixpkgs/master";
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
 
-  outputs = { self, nixpkgsUnstable, nixpkgsStable, nix-pills }:
+  outputs = { self, nixpkgsStable, nix-pills }:
     with import nixpkgsStable { system = "x86_64-linux"; };
     rec {
 
     checks.x86_64-linux.build = defaultPackage.x86_64-linux;
 
-    # Generate a JSON file listing the packages in Nixpkgs.
-    lib.nixpkgsToJSON = { src }: runCommand "nixpkgs-json"
-      { buildInputs = [ pkgs.nix jq ];
-      }
-      ''
-        export NIX_DB_DIR=$TMPDIR
-        export NIX_STATE_DIR=$TMPDIR
-        echo -n '{ "commit": "${src.rev}", "packages":' > tmp
-        nix-env -f '<nixpkgs>' -I nixpkgs=${src} -qa --json --arg config 'import ${./packages-config.nix}' >> tmp
-        echo -n '}' >> tmp
-        mkdir $out
-        < tmp sed "s|${src}/||g" | jq -c . > $out/packages.json
-
-        # Validate we don't keep references.
-        # The [^/] part of the expression could be changed for a better
-        # representation of a nix store path.
-        if jq < $out/packages.json | grep '/nix/store/[^/]+/'; then
-          echo "Errant nix store paths in packages.json output."
-          echo "See previous output as grepped."
-          exit 1
-        fi
-      '';
-
     packages.x86_64-linux = {
-
-      nixosOptions = (import (nixpkgsStable + "/nixos/release.nix") {
-        nixpkgs = nixpkgsStable;
-      }).options;
-
-      stablePackagesList = lib.nixpkgsToJSON {
-        src = nixpkgsStable;
-      };
-
-      unstablePackagesList = lib.nixpkgsToJSON {
-        src = nixpkgsUnstable;
-      };
 
       packagesExplorer = import ./packages-explorer nixpkgsStable;
 
@@ -103,9 +67,6 @@
           [ "NIX_MANUAL_IN=${nix.doc}/share/doc/nix/manual"
             "NIXOS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixosManual}"
             "NIXPKGS_MANUAL_IN=${nixpkgsStable.htmlDocs.nixpkgsManual}"
-            "NIXPKGS_STABLE=${packages.x86_64-linux.stablePackagesList}"
-            "NIXPKGS_UNSTABLE=${packages.x86_64-linux.unstablePackagesList}"
-            "NIXOS_OPTIONS=${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"
             "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
             "NIXOS_GCE=${packages.x86_64-linux.nixosGCE}"
             "NIXOS_AZURE_BLOBS=${packages.x86_64-linux.nixosAzureBlobs}"
@@ -122,9 +83,6 @@
           export NIX_MANUAL_IN="${nix.doc}/share/doc/nix/manual"
           export NIXOS_MANUAL_IN="${nixpkgsStable.htmlDocs.nixosManual}"
           export NIXPKGS_MANUAL_IN="${nixpkgsStable.htmlDocs.nixpkgsManual}"
-          export NIXPKGS_STABLE="${packages.x86_64-linux.stablePackagesList}"
-          export NIXPKGS_UNSTABLE="${packages.x86_64-linux.unstablePackagesList}"
-          export NIXOS_OPTIONS="${packages.x86_64-linux.nixosOptions}/share/doc/nixos/options.json"
           export NIXOS_AMIS="${packages.x86_64-linux.nixosAmis}"
           export NIXOS_GCE="${packages.x86_64-linux.nixosGCE}"
           export NIXOS_AZURE_BLOBS="${packages.x86_64-linux.nixosAzureBlobs}"

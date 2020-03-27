@@ -1,6 +1,4 @@
 NIXOS_SERIES = 19.09
-NIXPKGS_STABLE ?= /no-such-path
-NIXPKGS_UNSTABLE ?= /no-such-path
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
@@ -62,12 +60,10 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 	bash ./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT) 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
 	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
 
+
 all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
   nixos/packages-explorer.js \
-  nixpkgs/packages-channels.json \
-  nixpkgs/packages-nixos-$(NIXOS_SERIES).json \
-  nixpkgs/packages-nixpkgs-unstable.json \
-  nixos/options.json
+  nixpkgs/packages-channels.json
 
 
 favicon.png: logo/nixos-logo-only-hires.png
@@ -133,27 +129,10 @@ update: blogs.xml nixos-release.tt
 endif
 
 
-.PHONY: nixpkgs/packages-nixos-$(NIXOS_SERIES).json
-
-nixpkgs/packages-nixos-$(NIXOS_SERIES).json:
-	@ln -sfn $(NIXPKGS_STABLE)/packages.json $@
-
-.PHONY: nixpkgs/packages-nixpkgs-unstable.json
-
-nixpkgs/packages-nixpkgs-unstable.json:
-	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json $@
-
-NIXOS_OPTIONS ?= /no-such-path
-
-.PHONY: nixos/options.json
-
 # Cute hack, this allows future expansion if desired
 # Mainly, this allows tracking NIXOS_SERIES
 nixpkgs/packages-channels.json: Makefile
 	echo '["nixos-$(NIXOS_SERIES)", "nixpkgs-unstable"]' > $@
-
-nixos/options.json:
-	@ln -sfn $(NIXOS_OPTIONS) $@
 
 nixos/packages-explorer.js:
 	@ln -sfn $(PACKAGES_EXPLORER) $@
