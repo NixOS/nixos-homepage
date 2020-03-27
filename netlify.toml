@@ -77,3 +77,9 @@
   to = "https://github.com/svanderburg/disnix"
   status = 302
   force = true
+
+[[redirects]]
+  from  = "/~eelco"
+  to = "https://edolstra.github.io"
+  status = 301
+  force = true
