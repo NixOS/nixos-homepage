@@ -79,7 +79,7 @@
   force = true
 
 [[redirects]]
-  from  = "/~eelco"
-  to = "https://edolstra.github.io"
+  from  = "/~eelco/*"
+  to = "https://edolstra.github.io/:splat"
   status = 301
   force = true
