@@ -168,6 +168,7 @@ function ppNix(indent, v) {
     return len <= i ? ' ' : '\n';
   }
   function needIndentation(v) {
+    if (v == null) return false;
     if (typeof v == "object") {
       if (Array.isArray(v)) {
         if (v.some(needIndentation))
