@@ -13,19 +13,29 @@
          packages and OS, so that all community can be confident about the
          direction the ecosystem is evolving in.
       </p>
-      <a class="btn btn-block btn-large btn-inverse">Learn more</a>
+      <a class="btn btn-block btn-large btn-success">Learn more</a>
     </div>
   </div>
   <div class="span4">
     <a href="#rfc-process-modal" class="thumbnail" data-toggle="modal">
-      <img src="https://raw.githubusercontent.com/NixOS/rfcs/master/rfcs/0036-review-process.png" alt="rfc process" />
+      <img src="https://raw.githubusercontent.com/NixOS/rfcs/master/rfcs/0036-review-process.png"
+           alt="rfc process"
+           />
     </a>
-    <div id="rfc-process-modal" class="modal hide fade" tabindex="-1" role="dialog" data-backdrop="false" style="width: 700px; left:45%;">
+    <div id="rfc-process-modal"
+         class="modal hide fade"
+         tabindex="-1"
+         role="dialog"
+         data-backdrop="false"
+         style="width: 700px; left:45%;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
       <div class="modal-body" style="max-height: 600px;">
-        <img src="https://raw.githubusercontent.com/NixOS/rfcs/master/rfcs/0036-review-process.png" alt="rfc process" style="width: 100%"/>
+        <img src="https://raw.githubusercontent.com/NixOS/rfcs/master/rfcs/0036-review-process.png"
+             alt="rfc process"
+             style="width: 100%"
+             />
       </div>
     </div>
   </div>
@@ -40,13 +50,39 @@
        nominations on each RFC. RFC Shepherd team is then responsible for
        accepting or rejecting a specific RFC.
     </p>
-    <a class="btn btn-block btn-inverse" href="[%root%]/teams/rfc-steering-committee.html">Members &amp; Contacts</a>
+    <a class="btn btn-block btn-success"
+      href="[%root%]/teams/rfc-steering-committee.html">Members &amp; Contacts</a>
   </div>
   <div class="span4">
     <h3>Security Team</h3>
     <p>TODO: Responsible to keep everybody safe!
     </p>
-    <a class="btn btn-block btn-inverse" href="[%root%]/teams/security.html">Members &amp; Contacts</a>
+    <a class="btn btn-block btn-success"
+       href="[%root%]/teams/security.html">Members &amp; Contacts</a>
+  </div>
+  <div class="span4">
+    <h3>Infrastructure Team</h3>
+    <p>
+    </p>
+    <a class="btn btn-block btn-success"
+       href="[%root%]/teams/infrastructure.html">Members &amp; Contacts</a>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span4">
+    <h3>NixOS Release Team</h3>
+    <p>
+    </p>
+    <a class="btn btn-block btn-success"
+       href="[%root%]/teams/nixos_release.html">Members &amp; Contacts</a>
+  </div>
+  <div class="span4">
+    <h3>NixCon Team</h3>
+    <p>
+    </p>
+    <a class="btn btn-block btn-success"
+       href="[%root%]/teams/nixcon.html">Members &amp; Contacts</a>
   </div>
   <div class="span4">
     <h3>Marketing Team</h3>
@@ -54,7 +90,8 @@
        that team looks for ways to help and improve general communication of
        the project.
     </p>
-    <a class="btn btn-block btn-inverse" href="[%root%]/teams/marketing.html">Members &amp; Contacts</a>
+    <a class="btn btn-block btn-success"
+       href="[%root%]/teams/marketing.html">Members &amp; Contacts</a>
   </div>
 </div>
 
