@@ -55,14 +55,17 @@
   </div>
   <div class="span4">
     <h3>Security Team</h3>
-    <p>TODO: Responsible to keep everybody safe!
+    <p>Security is a priority for the NixOS community. In addition to
+       community-sourced developments, NixOS has a dedicated team, to look into
+       privately reported security issues.
     </p>
     <a class="btn btn-block btn-success"
        href="[%root%]/teams/security.html">Members &amp; Contacts</a>
   </div>
   <div class="span4">
     <h3>Infrastructure Team</h3>
-    <p>
+    <p>The responsibility of the team is to provide infrastructure for the Nix and
+       NixOS community.
     </p>
     <a class="btn btn-block btn-success"
        href="[%root%]/teams/infrastructure.html">Members &amp; Contacts</a>
@@ -72,14 +75,17 @@
 <div class="row-fluid">
   <div class="span4">
     <h3>NixOS Release Team</h3>
-    <p>
+    <p>A team that twice a year manages a release of NixOS. It is responsible
+       whole release process from setting the roadmap to uploading the
+       artifacts.
     </p>
     <a class="btn btn-block btn-success"
        href="[%root%]/teams/nixos_release.html">Members &amp; Contacts</a>
   </div>
   <div class="span4">
     <h3>NixCon Team</h3>
-    <p>
+    <p>A team that helps organize NixCon, a conference, where Nix and NixOS
+       related technologies are discussed.
     </p>
     <a class="btn btn-block btn-success"
        href="[%root%]/teams/nixcon.html">Members &amp; Contacts</a>
