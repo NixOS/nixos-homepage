@@ -2,8 +2,28 @@
 
 <h1>Infrastructure Team</h1>
 
+
 <div class="lead">
+  The responsibility of the team is to provide infrastructure for the Nix and
+  NixOS community.
 </div>
 
-[% END %]
+<h2>Members</h2>
 
+<ul>
+  <li><a href="https://github.com/AmineChikhaoui">@AmineChikhaoui</a></li>
+  <li><a href="https://github.com/edolstra">@edolstra</a></li>
+  <li><a href="https://github.com/grahamc">@grahamc</a></li>
+  <li><a href="https://github.com/rbvermaa">@rbvermaa</a></li>
+  <li><a href="https://github.com/zimbatm">@zimbatm</a></li>
+</ul>
+
+<h2>Reporting issues</h2>
+
+<p>
+  If you experience any issues with the infrastructure, please post a
+  <a href="https://github.com/NixOS/nixos-org-configurations/issues/new">issue
+    to this repository</a>.
+</p>
+
+[% END %]
