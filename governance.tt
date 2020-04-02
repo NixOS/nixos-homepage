@@ -13,7 +13,7 @@
          packages and OS, so that all community can be confident about the
          direction the ecosystem is evolving in.
       </p>
-      <a class="btn btn-block btn-large btn-success">Learn more</a>
+      <a href="https://github.com/NixOS/rfcs" class="btn btn-block btn-large btn-success">Learn more</a>
     </div>
   </div>
   <div class="span4">
@@ -47,8 +47,8 @@
   <div class="span4">
     <h3>RFC Steering Committee</h3>
     <p>Responsible for forming an RFC Shepherd team from the available
-       nominations on each RFC. RFC Shepherd team is then responsible for
-       accepting or rejecting a specific RFC.
+       nominations on each RFC, which is then responsible for accepting or
+       rejecting a specific RFC.
     </p>
     <a class="btn btn-block btn-success"
       href="[%root%]/teams/rfc-steering-committee.html">Members &amp; Contacts</a>
@@ -64,7 +64,7 @@
   </div>
   <div class="span4">
     <h3>Infrastructure Team</h3>
-    <p>The responsibility of the team is to provide infrastructure for the Nix and
+    <p>The responsibility of this team is to provide infrastructure for the Nix and
        NixOS community.
     </p>
     <a class="btn btn-block btn-success"
@@ -76,7 +76,7 @@
   <div class="span4">
     <h3>NixOS Release Team</h3>
     <p>A team that twice a year manages a release of NixOS. It is responsible
-       whole release process from setting the roadmap to uploading the
+       the entire release process from setting the roadmap to uploading the
        artifacts.
     </p>
     <a class="btn btn-block btn-success"
@@ -84,16 +84,16 @@
   </div>
   <div class="span4">
     <h3>NixCon Team</h3>
-    <p>A team that helps organize NixCon, a conference, where Nix and NixOS
-       related technologies are discussed.
+    <p>A team that helps organize NixCon, a conference for the Nix and NixOS
+       community.
     </p>
     <a class="btn btn-block btn-success"
        href="[%root%]/teams/nixcon.html">Members &amp; Contacts</a>
   </div>
   <div class="span4">
     <h3>Marketing Team</h3>
-    <p>Main responsibility is this website and the content on it. Apart from
-       that team looks for ways to help and improve general communication of
+    <p>Its main responsibility is this website and the content on it. Apart from
+       the team looks for ways to help and improve general communication of
        the project.
     </p>
     <a class="btn btn-block btn-success"
