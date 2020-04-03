@@ -8,6 +8,7 @@ default: all
 HTML = index.html news.html learn.html governance.html \
   teams/rfc-steering-committee.html teams/security.html teams/marketing.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
+  teams/discourse.html \
   nix/index.html nix/about.html nix/download.html \
   nixpkgs/index.html nixpkgs/download.html \
   nixos/index.html nixos/about.html nixos/download.html \
