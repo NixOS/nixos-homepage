@@ -99,6 +99,12 @@
     <a class="btn btn-block btn-success"
        href="[%root%]/teams/marketing.html">Members &amp; Contacts</a>
   </div>
+  <div class="span4">
+    <h3>Discourse Team</h3>
+    <p>Its configures and moderates the Discourse forum.</p>
+    <a class="btn btn-block btn-success"
+       href="[%root%]/teams/discourse.html">Members &amp; Contacts</a>
+  </div>
 </div>
 
 <div class="row-fluid">
