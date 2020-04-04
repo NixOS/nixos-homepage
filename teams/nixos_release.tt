@@ -18,8 +18,8 @@
 <h2>Members</h2>
 
 <ul>
-  <li><a href="https://github.com/worldofpeace">@worldofpeace</a></li>
-  <li><a href="https://github.com/disassembler">@disassembler</a></li>
+  <li><a href="https://discourse.nixos.org/u/worldofpeace">worldofpeace</a> (worldofpeace) - primary for 20.03</li>
+  <li><a href="https://discourse.nixos.org/u/disassembler">Samuel Leathers</a> (disasm) - primary for 19.09</li>
 </ul>
 
 <h2>Responsibilities</h2>
@@ -34,8 +34,8 @@
 
 <h2>Release process</h2>
 
-More about it you can
-<a href="https://nixos.org/nixos/manual/index.html#release-managers">
-  read in the manual</a>
+More information can be found in <a
+href="https://nixos.org/nixos/manual/index.html#release-managers"> the nixos
+manual</a>
 
 [% END %]
