@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title><TMPL_VAR name> administration</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="generator" content="<TMPL_VAR generator ESCAPE="HTML">">
+    </head>
+
+    <body>
+      <h2>Maintenance tasks</h2>
+         <form action="admin_cb.py" method="GET">
+            <input type="hidden" name="command" value="refresh" />
+            <input type="submit" value="Refresh planet" />
+         </form><br />
+         <form action="admin_cb.py" method="GET">
+            <input type="hidden" name="command" value="run" />
+            <input type="submit" value="Run planet" />
+         </form><br />
+         <form action="admin_cb.py" method="GET">
+            <input type="hidden" name="command" value="expunge" />
+            <input type="submit" value="Expunge planet" />
+         </form>
+         
+      <h2>Blacklist</h2>
+       <div>
+          <form action="admin_cb.py" method="GET">
+            <input type="hidden" name="command" value="blacklist" />
+            <TMPL_LOOP Items>
+            <input type="checkbox" value="<TMPL_VAR id ESCAPE="HTML">" name="bl<TMPL_VAR __PASS__>">
+               <a target="_blank" href="<TMPL_VAR channel_link ESCAPE="HTML">">
+                <TMPL_VAR channel_name>
+              </a>: <a target="_blank" href="<TMPL_VAR link ESCAPE="HTML">"><TMPL_VAR title></a></input>
+            <br />
+           </TMPL_LOOP>
+            <br />
+            <input type="submit" value="Blacklist" />
+           </form>
+         </div>
+    </body>
+
+</html>

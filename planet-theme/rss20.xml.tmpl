@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+
+<channel>
+	<title><TMPL_VAR name></title>
+	<link><TMPL_VAR link ESCAPE="HTML"></link>
+	<language>en</language>
+	<description><TMPL_VAR name ESCAPE="HTML"> - <TMPL_VAR link ESCAPE="HTML"></description>
+	<TMPL_IF pubsubhubbub_hub>
+	<atom:link rel="hub" href="<TMPL_VAR pubsubhubbub_hub ESCAPE="HTML">"/>
+	</TMPL_IF>
+	<TMPL_IF fullurl>
+	<atom:link rel="self" href="<TMPL_VAR fullurl ESCAPE="HTML">" type="application/rss+xml"/>
+	</TMPL_IF>
+
+<TMPL_LOOP Items>
+<item>
+	<title><TMPL_VAR channel_name ESCAPE="HTML"><TMPL_IF title>: <TMPL_VAR title_plain ESCAPE="HTML"></TMPL_IF></title>
+	<guid isPermaLink="<TMPL_VAR guid_isPermaLink>"><TMPL_VAR id ESCAPE="HTML"></guid>
+	<link><TMPL_VAR link ESCAPE="HTML"></link>
+	<TMPL_IF content>
+	<description><TMPL_VAR content ESCAPE="HTML"></description>
+	</TMPL_IF>
+	<pubDate><TMPL_VAR date_822></pubDate>
+	<TMPL_IF author_email>
+	<TMPL_IF author_name>
+	<author><TMPL_VAR author_email> (<TMPL_VAR author_name>)</author>
+	<TMPL_ELSE>
+	<author><TMPL_VAR author_email></author>
+	</TMPL_IF>
+	</TMPL_IF>
+	<TMPL_IF enclosure_href>
+        <enclosure url="<TMPL_VAR enclosure_href ESCAPE="HTML">" length="<TMPL_VAR enclosure_length>" type="<TMPL_VAR enclosure_type>"/>
+	</TMPL_IF>
+</item>
+</TMPL_LOOP>
+
+</channel>
+</rss>

@@ -56,6 +56,7 @@
             jq
             python3
             entr
+            venus
           ];
 
         preBuild = ''

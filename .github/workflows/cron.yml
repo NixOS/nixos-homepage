@@ -16,6 +16,8 @@ jobs:
       run: ./update.sh
     - name: Building nixos.org
       run: nix-build && mkdir build && cp -RL ./result/* ./build/
+    - name: Building nixos.org/planet
+      run: nix-shell --command "venus-planet planet.ini"
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.0.5
       env:
@@ -26,4 +28,3 @@ jobs:
         production-branch: 'master'
         deploy-message: 'Deploy from GitHub Actions'
       if: github.repository == 'NixOS/nixos-homepage'
-

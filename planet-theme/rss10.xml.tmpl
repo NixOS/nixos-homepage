@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns="http://purl.org/rss/1.0/"
+>
+<channel rdf:about="<TMPL_VAR link ESCAPE="HTML">">
+	<title><TMPL_VAR name ESCAPE="HTML"></title>
+	<link><TMPL_VAR link ESCAPE="HTML"></link>
+	<description><TMPL_VAR name ESCAPE="HTML"> - <TMPL_VAR link ESCAPE="HTML"></description>
+	<TMPL_IF pubsubhubbub_hub>
+	<atom:link rel="hub" href="<TMPL_VAR pubsubhubbub_hub ESCAPE="HTML">"/>
+	</TMPL_IF>
+	<TMPL_IF fullurl>
+	<atom:link rel="self" href="<TMPL_VAR fullurl ESCAPE="HTML">" type="application/rss+xml"/>
+	</TMPL_IF>
+
+	<items>
+		<rdf:Seq>
+<TMPL_LOOP Items>
+			<rdf:li rdf:resource="<TMPL_VAR id ESCAPE="HTML">" />
+</TMPL_LOOP>
+		</rdf:Seq>
+	</items>
+</channel>
+
+<TMPL_LOOP Items>
+<item rdf:about="<TMPL_VAR id ESCAPE="HTML">">
+	<title><TMPL_VAR channel_name ESCAPE="HTML"><TMPL_IF title>: <TMPL_VAR title_plain ESCAPE="HTML"></TMPL_IF></title>
+	<link><TMPL_VAR link ESCAPE="HTML"></link>
+	<TMPL_IF content>
+	<content:encoded><TMPL_VAR content ESCAPE="HTML"></content:encoded>
+	</TMPL_IF>
+	<dc:date><TMPL_VAR date_iso></dc:date>
+	<TMPL_IF author_name>
+	<dc:creator><TMPL_VAR author_name></dc:creator>
+	</TMPL_IF>
+</item>
+</TMPL_LOOP>
+
+</rdf:RDF>
