@@ -70,7 +70,7 @@
                 <li><a href="[%root%]nixos/packages.html">Packages</a></li>
                 <li><a href="[%root%]nixos/options.html">Options</a></li>
                 <li><a href="[%root%]nixos/community.html">Community</a></li>
-                <li><a href="[%root%]nixos/security.html">Security</a></li>
+                <li><a href="[%root%]governance.html">Governance</a></li>
               </ul>
               <ul class="nav pull-right">
                 <!--
@@ -82,6 +82,7 @@
                 <li><a href="[%root%]nix/about.html">About</a></li>
                 <li><a href="[%root%]nix/download.html">Download</a></li>
                 <li><a href="[%root%]learn.html">Learn</a></li>
+                <li><a href="[%root%]governance.html">Governance</a></li>
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
@@ -89,12 +90,14 @@
               <ul class="nav pull-left">
                 <li><a href="[%root%]nixpkgs/download.html">Download</a></li>
                 <li><a href="[%root%]learn.html">Learn</a></li>
+                <li><a href="[%root%]governance.html">Governance</a></li>
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
             [% ELSIF menu == 'organization' %]
               <ul class="nav pull-right">
                 <li><a href="[%root%]learn.html">Learn</a></li>
+                <li><a href="[%root%]governance.html">Governance</a></li>
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
                 <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
             [% ELSE %]
