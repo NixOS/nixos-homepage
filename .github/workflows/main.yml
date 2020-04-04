@@ -19,7 +19,7 @@ jobs:
     - name: Building nixos.org
       run: nix-build && mkdir build && cp -RL ./result/* ./build/
     - name: Building nixos.org/planet
-      run: nix-shell --command "venus-planet planet.ini"
+      run: nix-shell --command "venus-planet planet.ini" && mv planet ./build/
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.0.5
       env:
