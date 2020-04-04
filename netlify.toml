@@ -11,6 +11,18 @@
   force = true
 
 [[redirects]]
+  from = "/nix-dev"
+  to = "https://releases.nixos.org/nix-dev/index.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nix-dev/*"
+  to = "https://releases.nixos.org/nix-dev/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nixos/security.html"
   to = "/governance.html"
   status = 302
