@@ -23,7 +23,7 @@
       </p>
     
       <div class="learn-more">
-        <a class="btn btn-success" href="[%root%]/nix/">
+        <a class="btn btn-success" href="[%root%]nix/">
           <i class="fa fa-chevron-right"></i> Learn more about Nix
         </a>
       </div>
@@ -35,10 +35,10 @@
       to package and configuration management. Built on top of the
       Nix package manager, it is completely declarative, makes
       upgrading systems reliable, and has
-      <a href="[%root%]/nixos/about.html">many other advantages</a>.</p>
+      <a href="[%root%]nixos/about.html">many other advantages</a>.</p>
     
       <div class="learn-more">
-        <a class="btn btn-success" href="[%root%]/nixos/">
+        <a class="btn btn-success" href="[%root%]nixos/">
           <i class="fa fa-chevron-right"></i> Learn more about NixOS
         </a>
       </div>
@@ -57,7 +57,7 @@
         packages collection for the Nix package manager, released
         under a permissive MIT/X11 license.
       </p>
-      <a class="learn-more" href="[%root%]/nixpkgs">
+      <a class="learn-more" href="[%root%]nixpkgs">
         More about Nixpkgs
         <i class="fa fa-angle-right"></i>
       </a>
@@ -83,13 +83,13 @@
       </p>
       <ul>
         <li>
-          <a href="[%root%]/nixos/community.html">
+          <a href="[%root%]nixos/community.html">
             Get in touch
             <i class="fa fa-angle-right"></i>
           </a>
         </li>
         <li>
-          <a href="[%root%]/learn.html">
+          <a href="[%root%]learn.html">
             Learning resources
             <i class="fa fa-angle-right"></i>
           </a>
