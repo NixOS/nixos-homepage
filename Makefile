@@ -68,8 +68,8 @@ all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter
 
 robots.txt: $(HTML)
 	echo "Users-agent: *" >> $@
-	echo "Disallow: /" >> $@
-	for page in $(HTML); do echo "Allow: /$$page" >> $@; done
+	#echo "Disallow: /" >> $@
+	#for page in $(HTML); do echo "Allow: /$$page" >> $@; done
 
 favicon.png: logo/nixos-logo-only-hires.png
 	convert -resize 16x16 -background none -gravity center -extent 16x16 $< $@
