@@ -1,4 +1,5 @@
 NIXOS_SERIES = 19.09
+ROOT = "/"
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
@@ -83,7 +84,7 @@ favicon.ico: favicon.png
 %.html: %.tt layout.tt common.tt nix-release.tt nixos-release.tt donation.tt
 	tpage \
 	  --pre_chomp --post_chomp \
-	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
+	  --define root=$(ROOT) \
 	  --define fileName=$< \
 	  --define nixosAmis=$(NIXOS_AMIS) \
 	  --define nixosAzureBlobs=$(NIXOS_AZURE_BLOBS) \
