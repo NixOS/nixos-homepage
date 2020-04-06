@@ -107,3 +107,81 @@
   to = "https://edolstra.github.io/:splat"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/nixpkgs/packages-nixos-19.09.json.gz"
+  to = "https://channels.nixos.org/nixos-19.09/packages.json.br"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs/packages-nixos-unstable.json.gz"
+  to = "https://channels.nixos.org/nixos-unstable/packages.json.br"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/patchelf.html"
+  to = "https://github.com/NixOS/patchelf"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/bootstrap/css/bootstrap.min.css"
+  to = "/bootstrap/css/bootstrap.min.css"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/bootstrap/css/bootstrap-responsive.min.css"
+  to = "/bootstrap/css/bootstrap-responsive.min.css"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/css/nixos-site.css"
+  to = "/css/nixos-site.css"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/bootstrap/js/bootstrap.min.js"
+  to = "/bootstrap/js/bootstrap.min.js"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/logo/nix-wiki.png"
+  to = "/logo/nix-wiki.png"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/js/jquery-ui.min.js"
+  to = "/js/jquery-ui.min.js"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/js/jquery.min.js"
+  to = "/js/jquery.min.js"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/~eelco/pubs/bootstrap/css/bootstrap-responsive.min.css"
+  to = "/bootstrap/css/bootstrap-responsive.min.css"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/~eelco/pubs/bootstrap/css/bootstrap.min.css"
+  to = "/bootstrap/css/bootstrap.min.css"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/~eelco/pubs/css/nixos-site.css"
+  to = "/css/nixos-site.css"
+  status = 302
+  force = true

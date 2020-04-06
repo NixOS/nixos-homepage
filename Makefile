@@ -1,4 +1,5 @@
 NIXOS_SERIES = 19.09
+ROOT = "/"
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
@@ -63,13 +64,21 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
 
 
-all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
+all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
   nixos/packages-explorer.js \
   nixpkgs/packages-channels.json
 
 
+robots.txt: $(HTML)
+	echo "Users-agent: *" >> $@
+	#echo "Disallow: /" >> $@
+	#for page in $(HTML); do echo "Allow: /$$page" >> $@; done
+
 favicon.png: logo/nixos-logo-only-hires.png
 	convert -resize 16x16 -background none -gravity center -extent 16x16 $< $@
+
+favicon.ico: favicon.png
+	convert -resize x16 -gravity center -crop 16x16+0+0 -flatten -colors 256 -background transparent $< $@
 
 %-small.png: %.png
 	convert -resize 200 $< $@
@@ -77,7 +86,7 @@ favicon.png: logo/nixos-logo-only-hires.png
 %.html: %.tt layout.tt common.tt nix-release.tt nixos-release.tt donation.tt
 	tpage \
 	  --pre_chomp --post_chomp \
-	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
+	  --define root=$(ROOT) \
 	  --define fileName=$< \
 	  --define nixosAmis=$(NIXOS_AMIS) \
 	  --define nixosAzureBlobs=$(NIXOS_AZURE_BLOBS) \
