@@ -1076,18 +1076,16 @@ $ nix-store -qR /run/current-system | grep openssl
       We now have a fairly complete set of KDE 4.2 packages in Nixpkgs
       and NixOS.  Previously we had KDE 3.5, but it was rather
       incomplete: just <tt>kdelibs</tt> and <tt>kdebase</tt>.
-      Now we have all that <a
-      href="nixos/screenshots/nixos-kde42-2.png">desktop
-      goodness</a>, such as <tt>kdemultimedia</tt>,
-      <tt>kdenetwork</tt> and <tt>kdegames</tt>.  You can
-      enable KDE 4 in NixOS by setting the
+      Now we have all that desktop goodness, such as
+      <tt>kdemultimedia</tt>, <tt>kdenetwork</tt> and <tt>kdegames</tt>.
+      You can enable KDE 4 in NixOS by setting the
       <tt>services.xserver.sessionType</tt> option to
       <tt>kde4</tt>.  Thanks go to Yury G. Kudryashov, Andrew
       Morsillo and Sander van der Burg for doing the hard work on
       adding KDE 4 to Nixpkgs.  (<a
       href="nixos/screenshots/nixos-kde42-1.png">Screenshot 1</a>,
       <a href="nixos/screenshots/nixos-kde42-2.png">screenshot
-      2</a>.)
+      2</a>)
     </description>
   </item>
 
