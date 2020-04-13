@@ -7,7 +7,7 @@
 <p class="lead">
   Below you will find installation instructions for Nix, the package manager.
   Nix is currently supported on <strong>Linux</strong> and <strong>Mac</strong>.
-  The latest stable release is <strong>[%latestNixVersion%]</strong>
+  The latest stable release is <strong>[%latestNixVersion%]</strong>.
 </p>
 
 <ul id="getting-nix" class="nav nav-tabs">
@@ -19,10 +19,10 @@
 
 <div class="tab-content">
   <section class="tab-pane active" id="nix-quick-install">
-    The quickest way to install Nix is to run the following in a shell (as a
-    user other than <code>root</code>):
+    The quickest way to install Nix is to open a terminal and run the following
+    command (as a user other than <code>root</code> with <code>sudo</code> permission):
     <pre class="well" style="margin-top:1em">
-<span class="nix-command">curl -L --proto '=https' --tlsv1.2 https://nixos.org/nix/install | sh</span></pre>
+<span class="nix-command">curl -L https://nixos.org/nix/install | sh</span></pre>
     <p>Make sure to follow the instructions output by the script.</p>
     <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
   </section>
@@ -48,11 +48,10 @@
     <!-- TODO: expand this https://github.com/NixOS/nix/issues/1402 -->
   </section>
   <section class="tab-pane" id="nix-more">
-    <p>See <a href="[%nixManual%]#chap-installation">the manual</a> for more information.</p>
-    <p>The following artifacts are also available:</p>
+    <p>The following release items are also available:</p>
     <ul>
-      <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a>.</li>
-      <li><a href="[%nixManual%]#ssec-relnotes-[%latestNixVersion%]">Release notes</a>.</li>
+      <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a></li>
+      <li><a href="[%nixManual%]#sec-relnotes">Release notes</a></li>
       <li>
         <a href="[%nixManual%]">Manual</a>.
         Please read the <a href="[%nixManual%]#chap-quick-start">“Quick Start” section of the manual</a>
@@ -77,7 +76,7 @@
 <p class="lead">
   Below you will find installation instructions for NixOS, the linux
   distribution. The latest stable release series is
-  <strong>[%latestNixOSSeries%]</strong>
+  <strong>[%latestNixOSSeries%]</strong>.
 </p>
 
 <ul id="getting-nixos" class="nav nav-tabs">
@@ -102,9 +101,9 @@
       suitable for novice Linux users.</div>
 
     <p>The <strong>graphical installation CD</strong> contains the NixOS
-      installer as well as X11, Plasma 5 Desktop and several applications. It’s a
+      installer as well as the KDE Desktop and several applications. It’s a
       <em>live CD</em>, so it allows you to get an impression of NixOS (and
-      the Nix package manager) before installing it.</p>
+      the Nix package manager) without installing it.</p>
 
     [% prefix = "https://channels.nixos.org/nixos-" _ latestNixOSSeries %]
 
@@ -114,9 +113,9 @@
         <span class="label label-info">Recommended for most users</span></li>
     </ul>
 
-    <p>The <strong>minimal installation CD</strong> does not contain X11,
-      and is therefore a lot smaller. You have to run the installer from
-      the console. It contains a number of rescue tools.</p>
+    <p>The <strong>minimal installation CD</strong> does not contain the
+    graphical user interface, and is therefore a lot smaller. You have to run
+    the installer from the console. It contains a number of rescue tools.</p>
 
     <ul>
       <li><a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Minimal installation CD, 64-bit Intel/AMD</a> (<a
@@ -141,8 +140,8 @@
     </ul>
   </section>
   <section class="tab-pane" id="nixos-amazon">
-    <p>If you are an EC2 user, you can fire up a NixOS instance instantly
-      by using one of the AMIs listed below.</p>
+    <p>If you are an EC2 user, you can deploy a NixOS instance instantly
+      in your preferred region by using one of the AMIs listed below.</p>
 
     <div class="row">
       <table class="table">
