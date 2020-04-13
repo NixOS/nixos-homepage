@@ -108,14 +108,16 @@
     [% prefix = "https://channels.nixos.org/nixos-" _ latestNixOSSeries %]
 
     <ul>
-      <li><a href="[%prefix%]/latest-nixos-graphical-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a
-          href="[%prefix%]/latest-nixos-graphical-x86_64-linux.iso.sha256">SHA-256</a>)
-        <span class="label label-info">Recommended for most users</span></li>
+      <li>
+        <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a
+          href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso.sha256">SHA-256</a>)
+        <span class="label label-info">Recommended for most users</span>
+      </li>
     </ul>
 
     <p>The <strong>minimal installation CD</strong> does not contain the
-    graphical user interface, and is therefore a lot smaller. You have to run
-    the installer from the console. It contains a number of rescue tools.</p>
+      graphical user interface, and is therefore a lot smaller. You have to run
+      the installer from the console. It contains a number of rescue tools.</p>
 
     <ul>
       <li><a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Minimal installation CD, 64-bit Intel/AMD</a> (<a
@@ -187,8 +189,8 @@
       by using one of the bootstrap BLOBs listed below.</p>
 
     <div class="alert alert-block">
-     Please note that latest release currently lacks Azure image. We hope to
-     change this soon.
+      Please note that latest release currently lacks Azure image. We hope to
+      change this soon.
     </div>
 
     <div class="row">
@@ -293,8 +295,8 @@ ssh azureuser@"$VM_NAME"."$LOCATION".cloudapp.azure.com</pre>
       can then create a NixOS instance using the image.</p>
 
     <div class="alert alert-block">
-     Please note that latest release currently lacks GCE image. We hope to
-     change this soon.
+      Please note that latest release currently lacks GCE image. We hope to
+      change this soon.
     </div>
 
     <div class="row">
