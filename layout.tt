@@ -4,147 +4,147 @@
 
 <html lang="en">
 
-  <head>
-    <title>[% title %]</title>
+<head>
+  <title>[% title %]</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 
-    <script type="text/javascript" src="[% root %]js/jquery.min.js"></script>
-    <script type="text/javascript" src="[% root %]js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="[% root %]js/jquery.min.js"></script>
+  <script type="text/javascript" src="[% root %]js/jquery-ui.min.js"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script type="text/javascript" src="[% root %]bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="[% root %]bootstrap/css/bootstrap.min.css" />
+  <script type="text/javascript" src="[% root %]bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="[% root %]bootstrap/css/bootstrap.min.css" />
 
-    <link rel="stylesheet" href="[% root %]bootstrap/css/bootstrap-responsive.min.css" />
+  <link rel="stylesheet" href="[% root %]bootstrap/css/bootstrap-responsive.min.css" />
 
-    <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
+  <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
 
-    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-    
-    <meta name="google-site-verification" content="8CARljo3xNgyEV4UGN3r6p9n3qpt3Wf_mqda-YB6SMQ" />
+  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
 
-  </head>
+  <meta name="google-site-verification" content="ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE" />
 
-  <body>
+</head>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <li class="dropdown brand">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-              <img src="[% root %]logo/nix-wiki.png" alt="NixOS" class="logo" />
-              [% IF menu == 'nix' %]
-                Nix
-              [% ELSIF menu == 'nixpkgs' %]
-                Nixpkgs
-              [% ELSE %]
-                NixOS
-              [% END %]
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              [%# Using %root% for / will not work as expected. %]
-              <li><a href="/">Site Home</a></li>
-              <li><a href="[%root%]nixos">NixOS</a></li>
-              <li><a href="[%root%]nix">Nix</a></li>
-              <li><a href="[%root%]nixpkgs">Nixpkgs</a></li>
-            </ul>
-          </li>
+<body>
 
-          <div class="nav-collapse collapse">
-            [% IF menu == 'nixos' %]
-              <ul class="nav pull-left">
-                <li><a href="[%root%]nixos/about.html">About</a></li>
-                <li><a href="[%root%]nixos/download.html">Download</a></li>
-                <li><a href="[%root%]nixos/learn.html">Learn</a></li>
-                <li><a href="[%root%]nixos/packages.html">Packages</a></li>
-                <li><a href="[%root%]nixos/options.html">Options</a></li>
-                <li><a href="[%root%]nixos/community.html">Community</a></li>
-                <li><a href="[%root%]nixos/security.html">Security</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <!--
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <li class="dropdown brand">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <img src="[% root %]logo/nix-wiki.png" alt="NixOS" class="logo" />
+            [% IF menu == 'nix' %]
+            Nix
+            [% ELSIF menu == 'nixpkgs' %]
+            Nixpkgs
+            [% ELSE %]
+            NixOS
+            [% END %]
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            [%# Using %root% for / will not work as expected. %]
+            <li><a href="/">Site Home</a></li>
+            <li><a href="[%root%]nixos">NixOS</a></li>
+            <li><a href="[%root%]nix">Nix</a></li>
+            <li><a href="[%root%]nixpkgs">Nixpkgs</a></li>
+          </ul>
+        </li>
+
+        <div class="nav-collapse collapse">
+          [% IF menu == 'nixos' %]
+          <ul class="nav pull-left">
+            <li><a href="[%root%]nixos/about.html">About</a></li>
+            <li><a href="[%root%]download.html">Download</a></li>
+            <li><a href="[%root%]learn.html">Learn</a></li>
+            <li><a href="[%root%]nixos/packages.html">Packages</a></li>
+            <li><a href="[%root%]nixos/options.html">Options</a></li>
+            <li><a href="[%root%]nixos/community.html">Community</a></li>
+            <li><a href="[%root%]governance.html">Governance</a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <!--
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
                 <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
                 -->
             [% ELSIF menu == 'nix' %]
-              <ul class="nav pull-left">
-                <li><a href="[%root%]nix/about.html">About</a></li>
-                <li><a href="[%root%]nix/download.html">Download</a></li>
-                <li><a href="[%root%]nix/manual/">Manual</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
-            [% ELSIF menu == 'nixpkgs' %]
-              <ul class="nav pull-left">
-                <li><a href="[%root%]nixpkgs/download.html">Download</a></li>
-                <li><a href="[%root%]nixpkgs/manual">Manual</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-            [% ELSIF menu == 'organization' %]
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-                <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
-            [% ELSE %]
-              <ul class="nav pull-right">
-            [% END %]
-
-              <form class="navbar-search" method="get" action="https://www.google.com/search">
-                <input name="q" type="text" class="search-query span2" placeholder="Search nixos.org"/>
-                <input name="sitesearch" type="hidden" value="nixos.org"/>
-              </form>
+            <ul class="nav pull-left">
+              <li><a href="[%root%]nix/about.html">About</a></li>
+              <li><a href="[%root%]download.html">Download</a></li>
+              <li><a href="[%root%]learn.html">Learn</a></li>
+              <li><a href="[%root%]governance.html">Governance</a></li>
             </ul>
-          </div>
+            <ul class="nav pull-right">
+              <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
+              [% ELSIF menu == 'nixpkgs' %]
+              <ul class="nav pull-left">
+                <li><a href="[%root%]download.html">Download</a></li>
+                <li><a href="[%root%]learn.html">Learn</a></li>
+                <li><a href="[%root%]governance.html">Governance</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
+                [% ELSIF menu == 'organization' %]
+                <ul class="nav pull-right">
+                  <li><a href="[%root%]learn.html">Learn</a></li>
+                  <li><a href="[%root%]governance.html">Governance</a></li>
+                  <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
+                  <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
+                  [% ELSE %]
+                  <ul class="nav pull-right">
+                    [% END %]
+
+                  </ul>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="container main">
-      [% IF !hideTitle %]
-        <div class="page-header">
-          <h1>[% title %]</h1>
-        </div>
-      [% END %]
-
-      [% content %]
-
-      <div class="footer">
-        <hr />
-        <center>
-        <small class="muted">
-          [% IF sourceLink %]
-            <a [% HTML.attributes(href => sourceLink) %]>Source</a>
-          [% END %]
-        </small>
-        </center>
-      </div>
-
+  <div class="container main">
+    [% IF !hideTitle %]
+    <div class="page-header">
+      <h1>[% title %]</h1>
     </div>
-
-    <script>
-      $(document).ready(function() {
-        $(".nixos-popover").popover({});
-      });
-    </script>
-
-    [% IF anchors %]
-      <script src="[% root %]js/anchor.min.js"></script>
-      <script>
-        anchors.add('h1,h2,h3');
-      </script>
     [% END %]
 
-  </body>
+    [% content %]
+
+    <div class="footer">
+      <hr />
+      <center>
+        <small class="muted">
+          [% IF sourceLink %]
+          <a [% HTML.attributes(href=> sourceLink) %]>Source</a>
+          [% END %]
+        </small>
+      </center>
+    </div>
+
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $(".nixos-popover").popover({});
+    });
+  </script>
+
+  [% IF anchors %]
+  <script src="[% root %]js/anchor.min.js"></script>
+  <script>
+    anchors.add('h1,h2,h3');
+  </script>
+  [% END %]
+
+</body>
 
 </html>

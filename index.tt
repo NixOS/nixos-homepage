@@ -57,7 +57,7 @@
         packages collection for the Nix package manager, released
         under a permissive MIT/X11 license.
       </p>
-      <a class="learn-more" href="[%root%]/nixpkgs">
+      <a class="learn-more" href="[%root%]nixpkgs">
         More about Nixpkgs
         <i class="fa fa-angle-right"></i>
       </a>
@@ -83,13 +83,13 @@
       </p>
       <ul>
         <li>
-          <a href="[%root%]/nixos/community.html">
+          <a href="[%root%]nixos/community.html">
             Get in touch
             <i class="fa fa-angle-right"></i>
           </a>
         </li>
         <li>
-          <a href="[%root%]/nixos/learn.html">
+          <a href="[%root%]learn.html">
             Learning resources
             <i class="fa fa-angle-right"></i>
           </a>

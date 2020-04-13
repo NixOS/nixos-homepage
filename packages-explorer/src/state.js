@@ -168,7 +168,7 @@ class State extends Component {
 		this.setState({loading: this.state.loading + 1});
 		const {hostname} = window.location;
 
-		fetch(`../nixpkgs/packages-${channel}.json`, {mode: "cors"})
+		fetch(`https://channels.nixos.org/${channel}/packages.json.br`, {mode: "cors"})
 			.then((response) => response.json())
 			.then((channel_data) => {
 				// Ensures we update only for the currently selected channel.

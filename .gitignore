@@ -3,19 +3,20 @@
 
 /nixos/manual/
 /nixos/nix-pills/
-/nixos/options.json
 /nixos/screenshots/nixos-*-small.png
 /nixos/packages-explorer.js
 
 /nixpkgs/manual/
-/nixpkgs/*.json
+/nixpkgs/packages-channels.json
 
 /nix/manual/
 
 /blogs.json
 /blogs.xml
 /favicon.png
+/favicon.ico
 /news-rss.xml
 /nixos-release.tt
+/robots.txt
 
 /result*

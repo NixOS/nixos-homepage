@@ -8,9 +8,13 @@ build it:
     $ cd nixos-homepage
     $ nix-shell
     [nix-shell]$ make
-    [nix-shell]$ python2 -m SimpleHTTPServer 8000
+    [nix-shell]$ python -m http.server 8000
 
 then open http://127.0.0.1:8000/index.html
+
+To automatically rebuild on every change:
+
+    [nix-shell]$ git ls-files | entr make
 
 ## License
 

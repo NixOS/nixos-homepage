@@ -1,0 +1,29 @@
+[% WRAPPER layout.tt hideTitle=1 title="NixCon Team" menu='nixos' %]
+
+<h1>NixCon Team</h1>
+
+<div class="lead">
+  Attending and organizing NixCon is a unique and special experience, different
+  from any other OS/FOSS conference.
+</div>
+
+<h2>Members</h2>
+
+<ul>
+  <li><a href="https://discourse.nixos.org/u/andir">Andreas Rammhold</a> (andir)</li>
+  <li><a href="https://discourse.nixos.org/u/flokli">Florian Klink</a> (flokli)</li>
+  <li><a href="https://discourse.nixos.org/u/zimbatm">zimbatm</a> (zimbatm)</li>
+</ul>
+
+<a href="https://discourse.nixos.org/t/help-organize-nixcon-2020/4901">Help organize NixCon 2020 !!!</a>
+
+
+<h2>Previous NixCon</h2>
+<ul>
+  <li><a href="https://conf.nixos.org">NixCon 2015, Berlin</a></li>
+  <li><a href="http://nixcon2017.org">NixCon 2017, Munchen</a></li>
+  <li><a href="https://nixcon2018.org">NixCon 2018, London</a></li>
+  <li><a href="https://2019.nixcon.org">NixCon 2019, Brno</a></li>
+</ul>
+
+[% END %]

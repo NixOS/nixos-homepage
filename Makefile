@@ -1,25 +1,26 @@
 NIXOS_SERIES = 19.09
-NIXPKGS_STABLE = /no-such-path
-NIXPKGS_UNSTABLE = /no-such-path
+ROOT = "/"
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
 default: all
 
 
-HTML = index.html news.html \
-  nix/index.html nix/about.html nix/download.html \
-  nixpkgs/index.html nixpkgs/download.html \
-  nixos/index.html nixos/about.html nixos/download.html nixos/learn.html \
+HTML = index.html download.html news.html learn.html governance.html \
+  teams/rfc-steering-committee.html teams/security.html teams/marketing.html \
+  teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
+  teams/discourse.html \
+  nix/index.html nix/about.html \
+  nixpkgs/index.html \
+  nixos/index.html nixos/about.html \
   nixos/community.html nixos/packages.html nixos/options.html \
-  nixos/security.html nixos/foundation.html \
   nixos/wiki.html \
   404.html
 
 
 ### Prettify the NixOS manual.
 
-NIXOS_MANUAL_IN = /no-such-path
+NIXOS_MANUAL_IN ?= /no-such-path
 NIXOS_MANUAL_OUT = nixos/manual
 
 all: $(NIXOS_MANUAL_OUT)
@@ -30,7 +31,7 @@ $(NIXOS_MANUAL_OUT): $(NIXOS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-doc
 
 ### Prettify the Nix Pills
 
-NIX_PILLS_MANUAL_IN = /no-such-path
+NIX_PILLS_MANUAL_IN ?= /no-such-path
 NIX_PILLS_MANUAL_OUT = nixos/nix-pills
 
 all: $(NIX_PILLS_MANUAL_OUT)
@@ -41,7 +42,7 @@ $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) bootstrapify-docbook.sh bootstra
 
 ### Prettify the Nix manual.
 
-NIX_MANUAL_IN = /no-such-path
+NIX_MANUAL_IN ?= /no-such-path
 NIX_MANUAL_OUT = nix/manual
 
 all: $(NIX_MANUAL_OUT)
@@ -53,7 +54,7 @@ $(NIX_MANUAL_OUT): $(call rwildcard, $(NIX_MANUAL_IN), *) bootstrapify-docbook.s
 
 ### Prettify the Nixpkgs manual.
 
-NIXPKGS_MANUAL_IN = /no-such-path
+NIXPKGS_MANUAL_IN ?= /no-such-path
 NIXPKGS_MANUAL_OUT = nixpkgs/manual
 
 all: $(NIXPKGS_MANUAL_OUT)
@@ -62,16 +63,22 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 	bash ./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT) 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
 	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
 
-all: $(HTML) favicon.png $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
-  nixos/packages-explorer.js \
-  nixpkgs/packages-channels.json \
-  nixpkgs/packages-nixos-$(NIXOS_SERIES).json \
-  nixpkgs/packages-nixpkgs-unstable.json \
-  nixos/options.json
 
+all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
+  nixos/packages-explorer.js \
+  nixpkgs/packages-channels.json
+
+
+robots.txt: $(HTML)
+	echo "Users-agent: *" >> $@
+	#echo "Disallow: /" >> $@
+	#for page in $(HTML); do echo "Allow: /$$page" >> $@; done
 
 favicon.png: logo/nixos-logo-only-hires.png
 	convert -resize 16x16 -background none -gravity center -extent 16x16 $< $@
+
+favicon.ico: favicon.png
+	convert -resize x16 -gravity center -crop 16x16+0+0 -flatten -colors 256 -background transparent $< $@
 
 %-small.png: %.png
 	convert -resize 200 $< $@
@@ -79,7 +86,7 @@ favicon.png: logo/nixos-logo-only-hires.png
 %.html: %.tt layout.tt common.tt nix-release.tt nixos-release.tt donation.tt
 	tpage \
 	  --pre_chomp --post_chomp \
-	  --define root=`echo $@ | sed -e 's|[^/]||g' -e 's|/|../|g'` \
+	  --define root=$(ROOT) \
 	  --define fileName=$< \
 	  --define nixosAmis=$(NIXOS_AMIS) \
 	  --define nixosAzureBlobs=$(NIXOS_AZURE_BLOBS) \
@@ -133,27 +140,10 @@ update: blogs.xml nixos-release.tt
 endif
 
 
-.PHONY: nixpkgs/packages-nixos-$(NIXOS_SERIES).json
-
-nixpkgs/packages-nixos-$(NIXOS_SERIES).json:
-	@ln -sfn $(NIXPKGS_STABLE)/packages.json $@
-
-.PHONY: nixpkgs/packages-nixpkgs-unstable.json
-
-nixpkgs/packages-nixpkgs-unstable.json:
-	@ln -sfn $(NIXPKGS_UNSTABLE)/packages.json $@
-
-NIXOS_OPTIONS = /no-such-path
-
-.PHONY: nixos/options.json
-
 # Cute hack, this allows future expansion if desired
 # Mainly, this allows tracking NIXOS_SERIES
 nixpkgs/packages-channels.json: Makefile
 	echo '["nixos-$(NIXOS_SERIES)", "nixpkgs-unstable"]' > $@
-
-nixos/options.json:
-	@ln -sfn $(NIXOS_OPTIONS) $@
 
 nixos/packages-explorer.js:
 	@ln -sfn $(PACKAGES_EXPLORER) $@

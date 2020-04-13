@@ -1,4 +1,58 @@
 [[redirects]]
+  from = "/nix/download.html"
+  to = "/download.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs/download.html"
+  to = "/download.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/download.html"
+  to = "/download.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nix/learn.html"
+  to = "/learn.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/learn.html"
+  to = "/learn.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nix-dev"
+  to = "https://releases.nixos.org/nix-dev/index.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nix-dev/*"
+  to = "https://releases.nixos.org/nix-dev/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/security.html"
+  to = "/governance.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/foundation.html"
+  to = "/governance.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/channels/*"
   to = "https://channels.nixos.org/:splat"
   status = 302
@@ -30,7 +84,7 @@
 
 [[redirects]]
   from  = "/nix/install"
-  to = "https://releases.nixos.org/nix/nix-2.3.3/install"
+  to = "https://releases.nixos.org/nix/nix-2.3.4/install"
   status = 200
   #to = "https://channels.nixos.org/nix-latest/install"
   #status = 302
@@ -63,5 +117,89 @@
 [[redirects]]
   from  = "/disnix"
   to = "https://github.com/svanderburg/disnix"
+  status = 302
+  force = true
+
+[[redirects]]
+  from  = "/~eelco/*"
+  to = "https://edolstra.github.io/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs/packages-nixos-19.09.json.gz"
+  to = "https://channels.nixos.org/nixos-19.09/packages.json.br"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs/packages-nixos-unstable.json.gz"
+  to = "https://channels.nixos.org/nixos-unstable/packages.json.br"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/patchelf.html"
+  to = "https://github.com/NixOS/patchelf"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/bootstrap/css/bootstrap.min.css"
+  to = "/bootstrap/css/bootstrap.min.css"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/bootstrap/css/bootstrap-responsive.min.css"
+  to = "/bootstrap/css/bootstrap-responsive.min.css"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/css/nixos-site.css"
+  to = "/css/nixos-site.css"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/bootstrap/js/bootstrap.min.js"
+  to = "/bootstrap/js/bootstrap.min.js"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/logo/nix-wiki.png"
+  to = "/logo/nix-wiki.png"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/js/jquery-ui.min.js"
+  to = "/js/jquery-ui.min.js"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wiki/js/jquery.min.js"
+  to = "/js/jquery.min.js"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/~eelco/pubs/bootstrap/css/bootstrap-responsive.min.css"
+  to = "/bootstrap/css/bootstrap-responsive.min.css"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/~eelco/pubs/bootstrap/css/bootstrap.min.css"
+  to = "/bootstrap/css/bootstrap.min.css"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/~eelco/pubs/css/nixos-site.css"
+  to = "/css/nixos-site.css"
   status = 302
   force = true

@@ -67,7 +67,7 @@ const Position = use(["channel_data"], [], ({channel_data: {commit}, result: {me
 		<th>Nix expression</th>
 		<td>
 			{
-				position
+				position && commit
 					? <a href={githubLink(commit, position||"")}>
 						{position.replace(/:[0-9]+$/, "")}
 					</a>

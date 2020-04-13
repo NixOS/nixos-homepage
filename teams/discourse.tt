@@ -1,0 +1,28 @@
+[% WRAPPER layout.tt hideTitle=1 title="Discourse Team" menu='nixos' %]
+
+<h1>Discourse Team</h1>
+
+
+<div class="lead">
+  This team is responsible for configuring and moderating the <a
+  href="https://discourse.nixos.org/">Discourse forum</a>.
+</div>
+
+<h2>Members</h2>
+
+<ul>
+  <li><a href="https://discourse.nixos.org/u/zimbatm">zimbatm</a> (zimbatm)</li>
+  <li><a href="https://discourse.nixos.org/u/ryantm/">Ryan Mulligan</a> (ryantm)</li>
+  <li><a href="https://discourse.nixos.org/u/garbas">Rok Garbas</a> (garbas)</li>
+  <li><a href="https://discourse.nixos.org/u/grahamc">Graham Christensen</a> (gchristensen)</li>
+  <li><a href="https://discourse.nixos.org/u/mic92">Jörg Thalheim</a> (Mic92)</li>
+</ul>
+
+<h2>Reporting issues</h2>
+
+<p>
+  If you have an issue with the forum or its content, you can send a direct
+  message on the forum to any of these people.
+</p>
+
+[% END %]

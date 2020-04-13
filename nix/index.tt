@@ -26,7 +26,7 @@
     Nix</strong> is to run the following shell command (as a user
     other than <tt>root</tt>):</p>
 
-    <pre><span class="nix-command">curl -L --proto '=https' --tlsv1.2 https://nixos.org/nix/install | sh</span></pre>
+    <pre><span class="nix-command">curl -L https://nixos.org/nix/install | sh</span></pre>
 
     <p>This script will download a distribution-independent binary
     tarball containing Nix and its dependencies, and unpack it in

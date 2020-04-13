@@ -1,0 +1,29 @@
+[% WRAPPER layout.tt hideTitle=1 title="Infrastructure Team" menu='nixos' %]
+
+<h1>Infrastructure Team</h1>
+
+
+<div class="lead">
+  The responsibility of the team is to provide infrastructure for the Nix and
+  NixOS community.
+</div>
+
+<h2>Members</h2>
+
+<ul>
+  <li><a href="https://github.com/AmineChikhaoui">Amine Chikhaoui</a> (aminechikhaoui)</li>
+  <li><a href="https://discourse.nixos.org/u/edolstra">Eelco Dolstra</a> (niksnut)</li>
+  <li><a href="https://discourse.nixos.org/u/grahamc">Graham Christensen</a> (gchristensen)</li>
+  <li><a href="https://discourse.nixos.org/u/rbvermaa">Rob Vermaas</a> (ikwildrpepper)</li>
+  <li><a href="https://discourse.nixos.org/u/zimbatm">zimbatm</a> (zimbatm)</li>
+</ul>
+
+<h2>Reporting issues</h2>
+
+<p>
+  If you experience any issues with the infrastructure, please post a
+  <a href="https://github.com/NixOS/nixos-org-configurations/issues/new">issue
+    to this repository</a>.
+</p>
+
+[% END %]
