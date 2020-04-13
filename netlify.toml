@@ -1,4 +1,22 @@
 [[redirects]]
+  from = "/nix/download.html"
+  to = "/download.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs/download.html"
+  to = "/download.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/download.html"
+  to = "/download.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nix/learn.html"
   to = "/learn.html"
   status = 302
