@@ -186,6 +186,11 @@
     <p>If you are an Azure user, you can manually create a NixOS instance
       by using one of the bootstrap BLOBs listed below.</p>
 
+    <div class="alert alert-block">
+     Please note that latest release currently lacks Azure image. We hope to
+     change this soon.
+    </div>
+
     <div class="row">
       <table class="table">
         <thead>
@@ -286,6 +291,11 @@ ssh azureuser@"$VM_NAME"."$LOCATION".cloudapp.azure.com</pre>
   <section class="tab-pane" id="nixos-google">
     <p>If you are Google Cloud Platform user, you can create a NixOS image using one of the raw disks listed below. You
       can then create a NixOS instance using the image.</p>
+
+    <div class="alert alert-block">
+     Please note that latest release currently lacks GCE image. We hope to
+     change this soon.
+    </div>
 
     <div class="row">
       <table class="table">
