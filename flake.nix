@@ -20,10 +20,6 @@
         (builtins.toJSON (
           import (nixpkgs + "/nixos/modules/virtualisation/ec2-amis.nix")));
 
-      nixosGCE = writeText "gce-images.json"
-        (builtins.toJSON (
-          import (nixpkgs + "/nixos/modules/virtualisation/gce-images.nix")));
-
       nixPills = import nix-pills {
         inherit pkgs;
         revCount = nix-pills.lastModifiedDate; # FIXME
@@ -65,7 +61,6 @@
             "NIXOS_MANUAL_IN=${nixpkgs.htmlDocs.nixosManual}"
             "NIXPKGS_MANUAL_IN=${nixpkgs.htmlDocs.nixpkgsManual}"
             "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
-            "NIXOS_GCE=${packages.x86_64-linux.nixosGCE}"
             "PACKAGES_EXPLORER=${packages.x86_64-linux.packagesExplorer}/bundle.js"
             "NIX_PILLS_MANUAL_IN=${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
           ];
@@ -80,7 +75,6 @@
           export NIXOS_MANUAL_IN="${nixpkgs.htmlDocs.nixosManual}"
           export NIXPKGS_MANUAL_IN="${nixpkgs.htmlDocs.nixpkgsManual}"
           export NIXOS_AMIS="${packages.x86_64-linux.nixosAmis}"
-          export NIXOS_GCE="${packages.x86_64-linux.nixosGCE}"
           export PACKAGES_EXPLORER="${packages.x86_64-linux.packagesExplorer}/bundle.js"
           export NIX_PILLS_MANUAL_IN="${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
         '';

@@ -89,7 +89,6 @@ favicon.ico: favicon.png
 	  --define root=$(ROOT) \
 	  --define fileName=$< \
 	  --define nixosAmis=$(NIXOS_AMIS) \
-	  --define nixosGCE=$(NIXOS_GCE) \
 	  --pre_process=nix-release.tt --pre_process=nixos-release.tt --pre_process=common.tt \
 	  $< > $@.tmp
 	xmllint --nonet --noout $@.tmp
