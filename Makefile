@@ -89,7 +89,6 @@ favicon.ico: favicon.png
 	  --define root=$(ROOT) \
 	  --define fileName=$< \
 	  --define nixosAmis=$(NIXOS_AMIS) \
-	  --define nixosAzureBlobs=$(NIXOS_AZURE_BLOBS) \
 	  --define nixosGCE=$(NIXOS_GCE) \
 	  --pre_process=nix-release.tt --pre_process=nixos-release.tt --pre_process=common.tt \
 	  $< > $@.tmp

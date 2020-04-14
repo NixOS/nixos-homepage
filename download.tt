@@ -26,6 +26,7 @@
     <p>Make sure to follow the instructions output by the script.</p>
     <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
   </section>
+
   <section class="tab-pane" id="nix-verify-installation">
     <p>You may want to verify the integrity of the installation script using GPG:</p>
     <pre class="well">
@@ -41,12 +42,14 @@
       <a href="https://github.com/NixOS/nixos-homepage/blob/master/edolstra.gpg">on GitHub</a>.
     </p>
   </section>
+
   <section class="tab-pane" id="nix-uninstall">
     <p>
       You can uninstall Nix simply by running <code>rm -rf /nix</code>.
     </p>
     <!-- TODO: expand this https://github.com/NixOS/nix/issues/1402 -->
   </section>
+
   <section class="tab-pane" id="nix-more">
     <p>The following release items are also available:</p>
     <ul>
@@ -83,7 +86,6 @@
   <li class="active"><a href="#nixos-iso">ISO image</a></li>
   <li><a href="#nixos-virtualbox">VirtualBox</a></li>
   <li><a href="#nixos-amazon">Amazon EC2</a></li>
-  <li><a href="#nixos-azure">Microsoft Azure</a></li>
   <li><a href="#nixos-google">Google Compute Engine</a></li>
   <li><a href="#nixos-more">More ...</a></li>
 </ul>
@@ -124,6 +126,7 @@
           href="[%prefix%]/latest-nixos-minimal-i686-linux.iso.sha256">SHA-256</a>)</li>
     </ul>
   </section>
+
   <section class="tab-pane" id="nixos-virtualbox">
     <p>This is a demo appliance for VirtualBox (in OVA format) that has
       X11 and Plasma 5 enabled, as well as the VirtualBox guest additions. To
@@ -139,6 +142,7 @@
           href="[%prefix%]/latest-nixos-x86_64-linux.ova.sha256">SHA-256</a>)</li>
     </ul>
   </section>
+
   <section class="tab-pane" id="nixos-amazon">
     <p>If you are an EC2 user, you can deploy a NixOS instance instantly
       in your preferred region by using one of the AMIs listed below.</p>
@@ -182,112 +186,7 @@
     <pre class="well">
 $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre>
   </section>
-  <section class="tab-pane" id="nixos-azure">
-    <p>If you are an Azure user, you can manually create a NixOS instance
-      by using one of the bootstrap BLOBs listed below.</p>
 
-    <div class="alert alert-block">
-      Please note that latest release currently lacks Azure image. We hope to
-      change this soon.
-    </div>
-
-    <div class="row">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>NixOS version</th>
-            <th>BLOB URL</th>
-          </tr>
-        </thead>
-        <tbody>
-          [% blobs = JSON.Escape.json_decode(IO.All.new(nixosAzureBlobs).all) %]
-          [% FOREACH version IN blobs.keys.sort; blob = blobs.$version %]
-          <tr>
-            <td><code>[% version %]</code></td>
-            <td><a href="[% blob %]"><code>[% blob %]</code></a></td>
-          </tr>
-          [% END %]
-        </tbody>
-      </table>
-    </div>
-
-    <p>You can create an instance from the command line.
-      For example, to create an instance of version
-      <code>[% blob = blobs.$latestNixOSSeries; latestNixOSSeries %]</code>
-      of NixOS using azure-cli, just run:</p>
-
-    <pre class="well">
-# settings
-# vm name must be lowercase and letters/numbers only because it's also used as the domain name
-export VM_NAME="nixosvm"
-export RESOURCE_GROUP="rg-nixosvm"
-export LOCATION="eastus"
-export STORAGE_ACCOUNT="nixosvm"
-export SOURCE_URI="<code>[% blob %]</code>"
-
-# create group
-az group create \
-    --name "$RESOURCE_GROUP" \
-    --location "$LOCATION
-
-# create storage
-az storage account create \
-    --name "$STORAGE_ACCOUNT" \
-    --group "$RESOURCE_GROUP" \
-    --location "$LOCATION" \
-    --sku Standard_LRS
-
-az storage account keys list \
-    --name "$STORAGE_ACCOUNT" \
-    --group $RESOURCE_GROUP
-
-# export one of the storage access keys
-export STORAGE_ACCOUNT_KEY="..."
-echo $STORAGE_ACCOUNT_KEY
-
-az storage container create \
-    --account-name "$STORAGE_ACCOUNT"
-    --account-key "$STORAGE_ACCOUNT_KEY"
-    --name vm-images
-
-# copy the image blob
-az storage blob copy start \
-    --source-uri "$SOURCE_URI" \
-    --destination-blob "nixos-unstable-nixops.vhd" \
-    --destination-container "vm-images" \
-    --account-name "$STORAGE_ACCOUNT" \
-    --account-key "$STORAGE_ACCOUNT_KEY"
-
-# wait for blob copy status to change pending->success
-az storage blob show \
-    --name "nixos-unstable-nixops.vhd" \
-    --container-name "vm-images" \
-    --account-name "$STORAGE_ACCOUNT" \
-    --account-key "$STORAGE_ACCOUNT_KEY"
-
-
-# create vm
-az vm create \
-    --name "$VM_NAME" \
-    --resource-group "$RESOURCE_GROUP" \
-    --location "$LOCATION" \
-    --public-ip-address-dns-name "$VM_NAME" \
-    --image "https://$STORAGE_ACCOUNT.blob.core.windows.net/vm-images/nixos-unstable-nixops.vhd" \
-    --storage-account "$STORAGE_ACCOUNT" \
-    --storage-container-name "$VM_NAME" \
-    --use-unmanaged-disk \
-    --os-disk-size-gb "32" \
-    --os-type linux \
-    --admin-username "azureuser" \
-    --generate-ssh-keys
-
-# show machine properties and log in
-az vm show \
-    --name "$VM" \
-    --resource-group "$GROUP"
-
-ssh azureuser@"$VM_NAME"."$LOCATION".cloudapp.azure.com</pre>
-  </section>
   <section class="tab-pane" id="nixos-google">
     <p>If you are Google Cloud Platform user, you can create a NixOS image using one of the raw disks listed below. You
       can then create a NixOS instance using the image.</p>
@@ -326,6 +225,7 @@ source_uri=$(sed 's%gs:/%https://storage.googleapis.com%' &lt;&lt;&lt; $source_u
 gcloud compute images create $image --source-uri=$source_uri
 gcloud compute instances create instance-1 --image=$image</pre>
   </section>
+
   <section class="tab-pane" id="nixos-more">
     <h2 id="unstable-releases">Unstable releases</h2>
 
