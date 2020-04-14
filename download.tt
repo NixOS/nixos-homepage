@@ -182,7 +182,7 @@
       run:</p>
 
     <pre class="well">
-        $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre>
+$ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre>
   </section>
   <section class="tab-pane" id="nixos-azure">
     <p>If you are an Azure user, you can manually create a NixOS instance
