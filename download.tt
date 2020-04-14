@@ -114,8 +114,8 @@
     </ul>
 
     <p>The <strong>minimal installation CD</strong> does not contain the
-    graphical user interface, and is therefore a lot smaller. You have to run
-    the installer from the console. It contains a number of rescue tools.</p>
+      graphical user interface, and is therefore a lot smaller. You have to run
+      the installer from the console. It contains a number of rescue tools.</p>
 
     <ul>
       <li><a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Minimal installation CD, 64-bit Intel/AMD</a> (<a
@@ -180,15 +180,15 @@
       run:</p>
 
     <pre class="well">
-        $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre>
+$ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre>
   </section>
   <section class="tab-pane" id="nixos-azure">
     <p>If you are an Azure user, you can manually create a NixOS instance
       by using one of the bootstrap BLOBs listed below.</p>
 
     <div class="alert alert-block">
-     Please note that latest release currently lacks Azure image. We hope to
-     change this soon.
+      Please note that latest release currently lacks Azure image. We hope to
+      change this soon.
     </div>
 
     <div class="row">
@@ -293,8 +293,8 @@ ssh azureuser@"$VM_NAME"."$LOCATION".cloudapp.azure.com</pre>
       can then create a NixOS instance using the image.</p>
 
     <div class="alert alert-block">
-     Please note that latest release currently lacks GCE image. We hope to
-     change this soon.
+      Please note that latest release currently lacks GCE image. We hope to
+      change this soon.
     </div>
 
     <div class="row">
