@@ -1,0 +1,33 @@
+// Quick notes about adding images:
+// This uses an external pipeline in default.nix to replace the @SVG_* tokens
+// with files from this directory with their name uppercased.
+
+#svg(@svg) {
+    // ugh, that's an ugly hack... but escape() apparently doesn't deal well with percent signs.
+    @_data: replace(escape(@svg), "%", "PERCENT");
+    background-image: replace(~"url('data:image/svg+xml;utf8,@{_data}')", "PERCENT", "%");
+}
+
+#svg-lambdaflake() {
+    // The NixOS logo lambdaflake, alone
+    #svg(@SVG_LAMBDAFLAKE);
+}
+
+// The next tree may seem weird, we've split the lambdaflake from the text
+// elements in the logo, allowing us to re-use the one lambdaflake with
+// different site subsections.
+//
+// This also allows us to directly re-use the lone lambdaflake when needed.
+
+#svg-text-nixos() {
+    // The NixOS logotype, pre-rendered
+    #svg(@SVG_TEXT_NIXOS);
+}
+#svg-text-nix() {
+    // The NixOS logotype, pre-rendered, but with the "Nix" text
+    #svg(@SVG_TEXT_NIX);
+}
+#svg-text-nixpkgs() {
+    // The NixOS logotype, pre-rendered, but with the "Nixpkgs" text
+    #svg(@SVG_TEXT_NIXPKGS);
+}

@@ -1,0 +1,183 @@
+// One "unit" is equivalent to one pixel.
+// (Assuming 14px or computed equivalent.)
+@unit: 1/16rem;
+@line-height: 1.429; // Empirically deduced in the browser.
+
+// As a default
+@gutter: 15*@unit;
+
+@bs_radius: 6*@unit;
+@bs_navbar_height: 40*@unit;
+
+// Colors
+@bs_color_default_foreground: #333;
+@bs_color_default_background: #fff;
+@bs_color_link_foreground: #08c;
+@bs_color_link_hover_foreground: #005580;
+@bs_color_menu_hover_foreground: #fff;
+@bs_color_menu_hover_background: #0081c2;
+@bs_color_menu_hover_background_start: #08c;
+@bs_color_menu_hover_background_end: #0077b3;
+@bs_color_nav_foreground: rgb(119, 119, 119);
+@bs_color_nav_hover_foreground: @bs_color_default_foreground;
+
+// Basic catch-all rules
+// ---------------------
+
+body {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	// Assuming a browser default font size of 16px,
+	// this is equivalent to 14px from bootstrap 2
+	// font-size: 14px;
+	font-size: (14/16) * 100%;
+	// Note that **all** sizes will be relative from now on.
+	// This means that a browser defaulting to a bigger size will have a scaled
+	// up website by design.
+
+	// line-height: 20px;
+	line-height: @line-height;
+	color: @bs_color_default_foreground;
+	background-color: @bs_color_default_background;
+}
+
+input, textarea, select {
+	color: @bs_color_default_foreground;
+	background-color: @bs_color_default_background;
+}
+
+a, .pretend-link {
+	color: @bs_color_link_foreground;
+	text-decoration: none;
+
+	&:focus {
+		outline: thin dotted #333;
+		outline: 5px auto -webkit-focus-ring-color;
+		outline-offset: -2px
+	}
+
+	&:hover, &:focus {
+		color: @bs_color_link_hover_foreground;
+		text-decoration: underline;
+	}
+}
+
+// General, but specific, rules
+// ----------------------------
+
+.container {
+	margin: auto;
+	#screen-sm-min({ width: 724*@unit; });
+	#screen-md-min({ width: 940*@unit; });
+	#screen-lg-min({ width: 1170*@unit; });
+}
+
+// Layout-specific rules
+// ---------------------
+
+// Dropdown
+.dropdown {
+	position: relative;
+	&:not(.open) .dropdown-menu {
+		display: none;
+	}
+	.dropdown-menu {
+		display: block;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		// left: 50%;
+		// transform: translateX(-50%)
+		min-width: 160*@unit;
+	}
+
+	.dropdown-menu {
+		padding: 5*@unit 0;
+		margin: 2*@unit 0 0;
+		background-color: @bs_color_default_background;
+		border: @unit solid rgba(0, 0, 0, 0.2);
+		border-radius: @bs_radius;
+		list-style-type: none;
+		box-shadow: 0 5*@unit 10*@unit rgba(0,0,0,0.2);
+	}
+
+	.dropdown-menu a {
+		padding: 3*@unit 20*@unit;
+		color: @bs_color_default_foreground;
+		display: block;
+
+		&:hover, &:focus {
+			color: @bs_color_menu_hover_foreground;
+			background-color: @bs_color_menu_hover_background;
+			background-image: linear-gradient(
+				to bottom
+				, @bs_color_menu_hover_background_start
+				, @bs_color_menu_hover_background_end
+			);
+		}
+	}
+}
+
+// Navbar
+body > .navbar {
+	&.fixed-top {
+		position: static;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+}
+
+.navbar {
+	@_height: @bs_navbar_height;
+
+	& > * {
+		height: @_height;
+	}
+
+	* {
+		line-height: @_height;
+	}
+	ul, li {
+		list-style-type: none;
+	}
+	a {
+		display: block;
+	}
+
+	.brand {
+		font-size: 20*@unit;
+	}
+
+	.btn-navbar {
+		display: none; //FIXME
+	}
+
+	ul.nav {
+		margin: 0;
+		padding: 0;
+		& > li {
+			display: inline-block;
+		}
+	}
+	a {
+		padding-left: @gutter;
+		padding-right: @gutter;
+		color: @bs_color_nav_foreground;
+		&:hover, &:focus, &:active, &.active {
+			color: @bs_color_nav_hover_foreground;
+			text-decoration: none;
+		}
+	}
+
+	.navbar-inner > .container {
+		display: flex;
+	}
+}
+
+.navbar-inner {
+	background-color: rgb(250, 250, 250);
+	background-image: linear-gradient(rgb(255, 255, 255), rgb(242, 242, 242));
+	background-repeat: repeat-x;
+	border-bottom: @unit solid rgb(212, 212, 212);
+	box-shadow: rgba(0, 0, 0, 0.1) 0*@unit 1*@unit 10*@unit 0*@unit;
+}

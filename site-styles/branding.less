@@ -1,0 +1,82 @@
+// NixOS-specific customization of the navbar brand.
+// This uses the usual tricks to shove the text outside of the visible area,
+// to replace it with the pre-rendered paths.
+// It is using separate images for the logo and the text.
+// When used on a page without a specific image for the text, the text is kept.
+.navbar .brand > a {
+	@_logo_height: @bs_navbar_height * 0.7;
+	// Use three's complement to automatically compute the widths.
+	@_lambdaflake_width: @_logo_height * 587/517;
+	@_nixos_text_width: @_logo_height * 1059/516;
+	@_nix_text_width: @_logo_height * 635/516;
+	@_nixpkgs_text_width: @_logo_height * 1482/516;
+	padding: 0;
+	position: relative;
+	margin-right: @gutter;
+	&:before, &:after {
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center center;
+		display: inline-block;
+		content: "";
+		top: 0;
+		bottom: 0;
+		width: @_lambdaflake_width;
+		height: @bs_navbar_height;
+		vertical-align: bottom;
+	}
+	&:before {
+		#svg-lambdaflake();
+		left: 0;
+	}
+	&:after {
+		position: absolute;
+		right: @gutter;
+		opacity: 0.5;
+	}
+	&.is-menu-nixos,
+	&.is-menu-nix,
+	&.is-menu-nixpkgs {
+		text-indent: -9999px;
+		overflow: hidden;
+		&:before {
+			position: absolute;
+		}
+	}
+
+	&.is-menu-nixos {
+		width: @_lambdaflake_width + @_nixos_text_width + @gutter;
+		&:after {
+			#svg-text-nixos();
+			width: @_nixos_text_width;
+		}
+	}
+	&.is-menu-nix {
+		width: @_lambdaflake_width + @_nix_text_width + @gutter;
+		&:after {
+			#svg-text-nix();
+			width: @_nix_text_width;
+		}
+	}
+	&.is-menu-nixpkgs {
+		width: @_lambdaflake_width + @_nixpkgs_text_width + @gutter;
+		&:after {
+			#svg-text-nixpkgs();
+			width: @_nixpkgs_text_width;
+		}
+	}
+
+	// Build a caret out of whole cloth.
+	.caret {
+		@_size: 3;
+		@_color: @bs_color_nav_foreground;
+		position: absolute;
+		top: 50%;
+		right: 0;
+		border-right: @_size*@unit solid @_color;
+		border-bottom: @_size*@unit solid @_color;
+		border-top: @_size*@unit solid transparent;
+		border-left: @_size*@unit solid transparent;
+		transform: translateX(-2*@unit) translateY(-50%) rotate(45deg);
+	}
+}
