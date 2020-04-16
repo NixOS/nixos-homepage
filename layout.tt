@@ -28,9 +28,7 @@
           <span class="icon-bar"></span>
         </button>
         <div class="brand">
-          <a href="[% root %]">
-            <img src="[% root %]logo/nix-wiki.png" alt="NixOS" class="logo" />
-          </a>
+          <a href="[% root %]">NixOS</a>
         </div>
         <div class="nav-collapse collapse">
           <ul class="nav pull-left">
