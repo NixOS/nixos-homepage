@@ -65,6 +65,7 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 
 
 all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
+  styles \
   nixos/packages-explorer.js \
   nixpkgs/packages-channels.json
 
@@ -145,3 +146,13 @@ nixpkgs/packages-channels.json: Makefile
 
 nixos/packages-explorer.js:
 	@ln -sfn $(PACKAGES_EXPLORER) $@
+
+# The nix-built site will use the provided SITE_STYLES
+ifeq ($(strip $(SITE_STYLES)),)
+# But development `make` builds will nix-build.
+styles: $(wildcard site-styles/*)
+	nix-build -A packages.x86_64-linux.siteStyles --out-link $@
+else
+styles:
+	@ln -sfn $(SITE_STYLES) $@
+endif

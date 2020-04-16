@@ -66,6 +66,7 @@
             "NIXPKGS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixpkgsManual}"
             "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
             "PACKAGES_EXPLORER=${packages.x86_64-linux.packagesExplorer}/bundle.js"
+            "SITE_STYLES=${packages.x86_64-linux.siteStyles}"
             "NIX_PILLS_MANUAL_IN=${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
           ];
 
@@ -80,10 +81,12 @@
           export NIXPKGS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixpkgsManual}"
           export NIXOS_AMIS="${packages.x86_64-linux.nixosAmis}"
           export PACKAGES_EXPLORER="${packages.x86_64-linux.packagesExplorer}/bundle.js"
+          # SITE_STYLES skipped by design.
           export NIX_PILLS_MANUAL_IN="${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
         '';
       };
 
+      siteStyles = callPackage ./site-styles {};
 
     };
 
