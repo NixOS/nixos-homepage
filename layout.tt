@@ -35,8 +35,7 @@
           <span class="icon-bar"></span>
         </button>
         <li class="dropdown brand">
-          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-            <img src="[% root %]logo/nix-wiki.png" alt="NixOS" class="logo" />
+          <a class="dropdown-toggle is-menu-[% menu %]" href="#" data-toggle="dropdown">
             [% IF menu == 'nix' %]
             Nix
             [% ELSIF menu == 'nixpkgs' %]
