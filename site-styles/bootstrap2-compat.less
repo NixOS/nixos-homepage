@@ -119,8 +119,8 @@ a, .pretend-link {
 
 // Navbar
 body > .navbar {
-	&.fixed-top {
-		position: static;
+	&.navbar-fixed-top {
+		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
@@ -148,17 +148,36 @@ body > .navbar {
 		font-size: 20*@unit;
 	}
 
+	// TODO: Use as toggle for the responsive menu.
 	.btn-navbar {
 		display: none; //FIXME
+	}
+
+	.navbar-inner > .container {
+		display: flex;
+	}
+
+	// Bad assumption about the structure
+	.navbar-inner > .container > div {
+		display: flex;
+		flex-grow: 1;
 	}
 
 	ul.nav {
 		margin: 0;
 		padding: 0;
+		display: flex;
 		& > li {
-			display: inline-block;
 		}
 	}
+
+	.pull-left {
+		flex-grow: 1;
+	}
+	.pull-right {
+		flex-grow: 0;
+	}
+
 	a {
 		padding-left: @gutter;
 		padding-right: @gutter;
@@ -167,10 +186,6 @@ body > .navbar {
 			color: @bs_color_nav_hover_foreground;
 			text-decoration: none;
 		}
-	}
-
-	.navbar-inner > .container {
-		display: flex;
 	}
 }
 
