@@ -16,13 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <script type="text/javascript" src="[% root %]bootstrap/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="[% root %]bootstrap/css/bootstrap.min.css" />
-
-  <link rel="stylesheet" href="[% root %]bootstrap/css/bootstrap-responsive.min.css" />
-
-  <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
-
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+  <link rel="stylesheet" href="[% root %]styles/styles.css" type="text/css" />
 
   <link rel="shortcut icon" type="image/png" href="/favicon.png" />
 
