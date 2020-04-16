@@ -67,42 +67,33 @@
             <li><a href="[%root%]governance.html">Governance</a></li>
             <li><a href="[%root%]donate.html">Donate</a></li>
           </ul>
+          <!--
           <ul class="nav pull-right">
-            <!--
-                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-                <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
-                -->
-            [% ELSIF menu == 'nix' %]
-            <ul class="nav pull-left">
-              <li><a href="[%root%]nix/about.html">About</a></li>
-              <li><a href="[%root%]download.html">Download</a></li>
-              <li><a href="[%root%]learn.html">Learn</a></li>
-              <li><a href="[%root%]governance.html">Governance</a></li>
-              <li><a href="[%root%]donate.html">Donate</a></li>
-            </ul>
-            <ul class="nav pull-right">
-              <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
-              [% ELSIF menu == 'nixpkgs' %]
-              <ul class="nav pull-left">
-                <li><a href="[%root%]download.html">Download</a></li>
-                <li><a href="[%root%]learn.html">Learn</a></li>
-                <li><a href="[%root%]governance.html">Governance</a></li>
-                <li><a href="[%root%]donate.html">Donate</a></li>
-              </ul>
-              <ul class="nav pull-right">
-                <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-                [% ELSIF menu == 'organization' %]
-                <ul class="nav pull-right">
-                  <li><a href="[%root%]learn.html">Learn</a></li>
-                  <li><a href="[%root%]governance.html">Governance</a></li>
-                  <li><a href="[%root%]donate.html">Donate</a></li>
-                  <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
-                  <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
-                  [% ELSE %]
-                  <ul class="nav pull-right">
-                    [% END %]
-
-                  </ul>
+              <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
+              <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
+          </ul>
+          -->
+          [% ELSIF menu == 'nix' %]
+          <ul class="nav pull-left">
+            <li><a href="[%root%]nix/about.html">About</a></li>
+            <li><a href="[%root%]download.html">Download</a></li>
+            <li><a href="[%root%]learn.html">Learn</a></li>
+            <li><a href="[%root%]governance.html">Governance</a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li class="link-github link-external"><a href="https://github.com/NixOS/nix">Code</a></li>
+          </ul>
+          [% ELSIF menu == 'nixpkgs' %]
+          <ul class="nav pull-left">
+            <li><a href="[%root%]download.html">Download</a></li>
+            <li><a href="[%root%]learn.html">Learn</a></li>
+            <li><a href="[%root%]governance.html">Governance</a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li class="link-github link-external"><a href="https://github.com/NixOS/nixpkgs">Code</a></li>
+          </ul>
+          [% ELSE %]
+          [% END %]
         </div>
       </div>
     </div>
