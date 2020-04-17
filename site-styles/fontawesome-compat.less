@@ -1,0 +1,68 @@
+// Fakes compatibility with *some* fontawesome characters.
+
+@fa_size: 1.2em;
+
+#fa-compat() {
+	.base {
+		position: relative;
+		display: inline-block;
+		width: @fa_size;
+		height: @fa_size;
+		font-style: normal;
+		font-weight: normal;
+		vertical-align: middle;
+	}
+
+	.chevron() {
+		@_size: 0.3em;
+		@_thickness: 0.15em; // dependent on the local font-size.
+		#fa-compat.base();
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			bottom: 50%;
+			left: 50%;
+			width: @_size;
+			height: @_size;
+			transform: translateX(-100%) translateY(50%) rotate(-45deg);
+			border: @_thickness solid transparent;
+		}
+	}
+	.chevron-color(@_color) {
+		&::before {
+			border-right-color: @_color;
+			border-bottom-color: @_color;;
+		}
+	}
+
+	.svg() {
+		#fa-compat.base();
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+}
+
+
+.fa-chevron-right, .fa-angle-right {
+	#fa-compat.chevron();
+	a & { #fa-compat.chevron-color(@bs_color_link_foreground); }
+	a:hover & { #fa-compat.chevron-color(@bs_color_link_hover_foreground); }
+	.btn-success &,
+	.btn-success:hover & { #fa-compat.chevron-color(#fff); }
+}
+
+.fa-chevron-right {
+	transform: scale(1.4) translateY(-@unit);
+}
+
+// FIXME: I seem to recall they're going away, so for now I'm not including them.
+.fa-twitter, .fa-github {
+	#fa-compat.base();
+	outline: 1px solid red;
+}
+
+.fa-cloud-download {
+	#fa-compat.svg();
+	#svg-cloud-download();
+}
