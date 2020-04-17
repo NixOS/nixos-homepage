@@ -35,11 +35,31 @@ h6 { #theme.h6 }
 
 // Used on Nix and NixOS pages (not the index).
 // (The logo is not actually on the right *facepalm*.)
-.right-logo {
-    width: 14em;
-    float: left;
-    margin: 1em 3em 1em 0em;
-}
+
+#screen-xs-max({
+	.right-logo {
+		display: block;
+		max-width: 10rem;
+		margin: auto;
+	}
+});
+
+#screen-sm-min({
+	.right-logo {
+		width: 14rem;
+		float: left;
+		margin: 1em 3em 1em 0em;
+	}
+
+	.jumbotron.with-right-logo {
+		& > h1,
+		& > h2,
+		& > p {
+			// Width of image + margin right
+			padding-left: 14rem + 3rem;
+		}
+	}
+});
 
 // Inline (floating) images
 img.inline {
