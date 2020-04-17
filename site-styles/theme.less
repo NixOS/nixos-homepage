@@ -98,3 +98,14 @@ pre {
 tt {
 	font-size: 14*@unit;
 }
+
+.learn-resources,
+.governance-teams {
+	.row-fluid > * {
+		display: flex;
+		flex-direction: column;
+		& > .btn:last-child {
+			margin-top: auto;
+		}
+	}
+}
