@@ -12,8 +12,21 @@
 // This file directly copies some of the more complex styles, commenting out
 // with `//` less comments where it clashes with our rules.
 
+dl {
+ margin-bottom:20*@unit
+}
+dt {
+ font-weight:bold
+}
+dd {
+ margin-left:10*@unit
+}
+
 // Utility styles {{{
 
+.hidden {
+ display: none;
+}
 .muted {
  color:#999
 }
@@ -60,16 +73,16 @@ a.text-success:focus {
 }
 
 .lead {
- margin-bottom:20px;
- font-size:21px;
+ margin-bottom:20*@unit;
+ font-size:21*@unit;
  font-weight:200;
- line-height:30px
+ line-height:30*@unit
 }
 
 .page-header {
- padding-bottom:9px;
- margin:20px 0 30px;
- border-bottom:1px solid #eee
+ padding-bottom:9*@unit;
+ margin:20*@unit 0 30*@unit;
+ border-bottom:1*@unit solid #eee
 }
 
 // }}}
@@ -92,11 +105,11 @@ a.text-success:focus {
 // Buttons {{{
 .close {
  float:right;
- font-size:20px;
+ font-size:20*@unit;
  font-weight:bold;
- line-height:20px;
+ line-height:20*@unit;
  color:#000;
- text-shadow:0 1px 0 #fff;
+ text-shadow:0 1*@unit 0 #fff;
  opacity:.2;
  filter:alpha(opacity=20)
 }
@@ -550,17 +563,19 @@ pre code {
 
 // }}}
 
+// }}}
+
 // Alerts {{{
 
 .alert {
- padding:8px 35px 8px 14px;
- margin-bottom:20px;
- text-shadow:0 1px 0 rgba(255,255,255,0.5);
+ padding:8*@unit 35*@unit 8*@unit 14*@unit;
+ margin-bottom:20*@unit;
+ text-shadow:0 1*@unit 0 rgba(255,255,255,0.5);
  background-color:#fcf8e3;
- border:1px solid #fbeed5;
- -webkit-border-radius:4px;
- -moz-border-radius:4px;
- border-radius:4px
+ border:1*@unit solid #fbeed5;
+ -webkit-border-radius:4*@unit;
+ -moz-border-radius:4*@unit;
+ border-radius:4*@unit
 }
 .alert,
 .alert h4 {
@@ -571,9 +586,9 @@ pre code {
 }
 .alert .close {
  position:relative;
- top:-2px;
- right:-21px;
- line-height:20px
+ top:-2*@unit;
+ right:-21*@unit;
+ line-height:20*@unit
 }
 .alert-success {
  color:#468847;
@@ -602,15 +617,15 @@ pre code {
  color:#3a87ad
 }
 .alert-block {
- padding-top:14px;
- padding-bottom:14px
+ padding-top:14*@unit;
+ padding-bottom:14*@unit
 }
 .alert-block>p,
 .alert-block>ul {
  margin-bottom:0
 }
 .alert-block p+p {
- margin-top:5px
+ margin-top:5*@unit
 }
 
 // }}}
@@ -639,19 +654,19 @@ pre code {
  top:10%;
  left:50%;
  z-index:1050;
- width:560px;
- margin-left:-280px;
+ width:560*@unit;
+ margin-left:-280*@unit;
  background-color:#fff;
- border:1px solid #999;
- border:1px solid rgba(0,0,0,0.3);
- *border:1px solid #999;
- -webkit-border-radius:6px;
- -moz-border-radius:6px;
- border-radius:6px;
+ border:1*@unit solid #999;
+ border:1*@unit solid rgba(0,0,0,0.3);
+ *border:1*@unit solid #999;
+ -webkit-border-radius:6*@unit;
+ -moz-border-radius:6*@unit;
+ border-radius:6*@unit;
  outline:0;
- -webkit-box-shadow:0 3px 7px rgba(0,0,0,0.3);
- -moz-box-shadow:0 3px 7px rgba(0,0,0,0.3);
- box-shadow:0 3px 7px rgba(0,0,0,0.3);
+ -webkit-box-shadow:0 3*@unit 7*@unit rgba(0,0,0,0.3);
+ -moz-box-shadow:0 3*@unit 7*@unit rgba(0,0,0,0.3);
+ box-shadow:0 3*@unit 7*@unit rgba(0,0,0,0.3);
  -webkit-background-clip:padding-box;
  -moz-background-clip:padding-box;
  background-clip:padding-box
@@ -667,38 +682,38 @@ pre code {
  top:10%
 }
 .modal-header {
- padding:9px 15px;
- border-bottom:1px solid #eee
+ padding:9*@unit 15*@unit;
+ border-bottom:1*@unit solid #eee
 }
 .modal-header .close {
- margin-top:2px
+ margin-top:2*@unit
 }
 .modal-header h3 {
  margin:0;
- line-height:30px
+ line-height:30*@unit
 }
 .modal-body {
  position:relative;
- max-height:400px;
- padding:15px;
+ max-height:400*@unit;
+ padding:15*@unit;
  overflow-y:auto
 }
 .modal-form {
  margin-bottom:0
 }
 .modal-footer {
- padding:14px 15px 15px;
+ padding:14*@unit 15*@unit 15*@unit;
  margin-bottom:0;
  text-align:right;
  background-color:#f5f5f5;
- border-top:1px solid #ddd;
- -webkit-border-radius:0 0 6px 6px;
- -moz-border-radius:0 0 6px 6px;
- border-radius:0 0 6px 6px;
+ border-top:1*@unit solid #ddd;
+ -webkit-border-radius:0 0 6*@unit 6*@unit;
+ -moz-border-radius:0 0 6*@unit 6*@unit;
+ border-radius:0 0 6*@unit 6*@unit;
  *zoom:1;
- -webkit-box-shadow:inset 0 1px 0 #fff;
- -moz-box-shadow:inset 0 1px 0 #fff;
- box-shadow:inset 0 1px 0 #fff
+ -webkit-box-shadow:inset 0 1*@unit 0 #fff;
+ -moz-box-shadow:inset 0 1*@unit 0 #fff;
+ box-shadow:inset 0 1*@unit 0 #fff
 }
 .modal-footer:before,
 .modal-footer:after {
@@ -711,10 +726,10 @@ pre code {
 }
 .modal-footer .btn+.btn {
  margin-bottom:0;
- margin-left:5px
+ margin-left:5*@unit
 }
 .modal-footer .btn-group .btn+.btn {
- margin-left:-1px
+ margin-left:-1*@unit
 }
 .modal-footer .btn-block+.btn-block {
  margin-left:0
@@ -730,52 +745,52 @@ pre code {
  left:0;
  z-index:1010;
  display:none;
- max-width:276px;
- padding:1px;
+ max-width:276*@unit;
+ padding:1*@unit;
  text-align:left;
  white-space:normal;
  background-color:#fff;
- border:1px solid #ccc;
- border:1px solid rgba(0,0,0,0.2);
- -webkit-border-radius:6px;
- -moz-border-radius:6px;
- border-radius:6px;
- -webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);
- -moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);
- box-shadow:0 5px 10px rgba(0,0,0,0.2);
+ border:1*@unit solid #ccc;
+ border:1*@unit solid rgba(0,0,0,0.2);
+ -webkit-border-radius:6*@unit;
+ -moz-border-radius:6*@unit;
+ border-radius:6*@unit;
+ -webkit-box-shadow:0 5*@unit 10*@unit rgba(0,0,0,0.2);
+ -moz-box-shadow:0 5*@unit 10*@unit rgba(0,0,0,0.2);
+ box-shadow:0 5*@unit 10*@unit rgba(0,0,0,0.2);
  -webkit-background-clip:padding-box;
  -moz-background-clip:padding;
  background-clip:padding-box
 }
 .popover.top {
- margin-top:-10px
+ margin-top:-10*@unit
 }
 .popover.right {
- margin-left:10px
+ margin-left:10*@unit
 }
 .popover.bottom {
- margin-top:10px
+ margin-top:10*@unit
 }
 .popover.left {
- margin-left:-10px
+ margin-left:-10*@unit
 }
 .popover-title {
- padding:8px 14px;
+ padding:8*@unit 14*@unit;
  margin:0;
- font-size:14px;
+ font-size:14*@unit;
  font-weight:normal;
- line-height:18px;
+ line-height:18*@unit;
  background-color:#f7f7f7;
- border-bottom:1px solid #ebebeb;
- -webkit-border-radius:5px 5px 0 0;
- -moz-border-radius:5px 5px 0 0;
- border-radius:5px 5px 0 0
+ border-bottom:1*@unit solid #ebebeb;
+ -webkit-border-radius:5*@unit 5*@unit 0 0;
+ -moz-border-radius:5*@unit 5*@unit 0 0;
+ border-radius:5*@unit 5*@unit 0 0
 }
 .popover-title:empty {
  display:none
 }
 .popover-content {
- padding:9px 14px
+ padding:9*@unit 14*@unit
 }
 .popover .arrow,
 .popover .arrow:after {
@@ -787,65 +802,65 @@ pre code {
  border-style:solid
 }
 .popover .arrow {
- border-width:11px
+ border-width:11*@unit
 }
 .popover .arrow:after {
- border-width:10px;
+ border-width:10*@unit;
  content:""
 }
 .popover.top .arrow {
- bottom:-11px;
+ bottom:-11*@unit;
  left:50%;
- margin-left:-11px;
+ margin-left:-11*@unit;
  border-top-color:#999;
  border-top-color:rgba(0,0,0,0.25);
  border-bottom-width:0
 }
 .popover.top .arrow:after {
- bottom:1px;
- margin-left:-10px;
+ bottom:1*@unit;
+ margin-left:-10*@unit;
  border-top-color:#fff;
  border-bottom-width:0
 }
 .popover.right .arrow {
  top:50%;
- left:-11px;
- margin-top:-11px;
+ left:-11*@unit;
+ margin-top:-11*@unit;
  border-right-color:#999;
  border-right-color:rgba(0,0,0,0.25);
  border-left-width:0
 }
 .popover.right .arrow:after {
- bottom:-10px;
- left:1px;
+ bottom:-10*@unit;
+ left:1*@unit;
  border-right-color:#fff;
  border-left-width:0
 }
 .popover.bottom .arrow {
- top:-11px;
+ top:-11*@unit;
  left:50%;
- margin-left:-11px;
+ margin-left:-11*@unit;
  border-bottom-color:#999;
  border-bottom-color:rgba(0,0,0,0.25);
  border-top-width:0
 }
 .popover.bottom .arrow:after {
- top:1px;
- margin-left:-10px;
+ top:1*@unit;
+ margin-left:-10*@unit;
  border-bottom-color:#fff;
  border-top-width:0
 }
 .popover.left .arrow {
  top:50%;
- right:-11px;
- margin-top:-11px;
+ right:-11*@unit;
+ margin-top:-11*@unit;
  border-left-color:#999;
  border-left-color:rgba(0,0,0,0.25);
  border-right-width:0
 }
 .popover.left .arrow:after {
- right:1px;
- bottom:-10px;
+ right:1*@unit;
+ bottom:-10*@unit;
  border-left-color:#fff;
  border-right-width:0
 }
@@ -855,26 +870,26 @@ pre code {
 // Hero {{{
 
 .hero-unit {
- padding:60px;
- margin-bottom:30px;
- font-size:18px;
+ padding:60*@unit;
+ margin-bottom:30*@unit;
+ font-size:18*@unit;
  font-weight:200;
- line-height:30px;
+ line-height:30*@unit;
  color:inherit;
  background-color:#eee;
- -webkit-border-radius:6px;
- -moz-border-radius:6px;
- border-radius:6px
+ -webkit-border-radius:6*@unit;
+ -moz-border-radius:6*@unit;
+ border-radius:6*@unit
 }
 .hero-unit h1 {
  margin-bottom:0;
- font-size:60px;
+ font-size:60*@unit;
  line-height:1;
- letter-spacing:-1px;
+ letter-spacing:-1*@unit;
  color:inherit
 }
 .hero-unit li {
- line-height:30px
+ line-height:30*@unit
 }
 
 // }}}
