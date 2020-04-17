@@ -7,7 +7,7 @@
   </div>
 [% END %]
 
-<div class="jumbotron">
+<div class="jumbotron with-right-logo">
   <img class="right-logo" src="[%root%]logo/nixos-logo-only-hires.png" alt="NixOS Logo"/>
   <h1>Nix</h1>
   <h2>The Purely Functional Package Manager</h2>

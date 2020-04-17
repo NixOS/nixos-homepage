@@ -6,7 +6,7 @@
 
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 
-<div class="jumbotron">
+<div class="jumbotron with-right-logo">
   <img class="right-logo" src="[%root%]logo/nixos-logo-only-hires.png" alt="NixOS Logo"/>
   <h1>NixOS</h1>
   <h2>The Purely Functional Linux Distribution</h2>
