@@ -1,0 +1,158 @@
+// Main page "jumbotron"
+
+// Hides titles present on the page present only for semantic needs.
+.nixos-org-index > h1,
+.nixos-org-index > h2 {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    text-indent: -999em;
+}
+
+.nixos-org-index > hr {
+    margin-bottom: 0;
+}
+
+.nixos-org-index .more-about .learn-more {
+    display: block;
+    /*text-align: right;*/
+}
+
+.nixos-org-index .and-more ul {
+	list-style-type: none;
+	margin: 0;
+}
+.nixos-org-index .and-more ul li {
+	margin: 0;
+}
+
+@media (max-width: 767px) {
+    .jumbotron-two > div > div::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    .jumbotron-two .learn-more {
+        float: right;
+    }
+}
+@media (min-width: 768px) {
+    /* Punny name, as it is both the second jumobtron implementation
+       and a two elements side-by-side thing. */
+    .jumbotron-two {
+        display: table;
+		/* 14px/20px equivalent */
+		line-height: 1.429;
+    }
+    .jumbotron-two p {
+		font-size: 1.2em;
+	}
+    .jumbotron-two > div {
+        display: table-row;
+    }
+    .jumbotron-two > div > div {
+        width: 50%;
+        position: relative;
+        display: table-cell;
+        padding-bottom: 35px;
+    }
+    .jumbotron-two > div > div:not(:first-child) {
+        padding-left: 15px;
+    }
+    .jumbotron-two > div > div:not(:last-child) {
+        padding-right: 15px;
+    }
+    .jumbotron-two .learn-more {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+    .jumbotron-two div:not(:last-child) > .learn-more {
+        right: 15px;
+    }
+}
+
+// List of recent blogs
+
+ul.nixos-blogs {
+    list-style-type: none;
+    margin-left: 0;
+}
+
+ul.nixos-blogs a {
+    color: inherit;
+}
+
+ul.nixos-blogs > li {
+    border-top: 1px solid rgb(226, 234, 238);
+    margin-bottom: 0em;
+}
+
+ul.nixos-blogs > li:nth-child(odd) {
+    background-color: rgb(247, 251, 252);
+}
+
+div.nixos-blog {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    min-height: 36px;
+}
+
+div.nixos-blog-title {
+    font-weight: bold;
+}
+
+div.nixos-blog-author-info {
+    font-size: 90%;
+}
+
+// News items
+
+table.news {
+  padding: 0 0 0 0;
+}
+
+table.news td {
+   border: 0px;
+}
+
+tr.news-header {
+  font-size: 100%;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  border-bottom: solid #c0c0c0 1px;
+}
+
+.news-date {
+  text-align: right;
+  vertical-align: top;
+  font-weight: normal;
+  font-style: italic;
+  width: 25%;
+  color: #808080;
+}
+
+.news-short {
+  font-weight: normal;
+  font-size: 110%;
+  color: #404040;
+  padding-left: 0;
+}
+
+.news-descr > td {
+  text-align: justify;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+  padding-left: 0;
+}
+
+.news-descr p:first-child {
+  margin-top: 0;
+}
+
+.news-descr p {
+  margin-top: 1em;
+  margin-bottom: 0em;
+}
+
+

@@ -1,0 +1,63 @@
+// Package/option search
+
+table#search-results tbody tr.result {
+    cursor: pointer;
+}
+
+table#search-results tr.odd > td {
+    background-color: #f5f5f5;
+}
+
+table#search-results tr.details > td:hover {
+    background-color: white;
+}
+
+div.search-details {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+div.search-details th, div.search-details td {
+    border-top: 0;
+}
+
+div.search-details td.pre {
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+td.option {
+    font-family: monospace;
+}
+
+div.search-details td.nix {
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+#search-results .description.docbook p > .docbook-important {
+    margin-top: 0.5rem;
+}
+
+#search-results .description.docbook .docbook-important {
+    border-left: #F89406 solid 0.3rem;
+    padding-left: 0.5rem;
+}
+
+.license ul {
+    margin-left: 0px;
+}
+
+.license li {
+    display: inline;
+    list-style: none;
+    content: ", ";
+}
+
+.license li:after {
+    content: ", ";
+}
+
+.license li:last-child:after {
+    content: "";
+}
