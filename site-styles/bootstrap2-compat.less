@@ -99,6 +99,55 @@ table {
 // Layout-specific rules
 // ---------------------
 
+// Rows and spans
+.row,
+.row-fluid {
+	// This recursive mixin creates a loop.
+	._span(@_i) when (@_i > 0) {
+		._span((@_i - 1));
+		.span@{_i} {
+			flex-grow: @_i;
+			flex-shrink: @_i;
+			#screen-sm-min({
+				max-width: @_i/12 * 100%;
+			});
+		}
+	}
+	// The maximum supported `spanN`.
+	._span(12);
+
+	#screen-sm-min({
+		display: flex;
+		align-items: stretch;
+		& > * {
+			flex-basis: 0;
+			&:not(:first-child) {
+				padding-left: @gutter/2;
+			}
+			&:not(:last-child) {
+				padding-right: @gutter/2;
+			}
+		}
+		& > .span1,
+		& > .span2,
+		& > .span3,
+		& > .span4,
+		& > .span5,
+		& > .span6,
+		& > .span7,
+		& > .span8,
+		& > .span9,
+		& > .span10,
+		& > .span11,
+		& > .span12 {
+			& > :last-child {
+				margin-bottom: @gutter;
+			}
+		}
+	});
+}
+
+
 // Dropdown
 .dropdown {
 	position: relative;
