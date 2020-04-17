@@ -1,3 +1,27 @@
 body {
 	padding-top: @bs_navbar_height + @gutter;;
 }
+
+.center {
+    text-align: center;
+}
+
+p {
+    text-align: justify;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+.popover {
+	max-width: 30em;
+}
+
+// Horizontally centers the `get` button with the image.
+// 196px is the width of the image.
+@media (min-width: 980px) {
+	.get-button {
+		max-width: 196px;
+		text-align: center;
+	}
+}
