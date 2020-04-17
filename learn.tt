@@ -1,5 +1,6 @@
 [% WRAPPER layout.tt hideTitle=1 title="Learn" menu='nixos' %]
 
+<div class="learn-resources">
 <div class="row-fluid">
 
   <div class="span4">
@@ -120,6 +121,7 @@
     <a href="[%root%]nixos/manual" class="btn btn-block">More ...</a>
   </div>
 
+</div>
 </div>
 
 <div class="row-fluid">
