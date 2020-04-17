@@ -1,0 +1,80 @@
+// This is a mixin allowing another part of the design to
+// re-use those sizes in a different order.
+#theme() {
+	.h2, .h3, .h4, .h5, .h6 {
+		font-weight: normal;
+	}
+	.h1, .h2, .h3, .h4, .h5, .h6 {
+		margin-top: 0;
+		margin-bottom: @gutter;
+	}
+
+	.h1 {
+		font-size: 250%;
+	}
+	.h2 {
+		font-size: 200%;
+	}
+	.h3 {
+		font-size: 150%;
+	}
+	.h4 {
+		font-size: 140%;
+	}
+	.h5 {
+		font-size: 130%;
+	}
+}
+
+h1 { #theme.h1 }
+h2 { #theme.h2 }
+h3 { #theme.h3 }
+h4 { #theme.h4 }
+h5 { #theme.h5 }
+h6 { #theme.h6 }
+
+// Used on Nix and NixOS pages (not the index).
+// (The logo is not actually on the right *facepalm*.)
+.right-logo {
+    width: 14em;
+    float: left;
+    margin: 1em 3em 1em 0em;
+}
+
+// Inline (floating) images
+img.inline {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+}
+
+section {
+    margin-top: 1.5em;
+}
+
+section h2 {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+pre {
+    box-shadow: 0.1em 0.1em 0.5em #e0e0e0;
+}
+
+.nix-command {
+    white-space: nowrap;
+}
+
+.nix-command:before {
+    color: #999;
+    content: " $ ";
+}
+
+.nix-shell-command:before {
+    color: #999;
+    content: " [nix-shell]$ ";
+}
+
+// Some weirdness with `tt` that is not happening with `code`...
+tt {
+	font-size: 14*@unit;
+}
