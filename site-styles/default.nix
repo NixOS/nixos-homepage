@@ -24,6 +24,7 @@ stdenv.mkDerivation {
       token=''${token//[^A-Z]/_}
       token=SVG_''${token/%_SVG/}
       substituteInPlace svg.less --replace "@$token)" "'$(cat $f)')"
+      substituteInPlace svg.less --replace "@$token," "'$(cat $f)',"
     done
     )
     lessc index.less styles.css

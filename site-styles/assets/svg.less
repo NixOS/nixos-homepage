@@ -2,9 +2,10 @@
 // This uses an external pipeline in default.nix to replace the @SVG_* tokens
 // with files from this directory with their name uppercased.
 
-#svg(@svg) {
+#svg(@svg, @color: "#ffffff") {
+	@_colorized: replace(@svg, "#ffffff", @color);
     // ugh, that's an ugly hack... but escape() apparently doesn't deal well with percent signs.
-    @_data: replace(escape(@svg), "%", "PERCENT");
+    @_data: replace(escape(@_colorized), "%", "PERCENT");
     background-image: replace(~"url('data:image/svg+xml;utf8,@{_data}')", "PERCENT", "%");
 }
 
@@ -30,4 +31,11 @@
 #svg-text-nixpkgs() {
     // The NixOS logotype, pre-rendered, but with the "Nixpkgs" text
     #svg(@SVG_TEXT_NIXPKGS);
+}
+
+// Icons used throughout the site
+
+#svg-cloud-download(@color: #fff) {
+	/* https://fontawesome.com/v4.7.0/license/ */
+    #svg(@SVG_CLOUD_DOWNLOAD, @color);
 }
