@@ -145,12 +145,17 @@ table {
 // Navbar
 body > .navbar {
 	&.navbar-fixed-top {
-		position: fixed;
+		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		z-index: 1050;
 	}
+	#screen-sm-min({
+		&.navbar-fixed-top {
+			position: fixed;
+		}
+	});
 }
 
 .navbar {
