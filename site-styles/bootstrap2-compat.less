@@ -4,7 +4,7 @@
 @line-height: 1.429; // Empirically deduced in the browser.
 
 // As a default
-@gutter: 15*@unit;
+@gutter: 20*@unit;
 
 @bs_radius: 6*@unit;
 @bs_navbar_height: 40*@unit;
@@ -41,6 +41,10 @@ body {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: @bs_color_default_foreground;
 	background-color: @bs_color_default_background;
+	#screen-xs-max({
+		padding-left: @gutter;
+		padding-right: @gutter;
+	});
 }
 
 input, textarea, select {
@@ -68,6 +72,18 @@ hr {
 	border-top: 1px solid #eee;
 	border-bottom: 1px solid #fff;
 	margin: @gutter 0;
+}
+
+ul {
+	padding: 0;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: @gutter;
+	margin-left: @gutter;
+}
+
+table {
+	border-collapse: collapse;
 }
 
 // General, but specific, rules
@@ -110,7 +126,7 @@ hr {
 	}
 
 	.dropdown-menu a {
-		padding: 3*@unit 20*@unit;
+		padding: 3*@unit @gutter;
 		color: @bs_color_default_foreground;
 		display: block;
 
@@ -189,8 +205,8 @@ body > .navbar {
 	}
 
 	a {
-		padding-left: @gutter;
-		padding-right: @gutter;
+		padding-left:  15*@unit;
+		padding-right: 15*@unit;
 		color: @bs_color_nav_foreground;
 		&:hover, &:focus, &:active, &.active {
 			color: @bs_color_nav_hover_foreground;
