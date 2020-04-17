@@ -1,6 +1,6 @@
 // One "unit" is equivalent to one pixel.
 // (Assuming 14px or computed equivalent.)
-@unit: 1/16rem;
+@unit: 1/14rem;
 @line-height: 1.429; // Empirically deduced in the browser.
 
 // As a default
@@ -24,8 +24,7 @@
 // Basic catch-all rules
 // ---------------------
 
-body {
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+html {
 	// Assuming a browser default font size of 16px,
 	// this is equivalent to 14px from bootstrap 2
 	// font-size: 14px;
@@ -36,6 +35,10 @@ body {
 
 	// line-height: 20px;
 	line-height: @line-height;
+}
+
+body {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: @bs_color_default_foreground;
 	background-color: @bs_color_default_background;
 }
