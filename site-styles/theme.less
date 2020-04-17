@@ -75,11 +75,16 @@ section {
 }
 
 section h2 {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1*@unit solid #f0f0f0;
 }
 
 pre {
     box-shadow: 0.1em 0.1em 0.5em #e0e0e0;
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: @gutter;
 }
 
 .nix-command {
@@ -109,5 +114,14 @@ tt {
 		& > .btn:last-child {
 			margin-top: auto;
 		}
+	}
+}
+
+dt, dd {
+	& > *:first-child {
+		margin-top: 0;
+	}
+	& > *:last-child {
+		margin-bottom: 0;
 	}
 }

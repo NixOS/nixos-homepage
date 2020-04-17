@@ -54,13 +54,13 @@
         width: 50%;
         position: relative;
         display: table-cell;
-        padding-bottom: 35px;
+        padding-bottom: 35*@unit;
     }
     .jumbotron-two > div > div:not(:first-child) {
-        padding-left: 15px;
+        padding-left: 15*@unit;
     }
     .jumbotron-two > div > div:not(:last-child) {
-        padding-right: 15px;
+        padding-right: 15*@unit;
     }
     .jumbotron-two .learn-more {
         position: absolute;
@@ -68,7 +68,7 @@
         right: 0;
     }
     .jumbotron-two div:not(:last-child) > .learn-more {
-        right: 15px;
+        right: 15*@unit;
     }
 }
 
@@ -84,7 +84,7 @@ ul.nixos-blogs a {
 }
 
 ul.nixos-blogs > li {
-    border-top: 1px solid rgb(226, 234, 238);
+    border-top: 1*@unit solid rgb(226, 234, 238);
     margin-bottom: 0em;
 }
 
@@ -95,7 +95,7 @@ ul.nixos-blogs > li:nth-child(odd) {
 div.nixos-blog {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    min-height: 36px;
+    min-height: 36*@unit;
 }
 
 div.nixos-blog-title {
@@ -113,14 +113,14 @@ table.news {
 }
 
 table.news td {
-   border: 0px;
+   border: 0;
 }
 
 tr.news-header {
   font-size: 100%;
   padding: 0 0 0 0;
   margin: 0 0 0 0;
-  border-bottom: solid #c0c0c0 1px;
+  border-bottom: solid #c0c0c0 1*@unit;
 }
 
 .news-date {

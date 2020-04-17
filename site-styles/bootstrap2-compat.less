@@ -59,8 +59,8 @@ a, .pretend-link {
 
 	&:focus {
 		outline: thin dotted #333;
-		outline: 5px auto -webkit-focus-ring-color;
-		outline-offset: -2px
+		outline: 5*@unit auto -webkit-focus-ring-color;
+		outline-offset: -2*@unit
 	}
 
 	&:hover, &:focus {
@@ -70,8 +70,8 @@ a, .pretend-link {
 }
 
 hr {
-	border-top: 1px solid #eee;
-	border-bottom: 1px solid #fff;
+	border-top: 1*@unit solid #eee;
+	border-bottom: 1*@unit solid #fff;
 	margin: @gutter 0;
 }
 
