@@ -71,6 +71,7 @@
             <li><a href="[%root%]nixos/options.html">Options</a></li>
             <li><a href="[%root%]nixos/community.html">Community</a></li>
             <li><a href="[%root%]governance.html">Governance</a></li>
+            <li><a href="[%root%]donate.html">Donate</a></li>
           </ul>
           <ul class="nav pull-right">
             <!--
@@ -83,6 +84,7 @@
               <li><a href="[%root%]download.html">Download</a></li>
               <li><a href="[%root%]learn.html">Learn</a></li>
               <li><a href="[%root%]governance.html">Governance</a></li>
+              <li><a href="[%root%]donate.html">Donate</a></li>
             </ul>
             <ul class="nav pull-right">
               <li><a href="https://github.com/NixOS/nix"><i class="fa fa-github"></i></a></li>
@@ -91,6 +93,7 @@
                 <li><a href="[%root%]download.html">Download</a></li>
                 <li><a href="[%root%]learn.html">Learn</a></li>
                 <li><a href="[%root%]governance.html">Governance</a></li>
+                <li><a href="[%root%]donate.html">Donate</a></li>
               </ul>
               <ul class="nav pull-right">
                 <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
@@ -98,6 +101,7 @@
                 <ul class="nav pull-right">
                   <li><a href="[%root%]learn.html">Learn</a></li>
                   <li><a href="[%root%]governance.html">Governance</a></li>
+                  <li><a href="[%root%]donate.html">Donate</a></li>
                   <li><a href="https://github.com/NixOS/nixpkgs"><i class="fa fa-github"></i></a></li>
                   <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i></a></li>
                   [% ELSE %]

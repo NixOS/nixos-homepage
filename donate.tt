@@ -1,0 +1,105 @@
+[% WRAPPER layout.tt hideTitle=1 title="Donate" menu='nixos' %]
+
+<h1>Donate</h1>
+
+<p class="lead">
+The NixOS infrastructure, development and events
+are funded by its users and sponsors.
+</p>
+
+<p>Maintaining our build farm and binary cache is very expensive.
+We depend on your support to ensure the continuous operation
+and expansion of the NixOS infrastructure.
+Please consider donating a small amount every month
+to contribute to sustainable funding.
+Donations are handled by a nonprofit organization,
+the <a href="[%root%]governance.html#foundation">NixOS Foundation</a>.</p>
+
+<h2>Get Merch</h2>
+
+<p>You can get NixOS related Merch. The community member <a href="https://discourse.nixos.org/u/mogorman/summary">mogorman</a> created a Shop for it. The profits <a href="https://discourse.nixos.org/t/nixos-merchandise-report/303">are donated</a> to the <a href="[%root%]governance.html#foundation">NixOS Foundation</a>.</p>
+<a class="btn btn-block btn-success"
+   href="https://www.redbubble.com/people/mogorman/shop">Go to Shop</a>
+
+<h2>Donate with Open Collective</h2>
+
+<p>You can donate to the NixOS Foundation by using Open Collective:</p>
+
+<object type="image/svg+xml" data="https://opencollective.com/nixos/tiers/supporter.svg?avatarHeight=80&amp;width=1000"></object>
+
+<h2>Donate with SEPA bank transfer</h2>
+
+<p>The NixOS Foundation also accepts donations via SEPA bank transfer. Please send payments to:</p>
+
+<pre class="code">
+Stichting NixOS Foundation, De Meern, The Netherlands
+
+IBAN: NL45 KNAB 0732 3586 98
+BIC:  KNABNL2H
+</pre>
+
+<p>Please add your name and purpose (donation) in the description of the transfer.</p>
+
+<i>If you would like to support us with amounts above 2000 euro per year, please contact us at
+<a href="mailto:foundation@nixos.org">foundation@nixos.org</a>, as this will have tax implications.
+</i>
+
+<h2>Acknowledgments</h2>
+
+<p>The Nix package manager was developed by <a
+href="https://edolstra.github.io/">Eelco Dolstra</a> as
+part of his PhD research in the <a
+href="http://www.cs.uu.nl/wiki/Trace/WebHome">TraCE project</a>,
+funded by the <a href="http://www.jacquard.nl/">Jacquard programme</a>
+of the <a href="http://www.nwo.nl/">Netherlands Organisation for
+Scientific Research</a> (NWO) and <a
+href="http://www.serc.nl/">SERC</a>. The first prototype of NixOS was
+developed by <a href="http://www.tjaldur.nl/">Armijn Hemel</a> as
+his master’s thesis project. Hydra, the Nix-based continuous build
+system, was developed as part of the LaQuSo Buildfarm project, funded
+by <a href="https://www.4tu.nl/nirict/">NIRICT</a> and <a
+href="http://www.laquso.com/">LaQuSo</a>.</p>
+
+<p>The following companies and institutes have supported
+the development of NixOS and hosting for it's infrastructure.
+We are very grateful for that!
+If you would like to support us as well, please contact
+<a href="mailto:rob.vermaas@gmail.com">Rob Vermaas</a>.</p>
+
+<div class="row-fluid" style="height: 100px; line-height: 100px;">
+  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
+    <a href="http://www.logicblox.com/"><img src="[% root %]logo/lb_logo_small_no_bg.png" alt="LogicBlox logo" style="height:60px;" /></a>
+  </div>
+  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
+    <a href="http://www.tudelft.nl/"><img src="[% root %]logo/tudelft.gif" alt="TU Delft logo" style="height:60px;" /></a>
+  </div>
+  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
+    <a href="http://www.uu.nl/"><img src="[% root %]logo/uu.gif" alt="UU logo" style="height:60px;" /></a>
+  </div>
+</div>
+
+<div class="row-fluid" style="height: 100px; line-height: 100px;">
+  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
+    <a href="https://www.3tu.nl/"><img src="[% root %]logo/3tu.jpg" alt="3TU logo" style="height:60px;" /></a>
+  </div>
+  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
+    <a href="https://www.packet.com"><img src="[% root %]logo/packet.net.svg" alt="Premium Bare Metal Servers and Cloud Hosting" style="height:60px;" /></a>
+  </div>
+  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
+    <a href="https://snabb.co"><img src="[% root %]logo/snabb.png" alt="Snabb.co logo" style="height:60px;" /></a>
+  </div>
+</div>
+
+<div class="row-fluid" style="height: 100px; line-height: 100px;">
+  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
+    <a href="https://www.macstadium.com/"><img src="[% root %]logo/macstadium.png" alt="MacStadium logo" style="height:60px;" /></a>
+  </div>
+  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
+    <a href="https://www.fastly.com/"><img src="[% root %]logo/fastly.png" alt="Fastly" style="height:60px;" /></a>
+  </div>
+  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
+    <a href="https://www.hetzner.de/"><img src="[% root %]logo/hetzner-online.svg" alt="Hetzner Online GmbH" style="height:60px;" /></a>
+  </div>
+</div>
+
+[% END %]

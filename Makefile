@@ -6,7 +6,7 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 default: all
 
 
-HTML = index.html download.html news.html learn.html governance.html \
+HTML = index.html download.html news.html learn.html governance.html donate.html \
   teams/rfc-steering-committee.html teams/security.html teams/marketing.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
   teams/discourse.html \
@@ -83,7 +83,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt nix-release.tt nixos-release.tt donation.tt
+%.html: %.tt layout.tt common.tt nix-release.tt nixos-release.tt
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
@@ -145,4 +145,3 @@ nixpkgs/packages-channels.json: Makefile
 
 nixos/packages-explorer.js:
 	@ln -sfn $(PACKAGES_EXPLORER) $@
-
