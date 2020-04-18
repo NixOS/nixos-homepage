@@ -282,3 +282,18 @@ body > .navbar {
 	border-bottom: @unit solid rgb(212, 212, 212);
 	box-shadow: rgba(0, 0, 0, 0.1) 0*@unit 1*@unit 10*@unit 0*@unit;
 }
+
+// Tabs
+.tab-pane:not(.active) {
+	display: none;
+}
+.nav-tabs {
+	list-style-type: none;
+	margin-left: 0;
+}
+.nav-tabs > li > a {
+	&:hover, &:focus {
+		text-decoration:none;
+		background-color:#eee
+	}
+}
