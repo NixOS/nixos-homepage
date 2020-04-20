@@ -3,10 +3,14 @@
 
   description = "The nixos.org homepage";
 
+  # This is used to build the site.
   inputs.nixpkgs.url = "nixpkgs/nixos-20.03";
+
+  # These are used for the manuals, and release artifacts
+  inputs.released-nixpkgs.url = "nixpkgs/nixos-20.03";
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
 
-  outputs = { self, nixpkgs, nix-pills }:
+  outputs = { self, nixpkgs, released-nixpkgs, nix-pills }:
     with import nixpkgs { system = "x86_64-linux"; };
     rec {
 
@@ -18,7 +22,7 @@
 
       nixosAmis = writeText "ec2-amis.json"
         (builtins.toJSON (
-          import (nixpkgs + "/nixos/modules/virtualisation/ec2-amis.nix")));
+          import (released-nixpkgs + "/nixos/modules/virtualisation/ec2-amis.nix")));
 
       nixPills = import nix-pills {
         inherit pkgs;
@@ -58,8 +62,8 @@
 
         makeFlags =
           [ "NIX_MANUAL_IN=${nix.doc}/share/doc/nix/manual"
-            "NIXOS_MANUAL_IN=${nixpkgs.htmlDocs.nixosManual}"
-            "NIXPKGS_MANUAL_IN=${nixpkgs.htmlDocs.nixpkgsManual}"
+            "NIXOS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixosManual}"
+            "NIXPKGS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixpkgsManual}"
             "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
             "PACKAGES_EXPLORER=${packages.x86_64-linux.packagesExplorer}/bundle.js"
             "NIX_PILLS_MANUAL_IN=${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
@@ -72,8 +76,8 @@
 
         shellHook = ''
           export NIX_MANUAL_IN="${nix.doc}/share/doc/nix/manual"
-          export NIXOS_MANUAL_IN="${nixpkgs.htmlDocs.nixosManual}"
-          export NIXPKGS_MANUAL_IN="${nixpkgs.htmlDocs.nixpkgsManual}"
+          export NIXOS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixosManual}"
+          export NIXPKGS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixpkgsManual}"
           export NIXOS_AMIS="${packages.x86_64-linux.nixosAmis}"
           export PACKAGES_EXPLORER="${packages.x86_64-linux.packagesExplorer}/bundle.js"
           export NIX_PILLS_MANUAL_IN="${packages.x86_64-linux.nixPills}/share/doc/nix-pills"

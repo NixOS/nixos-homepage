@@ -35,10 +35,28 @@
         "type": "indirect"
       }
     },
+    "released-nixpkgs": {
+      "info": {
+        "lastModified": 1587398327,
+        "narHash": "sha256-mEKkeLgUrzAsdEaJ/1wdvYn0YZBAKEG3AN21koD2AgU="
+      },
+      "locked": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5272327b81ed355bbed5659b8d303cf2979b6953",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-20.03",
+        "type": "indirect"
+      }
+    },
     "root": {
       "inputs": {
         "nix-pills": "nix-pills",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "released-nixpkgs": "released-nixpkgs"
       }
     }
   },
