@@ -109,9 +109,11 @@
     [% prefix = "https://channels.nixos.org/nixos-" _ latestNixOSSeries %]
 
     <ul>
-      <li><a href="[%prefix%]/latest-nixos-graphical-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a
-          href="[%prefix%]/latest-nixos-graphical-x86_64-linux.iso.sha256">SHA-256</a>)
-        <span class="label label-info">Recommended for most users</span></li>
+      <li>
+        <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a
+          href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso.sha256">SHA-256</a>)
+        <span class="label label-info">Recommended for most users</span>
+      </li>
     </ul>
 
     <p>The <strong>minimal installation CD</strong> does not contain the

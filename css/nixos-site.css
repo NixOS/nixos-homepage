@@ -281,10 +281,11 @@ tr.news-header {
 }
 
 .news-short {
-  font-weight: normal;
-  font-size: 110%;
+  font-weight: bold;
+  font-size: 140%;
   color: #404040;
   padding-left: 0;
+  height: 2em;
 }
 
 .news-descr > td {
