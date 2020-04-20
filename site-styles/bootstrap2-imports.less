@@ -34,43 +34,6 @@ a.muted:hover,
 a.muted:focus {
  color:#808080
 }
-.text-warning {
- color:#c09853
-}
-a.text-warning:hover,
-a.text-warning:focus {
- color:#a47e3c
-}
-.text-error {
- color:#b94a48
-}
-a.text-error:hover,
-a.text-error:focus {
- color:#953b39
-}
-.text-info {
- color:#3a87ad
-}
-a.text-info:hover,
-a.text-info:focus {
- color:#2d6987
-}
-.text-success {
- color:#468847
-}
-a.text-success:hover,
-a.text-success:focus {
- color:#356635
-}
-.text-left {
- text-align:left
-}
-.text-right {
- text-align:right
-}
-.text-center {
- text-align:center
-}
 
 .lead {
  margin-bottom:20*@unit;
@@ -368,30 +331,6 @@ input[type="submit"].btn::-moz-focus-inner {
  padding:0;
  border:0
 }
-.btn-link,
-.btn-link:active,
-.btn-link[disabled] {
- background-color:transparent;
- background-image:none;
- box-shadow:none
-}
-.btn-link {
- color:#08c;
- cursor:pointer;
- border-color:transparent;
- border-radius:0
-}
-.btn-link:hover,
-.btn-link:focus {
- color:#005580;
- text-decoration:underline;
- background-color:transparent
-}
-.btn-link[disabled]:hover,
-.btn-link[disabled]:focus {
- color:#333;
- text-decoration:none
-}
 /// }}}
 
 // Form elements {{{
@@ -458,8 +397,7 @@ input[type="email"],
 input[type="url"],
 input[type="search"],
 input[type="tel"],
-input[type="color"],
-.uneditable-input {
+input[type="color"] {
  display:inline-block;
  height:20*@unit;
  padding:4*@unit 6*@unit;
@@ -471,8 +409,7 @@ input[type="color"],
  border-radius:4*@unit
 }
 input,
-textarea,
-.uneditable-input {
+textarea {
  width:206*@unit
 }
 textarea {
@@ -492,8 +429,7 @@ input[type="email"],
 input[type="url"],
 input[type="search"],
 input[type="tel"],
-input[type="color"],
-.uneditable-input {
+input[type="color"] {
  background-color:#fff;
  border:1*@unit solid #ccc;
  box-shadow:inset 0 1*@unit 1*@unit rgba(0,0,0,0.075);
@@ -513,8 +449,7 @@ input[type="email"]:focus,
 input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
-input[type="color"]:focus,
-.uneditable-input:focus {
+input[type="color"]:focus {
  border-color:rgba(82,168,236,0.8);
  outline:0;
  outline:thin dotted \9;
@@ -557,22 +492,6 @@ input[type="checkbox"]:focus {
  outline:5*@unit auto -webkit-focus-ring-color;
  outline-offset:-2*@unit
 }
-.uneditable-input,
-.uneditable-textarea {
- color:#999;
- cursor:not-allowed;
- background-color:#fcfcfc;
- border-color:#ccc;
- box-shadow:inset 0 1*@unit 2*@unit rgba(0,0,0,0.025)
-}
-.uneditable-input {
- overflow:hidden;
- white-space:nowrap
-}
-.uneditable-textarea {
- width:auto;
- height:auto
-}
 input:-moz-placeholder,
 textarea:-moz-placeholder {
  color:#999
@@ -594,10 +513,6 @@ textarea::-webkit-input-placeholder {
 .checkbox input[type="checkbox"] {
  float:left;
  margin-left:-20*@unit
-}
-.controls>.radio:first-child,
-.controls>.checkbox:first-child {
- padding-top:5*@unit
 }
 .radio.inline,
 .checkbox.inline {
@@ -631,92 +546,74 @@ textarea::-webkit-input-placeholder {
 input[class*="span"],
 select[class*="span"],
 textarea[class*="span"],
-.uneditable-input[class*="span"],
 .row-fluid input[class*="span"],
 .row-fluid select[class*="span"],
-.row-fluid textarea[class*="span"],
-.row-fluid .uneditable-input[class*="span"] {
+.row-fluid textarea[class*="span"] {
  float:none;
  margin-left:0
 }
 .input-append input[class*="span"],
-.input-append .uneditable-input[class*="span"],
 .input-prepend input[class*="span"],
-.input-prepend .uneditable-input[class*="span"],
 .row-fluid input[class*="span"],
 .row-fluid select[class*="span"],
 .row-fluid textarea[class*="span"],
-.row-fluid .uneditable-input[class*="span"],
 .row-fluid .input-prepend [class*="span"],
 .row-fluid .input-append [class*="span"] {
  display:inline-block
 }
 input,
-textarea,
-.uneditable-input {
+textarea {
  margin-left:0
 }
 .controls-row [class*="span"]+[class*="span"] {
  margin-left:20*@unit
 }
 input.span12,
-textarea.span12,
-.uneditable-input.span12 {
+textarea.span12 {
  width:926*@unit
 }
 input.span11,
-textarea.span11,
-.uneditable-input.span11 {
+textarea.span11 {
  width:846*@unit
 }
 input.span10,
-textarea.span10,
-.uneditable-input.span10 {
+textarea.span10 {
  width:766*@unit
 }
 input.span9,
-textarea.span9,
-.uneditable-input.span9 {
+textarea.span9 {
  width:686*@unit
 }
 input.span8,
-textarea.span8,
-.uneditable-input.span8 {
+textarea.span8 {
  width:606*@unit
 }
 input.span7,
-textarea.span7,
-.uneditable-input.span7 {
+textarea.span7 {
  width:526*@unit
 }
 input.span6,
-textarea.span6,
-.uneditable-input.span6 {
+textarea.span6 {
  width:446*@unit
 }
 input.span5,
-textarea.span5,
-.uneditable-input.span5 {
+textarea.span5 {
  width:366*@unit
 }
 input.span4,
-textarea.span4,
-.uneditable-input.span4 {
+textarea.span4 {
  width:286*@unit
 }
 input.span3,
-textarea.span3,
-.uneditable-input.span3 {
+textarea.span3 {
  width:206*@unit
 }
 input.span2,
-textarea.span2,
-.uneditable-input.span2 {
+textarea.span2 {
  width:126*@unit
 }
 input.span1,
-textarea.span1,
-.uneditable-input.span1 {
+textarea.span1 {
  width:46*@unit
 }
 
@@ -735,8 +632,7 @@ input.search-query {
  .input-xxlarge,
  input[class*="span"],
  select[class*="span"],
- textarea[class*="span"],
- .uneditable-input {
+ textarea[class*="span"] {
   display:block;
   width:100%;
   min-height:30*@unit;
@@ -845,8 +741,6 @@ pre code {
  overflow-y:scroll
 }
 
-
-
 // }}}
 
 // Tables {{{
@@ -888,73 +782,6 @@ table {
 }
 .table .table {
  background-color:#fff
-}
-.table-condensed th,
-.table-condensed td {
- padding:4*@unit 5*@unit
-}
-.table-bordered {
- border:1*@unit solid #ddd;
- border-collapse:separate;
- border-left:0;
- border-radius:4*@unit
-}
-.table-bordered th,
-.table-bordered td {
- border-left:1*@unit solid #ddd
-}
-.table-bordered caption+thead tr:first-child th,
-.table-bordered caption+tbody tr:first-child th,
-.table-bordered caption+tbody tr:first-child td,
-.table-bordered colgroup+thead tr:first-child th,
-.table-bordered colgroup+tbody tr:first-child th,
-.table-bordered colgroup+tbody tr:first-child td,
-.table-bordered thead:first-child tr:first-child th,
-.table-bordered tbody:first-child tr:first-child th,
-.table-bordered tbody:first-child tr:first-child td {
- border-top:0
-}
-.table-bordered thead:first-child tr:first-child>th:first-child,
-.table-bordered tbody:first-child tr:first-child>td:first-child,
-.table-bordered tbody:first-child tr:first-child>th:first-child {
- border-top-left-radius:4*@unit;
-}
-.table-bordered thead:first-child tr:first-child>th:last-child,
-.table-bordered tbody:first-child tr:first-child>td:last-child,
-.table-bordered tbody:first-child tr:first-child>th:last-child {
- border-top-right-radius:4*@unit;
-}
-.table-bordered thead:last-child tr:last-child>th:first-child,
-.table-bordered tbody:last-child tr:last-child>td:first-child,
-.table-bordered tbody:last-child tr:last-child>th:first-child,
-.table-bordered tfoot:last-child tr:last-child>td:first-child,
-.table-bordered tfoot:last-child tr:last-child>th:first-child {
- border-bottom-left-radius:4*@unit;
-}
-.table-bordered thead:last-child tr:last-child>th:last-child,
-.table-bordered tbody:last-child tr:last-child>td:last-child,
-.table-bordered tbody:last-child tr:last-child>th:last-child,
-.table-bordered tfoot:last-child tr:last-child>td:last-child,
-.table-bordered tfoot:last-child tr:last-child>th:last-child {
- border-bottom-right-radius:4*@unit;
-}
-.table-bordered tfoot+tbody:last-child tr:last-child td:first-child {
- border-bottom-left-radius:0;
-}
-.table-bordered tfoot+tbody:last-child tr:last-child td:last-child {
- border-bottom-right-radius:0;
-}
-.table-bordered caption+thead tr:first-child th:first-child,
-.table-bordered caption+tbody tr:first-child td:first-child,
-.table-bordered colgroup+thead tr:first-child th:first-child,
-.table-bordered colgroup+tbody tr:first-child td:first-child {
- border-top-left-radius:4*@unit;
-}
-.table-bordered caption+thead tr:first-child th:last-child,
-.table-bordered caption+tbody tr:first-child td:last-child,
-.table-bordered colgroup+thead tr:first-child th:last-child,
-.table-bordered colgroup+tbody tr:first-child td:last-child {
- border-top-right-radius:4*@unit;
 }
 .table-striped tbody>tr:nth-child(odd)>td,
 .table-striped tbody>tr:nth-child(odd)>th {
