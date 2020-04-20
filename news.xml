@@ -20,18 +20,71 @@
         <li><a href="https://nixos.org/nixos/manual/index.html#sec-upgrading">Upgrade instructions</a></li>
         <li><a href="https://nixos.org/download.html">Image downloads</a></li>
       </ul>
-      <h3>Some Numbers</h3>
+      <h3>NixOS 20.03 Contributors</h3>
+      <p>
+        We had <strong>1014</strong> people contribute to NixOS 20.03 and
+        <strong>21597</strong> contributions. Thank you soo much, each
+        contribution is valued.
+      </p>
+      <h4>Top 10 ordered by commits</h4>
       <table class="table">
         <thead>
           <tr>
-            <th>Count</th>
-            <th>Author</th>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Commits</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>TODO</td>
-            <td>TODO</td>
+            <td>1</td>
+            <td>Frederik Rietdijk</td>
+            <td>1573</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>worldofpeace</td>
+            <td>1273</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Mario Rodas</td>
+            <td>1256</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Maximilian Bosch</td>
+            <td>720</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Jan Tojnar</td>
+            <td>491</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Jonathan Ringer</td>
+            <td>477</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Jörg Thalheim</td>
+            <td>414</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Florian Klink</td>
+            <td>393</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Will Dietz</td>
+            <td>373</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>volth</td>
+            <td>356</td>
           </tr>
         </tbody>
       </table>

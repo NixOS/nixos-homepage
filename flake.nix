@@ -35,7 +35,7 @@
       };
 
       homepage = stdenv.mkDerivation {
-        name = "nixos-homepage-${self.lastModified}";
+        name = "nixos-homepage-${builtins.toString self.lastModified}";
 
         src = self;
 
