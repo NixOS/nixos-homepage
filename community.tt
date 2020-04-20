@@ -13,7 +13,7 @@
     <h3>Forum</h3>
     <p>The official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.</p>
     <div class="text-center">
-      <a class="btn btn-success"
+      <a class="btn btn-block btn-success"
       href="https://discourse.nixos.org/">Go to Discourse Forum</a>
     </div>
   </div>
@@ -22,7 +22,7 @@
     <p>Another place to get in contact with other users is the official IRC channel:</p>
     <p><a href="irc://irc.freenode.net/#nixos">#nixos</a> on the <a href="https://freenode.net/">freenode network</a> (<a href="https://logs.nix.samueldr.com/nixos/">logs</a> are available)</p>
     <div class="text-center">
-      <a class="btn btn-success"
+      <a class="btn btn-block btn-success"
        href="https://webchat.freenode.net/#nixos">Open Webchat</a>
     </div>
   </div>
