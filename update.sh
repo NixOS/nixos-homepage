@@ -1,5 +1,9 @@
 #! /bin/sh
 
-UPDATE=1 nix run nixpkgs#gnumake nixpkgs#curl -c make update --keep-going || true
+set -e
 
-nix flake update --update-input released-nixpkgs || true
+UPDATE=1 nix run nixpkgs#gnumake nixpkgs#curl -c make update --keep-going
+
+nix flake update \
+  --update-input released-nixpkgs \
+  --update-input nix-pills

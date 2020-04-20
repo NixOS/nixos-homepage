@@ -3,8 +3,9 @@ on:
   schedule:
   - cron: '0 * * * *'
 jobs:
-  build-and-deploy:
+  hourly-build-and-deploy:
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
     - name: Checking out the repository
       uses: actions/checkout@v2
@@ -12,10 +13,20 @@ jobs:
         fetch-depth: 0
     - name: Installing Nix
       uses: cachix/install-nix-action@v8
+    - name: Installing NixFlakes
+      run: |
+        nix-env -iA nixpkgs.nixFlakes
+        echo "::add-path::$HOME/.nix-profile/bin"
+        echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
+        nix --version
+        cat /etc/nix/nix.conf
     - name: Update content
       run: ./update.sh
     - name: Building nixos.org
-      run: nix-build && mkdir build && cp -RL ./result/* ./build/
+      run: |
+        nix build
+        mkdir build
+        cp -RL ./result/* ./build/
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.0.5
       env:
@@ -26,4 +37,11 @@ jobs:
         production-branch: 'master'
         deploy-message: 'Deploy from GitHub Actions'
       if: github.repository == 'NixOS/nixos-homepage'
-
+    - name: Commit flake.lock, blogs.xml and push to master branch
+      uses: github-actions-x/commit@v2.5
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        push-branch: 'master'
+        commit-message: 'Update flake.lock and blogs.xml [ci skip]'
+        files: flake.lock blogs.xml
+      if: github.repository == 'NixOS/nixos-homepage'
