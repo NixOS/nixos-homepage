@@ -37,7 +37,7 @@
   <div class="span4">
     <h2>Learn Nixpkgs</h2>
     <p>The Nix Packages collection (Nixpkgs) is a set of thousands of packages for the Nix package manager and NixOS
-      linux distribution.</p>
+      Linux distribution.</p>
     <ul>
       <li><a href="[%root%]nixpkgs/manual/#chap-packageconfig">Configure nixpkgs</a></li>
       <li><a href="[%root%]nixpkgs/manual/#chap-overrides">Customize packages (override packages)</a></li>
