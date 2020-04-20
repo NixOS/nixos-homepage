@@ -35,10 +35,28 @@
         "type": "indirect"
       }
     },
+    "released-nixpkgs": {
+      "info": {
+        "lastModified": 1586701331,
+        "narHash": "sha256-7vLoChJGMCrLJFuORIK4tYILy/k1rwzkOJtC4V2SXdw="
+      },
+      "locked": {
+        "owner": "edolstra",
+        "repo": "nixpkgs",
+        "rev": "23f6739791ea779310ea6bae07f10775631582fd",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "release-19.09",
+        "type": "indirect"
+      }
+    },
     "root": {
       "inputs": {
         "nix-pills": "nix-pills",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "released-nixpkgs": "released-nixpkgs"
       }
     }
   },
