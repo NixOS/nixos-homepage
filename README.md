@@ -16,6 +16,11 @@ To automatically rebuild on every change:
 
     [nix-shell]$ git ls-files | entr make
 
+To test the complete result from a nix-build:
+
+    $ nix-build
+    $ nix-shell --run 'python -m http.server 8000 --directory result'
+
 ## License
 
 The content of the website is licensed under the [Creative Commons Attribution Share Alike 4.0 International](LICENSES/CC-BY-SA-4.0.txt) license.
