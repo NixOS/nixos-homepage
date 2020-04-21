@@ -76,45 +76,42 @@ BIC:  KNABNL2H
   If you would like to support us as well, please contact
   <a href="mailto:rob.vermaas@gmail.com">Rob Vermaas</a>.</p>
 
-<div class="row-fluid" style="height: 100px; line-height: 100px;">
-  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
-    <a href="http://www.logicblox.com/"><img src="[% root %]logo/lb_logo_small_no_bg.png" alt="LogicBlox logo"
-        style="height:60px;" /></a>
+<div class="acknowledgments-logos">
+<div class="row-fluid">
+  <div class="span4 center">
+    <a href="http://www.logicblox.com/"><img src="[% root %]logo/lb_logo_small_no_bg.png" alt="LogicBlox logo" /></a>
   </div>
-  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
-    <a href="http://www.tudelft.nl/"><img src="[% root %]logo/tudelft.gif" alt="TU Delft logo"
-        style="height:60px;" /></a>
+  <div class="span4 center">
+    <a href="http://www.tudelft.nl/"><img src="[% root %]logo/tudelft.gif" alt="TU Delft logo" /></a>
   </div>
-  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
-    <a href="http://www.uu.nl/"><img src="[% root %]logo/uu.gif" alt="UU logo" style="height:60px;" /></a>
-  </div>
-</div>
-
-<div class="row-fluid" style="height: 100px; line-height: 100px;">
-  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
-    <a href="https://www.3tu.nl/"><img src="[% root %]logo/3tu.jpg" alt="3TU logo" style="height:60px;" /></a>
-  </div>
-  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
-    <a href="https://www.packet.com"><img src="[% root %]logo/packet.net.svg"
-        alt="Premium Bare Metal Servers and Cloud Hosting" style="height:60px;" /></a>
-  </div>
-  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
-    <a href="https://snabb.co"><img src="[% root %]logo/snabb.png" alt="Snabb.co logo" style="height:60px;" /></a>
+  <div class="span4 center">
+    <a href="http://www.uu.nl/"><img src="[% root %]logo/uu.gif" alt="UU logo" /></a>
   </div>
 </div>
 
-<div class="row-fluid" style="height: 100px; line-height: 100px;">
-  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
-    <a href="https://www.macstadium.com/"><img src="[% root %]logo/macstadium.png" alt="MacStadium logo"
-        style="height:60px;" /></a>
+<div class="row-fluid">
+  <div class="span4 center">
+    <a href="https://www.3tu.nl/"><img src="[% root %]logo/3tu.jpg" alt="3TU logo" /></a>
   </div>
-  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
-    <a href="https://www.fastly.com/"><img src="[% root %]logo/fastly.png" alt="Fastly" style="height:60px;" /></a>
+  <div class="span4 center">
+    <a href="https://www.packet.com"><img src="[% root %]logo/packet.net.svg" alt="Premium Bare Metal Servers and Cloud Hosting" /></a>
   </div>
-  <div class="span4 center" style="display: inline-block !important; vertical-align: middle;">
-    <a href="https://www.hetzner.de/"><img src="[% root %]logo/hetzner-online.svg" alt="Hetzner Online GmbH"
-        style="height:60px;" /></a>
+  <div class="span4 center">
+    <a href="https://snabb.co"><img src="[% root %]logo/snabb.png" alt="Snabb.co logo" /></a>
   </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span4 center">
+    <a href="https://www.macstadium.com/"><img src="[% root %]logo/macstadium.png" alt="MacStadium logo" /></a>
+  </div>
+  <div class="span4 center">
+    <a href="https://www.fastly.com/"><img src="[% root %]logo/fastly.png" alt="Fastly" /></a>
+  </div>
+  <div class="span4 center">
+    <a href="https://www.hetzner.de/"><img src="[% root %]logo/hetzner-online.svg" alt="Hetzner Online GmbH" /></a>
+  </div>
+</div>
 </div>
 
 <script charset="utf-8">
