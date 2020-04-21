@@ -70,7 +70,6 @@
     e.preventDefault();
     $(this).tab('show');
   })
-
 </script>
 
 
@@ -204,7 +203,6 @@ $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre
     e.preventDefault();
     $(this).tab('show');
   })
-
 </script>
 
 [% END %]
