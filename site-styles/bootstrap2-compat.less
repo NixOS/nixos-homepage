@@ -125,6 +125,8 @@ table {
 // Rows and spans
 .row,
 .row-fluid {
+	margin-bottom: @gutter;
+
 	// This recursive mixin creates a loop.
 	._span(@_i) when (@_i > 0) {
 		._span((@_i - 1));
@@ -381,4 +383,7 @@ body > .navbar {
 		text-decoration:none;
 		background-color:#eee
 	}
+}
+.tab-content {
+	margin-bottom: @gutter;
 }
