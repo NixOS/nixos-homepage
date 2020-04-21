@@ -1,4 +1,4 @@
-NIXOS_SERIES = 19.09
+NIXOS_SERIES = 20.03
 ROOT = "/"
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
@@ -13,7 +13,7 @@ HTML = index.html download.html news.html learn.html governance.html donate.html
   nix/index.html nix/about.html \
   nixpkgs/index.html \
   nixos/index.html nixos/about.html \
-  nixos/community.html nixos/packages.html nixos/options.html \
+  community.html nixos/packages.html nixos/options.html \
   nixos/wiki.html \
   404.html
 

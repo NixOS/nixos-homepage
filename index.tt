@@ -103,23 +103,23 @@
 
 <div class="row-fluid">
   <div class="span6">
-    <h3>
+    <h2>
       <a href="/news-rss.xml">
         <img src="/logo/rss.png"/>
       </a>
       News
-    </h3>
+    </h2>
     [% INSERT "latest-news.xhtml" %]
     <p><a href="news.html" class="btn btn-mini">More »</a></p>
   </div>
   <div class="span6">
 
-    <h3>
+    <h2>
       <a href="/blogs.xml">
         <img src="/logo/rss.png"/>
       </a>
       Blog Posts
-    </h3>
+    </h2>
     <ul class="nixos-blogs">
       [% FOREACH b IN JSON.Escape.json_decode(IO.All.new('blogs.json').all).channel.item.first(5); IF b; %]
         <li>
