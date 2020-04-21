@@ -21,6 +21,19 @@
 @bs_color_nav_foreground: rgb(119, 119, 119);
 @bs_color_nav_hover_foreground: @bs_color_default_foreground;
 
+// Responsive rules for when the responsive menu is not in use
+// REMINDER: Prefer setting the responsive rules first; override for larger widths. 
+#bs-responsive-menu-wide(@rules) {
+	#screen-sm-min({
+		@rules();
+	});
+}
+#bs-responsive-menu-narrow(@rules) {
+	#screen-xs-max({
+		@rules();
+	});
+}
+
 // Basic catch-all rules
 // ---------------------
 
@@ -45,6 +58,10 @@ body {
 	#screen-xs-max({
 		padding-left: @gutter;
 		padding-right: @gutter;
+	});
+
+	#bs-responsive-menu-wide({
+		padding-top: @bs_navbar_height + @gutter;
 	});
 }
 
@@ -199,17 +216,22 @@ table {
 
 // Navbar
 body > .navbar {
+	margin-bottom: @gutter;
 	&.navbar-fixed-top {
-		position: absolute;
+		position: static;
 		top: 0;
 		left: 0;
 		right: 0;
 		z-index: 1050;
 	}
-	#screen-sm-min({
+	#bs-responsive-menu-wide({
 		&.navbar-fixed-top {
 			position: fixed;
 		}
+	});
+	#bs-responsive-menu-narrow({
+		margin-left: -@gutter;
+		margin-right: -@gutter;
 	});
 }
 
@@ -217,7 +239,11 @@ body > .navbar {
 	@_height: @bs_navbar_height;
 
 	& > * {
-		height: @_height;
+		min-height: @_height;
+
+		#bs-responsive-menu-wide({
+			height: @_height;
+		});
 	}
 
 	* {
@@ -232,11 +258,9 @@ body > .navbar {
 
 	.brand {
 		font-size: 20*@unit;
-	}
-
-	// TODO: Use as toggle for the responsive menu.
-	.btn-navbar {
-		display: none; //FIXME
+		#bs-responsive-menu-narrow({
+			padding-left: @gutter;
+		});
 	}
 
 	.navbar-inner > .container {
@@ -253,8 +277,9 @@ body > .navbar {
 		margin: 0;
 		padding: 0;
 		display: flex;
-		& > li {
-		}
+		#bs-responsive-menu-narrow({
+			flex-direction: column;
+		});
 	}
 
 	.pull-left {
@@ -267,12 +292,72 @@ body > .navbar {
 	a {
 		padding-left:  15*@unit;
 		padding-right: 15*@unit;
+		#screen-sm-only({
+			padding-left:  10*@unit;
+			padding-right: 10*@unit;
+		});
 		color: @bs_color_nav_foreground;
 		&:hover, &:focus, &:active, &.active {
 			color: @bs_color_nav_hover_foreground;
 			text-decoration: none;
 		}
 	}
+
+	.nav a {
+		&:hover, &:focus, &:active, &.active {
+			#bs-responsive-menu-narrow({
+				color: @bs_color_menu_hover_foreground;
+				background-color: @bs_color_menu_hover_background;
+				background-image: linear-gradient(
+				to bottom
+				, @bs_color_menu_hover_background_start
+				, @bs_color_menu_hover_background_end
+				);
+			});
+		}
+	}
+
+	// Responsive menu
+	.btn-navbar {
+		@_size: @bs_navbar_height - @gutter/2;
+		position: absolute;
+		top: @gutter / 4;
+		right: @gutter;
+		height: @_size;
+		width: @_size;
+		// Working with the DOM we've been dealt with.
+		z-index: 10;
+		padding: 0;
+		padding-top: 5*@unit;
+		text-align: center;
+
+		.icon-bar {
+			display: block;
+			margin: auto;
+			border-top: 2*@unit solid @bs_color_default_foreground;
+			margin-bottom: 4*@unit;
+			width: @_size * 0.7;
+			opacity: 0.35;
+		}
+
+		#bs-responsive-menu-wide({
+			display: none;
+		});
+	}
+
+	#bs-responsive-menu-narrow({
+		.navbar-inner > .container {
+			display: block;
+		}
+	});
+
+	// Ugh, this is to fix a misbehaviour of the bootstrap imported CSS/JS.
+	#bs-responsive-menu-wide({
+		.nav-collapse.collapse {
+			height: auto;
+			overflow: visible;
+		}
+	});
 }
 
 .navbar-inner {
