@@ -29,6 +29,12 @@
   force = true
 
 [[redirects]]
+  from = "/nixos/support.html"
+  to = "/learn.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nixos/community.html"
   to = "/community.html"
   status = 302
