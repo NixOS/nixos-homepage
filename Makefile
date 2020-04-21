@@ -13,7 +13,7 @@ HTML = index.html download.html news.html learn.html governance.html \
   nix/index.html nix/about.html \
   nixpkgs/index.html \
   nixos/index.html nixos/about.html \
-  nixos/community.html nixos/packages.html nixos/options.html \
+  community.html nixos/packages.html nixos/options.html \
   nixos/wiki.html \
   404.html
 
@@ -145,4 +145,3 @@ nixpkgs/packages-channels.json: Makefile
 
 nixos/packages-explorer.js:
 	@ln -sfn $(PACKAGES_EXPLORER) $@
-

@@ -29,6 +29,12 @@
   force = true
 
 [[redirects]]
+  from = "/nixos/community.html"
+  to = "/community.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nix-dev"
   to = "https://releases.nixos.org/nix-dev/index.html"
   status = 302
