@@ -6,14 +6,16 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 default: all
 
 
-HTML = index.html download.html news.html learn.html governance.html donate.html \
+HTML = index.html download.html news.html learn.html community.html \
+  governance.html donate.html \
   teams/rfc-steering-committee.html teams/security.html teams/marketing.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
   teams/discourse.html \
+  guides/contributing.html \
   nix/index.html nix/about.html \
   nixpkgs/index.html \
   nixos/index.html nixos/about.html \
-  community.html nixos/packages.html nixos/options.html \
+  nixos/packages.html nixos/options.html \
   nixos/wiki.html \
   404.html
 
