@@ -14,7 +14,7 @@ then open http://127.0.0.1:8000/index.html
 
 To automatically rebuild on every change:
 
-    [nix-shell]$ git ls-files | entr make
+    [nix-shell]$ fd | entr make
 
 To test the complete result from a nix-build:
 
