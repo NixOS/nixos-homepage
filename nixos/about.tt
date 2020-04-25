@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="About NixOS" menu='nixos' %]
+[% WRAPPER layout.tt title="About NixOS" menu='nixos' contentclass='full-width' %]
 
 <p>NixOS is a GNU/Linux distribution that aims to
 improve the state of the art in system configuration management.  In

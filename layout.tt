@@ -114,7 +114,7 @@
     </div>
   </div>
 
-  <div class="container main">
+  <div class="container main [% contentclass %]">
     [% IF !hideTitle %]
     <div class="page-header">
       <h1>[% title %]</h1>

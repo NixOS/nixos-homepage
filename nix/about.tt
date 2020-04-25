@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="About Nix" menu='nix' %]
+[% WRAPPER layout.tt title="About Nix" menu='nix' contentclass='full-width' %]
 
 <p>Nix is a <em>purely functional package manager</em>.  This means
 that it treats packages like values in purely functional programming

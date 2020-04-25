@@ -1,10 +1,10 @@
-[% WRAPPER layout.tt title="Getting Nix / NixOS" hideTitle=1 menu='nixos' %]
+[% WRAPPER layout.tt title="Getting Nix / NixOS" hideTitle=1 menu='nixos' contentclass='full-width' %]
 [% USE IO.All %]
 [% USE JSON.Escape %]
 
 <h1>Getting Nix</h1>
 
-<p class="lead">
+<p>
   Below you will find installation instructions for Nix, the package manager.
   Nix is currently supported on <strong>Linux</strong> and <strong>Mac</strong>.
   The latest stable release is <strong>[%latestNixVersion%]</strong>.
@@ -75,7 +75,7 @@
 
 <h1>Getting NixOS</h1>
 
-<p class="lead">
+<p>
   Below you will find installation instructions for NixOS, the Linux
   distribution. The latest stable release series is
   <strong>[%latestNixOSSeries%]</strong>.

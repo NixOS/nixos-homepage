@@ -1,6 +1,8 @@
 /* Account for the top navbar. */
 
 body {
+    font-size: 14pt;
+    line-height: 1.5em;
     padding-top: 50px;
 }
 
@@ -24,6 +26,10 @@ p {
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     hyphens: auto;
+}
+
+li {
+  line-height: normal;
 }
 
 .brand > a {
@@ -181,6 +187,10 @@ pre {
 .nix-shell-command:before {
     color: #999;
     content: " [nix-shell]$ ";
+}
+
+div.main.full-width {
+  max-width: 40em;
 }
 
 div.main li {

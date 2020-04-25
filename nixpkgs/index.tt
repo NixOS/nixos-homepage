@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="The Nix Packages collection" menu='nixpkgs' %]
+[% WRAPPER layout.tt title="The Nix Packages collection" menu='nixpkgs' contentclass='full-width' %]
 
 <p>The <em>Nix Packages collection</em> (Nixpkgs) is a set of over
 <a href="/nixos/packages.html">40&#8201;000</a>  packages for the Nix
