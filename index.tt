@@ -13,25 +13,306 @@
     <p class="lead">
       NixOS is an open source set of tools that help you package and deliver
       any application in a <strong>reproducible</strong> way.
-      TODO: what we build reproducibly
+      <!-- TODO: this description needs to be improved -->
     </p>
+    <!-- <a class="btn btn-large" href="[% root %]download.html">Why NixOS</a> -->
     <a class="btn btn-large btn-success" href="[% root %]download.html">Get started</a>
+    <!-- <a class="btn btn-large btn-success" href="[% root %]download.html">Find Packages</a> -->
+    <!-- <a class="btn btn-large btn-success" href="https://github.com">View on GitHub</a> -->
   </div>
 
   <div class="span6">
     <h4>TODO: A video / picture of NixOS in action!</h4>
+    <!-- 
+
+    -->
   </div>
 </div>
 
-<div class="tabbable tabs-left">
-  <ul class="nav nav-tabs">
-    <li><a href="#">Declarative development environemt</a></li>
-    <li><a href="#">Adhoc scripts</a></li>
-  </ul>
-  <div class="tab-content">
-    ...
-  </div>
+<hr />
+
+<ul id="features">
+  <li class="active"><a href="#develop">Develop</a></li>
+  <li><a href="#build">Build</a></li>
+  <li><a href="#deploy">Deploy</a></li>
+</ul>
+
+<div id="features-content" class="tab-content">
+  <section class="tab-pane active" id="develop">
+    <div class="row-fluid">
+      <div class="span6">
+
+        <h3>Try new tools without fear</h3>
+        <p>Don't clutter your system with tools that you use only now and then.</p>
+        <pre class="well" style="margin-top:1em">
+<span class="nix-command">python --version</span>
+python: command not found
+<span class="nix-command"><strong>nix-shell -p python3</strong></span>
+(nix-shell)<span class="nix-command">python --version</span>
+Python 3.7.7</pre>
+
+        <h3>One tool, multiple languages</h3>
+        <p></p>
+        <pre class="well" style="margin-top:1em">
+<span class="nix-command"><strong>nix-shell -p python3 nodejs go rustc</strong></span>
+(nix-shell)<span class="nix-command">node --version</span>
+v10.20.1
+(nix-shell)<span class="nix-command">go version</span>
+go version go1.14.1 linux/amd64
+(nix-shell)<span class="nix-command">rustc --version</span>
+rustc 1.42.0</pre>
+
+      </div>
+      <div class="span6">
+
+        <h3>Isolated development environments</h3>
+        <p>
+          After you get familiar with <code>nix-shell -p</code> you can take
+          the next step further and <a href="[%root%]learn.html">learn some
+            Nix</a>. To setup a more persistent environment you can also write a
+          simple <code>shell.niix</code> file:
+        </p>
+        <pre class="well" style="margin-top:1em">
+{ pkgs ? import &lt;nixpkgs&gt; {}
+}:
+pkgs.mkShell {
+  name = "dev-shell";
+  buildInputs = [
+    pkgs.python3
+    pkgs.python3Packages.virtualenv
+    pkgs.nodejs
+    pkgs.yarn
+  ];
+}</pre>
+        <p>Then enter development environment with:</p>
+        <pre class="well" style="margin-top:1em">
+<span class="nix-command"><strong>nix-shell</strong></span>
+(nix-shell)<span class="nix-command">virtualenv --version</span>
+16.7.9
+(nix-shell)<span class="nix-command">yarn --version</span>
+1.22.4</pre>
+        <p>
+          Commit the above <code>shell.nix</code> file and let you coworkers have
+          easier time setting their development environment.
+        </p>
+
+      </div>
+    </div>
+  </section>
+  <section class="tab-pane" id="build">
+    <div class="row-fluid">
+      <div class="span6">
+        <h3>Minimal docker image</h3>
+        <p>
+          Declarative way to build minimal docker images. No build tools inside
+          docker image, no complex multi stage build process, only what your
+          application needs.
+        </p>
+        <p>
+          The following Nix expression (<code>default.nix</code>) defines a
+          docker image with <strong>only</strong> Python 3 installed in it.
+        </p>
+        <pre class="well" style="margin-top:1em">
+{ pkgs ? import &lt;nixpkgs&gt; {}
+}:
+pkgs.dockerTools.buildLayeredImage {
+  name = "only-python";
+  contents = [ pkgs.python3 ];
+}</pre>
+        <p>To build and run the image you need to:</p>
+        <pre class="well" style="margin-top:1em">
+<span class="nix-command"><strong>nix-build</strong></span>
+...
+/nix/store/hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3-docker-image-only-python.tar.gz
+<span class="nix-command">docker load -u ./result</span>
+...
+Loaded image: hello:hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3
+<span class="nix-command">docker run hello:hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3 python -c "print('hello world')"</span>
+hello world</pre>
+        <p>
+          Learn more <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
+            to build docker images</a>.
+        </p>
+
+      </div>
+      <div class="span6">
+
+        <h3>Declarative cloud images</h3>
+        <p>How hard would it be to build and configure <strong>Amazon AMI?</strong></p>
+        <p>
+          With the following <code>amazon.nix</code> we defined nginx which is
+          serving example <code>/var/www</code> folder, having a valid ssl
+          certificate (via LetsEncrypt) and enabled recommended security
+          settings.
+        </p>
+        <pre class="well" style="margin-top:1em">
+{ pkgs, ...}:
+{
+  security.acme.acceptTerms = true;
+  security.acme.email = "nix@example.com";
+  services.nginx = {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    virtualHosts."example.com" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/".root = "/var/www";
+    };
+  };
+}</pre>
+        <p>Now we just need to build it and upload it.</p>
+        <pre class="well" style="margin-top:1em">
+<span class="nix-command"><strong>nix-build '&lt;nixpkgs/nixos/release.nix&gt;' -A amazonImage.x86_64-linux --arg configuration ./amazon.nix</strong></span>
+...
+/nix/store/wmg6gcgnh6bk8d98syydfq73q6hjv682-nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux
+<span class="nix-command">ls -lh ./result/</span>
+-r--r--r--     1 root root   1.4G Jan  1  1970 nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux.vhd
+dr-xr-xr-x     2 root root      4 Jan  1  1970 nix-support
+<span class="nix-command"><strong>nix-shell -p awscli</strong></span>
+(nix-shell)<span class="nix-command">export AWS_IMAGE="./result/nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux.vhd"</span>
+(nix-shell)<span class="nix-command">aws s3 cp --region $REGION $AWS_IMAGE "S3://${BUCKET}/${AWS_IMAGE#/}"</span>
+...</pre>
+
+      </div>
+    </div>
+  </section>
+  <section class="tab-pane" id="deploy">
+    <div class="row-fluid">
+      <div class="span6">
+        <h3>TODO: Ideas</h3>
+        <ul>
+          <li>How to integrate with CI (travis, github actions, buildkite, ...) but that is notreally a deployment</li>
+        </ul>
+      </div>
+      <div class="span6">
+        <h3>NixOps</h3>
+        <p>TODO: can not come with a good example that is simple enough</p>
+      </div>
+    </div>
+  </section>
 </div>
+
+<script charset="utf-8">
+  $('#features a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  })
+</script>
+<style type="text/css" media="screen">
+  #features {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  #features>li {
+    margin: 0 0.5em;
+    list-style: none;
+    position: relative;
+    margin: 0;
+    margin-right: 110px;
+    padding: 0 5px;
+  }
+
+  #features>li:last-child() {
+    margin-right: 0;
+  }
+
+  #features>li>a {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 140px;
+    color: #DDDDDD;
+    width: 140px;
+    height: 140px;
+    border: 1px solid #e3e3e3;
+    background: #f5f5f5;
+    border-radius: 140px;
+  }
+
+  #features>li>a:focus {
+    outline: 0;
+  }
+
+  #features>li.active>a {
+    color: #666;
+    position: relative;
+  }
+
+  #features>li.active>a::before,
+  #features>li.active>a::after {
+    bottom: -32px;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  #features>li.active>a::after {
+    border-color: transparent;
+    border-bottom-color: #fff;
+    border-width: 20px;
+    margin-left: -20px;
+  }
+
+  #features>li.active>a::before {
+    border-color: transparent;
+    border-bottom-color: #dddddd;
+    border-width: 21px;
+    margin-left: -21px;
+  }
+
+  #features>li::after {
+    content: "";
+    border: 0;
+    border-top: 2px dashed #dddddd;
+    width: 100px;
+    height: 2px;
+    top: 69px;
+    right: -105px;
+    position: absolute;
+  }
+
+  #features>li:last-child::after {
+    display: none;
+  }
+
+  #features>li::before {
+    content: "";
+    position: absolute;
+    top: 65px;
+    left: -12px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 10px;
+    border-color: transparent transparent transparent #DDDDDD;
+  }
+
+  #features>li:first-child::before {
+    display: none;
+  }
+
+  #features-content {
+    margin: 0;
+    margin-top: 30px;
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+  }
+
+  #features-content h3 {
+    font-weight: bold;
+  }
+</style>
 
 <!--
 <div class="hero-unit">
@@ -39,21 +320,34 @@
   <pre class="well" style="margin-top:1em">
 <span class="nix-command">curl -L https://nixos.org/nix/install | sh</span></pre>
 
-  Declarative development environemt
-  nix-shell
+        Develop -> Build -> Deploy -> Repeat -|
 
-  Adhoc scripts
-  nix-shell
+        Develop
+        <p>Declarative development environments</p>
+        <p>Works for me, works for everyone.</p>
+        <p>One tool, many languages</p>
 
-  Build docker
-  nix-build docker.nix
+        Build
+        <p>Works on my machine, works in CI, works in production</p>
 
-  Build AMI image
-  nix-build
+        Deploy
+        <p>From zero to cloud</p>
 
-</div>
-NixOS for
--->
+        Examples:
+        Declarative development environent
+        nix-shell -p
+
+        Adhoc scripts
+        nix-shell
+
+        Build docker
+        nix-build docker.nix
+
+        Build AMI image
+        nix-build
+      </div>
+      NixOS for
+      -->
 
 
 [% END %]
