@@ -13,8 +13,8 @@
     <p class="lead">
       NixOS, an open source software, gives you tools to share
       your development and build environments between machines with confidence.
-      Many know NixOS as the <strong>declarative</strong> Linux distribution
-      that is not afraid to be different (XXX: too bullshit argument).
+      NixOS GNU/Linux distribution is built for the cloud, that brings
+      declarative configuration to the next level.
     </p>
     <!-- <a class="btn btn-large" href="[% root %]download.html">Why NixOS</a> -->
     <a class="btn btn-large btn-success" href="[% root %]download.html">Get started</a>
