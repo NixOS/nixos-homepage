@@ -38,7 +38,8 @@
         enableParallelBuilding = true;
 
         buildInputs =
-          [ libxslt
+          [ fd
+            libxslt
             libxml2
             perl
             perlPackages.JSON
