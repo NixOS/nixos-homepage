@@ -75,7 +75,7 @@ rustc 1.42.0</pre>
           After you get familiar with <code>nix-shell -p</code> you can take
           the next step further and <a href="[%root%]learn.html">learn some
             Nix</a>. To setup a more persistent environment you can also write a
-          simple <code>shell.niix</code> file:
+          simple <code>shell.nix</code> file:
         </p>
         <pre class="well" style="margin-top:1em">
 { pkgs ? import &lt;nixpkgs&gt; {}
