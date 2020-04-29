@@ -11,21 +11,25 @@
   <div class="span6">
     <h1>Reproducible builds and deployments.</h1>
     <p class="lead">
-      NixOS, an open source software, gives you tools to share
-      your development and build environments between machines with confidence.
-      NixOS GNU/Linux distribution is built for the cloud and brings
-      declarative configuration to the next level.
+      NixOS package manager can be used independently on any POSIX compliant
+      operating system to reliably share your development and build
+      environments across machines.
+    </p>
+    <p class="lead">
+      NixOS, an independently developed GNU/Linux distribution, aims to improve
+      the state of the art in system configuration management. The entire
+      operating system, including the kernel, applications, system packages and
+      configuration files, are built from a single location.
     </p>
     <!-- <a class="btn btn-large" href="[% root %]download.html">Why NixOS</a> -->
-    <a class="btn btn-large btn-success" href="[% root %]download.html">Get started</a>
-    <!-- <a class="btn btn-large btn-success" href="[% root %]download.html">Find Packages</a> -->
-    <!-- <a class="btn btn-large btn-success" href="https://github.com">View on GitHub</a> -->
+    <a class="btn btn-large btn-success" href="[% root %]learn.html">Get started</a>
+    <a class="btn btn-large" href="[% root %]download.html">Download</a>
+    <a class="" href="https://github.com">View on GitHub</a>
   </div>
 
   <div class="span6">
     <h4>TODO: A video / picture of NixOS in action!</h4>
     <!-- 
-
     -->
   </div>
 </div>
