@@ -143,7 +143,7 @@ hello world</pre>
       <div class="span6">
 
         <h3>Declarative cloud images</h3>
-        <p>How hard would it be to build and configure <strong>Amazon AMI?</strong></p>
+        <p>How hard would it be to build and configure a <strong>Amazon AMI</strong>?</p>
         <p>
           With the following <code>amazon.nix</code> we defined nginx which is
           serving example <code>/var/www</code> folder, having a valid ssl
