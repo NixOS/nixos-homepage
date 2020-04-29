@@ -28,9 +28,9 @@
   </div>
 
   <div class="span6">
-    <h4>TODO: A video / picture of NixOS in action!</h4>
-    <!-- 
-    -->
+    <!-- TODO: Add a proper video / picture of NixOS in action! -->
+    <!-- Fix needed for strict XML error complaining about "async" https://monkeyraptor.johanpaul.net/2015/11/fixing-xhtml-parsing-error-on-chrome.html -->
+    <script id="asciicast-113463" src="https://asciinema.org/a/113463.js" async="async"></script>
   </div>
 </div>
 
