@@ -129,7 +129,7 @@ pkgs.dockerTools.buildLayeredImage {
 <span class="nix-command"><strong>nix-build</strong></span>
 ...
 /nix/store/hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3-docker-image-only-python.tar.gz
-<span class="nix-command">docker load -u ./result</span>
+<span class="nix-command">docker load -i ./result</span>
 ...
 Loaded image: hello:hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3
 <span class="nix-command">docker run hello:hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3 python -c "print('hello world')"</span>
