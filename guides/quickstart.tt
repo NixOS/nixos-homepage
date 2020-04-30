@@ -1,0 +1,187 @@
+[% WRAPPER layout.tt hideTitle=1 title="Quickstart guide" menu='nixos' %]
+
+<h1>Quickstart guide</h1>
+
+<p class="lead">This quickstart guide will get you started with the Nix package manager.</p>
+
+<p>You will learn how to…</p>
+
+<ul>
+  <li>Install Nix</li>
+  <li>Create your first Nix shell as a working environment</li>
+  <li>Setup a development environment for a web app</li>
+  <li>Build a Docker image to deploy your web app</li>
+</ul>
+
+
+<h2>Install Nix</h2>
+
+<p>While NixOS is a Linux distribution based on Nix, you can install Nix on other Linux distributions, MacOS and Windows via WSL using the install script from our website:</p>
+
+<pre class="code">
+curl -L https://nixos.org/nix/install | sh
+</pre>
+
+<p>(For security, you may want to <a href="[%root%]download.html#nix-verify-installation">verify the script</a> using our GPG signatures.)</p>
+
+<p>Check that the installation was successful by running</p>
+
+<pre class="code">
+nix-channel --list
+</pre>
+
+<p>This command displays the package distribution channel used by Nix. By default, this is <code>https://nixos.org/channels/nixpkgs-unstable</code></p>
+
+
+<h2>Your first shell</h2>
+
+<p>Nix can create reproducible environments given a declarative configuration called a Nix expression. Reproducible means you can share the configuration with others and guarantee that they are using the same software as you.</p>
+
+<p>To get started, make a new folder and create a file called <code>shell.nix</code> with the following contents:</p>
+
+<pre class="code">
+{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+pkgs.mkShell {
+  buildInputs = [
+    pkgs.which
+    pkgs.htop
+  ];
+}
+</pre>
+
+<p>Basically we import our package channel <code>nixpkgs</code> and make a shell with <code>which</code> and <code>htop</code> as inputs. To enter this environment, type in:</p>
+
+<pre class="code">
+nix-shell
+</pre>
+
+<p>The command will start downloading the missing packages from the cache. This may take a few moments. When it is done, you are dropped into a new shell. This shell provides the packages specified in <code>shell.nix</code>.</p>
+
+<p>Run <code>htop</code> to confirm it is present. Quit the program again by hitting Q.</p>
+
+<p>Now try <code>which htop</code> to check where the <code>htop</code> command is on-disk. You should see something similar to this:</p>
+
+<pre class="code">
+/nix/store/y3w2i8kfdbfj9rx287ad52rahjpgv423-htop-2.2.0/bin/htop
+</pre>
+
+<p>This is the path to the binary in the Nix store. Nix installs all packages into the store using a combination of its hash, name and version.</p>
+
+<p>You can search for available packages using <code>nix search</code>, for example:</p>
+
+<pre class="code">
+nix search python3
+nix search nodejs
+nix search ghc
+nix search cargo
+</pre>
+
+
+<h2>Setup a development environment</h2>
+
+<p>As an exercise, let us build a Python web application using the Flask web framework.</p>
+
+<p>Create a new file <code>default.nix</code>. This file is conventionally used for specifying packages:</p>
+
+<pre class="code">
+{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+pkgs.python3Packages.buildPythonApplication {
+  pname = "myapp";
+  src = ./.;
+  version = "0.1";
+  propagatedBuildInputs = [ pkgs.python3Packages.flask ];
+}
+</pre>
+
+<p>You will also need a simple Flask app as <code>main.py</code>:</p>
+
+<pre class="code">
+#! /usr/bin/env python
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello, Nix!"
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
+</pre>
+
+<p>and a <code>setup.py</code> script:</p>
+
+<pre class="code">
+from distutils.core import setup
+
+setup(name='myapp', version='0.1', scripts=['main.py'])
+</pre>
+
+<p>Now build the package with:</p>
+
+<pre class="code">
+nix-build
+</pre>
+
+<p>This will create a symbolic link <code>result</code> to our package's path in the Nix store, which looks like <code>/nix/store/6i4l781jwk5vbia8as32637207kgkllj-myapp-0.1</code>. Look around to see what is inside.</p>
+
+<p>You may notice we can run the application from the package like <code>./result/bin/main.py</code>. We can still use the <code>default.nix</code> as a shell environment to get the same result:</p>
+
+<pre class="code">
+nix-shell default.nix
+python3 main.py
+</pre>
+
+<p>In this context, Nix takes on the role that you would otherwise use pip or virtualenv for. Nix installs required dependencies and separates the environment from others on your system.</p>
+
+<p>You can check this Nix configuration into version control and share it with others to make sure you are all running the same software. Especially with many dependencies this is a great way to prevent configuration drift between different team members &amp; contributors.</p>
+
+
+<h2>Build a Docker image</h2>
+
+<p>For this section we assume you have Docker installed.</p>
+
+<p>Now that you have package a Flask app, you may want to deploy it. One way to do this is to package it as a Docker container that can be hosted on a container hosting platform.</p>
+
+<p>Nix comes with tools for building Docker containers. To turn our Python app into a Docker container, we only have to specify what command to run. Nix will take care of building a minimal image required to make that happen.</p>
+
+<p>Create a file <code>docker.nix</code>:</p>
+
+<pre class="code">
+{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+let
+  app = pkgs.callPackage ./default.nix {
+    inherit pkgs;
+  };
+
+in pkgs.dockerTools.buildImage {
+  name = "myapp";
+  tag = "latest";
+  config = {
+    Cmd = [ "${app}/bin/main.py" ];
+  };
+}
+</pre>
+
+<p>We are calling the expression under <code>./default.nix</code> and pass it our own <code>pkgs</code>. Under <code>Cmd</code> we use the variable <code>app</code>to retrieve the path to the executable Python app.</p>
+
+<p>Now we can build the Docker image and load it into Docker:</p>
+
+<pre class="code">
+nix-build docker.nix
+docker load --input result
+</pre>
+
+<p>Now Docker has an image tagged <code>myapp:latest</code>. Run the Docker image and make sure to forward port 5000, so you can access the app in the browser:</p>
+
+<pre class="code">
+docker run -it -p 5000:5000 myapp:latest
+</pre>
+
+<p>Now you can see the site on <code>http://localhost:5000</code>.</p>
+
+[% END %]
