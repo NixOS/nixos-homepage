@@ -132,7 +132,7 @@ pkgs.dockerTools.buildLayeredImage {
 <span class="nix-command">docker load -i ./result</span>
 ...
 Loaded image: only-python:fgzj21lg3hjv8bxlaabcsfjkh4fg5ssk
-<span class="nix-command">docker run hello:hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3 python -c "print('hello world')"</span>
+<span class="nix-command">docker run only-python python -c "print('hello world')"</span>
 hello world</pre>
         <p>
           Learn more <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
