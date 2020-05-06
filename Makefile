@@ -7,7 +7,7 @@ default: all
 
 
 HTML = index.html download.html news.html learn.html community.html \
-  governance.html donate.html \
+  governance.html donate.html commercial-support.html \
   teams/rfc-steering-committee.html teams/security.html teams/marketing.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
   teams/discourse.html \

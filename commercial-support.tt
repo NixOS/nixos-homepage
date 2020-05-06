@@ -1,0 +1,22 @@
+[% WRAPPER layout.tt hideTitle=1 title="Commercial support" menu='nixos' %]
+
+<h1>Commercial support</h1>
+
+<div class="lead">
+  A number of consulting companies are available for professional support.
+</div>
+
+<p>The list is sorted in alphabetical order.</p>
+
+<ul>
+  <li><a href="https://www.enlambda.com/">Enlambda</a></li>
+  <li><a href="https://nixos.mayflower.consulting">Mayflower</a></li>
+  <li><a href="https://nixcloud.io/">nixcloud</a></li>
+  <li><a href="https://www.numtide.com/">NumTide Ltd</a></li>
+  <li><a href="https://obsidian.systems">Obsidian Systems</a></li>
+  <li><a href="https://serokell.io/">Serokell</a></li>
+</ul>
+
+<p>Please <a href="https://github.com/NixOS/nixos-homepage/edit/master/commercial-support.tt">submit a pull request</a> to add your company.</p>
+
+[% END %]
