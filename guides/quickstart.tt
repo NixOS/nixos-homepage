@@ -108,16 +108,23 @@ app = Flask(__name__)
 def hello():
     return "Hello, Nix!"
 
-if __name__ == "__main__":
+def run():
     app.run(host='0.0.0.0')
 </pre>
 
 <p>and a <code>setup.py</code> script:</p>
 
 <pre class="code">
-from distutils.core import setup
+from setuptools import setup
 
-setup(name='myapp', version='0.1', scripts=['main.py'])
+setup(
+    name='myapp',
+    version='0.1',
+    py_modules=['myapp'],
+    entry_points={
+        'console_scripts': ['myapp = myapp:run']
+    },
+)
 </pre>
 
 <p>Now build the package with:</p>
@@ -162,7 +169,7 @@ in pkgs.dockerTools.buildImage {
   name = "myapp";
   tag = "latest";
   config = {
-    Cmd = [ "${app}/bin/main.py" ];
+    Cmd = [ "${app}/bin/myapp" ];
   };
 }
 </pre>
