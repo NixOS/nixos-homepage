@@ -1,0 +1,47 @@
+[% WRAPPER layout.tt hideTitle=1 title="Guide: Install Nix" menu='nixos' %]
+
+<h1>Your first shell</h1>
+
+<p>Nix can create reproducible environments given a declarative configuration called a Nix expression. Reproducible means you can share the configuration with others and guarantee that they are using the same software as you.</p>
+
+<p>To get started, make a new folder and create a file called <code>shell.nix</code> with the following contents:</p>
+
+<pre class="code">
+{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+pkgs.mkShell {
+  buildInputs = [
+    pkgs.which
+    pkgs.htop
+  ];
+}
+</pre>
+
+<p>Basically we import our package channel <code>nixpkgs</code> and make a shell with <code>which</code> and <code>htop</code> as inputs. To enter this environment, type in:</p>
+
+<pre class="code">
+nix-shell
+</pre>
+
+<p>The command will start downloading the missing packages from the cache. This may take a few moments. When it is done, you are dropped into a new shell. This shell provides the packages specified in <code>shell.nix</code>.</p>
+
+<p>Run <code>htop</code> to confirm it is present. Quit the program again by hitting Q.</p>
+
+<p>Now try <code>which htop</code> to check where the <code>htop</code> command is on-disk. You should see something similar to this:</p>
+
+<pre class="code">
+/nix/store/y3w2i8kfdbfj9rx287ad52rahjpgv423-htop-2.2.0/bin/htop
+</pre>
+
+<p>This is the path to the binary in the Nix store. Nix installs all packages into the store using a combination of its hash, name and version.</p>
+
+<p>You can search for available packages using <code>nix-env -qa</code>, for example:</p>
+
+<pre class="code">
+nix-env -qa python3
+nix-env -qa nodejs
+nix-env -qa ghc
+nix-env -qa cargo
+</pre>
+
+[% END %]

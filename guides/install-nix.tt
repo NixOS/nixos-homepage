@@ -1,0 +1,21 @@
+[% WRAPPER layout.tt hideTitle=1 title="Guide: Install Nix" menu='nixos' %]
+
+<h1>Install Nix</h1>
+
+<p>While NixOS is a Linux distribution based on Nix, you can install Nix on other Linux distributions, MacOS and Windows via WSL using the install script from our website:</p>
+
+<pre class="code">
+curl -L https://nixos.org/nix/install | sh
+</pre>
+
+<p>(For security, you may want to <a href="[%root%]download.html#nix-verify-installation">verify the script</a> using our GPG signatures.)</p>
+
+<p>Check that the installation was successful by running</p>
+
+<pre class="code">
+nix-channel --list
+</pre>
+
+<p>This command displays the package distribution channel used by Nix. By default, this is <code>https://nixos.org/channels/nixpkgs-unstable</code></p>
+
+[% END %]
