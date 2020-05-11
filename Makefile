@@ -11,7 +11,7 @@ HTML = index.html download.html news.html learn.html community.html \
   teams/rfc-steering-committee.html teams/security.html teams/marketing.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
   teams/discourse.html \
-  guides/contributing.html guides/install-nix.html guides/first-shell.html guides/dev-environment.html guides/docker-image.html \
+  guides/contributing.html guides/install-nix.html guides/first-shell.html guides/dev-environment.html \
   nix/index.html nix/about.html \
   nixpkgs/index.html \
   nixos/index.html nixos/about.html \
