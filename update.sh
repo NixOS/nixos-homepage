@@ -2,7 +2,7 @@
 
 set -e
 
-UPDATE=1 nix run nixpkgs#gnumake nixpkgs#curl -c make update --keep-going
+UPDATE=1 nix shell nixpkgs#gnumake nixpkgs#curl -c make update --keep-going
 
 nix flake update \
   --update-input released-nixpkgs \
