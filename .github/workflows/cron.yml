@@ -38,7 +38,7 @@ jobs:
         deploy-message: 'Deploy from GitHub Actions'
       if: github.repository == 'NixOS/nixos-homepage'
     - name: Commit flake.lock, blogs.xml and push to master branch
-      uses: github-actions-x/commit@v2.5
+      uses: github-actions-x/commit@v2.6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         push-branch: 'master'
