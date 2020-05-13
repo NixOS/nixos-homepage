@@ -7,24 +7,21 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 
 <div class="row-fluid">
-
   <div class="span6">
     <h1>Reproducible builds and deployments.</h1>
     <p class="lead">
-      NixOS package manager can be used independently on any POSIX compliant
-      operating system to reliably share your development and build
-      environments across machines.
+      <strong>Nix</strong> is a powerful package manager for Linux and other
+      Unix systems that makes package management reliable and reproducible.
+      Share your development and build environments across different machines.
     </p>
     <p class="lead">
-      NixOS, an independently developed GNU/Linux distribution, aims to improve
-      the state of the art in system configuration management. The entire
-      operating system, including the kernel, applications, system packages and
-      configuration files, are built from a single location.
+      <strong>NixOS</strong> is a Linux distribution with a unique approach to
+      package and configuration management. Built on top of the Nix package
+      manager, it is completely declarative, makes upgrading systems reliable,
+      and has <a href="[% root %]features.html">many other advantages</a>.
     </p>
-    <!-- <a class="btn btn-large" href="[% root %]download.html">Why NixOS</a> -->
     <a class="btn btn-large btn-success" href="[% root %]learn.html">Get started</a>
     <a class="btn btn-large" href="[% root %]download.html">Download</a>
-    <a class="" href="https://github.com">View on GitHub</a>
   </div>
 
   <div class="span6">
@@ -36,18 +33,66 @@
 
 <hr />
 
-<ul id="features">
-  <li class="active"><a href="#develop">Develop</a></li>
-  <li><a href="#build">Build</a></li>
-  <li><a href="#deploy">Deploy</a></li>
-</ul>
+<div class="row-fluid">
+  <div class="span4">
+    <h2>Reproducible</h2>
+    <p>
+      Nix builds packages in isolation from each other. This ensures that they
+      are reproducible and don't have undeclared dependencies, so <strong>if a
+        package works on one machine, it will also work on another</strong>.
+    </p>
+  </div>
+  <div class="span4">
+    <h2>Declarative</h2>
+    <p>
+      Nix makes it <strong>trivial to share development and build
+        environments</strong> for your projects, regardless of what programming
+      languages and tools you’re using.
+    </p>
+  </div>
+  <div class="span4">
+    <h2>Reliable</h2>
+    <p>
+      Nix’s ensures that installing or upgrading one package <strong>cannot
+        break other packages</strong>. It allows you to <strong>roll back to
+        previous versions</strong>, and ensures that no package is in an
+      inconsistent state during an upgrade.
+    </p>
+  </div>
+</div>
 
-<div id="features-content" class="tab-content">
-  <section class="tab-pane active" id="develop">
+
+<hr />
+
+<div id="packages-search" class="row-fluid text-center">
+  <div class="span12">
+    <h1>Choose from Thousands of Packages</h1>
+    <p class="text-center lead">
+      The Nix Packages collection (<a href="https://github/NixOS/nixpkgs">nixpkgs</a>) is a set of
+      <strong>over 60 000 packages</strong> for the Nix package manager,
+      released under a permissive <a href="https://spdx.org/licenses/MIT.html">MIT/X11 license</a>.
+    </p>
+    <form>
+      <div class="input-append">
+        <input class="input-xxlarge" placeholder="Search for packages" type="text" />
+        <button class="btn">Search</button>
+      </div>
+      <p class="text-center">or <a href="[% root %]nixos/options.html">search among many NixOS options.</a></p>
+    </form>
+  </div>
+</div>
+
+<hr />
+
+<h1 class="text-center">Examples...</h1>
+
+<div id="features">
+
+  <section>
     <div class="row-fluid">
       <div class="span6">
 
-        <h3>Try new tools without fear</h3>
+        <h2>Try new tools without fear</h2>
         <p>Don't clutter your system with tools that you use only now and then.</p>
         <pre class="well" style="margin-top:1em">
 <span class="nix-command">python --version</span>
@@ -56,7 +101,7 @@ python: command not found
 (nix-shell)<span class="nix-command">python --version</span>
 Python 3.7.7</pre>
 
-        <h3>One tool, multiple languages</h3>
+        <h2>One tool, multiple languages</h2>
         <p></p>
         <pre class="well" style="margin-top:1em">
 <span class="nix-command"><strong>nix-shell -p python3 nodejs go rustc</strong></span>
@@ -70,7 +115,7 @@ rustc 1.42.0</pre>
       </div>
       <div class="span6">
 
-        <h3>Isolated development environments</h3>
+        <h2>Isolated development environments</h2>
         <p>
           After you get familiar with <code>nix-shell -p</code> you can take
           the next step further and <a href="[%root%]learn.html">learn some
@@ -107,7 +152,7 @@ pkgs.mkShell {
   <section class="tab-pane" id="build">
     <div class="row-fluid">
       <div class="span6">
-        <h3>Minimal docker image</h3>
+        <h2>Minimal docker image</h2>
         <p>
           Declarative way to build minimal docker images. No build tools inside
           docker image, no complex multi stage build process, only what your
@@ -121,19 +166,19 @@ pkgs.mkShell {
 { pkgs ? import &lt;nixpkgs&gt; {}
 }:
 pkgs.dockerTools.buildLayeredImage {
-  name = "only-python";
-  contents = [ pkgs.python3 ];
+  name = "only-hello";
+  contents = [ pkgs.hello ];
 }</pre>
         <p>To build and run the image you need to:</p>
         <pre class="well" style="margin-top:1em">
 <span class="nix-command"><strong>nix-build</strong></span>
 ...
-/nix/store/hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3-docker-image-only-python.tar.gz
+/nix/store/&#8230;-docker-image-only-hello.tar.gz
 <span class="nix-command">docker load -i ./result</span>
 ...
-Loaded image: only-python:fgzj21lg3hjv8bxlaabcsfjkh4fg5ssk
-<span class="nix-command">docker run only-python python -c "print('hello world')"</span>
-hello world</pre>
+Loaded image: only-hello:fgzj21lg3hjv8bxlaabcsfjkh4fg5ssk
+<span class="nix-command">docker run only-hello hello"</span>
+Hello World</pre>
         <p>
           Learn more <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
             to build docker images</a>.
@@ -142,8 +187,8 @@ hello world</pre>
       </div>
       <div class="span6">
 
-        <h3>Declarative cloud images</h3>
-        <p>How hard would it be to build and configure a <strong>Amazon AMI</strong>?</p>
+        <h2>Declarative cloud images</h2>
+        <p>How hard would it be to build and configure a <strong>Amazon EC2</strong> image?</p>
         <p>
           With the following <code>amazon.nix</code> we defined nginx which is
           serving example <code>/var/www</code> folder, having a valid ssl
@@ -168,191 +213,44 @@ hello world</pre>
     };
   };
 }</pre>
-        <p>Now we just need to build it and upload it.</p>
+        <p>Now we just need to build it.</p>
         <pre class="well" style="margin-top:1em">
-<span class="nix-command"><strong>nix-build '&lt;nixpkgs/nixos/release.nix&gt;' -A amazonImage.x86_64-linux --arg configuration ./amazon.nix</strong></span>
+<span class="nix-command"><strong>nix-build '&lt;nixpkgs/nixos/release.nix&gt;' \</strong></span>
+<strong>    -A amazonImage.x86_64-linux \</strong>
+<strong>    --arg configuration ./amazon.nix \</strong>
+<strong>    -o ./result</strong>
 ...
-/nix/store/wmg6gcgnh6bk8d98syydfq73q6hjv682-nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux
-<span class="nix-command">ls -lh ./result/</span>
--r--r--r--     1 root root   1.4G Jan  1  1970 nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux.vhd
-dr-xr-xr-x     2 root root      4 Jan  1  1970 nix-support
-<span class="nix-command"><strong>nix-shell -p awscli</strong></span>
-(nix-shell)<span class="nix-command">export AWS_IMAGE="./result/nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux.vhd"</span>
-(nix-shell)<span class="nix-command">aws s3 cp --region $REGION $AWS_IMAGE "S3://${BUCKET}/${AWS_IMAGE#/}"</span>
-...</pre>
-
-      </div>
-    </div>
-  </section>
-  <section class="tab-pane" id="deploy">
-    <div class="row-fluid">
-      <div class="span6">
-        <h3>TODO: Ideas</h3>
-        <ul>
-          <li>How to integrate with CI (travis, github actions, buildkite, ...) but that is notreally a deployment</li>
-        </ul>
-      </div>
-      <div class="span6">
-        <h3>NixOps</h3>
-        <p>TODO: can not come with a good example that is simple enough</p>
+<span class="nix-command">ls ./result/</span>
+nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux.vhd
+nix-support
       </div>
     </div>
   </section>
 </div>
 
-<script charset="utf-8">
-  $('#features a').click(function (e) {
-    e.preventDefault();
-    $(this).tab('show');
-  })
-</script>
 <style type="text/css" media="screen">
+  #packages-search .input-append button.btn {
+    font-size: 28px;
+    height: 54px;
+  }
+
+  #packages-search .input-append input {
+    font-size: 28px;
+    height: 44px;
+  }
+
   #features {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  #features>li {
-    margin: 0 0.5em;
-    list-style: none;
-    position: relative;
-    margin: 0;
-    margin-right: 110px;
-    padding: 0 5px;
-  }
-
-  #features>li:last-child() {
-    margin-right: 0;
-  }
-
-  #features>li>a {
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 140px;
-    color: #DDDDDD;
-    width: 140px;
-    height: 140px;
-    border: 1px solid #e3e3e3;
-    background: #f5f5f5;
-    border-radius: 140px;
-  }
-
-  #features>li>a:focus {
-    outline: 0;
-  }
-
-  #features>li.active>a {
-    color: #666;
-    position: relative;
-  }
-
-  #features>li.active>a::before,
-  #features>li.active>a::after {
-    bottom: -32px;
-    left: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-  }
-
-  #features>li.active>a::after {
-    border-color: transparent;
-    border-bottom-color: #fff;
-    border-width: 20px;
-    margin-left: -20px;
-  }
-
-  #features>li.active>a::before {
-    border-color: transparent;
-    border-bottom-color: #dddddd;
-    border-width: 21px;
-    margin-left: -21px;
-  }
-
-  #features>li::after {
-    content: "";
-    border: 0;
-    border-top: 2px dashed #dddddd;
-    width: 100px;
-    height: 2px;
-    top: 69px;
-    right: -105px;
-    position: absolute;
-  }
-
-  #features>li:last-child::after {
-    display: none;
-  }
-
-  #features>li::before {
-    content: "";
-    position: absolute;
-    top: 65px;
-    left: -12px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 5px 0 5px 10px;
-    border-color: transparent transparent transparent #DDDDDD;
-  }
-
-  #features>li:first-child::before {
-    display: none;
-  }
-
-  #features-content {
     margin: 0;
     margin-top: 30px;
+    padding: 1em;
     border: 1px solid #DDDDDD;
     border-radius: 2px;
   }
 
-  #features-content h3 {
-    font-weight: bold;
+  #features h2 {
+    border: 0;
   }
 </style>
-
-<!--
-<div class="hero-unit">
-  <h2>Install Nix</h2>
-  <pre class="well" style="margin-top:1em">
-<span class="nix-command">curl -L https://nixos.org/nix/install | sh</span></pre>
-
-        Develop -> Build -> Deploy -> Repeat -|
-
-        Develop
-        <p>Declarative development environments</p>
-        <p>Works for me, works for everyone.</p>
-        <p>One tool, many languages</p>
-
-        Build
-        <p>Works on my machine, works in CI, works in production</p>
-
-        Deploy
-        <p>From zero to cloud</p>
-
-        Examples:
-        Declarative development environent
-        nix-shell -p
-
-        Adhoc scripts
-        nix-shell
-
-        Build docker
-        nix-build docker.nix
-
-        Build AMI image
-        nix-build
-      </div>
-      NixOS for
-      -->
 
 
 [% END %]
