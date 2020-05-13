@@ -145,15 +145,10 @@
 
   <div class="span6">
     <h2>Get help from the community</h2>
-    <ul>
-      <li><a href="https://discourse.nixos.org/">Discourse</a> — Discourse is a forum where we have discussions and help
-        users out with their questions.</li>
-      <li><a href="irc://irc.freenode.net/#nixos">IRC</a> — You can drop by on the IRC channel <a
-          href="irc://irc.freenode.net/#nixos"><strong><tt>#nixos</tt></strong></a> on <a
-          href="https://freenode.net/"><tt>irc.freenode.net</tt></a> to chat with the developers or other users.</li>
-      <li><a href="https://stackoverflow.com/questions/tagged/nixos">Stackoverflow</a> — a place to ask questions.</li>
-      <li><a href="https://www.reddit.com/r/NixOS">Reddit</a> — a place to discuss Nix / NixOS.</li>
-    </ul>
+    <p>The <a href="[%root%]community.html">Community page</a> shows where the community meets.</p>
+
+    <h2>Get commercial support</h2>
+    <p>The <a href="[%root%]commercial-support.html">Commercial support page</a> provides a list of consulting companies.</p>
   </div>
 
 </div>
