@@ -28,9 +28,9 @@
   </div>
 
   <div class="span6">
-    <h4>TODO: A video / picture of NixOS in action!</h4>
-    <!-- 
-    -->
+    <!-- TODO: Add a proper video / picture of NixOS in action! -->
+    <!-- Fix needed for strict XML error complaining about "async" https://monkeyraptor.johanpaul.net/2015/11/fixing-xhtml-parsing-error-on-chrome.html -->
+    <script id="asciicast-113463" src="https://asciinema.org/a/113463.js" async="async"></script>
   </div>
 </div>
 
@@ -75,7 +75,7 @@ rustc 1.42.0</pre>
           After you get familiar with <code>nix-shell -p</code> you can take
           the next step further and <a href="[%root%]learn.html">learn some
             Nix</a>. To setup a more persistent environment you can also write a
-          simple <code>shell.niix</code> file:
+          simple <code>shell.nix</code> file:
         </p>
         <pre class="well" style="margin-top:1em">
 { pkgs ? import &lt;nixpkgs&gt; {}
@@ -129,10 +129,10 @@ pkgs.dockerTools.buildLayeredImage {
 <span class="nix-command"><strong>nix-build</strong></span>
 ...
 /nix/store/hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3-docker-image-only-python.tar.gz
-<span class="nix-command">docker load -u ./result</span>
+<span class="nix-command">docker load -i ./result</span>
 ...
-Loaded image: hello:hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3
-<span class="nix-command">docker run hello:hb8xwmgd1pfrwgmc3indi2rrgcjr3wa3 python -c "print('hello world')"</span>
+Loaded image: only-python:fgzj21lg3hjv8bxlaabcsfjkh4fg5ssk
+<span class="nix-command">docker run only-python python -c "print('hello world')"</span>
 hello world</pre>
         <p>
           Learn more <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
@@ -143,7 +143,7 @@ hello world</pre>
       <div class="span6">
 
         <h3>Declarative cloud images</h3>
-        <p>How hard would it be to build and configure <strong>Amazon AMI?</strong></p>
+        <p>How hard would it be to build and configure a <strong>Amazon AMI</strong>?</p>
         <p>
           With the following <code>amazon.nix</code> we defined nginx which is
           serving example <code>/var/www</code> folder, having a valid ssl
