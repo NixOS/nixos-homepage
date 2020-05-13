@@ -427,6 +427,30 @@ div.docbook span.command {
     content: "";
 }
 
+.footer {
+  background: #f2f2f2;
+  margin-top: 2em;
+  padding: 1em 0 3em 0;
+  font-size: 12px;
+}
+.footer a {
+  color: #a4a4a4;
+}
+.footer a:hover {
+  color: #848484;
+  text-decoration: none;
+}
+
+.footer h4 {
+  color: #545454;
+  font-size: 14px;
+}
+
+.footer ul {
+  list-style: none;
+  margin:0;
+}
+
 /* Centers the `get` button with the image.
  * 196px is the width of the image.
  */
@@ -436,3 +460,4 @@ div.docbook span.command {
     text-align: center;
   }
 }
+
