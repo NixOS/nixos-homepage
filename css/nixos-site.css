@@ -436,3 +436,15 @@ div.docbook span.command {
     text-align: center;
   }
 }
+
+/* Comma-separated lists */
+ul.comma-separated > li {
+  list-style-type: none;
+  display: inline;
+}
+ul.comma-separated > li:after {
+  content: ",";
+}
+ul.comma-separated > li:last-of-type:after {
+  display: none;
+}
