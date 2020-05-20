@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt hideTitle=1 title="Features" menu='nixos' %]
+[% WRAPPER layout.tt title="Features" %]
 
 <div class="row">
   <div class="span6">

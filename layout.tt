@@ -66,11 +66,6 @@
     </div>
   </div>
   <div class="container main">
-    [% IF !hideTitle %]
-    <div class="page-header">
-      <h1>[% title %]</h1>
-    </div>
-    [% END %]
     [% content %]
     <div class="footer">
       <hr />

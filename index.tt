@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="NixOS Linux" hideTitle=1 menu='nixos' %]
+[% WRAPPER layout.tt title="NixOS Linux" %]
 [% USE JSON.Escape %]
 [% USE IO.All %]
 [% USE HTML %]
