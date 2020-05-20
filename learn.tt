@@ -55,52 +55,60 @@
           <li><a href="[%root%]nixpkgs/manual/#chap-pkgs-fetchers">Fetching sources</a></li>
           <li>
             Building images:
-            <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">Docker</a>,
-            <a href="[%root%]nixpkgs/manual/#sec-pkgs-snapTools">Snap</a>,
-            <a href="[%root%]nixpkgs/manual/#sec-pkgs-appimageTools">AppImage</a>,
-            <a href="[%root%]nixpkgs/manual/#sec-pkgs-ociTools">OCI</a>,
-            ...
+            <ul class="comma-separated">
+              <li><a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">Docker</a></li>
+              <li><a href="[%root%]nixpkgs/manual/#sec-pkgs-snapTools">Snap</a></li>
+              <li><a href="[%root%]nixpkgs/manual/#sec-pkgs-appimageTools">AppImage</a></li>
+              <li><a href="[%root%]nixpkgs/manual/#sec-pkgs-ociTools">OCI</a></li>
+              <li>...</li>
+            </ul>
           </li>
         </ul>
       </li>
       <li>
         Integrate Nix with programming languages:
-        <a href="[%root%]nixpkgs/manual/#node.js">Javascript (Node)</a>,
-        <a href="[%root%]nixpkgs/manual/#python">Python</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-language-ruby">Ruby</a>
-        <a href="[%root%]nixpkgs/manual/#sec-language-java">Java</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-language-go">Go</a>,
-        <a href="[%root%]nixpkgs/manual/#rust">Rust</a>,
-        <a href="[%root%]nixpkgs/manual/#r">R</a>,
-        <a href="[%root%]nixpkgs/manual/#haskell">Haskell</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-elm">Elm</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-beam">BEAM Languages (Erlang, Elixir, LFE)</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-language-lua">Lua</a>,
-        <a href="[%root%]nixpkgs/manual/#idris">Idris</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-language-coq">Coq</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-language-perl">Perl</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-language-ocaml">OCaml</a>,
-        ...
+        <ul class="comma-separated">
+          <li><a href="[%root%]nixpkgs/manual/#node.js">Javascript (Node)</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#python">Python</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-language-ruby">Ruby</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-language-java">Java</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-language-go">Go</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#rust">Rust</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#r">R</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#haskell">Haskell</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-elm">Elm</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-beam">BEAM Languages (Erlang, Elixir, LFE)</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-language-lua">Lua</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#idris">Idris</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-language-coq">Coq</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-language-perl">Perl</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-language-ocaml">OCaml</a></li>
+          <li>...</li>
+        </ul>
       </li>
       <li>
         Integrate Nix with frameworks:
-        <a href="[%root%]nixpkgs/manual/#android">Android</a>,
-        <a href="[%root%]nixpkgs/manual/#ios">IOS</a>,
-        <a href="[%root%]nixpkgs/manual/#titanium">Titanium</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-language-texlive">Tex Live</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-language-qt">Qt</a>,
-        ...
+        <ul class="comma-separated">
+          <li><a href="[%root%]nixpkgs/manual/#android">Android</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#ios">IOS</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#titanium">Titanium</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-language-texlive">Tex Live</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-language-qt">Qt</a></li>
+          <li>...</li>
+        </ul>
       </li>
       <li>
         Configure your editor with Nix:
-        <a href="[%root%]nixpkgs/manual/#vim">Vim</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-emacs">Emacs</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-eclipse">Eclipse</a>,
-        <a href="[%root%]nixpkgs/manual/#sec-kakoune">Kakoune</a>,
-        <!-- TODO
-          <a href="[%root%]nixpkgs/manual/#">Visual Studio Code</a>,
-          -->
-        ...
+        <ul class="comma-separated">
+          <li><a href="[%root%]nixpkgs/manual/#vim">Vim</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-emacs">Emacs</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-eclipse">Eclipse</a></li>
+          <li><a href="[%root%]nixpkgs/manual/#sec-kakoune">Kakoune</a></li>
+            <!-- TODO
+            <li><a href="[%root%]nixpkgs/manual/#">Visual Studio Code</a></li>
+              -->
+          <li>...</li>
+        </ul>
       </li>
       <li><a href="[%root%]nixpkgs/manual/#chap-submitting-changes">Contributing to Nixpkgs</a></li>
     </ul>
