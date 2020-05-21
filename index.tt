@@ -153,13 +153,30 @@ pkgs.mkShell {
       <div class="span6">
         <h2>Minimal docker image</h2>
         <p>
-          Declarative way to build minimal docker images. No build tools inside
-          docker image, no complex multi stage build process, only what your
-          application needs.
+          Using <code>Dockefile</code> you are responsible to:
+        </p>
+        <ul>
+          <li>clean up everything that is not needed at runtime</li>
+          <li>decide how to split into layers for better caching</li>
+        </ul>
+        <p>
+          Writing <code>Dockefile</code> that would produce a minimal image is
+          at best a very error prone process.
+        </p>
+        <p>
+          With Nix you only include to docker image packages that you define.
+          No cleaning up needed. There are no build tools left in your docker
+          image, making it as minimal as you need.
+        </p>
+        <p>
+          Nix also know how to layer your resulting docker image, automatically
+          without you needed to do anything. The resulting layers are optimized
+          for caching as much as possible.
         </p>
         <p>
           The following Nix expression (<code>default.nix</code>) defines a
-          docker image with <strong>only</strong> Python 3 installed in it.
+          docker image with <strong>only</strong> <code>hello</code> package
+          in it.
         </p>
         <pre class="well">
 { pkgs ? import &lt;nixpkgs&gt; {}
@@ -170,14 +187,18 @@ pkgs.dockerTools.buildLayeredImage {
 }</pre>
         <p>To build and run the image you need to:</p>
         <pre class="well">
-<span class="nix-command"><strong>nix-build</strong></span>
+<span class="nix-command"><strong>nix-build default.nix -o ./result</strong></span>
 ...
 /nix/store/&#8230;-docker-image-only-hello.tar.gz
 <span class="nix-command">docker load -i ./result</span>
-...
-Loaded image: only-hello:fgzj21lg3hjv8bxlaabcsfjkh4fg5ssk
-<span class="nix-command">docker run only-hello hello"</span>
-Hello World</pre>
+1c31fbac2eb1: Loading layer [==================>]  1.649MB/1.649MB
+03b22f688054: Loading layer [==================>]    256kB/256kB
+29c350a9c392: Loading layer [==================>]  31.61MB/31.61MB
+6a87e4d71e07: Loading layer [==================>]  266.2kB/266.2kB
+c09c43a6b910: Loading layer [==================>]  71.68kB/71.68kB
+Loaded image: only-hello:qn5x1pnk7d467jsl81jng7168qsks42l
+<span class="nix-command">docker run only-hello:qn5x1pnk7d467jsl81jng7168qsks42l hello"</span>
+Hello, world</pre>
         <p>
           Learn more <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
             to build docker images</a>.
