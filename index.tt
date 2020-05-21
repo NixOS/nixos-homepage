@@ -118,7 +118,7 @@ rustc 1.42.0</pre>
         <h2>Isolated development environments</h2>
         <p>
           After you get familiar with <code>nix-shell -p</code> you can take
-          the next step further and <a href="[%root%]learn.html">learn some
+          the next step and <a href="[%root%]learn.html">learn some
             Nix</a>. To setup a more persistent environment you can also write a
           simple <code>shell.nix</code> file:
         </p>
