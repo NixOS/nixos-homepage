@@ -452,3 +452,37 @@ ul.comma-separated > li:after {
 ul.comma-separated > li:last-of-type:after {
   display: none;
 }
+
+
+/*
+ * index.tt
+ */
+
+#packages-search .input-append button.btn {
+  font-size: 28px;
+  height: 54px;
+}
+
+#packages-search .input-append input {
+  font-size: 28px;
+  height: 44px;
+}
+
+#examples {
+  margin: 0;
+  margin-top: 30px;
+  padding: 1em;
+  border: 1px solid #DDDDDD;
+  border-radius: 2px;
+}
+
+#examples pre.well {
+  margin-top: 1em;
+  background: #333333;
+  border-color: #333333;
+  color: #FFFFFF;
+}
+
+#examples h2 {
+  border: 0;
+}

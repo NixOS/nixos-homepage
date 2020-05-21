@@ -86,7 +86,7 @@
 
 <h1 class="text-center">Examples...</h1>
 
-<div id="features">
+<div id="examples">
 
   <section>
     <div class="row-fluid">
@@ -94,7 +94,7 @@
 
         <h2>Try new tools without fear</h2>
         <p>Don't clutter your system with tools that you use only now and then.</p>
-        <pre class="well" style="margin-top:1em">
+        <pre class="well">
 <span class="nix-command">python --version</span>
 python: command not found
 <span class="nix-command"><strong>nix-shell -p python3</strong></span>
@@ -103,7 +103,7 @@ Python 3.7.7</pre>
 
         <h2>Multiple languages, one tool</h2>
         <p></p>
-        <pre class="well" style="margin-top:1em">
+        <pre class="well">
 <span class="nix-command"><strong>nix-shell -p python3 nodejs go rustc</strong></span>
 (nix-shell)<span class="nix-command">node --version</span>
 v10.20.1
@@ -122,7 +122,7 @@ rustc 1.42.0</pre>
             Nix</a>. To setup a more persistent environment you can also write a
           simple <code>shell.nix</code> file:
         </p>
-        <pre class="well" style="margin-top:1em">
+        <pre class="well">
 { pkgs ? import &lt;nixpkgs&gt; {}
 }:
 pkgs.mkShell {
@@ -135,7 +135,7 @@ pkgs.mkShell {
   ];
 }</pre>
         <p>Then enter development environment with:</p>
-        <pre class="well" style="margin-top:1em">
+        <pre class="well">
 <span class="nix-command"><strong>nix-shell</strong></span>
 (nix-shell)<span class="nix-command">virtualenv --version</span>
 16.7.9
@@ -162,7 +162,7 @@ pkgs.mkShell {
           The following Nix expression (<code>default.nix</code>) defines a
           docker image with <strong>only</strong> Python 3 installed in it.
         </p>
-        <pre class="well" style="margin-top:1em">
+        <pre class="well">
 { pkgs ? import &lt;nixpkgs&gt; {}
 }:
 pkgs.dockerTools.buildLayeredImage {
@@ -170,7 +170,7 @@ pkgs.dockerTools.buildLayeredImage {
   contents = [ pkgs.hello ];
 }</pre>
         <p>To build and run the image you need to:</p>
-        <pre class="well" style="margin-top:1em">
+        <pre class="well">
 <span class="nix-command"><strong>nix-build</strong></span>
 ...
 /nix/store/&#8230;-docker-image-only-hello.tar.gz
@@ -195,7 +195,7 @@ Hello World</pre>
           certificate (via LetsEncrypt) and enabled recommended security
           settings.
         </p>
-        <pre class="well" style="margin-top:1em">
+        <pre class="well">
 { pkgs, ...}:
 {
   security.acme.acceptTerms = true;
@@ -214,7 +214,7 @@ Hello World</pre>
   };
 }</pre>
         <p>Now we just need to build it.</p>
-        <pre class="well" style="margin-top:1em">
+        <pre class="well">
 <span class="nix-command"><strong>nix-build '&lt;nixpkgs/nixos/release.nix&gt;' \</strong></span>
 <strong>    -A amazonImage.x86_64-linux \</strong>
 <strong>    --arg configuration ./amazon.nix \</strong>
@@ -227,30 +227,5 @@ nix-support</pre>
     </div>
   </section>
 </div>
-
-<style type="text/css" media="screen">
-  #packages-search .input-append button.btn {
-    font-size: 28px;
-    height: 54px;
-  }
-
-  #packages-search .input-append input {
-    font-size: 28px;
-    height: 44px;
-  }
-
-  #features {
-    margin: 0;
-    margin-top: 30px;
-    padding: 1em;
-    border: 1px solid #DDDDDD;
-    border-radius: 2px;
-  }
-
-  #features h2 {
-    border: 0;
-  }
-</style>
-
 
 [% END %]
