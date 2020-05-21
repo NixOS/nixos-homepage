@@ -101,7 +101,7 @@ python: command not found
 (nix-shell)<span class="nix-command">python --version</span>
 Python 3.7.7</pre>
 
-        <h2>One tool, multiple languages</h2>
+        <h2>Multiple languages, one tool</h2>
         <p></p>
         <pre class="well" style="margin-top:1em">
 <span class="nix-command"><strong>nix-shell -p python3 nodejs go rustc</strong></span>
