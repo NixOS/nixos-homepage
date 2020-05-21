@@ -243,6 +243,11 @@ Hello, world</pre>
 <span class="nix-command">ls ./result/</span>
 nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux.vhd
 nix-support</pre>
+        <p>
+          The resulting Virtual Hard Disk image can be then be
+          <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html">
+            imported to Amazon EC2 as usual</a>.
+        </p>
       </div>
     </div>
   </section>
