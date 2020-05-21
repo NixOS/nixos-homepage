@@ -74,7 +74,7 @@
     </p>
     <form>
       <div class="input-append">
-        <input class="input-xxlarge" placeholder="Search for packages" type="text" />
+        <input class="input-xxlarge" placeholder="Search for a package" type="text" />
         <button class="btn">Search</button>
       </div>
       <p class="text-center">or <a href="[% root %]nixos/options.html">search among many NixOS options.</a></p>
