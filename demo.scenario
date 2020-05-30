@@ -54,7 +54,7 @@ Start developing...
 
 --
 
-$ # For last example let us build a minimal docker image with Nix
+$ # For the last example let us build a minimal docker image with Nix
 $ bat docker-redis.nix
 ───────┬─────────────────────────────────────────────────────────────────────
        │ File: docker-redis.nix
