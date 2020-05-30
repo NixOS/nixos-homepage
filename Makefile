@@ -143,3 +143,8 @@ nixpkgs/packages-channels.json: Makefile
 
 nixos/packages-explorer.js:
 	@ln -sfn $(PACKAGES_EXPLORER) $@
+
+all: demo.cast
+
+demo.cast:
+	python demo.py demo.scenario > demo.cast

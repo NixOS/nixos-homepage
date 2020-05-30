@@ -486,3 +486,7 @@ ul.comma-separated > li:last-of-type:after {
 #examples h2 {
   border: 0;
 }
+
+.asciinema-player-wrapper {
+  margin-top: 2em;
+}

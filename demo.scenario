@@ -1,0 +1,144 @@
+
+$ # Hi!
+$ # Wonder how to start using Nix?
+$ # Here are few examples:
+
+--
+
+$ node -e "console.log(1+1)"
+node: command not found
+$ # Interesting, no node on this machine
+$ # No problem with Nix!
+$ nix-shell -p nodejs
+(nix-shell) $ node -e "console.log(1+1)"
+2
+(nix-shell) $ # And now we are able to use node.
+(nix-shell) $ # Nix Magic! :)
+
+--
+
+$ # Typing "nix-shell -p ..." each time can be tedious. We can do better.
+$ # We can write everything down in default.nix
+$ bat default.nix
+────────┬─────────────────────────────────────────────────────────────────────
+        │ File: default.nix
+────────┼───────────────────────────────────────────────────────────────────── 
+    1   │ { pkgs ? import <nixpkgs> {} # here we import nixpkgs package set 
+    2   │ }:
+    3   │ pkgs.mkShell {               # mkShell is a helping function
+    4   │   name="dev-environment";    # that requires a name
+    5   │   buildInputs = [            # list of packages
+    6   │     pkgs.nodejs
+    7   │   ];
+    8   │   shellHook = ''             # bash to run when you enter the shell
+    9   │     echo "WORKS!"
+   10   │   '';
+   11   │ }
+────────┴─────────────────────────────────────────────────────────────────────
+$ # Pause the video to understand the default.nix
+$ # To enter dev-environment simply run:
+$ nix-shell
+WORKS!
+(nix-shell) $ node -e "console.log(1+1)"
+2
+(nix-shell) $ # Now go ahead commit default.nix to your repository
+(nix-shell) $ # and share development environment with your coworkers
+
+--
+
+$ # For last example let us build a minimal docker image with Nix
+$ bat docker-redis.nix
+───────┬─────────────────────────────────────────────────────────────────────
+       │ File: docker-redis.nix
+───────┼─────────────────────────────────────────────────────────────────────
+   1   │ { pkgs ? import <nixpkgs> {}         # nixpkgs package set
+   2   │ }:
+   3   │ pkgs.dockerTools.buildLayeredImage { # helper to build docker image
+   4   │   name = "nix-redis";                # give docker image a name
+   5   │   tag = "latest";                    # provide a tag
+   6   │   contents = [ pkgs.redis ];         # packages in docker image
+   7   │ }
+───────┴─────────────────────────────────────────────────────────────────────
+$ # Pause the video and take the time to understand docker-redis.nix file
+$ # Now lets build the docker image and load it to docker
+$ nix-build docker-redis.nix -o ./result 
+... SKIPPING OUTPUT ...
+/nix/store/1crapx24sjgqm2j1wmq17k6f6a9wy66d-docker-image-nix-redis.tar.gz
+$ docker load -i ./result   
+Loaded image: nix-redis:latest
+$ docker images | grep redis
+debian-redis  latest    8366943c77e8     3 days ago       136MB
+alpine-redis  latest    aae644cd3417     3 days ago       6.99MB
+nix-redis     latest    30486183a209     50 years ago     45.4MB
+$ # Size of a Nix based docker image is somewhere between a Debian and Alpine.
+$ # redis packaged in nixpkgs is not optimized to be minimal as is in Alpine.
+$ # Let us fix this!
+$ bat redis-minimal.nix
+───────┬─────────────────────────────────────────────────────────────────────
+       │ File: redis-minimal.nix
+───────┼─────────────────────────────────────────────────────────────────────
+   1   │ { pkgs ? import <nixpkgs> {}
+   2   │ }:
+   4   │ pkgs.redis.overrideAttrs (old: {
+   5   │ 
+   6   │   # no need for systemd support in docker image
+   7   │   makeFlags = old.makeFlags ++ ["USE_SYSTEMD=no"];
+   8   │ 
+   9   │   # build static binary with musl
+  10   │   preBuild = ''
+  11   │     makeFlagsArray=(PREFIX="$out"
+  12   │                     CC="${pkgs.musl.dev}/bin/musl-gcc -static"
+  13   │                     CFLAGS="-I${pkgs.musl.dev}/include"
+  14   │                     LDFLAGS="-L${pkgs.musl.dev}/lib")
+  15   │   '';
+  16   │ 
+  17   │   # no need for other binaries then redis-server
+  18   │   postInstall = ''
+  19   │     rm -f $out/bin/redis-{benchmark,check-aof,check-rdb,check-dump,cli}
+  20   │     '';
+  21   │ })
+───────┴─────────────────────────────────────────────────────────────────────
+$ # In redis-minimal.nix we override the default redis build with 3 changes:
+$ # 1.) remove redis systemd support
+$ # 2.) build to static binary with musl
+$ # 3.) only redis-server binary is needed
+$ # Now all we need to is build docker image with our new minimal redis
+$ bat docker-redis-minimal.nix
+───────┬─────────────────────────────────────────────────────────────────────
+       │ File: redis-minimal.nix
+───────┼─────────────────────────────────────────────────────────────────────
+   1   │ { pkgs ? import <nixpkgs> {}
+   2   │ }:
+   3   │ let
+   4   │   redisMinimal = import ./redis-minimal.nix { inherit pkgs; };
+   5   │ in
+   6   │ pkgs.dockerTools.buildLayeredImage { # helper to build docker image
+   7   │   name = "nix-redis-minimal";        # give docker image a name
+   8   │   tag = "latest";                    # provide a tag
+   9   │   contents = [ redisMinimal ];       # use redisMinimal package
+  10   │ }
+───────┴─────────────────────────────────────────────────────────────────────
+$ # Lets build new docker image
+$ nix-build docker-redis-minimal.nix -o ./result 
+... SKIPPING OUTPUT ...
+/nix/store/83zcgs5xvzrgx09iv8s82wkabl8xkr03-docker-image-nix-redis-minimal.tar.gz
+$ docker load -i ./result
+Loaded image: nix-redis-minimal:latest
+$ docker images | grep redis
+debian-redis         latest    8366943c77e8    3 days ago      136MB
+alpine-redis         latest    aae644cd3417    3 days ago      6.99MB
+nix-redis            latest    30486183a209    50 years ago    45.4MB
+nix-redis-minimal    latest    a21238890680    50 years ago    2.02MB
+$ # Smaller then Alpine? Interesting!
+$ # Now we could claim Alpine is "bloated" :P, but we wont.
+$ # But we can not stop you from telling this to your friends :)
+
+--
+
+$ # This was a quick taste of what Nix can do.
+$ # I hope we made you eager to know more.
+$ # Happy Nixing!
+
+
+
+
