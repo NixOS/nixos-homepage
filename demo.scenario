@@ -20,10 +20,10 @@ $ nix-shell -p nodejs
 $ # Typing "nix-shell -p ..." each time can be tedious. We can do better.
 $ # We can write everything down in default.nix
 $ bat default.nix
-────────┬─────────────────────────────────────────────────────────────────────
+────────┬────────────────────────────────────────────────────────────────────
         │ File: default.nix
-────────┼───────────────────────────────────────────────────────────────────── 
-    1   │ { pkgs ? import <nixpkgs> {} # here we import nixpkgs package set 
+────────┼──────────────────────────────────────────────────────────────────── 
+    1   │ { pkgs ? import <nixpkgs> {} # here we import nixpkgs package set
     2   │ }:
     3   │ pkgs.mkShell {               # mkShell is a helping function
     4   │   name="dev-environment";    # that requires a name
@@ -34,7 +34,7 @@ $ bat default.nix
     9   │     echo "WORKS!"
    10   │   '';
    11   │ }
-────────┴─────────────────────────────────────────────────────────────────────
+────────┴────────────────────────────────────────────────────────────────────
 $ # Pause the video to understand the default.nix
 $ # To enter dev-environment simply run:
 $ nix-shell
