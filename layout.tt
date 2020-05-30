@@ -68,15 +68,55 @@
   </div>
   <div class="container main">
     [% content %]
-    <div class="footer">
-      <hr />
-      <center>
-        <small class="muted">
-          [% IF sourceLink %]
-          <a [% HTML.attributes(href=> sourceLink) %]>Source</a>
-          [% END %]
-        </small>
-      </center>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <div class="row-fluid">
+        <div class="span3">
+          <h4>The project</h4>
+          <ul>
+            <li><a href="https://status.nixos.org/">Nix Channel Status</a></li>
+            <li><a href="https://nixos.org/nixos/packages.html">Nix packages search</a></li>
+            <li><a href="https://nixos.org/nixos/options.html">NixOS options search</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://nixos.org/governance.html">Governance</a></li>
+            <li><a href="https://nixos.org/teams/security.html">Security</a></li>
+            <!-- <li><a href="#">History</a></li>  -->
+          </ul>
+        </div>
+        <div class="span3">
+          <h4>Get in Touch</h4>
+          <ul>
+            <li><a href="https://discourse.nixos.org/">Forum</a></li>
+            <li><a href="https://webchat.freenode.net/#nixos">Chat</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://nixos.org/commercial-support.html">Commercial support</a></li>
+          </ul>
+        </div>
+        <div class="span3">
+          <h4>Contribute</h4>
+          <ul>
+            <li><a href="https://nixos.org/guides/contributing.html">Contributing Guide</a></li>
+            <li><a href="https://nixos.org/donate.html">Donate</a></li>
+          </ul>
+        </div>
+        <div class="span3">
+          <h4>Stay up to date</h4>
+          <ul>
+            <li><a href="https://nixos.org/news.html">News</a></li>
+            <li><a href="https://weekly.nixos.org/">NixOS Weekly</a></li>
+          </ul>
+          <ul>
+            <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i> Twitter</a></li>
+            <li><a href="https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw"><i class="fa fa-youtube"></i>
+                Youtube</a></li>
+            <li><a href="https://github.com/NixOS"><i class="fa fa-github"></i> GitHub</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
   <script src="[% root %]js/nixos-site.js"></script>
