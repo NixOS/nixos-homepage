@@ -31,14 +31,14 @@ $ bat default.nix
     6   │     pkgs.nodejs
     7   │   ];
     8   │   shellHook = ''             # bash to run when you enter the shell
-    9   │     echo "WORKS!"
+    9   │     echo "Start developing..."
    10   │   '';
    11   │ }
 ────────┴────────────────────────────────────────────────────────────────────
 $ # Pause the video to understand the default.nix
 $ # To enter dev-environment simply run:
 $ nix-shell
-WORKS!
+Start developing...
 (nix-shell) $ node -e "console.log(1+1)"
 2
 (nix-shell) $ # Now go ahead commit default.nix to your repository

@@ -146,5 +146,5 @@ nixos/packages-explorer.js:
 
 all: demo.cast
 
-demo.cast: demo.scenario
+demo.cast: demo.py demo.scenario
 	python demo.py demo.scenario > demo.cast

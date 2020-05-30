@@ -6,6 +6,12 @@ import time
 CLEAR = "\033[2J\033[1;1H"
 
 
+def clear(t, t_step, chars="", color=None):
+    t += 3 * t_step
+    echo([t, "o", CLEAR])
+    return t
+
+
 def echo(item):
     click.echo(json.dumps(item))
 
@@ -104,8 +110,7 @@ def main(version,
 
         # lines starting with "--" will clear display
         elif line.startswith("--"):
-            line = CLEAR
-            echo_fn = echo_line
+            echo_fn = clear
 
         # everything else skip
         else:
