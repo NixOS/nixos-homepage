@@ -523,4 +523,5 @@ ul.comma-separated > li:last-of-type:after {
 
 .asciinema-player-wrapper {
   margin-top: 2em;
+  width: 570px;
 }
