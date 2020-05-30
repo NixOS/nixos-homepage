@@ -70,8 +70,8 @@ $ docker images | grep redis
 debian-redis  latest    8366943c77e8     3 days ago       136MB
 alpine-redis  latest    aae644cd3417     3 days ago       6.99MB
 nix-redis     latest    30486183a209     50 years ago     45.4MB
-$ # Size of a Nix based docker image is somewhere between a Debian and Alpine.
-$ # redis packaged in nixpkgs is not optimized to be minimal as is in Alpine.
+$ # Size of a Nix based docker image is somewhere between a Debian and Alpine
+$ # redis packaged in nixpkgs is not optimized to be minimal as is in Alpine
 $ # Let us fix this!
 $ bat redis-minimal.nix
 ───────┬─────────────────────────────────────────────────────────────────────
@@ -79,24 +79,19 @@ $ bat redis-minimal.nix
 ───────┼─────────────────────────────────────────────────────────────────────
    1   │ { pkgs ? import <nixpkgs> {}
    2   │ }:
-   4   │ pkgs.redis.overrideAttrs (old: {
-   5   │ 
-   6   │   # no need for systemd support in docker image
-   7   │   makeFlags = old.makeFlags ++ ["USE_SYSTEMD=no"];
-   8   │ 
-   9   │   # build static binary with musl
-  10   │   preBuild = ''
-  11   │     makeFlagsArray=(PREFIX="$out"
-  12   │                     CC="${pkgs.musl.dev}/bin/musl-gcc -static"
-  13   │                     CFLAGS="-I${pkgs.musl.dev}/include"
-  14   │                     LDFLAGS="-L${pkgs.musl.dev}/lib")
-  15   │   '';
-  16   │ 
-  17   │   # no need for other binaries then redis-server
-  18   │   postInstall = ''
-  19   │     rm -f $out/bin/redis-{benchmark,check-aof,check-rdb,check-dump,cli}
-  20   │     '';
-  21   │ })
+   3   │ pkgs.redis.overrideAttrs (old: {
+   4   │   # no need for systemd support in docker image
+   5   │   makeFlags = old.makeFlags ++ ["USE_SYSTEMD=no"];
+   6   │   # build static binary with musl
+   7   │   preBuild = ''
+   8   │     makeFlagsArray=(PREFIX="$out"
+   9   │                     CC="${pkgs.musl.dev}/bin/musl-gcc -static"
+  10   │                     CFLAGS="-I${pkgs.musl.dev}/include"
+  11   │                     LDFLAGS="-L${pkgs.musl.dev}/lib")
+  12   │   '';
+  13   │   # no need for other binaries then redis-server
+  14   │   postInstall = "rm -f $out/bin/redis-{benchmark,check-*,cli}";
+  15   │ })
 ───────┴─────────────────────────────────────────────────────────────────────
 $ # In redis-minimal.nix we override the default redis build with 3 changes:
 $ # 1.) remove redis systemd support
