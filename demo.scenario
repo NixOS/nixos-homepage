@@ -1,3 +1,11 @@
+# Instructions:
+# * empty lines will be skipped
+# * lines starting with "#" will be skipped
+# * lines starting with "$ " will be typed
+# * lines starting with "(nix-shell) $ " will be typed
+# * lines starting with "--" will clear the screen
+# * every line after "#" will be a little brighter
+# * everything else will be printed immediately
 
 $ # Hi!
 $ # Wonder how to start using Nix?
