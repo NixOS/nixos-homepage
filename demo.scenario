@@ -132,9 +132,8 @@ debian-redis         latest    8366943c77e8    3 days ago      136MB
 alpine-redis         latest    aae644cd3417    3 days ago      6.99MB
 nix-redis            latest    30486183a209    50 years ago    45.4MB
 nix-redis-minimal    latest    a21238890680    50 years ago    2.02MB
-$ # Smaller then Alpine? Interesting!
-$ # Now we could claim Alpine is "bloated" :P, but we wont.
-$ # But we can not stop you from telling this to your friends :)
+$ # Did we just produced a docker image _smaller_ then Alpine? Interesting!
+$ # Go tell your friends :)
 
 --
 
