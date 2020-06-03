@@ -151,14 +151,14 @@ pkgs.mkShell {
       <div class="span6">
         <h2>Minimal docker image</h2>
         <p>
-          Using <code>Dockefile</code> you are responsible to:
+          Using <code>Dockeffile</code> you are responsible to:
         </p>
         <ul>
           <li>clean up everything that is not needed at runtime</li>
           <li>decide how to split into layers for better caching</li>
         </ul>
         <p>
-          Writing <code>Dockefile</code> that would produce a minimal image is
+          Writing <code>Dockeffile</code> that would produce a minimal image is
           at best a very error prone process.
         </p>
         <p>
@@ -208,10 +208,9 @@ Hello, world</pre>
         <h2>Declarative cloud images</h2>
         <p>How hard would it be to build and configure a <strong>Amazon EC2</strong> image?</p>
         <p>
-          With the following <code>amazon.nix</code> we defined nginx which is
-          serving example <code>/var/www</code> folder, having a valid ssl
-          certificate (via LetsEncrypt) and enabled recommended security
-          settings.
+          With the following <code>amazon.nix</code> we configured nginx which is
+          serving a "Welcome to nginx!" page, having a valid ssl certificate
+          (via LetsEncrypt) and enabled recommended security settings.
         </p>
         <pre class="well">
 { pkgs, ...}:
@@ -227,7 +226,7 @@ Hello, world</pre>
     virtualHosts."example.com" = {
       enableACME = true;
       forceSSL = true;
-      locations."/".root = "/var/www";
+      locations."/".root = "${pkgs.nginx}/html";
     };
   };
 }</pre>
