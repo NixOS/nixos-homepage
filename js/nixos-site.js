@@ -3,7 +3,7 @@ $(document).ready(function () {
   $(".navbar-search a").click(function (event) {
     event.preventDefault();
     var url = window.location.protocol + "//" + window.location.host + "/nixos";
-    if ($(this).text() === "Options") {
+    if ($(this).hasClass("search-options")) {
       url += "/options.html";
       url += "#" + $("input", $(this).parents("form")).val()
     } else {
