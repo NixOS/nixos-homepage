@@ -8,16 +8,14 @@ $(document).ready(function () {
       url += "#" + $("input", $(this).parents("form")).val()
     } else {
       url += "/packages.html"
-      url += "?channel=nixos-" + $(document.body).data('latest-nixos-series');
-      url += "&query=" + $("input", $(this).parents("form")).val();
+      url += "?query=" + $("input", $(this).parents("form")).val();
     }
     window.location.href = url;
   });
   $("#packages-search button").click(function (event) {
     event.preventDefault();
     var url = window.location.protocol + "//" + window.location.host + "/nixos/packages.html"
-    url += "?channel=nixos-" + $(document.body).data('latest-nixos-series');
-    url += "&query=" + $("input", $(this).parents("form")).val();
+    url += "?query=" + $("input", $(this).parents("form")).val();
     window.location.href = url;
   });
   var qs = new URLSearchParams(window.location.search.substring(1));
