@@ -8,6 +8,9 @@ body {
     body {
         padding-top: 0;
     }
+    .nav-collapse.in .btn-group {
+      margin-top: 0;
+    }
 }
 
 @media (min-width: 980px) {
@@ -492,14 +495,16 @@ ul.comma-separated > li:last-of-type:after {
  * index.tt
  */
 
-#packages-search .input-append button.btn {
-  font-size: 28px;
-  height: 54px;
-}
+@media (min-width: 980px) {
+  #packages-search .input-append button.btn {
+    font-size: 28px;
+    height: 54px;
+  }
 
-#packages-search .input-append input {
-  font-size: 28px;
-  height: 44px;
+  #packages-search .input-append input {
+    font-size: 28px;
+    height: 44px;
+  }
 }
 
 #examples {
