@@ -8,6 +8,9 @@ body {
     body {
         padding-top: 0;
     }
+    .nav-collapse.in .btn-group {
+      margin-top: 0;
+    }
 }
 
 @media (min-width: 980px) {
@@ -38,6 +41,10 @@ p {
 
 .navbar .brand {
 	padding-bottom: 0;
+}
+
+.navbar .navbar-search .input-append {
+  margin: 0px;
 }
 
 .dropdown .caret {
@@ -481,4 +488,45 @@ ul.comma-separated > li:after {
 }
 ul.comma-separated > li:last-of-type:after {
   display: none;
+}
+
+
+/*
+ * index.tt
+ */
+
+@media (min-width: 980px) {
+  #packages-search .input-append button.btn {
+    font-size: 28px;
+    height: 54px;
+  }
+
+  #packages-search .input-append input {
+    font-size: 28px;
+    height: 44px;
+  }
+}
+
+#examples {
+  margin: 0;
+  margin-top: 30px;
+  padding: 1em;
+  border: 1px solid #DDDDDD;
+  border-radius: 2px;
+}
+
+#examples pre.well {
+  margin-top: 1em;
+  background: #333333;
+  border-color: #333333;
+  color: #FFFFFF;
+}
+
+#examples h2 {
+  border: 0;
+}
+
+.asciinema-player-wrapper {
+  margin-top: 2em;
+  width: 570px;
 }

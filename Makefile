@@ -7,16 +7,12 @@ default: all
 
 
 HTML = index.html download.html news.html learn.html community.html \
-  governance.html donate.html commercial-support.html \
+  governance.html donate.html commercial-support.html features.html \
   teams/rfc-steering-committee.html teams/security.html teams/marketing.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
   teams/discourse.html \
   guides/contributing.html \
-  nix/index.html nix/about.html \
-  nixpkgs/index.html \
-  nixos/index.html nixos/about.html \
   nixos/packages.html nixos/options.html \
-  nixos/wiki.html \
   404.html
 
 
@@ -147,3 +143,8 @@ nixpkgs/packages-channels.json: Makefile
 
 nixos/packages-explorer.js:
 	@ln -sfn $(PACKAGES_EXPLORER) $@
+
+all: demo.cast
+
+demo.cast: demo.py demo.scenario
+	python demo.py demo.scenario > demo.cast

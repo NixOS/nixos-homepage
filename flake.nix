@@ -53,6 +53,8 @@
             xhtml1
             jq
             python3
+            python3Packages.click
+            python3Packages.colorama
             entr
           ];
 
