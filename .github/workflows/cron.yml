@@ -12,7 +12,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Installing Nix
-      uses: cachix/install-nix-action@v8
+      uses: cachix/install-nix-action@v9
     - name: Installing NixFlakes
       run: |
         nix-env -iA nixpkgs.nixFlakes
@@ -43,4 +43,7 @@ jobs:
         commit_message: 'Update flake.lock and blogs.xml [ci skip]'
         branch: 'master'
         file_pattern: flake.lock blogs.xml
+        commit_user_name: NixOS webmaster
+        commit_user_email: webmaster@nixos.org
+        commit_author: GitHub Actions <webmaster@nixos.org>
       if: github.repository == 'NixOS/nixos-homepage'
