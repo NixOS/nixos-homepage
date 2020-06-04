@@ -974,7 +974,7 @@ $ nix-store -qR /run/current-system | grep openssl
       modern, light-weight desktop environment. It can be enabled by
       setting the NixOS configuration value
       <tt>services.xserver.desktopManager.xfce.enable</tt> to
-      <tt>true</tt>. (<a href="nixos/screenshots/nixos-xfce.png">Screenshot</a>)
+      <tt>true</tt>. (<a href="images/screenshots/nixos-xfce.png">Screenshot</a>)
     </description>
   </item>
 
@@ -1102,11 +1102,11 @@ $ nix-store -qR /run/current-system | grep openssl
       OpenOffice.org 3 in Nixpkgs
     </title>
     <description>
-      <a href="nixos/screenshots/nixos-openoffice-3.png"><img class="inline screenshot"
-          src="nixos/screenshots/nixos-openoffice-3-small.png" alt="OpenOffice.org 3.0.1 screenshot" /></a>
+      <a href="images/screenshots/nixos-openoffice-3.png"><img class="inline screenshot"
+          src="images/screenshots/nixos-openoffice-3-small.png" alt="OpenOffice.org 3.0.1 screenshot" /></a>
 
       Lluís Batlle has updated OpenOffice.org in Nixpkgs to 3.0.1
-      (<a href="nixos/screenshots/nixos-openoffice-3.png">screenshot</a>).
+      (<a href="images/screenshots/nixos-openoffice-3.png">screenshot</a>).
     </description>
   </item>
 
@@ -1116,8 +1116,8 @@ $ nix-store -qR /run/current-system | grep openssl
       KDE 4.2 in Nixpkgs/NixOS
     </title>
     <description>
-      <a href="nixos/screenshots/nixos-kde42-1.png"><img class="inline screenshot"
-          src="nixos/screenshots/nixos-kde42-1-small.png" alt="KDE 4.2 screenshot" /></a>
+      <a href="images/screenshots/nixos-kde42-1.png"><img class="inline screenshot"
+          src="images/screenshots/nixos-kde42-1-small.png" alt="KDE 4.2 screenshot" /></a>
 
       We now have a fairly complete set of KDE 4.2 packages in Nixpkgs
       and NixOS. Previously we had KDE 3.5, but it was rather
@@ -1128,8 +1128,8 @@ $ nix-store -qR /run/current-system | grep openssl
       <tt>services.xserver.sessionType</tt> option to
       <tt>kde4</tt>. Thanks go to Yury G. Kudryashov, Andrew
       Morsillo and Sander van der Burg for doing the hard work on
-      adding KDE 4 to Nixpkgs. (<a href="nixos/screenshots/nixos-kde42-1.png">Screenshot 1</a>,
-      <a href="nixos/screenshots/nixos-kde42-2.png">screenshot
+      adding KDE 4 to Nixpkgs. (<a href="images/screenshots/nixos-kde42-1.png">Screenshot 1</a>,
+      <a href="images/screenshots/nixos-kde42-2.png">screenshot
         2</a>)
     </description>
   </item>
@@ -1311,8 +1311,8 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <p>
 
-        <a href="nixos/screenshots/nixos-installer-help.png"><img class="inline screenshot"
-            src="nixos/screenshots/nixos-installer-help-small.png" alt="NixOS installer online help" /></a>
+        <a href="images/screenshots/nixos-installer-help.png"><img class="inline screenshot"
+            src="images/screenshots/nixos-installer-help-small.png" alt="NixOS installer online help" /></a>
 
         New NixOS installation CD images for <tt>i686</tt> and
         <tt>x86_64</tt> are <a href="https://nixos.org/releases/nixos-0.1pre10083/">available</a>,
@@ -1364,11 +1364,11 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <p>
 
-        <a href="nixos/screenshots/nixos-openoffice.png"><img class="inline screenshot"
-            src="nixos/screenshots/nixos-openoffice-small.png" alt="OpenOffice screenshot" /></a>
+        <a href="images/screenshots/nixos-openoffice.png"><img class="inline screenshot"
+            src="images/screenshots/nixos-openoffice-small.png" alt="OpenOffice screenshot" /></a>
 
         <a href="https://www.openoffice.org/">OpenOffice</a> is now in
-        Nixpkgs (<a href="nixos/screenshots/nixos-openoffice.png">screenshot of
+        Nixpkgs (<a href="images/screenshots/nixos-openoffice.png">screenshot of
           OpenOffice 2.2.1 running under NixOS</a>, and <a
           href="http://www.denbreejen.net/public/nixos/nixos-oo-scrs.png">another
           screenshot</a>). Despite being a rather gigantic package (it
@@ -1393,11 +1393,11 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <p>
 
-        <a href="nixos/screenshots/nixos-games.png"><img class="inline screenshot"
-            src="nixos/screenshots/nixos-games-small.png" alt="NixOS screenshot" /></a>
+        <a href="images/screenshots/nixos-games.png"><img class="inline screenshot"
+            src="images/screenshots/nixos-games-small.png" alt="NixOS screenshot" /></a>
 
         <a href="https://www.winehq.org/">Wine</a> now runs on NixOS!
-        Finally we can run all those <a href="nixos/screenshots/nixos-games.png">legacy
+        Finally we can run all those <a href="images/screenshots/nixos-games.png">legacy
           applications</a>... Thanks to Michael Raskin for adding Wine
         and a NPTL-enabled Glibc (which Wine seems to need). This is a
         nice application of purely functional package composition, by
@@ -1452,11 +1452,11 @@ $ nix-store -qR /run/current-system | grep openssl
 
       <p>
 
-        <a href="https://www.kde.org"><img class="inline screenshot" src="nixos/klogo-official-crystal-128x128.png"
+        <a href="https://www.kde.org"><img class="inline screenshot" src="images/klogo-official-crystal-128x128.png"
             alt="KDE logo" /></a>
 
         We now have <a href="https://www.kde.org/">KDE</a> running on
-        NixOS (<a href="nixos/screenshots/nixos-kde.png">obligatory
+        NixOS (<a href="images/screenshots/nixos-kde.png">obligatory
           screenshot</a>). Just <tt>kdebase</tt> for now (Martin
         Bravenboer already added <tt>kdelibs</tt> a long time ago so
         that we could run the wonderful <a href="http://kcachegrind.sourceforge.net/cgi-bin/show.cgi">KCachegrind</a>),
@@ -1477,8 +1477,8 @@ $ nix-store -qR /run/current-system | grep openssl
       NixOS progress report
     </title>
     <description>
-      <a href="nixos/screenshots/nixos-compiz-cube.png"><img class="inline screenshot"
-          src="nixos/screenshots/nixos-compiz-cube-small.png" alt="NixOS screenshot" /></a>
+      <a href="images/screenshots/nixos-compiz-cube.png"><img class="inline screenshot"
+          src="images/screenshots/nixos-compiz-cube-small.png" alt="NixOS screenshot" /></a>
 
       NixOS is now <em>almost</em> usable as a desktop OS ;-). We
       have an X server, a bunch of Gnome packages, basic wireless
@@ -1486,13 +1486,13 @@ $ nix-store -qR /run/current-system | grep openssl
       had all along running on other Linux distributions. Here are a
       few screenshots:
       <ul>
-        <li><a href="nixos/screenshots/nixos-compiz-cube.png">X server
+        <li><a href="images/screenshots/nixos-compiz-cube.png">X server
             with Compiz window manager</a>.</li>
-        <li><a href="nixos/screenshots/nixos-terminals.png">Emacs and
+        <li><a href="images/screenshots/nixos-terminals.png">Emacs and
             a few terminals</a> showing off the (near) absence of
           <tt>/lib</tt>, <tt>/bin</tt> etc.; everything is in the Nix
           store.</li>
-        <li><a href="nixos/screenshots/nixos-apps.png">Some
+        <li><a href="images/screenshots/nixos-apps.png">Some
             applications</a>.</li>
       </ul>
     </description>

@@ -11,32 +11,14 @@
   force = true
 
 [[redirects]]
-  from = "/nixos"
+  from = "/nix/index.html"
   to = "/"
   status = 302
   force = true
 
 [[redirects]]
-  from = "/nixpkgs"
-  to = "/"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/nix/download.html"
-  to = "/download.html"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/nixpkgs/download.html"
-  to = "/download.html"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/nixos/download.html"
-  to = "/download.html"
+  from = "/nix/about.html"
+  to = "/features.html"
   status = 302
   force = true
 
@@ -47,8 +29,92 @@
   force = true
 
 [[redirects]]
+  from = "/nix/download.html"
+  to = "/download.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs/index.html"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs/download.html"
+  to = "/download.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs/packages-nixos-19.09.json.gz"
+  to = "https://channels.nixos.org/nixos-19.09/packages.json.br"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs/packages-nixos-unstable.json.gz"
+  to = "https://channels.nixos.org/nixos-unstable/packages.json.br"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/index.html"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/about.html"
+  to = "/features.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/screenshots/*"
+  to = "/images/screenshots/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/klogo-official-crystal-128x128.png"
+  to = "/images/klogo-official-crystal-128x128.png"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/download.html"
+  to = "/download.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/foundation.html"
+  to = "/governance.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nixos/learn.html"
   to = "/learn.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/security.html"
+  to = "/governance.html"
   status = 302
   force = true
 
@@ -73,18 +139,6 @@
 [[redirects]]
   from = "/nix-dev/*"
   to = "https://releases.nixos.org/nix-dev/:splat"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/nixos/security.html"
-  to = "/governance.html"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/nixos/foundation.html"
-  to = "/governance.html"
   status = 302
   force = true
 
@@ -157,24 +211,6 @@
   force = true
 
 [[redirects]]
-  from  = "/~eelco/*"
-  to = "https://edolstra.github.io/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/nixpkgs/packages-nixos-19.09.json.gz"
-  to = "https://channels.nixos.org/nixos-19.09/packages.json.br"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/nixpkgs/packages-nixos-unstable.json.gz"
-  to = "https://channels.nixos.org/nixos-unstable/packages.json.br"
-  status = 302
-  force = true
-
-[[redirects]]
   from = "/patchelf.html"
   to = "https://github.com/NixOS/patchelf"
   status = 302
@@ -220,6 +256,12 @@
   from = "/wiki/js/jquery.min.js"
   to = "/js/jquery.min.js"
   status = 302
+  force = true
+
+[[redirects]]
+  from  = "/~eelco/*"
+  to = "https://edolstra.github.io/:splat"
+  status = 301
   force = true
 
 [[redirects]]

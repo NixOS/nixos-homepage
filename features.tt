@@ -308,13 +308,13 @@ upgrades.</p>
     <pre class="code">$ nixos-rebuild switch --rollback
 </pre>
 
-    <a href="/nixos/screenshots/nixos-grub.png"><img class="inline screenshot"
-        src="/nixos/screenshots/nixos-grub-small.png" alt="Grub boot menu" /></a>
+    <a href="/images/screenshots/nixos-grub.png"><img class="inline screenshot"
+        src="/images/screenshots/nixos-grub-small.png" alt="Grub boot menu" /></a>
 
     <p>In fact, all old system configurations automatically show up in the
       Grub boot menu. So if the new configuration crashes or doesn’t boot
       properly, you can just roll back by selecting an older configuration
-      in the <a href="/nixos/screenshots/nixos-grub.png">Grub boot
+      in the <a href="/images/screenshots/nixos-grub.png">Grub boot
         menu</a>. Rollbacks are very fast: it doesn’t involve lots of files
       having to be restored from copies.</p>
 
