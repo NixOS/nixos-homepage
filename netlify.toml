@@ -5,6 +5,12 @@
   force = true
 
 [[redirects]]
+  from = "/nix"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nix/download.html"
   to = "/download.html"
   status = 302
