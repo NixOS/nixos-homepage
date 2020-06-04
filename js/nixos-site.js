@@ -2,19 +2,19 @@ $(document).ready(function () {
   $(".nixos-popover").popover({});
   $(".navbar-search a").click(function (event) {
     event.preventDefault();
-    var url = window.location.protocol + "//" + window.location.host + "/nixos";
+    var url = "https://search.nixos.org";
     if ($(this).hasClass("search-options")) {
-      url += "/options.html";
-      url += "#" + $("input", $(this).parents("form")).val()
+      url += "/options";
+      url += "?query=" + $("input", $(this).parents("form")).val()
     } else {
-      url += "/packages.html"
+      url += "/packages"
       url += "?query=" + $("input", $(this).parents("form")).val();
     }
     window.location.href = url;
   });
   $("#packages-search button").click(function (event) {
     event.preventDefault();
-    var url = window.location.protocol + "//" + window.location.host + "/nixos/packages.html"
+    var url = "https://search.nixos.org/packages";
     url += "?query=" + $("input", $(this).parents("form")).val();
     window.location.href = url;
   });
