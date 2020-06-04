@@ -11,6 +11,18 @@
   force = true
 
 [[redirects]]
+  from = "/nixos"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nix/download.html"
   to = "/download.html"
   status = 302
