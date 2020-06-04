@@ -507,12 +507,22 @@ ul.comma-separated > li:last-of-type:after {
   }
 }
 
-#examples {
-  margin: 0;
-  margin-top: 30px;
-  padding: 1em;
-  border: 1px solid #DDDDDD;
-  border-radius: 2px;
+@media (min-width: 768px) {
+  #examples {
+    margin: 0;
+    margin-top: 30px;
+    padding: 1em;
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+  }
+}
+
+.asciinema-player-wrapper {
+  margin-top: 2em;
+}
+
+#examples h2 {
+  border: 0;
 }
 
 #examples pre.well {
@@ -520,13 +530,39 @@ ul.comma-separated > li:last-of-type:after {
   background: #333333;
   border-color: #333333;
   color: #FFFFFF;
+  white-space: pre;
+  overflow-x: auto;
 }
 
-#examples h2 {
-  border: 0;
+/* Keep the player usable when the viewport is narrow */
+@media (max-width: 767px) {
+  /* Completely fill the width of the display on narrow displays. */
+  .asciinema-player-wrapper {
+    position: relative;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  .asciinema-player-wrapper .asciinema-player {
+    overflow: auto;
+  }
 }
 
-.asciinema-player-wrapper {
-  margin-top: 2em;
-  width: 570px;
+/* [767 - 1158] */
+
+/* Imitates the span6/span6 layout, but in a more flexible manner */
+@media (min-width: 980px) {
+  .side-by-side {
+    display: flex;
+  }
+  .side-by-side > .hero {
+    margin-right: 1em;
+  }
+  .asciinema-player-wrapper {
+    width: 570px;
+  }
 }
+@media (max-width: 979px) {
+  .side-by-side > * {
+    text-align: center;
+  }
+
