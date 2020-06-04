@@ -87,11 +87,6 @@
 
           doCheck = true;
 
-          installPhase = ''
-            mkdir $out
-            cp -prd . $out/
-          '';
-
           shellHook = ''
             export NIX_VERSION="${released-pkgs.lib.getVersion nix.name}"
             export NIXOS_SERIES="${released-pkgs.lib.trivial.release}"

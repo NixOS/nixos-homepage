@@ -1,4 +1,16 @@
 [[redirects]]
+  from = "/nixos/packages.html"
+  to = "https://search.nixos.org/packages"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/options.html"
+  to = "https://search.nixos.org/options"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nixos/wiki.html"
   to = "https://nixos.wiki"
   status = 302
