@@ -18,8 +18,6 @@
 
     packages.x86_64-linux = {
 
-      packagesExplorer = import ./packages-explorer nixpkgs;
-
       nixosAmis = writeText "ec2-amis.json"
         (builtins.toJSON (
           import (released-nixpkgs + "/nixos/modules/virtualisation/ec2-amis.nix")));
@@ -68,7 +66,6 @@
             "NIXOS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixosManual}"
             "NIXPKGS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixpkgsManual}"
             "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
-            "PACKAGES_EXPLORER=${packages.x86_64-linux.packagesExplorer}/bundle.js"
             "NIX_PILLS_MANUAL_IN=${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
           ];
 
@@ -82,7 +79,6 @@
           export NIXOS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixosManual}"
           export NIXPKGS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixpkgsManual}"
           export NIXOS_AMIS="${packages.x86_64-linux.nixosAmis}"
-          export PACKAGES_EXPLORER="${packages.x86_64-linux.packagesExplorer}/bundle.js"
           export NIX_PILLS_MANUAL_IN="${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
         '';
       };
