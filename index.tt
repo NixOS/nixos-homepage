@@ -6,8 +6,8 @@
 
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 
-<div class="side-by-side hero">
-  <div>
+<div class="side-by-side">
+  <div class="hero">
     <h1>Reproducible builds and deployments.</h1>
     <p class="lead">
       <strong>Nix</strong> is a powerful package manager for Linux and other

@@ -551,17 +551,18 @@ ul.comma-separated > li:last-of-type:after {
 
 /* Imitates the span6/span6 layout, but in a more flexible manner */
 @media (min-width: 980px) {
-  .hero.side-by-side {
+  .side-by-side {
     display: flex;
   }
-  .hero.side-by-side > * {
+  .side-by-side > .hero {
+    margin-right: 1em;
   }
   .asciinema-player-wrapper {
     width: 570px;
   }
 }
 @media (max-width: 979px) {
-  .hero .hero-demo {
+  .side-by-side > * {
     text-align: center;
   }
-}
+
