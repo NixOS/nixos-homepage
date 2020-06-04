@@ -62,7 +62,7 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
 
 
-all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard nixos/screenshots/*))) \
+all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*))) \
   nixos/packages-explorer.js \
   nixpkgs/packages-channels.json
 
