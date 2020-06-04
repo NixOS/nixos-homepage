@@ -534,12 +534,6 @@ ul.comma-separated > li:last-of-type:after {
   overflow-x: auto;
 }
 
-@media (min-width: 768px) {
-  .asciinema-player-wrapper {
-    width: 570px;
-  }
-}
-
 /* Keep the player usable when the viewport is narrow */
 @media (max-width: 767px) {
   /* Completely fill the width of the display on narrow displays. */
@@ -550,5 +544,24 @@ ul.comma-separated > li:last-of-type:after {
   }
   .asciinema-player-wrapper .asciinema-player {
     overflow: auto;
+  }
+}
+
+/* [767 - 1158] */
+
+/* Imitates the span6/span6 layout, but in a more flexible manner */
+@media (min-width: 980px) {
+  .hero.side-by-side {
+    display: flex;
+  }
+  .hero.side-by-side > * {
+  }
+  .asciinema-player-wrapper {
+    width: 570px;
+  }
+}
+@media (max-width: 979px) {
+  .hero .hero-demo {
+    text-align: center;
   }
 }
