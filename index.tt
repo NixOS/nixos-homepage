@@ -151,25 +151,24 @@ pkgs.mkShell {
       <div class="span6">
         <h2>Minimal docker image</h2>
         <p>
-          Using <code>Dockerfile</code> you are responsible to:
+          Using a <code>Dockerfile</code>, you are responsible for:
         </p>
         <ul>
-          <li>clean up everything that is not needed at runtime</li>
-          <li>decide how to split into layers for better caching</li>
+          <li>cleaning up everything that is not needed at runtime</li>
+          <li>deciding how to split into layers for better caching</li>
         </ul>
         <p>
-          Writing <code>Dockerfile</code> that would produce a minimal image is
+          Writing a <code>Dockerfile</code> that would produce a minimal image is
           at best a very error prone process.
         </p>
         <p>
-          With Nix you only include to docker image packages that you define.
+          With Nix only packages you define are included in the docker image.
           No cleaning up needed. There are no build tools left in your docker
           image, making it as minimal as you need.
         </p>
         <p>
-          Nix also know how to layer your resulting docker image, automatically
-          without you needed to do anything. The resulting layers are optimized
-          for caching as much as possible.
+          Nix also knows how to layer your resulting docker image, automatically.
+          The resulting layers are optimized for caching as much as possible.
         </p>
         <p>
           The following Nix expression (<code>default.nix</code>) defines a
