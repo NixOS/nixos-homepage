@@ -269,7 +269,7 @@ upgrades.</p>
     <p>After changing <tt>/etc/nixos/configuration.nix</tt>, you realise
       the configuration by running this command:</p>
 
-    <pre class="code">$ nixos-rebuild switch
+    <pre class="code"><span class="nix-command">nixos-rebuild switch</span>
 </pre>
 
     <p>This command does everything necessary to make the configuration
@@ -305,7 +305,7 @@ upgrades.</p>
       instance, if after a <tt>nixos-rebuild switch</tt> you discover that
       you don’t like the new configuration, you can just go back:</p>
 
-    <pre class="code">$ nixos-rebuild switch --rollback
+    <pre class="code"><span class="nix-command">nixos-rebuild switch --rollback</span>
 </pre>
 
     <a href="/images/screenshots/nixos-grub.png"><img class="inline screenshot"
@@ -339,7 +339,7 @@ upgrades.</p>
       as enabling a system service, or as large as rebuilding the entire
       system with a new version of Glibc, you can test it by doing:</p>
 
-    <pre class="code">$ nixos-rebuild test
+    <pre class="code"><span class="nix-command">nixos-rebuild test</span>
 </pre>
 
     <p>This builds and activates the new configuration, but doesn’t make
@@ -348,8 +348,8 @@ upgrades.</p>
 
     <p>An even nicer way to test changes is the following:</p>
 
-    <pre class="code">$ nixos-rebuild build-vm
-$ ./result/bin/run-*-vm
+    <pre class="code"><span class="nix-command">nixos-rebuild build-vm</span>
+<span class="nix-command">./result/bin/run-*-vm</span>
 </pre>
 
     <p>This builds and starts a virtual machine that contains the new
