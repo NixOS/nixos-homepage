@@ -1,6 +1,4 @@
 {
-  edition = 201909;
-
   description = "The nixos.org homepage";
 
   # This is used to build the site.
@@ -64,7 +62,7 @@
         '';
 
         makeFlags =
-          [ "NIX_MANUAL_IN=${nix.doc}/share/doc/nix/manual"
+          [ "NIX_MANUAL_IN=${released-nixpkgs.legacyPackages.x86_64-linux.nix.doc}/share/doc/nix/manual"
             "NIXOS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixosManual}"
             "NIXPKGS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixpkgsManual}"
             "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
@@ -78,7 +76,7 @@
         '';
 
         shellHook = ''
-          export NIX_MANUAL_IN="${nix.doc}/share/doc/nix/manual"
+          export NIX_MANUAL_IN="${released-nixpkgs.legacyPackages.x86_64-linux.nix.doc}/share/doc/nix/manual"
           export NIXOS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixosManual}"
           export NIXPKGS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixpkgsManual}"
           export NIXOS_AMIS="${packages.x86_64-linux.nixosAmis}"
