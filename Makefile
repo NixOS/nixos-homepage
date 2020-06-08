@@ -81,27 +81,24 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt nix-release.tt nixos-release.tt
+%.html: %.tt layout.tt common.tt 
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
 	  --define fileName=$< \
 	  --define nixosAmis=$(NIXOS_AMIS) \
-	  --pre_process=nix-release.tt --pre_process=nixos-release.tt --pre_process=common.tt \
+	  --define latestNixVersion=$(NIX_VERSION) \
+	  --define latestNixOSSeries=$(NIXOS_SERIES) \
+	  --pre_process=common.tt \
 	  $< > $@.tmp
 	xmllint --nonet --noout $@.tmp
 	mv $@.tmp $@
 
-# FIXME: hacky. The channel generator should put up a JSON file.
-nixos-release.tt:
-	uri=$$(curl --fail --silent -o /dev/null -w %{redirect_url} https://nixos.org/channels/nixos-${NIXOS_SERIES}); \
-	version=$$(echo $$uri | sed 's|.*/nixos-||'); \
-	echo "[%- latestNixOSSeries = \"${NIXOS_SERIES}\"; -%]" > $@
-
-%: %.in common.tt nix-release.tt
+%: %.in common.tt
 	echo $$PATH
 	tpage \
-	  --pre_process=nix-release.tt --pre_process=common.tt $< > $@.tmp
+	  --define latestNixVersion=$(NIX_VERSION) \
+	  --pre_process=common.tt $< > $@.tmp
 	mv $@.tmp $@
 
 news.html: all-news.xhtml
@@ -130,8 +127,8 @@ blogs.json: blogs.xml
 	mv $@.tmp $@
 
 ifeq ($(UPDATE), 1)
-.PHONY: blogs.xml nixos-release.tt
-update: blogs.xml nixos-release.tt
+.PHONY: blogs.xml
+update: blogs.xml
 	@true
 endif
 
