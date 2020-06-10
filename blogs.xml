@@ -32,6 +32,60 @@
 	<author>noreply@blogger.com (Sander van der Burg)</author>
 </item>
 <item>
+	<title>Craige McWhirter: Building Daedalus Flight on NixOS</title>
+	<guid isPermaLink="true">http://mcwhirter.com.au//craige/blog/2020/Building_Daedalus_Flight_on_NixOS/</guid>
+	<link>http://mcwhirter.com.au//craige/blog/2020/Building_Daedalus_Flight_on_NixOS/</link>
+	<description>&lt;p&gt;&lt;img alt=&quot;NixOS Daedalus Gears by Craige McWhirter&quot; src=&quot;http://mcwhirter.com.au/files/NixOS_Daedalus_Gears.png&quot; title=&quot;NixOS Daedalus Gears by Craige McWhirter&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://daedaluswallet.io/en/flight/&quot;&gt;Daedalus Flight&lt;/a&gt; was recently released
+and this is how you can build and run this version of
+&lt;a href=&quot;https://daedaluswallet.io/&quot;&gt;Deadalus&lt;/a&gt; on &lt;a href=&quot;https://nixos.org/&quot;&gt;NixOS&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you want to speed the build process up, you can add the
+&lt;a href=&quot;https://iohk.io/&quot;&gt;IOHK&lt;/a&gt; &lt;a href=&quot;https://nixos.org/nix/&quot;&gt;Nix&lt;/a&gt; cache to your own NixOS configuration:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://source.mcwhirter.io/craige/mio-ops/src/branch/master/roles/iohk.nix&quot;&gt;iohk.nix&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;nix&quot;&gt;nix.binaryCaches = [
+  &quot;https://cache.nixos.org&quot;
+  &quot;https://hydra.iohk.io&quot;
+];
+nix.binaryCachePublicKeys = [
+  &quot;hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=&quot;
+];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you haven't already, you can clone the &lt;a href=&quot;https://github.com/input-output-hk/daedalus&quot;&gt;Daedalus
+repo&lt;/a&gt; and specifically the
+1.0.0 tagged commit:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone --branch 1.0.0 https://github.com/input-output-hk/daedalus.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you've cloned the repo and checked you're on the 1.0.0 tagged commit,
+you can build Daedalus flight with the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ nix build -f . daedalus --argstr cluster mainnet_flight
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once the build completes, you're ready to launch Daedalus Flight:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ./result/bin/daedalus
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To verify that you have in fact built Daedalus Flight, first head to the
+&lt;code&gt;Daedalus&lt;/code&gt; menu then &lt;code&gt;About Daedalus&lt;/code&gt;. You should see a title such as
+&quot;DAEDALUS 1.0.0&quot;. The second check, is to press &lt;code&gt;[Ctl]+d&lt;/code&gt; to access &lt;code&gt;Daedalus
+Diagnostocs&lt;/code&gt; and your &lt;code&gt;Daedalus state directory&lt;/code&gt; should have &lt;code&gt;mainnet_flight&lt;/code&gt;
+at the end of the path.&lt;/p&gt;
+
+&lt;p&gt;If you've got these, give yourself a pat on the back and grab yourself a
+refreshing bevvy while you wait for blocks to sync.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt=&quot;Daedalus FC1 screenshot&quot; src=&quot;http://mcwhirter.com.au/files/Daedalus_FC1.png&quot; title=&quot;Daedalus FC1 screenshot&quot; /&gt;&lt;/p&gt;</description>
+	<pubDate>Thu, 23 Apr 2020 23:28:59 +0000</pubDate>
+</item>
+<item>
 	<title>nixbuild.net: Binary Cache Support</title>
 	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-04-18-binary-cache-support.html</guid>
 	<link>https://blog.nixbuild.net/posts/2020-04-18-binary-cache-support.html</link>
@@ -1101,22 +1155,6 @@ As of today, all binary caches are served by CloudFlare CDN.</description>
 	<description>In Nix 2 a new parameter to the derivation primitive was added. It changes how information is passed to the derivation builder.
 Current State In order to show how it changes the handling of parameters to derivation, the first example will show the current state with __structuredAttrs set to false and the stdenv.mkDerivation wrapper around derivation. All parameters are passed to the builder as environment variables, canonicalised by Nix in imitation of shell script conventions:</description>
 	<pubDate>Mon, 20 Jan 2020 12:00:00 +0000</pubDate>
-</item>
-<item>
-	<title>Hercules Labs: Hercules CI &amp; Cachix split up</title>
-	<guid isPermaLink="true">https://blog.hercules-ci.com/2020/01/14/hercules-ci-cachix-split-up/</guid>
-	<link>https://blog.hercules-ci.com/2020/01/14/hercules-ci-cachix-split-up/</link>
-	<description>&lt;p&gt;After careful consideration of how to balance between the two products, we’ve decided to split up. Each of the two products will be a separate entity:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Hercules CI becomes part of Robert Hensing’s Ensius B.V.&lt;/li&gt;
-  &lt;li&gt;Cachix becomes part of Domen Kožar’s Enlambda OÜ&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For customers there will be no changes, except for the point of contact in support requests.&lt;/p&gt;
-
-&lt;p&gt;Domen &amp;amp; Robert&lt;/p&gt;</description>
-	<pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
 </item>
 
 </channel>
