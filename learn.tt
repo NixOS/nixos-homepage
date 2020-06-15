@@ -2,14 +2,46 @@
 
 <h2>Guides</h2>
 
-<ul>
-  <li><a href="[%root%]guides/install-nix.html">Install Nix</a></li>
-  <li><a href="[%root%]guides/ad-hoc-developer-environments.html">Ad hoc developer environments</a></li>
-  <li><a href="[%root%]guides/contributing.html">How to Contribute</a></li>
-</ul>
+<div class="row-fluid">
+  <div class="span12">
+    <ul>
+      <li><a href="[%root%]guides/install-nix.html">Install Nix</a></li>
+      <li><a href="[%root%]guides/ad-hoc-developer-environments.html">Ad hoc developer environments</a></li>
+      <li><a href="[%root%]guides/contributing.html">How to Contribute</a></li>
+    </ul>
+  </div>
+</div>
+
+<hr />
 
 <div class="row-fluid">
+  <div class="span6">
+    <h2>Discover Nix packages</h2>
+    <form id="learn-packages-search">
+      <div class="input-append">
+        <input class="span10" placeholder="Search for Nix packages" type="text" />
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="span6">
+    <h2>Discover NixOS options</h2>
+    <form id="learn-options-search">
+      <div class="input-append">
+        <input class="span10" placeholder="Search for NixOS options" type="text" />
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
 
+<hr />
+
+<div class="row-fluid">
   <div class="span4">
     <h2>Learn Nix</h2>
     <p>Nix is a package manager which comes in a form of many command line tools.
@@ -106,7 +138,7 @@
           <li><a href="[%root%]nixpkgs/manual/#sec-emacs">Emacs</a></li>
           <li><a href="[%root%]nixpkgs/manual/#sec-eclipse">Eclipse</a></li>
           <li><a href="[%root%]nixpkgs/manual/#sec-kakoune">Kakoune</a></li>
-            <!-- TODO
+          <!-- TODO
             <li><a href="[%root%]nixpkgs/manual/#">Visual Studio Code</a></li>
               -->
           <li>...</li>
@@ -158,7 +190,8 @@
     <p>The <a href="[%root%]community.html">Community page</a> shows where the community meets.</p>
 
     <h2>Get commercial support</h2>
-    <p>The <a href="[%root%]commercial-support.html">Commercial support page</a> provides a list of consulting companies.</p>
+    <p>The <a href="[%root%]commercial-support.html">Commercial support page</a> provides a list of consulting
+      companies.</p>
   </div>
 
 </div>

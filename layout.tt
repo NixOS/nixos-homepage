@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-  <title>[% title %]</title>
+  <title>NixOS - [% title %]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   <script type="text/javascript" src="[% root %]js/jquery.min.js"></script>
@@ -44,24 +44,6 @@
             <li><a href="[%root%]governance.html">Governance</a></li>
             <li><a href="[%root%]donate.html">Donate</a></li>
           </ul>
-          [% IF !hideSearch %]
-          <form class="navbar-search pull-right">
-            <div class="input-append">
-              <input class="span2" id="appendedDropdownButton" placeholder="Search for packages or options"
-                type="text" />
-              <div class="btn-group">
-                <button class="btn dropdown-toggle" data-toggle="dropdown">
-                  Search
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu pull-right">
-                  <li><a href="#" class="search-packages">... for packages</a></li>
-                  <li><a href="#" class="search-options">... for options</a></li>
-                </ul>
-              </div>
-            </div>
-          </form>
-          [% END %]
         </div>
       </div>
     </div>

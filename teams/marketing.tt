@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt hideTitle=1 title="Marketing team" menu='nixos' %]
+[% WRAPPER layout.tt title="Marketing team" %]
 [% PROCESS common.tt %]
 
 <h1>Marketing team</h1>
