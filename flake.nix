@@ -2,12 +2,11 @@
   description = "The nixos.org homepage";
 
   # This is used to build the site.
-  inputs.nixpkgs.url = "nixpkgs/nixos-20.03";
+  inputs.nixpkgs = { url = "nixpkgs/nixos-20.03"; };
 
-  # These input are used for the manuals and release artifacts
-  inputs.released-nixpkgs.url = "nixpkgs/nixos-20.03";
-  inputs.released-nix.url = "github:nixos/nix/2.3-maintenance";
-  inputs.released-nix.flake = false;
+  # These inputs are used for the manuals and release artifacts
+  inputs.released-nixpkgs = { url = "nixpkgs/nixos-20.03"; };
+  inputs.released-nix = { url = "github:nixos/nix/2.3-maintenance"; flake = false; };
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
 
   outputs = { self, nixpkgs, released-nixpkgs, released-nix, nix-pills }:
