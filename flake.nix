@@ -4,20 +4,31 @@
   # This is used to build the site.
   inputs.nixpkgs.url = "nixpkgs/nixos-20.03";
 
-  # These are used for the manuals, and release artifacts
+  # These input are used for the manuals and release artifacts
   inputs.released-nixpkgs.url = "nixpkgs/nixos-20.03";
+  inputs.released-nix.url = "github:nixos/nix/2.3-maintenance";
+  inputs.released-nix.flake = false;
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
 
-  outputs = { self, nixpkgs, released-nixpkgs, nix-pills }:
+  outputs = { self, nixpkgs, released-nixpkgs, released-nix, nix-pills }:
     let
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
-      released-pkgs = import released-nixpkgs { system = "x86_64-linux"; };
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+      released-pkgs = import released-nixpkgs { inherit system; };
     in rec {
-      checks.x86_64-linux.build = defaultPackage.x86_64-linux;
+      defaultPackage."${system}" = packages."${system}".homepage;
 
-      packages.x86_64-linux = {
+      checks."${system}".build = defaultPackage."${system}";
+
+      packages."${system}" = rec {
 
         packagesExplorer = import ./packages-explorer nixpkgs;
+
+        nix = (import "${released-nix}/release.nix" {
+          nix = released-nix;
+          nixpkgs = released-nixpkgs;
+          officialRelease = true;
+        }).build."${system}";
 
         nixosAmis = pkgs.writeText "ec2-amis.json"
           (builtins.toJSON (
@@ -63,14 +74,14 @@
           '';
 
           makeFlags =
-            [ "NIX_VERSION=${released-pkgs.lib.getVersion released-pkgs.nix.name}"
+            [ "NIX_VERSION=${released-pkgs.lib.getVersion nix.name}"
               "NIXOS_SERIES=${released-pkgs.lib.trivial.release}"
-              "NIX_MANUAL_IN=${released-pkgs.nix.doc}/share/doc/nix/manual"
+              "NIX_MANUAL_IN=${nix}/share/doc/nix/manual"
               "NIXOS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixosManual}"
               "NIXPKGS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixpkgsManual}"
-              "NIXOS_AMIS=${packages.x86_64-linux.nixosAmis}"
-              "PACKAGES_EXPLORER=${packages.x86_64-linux.packagesExplorer}/bundle.js"
-              "NIX_PILLS_MANUAL_IN=${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
+              "NIXOS_AMIS=${nixosAmis}"
+              "PACKAGES_EXPLORER=${packagesExplorer}/bundle.js"
+              "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
             ];
 
           installPhase = ''
@@ -79,22 +90,20 @@
           '';
 
           shellHook = ''
-            export NIX_VERSION="${released-pkgs.lib.getVersion released-pkgs.nix.name}"
+            export NIX_VERSION="${released-pkgs.lib.getVersion nix.name}"
             export NIXOS_SERIES="${released-pkgs.lib.trivial.release}"
-            export NIX_MANUAL_IN="${released-pkgs.nix.doc}/share/doc/nix/manual"
+            export NIX_MANUAL_IN="${nix}/share/doc/nix/manual"
             export NIXOS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixosManual}"
             export NIXPKGS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixpkgsManual}"
-            export NIXOS_AMIS="${packages.x86_64-linux.nixosAmis}"
-            export PACKAGES_EXPLORER="${packages.x86_64-linux.packagesExplorer}/bundle.js"
-            export NIX_PILLS_MANUAL_IN="${packages.x86_64-linux.nixPills}/share/doc/nix-pills"
+            export NIXOS_AMIS="${nixosAmis}"
+            export PACKAGES_EXPLORER="${packagesExplorer}/bundle.js"
+            export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
           '';
         };
       };
 
-      defaultPackage.x86_64-linux = packages.x86_64-linux.homepage;
-
       nixosConfigurations.container = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         modules =
           [ ({ lib, ... }:
             { system.configurationRevision = lib.mkIf (self ? rev) self.rev;
@@ -105,7 +114,7 @@
                 enable = true;
                 adminAddr = "admin@example.org";
                 virtualHosts.default = {
-                  documentRoot = self.packages.x86_64-linux.homepage;
+                  documentRoot = packages."${system}".homepage;
                 };
               };
             })

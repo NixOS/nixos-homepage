@@ -35,6 +35,25 @@
         "type": "indirect"
       }
     },
+    "released-nix": {
+      "flake": false,
+      "info": {
+        "lastModified": 1591132159,
+        "narHash": "sha256-gGvfd+JoCb4+ZmiP59GGv4Xfaq2/s+Gi3ZQztPpRSiM="
+      },
+      "locked": {
+        "owner": "nixos",
+        "repo": "nix",
+        "rev": "d2008f2fff4b71c775b4b5cdecaff0d7a4ebec85",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "2.3-maintenance",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
     "released-nixpkgs": {
       "info": {
         "lastModified": 1591993820,
@@ -56,6 +75,7 @@
       "inputs": {
         "nix-pills": "nix-pills",
         "nixpkgs": "nixpkgs",
+        "released-nix": "released-nix",
         "released-nixpkgs": "released-nixpkgs"
       }
     }
