@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="Install Nix" hideTitle=1 menu='nixos' %]
+[% WRAPPER layout.tt title="Install Nix" %]
 
 <h1>Install Nix</h1>
 

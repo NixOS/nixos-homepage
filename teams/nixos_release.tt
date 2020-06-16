@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt hideTitle=1 title="NixOS Release Team" menu='nixos' %]
+[% WRAPPER layout.tt title="NixOS Release Team" %]
 
 <h1>NixOS Release Team</h1>
 

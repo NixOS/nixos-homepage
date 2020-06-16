@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="Search NixOS packages" menu="nixos" hideSearch=1 %]
+[% WRAPPER layout.tt title="Search NixOS packages" %]
 
 <div id="packages-explorer">
 	<div class="app">
