@@ -44,6 +44,13 @@
             <li><a href="[%root%]governance.html">Governance</a></li>
             <li><a href="[%root%]donate.html">Donate</a></li>
           </ul>
+          <ul class="nav pull-right">
+            <li>
+              <a href="[% root %]nixos/packages.html">
+                <span class="icon-search"></span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
