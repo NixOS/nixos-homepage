@@ -20,19 +20,38 @@
     },
     "nixpkgs": {
       "info": {
-        "lastModified": 1586724123,
-        "narHash": "sha256-VQ7zZy2xpz6dULpjar4jxNaQ0N/2q68l+EYO2nXaXDo="
+        "lastModified": 1591564272,
+        "narHash": "sha256-Z+4hmPx21+vYx9jp19+3jaT/Whl8IzmH1G/fGyFv7FY="
       },
       "locked": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "708cb6b307b04ad862cc50de792e57e7a4a8bb5a",
+        "rev": "e2bb73ce5f786b83e984b80199112f86b8a6cc9d",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
         "ref": "nixos-20.03",
         "type": "indirect"
+      }
+    },
+    "released-nix": {
+      "flake": false,
+      "info": {
+        "lastModified": 1591132159,
+        "narHash": "sha256-gGvfd+JoCb4+ZmiP59GGv4Xfaq2/s+Gi3ZQztPpRSiM="
+      },
+      "locked": {
+        "owner": "nixos",
+        "repo": "nix",
+        "rev": "d2008f2fff4b71c775b4b5cdecaff0d7a4ebec85",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "latest-release",
+        "repo": "nix",
+        "type": "github"
       }
     },
     "released-nixpkgs": {
@@ -56,6 +75,7 @@
       "inputs": {
         "nix-pills": "nix-pills",
         "nixpkgs": "nixpkgs",
+        "released-nix": "released-nix",
         "released-nixpkgs": "released-nixpkgs"
       }
     }

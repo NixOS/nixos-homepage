@@ -174,9 +174,8 @@
 
 [[redirects]]
   from  = "/nix/install"
-  to = "https://releases.nixos.org/nix/nix-2.3.6/install"
+  to = "https://channels.nixos.org/nix-latest/install"
   status = 200
-  #to = "https://channels.nixos.org/nix-latest/install"
   #status = 302
   force = true
 
