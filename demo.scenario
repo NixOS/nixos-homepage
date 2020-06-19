@@ -108,7 +108,7 @@ $ # 3.) only redis-server binary is needed
 $ # Now all we need to is build docker image with our new minimal redis
 $ bat docker-redis-minimal.nix
 ───────┬─────────────────────────────────────────────────────────────────────
-       │ File: redis-minimal.nix
+       │ File: docker-redis-minimal.nix
 ───────┼─────────────────────────────────────────────────────────────────────
    1   │ { pkgs ? import <nixpkgs> {}
    2   │ }:
