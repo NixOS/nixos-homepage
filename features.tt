@@ -245,7 +245,8 @@ upgrades.</p>
     <h3>Declarative system configuration model</h3>
 
     <p>In NixOS, the entire operating system — the kernel, applications,
-      system packages, configuration files, and so on — is built by the <a href="/nix">Nix package manager</a> from a
+      system packages, configuration files, and so on — is built by the
+      <a href="/nix/">Nix package manager</a> from a
       description in a purely
       functional build language. The fact that it’s purely functional
       essentially means that building a new configuration cannot overwrite
