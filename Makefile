@@ -37,6 +37,17 @@ $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) bootstrapify-docbook.sh bootstra
 	bash ./bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nixos https://github.com/NixOS/nix-pills
 
 
+### Prettify the nix.dev guides
+
+NIX_DEV_MANUAL_IN ?= /no-such-path
+NIX_DEV_MANUAL_OUT = nix-dev
+
+all: $(NIX_DEV_MANUAL_OUT)
+
+$(NIX_DEV_MANUAL_OUT): $(NIX_DEV_MANUAL_IN) bootstrapify-sphinx.sh layout.tt common.tt
+	bash ./bootstrapify-sphinx.sh $(NIX_DEV_MANUAL_IN)/tutorials $(NIX_DEV_MANUAL_OUT) 'Nix guides' nixos https://github.com/domenkozar/nix.dev
+
+
 ### Prettify the Nix manual.
 
 NIX_MANUAL_IN ?= /no-such-path
@@ -63,7 +74,8 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 
 all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*))) \
   nixos/packages-explorer.js \
-  nixpkgs/packages-channels.json
+  nixpkgs/packages-channels.json \
+  nix-dev
 
 
 robots.txt: $(HTML)

@@ -8,8 +8,9 @@
   inputs.released-nixpkgs = { url = "nixpkgs/nixos-20.03"; };
   inputs.released-nix = { url = "github:nixos/nix/latest-release"; flake = false; };
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
+  inputs.nix-dev = { url = "github:domenkozar/nix.dev"; };
 
-  outputs = { self, nixpkgs, released-nixpkgs, released-nix, nix-pills }:
+  outputs = { self, nixpkgs, released-nixpkgs, released-nix, nix-pills, nix-dev }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -50,6 +51,7 @@
               fd
               libxslt
               libxml2
+              pandoc
               perl
               perlPackages.JSON
               perlPackages.XMLSimple
@@ -60,6 +62,7 @@
               pkgs.nix
               imagemagick
               xhtml1
+              xmlstarlet
               jq
               python3
               python3Packages.click
@@ -81,6 +84,7 @@
               "NIXOS_AMIS=${nixosAmis}"
               "PACKAGES_EXPLORER=${packagesExplorer}/bundle.js"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
+              "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}/html"
             ];
 
           installPhase = ''
@@ -97,6 +101,7 @@
             export NIXOS_AMIS="${nixosAmis}"
             export PACKAGES_EXPLORER="${packagesExplorer}/bundle.js"
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
+            export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}/html"
           '';
         };
       };
