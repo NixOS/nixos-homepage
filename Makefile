@@ -63,6 +63,14 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 
 all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*)))
 
+install:
+	fd -I -t d -x mkdir -p build/{}   
+	fd -I -t f -t l '(.*?)\.(gpg|svg|xml|ico|css|jpg|gif|doc|pdf|html|png|js|cast|ico|robots.txt)$$' -x cp -a {} build/{}
+
+clean:
+	rm -rf build 
+
+
 
 robots.txt: $(HTML)
 	echo "Users-agent: *" >> $@

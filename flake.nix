@@ -70,8 +70,9 @@
           ];
 
         installPhase = ''
+	  make install
           mkdir $out
-          cp -prd . $out/
+          cp -prd build/. $out/
         '';
 
         shellHook = ''
