@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "nix-dev": {
+      "info": {
+        "lastModified": 1592582812,
+        "narHash": "sha256-6a6NciJgPgktNsLYLEmyjYrx9dZSBptKVapUYBRuBAg="
+      },
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "owner": "domenkozar",
+        "repo": "nix.dev",
+        "rev": "36694e4351dca75d2b1e63480fddb1a99239d9d5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "domenkozar",
+        "repo": "nix.dev",
+        "type": "github"
+      }
+    },
     "nix-pills": {
       "flake": false,
       "info": {
@@ -19,6 +39,24 @@
       }
     },
     "nixpkgs": {
+      "info": {
+        "lastModified": 1592263354,
+        "narHash": "sha256-1wHPn5qKfzfG06dZhpXDEg5Zt6HwvfyPPgW1tkYFejg="
+      },
+      "locked": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a84b797b28eb104db758b5cb2b61ba8face6744b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-20.03",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "info": {
         "lastModified": 1591564272,
         "narHash": "sha256-Z+4hmPx21+vYx9jp19+3jaT/Whl8IzmH1G/fGyFv7FY="
@@ -73,8 +111,9 @@
     },
     "root": {
       "inputs": {
+        "nix-dev": "nix-dev",
         "nix-pills": "nix-pills",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "released-nix": "released-nix",
         "released-nixpkgs": "released-nixpkgs"
       }
