@@ -115,7 +115,7 @@ latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
 
 check:
-	checklink $(HTML)
+	linkchecker $(HTML)
 
 blogs.xml:
 	curl --fail https://planet.nixos.org/rss20.xml > $@.tmp

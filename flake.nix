@@ -50,6 +50,7 @@
               fd
               libxslt
               libxml2
+              linkchecker
               perl
               perlPackages.JSON
               perlPackages.XMLSimple
