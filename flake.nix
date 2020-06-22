@@ -47,6 +47,7 @@
           enableParallelBuilding = true;
 
           buildInputs = with pkgs; [
+              caddy
               fd
               libxslt
               libxml2
@@ -83,6 +84,8 @@
               "PACKAGES_EXPLORER=${packagesExplorer}/bundle.js"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
             ];
+
+          doCheck = true;
 
           installPhase = ''
             mkdir $out
