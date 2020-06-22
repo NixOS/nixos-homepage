@@ -80,7 +80,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt 
+%.html: %.tt layout.tt common.tt
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
