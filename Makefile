@@ -114,7 +114,7 @@ index.html: news-rss.xml latest-news.xhtml blogs.json
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
 
-check:
+check: $(HTML)
 	linkchecker $(HTML)
 
 blogs.xml:
