@@ -168,7 +168,7 @@ upgrades.</p>
     <h3>Nix Packages collection</h3>
 
     <p>We provide a large set of Nix expressions containing thousands of
-      existing Unix packages, the <a href="../nixpkgs"><em>Nix Packages
+      existing Unix packages, the <a href="https://github.com/NixOS/nixpkgs"><em>Nix Packages
           collection</em> (Nixpkgs)</a>.</p>
 
 
@@ -245,7 +245,8 @@ upgrades.</p>
     <h3>Declarative system configuration model</h3>
 
     <p>In NixOS, the entire operating system — the kernel, applications,
-      system packages, configuration files, and so on — is built by the <a href="/nix">Nix package manager</a> from a
+      system packages, configuration files, and so on — is built by the
+      <a href="/">Nix package manager</a> from a
       description in a purely
       functional build language. The fact that it’s purely functional
       essentially means that building a new configuration cannot overwrite
@@ -403,7 +404,7 @@ upgrades.</p>
     <section>
       <h2>How does NixOS work?</h2>
 
-      <p>NixOS is based on <a href="/nix">Nix</a>, a purely functional
+      <p>NixOS is based on <a href="/">Nix</a>, a purely functional
         package management system. Nix stores all packages in isolation from
         each other under paths such as</p>
 
@@ -460,7 +461,7 @@ upgrades.</p>
           (e.g., Apache HTTPD, PostgreSQL, and Tomcat) that can be configured
           declaratively through <tt>configuration.nix</tt>.</li>
 
-        <li>NixOS build on the <a href="/nixpkgs">Nix Packages
+        <li>NixOS build on the <a href="https://github.com/NixOS/nixpkgs">Nix Packages
             collection</a> (Nixpkgs), which provides Nix expressions for over
           40 000 packages that you can install under NixOS.</li>
 

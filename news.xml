@@ -124,7 +124,7 @@
       NixOS 19.09 “Loris” has been released, the twelfth stable release branch.
       See the <a href="/nixos/manual/release-notes.html#sec-release-19.09">release notes</a>
       for details. You can get NixOS 19.09 ISOs and VirtualBox appliances
-      from the <a href="nixos/download.html">download page</a>.
+      from the <a href="/download.html">download page</a>.
       For information on how to upgrade from older release branches
       to 19.09, check out the
       <a href="/nixos/manual/index.html#sec-upgrading">manual section on upgrading</a>.
@@ -143,7 +143,7 @@
       NixOS 19.03 “Koi” has been released, the eleventh stable release branch.
       See the <a href="/nixos/manual/release-notes.html#sec-release-19.03">release notes</a>
       for details. You can get NixOS 19.03 ISOs and VirtualBox appliances
-      from the <a href="nixos/download.html">download page</a>.
+      from the <a href="/download.html">download page</a>.
       For information on how to upgrade from older release branches
       to 19.03, check out the
       <a href="/nixos/manual/index.html#sec-upgrading">manual section on upgrading</a>.
@@ -163,7 +163,7 @@
       NixOS 18.09 “Jellyfish” has been released, the tenth stable release branch.
       See the <a href="/nixos/manual/release-notes.html#sec-release-18.09">release notes</a>
       for details. You can get NixOS 18.09 ISOs and VirtualBox appliances
-      from the <a href="nixos/download.html">download page</a>.
+      from the <a href="/download.html">download page</a>.
       For information on how to upgrade from older release branches
       to 18.09, check out the
       <a href="/nixos/manual/index.html#sec-upgrading">manual section on upgrading</a>.
@@ -235,7 +235,7 @@
       NixOS 18.03 “Impala” has been released, the ninth stable release branch.
       See the <a href="/nixos/manual/release-notes.html#sec-release-18.03">release notes</a>
       for details. You can get NixOS 18.03 ISOs and VirtualBox appliances
-      from the <a href="nixos/download.html">download page</a>.
+      from the <a href="/download.html">download page</a>.
       For information on how to upgrade from older release branches
       to 18.03, check out the
       <a href="/nixos/manual/index.html#sec-upgrading">manual section on upgrading</a>.
@@ -263,7 +263,7 @@
       NixOS 17.09 “Hummingbird” has been released, the eigth stable release
       branch. See the <a href="/nixos/manual/release-notes.html#sec-release-17.09">release notes</a>
       for details. You can get NixOS 17.09 ISOs and VirtualBox
-      appliances from the <a href="nixos/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
       branches to 17.09, check out the <a href="/nixos/manual/index.html#sec-upgrading">manual section on
         upgrading</a>.
@@ -306,7 +306,7 @@
       NixOS 17.03 “Gorilla” has been released, the seventh stable release
       branch. See the <a href="/nixos/manual/release-notes.html#sec-release-17.03">release notes</a>
       for details. You can get NixOS 17.03 ISOs and VirtualBox
-      appliances from the <a href="nixos/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
       branches to 17.03, check out the <a href="/nixos/manual/index.html#sec-upgrading">manual section on
         upgrading</a>.
@@ -322,7 +322,7 @@
       NixOS 16.09 “Flounder” has been released, the sixth stable release
       branch. See the <a href="/nixos/manual/release-notes.html#sec-release-16.09">release notes</a>
       for details. You can get NixOS 16.09 ISOs and VirtualBox
-      appliances from the <a href="nixos/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
       branches to 16.09, check out the <a href="/nixos/manual/index.html#sec-upgrading">manual section on
         upgrading</a>.
@@ -351,7 +351,7 @@
       NixOS 16.03 “Emu” has been released, the fifth stable release
       branch. See the <a href="/nixos/manual/release-notes.html#sec-release-16.03">release notes</a>
       for details. You can get NixOS 16.03 ISOs and VirtualBox
-      appliances from the <a href="nixos/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
       branches to 16.03, check out the <a href="/nixos/manual/index.html#sec-upgrading">manual section on
         upgrading</a>.
@@ -379,7 +379,7 @@
       NixOS 15.09 “Dingo” has been released, the fourth stable release
       branch. See the <a href="/nixos/manual/release-notes.html#sec-release-15.09">release notes</a>
       for details. You can get NixOS 15.09 ISOs and VirtualBox
-      appliances from the <a href="nixos/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
       branches to 15.09, check out the <a href="/nixos/manual/index.html#sec-upgrading">manual section on
         upgrading</a>.
@@ -450,7 +450,7 @@
       release branch. It brings Linux 3.14, systemd 217, Glibc 2.20,
       KDE 4.14.1, and much more. See the <a href="/nixos/manual/sec-release-14.12.html">release notes</a>
       for details. You can get NixOS 14.12 ISOs and VirtualBox
-      appliances from the <a href="nixos/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
       branches to 14.12, check out the <a href="/nixos/manual/sec-upgrading.html">manual section on
         upgrading</a>.
@@ -494,7 +494,7 @@
       Glibc 2.19, KDE 4.12, light-weight NixOS containers, and much
       more. See the <a href="/nixos/manual/#sec-release-14.04">release
         notes</a> for details. You can get NixOS 14.04 ISOs and
-      VirtualBox appliances from the <a href="nixos/download.html">download page</a>. For information on
+      VirtualBox appliances from the <a href="/download.html">download page</a>. For information on
       how to upgrade a 13.10 system to 14.04, check out the <a href="/nixos/manual/#sec-upgrading">manual
         section on upgrading</a>.
     </description>
@@ -589,7 +589,7 @@ $ nix-store -qR /run/current-system | grep openssl
       that need bug fixes and security updates, but not the
       potentially destabilising changes that sometimes occur on the
       unstable branch. You can get NixOS 13.10 ISOs and VirtualBox
-      appliances from the <a href="nixos/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. See the <a href="https://nixos.org/nix-dev/2013-October/011941.html">announcement</a>
       for more information. For information on how to switch an
       existing NixOS machine from the unstable channel to 13.10, check
@@ -944,7 +944,7 @@ $ nix-store -qR /run/current-system | grep openssl
       ISSRE paper on NixOS-based system testing
     </title>
     <description>
-      The paper <a href="docs/papers.html#issre10">“Automating System
+      The paper <a href="https://edolstra.github.io/pubs/decvms-issre2010-final.pdf">“Automating System
         Tests Using Declarative Virtual Machines”</a> (by Sander van der
       Burg and Eelco Dolstra) has been accepted for presentation at
       the <a href="http://www.issre2010.org/">21st IEEE International
@@ -1433,10 +1433,10 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       <p>
-        Eelco Dolstra presented the paper <a href="docs/papers.html#hotos07"><em>Purely Functional System
-            Configuration Management</em></a> at the <a href="https://www.usenix.org/events/hotos07/">11th Workshop on
-          Hot Topics in Operating Systems (HotOS XI)</a>. It gives an
-        overview of the ideas behind <a href="nixos">NixOS</a>. The
+        Eelco Dolstra presented the paper <a href="https://edolstra.github.io/pubs/hotos-final.pdf"><em>Purely Functional System
+        Configuration Management</em></a> at the <a href="https://www.usenix.org/events/hotos07/">11th Workshop on
+        Hot Topics in Operating Systems (HotOS XI)</a>. It gives an
+        overview of the ideas behind <a href="nixos/">NixOS</a>. The
         <a href="http://people.cs.uu.nl/eelco/talks/hotos-may-2007.pdf">slides</a>
         are also available.
       </p>
@@ -1603,7 +1603,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       <a href="http://www.cs.uu.nl/~eelco">Eelco Dolstra</a>
-      defended his <a href="docs/papers.html#dolstra06thesis">PhD
+        defended his <a href="https://edolstra.github.io/pubs/phd-thesis.pdf">PhD
         thesis</a> on the purely functional deployment model.
     </description>
   </item>

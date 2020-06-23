@@ -80,7 +80,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt 
+%.html: %.tt layout.tt common.tt
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
@@ -114,8 +114,8 @@ index.html: news-rss.xml latest-news.xhtml blogs.json
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
 
-check:
-	checklink $(HTML)
+check: $(HTML)
+	bash check-links.sh
 
 blogs.xml:
 	curl --fail https://planet.nixos.org/rss20.xml > $@.tmp
