@@ -51,7 +51,7 @@
   <div class="span4">
     <h2>Reliable</h2>
     <p>
-      Nix’s ensures that installing or upgrading one package <strong>cannot
+      Nix ensures that installing or upgrading one package <strong>cannot
         break other packages</strong>. It allows you to <strong>roll back to
         previous versions</strong>, and ensures that no package is in an
       inconsistent state during an upgrade.
