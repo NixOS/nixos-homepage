@@ -9,6 +9,25 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>nixbuild.net: Automatic Resource Optimization</title>
+	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-06-25-automatic-resource-optimization.html</guid>
+	<link>https://blog.nixbuild.net/posts/2020-06-25-automatic-resource-optimization.html</link>
+	<description>&lt;p&gt;As of today, nixbuild.net will automatically select resources (CPU count and memory amount) for builds submitted to it. Based on historic build data, nixbuild.net calculates a resource allocation that will make your build as performant as possible, while wasting minimal CPU time. This means nixbuild.net users get faster and cheaper builds, while also taking away the user’s burden of figuring out what resource settings to use for each individual build.&lt;/p&gt;
+
+&lt;p&gt;Previously, all builds were assigned 4 CPUs unless the user configured resource selection differently. However, configuring different resource settings for individual builds was difficult, since Nix has no notion of such settings. Additionally, it is really tricky to know wether a build will gain anything from being allocated many CPUs, or if it just makes the build more expensive. It generally requires the user to try out the build with different settings, which is time-consuming for a single build and almost insurmountable for a large set of builds with different characteristics.&lt;/p&gt;
+&lt;p&gt;Now, each individual build will be analyzed and can be assigned between 1 and 16 CPUs, depending on how well the build utilizes multiple CPUs. The memory allocation will be adapted to minimize the amount of unused memory.&lt;/p&gt;
+&lt;p&gt;The automatic resource optimization has been tested both internally and by a selected number of beta users, and the results have been very positive so far. We’re happy to make this feature available to all nixbuild.net users, since it aligns perfectly with the service’s core idea of being simple, cost-effective and performant.&lt;/p&gt;
+&lt;h2 id=&quot;how-does-it-work&quot;&gt;How Does it Work?&lt;/h2&gt;
+&lt;p&gt;The automatic resource optimization works in two steps:&lt;/p&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;&lt;p&gt;When a Nix derivation is submitted to nixbuild.net, we look for similar derivations that have been built on nixbuild.net before. A heuristic approach is used, where derivations are compared based on package names and version numbers. This approach can be improved in the future, by looking at more parts of the derivations, like dependencies and build scripts.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A number of the most recent, most similar derivations are selected. We then analyze the build data of those derivations. Since we have developed a secure sandbox specifically for running Nix builds, we’re also able to collect a lot of data about the builds. One metric that is collected is CPU utilization, and that lets us make predictions about how well a build would scale, performance-wise, if it was given more CPUs.&lt;/p&gt;
+&lt;p&gt;We also look at metrics about the historic memory usage, and make sure the new build is allocated enough memory.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
+	<pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
+	<author>support@nixbuild.net (nixbuild.net)</author>
+</item>
+<item>
 	<title>Tweag I/O: Long-term reproducibility with Nix and Software Heritage</title>
 	<guid isPermaLink="true">https://tweag.io/blog/2020-06-18-software-heritage/</guid>
 	<link>https://tweag.io/blog/2020-06-18-software-heritage/</link>
@@ -1070,87 +1089,6 @@ Since Nix community has previously succesfully stepped up and funded removal of 
 
 &lt;p&gt;As always: if you have any questions or comments then let us know and send us an email to &lt;a href=&quot;mailto:support@flyingcircus.io&quot;&gt;support@flyingcircus.io&lt;/a&gt;.&lt;/p&gt;</description>
 	<pubDate>Fri, 28 Feb 2020 14:16:49 +0000</pubDate>
-</item>
-<item>
-	<title>nixbuild.net: Introducing nixbuild.net</title>
-	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-02-18-introducing-nixbuild-net.html</guid>
-	<link>https://blog.nixbuild.net/posts/2020-02-18-introducing-nixbuild-net.html</link>
-	<description>&lt;p&gt;Exactly one month ago, I &lt;a href=&quot;https://discourse.nixos.org/t/announcing-nixbuild-net-nix-build-as-a-service&quot;&gt;announced&lt;/a&gt; the &lt;a href=&quot;https://nixbuild.net&quot;&gt;nixbuild.net&lt;/a&gt; service. Since then, there have been lots of work on functionality, performance and stability of the service. As of today, nixbuild.net is exiting alpha and entering private beta phase. If you want to try it out, just &lt;a href=&quot;mailto:rickard@nixbuild.net&quot;&gt;send me an email&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Today, I’m also launching the &lt;a href=&quot;https://blog.nixbuild.net&quot;&gt;nixbuild.net blog&lt;/a&gt;, which is intended as an outlet for anything related to the nixbuild.net service. Announcements, demos, technical articles and various tips and tricks. We’ll start out with a proper introduction of nixbuild.net; why it was built, what it can help you with and what the long-term goals are.&lt;/p&gt;
-
-&lt;h2 id=&quot;why-nixbuild.net&quot;&gt;Why nixbuild.net?&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://nixos.org/nix/&quot;&gt;Nix&lt;/a&gt; has great built-in support for &lt;a href=&quot;https://nixos.org/nix/manual/#chap-distributed-builds&quot;&gt;distributing builds&lt;/a&gt; to remote machines. You just need to setup a standard Nix enviroment on your build machines, and make sure they are accessible via SSH. Just like that, you can offload your heavy builds to a couple of beefy build servers, saving your poor laptop’s fan from spinning up.&lt;/p&gt;
-&lt;p&gt;However, just when you’ve tasted those sweet distributed builds you very likely run into the issue of &lt;em&gt;scaling&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;What if you need a really big server to run your builds, but only really need it once or twice per day? You’ll be wasting a lot of money keeping that build server available.&lt;/p&gt;
-&lt;p&gt;And what if you occasionally have lots and lots of builds to run, or if your whole development team wants to share the build servers? Then you probably need to add more build servers, which means more wasted money when they are not used.&lt;/p&gt;
-&lt;p&gt;So, you start looking into auto-scaling your build servers. This is quite easy to do if you use some cloud provider like AWS, Azure or GCP. But, this is where Nix will stop cooperating with you. It is really tricky to get Nix to work nicely together with an auto-scaled set of remote build machines. Nix has only a very coarse view of the “current load” of a build machine and can therefore not make very informed decisions on exactly how to distribute the builds. If there are multiple Nix instances (one for each developer in your team) fighting for the same resources, things get even trickier. It is really easy to end up in a situation where a bunch of really heavy builds are fighting for CPU time on the same build server while the other servers are idle or running lightweight build jobs.&lt;/p&gt;
-&lt;p&gt;If you use &lt;a href=&quot;https://nixos.org/hydra/&quot;&gt;Hydra&lt;/a&gt;, the continous build system for Nix, you can find scripts for using auto-scaled AWS instances, but it is still tricky to set it up. And in the end, it doesn’t work perfectly since Nix/Hydra has no notion of “consumable” CPU/memory resources so the build scheduling is somewhat hit-and-miss.&lt;/p&gt;
-&lt;p&gt;Even if you manage to come up with a solution that can handle your workload in an acceptable manner, you now have a new job: &lt;em&gt;maintaining&lt;/em&gt; uniquely configured build servers. Possibly for your whole company.&lt;/p&gt;
-&lt;p&gt;Through my consulting company, &lt;a href=&quot;https://immutablesolutions.com/&quot;&gt;Immutable Solutions&lt;/a&gt;, I’ve done a lot of work on Nix-based deployments, and I’ve always struggled with half-baked solutions to the Nix build farm problem. This is how the idea of the nixbuild.net service was born — a service that can fill in the missing pieces of the Nix distributed build puzzle and package it as a simple, no-maintenance, cost-effective service.&lt;/p&gt;
-&lt;h2 id=&quot;who-are-we&quot;&gt;Who are We?&lt;/h2&gt;
-&lt;p&gt;nixbuild.net is developed and operated by me (Rickard Nilsson) and my colleague David Waern. We both have extensive experience in building Nix-based solutions, for ourselves and for various clients.&lt;/p&gt;
-&lt;p&gt;We’re bootstrapping nixbuild.net, and we are long-term committed to keep developing and operating the service. Today, nixbuild.net can be productively used for its main purpose — running Nix builds in a scalable and cost-effective way — but there are lots of things that can (and will) be built on top of and around that core. Read more about this below.&lt;/p&gt;
-&lt;h2 id=&quot;what-does-nixbuild.net-look-like&quot;&gt;What does nixbuild.net Look Like?&lt;/h2&gt;
-&lt;p&gt;To the end-user, a person or team using Nix for building software, nixbuild.net behaves just like any other &lt;a href=&quot;https://nixos.org/nix/manual/#chap-distributed-builds&quot;&gt;remote build machine&lt;/a&gt;. As such, you can add it as an entry in your &lt;code&gt;/etc/nix/machines&lt;/code&gt; file:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;beta.nixbuild.net x86_64-linux - 100 1 big-parallel,benchmark&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;big-parallel,benchmark&lt;/code&gt; assignment is something that is called &lt;em&gt;system features&lt;/em&gt; in Nix. You can use that as a primitive scheduling strategy if you have multiple remote machines. Nix will only submit builds that have been marked as requiring a specific system feature to machines that are assigned that feature.&lt;/p&gt;
-&lt;p&gt;The number 100 in the file above tells Nix that it is allowed to submit up to 100 simultaneous builds to &lt;code&gt;beta.nixbuild.net&lt;/code&gt;. Usually, you use this property to balance builds between remote machines, and to make sure that a machine doesn’t run too many builds at the same time. This works OK when you have rather homogeneous builds, and only one single Nix client is using a set of build servers. If multiple Nix clients use the same set of build servers, this simplistic scheduling breaks down, since a given Nix client loses track on how many builds are really running on a server.&lt;/p&gt;
-&lt;p&gt;However, when you’re using nixbuild.net, you can set this number to anything really, since nixbuild.net will take care of the scheduling and scaling on its own, and it will not let multiple Nix clients step on each other’s toes. In fact each build that nixbuild.net runs is securely isolated from other builds and by default gets exclusive access to the resources (CPU and memory) it has been assigned.&lt;/p&gt;
-&lt;p&gt;Apart from setting up the distributed Nix machines, you need to configure SSH. When you register an account on nixbuild.net, you’ll provide us with a public SSH key. The corresponding private key is used for connecting to nixbuild.net. This private key needs to be readable by the user that runs the Nix build. This is usually the &lt;code&gt;root&lt;/code&gt; user, if you have a standard Nix setup where the &lt;code&gt;nix-daemon&lt;/code&gt; process runs as the root user.&lt;/p&gt;
-&lt;p&gt;That’s all there is to it, now we can run builds using nixbuild.net!&lt;/p&gt;
-&lt;p&gt;Let’s try building the following silly build, just so we can see some action:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;let pkgs = import &amp;lt;nixpkgs&amp;gt; { system = &quot;x86_64-linux&quot;; };
-
-in pkgs.runCommand &quot;silly&quot; {} ''
-  n=0
-  while (($n &amp;lt; 12)); do
-    date | tee -a $out
-    sleep 10
-    n=$(($n + 1))
-  done
-''&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This build will run for 2 minutes and output the current date every ten seconds:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ nix-build silly.nix
-these derivations will be built:
-  /nix/store/cy14fc13d3nzl65qp0sywvbjnnl48jf8-silly.drv
-building '/nix/store/khvphdj3q7nyim46jk97fjp174damrik-silly.drv' on 'ssh://beta.nixbuild.net'...
-Mon Feb 17 20:53:47 UTC 2020
-Mon Feb 17 20:53:57 UTC 2020
-Mon Feb 17 20:54:07 UTC 2020&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can see that Nix is telling us that the build is running on nixbuild.net!&lt;/p&gt;
-&lt;h3 id=&quot;the-nixbuild.net-shell&quot;&gt;The nixbuild.net Shell&lt;/h3&gt;
-&lt;p&gt;nixbuild.net supports a simple shell interface that you can access through SSH. This shell allows you to retrieve information about your builds on the service.&lt;/p&gt;
-&lt;p&gt;For example, we can list the currently running builds:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ ssh beta.nixbuild.net shell
-nixbuild.net&amp;gt; list builds --running
-10524 2020-02-17 21:05:20Z [40.95s] [Running]
-      /nix/store/khvphdj3q7nyim46jk97fjp174damrik-silly.drv&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We can also get information about any derivation or nix store path that has been built:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;nixbuild.net&amp;gt; show drv /nix/store/khvphdj3q7nyim46jk97fjp174damrik-silly.drv
-Derivation
-  path = /nix/store/khvphdj3q7nyim46jk97fjp174damrik-silly.drv
-  builds = 1
-  successful builds = 1
-
-Outputs
-  out -&amp;gt; /nix/store/8c7sndr3npwmskj9zzp4347cnqh5p8q0-silly
-
-Builds
-  10524 2020-02-17 21:05:20Z [02:01] [Built]&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This shell is under development, and new features are added continuously. A web-based frontend will also be implemented.&lt;/p&gt;
-&lt;h2 id=&quot;the-road-ahead&quot;&gt;The Road Ahead&lt;/h2&gt;
-&lt;p&gt;To finish up this short introduction to nixbuild.net, let’s talk a bit about our long-term goals for the service.&lt;/p&gt;
-&lt;p&gt;The core purpose of nixbuild.net is to provide Nix users with pay-per-use distributed builds that are simple to set up and integrate into any workflow. The build execution should be performant and secure.&lt;/p&gt;
-&lt;p&gt;There are a number of features that basically just are nice side-effects of the design of nixbuild.net:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Building a large number of variants of the same derivation (a build matrix or some sort of parameter sweep) will take the same time as running a single build, since nixbuild.net can run all builds in parallel.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Running repeated builds to find issues related to non-determinism/reproducability will not take longer than running a single build.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;A whole team/company can share the same account in nixbuild.net letting builds be shared in a cost-effective way. If everyone in a team delegates builds to nixbuild.net, the same derivation will never have to be built twice. This is similar to having a shared Nix cache, but avoids having to configure a cache and perform network uploads for each build artifact. Of course, nixbuild.net can be combined with a Nix cache too, if desired.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Beyond the above we have lots of thoughts on where we want to take nixbuild.net. I’m not going to enumerate possible directions here and now, but one big area that nixbuild.net is particularly suited for is advanced build analysis and visualisation. The sandbox that has been developed to securely isolate builds from each other also gives us a unique way to analyze exactly how a build behaves. One can imagine nixbuild.net being able give very detailed feedback to users about build bottlenecks, performance regressions, unused dependencies etc.&lt;/p&gt;
-&lt;p&gt;With that said, our primary focus right now is to make nixbuild.net a robust workhorse for your Nix builds, enabling you to fully embrace Nix without being limited by local compute resources. Please &lt;a href=&quot;mailto:rickard@nixbuild.net&quot;&gt;get in touch&lt;/a&gt; if you want try out nixbuild.net, or if you have any questions or comments!&lt;/p&gt;</description>
-	<pubDate>Tue, 18 Feb 2020 00:00:00 +0000</pubDate>
-	<author>support@nixbuild.net (nixbuild.net)</author>
 </item>
 
 </channel>
