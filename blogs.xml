@@ -9,6 +9,13 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Tweag I/O: Nix Flakes, Part 2: Evaluation caching</title>
+	<guid isPermaLink="true">https://tweag.io/blog/2020-06-25-eval-cache/</guid>
+	<link>https://tweag.io/blog/2020-06-25-eval-cache/</link>
+	<description>How Nix flakes enable caching of evaluation results of Nix expressions.</description>
+	<pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
+</item>
+<item>
 	<title>nixbuild.net: Automatic Resource Optimization</title>
 	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-06-25-automatic-resource-optimization.html</guid>
 	<link>https://blog.nixbuild.net/posts/2020-06-25-automatic-resource-optimization.html</link>
@@ -1030,65 +1037,6 @@ One of the most occouring annoyances that pops up more frequently with those sta
 Since Nix community has previously succesfully stepped up and funded removal of Perl to reduce barriers for source code contributions, I think we ought to do the same for removing barriers when using Nix.</description>
 	<pubDate>Wed, 18 Mar 2020 08:00:00 +0000</pubDate>
 	<author>support@cachix.org (Domen Kožar)</author>
-</item>
-<item>
-	<title>Flying Circus: Our new NixOS 19.03 Platform Is Ready for Production</title>
-	<guid isPermaLink="false">http://blog.flyingcircus.io/?p=5295</guid>
-	<link>https://blog.flyingcircus.io/2020/02/28/our-new-nixos-19-03-platform-is-ready-for-production/</link>
-	<description>&lt;p&gt;We have developed our third-generation platform which is now based on NixOS 19.03. All provided components have been ported to the new platform and VMs are already running in production.&lt;/p&gt;
-
-
-
-&lt;p&gt;Most of our development work is done for the new platform and new features will be available only for it. We pull in security updates from upstream regularly and will follow new NixOS releases more quickly in the future. The old NixOS 15.09 platform still receives critical security and bug fixes.&lt;/p&gt;
-
-
-
-&lt;p&gt;Effective March 6, VMs created via customer self-service will use the 19.03 platform.&lt;/p&gt;
-
-
-
-&lt;p&gt;You can find the documentation for the new platform here:&lt;/p&gt;
-
-
-
-&lt;p&gt;&lt;a href=&quot;https://flyingcircus.io/doc/guide/platform_nixos_2/index.html&quot;&gt;https://flyingcircus.io/doc/guide/platform_nixos_2/index.html&lt;/a&gt;&lt;/p&gt;
-
-
-
-&lt;p&gt;We recommend user profiles (done with buildEnv) in case your application needs specific packages in its environment:&lt;/p&gt;
-
-
-
-&lt;p&gt;&lt;a href=&quot;https://flyingcircus.io/doc/guide/platform_nixos_2/user_profile.html&quot;&gt;https://flyingcircus.io/doc/guide/platform_nixos_2/user_profile.html&lt;/a&gt;&lt;/p&gt;
-
-
-
-&lt;h2&gt;Upgrading 15.09 Machines&lt;/h2&gt;
-
-
-
-&lt;p&gt;Upgrading existing VMs online is supported and we have already done that for a number of VMs.&lt;br /&gt;Sometimes however, it can be better to create new NixOS VMs in parallel and set up your applications there.&lt;/p&gt;
-
-
-
-&lt;p&gt;Most managed components will just work after the upgrade. We are working on instructions for specific things that should be done before or after the upgrade.&lt;/p&gt;
-
-
-
-&lt;p&gt;If you’re a customer with a support contract in the “Guided” or “Managed” service classes&lt;br /&gt;then we’ll approach you directly and discuss when and how to upgrade VMs in the coming months.&lt;/p&gt;
-
-
-
-&lt;p&gt;If you’re a customer in the “Hosted” service class then we recommend contacting our support team to discuss the upgrade.&lt;/p&gt;
-
-
-
-&lt;h2&gt;If you have questions …&lt;/h2&gt;
-
-
-
-&lt;p&gt;As always: if you have any questions or comments then let us know and send us an email to &lt;a href=&quot;mailto:support@flyingcircus.io&quot;&gt;support@flyingcircus.io&lt;/a&gt;.&lt;/p&gt;</description>
-	<pubDate>Fri, 28 Feb 2020 14:16:49 +0000</pubDate>
 </item>
 
 </channel>
