@@ -496,19 +496,19 @@ ul.comma-separated > li:last-of-type:after {
  */
 
 @media (min-width: 980px) {
-  #packages-search .input-append button.btn {
+  .packages-searchbox .input-append button.btn {
     font-size: 28px;
     height: 54px;
   }
 
-  #packages-search .input-append input {
+  .packages-searchbox .input-append input {
     font-size: 28px;
     height: 44px;
   }
 }
 
 @media (min-width: 768px) {
-  #examples {
+  .home-examples {
     margin: 0;
     margin-top: 30px;
     padding: 1em;
@@ -521,11 +521,11 @@ ul.comma-separated > li:last-of-type:after {
   margin-top: 2em;
 }
 
-#examples h2 {
+.home-examples h2 {
   border: 0;
 }
 
-#examples pre.well {
+.home-examples pre.well {
   margin-top: 1em;
   background: #333333;
   border-color: #333333;
