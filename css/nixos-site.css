@@ -187,7 +187,7 @@ pre {
 
 .nix-shell-command:before {
     color: #999;
-    content: " [nix-shell]$ ";
+    content: "[nix-shell]$ ";
 }
 
 div.main li {
