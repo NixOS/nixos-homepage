@@ -95,18 +95,18 @@
 <span class="nix-command">python --version</span>
 python: command not found
 <span class="nix-command"><strong>nix-shell -p python3</strong></span>
-(nix-shell)<span class="nix-command">python --version</span>
+<span class="nix-shell-command">python --version</span>
 Python 3.7.7</pre>
 
         <h2>Multiple languages, one tool</h2>
         <p></p>
         <pre class="well">
 <span class="nix-command"><strong>nix-shell -p python3 nodejs go rustc</strong></span>
-(nix-shell)<span class="nix-command">node --version</span>
+<span class="nix-shell-command">node --version</span>
 v10.20.1
-(nix-shell)<span class="nix-command">go version</span>
+<span class="nix-shell-command">go version</span>
 go version go1.14.1 linux/amd64
-(nix-shell)<span class="nix-command">rustc --version</span>
+<span class="nix-shell-command">rustc --version</span>
 rustc 1.42.0</pre>
 
       </div>
@@ -134,9 +134,9 @@ pkgs.mkShell {
         <p>Then enter development environment with:</p>
         <pre class="well">
 <span class="nix-command"><strong>nix-shell</strong></span>
-(nix-shell)<span class="nix-command">virtualenv --version</span>
+<span class="nix-shell-command">virtualenv --version</span>
 16.7.9
-(nix-shell)<span class="nix-command">yarn --version</span>
+<span class="nix-shell-command">yarn --version</span>
 1.22.4</pre>
         <p>
           Commit the above <code>shell.nix</code> file and let you coworkers have
