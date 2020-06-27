@@ -176,18 +176,12 @@ pre {
     box-shadow: 0.1em 0.1em 0.5em #e0e0e0;
 }
 
-.nix-command {
-    white-space: nowrap;
-}
-
-.nix-command:before {
+.shell-prompt {
     color: #999;
-    content: " $ ";
-}
-
-.nix-shell-command:before {
-    color: #999;
-    content: " [nix-shell]$ ";
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 div.main li {
