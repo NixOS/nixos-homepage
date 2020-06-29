@@ -62,7 +62,7 @@
 
 <hr />
 
-<div id="packages-search" class="row-fluid text-center">
+<div id="packages-search" class="row-fluid text-center packages-searchbox">
   <div class="span12">
     <h1>Choose from Thousands of Packages</h1>
     <p class="text-center lead">
@@ -83,7 +83,7 @@
 
 <h1 class="text-center">Examples...</h1>
 
-<div id="examples">
+<div class="home-examples">
 
   <section>
     <div class="row-fluid">
