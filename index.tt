@@ -92,21 +92,21 @@
         <h2>Try new tools without fear</h2>
         <p>Don't clutter your system with tools that you use only now and then.</p>
         <pre class="well">
-<span class="shell-prompt">$</span> python --version
+<span class="shell-prompt">$ </span>python --version
 python: command not found
-<span class="shell-prompt">$</span> <strong>nix-shell -p python3</strong>
-<span class="shell-prompt">[nix-shell]$</span> python --version
+<span class="shell-prompt">$ </span><strong>nix-shell -p python3</strong>
+<span class="shell-prompt">[nix-shell]$ </span>python --version
 Python 3.7.7</pre>
 
         <h2>Multiple languages, one tool</h2>
         <p></p>
         <pre class="well">
-<span class="shell-prompt">$</span> <strong>nix-shell -p python3 nodejs go rustc</strong>
-<span class="shell-prompt">[nix-shell]$</span> node --version
+<span class="shell-prompt">$ </span><strong>nix-shell -p python3 nodejs go rustc</strong>
+<span class="shell-prompt">[nix-shell]$ </span>node --version
 v10.20.1
-<span class="shell-prompt">[nix-shell]$</span> go version
+<span class="shell-prompt">[nix-shell]$ </span>go version
 go version go1.14.1 linux/amd64
-<span class="shell-prompt">[nix-shell]$</span> rustc --version
+<span class="shell-prompt">[nix-shell]$ </span>rustc --version
 rustc 1.42.0</pre>
 
       </div>
@@ -133,10 +133,10 @@ pkgs.mkShell {
 }</pre>
         <p>Then enter development environment with:</p>
         <pre class="well">
-<span class="shell-prompt">$</span> <strong>nix-shell</strong>
-<span class="shell-prompt">[nix-shell]$</span> virtualenv --version
+<span class="shell-prompt">$ </span><strong>nix-shell</strong>
+<span class="shell-prompt">[nix-shell]$ </span>virtualenv --version
 16.7.9
-<span class="shell-prompt">[nix-shell]$</span> yarn --version
+<span class="shell-prompt">[nix-shell]$ </span>yarn --version
 1.22.4</pre>
         <p>
           Commit the above <code>shell.nix</code> file and let you coworkers have
@@ -184,17 +184,17 @@ pkgs.dockerTools.buildLayeredImage {
 }</pre>
         <p>To build and run the image you need to:</p>
         <pre class="well">
-<span class="shell-prompt">$</span> <strong>nix-build default.nix -o ./result</strong>
+<span class="shell-prompt">$ </span><strong>nix-build default.nix -o ./result</strong>
 ...
 /nix/store/&#8230;-docker-image-only-hello.tar.gz
-<span class="shell-prompt">$</span> docker load -i ./result
+<span class="shell-prompt">$ </span>docker load -i ./result
 1c31fbac2eb1: Loading layer [==================>]  1.649MB/1.649MB
 03b22f688054: Loading layer [==================>]    256kB/256kB
 29c350a9c392: Loading layer [==================>]  31.61MB/31.61MB
 6a87e4d71e07: Loading layer [==================>]  266.2kB/266.2kB
 c09c43a6b910: Loading layer [==================>]  71.68kB/71.68kB
 Loaded image: only-hello:qn5x1pnk7d467jsl81jng7168qsks42l
-<span class="shell-prompt">$</span> docker run only-hello:qn5x1pnk7d467jsl81jng7168qsks42l hello"
+<span class="shell-prompt">$ </span>docker run only-hello:qn5x1pnk7d467jsl81jng7168qsks42l hello"
 Hello, world</pre>
         <p>
           Learn more <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
@@ -231,12 +231,12 @@ Hello, world</pre>
 }</pre>
         <p>Now we just need to build it.</p>
         <pre class="well">
-<span class="shell-prompt">$</span> <strong>nix-build '&lt;nixpkgs/nixos/release.nix&gt;' \</strong>
+<span class="shell-prompt">$ </span><strong>nix-build '&lt;nixpkgs/nixos/release.nix&gt;' \</strong>
 <strong>    -A amazonImage.x86_64-linux \</strong>
 <strong>    --arg configuration ./amazon.nix \</strong>
 <strong>    -o ./result</strong>
 ...
-<span class="shell-prompt">$</span> ls ./result/
+<span class="shell-prompt">$ </span>ls ./result/
 nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux.vhd
 nix-support</pre>
         <p>
