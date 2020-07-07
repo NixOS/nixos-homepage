@@ -49,7 +49,7 @@ def echo_console_line(t, t_step, chars, color=None):
 
 def echo_nix_shell_line(t, t_step, chars, color=None):
     t += t_step
-    echo([t, "o", colorama.Fore.GREEN + "(nix-shell) $ " + colorama.Style.RESET_ALL])
+    echo([t, "o", colorama.Fore.GREEN + "[nix-shell]$ " + colorama.Style.RESET_ALL])
     t += (3 * t_step)
     t = echo_line(t, t_step, chars, color=color, nl=True)
     return t
@@ -104,8 +104,8 @@ def main(version,
             line = line[len("$ "):]
             echo_fn = echo_console_line
 
-        elif line.startswith("(nix-shell) $ "):
-            line = line[len("(nix-shell) $ "):]
+        elif line.startswith("[nix-shell]$ "):
+            line = line[len("[nix-shell]$ "):]
             echo_fn = echo_nix_shell_line
 
         # lines starting with "--" will clear display

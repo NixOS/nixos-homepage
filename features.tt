@@ -91,8 +91,8 @@
       there after an upgrade. This means that you can <em>roll back</em> to
       the old version:</p>
 
-    <pre class="code"><span class="nix-command">nix-env --upgrade <em>some-packages</em></span>
-<span class="nix-command">nix-env --rollback</span>
+    <pre class="code"><span class="shell-prompt">$</span> nix-env --upgrade <em>some-packages</em>
+<span class="shell-prompt">$</span> nix-env --rollback
 </pre>
 
 
@@ -100,7 +100,7 @@
 
     <p>When you uninstall a package like this…</p>
 
-    <pre class="code"><span class="nix-command">nix-env --uninstall firefox</span>
+    <pre class="code"><span class="shell-prompt">$</span> nix-env --uninstall firefox
 </pre>
 
     <p>the package isn’t deleted from the system right away (after all,
@@ -108,7 +108,7 @@
       other users). Instead, unused packages can be deleted safely by
       running the <em>garbage collector</em>:</p>
 
-    <pre class="code"><span class="nix-command">nix-collect-garbage</span>
+    <pre class="code"><span class="shell-prompt">$</span> nix-collect-garbage
 </pre>
 
     <p>This deletes all packages that aren’t in use by any user profile or
@@ -137,7 +137,7 @@
     <p>Nix expressions generally describe how to build a package from
       source, so an installation action like</p>
 
-    <pre class="code"><span class="nix-command">nix-env --install firefox</span>
+    <pre class="code"><span class="shell-prompt">$</span> nix-env --install firefox
 </pre>
 
     <p><em>could</em> cause quite a bit of build activity, as not only
@@ -187,17 +187,17 @@ upgrades.</p>
         href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/newsreaders/pan/default.nix">its
         Nix expression</a>:</p>
 
-    <pre><span class="nix-command">nix-shell '&lt;nixpkgs&gt;' -A pan</span>
+    <pre><span class="shell-prompt">$</span> nix-shell '&lt;nixpkgs&gt;' -A pan
 </pre>
 
     <p>You’re then dropped into a shell where you can edit, build and test
       the package:</p>
 
-    <pre><span class="nix-shell-command">tar xf $src</span>
-<span class="nix-shell-command">cd pan-*</span>
-<span class="nix-shell-command">./configure</span>
-<span class="nix-shell-command">make</span>
-<span class="nix-shell-command">./pan/gui/pan</span>
+    <pre><span class="shell-prompt">[nix-shell]$</span> tar xf $src
+<span class="shell-prompt">[nix-shell]$</span> cd pan-*
+<span class="shell-prompt">[nix-shell]$</span> ./configure
+<span class="shell-prompt">[nix-shell]$</span> make
+<span class="shell-prompt">[nix-shell]$</span> ./pan/gui/pan
 </pre>
 
     <p>Since Nix packages are reproducible and have complete dependency
@@ -270,7 +270,7 @@ upgrades.</p>
     <p>After changing <tt>/etc/nixos/configuration.nix</tt>, you realise
       the configuration by running this command:</p>
 
-    <pre class="code"><span class="nix-command">nixos-rebuild switch</span>
+    <pre class="code"><span class="shell-prompt">$</span> nixos-rebuild switch
 </pre>
 
     <p>This command does everything necessary to make the configuration
@@ -306,7 +306,7 @@ upgrades.</p>
       instance, if after a <tt>nixos-rebuild switch</tt> you discover that
       you don’t like the new configuration, you can just go back:</p>
 
-    <pre class="code"><span class="nix-command">nixos-rebuild switch --rollback</span>
+    <pre class="code"><span class="shell-prompt">$</span> nixos-rebuild switch --rollback
 </pre>
 
     <a href="/images/screenshots/nixos-grub.png"><img class="inline screenshot"
@@ -340,7 +340,7 @@ upgrades.</p>
       as enabling a system service, or as large as rebuilding the entire
       system with a new version of Glibc, you can test it by doing:</p>
 
-    <pre class="code"><span class="nix-command">nixos-rebuild test</span>
+    <pre class="code"><span class="shell-prompt">$</span> nixos-rebuild test
 </pre>
 
     <p>This builds and activates the new configuration, but doesn’t make
@@ -349,8 +349,8 @@ upgrades.</p>
 
     <p>An even nicer way to test changes is the following:</p>
 
-    <pre class="code"><span class="nix-command">nixos-rebuild build-vm</span>
-<span class="nix-command">./result/bin/run-*-vm</span>
+    <pre class="code"><span class="shell-prompt">$</span> nixos-rebuild build-vm
+<span class="shell-prompt">$</span> ./result/bin/run-*-vm
 </pre>
 
     <p>This builds and starts a virtual machine that contains the new
