@@ -22,7 +22,7 @@
     The quickest way to install Nix is to open a terminal and run the following
     command (as a user other than <code>root</code> with <code>sudo</code> permission):
     <pre class="well" style="margin-top:1em">
-<span class="shell-prompt">$ curl -L https://nixos.org/nix/install | sh</span></pre>
+<span class="shell-prompt">$</span> curl -L https://nixos.org/nix/install | sh</pre>
     <p>Make sure to follow the instructions output by the script.</p>
     <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
   </section>
@@ -30,11 +30,11 @@
   <section class="tab-pane" id="nix-verify-installation">
     <p>You may want to verify the integrity of the installation script using GPG:</p>
     <pre class="well">
-<span class="shell-prompt">$ curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install</span>
-<span class="shell-prompt">$ curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc</span>
-<span class="shell-prompt">$ gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE</span>
-<span class="shell-prompt">$ gpg2 --verify ./install-nix-[%latestNixVersion%].asc</span>
-<span class="shell-prompt">$ sh ./install-nix-[%latestNixVersion%]</span></pre>
+<span class="shell-prompt">$</span> curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install
+<span class="shell-prompt">$</span> curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc
+<span class="shell-prompt">$</span> gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE
+<span class="shell-prompt">$</span> gpg2 --verify ./install-nix-[%latestNixVersion%].asc
+<span class="shell-prompt">$</span> sh ./install-nix-[%latestNixVersion%]</pre>
     <p>
       The <a href="[%root%]edolstra.gpg">signing key</a> has fingerprint
       <code>B541 D553 0127 0E0B CF15 CA5D 8170 B472 6D71 98DE</code>.
