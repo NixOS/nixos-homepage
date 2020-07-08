@@ -9,6 +9,13 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Tweag I/O: Setting up Buildkite for Nix-based projects using Terraform and GCP</title>
+	<guid isPermaLink="true">https://tweag.io/blog/2020-07-08-buildkite-for-nix-ci/</guid>
+	<link>https://tweag.io/blog/2020-07-08-buildkite-for-nix-ci/</link>
+	<description>How to setup a Buildkite-based CI for Nix projects with workers running on GCP.</description>
+	<pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
+</item>
+<item>
 	<title>Tweag I/O: Nix Flakes, Part 2: Evaluation caching</title>
 	<guid isPermaLink="true">https://tweag.io/blog/2020-06-25-eval-cache/</guid>
 	<link>https://tweag.io/blog/2020-06-25-eval-cache/</link>
@@ -1027,16 +1034,6 @@ and issues and pull requests are welcomed.
 &lt;/div&gt;
 &lt;/div&gt;</description>
 	<pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-</item>
-<item>
-	<title>Cachix: Proposal for improving Nix error messages</title>
-	<guid isPermaLink="true">https://blog.cachix.org/post/2020-03-18-proposal-for-improving-nix-error-messages/</guid>
-	<link>https://blog.cachix.org/post/2020-03-18-proposal-for-improving-nix-error-messages/</link>
-	<description>I’m lucky to be in touch with a lot of people that use Nix day to day.
-One of the most occouring annoyances that pops up more frequently with those starting with Nix are confusing error messages.
-Since Nix community has previously succesfully stepped up and funded removal of Perl to reduce barriers for source code contributions, I think we ought to do the same for removing barriers when using Nix.</description>
-	<pubDate>Wed, 18 Mar 2020 08:00:00 +0000</pubDate>
-	<author>support@cachix.org (Domen Kožar)</author>
 </item>
 
 </channel>
