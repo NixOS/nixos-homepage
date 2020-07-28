@@ -9,6 +9,17 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Cachix: Upstream caches: avoiding pushing paths in cache.nixos.org</title>
+	<guid isPermaLink="true">https://blog.cachix.org/posts/2020-07-28-upstream-caches-avoiding-pushing-paths-in-cache-nixos-org/</guid>
+	<link>https://blog.cachix.org/posts/2020-07-28-upstream-caches-avoiding-pushing-paths-in-cache-nixos-org/</link>
+	<description>One of the most requested features, the so-called upstream caches was released today.
+It is enabled by default for all caches, and the owner of the binary cache can disable it via Settings.
+When you push store paths to Cachix, querying cache.nixos.org adds overhead of multiples of 100ms, but you save storage and possibly minutes for avoiding the pushing pf already available paths.
+Queries to cache.nixos.org are also cached, so that subsequent push operations do not have the overhead.</description>
+	<pubDate>Tue, 28 Jul 2020 14:30:00 +0000</pubDate>
+	<author>support@cachix.org (Domen Kožar)</author>
+</item>
+<item>
 	<title>Cachix: Documentation and More Documentation</title>
 	<guid isPermaLink="true">https://blog.cachix.org/posts/2020-07-20-documentation-and-more-documentation/</guid>
 	<link>https://blog.cachix.org/posts/2020-07-20-documentation-and-more-documentation/</link>
@@ -716,19 +727,6 @@ we need to track when considering and planning our datasets. This
 gives us flexibility later, and enables some superpowers like erasing
 my computer on every boot, which I’ll write about on Monday.&lt;/p&gt;</description>
 	<pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
-</item>
-<item>
-	<title>nixbuild.net: New nixbuild.net Resources</title>
-	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-03-27-nixbuild-net-beta.html</guid>
-	<link>https://blog.nixbuild.net/posts/2020-03-27-nixbuild-net-beta.html</link>
-	<description>&lt;p&gt;On the support side of the nixbuild.net service, two new resources have been published:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://docs.nixbuild.net&quot;&gt;docs.nixbuild.net&lt;/a&gt;, collecting all available documentation for nixbuild.net users.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The &lt;a href=&quot;https://github.com/nixbuild/feedback&quot;&gt;nixbuild.net feedback&lt;/a&gt; repository on GitHub, providing a way to report issues or ask questions related to the service.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These resources are mainly useful for nixbuild.net beta users, but they are open to anyone. And anyone is of course welcome to request a free beta account for evaluating nixbuild.net, by just &lt;a href=&quot;mailto:rickard@nixbuild.net&quot;&gt;sending me an email&lt;/a&gt;.&lt;/p&gt;</description>
-	<pubDate>Fri, 27 Mar 2020 00:00:00 +0000</pubDate>
-	<author>support@nixbuild.net (nixbuild.net)</author>
 </item>
 
 </channel>
