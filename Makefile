@@ -60,7 +60,9 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
 
 
-all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*)))
+all: $(HTML) favicon.png favicon.ico robots.txt \
+	styles \
+	$(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*)))
 
 
 robots.txt: $(HTML)
@@ -128,6 +130,15 @@ update: blogs.xml
 	@true
 endif
 
+# The nix-built site will use the provided SITE_STYLES
+ifeq ($(strip $(SITE_STYLES)),)
+# But development `make` builds will nix-build.
+styles: $(wildcard site-styles/*)
+	nix-build -A packages.x86_64-linux.siteStyles --out-link $@
+else
+styles:
+	@ln -sfn $(SITE_STYLES) $@
+endif
 
 all: demo.cast
 
