@@ -20,6 +20,7 @@
       checks."${system}".build = defaultPackage."${system}";
 
       packages."${system}" = rec {
+        siteStyles = pkgs.callPackage ./site-styles {};
 
         nix = (import "${released-nix}/release.nix" {
           nix = released-nix;
@@ -79,6 +80,7 @@
               "NIXOS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixosManual}"
               "NIXPKGS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixpkgsManual}"
               "NIXOS_AMIS=${nixosAmis}"
+              "SITE_STYLES=${siteStyles}"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
             ];
 
@@ -96,6 +98,7 @@
             export NIXOS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixosManual}"
             export NIXPKGS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixpkgsManual}"
             export NIXOS_AMIS="${nixosAmis}"
+            # SITE_STYLES skipped by design.
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
           '';
         };
