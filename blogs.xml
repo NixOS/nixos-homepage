@@ -9,6 +9,308 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Tweag I/O: Nix Flakes, Part 3: Managing NixOS systems</title>
+	<guid isPermaLink="true">https://tweag.io/blog/2020-07-31-nixos-flakes/</guid>
+	<link>https://tweag.io/blog/2020-07-31-nixos-flakes/</link>
+	<description>&lt;p&gt;This is the third in a series of blog posts about &lt;a href=&quot;https://github.com/NixOS/rfcs/pull/49&quot;&gt;&lt;em&gt;Nix
+flakes&lt;/em&gt;&lt;/a&gt;. The &lt;a href=&quot;https://www.tweag.io/../2020-05-25-flakes&quot;&gt;first
+part&lt;/a&gt; motivated why we developed flakes — to
+improve Nix’s reproducibility, composability and usability — and gave
+a short tutorial on how to use flakes. The &lt;a href=&quot;https://www.tweag.io/../2020-06-25-eval-cache&quot;&gt;second
+part&lt;/a&gt; showed how flakes enable reliable
+caching of Nix evaluation results. In this post, we show how flakes
+can be used to manage NixOS systems in a reproducible and composable
+way.&lt;/p&gt;
+&lt;h2&gt;What problems are we trying to solve?&lt;/h2&gt;
+&lt;h3&gt;Lack of reproducibility&lt;/h3&gt;
+&lt;p&gt;One of the main selling points of NixOS is reproducibility: given a
+specification of a system, if you run &lt;code class=&quot;language-text&quot;&gt;nixos-rebuild&lt;/code&gt; to deploy it,
+you should always get the same &lt;em&gt;actual&lt;/em&gt; system (modulo mutable state
+such as the contents of databases). For instance, we should be able to
+reproduce in a production environment the exact same configuration
+that we’ve previously validated in a test environment.&lt;/p&gt;
+&lt;p&gt;However, the default NixOS workflow doesn’t provide reproducible
+system configurations out of the box. Consider a typical sequence of
+commands to upgrade a NixOS system:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You edit &lt;code class=&quot;language-text&quot;&gt;/etc/nixos/configuration.nix&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;You run &lt;code class=&quot;language-text&quot;&gt;nix-channel --update&lt;/code&gt; to get the latest version of the
+&lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; repository (which contains the NixOS sources).&lt;/li&gt;
+&lt;li&gt;You run &lt;code class=&quot;language-text&quot;&gt;nixos-rebuild switch&lt;/code&gt;, which evaluates and builds a
+function in the &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; repository that takes
+&lt;code class=&quot;language-text&quot;&gt;/etc/nixos/configuration.nix&lt;/code&gt; as an input.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this workflow, &lt;code class=&quot;language-text&quot;&gt;/etc/nixos/configuration.nix&lt;/code&gt; might not be under
+configuration management (e.g. point to a Git repository), or if it
+is, it might be a dirty working tree. Furthermore, &lt;code class=&quot;language-text&quot;&gt;configuration.nix&lt;/code&gt;
+doesn’t specify what Git revision of &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; to use; so if somebody
+else deploys the same &lt;code class=&quot;language-text&quot;&gt;configuration.nix&lt;/code&gt;, they might get a very
+different result.&lt;/p&gt;
+&lt;h3&gt;Lack of traceability&lt;/h3&gt;
+&lt;p&gt;The ability to reproduce a configuration is not very useful if you
+can’t tell what configuration you’re actually running. That is, from a
+running system, you should be able to get back to its
+specification. So there is a lack of &lt;em&gt;traceability&lt;/em&gt;: the ability to
+trace derived artifacts back to their sources. This is an essential
+property of good configuration management, since without it, we don’t
+know &lt;em&gt;what&lt;/em&gt; we’re actually running in production, so reproducing or
+fixing problems becomes much harder.&lt;/p&gt;
+&lt;p&gt;NixOS currently doesn’t not have very good traceability. You can ask a
+NixOS system what version of Nixpkgs it was built from:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nixos-version --json | jq -r .nixpkgsRevision
+a84b797b28eb104db758b5cb2b61ba8face6744b&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Unfortunately, this doesn’t allow you to recover &lt;code class=&quot;language-text&quot;&gt;configuration.nix&lt;/code&gt;
+or any other external NixOS modules that were used by the
+configuration.&lt;/p&gt;
+&lt;h3&gt;Lack of composability&lt;/h3&gt;
+&lt;p&gt;It’s easy to enable a package or system service in a NixOS
+configuration if it is part of the &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; repository: you just add
+a line like &lt;code class=&quot;language-text&quot;&gt;environment.systemPackages = [ pkgs.hello ];&lt;/code&gt; or
+&lt;code class=&quot;language-text&quot;&gt;services.postgresql.enable = true;&lt;/code&gt; to your &lt;code class=&quot;language-text&quot;&gt;configuration.nix&lt;/code&gt;. But
+what if we want to use a package or service that &lt;em&gt;isn’t&lt;/em&gt; part of
+Nixpkgs? Then we’re forced to use mechanisms like &lt;code class=&quot;language-text&quot;&gt;$NIX_PATH&lt;/code&gt;,
+&lt;code class=&quot;language-text&quot;&gt;builtins.fetchGit&lt;/code&gt;, imports using relative paths, and so on. These
+are not standardized (since everybody uses different conventions) and
+are inconvenient to use (for example, when using &lt;code class=&quot;language-text&quot;&gt;$NIX_PATH&lt;/code&gt;, it’s the
+user’s responsibility to put external repositories in the right
+directories).&lt;/p&gt;
+&lt;p&gt;Put another way: NixOS is currently built around a &lt;em&gt;monorepo&lt;/em&gt; workflow
+— the entire universe should be added to the &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; repository,
+because anything that isn’t, is much harder to use.&lt;/p&gt;
+&lt;p&gt;It’s worth noting that any NixOS system configuration already violates
+the monorepo assumption: your system’s &lt;code class=&quot;language-text&quot;&gt;configuration.nix&lt;/code&gt; is not part
+of the &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; repository.&lt;/p&gt;
+&lt;h2&gt;Using flakes for NixOS configurations&lt;/h2&gt;
+&lt;p&gt;In the previous post, we saw that flakes are (typically) Git
+repositories that have a file named &lt;code class=&quot;language-text&quot;&gt;flake.nix&lt;/code&gt;, providing a
+standardized interface to Nix artifacts. We saw flakes that provide
+packages and development environments; now we’ll use them to provide
+&lt;em&gt;NixOS system configurations&lt;/em&gt;. This solves the problems described
+above:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Reproducibility&lt;/em&gt;: the entire system configuration (including
+everything it depends on) is captured by the flake and its lock
+file. So if two people check out the same Git revision of a flake
+and build it, they should get the same result.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Traceability&lt;/em&gt;: &lt;code class=&quot;language-text&quot;&gt;nixos-version&lt;/code&gt; prints the Git revision of the
+top-level configuration flake, not its &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; input.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Composability&lt;/em&gt;: it’s easy to pull in packages and modules from other
+repositories as flake inputs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Prerequisites&lt;/h2&gt;
+&lt;p&gt;Flake support has been added as an experimental feature to NixOS
+20.03. However, flake support is not part of the current stable
+release of Nix (2.3). So to get a NixOS system that supports flakes,
+you first need to switch to the &lt;code class=&quot;language-text&quot;&gt;nixUnstable&lt;/code&gt; package and enable some
+experimental features. This can be done by adding the following to
+&lt;code class=&quot;language-text&quot;&gt;configuration.nix&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;nix&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;package &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nixUnstable&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+nix&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;extraOptions &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;''
+  experimental-features = nix-command flakes
+''&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Creating a NixOS configuration flake&lt;/h2&gt;
+&lt;p&gt;Let’s create a flake that contains the configuration for a NixOS
+container.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ git init my-flake
+$ cd my-flake
+$ nix flake init -t templates#simpleContainer
+$ git commit -a -m 'Initial version'&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that the &lt;code class=&quot;language-text&quot;&gt;-t&lt;/code&gt; flag to &lt;code class=&quot;language-text&quot;&gt;nix flake init&lt;/code&gt; specifies a &lt;em&gt;template&lt;/em&gt;
+from which to copy the initial contents of the flake. This is useful
+for getting started. To see what templates are available, you can run:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix flake show templates&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For reference, this is what the initial &lt;code class=&quot;language-text&quot;&gt;flake.nix&lt;/code&gt; looks like:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  inputs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;url &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;github:NixOS/nixpkgs/nixos-20.03&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  outputs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; self&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nixpkgs &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    nixosConfigurations&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;container &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;lib&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nixosSystem &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      system &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;x86_64-linux&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      modules &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pkgs&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            boot&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;isContainer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;token comment&quot;&gt;# Let 'nixos-version --json' know about the Git revision&lt;/span&gt;
+            &lt;span class=&quot;token comment&quot;&gt;# of this flake.&lt;/span&gt;
+            system&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;configurationRevision &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;lib&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mkIf &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;self &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; rev&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; self&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;rev&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;token comment&quot;&gt;# Network configuration.&lt;/span&gt;
+            networking&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;useDHCP &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            networking&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;firewall&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;allowedTCPPorts &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;80&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;token comment&quot;&gt;# Enable a web server.&lt;/span&gt;
+            services&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;httpd &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+              enable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              adminAddr &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;morty@example.org&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That is, the flake has one input, namely &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; - specifically the
+20.03 branch. It has one output, &lt;code class=&quot;language-text&quot;&gt;nixosConfigurations.container&lt;/code&gt;, which
+evaluates a NixOS configuration for tools like
+&lt;code class=&quot;language-text&quot;&gt;nixos-rebuild&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;nixos-container&lt;/code&gt;. The main argument is &lt;code class=&quot;language-text&quot;&gt;modules&lt;/code&gt;,
+which is a list of NixOS configuration modules. This takes the place
+of the file &lt;code class=&quot;language-text&quot;&gt;configuration.nix&lt;/code&gt; in non-flake deployments. (In fact,
+you can write &lt;code class=&quot;language-text&quot;&gt;modules = [ ./configuration.nix ]&lt;/code&gt; if you’re converting
+a pre-flake NixOS configuration.)&lt;/p&gt;
+&lt;p&gt;Let’s create and start the container! (Note that &lt;code class=&quot;language-text&quot;&gt;nixos-container&lt;/code&gt;
+currently requires you to be &lt;code class=&quot;language-text&quot;&gt;root&lt;/code&gt;.)&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;# nixos-container create flake-test --flake /path/to/my-flake
+host IP is 10.233.4.1, container IP is 10.233.4.2
+
+# nixos-container start flake-test&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To check whether the container works, let’s try to connect to it:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ curl http://flake-test/
+&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;It works!&amp;lt;/h1&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As an aside, if you just want to &lt;em&gt;build&lt;/em&gt; the container without the
+&lt;code class=&quot;language-text&quot;&gt;nixos-container&lt;/code&gt; command, you can do so as follows:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix build /path/to/my-flake#nixosConfigurations.container.config.system.build.toplevel&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that &lt;code class=&quot;language-text&quot;&gt;system.build.toplevel&lt;/code&gt; is an internal NixOS option that
+evaluates to the “system” derivation that commands like
+&lt;code class=&quot;language-text&quot;&gt;nixos-rebuild&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;nixos-install&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;nixos-container&lt;/code&gt; build and
+activate. The symlink &lt;code class=&quot;language-text&quot;&gt;/run/current-system&lt;/code&gt; points to the output of
+this derivation.&lt;/p&gt;
+&lt;h2&gt;Hermetic evaluation&lt;/h2&gt;
+&lt;p&gt;One big difference between “regular” NixOS systems and flake-based
+NixOS systems is that the latter record the Git revisions from which
+they were built. We can query this as follows:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;# nixos-container run flake-test -- nixos-version --json
+{&quot;configurationRevision&quot;:&quot;9190c396f4dcfc734e554768c53a81d1c231c6a7&quot;
+,&quot;nixosVersion&quot;:&quot;20.03.20200622.13c15f2&quot;
+,&quot;nixpkgsRevision&quot;:&quot;13c15f26d44cf7f54197891a6f0c78ce8149b037&quot;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here, &lt;code class=&quot;language-text&quot;&gt;configurationRevision&lt;/code&gt; is the Git revision of the repository
+&lt;code class=&quot;language-text&quot;&gt;/path/to/my-flake&lt;/code&gt;. Because evaluation is hermetic, and the lock file
+locks all flake inputs such as &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt;, knowing the revision
+&lt;code class=&quot;language-text&quot;&gt;9190c39…&lt;/code&gt; allows you to completely reconstruct this configuration at
+a later point in time. For example, if you want to deploy this
+particular configuration to a container, you can do:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;# nixos-container update flake-test \
+    --flake /path/to/my-flake?rev=9190c396f4dcfc734e554768c53a81d1c231c6a7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Dirty configurations&lt;/h2&gt;
+&lt;p&gt;It’s not required that you commit all changes to a configuration
+before deploying it. For example, if you change the &lt;code class=&quot;language-text&quot;&gt;adminAddr&lt;/code&gt; line
+in &lt;code class=&quot;language-text&quot;&gt;flake.nix&lt;/code&gt; to&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;adminAddr &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;rick@example.org&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and redeploy the container, you will get:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;# nixos-container update flake-test
+warning: Git tree '/path/to/my-flake' is dirty
+...
+reloading container...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and the container will no longer have a configuration Git revision:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;# nixos-container run flake-test -- nixos-version --json | jq .configurationRevision
+null&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;While this may be convenient for testing, in production we really want
+to ensure that systems are deployed from clean Git trees. One way is
+to disallow dirty trees on the command line:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;# nixos-container update flake-test --no-allow-dirty
+error: --- Error -------------------- nix
+Git tree '/path/to/my-flake' is dirty&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Another is to require a clean Git tree in &lt;code class=&quot;language-text&quot;&gt;flake.nix&lt;/code&gt;, for instance by
+adding a check to the definition of &lt;code class=&quot;language-text&quot;&gt;system.configurationRevision&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;system&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;configurationRevision &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; self &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; rev
+  &lt;span class=&quot;token keyword&quot;&gt;then&lt;/span&gt; self&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;rev
+  &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Refusing to build from a dirty Git tree!&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Adding modules from third-party flakes&lt;/h2&gt;
+&lt;p&gt;One of the main goals of flake-based NixOS is to make it easier to use
+packages and modules that are not included in the &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt;
+repository. As an example, we’ll add
+&lt;a href=&quot;https://github.com/NixOS/hydra/blob/master/flake.nix&quot;&gt;Hydra&lt;/a&gt; (a
+continuous integration server) to our container.&lt;/p&gt;
+&lt;p&gt;Here’s how we add it to our container. We specify it as an additional input:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;  inputs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;hydra&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;url &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;github:NixOS/hydra&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and as a corresponding function argument to the &lt;code class=&quot;language-text&quot;&gt;outputs&lt;/code&gt; function:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;  outputs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; self&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; hydra &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, we enable the NixOS module provided by the &lt;code class=&quot;language-text&quot;&gt;hydra&lt;/code&gt; flake:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;      modules &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; hydra&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nixosModules&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;hydraTest
+
+          &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pkgs&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; our own configuration &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;
+
+            &lt;span class=&quot;token comment&quot;&gt;# Hydra runs on port 3000 by default, so open it in the firewall.&lt;/span&gt;
+            networking&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;firewall&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;allowedTCPPorts &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3000&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that we can discover the name of this module by using &lt;code class=&quot;language-text&quot;&gt;nix flake show&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix flake show github:NixOS/hydra
+github:NixOS/hydra/d0deebc4fc95dbeb0249f7b774b03d366596fbed
+├───…
+├───nixosModules
+│   ├───hydra: NixOS module
+│   ├───hydraProxy: NixOS module
+│   └───hydraTest: NixOS module
+└───overlay: Nixpkgs overlay&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After committing this change and running &lt;code class=&quot;language-text&quot;&gt;nixos-container update&lt;/code&gt;, we
+can check whether &lt;code class=&quot;language-text&quot;&gt;hydra&lt;/code&gt; is working in the container by visiting
+&lt;a href=&quot;http://flake-test:3000/&quot;&gt;http://flake-test:3000/&lt;/a&gt; in a web browser.&lt;/p&gt;
+&lt;h2&gt;Working with lock files&lt;/h2&gt;
+&lt;p&gt;There are a few command line flags accepted by &lt;code class=&quot;language-text&quot;&gt;nix&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;nixos-rebuild&lt;/code&gt;
+and &lt;code class=&quot;language-text&quot;&gt;nixos-container&lt;/code&gt; that make updating lock file more
+convenient. A very common action is to update a flake input to the
+latest version; for example,&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nixos-container update flake-test --update-input nixpkgs --commit-lock-file&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;updates the &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; input to the latest revision on the
+&lt;code class=&quot;language-text&quot;&gt;nixos-20.03&lt;/code&gt; branch, and commits the new lock file with a commit
+message that records the input change.&lt;/p&gt;
+&lt;p&gt;A useful flag during development is &lt;code class=&quot;language-text&quot;&gt;--override-input&lt;/code&gt;, which allows
+you to point a flake input to another location, completely overriding
+the input location specified by &lt;code class=&quot;language-text&quot;&gt;flake.nix&lt;/code&gt;. For example, this is how
+you can build the container against a local Git checkout of Hydra:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nixos-container update flake-test --override-input hydra /path/to/my/hydra&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Adding overlays from third-party flakes&lt;/h2&gt;
+&lt;p&gt;Similarly, we can add Nixpkgs overlays from other flakes. (Nixpkgs
+overlays add or override packages in the &lt;code class=&quot;language-text&quot;&gt;pkgs&lt;/code&gt; set.) For example,
+here is how you add the overlay provided by &lt;a href=&quot;https://github.com/NixOS/nix/blob/flakes/flake.nix&quot;&gt;the &lt;code class=&quot;language-text&quot;&gt;nix&lt;/code&gt;
+flake&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;  outputs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; self&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nix &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    nixosConfigurations&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;container &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;lib&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nixosSystem &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;
+      modules &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pkgs&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;overlays &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; nix&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;overlay &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;
+          &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Using &lt;code class=&quot;language-text&quot;&gt;nixos-rebuild&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Above we saw how to manage NixOS containers using flakes. Managing
+“real” NixOS systems works much the same, except using &lt;code class=&quot;language-text&quot;&gt;nixos-rebuild&lt;/code&gt;
+instead of &lt;code class=&quot;language-text&quot;&gt;nixos-container&lt;/code&gt;. For example,&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;# nixos-rebuild switch --flake /path/to/my-flake#my-machine&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;builds and activates the configuration specified by the flake output
+&lt;code class=&quot;language-text&quot;&gt;nixosConfigurations.my-machine&lt;/code&gt;. If you omit the name of the
+configuration (&lt;code class=&quot;language-text&quot;&gt;#my-machine&lt;/code&gt;), &lt;code class=&quot;language-text&quot;&gt;nixos-rebuild&lt;/code&gt; defaults to using the
+current host name.&lt;/p&gt;
+&lt;h2&gt;Pinning Nixpkgs&lt;/h2&gt;
+&lt;p&gt;It’s often convenient to &lt;em&gt;pin&lt;/em&gt; the &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; flake to the exact
+version of &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; used to build the system. This ensures that
+commands like &lt;code class=&quot;language-text&quot;&gt;nix shell nixpkgs#&amp;lt;package&amp;gt;&lt;/code&gt; work more efficiently
+since many or all of the dependencies of &lt;code class=&quot;language-text&quot;&gt;&amp;lt;package&amp;gt;&lt;/code&gt; will already be
+present. Here is a bit of NixOS configuration that pins &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; in
+the system-wide flake registry:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;nix&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;registry&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;flake &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that this only affects commands that reference &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; without
+further qualifiers; more specific flake references like
+&lt;code class=&quot;language-text&quot;&gt;nixpkgs/nixos-20.03&lt;/code&gt; or
+&lt;code class=&quot;language-text&quot;&gt;nixpkgs/348503b6345947082ff8be933dda7ebeddbb2762&lt;/code&gt; are unaffected.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;In this blog post we saw how Nix flakes make NixOS configurations
+hermetic and reproducible. In a future post, we’ll show how we can do
+the same for cloud deployments using NixOps.&lt;/p&gt;
+&lt;p&gt;Acknowledgment: The development of flakes was partially funded by
+Target Corporation.&lt;/p&gt;</description>
+	<pubDate>Fri, 31 Jul 2020 00:00:00 +0000</pubDate>
+</item>
+<item>
 	<title>Sander van der Burg: On using Nix and Docker as deployment automation solutions: similarities and differences</title>
 	<guid isPermaLink="false">tag:blogger.com,1999:blog-1397115249631682228.post-1542344007221596374</guid>
 	<link>http://sandervanderburg.blogspot.com/2020/07/on-using-nix-and-docker-as-deployment.html</link>
@@ -970,381 +1272,6 @@ refreshing bevvy while you wait for blocks to sync.&lt;/p&gt;
 &lt;p&gt;For more information on how to use binary caches with nixbuild.net, see the &lt;a href=&quot;https://docs.nixbuild.net/getting-started/&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;</description>
 	<pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
 	<author>support@nixbuild.net (nixbuild.net)</author>
-</item>
-<item>
-	<title>Graham Christensen: Erase your darlings</title>
-	<guid isPermaLink="false">http://grahamc.com//blog/erase-your-darlings</guid>
-	<link>http://grahamc.com/blog/erase-your-darlings</link>
-	<description>&lt;p&gt;I erase my systems at every boot.&lt;/p&gt;
-
-&lt;p&gt;Over time, a system collects state on its root partition. This state
-lives in assorted directories like &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;/var&lt;/code&gt;, and represents
-every under-documented or out-of-order step in bringing up the
-services.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“Right, run &lt;code class=&quot;highlighter-rouge&quot;&gt;myapp-init&lt;/code&gt;.”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;These small, inconsequential “oh, oops” steps are the pieces that get
-lost and don’t appear in your runbooks.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“Just download ca-certificates to … to fix …”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Each of these quick fixes leaves you doomed to repeat history in three
-years when you’re finally doing that dreaded RHEL 7 to RHEL 8 upgrade.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“Oh, &lt;code class=&quot;highlighter-rouge&quot;&gt;touch /etc/ipsec.secrets&lt;/code&gt; or the l2tp tunnel won’t work.”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;immutable-infrastructure-gets-us-so-close&quot;&gt;Immutable infrastructure gets us &lt;em&gt;so&lt;/em&gt; close&lt;/h3&gt;
-
-&lt;p&gt;Immutable infrastructure is a wonderfully effective method of
-eliminating so many of these forgotten steps. Leaning in to the pain
-by deleting and replacing your servers on a weekly or monthly basis
-means you are constantly testing and exercising your automation and
-runbooks.&lt;/p&gt;
-
-&lt;p&gt;The nugget here is the regular and indiscriminate removal of system
-state. Destroying the whole server doesn’t leave you much room to
-forget the little tweaks you made along the way.&lt;/p&gt;
-
-&lt;p&gt;These techniques work great when you meet two requirements:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;you can provision and destroy servers with an API call&lt;/li&gt;
-  &lt;li&gt;the servers aren’t inherently stateful&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;long-running-servers&quot;&gt;Long running servers&lt;/h4&gt;
-
-&lt;p&gt;There are lots of cases in which immutable infrastructure &lt;em&gt;doesn’t&lt;/em&gt;
-work, and the dirty secret is &lt;strong&gt;those servers need good tools the
-most.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Long-running servers cause long outages. Their runbooks are outdated
-and incomplete. They accrete tweaks and turn in to an ossified,
-brittle snowflake — except its arms are load-bearing.&lt;/p&gt;
-
-&lt;p&gt;Let’s bring the ideas of immutable infrastructure to these systems
-too. Whether this system is embedded in a stadium’s jumbotron, in a
-datacenter, or under your desk, we &lt;em&gt;can&lt;/em&gt; keep the state under control.&lt;/p&gt;
-
-&lt;h4 id=&quot;fhs-isnt-enough&quot;&gt;FHS isn’t enough&lt;/h4&gt;
-
-&lt;p&gt;The hard part about applying immutable techniques to long running
-servers is knowing exactly where your application state ends and the
-operating system, software, and configuration begin.&lt;/p&gt;
-
-&lt;p&gt;This is hard because legacy operating systems and the Filesystem
-Hierarchy Standard poorly separate these areas of concern. For
-example, &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/lib&lt;/code&gt; is for state information, but how much of this do
-you actually care about tracking? What did you configure in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc&lt;/code&gt; on
-purpose?&lt;/p&gt;
-
-&lt;p&gt;The answer is probably not a lot.&lt;/p&gt;
-
-&lt;p&gt;You may not care, but all of this accumulation of junk is a tarpit.
-Everything becomes harder: replicating production, testing changes,
-undoing mistakes.&lt;/p&gt;
-
-&lt;h3 id=&quot;new-computer-smell&quot;&gt;New computer smell&lt;/h3&gt;
-
-&lt;p&gt;Getting a new computer is this moment of cleanliness. The keycaps
-don’t have oils on them, the screen is perfect, and the hard drive
-is fresh and unspoiled — for about an hour or so.&lt;/p&gt;
-
-&lt;p&gt;Let’s get back to that.&lt;/p&gt;
-
-&lt;h2 id=&quot;how-is-this-possible&quot;&gt;How is this possible?&lt;/h2&gt;
-
-&lt;p&gt;NixOS can boot with only two directories: &lt;code class=&quot;highlighter-rouge&quot;&gt;/boot&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;/nix&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/nix&lt;/code&gt; contains read-only system configurations, which are specified
-by your &lt;code class=&quot;highlighter-rouge&quot;&gt;configuration.nix&lt;/code&gt; and are built and tracked as system
-generations. These never change. Once the files are created in &lt;code class=&quot;highlighter-rouge&quot;&gt;/nix&lt;/code&gt;,
-the only way to change the config’s contents is to build a new system
-configuration with the contents you want.&lt;/p&gt;
-
-&lt;p&gt;Any configuration or files created on the drive outside of &lt;code class=&quot;highlighter-rouge&quot;&gt;/nix&lt;/code&gt; is
-state and cruft. We can lose everything outside of &lt;code class=&quot;highlighter-rouge&quot;&gt;/nix&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;/boot&lt;/code&gt;
-and have a healthy system. My technique is to explicitly opt in and
-&lt;em&gt;choose&lt;/em&gt; which state is important, and only keep that.&lt;/p&gt;
-
-&lt;p&gt;How this is possible comes down to the boot sequence.&lt;/p&gt;
-
-&lt;p&gt;For NixOS, the bootloader follows the same basic steps as a standard
-Linux distribution: the kernel starts with an initial ramdisk, and the
-initial ramdisk mounts the system disks.&lt;/p&gt;
-
-&lt;p&gt;And here is where the similarities end.&lt;/p&gt;
-
-&lt;h3 id=&quot;nixoss-early-startup&quot;&gt;NixOS’s early startup&lt;/h3&gt;
-
-&lt;p&gt;NixOS configures the bootloader to pass some extra information: a
-specific system configuration. This is the secret to NixOS’s
-bootloader rollbacks, and also the key to erasing our disk on each
-boot. The parameter is named &lt;code class=&quot;highlighter-rouge&quot;&gt;systemConfig&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;On every startup the very early boot stage knows what the system’s
-configuration should be: the entire system configuration is stored in
-the read-only &lt;code class=&quot;highlighter-rouge&quot;&gt;/nix/store&lt;/code&gt;, and the directory passed through
-&lt;code class=&quot;highlighter-rouge&quot;&gt;systemConfig&lt;/code&gt; has a reference to the config. Early boot then
-manipulates &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;/run&lt;/code&gt; to match the chosen setup. Usually this
-involves swapping out a few symlinks.&lt;/p&gt;
-
-&lt;p&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc&lt;/code&gt; simply doesn’t exist, however, early boot &lt;em&gt;creates&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc&lt;/code&gt;
-and moves on like it were any other boot. It also &lt;em&gt;creates&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;/var&lt;/code&gt;,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;/dev&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;/home&lt;/code&gt;, and any other core directories that must be present.&lt;/p&gt;
-
-&lt;p&gt;Simply speaking, an empty &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt; is &lt;em&gt;not surprising&lt;/em&gt; to NixOS. In fact,
-the NixOS netboot, EC2, and installation media all start out this way.&lt;/p&gt;
-
-&lt;h2 id=&quot;opting-out&quot;&gt;Opting out&lt;/h2&gt;
-
-&lt;p&gt;Before we can opt in to saving data, we must opt out of saving data
-&lt;em&gt;by default&lt;/em&gt;. I do this by setting up my filesystem in a way that
-lets me easily and safely erase the unwanted data, while preserving
-the data I do want to keep.&lt;/p&gt;
-
-&lt;p&gt;My preferred method for this is using a ZFS dataset and rolling it
-back to a blank snapshot before it is mounted. A partition of any
-other filesystem would work just as well too, running &lt;code class=&quot;highlighter-rouge&quot;&gt;mkfs&lt;/code&gt; at boot,
-or something similar. If you have a lot of RAM, you could skip the
-erase step and make &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt; a tmpfs.&lt;/p&gt;
-
-&lt;h3 id=&quot;opting-out-with-zfs&quot;&gt;Opting out with ZFS&lt;/h3&gt;
-&lt;p&gt;When installing NixOS, I partition my disk with two partitions, one
-for the boot partition, and another for a ZFS pool. Then I create and
-mount a few datasets.&lt;/p&gt;
-
-&lt;p&gt;My root dataset:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# zfs create -p -o mountpoint=legacy rpool/local/root
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Before I even mount it, I &lt;strong&gt;create a snapshot while it is totally
-blank&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# zfs snapshot rpool/local/root@blank
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And then mount it:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mount -t zfs rpool/local/root /mnt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Then I mount the partition I created for the &lt;code class=&quot;highlighter-rouge&quot;&gt;/boot&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkdir /mnt/boot
-# mount /dev/the-boot-partition /mnt/boot
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Create and mount a dataset for &lt;code class=&quot;highlighter-rouge&quot;&gt;/nix&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# zfs create -p -o mountpoint=legacy rpool/local/nix
-# mkdir /mnt/nix
-# mount -t zfs rpool/local/nix /mnt/nix
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And a dataset for &lt;code class=&quot;highlighter-rouge&quot;&gt;/home&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# zfs create -p -o mountpoint=legacy rpool/safe/home
-# mkdir /mnt/home
-# mount -t zfs rpool/safe/home /mnt/home
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And finally, a dataset explicitly for state I want to persist between
-boots:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# zfs create -p -o mountpoint=legacy rpool/safe/persist
-# mkdir /mnt/persist
-# mount -t zfs rpool/safe/persist /mnt/persist
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; in my systems, datasets under &lt;code class=&quot;highlighter-rouge&quot;&gt;rpool/local&lt;/code&gt; are never backed
-up, and datasets under &lt;code class=&quot;highlighter-rouge&quot;&gt;rpool/safe&lt;/code&gt; are.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;And now safely erasing the root dataset on each boot is very easy:
-after devices are made available, roll back to the blank snapshot:&lt;/p&gt;
-
-&lt;div class=&quot;language-nix highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;boot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;initrd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;postDeviceCommands&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;lib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mkAfter&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    zfs rollback -r rpool/local/root@blank&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;  ''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I then finish the installation as normal. If all goes well, your
-next boot will start with an empty root partition but otherwise be
-configured exactly as you specified.&lt;/p&gt;
-
-&lt;h2 id=&quot;opting-in&quot;&gt;Opting in&lt;/h2&gt;
-
-&lt;p&gt;Now that I’m keeping no state, it is time to specify what I do want
-to keep. My choices here are different based on the role of the
-system: a laptop has different state than a server.&lt;/p&gt;
-
-&lt;p&gt;Here are some different pieces of state and how I preserve them. These
-examples largely use reconfiguration or symlinks, but using ZFS
-datasets and mount points would work too.&lt;/p&gt;
-
-&lt;h4 id=&quot;wireguard-private-keys&quot;&gt;Wireguard private keys&lt;/h4&gt;
-
-&lt;p&gt;Create a directory under &lt;code class=&quot;highlighter-rouge&quot;&gt;/persist&lt;/code&gt; for the key:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkdir -p /persist/etc/wireguard/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And use Nix’s wireguard module to generate the key there:&lt;/p&gt;
-
-&lt;div class=&quot;language-nix highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;networking&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;wireguard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;interfaces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;wg0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;generatePrivateKeyFile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;privateKeyFile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/persist/etc/wireguard/wg0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;networkmanager-connections&quot;&gt;NetworkManager connections&lt;/h4&gt;
-
-&lt;p&gt;Create a directory under &lt;code class=&quot;highlighter-rouge&quot;&gt;/persist&lt;/code&gt;, mirroring the &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc&lt;/code&gt; structure:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkdir -p /persist/etc/NetworkManager/system-connections
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And use Nix’s &lt;code class=&quot;highlighter-rouge&quot;&gt;etc&lt;/code&gt; module to set up the symlink:&lt;/p&gt;
-
-&lt;div class=&quot;language-nix highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;NetworkManager/system-connections&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/persist/etc/NetworkManager/system-connections/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;bluetooth-devices&quot;&gt;Bluetooth devices&lt;/h4&gt;
-
-&lt;p&gt;Create a directory under &lt;code class=&quot;highlighter-rouge&quot;&gt;/persist&lt;/code&gt;, mirroring the &lt;code class=&quot;highlighter-rouge&quot;&gt;/var&lt;/code&gt; structure:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkdir -p /persist/var/lib/bluetooth
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And then use systemd’s tmpfiles.d rules to create a symlink from
-&lt;code class=&quot;highlighter-rouge&quot;&gt;/var/lib/bluetooth&lt;/code&gt; to my persisted directory:&lt;/p&gt;
-
-&lt;div class=&quot;language-nix highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;systemd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tmpfiles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;rules&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&quot;L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth&quot;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;ssh-host-keys&quot;&gt;SSH host keys&lt;/h4&gt;
-
-&lt;p&gt;Create a directory under &lt;code class=&quot;highlighter-rouge&quot;&gt;/persist&lt;/code&gt;, mirroring the &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc&lt;/code&gt; structure:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkdir -p /persist/etc/ssh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And use Nix’s openssh module to create and use the keys in that
-directory:&lt;/p&gt;
-
-&lt;div class=&quot;language-nix highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;openssh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;enable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;hostKeys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/persist/ssh/ssh_host_ed25519_key&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ed25519&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/persist/ssh/ssh_host_rsa_key&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;rsa&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;bits&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4096&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;acme-certificates&quot;&gt;ACME certificates&lt;/h4&gt;
-
-&lt;p&gt;Create a directory under &lt;code class=&quot;highlighter-rouge&quot;&gt;/persist&lt;/code&gt;, mirroring the &lt;code class=&quot;highlighter-rouge&quot;&gt;/var&lt;/code&gt; structure:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# mkdir -p /persist/var/lib/acme
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And then use systemd’s tmpfiles.d rules to create a symlink from
-&lt;code class=&quot;highlighter-rouge&quot;&gt;/var/lib/acme&lt;/code&gt; to my persisted directory:&lt;/p&gt;
-
-&lt;div class=&quot;language-nix highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;systemd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tmpfiles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;rules&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&quot;L /var/lib/acme - - - - /persist/var/lib/acme&quot;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;answering-the-question-what-am-i-about-to-lose&quot;&gt;Answering the question “what am I about to lose?”&lt;/h3&gt;
-
-&lt;p&gt;I found this process a bit scary for the first few weeks: was I losing
-important data each reboot? No, I wasn’t.&lt;/p&gt;
-
-&lt;p&gt;If you’re worried and want to know what state you’ll lose on the next
-boot, you can list the files on your root filesystem and see if you’re
-missing something important:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# tree -x /
-├── bin
-│   └── sh -&amp;gt; /nix/store/97zzcs494vn5k2yw-dash-0.5.10.2/bin/dash
-├── boot
-├── dev
-├── etc
-│   ├── asound.conf -&amp;gt; /etc/static/asound.conf
-... snip ...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;ZFS can give you a similar answer:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# zfs diff rpool/local/root@blank
-M	/
-+	/nix
-+	/etc
-+	/root
-+	/var/lib/is-nix-channel-up-to-date
-+	/etc/pki/fwupd
-+	/etc/pki/fwupd-metadata
-... snip ...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;your-stateless-future&quot;&gt;Your stateless future&lt;/h2&gt;
-
-&lt;p&gt;You may bump in to new state you meant to be preserving. When I’m
-adding new services, I think about the state it is writing and whether
-I care about it or not. If I care, I find a way to redirect its state
-to &lt;code class=&quot;highlighter-rouge&quot;&gt;/persist&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Take care to reboot these machines on a somewhat regular basis. It
-will keep things agile, proving your system state is tracked
-correctly.&lt;/p&gt;
-
-&lt;p&gt;This technique has given me the “new computer smell” on every boot
-without the datacenter full of hardware, and even on systems that do
-carry important state. I have deployed this strategy to systems in the
-large and small: build farm servers, database servers, my NAS and home
-server, my raspberry pi garage door opener, and laptops.&lt;/p&gt;
-
-&lt;p&gt;NixOS enables powerful new deployment models in so many ways, allowing
-for systems of all shapes and sizes to be managed properly and
-consistently. I think this model of ephemeral roots is yet
-another example of this flexibility and power. I would like to see
-this partitioning scheme become a reference architecture and take us
-out of this eternal tarpit of legacy.&lt;/p&gt;</description>
-	<pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
 </item>
 
 </channel>
