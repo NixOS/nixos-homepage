@@ -967,7 +967,7 @@ best reference on flakes.&lt;/p&gt;
 &lt;p&gt;Flakes are currently implemented in &lt;a href=&quot;https://github.com/NixOS/nix/tree/flakes&quot;&gt;an experimental branch of
 Nix&lt;/a&gt;. If you want to play
 with flakes, you can get this version of Nix from Nixpkgs:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix-shell -I nixpkgs=channel:nixos-20.03 -p nixFlakes&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix-shell -I nixpkgs=channel:nixos-20.03 --packages nixFlakes&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Since flakes are an experimental feature, you also need to add the
 following line to &lt;code class=&quot;language-text&quot;&gt;~/.config/nix/nix.conf&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;experimental-features = nix-command flakes&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -985,7 +985,7 @@ Nix what the flake provides (such as Nix packages, NixOS modules or CI
 tests).&lt;/p&gt;
 &lt;p&gt;The following command fetches the &lt;code class=&quot;language-text&quot;&gt;dwarffs&lt;/code&gt; Git repository, builds its
 &lt;em&gt;default package&lt;/em&gt; and runs it.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix shell github:edolstra/dwarffs -c dwarffs --version
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix shell github:edolstra/dwarffs --command dwarffs --version
 dwarffs 0.1.20200406.cd7955a&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The command above isn’t very &lt;em&gt;reproducible&lt;/em&gt;: it fetches the most
 recent version of &lt;code class=&quot;language-text&quot;&gt;dwarffs&lt;/code&gt;, which could change over time. But it’s
@@ -1061,8 +1061,8 @@ registry&lt;/a&gt;
 that maps symbolic identifiers such as &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; to actual locations
 like &lt;code class=&quot;language-text&quot;&gt;https://github.com/NixOS/nixpkgs&lt;/code&gt;. So the following are (by
 default) equivalent:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix shell nixpkgs#cowsay -c cowsay Hi!
-$ nix shell github:NixOS/nixpkgs#cowsay -c cowsay Hi!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix shell nixpkgs#cowsay --command cowsay Hi!
+$ nix shell github:NixOS/nixpkgs#cowsay --command cowsay Hi!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It’s possible to override the registry locally. For example, you can
 override the &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; flake to your own Nixpkgs tree:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix registry add nixpkgs ~/my-nixpkgs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1111,7 +1111,7 @@ warning: Git tree '/home/eelco/Dev/hello' is dirty
 $ ./result/bin/hello
 Hello World&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;or equivalently:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix shell -c hello
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-console&quot;&gt;&lt;code class=&quot;language-console&quot;&gt;$ nix shell --command hello
 Hello World&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It’s also possible to get an interactive development environment in
 which all the dependencies (like GCC) and shell variables and
