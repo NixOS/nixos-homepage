@@ -23,6 +23,11 @@
   <header>
     <div>
       <h1><a href="[% root %]">NixOS</a></h1>
+      <div class="header-search">
+        <div class="form-input">
+          <input type="text" />
+        </div>
+      </div>
       <nav>
         <ul>
           <li><a href="[%root%]features.html">Features</a></li>
@@ -31,6 +36,7 @@
           <li><a href="[%root%]community.html">Community</a></li>
           <li><a href="[%root%]governance.html">Governance</a></li>
           <li><a href="[%root%]donate.html">Donate</a></li>
+          <li><a class="button -primary" href="#">Install Nix</a></li>
         </ul>
       </nav>
     </div>
