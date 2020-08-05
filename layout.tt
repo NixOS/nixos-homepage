@@ -42,9 +42,15 @@
     </div>
   </header>
 
-  <div class="temporary-main-container">
-    [% content %]
+  [% IF !handlesLayout %]
+  <div class="generic-layout">
+  [% END %]
+
+  [% content %]
+
+  [% IF !handlesLayout %]
   </div>
+  [% END %]
 
   <footer>
     <div class="upper">
