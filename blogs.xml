@@ -9,6 +9,115 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Matej Cotman: Neovim, WSL and Nix</title>
+	<guid isPermaLink="true">https://blog.matejc.com/blogs/myblog/neovim-wsl-and-nix</guid>
+	<link>https://blog.matejc.com/blogs/myblog/neovim-wsl-and-nix</link>
+	<description>&lt;p&gt;How to use Neovim (Neovim-Qt) under WSL 1/2 with the power of Nix&lt;/p&gt;
+
+&lt;h2 id=&quot;intro&quot;&gt;Intro&lt;/h2&gt;
+
+&lt;p&gt;Well we all know that generally development on Linux is easier than on Windows, but sometimes you are forced to use Windows. But that does not mean that all those nice tools from Linux are not available to you, as we will see in this post.&lt;/p&gt;
+
+&lt;p&gt;Windows has some thing called WSL which enables you to run Linux tools natively in the Windows subsystem.
+Not all is without issues, you can not run graphical Linux applications because Windows does not run Xorg server, yeah you have Xorg ports that run there but that is in this case just one more unwanted layer, remember, building efficient solutions is what every engineer should strive to.&lt;/p&gt;
+
+&lt;p&gt;What I did is to use Windows pre-built binaries of Neovim-Qt and run the Neovim installed with Nix inside WSL.&lt;/p&gt;
+
+&lt;p&gt;Ok, you could say then, why not use VS Code with some Vim/Neovim plugin and use so called Remote-WSL plugin to access WSL… Well yes, but at least me I stumble upon few issues.
+First was that CPU usage was through the roof when Remote-WSL extension was in use on WSL1 (I could not just run Windows Update on client’s managed computer) and the fix was to install specific version of libc with dpkg (which is absurd in the first place because this is a good way to ruin your whole environment).
+Applying this fix did the trick for lowering the CPU usage. The second issue come right after, when I wanted to install some package with APT package manager, like I predicted, libc install did its damage, I could not install or un-install anything with APT. Nix comes again to the rescue.&lt;/p&gt;
+
+&lt;p&gt;By the way the &lt;strong&gt;sleep&lt;/strong&gt; command forgot how to work under WSL and Ubuntu 20.04 &lt;a href=&quot;https://askubuntu.com/questions/1230252/sleep-doesnt-work-on-ubuntu-20-04-wsl&quot;&gt;Source&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;lets-see-the-solution&quot;&gt;Let’s see the solution&lt;/h2&gt;
+
+&lt;h3 id=&quot;neovim-qt&quot;&gt;Neovim-Qt&lt;/h3&gt;
+
+&lt;p&gt;Neovim-Qt has nicely built binaries on their GitHub page for Windows, so I just downloaded that zip and unpacked it into &lt;strong&gt;C:/Program Files/neovim-qt/&lt;/strong&gt;. But any location could do.&lt;/p&gt;
+
+&lt;h3 id=&quot;wsl&quot;&gt;WSL&lt;/h3&gt;
+
+&lt;p&gt;Open PowerShell as Administrator and run:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot;&gt;&lt;span class=&quot;nf&quot;&gt;dism.exe&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;/online&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;/enable-feature&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;/featurename:Microsoft-Windows-Subsystem-Linux&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;/all&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;/norestart&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;If you do not have up to date Windows for any kind of reason to install WLS2 then reboot now.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reboot Time&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You should have now enabled the WSL1 and you can proceed to install Ubuntu 20.04 (or any other Linux distro you like) from Microsoft store.
+Do not forget to click Launch after installing it (it will ask you to create a user).&lt;/p&gt;
+
+&lt;h3 id=&quot;nix&quot;&gt;Nix&lt;/h3&gt;
+
+&lt;p&gt;To install Nix, you need to first open some terminal emulator and run &lt;strong&gt;wsl.exe&lt;/strong&gt;, but you can also just run it from Start menu.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;bash &amp;lt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; https://nixos.org/nix/install&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;To finish you can just close the terminal and open wsl.exe again.&lt;/p&gt;
+
+&lt;p&gt;Thats it.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-nix-script&quot;&gt;The Nix script&lt;/h3&gt;
+
+&lt;p&gt;Now here is the absolutely most awesome part that connects everything together.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pkgs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;nixpkgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;pkgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;writeScript&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;run-neovim-qt.sh&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    #!&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pkgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;stdenv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;shell&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    set -e&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    # get random free port&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    export NVIM_LISTEN=&quot;127.0.0.1:$(&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pkgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;python3Packages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/bin/python -c 'import socket; s=socket.socket(); s.bind((&quot;&quot;, 0)); print(s.getsockname()[1]); s.close()')&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    # use python's sleep, because coreutils' sleep does not function under Ubuntu 20.04 and WSL&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    #   after delay start nvim-qt - so that nvim starts before the GUI&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    { &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pkgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;python3Packages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/bin/python -c 'import time; time.sleep(1)'; &quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;''$&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;{NVIM_QT_PATH}&quot; --server &quot;$NVIM_LISTEN&quot;; } &amp;amp;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    # start nvim&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pkgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;neovim&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/bin/nvim --listen &quot;$NVIM_LISTEN&quot; --headless &quot;$@&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;''&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Save it to your drive or download with &lt;strong&gt;wget&lt;/strong&gt; under WSL:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;wget https://raw.githubusercontent.com/matejc/helper_scripts/master/nixes/neovim-qt.nix &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then build the command with:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;nix-build ./neovim-qt.nix&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The resulting script is &lt;strong&gt;./result&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;usage&quot;&gt;Usage&lt;/h3&gt;
+
+&lt;p&gt;First we need to tell the script where is the Neovim-qt located:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;NVIM_QT_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/mnt/c/Program Files/neovim-qt/bin/nvim-qt.exe'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can save this into &lt;strong&gt;.bashrc&lt;/strong&gt; or &lt;strong&gt;.profile&lt;/strong&gt; and restart the terminal so that you do not need to repeat the step every time you run wsl shell.&lt;/p&gt;
+
+&lt;p&gt;The final step is:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;./result my/awesome/code.py&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Too much work? You think? Well how much more time you would use using and configuring VS Code or Atom to work under similar environment?
+And what about Nix? You can install it without the use of native package managers (in case the native one is b0rked) and once you do, you have the power to install your favorite development environment with single command.&lt;/p&gt;
+
+&lt;p&gt;I like this solution, in my eyes its simple and efficient, what are your thoughts?&lt;/p&gt;
+
+&lt;p&gt;Until next time… I wish you happy hacking!&lt;/p&gt;
+
+&lt;h2 id=&quot;links&quot;&gt;Links&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/microsoft/vscode-remote-release/issues/2921&quot;&gt;High cpu usage of node process in Remote-WSL extension #2921&lt;/a&gt;
+&lt;a href=&quot;https://github.com/equalsraf/neovim-qt/releases&quot;&gt;Neovim-Qt Releases&lt;/a&gt;
+&lt;a href=&quot;https://docs.microsoft.com/en-us/windows/wsl/install-win10&quot;&gt;WSL on Windows 10&lt;/a&gt;
+&lt;a href=&quot;https://nixos.org/nix/manual/#chap-quick-start&quot;&gt;Quick start with Nix&lt;/a&gt;&lt;/p&gt;</description>
+	<pubDate>Fri, 07 Aug 2020 22:00:00 +0000</pubDate>
+</item>
+<item>
 	<title>Tweag I/O: Nix Flakes, Part 3: Managing NixOS systems</title>
 	<guid isPermaLink="true">https://tweag.io/blog/2020-07-31-nixos-flakes/</guid>
 	<link>https://tweag.io/blog/2020-07-31-nixos-flakes/</link>
@@ -1259,19 +1368,6 @@ refreshing bevvy while you wait for blocks to sync.&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt=&quot;Daedalus FC1 screenshot&quot; src=&quot;http://mcwhirter.com.au/files/Daedalus_FC1.png&quot; title=&quot;Daedalus FC1 screenshot&quot; /&gt;&lt;/p&gt;</description>
 	<pubDate>Thu, 23 Apr 2020 23:28:59 +0000</pubDate>
-</item>
-<item>
-	<title>nixbuild.net: Binary Cache Support</title>
-	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-04-18-binary-cache-support.html</guid>
-	<link>https://blog.nixbuild.net/posts/2020-04-18-binary-cache-support.html</link>
-	<description>&lt;p&gt;Up until now, nixbuild.net has not supported directly fetching build dependencies from binary caches like &lt;a href=&quot;https://cache.nixos.org&quot;&gt;cache.nixos.org&lt;/a&gt; or &lt;a href=&quot;https://cachix.org&quot;&gt;Cachix&lt;/a&gt;. All build dependencies have instead been uploaded from the user’s local machine to nixbuild.net the first time they’ve been needed.&lt;/p&gt;
-&lt;p&gt;Today, this bottleneck has been removed, since nixbuild.net now can fetch build dependencies directly from binary caches, without taxing users’ upload bandwidth.&lt;/p&gt;
-
-&lt;p&gt;By default, the official Nix binary cache (&lt;a href=&quot;https://cache.nixos.org&quot;&gt;cache.nixos.org&lt;/a&gt;) is added to all nixbuild.net accounts, but a nixbuild.net user can freely decide on which caches that should be queried for build dependencies (including &lt;a href=&quot;https://cachix.org&quot;&gt;Cachix&lt;/a&gt; caches).&lt;/p&gt;
-&lt;p&gt;An additional benefit of the new support for binary caches is that users that trust the same binary caches automatically share build dependencies from those caches. This means that if one user’s build has triggered a download from for example cache.nixos.org, the next user that comes along and needs the same build dependency doesn’t have to spend time on downloading that dependency.&lt;/p&gt;
-&lt;p&gt;For more information on how to use binary caches with nixbuild.net, see the &lt;a href=&quot;https://docs.nixbuild.net/getting-started/&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;</description>
-	<pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
-	<author>support@nixbuild.net (nixbuild.net)</author>
 </item>
 
 </channel>
