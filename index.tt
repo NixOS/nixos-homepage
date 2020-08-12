@@ -1,4 +1,4 @@
-[% WRAPPER layout.tt title="NixOS Linux" %]
+[% WRAPPER layout.tt title="NixOS Linux" handlesLayout=1 %]
 [% USE JSON.Escape %]
 [% USE IO.All %]
 [% USE HTML %]
@@ -6,30 +6,65 @@
 
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 
-<div class="side-by-side">
-  <div class="hero">
-    <h1>Reproducible builds and deployments.</h1>
-    <p class="lead">
-      <strong>Nix</strong> is a powerful package manager for Linux and other
-      Unix systems that makes package management reliable and reproducible.
-      Share your development and build environments across different machines.
-    </p>
-    <p class="lead">
-      <strong>NixOS</strong> is a Linux distribution with a unique approach to
-      package and configuration management. Built on top of the Nix package
-      manager, it is completely declarative, makes upgrading systems reliable,
-      and has <a href="[% root %]features.html">many other advantages</a>.
-    </p>
-    <a class="btn btn-large btn-success" href="[% root %]download.html">Download</a>
-    <a class="btn btn-large" href="[% root %]learn.html">Get started</a>
-  </div>
+<section class="index-hero">
+  <div>
+	<div class="blurb">
+	  <h1>Reproducible builds and deployments.</h1>
+	  <div class="columns">
+		<div>
+		  <h2>Nix</h2>
+		  <p>
+		  A powerful package manager for Linux and other
+		  Unix systems that makes package management reliable and reproducible.
+		  Share your development and build environments across different machines.
+		  </p>
+		</div>
+		<div>
+		  <h2>NixOS</h2>
+		  <p>
+		  A Linux distribution with a unique approach to
+		  package and configuration management. Built on top of the Nix package
+		  manager, it is completely declarative, makes upgrading systems reliable,
+		  and has <a href="[% root %]features.html">many other advantages</a>.
+		  </p>
+		</div>
+	  </div>
+	  <div class="button-tray">
+		<a class="button -primary" href="[% root %]download.html">Download</a>
+		<a class="button" href="[% root %]learn.html">Get started</a>
+	  </div>
+	</div>
 
-  <div class="hero-demo">
-    <asciinema-player cols="77" rows="24" src="/demo.cast"></asciinema-player>
+	<div class="demo">
+	  <div class="asciinema-thumbnail">
+		<asciinema-player cols="77" rows="24" src="/demo.cast"></asciinema-player>
+	  </div>
+	</div>
   </div>
-</div>
+</section>
 
-<hr />
+<section id="packages-search" class="packages-searchbox">
+  <div>
+    <h1>Choose from Thousands of Packages</h1>
+    <p>
+      The Nix Packages collection
+      <strong>(<a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a>)</strong>
+      is a set of
+      <strong class="-highlighted">over 60 000 packages</strong> for the Nix package manager.
+    </p>
+    <form>
+      <div>
+        <div class="form-input">
+          <input placeholder="Search for a package" type="text" />
+        </div>
+      </div>
+      <div>
+        <button type="submit">Search</button>
+        <button><em>[undetermined]</em></button>
+      </div>
+    </form>
+  </div>
+</section>
 
 <div class="row-fluid">
   <div class="span4">
@@ -59,27 +94,9 @@
   </div>
 </div>
 
-
-<hr />
-
-<div id="packages-search" class="row-fluid text-center packages-searchbox">
-  <div class="span12">
-    <h1>Choose from Thousands of Packages</h1>
-    <p class="text-center lead">
-      The Nix Packages collection (<a href="https://github.com/NixOS/nixpkgs">nixpkgs</a>) is a set of
-      <strong>over 60 000 packages</strong> for the Nix package manager.
-    </p>
-    <form>
-      <div class="input-append">
-        <input class="input-xxlarge" placeholder="Search for a package" type="text" />
-        <button class="btn">Search</button>
-      </div>
-      <p class="text-center">or <a href="https://search.nixos.org/options">search among many NixOS options.</a></p>
-    </form>
-  </div>
-</div>
-
-<hr />
+<section id="examples" class="home-examples">
+  <div>
+    <h1>Examples...</h1>
 
 <h1 class="text-center">Examples...</h1>
 
