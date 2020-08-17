@@ -66,33 +66,47 @@
   </div>
 </section>
 
-<div class="row-fluid">
-  <div class="span4">
-    <h2>Reproducible</h2>
-    <p>
-      Nix builds packages in isolation from each other. This ensures that they
-      are reproducible and don't have undeclared dependencies, so <strong>if a
-        package works on one machine, it will also work on another</strong>.
-    </p>
+<section id="why-nix" class="index-whynix">
+  <div>
+    <h1>Why choose Nix or NixOS?</h1>
+    <ul>
+      <li>
+        <div></div>
+        <div>
+          <h2>It's Reproducible…</h2>
+          <p>
+          Nix builds packages in isolation from each other. This ensures that they
+          are reproducible and don't have undeclared dependencies, so <strong>if a
+            package works on one machine, it will also work on another</strong>.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div></div>
+        <div>
+          <h2>Declarative…</h2>
+          <p>
+          Nix makes it <strong>trivial to share development and build
+            environments</strong> for your projects, regardless of what programming
+          languages and tools you’re using.
+          </p>
+        </div>
+      </li>
+      <li>
+        <div></div>
+        <div>
+          <h2>And Reliable</h2>
+          <p>
+          Nix ensures that installing or upgrading one package <strong>cannot
+            break other packages</strong>. It allows you to <strong>roll back to
+            previous versions</strong>, and ensures that no package is in an
+          inconsistent state during an upgrade.
+          </p>
+        </div>
+      </li>
+    </ul>
   </div>
-  <div class="span4">
-    <h2>Declarative</h2>
-    <p>
-      Nix makes it <strong>trivial to share development and build
-        environments</strong> for your projects, regardless of what programming
-      languages and tools you’re using.
-    </p>
-  </div>
-  <div class="span4">
-    <h2>Reliable</h2>
-    <p>
-      Nix ensures that installing or upgrading one package <strong>cannot
-        break other packages</strong>. It allows you to <strong>roll back to
-        previous versions</strong>, and ensures that no package is in an
-      inconsistent state during an upgrade.
-    </p>
-  </div>
-</div>
+</section>
 
 <section id="examples" class="home-examples">
   <div>
