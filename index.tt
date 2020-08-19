@@ -194,7 +194,7 @@ pkgs.dockerTools.buildLayeredImage {
 6a87e4d71e07: Loading layer [==================>]  266.2kB/266.2kB
 c09c43a6b910: Loading layer [==================>]  71.68kB/71.68kB
 Loaded image: only-hello:qn5x1pnk7d467jsl81jng7168qsks42l
-<span class="shell-prompt">$ </span>docker run only-hello:qn5x1pnk7d467jsl81jng7168qsks42l "hello"
+<span class="shell-prompt">$ </span>docker run only-hello:qn5x1pnk7d467jsl81jng7168qsks42l hello
 Hello, world</pre>
         <p>
           Learn more <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
