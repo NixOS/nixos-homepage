@@ -1,21 +1,19 @@
 {
   "nodes": {
     "nix-dev": {
-      "info": {
-        "lastModified": 1592582812,
-        "narHash": "sha256-6a6NciJgPgktNsLYLEmyjYrx9dZSBptKVapUYBRuBAg="
-      },
       "inputs": {
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "owner": "domenkozar",
+        "lastModified": 1597851438,
+        "narHash": "sha256-/QIECsyKX5H8ozH0lJS9k2rbSxG5xXVv8MoNvxPpcM8=",
+        "owner": "nix-dot-dev",
         "repo": "nix.dev",
-        "rev": "36694e4351dca75d2b1e63480fddb1a99239d9d5",
+        "rev": "9ea3490c79822c363125704d88f302f2a129e65c",
         "type": "github"
       },
       "original": {
-        "owner": "domenkozar",
+        "owner": "nix-dot-dev",
         "repo": "nix.dev",
         "type": "github"
       }
@@ -37,11 +35,9 @@
       }
     },
     "nixpkgs": {
-      "info": {
-        "lastModified": 1592263354,
-        "narHash": "sha256-1wHPn5qKfzfG06dZhpXDEg5Zt6HwvfyPPgW1tkYFejg="
-      },
       "locked": {
+        "lastModified": 1592263354,
+        "narHash": "sha256-1wHPn5qKfzfG06dZhpXDEg5Zt6HwvfyPPgW1tkYFejg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "a84b797b28eb104db758b5cb2b61ba8face6744b",
@@ -55,10 +51,6 @@
       }
     },
     "nixpkgs_2": {
-      "info": {
-        "lastModified": 1591564272,
-        "narHash": "sha256-Z+4hmPx21+vYx9jp19+3jaT/Whl8IzmH1G/fGyFv7FY="
-      },
       "locked": {
         "lastModified": 1591564272,
         "narHash": "sha256-Z+4hmPx21+vYx9jp19+3jaT/Whl8IzmH1G/fGyFv7FY=",

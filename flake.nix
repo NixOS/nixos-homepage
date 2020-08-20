@@ -8,7 +8,7 @@
   inputs.released-nixpkgs = { url = "nixpkgs/nixos-20.03"; };
   inputs.released-nix = { url = "github:nixos/nix/latest-release"; flake = false; };
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
-  inputs.nix-dev = { url = "github:domenkozar/nix.dev"; };
+  inputs.nix-dev = { url = "github:nix-dot-dev/nix.dev"; };
 
   outputs = { self, nixpkgs, released-nixpkgs, released-nix, nix-pills, nix-dev }:
     let
