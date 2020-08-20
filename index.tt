@@ -139,8 +139,8 @@ pkgs.mkShell {
 <span class="shell-prompt">[nix-shell]$ </span>yarn --version
 1.22.4</pre>
         <p>
-          Commit the above <code>shell.nix</code> file and let you coworkers have
-          easier time setting their development environment.
+          Commit the above <code>shell.nix</code> file and help your coworkers have
+          an easier time setting their development environment.
         </p>
 
       </div>
@@ -149,7 +149,7 @@ pkgs.mkShell {
   <section class="tab-pane" id="build">
     <div class="row-fluid">
       <div class="span6">
-        <h2>Minimal docker image</h2>
+        <h2>Minimal Docker image</h2>
         <p>
           Using a <code>Dockerfile</code>, you are responsible for:
         </p>
@@ -162,17 +162,17 @@ pkgs.mkShell {
           at best a very error prone process.
         </p>
         <p>
-          With Nix only packages you define are included in the docker image.
-          No cleaning up needed. There are no build tools left in your docker
-          image, making it as minimal as you need.
+          With Nix, only packages you define are included in the Docker image.
+          No cleaning up needed. There are no build tools left in your Docker
+          image, keeping it as small as possible.
         </p>
         <p>
-          Nix also knows how to layer your resulting docker image, automatically.
+          Nix also knows how to layer your resulting Docker image, automatically.
           The resulting layers are optimized for caching as much as possible.
         </p>
         <p>
           The following Nix expression (<code>default.nix</code>) defines a
-          docker image with <strong>only</strong> <code>hello</code> package
+          Docker image with <strong>only</strong> the <code>hello</code> package
           in it.
         </p>
         <pre class="well">
@@ -197,19 +197,19 @@ Loaded image: only-hello:qn5x1pnk7d467jsl81jng7168qsks42l
 <span class="shell-prompt">$ </span>docker run only-hello:qn5x1pnk7d467jsl81jng7168qsks42l hello
 Hello, world</pre>
         <p>
-          Learn more <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
-            to build docker images</a>.
+          Learn more about <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
+            to build Docker images</a>.
         </p>
 
       </div>
       <div class="span6">
 
         <h2>Declarative cloud images</h2>
-        <p>How hard would it be to build and configure a <strong>Amazon EC2</strong> image?</p>
+        <p>How hard would it be to build and configure an <strong>Amazon EC2</strong> image?</p>
         <p>
-          With the following <code>amazon.nix</code> we configured nginx which is
-          serving a "Welcome to nginx!" page, having a valid ssl certificate
-          (via LetsEncrypt) and enabled recommended security settings.
+          With the following <code>amazon.nix</code> we configured nginx to
+          serve a "Welcome to nginx!" page, with a valid SSL certificate
+          (via LetsEncrypt) and recommended security settings.
         </p>
         <pre class="well">
 { pkgs, ...}:
