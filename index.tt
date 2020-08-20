@@ -197,7 +197,7 @@ Loaded image: only-hello:qn5x1pnk7d467jsl81jng7168qsks42l
 <span class="shell-prompt">$ </span>docker run only-hello:qn5x1pnk7d467jsl81jng7168qsks42l hello
 Hello, world</pre>
         <p>
-          Learn more <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
+          Learn more about <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
             to build Docker images</a>.
         </p>
 
