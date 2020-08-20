@@ -11,7 +11,6 @@ HTML = index.html download.html news.html learn.html community.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
   teams/discourse.html \
   guides/contributing.html guides/install-nix.html guides/ad-hoc-developer-environments.html \
-  nixos/packages.html nixos/options.html \
   404.html
 
 
@@ -61,9 +60,7 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
 
 
-all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*))) \
-  nixos/packages-explorer.js \
-  nixpkgs/packages-channels.json
+all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*)))
 
 
 robots.txt: $(HTML)
@@ -131,14 +128,6 @@ update: blogs.xml
 	@true
 endif
 
-
-# Cute hack, this allows future expansion if desired
-# Mainly, this allows tracking NIXOS_SERIES
-nixpkgs/packages-channels.json: Makefile
-	echo '["nixos-$(NIXOS_SERIES)", "nixpkgs-unstable"]' > $@
-
-nixos/packages-explorer.js:
-	@ln -sfn $(PACKAGES_EXPLORER) $@
 
 all: demo.cast
 

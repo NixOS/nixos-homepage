@@ -46,7 +46,7 @@
           </ul>
           <ul class="nav pull-right">
             <li>
-              <a href="[% root %]nixos/packages.html">
+              <a href="https://search.nixos.org/packages">
                 <span class="icon-search"></span>
               </a>
             </li>
@@ -66,8 +66,8 @@
           <h4>The project</h4>
           <ul>
             <li><a href="https://status.nixos.org/">Nix Channel Status</a></li>
-            <li><a href="https://nixos.org/nixos/packages.html">Nix packages search</a></li>
-            <li><a href="https://nixos.org/nixos/options.html">NixOS options search</a></li>
+            <li><a href="https://search.nixos.org/packages">Nix packages search</a></li>
+            <li><a href="https://search.nixos.org/options">NixOS options search</a></li>
           </ul>
           <ul>
             <li><a href="https://nixos.org/governance.html">Governance</a></li>
