@@ -11,7 +11,6 @@ HTML = index.html download.html news.html learn.html community.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
   teams/discourse.html \
   guides/contributing.html guides/install-nix.html guides/ad-hoc-developer-environments.html \
-  nixos/packages.html nixos/options.html \
   404.html
 
 
@@ -72,10 +71,7 @@ $(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify
 	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
 
 
-all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*))) \
-  nixos/packages-explorer.js \
-  nixpkgs/packages-channels.json \
-  nix-dev
+all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*))) nix-dev
 
 
 robots.txt: $(HTML)
@@ -92,7 +88,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt 
+%.html: %.tt layout.tt common.tt
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
@@ -126,8 +122,8 @@ index.html: news-rss.xml latest-news.xhtml blogs.json
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
 
-check:
-	checklink $(HTML)
+check: $(HTML)
+	bash check-links.sh
 
 blogs.xml:
 	curl --fail https://planet.nixos.org/rss20.xml > $@.tmp
@@ -143,14 +139,6 @@ update: blogs.xml
 	@true
 endif
 
-
-# Cute hack, this allows future expansion if desired
-# Mainly, this allows tracking NIXOS_SERIES
-nixpkgs/packages-channels.json: Makefile
-	echo '["nixos-$(NIXOS_SERIES)", "nixpkgs-unstable"]' > $@
-
-nixos/packages-explorer.js:
-	@ln -sfn $(PACKAGES_EXPLORER) $@
 
 all: demo.cast
 

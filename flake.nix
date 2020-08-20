@@ -22,8 +22,6 @@
 
       packages."${system}" = rec {
 
-        packagesExplorer = import ./packages-explorer nixpkgs;
-
         nix = (import "${released-nix}/release.nix" {
           nix = released-nix;
           nixpkgs = released-nixpkgs;
@@ -48,9 +46,11 @@
           enableParallelBuilding = true;
 
           buildInputs = with pkgs; [
+              caddy
               fd
               libxslt
               libxml2
+              linkchecker
               perl
               perlPackages.JSON
               perlPackages.XMLSimple
@@ -81,10 +81,11 @@
               "NIXOS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixosManual}"
               "NIXPKGS_MANUAL_IN=${released-nixpkgs.htmlDocs.nixpkgsManual}"
               "NIXOS_AMIS=${nixosAmis}"
-              "PACKAGES_EXPLORER=${packagesExplorer}/bundle.js"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
               "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}/html"
             ];
+
+          doCheck = true;
 
           installPhase = ''
             mkdir $out
@@ -98,7 +99,6 @@
             export NIXOS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixosManual}"
             export NIXPKGS_MANUAL_IN="${released-nixpkgs.htmlDocs.nixpkgsManual}"
             export NIXOS_AMIS="${nixosAmis}"
-            export PACKAGES_EXPLORER="${packagesExplorer}/bundle.js"
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
             export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}/html"
           '';

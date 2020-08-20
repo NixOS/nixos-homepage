@@ -22,14 +22,12 @@
     },
     "nix-pills": {
       "flake": false,
-      "info": {
-        "lastModified": 1591343853,
-        "narHash": "sha256-kbUF0LGevV8ooBInyJYBDsXI3wGxT9PxJqOC7e2scjo="
-      },
       "locked": {
+        "lastModified": 1595699599,
+        "narHash": "sha256-0zxHRLfvBmlZigo+B6AAH9h5jcvT3y9CPSqoy7xhHmA=",
         "owner": "NixOS",
         "repo": "nix-pills",
-        "rev": "f280712c4221da91b425df99a765b2daa3b51e3a",
+        "rev": "a26be5a2b9d12ef32e0e96e708de3ae3dda58c18",
         "type": "github"
       },
       "original": {
@@ -62,6 +60,8 @@
         "narHash": "sha256-Z+4hmPx21+vYx9jp19+3jaT/Whl8IzmH1G/fGyFv7FY="
       },
       "locked": {
+        "lastModified": 1591564272,
+        "narHash": "sha256-Z+4hmPx21+vYx9jp19+3jaT/Whl8IzmH1G/fGyFv7FY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "e2bb73ce5f786b83e984b80199112f86b8a6cc9d",
@@ -75,14 +75,12 @@
     },
     "released-nix": {
       "flake": false,
-      "info": {
-        "lastModified": 1591132159,
-        "narHash": "sha256-gGvfd+JoCb4+ZmiP59GGv4Xfaq2/s+Gi3ZQztPpRSiM="
-      },
       "locked": {
+        "lastModified": 1594210873,
+        "narHash": "sha256-QTPcLrvPXg7QhseBd854iCd7yGSlC/Oq3q2rlwiYdhg=",
         "owner": "nixos",
         "repo": "nix",
-        "rev": "d2008f2fff4b71c775b4b5cdecaff0d7a4ebec85",
+        "rev": "d5ecb8d3cd8cb2ae63966025c914fd4beff0a6ea",
         "type": "github"
       },
       "original": {
@@ -93,14 +91,12 @@
       }
     },
     "released-nixpkgs": {
-      "info": {
-        "lastModified": 1592495204,
-        "narHash": "sha256-+AdAIr4FJCb2ltFY1YsUQYrloBEB8l/snAAmwLvCRhA="
-      },
       "locked": {
+        "lastModified": 1597850840,
+        "narHash": "sha256-OYlhqSfeq0oSSrsbYr4t2kQFtBWy/1+iZGSx3jjVUnE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "2b417708c282d84316366f4125b00b29c49df10f",
+        "rev": "fc966732c89f9485a1ea1a0f86b2a1bb97db862c",
         "type": "github"
       },
       "original": {
@@ -120,5 +116,5 @@
     }
   },
   "root": "root",
-  "version": 5
+  "version": 7
 }
