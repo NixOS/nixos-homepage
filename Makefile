@@ -5,13 +5,27 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 default: all
 
 
-HTML = index.html download.html news.html learn.html community.html \
-  governance.html donate.html commercial-support.html features.html \
-  teams/rfc-steering-committee.html teams/security.html teams/marketing.html \
-  teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
+HTML = \
+  404.html \
+  commercial-support.html \
+  community.html \
+  donate.html \
+  download.html \
+  features.html \
+  governance.html \
+  guides/ad-hoc-developer-environments.html \
+  guides/contributing.html \
+  guides/install-nix.html \
+  index.html \
+  learn.html \
+  news.html \
   teams/discourse.html \
-  guides/contributing.html guides/install-nix.html guides/ad-hoc-developer-environments.html \
-  404.html
+  teams/infrastructure.html \
+  teams/marketing.html \
+  teams/nixcon.html \
+  teams/nixos_release.html \
+  teams/rfc-steering-committee.html \
+  teams/security.html
 
 
 ### Prettify the NixOS manual.
