@@ -6,7 +6,7 @@
 
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 
-<section class="index-hero">
+<section class="home-hero">
   <div>
 	<div class="blurb">
 	  <h1>Reproducible builds and deployments.</h1>
@@ -66,7 +66,7 @@
   </div>
 </section>
 
-<section id="why-nix" class="index-whynix">
+<section id="why-nix" class="home-whynix">
   <div>
     <h1>Why choose Nix or NixOS?</h1>
     <ul>
@@ -112,26 +112,24 @@
   <div>
     <h1>Examples...</h1>
 
-<h1 class="text-center">Examples...</h1>
-
-<div class="home-examples">
-
-  <section>
-    <div class="row-fluid">
-      <div class="span6">
+<ul>
+  <li>
 
         <h2>Try new tools without fear</h2>
         <p>Don't clutter your system with tools that you use only now and then.</p>
-        <pre class="well">
+        <pre class="terminal-console">
 <span class="shell-prompt">$ </span>python --version
 python: command not found
 <span class="shell-prompt">$ </span><strong>nix-shell -p python3</strong>
 <span class="shell-prompt">[nix-shell]$ </span>python --version
 Python 3.7.7</pre>
 
+  </li>
+  <li>
+
         <h2>Multiple languages, one tool</h2>
         <p></p>
-        <pre class="well">
+        <pre class="terminal-console">
 <span class="shell-prompt">$ </span><strong>nix-shell -p python3 nodejs go rustc</strong>
 <span class="shell-prompt">[nix-shell]$ </span>node --version
 v10.20.1
@@ -140,8 +138,8 @@ go version go1.14.1 linux/amd64
 <span class="shell-prompt">[nix-shell]$ </span>rustc --version
 rustc 1.42.0</pre>
 
-      </div>
-      <div class="span6">
+  </li>
+  <li>
 
         <h2>Isolated development environments</h2>
         <p>
@@ -150,7 +148,7 @@ rustc 1.42.0</pre>
             Nix</a>. To setup a more persistent environment you can also write a
           simple <code>shell.nix</code> file:
         </p>
-        <pre class="well">
+        <pre class="file-listing filetype-nix">
 { pkgs ? import &lt;nixpkgs&gt; {}
 }:
 pkgs.mkShell {
@@ -163,7 +161,7 @@ pkgs.mkShell {
   ];
 }</pre>
         <p>Then enter development environment with:</p>
-        <pre class="well">
+        <pre class="terminal-console">
 <span class="shell-prompt">$ </span><strong>nix-shell</strong>
 <span class="shell-prompt">[nix-shell]$ </span>virtualenv --version
 16.7.9
@@ -174,13 +172,10 @@ pkgs.mkShell {
           an easier time setting their development environment.
         </p>
 
-      </div>
-    </div>
-  </section>
-  <section class="tab-pane" id="build">
-    <div class="row-fluid">
-      <div class="span6">
-        <h2>Minimal Docker image</h2>
+  </li>
+  <li>
+
+        <h2>Minimal docker image</h2>
         <p>
           Using a <code>Dockerfile</code>, you are responsible for:
         </p>
@@ -206,7 +201,7 @@ pkgs.mkShell {
           Docker image with <strong>only</strong> the <code>hello</code> package
           in it.
         </p>
-        <pre class="well">
+        <pre class="file-listing filetype-nix">
 { pkgs ? import &lt;nixpkgs&gt; {}
 }:
 pkgs.dockerTools.buildLayeredImage {
@@ -214,7 +209,7 @@ pkgs.dockerTools.buildLayeredImage {
   contents = [ pkgs.hello ];
 }</pre>
         <p>To build and run the image you need to:</p>
-        <pre class="well">
+        <pre class="terminal-console">
 <span class="shell-prompt">$ </span><strong>nix-build default.nix -o ./result</strong>
 ...
 /nix/store/&#8230;-docker-image-only-hello.tar.gz
@@ -232,8 +227,8 @@ Hello, world</pre>
             to build Docker images</a>.
         </p>
 
-      </div>
-      <div class="span6">
+  </li>
+  <li>
 
         <h2>Declarative cloud images</h2>
         <p>How hard would it be to build and configure an <strong>Amazon EC2</strong> image?</p>
@@ -242,7 +237,7 @@ Hello, world</pre>
           serve a "Welcome to nginx!" page, with a valid SSL certificate
           (via LetsEncrypt) and recommended security settings.
         </p>
-        <pre class="well">
+        <pre class="file-listing filetype-nix">
 { pkgs, ...}:
 {
   security.acme.acceptTerms = true;
@@ -261,7 +256,7 @@ Hello, world</pre>
   };
 }</pre>
         <p>Now we just need to build it.</p>
-        <pre class="well">
+        <pre class="terminal-console">
 <span class="shell-prompt">$ </span><strong>nix-build '&lt;nixpkgs/nixos/release.nix&gt;' \</strong>
 <strong>    -A amazonImage.x86_64-linux \</strong>
 <strong>    --arg configuration ./amazon.nix \</strong>
@@ -275,9 +270,11 @@ nix-support</pre>
           <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html">
             imported to Amazon EC2 as usual</a>.
         </p>
-      </div>
-    </div>
-  </section>
-</div>
+
+  </li>
+</ul>
+
+  </div>
+</section>
 
 [% END %]
