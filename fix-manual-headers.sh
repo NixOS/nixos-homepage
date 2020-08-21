@@ -15,7 +15,8 @@ for path in $dir/*; do
     if [[ "$htmlFile" == *.html ]]; then
       fileName=${htmlFile#"./"}
       filePath="$path/$fileName"
-      echo -n "Patching $filePath ..."
+
+      echo -n "Patching <head> of $filePath ..."
       cannonicalFileName="$dir/$cannonical/$fileName"
       cannonicalUrl=$baseUrl
       if [ -e $cannonicalFileName ]; then
@@ -29,6 +30,15 @@ for path in $dir/*; do
       else
         sed -i -e "s|</head>|  $cannonicalTag\n</head>|" $filePath
         echo " Patched!"
+      fi
+
+      echo -n "Injecting channel switcher for $filePath ..."
+      injectedTag="<script src=\"/js/manual-version-switch.js\"></script>"
+      if grep -Fq "$injectedTag" $filePath; then
+        echo " Already injected!"
+      else
+        sed -i -e "s|</body>|\n  $injectedTag\n</body>|" $filePath
+        echo " Injected!"
       fi
     fi
   done

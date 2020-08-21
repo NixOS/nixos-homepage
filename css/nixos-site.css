@@ -560,3 +560,34 @@ ul.comma-separated > li:last-of-type:after {
     text-align: center;
   }
 
+.injected-select-channels {
+  background: #333333;
+  color: #FFFFFF;
+  padding: 0.5em 1em;
+  position: fixed;
+  bottom: 0.5em;
+  right: 0.5em;
+  font-size: 0.8em;
+}
+.injected-select-channels > div {
+  text-align: right;
+  cursor: pointer;
+}
+.injected-select-channels > dl {
+  display: none;
+  width: 150px;
+  margin: 0 0 1em 0;
+}
+.injected-select-channels > dl > dt {
+  color: #999999;
+}
+.injected-select-channels > dl > dd {
+  display: inline-block;
+}
+.injected-select-channels > dl > dd > a {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+.injected-select-channels.opened > dl {
+  display: block;
+}
