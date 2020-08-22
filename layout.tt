@@ -121,7 +121,7 @@
   [% IF anchors %]
   <script src="[% root %]js/anchor.min.js"></script>
   <script>
-    anchors.add('h1,h2,h3');
+    anchors.add('main h1, main h2, main h3');
   </script>
   [% END %]
 </body>
