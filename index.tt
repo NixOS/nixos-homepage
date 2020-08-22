@@ -43,8 +43,8 @@
   </div>
 </section>
 
-<section id="packages-search" class="packages-searchbox">
-  <div>
+<section class="packages-searchbox">
+  <div id="packages-search">
     <h1>Choose from Thousands of Packages</h1>
     <p>
       The Nix Packages collection
