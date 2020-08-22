@@ -42,6 +42,7 @@
     </div>
   </header>
 
+  <main>
   [% IF !handlesLayout %]
   <div class="generic-layout">
   [% END %]
@@ -51,6 +52,7 @@
   [% IF !handlesLayout %]
   </div>
   [% END %]
+  </main>
 
   <footer>
     <div class="upper">
