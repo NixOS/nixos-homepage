@@ -2,10 +2,10 @@ $(window).load(function() {
   let project = window.location.pathname.split('/')[2];
   let channel = window.location.pathname.split('/')[3];
   let unstable = $("<a/>")
-    .attr("href", "https://nixos.org/manual/" + project + "/unstable")
+    .attr("href", "/manual/" + project + "/unstable")
     .text("unstable");
   let stable = $("<a/>")
-    .attr("href", "https://nixos.org/manual/" + project + "/stable")
+    .attr("href", "/manual/" + project + "/stable")
     .text("stable");
   let channels = $("<dl>")
     .append($("<dt/>").text("Versions"))
