@@ -1,0 +1,172 @@
+.home-hero {
+	// From big-angles' margin-top;
+	// Used as a separation between this part and the big angles.
+	@_next-section-overlap: 100vw * 576.61139/2543.56445 * 0.6;
+	
+	#flair.outlined-bg();
+
+	padding-top: 90*@unit;
+	padding-bottom: 90*@unit;
+	margin-bottom: @_next-section-overlap * -1;
+
+	& > div {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		#flex-flexible-spacing(@gutter);
+
+		#screen-sm-max({
+			flex-direction: column;
+		});
+
+		margin-bottom: @_next-section-overlap;
+	}
+
+	.blurb, .demo {
+		#screen-md-min({
+			width: 50%;
+		});
+	}
+
+	.blurb .columns {
+		display: flex;
+		#flex-flexible-spacing(@gutter);
+
+		#screen-sm-min({
+			& > * {
+				width: 50%;
+			}
+		});
+
+		#screen-xs-max({
+			flex-direction: column;
+		});
+	}
+
+	.blurb {
+		p {
+			font-size: 0.91em;
+		}
+
+		.button-tray {
+			#screen-md-min({
+				#rules_for_form.button({
+					// Even at smaller sizes, as long as not full width
+					// the buttons are based on the main grid sizing.
+					width: 2 * @lg-grid-unit;
+					// Bigger buttons
+					padding-top: @gutter;
+					padding-bottom: @gutter;
+				});
+			});
+		}
+	}
+
+	// FIXME: for now this only wraps the asciinema player.
+	// It should rather be an element that lazy loads the
+	// asciinema player example as needed.
+	.demo {
+		@_asciinema-background-color: #121314;
+		border: @gutter solid #theme.color[white];
+		box-shadow: #theme.common[box-shadow];
+		overflow: hidden;
+		border-radius: 2*@gutter;
+		background: @_asciinema-background-color;
+		max-width: 100%;
+	}
+}
+
+.packages-searchbox {
+	background: #theme.color[blue-lighter];
+
+	&, p {
+		text-align: center;
+	}
+
+	h1, p {
+		display: block;
+		margin-bottom: 2 * @gutter;
+	}
+
+	p {
+		// Comparative sizes in my svg dissection of the layout
+		font-size: 26/16 * 1rem;
+		max-width: 880 * @unit;;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#rules_for_form.all({
+		// Comparative sizes in my svg dissection of the layout
+		font-size: 20/16 * 1rem;
+	});
+	.form-input {
+		// Comparative sizes in my svg dissection of the layout
+		font-size: 20/16 * 1rem;
+	}
+
+	form .form-input {
+		.form-input.with-icon({
+			#svg.icon.search.blue-light;
+		});
+	}
+
+	.form-input {
+		width: 100%;
+		max-width: 512px;
+	}
+
+	strong {
+		color: #theme.color[blue-dark];
+	}
+	strong.-highlighted {
+		color: #theme.color[green];
+	}
+	strong a {
+		color: inherit;
+	}
+
+	h1 {
+		max-width: 580 * @unit;
+		margin-top: 0;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#flair.big-angles;
+}
+
+.home-whynix {
+	#gfx-alternating-side(
+		@gfx-rules: {
+			background-color: #theme.color[gray-light];
+			border-radius: #theme.common[radius];
+			height: 166 * @unit; // FIXME
+		}
+	);
+}
+
+.home-examples {
+	h1 {
+		text-align: center;
+	}
+
+	& > div > ul {
+		margin: 0;
+		padding: 0;
+	}
+	& > div > ul > li {
+		list-style-type: none;
+		margin-bottom: @gutter;
+	}
+
+	#fill-width();
+	& > div {
+		#container();
+	}
+}
+
+.home-whynix, .home-examples {
+	margin-top: 4*@gutter;
+}

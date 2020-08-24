@@ -1,0 +1,101 @@
+// Adding an SVG file
+// ==================
+//
+// Quick notes about adding images:
+// This uses an external pipeline in default.nix to replace the @SVG_* tokens
+// with files from this directory with their name uppercased.
+
+// Inclusion of an SVG file in this file alone will not add it to the build
+// output. The mixins need to *also* be applied as rules for the SVG files to
+// be in the output.
+// This means that adding SVG files here and conditionally applying logic to
+// switch between variants is only costly in build-time, not in output size.
+
+// Note that this allows you to replace a "magic" colour code with a chosen
+// colour. This value (face12) has been chosen so it's not optimized away into
+// a three-digit colour code.
+// A future improvement could be to allow any `faceXX` colour code to be
+// overriden, allowing more complex use cases like gradients to be "native".
+
+// How to
+// ------
+//
+// This is a bit clumsy due to an issue with LESS CSS.
+//
+// You have to first declare the use of the SVG (color optional):
+//
+// ```
+// #_declare__svg(bananaphone, @SVG_BANANAPHONE, #face12);
+// ```
+//
+// Then you **have** to define the actual mixin:
+//
+// ```
+// #svg.bananaphone { &:extend(._svg__bananaphone all); }
+// ```
+// 
+// The apparently redundant mixin is to ensure only `extend` is used so that
+// the SVG content is not repeated as many times as it is used.
+
+// * * *
+
+// Implementation
+#_declare__svg(@name, @svg, @color: #face12) {
+	.__svg_@{name} {
+		@_colorized: replace(@svg, "#face12", @color);
+		// ugh, that's an ugly hack... but escape() apparently doesn't deal well with percent signs.
+		@_data: replace(escape(@_colorized), "%", "PERCENT");
+		background-image: replace(~"url('data:image/svg+xml;utf8,@{_data}')", "PERCENT", "%");
+	}
+}
+
+// * * *
+
+// NixOS branding
+// ==============
+
+// The NixOS logo lambdaflake, alone
+#_declare__svg(lambdaflake_color, @SVG_LAMBDAFLAKE);
+#svg.lambdaflake.color { &:extend(.__svg_lambdaflake_color); }
+
+// The NixOS logo lambdaflake, alone
+#_declare__svg(lambdaflake_white, @SVG_LAMBDAFLAKE_WHITE);
+#svg.lambdaflake.white { &:extend(.__svg_lambdaflake_white); }
+
+#_declare__svg(nixos-text_white, @SVG_TEXT_NIXOS, #theme.color[white]);
+#svg.nixos-text.white { &:extend(.__svg_nixos-text_white); }
+
+#_declare__svg(nixos-text_black, @SVG_TEXT_NIXOS, #theme.color[black]);
+#svg.nixos-text.black { &:extend(.__svg_nixos-text_black); }
+
+
+// Icons
+// =====
+
+#_declare__svg(icon_search_blue-light, @SVG_SEARCH, #theme.color[blue-light]);
+#svg.icon.search.blue-light { &:extend(.__svg_icon_search_blue-light); }
+
+#_declare__svg(icon_social_twitter_white, @SVG_SOCIAL_TWITTER, #theme.color[white]);
+#svg.icon.social.twitter.white { &:extend(.__svg_icon_social_twitter_white); }
+
+#_declare__svg(icon_social_youtube_white, @SVG_SOCIAL_YOUTUBE, #theme.color[white]);
+#svg.icon.social.youtube.white { &:extend(.__svg_icon_social_youtube_white); }
+
+#_declare__svg(icon_social_github_white, @SVG_SOCIAL_GITHUB, #theme.color[white]);
+#svg.icon.social.github.white { &:extend(.__svg_icon_social_github_white); }
+
+
+// Flair
+// =====
+
+#_declare__svg(background-outlines_blue-dark2, @SVG_BACKGROUND_OUTLINES, #theme.color[blue-dark2]);
+#svg.background-outlines.blue-dark2 { &:extend(.__svg_background-outlines_blue-dark2); }
+
+#_declare__svg(background-outlines_white, @SVG_BACKGROUND_OUTLINES, #theme.color[white]);
+#svg.background-outlines.white { &:extend(.__svg_background-outlines_white); }
+
+#_declare__svg(big-angles-1, @SVG_BIG_ANGLES_1);
+#svg.big-angles-1 { &:extend(.__svg_big-angles-1); }
+
+#_declare__svg(big-angles-2, @SVG_BIG_ANGLES_2);
+#svg.big-angles-2 { &:extend(.__svg_big-angles-2); }

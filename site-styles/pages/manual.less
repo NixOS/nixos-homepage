@@ -1,0 +1,66 @@
+// Manual
+
+div.docbook {
+	div.page-header {
+		margin-top: 4em;
+	}
+
+	section {
+		margin-top: 2em;
+	}
+
+	div.example {
+		margin-top: 1.5em;
+	}
+
+	br.example-break {
+		display: none;
+	}
+
+	div.footnotes > br {
+		display: none;
+	}
+
+	dt {
+		margin-top: 1em;
+	}
+
+	code {
+		padding: 0;
+		border: 0;
+		background-color: inherit;
+		color: inherit;
+		font-size: 100%;
+		white-space: normal;
+		-webkit-hyphens: none;
+		-moz-hyphens: none;
+		hyphens: none;
+	}
+
+	div.toc {
+		margin-bottom: 3em;
+		border-bottom: 1*@unit solid #theme.color[gray-light];
+	}
+
+	div.toc dd {
+		margin-left: 2em;
+	}
+
+	pre.hljs {
+		&:extend(.file-listing);
+		overflow-x: visible;
+	}
+
+	span.command {
+		font-family: Monaco, Menlo, Consolas, "Courier New", monospace; /* from bootstrap*/
+		-webkit-hyphens: none;
+		-moz-hyphens: none;
+		hyphens: none;
+	}
+
+	// "Re-order" the styles for the headers
+	h1 { #theme.h2 }
+	h2 { #theme.h3 }
+	h3 { #theme.h4 }
+	h4 { #theme.h5 }
+}

@@ -1,0 +1,155 @@
+// Note: don't forget to rely on `extend` to reduce the effect
+// of repeated mixin use on file weight!
+
+// Outlined background
+// ===================
+
+#flair() {
+	.outlined-bg() {
+		&:extend(.__flair_outlined-bg all);
+		&:extend(.__flair_outlined-bg_default all);
+	}
+	.outlined-bg-dark() {
+		&:extend(.__flair_outlined-bg all);
+		&:extend(.__flair_outlined-bg_dark all);
+	}
+}
+
+.__flair_outlined-bg {
+	margin-top: -@gutter;
+	padding-top: @gutter*2;
+
+	position: relative;
+	#fill-width();
+	& > div {
+		#container();
+		position: relative;
+	}
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: left center;
+	}
+}
+
+// Variants
+
+.__flair_outlined-bg_default {
+	&::before {
+		#svg.background-outlines.blue-dark2;
+		opacity: 0.08;
+	}
+}
+
+.__flair_outlined-bg_dark {
+	color: #theme.color[white];
+	background-color: #theme.color[blue-dark];
+	h1 {
+		color: #theme.color[white];
+	}
+	h2 {
+		color: #theme.color[green];
+	}
+	a {
+		color: inherit;
+	}
+	&::before {
+		#svg.background-outlines.white;
+		opacity: 0.3;
+	}
+
+}
+
+// Big angles
+// ==========
+
+#flair() {
+	.big-angles {
+		@_top-height: 100vw * 576.61139/2543.56445;
+		@_bottom-height: 100vw * 398.84964/2543.56445;
+		position: relative;
+		#fill-width();
+		padding-top: 75 * @unit;
+		padding-bottom: 16 * @unit;
+		margin-top: @_top-height * 0.6;
+		margin-bottom: @_bottom-height;
+
+		& > div {
+			#container();
+		}
+
+		&::before, &::after {
+			pointer-events: none;
+			content: "";
+			display: block;
+			position: absolute;
+			left: 0;
+			right: 0;
+			background-size:cover;
+			background-repeat: no-repeat;
+		}
+
+		&::before {
+			// Metrics of the file:
+			// 2543.56445 × 576.61139
+			height: @_top-height;
+			bottom: 100%;
+			#svg.big-angles-1();
+			background-position: bottom left;
+
+			// This is to remove the gap between the pseudo-element
+			// and the element at non-integer pixel sizes
+			transform: translateY(2*@unit);
+		}
+		&::after {
+			// Metrics of the file:
+			// 2543.56445 × 398.84964
+			top: 100%;
+			height: @_bottom-height;
+			#svg.big-angles-2();
+			background-position: top right;
+
+			// This is to remove the gap between the pseudo-element
+			// and the element at non-integer pixel sizes
+			transform: translateY(-2*@unit);
+		}
+	}
+}
+
+// Angled title
+// ============
+
+// TODO: Add the proper SVG for this flair on sm+.
+//       (I don't have the proper files.)
+
+#flair() {
+	.angled-title(
+		@foreground: #theme.color[white],
+		@background: #theme.color[blue-dark2],
+	) {
+		color: @foreground;
+		background-color: @background;
+		&:extend(.__flair_angled-title all);
+	}
+}
+
+.__flair_angled-title {
+	#fill-width();
+	margin-bottom: @gutter;
+	padding-top: @gutter * 2;
+	padding-bottom: @gutter * 2;
+	&:first-child {
+		margin-top: -@gutter;
+	}
+	& > h1 {
+		color: inherit;
+		#container();
+	}
+}
