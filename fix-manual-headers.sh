@@ -3,8 +3,8 @@
 set -e
 
 dir="$1"
-cannonical="$2"
-baseUrl="https://nixos.org/$dir/$cannonical"
+canonical="$2"
+baseUrl="https://nixos.org/$dir/$canonical"
 
 [[ -d $dir ]]
 
@@ -17,18 +17,18 @@ for path in $dir/*; do
       filePath="$path/$fileName"
 
       echo -n "Patching <head> of $filePath ..."
-      cannonicalFileName="$dir/$cannonical/$fileName"
-      cannonicalUrl=$baseUrl
-      if [ -e $cannonicalFileName ]; then
+      canonicalFileName="$dir/$canonical/$fileName"
+      canonicalUrl=$baseUrl
+      if [ -e $canonicalFileName ]; then
         if [ "$fileName" != "index.html" ]; then
-          cannonicalUrl="$baseUrl/$fileName"
+          canonicalUrl="$baseUrl/$fileName"
         fi
       fi
-      cannonicalTag="<link rel=\"cannonical\" url=\"$cannonicalUrl\" />"
-      if grep -Fq "$cannonicalTag" $filePath; then
+      canonicalTag="<link rel=\"canonical\" url=\"$canonicalUrl\" />"
+      if grep -Fq "$canonicalTag" $filePath; then
         echo " Already patched!"
       else
-        sed -i -e "s|</head>|  $cannonicalTag\n</head>|" $filePath
+        sed -i -e "s|</head>|  $canonicalTag\n</head>|" $filePath
         echo " Patched!"
       fi
 
