@@ -1,10 +1,12 @@
-[% WRAPPER layout.tt title="Features" %]
+[% WRAPPER layout.tt title="Features" handlesLayout=1 %]
 
+<div class="page-title">
+  <h1>About Nix</h1>
+</div>
+
+<div class="generic-layout">
 <div class="row">
   <div class="span6">
-    <div class="page-header">
-      <h1>About Nix</h1>
-    </div>
     <p>Nix is a <em>purely functional package manager</em>. This means
       that it treats packages like values in purely functional programming
       languages such as Haskell — they are built by functions that don’t
@@ -487,6 +489,7 @@ upgrades.</p>
     </section>
 
   </div>
+</div>
 </div>
 
 [% END %]
