@@ -11,13 +11,24 @@ $(window).load(function() {
     .append($("<dt/>").text("Versions"))
     .append($("<dd/>").append(unstable))
     .append($("<dd/>").append(stable));
+  let plus = $("<i class=\"fa fa-plus\" aria-hidden=\"true\"></i>");
+  let minus = $("<i class=\"fa fa-minus\" aria-hidden=\"true\"></i>").hide();
+  let currentVersion = $("<span>v: " + channel + "</span>");
   let current = $("<div/>")
     .click(function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).parent().toggleClass("opened");
+      e.preventDefault();
+      e.stopPropagation();
+      let wrapper = $(this).parent();
+      wrapper.toggleClass("opened");
+      if (wrapper.hasClass("opened")) {
+        $(".fa-plus", this).hide()
+        $(".fa-minus", this).show()
+      } else {
+        $(".fa-plus", this).show()
+        $(".fa-minus", this).hide()
+      }
     })
-    .text("v: " + channel);
+    .append([currentVersion, " ", plus, minus]);
   let injected = $("<div/>")
     .addClass("injected-select-channels")
     .append(current)
