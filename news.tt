@@ -1,9 +1,13 @@
-[% WRAPPER layout.tt title="News" %]
+[% WRAPPER layout.tt title="News" handlesLayout=1 %]
 
-<div class="page-header">
+<div class="page-title">
   <h1>News</h1>
 </div>
 
+<section class="page-news">
+
 [% INSERT "all-news.xhtml" %]
+
+</section>
 
 [% END %]
