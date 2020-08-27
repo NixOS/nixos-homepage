@@ -17,6 +17,9 @@
 
   <link rel="shortcut icon" type="image/png" href="/favicon.png" />
   <meta name="google-site-verification" content="ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE" />
+
+  [% documentHeadTags.join("\n") %]
+
 </head>
 
 <body>
@@ -126,6 +129,9 @@
     anchors.add('main h1, main h2, main h3');
   </script>
   [% END %]
+
+  [% documentEndTags.join("\n") %]
+
 </body>
 
 </html>
