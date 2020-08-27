@@ -1,8 +1,4 @@
 [% WRAPPER layout.tt title="NixOS Linux" handlesLayout=1 %]
-[% USE JSON.Escape %]
-[% USE IO.All %]
-[% USE HTML %]
-[% USE String %]
 
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 
