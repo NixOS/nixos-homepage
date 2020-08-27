@@ -65,14 +65,6 @@
   </section>
 </div>
 
-<script charset="utf-8">
-  $('#getting-nix a').click(function (e) {
-    e.preventDefault();
-    $(this).tab('show');
-  })
-</script>
-
-
 <h1>Getting NixOS</h1>
 
 <p class="lead">
@@ -197,12 +189,5 @@ $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre
         release</a>.</p>
   </section>
 </div>
-
-<script charset="utf-8">
-  $('#getting-nixos a').click(function (e) {
-    e.preventDefault();
-    $(this).tab('show');
-  })
-</script>
 
 [% END %]

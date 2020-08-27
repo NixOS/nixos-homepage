@@ -12,7 +12,6 @@
   <script type="text/javascript" src="[% root %]js/jquery.min.js"></script>
   <script type="text/javascript" src="[% root %]js/jquery-ui.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script type="text/javascript" src="[% root %]bootstrap/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="[% root %]styles/styles.css" type="text/css" />
 
   <link rel="shortcut icon" type="image/png" href="/favicon.png" />
@@ -122,7 +121,6 @@
     </div>
   </footer>
   <script src="[% root %]js/nixos-site.js"></script>
-  <script src="[% root %]js/asciinema-player.js"></script>
   [% IF anchors %]
   <script src="[% root %]js/anchor.min.js"></script>
   <script>

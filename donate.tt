@@ -117,11 +117,4 @@ BIC:  KNABNL2H
   </div>
 </div>
 
-<script charset="utf-8">
-  $('#donate-with a').click(function (e) {
-    e.preventDefault();
-    $(this).tab('show');
-  })
-
-</script>
 [% END %]
