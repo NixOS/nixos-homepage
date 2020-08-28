@@ -559,4 +559,36 @@ ul.comma-separated > li:last-of-type:after {
   .side-by-side > * {
     text-align: center;
   }
+}
 
+.injected-select-manual {
+  background: #333333;
+  color: #FFFFFF;
+  padding: 0.5em 1em;
+  position: fixed;
+  bottom: 0.5em;
+  right: 0.5em;
+  font-size: 0.8em;
+}
+.injected-select-manual > div {
+  text-align: right;
+  cursor: pointer;
+}
+.injected-select-manual > dl {
+  display: none;
+  width: 210px;
+  margin: 0 0 1em 0;
+}
+.injected-select-manual > dl > dt {
+  color: #999999;
+}
+.injected-select-manual > dl > dd {
+  display: inline-block;
+}
+.injected-select-manual > dl > dd > a {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+.injected-select-manual.opened > dl {
+  display: block;
+}

@@ -39,3 +39,7 @@ done
 
 rm -rf "$outDir" # FIXME: not atomic
 mv "$outDirTmp" "$outDir"
+
+if [ -e "$outDir/manual.html" ]; then
+  mv "$outDir/manual.html" "$outDir/index.html"
+fi
