@@ -1,20 +1,25 @@
 $(window).load(function() {
   let project = window.location.pathname.split('/')[2];
-  let channel = window.location.pathname.split('/')[3];
-  let unstable = $("<a/>")
-    .attr("href", "/manual/" + project + "/unstable")
-    .text("unstable");
-  let stable = $("<a/>")
-    .attr("href", "/manual/" + project + "/stable")
-    .text("stable");
-  let channels = $("<dl>")
-    .append($("<dt/>").text("Versions"))
-    .append($("<dd/>").append(unstable))
-    .append($("<dd/>").append(stable));
+
+  function mkItem(name, version) {
+    return $("<a/>")
+      .attr("href", "/manual/" + project + "/" + name)
+      .text(name + " (" + version + ")");
+  }
+
+  function mkItems(title, items) {
+    let el = $("<dl>")
+      .append($("<dt/>").text(title));
+    items.forEach(function(item) {
+      el.append($("<dd/>").append(mkItem(item[0], item[1])))
+    });
+    return el;
+  }
+
   let plus = $("<i class=\"fa fa-plus\" aria-hidden=\"true\"></i>");
   let minus = $("<i class=\"fa fa-minus\" aria-hidden=\"true\"></i>").hide();
-  let currentVersion = $("<span>v: " + channel + "</span>");
-  let current = $("<div/>")
+  let selected = $("<span>v: " + window.location.pathname.split('/')[3] + "</span>");
+  let header = $("<div/>")
     .click(function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -28,10 +33,16 @@ $(window).load(function() {
         $(".fa-minus", this).hide()
       }
     })
-    .append([currentVersion, " ", plus, minus]);
+    .append([selected, " ", plus, minus]);
+
   let injected = $("<div/>")
-    .addClass("injected-select-channels")
-    .append(current)
-    .append(channels);
+    .addClass("injected-select-manual")
+    .append(header)
+    .append(
+      mkItems("Channels", [
+        ["unstable", "20.09"],
+        ["stable", "20.03"]
+      ]))
+
   $("body").append(injected);
 })
