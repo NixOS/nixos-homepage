@@ -213,6 +213,47 @@ body > header {
 	html.without-js & nav {
 		display: initial !important;
 	}
+
+	.menu-toggle {
+		@_gutter: @gutter;
+
+		height: @_height - @_gutter*2;
+		overflow: hidden;
+		text-indent: -900%;
+		width: @_height * 0.4;
+		position: absolute;
+		top: @_gutter;
+		right: @_gutter;
+
+		background-color: #theme.color[white];
+		box-shadow: none;
+		border-radius: #theme.common[radius]/2;
+		border: 2*@unit solid #theme.color[blue-light];
+
+		#rules-for-responsive-navbar-wide({
+			display: none;
+		});
+
+		// The pseudo-elements implement the hamburglar bars.
+		&::before, &::after {
+			content: "";
+			position: absolute;
+			left:  @gutter * 0.8;
+			right: @gutter * 0.8;
+			border: 2*@unit solid #theme.color[blue-light];
+			border-left: 0;
+			border-right: 0;
+		}
+		&::before {
+			top:    @gutter * 0.9;
+			bottom: @gutter * 0.9;
+		}
+		&::after {
+			top: 50%;
+			transform: translateY(-50%);
+			border-bottom: 0;
+		}
+	}
 }
 
 // Static navbar
