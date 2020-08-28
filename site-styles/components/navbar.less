@@ -151,7 +151,9 @@ body > header {
 		margin: 0;
 		padding: 0;
 		display: flex;
+		flex-direction: column;
 		#rules-for-responsive-navbar-wide({
+			flex-direction: row;
 			justify-content: flex-end;
 			align-items: center;
 
@@ -161,9 +163,6 @@ body > header {
 			// (Disabled because a button won't have that issue)
 			// position: relative;
 			// left: @gutter;
-		});
-		#rules-for-responsive-navbar-narrow({
-			flex-direction: column;
 		});
 	}
 
@@ -214,12 +213,42 @@ body > header {
 		display: initial !important;
 	}
 
+	#rules-for-responsive-navbar-narrow({
+		@_spacing: @gutter * 2;
+		// FIXME: we don't seem to have a dark-themed palette for the menu.
+		nav {
+			margin-left: -@gutter;
+			margin-right: -@gutter;
+			padding-top: @_spacing;
+			padding-bottom: @_spacing;
+			text-align: center;
+			background: #theme.color[blue-lighter];
+
+			li:not(:first-child) {
+				a {
+					border-top: 2*@unit solid #theme.color[white];
+				}
+			}
+
+			a {
+				margin-left: @_spacing;
+				margin-right: @_spacing;
+				color: #theme.color[blue-dark2];
+			}
+
+			a.active, a:hover, a:focus {
+				background: #theme.color[blue-light];
+				color: #theme.color[white];
+			}
+		}
+	});
+
 	.menu-toggle {
 		@_gutter: @gutter;
 
 		height: @_height - @_gutter*2;
 		overflow: hidden;
-		text-indent: -900%;
+		text-indent: -900em;
 		width: @_height * 0.4;
 		position: absolute;
 		top: @_gutter;
