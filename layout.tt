@@ -36,7 +36,8 @@
           <input type="text" />
         </div>
       </div>
-      <nav>
+	  [%# ???! go read `navbar.less` and `nixos-site.js`, it's all fine I swear. %]
+      <nav style="display: none;">
         <ul>
           <li><a href="[%root%]features.html">Features</a></li>
           <li><a href="[%root%]download.html">Download</a></li>

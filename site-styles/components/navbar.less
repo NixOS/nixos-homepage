@@ -190,11 +190,29 @@ body > header {
 			padding-right: @gutter;
 		}
 	});
+
 	#screen-sm-max({
 		li.install-nix {
 			display: none;
 		}
 	});
+
+	// When we're on the *wide* website, we're undoing the work that the
+	// JavaScript code may have done.
+	// This allows the menu to not stay accidentally hidden when switching from
+	// narrow to wide; it is **always** shown when wide, and controlled via
+	// the hamburglar menu button otherwise.
+	#rules-for-responsive-navbar-wide({
+		nav {
+			display: initial !important;
+		}
+	});
+
+	// Don't forget about JavaScript-less users! We'll serve them the menu
+	// permanently open on narrow devices.
+	html.without-js & nav {
+		display: initial !important;
+	}
 }
 
 // Static navbar
