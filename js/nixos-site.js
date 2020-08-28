@@ -1,5 +1,6 @@
 $(document).ready(function () {
-  $(".nixos-popover").popover({});
+
+  // Search widget specific JavaScript (to be removed)
 
   $("#learn-options-search button, #options-search button").click(function (event) {
     event.preventDefault();
