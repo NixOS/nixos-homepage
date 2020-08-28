@@ -576,7 +576,7 @@ ul.comma-separated > li:last-of-type:after {
 }
 .injected-select-manual > dl {
   display: none;
-  width: 150px;
+  width: 210px;
   margin: 0 0 1em 0;
 }
 .injected-select-manual > dl > dt {

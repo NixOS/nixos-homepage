@@ -11,7 +11,7 @@ $(window).load(function() {
     let el = $("<dl>")
       .append($("<dt/>").text(title));
     items.forEach(function(item) {
-      el.append($("<dd/>").append(mkItem(item[0], item[1])))
+      el.append($("<dd/>").append(mkItem(item.channel, item.version)))
     });
     return el;
   }
@@ -38,11 +38,7 @@ $(window).load(function() {
   let injected = $("<div/>")
     .addClass("injected-select-manual")
     .append(header)
-    .append(
-      mkItems("Channels", [
-        ["unstable", "20.09"],
-        ["stable", "20.03"]
-      ]))
+    .append(mkItems("Channels", $("body").data(project + '-channels')));
 
   $("body").append(injected);
 })

@@ -5,6 +5,7 @@ set -e
 dir="$1"
 canonical="$2"
 baseUrl="https://nixos.org/$dir/$canonical"
+project="$(basename $dir)"
 
 [[ -d $dir ]]
 
@@ -38,6 +39,23 @@ for path in $dir/*; do
         echo " Already injected!"
       else
         sed -i -e "s|</body>|\n  $injectedTag\n</body>|" $filePath
+        echo " Injected!"
+      fi
+
+      echo -n "Injecting list of channels in $filePath ..."
+      injectedTag="data-$project-channels='["
+      if [[ "$project" == "nix" ]]; then
+        injectedTag+="{\"channel\":\"unstable\",\"version\":\"$NIX_UNSTABLE_VERSION\"},"
+        injectedTag+="{\"channel\":\"stable\",\"version\":\"$NIX_STABLE_VERSION\"}"
+      else
+        injectedTag+="{\"channel\":\"unstable\",\"version\":\"$NIXOS_UNSTABLE_SERIES\"},"
+        injectedTag+="{\"channel\":\"stable\",\"version\":\"$NIXOS_STABLE_SERIES\"}"
+      fi
+      injectedTag+="]'"
+      if grep -Fq "$injectedTag" $filePath; then
+        echo " Already injected!"
+      else
+        sed -i -e "s|<body|<body $injectedTag|" $filePath
         echo " Injected!"
       fi
     fi
