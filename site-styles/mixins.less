@@ -19,9 +19,9 @@
 #container() {
 	margin: auto;
 	width: 100%;
-	#screen-sm-min({ max-width: (unit(@screen-sm) - 2*@gutter) * @unit; });
-	#screen-md-min({ max-width: (unit(@screen-md) - 2*@gutter) * @unit; });
-	#screen-lg-min({ max-width: (unit(@screen-lg) - 2*@gutter) * @unit; });
+	#screen-sm-min({ max-width: unit(@screen-sm) * @unit - 2*@gutter; });
+	#screen-md-min({ max-width: unit(@screen-md) * @unit - 2*@gutter; });
+	#screen-lg-min({ max-width: unit(@screen-lg) * @unit - 2*@gutter; });
 }
 
 // Utility mixins
