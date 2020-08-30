@@ -50,6 +50,14 @@ html {
 	@media screen and (min-width: @_max-viewport) {
 		font-size: calc(@pixel-equivalent-font-size/unit(@_max-viewport) * 100vw);
 	}
+	// Similar, but for way too small displays. It's better to scale the site
+	// down a bit than to have it be broken. Users can still zoom in.
+	// In reality, what this means is that all sizes under 320px end up
+	// structurally the same as the iPhone 5/SE width.
+	@_min-viewport: 320px; // iPhone 5/SE width
+	@media screen and (max-width: @_min-viewport) {
+		font-size: calc(@pixel-equivalent-font-size/unit(@_min-viewport) * 100vw);
+	}
 }
 
 body {
