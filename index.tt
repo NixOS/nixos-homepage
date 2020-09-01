@@ -43,29 +43,6 @@
   </div>
 </section>
 
-<section class="packages-searchbox">
-  <div id="packages-search">
-    <h1>Choose from Thousands of Packages</h1>
-    <p>
-      The Nix Packages collection
-      <strong>(<a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a>)</strong>
-      is a set of
-      <strong class="-highlighted">over 60 000 packages</strong> for the Nix package manager.
-    </p>
-    <form>
-      <div>
-        <div class="form-input">
-          <input placeholder="Search for a package" type="text" />
-        </div>
-      </div>
-      <div>
-        <button type="submit">Search</button>
-        <button><em>[undetermined]</em></button>
-      </div>
-    </form>
-  </div>
-</section>
-
 <section id="why-nix" class="home-whynix">
   <div>
     <h1>Why choose Nix or NixOS?</h1>
@@ -105,6 +82,29 @@
         </div>
       </li>
     </ul>
+  </div>
+</section>
+
+<section class="packages-searchbox">
+  <div id="packages-search">
+    <h1>Choose from Thousands of Packages</h1>
+    <p>
+      The Nix Packages collection
+      <strong>(<a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a>)</strong>
+      is a set of
+      <strong class="-highlighted">over 60 000 packages</strong> for the Nix package manager.
+    </p>
+    <form>
+      <div>
+        <div class="form-input">
+          <input placeholder="Search for a package" type="text" />
+        </div>
+      </div>
+      <div>
+        <button type="submit">Search</button>
+        <button><em>[undetermined]</em></button>
+      </div>
+    </form>
   </div>
 </section>
 
