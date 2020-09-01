@@ -1,13 +1,8 @@
 .home-hero {
-	// From big-angles' margin-top;
-	// Used as a separation between this part and the big angles.
-	@_next-section-overlap: 100vw * 576.61139/2543.56445 * 0.6;
-	
-	#flair.outlined-bg();
+	#flair.outlined-bg-dark();
 
 	padding-top: 90*@unit;
 	padding-bottom: 90*@unit;
-	margin-bottom: @_next-section-overlap * -1;
 
 	& > div {
 		display: flex;
@@ -19,8 +14,6 @@
 		#screen-sm-max({
 			flex-direction: column;
 		});
-
-		margin-bottom: @_next-section-overlap;
 	}
 
 	.blurb, .demo {
@@ -75,6 +68,9 @@
 		background: @_asciinema-background-color;
 		max-width: 100%;
 	}
+}
+
+.home-whynix {
 }
 
 .packages-searchbox {
@@ -135,16 +131,6 @@
 	}
 
 	#flair.big-angles;
-}
-
-.home-whynix {
-	#gfx-alternating-side(
-		@gfx-rules: {
-			background-color: #theme.color[gray-light];
-			border-radius: #theme.common[radius];
-			height: 166 * @unit; // FIXME
-		}
-	);
 }
 
 .home-examples {
