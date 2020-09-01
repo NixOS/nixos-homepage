@@ -1,9 +1,9 @@
 [%
-  nixManual = "/nix/manual"
-  nixpkgsManual = "/nixpkgs/manual"
-  nixosManual = "/nixos/manual"
+  nixManual = "/manual/nix/stable"
+  nixpkgsManual = "/manual/nixpkgs/stable"
+  nixosManual = "/manual/nixos/stable"
   nixopsManual = "https://hydra.nixos.org/job/nixops/master/tarball/latest/download-by-type/doc/manual"
-  nixPills = "/nixos/nix-pills"
+  nixPills = "/guides/nix-pills"
   latestNixMirror = "https://nixos.org/releases/nix/nix-$latestNixVersion"
   latestNixOSBranch = "release-" _ latestNixOSSeries
   ;
