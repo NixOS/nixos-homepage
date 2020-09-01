@@ -8,13 +8,23 @@
   latestNixOSBranch = "release-" _ latestNixOSSeries
   ;
 
-  BLOCK renderPager %]
-<ul class='pager'>
-  <li class='back'><a href='javascript:void(0)' onclick='curPage = 0; updateTable();'>« First</a></li>
-  <li class='back'><a href='javascript:void(0)' onclick='curPage--; updateTable();'>‹ Previous</a></li>
-  <li class='forward'><a href='javascript:void(0)' onclick='curPage++; updateTable();'>Next ›</a></li>
-  <li class='forward'><a href='javascript:void(0)' onclick='curPage = lastPage; updateTable();'>Last »</a></li>
-</ul>
-[% END;
+  # Collects tags to be appended at the end of the document.
+  documentEndTags = [];
+  # Collects tags to be appended at the end of the head tag.
+  documentHeadTags = [];
+
+# Allows adding tags just before </head>.
+# Note that it has to be used *before or within* the layout.tt WRAPPER.
+BLOCK atHead;
+# The assignation here ensures the BLOCK outputs nothing
+_ignore = documentHeadTags.import([content]);
+END;
+
+# Allows adding tags just before </body>.
+# Note that it has to be used *before or within* the layout.tt WRAPPER.
+BLOCK atEnd;
+# The assignation here ensures the BLOCK outputs nothing
+_ignore = documentEndTags.import([content]);
+END;
 
 -%]

@@ -3,20 +3,28 @@
 [% USE HTML %]
 [% USE date %]
 
-<html lang="en">
+<html lang="en" class="without-js">
 
 <head>
   <title>NixOS - [% title %]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-  <script type="text/javascript" src="[% root %]js/jquery.min.js"></script>
-  <script type="text/javascript" src="[% root %]js/jquery-ui.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script type="text/javascript" src="[% root %]bootstrap/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0" />
   <link rel="stylesheet" href="[% root %]styles/styles.css" type="text/css" />
 
   <link rel="shortcut icon" type="image/png" href="/favicon.png" />
   <meta name="google-site-verification" content="ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE" />
+
+  [%# This has to happen ASAP, even before jQuery is initialized. %]
+  <script>
+    var html = document.documentElement;
+    html.className = html.className.replace("without-js","with-js");
+  </script>
+
+  <script type="text/javascript" src="[% root %]js/jquery.min.js"></script>
+
+  [% documentHeadTags.join("\n") %]
+
 </head>
 
 <body>
@@ -28,7 +36,8 @@
           <input type="text" />
         </div>
       </div>
-      <nav>
+	  [%# ???! go read `navbar.less` and `nixos-site.js`, it's all fine I swear. %]
+      <nav style="display: none;">
         <ul>
           <li><a href="[%root%]features.html">Features</a></li>
           <li><a href="[%root%]download.html">Download</a></li>
@@ -119,13 +128,15 @@
     </div>
   </footer>
   <script src="[% root %]js/nixos-site.js"></script>
-  <script src="[% root %]js/asciinema-player.js"></script>
   [% IF anchors %]
   <script src="[% root %]js/anchor.min.js"></script>
   <script>
     anchors.add('main h1, main h2, main h3');
   </script>
   [% END %]
+
+  [% documentEndTags.join("\n") %]
+
 </body>
 
 </html>

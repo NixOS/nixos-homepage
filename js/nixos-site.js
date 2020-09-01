@@ -1,5 +1,19 @@
-$(document).ready(function () {
-  $(".nixos-popover").popover({});
+$(function () {
+  // Setup the responsive collapsible menu
+  var $header = $("body > header");
+  var $menu = $("body > header nav");
+  // No need to hide the menu, it's already hidden via inline style, which is
+  // the method used by jQuery.slideToggle().
+  $header.append(function () {
+    var $el = $("<button class='menu-toggle'>Toggle the menu</button>");
+    $el.click(function () {
+      $menu.slideToggle(200);
+    });
+
+    return $el;
+  });
+
+  // Search widget specific JavaScript (to be removed)
 
   $("#learn-options-search button, #options-search button").click(function (event) {
     event.preventDefault();

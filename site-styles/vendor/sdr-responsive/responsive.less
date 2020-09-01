@@ -61,10 +61,10 @@
 @screen-sm-min:               @screen-sm;
 @screen-md-min:               @screen-md;
 @screen-lg-min:               @screen-lg;
-@screen-xs-max:              (@screen-sm-min - 0.001);
-@screen-sm-max:              (@screen-md-min - 0.001);
-@screen-md-max:              (@screen-lg-min - 0.001);
-@screen-xxs-max:             (@screen-xs-min - 0.001);
+@screen-xs-max:              (@screen-sm-min - 0.1);
+@screen-sm-max:              (@screen-md-min - 0.1);
+@screen-md-max:              (@screen-lg-min - 0.1);
+@screen-xxs-max:             (@screen-xs-min - 0.1);
 
 #screen-xxs-max(@rules) { @media screen and (max-width: (@screen-xxs-max)) { @rules(); } }
 #screen-xs-max(@rules)  { @media screen and (max-width: (@screen-xs-max)) { @rules(); } }

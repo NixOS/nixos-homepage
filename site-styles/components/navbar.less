@@ -151,7 +151,9 @@ body > header {
 		margin: 0;
 		padding: 0;
 		display: flex;
+		flex-direction: column;
 		#rules-for-responsive-navbar-wide({
+			flex-direction: row;
 			justify-content: flex-end;
 			align-items: center;
 
@@ -161,9 +163,6 @@ body > header {
 			// (Disabled because a button won't have that issue)
 			// position: relative;
 			// left: @gutter;
-		});
-		#rules-for-responsive-navbar-narrow({
-			flex-direction: column;
 		});
 	}
 
@@ -190,11 +189,100 @@ body > header {
 			padding-right: @gutter;
 		}
 	});
+
 	#screen-sm-max({
 		li.install-nix {
 			display: none;
 		}
 	});
+
+	// When we're on the *wide* website, we're undoing the work that the
+	// JavaScript code may have done.
+	// This allows the menu to not stay accidentally hidden when switching from
+	// narrow to wide; it is **always** shown when wide, and controlled via
+	// the hamburglar menu button otherwise.
+	#rules-for-responsive-navbar-wide({
+		nav {
+			display: initial !important;
+		}
+	});
+
+	// Don't forget about JavaScript-less users! We'll serve them the menu
+	// permanently open on narrow devices.
+	html.without-js & nav {
+		display: initial !important;
+	}
+
+	#rules-for-responsive-navbar-narrow({
+		@_spacing: @gutter * 2;
+		// FIXME: we don't seem to have a dark-themed palette for the menu.
+		nav {
+			margin-left: -@gutter;
+			margin-right: -@gutter;
+			padding-top: @_spacing;
+			padding-bottom: @_spacing;
+			text-align: center;
+			background: #theme.color[blue-lighter];
+
+			li:not(:first-child) {
+				a {
+					border-top: 2*@unit solid #theme.color[white];
+				}
+			}
+
+			a {
+				margin-left: @_spacing;
+				margin-right: @_spacing;
+				color: #theme.color[blue-dark2];
+			}
+
+			a.active, a:hover, a:focus {
+				background: #theme.color[blue-light];
+				color: #theme.color[white];
+			}
+		}
+	});
+
+	.menu-toggle {
+		@_gutter: @gutter;
+
+		height: @_height - @_gutter*2;
+		overflow: hidden;
+		text-indent: -900em;
+		width: @_height * 0.4;
+		position: absolute;
+		top: @_gutter;
+		right: @_gutter;
+
+		background-color: #theme.color[white];
+		box-shadow: none;
+		border-radius: #theme.common[radius]/2;
+		border: 2*@unit solid #theme.color[blue-light];
+
+		#rules-for-responsive-navbar-wide({
+			display: none;
+		});
+
+		// The pseudo-elements implement the hamburglar bars.
+		&::before, &::after {
+			content: "";
+			position: absolute;
+			left:  @gutter * 0.8;
+			right: @gutter * 0.8;
+			border: 2*@unit solid #theme.color[blue-light];
+			border-left: 0;
+			border-right: 0;
+		}
+		&::before {
+			top:    @gutter * 0.9;
+			bottom: @gutter * 0.9;
+		}
+		&::after {
+			top: 50%;
+			transform: translateY(-50%);
+			border-bottom: 0;
+		}
+	}
 }
 
 // Static navbar
