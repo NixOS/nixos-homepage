@@ -24,6 +24,32 @@
 	#screen-lg-min({ max-width: unit(@screen-lg) * @unit - 2*@gutter; });
 }
 
+// Spreads the children in equally-sized columns using flexbox.
+// By default, xs and under use only one column.
+// "under" xs cannot be forced to anything else than 1.
+// sm and md can be configured if needed, but will default to @amount.
+#columns(@amount, @xs: 1, @sm: @amount, @md: @amount, @spacing: @gutter) {
+	// This is a sane default, and helps with using <ul>
+	margin: 0;
+	// Same, as <ul> can often be made a columnar layout, it is a sane default.
+	list-style-type: none;
+
+	#flex-flexible-spacing(@spacing);
+
+	& > * {
+		width: 100%;
+		#screen-xs-min({
+			width: 100%/@xs;
+		});
+		#screen-sm-min({
+			width: 100%/@sm;
+		});
+		#screen-md-min({
+			width: 100%/@md;
+		});
+	}
+}
+
 // Utility mixins
 // ==============
 
