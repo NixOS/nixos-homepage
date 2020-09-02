@@ -49,20 +49,10 @@ body > footer {
 	}
 
 	& > .upper {
-		#flex-flexible-spacing(@gutter);
+		#columns(4, @xs: 2);
 
 		ul {
 			margin-bottom: @gutter;
-		}
-
-		& > * {
-			width: 100%;
-			#screen-xs-min({
-				width: 50%;
-			});
-			#screen-sm-min({
-				width: 25%;
-			});
 		}
 	}
 
