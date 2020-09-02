@@ -77,6 +77,28 @@
 }
 
 .home-whynix {
+	// Assuming the "angled" flair on the following element.
+	margin-bottom: -@gutter*4;
+	text-align: center;
+
+	& > div {
+		#container();
+	}
+	.whynix-points {
+		#columns(3, @spacing: @gutter*2);
+		margin-top: @gutter * 4;
+
+		& > li::before {
+			@_size: 112*@unit;
+			content: "";
+			display: block;
+			border-radius: 100%;
+			margin: auto;
+			height: @_size;
+			width: @_size;
+			background: #theme.color[gray-light];
+		}
+	}
 }
 
 .packages-searchbox {
