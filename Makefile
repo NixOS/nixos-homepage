@@ -161,7 +161,10 @@ manuals:
 all: \
   demos/cover.cast \
   demos/example_1.cast \
-  demos/example_2.cast
+  demos/example_2.cast \
+  demos/example_3.cast \
+  demos/example_4.cast \
+  demos/example_5.cast
 
 demos/%.cast: demos/%.scenario demos/create.py 
 	echo "Generating $@ ..."
