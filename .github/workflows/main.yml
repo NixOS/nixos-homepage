@@ -40,6 +40,3 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         deploy-message: 'Deploy from GitHub Actions'
       if: github.repository == 'NixOS/nixos-homepage'
-    - name: Setup tmate session
-      if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v2
