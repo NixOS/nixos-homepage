@@ -11,5 +11,14 @@
 <h2>Example 2: Multi-languages support</h2>
 <asciinema-player cols="77" rows="24" src="/demos/example_2.cast"></asciinema-player>
 
+<h2>Example 3: Reproducible development environments</h2>
+<asciinema-player cols="77" rows="24" src="/demos/example_3.cast"></asciinema-player>
+
+<h2>Example 4: Build Docker image with Nix</h2>
+<asciinema-player cols="77" rows="24" src="/demos/example_4.cast"></asciinema-player>
+
+<h2>Example 5: Build Amazon EC2 and any other cloud images</h2>
+<asciinema-player cols="77" rows="24" src="/demos/example_5.cast"></asciinema-player>
+
 
 [% END %]
