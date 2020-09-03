@@ -1,0 +1,15 @@
+[% WRAPPER layout.tt title="NixOS Linux" %]
+
+<h1>Examples</h1>
+
+<h2>Cover example</h2>
+<asciinema-player cols="77" rows="24" src="/demos/cover.cast"></asciinema-player>
+
+<h2>Example 1: On demand development environments</h2>
+<asciinema-player cols="77" rows="24" src="/demos/example_1.cast"></asciinema-player>
+
+<h2>Example 2: Multi-languages support</h2>
+<asciinema-player cols="77" rows="24" src="/demos/example_2.cast"></asciinema-player>
+
+
+[% END %]
