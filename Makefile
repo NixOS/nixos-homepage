@@ -11,6 +11,7 @@ HTML = index.html download.html news.html learn.html community.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
   teams/discourse.html \
   guides/contributing.html guides/install-nix.html guides/ad-hoc-developer-environments.html \
+  demos/index.html \
   404.html
 
 
@@ -150,15 +151,21 @@ update: blogs.xml
 	@true
 endif
 
-
-all: demo.cast
+all: manuals
 
 manuals:
 	bash ./fix-manual-headers.sh manual/nix stable
 	bash ./fix-manual-headers.sh manual/nixpkgs stable
 	bash ./fix-manual-headers.sh manual/nixos stable
 
-all: manuals
+all: \
+  demos/cover.cast \
+  demos/example_1.cast \
+  demos/example_2.cast \
+  demos/example_3.cast \
+  demos/example_4.cast \
+  demos/example_5.cast
 
-demo.cast: demo.py demo.scenario
-	python demo.py demo.scenario > demo.cast
+demos/%.cast: demos/%.scenario demos/create.py 
+	echo "Generating $@ ..."
+	python demos/create.py $< > $@
