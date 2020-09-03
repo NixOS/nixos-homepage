@@ -150,15 +150,14 @@ update: blogs.xml
 	@true
 endif
 
-
-all: demo.cast
+all: manuals
 
 manuals:
 	bash ./fix-manual-headers.sh manual/nix stable
 	bash ./fix-manual-headers.sh manual/nixpkgs stable
 	bash ./fix-manual-headers.sh manual/nixos stable
 
-all: manuals
+all: demos/*.cast
 
-demo.cast: demo.py demo.scenario
-	python demo.py demo.scenario > demo.cast
+demos/%.cast: demos/%.scenario demos/create.py 
+	python demos/create.py $< > $@
