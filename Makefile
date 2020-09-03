@@ -157,7 +157,11 @@ manuals:
 	bash ./fix-manual-headers.sh manual/nixpkgs stable
 	bash ./fix-manual-headers.sh manual/nixos stable
 
-all: demos/*.cast
+all: \
+  demos/cover.cast \
+  demos/example_1.cast \
+  demos/example_2.cast
 
 demos/%.cast: demos/%.scenario demos/create.py 
+	echo "Generating $@ ..."
 	python demos/create.py $< > $@
