@@ -1,4 +1,52 @@
 [[redirects]]
+  from = "/manual"
+  to = "/learn.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix"
+  to = "/manual/nix/stable"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nixpkgs"
+  to = "/manual/nixpkgs/stable"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nixos"
+  to = "/manual/nixos/stable"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/nix-pills/*"
+  to = "/guides/nix-pills/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nix/manual/*"
+  to = "/manual/nix/stable/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixpkgs/manual/*"
+  to = "/manual/nixpkgs/stable/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nixos/manual/*"
+  to = "/manual/nixos/stable/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nixos/packages.html"
   to = "https://search.nixos.org/packages"
   status = 302
