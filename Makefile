@@ -42,7 +42,8 @@ NIX_MANUAL_UNSTABLE_OUT = manual/nix/unstable
 all: $(NIX_MANUAL_UNSTABLE_OUT)
 
 $(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIX_MANUAL_UNSTABLE_IN) $(NIX_MANUAL_UNSTABLE_OUT) 'Nix $(NIX_UNSTABLE_VERSION) manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+	mkdir -p $(NIX_MANUAL_UNSTABLE_OUT)
+	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_UNSTABLE_IN)/* $(NIX_MANUAL_UNSTABLE_OUT)
 
 
 ### Prettify the Nixpkgs manual.
