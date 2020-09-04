@@ -15,8 +15,13 @@ HTML = \
   features.html \
   governance.html \
   guides/ad-hoc-developer-environments.html \
+  guides/building-and-running-docker-images.html \
+  guides/continuous-integration-github-actions.html \
   guides/contributing.html \
+  guides/declarative-and-reproducible-developer-environments.html \
+  guides/dev-environment.html \
   guides/install-nix.html \
+  guides/towards-reproducibility-pinning-nixpkgs.html \
   index.html \
   learn.html \
   news.html \
@@ -38,17 +43,6 @@ all: $(NIX_PILLS_MANUAL_OUT)
 
 $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
 	bash ./bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nixos https://github.com/NixOS/nix-pills
-
-
-### Prettify the nix.dev guides
-
-NIX_DEV_MANUAL_IN ?= /no-such-path
-NIX_DEV_MANUAL_OUT = nix-dev
-
-all: $(NIX_DEV_MANUAL_OUT)
-
-$(NIX_DEV_MANUAL_OUT): $(NIX_DEV_MANUAL_IN) bootstrapify-sphinx.sh layout.tt common.tt
-	bash ./bootstrapify-sphinx.sh $(NIX_DEV_MANUAL_IN)/tutorials $(NIX_DEV_MANUAL_OUT) 'Nix guides' nixos https://github.com/domenkozar/nix.dev
 
 
 ### Prettify the Nix manual.
@@ -109,7 +103,7 @@ $(NIXOS_MANUAL_UNSTABLE_OUT): $(NIXOS_MANUAL_UNSTABLE_IN) bootstrapify-docbook.s
 	bash ./bootstrapify-docbook.sh $(NIXOS_MANUAL_UNSTABLE_IN)/share/doc/nixos $(NIXOS_MANUAL_UNSTABLE_OUT) 'NixOS $(NIXOS_UNSTABLE_SERIES) manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
 
-all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*))) nix-dev
+all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*)))
 
 
 robots.txt: $(HTML)
@@ -126,7 +120,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt
+%.html: %.tt layout.tt common.tt nix-dev
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
@@ -195,3 +189,12 @@ all: \
 demos/%.cast: demos/%.scenario demos/create.py 
 	echo "Generating $@ ..."
 	python demos/create.py $< > $@
+
+
+all: nix-dev
+
+NIX_DEV_MANUAL_IN ?= /no-such-path
+NIX_DEV_MANUAL_OUT = guides
+
+nix-dev: $(NIX_DEV_MANUAL_IN)
+	bash copy-nix-dev-tutorials.sh $(NIX_DEV_MANUAL_OUT)

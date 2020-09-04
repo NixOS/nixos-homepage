@@ -1,5 +1,0 @@
-[% WRAPPER layout.tt title="Install Nix" %]
-
-[% INSERT "nix-dev/install-nix.html.in" %]
-
-[% END %]

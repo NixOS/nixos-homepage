@@ -1,5 +1,0 @@
-[% WRAPPER layout.tt title="Ad hoc developer environments" %]
-
-[% INSERT "nix-dev/ad-hoc-developer-environments.html.in" %]
-
-[% END %]

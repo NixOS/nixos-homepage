@@ -7,6 +7,14 @@
     <ul>
       <li><a href="[%root%]guides/install-nix.html">Install Nix</a></li>
       <li><a href="[%root%]guides/ad-hoc-developer-environments.html">Ad hoc developer environments</a></li>
+      <li><a href="[%root%]guides/declarative-and-reproducible-developer-environments.html">Declarative and reproducible
+          developer environments</a></li>
+      <li><a href="[%root%]guides/dev-environment.html">Setup a development environment</a></li>
+      <li><a href="[%root%]guides/towards-reproducibility-pinning-nixpkgs.html">Towards reproducibility: Pinning
+          nixpkgs</a></li>
+      <li><a href="[%root%]guides/continuous-integration-github-actions.html">Continuous Integration with GitHub
+          Actions</a></li>
+      <li><a href="[%root%]guides/building-and-running-docker-images.html">Building and running Docker images</a></li>
       <li><a href="[%root%]guides/contributing.html">How to Contribute</a></li>
     </ul>
   </div>
@@ -54,9 +62,11 @@
       <li>
         Main command line tools:
         <ul>
-          <li><a href="[%root%]manual/nix/stable/#sec-nix-env">nix-env</a> — manipulate or query Nix user environments</li>
+          <li><a href="[%root%]manual/nix/stable/#sec-nix-env">nix-env</a> — manipulate or query Nix user environments
+          </li>
           <li><a href="[%root%]manual/nix/stable/#sec-nix-build">nix-build</a> — build a Nix expression</li>
-          <li><a href="[%root%]manual/nix/stable/#sec-nix-shell">nix-shell</a> — start an interactive shell based on a Nix
+          <li><a href="[%root%]manual/nix/stable/#sec-nix-shell">nix-shell</a> — start an interactive shell based on a
+            Nix
             expression</li>
           <li><a href="[%root%]manual/nix/stable/#sec-nix-store">nix-store</a> — manipulate or query the Nix store</li>
         </ul>
