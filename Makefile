@@ -11,6 +11,7 @@ HTML = index.html download.html news.html learn.html community.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
   teams/discourse.html \
   guides/contributing.html guides/install-nix.html guides/ad-hoc-developer-environments.html \
+  demos/index.html \
   404.html
 
 
@@ -41,7 +42,8 @@ NIX_MANUAL_UNSTABLE_OUT = manual/nix/unstable
 all: $(NIX_MANUAL_UNSTABLE_OUT)
 
 $(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIX_MANUAL_UNSTABLE_IN) $(NIX_MANUAL_UNSTABLE_OUT) 'Nix $(NIX_UNSTABLE_VERSION) manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+	mkdir -p $(NIX_MANUAL_UNSTABLE_OUT)
+	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_UNSTABLE_IN)/* $(NIX_MANUAL_UNSTABLE_OUT)
 
 
 ### Prettify the Nixpkgs manual.
@@ -162,14 +164,21 @@ styles:
 	@ln -sfn $(SITE_STYLES) $@
 endif
 
-all: demo.cast
+all: manuals
 
 manuals:
 	bash ./fix-manual-headers.sh manual/nix stable
 	bash ./fix-manual-headers.sh manual/nixpkgs stable
 	bash ./fix-manual-headers.sh manual/nixos stable
 
-all: manuals
+all: \
+  demos/cover.cast \
+  demos/example_1.cast \
+  demos/example_2.cast \
+  demos/example_3.cast \
+  demos/example_4.cast \
+  demos/example_5.cast
 
-demo.cast: demo.py demo.scenario
-	python demo.py demo.scenario > demo.cast
+demos/%.cast: demos/%.scenario demos/create.py 
+	echo "Generating $@ ..."
+	python demos/create.py $< > $@
