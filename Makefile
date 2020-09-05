@@ -130,7 +130,7 @@ news-rss.xml: news.xml news-rss.xsl
 	xsltproc news-rss.xsl news.xml > $@.tmp
 	mv $@.tmp $@
 
-index.html: news-rss.xml latest-news.xhtml blogs.json
+index.html: news-rss.xml latest-news.xhtml blogs.json $(wildcard demos/*.svg)
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@

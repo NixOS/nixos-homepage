@@ -1,0 +1,44 @@
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="100%"
+   viewBox="0 0 824 623"
+   preserveAspectRatio="xMidYMid meet"
+>
+<mask id="bigterminal-mask">
+<rect x="0" y="0" width="824" height="623" fill="#fff" />
+</mask>
+<rect class="background" y="0" x="0" width="824" height="623" />
+<text
+	mask="url(#bigterminal-mask)"
+	transform="translate(0 0)"
+	y="0" x="0" xml:space="preserve"
+
+><tspan x="0" dy="1.2em">    1   │ { pkgs ? import &lt;nixpkgs> {} <tspan class="fg-15"># here we import the nixpkgs package s</tspan></tspan
+><tspan x="0" dy="1.2em"><tspan class="fg-15">et</tspan>                                                                           </tspan
+><tspan x="0" dy="1.2em">    2   │ }:                                                                 </tspan
+><tspan x="0" dy="1.2em">    3   │ pkgs.mkShell {               <tspan class="fg-15"># mkShell is a helper function</tspan>        </tspan
+><tspan x="0" dy="1.2em">    4   │   name="dev-environment";    <tspan class="fg-15"># that requires a name</tspan>                </tspan
+><tspan x="0" dy="1.2em">    5   │   buildInputs = [            <tspan class="fg-15"># and a list of packages</tspan>              </tspan
+><tspan x="0" dy="1.2em">    6   │     pkgs.nodejs                                                    </tspan
+><tspan x="0" dy="1.2em">    7   │   ];                                                               </tspan
+><tspan x="0" dy="1.2em">    8   │   shellHook = ''             <tspan class="fg-15"># bash to run when you enter the shell</tspan></tspan
+><tspan x="0" dy="1.2em">    9   │     echo "Start developing..."                                     </tspan
+><tspan x="0" dy="1.2em">   10   │   '';                                                              </tspan
+><tspan x="0" dy="1.2em">   11   │ }                                                                  </tspan
+><tspan x="0" dy="1.2em">────────┴────────────────────────────────────────────────────────────────────</tspan
+><tspan x="0" dy="1.2em">$ <tspan class="fg-15"># Pause the video to understand the default.nix</tspan>                            </tspan
+><tspan x="0" dy="1.2em">$ <tspan class="fg-15"># To enter dev-environment simply run:</tspan>                                     </tspan
+><tspan x="0" dy="1.2em">$ nix-shell                                                                  </tspan
+><tspan x="0" dy="1.2em">Start developing...                                                          </tspan
+><tspan x="0" dy="1.2em"><tspan class="fg-2">[nix-shell]$</tspan> node -e "console.log(1+1)"                                      </tspan
+><tspan x="0" dy="1.2em">2                                                                            </tspan
+><tspan x="0" dy="1.2em"><tspan class="fg-2">[nix-shell]$</tspan> <tspan class="fg-15"># Now go ahead commit default.nix to your repository</tspan>            </tspan
+></text>
+</svg>
+
+

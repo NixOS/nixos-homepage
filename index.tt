@@ -35,11 +35,7 @@
 	  </div>
 	</div>
 
-	<div class="demo">
-	  <div class="asciinema-thumbnail">
-		<asciinema-player cols="77" rows="24" src="/demo.cast"></asciinema-player>
-	  </div>
-	</div>
+    [% PROCESS demoPreview demo="cover" %]
   </div>
 </section>
 
