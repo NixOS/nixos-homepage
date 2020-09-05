@@ -27,4 +27,13 @@ BLOCK atEnd;
 _ignore = documentEndTags.import([content]);
 END;
 
+BLOCK demoPreview %]
+<div class="demo-preview">
+  <div class="thumbnail">
+    [% INSERT "demos/${demo}.svg" %]
+  </div>
+  <a href="#asciinema-demo-[% demo %]"></a>
+</div>
+[% END;
+
 -%]
