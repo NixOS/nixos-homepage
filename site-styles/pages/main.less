@@ -9,7 +9,9 @@
 		flex-direction: row;
 		align-items: center;
 
-		#flex-flexible-spacing(@gutter);
+		#screen-md-min({
+			#flex-flexible-spacing(@gutter);
+		});
 
 		#screen-sm-max({
 			flex-direction: column;
