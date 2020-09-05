@@ -62,16 +62,11 @@
 		}
 	}
 
-	// FIXME: for now this only wraps the asciinema player.
-	// It should rather be an element that lazy loads the
-	// asciinema player example as needed.
 	.demo {
-		@_asciinema-background-color: #121314;
+		padding: 0;
 		border: @gutter solid #theme.color[white];
 		box-shadow: #theme.common[box-shadow];
-		overflow: hidden;
 		border-radius: 2*@gutter;
-		background: @_asciinema-background-color;
 		max-width: 100%;
 	}
 }
