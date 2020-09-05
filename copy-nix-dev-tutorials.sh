@@ -21,7 +21,7 @@ for page in "${pages[@]}"; do
   filename="$(basename ${page%.*})"
   source="$NIX_DEV_MANUAL_IN/$page"
   target="$outDir/$filename.tt"
-  echo "[% WRAPPER layout.tt %]" > $target
+  echo '[% WRAPPER layout.tt title="" %]' > $target
   cat "$source" \
     | sed 's|<a class=\"headerlink\".*<\/a>||g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-attribute-name"><span class="xref std std-term">attribute name</span></a>|attribute name|g' \

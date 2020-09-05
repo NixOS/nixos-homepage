@@ -34,6 +34,15 @@ HTML = \
   teams/security.html
 
 
+NIX_DEV_MANUAL_IN ?= /no-such-path
+NIX_DEV_MANUAL_OUT = guides
+
+all: $(NIX_DEV_MANUAL_OUT)
+
+$(NIX_DEV_MANUAL_OUT): $(NIX_DEV_MANUAL_IN) layout.tt
+	bash copy-nix-dev-tutorials.sh $(NIX_DEV_MANUAL_OUT)
+
+
 ### Prettify the Nix Pills
 
 NIX_PILLS_MANUAL_IN ?= /no-such-path
@@ -120,7 +129,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt nix-dev
+%.html: %.tt layout.tt common.tt $(NIX_DEV_MANUAL_OUT)
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
@@ -133,7 +142,7 @@ favicon.ico: favicon.png
 	xmllint --nonet --noout $@.tmp
 	mv $@.tmp $@
 
-%: %.in common.tt
+%: %.in common.tt $(NIX_DEV_MANUAL_OUT)
 	echo $$PATH
 	tpage \
 	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
@@ -189,12 +198,3 @@ all: \
 demos/%.cast: demos/%.scenario demos/create.py 
 	echo "Generating $@ ..."
 	python demos/create.py $< > $@
-
-
-all: nix-dev
-
-NIX_DEV_MANUAL_IN ?= /no-such-path
-NIX_DEV_MANUAL_OUT = guides
-
-nix-dev: $(NIX_DEV_MANUAL_IN)
-	bash copy-nix-dev-tutorials.sh $(NIX_DEV_MANUAL_OUT)
