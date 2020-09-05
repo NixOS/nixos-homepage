@@ -50,6 +50,19 @@
 	}
 }
 
+#columns-relative-width(
+@amount: 1,
+@columns: 12,
+@xs: 12,
+@sm: @amount,
+@md: @amount,
+@property: width) {
+	width: 100%;
+	#screen-sm-min({ @{property}: (unit(@screen-sm) * @unit - 2*@gutter) * @amount / 12; });
+	#screen-md-min({ @{property}: (unit(@screen-md) * @unit - 2*@gutter) * @amount / 12; });
+	#screen-lg-min({ @{property}: (unit(@screen-lg) * @unit - 2*@gutter) * @amount / 12; });
+}
+
 // Utility mixins
 // ==============
 
