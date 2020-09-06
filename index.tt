@@ -6,6 +6,11 @@
 
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 
+<div class="alert alert-info">
+  This year's <a href="https://2020.nixcon.org/">NixCon</a> will take place <b>online</b> on <b>October 16th-18th 2020</b>. It is a community-oriented conference for contributors and users of Nix and NixOS.<br />
+  Please help the organizers to plan the event by filling out <a href="https://nixcon.limequery.org/">this survey</a>!
+</div>
+
 <div class="side-by-side">
   <div class="hero">
     <h1>Reproducible builds and deployments.</h1>
