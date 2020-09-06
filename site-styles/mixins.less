@@ -133,37 +133,6 @@
 	cursor: default;
 }
 
-// `vh` unit is completely useless because of the way they are
-// implemented. Browsers that hide and show their user interface
-// depending on the scroll action of the user will have a `vh` unit
-// that varies wildly while scrolling.
-//
-// This, in turn, causes needless layout re-computation when `vh` is
-// used.
-//
-// This works around the issue by using the aspect ratio of the device
-// to determine a ballpark value in vw.
-//
-// This is used by passing a property name and a desired value.
-#vh-replacement(@prop, @vh) {
-    @_urlbar: 1 - 9/100;
-    @media screen {
-        @{prop}: @vh * 1vh;
-    }
-    .__vhhack(@width, @height) {
-        @media screen and (max-device-aspect-ratio: @width/@height) {
-			// Use a browser-side calc
-            @{prop}: calc(~"100vw * (@{height}/@{width}*(@{vh}/100)) * @{_urlbar}");
-        }
-    }
-
-    // Ratios defined here have to go from bigger to smaller.
-    .__vhhack( 3,  4); // 0.75
-    .__vhhack( 2,  3); // 0.66_
-    .__vhhack(10, 16); // 0.62_
-    .__vhhack( 9, 16); // 0.56_
-}
-
 // Uses a pseudo-element @pseudo (by default :before) to replace the
 // text content (can be empty) with an image.
 //
