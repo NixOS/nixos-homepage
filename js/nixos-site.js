@@ -13,6 +13,12 @@ $(function () {
     return $el;
   });
 
+  // Allow some parts of the site to present additional information for
+  // debugging purposes. E.g. responsive width identifier.
+  $(".footer-copyright").dblclick(function () {
+    $("body").toggleClass("-debug");
+  })
+
   // Search widget specific JavaScript (to be removed)
 
   $("#learn-options-search button, #options-search button").click(function (event) {
