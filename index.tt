@@ -39,6 +39,8 @@
   </div>
 </section>
 
+[% PROCESS demoPane demo="cover" %]
+
 <section id="why-nix" class="home-whynix">
   <div>
     <h1>Why choose Nix or NixOS?</h1>
