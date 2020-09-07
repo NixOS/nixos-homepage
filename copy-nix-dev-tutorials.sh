@@ -3,25 +3,32 @@
 set -e
 
 pages=(
+  "tutorials/install-nix.html"
   "tutorials/ad-hoc-developer-environments.html"
-  "tutorials/building-and-running-docker-images.html"
-  "tutorials/continuous-integration-github-actions.html"
-  "tutorials/contributing.html"
   "tutorials/declarative-and-reproducible-developer-environments.html"
   "tutorials/dev-environment.html"
-  "tutorials/install-nix.html"
   "tutorials/towards-reproducibility-pinning-nixpkgs.html"
+  "tutorials/continuous-integration-github-actions.html"
+  "tutorials/building-and-running-docker-images.html"
+  "tutorials/contributing.html"
 )
 
 outDir=$1
 
 mkdir -p $outDir
+rm -f learn_guides.html.in
 
 for page in "${pages[@]}"; do
   filename="$(basename ${page%.*})"
   source="$NIX_DEV_MANUAL_IN/$page"
   target="$outDir/$filename.tt"
-  echo '[% WRAPPER layout.tt title="" %]' > $target
+  title=$(xidel $source --css '.body h1' --printed-node-format=text | sed 's|¶||')
+
+  echo "<li><a href=\"/$outDir/$filename.html\">$title</a></li>" >> learn_guides.html.in
+
+  echo '[% WRAPPER layout.tt title="Guides - $title" %]' > $target
+  echo '' >> $target
+
   xidel $source --css '.body > *' --printed-node-format=html \
     | sed 's|<a class=\"headerlink\".*<\/a>||g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-attribute-name"><span class="xref std std-term">attribute name</span></a>|attribute name|g' \
@@ -30,5 +37,6 @@ for page in "${pages[@]}"; do
     | sed 's|../reference/pinning-nixpkgs.html#ref-pinning-nixpkgs|towards-reproducibility-pinning-nixpkgs.html|g' \
       >> "$target"
 
+  echo '' >> $target
   echo "[% END %]" >> $target
 done

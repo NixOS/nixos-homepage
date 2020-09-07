@@ -5,17 +5,7 @@
 <div class="row-fluid">
   <div class="span12">
     <ul>
-      <li><a href="[%root%]guides/install-nix.html">Install Nix</a></li>
-      <li><a href="[%root%]guides/ad-hoc-developer-environments.html">Ad hoc developer environments</a></li>
-      <li><a href="[%root%]guides/declarative-and-reproducible-developer-environments.html">Declarative and reproducible
-          developer environments</a></li>
-      <li><a href="[%root%]guides/dev-environment.html">Setup a development environment</a></li>
-      <li><a href="[%root%]guides/towards-reproducibility-pinning-nixpkgs.html">Towards reproducibility: Pinning
-          nixpkgs</a></li>
-      <li><a href="[%root%]guides/continuous-integration-github-actions.html">Continuous Integration with GitHub
-          Actions</a></li>
-      <li><a href="[%root%]guides/building-and-running-docker-images.html">Building and running Docker images</a></li>
-      <li><a href="[%root%]guides/contributing.html">How to Contribute</a></li>
+      [% INSERT "learn_guides.html.in" %]
     </ul>
   </div>
 </div>

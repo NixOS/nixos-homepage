@@ -37,9 +37,9 @@ HTML = \
 NIX_DEV_MANUAL_IN ?= /no-such-path
 NIX_DEV_MANUAL_OUT = guides
 
-all: $(NIX_DEV_MANUAL_OUT)
+all: $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 
-$(NIX_DEV_MANUAL_OUT): $(NIX_DEV_MANUAL_IN) layout.tt
+$(NIX_DEV_MANUAL_OUT) learn_guides.html.in: $(NIX_DEV_MANUAL_IN) layout.tt
 	bash copy-nix-dev-tutorials.sh $(NIX_DEV_MANUAL_OUT)
 
 
@@ -129,7 +129,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt $(NIX_DEV_MANUAL_OUT)
+%.html: %.tt layout.tt common.tt $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
@@ -142,7 +142,7 @@ favicon.ico: favicon.png
 	xmllint --nonet --noout $@.tmp
 	mv $@.tmp $@
 
-%: %.in common.tt $(NIX_DEV_MANUAL_OUT)
+%: %.in common.tt $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 	echo $$PATH
 	tpage \
 	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
