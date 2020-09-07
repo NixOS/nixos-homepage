@@ -22,13 +22,12 @@ for page in "${pages[@]}"; do
   source="$NIX_DEV_MANUAL_IN/$page"
   target="$outDir/$filename.tt"
   echo '[% WRAPPER layout.tt title="" %]' > $target
-  cat "$source" \
+  xidel $source --css '.body > *' --printed-node-format=html \
     | sed 's|<a class=\"headerlink\".*<\/a>||g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-attribute-name"><span class="xref std std-term">attribute name</span></a>|attribute name|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-package-name"><span class="xref std std-term">package name</span></a>|package name|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-reproducible"><span class="xref std std-term">reproducible</span></a>|reproducible|g' \
     | sed 's|../reference/pinning-nixpkgs.html#ref-pinning-nixpkgs|towards-reproducibility-pinning-nixpkgs.html|g' \
-    | pup --pre '.section' \
       >> "$target"
 
   echo "[% END %]" >> $target

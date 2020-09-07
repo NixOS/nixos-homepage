@@ -78,11 +78,11 @@
               perlPackages.TemplatePluginJSONEscape
               perlPackages.TemplateToolkit
               perlPackages.XMLSimple
-              pup
               python3
               python3Packages.click
               python3Packages.colorama
               xhtml1
+              xidel
             ];
 
           preBuild = ''
