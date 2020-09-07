@@ -1,0 +1,56 @@
+// This component assumes it is used in an unmanaged layout.
+//
+// Basically, at body > main > .fullscreen-pane
+//
+// This only defines the basic unopinionated structure of the pane.
+// All panes should have their own "component" implementing it.
+// E.g. class="fullscreen-pane pane-foobar"
+.fullscreen-pane {
+	#fill-width();
+
+	// These are *sensible defaults*, not absolutes.
+	// Anyway there should be only one element, most of the time,
+	// which most likely will have #container(); added.
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+
+	min-height: 100vh;
+	position: relative;
+
+	.pane-close {
+		@_size: @gutter * 3;
+
+		position: absolute;
+		top: @gutter;
+		right: @gutter;
+		height: @_size;
+		width: @_size;
+
+		background-color: transparent;
+		box-shadow: none;
+		border: 0;
+		padding: 0;
+		text-indent: -999em;
+		overflow: hidden;
+
+
+		&::before, &::after {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 100%;
+			top: @_size/2;
+			left: 0;
+			border-top: 3*@unit solid #theme.color[white];
+		}
+		&::before {
+			transform: rotate(45deg);
+		}
+		&::after {
+			transform: rotate(-45deg);
+		}
+	}
+}
