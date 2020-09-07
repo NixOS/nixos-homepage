@@ -17,6 +17,24 @@
         "type": "github"
       }
     },
+    "nix-dev": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1598260060,
+        "narHash": "sha256-RACpTFeoImVRqiFbHFPzVAE9TzkM95ozfNav+a7u6Bo=",
+        "owner": "nix-dot-dev",
+        "repo": "nix.dev",
+        "rev": "745393d3c884aa48d9e5d972a9ccab20507fcd36",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-dot-dev",
+        "repo": "nix.dev",
+        "type": "github"
+      }
+    },
     "nix-pills": {
       "flake": false,
       "locked": {
@@ -35,11 +53,27 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1597909278,
-        "narHash": "sha256-fZFpyPyEMPd+qp6hg3LbCYNXkKh40F2I1za8lo4BCWA=",
+        "lastModified": 1592263354,
+        "narHash": "sha256-1wHPn5qKfzfG06dZhpXDEg5Zt6HwvfyPPgW1tkYFejg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "de3780b937d2984f9b5e20d191f23be4f857b3aa",
+        "rev": "a84b797b28eb104db758b5cb2b61ba8face6744b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-20.03",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1599197033,
+        "narHash": "sha256-VCq/HKEUxZdebo4rtYT1/Wwhz1AKpcOJKcgevPQLmL4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5607e74b1dd2c9bf19fcb35ddf5ee68b3228f67c",
         "type": "github"
       },
       "original": {
@@ -48,7 +82,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1591633336,
         "narHash": "sha256-oVXv4xAnDJB03LvZGbC72vSVlIbbJr8tpjEW5o/Fdek=",
@@ -83,7 +117,7 @@
     "released-nix-unstable": {
       "inputs": {
         "lowdown-src": "lowdown-src",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1599125415,
@@ -132,8 +166,9 @@
     },
     "root": {
       "inputs": {
+        "nix-dev": "nix-dev",
         "nix-pills": "nix-pills",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "released-nix-stable": "released-nix-stable",
         "released-nix-unstable": "released-nix-unstable",
         "released-nixpkgs-stable": "released-nixpkgs-stable",

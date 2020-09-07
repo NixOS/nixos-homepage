@@ -5,14 +5,42 @@ rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst 
 default: all
 
 
-HTML = index.html download.html news.html learn.html community.html \
-  governance.html donate.html commercial-support.html features.html \
-  teams/rfc-steering-committee.html teams/security.html teams/marketing.html \
-  teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
-  teams/discourse.html \
-  guides/contributing.html guides/install-nix.html guides/ad-hoc-developer-environments.html \
+HTML = \
+  404.html \
+  commercial-support.html \
+  community.html \
   demos/index.html \
-  404.html
+  donate.html \
+  download.html \
+  features.html \
+  governance.html \
+  guides/ad-hoc-developer-environments.html \
+  guides/building-and-running-docker-images.html \
+  guides/continuous-integration-github-actions.html \
+  guides/contributing.html \
+  guides/declarative-and-reproducible-developer-environments.html \
+  guides/dev-environment.html \
+  guides/install-nix.html \
+  guides/towards-reproducibility-pinning-nixpkgs.html \
+  index.html \
+  learn.html \
+  news.html \
+  teams/discourse.html \
+  teams/infrastructure.html \
+  teams/marketing.html \
+  teams/nixcon.html \
+  teams/nixos_release.html \
+  teams/rfc-steering-committee.html \
+  teams/security.html
+
+
+NIX_DEV_MANUAL_IN ?= /no-such-path
+NIX_DEV_MANUAL_OUT = guides
+
+all: $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
+
+$(NIX_DEV_MANUAL_OUT) learn_guides.html.in: $(NIX_DEV_MANUAL_IN) layout.tt
+	bash copy-nix-dev-tutorials.sh $(NIX_DEV_MANUAL_OUT)
 
 
 ### Prettify the Nix Pills
@@ -101,7 +129,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt
+%.html: %.tt layout.tt common.tt $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
@@ -114,7 +142,7 @@ favicon.ico: favicon.png
 	xmllint --nonet --noout $@.tmp
 	mv $@.tmp $@
 
-%: %.in common.tt
+%: %.in common.tt $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 	echo $$PATH
 	tpage \
 	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
