@@ -1,0 +1,33 @@
+.pane-asciinemaplayer {
+	background: #theme.color[gray-dark];
+	&, h1, h2, a {
+		color: #theme.color[white];
+	}
+
+	& > div {
+		#container();
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+	}
+
+	asciinema-player {
+		margin-top: @gutter;
+		margin-bottom: @gutter;
+
+		// Font metrics verified to be fine with 77 columns.
+		.asciinema-terminal {
+			// horizontal (landscape) and just before square aspect ratio
+			font-size: 0.9rem;
+
+			// vertical (portrait) and square aspect ratio
+			// In that case we set it as a fraction of the width.
+			@media screen and (max-aspect-ratio: ~"1/1") {
+				font-size: 1.7vw;
+			}
+		}
+	}
+}
