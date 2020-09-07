@@ -19,6 +19,25 @@ $(function () {
     $("body").toggleClass("-debug");
   })
 
+  $("[data-fullscreen-pane]").each(function () {
+    var $source = $(this);
+    var $pane = $(".fullscreen-pane." + $source.data("fullscreen-pane"));
+
+    // Wire the source to present the pane
+    $source.click(function (e) {
+      $pane.show()[0].scrollIntoView();
+      e.preventDefault();
+    })
+
+    // Add the close button, and wire it.
+    var $el = $("<button class='pane-close'>Close this pane</button>");
+    $el.click(function () {
+      $pane.hide();
+      $source[0].scrollIntoView({ block: "center" });
+    });
+    $pane.append($el);
+  })
+
   // Search widget specific JavaScript (to be removed)
 
   $("#learn-options-search button, #options-search button").click(function (event) {
