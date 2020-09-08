@@ -1,3 +1,23 @@
+[%-
+
+BLOCK exampleBlock %]
+<li>
+  <div class="clickable-whole">
+    <div class="demo-preview">
+      <div class="thumbnail">
+        [% INSERT "demos/${demo}.svg" %]
+      </div>
+      <a href="#asciinema-demo-[% demo %]" data-fullscreen-pane="-demo-[% demo %]"></a>
+    </div>
+    <h2>[% title %]</h2>
+    <p>
+    [% content %]
+    </p>
+  </div>
+</li>
+[% END;
+
+-%]
 [% WRAPPER atHead %]
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 [% END %]
@@ -99,171 +119,39 @@
 
 <section id="examples" class="home-examples">
   <div>
-    <h1>Examples...</h1>
+    <h1>Examples</h1>
 
-<ul>
-  <li>
+    <ul class="examples-list -spotlight">
+      [% WRAPPER exampleBlock demo="example_1" title="On demand development environments" %]
+      Suspendisse ac dolor id ex accumsan mattis in in lacus. Sed eget ultrices diam, et pretium sem.
+      [% END %]
 
-        <h2>Try new tools without fear</h2>
-        <p>Don't clutter your system with tools that you use only now and then.</p>
-        <pre class="terminal-console">
-<span class="shell-prompt">$ </span>python --version
-python: command not found
-<span class="shell-prompt">$ </span><strong>nix-shell -p python3</strong>
-<span class="shell-prompt">[nix-shell]$ </span>python --version
-Python 3.7.7</pre>
+      [% WRAPPER exampleBlock demo="example_2" title="Multiple languages support" %]
+      Morbi molestie ultrices odio pulvinar posuere. Etiam a est vulputate, convallis tortor auctor.
+      [% END %]
 
-  </li>
-  <li>
+      [% WRAPPER exampleBlock demo="example_3" title="Reproducible development environments" %]
+      Donec at faucibus diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at pretium magna.
+      [% END %]
+    </ul>
+    
+    <ul class="examples-list">
+      [% WRAPPER exampleBlock demo="example_4" title="Build Docker images" %]
+      Etiam eget eros et urna tincidunt porttitor.
+      [% END %]
 
-        <h2>Multiple languages, one tool</h2>
-        <p></p>
-        <pre class="terminal-console">
-<span class="shell-prompt">$ </span><strong>nix-shell -p python3 nodejs go rustc</strong>
-<span class="shell-prompt">[nix-shell]$ </span>node --version
-v10.20.1
-<span class="shell-prompt">[nix-shell]$ </span>go version
-go version go1.14.1 linux/amd64
-<span class="shell-prompt">[nix-shell]$ </span>rustc --version
-rustc 1.42.0</pre>
-
-  </li>
-  <li>
-
-        <h2>Isolated development environments</h2>
-        <p>
-          After you get familiar with <code>nix-shell -p</code> you can take
-          the next step and <a href="[%root%]learn.html">learn some
-            Nix</a>. To setup a more persistent environment you can also write a
-          simple <code>shell.nix</code> file:
-        </p>
-        <pre class="file-listing filetype-nix">
-{ pkgs ? import &lt;nixpkgs&gt; {}
-}:
-pkgs.mkShell {
-  name = "dev-shell";
-  buildInputs = [
-    pkgs.python3
-    pkgs.python3Packages.virtualenv
-    pkgs.nodejs
-    pkgs.yarn
-  ];
-}</pre>
-        <p>Then enter development environment with:</p>
-        <pre class="terminal-console">
-<span class="shell-prompt">$ </span><strong>nix-shell</strong>
-<span class="shell-prompt">[nix-shell]$ </span>virtualenv --version
-16.7.9
-<span class="shell-prompt">[nix-shell]$ </span>yarn --version
-1.22.4</pre>
-        <p>
-          Commit the above <code>shell.nix</code> file and help your coworkers have
-          an easier time setting their development environment.
-        </p>
-
-  </li>
-  <li>
-
-        <h2>Minimal docker image</h2>
-        <p>
-          Using a <code>Dockerfile</code>, you are responsible for:
-        </p>
-        <ul>
-          <li>cleaning up everything that is not needed at runtime</li>
-          <li>deciding how to split into layers for better caching</li>
-        </ul>
-        <p>
-          Writing a <code>Dockerfile</code> that would produce a minimal image is
-          at best a very error prone process.
-        </p>
-        <p>
-          With Nix, only packages you define are included in the Docker image.
-          No cleaning up needed. There are no build tools left in your Docker
-          image, keeping it as small as possible.
-        </p>
-        <p>
-          Nix also knows how to layer your resulting Docker image, automatically.
-          The resulting layers are optimized for caching as much as possible.
-        </p>
-        <p>
-          The following Nix expression (<code>default.nix</code>) defines a
-          Docker image with <strong>only</strong> the <code>hello</code> package
-          in it.
-        </p>
-        <pre class="file-listing filetype-nix">
-{ pkgs ? import &lt;nixpkgs&gt; {}
-}:
-pkgs.dockerTools.buildLayeredImage {
-  name = "only-hello";
-  contents = [ pkgs.hello ];
-}</pre>
-        <p>To build and run the image you need to:</p>
-        <pre class="terminal-console">
-<span class="shell-prompt">$ </span><strong>nix-build default.nix -o ./result</strong>
-...
-/nix/store/&#8230;-docker-image-only-hello.tar.gz
-<span class="shell-prompt">$ </span>docker load -i ./result
-1c31fbac2eb1: Loading layer [==================>]  1.649MB/1.649MB
-03b22f688054: Loading layer [==================>]    256kB/256kB
-29c350a9c392: Loading layer [==================>]  31.61MB/31.61MB
-6a87e4d71e07: Loading layer [==================>]  266.2kB/266.2kB
-c09c43a6b910: Loading layer [==================>]  71.68kB/71.68kB
-Loaded image: only-hello:qn5x1pnk7d467jsl81jng7168qsks42l
-<span class="shell-prompt">$ </span>docker run only-hello:qn5x1pnk7d467jsl81jng7168qsks42l hello
-Hello, world</pre>
-        <p>
-          Learn more about <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
-            to build Docker images</a>.
-        </p>
-
-  </li>
-  <li>
-
-        <h2>Declarative cloud images</h2>
-        <p>How hard would it be to build and configure an <strong>Amazon EC2</strong> image?</p>
-        <p>
-          With the following <code>amazon.nix</code> we configured nginx to
-          serve a "Welcome to nginx!" page, with a valid SSL certificate
-          (via LetsEncrypt) and recommended security settings.
-        </p>
-        <pre class="file-listing filetype-nix">
-{ pkgs, ...}:
-{
-  security.acme.acceptTerms = true;
-  security.acme.email = "nix@example.com";
-  services.nginx = {
-    enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
-    virtualHosts."example.com" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/".root = "${pkgs.nginx}/html";
-    };
-  };
-}</pre>
-        <p>Now we just need to build it.</p>
-        <pre class="terminal-console">
-<span class="shell-prompt">$ </span><strong>nix-build '&lt;nixpkgs/nixos/release.nix&gt;' \</strong>
-<strong>    -A amazonImage.x86_64-linux \</strong>
-<strong>    --arg configuration ./amazon.nix \</strong>
-<strong>    -o ./result</strong>
-...
-<span class="shell-prompt">$ </span>ls ./result/
-nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux.vhd
-nix-support</pre>
-        <p>
-          The resulting Virtual Hard Disk image can be then be
-          <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html">
-            imported to Amazon EC2 as usual</a>.
-        </p>
-
-  </li>
-</ul>
+      [% WRAPPER exampleBlock demo="example_5" title="Build cloud images" %]
+      Amazon EC2, and any other cloud.
+      [% END %]
+    </ul>
 
   </div>
 </section>
+
+[% PROCESS demoPane demo="example_1" %]
+[% PROCESS demoPane demo="example_2" %]
+[% PROCESS demoPane demo="example_3" %]
+[% PROCESS demoPane demo="example_4" %]
+[% PROCESS demoPane demo="example_5" %]
 
 [% END %]
