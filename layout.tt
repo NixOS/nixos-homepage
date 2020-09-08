@@ -99,7 +99,16 @@
         </section>
         <section>
           <h4>The choice is yours</h4>
-          <pre style="border: 10px solid lime;">TODO</pre>
+          <h5>Get started with...</h5>
+          <ul>
+            <li><a href="[% root %]learn.html#nix">Nix Packages Manager</a></li>
+            <li><a href="[% root %]learn.html#nixos">NixOS Linux</a></li>
+          </ul>
+          <h5>Download...</h5>
+          <ul>
+            <li><a href="[% root %]download.html#nix">Nix Packages Manager</a></li>
+            <li><a href="[% root %]download.html#nixos">NixOS Linux</a></li>
+          </ul>
         </section>
     </div>
     <hr />
