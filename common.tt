@@ -68,9 +68,11 @@ BLOCK demoPane %]
         <p>
         This demo requires JavaScript to work properly.
         </p>
+        [%# If we wanted to provide a user-friendly version
         <p>
-        You can read <a href="[%root%]demos/[% demo %].transcript.html">its transcript</a> instead.
+        You can read <a href="[ %root% ]demos/[ % demo % ].transcript.html">its transcript</a> instead.
         </p>
+        %]
       </div>
     </asciinema-player>
   </div>
