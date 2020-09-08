@@ -103,15 +103,14 @@ BLOCK exampleBlock %]
       is a set of
       <strong class="-highlighted">over 60 000 packages</strong> for the Nix package manager.
     </p>
-    <form>
+    <form method="get" action="https://search.nixos.org/packages">
       <div>
         <div class="form-input">
-          <input placeholder="Search for a package" type="text" />
+          <input placeholder="Search for a package" type="text" name="query" />
         </div>
       </div>
       <div>
         <button type="submit">Search</button>
-        <button><em>[undetermined]</em></button>
       </div>
     </form>
   </div>
