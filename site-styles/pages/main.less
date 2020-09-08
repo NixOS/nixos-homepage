@@ -162,18 +162,69 @@
 		text-align: center;
 	}
 
-	& > div > ul {
-		margin: 0;
-		padding: 0;
-	}
-	& > div > ul > li {
-		list-style-type: none;
-		margin-bottom: @gutter;
-	}
-
-	#fill-width();
 	& > div {
 		#container();
+	}
+	.examples-list {
+		#columns(3, @sm: 1);
+		margin-top: @gutter * 4;
+
+		a {
+			color: inherit;
+			text-decoration: inherit;
+		}
+		h2 {
+			font-size: 1.4rem;
+			color: #theme.color[blue-dark2];
+		}
+
+		.clickable-whole {
+			padding: @gutter;
+			&:hover {
+				//background: #theme.color[gray-light];
+			}
+
+			&:hover a, a:hover, a:focus, a:active {
+				opacity: 1;
+			}
+		}
+
+		.demo-preview {
+			border-radius: #theme.common[radius];
+			margin-bottom: @gutter;
+		}
+
+		@_thumb_width: 180/24*16 * @unit;
+		.demo-preview {
+			float: left;
+			width: @_thumb_width;
+			height: 174/24*16 * @unit;
+		}
+		h2 {
+			margin-top: 0;
+		}
+		.clickable-whole {
+			h2, p {
+				padding-left: @_thumb_width + @gutter;
+			}
+		}
+
+		// The spotlight, starting at -sm is quite problematic.
+		#screen-md-min({
+			// The first big three examples.
+			&.-spotlight {
+				.demo-preview {
+					float: none;
+					width: auto;
+					height: auto;
+				}
+				.clickable-whole {
+					h2, p {
+						padding-left: 0;
+					}
+				}
+			}
+		});
 	}
 }
 
