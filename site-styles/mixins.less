@@ -35,8 +35,10 @@
 	list-style-type: none;
 
 	#flex-flexible-spacing(@spacing);
+	justify-content: flex-start;
 
 	& > * {
+		flex-grow: 0;
 		width: 100%;
 		#screen-xs-min({
 			width: 100%/@xs;
