@@ -135,16 +135,41 @@
 		@background: #theme.color[blue-dark2],
 	) {
 		color: @foreground;
-		background-color: @background;
 		&:extend(.__flair_angled-title all);
+		background-color: @background;
 	}
 }
 
 .__flair_angled-title {
 	#fill-width();
-	margin-bottom: @gutter;
+	position: relative;
+	margin-bottom: @gutter * 4;
 	padding-top: @gutter * 2;
 	padding-bottom: @gutter * 2;
+	display: flex;
+
+	// extend in a media query doesn't work.
+	#svg.title-angle.white;
+	// so we instead undo the background-image.
+	#screen-xs-max({ background-image: none !important; });
+	#screen-sm-min({
+		background-repeat: no-repeat;
+		background-position: 47% 100%;
+		background-size: auto 100%;
+		min-height: 240*@unit;
+		overflow: hidden;
+
+		// Prevent "aliasing" line to be visible.
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: -3*@unit;
+			left: 0;
+			right: 0;
+			height: 6*@unit;
+			background: #theme.color[white];
+		}
+	});
 	&:first-child {
 		margin-top: -@gutter;
 	}
