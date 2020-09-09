@@ -1,29 +1,24 @@
 .home-hero {
-	// From big-angles' margin-top;
-	// Used as a separation between this part and the big angles.
-	@_next-section-overlap: 100vw * 576.61139/2543.56445 * 0.6;
-	
-	#flair.outlined-bg();
+	#flair.outlined-bg-dark();
 
 	padding-top: 90*@unit;
 	padding-bottom: 90*@unit;
-	margin-bottom: @_next-section-overlap * -1;
 
 	& > div {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 
-		#flex-flexible-spacing(@gutter);
+		#screen-md-min({
+			#flex-flexible-spacing(@gutter);
+		});
 
 		#screen-sm-max({
 			flex-direction: column;
 		});
-
-		margin-bottom: @_next-section-overlap;
 	}
 
-	.blurb, .demo {
+	.blurb, .demo-preview {
 		#screen-md-min({
 			width: 50%;
 		});
@@ -48,6 +43,12 @@
 		p {
 			font-size: 0.91em;
 		}
+		#rules_for_form.button({
+			background: #theme.color[blue-light];
+			&.-primary {
+				background: #theme.color[green];
+			}
+		});
 
 		.button-tray {
 			#screen-md-min({
@@ -63,17 +64,36 @@
 		}
 	}
 
-	// FIXME: for now this only wraps the asciinema player.
-	// It should rather be an element that lazy loads the
-	// asciinema player example as needed.
-	.demo {
-		@_asciinema-background-color: #121314;
+	.demo-preview {
+		padding: 0;
 		border: @gutter solid #theme.color[white];
 		box-shadow: #theme.common[box-shadow];
-		overflow: hidden;
 		border-radius: 2*@gutter;
-		background: @_asciinema-background-color;
-		max-width: 100%;
+	}
+}
+
+.home-whynix {
+	// Assuming the "angled" flair on the following element.
+	margin-bottom: -@gutter*4;
+	text-align: center;
+
+	& > div {
+		#container();
+	}
+	.whynix-points {
+		#columns(3, @spacing: @gutter*2);
+		margin-top: @gutter * 4;
+
+		& > li::before {
+			@_size: 112*@unit;
+			content: "";
+			display: block;
+			border-radius: 100%;
+			margin: auto;
+			height: @_size;
+			width: @_size;
+			background: #theme.color[gray-light];
+		}
 	}
 }
 
@@ -114,7 +134,7 @@
 
 	.form-input {
 		width: 100%;
-		max-width: 512px;
+		max-width: 512 * @unit;
 	}
 
 	strong {
@@ -137,33 +157,74 @@
 	#flair.big-angles;
 }
 
-.home-whynix {
-	#gfx-alternating-side(
-		@gfx-rules: {
-			background-color: #theme.color[gray-light];
-			border-radius: #theme.common[radius];
-			height: 166 * @unit; // FIXME
-		}
-	);
-}
-
 .home-examples {
 	h1 {
 		text-align: center;
 	}
 
-	& > div > ul {
-		margin: 0;
-		padding: 0;
-	}
-	& > div > ul > li {
-		list-style-type: none;
-		margin-bottom: @gutter;
-	}
-
-	#fill-width();
 	& > div {
 		#container();
+	}
+	.examples-list {
+		#columns(3, @sm: 1);
+		margin-top: @gutter * 4;
+
+		a {
+			color: inherit;
+			text-decoration: inherit;
+		}
+		h2 {
+			font-size: 1.4rem;
+			color: #theme.color[blue-dark2];
+		}
+
+		.clickable-whole {
+			padding: @gutter;
+			&:hover {
+				//background: #theme.color[gray-light];
+			}
+
+			&:hover a, a:hover, a:focus, a:active {
+				opacity: 1;
+			}
+		}
+
+		.demo-preview {
+			border-radius: #theme.common[radius];
+			margin-bottom: @gutter;
+		}
+
+		@_thumb_width: 180/24*16 * @unit;
+		.demo-preview {
+			float: left;
+			width: @_thumb_width;
+			height: 174/24*16 * @unit;
+		}
+		h2 {
+			margin-top: 0;
+		}
+		.clickable-whole {
+			h2, p {
+				padding-left: @_thumb_width + @gutter;
+			}
+		}
+
+		// The spotlight, starting at -sm is quite problematic.
+		#screen-md-min({
+			// The first big three examples.
+			&.-spotlight {
+				.demo-preview {
+					float: none;
+					width: auto;
+					height: auto;
+				}
+				.clickable-whole {
+					h2, p {
+						padding-left: 0;
+					}
+				}
+			}
+		});
 	}
 }
 

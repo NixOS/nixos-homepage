@@ -11,24 +11,14 @@ HTML = index.html download.html news.html learn.html community.html \
   teams/nixos_release.html teams/infrastructure.html teams/nixcon.html \
   teams/discourse.html \
   guides/contributing.html guides/install-nix.html guides/ad-hoc-developer-environments.html \
+  demos/index.html \
   404.html
-
-
-### Prettify the NixOS manual.
-
-NIXOS_MANUAL_IN ?= /no-such-path
-NIXOS_MANUAL_OUT = nixos/manual
-
-all: $(NIXOS_MANUAL_OUT)
-
-$(NIXOS_MANUAL_OUT): $(NIXOS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIXOS_MANUAL_IN)/share/doc/nixos $(NIXOS_MANUAL_OUT) 'NixOS manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
 
 ### Prettify the Nix Pills
 
 NIX_PILLS_MANUAL_IN ?= /no-such-path
-NIX_PILLS_MANUAL_OUT = nixos/nix-pills
+NIX_PILLS_MANUAL_OUT = guides/nix-pills
 
 all: $(NIX_PILLS_MANUAL_OUT)
 
@@ -38,26 +28,60 @@ $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) bootstrapify-docbook.sh bootstra
 
 ### Prettify the Nix manual.
 
-NIX_MANUAL_IN ?= /no-such-path
-NIX_MANUAL_OUT = nix/manual
+NIX_MANUAL_STABLE_IN ?= /no-such-path
+NIX_MANUAL_STABLE_OUT = manual/nix/stable
 
-all: $(NIX_MANUAL_OUT)
+all: $(NIX_MANUAL_STABLE_OUT)
 
-$(NIX_MANUAL_OUT): $(call rwildcard, $(NIX_MANUAL_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIX_MANUAL_IN) $(NIX_MANUAL_OUT) 'Nix manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
-	ln -sfn manual.html $(NIX_MANUAL_OUT)/index.html
+$(NIX_MANUAL_STABLE_OUT): $(call rwildcard, $(NIX_MANUAL_STABLE_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./bootstrapify-docbook.sh $(NIX_MANUAL_STABLE_IN) $(NIX_MANUAL_STABLE_OUT) 'Nix $(NIX_STABLE_VERSION) manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+
+NIX_MANUAL_UNSTABLE_IN ?= /no-such-path
+NIX_MANUAL_UNSTABLE_OUT = manual/nix/unstable
+
+all: $(NIX_MANUAL_UNSTABLE_OUT)
+
+$(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	mkdir -p $(NIX_MANUAL_UNSTABLE_OUT)
+	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_UNSTABLE_IN)/* $(NIX_MANUAL_UNSTABLE_OUT)
 
 
 ### Prettify the Nixpkgs manual.
 
-NIXPKGS_MANUAL_IN ?= /no-such-path
-NIXPKGS_MANUAL_OUT = nixpkgs/manual
+NIXPKGS_MANUAL_STABLE_IN ?= /no-such-path
+NIXPKGS_MANUAL_STABLE_OUT = manual/nixpkgs/stable
 
-all: $(NIXPKGS_MANUAL_OUT)
+all: $(NIXPKGS_MANUAL_STABLE_OUT)
 
-$(NIXPKGS_MANUAL_OUT): $(NIXPKGS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_OUT) 'Nixpkgs manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
-	ln -sfn manual.html $(NIXPKGS_MANUAL_OUT)/index.html
+$(NIXPKGS_MANUAL_STABLE_OUT): $(NIXPKGS_MANUAL_STABLE_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_STABLE_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_STABLE_OUT) 'Nixpkgs $(NIXOS_STABLE_SERIES) manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+
+NIXPKGS_MANUAL_UNSTABLE_IN ?= /no-such-path
+NIXPKGS_MANUAL_UNSTABLE_OUT = manual/nixpkgs/unstable
+
+all: $(NIXPKGS_MANUAL_UNSTABLE_OUT)
+
+$(NIXPKGS_MANUAL_UNSTABLE_OUT): $(NIXPKGS_MANUAL_UNSTABLE_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_UNSTABLE_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_UNSTABLE_OUT) 'Nixpkgs $(NIXOS_UNSTABLE_SERIES) manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+
+
+### Prettify the NixOS manual.
+
+NIXOS_MANUAL_STABLE_IN ?= /no-such-path
+NIXOS_MANUAL_STABLE_OUT = manual/nixos/stable
+
+all: $(NIXOS_MANUAL_STABLE_OUT)
+
+$(NIXOS_MANUAL_STABLE_OUT): $(NIXOS_MANUAL_STABLE_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./bootstrapify-docbook.sh $(NIXOS_MANUAL_STABLE_IN)/share/doc/nixos $(NIXOS_MANUAL_STABLE_OUT) 'NixOS $(NIXOS_STABLE_SERIES) manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+
+NIXOS_MANUAL_UNSTABLE_IN ?= /no-such-path
+NIXOS_MANUAL_UNSTABLE_OUT = manual/nixos/unstable
+
+all: $(NIXOS_MANUAL_UNSTABLE_OUT)
+
+$(NIXOS_MANUAL_UNSTABLE_OUT): $(NIXOS_MANUAL_UNSTABLE_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./bootstrapify-docbook.sh $(NIXOS_MANUAL_UNSTABLE_IN)/share/doc/nixos $(NIXOS_MANUAL_UNSTABLE_OUT) 'NixOS $(NIXOS_UNSTABLE_SERIES) manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
 
 all: $(HTML) favicon.png favicon.ico robots.txt \
@@ -85,8 +109,8 @@ favicon.ico: favicon.png
 	  --define root=$(ROOT) \
 	  --define fileName=$< \
 	  --define nixosAmis=$(NIXOS_AMIS) \
-	  --define latestNixVersion=$(NIX_VERSION) \
-	  --define latestNixOSSeries=$(NIXOS_SERIES) \
+	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
+	  --define latestNixOSSeries=$(NIXOS_STABLE_SERIES) \
 	  --pre_process=common.tt \
 	  $< > $@.tmp
 	xmllint --nonet --noout $@.tmp
@@ -95,7 +119,7 @@ favicon.ico: favicon.png
 %: %.in common.tt
 	echo $$PATH
 	tpage \
-	  --define latestNixVersion=$(NIX_VERSION) \
+	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
 	  --pre_process=common.tt $< > $@.tmp
 	mv $@.tmp $@
 
@@ -108,7 +132,7 @@ news-rss.xml: news.xml news-rss.xsl
 	xsltproc news-rss.xsl news.xml > $@.tmp
 	mv $@.tmp $@
 
-index.html: news-rss.xml latest-news.xhtml blogs.json
+index.html: news-rss.xml latest-news.xhtml blogs.json $(wildcard demos/*.svg)
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
@@ -140,7 +164,21 @@ styles:
 	@ln -sfn $(SITE_STYLES) $@
 endif
 
-all: demo.cast
+all: manuals
 
-demo.cast: demo.py demo.scenario
-	python demo.py demo.scenario > demo.cast
+manuals:
+	bash ./fix-manual-headers.sh manual/nix stable
+	bash ./fix-manual-headers.sh manual/nixpkgs stable
+	bash ./fix-manual-headers.sh manual/nixos stable
+
+all: \
+  demos/cover.cast \
+  demos/example_1.cast \
+  demos/example_2.cast \
+  demos/example_3.cast \
+  demos/example_4.cast \
+  demos/example_5.cast
+
+demos/%.cast: demos/%.scenario demos/create.py 
+	echo "Generating $@ ..."
+	python demos/create.py $< > $@
