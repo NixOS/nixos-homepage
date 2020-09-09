@@ -67,11 +67,19 @@ body {
 	color: #theme.color[foreground];
 	background-color: #theme.color[background];
 
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+
 	// For narrow designs, the body handles the gutters.
 	#screen-xs-max({
 		padding-left: @gutter;
 		padding-right: @gutter;
 	});
+}
+
+body > main {
+	flex-grow: 1;
 }
 
 ul {
