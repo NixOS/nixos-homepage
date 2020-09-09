@@ -50,11 +50,11 @@ BLOCK navigationLink %]
   <header>
     <div>
       <h1><a href="[% root %]">NixOS</a></h1>
-      <div class="header-search">
+      <form class="header-search" method="get" action="https://search.nixos.org/packages">
         <div class="form-input">
-          <input type="text" />
+          <input type="text" name="query" />
         </div>
-      </div>
+      </form>
 	  [%# ???! go read `navbar.less` and `nixos-site.js`, it's all fine I swear. %]
       <nav style="display: none;">
         <ul>
