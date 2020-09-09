@@ -159,7 +159,7 @@ form {
 	// A div is assumed to be a row.
 	& > div {
 		margin-bottom: @gutter;
-		#flex-flexible-margin-between(@gutter);
+		display: flex;
 		justify-content: center;
 		& > * {
 			flex-grow: initial;
