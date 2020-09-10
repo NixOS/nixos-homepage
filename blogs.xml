@@ -9,6 +9,97 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Tweag I/O: Towards a content-addressed model for Nix</title>
+	<guid isPermaLink="true">https://tweag.io/blog/2020-09-10-nix-cas/</guid>
+	<link>https://tweag.io/blog/2020-09-10-nix-cas/</link>
+	<description>&lt;p&gt;This is my first post about content-addressability in Nix — a long-awaited feature that is hopefully coming soon!
+In this post I will show you how this feature will improve the Nix
+infrastructure. I’ll come back in another post to explain the technical challenges of
+adding content-addressability to Nix.&lt;/p&gt;
+&lt;p&gt;Nix has a wonderful model for handling packages.
+Because each derivation is stored under (aka &lt;em&gt;addressed by&lt;/em&gt;) a unique
+name, multiple versions of the same library can coexist on the same
+system without issues: each version of the library has a distinct
+name, as far as Nix is concerned.&lt;/p&gt;
+&lt;p&gt;What’s more, if &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; is upgraded in &lt;a href=&quot;https://github.com/NixOS/nixpkgs/&quot;&gt;Nixpkgs&lt;/a&gt;, Nix knows that all the
+packages that depend on &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; (i.e., almost everything) must be
+rebuilt, if only so that they point at the name of the new &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt;
+version. This way, a Nix installation will never feature a package
+built for one version of &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt;, but dynamically linked against
+another: as a user, it means that you will never have an &lt;em&gt;undefined
+symbol&lt;/em&gt; error. Hurray!&lt;/p&gt;
+&lt;h2&gt;The input-addressed store&lt;/h2&gt;
+&lt;p&gt;How does Nix achieve this feat? The idea is that the name of a package
+is derived from all of its inputs (that is, the complete list of
+dependencies, as well as the package description). So if you change
+the git tag from which &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; is fetched, the name changes, if the
+name of &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; changes, then the name of any package which has &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; in
+its dependencies changes.&lt;/p&gt;
+&lt;p&gt;However this can be very pessimistic: even changes that aren’t
+semantically meaningful can imply mass rebuilding and downloading. As
+a slightly extreme example, &lt;a href=&quot;https://github.com/NixOS/nixpkgs/pull/83446&quot;&gt;this merge-request on
+Nixpkgs&lt;/a&gt; makes a tiny change to the way &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; is built. It doesn’t actually
+change &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt;, yet requires rebuilding an insane amount of
+packages. Because, as far as Nix is concerned, all these packages have
+different names, hence are different packages. In reality, though,
+they weren’t.&lt;/p&gt;
+&lt;p&gt;Nevertheless, the cost of the rebuild has to be born by the Nix
+infrastructure: &lt;a href=&quot;https://hydra.nixos.org&quot;&gt;Hydra&lt;/a&gt; builds all packages to populate the cache,
+and all the newly built packages must be stored. It costs both time,
+and money (in cpu power, and storage space).&lt;/p&gt;
+&lt;h2&gt;Unnecessary rebuilds?&lt;/h2&gt;
+&lt;p&gt;Most distributions, by default, don’t rebuild packages when their dependencies change, and have a (more-or-less automated) process to detect changes that require rebuilding reverse dependencies.
+For example, Debian &lt;a href=&quot;https://www.debian.org/doc/debian-policy/policy.pdf#81&quot;&gt;tries to detect ABI changes automatically&lt;/a&gt; and Fedora has a &lt;a href=&quot;https://docs.fedoraproject.org/en-US/fesco/Updates_Policy/&quot;&gt;more manual process&lt;/a&gt;.
+But Nix doesn’t.&lt;/p&gt;
+&lt;p&gt;The issue is that the notion of a “breaking change” is a very fuzzy one.
+Should we follow Debian and consider that only ABI changes are breaking?
+This criterion only applies for shared libraries, and as the Debian policy acknowledges, only for “well-behaved” programs.
+So if we follow this criterion, there’s still need for manual curation, which is &lt;strong&gt;precisely&lt;/strong&gt; what Nix tries to avoid.&lt;/p&gt;
+&lt;h2&gt;The content-addressed model&lt;/h2&gt;
+&lt;p&gt;Quite happily, there is a criterion to avoid many useless rebuilds without sacrificing correctness: detecting when changes in a package (or one of its dependencies) yields the exact same output.
+That might seem like an edge case, but the &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; example above (and many others) shows that there’s a practical application to it.
+As another example, &lt;code class=&quot;language-text&quot;&gt;go&lt;/code&gt; depends on &lt;code class=&quot;language-text&quot;&gt;perl&lt;/code&gt; for its tests, so an upgrade of &lt;code class=&quot;language-text&quot;&gt;perl&lt;/code&gt; requires rebuilding all the Go packages in Nixpkgs, although it most likely doesn’t change the output of the &lt;code class=&quot;language-text&quot;&gt;go&lt;/code&gt; derivation.&lt;/p&gt;
+&lt;p&gt;But, for Nix to recognise that a package is not a new package, the
+new, unchanged, &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; or &lt;code class=&quot;language-text&quot;&gt;go&lt;/code&gt; packages must have &lt;em&gt;the same name&lt;/em&gt;
+as the old version. Therefore, the name of a package must not be
+derived from its inputs which have changed, but, instead, it should be
+derived from the content of the compiled package. This is called
+content addressing.&lt;/p&gt;
+&lt;p&gt;Content addressing is how you can be sure that when you and a
+colleague at the other side of the world type &lt;code class=&quot;language-text&quot;&gt;git checkout 7cc16bb8cd38ff5806e40b32978ae64d54023ce0&lt;/code&gt; you actually have the exact
+same content in your tree. Git commits are content addressed, therefore the name
+&lt;code class=&quot;language-text&quot;&gt;7cc16bb8cd38ff5806e40b32978ae64d54023ce0&lt;/code&gt; refers to that exact
+tree.&lt;/p&gt;
+&lt;p&gt;Yet another content-addressed storage is &lt;a href=&quot;https://ipfs.io/&quot;&gt;IPFS&lt;/a&gt;. In IPFS storage
+files can be stored in any number of computers, and even move from
+computer to computer. The content-derived name is used a way to give
+an intrinsic name to a file, regardless of where it is stored.&lt;/p&gt;
+&lt;p&gt;In fact, even the particular use case that we are discussing here:
+avoid recompilation when a rebuilt dependency hasn’t changed, can be
+found in various build systems such as
+&lt;a href=&quot;https://bazel.build/&quot;&gt;Bazel&lt;/a&gt;. In build systems, such recompilation
+avoidance is sometimes known as the &lt;em&gt;early cutoff optimization&lt;/em&gt; − see the &lt;a href=&quot;https://www.microsoft.com/en-us/research/uploads/prod/2018/03/build-systems.pdf&quot;&gt;build systems a la carte paper&lt;/a&gt; for example).&lt;/p&gt;
+&lt;p&gt;So all we need to do is to move the Nix store from an input-addressed
+model, to a content-addressed model, as used by many tools
+already, and we will be able to save a lot of storage space and cpu
+usage, by rebuilding much fewer packages. Nixpkgs contributors will
+see their CI time improved. It could also help &lt;a href=&quot;https://github.com/NixOS/nix/issues/859&quot;&gt;serving a binary cache
+over IPFS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Well, like many things with computers,
+this is actually way harder than it sounds (which explains why this
+isn’t done despite being already discussed nearly 15 years ago in the
+&lt;a href=&quot;https://github.com/edolstra/edolstra.github.io/raw/49a78323f6b319da6e078b4f5f6b3112a30e8db9/pubs/phd-thesis.pdf&quot;&gt;original paper&lt;/a&gt;), but we now believe that there’s &lt;a href=&quot;https://github.com/NixOS/rfcs/pull/62&quot;&gt;a way forward&lt;/a&gt;… more on that in a later post.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;A content-addressed store for Nix would help reduce the insane load
+that &lt;a href=&quot;https://hydra.nixos.org&quot;&gt;Hydra&lt;/a&gt; has to sustain. But, despite the fact that
+content-addressing is a common technique both in distributed systems
+and build systems (Nix is both!), getting to the point where it was
+feasible to integrate content-addressing in Nix has been a long journey.&lt;/p&gt;
+&lt;p&gt;In a future post, I’ll explain why it was so hard, and how we finally
+managed to propose a viable design for a content-addressed Nix.&lt;/p&gt;</description>
+	<pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
+</item>
+<item>
 	<title>nixbuild.net: nixbuild.net is Generally Available</title>
 	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html</guid>
 	<link>https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html</link>
@@ -1351,14 +1442,6 @@ For this reason, the Software Heritage loader archiving Nixpkgs source code tarb
 For example, the &lt;a href=&quot;https://guix.gnu.org/&quot;&gt;Guix&lt;/a&gt; project already started publishing and archiving their sources using the same component!
 Finally, we want to thank &lt;a href=&quot;https://nlnet.nl/&quot;&gt;NLnet&lt;/a&gt; for the funding that makes this work possible.&lt;/p&gt;</description>
 	<pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
-</item>
-<item>
-	<title>Mayflower: Windows-on-NixOS, part 2: Make it go fast!</title>
-	<guid isPermaLink="true">https://nixos.mayflower.consulting/blog/2020/06/17/windows-vm-performance/</guid>
-	<link>https://nixos.mayflower.consulting/blog/2020/06/17/windows-vm-performance/</link>
-	<description>This is part 2 of a series of blog posts explaining how we took an existing Windows installation on hardware and moved it into a VM running on top of NixOS. Previously, we discussed how we performed the actual storage migration. In this post, we’ll cover the various performance optimisations we tried, what worked, and what didn’t work.
-GPU passthrough Since the machine is, amongst other things, used for gaming, graphics performance is critical.</description>
-	<pubDate>Wed, 17 Jun 2020 09:00:00 +0000</pubDate>
 </item>
 
 </channel>
