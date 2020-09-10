@@ -1,9 +1,10 @@
-name: "Hourly Build & Deploy to Netlify"
+name: "Build & Deploy to Netlify"
 on:
-  schedule:
-  - cron: '0 * * * *'
+  push:
+    branches:
+      - master
 jobs:
-  hourly-build-and-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
@@ -28,26 +29,17 @@ jobs:
         mkdir build
         cp -RL ./result/* ./build/
     - name: Deploy to Netlify
-      uses: nwtgck/actions-netlify@v1
+      uses: nwtgck/actions-netlify@v1.1
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       with:
         production-branch: 'master'
         publish-dir: './build'
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         deploy-message: 'Deploy from GitHub Actions'
         enable-pull-request-comment: true
         enable-commit-comment: true
         enable-commit-status: true
         overwrites-pull-request-comment: false
-      if: github.repository == 'NixOS/nixos-homepage'
-    - name: Commit flake.lock, blogs.xml and push to master branch
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: 'Update flake.lock and blogs.xml [ci skip]'
-        branch: 'master'
-        file_pattern: flake.lock blogs.xml
-        commit_user_name: NixOS webmaster
-        commit_user_email: webmaster@nixos.org
-        commit_author: GitHub Actions <webmaster@nixos.org>
       if: github.repository == 'NixOS/nixos-homepage'
