@@ -10,6 +10,7 @@
   inputs.released-nix-unstable = { url = "github:nixos/nix/master"; };
   inputs.released-nix-stable = { url = "github:nixos/nix/latest-release"; flake = false; };
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
+  inputs.nix-dev = { url = "github:nix-dot-dev/nix.dev"; };
 
   outputs =
     { self
@@ -19,6 +20,7 @@
     , released-nix-unstable
     , released-nix-stable
     , nix-pills
+    , nix-dev
     }:
     let
       system = "x86_64-linux";
@@ -81,6 +83,7 @@
               python3Packages.click
               python3Packages.colorama
               xhtml1
+              xidel
             ];
 
           preBuild = ''
@@ -104,6 +107,9 @@
               "NIXOS_AMIS=${nixosAmis}"
               "SITE_STYLES=${siteStyles}"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
+              "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}/html"
+
+              "-j 1"
             ];
 
           doCheck = true;
@@ -129,6 +135,7 @@
             export NIXOS_AMIS="${nixosAmis}"
             # SITE_STYLES skipped by design.
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
+            export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}/html"
           '';
         };
       };
