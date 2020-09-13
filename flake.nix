@@ -61,6 +61,7 @@
           enableParallelBuilding = true;
 
           buildInputs = with pkgs; [
+              asciinema-scenario
               caddy
               entr
               fd
@@ -78,9 +79,6 @@
               perlPackages.TemplatePluginJSONEscape
               perlPackages.TemplateToolkit
               perlPackages.XMLSimple
-              python3
-              python3Packages.click
-              python3Packages.colorama
               xhtml1
               xidel
             ];
