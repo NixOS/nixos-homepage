@@ -2,7 +2,7 @@
   description = "The nixos.org homepage";
 
   # This is used to build the site.
-  inputs.nixpkgs = { url = "nixpkgs/nixos-20.03"; };
+  inputs.nixpkgs = { url = "nixpkgs/nixos-unstable"; };
 
   # These inputs are used for the manuals and release artifacts
   inputs.released-nixpkgs-unstable = { url = "nixpkgs/nixos-unstable"; };
