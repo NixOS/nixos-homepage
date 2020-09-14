@@ -26,8 +26,7 @@ for page in "${pages[@]}"; do
 
   echo "<li><a href=\"/$outDir/$filename.html\">$title</a></li>" >> learn_guides.html.in
 
-  echo '[% WRAPPER layout.tt title="Guides - $title" %]' > $target
-  echo '' >> $target
+  printf '[%% WRAPPER layout.tt title="Guides - %s" %%]\n\n' "$title" > $target
 
   xidel $source --css '.body > *' --printed-node-format=html \
     | sed 's|<a class=\"headerlink\".*<\/a>||g' \
@@ -37,6 +36,5 @@ for page in "${pages[@]}"; do
     | sed 's|../reference/pinning-nixpkgs.html#ref-pinning-nixpkgs|towards-reproducibility-pinning-nixpkgs.html|g' \
       >> "$target"
 
-  echo '' >> $target
-  echo "[% END %]" >> $target
+  printf '\n\n[%% END %%]\n' >> $target
 done

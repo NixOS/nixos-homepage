@@ -39,7 +39,7 @@ NIX_DEV_MANUAL_OUT = guides
 
 all: $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 
-$(NIX_DEV_MANUAL_OUT) learn_guides.html.in: $(NIX_DEV_MANUAL_IN) layout.tt
+$(NIX_DEV_MANUAL_OUT) learn_guides.html.in: $(NIX_DEV_MANUAL_IN) layout.tt copy-nix-dev-tutorials.sh
 	bash copy-nix-dev-tutorials.sh $(NIX_DEV_MANUAL_OUT)
 
 
@@ -208,6 +208,6 @@ all: \
   demos/example_4.cast \
   demos/example_5.cast
 
-demos/%.cast: demos/%.scenario demos/create.py 
+demos/%.cast demos/%.svg: demos/%.scenario
 	echo "Generating $@ ..."
-	python demos/create.py $< > $@
+	asciinema-scenario --preview-file "$(patsubst %.cast,%.svg,$@)" $< > $@
