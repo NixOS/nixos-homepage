@@ -2,6 +2,7 @@
 
 body > header {
 	@_height: #theme.navbar[height];
+	@_link_flavour_size: 4*@unit;
 	#no-select();
 
 	position: relative;
@@ -123,6 +124,9 @@ body > header {
 
 	nav .button {
 		margin-left: @gutter / 2;
+		&::before {
+			display: none;
+		}
 	}
 
 	.header-search {
@@ -132,6 +136,9 @@ body > header {
 		padding-left: @gutter / 2;
 		padding-right: @gutter / 2;
 		& > .form-input {
+			&, input {
+				margin: 0;
+			}
 			input {
 				background-color: transparent;
 			}
@@ -177,6 +184,35 @@ body > header {
 		});
 		&:hover, &:focus, &:active {
 			text-decoration: none;
+		}
+	}
+
+	li {
+		a {
+			position: relative;
+			&::before {
+				content: "";
+				display: block;
+				position: absolute;
+				bottom: 0;
+
+				// See paddings higher up.
+				left: 13*@unit;
+				right: 13*@unit;
+				#screen-sm-only({
+					left: 8*@unit;
+					right: 8*@unit;
+				});
+				height: @_link_flavour_size;
+			}
+		}
+		&.active a {
+			font-weight: bold;
+		}
+		&.active a, & a:active, & a:hover, & a:focus {
+			&::before {
+				background: #theme.color[blue-light];
+			}
 		}
 	}
 
@@ -236,7 +272,7 @@ body > header {
 				color: #theme.color[blue-dark2];
 			}
 
-			a.active, a:hover, a:focus {
+			li.active a, a.active, a:hover, a:focus {
 				background: #theme.color[blue-light];
 				color: #theme.color[white];
 			}

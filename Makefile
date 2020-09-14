@@ -136,6 +136,7 @@ favicon.ico: favicon.png
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
 	  --define fileName=$< \
+	  --define outputName=$@ \
 	  --define nixosAmis=$(NIXOS_AMIS) \
 	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
 	  --define latestNixOSSeries=$(NIXOS_STABLE_SERIES) \
