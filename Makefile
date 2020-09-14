@@ -195,6 +195,6 @@ all: \
   demos/example_4.cast \
   demos/example_5.cast
 
-demos/%.cast: demos/%.scenario demos/create.py 
+demos/%.cast demos/%.svg: demos/%.scenario
 	echo "Generating $@ ..."
-	python demos/create.py $< > $@
+	asciinema-scenario --preview-file "$(patsubst %.cast,%.svg,$@)" $< > $@
