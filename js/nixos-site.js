@@ -1,4 +1,8 @@
 $(function () {
+  // Special "pseudo-global" variable to track whether we are synthetically
+  // activating an event. In that case some semantics are different.
+  var $$synthetic = false;
+
   // Setup the responsive collapsible menu
   var $header = $("body > header");
   var $menu = $("body > header nav");
@@ -17,23 +21,23 @@ $(function () {
   // debugging purposes. E.g. responsive width identifier.
   $(".footer-copyright").dblclick(function () {
     $("body").toggleClass("-debug");
-  })
+  });
 
   $("[data-fullscreen-pane]").each(function () {
     var $source = $(this);
-    var $pane = $(".fullscreen-pane." + $source.data("fullscreen-pane"));
+    var $pane = $($source.attr("href"));
 
     // Wire the source to present the pane
     $source.click(function (e) {
       $pane.show()[0].scrollIntoView();
-      e.preventDefault();
-    })
+    });
 
     // Add the close button, and wire it.
     var $el = $("<button class='pane-close'>Close this pane</button>");
     $el.click(function () {
       $pane.hide();
       $source[0].scrollIntoView({ block: "center" });
+      history.replaceState(null, null, " ");
     });
     $pane.append($el);
   })
@@ -43,10 +47,53 @@ $(function () {
     var $link = $($(this).find("a, button")[0]);
 
     // Make the whole thing act as if it was clicked.
-    $(this).click(function () {
-      $link.click();
+    $(this).on("click", function (event) {
+      $link[0].click();
     });
   });
+
+  // Tabs navigation
+  $(".tabs-navigation").each(function () {
+    var $tabview = $(this);
+    var $links = $tabview.children("nav").find("a");
+
+    $panes = $tabview.children("div").children();
+    $panes.hide();
+    $($panes[0]).show();
+    $($links[0]).addClass("-active")
+
+    $links.each(function () {
+      $(this).click(function (event) {
+        var href = $(this).attr("href");
+        var $pane = $(href);
+        $links.removeClass("-active");
+        $(this).addClass("-active")
+        $panes.hide();
+        $pane.show();
+
+        // This looks dumb, but if we don't override the native behaviour we
+        // get scrolled just past the tabs...
+        // So no scroll, and we control the URL.
+        if (!$$synthetic) {
+          history.pushState(null, null, href);
+        }
+        event.preventDefault();
+      });
+    });
+  });
+
+  // Activate the link for which the anchor matches. Hopefully changing the tab
+  // or opening the relevant pane.
+  var handleNavigation = function(event) {
+    $$synthetic = true;
+    $("[href='"+window.location.hash+"']").click()
+    $$synthetic = false;
+  };
+  window.onpopstate = handleNavigation;
+
+  // Assume a fresh navigation activates our handler.
+  // This way tabs and panes are active as intended.
+  handleNavigation();
 
   // Search widget specific JavaScript (to be removed)
 

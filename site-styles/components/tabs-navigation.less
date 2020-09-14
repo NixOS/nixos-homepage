@@ -1,0 +1,44 @@
+.tabs-navigation {
+	@_border: 2*@unit solid #theme.color[blue-dark2];
+
+	& > nav {
+		font-family: #theme.font[secondary];
+		ul, li {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+		}
+
+		a {
+			display: block;
+			color: inherit;
+			text-decoration: inherit;
+			padding: @gutter / 2;
+		}
+		.-active {
+			background: #theme.color[blue-light];
+		}
+
+		ul {
+			display: flex;
+		}
+
+		li {
+			background: #theme.color[background];
+			border: @_border;
+			border-bottom: 0;
+			&:not(:first-child) {
+				margin-left: -2*@unit;
+			}
+		}
+	}
+
+	& > div {
+		border: @_border;
+		padding: @gutter;
+
+		& > * {
+			margin-top: 0;
+		}
+	}
+}

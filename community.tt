@@ -1,32 +1,40 @@
-[% WRAPPER layout.tt title="NixOS Community" %]
+[% WRAPPER layout.tt title="NixOS Community" handlesLayout=1 %]
 
-<h1>NixOS Community</h1>
+<div class="page-title">
+  <h1>NixOS Community</h1>
+</div>
 
-<p class="lead">Nix and NixOS are developed and used by a diverse and welcoming community from all around the world.</p>
+<section class="generic-layout lead">
+  <p>Nix and NixOS are developed and used by a diverse and welcoming community from all around the world.</p>
+</section>
 
-<p><strong>Check out what the community has made recently in the <a href="https://weekly.nixos.org/">NixOS Weekly</a> newsletter.</strong></p>
+<section class="wide-banner clickable-whole">
+  <p>
+    Check out what the community has made recently in the <a href="https://weekly.nixos.org/">NixOS Weekly</a> newsletter.
+  </p>
+</section>
+
+<div class="generic-layout">
 
 <h2>Communication</h2>
 
-<div class="row-fluid">
-  <div class="span4">
+<div class="columnar-layout -three">
+  <div>
     <h3>Forum</h3>
     <p>The official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.</p>
-    <div class="text-center">
-      <a class="btn btn-block btn-success"
-      href="https://discourse.nixos.org/">Go to Discourse Forum</a>
+    <div>
+      <a href="https://discourse.nixos.org/">Go to Discourse Forum</a>
     </div>
   </div>
-  <div class="span4">
+  <div>
     <h3>Chat</h3>
     <p>Another place to get in contact with other users is the official IRC channel:</p>
     <p><a href="irc://irc.freenode.net/#nixos">#nixos</a> on the <a href="https://freenode.net/">freenode network</a> (<a href="https://logs.nix.samueldr.com/nixos/">logs</a> are available)</p>
-    <div class="text-center">
-      <a class="btn btn-block btn-success"
-       href="https://webchat.freenode.net/#nixos">Open Webchat</a>
+    <div>
+      <a href="https://webchat.freenode.net/#nixos">Open Webchat</a>
     </div>
   </div>
-  <div class="span4">
+  <div>
     <h3>Unofficial Platforms</h3>
     <p>The community is also active on other platforms.</p>
     <ul>
@@ -41,8 +49,8 @@
 
 <h2>Events</h2>
 
-<div class="row-fluid">
-  <div class="span4">
+<div class="columnar-layout -three">
+  <div>
     <h3>NixCon</h3>
     <p>The <a href="[%root%]teams/nixcon.html">NixCon Team</a> organizes a conference once a year.</p>
     <p>You can find announcements on <a href="https://twitter.com/nixconf">Twitter</a> or in the <a href="https://discourse.nixos.org/c/events/13">Forum</a>.</p>
@@ -55,7 +63,7 @@
     <li><a href="https://conf.nixos.org/">NixCon 2015</a>, Berlin (<a href="https://media.ccc.de/c/nixcon2015">Recorded Talks</a>)</li>
     </ul>
   </div>
-  <div class="span4">
+  <div>
     <h3>Meetups</h3>
     <h4>Europe</h4>
     <ul>
@@ -72,7 +80,7 @@
     </ul>
 
   </div>
-  <div class="span4">
+  <div>
     <h3> </h3> <!-- dirty hack to fix layout -->
     <h4>America</h4>
     <ul>
@@ -89,4 +97,5 @@
   </div>
 </div>
 
+</div>
 [% END %]

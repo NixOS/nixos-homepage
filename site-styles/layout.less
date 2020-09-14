@@ -67,11 +67,19 @@ body {
 	color: #theme.color[foreground];
 	background-color: #theme.color[background];
 
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+
 	// For narrow designs, the body handles the gutters.
 	#screen-xs-max({
 		padding-left: @gutter;
 		padding-right: @gutter;
 	});
+}
+
+body > main {
+	flex-grow: 1;
 }
 
 ul {
@@ -155,6 +163,10 @@ img.inline {
 	.code {
 		&:extend(.file-listing all);
 	}
+
+	&.lead, & > .lead {
+		font-size: 1.25em;
+	}
 }
 
 .page-title {
@@ -172,6 +184,10 @@ img.inline {
 .terminal-console {
 	color: #theme.terminal[foreground];
 	background-color: #theme.terminal[background];
+
+	.shell-prompt {
+		font-weight: bold;
+	}
 }
 
 // But the file listing is light!
@@ -179,4 +195,47 @@ img.inline {
 	background: #theme.file-listing[background];
 	color: #theme.file-listing[foreground];
 	box-shadow: #theme.common[internal-shadow];
+}
+
+// Unsemantic layouts
+// ==================
+// 
+// Used only for making "MVP" pages. Once *actually* designed, they should only
+// use semantic class names, with appropriate styles.
+
+.columnar-layout {
+	&.-two {
+		@_cols: 2;
+		#columns(@_cols);
+		& > .-twice {
+			width: 100%/@_cols*2;
+		}
+	}
+	&.-three {
+		@_cols: 3;
+		#columns(@_cols);
+		& > .-twice {
+			width: 100%/@_cols*2;
+		}
+	}
+	&.-four {
+		@_cols: 4;
+		#columns(@_cols);
+		& > .-twice {
+			width: 100%/@_cols*2;
+		}
+	}
+}
+
+.well {
+	margin-bottom: @gutter;
+	border-radius: #theme.common[radius];
+	padding: @gutter;
+	overflow: auto;
+	background: #theme.file-listing[background];
+	color: #theme.file-listing[foreground];
+
+	& > :first-child {
+		margin-top: 0;
+	}
 }
