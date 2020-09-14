@@ -56,7 +56,7 @@ BLOCK demoPreview %]
 
 BLOCK demoPane %]
 [%# display: none; here is how jQuery toggles the element. %]
-<aside class="fullscreen-pane pane-asciinemaplayer -demo-[% demo %]" id="asciinema-demo-cover" style="display: none;">
+<aside class="fullscreen-pane pane-asciinemaplayer -demo-[% demo %]" id="asciinema-demo-[% demo %]" style="display: none;">
   <div>
     [%- IF content -%]
     <header>
