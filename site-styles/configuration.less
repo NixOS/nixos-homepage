@@ -1,4 +1,14 @@
 #theme() {
+	.layout() {
+		// This forces a "base zoom level" for too wide windows.
+		// This might cause hardships for some users, but reduces the wonkyness
+		// of the design on wider-than-expected viewport widths.
+		workaround-ultrawide: false;
+
+		// This is for working around density issues in way-too-narrow designs.
+		// This does not affect normal use even on the smaller normal devices.
+		workaround-ultrasmall: true;
+	}
 	.navbar() {
 		// Static navbar, true or false.
 		static: false;

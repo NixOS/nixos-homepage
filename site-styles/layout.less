@@ -43,13 +43,18 @@ html {
 
 	// Purposefully without unit.
 	line-height: @line-height;
+}
 
+html when (#theme.layout[workaround-ultrawide] = true) {
 	// Starting with large viewport sizes, we change the
 	// font-width according to the viewport size.
 	@_max-viewport: @screen-lg * 1.3;
 	@media screen and (min-width: @_max-viewport) {
 		font-size: calc(@pixel-equivalent-font-size/unit(@_max-viewport) * 100vw);
 	}
+}
+
+html when (#theme.layout[workaround-ultrasmall] = true) {
 	// Similar, but for way too small displays. It's better to scale the site
 	// down a bit than to have it be broken. Users can still zoom in.
 	// In reality, what this means is that all sizes under 320px end up
