@@ -70,29 +70,30 @@ colleague at the other side of the world type &lt;code class=&quot;language-text
 same content in your tree. Git commits are content addressed, therefore the name
 &lt;code class=&quot;language-text&quot;&gt;7cc16bb8cd38ff5806e40b32978ae64d54023ce0&lt;/code&gt; refers to that exact
 tree.&lt;/p&gt;
-&lt;p&gt;Yet another content-addressed storage is &lt;a href=&quot;https://ipfs.io/&quot;&gt;IPFS&lt;/a&gt;. In IPFS storage
-files can be stored in any number of computers, and even move from
-computer to computer. The content-derived name is used a way to give
+&lt;p&gt;Yet another example of content-addressed storage is &lt;a href=&quot;https://ipfs.io/&quot;&gt;IPFS&lt;/a&gt;. In IPFS storage
+files can be stored in any number of computers, and even moved from
+computer to computer. The content-derived name is used as a way to give
 an intrinsic name to a file, regardless of where it is stored.&lt;/p&gt;
-&lt;p&gt;In fact, even the particular use case that we are discussing here:
-avoid recompilation when a rebuilt dependency hasn’t changed, can be
-found in various build systems such as
+&lt;p&gt;In fact, even the particular use case that we are discussing here -
+avoiding recompilation when a rebuilt dependency hasn’t changed -
+can be found in various build systems such as
 &lt;a href=&quot;https://bazel.build/&quot;&gt;Bazel&lt;/a&gt;. In build systems, such recompilation
-avoidance is sometimes known as the &lt;em&gt;early cutoff optimization&lt;/em&gt; − see the &lt;a href=&quot;https://www.microsoft.com/en-us/research/uploads/prod/2018/03/build-systems.pdf&quot;&gt;build systems a la carte paper&lt;/a&gt; for example).&lt;/p&gt;
+avoidance is sometimes known as the &lt;em&gt;early cutoff optimization&lt;/em&gt; −
+see the &lt;a href=&quot;https://www.microsoft.com/en-us/research/uploads/prod/2018/03/build-systems.pdf&quot;&gt;build systems a la carte paper&lt;/a&gt;
+for example).&lt;/p&gt;
 &lt;p&gt;So all we need to do is to move the Nix store from an input-addressed
-model, to a content-addressed model, as used by many tools
-already, and we will be able to save a lot of storage space and cpu
-usage, by rebuilding much fewer packages. Nixpkgs contributors will
-see their CI time improved. It could also help &lt;a href=&quot;https://github.com/NixOS/nix/issues/859&quot;&gt;serving a binary cache
+model to a content-addressed model, as used by many tools
+already, and we will be able to save a lot of storage space and CPU
+usage, by rebuilding many fewer packages. Nixpkgs contributors will
+see their CI time improved. It could also allow &lt;a href=&quot;https://github.com/NixOS/nix/issues/859&quot;&gt;serving a binary cache
 over IPFS&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Well, like many things with computers,
 this is actually way harder than it sounds (which explains why this
-isn’t done despite being already discussed nearly 15 years ago in the
+hasn’t already been done despite being discussed nearly 15 years ago in the
 &lt;a href=&quot;https://github.com/edolstra/edolstra.github.io/raw/49a78323f6b319da6e078b4f5f6b3112a30e8db9/pubs/phd-thesis.pdf&quot;&gt;original paper&lt;/a&gt;), but we now believe that there’s &lt;a href=&quot;https://github.com/NixOS/rfcs/pull/62&quot;&gt;a way forward&lt;/a&gt;… more on that in a later post.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;A content-addressed store for Nix would help reduce the insane load
-that &lt;a href=&quot;https://hydra.nixos.org&quot;&gt;Hydra&lt;/a&gt; has to sustain. But, despite the fact that
-content-addressing is a common technique both in distributed systems
+that &lt;a href=&quot;https://hydra.nixos.org&quot;&gt;Hydra&lt;/a&gt; has to sustain. While content-addressing is a common technique both in distributed systems
 and build systems (Nix is both!), getting to the point where it was
 feasible to integrate content-addressing in Nix has been a long journey.&lt;/p&gt;
 &lt;p&gt;In a future post, I’ll explain why it was so hard, and how we finally

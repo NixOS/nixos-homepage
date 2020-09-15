@@ -19,6 +19,10 @@ jobs:
         echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
         nix --version
         cat /etc/nix/nix.conf
+    - uses: cachix/cachix-action@v6
+      with:
+        name: nixos-homepage
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - name: Update content
       run: ./update.sh
     - name: Building nixos.org
