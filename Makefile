@@ -33,6 +33,14 @@ HTML = \
   teams/rfc-steering-committee.html \
   teams/security.html
 
+DEMOS = \
+  demos/cover.svg \
+  demos/example_1.svg \
+  demos/example_2.svg \
+  demos/example_3.svg \
+  demos/example_4.svg \
+  demos/example_5.svg
+
 
 NIX_DEV_MANUAL_IN ?= /no-such-path
 NIX_DEV_MANUAL_OUT = guides
@@ -131,7 +139,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
+%.html: %.tt layout.tt common.tt $(DEMOS) $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
@@ -161,7 +169,7 @@ news-rss.xml: news.xml news-rss.xsl
 	xsltproc news-rss.xsl news.xml > $@.tmp
 	mv $@.tmp $@
 
-index.html: news-rss.xml latest-news.xhtml blogs.json $(wildcard demos/*.svg)
+index.html: $(DEMOS) news-rss.xml latest-news.xhtml blogs.json 
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
@@ -200,14 +208,11 @@ manuals:
 	bash ./fix-manual-headers.sh manual/nixpkgs stable
 	bash ./fix-manual-headers.sh manual/nixos stable
 
-all: \
-  demos/cover.cast \
-  demos/example_1.cast \
-  demos/example_2.cast \
-  demos/example_3.cast \
-  demos/example_4.cast \
-  demos/example_5.cast
+all: $(DEMOS)
 
-demos/%.cast demos/%.svg: demos/%.scenario
-	echo "Generating $@ ..."
-	asciinema-scenario --preview-file "$(patsubst %.cast,%.svg,$@)" $< > $@
+demos/%.svg: demos/%.scenario
+	echo "Generating $@ and $(patsubst %.svg,%.cast,$@) ..."
+	asciinema-scenario --preview-file "$@" $< > $(patsubst %.svg,%.cast,$@)
+	# XXX: this in until asciinema-scenario is fixed
+	#      https://github.com/garbas/asciinema-scenario/issues/3
+	sed -i -e "s|<nixpkgs|\&lt;nixpkgs|g" $@
