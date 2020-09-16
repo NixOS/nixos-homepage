@@ -77,7 +77,7 @@ $(function () {
     var $tabview = $(this);
     var $links = $tabview.children("nav").find("a");
 
-    $panes = $tabview.children("div").children();
+    var $panes = $tabview.children("div").children();
     $panes.hide();
     $($panes[0]).show();
     $($links[0]).addClass("-active")
