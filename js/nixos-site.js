@@ -27,6 +27,18 @@ $(function () {
     $("body").toggleClass("-debug");
   });
 
+  $(".pane-asciinemaplayer").each(function () {
+    var player = $(this).find("asciinema-player")[0];
+
+    this.addEventListener("paneOpen", function (e) {
+      player.play();
+    });
+
+    this.addEventListener("paneClose", function (e) {
+      player.pause();
+    });
+  });
+
   $("[data-fullscreen-pane]").each(function () {
     var $source = $(this);
     var $pane = $($source.attr("href"));
