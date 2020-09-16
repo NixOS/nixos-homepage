@@ -1,7 +1,7 @@
-[% WRAPPER layout.tt title="NixOS Community" handlesLayout=1 %]
+[% WRAPPER layout.tt title="Community" handlesLayout=1 %]
 
 <div class="page-title">
-  <h1>NixOS Community</h1>
+  <h1>Community</h1>
 </div>
 
 <section class="generic-layout lead">
@@ -10,92 +10,107 @@
 
 <section class="wide-banner clickable-whole">
   <p>
-    Check out what the community has made recently in the <a href="https://weekly.nixos.org/">NixOS Weekly</a> newsletter.
+    Check out what the community has made recently in the <a href="https://weekly.nixos.org/">NixOS Weekly</a>
+    newsletter.
   </p>
 </section>
 
 <div class="generic-layout">
 
-<h2>Communication</h2>
+  <h2>Communication</h2>
 
-<div class="columnar-layout -three">
-  <div>
-    <h3>Forum</h3>
-    <p>The official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.</p>
+  <div class="columnar-layout -three">
     <div>
-      <a href="https://discourse.nixos.org/">Go to Discourse Forum</a>
+      <h3>Forum</h3>
+      <p>The official forum is the right place to get help from other users and discuss the development of the projects.
+        There are also Announcements, Job offers and Events.</p>
+      <div>
+        <a href="https://discourse.nixos.org/">Go to Discourse Forum</a>
+      </div>
+    </div>
+    <div>
+      <h3>Chat</h3>
+      <p>Another place to get in contact with other users is the official IRC channel:</p>
+      <p><a href="irc://irc.freenode.net/#nixos">#nixos</a> on the <a href="https://freenode.net/">freenode network</a>
+        (<a href="https://logs.nix.samueldr.com/nixos/">logs</a> are available)</p>
+      <div>
+        <a href="https://webchat.freenode.net/#nixos">Open Webchat</a>
+      </div>
+    </div>
+    <div>
+      <h3>Unofficial Platforms</h3>
+      <p>The community is also active on other platforms.</p>
+      <ul>
+        <li><a href="https://www.reddit.com/r/NixOS/">reddit</a></li>
+        <li><a href="https://discord.gg/RbvHtGa">Discord</a></li>
+        <li>stackoverflow: see tags <a href="https://stackoverflow.com/questions/tagged/nix">nix</a>, <a
+            href="https://stackoverflow.com/questions/tagged/nixos">nixos</a>, <a
+            href="https://stackoverflow.com/questions/tagged/nixops">nixops</a> and <a
+            href="https://stackoverflow.com/questions/tagged/nixpkgs">nixpkgs</a></li>
+        <li>Twitter: see the hashtag <a href="https://twitter.com/hashtag/NixOS">#nixos</a> (#nix is too ambiguous)</li>
+        <li>Mastodon/Fediverse: see the hashtag <a href="https://mastodon.social/tags/nixos">#nixos</a></li>
+      </ul>
     </div>
   </div>
-  <div>
-    <h3>Chat</h3>
-    <p>Another place to get in contact with other users is the official IRC channel:</p>
-    <p><a href="irc://irc.freenode.net/#nixos">#nixos</a> on the <a href="https://freenode.net/">freenode network</a> (<a href="https://logs.nix.samueldr.com/nixos/">logs</a> are available)</p>
+
+  <h2>Events</h2>
+
+  <div class="columnar-layout -three">
     <div>
-      <a href="https://webchat.freenode.net/#nixos">Open Webchat</a>
+      <h3>NixCon</h3>
+      <p>The <a href="[%root%]teams/nixcon.html">NixCon Team</a> organizes a conference once a year.</p>
+      <p>You can find announcements on <a href="https://twitter.com/nixconf">Twitter</a> or in the <a
+          href="https://discourse.nixos.org/c/events/13">Forum</a>.</p>
+      <h4>Previous Conferences</h4>
+      <ul>
+        <li><a href="https://blog.hackeriet.no/oslo-nixos-minicon-2020/">Oslo NixOS MiniCon 2020</a> (<a
+            href="https://www.youtube.com/channel/UCyZKWsKG3uVEfgjNwzfPhhQ">Recorded Talks</a>)</li>
+        <li><a href="https://2019.nixcon.org/">NixCon 2019</a>, Brno (<a
+            href="https://www.youtube.com/watch?v=pfg9ykBo9oM&amp;list=PLgknCdxP89Re9oFsLnAb5iLO0XG_rMuAo">Recorded
+            Talks</a>)</li>
+        <li><a href="http://nixcon2018.org/">NixCon 2018</a>, London (<a
+            href="https://www.youtube.com/watch?v=rzjMif6wvMk&amp;list=PLgknCdxP89ReJKWX3sthcsbBYsoihzSQX">Recorded
+            Talks</a>)</li>
+        <li><a href="http://nixcon2017.org/">NixCon 2017</a>, Munich (<a
+            href="https://www.youtube.com/watch?v=fdj9tzRaLn4&amp;list=PLgknCdxP89ReQzhfKwMYjLdwWsc7us8ns">Recorded
+            Talks</a>)</li>
+        <li><a href="https://conf.nixos.org/">NixCon 2015</a>, Berlin (<a
+            href="https://media.ccc.de/c/nixcon2015">Recorded Talks</a>)</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Meetups</h3>
+      <h4>Europe</h4>
+      <ul>
+        <li><a href="http://www.meetup.com/Amsterdam-Nix-Meetup/">Amsterdam (Netherlands)</a></li>
+        <li><a href="http://www.meetup.com/Berlin-NixOS-Meetup/">Berlin (Germany)</a></li>
+        <li><a href="https://www.meetup.com/Greater-Copenhagen-NixOS-User-Group">Copenhagen (Denmark)</a></li>
+        <li><a href="https://www.meetup.com/Suisse-Romande-NixOS-User-Group/">Lausanne (Switzerland)</a></li>
+        <li><a href="https://www.meetup.com/NixOS-London/">London (United Kingdom)</a></li>
+        <li><a href="https://www.meetup.com/Meetup-NixOS-Montpellier/">Montpellier (France)</a></li>
+        <li><a href="http://www.meetup.com/Munich-NixOS-Meetup/">Munich (Germany)</a></li>
+        <li><a href="https://www.meetup.com/Oslo-NixOS-User-Group/">Oslo (Norway)</a></li>
+        <li><a href="https://blog.shackspace.de/?p=5829">Stuttgart (Germany)</a></li>
+        <li><a href="https://www.meetup.com/NixOS-User-Group-Zurich/">Zürich (Switzerland)</a></li>
+      </ul>
+
+    </div>
+    <div>
+      <h3> </h3> <!-- dirty hack to fix layout -->
+      <h4>America</h4>
+      <ul>
+        <li><a href="https://www.meetup.com/New-York-Nix-Users-Group/">New York (New York)</a></li>
+        <li><a href="https://www.meetup.com/Nova-Nix-NixOS-NixOps-Meetup/">Reston (Virginia)</a></li>
+        <li><a href="http://www.meetup.com/Bay-Area-Nix-NixOS-User-Group/">San Francisco (California)</a></li>
+        <li><a href="https://www.meetup.com/Seattle-Nix-NixOS-and-Guix-GuixSD-Users/">Seattle (Washington)</a></li>
+      </ul>
+      <h4>Asia</h4>
+      <ul>
+        <li><a href="https://www.meetup.com/Singapore-NixOS-Nix-User-Group/">Singapore (Singapore)</a></li>
+        <li><a href="http://www.meetup.com/Tokyo-NixOS-Meetup/">Tokyo (Japan)</a></li>
+      </ul>
     </div>
   </div>
-  <div>
-    <h3>Unofficial Platforms</h3>
-    <p>The community is also active on other platforms.</p>
-    <ul>
-      <li><a href="https://www.reddit.com/r/NixOS/">reddit</a></li>
-      <li><a href="https://discord.gg/RbvHtGa">Discord</a></li>
-      <li>stackoverflow: see tags <a href="https://stackoverflow.com/questions/tagged/nix">nix</a>, <a href="https://stackoverflow.com/questions/tagged/nixos">nixos</a>, <a href="https://stackoverflow.com/questions/tagged/nixops">nixops</a> and <a href="https://stackoverflow.com/questions/tagged/nixpkgs">nixpkgs</a></li>
-      <li>Twitter: see the hashtag <a href="https://twitter.com/hashtag/NixOS">#nixos</a> (#nix is too ambiguous)</li>
-      <li>Mastodon/Fediverse: see the hashtag <a href="https://mastodon.social/tags/nixos">#nixos</a></li>
-    </ul>
-  </div>
-</div>
-
-<h2>Events</h2>
-
-<div class="columnar-layout -three">
-  <div>
-    <h3>NixCon</h3>
-    <p>The <a href="[%root%]teams/nixcon.html">NixCon Team</a> organizes a conference once a year.</p>
-    <p>You can find announcements on <a href="https://twitter.com/nixconf">Twitter</a> or in the <a href="https://discourse.nixos.org/c/events/13">Forum</a>.</p>
-    <h4>Previous Conferences</h4>
-    <ul>
-    <li><a href="https://blog.hackeriet.no/oslo-nixos-minicon-2020/">Oslo NixOS MiniCon 2020</a> (<a href="https://www.youtube.com/channel/UCyZKWsKG3uVEfgjNwzfPhhQ">Recorded Talks</a>)</li>
-    <li><a href="https://2019.nixcon.org/">NixCon 2019</a>, Brno (<a href="https://www.youtube.com/watch?v=pfg9ykBo9oM&amp;list=PLgknCdxP89Re9oFsLnAb5iLO0XG_rMuAo">Recorded Talks</a>)</li>
-    <li><a href="http://nixcon2018.org/">NixCon 2018</a>, London (<a href="https://www.youtube.com/watch?v=rzjMif6wvMk&amp;list=PLgknCdxP89ReJKWX3sthcsbBYsoihzSQX">Recorded Talks</a>)</li>
-    <li><a href="http://nixcon2017.org/">NixCon 2017</a>, Munich (<a href="https://www.youtube.com/watch?v=fdj9tzRaLn4&amp;list=PLgknCdxP89ReQzhfKwMYjLdwWsc7us8ns">Recorded Talks</a>)</li>
-    <li><a href="https://conf.nixos.org/">NixCon 2015</a>, Berlin (<a href="https://media.ccc.de/c/nixcon2015">Recorded Talks</a>)</li>
-    </ul>
-  </div>
-  <div>
-    <h3>Meetups</h3>
-    <h4>Europe</h4>
-    <ul>
-      <li><a href="http://www.meetup.com/Amsterdam-Nix-Meetup/">Amsterdam (Netherlands)</a></li>
-      <li><a href="http://www.meetup.com/Berlin-NixOS-Meetup/">Berlin (Germany)</a></li>
-      <li><a href="https://www.meetup.com/Greater-Copenhagen-NixOS-User-Group">Copenhagen (Denmark)</a></li>
-      <li><a href="https://www.meetup.com/Suisse-Romande-NixOS-User-Group/">Lausanne (Switzerland)</a></li>
-      <li><a href="https://www.meetup.com/NixOS-London/">London (United Kingdom)</a></li>
-      <li><a href="https://www.meetup.com/Meetup-NixOS-Montpellier/">Montpellier (France)</a></li>
-      <li><a href="http://www.meetup.com/Munich-NixOS-Meetup/">Munich (Germany)</a></li>
-      <li><a href="https://www.meetup.com/Oslo-NixOS-User-Group/">Oslo (Norway)</a></li>
-      <li><a href="https://blog.shackspace.de/?p=5829">Stuttgart (Germany)</a></li>
-      <li><a href="https://www.meetup.com/NixOS-User-Group-Zurich/">Zürich (Switzerland)</a></li>
-    </ul>
-
-  </div>
-  <div>
-    <h3> </h3> <!-- dirty hack to fix layout -->
-    <h4>America</h4>
-    <ul>
-      <li><a href="https://www.meetup.com/New-York-Nix-Users-Group/">New York (New York)</a></li>
-      <li><a href="https://www.meetup.com/Nova-Nix-NixOS-NixOps-Meetup/">Reston (Virginia)</a></li>
-      <li><a href="http://www.meetup.com/Bay-Area-Nix-NixOS-User-Group/">San Francisco (California)</a></li>
-      <li><a href="https://www.meetup.com/Seattle-Nix-NixOS-and-Guix-GuixSD-Users/">Seattle (Washington)</a></li>
-    </ul>
-    <h4>Asia</h4>
-    <ul>
-      <li><a href="https://www.meetup.com/Singapore-NixOS-Nix-User-Group/">Singapore (Singapore)</a></li>
-      <li><a href="http://www.meetup.com/Tokyo-NixOS-Meetup/">Tokyo (Japan)</a></li>
-    </ul>
-  </div>
-</div>
 
 </div>
 [% END %]

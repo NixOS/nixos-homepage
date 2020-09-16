@@ -1,60 +1,52 @@
-[%-
-
-BLOCK exampleBlock %]
+[% BLOCK exampleBlock %]
 <li>
   <div class="clickable-whole">
+    <h2>[% title %]</h2>
     <div class="demo-preview">
       <div class="thumbnail">
         [% INSERT "demos/${demo}.svg" %]
       </div>
       <a href="#asciinema-demo-[% demo %]" data-fullscreen-pane="-demo-[% demo %]"></a>
     </div>
-    <h2>[% title %]</h2>
-    <p>
-    [% content %]
-    </p>
   </div>
 </li>
-[% END;
-
--%]
+[% END %]
 [% WRAPPER atHead %]
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 [% END %]
 [% WRAPPER atEnd %]
-  <script src="[% root %]js/asciinema-player.js"></script>
+<script src="[% root %]js/asciinema-player.js"></script>
 [% END %]
 [% WRAPPER layout.tt title="NixOS Linux" handlesLayout=1 %]
 
 <section class="home-hero">
   <div>
-	<div class="blurb">
-	  <h1>Reproducible builds <span>and deployments.</span></h1>
-	  <div class="columns">
-		<div>
-		  <h2>Nix</h2>
-		  <p>
-		  A powerful package manager for Linux and other
-		  Unix systems that makes package management reliable and reproducible.
-		  Share your development and build environments across different machines.
-		  </p>
-		</div>
-		<div>
-		  <h2>NixOS</h2>
-		  <p>
-		  A Linux distribution with a unique approach to
-		  package and configuration management. Built on top of the Nix package
-		  manager, it is completely declarative, makes upgrading systems reliable,
-		  and has <a href="[% root %]features.html">many other advantages</a>.
-		  </p>
-		</div>
-	  </div>
-	  <div class="button-tray">
-		<a class="button -primary" href="[% root %]download.html">Download</a>
-		<a class="button" href="[% root %]learn.html">Get started</a>
-	  </div>
-	</div>
-
+    <div class="blurb">
+      <h1>Reproducible builds <span>and deployments.</span></h1>
+      <div class="columns">
+        <div>
+          <h2>Nix</h2>
+          <p>
+            A powerful package manager for Linux and other
+            Unix systems that makes package management reliable and reproducible.
+            Share your development and build environments across different machines.
+          </p>
+        </div>
+        <div>
+          <h2>NixOS</h2>
+          <p>
+            A Linux distribution with a unique approach to
+            package and configuration management. Built on top of the Nix package
+            manager, it is completely declarative, makes upgrading systems reliable,
+            and has <a href="[% root %]features.html">many other advantages</a>.
+          </p>
+        </div>
+      </div>
+      <div class="button-tray">
+        <a class="button -primary" href="[% root %]download.html">Download</a>
+        <a class="button" href="[% root %]learn.html">Get started</a>
+      </div>
+    </div>
     [% PROCESS demoPreview demo="cover" %]
   </div>
 </section>
@@ -63,31 +55,30 @@ BLOCK exampleBlock %]
 
 <section id="why-nix" class="home-whynix">
   <div>
-    <h1>Why choose Nix or NixOS?</h1>
-    <ul class="whynix-points">
+    <ul class="whynix">
       <li>
-        <h2>It's Reproducible…</h2>
+        <h2>Reproducible</h2>
         <p>
-        Nix builds packages in isolation from each other. This ensures that they
-        are reproducible and don't have undeclared dependencies, so <strong>if a
-        package works on one machine, it will also work on another</strong>.
+          Nix builds packages in isolation from each other. This ensures that they
+          are reproducible and don't have undeclared dependencies, so <strong>if a
+            package works on one machine, it will also work on another</strong>.
         </p>
       </li>
       <li>
-        <h2>Declarative…</h2>
+        <h2>Declarative</h2>
         <p>
-        Nix makes it <strong>trivial to share development and build
-        environments</strong> for your projects, regardless of what programming
-        languages and tools you’re using.
+          Nix makes it <strong>trivial to share development and build
+            environments</strong> for your projects, regardless of what programming
+          languages and tools you’re using.
         </p>
       </li>
       <li>
-        <h2>And Reliable</h2>
+        <h2>Reliable</h2>
         <p>
-        Nix ensures that installing or upgrading one package <strong>cannot
-        break other packages</strong>. It allows you to <strong>roll back to
-        previous versions</strong>, and ensures that no package is in an
-        inconsistent state during an upgrade.
+          Nix ensures that installing or upgrading one package <strong>cannot
+            break other packages</strong>. It allows you to <strong>roll back to
+            previous versions</strong>, and ensures that no package is in an
+          inconsistent state during an upgrade.
         </p>
       </li>
     </ul>
@@ -121,26 +112,24 @@ BLOCK exampleBlock %]
     <h1>Examples</h1>
 
     <ul class="examples-list -spotlight">
-      [% WRAPPER exampleBlock demo="example_1" title="On demand development environments" %]
-      Suspendisse ac dolor id ex accumsan mattis in in lacus. Sed eget ultrices diam, et pretium sem.
+      [% WRAPPER exampleBlock demo="example_1" title="Try new tools without fear" %]
       [% END %]
 
-      [% WRAPPER exampleBlock demo="example_2" title="Multiple languages support" %]
-      Morbi molestie ultrices odio pulvinar posuere. Etiam a est vulputate, convallis tortor auctor.
+      [% WRAPPER exampleBlock demo="example_2" title="Multiple languages, one tool" %]
       [% END %]
 
-      [% WRAPPER exampleBlock demo="example_3" title="Reproducible development environments" %]
-      Donec at faucibus diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at pretium magna.
+      [% WRAPPER exampleBlock demo="example_3" title="Isolated development environments" %]
       [% END %]
     </ul>
-    
+
     <ul class="examples-list">
-      [% WRAPPER exampleBlock demo="example_4" title="Build Docker images" %]
-      Etiam eget eros et urna tincidunt porttitor.
+      [% WRAPPER exampleBlock demo="example_4" title="Minimal docker images" %]
       [% END %]
 
-      [% WRAPPER exampleBlock demo="example_5" title="Build cloud images" %]
-      Amazon EC2, and any other cloud.
+      [% WRAPPER exampleBlock demo="example_5" title="Declarative cloud images" %]
+      [% END %]
+
+      [% WRAPPER exampleBlock demo="example_6" title="Test your configurations" %]
       [% END %]
     </ul>
 
@@ -152,5 +141,6 @@ BLOCK exampleBlock %]
 [% PROCESS demoPane demo="example_3" %]
 [% PROCESS demoPane demo="example_4" %]
 [% PROCESS demoPane demo="example_5" %]
+[% PROCESS demoPane demo="example_6" %]
 
 [% END %]
