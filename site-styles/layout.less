@@ -244,3 +244,20 @@ img.inline {
 		margin-top: 0;
 	}
 }
+
+.label {
+	pointer-events: none;
+	#no-select();
+
+	font-family: #theme.font[secondary];
+	font-weight: bold;
+	font-size: 0.8em;
+	vertical-align: text-bottom;
+	border-radius: 0.3em;
+	padding: 0.1em 0.3em;
+
+	&.-info {
+		background-color: #theme.color[blue-dark];
+		color: #theme.color[white];
+	}
+}
