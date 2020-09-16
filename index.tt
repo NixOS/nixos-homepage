@@ -11,7 +11,7 @@ BLOCK exampleBlock %]
     </div>
     <h2>[% title %]</h2>
     <p>
-    [% content %]
+      [% content %]
     </p>
   </div>
 </li>
@@ -22,38 +22,38 @@ BLOCK exampleBlock %]
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
 [% END %]
 [% WRAPPER atEnd %]
-  <script src="[% root %]js/asciinema-player.js"></script>
+<script src="[% root %]js/asciinema-player.js"></script>
 [% END %]
 [% WRAPPER layout.tt title="NixOS Linux" handlesLayout=1 %]
 
 <section class="home-hero">
   <div>
-	<div class="blurb">
-	  <h1>Reproducible builds <span>and deployments.</span></h1>
-	  <div class="columns">
-		<div>
-		  <h2>Nix</h2>
-		  <p>
-		  A powerful package manager for Linux and other
-		  Unix systems that makes package management reliable and reproducible.
-		  Share your development and build environments across different machines.
-		  </p>
-		</div>
-		<div>
-		  <h2>NixOS</h2>
-		  <p>
-		  A Linux distribution with a unique approach to
-		  package and configuration management. Built on top of the Nix package
-		  manager, it is completely declarative, makes upgrading systems reliable,
-		  and has <a href="[% root %]features.html">many other advantages</a>.
-		  </p>
-		</div>
-	  </div>
-	  <div class="button-tray">
-		<a class="button -primary" href="[% root %]download.html">Download</a>
-		<a class="button" href="[% root %]learn.html">Get started</a>
-	  </div>
-	</div>
+    <div class="blurb">
+      <h1>Reproducible builds <span>and deployments.</span></h1>
+      <div class="columns">
+        <div>
+          <h2>Nix</h2>
+          <p>
+            A powerful package manager for Linux and other
+            Unix systems that makes package management reliable and reproducible.
+            Share your development and build environments across different machines.
+          </p>
+        </div>
+        <div>
+          <h2>NixOS</h2>
+          <p>
+            A Linux distribution with a unique approach to
+            package and configuration management. Built on top of the Nix package
+            manager, it is completely declarative, makes upgrading systems reliable,
+            and has <a href="[% root %]features.html">many other advantages</a>.
+          </p>
+        </div>
+      </div>
+      <div class="button-tray">
+        <a class="button -primary" href="[% root %]download.html">Download</a>
+        <a class="button" href="[% root %]learn.html">Get started</a>
+      </div>
+    </div>
 
     [% PROCESS demoPreview demo="cover" %]
   </div>
@@ -68,26 +68,26 @@ BLOCK exampleBlock %]
       <li>
         <h2>It's Reproducible…</h2>
         <p>
-        Nix builds packages in isolation from each other. This ensures that they
-        are reproducible and don't have undeclared dependencies, so <strong>if a
-        package works on one machine, it will also work on another</strong>.
+          Nix builds packages in isolation from each other. This ensures that they
+          are reproducible and don't have undeclared dependencies, so <strong>if a
+            package works on one machine, it will also work on another</strong>.
         </p>
       </li>
       <li>
         <h2>Declarative…</h2>
         <p>
-        Nix makes it <strong>trivial to share development and build
-        environments</strong> for your projects, regardless of what programming
-        languages and tools you’re using.
+          Nix makes it <strong>trivial to share development and build
+            environments</strong> for your projects, regardless of what programming
+          languages and tools you’re using.
         </p>
       </li>
       <li>
         <h2>And Reliable</h2>
         <p>
-        Nix ensures that installing or upgrading one package <strong>cannot
-        break other packages</strong>. It allows you to <strong>roll back to
-        previous versions</strong>, and ensures that no package is in an
-        inconsistent state during an upgrade.
+          Nix ensures that installing or upgrading one package <strong>cannot
+            break other packages</strong>. It allows you to <strong>roll back to
+            previous versions</strong>, and ensures that no package is in an
+          inconsistent state during an upgrade.
         </p>
       </li>
     </ul>
@@ -133,7 +133,7 @@ BLOCK exampleBlock %]
       Donec at faucibus diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at pretium magna.
       [% END %]
     </ul>
-    
+
     <ul class="examples-list">
       [% WRAPPER exampleBlock demo="example_4" title="Build Docker images" %]
       Etiam eget eros et urna tincidunt porttitor.
