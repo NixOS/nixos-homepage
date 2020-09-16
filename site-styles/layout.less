@@ -233,16 +233,10 @@ img.inline {
 }
 
 .well {
-	margin-bottom: @gutter;
-	border-radius: #theme.common[radius];
-	padding: @gutter;
-	overflow: auto;
 	background: #theme.file-listing[background];
 	color: #theme.file-listing[foreground];
 
-	& > :first-child {
-		margin-top: 0;
-	}
+	&:extend(.notice-box all);
 }
 
 .label {

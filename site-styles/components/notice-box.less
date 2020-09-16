@@ -1,0 +1,14 @@
+.notice-box {
+	margin-bottom: @gutter;
+	border-radius: #theme.common[radius];
+	padding: @gutter;
+	overflow: auto;
+
+	& > :first-child {
+		margin-top: 0;
+	}
+
+	&.-warning {
+		background-color: #theme.color[yellow];
+	}
+}
