@@ -3,6 +3,10 @@ $(function () {
   // activating an event. In that case some semantics are different.
   var $$synthetic = false;
 
+  // Custom event types
+  var paneOpenEvent = new Event("paneOpen");
+  var paneCloseEvent = new Event("paneClose");
+
   // Setup the responsive collapsible menu
   var $header = $("body > header");
   var $menu = $("body > header nav");
@@ -26,10 +30,13 @@ $(function () {
   $("[data-fullscreen-pane]").each(function () {
     var $source = $(this);
     var $pane = $($source.attr("href"));
+    var pane = $pane[0];
 
     // Wire the source to present the pane
     $source.click(function (e) {
-      $pane.show()[0].scrollIntoView();
+      $pane.show();
+      pane.scrollIntoView();
+      pane.dispatchEvent(paneOpenEvent);
     });
 
     // Add the close button, and wire it.
@@ -37,6 +44,7 @@ $(function () {
     $el.click(function () {
       $pane.hide();
       $source[0].scrollIntoView({ block: "center" });
+      pane.dispatchEvent(paneCloseEvent);
       history.replaceState(null, null, " ");
     });
     $pane.append($el);
