@@ -80,20 +80,9 @@
 	& > div {
 		#container();
 	}
-	.whynix-points {
+	.whynix {
 		#columns(3, @spacing: @gutter*2);
 		margin-top: @gutter * 4;
-
-		& > li::before {
-			@_size: 112*@unit;
-			content: "";
-			display: block;
-			border-radius: 100%;
-			margin: auto;
-			height: @_size;
-			width: @_size;
-			background: #theme.color[gray-light];
-		}
 	}
 }
 
@@ -167,7 +156,7 @@
 	}
 	.examples-list {
 		#columns(3, @sm: 1);
-		margin-top: @gutter * 4;
+		margin-top: @gutter * 2;
 
 		a {
 			color: inherit;
@@ -191,23 +180,26 @@
 
 		.demo-preview {
 			border-radius: #theme.common[radius];
-			margin-bottom: @gutter;
+			margin-top: @gutter;
 		}
 
 		@_thumb_width: 180/24*16 * @unit;
 		.demo-preview {
 			float: left;
-			width: @_thumb_width;
+			width: 100%;
 			height: 174/24*16 * @unit;
 		}
 		h2 {
 			margin-top: 0;
 		}
 		.clickable-whole {
-			h2, p {
-				padding-left: @_thumb_width + @gutter;
+			h2 {
+        height: 2em;
+        display: table-cell;
+        vertical-align: bottom;
 			}
 		}
+
 
 		// The spotlight, starting at -sm is quite problematic.
 		#screen-md-min({
