@@ -3,7 +3,7 @@
 [% USE JSON.Escape %]
 
 <div class="page-title">
-  <h1>Getting Nix</h1>
+  <h1>Download</h1>
 </div>
 
 <section class="generic-layout lead">
@@ -15,6 +15,7 @@
 </section>
 
 <section class="generic-layout">
+  <h1>Getting Nix</h1>
   <div class="tabs-navigation">
     <nav>
       <ul id="getting-nix">
