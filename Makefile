@@ -39,7 +39,8 @@ DEMOS = \
   demos/example_2.svg \
   demos/example_3.svg \
   demos/example_4.svg \
-  demos/example_5.svg
+  demos/example_5.svg \
+  demos/example_6.svg
 
 
 NIX_DEV_MANUAL_IN ?= /no-such-path
