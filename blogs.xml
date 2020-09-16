@@ -9,6 +9,74 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Tweag I/O: Implicit Dependencies in Build Systems</title>
+	<guid isPermaLink="true">https://tweag.io/blog/2020-09-16-implicit-build-dependencies/</guid>
+	<link>https://tweag.io/blog/2020-09-16-implicit-build-dependencies/</link>
+	<description>&lt;p&gt;In making a build system for your software, you codified the dependencies
+between its parts. But, did you account for &lt;em&gt;implicit&lt;/em&gt; software dependencies,
+like system libraries and compiler toolchains?&lt;/p&gt;
+&lt;p&gt;Implicit dependencies give rise to the biggest and most common problem with
+software builds - the lack of &lt;em&gt;hermiticity&lt;/em&gt;. Without hermetic builds,
+&lt;em&gt;reproducibility&lt;/em&gt; and &lt;em&gt;cacheability&lt;/em&gt; are lost.&lt;/p&gt;
+&lt;p&gt;This post motivates the desire for reproducibility and cacheability, and
+explains how we achieve hermetic, reproducible, highly cacheable builds by
+taking control of implicit dependencies.&lt;/p&gt;
+&lt;h3&gt;Reproducibility&lt;/h3&gt;
+&lt;p&gt;Consider a developer newly approaching a code repository. After cloning the
+repo, the developer must install a long list of “build requirements” and plod
+through multiple steps of “setup”, only to find that, yes indeed, the build
+fails. Yet, it worked just fine for their colleague! The developer, typically
+not expert in build tooling, must debug the mysterious failure not of their
+making. This is bad for morale and for productivity.&lt;/p&gt;
+&lt;p&gt;This happens because the build is not &lt;em&gt;reproducible&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;One very common reason for the failure is that the compiler toolchain on the
+developer’s system is different from that of the colleague. This happens even
+with build systems that use sophisticated build software, like &lt;a href=&quot;https://www.tweag.io/blog/tags/bazel&quot;&gt;Bazel&lt;/a&gt;.
+Bazel implicitly uses whatever system libraries and compilers are currently
+installed in the developer’s environment.&lt;/p&gt;
+&lt;p&gt;A common workaround is to provide developers with a Docker image equipped with
+a certain compiler toolchain and system libraries, and then to mandate that the
+Bazel build occurs in that context.&lt;/p&gt;
+&lt;p&gt;That solution has a number of drawbacks. First, if the developer is using
+macOS, the virtualized build context runs substantially slower. Second, the
+Bazel build cache, developer secrets, and the source code remain outside of the
+image and this adds complexity to the Docker invocation. Third, the Docker
+image must be rebuilt and redistributed as dependencies change and that’s extra
+maintenance. Fourth, and this is the biggest issue, Docker image builds are
+themselves not reproducible - they nearly always rely on some external state
+that does not remain constant across build invocations, and that means the
+build can fail for reasons unrelated to the developer’s code.&lt;/p&gt;
+&lt;p&gt;A better solution is to use &lt;a href=&quot;https://www.tweag.io/blog/tags/nix&quot;&gt;Nix&lt;/a&gt; to supply the compiler toolchain and
+system library dependencies. Nix is a software package management system
+somewhat like Debian’s APT or macOS’s Homebrew. Nix goes much farther to help
+developers control their environments. It is unsurpassed when it comes to
+reproducible builds of software packages.&lt;/p&gt;
+&lt;p&gt;Nix facilitates use of the Nixpkgs package set. That set is &lt;a href=&quot;https://repology.org/repositories/statistics/nonunique&quot;&gt;the largest single
+set of software packages&lt;/a&gt;. It is also the &lt;a href=&quot;https://repology.org/repositories/statistics/newest&quot;&gt;freshest&lt;/a&gt; package set. It
+provides build instructions that work both on Linux and macOS. Developers can
+easily pin any software package at an exact version.&lt;/p&gt;
+&lt;p&gt;Learn more about &lt;a href=&quot;https://www.tweag.io/blog/2018-03-15-bazel-nix/&quot;&gt;using Nix with Bazel, here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Cacheability&lt;/h3&gt;
+&lt;p&gt;Not only should builds be reproducible, but they should also be fast. Fast
+builds are achieved by caching intermediate build results. Cache entries are
+keyed based on the precise dependencies as well as the build instructions that
+produce the entries. Builds will only benefit from a (shared, distributed)
+cache when they have matching dependencies. Otherwise, cache keys (which depend
+on the precise dependencies) will be different, and there will be cache misses.
+This means that the developer will have to rebuild targets locally. These
+unnecessary local rebuilds slow development.&lt;/p&gt;
+&lt;p&gt;The solution is to &lt;a href=&quot;https://www.tweag.io/blog/2018-03-15-bazel-nix/&quot;&gt;make the implicit dependencies into explicit ones, again
+using Nix&lt;/a&gt;, making sure to configure and use a shared Nix cache.&lt;/p&gt;
+&lt;p&gt;Learn more about &lt;a href=&quot;https://www.tweag.io/blog/2020-04-09-bazel-remote-cache/&quot;&gt;configuring a shared Bazel cache, here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;It is important to eliminate implicit dependencies in your build system in
+order to retain build reproducibility and cacheability. Identify Nix packages
+that can replace the implicit dependencies of your Bazel build and use
+&lt;a href=&quot;https://github.com/tweag/rules_nixpkgs&quot;&gt;rules_nixpkgs&lt;/a&gt; to declare them as explicit dependencies. That will yield a
+fast, correct, hermetic build.&lt;/p&gt;</description>
+	<pubDate>Wed, 16 Sep 2020 00:00:00 +0000</pubDate>
+</item>
+<item>
 	<title>Tweag I/O: Towards a content-addressed model for Nix</title>
 	<guid isPermaLink="true">https://tweag.io/blog/2020-09-10-nix-cas/</guid>
 	<link>https://tweag.io/blog/2020-09-10-nix-cas/</link>
@@ -1344,105 +1412,6 @@ update the cache.&lt;/p&gt;</description>
 &lt;/ol&gt;</description>
 	<pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
 	<author>support@nixbuild.net (nixbuild.net)</author>
-</item>
-<item>
-	<title>Tweag I/O: Long-term reproducibility with Nix and Software Heritage</title>
-	<guid isPermaLink="true">https://tweag.io/blog/2020-06-18-software-heritage/</guid>
-	<link>https://tweag.io/blog/2020-06-18-software-heritage/</link>
-	<description>&lt;p&gt;Reproducible builds and deployments — this is the ambition that Nix proclaims for itself.
-This ambition comes, however, with a fine print: builds are reproducible &lt;em&gt;only if the original source code still exists&lt;/em&gt;.
-Otherwise, Nix can’t download, build and deploy it.
-The community maintains binary caches like &lt;code class=&quot;language-text&quot;&gt;cache.nixos.org&lt;/code&gt;, but these don’t preserve anything — caches are ephemeral.
-After all, preserving source code is not Nix’s primary mission!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.softwareheritage.org/&quot;&gt;Software Heritage&lt;/a&gt;, on the other hand, aspires to preserve software forever.
-Software Heritage is an independent foundation, grounded in academia, supported by public money, and backed by many of the world’s largest software companies.
-It can thus reliably pursue the tedious task of collecting and archiving public code and making it available through its website.&lt;/p&gt;
-&lt;p&gt;Quite naturally, this situation suggested an opportunity for collaboration:
-can we combine Nix’s reproducible build definitions with Software Heritage’s long-term archive?
-Will this collaboration bring us closer to the dream of forever replicable and successful builds?
-We thought that this was an effort worth pursuing, so a &lt;a href=&quot;https://www.softwareheritage.org/2020/06/18/welcome-nixpgks&quot;&gt;partnership started&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This is a story about the challenges that we encountered when trying to make this happen, what we already achieved, and the lessons that we have learned.&lt;/p&gt;
-&lt;h2&gt;Archiving all sources in Nixpkgs&lt;/h2&gt;
-&lt;p&gt;Whenever a Nix user installs a package that isn’t in the binary cache, Nix tries to download the original source and build it from scratch.
-When these sources don’t exist anymore, or don’t correspond anymore to what Nix expects them to be, the experience can be frustrating —
-instead of a reproducible build, the user ends up with a “file not found” HTTP error message.&lt;/p&gt;
-&lt;p&gt;With a long-term source code archive at hand, we could simply redirect the download request to it and move on with the build process.
-In other words, we would like to make Nix fall back on the Software Heritage archive to download the missing source from there.&lt;/p&gt;
-&lt;p&gt;For this to work, we must ensure that the source code has been fed to the Software Heritage archive previously. The best way to do it is
-simply to tell Software Heritage which source code we would like to have archived. Indeed, Software Heritage’s long term goal is to archive
-all source code produced in the world, and is quite eager to get pointed to locations where to get more!&lt;/p&gt;
-&lt;p&gt;The first step of this joint effort was to compile a list of all source code URLs required by Nixpkgs, and make them available to Software Heritage.
-A &lt;a href=&quot;https://github.com/nix-community/nixpkgs-swh&quot;&gt;Nix community project&lt;/a&gt; is in charge of generating the list of source code URLs required by a Nixpkgs build, and it is available &lt;a href=&quot;https://nix-community.github.io/nixpkgs-swh/sources-unstable.json&quot;&gt;here&lt;/a&gt;.
-This list indexes every tarball used by the Nixpkgs &lt;code class=&quot;language-text&quot;&gt;master&lt;/code&gt; branch, with other sources such as patches, JAR’s, or git clones being currently excluded, and hence not archived.&lt;/p&gt;
-&lt;p&gt;A source list is a simple JSON file that looks like this:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
-  &quot;sources&quot;: [
-    {
-      &quot;type&quot;: &quot;url&quot;,
-      &quot;urls&quot;: [
-        &quot;https://ftpmirror.gnu.org/hello/hello-2.10.tar.gz&quot;,
-      ],
-      &quot;integrity&quot;: &quot;sha256-MeBmE3qWJnbon2nRtlOC3pWn732RS4y5VvQepy4PUWs=&quot;,
-    },
-    ...
-  ],
-  &quot;version&quot;: 1,
-  &quot;revision&quot;: &quot;cc4e04c26672dd74e5fd0fecb78b435fb55368f7&quot;
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Here,&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;version&lt;/code&gt; is the version of this file’s format,&lt;/li&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;revision&lt;/code&gt; is a Nixpkgs commit ID,&lt;/li&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;type&lt;/code&gt; is the type of the source. Only the &lt;code class=&quot;language-text&quot;&gt;url&lt;/code&gt; type is currently supported,&lt;/li&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;integrity&lt;/code&gt; is the hash of the Nix fixed output derivation.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We then implemented a Software Heritage &lt;a href=&quot;https://docs.softwareheritage.org/devel/glossary.html#term-loader&quot;&gt;loader&lt;/a&gt; which fetches this JSON file once per day and archives all listed tarballs in a snapshot.&lt;/p&gt;
-&lt;p&gt;You can see an example snapshot &lt;a href=&quot;https://archive.softwareheritage.org/browse/origin/directory/?origin_url=https://nix-community.github.io/nixpkgs-swh/sources-unstable.json&amp;amp;timestamp=2020-06-03T11:25:05Z&quot;&gt;here&lt;/a&gt;.
-This snapshot was created the 03 June 2020, points to the Nixpkgs commit &lt;a href=&quot;https://github.com/NixOS/nixpkgs/tree/46fcaf3c8a13f32e2c147fd88f97c4ad2d3b0f27&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;46fcaf3c8a13f32e2c147fd88f97c4ad2d3b0f27&lt;/code&gt;&lt;/a&gt; and contains 21,100 branches, each one corresponding to the tarballs used by this Nixpkgs revision.&lt;/p&gt;
-&lt;p&gt;Every day, Software Heritage is now archiving more than 21,000 tarballs used by Nixpkgs.
-But how we can plug them back into Nix?&lt;/p&gt;
-&lt;h2&gt;Falling back on Software Heritage&lt;/h2&gt;
-&lt;p&gt;Two issues need to be addressed to make this happen:&lt;/p&gt;
-&lt;p&gt;First, we need to find the correct source, the one that Nix tried to download unsuccessfully, in the Software Heritage archive.
-We cannot simply use the original source URL to query the Software Heritage archive because the URL alone doesn’t identify uniquely the content that is behind it.
-What if the code that a URL points to has changed over time?
-To check this, Nix associates a hash with each downloaded artifact.
-Such a build step is called a &lt;a href=&quot;https://nixos.org/nix/manual/#fixed-output-drvs&quot;&gt;fixed output derivation&lt;/a&gt; because Nix verifies that the output hash remains immitigably unchanged.
-It thus ensures that the content that it downloads is always the same, and emits an error otherwise.
-What we therefore really want is querying Software Heritage with the &lt;em&gt;contents&lt;/em&gt;, that is, the hash of the source code artifact itself.&lt;/p&gt;
-&lt;p&gt;Let’s do it then!
-Does this mean that the problem is solved?
-Unfortunately not, and the reason for this are the design decisions behind Nix, Software Heritage and other package repositories, that are not fully compatible.
-And tarballs play a central role in this.&lt;/p&gt;
-&lt;h1&gt;Content Hash vs Tarball Hash&lt;/h1&gt;
-&lt;p&gt;When Software Heritage archives a tarball, it first unpacks it and then stores all files and directories.
-This makes it possible to &lt;em&gt;deduplicate&lt;/em&gt; files: when two tarballs contain the same file it is only stored once.
-This is a nice solution, but unfortunately, this new tarball may differ from the original one — for example, if file permissions or timestamps were not preserved in this reassembly procedure.
-Since Nix computes the checksum of the tarball, it will detect that it differs from the hash of the original, and has no means to ensure that the tarball downloaded from the Software Heritage archive corresponds to the one it expects.&lt;/p&gt;
-&lt;p&gt;Nix, being really stubborn with respect to reproducibility, computes the checksum of the tarball, and detects that it differs from the hash of the original.
-Nix simply cannot ensure that the tarball downloaded from the Software Heritage archive corresponds to the one it expects, and rightly so because this could easily lead to a different build.&lt;/p&gt;
-&lt;p&gt;Nix already deals with some situations where the hash of a source tarball can change without affecting build reproducibility.
-For example, &lt;code class=&quot;language-text&quot;&gt;fetchFromGitHub&lt;/code&gt; unpacks the tarball &lt;em&gt;before&lt;/em&gt; computing the hash of the unpacked contents.
-This is because GitHub produces release tarballs on the fly, and a change in the compression algorithm can invalidate the hash expected by Nix.
-It happens that when Nix uses the &lt;code class=&quot;language-text&quot;&gt;fetchFromGithub&lt;/code&gt; strategy, it manages to download tarballs from Software Heritage.
-Currently, this is the case for about 6,000 sources in Nixpkgs.&lt;/p&gt;
-&lt;p&gt;For all other sources, we would have to modify the Nixpkgs fetchers to compute checksums on the unpacked tarball contents.
-This seems reasonable, since we want to make sure that the source code is the same, and we don’t care much about the format in it is transferred (which can also be important for security reasons).
-However, using the hash of the tarball directly is often more convenient, since it is exposed by many repositories such as &lt;a href=&quot;https://pypi.org&quot;&gt;Pypi&lt;/a&gt; and &lt;a href=&quot;https://hackage.haskell.org&quot;&gt;Hackage&lt;/a&gt;.
-When updating a package in Nixpkgs, the maintainer can just pick the checksum provided by the package repository, instead of recalculating it locally.&lt;/p&gt;
-&lt;p&gt;Ideally, Nix fetchers and these package repositories would provide checksums of the unpacked &lt;em&gt;contents&lt;/em&gt; of their packages as much as possible.
-This would give us the freedom to identify content independently of the way it is packed, transferred and stored.
-We haven’t yet decided how to move on, but rest assured that we will continue to work on it.&lt;/p&gt;
-&lt;h1&gt;Wrap up&lt;/h1&gt;
-&lt;p&gt;Thanks to Software Heritage, a significant part of the sources used by Nixpkgs are now archived forever.
-Moreover, about 6,000 out of the 21,000 tarballs used by Nixpkgs can already be used by the future Nix fallback mechanism.
-We now want to increase the number of archived source code tarballs, add support for Git sources and start to implement the fallback mechanism in Nix.
-At the same time, we aim to increase the number of fixed output derivations whose hash is computed on the unpacked tarball.&lt;/p&gt;
-&lt;p&gt;We want build reproducibility to become the standard in the software world.
-For this reason, the Software Heritage loader archiving Nixpkgs source code tarballs has been designed to be easily reused by other actors.
-For example, the &lt;a href=&quot;https://guix.gnu.org/&quot;&gt;Guix&lt;/a&gt; project already started publishing and archiving their sources using the same component!
-Finally, we want to thank &lt;a href=&quot;https://nlnet.nl/&quot;&gt;NLnet&lt;/a&gt; for the funding that makes this work possible.&lt;/p&gt;</description>
-	<pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
 </item>
 
 </channel>
