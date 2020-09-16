@@ -11,12 +11,12 @@ USE date;
 # class: Additional classes
 BLOCK navigationLink %]
 
-<li class="[% outputName == href ? "active" : "" %] [% class %]">
-[%- IF href -%]
-<a href="[% root %][% href %]">[% title %]</a>
-[%- ELSE -%]
-[%- content -%]
-[%- END -%]
+<li class="[% outputName == href ? " active" : "" %] [% class %]">
+  [%- IF href -%]
+  <a href="[% root %][% href %]">[% title %]</a>
+  [%- ELSE -%]
+  [%- content -%]
+  [%- END -%]
 </li>
 [% END;
 
@@ -37,7 +37,7 @@ BLOCK navigationLink %]
   [%# This has to happen ASAP, even before jQuery is initialized. %]
   <script>
     var html = document.documentElement;
-    html.className = html.className.replace("without-js","with-js");
+    html.className = html.className.replace("without-js", "with-js");
   </script>
 
   <script type="text/javascript" src="[% root %]js/jquery.min.js"></script>
@@ -55,7 +55,7 @@ BLOCK navigationLink %]
           <input type="text" name="query" />
         </div>
       </form>
-	  [%# ???! go read `navbar.less` and `nixos-site.js`, it's all fine I swear. %]
+      [%# ???! go read `navbar.less` and `nixos-site.js`, it's all fine I swear. %]
       <nav style="display: none;">
         <ul>
           [% INCLUDE navigationLink href="features.html" title="Features" %]
@@ -64,73 +64,56 @@ BLOCK navigationLink %]
           [% INCLUDE navigationLink href="community.html" title="Community" %]
           [% INCLUDE navigationLink href="governance.html" title="Governance" %]
           [% INCLUDE navigationLink href="donate.html" title="Donate" %]
-          [% WRAPPER navigationLink %]
-            <a class="button -primary" href="#">Install Nix</a>
-          [% END %]
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-  [% IF !handlesLayout %]
-  <div class="generic-layout">
-  [% END %]
+    [% IF !handlesLayout %]
+    <div class="generic-layout">
+      [% END %]
 
-  [% content %]
+      [% content %]
 
-  [% IF !handlesLayout %]
-  </div>
-  [% END %]
+      [% IF !handlesLayout %]
+    </div>
+    [% END %]
   </main>
 
   <footer>
     <div class="upper">
-        <section>
-          <h4>The project</h4>
-          <ul>
-            <li><a href="https://status.nixos.org/">Nix Channel Status</a></li>
-            <li><a href="https://search.nixos.org/packages">Nix packages search</a></li>
-            <li><a href="https://search.nixos.org/options">NixOS options search</a></li>
-          </ul>
-          <ul>
-            <li><a href="https://nixos.org/governance.html">Governance</a></li>
-            <li><a href="https://nixos.org/teams/security.html">Security</a></li>
-          </ul>
-        </section>
-        <section>
-          <h4>Contribute</h4>
-          <ul>
-            <li><a href="https://nixos.org/guides/contributing.html">Contributing Guide</a></li>
-            <li><a href="https://nixos.org/donate.html">Donate</a></li>
-          </ul>
-          <h4>Stay up to date</h4>
-          <ul>
-            <li><a href="https://nixos.org/news.html">News</a></li>
-            <li><a href="https://weekly.nixos.org/">NixOS Weekly</a></li>
-          </ul>
-        </section>
-        <section>
-          <h4>Get in Touch</h4>
-          <ul>
-            <li><a href="https://discourse.nixos.org/">Forum</a></li>
-            <li><a href="https://webchat.freenode.net/#nixos">Chat</a></li>
-            <li><a href="https://nixos.org/commercial-support.html">Commercial support</a></li>
-          </ul>
-        </section>
-        <section>
-          <h4>The choice is yours</h4>
-          <h5>Get started with...</h5>
-          <ul>
-            <li><a href="[% root %]learn.html#nix">Nix Packages Manager</a></li>
-            <li><a href="[% root %]learn.html#nixos">NixOS Linux</a></li>
-          </ul>
-          <h5>Download...</h5>
-          <ul>
-            <li><a href="[% root %]download.html#nix">Nix Packages Manager</a></li>
-            <li><a href="[% root %]download.html#nixos">NixOS Linux</a></li>
-          </ul>
-        </section>
+      <section>
+        <h4>The project</h4>
+        <ul>
+          <li><a href="https://status.nixos.org/">Channel Status</a></li>
+          <li><a href="https://search.nixos.org/packages">Packages search</a></li>
+          <li><a href="https://search.nixos.org/options">Options search</a></li>
+          <li><a href="https://nixos.org/teams/security.html">Security</a></li>
+        </ul>
+      </section>
+      <section>
+        <h4>Get in Touch</h4>
+        <ul>
+          <li><a href="https://discourse.nixos.org/">Forum</a></li>
+          <li><a href="https://webchat.freenode.net/#nixos">Chat</a></li>
+          <li><a href="https://nixos.org/commercial-support.html">Commercial support</a></li>
+        </ul>
+      </section>
+      <section>
+        <h4>Contribute</h4>
+        <ul>
+          <li><a href="https://nixos.org/guides/contributing.html">Contributing Guide</a></li>
+          <li><a href="https://nixos.org/donate.html">Donate</a></li>
+        </ul>
+      </section>
+      <section>
+        <h4>Stay up to date</h4>
+        <ul>
+          <li><a href="https://nixos.org/news.html">Announcements</a></li>
+          <li><a href="https://weekly.nixos.org/">Newsletter</a></li>
+        </ul>
+      </section>
     </div>
     <hr />
     <div class="lower">
@@ -151,7 +134,8 @@ BLOCK navigationLink %]
         <h4>Connect with us</h4>
         <ul>
           <li class="social-icon -twitter"><a href="https://twitter.com/nixos_org">Twitter</a></li>
-          <li class="social-icon -youtube"><a href="https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw">Youtube</a></li>
+          <li class="social-icon -youtube"><a
+              href="https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw">Youtube</a></li>
           <li class="social-icon -github"><a href="https://github.com/NixOS">GitHub</a></li>
         </ul>
       </section>
