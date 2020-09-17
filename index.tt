@@ -150,7 +150,7 @@
     [% PROCESS demoPane demo="example_2" %]
     [% PROCESS demoPane demo="example_3" %]
 
-    <ul class="examples-list">
+    <ul class="examples-list -spotlight">
       [% WRAPPER exampleBlock demo="example_4" title="Minimal docker images" %]
       [% END %]
 
