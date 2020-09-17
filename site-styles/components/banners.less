@@ -1,7 +1,15 @@
 // Needs to be part of the *root* element, e.g. body > main > .wide-banner
+// `.-detailed` elements will be shown only for wider viewports (-lg)
 .wide-banner {
 	&:first-child {
 		margin-top: -@gutter;
+	}
+
+	.-detailed {
+		display: none;
+		#screen-lg-min({
+			display: initial;
+		});
 	}
 
 	#fill-width();
