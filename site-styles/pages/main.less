@@ -1,8 +1,13 @@
 .home-hero {
 	#flair.outlined-bg-dark();
 
-	padding-top: 90*@unit;
-	padding-bottom: 90*@unit;
+	padding-top: 1*@gutter;
+	padding-bottom: 2*@gutter;
+
+	#screen-md-min({
+		padding-top: 90*@unit;
+		padding-bottom: 90*@unit;
+	});
 
 	& > div {
 		display: flex;
@@ -51,7 +56,11 @@
 		});
 
 		.button-tray {
-			#screen-md-min({
+			#screen-sm-only({
+				justify-content: center;
+				margin-bottom: 2 * @gutter;
+			});
+			#screen-sm-min({
 				#rules_for_form.button({
 					// Even at smaller sizes, as long as not full width
 					// the buttons are based on the main grid sizing.
@@ -82,7 +91,6 @@
 	}
 	.whynix {
 		#columns(3, @spacing: @gutter*2);
-		margin-top: @gutter * 4;
 	}
 }
 
@@ -221,5 +229,11 @@
 }
 
 .home-whynix, .home-examples {
-	margin-top: 4*@gutter;
+	margin-top: 1*@gutter;
 }
+
+#screen-md-min({
+	.home-whynix, .home-examples {
+		margin-top: 4*@gutter;
+	}
+});
