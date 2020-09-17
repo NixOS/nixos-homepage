@@ -7,6 +7,9 @@ $(function () {
   var paneOpenEvent = new Event("paneOpen");
   var paneCloseEvent = new Event("paneClose");
 
+  // All known panes
+  var panesRegistry = [];
+
   // Setup the responsive collapsible menu
   var $header = $("body > header");
   var $menu = $("body > header nav");
@@ -44,10 +47,15 @@ $(function () {
     var $pane = $($source.attr("href"));
     var pane = $pane[0];
 
+    panesRegistry.push(pane);
+
     // Wire the source to present the pane
     $source.click(function (e) {
+      $$synthetic = true;
+      $(panesRegistry).find(".pane-close").click();
+      $$synthetic = false;
       $pane.show();
-      pane.scrollIntoView();
+      pane.scrollIntoView({ block: "center" });
       pane.dispatchEvent(paneOpenEvent);
     });
 
@@ -57,7 +65,9 @@ $(function () {
       $pane.hide();
       $source[0].scrollIntoView({ block: "center" });
       pane.dispatchEvent(paneCloseEvent);
-      history.replaceState(null, null, " ");
+      if (!$$synthetic) {
+        history.replaceState(null, null, " ");
+      }
     });
     $pane.append($el);
   })
@@ -77,7 +87,7 @@ $(function () {
     var $tabview = $(this);
     var $links = $tabview.children("nav").find("a");
 
-    $panes = $tabview.children("div").children();
+    var $panes = $tabview.children("div").children();
     $panes.hide();
     $($panes[0]).show();
     $($links[0]).addClass("-active")

@@ -97,6 +97,12 @@ ul {
 
 table {
 	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: @gutter;
+}
+
+thead th {
+	text-align: left;
 }
 
 hr {
@@ -165,9 +171,6 @@ img.inline {
 // (generic-layout is wrapped when a .tt page doesn't define handlesLayout)
 .generic-layout {
 	#container();
-	.code {
-		&:extend(.file-listing all);
-	}
 
 	&.lead, & > .lead {
 		font-size: 1.25em;
@@ -233,14 +236,25 @@ img.inline {
 }
 
 .well {
-	margin-bottom: @gutter;
-	border-radius: #theme.common[radius];
-	padding: @gutter;
-	overflow: auto;
 	background: #theme.file-listing[background];
 	color: #theme.file-listing[foreground];
 
-	& > :first-child {
-		margin-top: 0;
+	&:extend(.notice-box all);
+}
+
+.label {
+	pointer-events: none;
+	#no-select();
+
+	font-family: #theme.font[secondary];
+	font-weight: bold;
+	font-size: 0.8em;
+	vertical-align: text-bottom;
+	border-radius: 0.3em;
+	padding: 0.1em 0.3em;
+
+	&.-info {
+		background-color: #theme.color[blue-dark];
+		color: #theme.color[white];
 	}
 }

@@ -42,6 +42,7 @@
 
 		white: @white;
 		black: @black;
+		not-black: #3a3a3a;
 		blue-darker: #27385d;
 		blue-dark2: #405D99;
 		blue-dark: #5277c3;
@@ -50,6 +51,8 @@
 		green: #6ad541;
 		gray-dark: #6a6a6a;
 		gray-light: #d8d8d8;
+		gray-lightest: #f4f4f4;
+		yellow: #fffeca;
 
 		foreground: @black;
 		background: @white;
@@ -89,7 +92,7 @@
 
 	.terminal() {
 		foreground: #theme.color[white];
-		background: #theme.color[black];
+		background: #theme.color[not-black];
 	}
 
 	.file-listing() {

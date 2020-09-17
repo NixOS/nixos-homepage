@@ -1,0 +1,44 @@
+.learn-guides > ul {
+	&:extend(.choice-smorgasboard all);
+}
+
+.learn-manuals {
+	margin-bottom: @gutter;
+	& > ul {
+		#columns(3, @md: 3, @sm: 1);
+		list-style-type: none;
+
+		padding: 0;
+		margin: 0;
+		margin-bottom: 0;
+	}
+
+	& > ul ul ul {
+		margin-bottom: 0;
+	}
+
+	ul.comma-separated {
+		&, & > li {
+			margin: 0;
+			padding: 0;
+			display: inline;
+		}
+		& > li::after {
+			content: ",";
+		}
+	}
+
+	.button {
+		width: 100%;
+		margin-bottom: @gutter;
+	}
+}
+
+.learn-gethelp {
+	& > ul {
+		#columns(2);
+	}
+	.support {
+		&:extend(.well all);
+	}
+}

@@ -17,7 +17,7 @@
 	align-items: stretch;
 	align-content: stretch;
 
-	min-height: 100vh;
+	min-height: 90vh;
 	position: relative;
 
 	.pane-close {
@@ -44,7 +44,7 @@
 			width: 100%;
 			top: @_size/2;
 			left: 0;
-			border-top: 3*@unit solid #theme.color[white];
+			border-top: 3*@unit solid transparent;
 		}
 		&::before {
 			transform: rotate(45deg);
@@ -53,4 +53,19 @@
 			transform: rotate(-45deg);
 		}
 	}
+
 }
+
+#fullscreen-pane {
+	.close-color(@color) {
+		&.fullscreen-pane {
+			.pane-close {
+				&::before, &::after {
+					border-top-color: @color;
+				}
+			}
+		}
+	}
+}
+
+#fullscreen-pane.close-color(#theme.color[gray-dark]);
