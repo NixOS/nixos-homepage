@@ -112,6 +112,39 @@ $(function () {
     });
   });
 
+  // Terrible days counter
+  $(".countdown-timer").each(function () {
+    var $this = $(this);
+    var when = new Date($this.data("date"));
+
+    function updateCounter() {
+      var today = new Date();
+      var left = when - today;  // in miliseconds
+
+      var stale = (new Date($this.data("stale")) - today) < 0;
+      if (stale) {
+        $($this.data("stale-hide")).remove();
+      }
+
+      var current = left < 0;
+      if (current) {
+        $this.text(
+          $this.data("current")
+        );
+      } else {
+        var days = Math.round(left / (24*60*60*1000));
+        var left_date = new Date(left);
+        $(".counter-days", $this).text(days);
+        $(".counter-hours", $this).text(left_date.getHours());
+        $(".counter-minutes", $this).text(left_date.getMinutes());
+        $(".counter-seconds", $this).text(left_date.getSeconds());
+      }
+    }
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
+  })
+
   // Activate the link for which the anchor matches. Hopefully changing the tab
   // or opening the relevant pane.
   var handleNavigation = function(event) {

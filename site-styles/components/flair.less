@@ -16,7 +16,10 @@
 }
 
 .__flair_outlined-bg {
-	margin-top: -@gutter;
+	&:first-child {
+		margin-top: -@gutter;
+	}
+	margin-top: 0;
 	padding-top: @gutter*2;
 
 	position: relative;

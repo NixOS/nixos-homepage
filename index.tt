@@ -19,6 +19,32 @@
 [% END %]
 [% WRAPPER layout.tt title="NixOS Linux" handlesLayout=1 %]
 
+<section class="wide-banner clickable-whole event-banner">
+  <div>
+    <div>
+      NixCon 2020.
+      <!-- TODO: show this only in lg
+      <span>Talks. Discussions. Hacking.</span>
+      -->
+    </div>
+    <div class="description">
+      October 16th-18th 2020
+    </div>
+    <div class="countdown-timer" data-date="2020-10-16 12:00:00" data-stale="2020-10-19 0:00:00"
+      data-stale-hide="main > .event-banner" data-current="Currently happening!">
+      <ul>
+        <li><span class="counter-days"></span>days</li>
+        <li><span class="counter-hours"></span>hours</li>
+        <li><span class="counter-minutes"></span>minutes</li>
+        <li><span class="counter-seconds"></span>seconds</li>
+      </ul>
+    </div>
+    <div class="action">
+      <a href="https://2020.nixcon.org/">Program</a>
+    </div>
+  </div>
+</section>
+
 <section class="home-hero">
   <div>
     <div class="blurb">
@@ -122,7 +148,11 @@
       [% END %]
     </ul>
 
-    <ul class="examples-list">
+    [% PROCESS demoPane demo="example_1" %]
+    [% PROCESS demoPane demo="example_2" %]
+    [% PROCESS demoPane demo="example_3" %]
+
+    <ul class="examples-list -spotlight">
       [% WRAPPER exampleBlock demo="example_4" title="Minimal docker images" %]
       [% END %]
 
@@ -136,9 +166,6 @@
   </div>
 </section>
 
-[% PROCESS demoPane demo="example_1" %]
-[% PROCESS demoPane demo="example_2" %]
-[% PROCESS demoPane demo="example_3" %]
 [% PROCESS demoPane demo="example_4" %]
 [% PROCESS demoPane demo="example_5" %]
 [% PROCESS demoPane demo="example_6" %]
