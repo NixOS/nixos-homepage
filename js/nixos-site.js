@@ -69,7 +69,7 @@ $(function () {
         history.replaceState(null, null, " ");
       }
     });
-    $("div", $pane).first().append($el);
+    $pane.append($el);
   })
 
   // Make a whole element act as if the first link or button was clicked.
