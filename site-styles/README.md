@@ -18,6 +18,8 @@ innate structure of the document is enough.
 Units
 -----
 
+### `@unit`
+
 **Always** use `@unit` relative sizes rather than pixels, if pixels equivalents
 are desired. Otherwise, work with `em` for relative sizes according to the
 current sizes, or `rem` for root-relative sizes.
@@ -38,6 +40,19 @@ configuration.
 This is not to be confused with the `unit()` function of LESS, which changes or
 removes a unit without conversion. The `unit()` function maye be found near
 uses of `@unit` to strip a unit to work around automatic unit conversions.
+
+### `@gutter`
+
+The gutter is the other unit that is being used on the site. It is defined as
+based on `@unit`, so it respects the rule of always defining sizes based on
+`@unit`.
+
+A gutter is, simply put, the spacing between two elements of the design. When
+spacing out elements, put 1 `@gutter` between them. It can be done through
+dividing the responsibility in halves (`@gutter/2`).
+
+It might be needed to space things a bit more. Using multiples of `@gutter`
+makes ad-hoc adjustments harmonize better with the site.
 
 
 Colours
