@@ -132,12 +132,27 @@ $(function () {
           $this.data("current")
         );
       } else {
-        var days = Math.round(left / (24*60*60*1000));
         var left_date = new Date(left);
+        var days = Math.round(left / (24*60*60*1000));
+        if (days < 10) {
+          days = "0" + days;
+        }
         $(".counter-days", $this).text(days);
-        $(".counter-hours", $this).text(left_date.getHours());
-        $(".counter-minutes", $this).text(left_date.getMinutes());
-        $(".counter-seconds", $this).text(left_date.getSeconds());
+        var hours = left_date.getHours();
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+        $(".counter-hours", $this).text(hours);
+        var minutes = left_date.getMinutes();
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        $(".counter-minutes", $this).text(minutes);
+        var seconds = left_date.getSeconds();
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+        $(".counter-seconds", $this).text(seconds);
       }
     }
 
