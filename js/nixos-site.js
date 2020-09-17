@@ -112,6 +112,35 @@ $(function () {
     });
   });
 
+  // Terrible days counter
+  $(".countdown-timer").each(function () {
+    var $this = $(this);
+    var when = new Date($this.data("date"));
+    var today = new Date();
+    // In ms
+    var left = when - today;
+    var stale = (new Date($this.data("stale")) - today) < 0;
+    var current = left < 0;
+    var days = Math.round(left / (24*60*60*1000));
+
+    if (stale) {
+      $($this.data("stale-hide")).remove();
+    }
+
+    if (current) {
+      $this.text(
+        $this.data("current")
+      );
+    }
+    else {
+      $this.text(
+        $this.data("template")
+          .replace("{days}", days)
+          .replace("{s}", days != 1 ? "s" : "")
+      );
+    }
+  })
+
   // Activate the link for which the anchor matches. Hopefully changing the tab
   // or opening the relevant pane.
   var handleNavigation = function(event) {
