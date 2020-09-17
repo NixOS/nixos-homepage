@@ -116,29 +116,33 @@ $(function () {
   $(".countdown-timer").each(function () {
     var $this = $(this);
     var when = new Date($this.data("date"));
-    var today = new Date();
-    // In ms
-    var left = when - today;
-    var stale = (new Date($this.data("stale")) - today) < 0;
-    var current = left < 0;
-    var days = Math.round(left / (24*60*60*1000));
 
-    if (stale) {
-      $($this.data("stale-hide")).remove();
+    function updateCounter() {
+      var today = new Date();
+      var left = when - today;  // in miliseconds
+
+      var stale = (new Date($this.data("stale")) - today) < 0;
+      if (stale) {
+        $($this.data("stale-hide")).remove();
+      }
+
+      var current = left < 0;
+      if (current) {
+        $this.text(
+          $this.data("current")
+        );
+      } else {
+        var days = Math.round(left / (24*60*60*1000));
+        var left_date = new Date(left);
+        $(".counter-days", $this).text(days);
+        $(".counter-hours", $this).text(left_date.getHours());
+        $(".counter-minutes", $this).text(left_date.getMinutes());
+        $(".counter-seconds", $this).text(left_date.getSeconds());
+      }
     }
 
-    if (current) {
-      $this.text(
-        $this.data("current")
-      );
-    }
-    else {
-      $this.text(
-        $this.data("template")
-          .replace("{days}", days)
-          .replace("{s}", days != 1 ? "s" : "")
-      );
-    }
+    updateCounter();
+    setInterval(updateCounter, 1000);
   })
 
   // Activate the link for which the anchor matches. Hopefully changing the tab
