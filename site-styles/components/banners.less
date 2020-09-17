@@ -1,5 +1,9 @@
-
+// Needs to be part of the *root* element, e.g. body > main > .wide-banner
 .wide-banner {
+	&:first-child {
+		margin-top: -@gutter;
+	}
+
 	#fill-width();
 	background-color: #theme.color[blue-lighter];
 	padding: @gutter;
@@ -12,5 +16,28 @@
 	font-weight: #theme.font[secondary-weight];
 	font-family: #theme.font[secondary];
 	color: #theme.color[blue-dark2];
+
+	strong {
+		font-weight: inherit;
+		text-decoration: underline;
+	}
 }
 
+.event-banner {
+	font-size: 1.2rem;
+	& > * {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		#screen-sm-min({
+			flex-direction: row;
+		});
+	}
+
+	.action a {
+		font-size: 1rem;
+		#_form.button();
+		#_form.button.-highlighted();
+	}
+}
