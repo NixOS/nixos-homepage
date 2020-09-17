@@ -19,6 +19,25 @@
 [% END %]
 [% WRAPPER layout.tt title="NixOS Linux" handlesLayout=1 %]
 
+<section class="wide-banner clickable-whole event-banner">
+  <div>
+    <div class="description">
+      NixCon 2020 is <em>online!</em> 
+      <strong>October 16th-18th 2020</strong>
+    </div>
+    <div class="countdown-timer"
+      data-date="2020-10-16 12:00:00"
+      data-stale="2020-10-19 0:00:00"
+      data-stale-hide="main > .event-banner"
+      data-template="{days} day{s} left"
+      data-current="Currently happening!"
+    ></div>
+    <div class="action">
+      <a href="https://2020.nixcon.org/">Learn more</a>
+    </div>
+  </div>
+</section>
+
 <section class="home-hero">
   <div>
     <div class="blurb">
