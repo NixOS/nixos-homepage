@@ -46,15 +46,10 @@
 // Variants
 
 .__flair_outlined-bg_default {
-	// XXX: This needs further investigation.
-	// Performance is hindered on small devices.
-	// When scrolling on the landing page you can see some stuttering.
-	#screen-sm-min({
-		&::before {
-			#svg.background-outlines.blue-dark2;
-			opacity: 0.08;
-		}
-	});
+	&::before {
+		#svg.background-outlines.blue-dark2;
+		opacity: 0.08;
+	}
 }
 
 .__flair_outlined-bg_dark {
@@ -69,15 +64,10 @@
 	a {
 		color: inherit;
 	}
-	// XXX: This needs further investigation
-	// Performance is hindered on small devices.
-	// When scrolling on the landing page you can see some stuttering.
-	#screen-sm-min({
-		&::before {
-			#svg.background-outlines.white;
-			opacity: 0.3;
-		}
-	});
+	&::before {
+		#svg.background-outlines.white;
+		opacity: 0.3;
+	}
 
 }
 

@@ -93,10 +93,18 @@
 // Flair
 // =====
 
-#_declare__svg(background-outlines_blue-dark2, @SVG_BACKGROUND_OUTLINES, #theme.color[blue-dark2]);
+// XXX: This needs further investigation
+// Performance is hindered on small devices.
+// When scrolling on the landing page you can see some stuttering.
+
+#screen-sm-min({
+  #_declare__svg(background-outlines_blue-dark2, @SVG_BACKGROUND_OUTLINES, #theme.color[blue-dark2]);
+});
 #svg.background-outlines.blue-dark2 { &:extend(.__svg_background-outlines_blue-dark2); }
 
-#_declare__svg(background-outlines_white, @SVG_BACKGROUND_OUTLINES, #theme.color[white]);
+#screen-sm-min({
+  #_declare__svg(background-outlines_white, @SVG_BACKGROUND_OUTLINES, #theme.color[white]);
+});
 #svg.background-outlines.white { &:extend(.__svg_background-outlines_white); }
 
 #_declare__svg(big-angles-1, @SVG_BIG_ANGLES_1);
