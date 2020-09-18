@@ -60,8 +60,8 @@ $(function () {
     });
 
     // Add the close button, and wire it.
-    var $el = $("<button class='pane-close'>Close this pane</button>");
-    $el.click(function () {
+    var $close = $("<button class='pane-close'>Close this pane</button>");
+    $close.click(function () {
       $pane.hide();
       $source[0].scrollIntoView({ block: "center" });
       pane.dispatchEvent(paneCloseEvent);
@@ -69,7 +69,7 @@ $(function () {
         history.replaceState(null, null, " ");
       }
     });
-    $pane.append($el);
+    $($pane).children().first().append($close);
   })
 
   // Make a whole element act as if the first link or button was clicked.
