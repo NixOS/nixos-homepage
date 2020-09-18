@@ -16,6 +16,7 @@
 }
 
 .__flair_outlined-bg {
+	z-index: 1;
 	&:first-child {
 		margin-top: -@gutter;
 	}
@@ -75,14 +76,27 @@
 
 #flair() {
 	.big-angles {
-		@_top-height: 100vw * 576.61139/2543.56445;
-		@_bottom-height: 100vw * 398.84964/2543.56445;
+		// Unit-less
+		@_top-height: 362;
+		@_top-width: 1600;
+		@_top-full-width: 4000;
+		@_top-full-height: 2066;
+
+		@_bottom-height: 250;
+		@_bottom-width: 1600;
+		@_bottom-full-width: 4000;
+		@_bottom-full-height: 516;
+
+		* {
+			position: relative;
+		}
+
 		position: relative;
 		#fill-width();
 		padding-top: 75 * @unit;
-		padding-bottom: 16 * @unit;
-		margin-top: @_top-height - 2*@gutter;
-		margin-bottom: @_bottom-height;
+		padding-bottom: 0;
+		margin-top: @_top-height * @unit / 2 + 2*@gutter;
+		margin-bottom: @_bottom-height * @unit + 2*@gutter;
 
 		& > div {
 			#container();
@@ -95,29 +109,42 @@
 			position: absolute;
 			left: 0;
 			right: 0;
-			background-size:cover;
+
 			background-repeat: no-repeat;
+			background-size: auto 100%;
+			overflow: hidden;
 		}
 
-		&::before {
-			// Metrics of the file:
-			// 2543.56445 × 576.61139
-			height: @_top-height;
+		&::after {
 			bottom: 100%;
+
+			height: @_top-full-height * @unit;
 			#svg.big-angles-1();
-			background-position: bottom left;
+			background-position: 41% 100%;
+			#screen-sm-min({
+				background-position: 43% 100%;
+			});
+			#screen-md-min({
+				background-position: 45% 100%;
+			});
+			#screen-lg-min({
+				background-position: 48% 100%;
+			});
 
 			// This is to remove the gap between the pseudo-element
 			// and the element at non-integer pixel sizes
 			transform: translateY(2*@unit);
 		}
-		&::after {
-			// Metrics of the file:
-			// 2543.56445 × 398.84964
-			top: 100%;
-			height: @_bottom-height;
+
+		&::before {
+			top: calc(100% - 168*@unit);
+
+			height: @_bottom-full-height * @unit;
 			#svg.big-angles-2();
-			background-position: top right;
+			background-position: 61% 100%;
+			#screen-lg-min({
+				background-position: 59% 100%;
+			});
 
 			// This is to remove the gap between the pseudo-element
 			// and the element at non-integer pixel sizes
