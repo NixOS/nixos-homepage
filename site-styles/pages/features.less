@@ -1,0 +1,14 @@
+.features .columns {
+		display: flex;
+		#flex-flexible-spacing(@gutter);
+
+		#screen-md-min({
+			& > * {
+				width: 50%;
+			}
+		});
+
+		#screen-sm-max({
+			flex-direction: column;
+		});
+}
