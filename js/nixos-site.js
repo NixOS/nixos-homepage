@@ -26,8 +26,21 @@ $(function () {
 
   // Allow some parts of the site to present additional information for
   // debugging purposes. E.g. responsive width identifier.
-  $(".footer-copyright").dblclick(function () {
-    $("body").toggleClass("-debug");
+  function setDebug(debug) {
+    localStorage.setItem("DEBUG", JSON.stringify(debug));
+    if (debug) {
+      if (!$('body').hasClass('-debug')) {
+        $("body").addClass("-debug");
+      }
+    } else {
+      if ($('body').hasClass('-debug')) {
+        $("body").removeClass("-debug");
+      }
+    }
+  }
+  setDebug(JSON.parse(localStorage.getItem("DEBUG")));
+  $(".footer-copyright").dblclick(function() {
+    setDebug(!JSON.parse(localStorage.getItem("DEBUG")));
   });
 
   $(".pane-asciinemaplayer").each(function () {
