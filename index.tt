@@ -30,10 +30,10 @@
     <div class="countdown-timer" data-date="2020-10-16 12:00:00" data-stale="2020-10-19 0:00:00"
       data-stale-hide="main > .event-banner" data-current="Currently happening!">
       <ul>
-        <li><span class="counter-days"></span>days</li>
-        <li><span class="counter-hours"></span>hours</li>
-        <li><span class="counter-minutes"></span>minutes</li>
-        <li><span class="counter-seconds"></span>seconds</li>
+        <li><span class="counter-days">00</span>days</li>
+        <li><span class="counter-hours">00</span>hours</li>
+        <li><span class="counter-minutes">00</span>minutes</li>
+        <li><span class="counter-seconds">00</span>seconds</li>
       </ul>
     </div>
     <div class="action">

@@ -169,8 +169,12 @@ $(function () {
       }
     }
 
-    updateCounter();
-    setInterval(updateCounter, 1000);
+    if (isNaN(new Date($this.data("date")))) {
+      $this.hide();
+    } else {
+      updateCounter();
+      setInterval(updateCounter, 1000);
+    }
   })
 
   // Activate the link for which the anchor matches. Hopefully changing the tab
