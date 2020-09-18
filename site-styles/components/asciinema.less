@@ -3,16 +3,6 @@
 		color: #theme.color[white];
 	}
 
-	& > div {
-		#container();
-
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		align-content: center;
-		justify-content: center;
-	}
-
 	asciinema-player {
 		margin-top: @gutter;
 		margin-bottom: @gutter;
@@ -22,10 +12,14 @@
 			// horizontal (landscape) and just before square aspect ratio
 			font-size: 0.9rem;
 
+			#screen-sm-only({
+				font-size: 0.85rem;
+			});
+
 			// vertical (portrait) and square aspect ratio
 			// In that case we set it as a fraction of the width.
-			@media screen and (max-aspect-ratio: ~"1/1") {
-				font-size: 1.7vw;
+			@media screen and (max-aspect-ratio: ~"1/1") and (max-width: (@screen-sm-max)) {
+				font-size: 1.65vw;
 			}
 		}
 	}
