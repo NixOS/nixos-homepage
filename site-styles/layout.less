@@ -234,21 +234,27 @@ img.inline {
 		@_cols: 2;
 		#columns(@_cols);
 		& > .-twice {
-			width: 100%/@_cols*2;
+			#screen-sm-min({
+				width: 100%/@_cols*2;
+			});
 		}
 	}
 	&.-three {
 		@_cols: 3;
 		#columns(@_cols);
 		& > .-twice {
-			width: 100%/@_cols*2;
+			#screen-sm-min({
+				width: 100%/@_cols*2;
+			});
 		}
 	}
 	&.-four {
 		@_cols: 4;
 		#columns(@_cols);
 		& > .-twice {
-			width: 100%/@_cols*2;
+			#screen-sm-min({
+				width: 100%/@_cols*2;
+			});
 		}
 	}
 }
