@@ -229,32 +229,66 @@ img.inline {
 // Used only for making "MVP" pages. Once *actually* designed, they should only
 // use semantic class names, with appropriate styles.
 
+// The "columnar layout" can be of the "-longform" variant.
+// The long form does not split on columns on the "sm" viewport width.
+// This is better for long form content laid-out in two columns.
 .columnar-layout {
-	&.-two {
-		@_cols: 2;
-		#columns(@_cols);
-		& > .-twice {
-			#screen-sm-min({
-				width: 100%/@_cols*2;
-			});
+	&.-longform {
+		&.-two {
+			@_cols: 2;
+			#columns(@_cols, @sm: 1);
+			& > .-twice {
+				#screen-md-min({
+					width: 100%/@_cols*2;
+				});
+			}
+		}
+		&.-three {
+			@_cols: 3;
+			#columns(@_cols, @sm: 1);
+			& > .-twice {
+				#screen-md-min({
+					width: 100%/@_cols*2;
+				});
+			}
+		}
+		&.-four {
+			@_cols: 4;
+			#columns(@_cols, @sm: 1);
+			& > .-twice {
+				#screen-md-min({
+					width: 100%/@_cols*2;
+				});
+			}
 		}
 	}
-	&.-three {
-		@_cols: 3;
-		#columns(@_cols);
-		& > .-twice {
-			#screen-sm-min({
-				width: 100%/@_cols*2;
-			});
+	&:not(.-longform) {
+		&.-two {
+			@_cols: 2;
+			#columns(@_cols);
+			& > .-twice {
+				#screen-sm-min({
+					width: 100%/@_cols*2;
+				});
+			}
 		}
-	}
-	&.-four {
-		@_cols: 4;
-		#columns(@_cols);
-		& > .-twice {
-			#screen-sm-min({
-				width: 100%/@_cols*2;
-			});
+		&.-three {
+			@_cols: 3;
+			#columns(@_cols);
+			& > .-twice {
+				#screen-sm-min({
+					width: 100%/@_cols*2;
+				});
+			}
+		}
+		&.-four {
+			@_cols: 4;
+			#columns(@_cols);
+			& > .-twice {
+				#screen-sm-min({
+					width: 100%/@_cols*2;
+				});
+			}
 		}
 	}
 }
