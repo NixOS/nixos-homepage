@@ -540,7 +540,7 @@
         switch --upgrade</tt>. You can verify whether you are safe by
       running
 
-      <pre class="code">
+      <pre class="terminal-console">
 $ nix-store -qR /run/current-system | grep openssl
 </pre>
 

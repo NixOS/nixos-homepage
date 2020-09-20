@@ -1,256 +1,170 @@
-[% WRAPPER layout.tt title="NixOS Linux" %]
-[% USE JSON.Escape %]
-[% USE IO.All %]
-[% USE HTML %]
-[% USE String %]
-
-<link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
-
-<div class="alert alert-info">
-  This year's <a href="https://2020.nixcon.org/">NixCon</a> will take place <b>online</b> on <b>October 16th-18th 2020</b>. It is a community-oriented conference for contributors and users of Nix and NixOS.<br />
-</div>
-
-<div class="side-by-side">
-  <div class="hero">
-    <h1>Reproducible builds and deployments.</h1>
-    <p class="lead">
-      <strong>Nix</strong> is a powerful package manager for Linux and other
-      Unix systems that makes package management reliable and reproducible.
-      Share your development and build environments across different machines.
-    </p>
-    <p class="lead">
-      <strong>NixOS</strong> is a Linux distribution with a unique approach to
-      package and configuration management. Built on top of the Nix package
-      manager, it is completely declarative, makes upgrading systems reliable,
-      and has <a href="[% root %]features.html">many other advantages</a>.
-    </p>
-    <a class="btn btn-large btn-success" href="[% root %]download.html">Download</a>
-    <a class="btn btn-large" href="[% root %]learn.html">Get started</a>
-  </div>
-
-  <div class="hero-demo">
-    <asciinema-player cols="77" rows="24" src="/demos/cover.cast"></asciinema-player>
-  </div>
-</div>
-
-<hr />
-
-<div class="row-fluid">
-  <div class="span4">
-    <h2>Reproducible</h2>
-    <p>
-      Nix builds packages in isolation from each other. This ensures that they
-      are reproducible and don't have undeclared dependencies, so <strong>if a
-        package works on one machine, it will also work on another</strong>.
-    </p>
-  </div>
-  <div class="span4">
-    <h2>Declarative</h2>
-    <p>
-      Nix makes it <strong>trivial to share development and build
-        environments</strong> for your projects, regardless of what programming
-      languages and tools you’re using.
-    </p>
-  </div>
-  <div class="span4">
-    <h2>Reliable</h2>
-    <p>
-      Nix ensures that installing or upgrading one package <strong>cannot
-        break other packages</strong>. It allows you to <strong>roll back to
-        previous versions</strong>, and ensures that no package is in an
-      inconsistent state during an upgrade.
-    </p>
-  </div>
-</div>
-
-
-<hr />
-
-<div id="packages-search" class="row-fluid text-center packages-searchbox">
-  <div class="span12">
-    <h1>Choose from Thousands of Packages</h1>
-    <p class="text-center lead">
-      The Nix Packages collection (<a href="https://github.com/NixOS/nixpkgs">nixpkgs</a>) is a set of
-      <strong>over 60 000 packages</strong> for the Nix package manager.
-    </p>
-    <form>
-      <div class="input-append">
-        <input class="input-xxlarge" placeholder="Search for a package" type="text" />
-        <button class="btn">Search</button>
+[% BLOCK exampleBlock %]
+<li>
+  <div class="clickable-whole">
+    <h2>[% title %]</h2>
+    <div class="demo-preview">
+      <div class="thumbnail">
+        [% INSERT "demos/${demo}.svg" %]
       </div>
-      <p class="text-center">or <a href="https://search.nixos.org/options">search among many NixOS options.</a></p>
+      <a href="#asciinema-demo-[% demo %]" data-fullscreen-pane="-demo-[% demo %]"></a>
+    </div>
+  </div>
+</li>
+[% END %]
+[% WRAPPER atHead %]
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
+[% END %]
+[% WRAPPER atEnd %]
+<script src="[% root %]js/asciinema-player.js"></script>
+[% END %]
+[% WRAPPER layout.tt title="NixOS Linux" handlesLayout=1 %]
+
+<section class="wide-banner clickable-whole event-banner">
+  <div>
+    <div>
+      NixCon 2020<span class="-detailed">. Talks. Discussions. Hacking.</span>
+    </div>
+    <div class="description">
+      October 16th-18th 2020
+    </div>
+    <div class="countdown-timer" data-date="2020-10-16 12:00:00" data-stale="2020-10-19 0:00:00"
+      data-stale-hide="main > .event-banner" data-current="Currently happening!">
+      <ul>
+        <li><span class="counter-days">00</span>days</li>
+        <li><span class="counter-hours">00</span>hours</li>
+        <li><span class="counter-minutes">00</span>minutes</li>
+        <li><span class="counter-seconds">00</span>seconds</li>
+      </ul>
+    </div>
+    <div class="action">
+      <a href="https://2020.nixcon.org/">Program</a>
+    </div>
+  </div>
+</section>
+
+<section class="home-hero">
+  <div>
+    <div class="blurb">
+      <h1>Reproducible builds <span>and deployments.</span></h1>
+      <div class="columns">
+        <div>
+          <h2>Nix</h2>
+          <p>
+            A powerful package manager for Linux and other
+            Unix systems that makes package management reliable and reproducible.
+            Share your development and build environments across different machines.
+          </p>
+        </div>
+        <div>
+          <h2>NixOS</h2>
+          <p>
+            A Linux distribution with a unique approach to
+            package and configuration management. Built on top of the Nix package
+            manager, it is completely declarative, makes upgrading systems reliable,
+            and has <a href="[% root %]features.html">many other advantages</a>.
+          </p>
+        </div>
+      </div>
+      <div class="button-tray">
+        <a class="button -primary" href="[% root %]download.html">Download</a>
+        <a class="button" href="[% root %]learn.html">Get started</a>
+      </div>
+    </div>
+    [% PROCESS demoPreview demo="cover" %]
+  </div>
+</section>
+
+[% PROCESS demoPane demo="cover" %]
+
+<section id="why-nix" class="home-whynix">
+  <div>
+    <ul class="whynix">
+      <li>
+        <h2>Reproducible</h2>
+        <p>
+          Nix builds packages in isolation from each other. This ensures that they
+          are reproducible and don't have undeclared dependencies, so <strong>if a
+            package works on one machine, it will also work on another</strong>.
+        </p>
+      </li>
+      <li>
+        <h2>Declarative</h2>
+        <p>
+          Nix makes it <strong>trivial to share development and build
+            environments</strong> for your projects, regardless of what programming
+          languages and tools you’re using.
+        </p>
+      </li>
+      <li>
+        <h2>Reliable</h2>
+        <p>
+          Nix ensures that installing or upgrading one package <strong>cannot
+            break other packages</strong>. It allows you to <strong>roll back to
+            previous versions</strong>, and ensures that no package is in an
+          inconsistent state during an upgrade.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="packages-searchbox">
+  <div id="packages-search">
+    <h1>Choose from Thousands of Packages</h1>
+    <p>
+      The Nix Packages collection
+      <strong>(<a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a>)</strong>
+      is a set of
+      <strong class="-highlighted">over 60 000 packages</strong> for the Nix package manager.
+    </p>
+    <form method="get" action="https://search.nixos.org/packages">
+      <div>
+        <div class="form-input">
+          <input placeholder="Search for a package" type="text" name="query" />
+        </div>
+      </div>
+      <div>
+        <button type="submit">Search</button>
+      </div>
     </form>
   </div>
-</div>
+</section>
 
-<hr />
+<section id="examples" class="home-examples">
+  <div>
+    <h1>Examples</h1>
 
-<h1 class="text-center">Examples...</h1>
+    <ul class="examples-list -spotlight">
+      [% WRAPPER exampleBlock demo="example_1" title="Try new tools without fear" %]
+      [% END %]
 
-<div class="home-examples">
+      [% WRAPPER exampleBlock demo="example_2" title="Multiple languages, one tool" %]
+      [% END %]
 
-  <section>
-    <div class="row-fluid">
-      <div class="span6">
+      [% WRAPPER exampleBlock demo="example_3" title="Isolated development environments" %]
+      [% END %]
+    </ul>
 
-        <h2>Try new tools without fear</h2>
-        <p>Don't clutter your system with tools that you use only now and then.</p>
-        <pre class="well">
-<span class="shell-prompt">$ </span>python --version
-python: command not found
-<span class="shell-prompt">$ </span><strong>nix-shell -p python3</strong>
-<span class="shell-prompt">[nix-shell]$ </span>python --version
-Python 3.7.7</pre>
+    [% PROCESS demoPane demo="example_1" %]
+    [% PROCESS demoPane demo="example_2" %]
+    [% PROCESS demoPane demo="example_3" %]
 
-        <h2>Multiple languages, one tool</h2>
-        <p></p>
-        <pre class="well">
-<span class="shell-prompt">$ </span><strong>nix-shell -p python3 nodejs go rustc</strong>
-<span class="shell-prompt">[nix-shell]$ </span>node --version
-v10.20.1
-<span class="shell-prompt">[nix-shell]$ </span>go version
-go version go1.14.1 linux/amd64
-<span class="shell-prompt">[nix-shell]$ </span>rustc --version
-rustc 1.42.0</pre>
+    <ul class="examples-list -spotlight">
+      [% WRAPPER exampleBlock demo="example_4" title="Minimal docker images" %]
+      [% END %]
 
-      </div>
-      <div class="span6">
+      [% WRAPPER exampleBlock demo="example_5" title="Declarative cloud images" %]
+      [% END %]
 
-        <h2>Isolated development environments</h2>
-        <p>
-          After you get familiar with <code>nix-shell -p</code> you can take
-          the next step and <a href="[%root%]learn.html">learn some
-            Nix</a>. To setup a more persistent environment you can also write a
-          simple <code>shell.nix</code> file:
-        </p>
-        <pre class="well">
-{ pkgs ? import &lt;nixpkgs&gt; {}
-}:
-pkgs.mkShell {
-  name = "dev-shell";
-  buildInputs = [
-    pkgs.python3
-    pkgs.python3Packages.virtualenv
-    pkgs.nodejs
-    pkgs.yarn
-  ];
-}</pre>
-        <p>Then enter development environment with:</p>
-        <pre class="well">
-<span class="shell-prompt">$ </span><strong>nix-shell</strong>
-<span class="shell-prompt">[nix-shell]$ </span>virtualenv --version
-16.7.9
-<span class="shell-prompt">[nix-shell]$ </span>yarn --version
-1.22.4</pre>
-        <p>
-          Commit the above <code>shell.nix</code> file and help your coworkers have
-          an easier time setting their development environment.
-        </p>
+      [% WRAPPER exampleBlock demo="example_6" title="Test your configurations" %]
+      [% END %]
+    </ul>
 
-      </div>
-    </div>
-  </section>
-  <section class="tab-pane" id="build">
-    <div class="row-fluid">
-      <div class="span6">
-        <h2>Minimal Docker image</h2>
-        <p>
-          Using a <code>Dockerfile</code>, you are responsible for:
-        </p>
-        <ul>
-          <li>cleaning up everything that is not needed at runtime</li>
-          <li>deciding how to split into layers for better caching</li>
-        </ul>
-        <p>
-          Writing a <code>Dockerfile</code> that would produce a minimal image is
-          at best a very error prone process.
-        </p>
-        <p>
-          With Nix, only packages you define are included in the Docker image.
-          No cleaning up needed. There are no build tools left in your Docker
-          image, keeping it as small as possible.
-        </p>
-        <p>
-          Nix also knows how to layer your resulting Docker image, automatically.
-          The resulting layers are optimized for caching as much as possible.
-        </p>
-        <p>
-          The following Nix expression (<code>default.nix</code>) defines a
-          Docker image with <strong>only</strong> the <code>hello</code> package
-          in it.
-        </p>
-        <pre class="well">
-{ pkgs ? import &lt;nixpkgs&gt; {}
-}:
-pkgs.dockerTools.buildLayeredImage {
-  name = "only-hello";
-  contents = [ pkgs.hello ];
-}</pre>
-        <p>To build and run the image you need to:</p>
-        <pre class="well">
-<span class="shell-prompt">$ </span><strong>nix-build default.nix -o ./result</strong>
-...
-/nix/store/&#8230;-docker-image-only-hello.tar.gz
-<span class="shell-prompt">$ </span>docker load -i ./result
-1c31fbac2eb1: Loading layer [==================>]  1.649MB/1.649MB
-03b22f688054: Loading layer [==================>]    256kB/256kB
-29c350a9c392: Loading layer [==================>]  31.61MB/31.61MB
-6a87e4d71e07: Loading layer [==================>]  266.2kB/266.2kB
-c09c43a6b910: Loading layer [==================>]  71.68kB/71.68kB
-Loaded image: only-hello:qn5x1pnk7d467jsl81jng7168qsks42l
-<span class="shell-prompt">$ </span>docker run only-hello:qn5x1pnk7d467jsl81jng7168qsks42l hello
-Hello, world</pre>
-        <p>
-          Learn more about <a href="[%root%]nixpkgs/manual/#sec-pkgs-dockerTools">how
-            to build Docker images</a>.
-        </p>
+  </div>
+</section>
 
-      </div>
-      <div class="span6">
-
-        <h2>Declarative cloud images</h2>
-        <p>How hard would it be to build and configure an <strong>Amazon EC2</strong> image?</p>
-        <p>
-          With the following <code>amazon.nix</code> we configured nginx to
-          serve a "Welcome to nginx!" page, with a valid SSL certificate
-          (via LetsEncrypt) and recommended security settings.
-        </p>
-        <pre class="well">
-{ pkgs, ...}:
-{
-  security.acme.acceptTerms = true;
-  security.acme.email = "nix@example.com";
-  services.nginx = {
-    enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
-    virtualHosts."example.com" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/".root = "${pkgs.nginx}/html";
-    };
-  };
-}</pre>
-        <p>Now we just need to build it.</p>
-        <pre class="well">
-<span class="shell-prompt">$ </span><strong>nix-build '&lt;nixpkgs/nixos/release.nix&gt;' \</strong>
-<strong>    -A amazonImage.x86_64-linux \</strong>
-<strong>    --arg configuration ./amazon.nix \</strong>
-<strong>    -o ./result</strong>
-...
-<span class="shell-prompt">$ </span>ls ./result/
-nixos-amazon-image-20.09pre130979.gfedcba-x86_64-linux.vhd
-nix-support</pre>
-        <p>
-          The resulting Virtual Hard Disk image can be then be
-          <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html">
-            imported to Amazon EC2 as usual</a>.
-        </p>
-      </div>
-    </div>
-  </section>
-</div>
+[% PROCESS demoPane demo="example_4" %]
+[% PROCESS demoPane demo="example_5" %]
+[% PROCESS demoPane demo="example_6" %]
 
 [% END %]

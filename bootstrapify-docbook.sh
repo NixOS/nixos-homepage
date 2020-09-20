@@ -25,9 +25,11 @@ mkdir -p "$outDirTmp"
             --define root="${root}" \
             --pre_process=common.tt \
             > "$outDirTmp/$fn" <<EOF
-[% WRAPPER layout.tt title="$title" menu='$menu' hideTitle=1 sourceLink='$source' anchors=1 %]
+[% WRAPPER layout.tt title="$title" menu='$menu' hideTitle=1 sourceLink='$source' anchors=1 handlesLayout=1 %]
 
+<section class="generic-layout docbook-page">
 [% INSERT "$outDirTmp/$fn.in" %]
+</section>
 
 [% END %]
 EOF

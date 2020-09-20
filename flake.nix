@@ -52,6 +52,7 @@
       checks."${system}".build = defaultPackage."${system}";
 
       packages."${system}" = rec {
+        siteStyles = pkgs.callPackage ./site-styles {};
 
         homepage = pkgs.stdenv.mkDerivation {
           name = "nixos-homepage-${self.lastModifiedDate}";
@@ -102,6 +103,7 @@
               "NIXOS_UNSTABLE_SERIES=${pkgs-unstable.lib.trivial.release}"
 
               "NIXOS_AMIS=${nixosAmis}"
+              "SITE_STYLES=${siteStyles}"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
               "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}/html"
 
@@ -129,6 +131,7 @@
             export NIXOS_UNSTABLE_SERIES="${pkgs-unstable.lib.trivial.release}"
 
             export NIXOS_AMIS="${nixosAmis}"
+            # SITE_STYLES skipped by design.
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
             export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}/html"
           '';

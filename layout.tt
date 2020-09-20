@@ -1,121 +1,156 @@
 <!DOCTYPE html>
 
-[% USE HTML %]
+[%-
+USE HTML;
+USE date;
 
-<html lang="en">
+# Automatically marks the link with the class "active" if it is the current page.
+# title: Link label
+# content: use custom content instead of title in link.
+# href: Page output filename without leading slash
+# class: Additional classes
+BLOCK navigationLink %]
+
+<li class="[% outputName == href ? " active" : "" %] [% class %]">
+  [%- IF href -%]
+  <a href="[% root %][% href %]">[% title %]</a>
+  [%- ELSE -%]
+  [%- content -%]
+  [%- END -%]
+</li>
+[% END;
+
+-%]
+
+<html lang="en" class="without-js">
 
 <head>
   <title>NixOS - [% title %]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-  <script type="text/javascript" src="[% root %]js/jquery.min.js"></script>
-  <script type="text/javascript" src="[% root %]js/jquery-ui.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script type="text/javascript" src="[% root %]bootstrap/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="[% root %]bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="[% root %]bootstrap/css/bootstrap-responsive.min.css" />
-  <link rel="stylesheet" href="[% root %]css/asciinema-player.css" type="text/css" />
-  <link rel="stylesheet" href="[% root %]css/nixos-site.css" type="text/css" />
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0" />
+  <link rel="stylesheet" href="[% root %]styles/styles.css" type="text/css" />
+
   <link rel="shortcut icon" type="image/png" href="/favicon.png" />
   <meta name="google-site-verification" content="ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE" />
+
+  [%# This has to happen ASAP, even before jQuery is initialized. %]
+  <script>
+    var html = document.documentElement;
+    html.className = html.className.replace("without-js", "with-js");
+  </script>
+
+  <script type="text/javascript" src="[% root %]js/jquery.min.js"></script>
+
+  [% documentHeadTags.join("\n") %]
+
 </head>
 
 <body>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <div class="brand">
-          <a href="[% root %]">
-            <img src="[% root %]logo/nix-wiki.png" alt="NixOS" class="logo" />
+  <header>
+    <div>
+      <h1><a href="[% root %]">NixOS</a></h1>
+      <form class="header-search" method="get" action="https://search.nixos.org/packages">
+        <div class="form-input">
+          <input type="text" name="query" />
+        </div>
+      </form>
+      [%# ???! go read `navbar.less` and `nixos-site.js`, it's all fine I swear. %]
+      <nav style="display: none;">
+        <ul>
+          [% INCLUDE navigationLink href="features.html" title="Features" %]
+          [% INCLUDE navigationLink href="download.html" title="Download" %]
+          [% INCLUDE navigationLink href="learn.html" title="Learn" %]
+          [% INCLUDE navigationLink href="community.html" title="Community" %]
+          [% INCLUDE navigationLink href="governance.html" title="Governance" %]
+          [% INCLUDE navigationLink href="donate.html" title="Donate" %]
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    [% IF !handlesLayout %]
+    <div class="generic-layout">
+      [% END %]
+
+      [% content %]
+
+      [% IF !handlesLayout %]
+    </div>
+    [% END %]
+  </main>
+
+  <footer>
+    <div class="upper">
+      <section>
+        <h4>The project</h4>
+        <ul>
+          <li><a href="https://status.nixos.org/">Channel Status</a></li>
+          <li><a href="https://search.nixos.org/packages">Packages search</a></li>
+          <li><a href="https://search.nixos.org/options">Options search</a></li>
+          <li><a href="https://nixos.org/teams/security.html">Security</a></li>
+        </ul>
+      </section>
+      <section>
+        <h4>Get in Touch</h4>
+        <ul>
+          <li><a href="https://discourse.nixos.org/">Forum</a></li>
+          <li><a href="https://webchat.freenode.net/#nixos">Chat</a></li>
+          <li><a href="https://nixos.org/commercial-support.html">Commercial support</a></li>
+        </ul>
+      </section>
+      <section>
+        <h4>Contribute</h4>
+        <ul>
+          <li><a href="https://nixos.org/guides/contributing.html">Contributing Guide</a></li>
+          <li><a href="https://nixos.org/donate.html">Donate</a></li>
+        </ul>
+      </section>
+      <section>
+        <h4>Stay up to date</h4>
+        <ul>
+          <li><a href="https://nixos.org/news.html">Announcements</a></li>
+          <li><a href="https://weekly.nixos.org/">Newsletter</a></li>
+        </ul>
+      </section>
+    </div>
+    <hr />
+    <div class="lower">
+      <section class="footer-copyright">
+        <h4>NixOS</h4>
+        <div>
+          <span>
+            Copyright © [% date.format(date.now, '%Y') %] NixOS
+          </span>
+          <a href="https://github.com/NixOS/nixos-homepage/blob/master/LICENSES/CC-BY-SA-4.0.txt">
+            <abbr title="Creative Commons Attribution Share Alike 4.0 International">
+              CC-BY-SA-4.0
+            </abbr>
           </a>
         </div>
-        <div class="nav-collapse collapse">
-          <ul class="nav pull-left">
-            <li><a href="[%root%]features.html">Features</a></li>
-            <li><a href="[%root%]download.html">Download</a></li>
-            <li><a href="[%root%]learn.html">Learn</a></li>
-            <li><a href="[%root%]community.html">Community</a></li>
-            <li><a href="[%root%]governance.html">Governance</a></li>
-            <li><a href="[%root%]donate.html">Donate</a></li>
-          </ul>
-          <ul class="nav pull-right">
-            <li>
-              <a href="https://search.nixos.org/packages">
-                <span class="icon-search"></span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      </section>
+      <section class="footer-social">
+        <h4>Connect with us</h4>
+        <ul>
+          <li class="social-icon -twitter"><a href="https://twitter.com/nixos_org">Twitter</a></li>
+          <li class="social-icon -youtube"><a
+              href="https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw">Youtube</a></li>
+          <li class="social-icon -github"><a href="https://github.com/NixOS">GitHub</a></li>
+        </ul>
+      </section>
     </div>
-  </div>
-  <div class="container main">
-    [% content %]
-  </div>
-
-  <div class="footer">
-    <div class="container">
-      <div class="row-fluid">
-        <div class="span3">
-          <h4>The project</h4>
-          <ul>
-            <li><a href="https://status.nixos.org/">Nix Channel Status</a></li>
-            <li><a href="https://search.nixos.org/packages">Nix packages search</a></li>
-            <li><a href="https://search.nixos.org/options">NixOS options search</a></li>
-          </ul>
-          <ul>
-            <li><a href="https://nixos.org/governance.html">Governance</a></li>
-            <li><a href="https://nixos.org/teams/security.html">Security</a></li>
-            <!-- <li><a href="#">History</a></li>  -->
-          </ul>
-        </div>
-        <div class="span3">
-          <h4>Get in Touch</h4>
-          <ul>
-            <li><a href="https://discourse.nixos.org/">Forum</a></li>
-            <li><a href="https://webchat.freenode.net/#nixos">Chat</a></li>
-          </ul>
-          <ul>
-            <li><a href="https://nixos.org/commercial-support.html">Commercial support</a></li>
-          </ul>
-        </div>
-        <div class="span3">
-          <h4>Contribute</h4>
-          <ul>
-            <li><a href="https://nixos.org/guides/contributing.html">Contributing Guide</a></li>
-            <li><a href="https://nixos.org/donate.html">Donate</a></li>
-          </ul>
-        </div>
-        <div class="span3">
-          <h4>Stay up to date</h4>
-          <ul>
-            <li><a href="https://nixos.org/news.html">News</a></li>
-            <li><a href="https://weekly.nixos.org/">NixOS Weekly</a></li>
-          </ul>
-          <ul>
-            <li><a href="https://twitter.com/nixos_org"><i class="fa fa-twitter"></i> Twitter</a></li>
-            <li><a href="https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw"><i class="fa fa-youtube"></i>
-                Youtube</a></li>
-            <li><a href="https://github.com/NixOS"><i class="fa fa-github"></i> GitHub</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  </footer>
   <script src="[% root %]js/nixos-site.js"></script>
-  <script src="[% root %]js/asciinema-player.js"></script>
   [% IF anchors %]
   <script src="[% root %]js/anchor.min.js"></script>
   <script>
-    anchors.add('h1,h2,h3');
+    anchors.add('main h1, main h2, main h3');
   </script>
   [% END %]
+
+  [% documentEndTags.join("\n") %]
+
 </body>
 
 </html>

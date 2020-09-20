@@ -33,6 +33,15 @@ HTML = \
   teams/rfc-steering-committee.html \
   teams/security.html
 
+DEMOS = \
+  demos/cover.svg \
+  demos/example_1.svg \
+  demos/example_2.svg \
+  demos/example_3.svg \
+  demos/example_4.svg \
+  demos/example_5.svg \
+  demos/example_6.svg
+
 
 NIX_DEV_MANUAL_IN ?= /no-such-path
 NIX_DEV_MANUAL_OUT = guides
@@ -112,7 +121,9 @@ $(NIXOS_MANUAL_UNSTABLE_OUT): $(NIXOS_MANUAL_UNSTABLE_IN) bootstrapify-docbook.s
 	bash ./bootstrapify-docbook.sh $(NIXOS_MANUAL_UNSTABLE_IN)/share/doc/nixos $(NIXOS_MANUAL_UNSTABLE_OUT) 'NixOS $(NIXOS_UNSTABLE_SERIES) manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
 
-all: $(HTML) favicon.png favicon.ico robots.txt $(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*)))
+all: $(HTML) favicon.png favicon.ico robots.txt \
+	styles \
+	$(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*)))
 
 
 robots.txt: $(HTML)
@@ -129,11 +140,12 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
+%.html: %.tt layout.tt common.tt $(DEMOS) $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --define root=$(ROOT) \
 	  --define fileName=$< \
+	  --define outputName=$@ \
 	  --define nixosAmis=$(NIXOS_AMIS) \
 	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
 	  --define latestNixOSSeries=$(NIXOS_STABLE_SERIES) \
@@ -158,7 +170,7 @@ news-rss.xml: news.xml news-rss.xsl
 	xsltproc news-rss.xsl news.xml > $@.tmp
 	mv $@.tmp $@
 
-index.html: news-rss.xml latest-news.xhtml blogs.json
+index.html: $(DEMOS) news-rss.xml latest-news.xhtml blogs.json 
 
 latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
@@ -180,6 +192,16 @@ update: blogs.xml
 	@true
 endif
 
+# The nix-built site will use the provided SITE_STYLES
+ifeq ($(strip $(SITE_STYLES)),)
+# But development `make` builds will nix-build.
+styles: $(wildcard site-styles/*)
+	nix-build -A packages.x86_64-linux.siteStyles --out-link $@
+else
+styles:
+	@ln -sfn $(SITE_STYLES) $@
+endif
+
 all: manuals
 
 manuals:
@@ -187,14 +209,11 @@ manuals:
 	bash ./fix-manual-headers.sh manual/nixpkgs stable
 	bash ./fix-manual-headers.sh manual/nixos stable
 
-all: \
-  demos/cover.cast \
-  demos/example_1.cast \
-  demos/example_2.cast \
-  demos/example_3.cast \
-  demos/example_4.cast \
-  demos/example_5.cast
+all: $(DEMOS)
 
-demos/%.cast demos/%.svg: demos/%.scenario
-	echo "Generating $@ ..."
-	asciinema-scenario --preview-file "$(patsubst %.cast,%.svg,$@)" $< > $@
+demos/%.svg: demos/%.scenario
+	echo "Generating $@ and $(patsubst %.svg,%.cast,$@) ..."
+	asciinema-scenario --preview-file "$@" $< > $(patsubst %.svg,%.cast,$@)
+	# XXX: this in until asciinema-scenario is fixed
+	#      https://github.com/garbas/asciinema-scenario/issues/3
+	sed -i -e "s|<nixpkgs|\&lt;nixpkgs|g" $@

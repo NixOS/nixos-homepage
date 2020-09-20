@@ -1,11 +1,14 @@
-[% WRAPPER layout.tt title="Commercial support" %]
+[% WRAPPER layout.tt title="Commercial support" handlesLayout=1 %]
 
-<h1>Commercial support</h1>
-
-<div class="lead">
-  A number of consulting companies are available for professional support.
+<div class="page-title">
+  <h1>Commercial support</h1>
 </div>
 
+<section class="generic-layout lead">
+  A number of consulting companies are available for professional support.
+</section>
+
+<section class="generic-layout">
 <p>The list is sorted in alphabetical order.</p>
 
 <ul>
@@ -21,5 +24,6 @@
 </ul>
 
 <p>Please <a href="https://github.com/NixOS/nixos-homepage/edit/master/commercial-support.tt">submit a pull request</a> to add your company.</p>
+</section>
 
 [% END %]
