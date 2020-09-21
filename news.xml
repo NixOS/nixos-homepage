@@ -291,7 +291,7 @@
       We're happy to announce that <strong>NixCon 2017</strong>, the
       second Nix Conference, will take place <strong>October 28–31 2017 in Munich</strong>
       For more information, see the
-      <a href="http://nixcon2017.org/">NixCon 2017 website</a>.
+      <a href="https://web.archive.org/web/20200816233409/http://nixcon2017.org/">NixCon 2017 website</a>.
       And please consider
       <a href="https://schedule.nixcon2017.org/en/nixcon2017/cfp/">submitting a talk</a>!
     </description>
@@ -337,7 +337,7 @@
     <description>
       <a href="/releases/nixops/nixops-1.4/nixops-1.4.tar.bz2">NixOps
         1.4</a> has been released. This release contains contains many
-      nice new features. See the <a href="https://nixos.org/nixops/manual#ssec-relnotes-1.4">manual</a>
+      nice new features. See the <a href="https://web.archive.org/web/20200613150138/https://hydra.nixos.org/build/115931128/download/1/manual/manual.html#ssec-relnotes-1.4">manual</a>
       for details.
     </description>
   </item>
@@ -404,12 +404,12 @@
       NixCon 2015
     </title>
     <description>
-      <a href="http://conf.nixos.org"><img class="inline" style="width: 10em;"
-          src="https://d2z6c3c3r6k4bx.cloudfront.net/uploads/event/logo/1005856/banner.png" alt="NixCon logo" /></a>
+      <a href="https://web.archive.org/web/20200210001459/http://conf.nixos.org/"><img class="inline" style="width: 10em;"
+          src="https://web.archive.org/web/20180921172104if_/https://d2z6c3c3r6k4bx.cloudfront.net/uploads/event/logo/1005856/banner.png" alt="NixCon logo" /></a>
       We're happy to announce that <strong>NixCon 2015</strong>, the
       first Nix Conference, will take place on <strong>November
         14—15th 2015 in Berlin</strong>. For more information, see the
-      <a href="http://conf.nixos.org">NixCon website</a>. And please
+      <a href="https://web.archive.org/web/20200210001459/http://conf.nixos.org/">NixCon website</a>. And please
       consider <a href="http://conf.nixos.org/submit-a-talk.html">submitting a
         talk</a>!
     </description>
@@ -478,7 +478,7 @@
       We’re having a NixOS sprint at the <a href="https://www.kiberpipa.org/en/">Kiberpipa hackerspace</a>
       in Ljubljana, Slovenia, on <strong>August
         23—27</strong>. Joining is free! For more information and to
-      register, please go to the <a href="http://www.kiberpipa.org/nixos-sprint-ljubljana-2014/">sprint
+      register, please go to the <a href="https://web.archive.org/web/20150623082420/http://www.kiberpipa.org/nixos-sprint-ljubljana-2014/">sprint
         page</a>.
     </description>
   </item>
@@ -508,7 +508,7 @@
     <description>
       <a href="https://hydra.nixos.org/release/nixops/nixops-1.2">NixOps
         1.2</a> has been released. This release contains contains many nice new features. See the <a
-        href="https://nixos.org/nixops/manual#ssec-relnotes-1.2">manual</a>
+        href="https://web.archive.org/web/20200613150138/https://hydra.nixos.org/build/115931128/download/1/manual/manual.html#ssec-relnotes-1.2">manual</a>
       for details.
     </description>
   </item>
@@ -520,7 +520,7 @@
     </title>
     <description>
       <a href="https://hydra.nixos.org/release/nix/nix-1.7">Nix 1.7</a>
-      has been released. See the <a href="https://nixos.org/releases/nix/nix-1.7/manual/#ssec-relnotes-1.7">release
+      has been released. See the <a href="https://web.archive.org/web/20170723084043/https://releases.nixos.org/nix/nix-1.7/manual/#ssec-relnotes-1.7">release
         notes</a> for a list of new features.
     </description>
   </item>
@@ -556,10 +556,10 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       <a href="https://www.domenkozar.com/">Domen Kožar</a> gave <a
-        href="https://fosdem.org/2014/schedule/event/nixos_declarative_configuration_linux_distribution/">a
+        href="https://web.archive.org/web/20200424105824/https://archive.fosdem.org/2014/schedule/event/nixos_declarative_configuration_linux_distribution/">a
         talk at FOSDEM about NixOS</a> (<a
         href="https://video.fosdem.org/2014/H1309_Van_Rijn/Saturday/NixOS_declarative_configuration_Linux_distribution.webm">video</a>).
-      Also, Ludovic Courtès gave <a href="https://fosdem.org/2014/schedule/event/gnuguix/">a talk on
+      Also, Ludovic Courtès gave <a href="https://web.archive.org/web/20200424075250/https://archive.fosdem.org/2014/schedule/event/gnuguix/">a talk on
         Guix</a>, the Nix- and Guile-based package manager.
     </description>
   </item>
@@ -590,7 +590,7 @@ $ nix-store -qR /run/current-system | grep openssl
       potentially destabilising changes that sometimes occur on the
       unstable branch. You can get NixOS 13.10 ISOs and VirtualBox
       appliances from the <a href="/download.html">download
-        page</a>. See the <a href="https://nixos.org/nix-dev/2013-October/011941.html">announcement</a>
+        page</a>. See the <a href="https://web.archive.org/web/20200423231710/https://releases.nixos.org/nix-dev/2013-October/011941.html">announcement</a>
       for more information. For information on how to switch an
       existing NixOS machine from the unstable channel to 13.10, check
       out the <a href="https://nixos.org/manual/nixos/stable/#sec-upgrading">manual
@@ -607,7 +607,7 @@ $ nix-store -qR /run/current-system | grep openssl
       <a href="https://hydra.nixos.org/release/nix/nix-1.6.1">Nix
         1.6.1</a> has been released. This is primarily a bug fix
       release but has some minor new features. See the <a
-        href="https://nixos.org/manual/nix/stable/#ssec-relnotes-1.6.1">release
+        href="https://web.archive.org/web/20200916201737/https://nixos.org/manual/nix/stable/#ssec-relnotes-1.6.1">release
         notes</a> for details.
     </description>
   </item>
@@ -622,7 +622,7 @@ $ nix-store -qR /run/current-system | grep openssl
       order to simplify development. The sources now live in the <a
         href="https://github.com/NixOS/nixpkgs/tree/master/nixos"><tt>nixos</tt>
         subdirectory of the Nixpkgs repository on GitHub</a>. See the
-      <a href="https://nixos.org/nix-dev/2013-October/011873.html">announcement</a>
+      <a href="https://web.archive.org/web/20200423220422/https://releases.nixos.org/nix-dev/2013-October/011873.html">announcement</a>
       for more information.
     </description>
   </item>
@@ -674,7 +674,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       A sprint focused on NixOS and <a href="http://kotti.pylonsproject.org/">Kotti</a> will be held <a
-        href="http://www.coactivate.org/projects/zidanca-sprint-2013/project-home">22-26
+        href="https://web.archive.org/web/20170711080526/https://www.coactivate.org/projects/zidanca-sprint-2013/project-home">22-26
         July 2013 in Lokve, Slovenia</a>. It is organised by <a href="http://www.termitnjak.com/">Termitnjak</a> and
       sponsored
       by <a href="http://www.logicblox.com/">LogicBlox</a>.
@@ -701,7 +701,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       Domen Kožar gave a presentation at <a
-        href="https://ep2013.europython.eu/conference/talks/nixos-operating-system-declarative-configuration-distribution">EuroPython
+        href="https://web.archive.org/web/20161207155802/https://ep2013.europython.eu/conference/talks/nixos-operating-system-declarative-configuration-distribution">EuroPython
         2013</a>: <a href="https://www.youtube.com/watch?v=DtOBROowzDg">“NixOS
         Operating System: Declarative Configuration Distribution”</a>.
     </description>
@@ -740,9 +740,9 @@ $ nix-store -qR /run/current-system | grep openssl
       PhD thesis: A Reference Architecture for Distributed Software Deployment
     </title>
     <description>
-      Today <a href="http://www.st.ewi.tudelft.nl/~sander/">Sander van
+      Today <a href="https://web.archive.org/web/20180415232015/http://www.st.ewi.tudelft.nl/~sander/">Sander van
         der Burg</a> successfully defended his PhD thesis entitled <a
-        href="http://www.st.ewi.tudelft.nl/~sander/index.php/phdthesis"><em>A
+        href="https://web.archive.org/web/20160304065255/http://www.st.ewi.tudelft.nl/~sander/index.php/phdthesis"><em>A
           Reference Architecture for Distributed Software
           Deployment</em></a>! It describes (among other things) <a href="https://nixos.org/disnix/">Disnix</a>, a
       system for
@@ -799,7 +799,7 @@ $ nix-store -qR /run/current-system | grep openssl
       Systemd brings many advantages such as better dependency
       management, socket-based activation of services, per-service
       logging, cgroup-based process management, and much more. (Read
-      the <a href="https://nixos.org/nix-dev/2013-January/010482.html">announcement</a>.)
+      the <a href="https://web.archive.org/web/20200423143059/https://releases.nixos.org/nix-dev/2013-January/010482.html">announcement</a>.)
     </description>
   </item>
 
@@ -918,7 +918,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       The <tt>nix-dev</tt> mailing list has moved. The address is now
-      <tt>nix-dev@lists.science.uu.nl</tt> (<a href="http://lists.science.uu.nl/mailman/listinfo/nix-dev">web
+      <tt>nix-dev@lists.science.uu.nl</tt> (<a href="https://web.archive.org/web/20170318055412/http://lists.science.uu.nl/mailman/listinfo/nix-dev">web
         interface</a>).
     </description>
   </item>
@@ -932,9 +932,9 @@ $ nix-store -qR /run/current-system | grep openssl
       <a href="https://fosdem.org/2011"><img class="inline" src="logo/fosdem-logo.png" alt="Fosdem logo" /></a>
       <a href="http://www.st.ewi.tudelft.nl/~sander/">Sander van der
         Burg</a> gave a talk about NixOS at the <a
-        href="https://fosdem.org/2011/schedule/track/crossdistro_devroom">CrossDistro
-        track</a> of <a href="http://fosdem.org/2011/">FOSDEM</a> (<a href="http://blip.tv/file/4726612">video</a>, <a
-        href="http://www.st.ewi.tudelft.nl/~sander/pdf/talks/vanderburg11-fosdem.pdf">slides</a>).
+        href="https://web.archive.org/web/20120107073048/https://archive.fosdem.org/2011/schedule/track/crossdistro_devroom">CrossDistro
+        track</a> of <a href="https://web.archive.org/web/20200815114616/https://archive.fosdem.org/2011/">FOSDEM</a> (<a href="http://blip.tv/file/4726612">video</a>, <a
+        href="https://web.archive.org/web/20160829182544/http://www.st.ewi.tudelft.nl/~sander/pdf/talks/vanderburg11-fosdem.pdf">slides</a>).
     </description>
   </item>
 
@@ -947,7 +947,7 @@ $ nix-store -qR /run/current-system | grep openssl
       The paper <a href="https://edolstra.github.io/pubs/decvms-issre2010-final.pdf">“Automating System
         Tests Using Declarative Virtual Machines”</a> (by Sander van der
       Burg and Eelco Dolstra) has been accepted for presentation at
-      the <a href="http://www.issre2010.org/">21st IEEE International
+      the <a href="https://web.archive.org/web/20110726193652/http://www.issre2010.org/">21st IEEE International
         Symposium on Software Reliability Engineering (ISSRE 2010)</a>.
       It describes how system tests with complex requirements on the
       environment (such as remote machines, network topologies, system
@@ -999,10 +999,10 @@ $ nix-store -qR /run/current-system | grep openssl
       NixOS talk at LSM
     </title>
     <description>
-      Ludovic Courtès gave a talk about Nix and NixOS at the <a href="http://2010.rmll.info/spip.php">Libre Software
+      Ludovic Courtès gave a talk about Nix and NixOS at the <a href="https://web.archive.org/web/20200204030015/http://2010.rmll.info/spip.php?lang=en">Libre Software
         Meeting</a>
       in Bordeaux, entitled <a
-        href="http://2010.rmll.info/NixOS-The-Only-Functional-GNU-Linux-Distribution.html?lang=en"><em>“NixOS:
+        href="https://web.archive.org/web/20200422145743/http://2010.rmll.info/NixOS-The-Only-Functional-GNU-Linux-Distribution.html?lang=en"><em>“NixOS:
           The Only Functional GNU/Linux Distribution”</em></a> (<a
         href="http://2010.rmll.info/IMG/pdf/LSM2010-OS-NixOS.pdf">slides</a>).
     </description>
@@ -1087,9 +1087,9 @@ $ nix-store -qR /run/current-system | grep openssl
       Nixpkgs 0.12 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.12/">Nixpkgs
+      <a href="https://web.archive.org/web/20140913053728/https://releases.nixos.org/nixpkgs/nixpkgs-0.12/">Nixpkgs
         0.12</a> has been released. See the <a
-        href="https://nixos.org/releases/nixpkgs/nixpkgs-0.12/release-notes/">release
+        href="https://web.archive.org/web/20140913054742/https://releases.nixos.org/nixpkgs/nixpkgs-0.12/release-notes/">release
         notes</a> for details. Meanwhile, the Nixpkgs trunk has been
       <a href="https://svn.nixos.org/websvn/nix/nixpkgs/trunk/?rev=15324&amp;sc=1">updated</a>
       to GCC 4.3.3, Glibc 2.9 and X.org 7.4.
@@ -1143,7 +1143,7 @@ $ nix-store -qR /run/current-system | grep openssl
       <a href="https://hydra.nixos.org/releases/nix/unstable">Nix</a>
       and <a href="https://hydra.nixos.org/project/nixos/jobstatus">NixOS</a>
       releases are now built in <a href="https://github.com/NixOS/hydra">Hydra</a>, the new Nix-based
-      continuous build system. Hydra replaces our <a href="http://buildfarm.st.ewi.tudelft.nl/status">old Nix-based
+      continuous build system. Hydra replaces our <a href="https://web.archive.org/web/20090412101819/http://buildfarm.st.ewi.tudelft.nl/status">old Nix-based
         build farm</a>, which will be phased out soon. There are
       several advantages over the old build farm: the build tasks for
       a project are scheduled and published separately, so that for
@@ -1165,7 +1165,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       There is an article on <a href="https://www.linux.com/">Linux.com</a> about Nix: <a
-        href="https://www.linux.com/feature/155922">“Nix fixes dependency
+        href="https://web.archive.org/web/20090228052832/https://www.linux.com/feature/155922">“Nix fixes dependency
         hell on all Linux distributions”</a>.
     </description>
   </item>
@@ -1176,10 +1176,10 @@ $ nix-store -qR /run/current-system | grep openssl
       Nix 0.12 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nix/nix-0.12/">Nix
+      <a href="https://web.archive.org/web/20140913054727/https://releases.nixos.org/nix/nix-0.12/">Nix
         0.12</a> has been released. The most important change is that
       Nix no longer needs Berkeley DB to store metadata, but there are
-      many other improvements. See the <a href="https://nixos.org/releases/nix/nix-0.12/release-notes/">release
+      many other improvements. See the <a href="https://web.archive.org/web/20140913054524/https://releases.nixos.org/nix/nix-0.12/release-notes/">release
         notes</a> for details.
     </description>
   </item>
@@ -1193,7 +1193,7 @@ $ nix-store -qR /run/current-system | grep openssl
       <p>
         The paper “Atomic Upgrading of Distributed Systems” (by Sander
         van der Burg, Eelco Dolstra and Merijn de Jonge) has been
-        accepted for presentation at the <a href="http://www.hotswup.org/">First ACM Workshop on Hot
+        accepted for presentation at the <a href="https://web.archive.org/web/20090525100630/http://www.hotswup.org/">First ACM Workshop on Hot
           Topics in Software Upgrades (HotSWUp)</a>. A <a
           href="https://nixos.org/~eelco/pubs/atomic-hotswup2008-submitted.pdf">draft
           of the paper</a> is available. It describes Sander’s master’s
@@ -1217,8 +1217,8 @@ $ nix-store -qR /run/current-system | grep openssl
       <p>
         The paper “NixOS: A Purely Functional Linux Distribution” (by
         Eelco Dolstra and Andres Löh) has been <a
-          href="http://www.icfpconference.org/icfp2008/accepted/accepted.html">accepted</a>
-        for presentation at the <a href="http://www.icfpconference.org/icfp2008/">2008
+          href="https://web.archive.org/web/20170129015859/http://www.icfpconference.org/icfp2008/accepted/accepted.html">accepted</a>
+        for presentation at the <a href="https://web.archive.org/web/20200729214737/http://www.icfpconference.org/icfp2008/">2008
           International Conference on Functional Programming</a> (ICFP).
         It describes NixOS in much greater detail than last year’s
         HotOS paper, and argues why the purely functional style and
@@ -1256,7 +1256,7 @@ $ nix-store -qR /run/current-system | grep openssl
         The Nix website has moved to <a href="https://nixos.org/"><tt>nixos.org</tt></a> (hosted at <a
           href="http://www.tudelft.nl/">TU Delft</a>). The Subversion
         repositories have moved to <a href="http://svn.nixos.org/"><tt>svn.nixos.org</tt></a>. See
-        <a href="http://mail.cs.uu.nl/pipermail/nix-dev/2008-April/000740.html">this
+        <a href="https://web.archive.org/web/20120118052400/http://mail.cs.uu.nl/pipermail/nix-dev/2008-April/000740.html">this
           mailing list posting</a> for information about moving existing
         SVN working copies.
       </p>
@@ -1272,7 +1272,7 @@ $ nix-store -qR /run/current-system | grep openssl
       <p>
         Eelco Dolstra presented the paper <a href="https://nixos.org/~eelco/pubs/laziness-ldta2008-final.pdf">“Maximal
           Laziness — An Efficient Interpretation Technique for Purely
-          Functional DSLs”</a> at <a href="http://ldta2008.inf.elte.hu/">8th Workshop on Language
+          Functional DSLs”</a> at <a href="https://web.archive.org/web/20090716235453/http://ldta2008.inf.elte.hu/">8th Workshop on Language
           Description, Tools and Applications (LDTA 2008)</a>. It’s about
         caching of evaluation results in the Nix expression evaluator as
         a technique to make a simple term-rewriting evaluator efficient.
@@ -1289,7 +1289,7 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <p>
 
-        The <a href="http://www.jacquard.nl/">Jacquard program</a> of
+        The <a href="https://web.archive.org/web/20130923164506/https://www.nwo.nl/onderzoek-en-resultaten/programmas/Jacquard">Jacquard program</a> of
         NWO and EZ has granted funding for the Nix-related project “Pull
         Deployment of Services” (PDS), which is about improving the
         deployment of software and services in complex heterogenous
@@ -1332,13 +1332,13 @@ $ nix-store -qR /run/current-system | grep openssl
       Nix 0.11 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nix/nix-0.11/">Nix
+      <a href="https://web.archive.org/web/20140913060613/https://releases.nixos.org/nix/nix-0.11/">Nix
         0.11</a> has been released. This is a major new release
       representing over a year of development. The most important
       improvement is secure multi-user support. It also features many
       usability enhancements and language extensions, many of them
       prompted by NixOS, the purely functional Linux distribution
-      based on Nix. See the <a href="https://nixos.org/releases/nix/nix-0.11/release-notes/">release
+      based on Nix. See the <a href="https://web.archive.org/web/20140913055323/https://releases.nixos.org/nix/nix-0.11/release-notes/">release
         notes</a> for details.
     </description>
   </item>
@@ -1349,9 +1349,9 @@ $ nix-store -qR /run/current-system | grep openssl
       Nixpkgs 0.11 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.11/">Nixpkgs
+      <a href="https://web.archive.org/web/20140913055544/https://releases.nixos.org/nixpkgs/nixpkgs-0.11/">Nixpkgs
         0.11</a> has been released. See the <a
-        href="https://nixos.org/releases/nixpkgs/nixpkgs-0.11/release-notes/">release
+        href="https://web.archive.org/web/20140913054140/https://releases.nixos.org/nixpkgs/nixpkgs-0.11/release-notes/">release
         notes</a> for details.
     </description>
   </item>
@@ -1370,7 +1370,7 @@ $ nix-store -qR /run/current-system | grep openssl
         <a href="https://www.openoffice.org/">OpenOffice</a> is now in
         Nixpkgs (<a href="images/screenshots/nixos-openoffice.png">screenshot of
           OpenOffice 2.2.1 running under NixOS</a>, and <a
-          href="http://www.denbreejen.net/public/nixos/nixos-oo-scrs.png">another
+          href="https://web.archive.org/web/20160528175628if_/https://www.denbreejen.net/public/nixos/nixos-oo-scrs.png">another
           screenshot</a>). Despite being a rather gigantic package (it
         takes two hours to compile on an Intel Core 2 6700), OpenOffice
         had only two “impurities” (references to paths outside of the
@@ -1418,7 +1418,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       <p>
-        There is now a <a href="http://mail.cs.uu.nl/mailman/listinfo/nix-commits">mailing
+        There is now a <a href="https://web.archive.org/web/20110820121249/http://mail.cs.uu.nl/mailman/listinfo/nix-commits">mailing
           list</a> (<tt>nix-commits@cs.uu.nl</tt>) that you can
         subscribe to if you want to receive automatic commit
         notifications from the Nix Subversion repository.
@@ -1526,7 +1526,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       <p><a href="https://www.flickr.com/photos/eelcovisser/367433201/"><img class="inline screenshot"
-            src="https://farm1.static.flickr.com/185/367433201_9ee5ad0986_m.jpg" alt="New build farm" /></a>To quote
+            src="https://web.archive.org/web/20200422161704if_/https://farm1.static.flickr.com/185/367433201_9ee5ad0986_m.jpg" alt="New build farm" /></a>To quote
         Eelco Visser: new
         hardware for buildfarm at Delft University of Technology has
         arrived.</p>
@@ -1542,7 +1542,7 @@ $ nix-store -qR /run/current-system | grep openssl
         be used to crank at building hundreds of software
         packages. Using virtualisation we should be able to run builds
         on multiple operating system distributions. <a
-          href="http://blog.eelcovisser.net/index.php?/archives/36-Bootfarm.html">Read
+          href="https://eelcovisser.org/blog/2007/01/23/bootfarm/">Read
           more…</a></p>
     </description>
   </item>
@@ -1553,9 +1553,9 @@ $ nix-store -qR /run/current-system | grep openssl
       Nixpkgs 0.10 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.10/">Nixpkgs
+      <a href="https://web.archive.org/web/20140913061226/https://releases.nixos.org/nixpkgs/nixpkgs-0.10/">Nixpkgs
         0.10</a> has been released. See the <a
-        href="https://nixos.org/releases/nixpkgs/nixpkgs-0.10/release-notes/">release
+        href="https://web.archive.org/web/20140913060334/https://releases.nixos.org/nixpkgs/nixpkgs-0.10/release-notes/">release
         notes</a> for details.
     </description>
   </item>
@@ -1566,7 +1566,7 @@ $ nix-store -qR /run/current-system | grep openssl
       Nix 0.10.1 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nix/nix-0.10.1/">Nix
+      <a href="https://web.archive.org/web/20140913060038/https://releases.nixos.org/nix/nix-0.10.1/">Nix
         0.10.1</a> has been released. It fixes two obscure bugs that
       shouldn’t affect most users.
     </description>
@@ -1578,9 +1578,9 @@ $ nix-store -qR /run/current-system | grep openssl
       Nix 0.10 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nix/nix-0.10/">Nix
+      <a href="https://web.archive.org/web/20140913062041/https://releases.nixos.org/nix/nix-0.10/">Nix
         0.10</a> has been released. This release has many
-      improvements and bug fixes; see the <a href="https://nixos.org/releases/nix/nix-0.10/release-notes/">release
+      improvements and bug fixes; see the <a href="https://web.archive.org/web/20140913061253/https://releases.nixos.org/nix/nix-0.10/release-notes/">release
         notes</a> for details.
     </description>
   </item>
@@ -1591,8 +1591,8 @@ $ nix-store -qR /run/current-system | grep openssl
       Nixpkgs 0.9 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nixpkgs/nixpkgs-0.9/">Nixpkgs
-        0.9</a> has been <a href="http://mail.cs.uu.nl/pipermail/nix-dev/2006-January/000121.html">released</a>.
+      <a href="https://web.archive.org/web/20140913055101/https://releases.nixos.org/nixpkgs/nixpkgs-0.9/">Nixpkgs
+        0.9</a> has been <a href="https://web.archive.org/web/20110820121350/http://mail.cs.uu.nl/pipermail/nix-dev/2006-January/000121.html">released</a>.
     </description>
   </item>
 
@@ -1602,7 +1602,7 @@ $ nix-store -qR /run/current-system | grep openssl
       PhD thesis defended
     </title>
     <description>
-      <a href="http://www.cs.uu.nl/~eelco">Eelco Dolstra</a>
+      <a href="https://web.archive.org/web/20080205081357/https://people.cs.uu.nl/eelco">Eelco Dolstra</a>
         defended his <a href="https://edolstra.github.io/pubs/phd-thesis.pdf">PhD
         thesis</a> on the purely functional deployment model.
     </description>
@@ -1614,7 +1614,7 @@ $ nix-store -qR /run/current-system | grep openssl
       Nix 0.9.2 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nix/nix-0.9.2/">Nix
+      <a href="https://web.archive.org/web/20140913055759/https://releases.nixos.org/nix/nix-0.9.2/">Nix
         0.9.2</a> has been released released. This is a bug fix
       release that addresses some problems on Mac OS X.
     </description>
@@ -1626,10 +1626,10 @@ $ nix-store -qR /run/current-system | grep openssl
       Nix 0.9 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nix/nix-0.9/">Nix 0.9</a>
+      <a href="https://web.archive.org/web/20140913053124/https://releases.nixos.org/nix/nix-0.9/">Nix 0.9</a>
       has been released. This is a new major release that provides
       quite a few performance improvements and bug fixes, as well as a
-      number of new features. Read the <a href="https://nixos.org/releases/nix/nix-0.9/release-notes/">release
+      number of new features. Read the <a href="https://web.archive.org/web/20140913061858/https://releases.nixos.org/nix/nix-0.9/release-notes/">release
         notes</a> for details.
     </description>
   </item>
@@ -1657,7 +1657,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       The paper “Service Configuration Management” (accepted at the
-      <a href="https://users.soe.ucsc.edu/~ejw/scm12/">12th
+      <a href="https://web.archive.org/web/20200422192338/https://users.soe.ucsc.edu/~ejw/scm12/">12th
         International Workshop on Software Configuration
         Management</a>) describes how we can rather easily deploy
       “services” (e.g., complete webserver configurations such as our
@@ -1679,7 +1679,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       The paper “Efficient Upgrading in a Purely Functional Component
-      Deployment Model” has been accepted at <a href="http://www.sei.cmu.edu/pacc/CBSE2005/">CBSE 2005</a>.
+      Deployment Model” has been accepted at <a href="https://web.archive.org/web/20090712101213/https://www.sei.cmu.edu/pacc/CBSE2005/">CBSE 2005</a>.
       It describes how we can deploy updates to Nix packages
       efficiently, even if “fundamental” packages like Glibc are
       updated (which cause a rebuild of all dependent packages), by
