@@ -4,7 +4,7 @@
 # * empty lines will be skipped
 # * lines starting with "#" will be skipped
 # * lines starting with "$ " will be typed
-# * lines starting with "[nix-shell]$ " will be typed
+# * lines starting with "(nix-shell) $ " will be typed
 # * lines starting with "--" will clear the screen
 # * every line after "#" will be a little brighter
 # * everything else will be printed immediately
@@ -20,10 +20,10 @@ node: command not found
 $ # Interesting, no node on this machine
 $ # No problem with Nix!
 $ nix-shell -p nodejs
-[nix-shell]$ node -e "console.log(1+1)"
+(nix-shell) $ node -e "console.log(1+1)"
 2
-[nix-shell]$ # And now we are able to use node.
-[nix-shell]$ # Nix Magic! :)
+(nix-shell) $ # And now we are able to use node.
+(nix-shell) $ # Nix Magic! :)
 
 --
 
@@ -49,10 +49,10 @@ $ # Pause the video to understand the default.nix
 $ # To enter dev-environment simply run:
 $ nix-shell
 Start developing...
-[nix-shell]$ node -e "console.log(1+1)"
+(nix-shell) $ node -e "console.log(1+1)"
 2
-[nix-shell]$ # Now go ahead commit default.nix to your repository
-[nix-shell]$ # and share your development environment with your coworkers
+(nix-shell) $ # Now go ahead commit default.nix to your repository
+(nix-shell) $ # and share your development environment with your coworkers
 
 --
 
