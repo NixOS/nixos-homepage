@@ -8,7 +8,7 @@ v10.20.1
 go version go1.14.1 linux/amd64
 (nix-shell) $ rustc --version
 rustc 1.42.0
-(nix-shell) $ # Imagine how easy 
+(nix-shell) $ # Imagine how easy
 (nix-shell) $ exit
 $ # And POOF, just like that your are back to your normal environment after
 $ # playing around. No system was hurt during this time :)

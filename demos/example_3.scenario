@@ -12,7 +12,7 @@ $ bat shell.nix
     4   │   name="dev-environment";    # that requires a name
     5   │   buildInputs = [            # and a list of packages
     6   │     pkgs.python3
-    7   │     pkgs.python3Packages.virtualenv 
+    7   │     pkgs.python3Packages.virtualenv
     8   │     pkgs.nodejs
     9   │     pkgs.yarn
    10   │   ];
@@ -21,8 +21,9 @@ $ bat shell.nix
    13   │   '';
    14   │ }
 ────────┴────────────────────────────────────────────────────────────────────
+
 $ # Pause the video to read and understand the shell.nix
-$ # To enter dev-environment simply run:
+$ # To enter the dev-environment simply run:
 $ nix-shell
 Start developing...
 (nix-shell) $ python --version
@@ -36,8 +37,8 @@ v10.20.1
 (nix-shell) $ yarn --version
 1.22.4
 (nix-shell) $ # Having node and yarn in PATH you already know you can
-(nix-shell) $ # do all the good stuff with nodejs 
+(nix-shell) $ # do all the good stuff with nodejs
 (nix-shell) $ exit
-$ # How hard it is in your company to share the same version of required
+$ # How hard is it in your company to share the same version of required
 $ # tooling across different machines?
 

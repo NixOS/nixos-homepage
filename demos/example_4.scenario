@@ -1,25 +1,25 @@
 #! { "step": 0.10, "width": 77, "height": 20 }
 
-$ # We all love docker. But it becomes hard with time to write 
-$ # reliable Dockerfile.
-$ # What if you can use the power of Nix and build Docker images?
+$ # We all love docker. But over time it can become tedious to write
+$ # reliable docker files.
+$ # What if you could use the power of Nix to build Docker images?
 $ bat docker.nix
 ───────┬─────────────────────────────────────────────────────────────────────
        │ File: docker.nix
 ───────┼─────────────────────────────────────────────────────────────────────
    1   │ { pkgs ? import <nixpkgs> {}         # nixpkgs package set
    2   │ }:
-   3   │ pkgs.dockerTools.buildLayeredImage { # helper to build docker image
+   3   │ pkgs.dockerTools.buildLayeredImage { # helper to build Docker image
    4   │   name = "nix-hello";                # give docker image a name
    5   │   tag = "latest";                    # provide a tag
    6   │   contents = [ pkgs.hello ];         # packages in docker image
    7   │ }
 ───────┴─────────────────────────────────────────────────────────────────────
 $ # Pause the video to read and understand the docker.nix
-$ # Now we build a docker image with nix-build
+$ # Now we build a Docker image with nix-build
 $ nix-build default.nix -o result
 /nix/store/91ry9y0686xn9dgnn6rawfvknj8582ws-nix-hello.tar.gz
-$ # We can import the image into docker as usual
+$ # We can import the image into Docker as usual
 $ docker load -i ./result
 e25615ae850b: Loading layer  1.649MB/1.649MB
 bde5792b3b71: Loading layer    256kB/256kB
@@ -27,7 +27,7 @@ bde5792b3b71: Loading layer    256kB/256kB
 ab8ee9b997a1: Loading layer  266.2kB/266.2kB
 f568d8025dd8: Loading layer  71.68kB/71.68kB
 Loaded image: nix-hello:latest
-$ # You can see that docker layers were automatically calculated.
+$ # You can see that the Docker layers were automatically calculated.
 $ docker images | grep nix-hello
 nix-hello     latest     83667617cdb9    50 years ago    32.9MB
 $ # And for the final thing lets test that it really works
