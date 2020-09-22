@@ -17,7 +17,7 @@ $ bat docker.nix
 ───────┴─────────────────────────────────────────────────────────────────────
 $ # Pause the video to read and understand the docker.nix
 $ # Now we build a Docker image with nix-build
-$ nix-build default.nix -o result
+$ nix-build docker.nix -o result
 /nix/store/91ry9y0686xn9dgnn6rawfvknj8582ws-nix-hello.tar.gz
 $ # We can import the image into Docker as usual
 $ docker load -i ./result
