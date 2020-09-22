@@ -42,3 +42,28 @@
 		&:extend(.well all);
 	}
 }
+
+.learn-search {
+	& > ul {
+		#columns(2);
+		margin-bottom: 1rem;
+	}
+	form {
+		display: flex;
+		align-items: center;
+		flex-grow: 1;
+		& > .form-input {
+			&, input {
+				margin: 0;
+			}
+			input {
+				background-color: transparent;
+			}
+			flex-grow: 1;
+			.form-input.with-icon({
+				#svg.icon.search.blue-light;
+			});
+		}
+	}
+}
+

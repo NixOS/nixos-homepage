@@ -5,52 +5,40 @@
 </div>
 
 <section class="generic-layout learn-guides">
-  <h2>Guides</h2>
+  <h1>Guides</h1>
   <ul>
     [% INSERT "learn_guides.html.in" %]
   </ul>
 </section>
 
-[%#
-<section class="generic-layout">
-  <div>
-    <ul>
-      <li>
-
-        <h2>Discover Nix packages</h2>
-        <form id="learn-packages-search">
-          <div class="input-append">
-            <input class="span10" placeholder="Search for Nix packages" type="text" />
-            <button class="btn dropdown-toggle" data-toggle="dropdown">
-              Search
-            </button>
-          </div>
-        </form>
-      </li>
-      <li>
-
-        <h2>Discover NixOS options</h2>
-        <form id="learn-options-search">
-          <div class="input-append">
-            <input class="span10" placeholder="Search for NixOS options" type="text" />
-            <button class="btn dropdown-toggle" data-toggle="dropdown">
-              Search
-            </button>
-          </div>
-        </form>
-      </li>
-
-    </ul>
-  </div>
+<section class="generic-layout learn-search">
+  <h1>Search</h1>
+  <ul>
+    <li>
+      <h4>Nix packages</h4>
+      <form method="get" action="https://search.nixos.org/packages">
+        <div class="form-input">
+          <input type="text" placeholder="Search for Nix packages" name="query" />
+        </div>
+      </form>
+    </li>
+    <li>
+      <h4>NixOS options</h4>
+      <form method="get" action="https://search.nixos.org/options">
+        <div class="form-input">
+          <input type="text" placeholder="Search for NixOS options" name="query" />
+        </div>
+      </form>
+    </li>
+  </ul>
 </section>
-%]
 
 <section class="generic-layout learn-manuals">
   <ul>
     <li>
-      <h2>Learn Nix</h2>
+      <h1>Learn Nix</h1>
       <p>Nix is a package manager which comes in a form of many command line tools.
-      Packages that Nix can build are defined with Nix Expression Language.
+        Packages that Nix can build are defined with Nix Expression Language.
       </p>
       <ul>
         <li><a href="[%root%]manual/nix/stable/#ch-installing-binary">Installation</a></li>
@@ -84,9 +72,9 @@
     </li>
 
     <li>
-      <h2>Learn Nixpkgs</h2>
+      <h1>Learn Nixpkgs</h1>
       <p>The Nix Packages collection (Nixpkgs) is a set of thousands of packages for the Nix package manager and NixOS
-      Linux distribution.</p>
+        Linux distribution.</p>
       <ul>
         <li><a href="[%root%]manual/nixpkgs/stable/#chap-packageconfig">Configure nixpkgs</a></li>
         <li><a href="[%root%]manual/nixpkgs/stable/#chap-overrides">Customize packages (override packages)</a></li>
@@ -159,7 +147,7 @@
     </li>
 
     <li>
-      <h2>Learn NixOS</h2>
+      <h1>Learn NixOS</h1>
       <p>NixOS is a Linux distribution based on Nix package manager.</p>
       <ul>
         <li><a href="[%root%]manual/nixos/stable/#sec-installation">Installing NixOS</a></li>
@@ -182,7 +170,7 @@
 <section class="generic-layout learn-gethelp">
   <ul>
     <li>
-      <h2>Other learning resources</h2>
+      <h1>Other learning resources</h1>
       <ul>
         <li>
           <a href="[%root%]guides/nix-pills">Nix Pills</a> — At the beginning you may feel that some of the magic
@@ -196,12 +184,12 @@
       </ul>
     </li>
     <li class="support">
-      <h2>Get help from the community</h2>
+      <h1>Get help from the community</h1>
       <p>The <a href="[%root%]community.html">Community page</a> shows where the community meets.</p>
 
-      <h2>Get commercial support</h2>
+      <h1>Get commercial support</h1>
       <p>The <a href="[%root%]commercial-support.html">Commercial support page</a> provides a list of consulting
-      companies.</p>
+        companies.</p>
     </li>
   </ul>
 </section>
