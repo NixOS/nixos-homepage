@@ -2,9 +2,9 @@
 
 $ # You can also persist your development environment.
 $ # Here is a short example with python and nodejs:
-$ bat default.nix
+$ bat shell.nix
 ────────┬────────────────────────────────────────────────────────────────────
-        │ File: default.nix
+        │ File: shell.nix
 ────────┼──────────────────────────────────────────────────────────────────── 
     1   │ { pkgs ? import <nixpkgs> {} # here we import the nixpkgs package set
     2   │ }:
@@ -21,7 +21,8 @@ $ bat default.nix
    13   │   '';
    14   │ }
 ────────┴────────────────────────────────────────────────────────────────────
-$ # Pause the video to read and understand the default.nix
+
+$ # Pause the video to read and understand the shell.nix
 $ # To enter the dev-environment simply run:
 $ nix-shell
 Start developing...
