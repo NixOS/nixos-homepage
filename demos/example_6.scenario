@@ -1,8 +1,8 @@
 #! { "step": 0.10, "width": 77, "height": 20 }
 
-$ # In this example we will look how to test your NixOS configuration
-$ # We will create a simple configuration with `hello` pacakge installed
-$ # system wide and check that `hello` world binary works.
+$ # In this example we will look into how to test your NixOS configuration
+$ # We will create a simple configuration with the `hello` package installed
+$ # system wide and check that the `hello` world binary works.
 
 $ bat test.nix
 ────────┬─────────────────────────────────────────────────────────────────────
@@ -32,8 +32,8 @@ machine1: must succeed: hello | grep "Hello, world!"
 ...
 /nix/store/99cb3pmmyaxp0rs6r596kqq5v8ivp45j-vm-test-run-example-test
 
-$ # While this example is simple you can imagine how handy can it be 
-$ # to test interaction between many machines.
+$ # While this example is simple you can imagine how handy it can be
+$ # to test interactions between many machines.
 $ # You can take screenshots, scrape for text and more. Checkout what
-$ # else you can do in NixOS manual under NixOS Tests section
+$ # else you can do in the Tests section in the NixOS manual
 $ # Happy testing!

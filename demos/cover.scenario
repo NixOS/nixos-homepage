@@ -32,7 +32,7 @@ $ # We can write everything down in default.nix
 $ bat default.nix
 ────────┬────────────────────────────────────────────────────────────────────
         │ File: default.nix
-────────┼──────────────────────────────────────────────────────────────────── 
+────────┼────────────────────────────────────────────────────────────────────
     1   │ { pkgs ? import <nixpkgs> {} # here we import the nixpkgs package set
     2   │ }:
     3   │ pkgs.mkShell {               # mkShell is a helper function
@@ -71,10 +71,10 @@ $ bat docker-redis.nix
 ───────┴─────────────────────────────────────────────────────────────────────
 $ # Pause the video and take the time to understand docker-redis.nix file
 $ # Now let's build the docker image and load it into docker
-$ nix-build docker-redis.nix -o ./result 
+$ nix-build docker-redis.nix -o ./result
 ... SKIPPING OUTPUT ...
 /nix/store/1crapx24sjgqm2j1wmq17k6f6a9wy66d-docker-image-nix-redis.tar.gz
-$ docker load -i ./result   
+$ docker load -i ./result
 Loaded image: nix-redis:latest
 $ docker images | grep redis
 debian-redis  latest    8366943c77e8     3 days ago       136MB
@@ -142,5 +142,5 @@ $ # Go tell your friends :)
 
 $ # This was a quick taste of what Nix can do.
 $ # I hope we made you eager to try it for yourself.
-$ # Happy Nixing! 
+$ # Happy Nixing!
 

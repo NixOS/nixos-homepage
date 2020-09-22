@@ -9,4 +9,4 @@ $ nix-shell -p python3
 Python 3.7.7
 (nix-shell) $ # YAAAY! Python is available
 (nix-shell) $ exit
-$ And this is how you create on demand environments
+$ # And this is how you create on demand environments
