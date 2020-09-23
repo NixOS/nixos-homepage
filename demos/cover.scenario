@@ -28,10 +28,10 @@ $ nix-shell -p nodejs
 --
 
 $ # Typing "nix-shell -p ..." each time can be tedious. We can do better.
-$ # We can write everything down in default.nix
-$ bat default.nix
+$ # We can write everything down in shell.nix
+$ bat shell.nix
 ────────┬────────────────────────────────────────────────────────────────────
-        │ File: default.nix
+        │ File: shell.nix
 ────────┼────────────────────────────────────────────────────────────────────
     1   │ { pkgs ? import <nixpkgs> {} # here we import the nixpkgs package set
     2   │ }:
@@ -45,13 +45,13 @@ $ bat default.nix
    10   │   '';
    11   │ }
 ────────┴────────────────────────────────────────────────────────────────────
-$ # Pause the video to understand the default.nix
+$ # Pause the video to understand the shell.nix
 $ # To enter dev-environment simply run:
 $ nix-shell
 Start developing...
 (nix-shell) $ node -e "console.log(1+1)"
 2
-(nix-shell) $ # Now go ahead commit default.nix to your repository
+(nix-shell) $ # Now go ahead commit shell.nix to your repository
 (nix-shell) $ # and share your development environment with your coworkers
 
 --
