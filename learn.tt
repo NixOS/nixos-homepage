@@ -37,7 +37,7 @@
   <h1>Manuals</h1>
   <ul>
     <li>
-      <h2>Nix manual</h2>
+      <h2>Nix Manual</h2>
       <p>Nix is a package manager which comes in a form of many command line tools.
         Packages that Nix can build are defined with Nix Expression Language.
       </p>
@@ -73,7 +73,7 @@
     </li>
 
     <li>
-      <h2>Nixpkgs manual</h2>
+      <h2>Nixpkgs Manual</h2>
       <p>The Nix Packages collection (Nixpkgs) is a set of thousands of packages for the Nix package manager and NixOS
         Linux distribution.</p>
       <ul>
