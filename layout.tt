@@ -50,11 +50,6 @@ BLOCK navigationLink %]
   <header>
     <div>
       <h1><a href="[% root %]">NixOS</a></h1>
-      <form class="header-search" method="get" action="https://search.nixos.org/packages">
-        <div class="form-input">
-          <input type="text" placeholder="Search for Nix packages" name="query" />
-        </div>
-      </form>
       [%# ???! go read `navbar.less` and `nixos-site.js`, it's all fine I swear. %]
       <nav style="display: none;">
         <ul>
@@ -66,6 +61,7 @@ BLOCK navigationLink %]
           [% INCLUDE navigationLink href="donate.html" title="Donate" %]
         </ul>
       </nav>
+      <a class="header-search-link" href="https://search.nixos.org/packages"></a>
     </div>
   </header>
 

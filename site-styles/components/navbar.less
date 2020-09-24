@@ -129,6 +129,28 @@ body > header {
 		}
 	}
 
+	.header-search-link {
+		#screen-xs-max({ display: none; });
+		position: relative;
+		display: block;
+		padding: 0;
+		flex: 0;
+		flex-basis: 3.5rem;
+		&::before {
+			#svg.icon.search.blue-light;
+			content: "";
+			z-index: 1;
+			position: absolute;
+			left: @gutter;
+			top: 50%;
+			transform: translateY(-50%);
+			background-repeat: no-repeat;
+			background-size: contain;
+			height: @input-icon-size;
+			width: @input-icon-size;
+		}
+	}
+
 	.header-search {
 		display: flex;
 		align-items: center;
