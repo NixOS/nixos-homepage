@@ -2,26 +2,21 @@
 
 $ # You can also persist your development environment.
 $ # Here is a short example with python and nodejs:
-$ bat shell.nix
-────────┬────────────────────────────────────────────────────────────────────
-        │ File: shell.nix
-────────┼──────────────────────────────────────────────────────────────────── 
-    1   │ { pkgs ? import <nixpkgs> {} # here we import the nixpkgs package set
-    2   │ }:
-    3   │ pkgs.mkShell {               # mkShell is a helper function
-    4   │   name="dev-environment";    # that requires a name
-    5   │   buildInputs = [            # and a list of packages
-    6   │     pkgs.python3
-    7   │     pkgs.python3Packages.virtualenv
-    8   │     pkgs.nodejs
-    9   │     pkgs.yarn
-   10   │   ];
-   11   │   shellHook = ''             # bash to run when you enter the shell
-   12   │     echo "Start developing..."
-   13   │   '';
-   14   │ }
-────────┴────────────────────────────────────────────────────────────────────
-
+$ cat -n shell.nix
+     1  { pkgs ? import <nixpkgs> {} # here we import the nixpkgs package set
+     2  }:
+     3  pkgs.mkShell {               # mkShell is a helper function
+     4    name="dev-environment";    # that requires a name
+     5    buildInputs = [            # and a list of packages
+     6      pkgs.python3
+     7      pkgs.python3Packages.virtualenv
+     8      pkgs.nodejs
+     9      pkgs.yarn
+    10    ];
+    11    shellHook = ''             # bash to run when you enter the shell
+    12      echo "Start developing..."
+    13    '';
+    14  }
 $ # Pause the video to read and understand the shell.nix
 $ # To enter the dev-environment simply run:
 $ nix-shell
@@ -41,4 +36,3 @@ v10.20.1
 (nix-shell) $ exit
 $ # How hard is it in your company to share the same version of required
 $ # tooling across different machines?
-
