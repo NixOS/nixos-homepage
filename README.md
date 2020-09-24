@@ -8,7 +8,7 @@ build it:
     $ cd nixos-homepage
     $ nix-shell
     [nix-shell]$ make
-    [nix-shell]$ caddy
+    [nix-shell]$ python -m http.server
 
 then open http://127.0.0.1:8000/index.html
 
@@ -19,7 +19,7 @@ To automatically rebuild on every change:
 To test the complete result from a nix-build:
 
     $ nix-build
-    $ nix-shell --run 'cd result/ && caddy'
+    $ nix-shell --run 'cd result/ && python -m http.server'
 
 ## License
 
