@@ -4,25 +4,21 @@ $ # In this example we will look into how to test your NixOS configuration
 $ # We will create a simple configuration with the `hello` package installed
 $ # system wide and check that the `hello` world binary works.
 
-$ bat test.nix
-────────┬─────────────────────────────────────────────────────────────────────
-        │ File: test.nix
-────────┼─────────────────────────────────────────────────────────────────────
-    1   │ { pkgs ? import <nixpkgs> {}
-    2   │ }:
-    3   │ pkgs.nixosTest ({ lib, pkgs, ...}: {
-    4   │   name = "example-test";
-    5   │   # virtual machine with one package installed system wide
-    6   │   machine = { pkgs, ... }: {
-    7   │     environment.systemPackages = [ pkgs.hello ];
-    8   │   };
-    9   │   testScript = ''
-   10   │     # run hello on machine and check for output
-   11   │     machine.succeed('hello | grep "Hello, world!"')
-   12   │     # test is a simple python script
-   13   │   '';
-   14   │ })
-────────┴────────────────────────────────────────────────────────────────────
+$ cat -n test.nix
+     1  { pkgs ? import <nixpkgs> {}
+     2  }:
+     3  pkgs.nixosTest ({ lib, pkgs, ...}: {
+     4    name = "example-test";
+     5    # virtual machine with one package installed system wide
+     6    machine = { pkgs, ... }: {
+     7      environment.systemPackages = [ pkgs.hello ];
+     8    };
+     9    testScript = ''
+    10      # run hello on machine and check for output
+    11      machine.succeed('hello | grep "Hello, world!"')
+    12      # test is a simple python script
+    13    '';
+    14  })
 $ # Pause the video to understand the test.nix
 
 $ # To run the test you simply need to run:
