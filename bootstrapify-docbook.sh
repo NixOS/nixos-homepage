@@ -44,4 +44,8 @@ mv "$outDirTmp" "$outDir"
 
 if [ -e "$outDir/manual.html" ]; then
   mv "$outDir/manual.html" "$outDir/index.html"
+  sed -i -z \
+    -e 's|pre-git\n  <\/h2>|<\/h2>|g' \
+    -e 's|post-git\n  <\/h2>|<\/h2>|g' \
+    "$outDir/index.html"
 fi
