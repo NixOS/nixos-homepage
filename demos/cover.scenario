@@ -54,8 +54,8 @@ Start developing...
 
 $ # For the last example, let us build a minimal docker image with Nix
 $ cat -n docker-redis.nix
-    1  { pkgs ? import <nixpkgs> {}         # nixpkgs package set
-    2  }:
+    1  { pkgs ? import <nixpkgs> { system = "x86_64-linux";}
+    2  }:                                   # nixpkgs package set
     3  pkgs.dockerTools.buildLayeredImage { # helper to build docker image
     4    name = "nix-redis";                # give docker image a name
     5    tag = "latest";                    # provide a tag
@@ -98,8 +98,8 @@ $ # 2.) Build a statically linked binary with musl
 $ # 3.) Remove all binaries apart from redis-server
 $ # Now let's build the docker image with our newly created minimal redis
 $ cat -n docker-redis-minimal.nix
-    1  { pkgs ? import <nixpkgs> {}
-    2  }:
+    1  { pkgs ? import <nixpkgs> { system = "x86_64-linux";}
+    2  }:                                   # nixpkgs package set
     3  let
     4    redisMinimal = import ./redis-minimal.nix { inherit pkgs; };
     5  in
