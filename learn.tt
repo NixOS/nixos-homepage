@@ -68,7 +68,7 @@
           </ul>
         </li>
       </ul>
-      <a href="[%root%]manual/nix/stable" class="button">More ...</a>
+      <a href="[%root%]manual/nix/stable" class="button">Manual</a>
     </li>
 
     <li>
@@ -143,7 +143,7 @@
         </li>
         <li><a href="[%root%]manual/nixpkgs/stable/#chap-submitting-changes">Contributing to Nixpkgs</a></li>
       </ul>
-      <a href="[%root%]manual/nixpkgs/stable" class="button">More ...</a>
+      <a href="[%root%]manual/nixpkgs/stable" class="button">Manual</a>
     </li>
 
     <li>
@@ -162,7 +162,7 @@
         <li><a href="[%root%]manual/nixos/stable/#sec-nixos-tests">Writing NixOS Tests</a></li>
         <li><a href="[%root%]manual/nixos/stable/#sec-building-cd">Building Your Own NixOS CD</a></li>
       </ul>
-      <a href="[%root%]manual/nixos/stable" class="button">More ...</a>
+      <a href="[%root%]manual/nixos/stable" class="button">Manual</a>
     </li>
   </ul>
 </section>
