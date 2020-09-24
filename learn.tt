@@ -34,9 +34,10 @@
 </section>
 
 <section class="generic-layout learn-manuals">
+  <h1>Manuals</h1>
   <ul>
     <li>
-      <h1>Learn Nix</h1>
+      <h2>Nix manual</h2>
       <p>Nix is a package manager which comes in a form of many command line tools.
         Packages that Nix can build are defined with Nix Expression Language.
       </p>
@@ -68,11 +69,11 @@
           </ul>
         </li>
       </ul>
-      <a href="[%root%]manual/nix/stable" class="button">More ...</a>
+      <a href="[%root%]manual/nix/stable" class="button">Read more</a>
     </li>
 
     <li>
-      <h1>Learn Nixpkgs</h1>
+      <h2>Nixpkgs manual</h2>
       <p>The Nix Packages collection (Nixpkgs) is a set of thousands of packages for the Nix package manager and NixOS
         Linux distribution.</p>
       <ul>
@@ -143,11 +144,11 @@
         </li>
         <li><a href="[%root%]manual/nixpkgs/stable/#chap-submitting-changes">Contributing to Nixpkgs</a></li>
       </ul>
-      <a href="[%root%]manual/nixpkgs/stable" class="button">More ...</a>
+      <a href="[%root%]manual/nixpkgs/stable" class="button">Read more</a>
     </li>
 
     <li>
-      <h1>Learn NixOS</h1>
+      <h2>NixOS Manual</h2>
       <p>NixOS is a Linux distribution based on Nix package manager.</p>
       <ul>
         <li><a href="[%root%]manual/nixos/stable/#sec-installation">Installing NixOS</a></li>
@@ -162,7 +163,7 @@
         <li><a href="[%root%]manual/nixos/stable/#sec-nixos-tests">Writing NixOS Tests</a></li>
         <li><a href="[%root%]manual/nixos/stable/#sec-building-cd">Building Your Own NixOS CD</a></li>
       </ul>
-      <a href="[%root%]manual/nixos/stable" class="button">More ...</a>
+      <a href="[%root%]manual/nixos/stable" class="button">Read more</a>
     </li>
   </ul>
 </section>
