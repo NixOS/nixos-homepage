@@ -7,7 +7,7 @@ $ # system wide and check that the `hello` world binary works.
 $ cat -n test.nix
      1  { pkgs ? import <nixpkgs> {}
      2  }:
-     3  pkgs.nixosTest ({ lib, pkgs, ...}: {
+     3  pkgs.nixosTest {
      4    name = "example-test";
      5    # virtual machine with one package installed system wide
      6    machine = { pkgs, ... }: {
@@ -18,7 +18,7 @@ $ cat -n test.nix
     11      machine.succeed('hello | grep "Hello, world!"')
     12      # test is a simple python script
     13    '';
-    14  })
+    14  }
 $ # Pause the video to understand the test.nix
 
 $ # To run the test you simply need to run:
