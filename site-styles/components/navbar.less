@@ -129,50 +129,24 @@ body > header {
 		}
 	}
 
-	.header-search-link {
-		#screen-xs-max({ display: none; });
-		position: relative;
-		display: block;
-		padding: 0;
-		flex: 0;
-		flex-basis: 3.5rem;
-		&::before {
+	nav .search {
+		a:after {
 			#svg.icon.search.blue-light;
-			content: "";
-			z-index: 1;
-			position: absolute;
-			left: @gutter;
-			top: 50%;
-			transform: translateY(-50%);
-			background-repeat: no-repeat;
-			background-size: contain;
-			height: @input-icon-size;
-			width: @input-icon-size;
-		}
-	}
-
-	.header-search {
-		display: flex;
-		align-items: center;
-		flex-grow: 1;
-		padding-left: @gutter / 2;
-		padding-right: @gutter / 2;
-		& > .form-input {
-			&, input {
-				margin: 0;
-			}
-			input {
-				background-color: transparent;
-			}
-			flex-grow: 1;
-			.form-input.with-icon({
-				#svg.icon.search.blue-light;
-			});
 		}
 
-		#screen-md-max({
-			// FIXME: pop out search like for `xs`
-			display: none;
+		#rules-for-responsive-navbar-wide({
+			a {
+				#text-replacement(
+					@image-rules: {
+						left: @gutter;
+					},
+					// ::before is co-opted for the focus/active blue bar.
+					@pseudo: after,
+					@width: @input-icon-size,
+					@height: @_height,
+				);
+				width: @input-icon-size + @gutter*2,
+			}
 		});
 	}
 
