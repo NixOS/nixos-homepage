@@ -59,9 +59,11 @@ BLOCK navigationLink %]
           [% INCLUDE navigationLink href="community.html" title="Community" %]
           [% INCLUDE navigationLink href="governance.html" title="Governance" %]
           [% INCLUDE navigationLink href="donate.html" title="Donate" %]
+          [% WRAPPER navigationLink class="search" title="Donate" %]
+            <a href="https://search.nixos.org/packages">Search</a>
+          [% END %]
         </ul>
       </nav>
-      <a class="header-search-link" href="https://search.nixos.org/packages"></a>
     </div>
   </header>
 
