@@ -935,7 +935,13 @@ further qualifiers; more specific flake references like
 hermetic and reproducible. In a future post, we’ll show how we can do
 the same for cloud deployments using NixOps.&lt;/p&gt;
 &lt;p&gt;Acknowledgment: The development of flakes was partially funded by
-Target Corporation.&lt;/p&gt;</description>
+Target Corporation.&lt;/p&gt;
+&lt;h2&gt;Nix Flakes Series&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.tweag.io/../2020-05-25-flakes&quot;&gt;Part 1: An introduction and tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.tweag.io/../2020-06-25-eval-cache&quot;&gt;Part 2: Evaluation caching&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Part 3: Managing NixOS systems&lt;/li&gt;
+&lt;/ul&gt;</description>
 	<pubDate>Fri, 31 Jul 2020 00:00:00 +0000</pubDate>
 </item>
 <item>
@@ -1399,7 +1405,13 @@ shares most of its dependencies. So it would be nice if the evaluator
 had knowledge of the evaluation cache. For example, the evaluation of
 thunks that represent attributes like
 &lt;code class=&quot;language-text&quot;&gt;nixpkgs.legacyPackages.x86_64-linux.&amp;lt;package name&amp;gt;&lt;/code&gt; could check and
-update the cache.&lt;/p&gt;</description>
+update the cache.&lt;/p&gt;
+&lt;h2&gt;Nix Flakes Series&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.tweag.io/../2020-05-25-flakes&quot;&gt;Part 1: An introduction and tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Part 2: Evaluation caching&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.tweag.io/../2020-07-31-nixos-flakes&quot;&gt;Part 3: Managing NixOS systems&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
 	<pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
 </item>
 
