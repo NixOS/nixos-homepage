@@ -181,7 +181,10 @@
 	// extend in a media query doesn't work.
 	#svg.title-angle.white;
 	// so we instead undo the background-image.
-	#screen-xs-max({ background-image: none !important; });
+	#screen-xs-max({
+		background-image: none !important;
+		margin-bottom: @gutter;
+	});
 	#screen-sm-min({
 		background-repeat: no-repeat;
 		background-position: 44% 100%;
