@@ -156,35 +156,25 @@
 	@height: auto,
 	@image-rules: {},
 ) {
-	&:extend(.__text-replacement_common all);
+	position: relative;
+	text-indent: -9999px;
+	overflow: hidden;
 	width: @width;
 	height: @height;
 
 	&:@{pseudo} {
-		&:extend(.__text-replacement_common_pseudo all);
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center center;
+		display: inline-block;
 		width: @width;
 		height: @height;
 		@image-rules();
-
 	}
-}
-
-// The following two classes are used with `extend` to reduce
-// duplication in the generated stylesheet.
-.__text-replacement_common {
-	position: relative;
-	text-indent: -9999px;
-	overflow: hidden;
-}
-.__text-replacement_common_pseudo {
-	content: "";
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center center;
-	display: inline-block;
 }

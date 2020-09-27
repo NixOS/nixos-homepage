@@ -129,28 +129,24 @@ body > header {
 		}
 	}
 
-	.header-search {
-		display: flex;
-		align-items: center;
-		flex-grow: 1;
-		padding-left: @gutter / 2;
-		padding-right: @gutter / 2;
-		& > .form-input {
-			&, input {
-				margin: 0;
-			}
-			input {
-				background-color: transparent;
-			}
-			flex-grow: 1;
-			.form-input.with-icon({
-				#svg.icon.search.blue-light;
-			});
+	nav .search {
+		a:after {
+			#svg.icon.search.blue-light;
 		}
 
-		#screen-md-max({
-			// FIXME: pop out search like for `xs`
-			display: none;
+		#rules-for-responsive-navbar-wide({
+			a {
+				#text-replacement(
+					@image-rules: {
+						left: @gutter;
+					},
+					// ::before is co-opted for the focus/active blue bar.
+					@pseudo: after,
+					@width: @input-icon-size,
+					@height: @_height,
+				);
+				width: @input-icon-size + @gutter*2,
+			}
 		});
 	}
 
