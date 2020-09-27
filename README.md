@@ -25,7 +25,7 @@ To test the complete result from a nix-build:
     $ nix-build
     $ nix-shell --run 'cd result/ && python -m http.server'
 
-### Docker Desktop for Mac
+### MacOS (via Docker)
 
 Unfortunately it will not build on macOS natively. 
 But it can be build in a [Docker container on macOS](https://www.docker.com/products/docker-desktop). 
