@@ -13,7 +13,7 @@ To build it on Linux/NixOS:
     [nix-shell]$ make
     [nix-shell]$ python -m http.server
 
-then open http://127.0.0.1:8000/index.html
+then open http://127.0.0.1:8000
 
 
 To automatically rebuild on every change:
