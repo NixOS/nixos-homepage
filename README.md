@@ -50,7 +50,7 @@ Add the `--bind 0.0.0.0` argument to bind the web server with the container's ex
 
     [nix-shell]$ python -m http.server --bind 0.0.0.0
 
-Then open http://127.0.0.1:8000/index.html in your browser on macOS.
+Then open http://127.0.0.1:8000 in your browser on macOS.
 
 A single terminal screen is inconvenient for serious development, so you may want to set up openssh on the container to access the sources with the IDE on your Mac.
 Alternatively you can set up something like [tmux](https://github.com/tmux/tmux/) to allow for multiple terminals into the container. Replace
