@@ -1,3 +1,18 @@
+.governance-rfcprocess {
+  @_cols: 3;
+  #container();
+  & > * {
+    #columns(@_cols);
+  }
+  // TODO: add a generic way to make -twice
+  // this snippet was taken from ../layout.less:239
+  & > *:first-child() {
+    #screen-md-min({
+      width: 100%/@_cols*2;
+    });
+  }
+}
+
 .teams-section {
   background: #theme.color[blue-dark];
   h2, h3, p {

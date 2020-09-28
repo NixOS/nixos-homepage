@@ -8,9 +8,9 @@
   Nix and NixOS are built by its community.
 </section>
 
-<section class="generic-layout rfc-section">
-  <div class="columnar-layout -three">
-    <div class="-twice">
+<section class="governance-rfcprocess">
+  <div>
+    <div>
       <div>
         <h2>RFC Process</h2>
         <p>The "RFC" (request for comments) process is intended to provide a
@@ -18,7 +18,7 @@
           packages and OS, so that all community can be confident about the
           direction the ecosystem is evolving in.
         </p>
-        <a href="https://github.com/NixOS/rfcs">Learn more</a>
+        <a class="button -primary" href="https://github.com/NixOS/rfcs">Learn more</a>
       </div>
     </div>
     <div>
