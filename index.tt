@@ -141,7 +141,7 @@
       [% WRAPPER exampleBlock demo="example_2" title="Multiple languages, one tool" %]
       [% END %]
 
-      [% WRAPPER exampleBlock demo="example_3" title="Isolated development environments" %]
+      [% WRAPPER exampleBlock demo="example_3" title="Declarative development environments" %]
       [% END %]
     </ul>
 
