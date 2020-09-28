@@ -35,53 +35,53 @@
 // the visual aid! This is done through CSS.
 //
 #gfx-alternating-side(@gfx-rules: {}) {
-	#fill-width();
-	& > * {
-		#container();
-	}
+  #fill-width();
+  & > * {
+    #container();
+  }
 
-	& > div > h1 {
-		text-align: center;
-	}
+  & > div > h1 {
+    text-align: center;
+  }
 
-	& > div > ul {
-		margin: 0;
-		padding: 0;
-		margin-top: @gutter * 2;
-		margin-bottom: @gutter * 2;
-	}
+  & > div > ul {
+    margin: 0;
+    padding: 0;
+    margin-top: @gutter * 2;
+    margin-bottom: @gutter * 2;
+  }
 
-	& > div > ul > li {
-		list-style-type: none;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		margin-bottom: @gutter;
+  & > div > ul > li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: @gutter;
 
-		& > :first-child {
-			#screen-sm-min({
-				width: 33%;
-			});
-			flex-shrink: 0;
-			@gfx-rules();
-		}
+    & > :first-child {
+      #screen-sm-min({
+        width: 33%;
+      });
+      flex-shrink: 0;
+      @gfx-rules();
+    }
 
-		#screen-sm-min({
-			flex-direction: row;
+    #screen-sm-min({
+      flex-direction: row;
 
-			& > :last-child {
-				padding-left: @gutter;
-			}
+      & > :last-child {
+        padding-left: @gutter;
+      }
 
-			&:nth-child(2n) {
-				& > :first-child {
-					order: 2;
-				}
-				& > :last-child {
-					padding-left: 0;
-					padding-right: @gutter;
-				}
-			}
-		});
-	}
+      &:nth-child(2n) {
+        & > :first-child {
+          order: 2;
+        }
+        & > :last-child {
+          padding-left: 0;
+          padding-right: @gutter;
+        }
+      }
+    });
+  }
 }

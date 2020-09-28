@@ -1908,16 +1908,16 @@
 }
 
 .asciinema-theme-asciinema {
-	.make_colors(@counter: 15) when (@counter >= 0) {
-		.make_colors((@counter - 1));
-		@color: "color-@{counter}";
+  .make_colors(@counter: 15) when (@counter >= 0) {
+    .make_colors((@counter - 1));
+    @color: "color-@{counter}";
 
-		.bg-@{counter} {
-			background-color: #theme.terminal[@@color];
-		}
-		.fg-@{counter} {
-			color: #theme.terminal[@@color];
-		}
-	}
-	.make_colors();
+    .bg-@{counter} {
+      background-color: #theme.terminal[@@color];
+    }
+    .fg-@{counter} {
+      color: #theme.terminal[@@color];
+    }
+  }
+  .make_colors();
 }

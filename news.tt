@@ -4,10 +4,6 @@
   <h1>News</h1>
 </div>
 
-<section class="page-news">
-
 [% INSERT "all-news.xhtml" %]
-
-</section>
 
 [% END %]

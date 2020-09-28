@@ -1,23 +1,26 @@
-// MVP to re-use the DOM of the existing page.
-section.page-news {
-	#container();
+// MVP /o re-use the DOM of the existing page.
+section.news-items {
+  #container();
 
-	.news-header .news-date {
-		white-space: nowrap;
-		padding-left: @gutter;
-		text-align: right;
-		vertical-align: bottom;
-	}
-	.news-header .news-short {
-		#theme.h1;
-	}
+  header {
+    border-bottom: @unit solid #theme.color[blue-light];
+    margin-bottom: @gutter;
 
-	.news-header > td {
-		border-bottom: @unit solid #theme.color[blue-light];
-	}
+    display: flex;
+    flex-direction: column;
 
-	tr.news-descr > td {
-		padding-top: @gutter;
-		padding-bottom: @gutter * 2;
-	}
+    #screen-sm-min({
+      flex-direction: row;
+    });
+
+    align-items: baseline;
+
+    h2 {
+      flex-grow: 1;
+    }
+  }
+
+  section {
+    margin-bottom: @gutter * 2;
+  }
 }

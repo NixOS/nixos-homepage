@@ -17,174 +17,174 @@
 
 // Basic rules
 #_form() {
-	.base {
-		-webkit-appearance: none;
-		-moz-appearance:    none;
-		-ms-appearance:     none;
-		-o-appearance:      none;
-		appearance:         none;
+  .base {
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    -ms-appearance:     none;
+    -o-appearance:      none;
+    appearance:         none;
 
-		line-height: @line-height;
-		border-radius: #theme.common[radius];
-		padding: @gutter/2 @gutter*2;
-		border: 0;
-		background: transparent;
-		display: inline-block;
-		position: relative;
-		text-decoration: none;
-	}
+    line-height: @line-height;
+    border-radius: #theme.common[radius];
+    padding: @gutter/2 @gutter*2;
+    border: 0;
+    background: transparent;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+  }
 
-	.button {
-		#_form.base();
-		#no-select();
+  .button {
+    #_form.base();
+    #no-select();
 
-		background: #theme.color[blue-dark2];
-		color: #theme.color[white];
-		text-align: center;
-		cursor: pointer;
+    background: #theme.color[blue-dark2];
+    color: #theme.color[white];
+    text-align: center;
+    cursor: pointer;
 
-		font-weight: bold;
-		font-family: #theme.font[primary];
-		box-shadow: 0*@unit 3*@unit 3*@unit 1*@unit rgba(0, 0, 0, 0.25);
+    font-weight: bold;
+    font-family: #theme.font[primary];
+    box-shadow: 0*@unit 3*@unit 3*@unit 1*@unit rgba(0, 0, 0, 0.25);
 
-		// Variants
-		&.-light {
-			background: #theme.color[blue-light];
-		}
-		&.-primary {
-			background: #theme.color[green];
-		}
-		&.-highlighted {
-			background: #theme.color[orange];
-		}
-		#screen-xs-max({
-			width: 100%;
-			display: block;
-			margin-bottom: @gutter;
-		});
-	}
+    // Variants
+    &.-light {
+      background: #theme.color[blue-light];
+    }
+    &.-primary {
+      background: #theme.color[green];
+    }
+    &.-highlighted {
+      background: #theme.color[orange];
+    }
+    #screen-xs-max({
+      width: 100%;
+      display: block;
+      margin-bottom: @gutter;
+    });
+  }
 
-	.input {
-		#_form.base();
-		background-color: #theme.color[white];
-		padding-right: 0;
-		border: 1*@unit solid #theme.color[gray-light];
-		outline: 0;
-		&:active {
-			box-shadow: 0 0 0 3*@unit #theme.color[blue-dark];
-			border-color: transparent;
-		}
-		&:focus {
-			box-shadow: 0 0 0 3*@unit #theme.color[blue-light];
-			border-color: transparent;
-		}
-	}
+  .input {
+    #_form.base();
+    background-color: #theme.color[white];
+    padding-right: 0;
+    border: 1*@unit solid #theme.color[gray-light];
+    outline: 0;
+    &:active {
+      box-shadow: 0 0 0 3*@unit #theme.color[blue-dark];
+      border-color: transparent;
+    }
+    &:focus {
+      box-shadow: 0 0 0 3*@unit #theme.color[blue-light];
+      border-color: transparent;
+    }
+  }
 }
 
 #rules_for_form() {
-	.input(@rules) {
-		input[type=text],
-		input[type=password],
-		input[type=date],
-		.text-input {
-			@rules();
-		}
-	}
-	.button(@rules) {
-		input[type=button],
-		input[type=submit],
-		button,
-		.button {
-			@rules();
-		};
-	}
+  .input(@rules) {
+    input[type=text],
+    input[type=password],
+    input[type=date],
+    .text-input {
+      @rules();
+    }
+  }
+  .button(@rules) {
+    input[type=button],
+    input[type=submit],
+    button,
+    .button {
+      @rules();
+    };
+  }
 
-	.all(@rules) {
-		#rules_for_form.input(@rules);
-		#rules_for_form.button(@rules);
-	}
+  .all(@rules) {
+    #rules_for_form.input(@rules);
+    #rules_for_form.button(@rules);
+  }
 }
 
 .form-input {
-	position: relative;
-	display: flex;
-	min-height: @input-height;
-	height: @input-height;
+  position: relative;
+  display: flex;
+  min-height: @input-height;
+  height: @input-height;
 
-	& > input,
-	& > button,
-	& > textarea {
-		width: 100%;
-		height: 100%;
-		flex-grow: 1;
-	}
-	.-with-icon {
-		input {
-			padding-left: calc(@input-icon-size + @gutter*1.5);
-		}
-		&::before {
-			content: "";
-			z-index: 1;
-			position: absolute;
-			left: @gutter;
-			top: 50%;
-			transform: translateY(-50%);
-			background-repeat: no-repeat;
-			background-size: contain;
-			height: @input-icon-size;
-			width: @input-icon-size;
-		}
-	}
+  & > input,
+  & > button,
+  & > textarea {
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+  }
+  .-with-icon {
+    input {
+      padding-left: calc(@input-icon-size + @gutter*1.5);
+    }
+    &::before {
+      content: "";
+      z-index: 1;
+      position: absolute;
+      left: @gutter;
+      top: 50%;
+      transform: translateY(-50%);
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: @input-icon-size;
+      width: @input-icon-size;
+    }
+  }
 
-	.with-icon(@icons_background_rules) {
-		.form-input.-with-icon;
-		&::before {
-			@icons_background_rules();
-		}
-	};
+  .with-icon(@icons_background_rules) {
+    .form-input.-with-icon;
+    &::before {
+      @icons_background_rules();
+    }
+  };
 }
 
 #rules_for_form.input({
-	#_form.input();
+  #_form.input();
 });
 
 #rules_for_form.button({
-	#_form.button();
+  #_form.button();
 });
 
 input[type=submit],
 button[type=submit] {
-	#_form.button.-primary();
+  #_form.button.-primary();
 }
 
 // Another deviation from rscss. We apply defaults to `<form>` as it is
 // a consistent enough value.
 form {
-	// A div is assumed to be a row.
-	& > div {
-		margin-bottom: @gutter;
-		display: flex;
-		justify-content: center;
-		& > * {
-			flex-grow: initial;
-		}
-	}
+  // A div is assumed to be a row.
+  & > div {
+    margin-bottom: @gutter;
+    display: flex;
+    justify-content: center;
+    & > * {
+      flex-grow: initial;
+    }
+  }
 }
 
 .button-tray {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: @gutter;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: @gutter;
 
-	#screen-sm-min({
-		flex-direction: row;
-	});
+  #screen-sm-min({
+    flex-direction: row;
+  });
 
-	#rules_for_form.button({
-		#screen-sm-min({
-			&:not(:last-child) {
-				margin-right: @gutter;
-			}
-		});
-	});
+  #rules_for_form.button({
+    #screen-sm-min({
+      &:not(:last-child) {
+        margin-right: @gutter;
+      }
+    });
+  });
 }
