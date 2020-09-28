@@ -90,14 +90,14 @@
 
 // Up to and including value.
 #screen-lte(@val, @rules) {
-	@media screen and (max-width: @val) {
-		@rules();
-	}
+  @media screen and (max-width: @val) {
+    @rules();
+  }
 }
 
 // Of value and greater.
 #screen-gte(@val, @rules) {
-	@media screen and (min-width: @val) {
-		@rules();
-	}
+  @media screen and (min-width: @val) {
+    @rules();
+  }
 }
