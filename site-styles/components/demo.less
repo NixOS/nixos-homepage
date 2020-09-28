@@ -11,6 +11,12 @@
 	});
 
 	a {
+		#text-replacement(
+		@image-rules: {
+			#svg.play;
+			background-size: contain;
+		},
+		);
 		position: absolute;
 		top: 0;
 		bottom: 0;
@@ -18,12 +24,6 @@
 		right: 0;
 		border: 0;
 		opacity: 0.78;
-		#text-replacement(
-		@image-rules: {
-			#svg.play;
-			background-size: contain;
-		},
-		);
 
 		&:hover, &:focus, &:active {
 			opacity: 1;
