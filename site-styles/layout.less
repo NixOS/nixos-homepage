@@ -28,104 +28,104 @@
 @gutter: 16*@unit;
 
 * {
-	box-sizing:border-box
+  box-sizing:border-box
 }
 
 html {
-	// Assuming a browser default font size of 16px,
-	// this is equivalent to setting the document size
-	// in pixel-width to what the numerator is.
-	// font-size: (@pixel-equivalent-font-size)px;
-	font-size: (@pixel-equivalent-font-size/16) * 100%;
-	// Doing it like this ensures the whole document scales up
-	// according to the font size preferences of the user agent (the
-	// browser).
+  // Assuming a browser default font size of 16px,
+  // this is equivalent to setting the document size
+  // in pixel-width to what the numerator is.
+  // font-size: (@pixel-equivalent-font-size)px;
+  font-size: (@pixel-equivalent-font-size/16) * 100%;
+  // Doing it like this ensures the whole document scales up
+  // according to the font size preferences of the user agent (the
+  // browser).
 
-	// Purposefully without unit.
-	line-height: @line-height;
+  // Purposefully without unit.
+  line-height: @line-height;
 }
 
 html when (#theme.layout[workaround-ultrawide] = true) {
-	// Look, 4K is 3840 pixels wide *in 1:1 pixel size*.
-	// If people are using 2160p-class displays (same height as 4K) without
-	// some kind of Hi-DPI setting, this is their own fault.
-	// Note that changing this setting is hazardous to your health!
-	// You have to make sure all SVG elements that are meant to fill the width
-	// have been resized accordingly!
-	@_max-viewport: 4000px;
-	@media screen and (min-width: @_max-viewport) {
-		// Hides stuff like the box-shadow.
-		// Also makes for a clear message: this is the void, you stretched the site
-		// too far!
-		background: #000;
+  // Look, 4K is 3840 pixels wide *in 1:1 pixel size*.
+  // If people are using 2160p-class displays (same height as 4K) without
+  // some kind of Hi-DPI setting, this is their own fault.
+  // Note that changing this setting is hazardous to your health!
+  // You have to make sure all SVG elements that are meant to fill the width
+  // have been resized accordingly!
+  @_max-viewport: 4000px;
+  @media screen and (min-width: @_max-viewport) {
+    // Hides stuff like the box-shadow.
+    // Also makes for a clear message: this is the void, you stretched the site
+    // too far!
+    background: #000;
 
-		body {
-			margin: auto;
-			max-width: unit(@_max-viewport)*@unit;
-		}
-	}
+    body {
+      margin: auto;
+      max-width: unit(@_max-viewport)*@unit;
+    }
+  }
 }
 
 html when (#theme.layout[workaround-ultrasmall] = true) {
-	// Similar, but for way too small displays. It's better to scale the site
-	// down a bit than to have it be broken. Users can still zoom in.
-	// In reality, what this means is that all sizes under 320px end up
-	// structurally the same as the iPhone 5/SE width.
-	@_min-viewport: 320px; // iPhone 5/SE width
-	@media screen and (max-width: @_min-viewport) {
-		font-size: calc(@pixel-equivalent-font-size/unit(@_min-viewport) * 100vw);
-	}
+  // Similar, but for way too small displays. It's better to scale the site
+  // down a bit than to have it be broken. Users can still zoom in.
+  // In reality, what this means is that all sizes under 320px end up
+  // structurally the same as the iPhone 5/SE width.
+  @_min-viewport: 320px; // iPhone 5/SE width
+  @media screen and (max-width: @_min-viewport) {
+    font-size: calc(@pixel-equivalent-font-size/unit(@_min-viewport) * 100vw);
+  }
 }
 
 body {
-	font-size: 1rem;
-	font-family: #theme.font[primary];
-	font-weight: #theme.font[primary-weight];
-	color: #theme.color[foreground];
-	background-color: #theme.color[background];
+  font-size: 1rem;
+  font-family: #theme.font[primary];
+  font-weight: #theme.font[primary-weight];
+  color: #theme.color[foreground];
+  background-color: #theme.color[background];
 
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
-	// For narrow designs, the body handles the gutters.
-	#screen-xs-max({
-		padding-left: @gutter;
-		padding-right: @gutter;
-	});
+  // For narrow designs, the body handles the gutters.
+  #screen-xs-max({
+    padding-left: @gutter;
+    padding-right: @gutter;
+  });
 }
 
 body > main {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 
 a {
-	text-decoration: none;
-	border-bottom: 1px solid;
-	color: #theme.color[blue-dark2];
+  text-decoration: none;
+  border-bottom: 1px solid;
+  color: #theme.color[blue-dark2];
 }
 
 ul {
-	padding: 0;
-	margin-top: 0;
-	margin-right: 0;
-	margin-bottom: @gutter;
-	margin-left: @gutter;
+  padding: 0;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: @gutter;
+  margin-left: @gutter;
 }
 
 table {
-	border-collapse: collapse;
-	width: 100%;
-	margin-bottom: @gutter;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: @gutter;
 }
 
 thead th {
-	text-align: left;
+  text-align: left;
 }
 
 hr {
-	margin-top: @gutter;
-	margin-bottom: @gutter;
+  margin-top: @gutter;
+  margin-bottom: @gutter;
 }
 
 // Apply the theme's heading rules
@@ -137,7 +137,7 @@ h5 { #theme.h5 }
 h6 { #theme.h6 }
 
 b, strong {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 section {
@@ -145,27 +145,27 @@ section {
 }
 
 p {
-	margin-top: 0;
-	margin-bottom: @gutter;
+  margin-top: 0;
+  margin-bottom: @gutter;
 }
 
 // Some weirdness with `tt` that is not happening with `code`...
 tt {
-	font-size: 14*@unit;
-	overflow-wrap: break-word;
+  font-size: 14*@unit;
+  overflow-wrap: break-word;
 }
 
 dt, dd {
-	& > *:first-child {
-		margin-top: 0;
-	}
-	& > *:last-child {
-		margin-bottom: 0;
-	}
+  & > *:first-child {
+    margin-top: 0;
+  }
+  & > *:last-child {
+    margin-bottom: 0;
+  }
 }
 
 pre, code {
-	font-family: #theme.font[monospace];
+  font-family: #theme.font[monospace];
 }
 
 // Utility classes
@@ -189,39 +189,39 @@ img.inline {
 // handle being containers (and be graphically enhanced).
 // (generic-layout is wrapped when a .tt page doesn't define handlesLayout)
 .generic-layout {
-	#container();
+  #container();
 
-	&.lead, & > .lead {
-		font-size: 1.25em;
-	}
+  &.lead, & > .lead {
+    font-size: 1.25em;
+  }
 }
 
 .page-title {
-	#flair.angled-title();
+  #flair.angled-title();
 }
 
 // "Bordered" monospaced text.
 .terminal-console, .file-listing {
-	border-radius: #theme.common[radius];
-	padding: @gutter;
-	overflow: auto;
+  border-radius: #theme.common[radius];
+  padding: @gutter;
+  overflow: auto;
 }
 
 // The console has a dark background
 .terminal-console {
-	color: #theme.terminal[foreground];
-	background-color: #theme.terminal[background];
+  color: #theme.terminal[foreground];
+  background-color: #theme.terminal[background];
 
-	.shell-prompt {
-		font-weight: bold;
-	}
+  .shell-prompt {
+    font-weight: bold;
+  }
 }
 
 // But the file listing is light!
 .file-listing {
-	background: #theme.file-listing[background];
-	color: #theme.file-listing[foreground];
-	box-shadow: #theme.common[internal-shadow];
+  background: #theme.file-listing[background];
+  color: #theme.file-listing[foreground];
+  box-shadow: #theme.common[internal-shadow];
 }
 
 // Unsemantic layouts
@@ -234,86 +234,86 @@ img.inline {
 // The long form does not split on columns on the "sm" viewport width.
 // This is better for long form content laid-out in two columns.
 .columnar-layout {
-	&.-longform {
-		&.-two {
-			@_cols: 2;
-			#columns(@_cols, @sm: 1);
-			& > .-twice {
-				#screen-md-min({
-					width: 100%/@_cols*2;
-				});
-			}
-		}
-		&.-three {
-			@_cols: 3;
-			#columns(@_cols, @sm: 1);
-			& > .-twice {
-				#screen-md-min({
-					width: 100%/@_cols*2;
-				});
-			}
-		}
-		&.-four {
-			@_cols: 4;
-			#columns(@_cols, @sm: 1);
-			& > .-twice {
-				#screen-md-min({
-					width: 100%/@_cols*2;
-				});
-			}
-		}
-	}
-	&:not(.-longform) {
-		&.-two {
-			@_cols: 2;
-			#columns(@_cols);
-			& > .-twice {
-				#screen-sm-min({
-					width: 100%/@_cols*2;
-				});
-			}
-		}
-		&.-three {
-			@_cols: 3;
-			#columns(@_cols);
-			& > .-twice {
-				#screen-sm-min({
-					width: 100%/@_cols*2;
-				});
-			}
-		}
-		&.-four {
-			@_cols: 4;
-			#columns(@_cols);
-			& > .-twice {
-				#screen-sm-min({
-					width: 100%/@_cols*2;
-				});
-			}
-		}
-	}
+  &.-longform {
+    &.-two {
+      @_cols: 2;
+      #columns(@_cols, @sm: 1);
+      & > .-twice {
+        #screen-md-min({
+          width: 100%/@_cols*2;
+        });
+      }
+    }
+    &.-three {
+      @_cols: 3;
+      #columns(@_cols, @sm: 1);
+      & > .-twice {
+        #screen-md-min({
+          width: 100%/@_cols*2;
+        });
+      }
+    }
+    &.-four {
+      @_cols: 4;
+      #columns(@_cols, @sm: 1);
+      & > .-twice {
+        #screen-md-min({
+          width: 100%/@_cols*2;
+        });
+      }
+    }
+  }
+  &:not(.-longform) {
+    &.-two {
+      @_cols: 2;
+      #columns(@_cols);
+      & > .-twice {
+        #screen-sm-min({
+          width: 100%/@_cols*2;
+        });
+      }
+    }
+    &.-three {
+      @_cols: 3;
+      #columns(@_cols);
+      & > .-twice {
+        #screen-sm-min({
+          width: 100%/@_cols*2;
+        });
+      }
+    }
+    &.-four {
+      @_cols: 4;
+      #columns(@_cols);
+      & > .-twice {
+        #screen-sm-min({
+          width: 100%/@_cols*2;
+        });
+      }
+    }
+  }
 }
 
 .well {
-	background: #theme.file-listing[background];
-	color: #theme.file-listing[foreground];
+  background: #theme.file-listing[background];
+  color: #theme.file-listing[foreground];
 
-	&:extend(.notice-box all);
+  &:extend(.notice-box all);
 }
 
 .label {
-	pointer-events: none;
-	#no-select();
+  pointer-events: none;
+  #no-select();
 
-	font-family: #theme.font[secondary];
-	font-weight: bold;
-	font-size: 0.8em;
-	vertical-align: text-bottom;
-	border-radius: 0.3em;
-	padding: 0.1em 0.3em;
+  font-family: #theme.font[secondary];
+  font-weight: bold;
+  font-size: 0.8em;
+  vertical-align: text-bottom;
+  border-radius: 0.3em;
+  padding: 0.1em 0.3em;
 
-	&.-info {
-		background-color: #theme.color[blue-dark];
-		color: #theme.color[white];
-	}
+  &.-info {
+    background-color: #theme.color[blue-dark];
+    color: #theme.color[white];
+  }
 }

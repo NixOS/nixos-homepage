@@ -5,23 +5,23 @@
 // For elements that are intended to fill the width of the page, generally
 // to fill with a colour or pattern.
 #fill-width() {
-	// For narrow viewports, correctly fix margins and paddings
-	#screen-xs-max({
-		margin-left: -@gutter;
-		margin-right: -@gutter;
-		padding-left: @gutter;
-		padding-right: @gutter;
-	});
+  // For narrow viewports, correctly fix margins and paddings
+  #screen-xs-max({
+    margin-left: -@gutter;
+    margin-right: -@gutter;
+    padding-left: @gutter;
+    padding-right: @gutter;
+  });
 }
 
 // For elements that are "container widths", meaning they take the width of
 // the page.
 #container() {
-	margin: auto;
-	width: 100%;
-	#screen-sm-min({ max-width: unit(@screen-sm) * @unit - 2*@gutter; });
-	#screen-md-min({ max-width: unit(@screen-md) * @unit - 2*@gutter; });
-	#screen-lg-min({ max-width: unit(@screen-lg) * @unit - 2*@gutter; });
+  margin: auto;
+  width: 100%;
+  #screen-sm-min({ max-width: unit(@screen-sm) * @unit - 2*@gutter; });
+  #screen-md-min({ max-width: unit(@screen-md) * @unit - 2*@gutter; });
+  #screen-lg-min({ max-width: unit(@screen-lg) * @unit - 2*@gutter; });
 }
 
 // Spreads the children in equally-sized columns using flexbox.
@@ -29,30 +29,30 @@
 // "under" xs cannot be forced to anything else than 1.
 // sm and md can be configured if needed, but will default to @amount.
 #columns(@amount, @xs: 1, @sm: @amount, @md: @amount, @spacing: @gutter) {
-	// This is a sane default, and helps with using <ul>
-	margin: 0;
-	// Same, as <ul> can often be made a columnar layout, it is a sane default.
-	list-style-type: none;
+  // This is a sane default, and helps with using <ul>
+  margin: 0;
+  // Same, as <ul> can often be made a columnar layout, it is a sane default.
+  list-style-type: none;
 
-	#flex-flexible-spacing(@spacing);
-	justify-content: flex-start;
+  #flex-flexible-spacing(@spacing);
+  justify-content: flex-start;
 
-	& > * {
-		flex-grow: 0;
-		width: 100%;
-		#screen-xs-min({
-			width: 100%/@xs;
-		});
-		#screen-sm-min({
-			width: 100%/@sm;
-		});
-		#screen-md-min({
-			width: 100%/@md;
-		});
-		#screen-lg-min({
-			width: 100%/@amount;
-		});
-	}
+  & > * {
+    flex-grow: 0;
+    width: 100%;
+    #screen-xs-min({
+      width: 100%/@xs;
+    });
+    #screen-sm-min({
+      width: 100%/@sm;
+    });
+    #screen-md-min({
+      width: 100%/@md;
+    });
+    #screen-lg-min({
+      width: 100%/@amount;
+    });
+  }
 }
 
 #columns-relative-width(
@@ -62,10 +62,10 @@
 @sm: @amount,
 @md: @amount,
 @property: width) {
-	width: 100%;
-	#screen-sm-min({ @{property}: (unit(@screen-sm) * @unit - 2*@gutter) * @amount / 12; });
-	#screen-md-min({ @{property}: (unit(@screen-md) * @unit - 2*@gutter) * @amount / 12; });
-	#screen-lg-min({ @{property}: (unit(@screen-lg) * @unit - 2*@gutter) * @amount / 12; });
+  width: 100%;
+  #screen-sm-min({ @{property}: (unit(@screen-sm) * @unit - 2*@gutter) * @amount / 12; });
+  #screen-md-min({ @{property}: (unit(@screen-md) * @unit - 2*@gutter) * @amount / 12; });
+  #screen-lg-min({ @{property}: (unit(@screen-lg) * @unit - 2*@gutter) * @amount / 12; });
 }
 
 // Utility mixins
@@ -76,66 +76,66 @@
 // Use this for main *layout* purpose, where you have a wrapper element per
 // "columned" items.
 #flex-flexible-spacing(@size) {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	align-content: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: stretch;
 
-	// This is a horrible hack
-	// We shift the whole container left so we can freely add "margins" to
-	// the right of every elements...
-	position: relative;
-	left: -@size;
+  // This is a horrible hack
+  // We shift the whole container left so we can freely add "margins" to
+  // the right of every elements...
+  position: relative;
+  left: -@size;
 
-	& > * {
-		// Sane default here
-		flex-grow: 1;
+  & > * {
+    // Sane default here
+    flex-grow: 1;
 
-		padding-right: @size;
-		// Since everything is shifted left, don't forget to shift it back
-		// to the right!
-		position: relative;
-		left: @size;
-	}
+    padding-right: @size;
+    // Since everything is shifted left, don't forget to shift it back
+    // to the right!
+    position: relative;
+    left: @size;
+  }
 }
 
 // Same as the precedent, but less opinionated.
 // This one uses margin as spacing.
 #flex-flexible-margin-between(@size) {
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 
-	// This is a horrible hack
-	// We shift the whole container left so we can freely add "margins" to
-	// the right of every elements...
-	position: relative;
-	margin-left: @size;
-	left: -@size;
+  // This is a horrible hack
+  // We shift the whole container left so we can freely add "margins" to
+  // the right of every elements...
+  position: relative;
+  margin-left: @size;
+  left: -@size;
 
-	& > * {
-		margin-right: @size;
-		// Since everything is shifted left, don't forget to shift it back
-		// to the right!
-		position: relative;
-		left: @size;
-	}
+  & > * {
+    margin-right: @size;
+    // Since everything is shifted left, don't forget to shift it back
+    // to the right!
+    position: relative;
+    left: @size;
+  }
 }
 
 // Sets the given @prop to @color modulated by @opacity.
 // Useful to re-use an existing colour variable with a new opacity value.
 #translucent(@prop, @color, @opacity) {
-	@{prop}: rgba(red(@color), green(@color), blue(@color), @opacity);
+  @{prop}: rgba(red(@color), green(@color), blue(@color), @opacity);
 }
 
 // Use sparingly.
 #no-select {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
 // Uses a pseudo-element @pseudo (by default :before) to replace the
@@ -151,30 +151,30 @@
 // )
 
 #text-replacement(
-	@pseudo: before,
-	@width: auto,
-	@height: auto,
-	@image-rules: {},
+  @pseudo: before,
+  @width: auto,
+  @height: auto,
+  @image-rules: {},
 ) {
-	position: relative;
-	text-indent: -9999px;
-	overflow: hidden;
-	width: @width;
-	height: @height;
+  position: relative;
+  text-indent: -9999px;
+  overflow: hidden;
+  width: @width;
+  height: @height;
 
-	&:@{pseudo} {
-		content: "";
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: center center;
-		display: inline-block;
-		width: @width;
-		height: @height;
-		@image-rules();
-	}
+  &:@{pseudo} {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    width: @width;
+    height: @height;
+    @image-rules();
+  }
 }

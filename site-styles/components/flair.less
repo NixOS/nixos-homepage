@@ -5,69 +5,69 @@
 // ===================
 
 #flair() {
-	.outlined-bg() {
-		&:extend(.__flair_outlined-bg all);
-		&:extend(.__flair_outlined-bg_default all);
-	}
-	.outlined-bg-dark() {
-		&:extend(.__flair_outlined-bg all);
-		&:extend(.__flair_outlined-bg_dark all);
-	}
+  .outlined-bg() {
+    &:extend(.__flair_outlined-bg all);
+    &:extend(.__flair_outlined-bg_default all);
+  }
+  .outlined-bg-dark() {
+    &:extend(.__flair_outlined-bg all);
+    &:extend(.__flair_outlined-bg_dark all);
+  }
 }
 
 .__flair_outlined-bg {
-	z-index: 1;
-	&:first-child {
-		margin-top: -@gutter;
-	}
-	margin-top: 0;
-	padding-top: @gutter*2;
+  z-index: 1;
+  &:first-child {
+    margin-top: -@gutter;
+  }
+  margin-top: 0;
+  padding-top: @gutter*2;
 
-	position: relative;
-	#fill-width();
-	& > div {
-		#container();
-		position: relative;
-	}
-	&::before {
-		content: "";
-		display: block;
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: left center;
-	}
+  position: relative;
+  #fill-width();
+  & > div {
+    #container();
+    position: relative;
+  }
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left center;
+  }
 }
 
 // Variants
 
 .__flair_outlined-bg_default {
-	&::before {
-		#svg.background-outlines.blue-dark2;
-		opacity: 0.08;
-	}
+  &::before {
+    #svg.background-outlines.blue-dark2;
+    opacity: 0.08;
+  }
 }
 
 .__flair_outlined-bg_dark {
-	color: #theme.color[white];
-	background-color: #theme.color[blue-dark2];
-	h1 {
-		color: #theme.color[white];
-	}
-	h2 {
-		color: #theme.color[green];
-	}
-	a {
-		color: inherit;
-	}
-	&::before {
-		#svg.background-outlines.white;
-		opacity: 0.3;
-	}
+  color: #theme.color[white];
+  background-color: #theme.color[blue-dark2];
+  h1 {
+    color: #theme.color[white];
+  }
+  h2 {
+    color: #theme.color[green];
+  }
+  a {
+    color: inherit;
+  }
+  &::before {
+    #svg.background-outlines.white;
+    opacity: 0.3;
+  }
 
 }
 
@@ -75,82 +75,82 @@
 // ==========
 
 #flair() {
-	.big-angles {
-		// Unit-less
-		@_top-height: 362;
-		@_top-width: 1600;
-		@_top-full-width: 4000;
-		@_top-full-height: 2066;
+  .big-angles {
+    // Unit-less
+    @_top-height: 362;
+    @_top-width: 1600;
+    @_top-full-width: 4000;
+    @_top-full-height: 2066;
 
-		@_bottom-height: 250;
-		@_bottom-width: 1600;
-		@_bottom-full-width: 4000;
-		@_bottom-full-height: 516;
+    @_bottom-height: 250;
+    @_bottom-width: 1600;
+    @_bottom-full-width: 4000;
+    @_bottom-full-height: 516;
 
-		* {
-			position: relative;
-		}
+    * {
+      position: relative;
+    }
 
-		position: relative;
-		#fill-width();
-		padding-top: 75 * @unit;
-		padding-bottom: 0;
-		margin-top: @_top-height * @unit / 2 + 2*@gutter;
-		margin-bottom: @_bottom-height * @unit + 2*@gutter;
+    position: relative;
+    #fill-width();
+    padding-top: 75 * @unit;
+    padding-bottom: 0;
+    margin-top: @_top-height * @unit / 2 + 2*@gutter;
+    margin-bottom: @_bottom-height * @unit + 2*@gutter;
 
-		& > div {
-			#container();
-		}
+    & > div {
+      #container();
+    }
 
-		&::before, &::after {
-			pointer-events: none;
-			content: "";
-			display: block;
-			position: absolute;
-			left: 0;
-			right: 0;
+    &::before, &::after {
+      pointer-events: none;
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
 
-			background-repeat: no-repeat;
-			background-size: auto 100%;
-			overflow: hidden;
-		}
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+      overflow: hidden;
+    }
 
-		&::after {
-			bottom: 100%;
+    &::after {
+      bottom: 100%;
 
-			height: @_top-full-height * @unit;
-			#svg.big-angles-1();
-			background-position: 41% 100%;
-			#screen-sm-min({
-				background-position: 43% 100%;
-			});
-			#screen-md-min({
-				background-position: 45% 100%;
-			});
-			#screen-lg-min({
-				background-position: 48% 100%;
-			});
+      height: @_top-full-height * @unit;
+      #svg.big-angles-1();
+      background-position: 41% 100%;
+      #screen-sm-min({
+        background-position: 43% 100%;
+      });
+      #screen-md-min({
+        background-position: 45% 100%;
+      });
+      #screen-lg-min({
+        background-position: 48% 100%;
+      });
 
-			// This is to remove the gap between the pseudo-element
-			// and the element at non-integer pixel sizes
-			transform: translateY(2*@unit);
-		}
+      // This is to remove the gap between the pseudo-element
+      // and the element at non-integer pixel sizes
+      transform: translateY(2*@unit);
+    }
 
-		&::before {
-			top: calc(100% - 168*@unit);
+    &::before {
+      top: calc(100% - 168*@unit);
 
-			height: @_bottom-full-height * @unit;
-			#svg.big-angles-2();
-			background-position: 61% 100%;
-			#screen-lg-min({
-				background-position: 59% 100%;
-			});
+      height: @_bottom-full-height * @unit;
+      #svg.big-angles-2();
+      background-position: 61% 100%;
+      #screen-lg-min({
+        background-position: 59% 100%;
+      });
 
-			// This is to remove the gap between the pseudo-element
-			// and the element at non-integer pixel sizes
-			transform: translateY(-2*@unit);
-		}
-	}
+      // This is to remove the gap between the pseudo-element
+      // and the element at non-integer pixel sizes
+      transform: translateY(-2*@unit);
+    }
+  }
 }
 
 // Angled title
@@ -160,60 +160,60 @@
 //       (I don't have the proper files.)
 
 #flair() {
-	.angled-title(
-		@foreground: #theme.color[white],
-		@background: #theme.color[blue-dark2],
-	) {
-		color: @foreground;
-		&:extend(.__flair_angled-title all);
-		background-color: @background;
-	}
+  .angled-title(
+    @foreground: #theme.color[white],
+    @background: #theme.color[blue-dark2],
+  ) {
+    color: @foreground;
+    &:extend(.__flair_angled-title all);
+    background-color: @background;
+  }
 }
 
 .__flair_angled-title {
-	#fill-width();
-	position: relative;
-	margin-bottom: @gutter * 4;
-	padding-top: @gutter * 2;
-	padding-bottom: @gutter * 2;
-	display: flex;
+  #fill-width();
+  position: relative;
+  margin-bottom: @gutter * 4;
+  padding-top: @gutter * 2;
+  padding-bottom: @gutter * 2;
+  display: flex;
 
-	// extend in a media query doesn't work.
-	#svg.title-angle.white;
-	// so we instead undo the background-image.
-	#screen-xs-max({
-		background-image: none !important;
-		margin-bottom: @gutter;
-	});
-	#screen-sm-min({
-		background-repeat: no-repeat;
-		background-position: 44% 100%;
-		background-size: auto 100%;
-		min-height: 240*@unit;
-		overflow: hidden;
+  // extend in a media query doesn't work.
+  #svg.title-angle.white;
+  // so we instead undo the background-image.
+  #screen-xs-max({
+    background-image: none !important;
+    margin-bottom: @gutter;
+  });
+  #screen-sm-min({
+    background-repeat: no-repeat;
+    background-position: 44% 100%;
+    background-size: auto 100%;
+    min-height: 240*@unit;
+    overflow: hidden;
 
-		// Prevent "aliasing" line to be visible.
-		&::after {
-			content: "";
-			position: absolute;
-			bottom: -3*@unit;
-			left: 0;
-			right: 0;
-			height: 6*@unit;
-			background: #theme.color[white];
-		}
-	});
-	#screen-md-min({
-		background-position: 46% 100%;
-	});
-	#screen-lg-min({
-		background-position: 49% 100%;
-	});
-	&:first-child {
-		margin-top: -@gutter;
-	}
-	& > h1 {
-		color: inherit;
-		#container();
-	}
+    // Prevent "aliasing" line to be visible.
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -3*@unit;
+      left: 0;
+      right: 0;
+      height: 6*@unit;
+      background: #theme.color[white];
+    }
+  });
+  #screen-md-min({
+    background-position: 46% 100%;
+  });
+  #screen-lg-min({
+    background-position: 49% 100%;
+  });
+  &:first-child {
+    margin-top: -@gutter;
+  }
+  & > h1 {
+    color: inherit;
+    #container();
+  }
 }

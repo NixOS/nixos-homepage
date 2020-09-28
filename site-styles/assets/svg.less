@@ -41,12 +41,12 @@
 
 // Implementation
 #_declare__svg(@name, @svg, @color: #face12) {
-	.__svg_@{name} {
-		@_colorized: replace(@svg, "#face12", @color);
-		// ugh, that's an ugly hack... but escape() apparently doesn't deal well with percent signs.
-		@_data: replace(escape(@_colorized), "%", "PERCENT");
-		background-image: replace(~"url('data:image/svg+xml;utf8,@{_data}')", "PERCENT", "%");
-	}
+  .__svg_@{name} {
+    @_colorized: replace(@svg, "#face12", @color);
+    // ugh, that's an ugly hack... but escape() apparently doesn't deal well with percent signs.
+    @_data: replace(escape(@_colorized), "%", "PERCENT");
+    background-image: replace(~"url('data:image/svg+xml;utf8,@{_data}')", "PERCENT", "%");
+  }
 }
 
 // * * *
