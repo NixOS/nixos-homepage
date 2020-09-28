@@ -24,7 +24,20 @@
     }:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+
+      overlay = final: prev: {
+        asciinema-scenario = final.rustPlatform.buildRustPackage rec {
+          pname = "asciinema-scenario";
+          version = "0.2.0";
+          src = final.fetchCrate {
+            inherit pname version;
+            sha256 = "sha256-qMGi+myppWBapM7TkPeXC2g/M1FA1YGwESNrx8LVXkw=";
+          };
+          cargoSha256 = "1jb34b634wkn5zhzipwi67761qsbr2qvjkd6kz3031hapl457r0b";
+        };
+      };
+
+      pkgs = import nixpkgs { inherit system; overlays = [ overlay ]; };
       inherit (pkgs.lib) getVersion;
 
       pkgs-unstable = import released-nixpkgs-unstable { inherit system; };
