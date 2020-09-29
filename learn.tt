@@ -4,11 +4,15 @@
   <h1>Learn</h1>
 </div>
 
-<section class="generic-layout learn-guides">
-  <h1>Guides</h1>
-  <ul>
-    [% INSERT "learn_guides.html.in" %]
-  </ul>
+<section class="learn-getstarted">
+  <div>
+    <div class="learn-installnix">
+      <a href="#???">Install Nix</a>
+    </div>
+    <div class="learn-firststeps">
+      <a href="#???">First steps with Nix</a>
+    </div>
+  </div>
 </section>
 
 <section class="generic-layout learn-search">
@@ -30,6 +34,13 @@
         </div>
       </form>
     </li>
+  </ul>
+</section>
+
+<section class="generic-layout learn-guides">
+  <h1>Guides</h1>
+  <ul>
+    [% INSERT "learn_guides.html.in" %]
   </ul>
 </section>
 
