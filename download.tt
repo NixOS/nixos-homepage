@@ -8,30 +8,35 @@
 
 <section class="download-nix">
   <div>
-    <ul class="download-header">
-      <li>
-        <h1>Nix</h1>
-      </li>
-      <li>
-        <span>Current version: </span>
-        <ul>
-          <li><a href="?nix-version=[% latestNixVersion %]"></a>[% latestNixVersion %]</li>
-          <li><a href="?nix-version=">2.3.6</a></li>
-          <li><a href="?nix-version=">2.3.5</a></li>
-          <li><a href="?nix-version=">2.3.4</a></li>
-          <li><a href="?nix-version=">2.3.2</a></li>
-          <li><a href="?nix-version=">2.3.1</a></li>
-          <li><a href="?nix-version=">2.2.2</a></li>
-          <li><a href="https://releases.nixos.org/?prefix=nix">older releases</a></li>
-        </ul>
-      </li>
-    </ul>
-
+    <div class="download-header">
+      <ul>
+        <li>
+          <h1>Nix</h1>
+        </li>
+        <li>
+          <h2>Current version</h2>
+          <a href="#">[% latestNixVersion %]</a>
+          <!-- TODO: add dropdown link to other version -->
+          <!--
+          <ul>
+            <li><a href="?nix-version=[% latestNixVersion %]"></a>[% latestNixVersion %]</li>
+            <li><a href="?nix-version=">2.3.6</a></li>
+            <li><a href="?nix-version=">2.3.5</a></li>
+            <li><a href="?nix-version=">2.3.4</a></li>
+            <li><a href="?nix-version=">2.3.2</a></li>
+            <li><a href="?nix-version=">2.3.1</a></li>
+            <li><a href="?nix-version=">2.2.2</a></li>
+            <li><a href="https://releases.nixos.org/?prefix=nix">older releases</a></li>
+          </ul>
+          -->
+        </li>
+      </ul>
+    </div>
     <div class="tabs-navigation">
+      <p>
+        Below you will find installation instructions for Nix, the package manager.
+      </p>
       <nav>
-        <p>
-          Below you will find installation instructions for Nix, the package manager.
-        </p>
         <ul id="getting-nix">
           <li><a href="#nix-quick-install">Quick install</a></li>
           <li><a href="#nix-verify-installation">Verify installation (GPG)</a></li>
@@ -93,31 +98,36 @@
 
 <section class="download-nixos">
   <div>
-    <ul class="download-header">
-      <li>
-        <h1>NixOS</h1>
-      </li>
-      <li>
-        <span>Current version: </span>
-        <ul>
-          <li><a href="?nix-version=[% latestNixVersion %]"></a>[% latestNixOSSeries %]</li>
-          <li><a href="?nix-version="></a></li>
-          <li><a href="?nix-version="></a></li>
-          <li><a href="?nix-version="></a></li>
-          <li><a href="?nix-version="></a></li>
-          <li><a href="?nix-version="></a></li>
-          <li><a href="?nix-version="></a></li>
-          <li><a href="https://releases.nixos.org/?prefix=nix">older releases</a></li>
-        </ul>
-      </li>
-    </ul>
-
+    <div class="download-header">
+      <ul>
+        <li>
+          <h1>NixOS</h1>
+        </li>
+        <li>
+          <h2>Current version</h2>
+          <a href="#">[% latestNixOSSeries %]</a>
+          <!-- TODO: add dropdown link to other version -->
+          <!--
+          <ul>
+            <li><a href="?nix-version=[% latestNixVersion %]"></a>[% latestNixOSSeries %]</li>
+            <li><a href="?nix-version=">20.03</a></li>
+            <li><a href="?nix-version=">19.09</a></li>
+            <li><a href="?nix-version="></a></li>
+            <li><a href="?nix-version="></a></li>
+            <li><a href="?nix-version="></a></li>
+            <li><a href="?nix-version="></a></li>
+            <li><a href="https://releases.nixos.org/?prefix=nix">older releases</a></li>
+          </ul>
+          -->
+        </li>
+      </ul>
+    </div>
     <div class="tabs-navigation">
+      <p>
+        Below you will find installation instructions for NixOS, the Linux
+        distribution.
+      </p>
       <nav>
-        <p class="lead">
-          Below you will find installation instructions for NixOS, the Linux
-          distribution.
-        </p>
         <ul id="getting-nixos">
           <li><a href="#nixos-iso">ISO image</a></li>
           <li><a href="#nixos-virtualbox">VirtualBox</a></li>
@@ -160,7 +170,8 @@
             the installer from the console. It contains a number of rescue tools.</p>
 
           <ul>
-            <li><a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Minimal installation CD, 64-bit Intel/AMD</a>
+            <li><a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Minimal installation CD, 64-bit
+                Intel/AMD</a>
               (<a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso.sha256">SHA-256</a>)</li>
             <li><a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso">Minimal installation CD, 32-bit Intel/AMD</a>
               (<a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso.sha256">SHA-256</a>)</li>
