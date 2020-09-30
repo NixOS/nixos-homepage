@@ -9,6 +9,222 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Tweag I/O: Fully statically linked Haskell binaries with Bazel</title>
+	<guid isPermaLink="true">https://tweag.io/blog/2020-09-30-bazel-static-haskell/</guid>
+	<link>https://tweag.io/blog/2020-09-30-bazel-static-haskell/</link>
+	<description>&lt;p&gt;Deploying and packaging Haskell applications can be challenging at times, and
+runtime library dependencies are one reason for this. Statically linked
+binaries have no such dependencies and are therefore easier to deploy. They
+can also be quicker to start, since no dynamic loading is needed. In exchange,
+all used symbols must be bundled into the application, which may lead to larger
+artifacts.&lt;/p&gt;
+&lt;p&gt;Thanks to the contribution of Will Jones of &lt;a href=&quot;https://www.habito.com/&quot;&gt;Habito&lt;/a&gt;&lt;sup id=&quot;fnref-1&quot;&gt;&lt;a class=&quot;footnote-ref&quot; href=&quot;https://www.tweag.io/rss-nix.xml#fn-1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;,
+&lt;a href=&quot;https://github.com/tweag/rules_haskell&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;&lt;/a&gt;, the Haskell &lt;a href=&quot;https://bazel.build&quot;&gt;Bazel&lt;/a&gt; extension, has
+&lt;a href=&quot;https://github.com/tweag/rules_haskell/pull/1390&quot;&gt;gained support&lt;/a&gt; for fully static linking of Haskell
+binaries.&lt;/p&gt;
+&lt;p&gt;Habito uses Bazel to develop, build, test and deploy Haskell code in a minimal
+Docker container. By building fully-statically-linked binaries, Docker
+packaging (using &lt;a href=&quot;https://github.com/bazelbuild/rules_docker&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;rules_docker&lt;/code&gt;&lt;/a&gt;) becomes straightforward and
+easy to integrate into existing build workflows. A static binary can also be
+&lt;code class=&quot;language-text&quot;&gt;strip&lt;/code&gt;ped once it is built to reduce the size of production artifacts. With
+static binaries, what you see (just the binary) is what you get, and this is
+powerful.&lt;/p&gt;
+&lt;p&gt;In the following, we will discuss the technical challenges of statically
+linking Haskell binaries and how these challenges are addressed in
+&lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;. Spoiler alert: Nix is an important part of the solution.
+Finally, we will show you how you can create your own fully statically linked
+Haskell binaries with Bazel and Nix.&lt;/p&gt;
+&lt;h2&gt;Technical challenges&lt;/h2&gt;
+&lt;p&gt;Creating fully statically linked Haskell binaries is not without challenges.
+The main difficulties for doing so are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Not all library dependencies are suited for statically linked binaries.&lt;/li&gt;
+&lt;li&gt;Compiling template Haskell requires dynamic libraries on Linux by default.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Library dependencies&lt;/h3&gt;
+&lt;p&gt;Like most binaries on Linux, the Haskell compiler GHC is typically configured to
+link against the &lt;a href=&quot;https://www.gnu.org/software/libc/&quot;&gt;GNU C library &lt;code class=&quot;language-text&quot;&gt;glibc&lt;/code&gt;&lt;/a&gt;. However, &lt;code class=&quot;language-text&quot;&gt;glibc&lt;/code&gt; is not
+designed to support fully static linking and explicitly &lt;a href=&quot;https://sourceware.org/glibc/wiki/FAQ#Even_statically_linked_programs_need_some_shared_libraries_which_is_not_acceptable_for_me.__What_can_I_do.3F&quot;&gt;depends on dynamic
+linking&lt;/a&gt; in some use cases. The alternative C library
+&lt;a href=&quot;https://musl.libc.org/about.html&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;musl&lt;/code&gt;&lt;/a&gt; is designed to support fully static linking.&lt;/p&gt;
+&lt;p&gt;Relatedly, there may be licensing reasons to not link some libraries
+statically. Common instances in the Haskell ecosystem are again &lt;code class=&quot;language-text&quot;&gt;glibc&lt;/code&gt; which
+is licensed under GPL, and the core Haskell dependency &lt;code class=&quot;language-text&quot;&gt;libgmp&lt;/code&gt; which is
+licensed under LGPL. For the latter GHC can be configured to use the core
+package &lt;code class=&quot;language-text&quot;&gt;integer-simple&lt;/code&gt; instead of &lt;code class=&quot;language-text&quot;&gt;integer-gmp&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Fortunately, the Nix community has made &lt;a href=&quot;https://github.com/NixOS/nixpkgs/issues/43795&quot;&gt;great
+progress&lt;/a&gt; towards fully statically linked Haskell
+binaries and we can build on much of this work in &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;. The
+&lt;a href=&quot;https://github.com/tweag/rules_nixpkgs&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;rules_nixpkgs&lt;/code&gt;&lt;/a&gt; extension makes it possible to import Nix derivations
+into a Bazel project, and &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt; has first class support for
+Nix-provided GHC toolchains using &lt;code class=&quot;language-text&quot;&gt;rules_nixpkgs&lt;/code&gt; under the hood. In
+particular, it can import a GHC toolchain based on &lt;code class=&quot;language-text&quot;&gt;musl&lt;/code&gt; from
+&lt;a href=&quot;https://github.com/nh2/static-haskell-nix&quot;&gt;static-haskell-nix&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Template Haskell&lt;/h3&gt;
+&lt;p&gt;By default GHC is configured to require dynamic libraries when compiling
+template Haskell. GHC’s runtime system (RTS) can be built in various
+combinations of so called &lt;a href=&quot;https://gitlab.haskell.org/ghc/ghc/-/wikis/commentary/rts/compiler-ways&quot;&gt;ways&lt;/a&gt;. The relevant way in this context is
+called &lt;em&gt;dynamic&lt;/em&gt;. On Linux, GHC itself is built with a dynamic RTS. However,
+statically linked code is targeting a non-dynamic RTS. This may sound familiar
+if you ever tried to compile code using template Haskell in profiling mode. As
+the &lt;a href=&quot;https://downloads.haskell.org/ghc/8.10.1/docs/html/users_guide/glasgow_exts.html#using-template-haskell-with-profiling&quot;&gt;GHC user guide&lt;/a&gt; points out, when evaluating template Haskell
+splices, GHC will execute compiled expressions in its built-in bytecode
+interpreter and this code has to be compatible with the RTS of GHC itself. In
+short, a GHC configured with a dynamic RTS will not be able to load static
+Haskell libraries to evaluate template Haskell splices.&lt;/p&gt;
+&lt;p&gt;One way to solve this issue is to compile all Haskell libraries twice, once
+with dynamic linking and once with static linking. C library dependencies will
+similarly need to be available in both static and dynamic forms. This is the
+approach taken by &lt;code class=&quot;language-text&quot;&gt;static-haskell-nix&lt;/code&gt;. However, in the context of Bazel we
+found it preferable to only compile Haskell libraries once in static form and
+also only have to provide C libraries in static form. To achieve this we need
+to build GHC with a static RTS and to make sure that Haskell code is
+compiled as position independent code so that it can be loaded into a running
+GHC for template Haskell splices. Thanks to Nix, it is easy to override the GHC
+derivation to include the necessary configuration.&lt;/p&gt;
+&lt;h2&gt;Make your project fully statically linked&lt;/h2&gt;
+&lt;p&gt;How can you benefit from this? In this section we will show how you can setup a
+Bazel Haskell project for fully static linking with Nix. For further details
+please refer to the corresponding documentation on
+&lt;a href=&quot;https://rules-haskell.readthedocs.io/en/latest/haskell-use-cases.html#building-fully-statically-linked-binaries&quot;&gt;haskell.build&lt;/a&gt;. A fully working example repository is
+available &lt;a href=&quot;https://github.com/lunaris/minirepo&quot;&gt;here&lt;/a&gt;. For a primer on setting up a Bazel Haskell project
+take a look at &lt;a href=&quot;https://www.tweag.io/blog/2020-05-06-convert-haskell-project-to-bazel/&quot;&gt;this tutorial&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;First, you need to configure a Nixpkgs repository that defines a GHC toolchain
+for fully static linking based on musl. We start by pulling in a base Nixpkgs
+revision and the &lt;code class=&quot;language-text&quot;&gt;static-haskell-nix&lt;/code&gt; project. Create a &lt;code class=&quot;language-text&quot;&gt;default.nix&lt;/code&gt;,
+with the following.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt;
+  baseNixpkgs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;builtins&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;fetchTarball&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;nixos-nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    url &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;https://github.com/NixOS/nixpkgs/archive/dca182df882db483cea5bb0115fea82304157ba1.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    sha256 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0193bpsg1ssr93ihndyv7shz6ivsm8cvaxxl72mc7vfb8d1bwx55&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  staticHaskellNixpkgs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;builtins&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;fetchTarball&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;https://github.com/nh2/static-haskell-nix/archive/dbce18f4808d27f6a51ce31585078b49c86bd2b5.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then we import a Haskell package set based on &lt;code class=&quot;language-text&quot;&gt;musl&lt;/code&gt; from &lt;code class=&quot;language-text&quot;&gt;static-haskell-nix&lt;/code&gt;.
+The package set provides GHC and various Haskell packages. However, we will
+only use the GHC compiler and use Bazel to build other Haskell packages.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt;
+  staticHaskellPkgs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;staticHaskellNixpkgs &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;/survey/default.nix&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;approachPkgs&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next we define a Nixpkgs &lt;a href=&quot;https://nixos.org/nixpkgs/manual/#chap-overlays&quot;&gt;overlay&lt;/a&gt; that introduces a GHC based
+on &lt;code class=&quot;language-text&quot;&gt;musl&lt;/code&gt; that is configured to use a static runtime system and core packages
+built with position independent code so that they can be loaded for template
+Haskell.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt;
+  overlay &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; self&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; super&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    staticHaskell &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; staticHaskellPkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;extend &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;selfSH&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; superSH&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      ghc &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;superSH&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ghc&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;override &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        enableRelocatedStaticLibs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        enableShared &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;overrideAttrs &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;oldAttrs&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        preConfigure &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;''
+          &lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token antiquotation variable&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;oldAttrs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;preConfigure &lt;span class=&quot;token keyword&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+          echo &quot;GhcLibHcOpts += -fPIC -fexternal-dynamic-refs&quot; &amp;gt;&amp;gt; mk/build.mk
+          echo &quot;GhcRtsHcOpts += -fPIC -fexternal-dynamic-refs&quot; &amp;gt;&amp;gt; mk/build.mk
+        ''&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, we extend the base Nixpkgs revision with the overlay. This makes the
+newly configured GHC available under the Nix attribute path
+&lt;code class=&quot;language-text&quot;&gt;staticHaskell.ghc&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;  args&lt;span class=&quot;token operator&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; overlays &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;import&lt;/span&gt; baseNixpkgs &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;args &lt;span class=&quot;token operator&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      overlays &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;overlay&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; overlays&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This concludes the Nix part of the setup and we can move on to the Bazel part.&lt;/p&gt;
+&lt;p&gt;You can import this Nixpkgs repository into Bazel by adding the following lines
+to your &lt;code class=&quot;language-text&quot;&gt;WORKSPACE&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;load&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;nixpkgs_local_repository&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+nixpkgs_local_repository&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    nix_file &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;default.nix&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now you can define a GHC toolchain for &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt; that uses the Nix built
+GHC defined above. Note how we declare that this toolchain has a static RTS and
+is configured for fully static linking. Add the following lines to your
+&lt;code class=&quot;language-text&quot;&gt;WORKSPACE&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;load&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;@rules_haskell//haskell:nixpkgs.bzl&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;haskell_register_ghc_nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+haskell_register_ghc_nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    version &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;X.Y.Z&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;# Make sure this matches the GHC version.&lt;/span&gt;
+    attribute_path &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;staticHaskell.ghc&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    repositories &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;@nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    static_runtime &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    fully_static_link &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;GHC relies on the C compiler and linker during compilation. &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;
+will always use the C compiler and linker provided by the active Bazel C
+toolchain. We need to make sure that we use a musl-based C toolchain as well.
+Here we will use the same Nix-provided C toolchain that is used by
+static-haskell-nix to build GHC.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;load&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;nixpkgs_cc_configure&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+nixpkgs_cc_configure&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    repository &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;@nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    nix_file_content &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token triple-quoted-string string&quot;&gt;&quot;&quot;&quot;
+      with import &amp;lt;nixpkgs&amp;gt; { config = {}; overlays = []; }; buildEnv {
+        name = &quot;bazel-cc-toolchain&quot;;
+        paths = [ staticHaskell.stdenv.cc staticHaskell.binutils ];
+      }
+    &quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, everything is configured for fully static linking. You can define a
+Bazel target for a fully statically linked Haskell binary as follows.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;haskell_binary&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;example&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    srcs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Main.hs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    features &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;fully_static_link&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can build your binary and confirm that it is fully statically linked as follows.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ bazel build //:example
+$ ldd bazel-bin/example
+      not a dynamic executable&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;If you’re interested in further exploring the benefits of fully statically linked
+binaries, you might &lt;a href=&quot;https://rules-haskell.readthedocs.io/en/latest/haskell-use-cases.html#containerization-with-rules-docker&quot;&gt;combine them with &lt;code class=&quot;language-text&quot;&gt;rules_docker&lt;/code&gt;&lt;/a&gt; (e.g. through its
+&lt;code class=&quot;language-text&quot;&gt;container_image&lt;/code&gt; rule) to build Docker images as Habito have done. With
+a rich enough set of Bazel rules and dependency specifications, it’s possible
+to reduce your build and deployment workflow to a &lt;code class=&quot;language-text&quot;&gt;bazel test&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;bazel run&lt;/code&gt;!&lt;/p&gt;
+&lt;p&gt;The current implementation depends on a Nix-provided GHC toolchain capable of
+fully static linking that is imported into Bazel using &lt;code class=&quot;language-text&quot;&gt;rules_nixpkgs&lt;/code&gt;.
+However, there is no reason why it shouldn’t be possible to use a GHC
+distribution capable of fully static linking that was provided by other means,
+for example a Docker image such as &lt;a href=&quot;https://github.com/utdemir/ghc-musl&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;ghc-musl&lt;/code&gt;&lt;/a&gt;. Get in touch if you
+would like to create fully statically linked Haskell binaries with Bazel but
+can’t or don’t want to integrate Nix into your build. Contributions are
+welcome!&lt;/p&gt;
+&lt;p&gt;We thank Habito for their contributions to &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&quot;fn-1&quot;&gt;
+&lt;p&gt;  &lt;a href=&quot;https://www.habito.com/&quot;&gt;Habito&lt;/a&gt; is fixing mortgages and making homebuying fit for the
+future. Habito gives people tools, jargon-free knowledge and expert support
+to help them buy and finance their homes. Built on a rich foundation of
+functional programming and other cutting-edge technology, Habito is a long
+time user of and contributor to &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;.&lt;/p&gt;
+&lt;a class=&quot;footnote-backref&quot; href=&quot;https://www.tweag.io/rss-nix.xml#fnref-1&quot;&gt;↩&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description>
+	<pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+</item>
+<item>
 	<title>Sander van der Burg: Assigning unique IDs to services in Disnix deployment models</title>
 	<guid isPermaLink="false">tag:blogger.com,1999:blog-1397115249631682228.post-1266939232103509859</guid>
 	<link>http://sandervanderburg.blogspot.com/2020/09/assigning-unique-ids-to-services-in.html</link>
@@ -1255,164 +1471,6 @@ minimal. A typical CI script looks like this:&lt;/p&gt;
 &lt;p&gt;Builds with up-to-date cache that does not cause re-builds may finish in
 literally 1 second.&lt;/p&gt;</description>
 	<pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
-</item>
-<item>
-	<title>Tweag I/O: Nix Flakes, Part 2: Evaluation caching</title>
-	<guid isPermaLink="true">https://tweag.io/blog/2020-06-25-eval-cache/</guid>
-	<link>https://tweag.io/blog/2020-06-25-eval-cache/</link>
-	<description>&lt;p&gt;Nix evaluation is often quite slow. In this blog post, we’ll have a
-look at a nice advantage of the hermetic evaluation model enforced by
-flakes: the ability to cache evaluation results reliably. For a short
-introduction to flakes, see our &lt;a href=&quot;https://www.tweag.io/blog/2020-05-25-flakes/&quot;&gt;previous blog post&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Why Nix evaluation is slow&lt;/h2&gt;
-&lt;p&gt;Nix uses a simple, interpreted, purely functional language to describe
-package dependency graphs and NixOS system configurations. So to get
-any information about those things, Nix first needs to &lt;em&gt;evaluate&lt;/em&gt; a
-substantial Nix program. This involves parsing potentially thousands
-of .nix files and running a Turing-complete language.&lt;/p&gt;
-&lt;p&gt;For example, the command &lt;code class=&quot;language-text&quot;&gt;nix-env -qa&lt;/code&gt; shows you which packages are
-available in Nixpkgs. But this is quite slow and takes a lot of memory:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;token bash language-bash&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;time&lt;/span&gt; nix-env -qa &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;wc&lt;/span&gt; -l&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token output&quot;&gt;5.09user 0.49system 0:05.59elapsed 99%CPU (0avgtext+0avgdata 1522792maxresident)k
-28012&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Evaluating individual packages or configurations can also be slow. For
-example, using &lt;code class=&quot;language-text&quot;&gt;nix-shell&lt;/code&gt; to enter a development environment for
-&lt;a href=&quot;https://github.com/NixOS/hydra&quot;&gt;Hydra&lt;/a&gt;, we have to wait a bit, even
-if all dependencies are present in the Nix store:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;token bash language-bash&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;time&lt;/span&gt; nix-shell --command &lt;span class=&quot;token string&quot;&gt;'exit 0'&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token output&quot;&gt;1.34user 0.18system 0:01.69elapsed 89%CPU (0avgtext+0avgdata 434808maxresident)k&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;That might be okay for occasional use but a wait of one or more
-seconds may well be unacceptably slow in scripts.&lt;/p&gt;
-&lt;p&gt;Note that the evaluation overhead is completely independent from the
-time it takes to actually build or download a package or
-configuration. If something is already present in the Nix store, Nix
-won’t build or download it again. But it still needs to re-evaluate
-the Nix files to determine &lt;em&gt;which&lt;/em&gt; Nix store paths are needed.&lt;/p&gt;
-&lt;h2&gt;Caching evaluation results&lt;/h2&gt;
-&lt;p&gt;So can’t we speed things up by &lt;em&gt;caching&lt;/em&gt; evaluation results? After
-all, the Nix language is purely functional, so it seems that
-re-evaluation should produce the same result, every time. Naively,
-maybe we can keep a cache that records that attribute A of file X
-evaluates to derivation D (or whatever metadata we want to cache).
-Unfortunately, it’s not that simple; cache invalidation is, after all,
-one of the &lt;a href=&quot;https://martinfowler.com/bliki/TwoHardThings.html&quot;&gt;only two hard problems in computer
-science&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The reason this didn’t work is that in the past Nix evaluation was not
-&lt;em&gt;hermetic&lt;/em&gt;. For example, a &lt;code class=&quot;language-text&quot;&gt;.nix&lt;/code&gt; file can import other Nix files
-through relative or absolute paths (such as
-&lt;code class=&quot;language-text&quot;&gt;~/.config/nixpkgs/config.nix&lt;/code&gt; for Nixpkgs) or by looking them up in
-the Nix search path (&lt;code class=&quot;language-text&quot;&gt;$NIX_PATH&lt;/code&gt;). So unless we perfectly keep track
-of &lt;em&gt;all&lt;/em&gt; the files used during evaluation, a cached result might be
-inconsistent with the current input.&lt;/p&gt;
-&lt;p&gt;(As an aside: for a while, Nix has had an experimental replacement for
-&lt;code class=&quot;language-text&quot;&gt;nix-env -qa&lt;/code&gt; called &lt;code class=&quot;language-text&quot;&gt;nix search&lt;/code&gt;, which used an ad hoc cache for
-package metadata. It had exactly this cache invalidation problem: it
-wasn’t smart enough to figure out whether its cache was up to date
-with whatever revision of Nixpkgs you were using. So it had a manual
-flag &lt;code class=&quot;language-text&quot;&gt;--update-cache&lt;/code&gt; to allow the user to force cache invalidation.)&lt;/p&gt;
-&lt;h2&gt;Flakes to the rescue&lt;/h2&gt;
-&lt;p&gt;Flakes solve this problem by ensuring fully hermetic evaluation. When
-you evaluate an output attribute of a particular flake (e.g. the
-attribute &lt;code class=&quot;language-text&quot;&gt;defaultPackage.x86_64-linux&lt;/code&gt; of the &lt;code class=&quot;language-text&quot;&gt;dwarffs&lt;/code&gt; flake), Nix
-disallows access to any files outside that flake or its
-dependencies. It also disallows impure or platform-dependent features
-such as access to environment variables or the current system type.&lt;/p&gt;
-&lt;p&gt;This allows the &lt;code class=&quot;language-text&quot;&gt;nix&lt;/code&gt; command to aggressively cache evaluation results
-without fear of cache invalidation problems. Let’s see this in action
-by running Firefox from the &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; flake. If we do this with an
-empty evaluation cache, Nix needs to evaluate the entire dependency
-graph of Firefox, which takes a quarter of a second:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ command time nix shell nixpkgs#firefox -c firefox --version
-Mozilla Firefox 75.0
-0.26user 0.05system 0:00.39elapsed 82%CPU (0avgtext+0avgdata 115224maxresident)k&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;But if we do it again, it’s almost instantaneous (and takes less
-memory):&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ command time nix shell nixpkgs#firefox -c firefox --version
-Mozilla Firefox 75.0
-0.01user 0.01system 0:00.03elapsed 93%CPU (0avgtext+0avgdata 25840maxresident)k&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The cache is implemented using a simple SQLite database that stores the
-values of flake output attributes. After the first command above, the
-cache looks like this:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;token bash language-bash&quot;&gt;sqlite3 ~/.cache/nix/eval-cache-v1/302043eedfbce13ecd8169612849f6ce789c26365c9aa0e6cfd3a772d746e3ba.sqlite .dump&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token output&quot;&gt;PRAGMA foreign_keys=OFF;
-BEGIN TRANSACTION;
-CREATE TABLE Attributes (
-    parent      integer not null,
-    name        text,
-    type        integer not null,
-    value       text,
-    primary key (parent, name)
-);
-INSERT INTO Attributes VALUES(0,'',0,NULL);
-INSERT INTO Attributes VALUES(1,'packages',3,NULL);
-INSERT INTO Attributes VALUES(1,'legacyPackages',0,NULL);
-INSERT INTO Attributes VALUES(3,'x86_64-linux',0,NULL);
-INSERT INTO Attributes VALUES(4,'firefox',0,NULL);
-INSERT INTO Attributes VALUES(5,'type',2,'derivation');
-INSERT INTO Attributes VALUES(5,'drvPath',2,'/nix/store/7mz8pkgpl24wyab8nny0zclvca7ki2m8-firefox-75.0.drv');
-INSERT INTO Attributes VALUES(5,'outPath',2,'/nix/store/5x1i2gp8k95f2mihd6aj61b5lydpz5dy-firefox-75.0');
-INSERT INTO Attributes VALUES(5,'outputName',2,'out');
-COMMIT;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In other words, the cache stores all the attributes that &lt;code class=&quot;language-text&quot;&gt;nix shell&lt;/code&gt;
-had to evaluate, in particular
-&lt;code class=&quot;language-text&quot;&gt;legacyPackages.x86_64-linux.firefox.{type,drvPath,outPath,outputName}&lt;/code&gt;. It
-also stores negative lookups, that is, attributes that don’t exist
-(such as &lt;code class=&quot;language-text&quot;&gt;packages&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;The name of the SQLite database, &lt;code class=&quot;language-text&quot;&gt;302043eedf….sqlite&lt;/code&gt; in this example,
-is derived from the contents of the top-level flake. Since the flake’s
-lock file contains content hashes of all dependencies, this is enough
-to efficiently and completely capture all files that might influence
-the evaluation result. (In the future, we’ll optimise this a bit more:
-for example, if the flake is a Git repository, we can simply use the
-Git revision as the cache name.)&lt;/p&gt;
-&lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;nix search&lt;/code&gt; command has been updated to use the new evaluation
-cache instead of its previous ad hoc cache. For example, searching for
-Blender is slow the first time:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;token bash language-bash&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;time&lt;/span&gt; nix search nixpkgs blender&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token output&quot;&gt;* legacyPackages.x86_64-linux.blender (2.82a)
-  3D Creation/Animation/Publishing System
-5.55user 0.63system 0:06.17elapsed 100%CPU (0avgtext+0avgdata 1491912maxresident)k&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;but the second time it is pretty fast and uses much less memory:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;token bash language-bash&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;time&lt;/span&gt; nix search nixpkgs blender&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token output&quot;&gt;* legacyPackages.x86_64-linux.blender (2.82a)
-  3D Creation/Animation/Publishing System
-0.41user 0.00system 0:00.42elapsed 99%CPU (0avgtext+0avgdata 21100maxresident)k&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The evaluation cache at this point is about 10.9 MiB in size. The
-overhead for creating the cache is fairly modest: with the flag
-&lt;code class=&quot;language-text&quot;&gt;--no-eval-cache&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;nix search nixpkgs blender&lt;/code&gt; takes 4.9 seconds.&lt;/p&gt;
-&lt;h2&gt;Caching and store derivations&lt;/h2&gt;
-&lt;p&gt;There is only one way in which cached results can become “stale”, in a
-way. Nix evaluation produces store derivations such as
-&lt;code class=&quot;language-text&quot;&gt;/nix/store/7mz8pkgpl24wyab8nny0zclvca7ki2m8-firefox-75.0.drv&lt;/code&gt; as a
-side effect. (&lt;code class=&quot;language-text&quot;&gt;.drv&lt;/code&gt; files are essentially a serialization of the
-dependency graph of a package.) These store derivations may be
-garbage-collected. In that case, the evaluation cache points to a path
-that no longer exists. Thus, Nix checks whether the &lt;code class=&quot;language-text&quot;&gt;.drv&lt;/code&gt; file still
-exist, and if not, falls back to evaluating normally.&lt;/p&gt;
-&lt;h2&gt;Future improvements&lt;/h2&gt;
-&lt;p&gt;Currently, the evaluation cache is only created and used
-locally. However, Nix could automatically &lt;em&gt;download&lt;/em&gt; precomputed
-caches, similar to how it has a binary cache for the contents of store
-paths. That is, if we need a cache like &lt;code class=&quot;language-text&quot;&gt;302043eedf….sqlite&lt;/code&gt;, we could
-first check if it’s available on &lt;code class=&quot;language-text&quot;&gt;cache.nixos.org&lt;/code&gt; and if so fetch it
-from there. In this way, when we run a command such as &lt;code class=&quot;language-text&quot;&gt;nix shell nixpkgs#firefox&lt;/code&gt;, we could even avoid the need to fetch the actual
-source of the flake!&lt;/p&gt;
-&lt;p&gt;Another future improvement is to populate and use the cache in the
-evaluator itself. Currently the cache is populated and cached in the
-user interface (that is, the &lt;code class=&quot;language-text&quot;&gt;nix&lt;/code&gt; command). The command &lt;code class=&quot;language-text&quot;&gt;nix shell nixpkgs#firefox&lt;/code&gt; will create a cache entry for &lt;code class=&quot;language-text&quot;&gt;firefox&lt;/code&gt;, but not for
-the dependencies of &lt;code class=&quot;language-text&quot;&gt;firefox&lt;/code&gt;; thus a subsequent &lt;code class=&quot;language-text&quot;&gt;nix shell nixpkgs#thunderbird&lt;/code&gt; won’t see a speed improvement even though it
-shares most of its dependencies. So it would be nice if the evaluator
-had knowledge of the evaluation cache. For example, the evaluation of
-thunks that represent attributes like
-&lt;code class=&quot;language-text&quot;&gt;nixpkgs.legacyPackages.x86_64-linux.&amp;lt;package name&amp;gt;&lt;/code&gt; could check and
-update the cache.&lt;/p&gt;
-&lt;h2&gt;Nix Flakes Series&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.tweag.io/../2020-05-25-flakes&quot;&gt;Part 1: An introduction and tutorial&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Part 2: Evaluation caching&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.tweag.io/../2020-07-31-nixos-flakes&quot;&gt;Part 3: Managing NixOS systems&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description>
-	<pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
 </item>
 
 </channel>
