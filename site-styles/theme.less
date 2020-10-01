@@ -1,26 +1,14 @@
 // Describe the theme, mainly as variables in a Map.
-// Some namespaces will have variants defined, they have to be
-// configured in the `configuration.less` file.
 #theme() {
   .layout() {
   }
-  // The variant will be chosen in the configuration. The variant's
-  // keys will be merged with `#theme.font`.
   .font() {
     monospace: "Fira Mono", monospace;
 
-    .variant-A() {
-      primary: "Krub", sans-serif;
-      primary-weight: 400;
-      secondary: "Sora", serif;
-      secondary-weight: 700;
-    }
-    .variant-B() {
-      primary: "Open Sans", sans-serif;
-      primary-weight: 400;
-      secondary: "Zilla Slab", serif;
-      secondary-weight: 700;
-    }
+    primary: "Krub", sans-serif;
+    primary-weight: 400;
+    secondary: "Sora", serif;
+    secondary-weight: 700;
   }
 
   // Common rules shared across elements.
@@ -65,23 +53,8 @@
   .navbar() {
     height: 87*@unit;
 
-    .variant-darker() {
-      variant: darker;
-      background: #theme.color[blue-darker];
-      foreground: #theme.color[white];
-    }
-
-    .variant-dark() {
-      variant: dark;
-      background: #theme.color[blue-dark];
-      foreground: #theme.color[white];
-    }
-
-    .variant-light() {
-      variant: light;
-      background: #theme.color[background];
-      foreground: #theme.color[foreground];
-    }
+    background: #theme.color[background];
+    foreground: #theme.color[foreground];
   }
 
   .footer() {

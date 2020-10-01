@@ -11,11 +11,8 @@ body > header {
   #fill-width();
   background: #theme.navbar[background];
 
-  // The light variant of the navbar needs a shadow.
-  & when (#theme.navbar[variant] = light) {
-    border-bottom: 1*@unit solid rgba(0, 0, 0, 0.2);
-    box-shadow: #theme.common[box-shadow];
-  }
+  border-bottom: 1*@unit solid rgba(0, 0, 0, 0.2);
+  box-shadow: #theme.common[box-shadow];
 
   // Ensure *everything* in the navbar fills it vertically.
   * {
@@ -88,12 +85,8 @@ body > header {
       @height: @_height,
     );
 
-    // Select according to the variant
-    &::before when (#theme.navbar[variant] = light) {
+    &::before {
       #svg.lambdaflake.color();
-    }
-    &::before when not (#theme.navbar[variant] = light) {
-      #svg.lambdaflake.white();
     }
 
 
@@ -106,12 +99,8 @@ body > header {
       @width: @_nixos_text_width,
       @height: @_height,
     );
-    // Select according to the variant
-    &::after when (#theme.navbar[variant] = light) {
+    &::after {
       #svg.nixos-text.black();
-    }
-    &::after when not (#theme.navbar[variant] = light) {
-      #svg.nixos-text.white();
     }
 
     // We can't rely on what `#text-replacement` gives us since we're doing it twice.
