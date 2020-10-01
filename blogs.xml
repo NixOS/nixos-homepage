@@ -12,9 +12,11 @@
 	<title>Cachix: Changes to Garbage Collection</title>
 	<guid isPermaLink="true">https://blog.cachix.org/posts/2020-10-01-changes-to-garbage-collection/</guid>
 	<link>https://blog.cachix.org/posts/2020-10-01-changes-to-garbage-collection/</link>
-	<description>Based on your feedbacd, I have made the following two changes:
- When downloading &amp;lt;store-hash&amp;gt;.narinfo the timestamp of last access is updated, previously this would happen only with nar archives.  This change allows tools like nix-build-uncached to prevent unneeded downloads and playing nicely with Cachix garbage collection algorithm!
- Previously, the algorithm ordered paths first by last accessed timestamp and then by creation timestamp.  That worked well until you had all entries with last accessed and all newly created store paths will get deleted first.</description>
+	<description>Based on your feedback, I have made the following two changes:
+  When downloading &amp;lt;store-hash&amp;gt;.narinfo the timestamp of last access is updated, previously this would happen only with nar archives.
+This change allows tools like nix-build-uncached to prevent unneeded downloads and playing nicely with Cachix garbage collection algorithm!
+  Previously, the algorithm ordered paths first by last accessed timestamp and then by creation timestamp.
+That worked well until you had all entries with last accessed and all newly created store paths will get deleted first.</description>
 	<pubDate>Thu, 01 Oct 2020 09:00:00 +0000</pubDate>
 	<author>support@cachix.org (Domen Kožar)</author>
 </item>
@@ -1195,11 +1197,11 @@ Queries to cache.nixos.org are also cached, so that subsequent push operations d
 	<link>https://blog.cachix.org/posts/2020-07-20-documentation-and-more-documentation/</link>
 	<description>Documentation is an important ingredient of a successful software project.
 Last few weeks I’ve worked on improving status quo on two fronts:
-1) https://nix.dev is an opinionated guide for developers getting things done using the Nix ecosystem.
+  https://nix.dev is an opinionated guide for developers getting things done using the Nix ecosystem.
 A few highlights:
- Getting started repository template with a tutorial for using declarative and reproducible developer environments
- Setting up GitHub Actions with Nix
- Nix language anti-patterns to avoid and recommended alternatives</description>
+  Getting started repository template with a tutorial for using declarative and reproducible developer environments
+  Setting up GitHub Actions with Nix
+  Nix language anti-patterns to avoid and recommended alternatives</description>
 	<pubDate>Mon, 20 Jul 2020 14:45:00 +0000</pubDate>
 	<author>support@cachix.org (Domen Kožar)</author>
 </item>
