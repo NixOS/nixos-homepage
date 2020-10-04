@@ -118,10 +118,10 @@ $(function () {
         $thisLink.parent().addClass("selected");
 
         // hide all content
-        $("article", $tabview).hide();
+        $("article", $tabview).removeClass("visible");
 
         // show the content of the link you clicked on
-        $link.parents("article").show();
+        $link.parents("article").addClass("visible");
       });
       $desktopLinks.append($link.clone()
                                 .wrapInner($newLink)
