@@ -9,6 +9,234 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Cachix: Changes to Garbage Collection</title>
+	<guid isPermaLink="true">https://blog.cachix.org/posts/2020-10-01-changes-to-garbage-collection/</guid>
+	<link>https://blog.cachix.org/posts/2020-10-01-changes-to-garbage-collection/</link>
+	<description>Based on your feedback, I have made the following two changes:
+  When downloading &amp;lt;store-hash&amp;gt;.narinfo the timestamp of last access is updated, previously this would happen only with nar archives.
+This change allows tools like nix-build-uncached to prevent unneeded downloads and playing nicely with Cachix garbage collection algorithm!
+  Previously, the algorithm ordered paths first by last accessed timestamp and then by creation timestamp.
+That worked well until you had all entries with last accessed and all newly created store paths will get deleted first.</description>
+	<pubDate>Thu, 01 Oct 2020 09:00:00 +0000</pubDate>
+	<author>support@cachix.org (Domen Kožar)</author>
+</item>
+<item>
+	<title>Tweag I/O: Fully statically linked Haskell binaries with Bazel</title>
+	<guid isPermaLink="true">https://tweag.io/blog/2020-09-30-bazel-static-haskell/</guid>
+	<link>https://tweag.io/blog/2020-09-30-bazel-static-haskell/</link>
+	<description>&lt;p&gt;Deploying and packaging Haskell applications can be challenging at times, and
+runtime library dependencies are one reason for this. Statically linked
+binaries have no such dependencies and are therefore easier to deploy. They
+can also be quicker to start, since no dynamic loading is needed. In exchange,
+all used symbols must be bundled into the application, which may lead to larger
+artifacts.&lt;/p&gt;
+&lt;p&gt;Thanks to the contribution of Will Jones of &lt;a href=&quot;https://www.habito.com/&quot;&gt;Habito&lt;/a&gt;&lt;sup id=&quot;fnref-1&quot;&gt;&lt;a class=&quot;footnote-ref&quot; href=&quot;https://www.tweag.io/rss-nix.xml#fn-1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;,
+&lt;a href=&quot;https://github.com/tweag/rules_haskell&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;&lt;/a&gt;, the Haskell &lt;a href=&quot;https://bazel.build&quot;&gt;Bazel&lt;/a&gt; extension, has
+&lt;a href=&quot;https://github.com/tweag/rules_haskell/pull/1390&quot;&gt;gained support&lt;/a&gt; for fully static linking of Haskell
+binaries.&lt;/p&gt;
+&lt;p&gt;Habito uses Bazel to develop, build, test and deploy Haskell code in a minimal
+Docker container. By building fully-statically-linked binaries, Docker
+packaging (using &lt;a href=&quot;https://github.com/bazelbuild/rules_docker&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;rules_docker&lt;/code&gt;&lt;/a&gt;) becomes straightforward and
+easy to integrate into existing build workflows. A static binary can also be
+&lt;code class=&quot;language-text&quot;&gt;strip&lt;/code&gt;ped once it is built to reduce the size of production artifacts. With
+static binaries, what you see (just the binary) is what you get, and this is
+powerful.&lt;/p&gt;
+&lt;p&gt;In the following, we will discuss the technical challenges of statically
+linking Haskell binaries and how these challenges are addressed in
+&lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;. Spoiler alert: Nix is an important part of the solution.
+Finally, we will show you how you can create your own fully statically linked
+Haskell binaries with Bazel and Nix.&lt;/p&gt;
+&lt;h2&gt;Technical challenges&lt;/h2&gt;
+&lt;p&gt;Creating fully statically linked Haskell binaries is not without challenges.
+The main difficulties for doing so are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Not all library dependencies are suited for statically linked binaries.&lt;/li&gt;
+&lt;li&gt;Compiling template Haskell requires dynamic libraries on Linux by default.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Library dependencies&lt;/h3&gt;
+&lt;p&gt;Like most binaries on Linux, the Haskell compiler GHC is typically configured to
+link against the &lt;a href=&quot;https://www.gnu.org/software/libc/&quot;&gt;GNU C library &lt;code class=&quot;language-text&quot;&gt;glibc&lt;/code&gt;&lt;/a&gt;. However, &lt;code class=&quot;language-text&quot;&gt;glibc&lt;/code&gt; is not
+designed to support fully static linking and explicitly &lt;a href=&quot;https://sourceware.org/glibc/wiki/FAQ#Even_statically_linked_programs_need_some_shared_libraries_which_is_not_acceptable_for_me.__What_can_I_do.3F&quot;&gt;depends on dynamic
+linking&lt;/a&gt; in some use cases. The alternative C library
+&lt;a href=&quot;https://musl.libc.org/about.html&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;musl&lt;/code&gt;&lt;/a&gt; is designed to support fully static linking.&lt;/p&gt;
+&lt;p&gt;Relatedly, there may be licensing reasons to not link some libraries
+statically. Common instances in the Haskell ecosystem are again &lt;code class=&quot;language-text&quot;&gt;glibc&lt;/code&gt; which
+is licensed under GPL, and the core Haskell dependency &lt;code class=&quot;language-text&quot;&gt;libgmp&lt;/code&gt; which is
+licensed under LGPL. For the latter GHC can be configured to use the core
+package &lt;code class=&quot;language-text&quot;&gt;integer-simple&lt;/code&gt; instead of &lt;code class=&quot;language-text&quot;&gt;integer-gmp&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Fortunately, the Nix community has made &lt;a href=&quot;https://github.com/NixOS/nixpkgs/issues/43795&quot;&gt;great
+progress&lt;/a&gt; towards fully statically linked Haskell
+binaries and we can build on much of this work in &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;. The
+&lt;a href=&quot;https://github.com/tweag/rules_nixpkgs&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;rules_nixpkgs&lt;/code&gt;&lt;/a&gt; extension makes it possible to import Nix derivations
+into a Bazel project, and &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt; has first class support for
+Nix-provided GHC toolchains using &lt;code class=&quot;language-text&quot;&gt;rules_nixpkgs&lt;/code&gt; under the hood. In
+particular, it can import a GHC toolchain based on &lt;code class=&quot;language-text&quot;&gt;musl&lt;/code&gt; from
+&lt;a href=&quot;https://github.com/nh2/static-haskell-nix&quot;&gt;static-haskell-nix&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Template Haskell&lt;/h3&gt;
+&lt;p&gt;By default GHC is configured to require dynamic libraries when compiling
+template Haskell. GHC’s runtime system (RTS) can be built in various
+combinations of so called &lt;a href=&quot;https://gitlab.haskell.org/ghc/ghc/-/wikis/commentary/rts/compiler-ways&quot;&gt;ways&lt;/a&gt;. The relevant way in this context is
+called &lt;em&gt;dynamic&lt;/em&gt;. On Linux, GHC itself is built with a dynamic RTS. However,
+statically linked code is targeting a non-dynamic RTS. This may sound familiar
+if you ever tried to compile code using template Haskell in profiling mode. As
+the &lt;a href=&quot;https://downloads.haskell.org/ghc/8.10.1/docs/html/users_guide/glasgow_exts.html#using-template-haskell-with-profiling&quot;&gt;GHC user guide&lt;/a&gt; points out, when evaluating template Haskell
+splices, GHC will execute compiled expressions in its built-in bytecode
+interpreter and this code has to be compatible with the RTS of GHC itself. In
+short, a GHC configured with a dynamic RTS will not be able to load static
+Haskell libraries to evaluate template Haskell splices.&lt;/p&gt;
+&lt;p&gt;One way to solve this issue is to compile all Haskell libraries twice, once
+with dynamic linking and once with static linking. C library dependencies will
+similarly need to be available in both static and dynamic forms. This is the
+approach taken by &lt;code class=&quot;language-text&quot;&gt;static-haskell-nix&lt;/code&gt;. However, in the context of Bazel we
+found it preferable to only compile Haskell libraries once in static form and
+also only have to provide C libraries in static form. To achieve this we need
+to build GHC with a static RTS and to make sure that Haskell code is
+compiled as position independent code so that it can be loaded into a running
+GHC for template Haskell splices. Thanks to Nix, it is easy to override the GHC
+derivation to include the necessary configuration.&lt;/p&gt;
+&lt;h2&gt;Make your project fully statically linked&lt;/h2&gt;
+&lt;p&gt;How can you benefit from this? In this section we will show how you can setup a
+Bazel Haskell project for fully static linking with Nix. For further details
+please refer to the corresponding documentation on
+&lt;a href=&quot;https://rules-haskell.readthedocs.io/en/latest/haskell-use-cases.html#building-fully-statically-linked-binaries&quot;&gt;haskell.build&lt;/a&gt;. A fully working example repository is
+available &lt;a href=&quot;https://github.com/lunaris/minirepo&quot;&gt;here&lt;/a&gt;. For a primer on setting up a Bazel Haskell project
+take a look at &lt;a href=&quot;https://www.tweag.io/blog/2020-05-06-convert-haskell-project-to-bazel/&quot;&gt;this tutorial&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;First, you need to configure a Nixpkgs repository that defines a GHC toolchain
+for fully static linking based on musl. We start by pulling in a base Nixpkgs
+revision and the &lt;code class=&quot;language-text&quot;&gt;static-haskell-nix&lt;/code&gt; project. Create a &lt;code class=&quot;language-text&quot;&gt;default.nix&lt;/code&gt;,
+with the following.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt;
+  baseNixpkgs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;builtins&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;fetchTarball&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;nixos-nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    url &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;https://github.com/NixOS/nixpkgs/archive/dca182df882db483cea5bb0115fea82304157ba1.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    sha256 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0193bpsg1ssr93ihndyv7shz6ivsm8cvaxxl72mc7vfb8d1bwx55&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  staticHaskellNixpkgs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;builtins&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;fetchTarball&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;https://github.com/nh2/static-haskell-nix/archive/dbce18f4808d27f6a51ce31585078b49c86bd2b5.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then we import a Haskell package set based on &lt;code class=&quot;language-text&quot;&gt;musl&lt;/code&gt; from &lt;code class=&quot;language-text&quot;&gt;static-haskell-nix&lt;/code&gt;.
+The package set provides GHC and various Haskell packages. However, we will
+only use the GHC compiler and use Bazel to build other Haskell packages.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt;
+  staticHaskellPkgs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;staticHaskellNixpkgs &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;/survey/default.nix&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;approachPkgs&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next we define a Nixpkgs &lt;a href=&quot;https://nixos.org/nixpkgs/manual/#chap-overlays&quot;&gt;overlay&lt;/a&gt; that introduces a GHC based
+on &lt;code class=&quot;language-text&quot;&gt;musl&lt;/code&gt; that is configured to use a static runtime system and core packages
+built with position independent code so that they can be loaded for template
+Haskell.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt;
+  overlay &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; self&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; super&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    staticHaskell &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; staticHaskellPkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;extend &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;selfSH&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; superSH&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      ghc &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;superSH&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ghc&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;override &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        enableRelocatedStaticLibs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        enableShared &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;overrideAttrs &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;oldAttrs&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        preConfigure &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;''
+          &lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token antiquotation variable&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;oldAttrs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;preConfigure &lt;span class=&quot;token keyword&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+          echo &quot;GhcLibHcOpts += -fPIC -fexternal-dynamic-refs&quot; &amp;gt;&amp;gt; mk/build.mk
+          echo &quot;GhcRtsHcOpts += -fPIC -fexternal-dynamic-refs&quot; &amp;gt;&amp;gt; mk/build.mk
+        ''&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, we extend the base Nixpkgs revision with the overlay. This makes the
+newly configured GHC available under the Nix attribute path
+&lt;code class=&quot;language-text&quot;&gt;staticHaskell.ghc&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;  args&lt;span class=&quot;token operator&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; overlays &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;import&lt;/span&gt; baseNixpkgs &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;args &lt;span class=&quot;token operator&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      overlays &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;overlay&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; overlays&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This concludes the Nix part of the setup and we can move on to the Bazel part.&lt;/p&gt;
+&lt;p&gt;You can import this Nixpkgs repository into Bazel by adding the following lines
+to your &lt;code class=&quot;language-text&quot;&gt;WORKSPACE&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;load&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;nixpkgs_local_repository&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+nixpkgs_local_repository&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    nix_file &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;default.nix&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now you can define a GHC toolchain for &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt; that uses the Nix built
+GHC defined above. Note how we declare that this toolchain has a static RTS and
+is configured for fully static linking. Add the following lines to your
+&lt;code class=&quot;language-text&quot;&gt;WORKSPACE&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;load&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;@rules_haskell//haskell:nixpkgs.bzl&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;haskell_register_ghc_nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+haskell_register_ghc_nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    version &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;X.Y.Z&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;# Make sure this matches the GHC version.&lt;/span&gt;
+    attribute_path &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;staticHaskell.ghc&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    repositories &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;@nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    static_runtime &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    fully_static_link &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;GHC relies on the C compiler and linker during compilation. &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;
+will always use the C compiler and linker provided by the active Bazel C
+toolchain. We need to make sure that we use a musl-based C toolchain as well.
+Here we will use the same Nix-provided C toolchain that is used by
+static-haskell-nix to build GHC.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;load&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;nixpkgs_cc_configure&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+nixpkgs_cc_configure&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    repository &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;@nixpkgs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    nix_file_content &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token triple-quoted-string string&quot;&gt;&quot;&quot;&quot;
+      with import &amp;lt;nixpkgs&amp;gt; { config = {}; overlays = []; }; buildEnv {
+        name = &quot;bazel-cc-toolchain&quot;;
+        paths = [ staticHaskell.stdenv.cc staticHaskell.binutils ];
+      }
+    &quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, everything is configured for fully static linking. You can define a
+Bazel target for a fully statically linked Haskell binary as follows.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;haskell_binary&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;example&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    srcs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Main.hs&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    features &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;fully_static_link&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can build your binary and confirm that it is fully statically linked as follows.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ bazel build //:example
+$ ldd bazel-bin/example
+      not a dynamic executable&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;If you’re interested in further exploring the benefits of fully statically linked
+binaries, you might &lt;a href=&quot;https://rules-haskell.readthedocs.io/en/latest/haskell-use-cases.html#containerization-with-rules-docker&quot;&gt;combine them with &lt;code class=&quot;language-text&quot;&gt;rules_docker&lt;/code&gt;&lt;/a&gt; (e.g. through its
+&lt;code class=&quot;language-text&quot;&gt;container_image&lt;/code&gt; rule) to build Docker images as Habito have done. With
+a rich enough set of Bazel rules and dependency specifications, it’s possible
+to reduce your build and deployment workflow to a &lt;code class=&quot;language-text&quot;&gt;bazel test&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;bazel run&lt;/code&gt;!&lt;/p&gt;
+&lt;p&gt;The current implementation depends on a Nix-provided GHC toolchain capable of
+fully static linking that is imported into Bazel using &lt;code class=&quot;language-text&quot;&gt;rules_nixpkgs&lt;/code&gt;.
+However, there is no reason why it shouldn’t be possible to use a GHC
+distribution capable of fully static linking that was provided by other means,
+for example a Docker image such as &lt;a href=&quot;https://github.com/utdemir/ghc-musl&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;ghc-musl&lt;/code&gt;&lt;/a&gt;. Get in touch if you
+would like to create fully statically linked Haskell binaries with Bazel but
+can’t or don’t want to integrate Nix into your build. Contributions are
+welcome!&lt;/p&gt;
+&lt;p&gt;We thank Habito for their contributions to &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&quot;fn-1&quot;&gt;
+&lt;p&gt;  &lt;a href=&quot;https://www.habito.com/&quot;&gt;Habito&lt;/a&gt; is fixing mortgages and making homebuying fit for the
+future. Habito gives people tools, jargon-free knowledge and expert support
+to help them buy and finance their homes. Built on a rich foundation of
+functional programming and other cutting-edge technology, Habito is a long
+time user of and contributor to &lt;code class=&quot;language-text&quot;&gt;rules_haskell&lt;/code&gt;.&lt;/p&gt;
+&lt;a class=&quot;footnote-backref&quot; href=&quot;https://www.tweag.io/rss-nix.xml#fnref-1&quot;&gt;↩&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description>
+	<pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+</item>
+<item>
 	<title>Sander van der Burg: Assigning unique IDs to services in Disnix deployment models</title>
 	<guid isPermaLink="false">tag:blogger.com,1999:blog-1397115249631682228.post-1266939232103509859</guid>
 	<link>http://sandervanderburg.blogspot.com/2020/09/assigning-unique-ids-to-services-in.html</link>
@@ -175,6 +403,231 @@ feasible to integrate content-addressing in Nix has been a long journey.&lt;/p&g
 &lt;p&gt;In a future post, I’ll explain why it was so hard, and how we finally
 managed to propose a viable design for a content-addressed Nix.&lt;/p&gt;</description>
 	<pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Guillaume Maudoux: How to Digest Nix Hashes ?</title>
+	<guid isPermaLink="true">https://blog.layus.be/posts/2020-09-01-nix-hashes.html</guid>
+	<link>https://blog.layus.be/posts/2020-09-01-nix-hashes.html</link>
+	<description>&lt;article&gt;
+    &lt;p&gt;They say there are two hard things in computing: cache invalidation and naming things. Alas, build systems fight against these two at the same time. Because caching build results is a central feature of most build systems, they are immediately concerned by cache invalidation issues. For naming things, it is less obvious. I used to understand the naming problem as related to concepts and source code variables. Finding the right name for a class, a function or a variable can be a real headache.&lt;/p&gt;
+&lt;p&gt;But it can also be difficult to generate a meaningful name for values manipulated by programs. Nix and a range of build systems have to forge unique and deterministic names for intermediate build results. These names are used as cache keys. In the case of Nix, the names are first class citizens as they are visible in the public store, in the form of store paths.&lt;/p&gt;
+&lt;p&gt;Did you ever wonder what’s in your Nix hashes? Or how they are computed? Two different projects led me to further investigate these questions. Implementing &lt;a href=&quot;https://github.com/haskell-Nix&quot;&gt;HNix&lt;/a&gt; store and shepherding the “Content addressed paths” &lt;a href=&quot;https://github.com/NixOS/rfcs/pull/62&quot;&gt;RFC #62&lt;/a&gt;. In both cases, understanding how path names (and the other hashes) are generated took some time. Here is what I learned.&lt;/p&gt;
+&lt;h2 id=&quot;store-path-hashes&quot;&gt;Store path hashes&lt;/h2&gt;
+&lt;p&gt;The most visible digests in Nix appears in store path names. Lets take for example a pinned version of &lt;code&gt;hello&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot;&gt;&lt;pre class=&quot;sourceCode nix&quot;&gt;&lt;code class=&quot;sourceCode bash&quot;&gt;&lt;span id=&quot;cb1-1&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;bu&quot;&gt;let&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb1-2&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-2&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;ex&quot;&gt;nixpkgs&lt;/span&gt; = import (builtins.fetchTarball {&lt;/span&gt;
+&lt;span id=&quot;cb1-3&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-3&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;ex&quot;&gt;url&lt;/span&gt; = &lt;span class=&quot;st&quot;&gt;&quot;https://github.com/nixos/nixpkgs/archive/c59ea8b8a0e7f927e7291c14ea6cd1bd3a16ff38.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;kw&quot;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb1-4&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-4&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;ex&quot;&gt;sha256&lt;/span&gt; = &lt;span class=&quot;st&quot;&gt;&quot;1ak7jqx94fjhc68xh1lh35kh3w3ndbadprrb762qgvcfb8351x8v&quot;&lt;/span&gt;&lt;span class=&quot;kw&quot;&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb1-5&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-5&quot;&gt;&lt;/a&gt;  }) {};&lt;/span&gt;
+&lt;span id=&quot;cb1-6&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-6&quot;&gt;&lt;/a&gt;&lt;span class=&quot;kw&quot;&gt;in&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb1-7&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-7&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;ex&quot;&gt;nixpkgs.hello&lt;/span&gt; # =&lt;span class=&quot;op&quot;&gt;&amp;gt;&lt;/span&gt; /nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Nix composes the hash part of the path by compressing to 32 base32 characters (160 bits or 20 bytes) a sha256 digest. Base32 encoding is unique to Nix. It uses digits and lower-case letters (except &lt;a href=&quot;https://discourse.nixos.org/t/no-hashes-starting-with-e-t-o-or-u-in-nix-store/4906/1&quot;&gt;EOUT&lt;/a&gt;) for a total of 32 characters valid in a file name. The result is more dense than base16 while avoiding the strange characters of base64 (&lt;code&gt;+&lt;/code&gt;, &lt;code&gt;/&lt;/code&gt;, &lt;code&gt;=&lt;/code&gt;) amongst which &lt;code&gt;/&lt;/code&gt; would create a lot of trouble in file names.&lt;/p&gt;
+&lt;p&gt;For example &lt;code&gt;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&lt;/code&gt; contains &lt;code&gt;&lt;b&gt;ab1pfk338f6g&lt;/b&gt;zpglsirxhvji4g9w558i&lt;/code&gt; which is the compression on 20 bytes of &lt;code&gt;0fqqilza6ifk0arlay18&lt;b&gt;ab1pfk338f6g&lt;/b&gt;zrpcb56pnaw245h8gv9r&lt;/code&gt;. Basically folding excess bits with xor. Notice how some characters are shared, as the input is so small that some of them are passed as-is.&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;pre&gt;&lt;code&gt;  ab1pfk338f6gzrpcb56pnaw245h8gv9r
+^             0fqqilza6ifk0arlay18
+  --------------------------------
+= ab1pfk338f6gzpglsirxhvji4g9w558i&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;The full (uncompressed) digest comes from hashing the string &lt;code&gt;output:out:sha256:5d4447675168bb44442f0d225ab8b50b7a67544f0ba2104dbf74926ff4df1d1e:/nix/store:hello-2.10&lt;/code&gt;. This string is a fingerprint of the important parts of that derivation. If any part changes, the hash will be different, and it will produce a different output path.&lt;/p&gt;
+&lt;p&gt;We can see four parts:&lt;/p&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;&lt;code&gt;output:out&lt;/code&gt; is the type of the fingerprint. Here we fingerprint something used for an output path. The output named &lt;code&gt;out&lt;/code&gt; in this case. Nix uses various types, and each expects different things in the remainder of the string.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sha256:5d4447675168bb44442f0d225ab8b50b7a67544f0ba2104dbf74926ff4df1d1e&lt;/code&gt; is the hash of the derivation building hello. As a hash it encompasses many things, and we will explore that further below.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/nix/store&lt;/code&gt; is the store prefix.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hello-2.10&lt;/code&gt; is the name of the derivation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Hashing the derivation is a tricky part. Nix store a lot of information about derivations. To read it, we can use &lt;code&gt;nix show-derivation&lt;/code&gt; on our &lt;code&gt;hello&lt;/code&gt; package.&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb3&quot;&gt;&lt;pre class=&quot;sourceCode json&quot;&gt;&lt;code class=&quot;sourceCode json&quot;&gt;&lt;span id=&quot;cb3-1&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-2&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-2&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;dt&quot;&gt;&quot;/nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-3&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-3&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;outputs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-4&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-4&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;&quot;path&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&quot;&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-5&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-5&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;},&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-6&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-6&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;inputSrcs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-7&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-7&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;inputDrvs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-8&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-8&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;/nix/store/fkz4j4zj7xaf1z1g0i29987dvvc3xxbv-hello-2.10.tar.gz.drv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-9&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-9&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;/nix/store/fsqdw7hjs2qdcy8qgcv5hnrajsr77xhc-bash-4.4-p23.drv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-10&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-10&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;/nix/store/q0kiricfc0gkwm1vy3j0svcq5jib4v1g-stdenv-linux.drv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-11&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-11&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;},&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-12&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-12&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;platform&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;x86_64-linux&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-13&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-13&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;builder&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/6737cq9nvp4k5r70qcgf61004r0l2g3v-bash-4.4-p23/bin/bash&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-14&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-14&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;-e&quot;&lt;/span&gt;&lt;span class=&quot;ot&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-15&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-15&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;env&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-16&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-16&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;hello-2.10&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-17&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-17&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-18&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-18&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/3x7dwzq014bblazs7kq20p9hyzz0qh8g-hello-2.10.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-19&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-19&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;stdenv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/50780gywsyjad8nxrf79q6qx7y7mqgal-stdenv-linux&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-20&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-20&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;[elided&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;brevity]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-21&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-21&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-22&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-22&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb3-23&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-23&quot;&gt;&lt;/a&gt;&lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;show-derivation&lt;/code&gt; pretty prints and reformats the content of the .drv file. The exact content of &lt;code&gt;/nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv&lt;/code&gt; is a nested structure starting with &lt;code&gt;&quot;Derive(&quot;&lt;/code&gt; and that’s why we will call it the &lt;em&gt;derive&lt;/em&gt; string. It is formatted as an &lt;a href=&quot;http://releases.strategoxt.org/strategoxt-manual/unstable/manual/chunk-chapter/stratego-terms.html#id3314115&quot;&gt;ATerm&lt;/a&gt; from the Stratego language. Curious readers will find more about this format in the related &lt;a href=&quot;http://lethalman.blogspot.com/2014/07/nix-pill-6-our-first-derivation.html&quot;&gt;nix pill&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;pre&gt;&lt;code&gt;$ cat /nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv
+Derive([(&quot;out&quot;,&quot;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&quot;,&quot;&quot;,&quot;&quot;)],[(&quot;/nix/store/fkz4j4zj7xaf1z1g0i29987dvvc3xxbv-hello-2.10.tar.gz.drv&quot;,[&quot;out&quot;]),(&quot;/nix/store/fsqdw7hjs2qdcy8qgcv5hnrajsr77xhc-bash-4.4-p23.drv&quot;,[&quot;out&quot;]),(&quot;/nix/store/q0kiricfc0gkwm1vy3j0svcq5jib4v1g-stdenv-linux.drv&quot;,[&quot;out&quot;])],[&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;],&quot;x86_64-linux&quot;,&quot;/nix/store/6737cq9nvp4k5r70qcgf61004r0l2g3v-bash-4.4-p23/bin/bash&quot;,[&quot;-e&quot;,&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;],[(&quot;buildInputs&quot;,&quot;&quot;),(&quot;builder&quot;,&quot;/nix/store/6737cq9nvp4k5r70qcgf61004r0l2g3v-bash-4.4-p23/bin/bash&quot;),(&quot;configureFlags&quot;,&quot;&quot;),(&quot;depsBuildBuild&quot;,&quot;&quot;),(&quot;depsBuildBuildPropagated&quot;,&quot;&quot;),(&quot;depsBuildTarget&quot;,&quot;&quot;),(&quot;depsBuildTargetPropagated&quot;,&quot;&quot;),(&quot;depsHostHost&quot;,&quot;&quot;),(&quot;depsHostHostPropagated&quot;,&quot;&quot;),(&quot;depsTargetTarget&quot;,&quot;&quot;),(&quot;depsTargetTargetPropagated&quot;,&quot;&quot;),(&quot;doCheck&quot;,&quot;1&quot;),(&quot;doInstallCheck&quot;,&quot;&quot;),(&quot;name&quot;,&quot;hello-2.10&quot;),(&quot;nativeBuildInputs&quot;,&quot;&quot;),(&quot;out&quot;,&quot;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&quot;),(&quot;outputs&quot;,&quot;out&quot;),(&quot;patches&quot;,&quot;&quot;),(&quot;pname&quot;,&quot;hello&quot;),(&quot;propagatedBuildInputs&quot;,&quot;&quot;),(&quot;propagatedNativeBuildInputs&quot;,&quot;&quot;),(&quot;src&quot;,&quot;/nix/store/3x7dwzq014bblazs7kq20p9hyzz0qh8g-hello-2.10.tar.gz&quot;),(&quot;stdenv&quot;,&quot;/nix/store/50780gywsyjad8nxrf79q6qx7y7mqgal-stdenv-linux&quot;),(&quot;strictDeps&quot;,&quot;&quot;),(&quot;system&quot;,&quot;x86_64-linux&quot;),(&quot;version&quot;,&quot;2.10&quot;)])&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;However, hashing this derive string directly does not yield the expected hash found above. (Do you recall the &lt;code&gt;sha256:5d4447675168bb44442f0d225ab8b50b7a67544f0ba2104dbf74926ff4df1d1e&lt;/code&gt; ?)&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-hash --flat --type sha256 /nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv
+40289ac3cc7d8896122c9a93ce580fb657aa29af6cf0a2bc4a30b3c53172ccf6&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;To understand where this hash comes from, it helps to understand other types of store objects. Let’s make a small detour to simpler paths.&lt;/p&gt;
+&lt;h2 id=&quot;text-files&quot;&gt;Text files&lt;/h2&gt;
+&lt;p&gt;Raw text files whose content is know by Nix without running any builder are named by a comparatively simpler scheme. Their name is a digest over both the content and the name of the path.&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-instantiate --eval --expr 'builtins.toFile &quot;file-name&quot; &quot;some content&quot;'
+/nix/store/gn48qr23kimj8iyh50jvffjx7335k9fz-file-name
+└── gn48qr23kimj8iyh50jvffjx7335k9fz
+    └── 0cl4lvq60bp9il749fyngn48qr23kimj8xalivaxf55lnp41s7h9
+        └── &quot;text:sha256:290f493c44f5d63d06b374d0a5abd292fae38b92cab2fae5efefe1b0e9347f56:/nix/store:file-name&quot;
+            └── 290f493c44f5d63d06b374d0a5abd292fae38b92cab2fae5efefe1b0e9347f56
+                └── &quot;some content&quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;The text format is also used by .drv files. But .drv files can depend on other .drv files. All the dependencies appear between the &lt;code&gt;text:&lt;/code&gt; and &lt;code&gt;:sha256&lt;/code&gt; part of the path description.&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;pre&gt;&lt;code&gt;/nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv
+└── 4pmrswlhqyclwpv12l1h7mr9qkfhpd1c
+    └── 1c3ws0r5wm3ydx1zijcf4pmrswlhqyclxvqxqlqmv0spmfgg6zd2
+        └── &quot;text:[... dependant .drv's  ...]:sha256:40289ac3cc7d8896122c9a93ce580fb657aa29af6cf0a2bc4a30b3c53172ccf6:/nix/store:hello-2.10.drv&quot;
+            └── 40289ac3cc7d8896122c9a93ce580fb657aa29af6cf0a2bc4a30b3c53172ccf6
+                └── &quot;Derive([(&quot;out&quot;,&quot;... [content of /nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv] ...&quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;All the different store path description strings are listed in &lt;a href=&quot;https://github.com/NixOS/nix/blob/691a1bd7179bcf88f2638c1b8574c81f61e20786/src/libstore/store-api.cc#L63-L140&quot;&gt;store-api.cc&lt;/a&gt;. We have already seen ‘text’ right now and ‘output’ before. The third type is ‘source’, for some well-behaved, content addressed paths.&lt;/p&gt;
+&lt;h2 id=&quot;hashing-modulo&quot;&gt;Hashing modulo&lt;/h2&gt;
+&lt;p&gt;Back to our initial &lt;code&gt;pkgs.hello&lt;/code&gt; store path. We were stuck at understanding the hash used there.&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;pre&gt;&lt;code&gt;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10
+└── ab1pfk338f6gzpglsirxhvji4g9w558i
+    └── 0fqqilza6ifk0arlay18ab1pfk338f6gzrpcb56pnaw245h8gv9r
+        └── &quot;output:out:sha256:5d4447675168bb44442f0d225ab8b50b7a67544f0ba2104dbf74926ff4df1d1e:/nix/store:hello-2.10&quot;
+            └── 5d4447675168bb44442f0d225ab8b50b7a67544f0ba2104dbf74926ff4df1d1e
+                └── ???&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Ideally, this would be the hash of the ‘derive’ string from the .drv. This is not the case because it would be impossible and undesirable. The impossibility comes from the fact that the output paths of a derivation are part of its ‘derive’ string. The loop needs to be broken somewhere. That is why the output paths are replaced with empty strings before hashing the ‘derive’ string used in output paths.&lt;/p&gt;
+&lt;p&gt;The other aspect comes from fixed-output paths. While the recipe to build them may vary (and hence their derive string) we would like to avoid propagating such changes to other derivations outputs. As fixed-output derivations can happen anywhere in the dependency tree, the process of replacing the hash of fixed-output derivations needs to be recursive. This is performed by &lt;code&gt;hashDerivationModulo()&lt;/code&gt; whose name hints that the hashing is made modulo the equivalence of recipes for the same fixed-output paths.&lt;/p&gt;
+&lt;p&gt;It means that instead of the former &lt;code&gt;nix show-derivation&lt;/code&gt; result, hashDerivationModulo ends up hashing a modified derive string.&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb9&quot;&gt;&lt;pre class=&quot;sourceCode json&quot;&gt;&lt;code class=&quot;sourceCode json&quot;&gt;&lt;span id=&quot;cb9-1&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-2&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-2&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;dt&quot;&gt;&quot;/nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv +mased +modulo&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-3&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-3&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;outputs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-4&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-4&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;&quot;path&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;masked&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-5&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-5&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;},&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-6&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-6&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;inputSrcs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-7&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-7&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;inputDrvs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-8&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-8&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;103f297b7051255f2b7c1cd9838ee978d6ba392fb6ae2a6112d5816279c4ed14&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&quot;cb9-9&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-9&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;hash&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;modulo&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;fixed-ouput&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;derivations&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;/nix/store/fsqdw7hjs2qdcy8qgcv5hnrajsr77xhc-bash-4.4-p23.drv&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-10&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-10&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;26f653058a4d742a815b4d3a3c0721bca16200ffc48c22d62b3eb54164560856&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-11&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-11&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;fixed&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;hash&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;fixed-ouptut&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;derivation&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;/nix/store/3x7dwzq014bblazs7kq20p9hyzz0qh8g-hello-2.10.tar.gz&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-12&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-12&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;hash&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;'fixed&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;er&quot;&gt;out:sha256:&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;31e066137&lt;/span&gt;&lt;span class=&quot;er&quot;&gt;a962676e89f69d1b65382de95a7ef7d914b8cb956f41ea72e0f516b:/nix/store/&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;er&quot;&gt;x7dwzq014bblazs7kq20p9hyzz0qh8g-hello&lt;/span&gt;&lt;span class=&quot;fl&quot;&gt;-2.10&lt;/span&gt;&lt;span class=&quot;er&quot;&gt;.tar.gz'&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-13&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-13&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;st&quot;&gt;&quot;a9365c39d2b7a2a8f2340da6e9814ca605f8dcefe4b49f5c44db7d9ed3bb031f&quot;&lt;/span&gt;&lt;span class=&quot;er&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-14&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-14&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;hash&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;modulo&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;fixed-output&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;derivations&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;/nix/store/q0kiricfc0gkwm1vy3j0svcq5jib4v1g-stdenv-linux.drv&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-15&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-15&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;},&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-16&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-16&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;platform&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;x86_64-linux&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-17&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-17&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;builder&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/6737cq9nvp4k5r70qcgf61004r0l2g3v-bash-4.4-p23/bin/bash&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-18&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-18&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;-e&quot;&lt;/span&gt;&lt;span class=&quot;ot&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-19&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-19&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;env&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-20&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-20&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;hello-2.10&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-21&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-21&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;masked&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-22&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-22&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/3x7dwzq014bblazs7kq20p9hyzz0qh8g-hello-2.10.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-23&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-23&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;stdenv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/50780gywsyjad8nxrf79q6qx7y7mqgal-stdenv-linux&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-24&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-24&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;[still&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;elided&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;brevity]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-25&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-25&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-26&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-26&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb9-27&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-27&quot;&gt;&lt;/a&gt;&lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&quot;recap&quot;&gt;Recap&lt;/h2&gt;
+&lt;p&gt;As we have seen, hashing in Nix is based on several concepts.&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;Description strings&lt;/dt&gt;
+&lt;dd&gt;starting with a type, and separated with colons. Highly recognisable. They describe uniquely a ressource. In practice, we never encounter them, as they are always hashed with sha256.
+&lt;/dd&gt;
+&lt;dt&gt;Hash compression&lt;/dt&gt;
+&lt;dd&gt;The hash appearing in path names is a folded version of full digests. Nix compresses the hash to 32 base32 characters.
+&lt;/dd&gt;
+&lt;dt&gt;Maksing&lt;/dt&gt;
+&lt;dd&gt;&lt;em&gt;Derive&lt;/em&gt; strings contain the output paths of the derivation. As these output paths are generated based on a digest of the derivation itself, we have to break the loop. Masking is the process of removing output paths from a &lt;em&gt;derive&lt;/em&gt; string before computing it’s hash.
+&lt;/dd&gt;
+&lt;dt&gt;Hashing modulo [other derivations]&lt;/dt&gt;
+&lt;dd&gt;Digests of derivations form a tree. Any change to a dependency’s &lt;em&gt;derive&lt;/em&gt; string will propagate to all the dependant .drv paths and output paths. But it makes little sense to propagate changes in the recipe (the &lt;em&gt;derive&lt;/em&gt; string) of a fixed output path. By definition, they will produce the same output regardless of their recipe. Nix computes output paths hashes on a tree of digests where fixed-output &lt;em&gt;derive&lt;/em&gt; strings are replaced by the fixed-output hash.
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;h2 id=&quot;practical-issues&quot;&gt;Practical issues&lt;/h2&gt;
+&lt;p&gt;So much for technical considerations. What is this useful for? The way hashes are computed constrains how they can be computed and generated.&lt;/p&gt;
+&lt;p&gt;In an HNix &lt;a href=&quot;https://github.com/haskell-nix/hnix-store/pull/59#discussion_r429582370-permalink&quot;&gt;discussion&lt;/a&gt;, I discovered that the Nix daemon has two API calls to build derivations.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;opBuildPaths&lt;/code&gt; is the most obvious one. It takes a list of pre-uploaded .drv files and triggers the build. Because a .drv depends on other .drv files, the full closure needs to be uploaded to the store upfront. In our example, that closure represents 280 .drv files to upload before starting the build. And &lt;code&gt;hello&lt;/code&gt; is a relatively small package. This can slow down build times in distributed remote building situation where the builder responsible for a package may not be the one that built its dependencies. The machine will have to download all the .drv files when all it really needs is the &lt;code&gt;hello&lt;/code&gt; .drv file and the build inputs paths.&lt;/p&gt;
+&lt;p&gt;That is why &lt;code&gt;opBuildDerivation&lt;/code&gt; was implemented. It takes all the information from a derivation and builds it. The input paths need to be uploaded beforehand, but nothing more. This nice feature come with a downside. As we have seen, the ouptut path of a derivation is computed with hashDerivationModulo, which requires the full closure of derivations to substitute the hashe of fixed-output ones. Without the closure, it is impossible for the builder to check the validity of an output path. That is why this API call is a privileged operation.&lt;/p&gt;
+&lt;p&gt;Allowing unprivileged builds without the .drv closure is not an easy feature. As Eelco Dolstra states in the &lt;a href=&quot;https://blog.layus.be/tags/1511aa9f488ba0762c2da0bf8ab61b5fde47305d&quot;&gt;commit introducing &lt;code&gt;opBuildDerivation&lt;/code&gt;&lt;/a&gt;, it would require changing the hashing scheme. And finding the right balance is complicated. Using a hash “without modulo” means that changing &lt;em&gt;how&lt;/em&gt; we build fixed-output derivations will propagate to all the package. Not hashing inputs makes it possible to obtain the same output path name for all the derivations that change only in their inputs. For example, updating gcc would not change our &lt;code&gt;hello&lt;/code&gt; output path. You could get different things under the same name. Not an option.&lt;/p&gt;
+&lt;p&gt;That sentence from Eelco Dolstra feels a bit like Fermat’s last theorem. While it seems to imply that there exists other hashing schemes, nothing is said about these schemes. Years later (the commit dates from 2015), the solution comes from a different angle. The long discussed, argued (and ultimately postponed) feature of a content-addressed store could bring builds without the .drv closure. Much like the proof of Fermat’s last theorem, the implementation of the content-addressed store comes long after the problem is sketched but, were it used only to solve that specific problem, would also feels like bringing an elephant to kill the mouse.&lt;/p&gt;
+&lt;h3 id=&quot;content-addressed-paths&quot;&gt;Content-addressed paths&lt;/h3&gt;
+&lt;p&gt;In the content-addressed store, output path names are not derived from their .drv, but from their content. Orthogonal changes to .drv files are not reflected in the name, and do not propagate. The name changes only if the content changes. The major downside is that output path names cannot be known before their content is made available. That’s why we need two names. On for the output path we want to build, and one for the actual content-addressed result.&lt;/p&gt;
+&lt;p&gt;In such a setup, there is no need anymore for &lt;code&gt;hashDerivationModulo&lt;/code&gt;. I tend to see &lt;code&gt;hashDerivationModulo&lt;/code&gt; as a hack, a workaround to limit useless rebuilds as much as possible without having to implement the content-addressed store in its full complexity. That hack served us well over the years, and content-addressed stores are not yet implemented.&lt;/p&gt;
+
+&lt;h2 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h2&gt;
+&lt;p&gt;There is already a lot in this article, but we did not cover everything. There are several ways to upload a content-addressed path to the store, and content-addressed paths can also depend on other content-addressed paths. There are other funny corner cases here and there. But overall, this sketches the idea behind Nix store paths generation, and gives an idea of how derivations and store paths interact.&lt;/p&gt;
+&lt;p&gt;I had to leave aside the detailed explanation of content-addressed stores, but this is perhaps not for long…&lt;/p&gt;
+&lt;p&gt;This blog is still lacking a proper way to leave comments, but I would be more than happy to receive remarks, comments, advices and praises by email, or by any other channel if you are willing to wait more.&lt;/p&gt;
+&lt;h2 id=&quot;some-more-stuff-a.k.a.-annexes&quot;&gt;Some more stuff (a.k.a. Annexes)&lt;/h2&gt;
+&lt;p&gt;Things that did not fit elsewhere.&lt;/p&gt;
+&lt;p&gt;A/ Python based hash compression.&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb10&quot;&gt;&lt;pre class=&quot;sourceCode python&quot;&gt;&lt;code class=&quot;sourceCode python&quot;&gt;&lt;span id=&quot;cb10-1&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;&quot;&quot;&quot; XORing directly in base32, thanks to python &quot;&quot;&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-2&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-2&quot;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-3&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-3&quot;&gt;&lt;/a&gt;h &lt;span class=&quot;op&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;0fqqilza6ifk0arlay18ab1pfk338f6gzrpcb56pnaw245h8gv9r&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-4&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-4&quot;&gt;&lt;/a&gt;key &lt;span class=&quot;op&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;0123456789abcdfghijklmnpqrsvwxyz&quot;&lt;/span&gt; &lt;span class=&quot;co&quot;&gt;# no e,o,u,t&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-5&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;# len(key) == 32&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-6&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-6&quot;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-7&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;kw&quot;&gt;def&lt;/span&gt; xor(a, b):&lt;/span&gt;
+&lt;span id=&quot;cb10-8&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-8&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;cf&quot;&gt;return&lt;/span&gt; key[key.index(a) &lt;span class=&quot;op&quot;&gt;^&lt;/span&gt; key.index(b)]&lt;/span&gt;
+&lt;span id=&quot;cb10-9&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;# xor('0', 'a') == 'a'&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-10&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-10&quot;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-11&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-11&quot;&gt;&lt;/a&gt;h1, h2 &lt;span class=&quot;op&quot;&gt;=&lt;/span&gt; h[&lt;span class=&quot;op&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;32&lt;/span&gt;:], &lt;span class=&quot;st&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;{:0&amp;gt;32}&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;&quot;&lt;/span&gt;.&lt;span class=&quot;bu&quot;&gt;format&lt;/span&gt;(h[:&lt;span class=&quot;op&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;32&lt;/span&gt;])&lt;/span&gt;
+&lt;span id=&quot;cb10-12&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-12&quot;&gt;&lt;/a&gt;res &lt;span class=&quot;op&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;&quot;&lt;/span&gt;.join(xor(h1[i],h2[i]) &lt;span class=&quot;cf&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;kw&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bu&quot;&gt;range&lt;/span&gt;(&lt;span class=&quot;dv&quot;&gt;32&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&quot;cb10-13&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-13&quot;&gt;&lt;/a&gt;&lt;span class=&quot;bu&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;st&quot;&gt;&quot;  &lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;{}&lt;/span&gt;&lt;span class=&quot;ch&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;^ &lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;{}&lt;/span&gt;&lt;span class=&quot;ch&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;  ---------------------------------&lt;/span&gt;&lt;span class=&quot;ch&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;{}&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;&quot;&lt;/span&gt;.&lt;span class=&quot;bu&quot;&gt;format&lt;/span&gt;(h1,h2,res))&lt;/span&gt;
+&lt;span id=&quot;cb10-14&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-14&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;# prints:&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-15&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-15&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-16&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;  ab1pfk338f6gzrpcb56pnaw245h8gv9r&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-17&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-17&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;^ 0000000000000fqqilza6ifk0arlay18&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-18&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-18&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;  ---------------------------------&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-19&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-19&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;= ab1pfk338f6gzpglsirxhvji4g9w558i&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb10-20&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-20&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;B/ Nix source code patch to trace digests being computed.&lt;/p&gt;
+&lt;div class=&quot;scroll-wrapper&quot;&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb11&quot;&gt;&lt;pre class=&quot;sourceCode diff&quot;&gt;&lt;code class=&quot;sourceCode diff&quot;&gt;&lt;span id=&quot;cb11-1&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;kw&quot;&gt;diff --git a/src/libutil/hash.cc b/src/libutil/hash.cc&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-2&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-2&quot;&gt;&lt;/a&gt;index 4a94f0dfd..b06a08c79 100644&lt;/span&gt;
+&lt;span id=&quot;cb11-3&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;dt&quot;&gt;--- a/src/libutil/hash.cc&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-4&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;dt&quot;&gt;+++ b/src/libutil/hash.cc&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-5&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;dt&quot;&gt;@@ -316,6 +316,15 @@ Hash hashString(HashType ht, std::string_view s)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-6&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-6&quot;&gt;&lt;/a&gt;     start(ht, ctx);&lt;/span&gt;
+&lt;span id=&quot;cb11-7&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-7&quot;&gt;&lt;/a&gt;     update(ht, ctx, (const unsigned char *) s.data(), s.length());&lt;/span&gt;
+&lt;span id=&quot;cb11-8&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-8&quot;&gt;&lt;/a&gt;     finish(ht, ctx, hash.hash);&lt;/span&gt;
+&lt;span id=&quot;cb11-9&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+    if (s.length() &amp;gt; 500 &amp;amp;&amp;amp; s.data()[0] != 'D') {&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-10&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-10&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;Hashing %d characters with '%s'&quot;, s.length(), ht);&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-11&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-11&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;base32: %s&quot;, hash.to_string(Base32, true));&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-12&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-12&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+    } else {&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-13&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-13&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;Hashing '%s' with '%s'&quot;, s, ht);&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-14&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-14&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;base16: %s&quot;, hash.to_string(Base16, true));&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-15&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-15&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;base32: %s&quot;, hash.to_string(Base32, true));&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-16&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;base64: %s&quot;, hash.to_string(Base64, true));&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-17&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-17&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+    }&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-18&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-18&quot;&gt;&lt;/a&gt;     return hash;&lt;/span&gt;
+&lt;span id=&quot;cb11-19&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-19&quot;&gt;&lt;/a&gt; }&lt;/span&gt;
+&lt;span id=&quot;cb11-20&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-20&quot;&gt;&lt;/a&gt; &lt;/span&gt;
+&lt;span id=&quot;cb11-21&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-21&quot;&gt;&lt;/a&gt;&lt;span class=&quot;dt&quot;&gt;@@ -380,6 +389,7 @@ Hash compressHash(const Hash &amp;amp; hash, unsigned int newSize)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-22&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-22&quot;&gt;&lt;/a&gt;     h.hashSize = newSize;&lt;/span&gt;
+&lt;span id=&quot;cb11-23&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-23&quot;&gt;&lt;/a&gt;     for (unsigned int i = 0; i &amp;lt; hash.hashSize; ++i)&lt;/span&gt;
+&lt;span id=&quot;cb11-24&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-24&quot;&gt;&lt;/a&gt;         h.hash[i % newSize] ^= hash.hash[i];&lt;/span&gt;
+&lt;span id=&quot;cb11-25&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-25&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+    warn(&quot;Compressed '%s' to size %d: '%s'&quot;, hash.to_string(Base32, false), newSize, h.to_string(Base32, false));&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&quot;cb11-26&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-26&quot;&gt;&lt;/a&gt;     return h;&lt;/span&gt;
+&lt;span id=&quot;cb11-27&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-27&quot;&gt;&lt;/a&gt; }&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;C/ The full log of hashes generated for out &lt;code&gt;pkgs.hello&lt;/code&gt; example with the above logging patch is available on &lt;a href=&quot;https://gist.github.com/551fcccf4ddc1a851bc818ad2d21f8fb&quot;&gt;gist&lt;/a&gt;.&lt;/p&gt;
+&lt;/article&gt;</description>
+	<pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
 </item>
 <item>
 	<title>nixbuild.net: nixbuild.net is Generally Available</title>
@@ -962,457 +1415,6 @@ When you push store paths to Cachix, querying cache.nixos.org adds overhead of m
 Queries to cache.nixos.org are also cached, so that subsequent push operations do not have the overhead.</description>
 	<pubDate>Tue, 28 Jul 2020 14:30:00 +0000</pubDate>
 	<author>support@cachix.org (Domen Kožar)</author>
-</item>
-<item>
-	<title>Cachix: Documentation and More Documentation</title>
-	<guid isPermaLink="true">https://blog.cachix.org/posts/2020-07-20-documentation-and-more-documentation/</guid>
-	<link>https://blog.cachix.org/posts/2020-07-20-documentation-and-more-documentation/</link>
-	<description>Documentation is an important ingredient of a successful software project.
-Last few weeks I’ve worked on improving status quo on two fronts:
-1) https://nix.dev is an opinionated guide for developers getting things done using the Nix ecosystem.
-A few highlights:
- Getting started repository template with a tutorial for using declarative and reproducible developer environments
- Setting up GitHub Actions with Nix
- Nix language anti-patterns to avoid and recommended alternatives</description>
-	<pubDate>Mon, 20 Jul 2020 14:45:00 +0000</pubDate>
-	<author>support@cachix.org (Domen Kožar)</author>
-</item>
-<item>
-	<title>Tweag I/O: Setting up Buildkite for Nix-based projects using Terraform and GCP</title>
-	<guid isPermaLink="true">https://tweag.io/blog/2020-07-08-buildkite-for-nix-ci/</guid>
-	<link>https://tweag.io/blog/2020-07-08-buildkite-for-nix-ci/</link>
-	<description>&lt;p&gt;In this post I’m going to show how to setup, with Terraform, a Buildkite-based CI using your
-own workers that run on GCP. For reference, the complete
-Terraform configuration for this post is available in &lt;a href=&quot;https://github.com/tweag/blog-resources/tree/master/buildkite-for-nix-ci&quot;&gt;this
-repository&lt;/a&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The setup gives you complete control on how fast your worker are.&lt;/li&gt;
-&lt;li&gt;The workers come with Nix pre-installed, so you won’t need to spend
-time downloading the same docker container again and again on every
-push as would usually happen with most cloud CI providers.&lt;/li&gt;
-&lt;li&gt;The workers come with a distributed Nix cache set up. So
-authors of CI scripts won’t have to bother about caching at all.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Secrets&lt;/h2&gt;
-&lt;p&gt;We are going to need to import two &lt;a href=&quot;https://www.tweag.io/posts/2019-04-03-terraform-provider-secret.html&quot;&gt;secret resources&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-hcl&quot;&gt;&lt;code class=&quot;language-hcl&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;resource &lt;span class=&quot;token type variable&quot;&gt;&quot;secret_resource&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite_agent_token&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;resource &lt;span class=&quot;token type variable&quot;&gt;&quot;secret_resource&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;nix_signing_key&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To initialize the resources, execute the following from the root directory of your project:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;$ terraform &lt;span class=&quot;token function&quot;&gt;import&lt;/span&gt; secret_resource.&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;name&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;value&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;where:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;buildkite_agent_token&lt;/code&gt; is obtained from the &lt;a href=&quot;https://buildkite.com&quot;&gt;Buildkite site&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;nix_signing_key&lt;/code&gt; can be generated by running:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;nix-store --generate-binary-cache-key &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;your-key-name&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; key.private key.public&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;key.private&lt;/code&gt; file will contain the value for the signing key. I’ll
-explain later in the post how to use the contents of the &lt;code class=&quot;language-text&quot;&gt;key.public&lt;/code&gt;
-file.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Custom NixOS image&lt;/h2&gt;
-&lt;p&gt;The next step is to use the &lt;a href=&quot;https://github.com/tweag/terraform-nixos/tree/master/google_image_nixos_custom&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;nixos_image_custom&lt;/code&gt;&lt;/a&gt;
-module to create a NixOS image with custom configuration.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-hcl&quot;&gt;&lt;code class=&quot;language-hcl&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;resource &lt;span class=&quot;token type variable&quot;&gt;&quot;google_storage_bucket&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;nixos_image&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;name&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite-nixos-image-bucket-name&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;EU&quot;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;module&lt;span class=&quot;token type variable&quot;&gt; &quot;nixos_image_custom&quot; &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;source&lt;/span&gt;      &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;git::https://github.com/tweag/terraform-nixos.git//google_image_nixos_custom?ref=40fedb1fae7df5bd7ad9defdd71eb06b7252810f&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;bucket_name&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;google_storage_bucket&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nixos_image&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;nixos_config&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token type variable&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;/nixos-config.nix&quot;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The snippet above first creates a bucket &lt;code class=&quot;language-text&quot;&gt;nixos_image&lt;/code&gt; where the generated
-image will be uploaded, then it uses the &lt;code class=&quot;language-text&quot;&gt;nixos_image_custom&lt;/code&gt; module, which
-handles generation of the image using the configuration from the
-&lt;code class=&quot;language-text&quot;&gt;nixos-config.nix&lt;/code&gt; file. The file is assumed to be in the same directory as
-the Terraform configuration, hence &lt;code class=&quot;language-text&quot;&gt;${path.module}/&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Service account and cache bucket&lt;/h2&gt;
-&lt;p&gt;To control access to different resources we will also need a service
-account:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-hcl&quot;&gt;&lt;code class=&quot;language-hcl&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;resource &lt;span class=&quot;token type variable&quot;&gt;&quot;google_service_account&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite_agent&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;account_id&lt;/span&gt;   &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite-agent&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;display_name&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Buildkite agent&quot;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;We can use it to set access permissions for the storage bucket that will contain the
-Nix cache:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-hcl&quot;&gt;&lt;code class=&quot;language-hcl&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;resource &lt;span class=&quot;token type variable&quot;&gt;&quot;google_storage_bucket&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;nix_cache_bucket&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;name&lt;/span&gt;     &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;nix-cache-bucket-name&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;EU&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;force_destroy&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
-  &lt;span class=&quot;token keyword&quot;&gt;retention_policy&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;retention_period&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;7889238&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# three months&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;resource &lt;span class=&quot;token type variable&quot;&gt;&quot;google_storage_bucket_iam_member&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite_nix_cache_writer&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;bucket&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;google_storage_bucket&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nix_cache_bucket&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;role&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;roles/storage.objectAdmin&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;member&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;serviceAccount:&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;google_service_account&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;buildkite_agent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;email&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;resource &lt;span class=&quot;token type variable&quot;&gt;&quot;google_storage_bucket_iam_member&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite_nix_cache_reader&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;bucket&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;google_storage_bucket&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nix_cache_bucket&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;role&lt;/span&gt;   &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;roles/storage.objectViewer&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;member&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;allUsers&quot;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The bucket is configured to automatically delete objects that are older than
-3 months. We give the service account the ability to write to and read from
-the bucket (the &lt;code class=&quot;language-text&quot;&gt;roles/storage.objectAdmin&lt;/code&gt; role). The rest of the world
-gets the ability to read from the bucket (the &lt;code class=&quot;language-text&quot;&gt;roles/storage.objectViewer&lt;/code&gt;
-role).&lt;/p&gt;
-&lt;h2&gt;NixOS configuration&lt;/h2&gt;
-&lt;p&gt;Here is the content of my &lt;code class=&quot;language-text&quot;&gt;nixos-config.nix&lt;/code&gt;. This NixOS configuration
-can serve as a starting point for writing your own. The numbered
-points refer to the notes below.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; modulesPath&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; pkgs&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  imports &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token antiquotation variable&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;modulesPath&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;/virtualisation/google-compute-image.nix&quot;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  virtualisation&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;googleComputeImage&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;diskSize &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  virtualisation&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;docker&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;enable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-  services &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    buildkite&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;agents&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;agent &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-      enable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-      extraConfig &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;''
-      tags-from-gcp=true
-      ''&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-      tags &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-        os &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;nixos&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-        nix &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-      tokenPath &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;/run/keys/buildkite-agent-token&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (1)&lt;/span&gt;
-      runtimePackages &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; pkgs&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-        bash
-        curl
-        gcc
-        gnutar
-        gzip
-        ncurses
-        nix
-        python3
-        xz
-        &lt;span class=&quot;token comment&quot;&gt;# (2) extend as necessary&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-    nix&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;store&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;gcs&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;proxy &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-      nix&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;cache&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;bucket&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (3)&lt;/span&gt;
-        address &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;localhost:3000&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-  nix &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    binaryCaches &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;token string&quot;&gt;&quot;https://cache.nixos.org/&quot;&lt;/span&gt;
-      &lt;span class=&quot;token string&quot;&gt;&quot;https://storage.googleapis.com/nix-cache-bucket-name&quot;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (4)&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-    binaryCachePublicKeys &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;token string&quot;&gt;&quot;cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=&quot;&lt;/span&gt;
-      &lt;span class=&quot;token string&quot;&gt;&quot;&amp;lt;insert your public signing key here&amp;gt;&quot;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (5)&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-    extraOptions &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;''
-      post-build-hook = /etc/nix/upload-to-cache.sh # (6)
-    ''&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-  security&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;sudo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;enable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  services&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;openssh&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;passwordAuthentication &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  security&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;sudo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;wheelNeedsPassword &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Notes:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;This file will be created later by the startup script (see below).&lt;/li&gt;
-&lt;li&gt;The collection of packages that are available to the Buildkite script can
-be edited here.&lt;/li&gt;
-&lt;li&gt;Replace &lt;code class=&quot;language-text&quot;&gt;nix-cache-bucket-name&lt;/code&gt; by the name of the bucket used for the
-Nix cache.&lt;/li&gt;
-&lt;li&gt;Similarly to (3) replace &lt;code class=&quot;language-text&quot;&gt;nix-cache-bucket-name&lt;/code&gt; in the URL.&lt;/li&gt;
-&lt;li&gt;Insert the contents of the &lt;code class=&quot;language-text&quot;&gt;key.public&lt;/code&gt; file you generated earlier.&lt;/li&gt;
-&lt;li&gt;The file will be created later by the startup script.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Compute instances and startup script&lt;/h2&gt;
-&lt;p&gt;The following snippet sets up an instance group manager which controls
-multiple (3 in this example) Buildkite agents. The numbered
-points refer to the notes below.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-hcl&quot;&gt;&lt;code class=&quot;language-hcl&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;data &lt;span class=&quot;token type variable&quot;&gt;&quot;template_file&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite_nixos_startup&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (1)&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;${path.module}/files/buildkite_nixos_startup.sh&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-
-  &lt;span class=&quot;token property&quot;&gt;vars&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;buildkite_agent_token&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;secret_resource&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;buildkite_agent_token&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;nix_signing_key&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;secret_resource&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nix_signing_key&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;resource &lt;span class=&quot;token type variable&quot;&gt;&quot;google_compute_instance_template&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite_nixos&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;name_prefix&lt;/span&gt;  &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite-nixos-&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;machine_type&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;n1-standard-8&quot;&lt;/span&gt;
-
-  &lt;span class=&quot;token keyword&quot;&gt;disk&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;boot&lt;/span&gt;         &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;disk_size_gb&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;source_image&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token type variable&quot;&gt;nixos_image_custom&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;self_link&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;token property&quot;&gt;metadata_startup_script&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token type variable&quot;&gt;template_file&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;buildkite_nixos_startup&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;rendered&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-
-  &lt;span class=&quot;token keyword&quot;&gt;network_interface&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;network&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;default&quot;&lt;/span&gt;
-
-    &lt;span class=&quot;token property&quot;&gt;access_config&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;token keyword&quot;&gt;metadata&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;enable-oslogin&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;token keyword&quot;&gt;service_account&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;google_service_account&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;buildkite_agent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;email&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-
-    &lt;span class=&quot;token property&quot;&gt;scopes&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;token string&quot;&gt;&quot;compute-ro&quot;&lt;/span&gt;,
-      &lt;span class=&quot;token string&quot;&gt;&quot;logging-write&quot;&lt;/span&gt;,
-      &lt;span class=&quot;token string&quot;&gt;&quot;storage-rw&quot;&lt;/span&gt;,
-    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;token keyword&quot;&gt;scheduling&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;automatic_restart&lt;/span&gt;   &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;on_host_maintenance&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;TERMINATE&quot;&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;preemptible&lt;/span&gt;         &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (2)&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;token keyword&quot;&gt;lifecycle&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;create_before_destroy&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;token keyword&quot;&gt;resource &lt;span class=&quot;token type variable&quot;&gt;&quot;google_compute_instance_group_manager&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite_nixos&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;provider&lt;/span&gt;           &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;google-beta&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;name&lt;/span&gt;               &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite-nixos&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;base_instance_name&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite-nixos&quot;&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;target_size&lt;/span&gt;        &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;3&quot;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (3)&lt;/span&gt;
-  &lt;span class=&quot;token property&quot;&gt;zone&lt;/span&gt;               &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&amp;lt;your-zone&amp;gt;&quot;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (4)&lt;/span&gt;
-
-  &lt;span class=&quot;token keyword&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;name&lt;/span&gt;              &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;buildkite_nixos&quot;&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;instance_template&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;google_compute_instance_template&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;buildkite_nixos&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;self_link&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;token keyword&quot;&gt;update_policy&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;type&lt;/span&gt;                  &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;PROACTIVE&quot;&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;minimal_action&lt;/span&gt;        &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;REPLACE&quot;&lt;/span&gt;
-    &lt;span class=&quot;token property&quot;&gt;max_unavailable_fixed&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Notes:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;The file &lt;code class=&quot;language-text&quot;&gt;files/buildkite_nixos_startup.sh&lt;/code&gt; is shown below.&lt;/li&gt;
-&lt;li&gt;Because of the remote Nix cache, the nodes can be preemptible
-(short-lived, never lasting longer than 24 hours), which results in much
-lower GCP costs.&lt;/li&gt;
-&lt;li&gt;Changing &lt;code class=&quot;language-text&quot;&gt;target_size&lt;/code&gt; allows you to scale the system. This is the number
-of instances that are controlled by the instance group manager.&lt;/li&gt;
-&lt;li&gt;Insert your desired zone here.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Finally, here is the startup script:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# workaround https://github.com/NixOS/nixpkgs/issues/42344&lt;/span&gt;
-&lt;span class=&quot;token function&quot;&gt;chown&lt;/span&gt; root:keys /run/keys
-&lt;span class=&quot;token function&quot;&gt;chmod&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;750&lt;/span&gt; /run/keys
-&lt;span class=&quot;token builtin class-name&quot;&gt;umask&lt;/span&gt; 037
-&lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;${buildkite_agent_token}&lt;/span&gt;&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; /run/keys/buildkite-agent-token
-&lt;span class=&quot;token function&quot;&gt;chown&lt;/span&gt; root:keys /run/keys/buildkite-agent-token
-&lt;span class=&quot;token builtin class-name&quot;&gt;umask&lt;/span&gt; 077
-&lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;'&lt;span class=&quot;token variable&quot;&gt;${nix_signing_key}&lt;/span&gt;'&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; /run/keys/nix_signing_key
-&lt;span class=&quot;token function&quot;&gt;chown&lt;/span&gt; root:keys /run/keys/nix-signing-key
-
-&lt;span class=&quot;token function&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;EOF &lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; /etc/nix/upload-to-cache.sh
-&lt;span class=&quot;token comment&quot;&gt;#!/bin/sh&lt;/span&gt;
-
-&lt;span class=&quot;token builtin class-name&quot;&gt;set&lt;/span&gt; -eu
-&lt;span class=&quot;token builtin class-name&quot;&gt;set&lt;/span&gt; -f &lt;span class=&quot;token comment&quot;&gt;# disable globbing&lt;/span&gt;
-&lt;span class=&quot;token builtin class-name&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token assign-left variable&quot;&gt;&lt;span class=&quot;token environment constant&quot;&gt;IFS&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;' '&lt;/span&gt;
-
-&lt;span class=&quot;token builtin class-name&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Uploading paths&quot;&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;$OUT_PATHS&lt;/span&gt;
-&lt;span class=&quot;token builtin class-name&quot;&gt;exec&lt;/span&gt; nix copy --to http://localhost:3000?secret-key&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;/run/keys/nix_signing_key &lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;$OUT_PATHS&lt;/span&gt;
-EOF
-&lt;span class=&quot;token function&quot;&gt;chmod&lt;/span&gt; +x /etc/nix/upload-to-cache.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This script uses the Nix &lt;a href=&quot;https://www.tweag.io/posts/2019-11-21-untrusted-ci.html&quot;&gt;post build hook&lt;/a&gt; approach for
-uploading to the cache without polluting the CI script.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;The setup allows us to run Nix builds in an environment where Nix tooling is
-available. It also provides a remote Nix cache which does not require
-that the
-authors of CI scripts set it up or, even, be aware of it at all. We use this setup on
-many of Tweag’s projects and found that both mental and performance overheads are
-minimal. A typical CI script looks like this:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-yaml&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Build and test
-    &lt;span class=&quot;token key atrule&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; nix&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;build &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;A distributed&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;closure &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;no&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;out&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;link&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Builds with up-to-date cache that does not cause re-builds may finish in
-literally 1 second.&lt;/p&gt;</description>
-	<pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
-</item>
-<item>
-	<title>Tweag I/O: Nix Flakes, Part 2: Evaluation caching</title>
-	<guid isPermaLink="true">https://tweag.io/blog/2020-06-25-eval-cache/</guid>
-	<link>https://tweag.io/blog/2020-06-25-eval-cache/</link>
-	<description>&lt;p&gt;Nix evaluation is often quite slow. In this blog post, we’ll have a
-look at a nice advantage of the hermetic evaluation model enforced by
-flakes: the ability to cache evaluation results reliably. For a short
-introduction to flakes, see our &lt;a href=&quot;https://www.tweag.io/blog/2020-05-25-flakes/&quot;&gt;previous blog post&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Why Nix evaluation is slow&lt;/h2&gt;
-&lt;p&gt;Nix uses a simple, interpreted, purely functional language to describe
-package dependency graphs and NixOS system configurations. So to get
-any information about those things, Nix first needs to &lt;em&gt;evaluate&lt;/em&gt; a
-substantial Nix program. This involves parsing potentially thousands
-of .nix files and running a Turing-complete language.&lt;/p&gt;
-&lt;p&gt;For example, the command &lt;code class=&quot;language-text&quot;&gt;nix-env -qa&lt;/code&gt; shows you which packages are
-available in Nixpkgs. But this is quite slow and takes a lot of memory:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;token bash language-bash&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;time&lt;/span&gt; nix-env -qa &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;wc&lt;/span&gt; -l&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token output&quot;&gt;5.09user 0.49system 0:05.59elapsed 99%CPU (0avgtext+0avgdata 1522792maxresident)k
-28012&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Evaluating individual packages or configurations can also be slow. For
-example, using &lt;code class=&quot;language-text&quot;&gt;nix-shell&lt;/code&gt; to enter a development environment for
-&lt;a href=&quot;https://github.com/NixOS/hydra&quot;&gt;Hydra&lt;/a&gt;, we have to wait a bit, even
-if all dependencies are present in the Nix store:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;token bash language-bash&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;time&lt;/span&gt; nix-shell --command &lt;span class=&quot;token string&quot;&gt;'exit 0'&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token output&quot;&gt;1.34user 0.18system 0:01.69elapsed 89%CPU (0avgtext+0avgdata 434808maxresident)k&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;That might be okay for occasional use but a wait of one or more
-seconds may well be unacceptably slow in scripts.&lt;/p&gt;
-&lt;p&gt;Note that the evaluation overhead is completely independent from the
-time it takes to actually build or download a package or
-configuration. If something is already present in the Nix store, Nix
-won’t build or download it again. But it still needs to re-evaluate
-the Nix files to determine &lt;em&gt;which&lt;/em&gt; Nix store paths are needed.&lt;/p&gt;
-&lt;h2&gt;Caching evaluation results&lt;/h2&gt;
-&lt;p&gt;So can’t we speed things up by &lt;em&gt;caching&lt;/em&gt; evaluation results? After
-all, the Nix language is purely functional, so it seems that
-re-evaluation should produce the same result, every time. Naively,
-maybe we can keep a cache that records that attribute A of file X
-evaluates to derivation D (or whatever metadata we want to cache).
-Unfortunately, it’s not that simple; cache invalidation is, after all,
-one of the &lt;a href=&quot;https://martinfowler.com/bliki/TwoHardThings.html&quot;&gt;only two hard problems in computer
-science&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The reason this didn’t work is that in the past Nix evaluation was not
-&lt;em&gt;hermetic&lt;/em&gt;. For example, a &lt;code class=&quot;language-text&quot;&gt;.nix&lt;/code&gt; file can import other Nix files
-through relative or absolute paths (such as
-&lt;code class=&quot;language-text&quot;&gt;~/.config/nixpkgs/config.nix&lt;/code&gt; for Nixpkgs) or by looking them up in
-the Nix search path (&lt;code class=&quot;language-text&quot;&gt;$NIX_PATH&lt;/code&gt;). So unless we perfectly keep track
-of &lt;em&gt;all&lt;/em&gt; the files used during evaluation, a cached result might be
-inconsistent with the current input.&lt;/p&gt;
-&lt;p&gt;(As an aside: for a while, Nix has had an experimental replacement for
-&lt;code class=&quot;language-text&quot;&gt;nix-env -qa&lt;/code&gt; called &lt;code class=&quot;language-text&quot;&gt;nix search&lt;/code&gt;, which used an ad hoc cache for
-package metadata. It had exactly this cache invalidation problem: it
-wasn’t smart enough to figure out whether its cache was up to date
-with whatever revision of Nixpkgs you were using. So it had a manual
-flag &lt;code class=&quot;language-text&quot;&gt;--update-cache&lt;/code&gt; to allow the user to force cache invalidation.)&lt;/p&gt;
-&lt;h2&gt;Flakes to the rescue&lt;/h2&gt;
-&lt;p&gt;Flakes solve this problem by ensuring fully hermetic evaluation. When
-you evaluate an output attribute of a particular flake (e.g. the
-attribute &lt;code class=&quot;language-text&quot;&gt;defaultPackage.x86_64-linux&lt;/code&gt; of the &lt;code class=&quot;language-text&quot;&gt;dwarffs&lt;/code&gt; flake), Nix
-disallows access to any files outside that flake or its
-dependencies. It also disallows impure or platform-dependent features
-such as access to environment variables or the current system type.&lt;/p&gt;
-&lt;p&gt;This allows the &lt;code class=&quot;language-text&quot;&gt;nix&lt;/code&gt; command to aggressively cache evaluation results
-without fear of cache invalidation problems. Let’s see this in action
-by running Firefox from the &lt;code class=&quot;language-text&quot;&gt;nixpkgs&lt;/code&gt; flake. If we do this with an
-empty evaluation cache, Nix needs to evaluate the entire dependency
-graph of Firefox, which takes a quarter of a second:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ command time nix shell nixpkgs#firefox -c firefox --version
-Mozilla Firefox 75.0
-0.26user 0.05system 0:00.39elapsed 82%CPU (0avgtext+0avgdata 115224maxresident)k&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;But if we do it again, it’s almost instantaneous (and takes less
-memory):&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$ command time nix shell nixpkgs#firefox -c firefox --version
-Mozilla Firefox 75.0
-0.01user 0.01system 0:00.03elapsed 93%CPU (0avgtext+0avgdata 25840maxresident)k&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The cache is implemented using a simple SQLite database that stores the
-values of flake output attributes. After the first command above, the
-cache looks like this:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;token bash language-bash&quot;&gt;sqlite3 ~/.cache/nix/eval-cache-v1/302043eedfbce13ecd8169612849f6ce789c26365c9aa0e6cfd3a772d746e3ba.sqlite .dump&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token output&quot;&gt;PRAGMA foreign_keys=OFF;
-BEGIN TRANSACTION;
-CREATE TABLE Attributes (
-    parent      integer not null,
-    name        text,
-    type        integer not null,
-    value       text,
-    primary key (parent, name)
-);
-INSERT INTO Attributes VALUES(0,'',0,NULL);
-INSERT INTO Attributes VALUES(1,'packages',3,NULL);
-INSERT INTO Attributes VALUES(1,'legacyPackages',0,NULL);
-INSERT INTO Attributes VALUES(3,'x86_64-linux',0,NULL);
-INSERT INTO Attributes VALUES(4,'firefox',0,NULL);
-INSERT INTO Attributes VALUES(5,'type',2,'derivation');
-INSERT INTO Attributes VALUES(5,'drvPath',2,'/nix/store/7mz8pkgpl24wyab8nny0zclvca7ki2m8-firefox-75.0.drv');
-INSERT INTO Attributes VALUES(5,'outPath',2,'/nix/store/5x1i2gp8k95f2mihd6aj61b5lydpz5dy-firefox-75.0');
-INSERT INTO Attributes VALUES(5,'outputName',2,'out');
-COMMIT;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In other words, the cache stores all the attributes that &lt;code class=&quot;language-text&quot;&gt;nix shell&lt;/code&gt;
-had to evaluate, in particular
-&lt;code class=&quot;language-text&quot;&gt;legacyPackages.x86_64-linux.firefox.{type,drvPath,outPath,outputName}&lt;/code&gt;. It
-also stores negative lookups, that is, attributes that don’t exist
-(such as &lt;code class=&quot;language-text&quot;&gt;packages&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;The name of the SQLite database, &lt;code class=&quot;language-text&quot;&gt;302043eedf….sqlite&lt;/code&gt; in this example,
-is derived from the contents of the top-level flake. Since the flake’s
-lock file contains content hashes of all dependencies, this is enough
-to efficiently and completely capture all files that might influence
-the evaluation result. (In the future, we’ll optimise this a bit more:
-for example, if the flake is a Git repository, we can simply use the
-Git revision as the cache name.)&lt;/p&gt;
-&lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;nix search&lt;/code&gt; command has been updated to use the new evaluation
-cache instead of its previous ad hoc cache. For example, searching for
-Blender is slow the first time:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;token bash language-bash&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;time&lt;/span&gt; nix search nixpkgs blender&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token output&quot;&gt;* legacyPackages.x86_64-linux.blender (2.82a)
-  3D Creation/Animation/Publishing System
-5.55user 0.63system 0:06.17elapsed 100%CPU (0avgtext+0avgdata 1491912maxresident)k&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;but the second time it is pretty fast and uses much less memory:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-shell-session&quot;&gt;&lt;code class=&quot;language-shell-session&quot;&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token shell-symbol important&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;token bash language-bash&quot;&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;time&lt;/span&gt; nix search nixpkgs blender&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token output&quot;&gt;* legacyPackages.x86_64-linux.blender (2.82a)
-  3D Creation/Animation/Publishing System
-0.41user 0.00system 0:00.42elapsed 99%CPU (0avgtext+0avgdata 21100maxresident)k&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The evaluation cache at this point is about 10.9 MiB in size. The
-overhead for creating the cache is fairly modest: with the flag
-&lt;code class=&quot;language-text&quot;&gt;--no-eval-cache&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;nix search nixpkgs blender&lt;/code&gt; takes 4.9 seconds.&lt;/p&gt;
-&lt;h2&gt;Caching and store derivations&lt;/h2&gt;
-&lt;p&gt;There is only one way in which cached results can become “stale”, in a
-way. Nix evaluation produces store derivations such as
-&lt;code class=&quot;language-text&quot;&gt;/nix/store/7mz8pkgpl24wyab8nny0zclvca7ki2m8-firefox-75.0.drv&lt;/code&gt; as a
-side effect. (&lt;code class=&quot;language-text&quot;&gt;.drv&lt;/code&gt; files are essentially a serialization of the
-dependency graph of a package.) These store derivations may be
-garbage-collected. In that case, the evaluation cache points to a path
-that no longer exists. Thus, Nix checks whether the &lt;code class=&quot;language-text&quot;&gt;.drv&lt;/code&gt; file still
-exist, and if not, falls back to evaluating normally.&lt;/p&gt;
-&lt;h2&gt;Future improvements&lt;/h2&gt;
-&lt;p&gt;Currently, the evaluation cache is only created and used
-locally. However, Nix could automatically &lt;em&gt;download&lt;/em&gt; precomputed
-caches, similar to how it has a binary cache for the contents of store
-paths. That is, if we need a cache like &lt;code class=&quot;language-text&quot;&gt;302043eedf….sqlite&lt;/code&gt;, we could
-first check if it’s available on &lt;code class=&quot;language-text&quot;&gt;cache.nixos.org&lt;/code&gt; and if so fetch it
-from there. In this way, when we run a command such as &lt;code class=&quot;language-text&quot;&gt;nix shell nixpkgs#firefox&lt;/code&gt;, we could even avoid the need to fetch the actual
-source of the flake!&lt;/p&gt;
-&lt;p&gt;Another future improvement is to populate and use the cache in the
-evaluator itself. Currently the cache is populated and cached in the
-user interface (that is, the &lt;code class=&quot;language-text&quot;&gt;nix&lt;/code&gt; command). The command &lt;code class=&quot;language-text&quot;&gt;nix shell nixpkgs#firefox&lt;/code&gt; will create a cache entry for &lt;code class=&quot;language-text&quot;&gt;firefox&lt;/code&gt;, but not for
-the dependencies of &lt;code class=&quot;language-text&quot;&gt;firefox&lt;/code&gt;; thus a subsequent &lt;code class=&quot;language-text&quot;&gt;nix shell nixpkgs#thunderbird&lt;/code&gt; won’t see a speed improvement even though it
-shares most of its dependencies. So it would be nice if the evaluator
-had knowledge of the evaluation cache. For example, the evaluation of
-thunks that represent attributes like
-&lt;code class=&quot;language-text&quot;&gt;nixpkgs.legacyPackages.x86_64-linux.&amp;lt;package name&amp;gt;&lt;/code&gt; could check and
-update the cache.&lt;/p&gt;
-&lt;h2&gt;Nix Flakes Series&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.tweag.io/../2020-05-25-flakes&quot;&gt;Part 1: An introduction and tutorial&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Part 2: Evaluation caching&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.tweag.io/../2020-07-31-nixos-flakes&quot;&gt;Part 3: Managing NixOS systems&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description>
-	<pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
 </item>
 
 </channel>
