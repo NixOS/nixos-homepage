@@ -31,59 +31,57 @@
 
 <section class="download-nix">
   <div>
-    <div class="tabs-navigation">
+    <p>
+      Below you will find installation instructions for Nix, the package manager.
+    </p>
+    <article>
+      <h2><span>1.</span>Quick install</h2>
       <p>
-        Below you will find installation instructions for Nix, the package manager.
+        The quickest way to install Nix is to open a terminal and run the following
+        command (as a user other than <code>root</code> with <code>sudo</code> permission):
       </p>
-      <article>
-        <h2>Quick install</h2>
-        <p>
-          The quickest way to install Nix is to open a terminal and run the following
-          command (as a user other than <code>root</code> with <code>sudo</code> permission):
-        </p>
-        <pre class="terminal-console">
+      <pre class="terminal-console">
 <span class="shell-prompt">$ </span>curl -L https://nixos.org/nix/install | sh</pre>
-        <p>Make sure to follow the instructions output by the script.</p>
-        <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
-      </article>
-      <article>
-        <h2>Verify installation (GPG)</h2>
-        <p>You may want to verify the integrity of the installation script using GPG:</p>
-        <pre class="terminal-console">
+      <p>Make sure to follow the instructions output by the script.</p>
+      <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
+    </article>
+    <article>
+      <h2><span>2.</span>Verify installation</h2>
+      <p>You may want to verify the integrity of the installation script using GPG:</p>
+      <pre class="terminal-console">
 <span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install
 <span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc
 <span cls="shell-prompt">$ </span>gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE
 <span cls="shell-prompt">$ </span>gpg2 --verify ./install-nix-[%latestNixVersion%].asc
 <span cls="shell-prompt">$ </span>sh ./install-nix-[%latestNixVersion%]</pre>
-        <p>
-          The <a href="[%root%]edolstra.gpg">signing key</a> has fingerprint
-          <code>B541 D553 0127 0E0B CF15 CA5D 8170 B472 6D71 98DE</code>.
-          It is also available
-          <a href="https://github.com/NixOS/nixos-homepage/blob/master/edolstra.gpg">on GitHub</a>.
-        </p>
-      </article>
-      <article>
-        <h2>Uninstall</h2>
-        <p>
-          You can uninstall Nix simply by running <code>rm -rf /nix</code>.
-        </p>
-        <!-- TODO: expand this https://github.com/NixOS/nix/issues/1402 -->
-      </article>
-      <article>
-        <h2>More ...</h2>
-        <p>The following release items are also available:</p>
-        <ul>
-          <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a></li>
-          <li><a href="[%nixManual%]#sec-relnotes">Release notes</a></li>
-          <li>
-            <a href="[%nixManual%]">Manual</a>.
-            Please read the <a href="[%nixManual%]#chap-quick-start">“Quick Start” section of the manual</a>
-            for an overview of how to install and use Nix.
-          </li>
-          <li>Old releases are <a href="https://releases.nixos.org/?prefix=nix">also available</a>.</li>
-        </ul>
-      </article>
-    </div>
+      <p>
+        The <a href="[%root%]edolstra.gpg">signing key</a> has fingerprint
+        <code>B541 D553 0127 0E0B CF15 CA5D 8170 B472 6D71 98DE</code>.
+        It is also available
+        <a href="https://github.com/NixOS/nixos-homepage/blob/master/edolstra.gpg">on GitHub</a>.
+      </p>
+    </article>
+    <article>
+      <h2><span>3.</span>Uninstall</h2>
+      <p>
+        You can uninstall Nix simply by running <code>rm -rf /nix</code>.
+      </p>
+      <!-- TODO: expand this https://github.com/NixOS/nix/issues/1402 -->
+    </article>
+    <article>
+      <h2><span>4.</span>More ...</h2>
+      <p>The following release items are also available:</p>
+      <ul>
+        <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a></li>
+        <li><a href="[%nixManual%]#sec-relnotes">Release notes</a></li>
+        <li>
+          <a href="[%nixManual%]">Manual</a>.
+          Please read the <a href="[%nixManual%]#chap-quick-start">“Quick Start” section of the manual</a>
+          for an overview of how to install and use Nix.
+        </li>
+        <li>Old releases are <a href="https://releases.nixos.org/?prefix=nix">also available</a>.</li>
+      </ul>
+    </article>
   </div>
 </section>
 

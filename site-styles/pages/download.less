@@ -51,6 +51,27 @@
 .download-nixos {
   & > div {
     #container();
+
+    margin-top: 3*@gutter;
     margin-bottom: 3*@gutter;
+
+    h2 {
+      color: #theme.color[blue-dark2];
+      background: #theme.color[blue-lighter];
+      padding: 1.5*@gutter;
+      border-radius: 1.5*@gutter;
+      font-size: 150%;
+      span {
+        color: #theme.color[white];
+        background: #theme.color[green];
+        width: 3*@gutter;
+        display: inline-block;
+        margin-right: 1*@gutter;
+        height: 3*@gutter;
+        padding: 0.75*@gutter;
+        border-radius: 2*@gutter;
+        text-align: center;
+      }
+    }
   }
 }
