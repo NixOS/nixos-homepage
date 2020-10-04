@@ -96,34 +96,34 @@ $(function () {
   });
 
   // Tabs navigation
-  $(".tabs-navigation").each(function () {
-    var $tabview = $(this);
-    var $links = $tabview.children("nav").find("a");
+  //$(".tabs-navigation").each(function () {
+  //  var $tabview = $(this);
+  //  var $links = $tabview.children("nav").find("a");
 
-    var $panes = $tabview.children("div").children();
-    $panes.hide();
-    $($panes[0]).show();
-    $($links[0]).addClass("-active")
+  //  var $panes = $tabview.children("div").children();
+  //  $panes.hide();
+  //  $($panes[0]).show();
+  //  $($links[0]).addClass("-active")
 
-    $links.each(function () {
-      $(this).click(function (event) {
-        var href = $(this).attr("href");
-        var $pane = $(href);
-        $links.removeClass("-active");
-        $(this).addClass("-active")
-        $panes.hide();
-        $pane.show();
+  //  $links.each(function () {
+  //    $(this).click(function (event) {
+  //      var href = $(this).attr("href");
+  //      var $pane = $(href);
+  //      $links.removeClass("-active");
+  //      $(this).addClass("-active")
+  //      $panes.hide();
+  //      $pane.show();
 
-        // This looks dumb, but if we don't override the native behaviour we
-        // get scrolled just past the tabs...
-        // So no scroll, and we control the URL.
-        if (!$$synthetic) {
-          history.pushState(null, null, href);
-        }
-        event.preventDefault();
-      });
-    });
-  });
+  //      // This looks dumb, but if we don't override the native behaviour we
+  //      // get scrolled just past the tabs...
+  //      // So no scroll, and we control the URL.
+  //      if (!$$synthetic) {
+  //        history.pushState(null, null, href);
+  //      }
+  //      event.preventDefault();
+  //    });
+  //  });
+  //});
 
   // Terrible days counter
   $(".countdown-timer").each(function () {
