@@ -98,46 +98,55 @@ $(function () {
   // Tabs navigation
   $(".tabs-navigation").each(function () {
     var $tabview = $(this);
-    var $links = $tabview.children("article").find("h2");
+    var $links = $("article > h2", $tabview);
+    var $desktopLinks = $("<ul>");
 
     $links.each(function () {
       var $link = $(this);
 
+      // clone and append link to navigation
+      $newLink = $("<a href=\"#\"/>");
+      $newLink.on("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $thisLink = $(this);
+
+        // unselect all selected navigation buttons
+        $(".selected", $thisLink.parents("ul")).removeClass("selected");
+
+        // select the link you clicked on
+        $thisLink.parent().addClass("selected");
+
+        // hide all content
+        $("article", $tabview).hide();
+
+        // show the content of the link you clicked on
+        $link.parents("article").show();
+      });
+      $desktopLinks.append($link.clone()
+                                .wrapInner($newLink)
+                                .wrapInner("<li/>")
+                                .children());
+
       // append plus/minus button the header (for mobile)
-      var link_botton = $("<a href=\"#\"/>");
-      link_botton.on("click", function (e) {
+      var $toggleButton = $("<a href=\"#\"/>");
+      $toggleButton.on("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
         $link.parent().toggleClass("visible");
       });
-      $link.append(link_botton);
+      $link.append($toggleButton);
 
-      $link.parent().addClass("enabled");
     });
 
-  //  var $panes = $tabview.children("div").children();
-  //  $panes.hide();
-  //  $($panes[0]).show();
-  //  $($links[0]).addClass("-active")
+    $("nav", $tabview).children().remove();
+    $("nav", $tabview).append($desktopLinks);
 
-  //  $links.each(function () {
-  //    $(this).click(function (event) {
-  //      var href = $(this).attr("href");
-  //      var $pane = $(href);
-  //      $links.removeClass("-active");
-  //      $(this).addClass("-active")
-  //      $panes.hide();
-  //      $pane.show();
+    // mark that javascript was enabled
+    $tabview.addClass("js-enabled");
 
-  //      // This looks dumb, but if we don't override the native behaviour we
-  //      // get scrolled just past the tabs...
-  //      // So no scroll, and we control the URL.
-  //      if (!$$synthetic) {
-  //        history.pushState(null, null, href);
-  //      }
-  //      event.preventDefault();
-  //    });
-  //  });
+    // select the first one
+    $("nav > ul > li > a", $tabview).first().click();
   });
 
   // Terrible days counter

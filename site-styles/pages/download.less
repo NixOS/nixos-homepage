@@ -52,72 +52,8 @@
 
 .download-nix,
 .download-nixos {
-  & > div {
-    #container();
+  #container();
 
-    margin-top: 2*@gutter;
-    margin-bottom: 3*@gutter;
-
-    h2 {
-      color: #theme.color[blue-dark2];
-      background: #theme.color[blue-lighter];
-      padding: 1.5*@gutter;
-      border-radius: 1.5*@gutter;
-      font-size: 150%;
-      line-height: 3*@gutter;
-      span {
-        color: #theme.color[white];
-        background: #theme.color[green];
-        width: 3*@gutter;
-        display: inline-block;
-        margin-right: 1*@gutter;
-        height: 3*@gutter;
-        padding: 0.75*@gutter;
-        border-radius: 2*@gutter;
-        text-align: center;
-        line-height: 1.6*@gutter;
-      }
-      a {
-        color: #theme.color[white];
-        background: #theme.color[blue-light];
-        float: right;
-        width: 2*@gutter;
-        height: 2*@gutter;
-        padding: 0;
-        margin: 0;
-        margin-top: 0.5*@gutter;
-        border: 0;
-        text-align: center;
-        line-height: 2*@gutter;
-        border-radius: 1*@gutter;
-      }
-    }
-
-    article.enabled {
-      & > * {
-        display: none;
-        margin-left: 1*@gutter;
-        margin-right: 1*@gutter;
-      }
-      & > ul {
-        margin-left: 2*@gutter;
-      }
-      &.visible {
-        & > * {
-          display: block;
-        }
-        h2 > a:before {
-          content: "-";
-        }
-      }
-      h2 {
-        display: block;
-        margin-left: 0;
-        margin-right: 0;
-        & > a:before {
-          content: "+";
-        }
-      }
-    }
-  }
+  margin-top: 2*@gutter;
+  margin-bottom: 3*@gutter;
 }
