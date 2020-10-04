@@ -30,7 +30,7 @@
 </section>
 
 <section class="download-nix">
-  <div>
+  <div class="tabs-navigation">
     <p>
       Below you will find installation instructions for Nix, the package manager.
     </p>
@@ -109,114 +109,111 @@
 </section>
 
 <section class="download-nixos">
-  <div>
-    <div class="tabs-navigation">
-      <p>
-        Below you will find installation instructions for NixOS, the Linux
-        distribution.
-      </p>
-      <article>
-        <h2>ISO image</h2>
-        <p>You can install NixOS on physical hardware by burning one of the CD
-          images onto a blank CD/DVD disk, or <a
-            href="https://nixos.org/nixos/manual/index.html#sec-booting-from-usb">by
-            copying it onto a USB stick</a>. For <strong>installation
-            instructions</strong>, please see the <a href="[%nixosManual%]">manual</a>.</p>
+  <div class="tabs-navigation">
+    <p>
+      Below you will find installation instructions for NixOS, the Linux
+      distribution.
+    </p>
+    <article>
+      <h2>ISO image</h2>
+      <p>You can install NixOS on physical hardware by burning one of the CD
+        images onto a blank CD/DVD disk, or <a href="https://nixos.org/nixos/manual/index.html#sec-booting-from-usb">by
+          copying it onto a USB stick</a>. For <strong>installation
+          instructions</strong>, please see the <a href="[%nixosManual%]">manual</a>.</p>
 
-        <aside class="notice-box -warning">
-          Please note that NixOS at the moment lacks a nice, user-friendly
-          graphical installer. Therefore this form of installation may not be
-          suitable for novice Linux users.
-        </aside>
+      <aside class="notice-box -warning">
+        Please note that NixOS at the moment lacks a nice, user-friendly
+        graphical installer. Therefore this form of installation may not be
+        suitable for novice Linux users.
+      </aside>
 
-        <p>The <strong>graphical installation CD</strong> contains the NixOS
-          installer as well as the KDE Desktop and several applications. It’s a
-          <em>live CD</em>, so it allows you to get an impression of NixOS (and
-          the Nix package manager) without installing it.</p>
+      <p>The <strong>graphical installation CD</strong> contains the NixOS
+        installer as well as the KDE Desktop and several applications. It’s a
+        <em>live CD</em>, so it allows you to get an impression of NixOS (and
+        the Nix package manager) without installing it.</p>
 
-        [% prefix = "https://channels.nixos.org/nixos-" _ latestNixOSSeries %]
+      [% prefix = "https://channels.nixos.org/nixos-" _ latestNixOSSeries %]
 
-        <ul>
-          <li>
-            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a
-              href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso.sha256">SHA-256</a>)
-            <span class="label -info">Recommended for most users</span>
-          </li>
-        </ul>
+      <ul>
+        <li>
+          <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a
+            href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso.sha256">SHA-256</a>)
+          <span class="label -info">Recommended for most users</span>
+        </li>
+      </ul>
 
-        <p>The <strong>minimal installation CD</strong> does not contain the
-          graphical user interface, and is therefore a lot smaller. You have to run
-          the installer from the console. It contains a number of rescue tools.</p>
+      <p>The <strong>minimal installation CD</strong> does not contain the
+        graphical user interface, and is therefore a lot smaller. You have to run
+        the installer from the console. It contains a number of rescue tools.</p>
 
-        <ul>
-          <li><a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Minimal installation CD, 64-bit
-              Intel/AMD</a>
-            (<a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso.sha256">SHA-256</a>)</li>
-          <li><a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso">Minimal installation CD, 32-bit Intel/AMD</a>
-            (<a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso.sha256">SHA-256</a>)</li>
-        </ul>
-      </article>
-      <article>
-        <h2>VirtualBox</h2>
-        <p>This is a demo appliance for VirtualBox (in OVA format) that has
-          X11 and Plasma 5 enabled, as well as the VirtualBox guest additions. To
-          use it, download the OVA file, open VirtualBox, run “File → Import
-          Appliance” from the menu, select the OVA file, and click “Import”.
-          You can then start the virtual machine. When the KDE login screen
-          appears, you can log in as <strong>user <code>demo</code></strong>,
-          <strong>password <code>demo</code></strong>. To obtain a root shell, run
-          <code>sudo -i</code> in the KDE terminal (<code>konsole</code>).</p>
+      <ul>
+        <li><a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Minimal installation CD, 64-bit
+            Intel/AMD</a>
+          (<a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso.sha256">SHA-256</a>)</li>
+        <li><a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso">Minimal installation CD, 32-bit Intel/AMD</a>
+          (<a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso.sha256">SHA-256</a>)</li>
+      </ul>
+    </article>
+    <article>
+      <h2>VirtualBox</h2>
+      <p>This is a demo appliance for VirtualBox (in OVA format) that has
+        X11 and Plasma 5 enabled, as well as the VirtualBox guest additions. To
+        use it, download the OVA file, open VirtualBox, run “File → Import
+        Appliance” from the menu, select the OVA file, and click “Import”.
+        You can then start the virtual machine. When the KDE login screen
+        appears, you can log in as <strong>user <code>demo</code></strong>,
+        <strong>password <code>demo</code></strong>. To obtain a root shell, run
+        <code>sudo -i</code> in the KDE terminal (<code>konsole</code>).</p>
 
-        <ul>
-          <li><a href="[%prefix%]/latest-nixos-x86_64-linux.ova">VirtualBox appliance, 64-bit Intel/AMD</a> (<a
-              href="[%prefix%]/latest-nixos-x86_64-linux.ova.sha256">SHA-256</a>)</li>
-        </ul>
-      </article>
-      <article>
-        <h2>Amazon EC2</h2>
-        <p>If you are an EC2 user, you can deploy a NixOS instance instantly
-          in your preferred region by using one of the AMIs listed below.</p>
+      <ul>
+        <li><a href="[%prefix%]/latest-nixos-x86_64-linux.ova">VirtualBox appliance, 64-bit Intel/AMD</a> (<a
+            href="[%prefix%]/latest-nixos-x86_64-linux.ova.sha256">SHA-256</a>)</li>
+      </ul>
+    </article>
+    <article>
+      <h2>Amazon EC2</h2>
+      <p>If you are an EC2 user, you can deploy a NixOS instance instantly
+        in your preferred region by using one of the AMIs listed below.</p>
 
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Region</th>
-                <th>Root storage</th>
-                <th>Virtualisation</th>
-                <th>AMI</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              [% amis = JSON.Escape.json_decode(IO.All.new(nixosAmis).all).$latestNixOSSeries %]
-              [% FOREACH region IN amis.keys.sort %]
-              [% FOREACH type IN amis.$region.keys.sort; ami = amis.$region.$type %]
-              <tr>
-                <td><code>[% region %]</code></td>
-                <td>[% IF type.search("ebs"); THEN; "EBS"; ELSE; "Instance"; END; %]</td>
-                <td>[% IF type.search("hvm"); THEN; "Hardware"; ELSE; "Para"; END; %]</td>
-                <td><code>[% ami %]</code></td>
-                <td><a href="https://console.aws.amazon.com/ec2/home?region=[%region%]#launchAmi=[%ami%]"
-                    class="btn btn-primary btn-mini">Launch</a></td>
-              </tr>
-              [% END %]
-              [% END %]
-            </tbody>
-          </table>
-        </div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Region</th>
+              <th>Root storage</th>
+              <th>Virtualisation</th>
+              <th>AMI</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            [% amis = JSON.Escape.json_decode(IO.All.new(nixosAmis).all).$latestNixOSSeries %]
+            [% FOREACH region IN amis.keys.sort %]
+            [% FOREACH type IN amis.$region.keys.sort; ami = amis.$region.$type %]
+            <tr>
+              <td><code>[% region %]</code></td>
+              <td>[% IF type.search("ebs"); THEN; "EBS"; ELSE; "Instance"; END; %]</td>
+              <td>[% IF type.search("hvm"); THEN; "Hardware"; ELSE; "Para"; END; %]</td>
+              <td><code>[% ami %]</code></td>
+              <td><a href="https://console.aws.amazon.com/ec2/home?region=[%region%]#launchAmi=[%ami%]"
+                  class="btn btn-primary btn-mini">Launch</a></td>
+            </tr>
+            [% END %]
+            [% END %]
+          </tbody>
+        </table>
+      </div>
 
-        <p>You can create an instance using the AWS Management Console by
-          clicking one of the Launch buttons. You can also create an instance
-          from the command line. For example, to create an instance in region
-          <code>[% region = "eu-west-1"; type = "hvm-ebs"; ami = amis.$region.$type; region %]</code>
-          using the EC2 API tools, just
-          run:</p>
+      <p>You can create an instance using the AWS Management Console by
+        clicking one of the Launch buttons. You can also create an instance
+        from the command line. For example, to create an instance in region
+        <code>[% region = "eu-west-1"; type = "hvm-ebs"; ami = amis.$region.$type; region %]</code>
+        using the EC2 API tools, just
+        run:</p>
 
-        <pre class="terminal-console">
+      <pre class="terminal-console">
 $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre>
-      </article>
-    </div>
+    </article>
   </div>
 </section>
 

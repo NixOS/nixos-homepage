@@ -96,9 +96,24 @@ $(function () {
   });
 
   // Tabs navigation
-  //$(".tabs-navigation").each(function () {
-  //  var $tabview = $(this);
-  //  var $links = $tabview.children("nav").find("a");
+  $(".tabs-navigation").each(function () {
+    var $tabview = $(this);
+    var $links = $tabview.children("article").find("h2");
+
+    $links.each(function () {
+      var $link = $(this);
+
+      // append plus/minus button the header (for mobile)
+      var link_botton = $("<a href=\"#\"/>");
+      link_botton.on("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $link.parent().toggleClass("visible");
+      });
+      $link.append(link_botton);
+
+      $link.parent().addClass("enabled");
+    });
 
   //  var $panes = $tabview.children("div").children();
   //  $panes.hide();
@@ -123,7 +138,7 @@ $(function () {
   //      event.preventDefault();
   //    });
   //  });
-  //});
+  });
 
   // Terrible days counter
   $(".countdown-timer").each(function () {
