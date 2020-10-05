@@ -95,34 +95,104 @@ $(function () {
     });
   });
 
-  // Tabs navigation
-  $(".tabs-navigation").each(function () {
-    var $tabview = $(this);
-    var $links = $tabview.children("nav").find("a");
+  /*
+   * Amazon region selection
+   */
+  $(".download-amazon").each(function () {
+    var $root = $(this);
+    var amazonUrl = $(".download-buttons a", $root).attr("href");
+    var selectRegion = function () {
+      $(".selected", $root).removeClass("selected");
+      var region = $("select", $root).val();
+      var ami = $("#" + region, $root)
+        .addClass("selected")
+        .find("code").text();
+      $(".download-buttons a", $root)
+        .attr("href", amazonUrl + "?region=" + region + "#launchAmi=" + ami);
+    };
+    $("select", $root).on("change", selectRegion);
+    selectRegion();
+  });
 
-    var $panes = $tabview.children("div").children();
-    $panes.hide();
-    $($panes[0]).show();
-    $($links[0]).addClass("-active")
+  /* `.collapse` component
+   *
+   * Read documentation at ../site-styles/components/collapse.less
+   */
+  $(".collapse").each(function () {
+    var $collapse = $(this);
+    var sectionName = $collapse.parents("section").attr("class") + "-";
+    var $titles = $("div > article > h2", $collapse);
+    var $navItems = $("<ul>");
 
-    $links.each(function () {
-      $(this).click(function (event) {
-        var href = $(this).attr("href");
-        var $pane = $(href);
-        $links.removeClass("-active");
-        $(this).addClass("-active")
-        $panes.hide();
-        $pane.show();
+    $titles.each(function () {
+      var $link = $(this);
+      var articleId = "collapse-article-" + sectionName + $link.text()
+        .replace(".", "-")
+        .replace(" ", "-")
+        .toLowerCase();
+
+      // clone and append link to navigation
+      var $navLink = $("<a href=\"#" + articleId + "\"/>").on("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $this = $(this);
+
+        // unselect all selected navigation buttons
+        $(".selected", $this.parents("ul")).removeClass("selected");
+
+        // select the link you clicked on
+        $this.parent().addClass("selected");
+
+        // hide all content
+        $("article", $collapse).removeClass("selected");
+
+        // show the content of the link you clicked on
+        $link.parents("article").addClass("selected");
 
         // This looks dumb, but if we don't override the native behaviour we
         // get scrolled just past the tabs...
         // So no scroll, and we control the URL.
         if (!$$synthetic) {
-          history.pushState(null, null, href);
+          history.pushState(null, null, $this.attr('href'));
         }
-        event.preventDefault();
       });
+      var $navItem = $link
+        .clone()
+        .wrapInner($navLink)
+        .wrapInner("<li/>")
+        .children();
+      $navItems.append($navItem);
+
+      // Wrap h2 title with a link which points to the article
+      $link.wrap($("<a class=\"article-title\" href=\"#" + articleId + "\"/> "));
+      $link.parent().on("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $link.parents("article").toggleClass("selected");
+        // This looks dumb, but if we don't override the native behaviour we
+        // get scrolled just past the tabs...
+        // So no scroll, and we control the URL.
+        if (!$$synthetic) {
+          history.pushState(null, null, $(this).attr('href'));
+        }
+      });
+
+      // add linkId to the article
+      $link.parents("article").attr("id", articleId);
     });
+
+    // prepend the "desktop" navigation
+    $nav = $("<nav/>");
+    $collapse.prepend($nav);
+    $nav.append($navItems);
+
+    // mark that javascript was enabled
+    $collapse.addClass("enabled");
+
+    // select the first one when not in url
+    if (!window.location.hash.startsWith("#collapse-article-" + sectionName)) {
+      $("nav > ul > li > a", $collapse).first().click();
+    }
   });
 
   // Terrible days counter
@@ -181,7 +251,7 @@ $(function () {
   // or opening the relevant pane.
   var handleNavigation = function(event) {
     $$synthetic = true;
-    $("[href='"+window.location.hash+"']").click()
+    $("[href='"+window.location.hash+"']:visible").click()
     $$synthetic = false;
   };
   window.onpopstate = handleNavigation;

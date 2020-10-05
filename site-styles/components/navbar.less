@@ -60,9 +60,6 @@ body > header {
   // This ends up being replaced by the logo.
   h1 {
     font-size: 1.2em;
-    #rules-for-responsive-navbar-narrow({
-      padding-left: @gutter;
-    });
   }
 
   // NixOS-specific customization of the navbar brand.
@@ -288,7 +285,7 @@ body > header {
     top: @_gutter;
     right: @_gutter;
 
-    background-color: #theme.color[white];
+    background-color: #theme.color[blue-light];
     box-shadow: none;
     border-radius: #theme.common[radius]/2;
     border: 2*@unit solid #theme.color[blue-light];
@@ -301,9 +298,9 @@ body > header {
     &::before, &::after {
       content: "";
       position: absolute;
-      left:  @gutter * 0.8;
-      right: @gutter * 0.8;
-      border: 2*@unit solid #theme.color[blue-light];
+      left:  @gutter * 1.0;
+      right: @gutter * 1.0;
+      border: 4*@unit solid #theme.color[white];
       border-left: 0;
       border-right: 0;
     }

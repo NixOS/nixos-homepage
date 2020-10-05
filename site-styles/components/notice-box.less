@@ -1,7 +1,7 @@
 .notice-box {
   margin-bottom: @gutter;
   border-radius: #theme.common[radius];
-  padding: @gutter;
+  padding: 1.5*@gutter;
   overflow: auto;
 
   & > :first-child {
@@ -9,9 +9,11 @@
   }
 
   &.-info {
+    color: #theme.color[blue-dark];
     background: #theme.color[blue-lighter];
   }
   &.-warning {
-    background-color: #theme.color[yellow];
+    color: #theme.color[orange-dark];
+    background-color: #theme.color[orange-light];
   }
 }
