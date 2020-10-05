@@ -111,45 +111,60 @@ $(function () {
         .replace(" ", "-")
         .toLowerCase();
 
+      // clone and append link to navigation
+      var $navLink = $("<a href=\"#\"/>").on("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $this = $(this);
 
-      //// clone and append link to navigation
-      //$newLink = $("<a href=\"#\"/>");
-      //$newLink.on("click", function (e) {
-      //  e.preventDefault();
-      //  e.stopPropagation();
-      //  var $thisLink = $(this);
+        // unselect all selected navigation buttons
+        $(".selected", $this.parents("ul")).removeClass("selected");
 
-      //  // unselect all selected navigation buttons
-      //  $(".selected", $thisLink.parents("ul")).removeClass("selected");
+        // select the link you clicked on
+        $this.parent().addClass("selected");
 
-      //  // select the link you clicked on
-      //  $thisLink.parent().addClass("selected");
+        // hide all content
+        $("article", $collapse).removeClass("selected");
 
-      //  // hide all content
-      //  $("article", $collapse).removeClass("selected");
+        // show the content of the link you clicked on
+        $link.parents("article").addClass("selected");
 
-      //  // show the content of the link you clicked on
-      //  $link.parents("article").addClass("selected");
-      //});
-      //$navItems.append($link.clone()
-      //                          .wrapInner($newLink)
-      //                          .wrapInner("<li/>")
-      //                          .children());
+        // This looks dumb, but if we don't override the native behaviour we
+        // get scrolled just past the tabs...
+        // So no scroll, and we control the URL.
+        if (!$$synthetic) {
+          history.pushState(null, null, $this.attr('href'));
+        }
+      });
+      var $navItem = $link
+        .clone()
+        .wrapInner($navLink)
+        .wrapInner("<li/>")
+        .children();
+      $navItems.append($navItem);
 
       // Wrap h2 title with a link which points to the article
-      $link.wrap($("<a href=\"#" + articleId + "\"/> "));
+      $link.wrap($("<a class=\"article-title\" href=\"#" + articleId + "\"/> "));
       $link.parent().on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
         $link.parents("article").toggleClass("selected");
+        // This looks dumb, but if we don't override the native behaviour we
+        // get scrolled just past the tabs...
+        // So no scroll, and we control the URL.
+        if (!$$synthetic) {
+          history.pushState(null, null, $(this).attr('href'));
+        }
       });
 
       // add linkId to the article
       $link.parents("article").attr("id", articleId);
     });
 
-    $("nav", $collapse).children().remove();
-    $("nav", $collapse).append($navItems);
+    // prepend the "desktop" navigation
+    $nav = $("<nav/>");
+    $collapse.prepend($nav);
+    $nav.append($navItems);
 
     // mark that javascript was enabled
     $collapse.addClass("enabled");
@@ -214,7 +229,7 @@ $(function () {
   // or opening the relevant pane.
   var handleNavigation = function(event) {
     $$synthetic = true;
-    $("[href='"+window.location.hash+"']").click()
+    $("[href='"+window.location.hash+"']:visible").click()
     $$synthetic = false;
   };
   window.onpopstate = handleNavigation;
