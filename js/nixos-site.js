@@ -106,47 +106,53 @@ $(function () {
 
     $titles.each(function () {
       var $link = $(this);
+      var articleId = "collapse-article-" + $link.text()
+        .replace(".", "-")
+        .replace(" ", "-")
+        .toLowerCase();
 
-      // clone and append link to navigation
-      $newLink = $("<a href=\"#\"/>");
-      $newLink.on("click", function (e) {
+
+      //// clone and append link to navigation
+      //$newLink = $("<a href=\"#\"/>");
+      //$newLink.on("click", function (e) {
+      //  e.preventDefault();
+      //  e.stopPropagation();
+      //  var $thisLink = $(this);
+
+      //  // unselect all selected navigation buttons
+      //  $(".selected", $thisLink.parents("ul")).removeClass("selected");
+
+      //  // select the link you clicked on
+      //  $thisLink.parent().addClass("selected");
+
+      //  // hide all content
+      //  $("article", $collapse).removeClass("selected");
+
+      //  // show the content of the link you clicked on
+      //  $link.parents("article").addClass("selected");
+      //});
+      //$navItems.append($link.clone()
+      //                          .wrapInner($newLink)
+      //                          .wrapInner("<li/>")
+      //                          .children());
+
+      // Wrap h2 title with a link which points to the article
+      $link.wrap($("<a href=\"#" + articleId + "\"/> "));
+      $link.parent().on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        var $thisLink = $(this);
-
-        // unselect all selected navigation buttons
-        $(".selected", $thisLink.parents("ul")).removeClass("selected");
-
-        // select the link you clicked on
-        $thisLink.parent().addClass("selected");
-
-        // hide all content
-        $("article", $collapse).removeClass("selected");
-
-        // show the content of the link you clicked on
-        $link.parents("article").addClass("selected");
+        $link.parents("article").toggleClass("selected");
       });
-      $navItems.append($link.clone()
-                                .wrapInner($newLink)
-                                .wrapInner("<li/>")
-                                .children());
 
-      // append plus/minus button the header (for mobile)
-      var $toggleButton = $("<a href=\"#\"/>");
-      $toggleButton.on("click", function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $link.parent().toggleClass("visible");
-      });
-      $link.append($toggleButton);
-
+      // add linkId to the article
+      $link.parents("article").attr("id", articleId);
     });
 
     $("nav", $collapse).children().remove();
     $("nav", $collapse).append($navItems);
 
     // mark that javascript was enabled
-    $collapse.addClass("js-enabled");
+    $collapse.addClass("enabled");
 
     // select the first one
     $("nav > ul > li > a", $collapse).first().click();

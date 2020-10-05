@@ -48,9 +48,67 @@
 
 .collapse {
 
+  // Indent by 1 unit everything except h2
+  article {
+    & > * {
+      margin-left: 1*@gutter;
+      margin-right: 1*@gutter;
+    }
+    & > ul {
+      margin-left: 2*@gutter;
+    }
+    h2 {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
   // 1. No Javascript (all screen sizes)
   & > div > article > h2 {
     #collapse-title-bubble();
+  }
+
+  // 2. Collapsible content, needs javascript (on mobile devices, on xs sizes or lower)
+  &.enabled {
+    & > div > article {
+      & > * {
+        display: none;
+      }
+      &.selected > * {
+        display: inherit;
+      }
+      & > a {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        border: 0;
+        margin-left: 0;
+        margin-right: 0;
+
+        &:after {
+          color: #theme.color[white];
+          background: #theme.color[blue-light];
+          position: absolute;
+          display: block;
+          right: 2*@gutter;
+          top: 1.5*@gutter;
+          width: 2*@gutter;
+          height: 2*@gutter;
+          padding: 0;
+          margin: 0;
+          margin-top: 0.5*@gutter;
+          border: 0;
+          text-align: center;
+          line-height: 2*@gutter;
+          border-radius: 1*@gutter;
+          content: "+";
+        }
+
+        h2 {
+          #collapse-title-bubble();
+        }
+      }
+    }
   }
 }
 
@@ -59,6 +117,7 @@
   // Creates a light blue bubble with quite some spacing around
   color: #theme.color[blue-dark2];
   background: #theme.color[blue-lighter];
+  margin: 0 0 1*@gutter 0;
   padding: 1.5*@gutter;
   border-radius: 1.5*@gutter;
   font-size: 150%;
@@ -80,7 +139,7 @@
   }
 
 };
-//
+
 //  h2 {
 //    span {
 //    }
@@ -104,19 +163,6 @@
 //    display: none;
 //  }
 //
-//  article {
-//    & > * {
-//      margin-left: 1*@gutter;
-//      margin-right: 1*@gutter;
-//    }
-//    & > ul {
-//      margin-left: 2*@gutter;
-//    }
-//    h2 {
-//      margin-left: 0;
-//      margin-right: 0;
-//    }
-//  }
 //
 //  &.js-enabled {
 //    article {
