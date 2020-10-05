@@ -56,4 +56,74 @@
 
   margin-top: 2*@gutter;
   margin-bottom: 3*@gutter;
+
+  .download-buttons {
+    list-style: none;
+    & > li {
+      display: inline-block;
+      margin-bottom: 1*@gutter;
+      margin-right: 1*@gutter;
+
+      & > a:first-child {
+        &:extend(.button);
+      }
+
+      #screen-xs-max({
+        display: block;
+
+        & > span.label {
+          display: none;
+        }
+        & > a:not(first-child) {
+          display: none;
+        }
+      });
+    } 
+  }
+
+  .download-amazon {
+    & > strong,
+    & > select {
+      font-size: 120%;
+    }
+
+    & > table {
+      background: #theme.color[blue-lighter];
+      border-radius: 1*@gutter;
+      text-align: center;
+      font-size: 110%;
+      margin-top: 1*@gutter;
+      padding-left: 2*@gutter;
+      padding-right: 2*@gutter;
+
+      & > thead > tr > th {
+        padding-top: 1*@gutter;
+      }
+
+      & > tbody > tr > td {
+        padding-bottom: 1*@gutter;
+      }
+
+      & > thead > tr > th {
+        color: #theme.color[blue-light];
+        text-align: center;
+      }
+
+      & > tbody > tr {
+        display: none;
+
+        &.selected {
+          display: table-row;
+        }
+
+        & > td {
+          font-weight: bold;
+
+          & > code {
+            font-weight: normal;
+          }
+        }
+      } 
+    }
+  }
 }

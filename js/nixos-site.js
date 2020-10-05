@@ -95,24 +95,44 @@ $(function () {
     });
   });
 
+  /*
+   * Amazon region selection
+   */
+  $(".download-amazon").each(function () {
+    var $root = $(this);
+    var amazonUrl = $(".download-buttons a", $root).attr("href");
+    var selectRegion = function () {
+      $(".selected", $root).removeClass("selected");
+      var region = $("select", $root).val();
+      var ami = $("#" + region, $root)
+        .addClass("selected")
+        .find("code").text();
+      $(".download-buttons a", $root)
+        .attr("href", amazonUrl + "?region=" + region + "#launchAmi=" + ami);
+    };
+    $("select", $root).on("change", selectRegion);
+    selectRegion();
+  });
+
   /* `.collapse` component
    *
    * Read documentation at ../site-styles/components/collapse.less
    */
   $(".collapse").each(function () {
     var $collapse = $(this);
+    var sectionName = $collapse.parents("section").attr("class") + "-";
     var $titles = $("div > article > h2", $collapse);
     var $navItems = $("<ul>");
 
     $titles.each(function () {
       var $link = $(this);
-      var articleId = "collapse-article-" + $link.text()
+      var articleId = "collapse-article-" + sectionName + $link.text()
         .replace(".", "-")
         .replace(" ", "-")
         .toLowerCase();
 
       // clone and append link to navigation
-      var $navLink = $("<a href=\"#\"/>").on("click", function (e) {
+      var $navLink = $("<a href=\"#" + articleId + "\"/>").on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
         var $this = $(this);
@@ -169,8 +189,10 @@ $(function () {
     // mark that javascript was enabled
     $collapse.addClass("enabled");
 
-    // select the first one
-    $("nav > ul > li > a", $collapse).first().click();
+    // select the first one when not in url
+    if (!window.location.hash.startsWith("#collapse-article-" + sectionName)) {
+      $("nav > ul > li > a", $collapse).first().click();
+    }
   });
 
   // Terrible days counter
