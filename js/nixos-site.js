@@ -95,13 +95,16 @@ $(function () {
     });
   });
 
-  // Tabs navigation
-  $(".tabs-navigation").each(function () {
-    var $tabview = $(this);
-    var $links = $("article > h2", $tabview);
-    var $desktopLinks = $("<ul>");
+  /* `.collapse` component
+   *
+   * Read documentation at ../site-styles/components/collapse.less
+   */
+  $(".collapse").each(function () {
+    var $collapse = $(this);
+    var $titles = $("div > article > h2", $collapse);
+    var $navItems = $("<ul>");
 
-    $links.each(function () {
+    $titles.each(function () {
       var $link = $(this);
 
       // clone and append link to navigation
@@ -118,12 +121,12 @@ $(function () {
         $thisLink.parent().addClass("selected");
 
         // hide all content
-        $("article", $tabview).removeClass("selected");
+        $("article", $collapse).removeClass("selected");
 
         // show the content of the link you clicked on
         $link.parents("article").addClass("selected");
       });
-      $desktopLinks.append($link.clone()
+      $navItems.append($link.clone()
                                 .wrapInner($newLink)
                                 .wrapInner("<li/>")
                                 .children());
@@ -139,14 +142,14 @@ $(function () {
 
     });
 
-    $("nav", $tabview).children().remove();
-    $("nav", $tabview).append($desktopLinks);
+    $("nav", $collapse).children().remove();
+    $("nav", $collapse).append($navItems);
 
     // mark that javascript was enabled
-    $tabview.addClass("js-enabled");
+    $collapse.addClass("js-enabled");
 
     // select the first one
-    $("nav > ul > li > a", $tabview).first().click();
+    $("nav > ul > li > a", $collapse).first().click();
   });
 
   // Terrible days counter
