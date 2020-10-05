@@ -1,209 +1,210 @@
+/* .tabs-navigation
+ *
+ * Required HTML structure:
+ *   <div class="tabs-navigation">
+ *     <article>
+ *       <h2>Title 1</h2>
+ *     </article>
+ *     <article>
+ *       <h2>Title 2</h2>
+ *     </article>
+ *     <article>
+ *       <h2>Title 3</h2>
+ *     </article>
+ *   </div>
+ *
+ * With above structure it will create a navigation with h2 titles as
+ * navigation items. It degraded gracefully to devices with smaller screen
+ * or even on devices with no javascript.
+ *
+ * 1. No Javascript (all screen sizes)
+ *
+ *    It leaves articles as they are it only styles the h2 titles as bubble.
+ *    First span element is will be put in a green circle, this is normally
+ *    used for number representing and emphasising the order of the article.
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
 .tabs-navigation {
 
-  h2 {
-    color: #theme.color[blue-dark2];
-    background: #theme.color[blue-lighter];
-    padding: 1.5*@gutter;
-    border-radius: 1.5*@gutter;
-    font-size: 150%;
-    line-height: 3*@gutter;
-    span {
-      color: #theme.color[white];
-      background: #theme.color[green];
-      width: 3*@gutter;
-      display: inline-block;
-      margin-right: 1*@gutter;
-      height: 3*@gutter;
-      padding: 0.75*@gutter;
-      border-radius: 2*@gutter;
-      text-align: center;
-      line-height: 1.6*@gutter;
-    }
-    a {
-      color: #theme.color[white];
-      background: #theme.color[blue-light];
-      float: right;
-      width: 2*@gutter;
-      height: 2*@gutter;
-      padding: 0;
-      margin: 0;
-      margin-top: 0.5*@gutter;
-      border: 0;
-      text-align: center;
-      line-height: 2*@gutter;
-      border-radius: 1*@gutter;
-    }
-  }
-
-  nav > ul {
-    display: none;
-  }
-
-  article {
-    & > * {
-      margin-left: 1*@gutter;
-      margin-right: 1*@gutter;
-    }
-    & > ul {
-      margin-left: 2*@gutter;
-    }
-    h2 {
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
-  &.js-enabled {
-    article {
-      & > * {
-        display: none;
-      }
-      &.visible {
-        & > * {
-          display: block;
-        }
-        h2 > a:before {
-          content: "-";
-        }
-      }
-      h2 {
-        display: block;
-        & > a:before {
-          content: "+";
-        }
-      }
-    }
-
-    #screen-sm-min({
-      @_columns: 2;
-      display: flex;
-      flex-direction: row;
-
-      article > * {
-        display: block;
-      }
-      article > h2 {
-        display: none;
-      }
-
-      & > * {
-        flex-grow: 1;
-        flex-shrink: 1;
-        width: 70%;
-      }
-
-      & > nav {
-        flex-grow: 0;
-        flex-shrink: 0;
-        width: 30%;
-        margin-right: 2*@gutter;
-
-        p {
-          margin: 0 1*@gutter;
-        }
-
-        ul {
-          display: block;
-          font-weight: bold;
-          font-size: 120%;
-          margin: 0;
-          padding: 0;
-          list-style-type: none;
-          border-radius: #theme.common[radius];
-          background: #theme.color[blue-lighter];
-          padding-top: @gutter * 2;
-          padding-bottom: @gutter * 2;
-
-        }
-
-        li {
-          &.selected {
-            background: #theme.color[white];
-            & > a {
-              color: #theme.color[blue-dark2];
-            }
-          }
-          & > a {
-            color: #theme.color[blue-light];
-            padding: 1*@gutter 2*@gutter;
-            display: block;
-            text-decoration: none;
-            border: 0;
-
-            span {
-              color: #theme.color[white];
-              background: #theme.color[green];
-              width: 2.5*@gutter;
-              height: 2.5*@gutter;
-              display: inline-block;
-              margin-right: 1*@gutter;
-              padding: 0.75*@gutter;
-              border-radius: 2*@gutter;
-              text-align: center;
-              line-height: 1.1*@gutter;
-            }
-          }
-        }
-      }
-    });
-
+  // 1. No Javascript (all screen sizes)
+  & > article > h2 {
+    #tabs-navigation-title-bubble();
   }
 }
 
-#tabs-navigation-item() {
-}
-//  & > nav {
-//    font-family: #theme.font[secondary];
-//    font-weight: bold;
+#tabs-navigation-title-bubble() {
+
+  // Creates a light blue bubble with quite some spacing around
+  color: #theme.color[blue-dark2];
+  background: #theme.color[blue-lighter];
+  padding: 1.5*@gutter;
+  border-radius: 1.5*@gutter;
+  font-size: 150%;
+  line-height: 3*@gutter;
+
+  // First span element is will be put in a green circle, this is normally
+  // used for number representing and emphasising the order of the article.
+  & > span:first-child {
+    color: #theme.color[white];
+    background: #theme.color[green];
+    width: 3*@gutter;
+    display: inline-block;
+    margin-right: 1*@gutter;
+    height: 3*@gutter;
+    padding: 0.75*@gutter;
+    border-radius: 2*@gutter;
+    text-align: center;
+    line-height: 1.6*@gutter;
+  }
+
+};
 //
-//    border-radius: #theme.common[radius];
-//    background: #theme.color[blue-lighter];
-//    padding-top: @gutter * 2;
-//    padding-bottom: @gutter * 2;
-//
-//    ul, li {
-//      margin: 0;
-//      padding: 0;
-//      list-style-type: none;
+//  h2 {
+//    span {
 //    }
-//
 //    a {
-//      display: block;
-//      color: #theme.color[gray-dark];
-//      text-decoration: inherit;
-//      padding: @gutter / 2 @gutter;
+//      color: #theme.color[white];
+//      background: #theme.color[blue-light];
+//      float: right;
+//      width: 2*@gutter;
+//      height: 2*@gutter;
+//      padding: 0;
+//      margin: 0;
+//      margin-top: 0.5*@gutter;
 //      border: 0;
-//
-//      &:hover, &.-active {
-//        color: #theme.color[blue-dark];
-//      }
-//      &.-active {
-//        color: #theme.color[white];
-//        background: #theme.color[blue-dark];
-//      }
-//    }
-//
-//    ul {
-//      display: flex;
-//      flex-direction: column;
-//    }
-//
-//    li {
-//      border-bottom: 0;
-//      #screen-xs-min({
-//        &:not(:first-child) {
-//          margin-left: -2*@unit;
-//        }
-//      });
+//      text-align: center;
+//      line-height: 2*@gutter;
+//      border-radius: 1*@gutter;
 //    }
 //  }
 //
-//  & > div {
-//    padding: @gutter;
+//  nav > ul {
+//    display: none;
+//  }
 //
+//  article {
 //    & > * {
-//      margin-top: 0;
+//      margin-left: 1*@gutter;
+//      margin-right: 1*@gutter;
 //    }
+//    & > ul {
+//      margin-left: 2*@gutter;
+//    }
+//    h2 {
+//      margin-left: 0;
+//      margin-right: 0;
+//    }
+//  }
+//
+//  &.js-enabled {
+//    article {
+//      & > * {
+//        display: none;
+//      }
+//      &.visible,
+//      &.selected {
+//        & > * {
+//          display: block;
+//        }
+//        h2 > a:before {
+//          content: "-";
+//        }
+//      }
+//      h2 {
+//        display: block;
+//        & > a:before {
+//          content: "+";
+//        }
+//      }
+//    }
+//
+//    #screen-sm-min({
+//      @_columns: 2;
+//      display: flex;
+//      flex-direction: row;
+//
+//      article > * {
+//        display: none;
+//      }
+//      article.selected > * {
+//        display: block;
+//      }
+//      article > h2
+//      article.visible > h2,
+//      article.selected > h2 {
+//        display: none;
+//      }
+//
+//      & > * {
+//        flex-grow: 1;
+//        flex-shrink: 1;
+//        width: 70%;
+//      }
+//
+//      & > nav {
+//        flex-grow: 0;
+//        flex-shrink: 0;
+//        width: 30%;
+//        margin-right: 2*@gutter;
+//
+//        p {
+//          margin: 0 1*@gutter;
+//        }
+//
+//        ul {
+//          display: block;
+//          font-weight: bold;
+//          font-size: 120%;
+//          margin: 0;
+//          padding: 0;
+//          list-style-type: none;
+//          border-radius: #theme.common[radius];
+//          background: #theme.color[blue-lighter];
+//          padding-top: @gutter * 2;
+//          padding-bottom: @gutter * 2;
+//
+//        }
+//
+//        li {
+//          &.selected {
+//            background: #theme.color[white];
+//            & > a {
+//              color: #theme.color[blue-dark2];
+//            }
+//          }
+//          & > a {
+//            color: #theme.color[blue-light];
+//            padding: 1*@gutter 2*@gutter;
+//            display: block;
+//            text-decoration: none;
+//            border: 0;
+//
+//            span {
+//              color: #theme.color[white];
+//              background: #theme.color[green];
+//              width: 2.5*@gutter;
+//              height: 2.5*@gutter;
+//              display: inline-block;
+//              margin-right: 1*@gutter;
+//              padding: 0.75*@gutter;
+//              border-radius: 2*@gutter;
+//              text-align: center;
+//              line-height: 1.1*@gutter;
+//            }
+//          }
+//        }
+//      }
+//    });
+//
 //  }
 //}
-//
