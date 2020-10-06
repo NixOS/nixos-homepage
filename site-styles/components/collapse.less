@@ -28,9 +28,7 @@
 // 2. Collapsible content, needs javascript (on mobile devices, on sm sizes or
 //    lower)
 //
-//    Javascript part will add `enabled` class on the root element (the one
-//    that has collapse` class) once it finished initializing the
-//    component. An `id` will be created from a normalized h2 title with
+//    An `id` will be created from a normalized h2 title with
 //    `tab-` prefix and added to the article element of corresponding title.
 //    `h2` titles will be wrapped with a link element (`a`) pointing to the
 //    article (`#tag-normalized-title-here`).
@@ -72,7 +70,7 @@
     font-size: 150%;
   }
 
-  &.enabled {
+  html.with-js & {
 
     // 2. Collapsible content, needs javascript (on mobile devices, on sm sizes or lower)
     & > div > article {

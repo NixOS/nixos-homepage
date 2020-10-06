@@ -186,9 +186,6 @@ $(function () {
     $collapse.prepend($nav);
     $nav.append($navItems);
 
-    // mark that javascript was enabled
-    $collapse.addClass("enabled");
-
     // select the first one when not in url
     if (!window.location.hash.startsWith("#collapse-article-" + sectionName)) {
       $("nav > ul > li > a", $collapse).first().click();
