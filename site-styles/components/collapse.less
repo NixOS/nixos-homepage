@@ -1,54 +1,53 @@
-/* # `.collapse` component
- *
- * Required HTML structure:
- *   <div class="collapse">
- *     <div>
- *       <article>
- *         <h2>Title 1</h2>
- *       </article>
- *       <article>
- *         <h2>Title 2</h2>
- *       </article>
- *       <article>
- *         <h2>Title 3</h2>
- *       </article>
- *     </div>
- *   </div>
- *
- * With above structure it will create a navigation with h2 titles as
- * navigation items. It degraded gracefully to devices with smaller screen
- * or even on devices with no javascript.
- *
- * 1. No Javascript (all screen sizes)
- *
- *    It leaves articles as they are it only styles the h2 titles as bubble.
- *    First span element is will be put in a green circle, this is normally
- *    used for number representing and emphasising the order of the article.
- *
- * 2. Collapsible content, needs javascript (on mobile devices, on sm sizes or
- *    lower)
- *
- *    Javascript part will add `enabled` class on the root element (the one
- *    that has collapse` class) once it finished initializing the
- *    component. An `id` will be created from a normalized h2 title with
- *    `tab-` prefix and added to the article element of corresponding title.
- *    `h2` titles will be wrapped with a link element (`a`) pointing to the
- *    article (`#tag-normalized-title-here`).
- *
- *    It is designed as before, but content is hidden until you click on a 
- *    title. Also there is a (+) or (-) indicator on right side - which was
- *    added by javascript - that shows the state of the article (opened or 
- *    closed).
- *
- * 3. Side tab (on the left) like navigation (only for non mobile devices, on
- *    md and higher)
- *
- *    Javascript part creates a `nav` at the top of the root element, with
- *    copies of all of the h2 titles. `nav` element should not be visible on
- *    mobile devices. Then `nav` should be placed on the left side and content
- *    on the right side.
- *
- */
+// # `.collapse` component
+//
+// Required HTML structure:
+//   <div class="collapse">
+//     <div>
+//       <article>
+//         <h2>Title 1</h2>
+//       </article>
+//       <article>
+//         <h2>Title 2</h2>
+//       </article>
+//       <article>
+//         <h2>Title 3</h2>
+//       </article>
+//     </div>
+//   </div>
+//
+// With above structure it will create a navigation with h2 titles as
+// navigation items. It degraded gracefully to devices with smaller screen
+// or even on devices with no javascript.
+//
+// 1. No Javascript (all screen sizes)
+//
+//    It leaves articles as they are it only styles the h2 titles as bubble.
+//    First span element is will be put in a green circle, this is normally
+//    used for number representing and emphasising the order of the article.
+//
+// 2. Collapsible content, needs javascript (on mobile devices, on sm sizes or
+//    lower)
+//
+//    Javascript part will add `enabled` class on the root element (the one
+//    that has collapse` class) once it finished initializing the
+//    component. An `id` will be created from a normalized h2 title with
+//    `tab-` prefix and added to the article element of corresponding title.
+//    `h2` titles will be wrapped with a link element (`a`) pointing to the
+//    article (`#tag-normalized-title-here`).
+//
+//    It is designed as before, but content is hidden until you click on a 
+//    title. Also there is a (+) or (-) indicator on right side - which was
+//    added by javascript - that shows the state of the article (opened or 
+//    closed).
+//
+// 3. Side tab (on the left) like navigation (only for non mobile devices, on
+//    md and higher)
+//
+//    Javascript part creates a `nav` at the top of the root element, with
+//    copies of all of the h2 titles. `nav` element should not be visible on
+//    mobile devices. Then `nav` should be placed on the left side and content
+//    on the right side.
+//
 
 .collapse {
 
