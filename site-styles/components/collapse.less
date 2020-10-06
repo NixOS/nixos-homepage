@@ -4,7 +4,7 @@
 //   <div class="collapse">
 //     <div>
 //       <article>
-//         <h2>Title 1</h2>
+//         <h2><span>1.</span>Title</h2>
 //       </article>
 //       <article>
 //         <h2>Title 2</h2>
@@ -16,16 +16,19 @@
 //   </div>
 //
 // With above structure it will create a navigation with h2 titles as
-// navigation items. It degraded gracefully to devices with smaller screen
-// or even on devices with no javascript.
+// navigation items. It degrades gracefully to devices with smaller screen
+// by relying on a "collapsible section" behaviour, and for user agents with 
+// JavaScript disabled by ensuring things are always visible.
 //
-// 1. No Javascript (all screen sizes)
+// The `h2 > span` is optional.
+//
+// 1. No JavaScript (all screen sizes)
 //
 //    It leaves articles as they are it only styles the h2 titles as bubble.
 //    First span element is will be put in a green circle, this is normally
 //    used for number representing and emphasising the order of the article.
 //
-// 2. Collapsible content, needs javascript (on mobile devices, on sm sizes or
+// 2. Collapsible content, needs JavaScript (on mobile devices, on sm sizes or
 //    lower)
 //
 //    Unless provided, an `id` will be created from a normalized h2 title with
@@ -33,18 +36,19 @@
 //    `h2` titles will be wrapped with a link element (`a`) pointing to the
 //    article (`#id-of-article`).
 //
-//    It is designed as before, but content is hidden until you click on a 
-//    title. Also there is a (+) or (-) indicator on right side - which was
-//    added by javascript - that shows the state of the article (opened or 
+//    Its appearance is just like without JavaScript, but the content is hidden
+//    until the title has been activated.
+//    There is a symbol (+ or -) indicator on the right side - which is
+//    added using JavaScript - that shows the state of the article (opened or 
 //    closed).
 //
 // 3. Side tab (on the left) like navigation (only for non mobile devices, on
-//    md and higher)
+//    md sizes and higher)
 //
-//    Javascript part creates a `nav` at the top of the root element, with
-//    copies of all of the h2 titles. `nav` element should not be visible on
-//    mobile devices. Then `nav` should be placed on the left side and content
-//    on the right side.
+//    JavaScript part creates a `nav` at the top of the root element, which
+//    mirrors all of the h2 titles. This redundant `nav` element will not be
+//    visible on mobile devices. The `nav` will be placed on the left side
+//    and content on the right side.
 //
 
 .collapse {
