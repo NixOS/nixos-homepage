@@ -116,7 +116,7 @@ $(function () {
 
     $articles.each(function () {
       var $article = $(this);
-      var $link = $article.children("h2");
+      var $header = $article.children("h2");
 
       // Generate an identifier, in case it's needed.
       var articleId = sanitizeIdentifier("collapse-article-" + sectionName + $header.text());
@@ -145,7 +145,7 @@ $(function () {
         $("article", $collapse).removeClass("selected");
 
         // show the content of the link you clicked on
-        $link.parents("article").addClass("selected");
+        $header.parents("article").addClass("selected");
 
         // This looks dumb, but if we don't override the native behaviour we
         // get scrolled just past the tabs...
@@ -154,7 +154,7 @@ $(function () {
           history.pushState(null, null, $this.attr('href'));
         }
       });
-      var $navItem = $link
+      var $navItem = $header
         .clone()
         .wrapInner($navLink)
         .wrapInner("<li/>")
@@ -162,12 +162,12 @@ $(function () {
       $navItems.append($navItem);
 
       // Wrap h2 title with a link which points to the article
-      $link.wrap($("<a class='article-title' />"))
+      $header.wrap($("<a class='article-title' />"))
         .attr("href", "#" + articleId);
-      $link.parent().on("click", function (e) {
+      $header.parent().on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $link.parents("article").toggleClass("selected");
+        $header.parents("article").toggleClass("selected");
         // This looks dumb, but if we don't override the native behaviour we
         // get scrolled just past the tabs...
         // So no scroll, and we control the URL.
@@ -177,7 +177,7 @@ $(function () {
       });
 
       // add linkId to the article
-      $link.parents("article").attr("id", articleId);
+      $header.parents("article").attr("id", articleId);
     });
 
     // prepend the "desktop" navigation
