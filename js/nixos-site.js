@@ -24,6 +24,15 @@ $(function () {
     return $el;
   });
 
+  var sanitizeIdentifier = function (name) {
+    return name.toLowerCase()
+      .replace(/[^a-z0-9]/g, "-") // Any non-alnum is replaced by a -
+      .replace(/-+/g, "-")        // Any sequence of dashes replaced by only one
+      .replace(/^-/, "")          // Starting dashes removed
+      .replace(/-$/, "")          // And ending dashes removed
+    ;
+  };
+
   // Allow some parts of the site to present additional information for
   // debugging purposes. E.g. responsive width identifier.
   function setDebug(debug) {
@@ -107,10 +116,17 @@ $(function () {
 
     $titles.each(function () {
       var $link = $(this);
-      var articleId = "collapse-article-" + sectionName + $link.text()
-        .replace(".", "-")
-        .replace(" ", "-")
-        .toLowerCase();
+
+      // Generate an identifier, in case it's needed.
+      var articleId = sanitizeIdentifier("collapse-article-" + sectionName + $header.text());
+
+      // But prefer the existing ID.
+      if ($article.attr("id")) {
+        articleId = $article.attr("id");
+      }
+      else {
+        console.warn("WARNING: collapse section `" + articleId + "` uses generated name.");
+      }
 
       // clone and append link to navigation
       var $navLink = $("<a href=\"#" + articleId + "\"/>").on("click", function (e) {
