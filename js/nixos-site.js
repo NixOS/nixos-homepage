@@ -111,11 +111,12 @@ $(function () {
   $(".collapse").each(function () {
     var $collapse = $(this);
     var sectionName = $collapse.parents("section").attr("class") + "-";
-    var $titles = $("div > article > h2", $collapse);
+    var $articles = $("div > article", $collapse);
     var $navItems = $("<ul>");
 
-    $titles.each(function () {
-      var $link = $(this);
+    $articles.each(function () {
+      var $article = $(this);
+      var $link = $article.children("h2");
 
       // Generate an identifier, in case it's needed.
       var articleId = sanitizeIdentifier("collapse-article-" + sectionName + $header.text());
