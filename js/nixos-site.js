@@ -129,7 +129,7 @@ $(function () {
       }
 
       // clone and append link to navigation
-      var $navLink = $("<a href=\"#" + articleId + "\"/>").on("click", function (e) {
+      var $navLink = $("<a />").attr("href", "#" + articleId).on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
         var $this = $(this);
@@ -161,7 +161,8 @@ $(function () {
       $navItems.append($navItem);
 
       // Wrap h2 title with a link which points to the article
-      $link.wrap($("<a class=\"article-title\" href=\"#" + articleId + "\"/> "));
+      $link.wrap($("<a class='article-title' />"))
+        .attr("href", "#" + articleId);
       $link.parent().on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
