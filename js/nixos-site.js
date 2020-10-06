@@ -95,25 +95,6 @@ $(function () {
     });
   });
 
-  /*
-   * Amazon region selection
-   */
-  $(".download-amazon").each(function () {
-    var $root = $(this);
-    var amazonUrl = $(".download-buttons a", $root).attr("href");
-    var selectRegion = function () {
-      $(".selected", $root).removeClass("selected");
-      var region = $("select", $root).val();
-      var ami = $("#" + region, $root)
-        .addClass("selected")
-        .find("code").text();
-      $(".download-buttons a", $root)
-        .attr("href", amazonUrl + "?region=" + region + "#launchAmi=" + ami);
-    };
-    $("select", $root).on("change", selectRegion);
-    selectRegion();
-  });
-
   /* `.collapse` component
    *
    * Read documentation at ../site-styles/components/collapse.less
@@ -243,6 +224,33 @@ $(function () {
       setInterval(updateCounter, 1000);
     }
   })
+
+  //
+  // Page-specific JS
+  //
+
+  /*
+   * Amazon region selection
+   */
+  $(".download-amazon").each(function () {
+    var $root = $(this);
+    var amazonUrl = $(".download-buttons a", $root).attr("href");
+    var selectRegion = function () {
+      $(".selected", $root).removeClass("selected");
+      var region = $("select", $root).val();
+      var ami = $("#" + region, $root)
+        .addClass("selected")
+        .find("code").text();
+      $(".download-buttons a", $root)
+        .attr("href", amazonUrl + "?region=" + region + "#launchAmi=" + ami);
+    };
+    $("select", $root).on("change", selectRegion);
+    selectRegion();
+  });
+
+  //
+  // Some late initialization stuff
+  //
 
   // Activate the link for which the anchor matches. Hopefully changing the tab
   // or opening the relevant pane.
