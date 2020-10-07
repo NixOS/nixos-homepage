@@ -28,7 +28,7 @@
 // By default, xs and under use only one column.
 // "under" xs cannot be forced to anything else than 1.
 // sm and md can be configured if needed, but will default to @amount.
-#columns(@amount, @xxs: 1, @xs: 1, @sm: @amount, @md: @amount, @spacing: @gutter) {
+#columns(@amount, @xxs: 1, @xs: @xxs, @sm: @amount, @md: @amount, @spacing: @gutter) {
   // This is a sane default, and helps with using <ul>
   margin: 0;
   // Same, as <ul> can often be made a columnar layout, it is a sane default.

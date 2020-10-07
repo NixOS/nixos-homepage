@@ -1,54 +1,80 @@
-/* # `.collapse` component
- *
- * Required HTML structure:
- *   <div class="collapse">
- *     <div>
- *       <article>
- *         <h2>Title 1</h2>
- *       </article>
- *       <article>
- *         <h2>Title 2</h2>
- *       </article>
- *       <article>
- *         <h2>Title 3</h2>
- *       </article>
- *     </div>
- *   </div>
- *
- * With above structure it will create a navigation with h2 titles as
- * navigation items. It degraded gracefully to devices with smaller screen
- * or even on devices with no javascript.
- *
- * 1. No Javascript (all screen sizes)
- *
- *    It leaves articles as they are it only styles the h2 titles as bubble.
- *    First span element is will be put in a green circle, this is normally
- *    used for number representing and emphasising the order of the article.
- *
- * 2. Collapsible content, needs javascript (on mobile devices, on sm sizes or
- *    lower)
- *
- *    Javascript part will add `enabled` class on the root element (the one
- *    that has collapse` class) once it finished initializing the
- *    component. An `id` will be created from a normalized h2 title with
- *    `tab-` prefix and added to the article element of corresponding title.
- *    `h2` titles will be wrapped with a link element (`a`) pointing to the
- *    article (`#tag-normalized-title-here`).
- *
- *    It is designed as before, but content is hidden until you click on a 
- *    title. Also there is a (+) or (-) indicator on right side - which was
- *    added by javascript - that shows the state of the article (opened or 
- *    closed).
- *
- * 3. Side tab (on the left) like navigation (only for non mobile devices, on
- *    md and higher)
- *
- *    Javascript part creates a `nav` at the top of the root element, with
- *    copies of all of the h2 titles. `nav` element should not be visible on
- *    mobile devices. Then `nav` should be placed on the left side and content
- *    on the right side.
- *
- */
+// # `.collapse` component
+//
+// Required HTML structure:
+//   <div class="collapse">
+//     <div>
+//       <article>
+//         <h2><span>1.</span>Title</h2>
+//       </article>
+//       <article>
+//         <h2>Title 2</h2>
+//       </article>
+//       <article>
+//         <h2>Title 3</h2>
+//       </article>
+//     </div>
+//   </div>
+//
+// With above structure it will create a navigation with h2 titles as
+// navigation items. It degrades gracefully to devices with smaller screen
+// by relying on a "collapsible section" behaviour, and for user agents with 
+// JavaScript disabled by ensuring things are always visible.
+//
+// The `h2 > span` is optional.
+//
+// 1. No JavaScript (all screen sizes)
+//
+//    It leaves articles as they are it only styles the h2 titles as bubble.
+//    First span element is will be put in a green circle, this is normally
+//    used for number representing and emphasising the order of the article.
+//
+// 2. Collapsible content, needs JavaScript (on mobile devices, on sm sizes or
+//    lower)
+//
+//    Unless provided, an `id` will be created from a normalized h2 title with
+//    the `collapse-article-` prefix and added to the parent article element.
+//    `h2` titles will be wrapped with a link element (`a`) pointing to the
+//    article (`#id-of-article`).
+//
+//    Its appearance is just like without JavaScript, but the content is hidden
+//    until the title has been activated.
+//    There is a symbol (+ or -) indicator on the right side - which is
+//    added using JavaScript - that shows the state of the article (opened or 
+//    closed).
+//
+//    Collapsed content have no special class. Thy have the `-expanded` class
+//    to expand on **only** when they are in the viewport widths where the
+//    collapse view is used.
+//
+// 3. Side tab (on the left) like navigation (only for non mobile devices, on
+//    md sizes and higher)
+//
+//    JavaScript part creates a `nav` at the top of the root element, which
+//    mirrors all of the h2 titles. This redundant `nav` element will not be
+//    visible on mobile devices. The `nav` will be placed on the left side
+//    and content on the right side.
+//
+//    Hidden tabs have no special class. The `-selected` class is used to
+//    show a tab currently in view, **only** when they are in the viewport
+//    widths where the tabs view is used.
+//
+// ## Note about navigation
+//
+// Navigation from tabs forcibly collapses and expands only the selected item.
+// Navigation in collapsible form affects the tabs navigation, but does not
+// collapse other elements.
+//
+// What this means, concretely, is that someone moving the window about
+// *should* have a relatively coherent experience. Selecting any option in any
+// of the views should make it available in the other view.
+//
+// This weird complex behaviour, including the implementation with a different
+// set of classes ensures that the following scenario does not happen:
+//
+// 1. User, in narrow view expands three elements
+// 2. User resizes window, or changes from portrait to landscape
+// 3. User observes content for three tabs inexplicably open!
+//
 
 .collapse {
 
@@ -73,17 +99,21 @@
     font-size: 150%;
   }
 
-  &.enabled {
+  html.with-js & {
 
     // 2. Collapsible content, needs javascript (on mobile devices, on sm sizes or lower)
     & > div > article {
-      & > * {
-        display: none;
-      }
-      &.selected > * {
-        display: inherit;
-      }
-      &.selected > a.article-title::after {
+      #screen-sm-max({
+        // Hide everything by default
+        & > * {
+          display: none;
+        }
+        // Only affect visibility when the collapsible version is shown.
+        &.-expanded > * {
+          display: inherit;
+        }
+      });
+      &.-expanded > a.article-title::after {
         content: "-";
       }
       & > a.article-title {
@@ -136,6 +166,15 @@
         & > article > a.article-title {
           display: none;
         }
+
+        & > * {
+          display: none;
+        }
+
+        // Only affect visibility when the tabs version is shown.
+        & > .-selected {
+          display: inherit;
+        }
       }
 
       & > nav {
@@ -156,7 +195,7 @@
           padding-top: @gutter * 2;
           padding-bottom: @gutter * 2;
 
-          & > li.selected {
+          & > li.-active {
             color: #theme.color[blue-dark2];
             background: #theme.color[white];
             & > a {

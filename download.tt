@@ -19,7 +19,7 @@
 <section class="download-nix">
   <div class="collapse">
     <div>
-      <article>
+      <article id="nix-quick-install">
         <h2><span>1.</span>Quick install</h2>
         <p>
           The quickest way to install Nix is to open a terminal and run the following
@@ -30,7 +30,7 @@
         <p>Make sure to follow the instructions output by the script.</p>
         <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
       </article>
-      <article>
+      <article id="nix-verify-installation">
         <h2><span>2.</span>Verify installation</h2>
         <p>You may want to verify the integrity of the installation script using GPG:</p>
         <pre class="terminal-console">
@@ -46,14 +46,14 @@
           <a href="https://github.com/NixOS/nixos-homepage/blob/master/edolstra.gpg">on GitHub</a>.
         </p>
       </article>
-      <article>
+      <article id="nix-uninstall">
         <h2><span>3.</span>Uninstall</h2>
         <p>
           You can uninstall Nix simply by running <code>rm -rf /nix</code>.
         </p>
         <!-- TODO: expand this https://github.com/NixOS/nix/issues/1402 -->
       </article>
-      <article>
+      <article id="nix-more">
         <h2><span>4.</span>More ...</h2>
         <p>The following release items are also available:</p>
         <ul>
@@ -84,7 +84,7 @@
 <section class="download-nixos">
   <div class="collapse">
     <div>
-      <article>
+      <article id="nixos-iso">
         <h2>ISO image</h2>
         <p>You can install NixOS on physical hardware by burning one of the CD
           images onto a blank CD/DVD disk, or <a
@@ -134,7 +134,7 @@
           </li>
         </ul>
       </article>
-      <article>
+      <article id="nixos-virtualbox">
         <h2>VirtualBox</h2>
         <aside class="notice-box -warning">
           <strong>This is a demo appliance</strong> for VirtualBox (in OVA format).
@@ -161,7 +161,7 @@
             <code>sudo -i</code> in the KDE terminal (<code>konsole</code>).</li>
         </ul>
       </article>
-      <article>
+      <article id="nixos-amazon">
         <h2>Amazon EC2</h2>
         <p>NixOS can be deployed to Amazon EC2 with a pre-generated AMI image
           that you can select bellow.</p>

@@ -24,6 +24,15 @@ $(function () {
     return $el;
   });
 
+  var sanitizeIdentifier = function (name) {
+    return name.toLowerCase()
+      .replace(/[^a-z0-9]/g, "-") // Any non-alnum is replaced by a -
+      .replace(/-+/g, "-")        // Any sequence of dashes replaced by only one
+      .replace(/^-/, "")          // Starting dashes removed
+      .replace(/-$/, "")          // And ending dashes removed
+    ;
+  };
+
   // Allow some parts of the site to present additional information for
   // debugging purposes. E.g. responsive width identifier.
   function setDebug(debug) {
@@ -95,25 +104,6 @@ $(function () {
     });
   });
 
-  /*
-   * Amazon region selection
-   */
-  $(".download-amazon").each(function () {
-    var $root = $(this);
-    var amazonUrl = $(".download-buttons a", $root).attr("href");
-    var selectRegion = function () {
-      $(".selected", $root).removeClass("selected");
-      var region = $("select", $root).val();
-      var ami = $("#" + region, $root)
-        .addClass("selected")
-        .find("code").text();
-      $(".download-buttons a", $root)
-        .attr("href", amazonUrl + "?region=" + region + "#launchAmi=" + ami);
-    };
-    $("select", $root).on("change", selectRegion);
-    selectRegion();
-  });
-
   /* `.collapse` component
    *
    * Read documentation at ../site-styles/components/collapse.less
@@ -121,33 +111,73 @@ $(function () {
   $(".collapse").each(function () {
     var $collapse = $(this);
     var sectionName = $collapse.parents("section").attr("class") + "-";
-    var $titles = $("div > article > h2", $collapse);
+    var $articles = $("div > article", $collapse);
     var $navItems = $("<ul>");
 
-    $titles.each(function () {
-      var $link = $(this);
-      var articleId = "collapse-article-" + sectionName + $link.text()
-        .replace(".", "-")
-        .replace(" ", "-")
-        .toLowerCase();
+    $articles.each(function () {
+      var $article = $(this);
+      var $header = $article.children("h2");
 
-      // clone and append link to navigation
-      var $navLink = $("<a href=\"#" + articleId + "\"/>").on("click", function (e) {
+      // Generate an identifier, in case it's needed.
+      var articleId = sanitizeIdentifier("collapse-article-" + sectionName + $header.text());
+
+      // But prefer the existing ID.
+      if ($article.attr("id")) {
+        articleId = $article.attr("id");
+      }
+      else {
+        console.warn("WARNING: collapse section `" + articleId + "` uses generated name.");
+      }
+
+      // First create all elements we lack
+
+      // Create a link to be used in the left-hand side navigation.
+      var $navLink = $("<a />").attr("href", "#" + articleId);
+
+      // Create the actual navigation element.
+      var $navItem = $header
+        .clone()             // Clone the header
+        .wrapInner($navLink) // Wrap its contents with the previously created link
+        .wrapInner("<li/>")  // Then wrap *that* with a <li>
+        .children();         // And take what we just created
+      $navItems.append($navItem);
+
+      // Update to point to the newly-wrapped element.
+      $navLink = $navItem.children();
+
+      // Local function to synchronize tab navigation.
+      var selectCurrentTab = function () {
+        // unselect all selected navigation buttons
+        $("li", $navItems).removeClass("-active");
+
+        // select the link you clicked on
+        $navItem.addClass("-active");
+
+        // hide all content (in tabs view)
+        $("article", $collapse).removeClass("-selected");
+
+        // show the content of the link you clicked on
+        $article.addClass("-selected");
+      };
+
+      // Wrap h2 title with a link which points to the article
+      var $narrowLink = $header.wrap($("<a class='article-title' />")).parent();
+      $narrowLink.attr("href", "#" + articleId);
+
+      // Then plug events
+
+      // On the "tab" link
+      $navLink.on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
         var $this = $(this);
+        selectCurrentTab();
 
-        // unselect all selected navigation buttons
-        $(".selected", $this.parents("ul")).removeClass("selected");
-
-        // select the link you clicked on
-        $this.parent().addClass("selected");
-
-        // hide all content
-        $("article", $collapse).removeClass("selected");
-
-        // show the content of the link you clicked on
-        $link.parents("article").addClass("selected");
+        if (!$$synthetic) {
+          // Hide all contents in the collapsible view
+          $("article", $collapse).removeClass("-expanded");
+          $article.addClass("-expanded");
+        }
 
         // This looks dumb, but if we don't override the native behaviour we
         // get scrolled just past the tabs...
@@ -156,19 +186,18 @@ $(function () {
           history.pushState(null, null, $this.attr('href'));
         }
       });
-      var $navItem = $link
-        .clone()
-        .wrapInner($navLink)
-        .wrapInner("<li/>")
-        .children();
-      $navItems.append($navItem);
 
-      // Wrap h2 title with a link which points to the article
-      $link.wrap($("<a class=\"article-title\" href=\"#" + articleId + "\"/> "));
-      $link.parent().on("click", function (e) {
+      // On the "collapsible" header
+      $narrowLink.on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $link.parents("article").toggleClass("selected");
+
+        // Expand the section on the collapsible side
+        $article.toggleClass("-expanded");
+
+        // And synchronize tab navigation
+        selectCurrentTab();
+
         // This looks dumb, but if we don't override the native behaviour we
         // get scrolled just past the tabs...
         // So no scroll, and we control the URL.
@@ -178,21 +207,20 @@ $(function () {
       });
 
       // add linkId to the article
-      $link.parents("article").attr("id", articleId);
+      $article.attr("id", articleId);
     });
 
     // prepend the "desktop" navigation
-    $nav = $("<nav/>");
+    var $nav = $("<nav/>");
     $collapse.prepend($nav);
     $nav.append($navItems);
 
-    // mark that javascript was enabled
-    $collapse.addClass("enabled");
-
-    // select the first one when not in url
-    if (!window.location.hash.startsWith("#collapse-article-" + sectionName)) {
-      $("nav > ul > li > a", $collapse).first().click();
-    }
+    // Activate the first navigation link, always.
+    $$synthetic = true;
+    // Activate the tab side of the component.
+    // This way the first item is implicitly open.
+    $navItems.children().first().find("a").click();
+    $$synthetic = false;
   });
 
   // Terrible days counter
@@ -247,11 +275,38 @@ $(function () {
     }
   })
 
+  //
+  // Page-specific JS
+  //
+
+  /*
+   * Amazon region selection
+   */
+  $(".download-amazon").each(function () {
+    var $root = $(this);
+    var amazonUrl = $(".download-buttons a", $root).attr("href");
+    var selectRegion = function () {
+      $(".selected", $root).removeClass("selected");
+      var region = $("select", $root).val();
+      var ami = $("#" + region, $root)
+        .addClass("selected")
+        .find("code").text();
+      $(".download-buttons a", $root)
+        .attr("href", amazonUrl + "?region=" + region + "#launchAmi=" + ami);
+    };
+    $("select", $root).on("change", selectRegion);
+    selectRegion();
+  });
+
+  //
+  // Some late initialization stuff
+  //
+
   // Activate the link for which the anchor matches. Hopefully changing the tab
   // or opening the relevant pane.
   var handleNavigation = function(event) {
     $$synthetic = true;
-    $("[href='"+window.location.hash+"']:visible").click()
+    $("[href='"+window.location.hash+"']").click()
     $$synthetic = false;
   };
   window.onpopstate = handleNavigation;
