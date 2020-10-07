@@ -129,8 +129,10 @@ $(function () {
         console.warn("WARNING: collapse section `" + articleId + "` uses generated name.");
       }
 
-      // clone and append link to navigation
-      var $navLink = $("<a />").attr("href", "#" + articleId).on("click", function (e) {
+      // Create a link to be used in the left-hand side navigation.
+      var $navLink = $("<a />").attr("href", "#" + articleId);
+
+      $navLink.on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
         var $this = $(this);
@@ -154,11 +156,13 @@ $(function () {
           history.pushState(null, null, $this.attr('href'));
         }
       });
+
+      // Create the actual navigation element.
       var $navItem = $header
-        .clone()
-        .wrapInner($navLink)
-        .wrapInner("<li/>")
-        .children();
+        .clone()             // Clone the header
+        .wrapInner($navLink) // Wrap its contents with the previously created link
+        .wrapInner("<li/>")  // Then wrap *that* with a <li>
+        .children();         // And take what we just created
       $navItems.append($navItem);
 
       // Wrap h2 title with a link which points to the article
