@@ -136,16 +136,16 @@ $(function () {
         var $this = $(this);
 
         // unselect all selected navigation buttons
-        $(".selected", $this.parents("ul")).removeClass("selected");
+        $("li", $navItems).removeClass("-selected");
 
         // select the link you clicked on
-        $this.parent().addClass("selected");
+        $this.parent().addClass("-selected");
 
         // hide all content
-        $("article", $collapse).removeClass("selected");
+        $("article", $collapse).removeClass("-selected");
 
         // show the content of the link you clicked on
-        $header.parents("article").addClass("selected");
+        $article.addClass("-selected");
 
         // This looks dumb, but if we don't override the native behaviour we
         // get scrolled just past the tabs...
@@ -167,7 +167,7 @@ $(function () {
       $narrowLink.on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $header.parents("article").toggleClass("selected");
+        $header.parents("article").toggleClass("-selected");
         // This looks dumb, but if we don't override the native behaviour we
         // get scrolled just past the tabs...
         // So no scroll, and we control the URL.
