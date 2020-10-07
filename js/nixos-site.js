@@ -129,33 +129,10 @@ $(function () {
         console.warn("WARNING: collapse section `" + articleId + "` uses generated name.");
       }
 
+      // First create all elements we lack
+
       // Create a link to be used in the left-hand side navigation.
       var $navLink = $("<a />").attr("href", "#" + articleId);
-
-      $navLink.on("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var $this = $(this);
-
-        // unselect all selected navigation buttons
-        $("li", $navItems).removeClass("-selected");
-
-        // select the link you clicked on
-        $this.parent().addClass("-selected");
-
-        // hide all content
-        $("article", $collapse).removeClass("-expanded");
-
-        // show the content of the link you clicked on
-        $article.addClass("-expanded");
-
-        // This looks dumb, but if we don't override the native behaviour we
-        // get scrolled just past the tabs...
-        // So no scroll, and we control the URL.
-        if (!$$synthetic) {
-          history.pushState(null, null, $this.attr('href'));
-        }
-      });
 
       // Create the actual navigation element.
       var $navItem = $header
@@ -165,13 +142,62 @@ $(function () {
         .children();         // And take what we just created
       $navItems.append($navItem);
 
+      // Update to point to the newly-wrapped element.
+      $navLink = $navItem.children();
+
+      // Local function to synchronize tab navigation.
+      var selectCurrentTab = function () {
+        // unselect all selected navigation buttons
+        $("li", $navItems).removeClass("-active");
+
+        // select the link you clicked on
+        $navItem.addClass("-active");
+
+        // hide all content (in tabs view)
+        $("article", $collapse).removeClass("-selected");
+
+        // show the content of the link you clicked on
+        $article.addClass("-selected");
+      };
+
       // Wrap h2 title with a link which points to the article
       var $narrowLink = $header.wrap($("<a class='article-title' />")).parent();
       $narrowLink.attr("href", "#" + articleId);
+
+      // Then plug events
+
+      // On the "tab" link
+      $navLink.on("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $this = $(this);
+        selectCurrentTab();
+
+        if (!$$synthetic) {
+          // Hide all contents in the collapsible view
+          $("article", $collapse).removeClass("-expanded");
+          $article.addClass("-expanded");
+        }
+
+        // This looks dumb, but if we don't override the native behaviour we
+        // get scrolled just past the tabs...
+        // So no scroll, and we control the URL.
+        if (!$$synthetic) {
+          history.pushState(null, null, $this.attr('href'));
+        }
+      });
+
+      // On the "collapsible" header
       $narrowLink.on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $header.parents("article").toggleClass("-expanded");
+
+        // Expand the section on the collapsible side
+        $article.toggleClass("-expanded");
+
+        // And synchronize tab navigation
+        selectCurrentTab();
+
         // This looks dumb, but if we don't override the native behaviour we
         // get scrolled just past the tabs...
         // So no scroll, and we control the URL.
@@ -181,7 +207,7 @@ $(function () {
       });
 
       // add linkId to the article
-      $header.parents("article").attr("id", articleId);
+      $article.attr("id", articleId);
     });
 
     // prepend the "desktop" navigation
@@ -189,10 +215,12 @@ $(function () {
     $collapse.prepend($nav);
     $nav.append($navItems);
 
-    // select the first one when not in url
-    if (!window.location.hash.startsWith("#collapse-article-" + sectionName)) {
-      $("nav > ul > li > a", $collapse).first().click();
-    }
+    // Activate the first navigation link, always.
+    $$synthetic = true;
+    // Activate the tab side of the component.
+    // This way the first item is implicitly open.
+    $navItems.children().first().find("a").click();
+    $$synthetic = false;
   });
 
   // Terrible days counter

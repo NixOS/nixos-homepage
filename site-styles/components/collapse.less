@@ -42,6 +42,10 @@
 //    added using JavaScript - that shows the state of the article (opened or 
 //    closed).
 //
+//    Collapsed content have no special class. Thy have the `-expanded` class
+//    to expand on **only** when they are in the viewport widths where the
+//    collapse view is used.
+//
 // 3. Side tab (on the left) like navigation (only for non mobile devices, on
 //    md sizes and higher)
 //
@@ -49,6 +53,27 @@
 //    mirrors all of the h2 titles. This redundant `nav` element will not be
 //    visible on mobile devices. The `nav` will be placed on the left side
 //    and content on the right side.
+//
+//    Hidden tabs have no special class. The `-selected` class is used to
+//    show a tab currently in view, **only** when they are in the viewport
+//    widths where the tabs view is used.
+//
+// ## Note about navigation
+//
+// Navigation from tabs forcibly collapses and expands only the selected item.
+// Navigation in collapsible form affects the tabs navigation, but does not
+// collapse other elements.
+//
+// What this means, concretely, is that someone moving the window about
+// *should* have a relatively coherent experience. Selecting any option in any
+// of the views should make it available in the other view.
+//
+// This weird complex behaviour, including the implementation with a different
+// set of classes ensures that the following scenario does not happen:
+//
+// 1. User, in narrow view expands three elements
+// 2. User resizes window, or changes from portrait to landscape
+// 3. User observes content for three tabs inexplicably open!
 //
 
 .collapse {
@@ -78,12 +103,16 @@
 
     // 2. Collapsible content, needs javascript (on mobile devices, on sm sizes or lower)
     & > div > article {
-      & > * {
-        display: none;
-      }
-      &.-expanded > * {
-        display: inherit;
-      }
+      #screen-sm-max({
+        // Hide everything by default
+        & > * {
+          display: none;
+        }
+        // Only affect visibility when the collapsible version is shown.
+        &.-expanded > * {
+          display: inherit;
+        }
+      });
       &.-expanded > a.article-title::after {
         content: "-";
       }
@@ -137,6 +166,15 @@
         & > article > a.article-title {
           display: none;
         }
+
+        & > * {
+          display: none;
+        }
+
+        // Only affect visibility when the tabs version is shown.
+        & > .-selected {
+          display: inherit;
+        }
       }
 
       & > nav {
@@ -157,7 +195,7 @@
           padding-top: @gutter * 2;
           padding-bottom: @gutter * 2;
 
-          & > li.-selected {
+          & > li.-active {
             color: #theme.color[blue-dark2];
             background: #theme.color[white];
             & > a {
