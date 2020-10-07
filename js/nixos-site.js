@@ -278,7 +278,7 @@ $(function () {
   // or opening the relevant pane.
   var handleNavigation = function(event) {
     $$synthetic = true;
-    $("[href='"+window.location.hash+"']:visible").click()
+    $("[href='"+window.location.hash+"']").click()
     $$synthetic = false;
   };
   window.onpopstate = handleNavigation;
