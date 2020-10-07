@@ -211,7 +211,7 @@ $(function () {
     });
 
     // prepend the "desktop" navigation
-    $nav = $("<nav/>");
+    var $nav = $("<nav/>");
     $collapse.prepend($nav);
     $nav.append($navItems);
 
