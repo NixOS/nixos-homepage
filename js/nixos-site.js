@@ -162,9 +162,9 @@ $(function () {
       $navItems.append($navItem);
 
       // Wrap h2 title with a link which points to the article
-      $header.wrap($("<a class='article-title' />"))
-        .attr("href", "#" + articleId);
-      $header.parent().on("click", function (e) {
+      var $narrowLink = $header.wrap($("<a class='article-title' />")).parent();
+      $narrowLink.attr("href", "#" + articleId);
+      $narrowLink.on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
         $header.parents("article").toggleClass("selected");
