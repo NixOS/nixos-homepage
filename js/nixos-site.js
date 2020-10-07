@@ -144,10 +144,10 @@ $(function () {
         $this.parent().addClass("-selected");
 
         // hide all content
-        $("article", $collapse).removeClass("-selected");
+        $("article", $collapse).removeClass("-expanded");
 
         // show the content of the link you clicked on
-        $article.addClass("-selected");
+        $article.addClass("-expanded");
 
         // This looks dumb, but if we don't override the native behaviour we
         // get scrolled just past the tabs...
@@ -171,7 +171,7 @@ $(function () {
       $narrowLink.on("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $header.parents("article").toggleClass("-selected");
+        $header.parents("article").toggleClass("-expanded");
         // This looks dumb, but if we don't override the native behaviour we
         // get scrolled just past the tabs...
         // So no scroll, and we control the URL.
