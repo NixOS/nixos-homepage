@@ -1,4 +1,112 @@
-.nixcon-section {
-  background: #theme.color[blue-light];
-  color: #theme.color[white];
+.community-description {
+  .generic-layout();
+  .lead();
+}
+
+.community-banner {
+  .wide-banner();
+  margin-bottom: 3*@gutter;
+}
+
+.community-communication {
+  .generic-layout();
+
+  & > div {
+    #columns(3);
+  }
+}
+
+.community-nixcon {
+  background: #theme.color[blue-dark];
+  padding-top: 1*@gutter;
+  padding-bottom: 1*@gutter;
+  margin-bottom: 3*@gutter;
+
+  & > div {
+    .generic-layout();
+
+    color: #theme.color[white];
+
+    h1, a {
+      color: #theme.color[white];
+    }
+
+    & > p {
+      .lead();
+    }
+
+    & > div {
+      #columns(2);
+
+      #screen-sm-min({
+        & > div:first-child {
+          width: 34%;
+        }
+
+        & > div:last-child {
+          width: 66%;
+
+        }
+      });
+
+      h2 {
+        margin-top: 1*@gutter;
+        margin-bottom: 3*@gutter;
+      }
+
+      & > div > div {
+        padding: 1*@gutter;
+        h3 {
+          margin-top: 0;
+        }
+        article {
+          margin-bottom: 2*@gutter;
+        }
+      }
+
+      & > div:first-child > div {
+        background: #theme.color[blue-lighter];
+        border-radius: 1*@gutter;
+
+        p, a {
+          color: #theme.color[black];
+        }
+      }
+
+      & > div:last-child {
+        h2, h3, p, a {
+          color: #theme.color[white];
+        }
+        & > div > div {
+          #columns(2);
+        }
+      }
+    }
+  }
+}
+
+.community-meetups {
+  .generic-layout();
+
+  & > ul {
+    #columns(3);
+    text-align: center;
+    margin: 2*@gutter 0;
+    font-size: 120%;
+
+    & > li {
+      h2 {
+        font-size: 140%;
+      }
+
+      & > ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        & > li {
+          margin: 0.5*@gutter 0;
+        }
+      }
+    }
+  }
 }
