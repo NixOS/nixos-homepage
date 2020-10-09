@@ -101,7 +101,7 @@
         <h3>Graphical ISO image</h3>
 
         <p>The graphical installation ISO image <strong>contains NixOS
-            installer</strong> as well as <strong>KDE Desktop</strong> and
+            installer</strong> as well as <strong>Plasma 5</strong> and
           several applications. It’s a <em>live CD</em>, so it allows you to
           get an impression of NixOS (and the Nix package manager) without
           installing it.</p>
@@ -139,7 +139,7 @@
         <aside class="notice-box -warning">
           <strong>This is a demo appliance</strong> for VirtualBox (in OVA format).
         </aside>
-        <p>VirtualBox image includes includes <strong>KDE (Plasma5)</strong> as
+        <p>VirtualBox image includes includes <strong>Plasma 5</strong> as
           well as <strong>the VirtualBox guest additions</strong>.</p>
         <ul class="download-buttons">
           <li>
@@ -158,7 +158,7 @@
           <li>You can log in as <strong>user <code>demo</code></strong>,
             <strong>password <code>demo</code></strong>.</li>
           <li>To obtain a root shell, run
-            <code>sudo -i</code> in the KDE terminal (<code>konsole</code>).</li>
+            <code>sudo -i</code> in the terminal (<code>konsole</code>).</li>
         </ul>
       </article>
       <article id="nixos-amazon">
