@@ -47,14 +47,14 @@
 
 .__flair_outlined-bg_default {
   &::before {
-    #svg.background-outlines.blue-dark2;
+    #svg.background-outlines.blue-dark;
     opacity: 0.08;
   }
 }
 
 .__flair_outlined-bg_dark {
   color: #theme.color[white];
-  background-color: #theme.color[blue-dark2];
+  background-color: #theme.color[blue-dark];
   h1 {
     color: #theme.color[white];
   }
@@ -162,7 +162,7 @@
 #flair() {
   .angled-title(
     @foreground: #theme.color[white],
-    @background: #theme.color[blue-dark2],
+    @background: #theme.color[blue-dark],
   ) {
     color: @foreground;
     &:extend(.__flair_angled-title all);
