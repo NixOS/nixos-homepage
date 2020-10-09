@@ -1,0 +1,129 @@
+.download-header {
+  #container();
+  background: #theme.color[blue-dark];
+  color: #theme.color[white];
+
+  h1, h2, a {
+    margin: 0;
+    color: #theme.color[white];
+  }
+
+  h2 {
+    font-size: 150%;
+  }
+
+  a {
+    font-size: 150%;
+    font-weight: bold;
+    background-color: #theme.color[green];
+    border: 0;
+    padding: 0 1rem;
+    border-radius: 1*@gutter;
+    margin-left: 1*@gutter;
+  }
+
+  & > div {
+    #columns(2, @xxs: 2, @xs: 2);
+
+    & > div {
+      text-align: right;
+      & > * {
+        display: inline-block;
+      }
+    }
+  }
+
+  #screen-sm-min({
+    padding: 1*@gutter 2*@gutter;
+  });
+
+  #screen-xs-max({
+    #fill-width();
+    width: auto;
+    margin: -1*@gutter;
+    padding: 2*@gutter 1*@gutter;
+    & > div > div > h2 {
+      display: none;
+    }
+  });
+
+
+}
+
+.download-nix,
+.download-nixos {
+  #container();
+
+  margin-top: 2*@gutter;
+  margin-bottom: 3*@gutter;
+
+  .download-buttons {
+    list-style: none;
+    & > li {
+      display: inline-block;
+      margin-bottom: 1*@gutter;
+      margin-right: 1*@gutter;
+
+      & > a:first-child {
+        &:extend(.button);
+      }
+
+      #screen-xs-max({
+        display: block;
+
+        & > span.label {
+          display: none;
+        }
+        & > a:not(first-child) {
+          display: none;
+        }
+      });
+    } 
+  }
+
+  .download-amazon {
+    & > strong,
+    & > select {
+      font-size: 120%;
+    }
+
+    & > table {
+      background: #theme.color[blue-lighter];
+      border-radius: 1*@gutter;
+      text-align: center;
+      font-size: 110%;
+      margin-top: 1*@gutter;
+      padding-left: 2*@gutter;
+      padding-right: 2*@gutter;
+
+      & > thead > tr > th {
+        padding-top: 1*@gutter;
+      }
+
+      & > tbody > tr > td {
+        padding-bottom: 1*@gutter;
+      }
+
+      & > thead > tr > th {
+        color: #theme.color[blue-light];
+        text-align: center;
+      }
+
+      & > tbody > tr {
+        display: none;
+
+        &.selected {
+          display: table-row;
+        }
+
+        & > td {
+          font-weight: bold;
+
+          & > code {
+            font-weight: normal;
+          }
+        }
+      } 
+    }
+  }
+}

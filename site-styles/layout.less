@@ -168,6 +168,16 @@ pre, code {
   font-family: #theme.font[monospace];
 }
 
+code {
+  color: #theme.color[orange-dark];
+  background: #theme.color[gray-lighter];
+  display: inline-block;
+  padding: 0 0.5*@gutter;
+  border: 1px solid #theme.color[gray-light];
+  border-radius: 0.5*@gutter;
+  line-height: @line-height - (0.2); // border should not make line bigger
+}
+
 // Utility classes
 // ===============
 
@@ -314,6 +324,14 @@ img.inline {
 
   &.-info {
     background-color: #theme.color[blue-dark];
+    color: #theme.color[white];
+  }
+  &.-warn {
+    background-color: #theme.color[orange];
+    color: #theme.color[white];
+  }
+  &.-success {
+    background-color: #theme.color[green];
     color: #theme.color[white];
   }
 }
