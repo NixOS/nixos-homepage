@@ -1,21 +1,127 @@
+.governance-description {
+  .generic-layout();
+  .lead();
+}
+
+
 .governance-rfcprocess {
-  @_cols: 3;
   #container();
-  & > * {
-    #columns(@_cols);
-  }
-  // TODO: add a generic way to make -twice
-  // this snippet was taken from ../layout.less:239
-  & > *:first-child {
-    #screen-md-min({
-      width: 100%/@_cols*2;
-    });
+
+  & > div {
+    #columns(2);
+
+    h2 {
+      font-size: 250%;
+      margin-bottom: 1.5*@gutter;
+    }
+    & > div:first-child > a {
+      display: inline-block;
+      color: #theme.color[white];
+      background: #theme.color[green];
+      border: 0;
+      border-radius: 1*@gutter;
+      margin-top: 0.5*@gutter;
+      padding: 1.2*@gutter 3*@gutter;
+      line-height: 1.5*@gutter;
+      font-size: 110%;
+      font-weight: bold;
+    }
   }
 }
 
-.teams-section {
+.governance-teams {
   background: #theme.color[blue-dark];
-  h2, h3, p {
+  padding-top: 1*@gutter;
+  padding-bottom: 2*@gutter;
+  margin-bottom: 3*@gutter;
+
+  & > div {
+    .generic-layout();
+
     color: #theme.color[white];
+
+    h2, h3, p {
+      color: #theme.color[white];
+    }
+
+    h2 {
+      font-size: 250%;
+    }
+
+    h3 {
+      font-size: 170%;
+    }
+
+    p {
+      height: 7*@gutter;
+    }
+    & > div {
+      #columns(3);
+
+      & > div {
+        margin-bottom: 2*@gutter;
+      }
+    }
+  }
+}
+
+.governance-foundation {
+  #container();
+
+  h3 {
+    font-size: 170%;
+  }
+  & > div {
+    #columns(2);
+
+    & > div:first-child > {
+      h2 {
+        #svg.nixos-text.black();
+
+        display: block;
+        font-size: 0.1px;
+        height: 7*@gutter;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        margin-top: 11*@gutter;
+        margin-bottom: 5*@gutter;
+
+        &::before {
+          #svg.lambdaflake.color();
+
+          content: "";
+          display: block;
+          height: 10*@gutter;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center center;
+          position: relative;
+          top: -10*@gutter;
+        }
+
+        &::after {
+          content: "Foundation";
+          display: block;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center center;
+          font-size: 3.4*@gutter;
+          font-weight: 100;
+          text-align: center;
+          color: #theme.color[black];
+          position: relative;
+          top: -3*@gutter;
+        }
+      }
+
+      text-align: center;
+
+      ul {
+        display: inline-block;
+        text-align: left;
+      }
+    }
   }
 }
