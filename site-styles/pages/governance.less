@@ -7,6 +7,8 @@
 .governance-rfcprocess {
   #container();
 
+  margin-bottom: 3*@gutter;
+
   & > div {
     #columns(2);
 
@@ -15,17 +17,18 @@
       margin-bottom: 1.5*@gutter;
     }
     & > div:first-child > a {
-      display: inline-block;
-      color: #theme.color[white];
-      background: #theme.color[green];
-      border: 0;
-      border-radius: 1*@gutter;
-      margin-top: 0.5*@gutter;
-      padding: 1.2*@gutter 3*@gutter;
-      line-height: 1.5*@gutter;
-      font-size: 110%;
-      font-weight: bold;
+      .button();
+      .-primary();
+
+      margin-top: 2*@gutter;
+      padding-top: 1*@gutter;
+      padding-bottom: 1*@gutter;
     }
+    #screen-xs-max({
+      & > div:last-child {
+        display: none;
+      }
+    });
   }
 }
 
@@ -34,6 +37,13 @@
   padding-top: 1*@gutter;
   padding-bottom: 2*@gutter;
   margin-bottom: 3*@gutter;
+
+  #screen-xs-max({
+    padding-left: 1*@gutter;
+    padding-right: 1*@gutter;
+    margin-left: -1*@gutter;
+    margin-right: -1*@gutter;
+  });
 
   & > div {
     .generic-layout();
