@@ -1,20 +1,16 @@
 { stdenv, runCommandNoCC, fetchurl, lib, nodePackages }:
 
-stdenv.mkDerivation {
-  name = "nixos-homepage-styles";
+let
+  # "Memoize" the svg optimization.
+  # Files are not often changed, but the compilation takes some time.
+  memoizedAssets = runCommandNoCC "nixos-site-svg-assets" {
+    nativeBuildInputs = with nodePackages; [
+      svgo
+    ];
+  } ''
+    cp -r "${./assets}" assets
+    chmod -R +w assets
 
-  nativeBuildInputs = with nodePackages; [
-    less
-    svgo
-  ];
-
-  src = ./.;
-
-  privateOutputs = [
-    "community"
-  ];
-   
-  buildPhase = ''
     echo ":: Embedding SVG files"
     (cd assets
     # Skip the source svg files
@@ -37,6 +33,27 @@ stdenv.mkDerivation {
       substituteInPlace svg.less --replace "@$token," "'$(cat $f)',"
     done
     )
+    mv assets $out
+  '';
+in
+
+stdenv.mkDerivation {
+  name = "nixos-homepage-styles";
+
+  nativeBuildInputs = with nodePackages; [
+    less
+  ];
+
+  src = ./.;
+
+  privateOutputs = [
+    "community"
+  ];
+   
+  buildPhase = ''
+    echo ":: Reusing memoized assets"
+    rm -rf assets
+    ln -sf ${memoizedAssets} ./assets
 
     echo ":: Building site styles"
     lessc --verbose --source-map index.less styles.css
