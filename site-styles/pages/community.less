@@ -162,9 +162,16 @@
           background-position: center center;
           margin: 0 auto 1*@gutter auto;
           padding: 0;
+          border-radius: #theme.common[radius];
         }
 
         article.nixcon-2020::before {
+          // This would be the NixOS logo on a dark blue background
+          // This is a no-no, so we put it up against a white backdrop
+          background-color: #theme.color[white];
+          // And since padding wouldn't affect it, we handle it in the
+          // background-size property.
+          background-size: calc(100% - 2*@gutter) calc(100% - 2*@gutter);
           #svg.nixcon.2020.color();
         }
       }
