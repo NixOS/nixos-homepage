@@ -9,8 +9,12 @@ stdenv.mkDerivation {
   ];
 
   src = ./.;
+
+  privateOutputs = [
+  ];
    
   buildPhase = ''
+    echo ":: Embedding SVG files"
     (cd assets
     # Skip the source svg files
     rm -f *.src.svg
@@ -32,12 +36,24 @@ stdenv.mkDerivation {
       substituteInPlace svg.less --replace "@$token," "'$(cat $f)',"
     done
     )
+
+    echo ":: Building site styles"
     lessc --verbose --source-map index.less styles.css
+
+    for p in $privateOutputs; do
+      echo ":: Building page-specific styles for $p"
+      lessc --verbose --source-map "pages/$p.private.less" "pages/$p.css"
+    done
   '';
 
   installPhase = ''
     mkdir -p $out
     cp -v styles.css $out/
     cp -v styles.css.map $out/
+
+    mkdir -v $out/pages
+    for p in $privateOutputs; do
+      cp -v "pages/$p.css" "$out/pages/$p.css"
+    done
   '';
 }
