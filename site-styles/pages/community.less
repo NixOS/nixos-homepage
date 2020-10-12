@@ -10,10 +10,17 @@
 
 .community-communication {
   .generic-layout();
+
   margin-bottom: 3*@gutter;
 
   & > div {
-    #columns(3);
+    #columns(3, @sm: 2);
+
+    & > div:nth-child(1) > a,
+    & > div:nth-child(2) > a {
+      .button();
+    }
+
     & > div:last-child > ul {
       list-style: none;
       margin: 0;
@@ -79,59 +86,21 @@
       color: #theme.color[white];
     }
 
-    article::before {
-      display: block;
-      content: "";
-      height: 200*@unit;
-      width: 200*@unit;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center center;
-      background-color: #theme.color[white];
-      margin: 0 auto 1*@gutter auto;
-      padding: 0;
-    }
-
-    article.nixcon-2020::before {
-      #svg.nixcon.2020.color();
-    }
-
-    article.nixcon-2019::before {
-      #svg.nixcon.2019.color();
-    }
-
-    article.nixcon-2018::before {
-      #svg.nixcon.2018.color();
-    }
-
-    article.nixcon-2017::before {
-      #svg.lambdaflake.color();
-    }
-
-    article.nixcon-2015::before {
-      #svg.lambdaflake.color();
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 1*@gutter;
-    }
-
     & > p {
       .lead();
+      color: #theme.color[white];
     }
 
     & > div {
       #columns(2);
 
-      #screen-sm-min({
+      #screen-md-min({
         & > div:first-child {
           width: 34%;
         }
 
         & > div:last-child {
           width: 66%;
-
         }
       });
 
@@ -141,39 +110,134 @@
       }
 
       & > div > div {
-        height: 100%;
-        padding: 1.5*@gutter;
+
+        h2, h3, p, a {
+          color: #theme.color[white];
+        }
 
         h3 {
           margin-top: 0;
           margin-bottom: 0;
         }
 
+        time {
+          font-size: 80%;
+          font-style: italic;
+        }
+
         article {
           margin-bottom: 2*@gutter;
         }
+
+        footer {
+          text-align: right;
+        }
+
+        footer > a {
+          font-weight: bold;
+        }
+
+        p {
+          margin-bottom: 0;
+        }
+
       }
 
       & > div:first-child > div {
         background: #theme.color[blue-dark2];
         border-radius: 1*@gutter;
+        padding: 1.5*@gutter;
 
-        h2, h3, p, a {
-          color: #theme.color[white];
+        article {
+          margin-bottom: 0;
+        }
+
+        article::before {
+          display: inline-block;
+          content: "";
+          height: 200*@unit;
+          width: 100%;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center center;
+          margin: 0 auto 1*@gutter auto;
+          padding: 0;
+        }
+
+        article.nixcon-2020::before {
+          #svg.nixcon.2020.color();
         }
       }
 
       & > div:last-child {
-        h2, h3, p, a {
-          color: #theme.color[white];
-        }
+        padding-top: 1.5*@gutter;
+        padding-bottom: 1.5*@gutter;
+        padding-right: 0; 
+        padding-left: 0.5*@gutter; 
 
         & > div > div {
-          #columns(2);
+          #columns(2, @sm: 1);
+
+          article:nth-child(even) {
+            padding-right: 0;
+            padding-left: 0.5*@gutter;
+          }
+
+          article:nth-child(odd) {
+            padding-right: 0.5*@gutter;
+            padding-left: 0;
+          }
+
+          article:nth-last-child(1),
+          article:nth-last-child(2) {
+            margin-bottom: 0;
+          }
+
         }
+
+        #screen-sm-max({
+          padding-top: 2*@gutter;
+          padding-bottom: 0;
+
+          & > div > div > article {
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+          }
+        });
+
+        #screen-xs-max({
+          padding-left: 1.5*@gutter;
+          padding-right: 1.5*@gutter;
+          padding-top: 3*@gutter;
+          padding-bottom: 0;
+
+          & > div > div {
+
+            & > article > p,
+            & article > footer {
+              display: none;
+            }
+
+            & > article:nth-last-child(2) {
+              margin-bottom: 2*@gutter;
+            }
+          }
+        });
       }
     }
   }
+
+  #screen-xs-max({
+    padding-left: 1*@gutter;
+    padding-right: 1*@gutter;
+    margin-left: -1*@gutter;
+    margin-right: -1*@gutter;
+
+    & > div > div > div {
+      padding-right: 0;
+    }
+  });
+
 }
 
 .community-meetups {

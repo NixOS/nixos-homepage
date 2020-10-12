@@ -22,9 +22,7 @@
       <p>The official forum is the right place to get help from other users and
         discuss the development of the projects. There are also Announcements,
         Job offers and Events.</p>
-      <div>
-        <a class="button" href="https://discourse.nixos.org/">Discourse Forum</a>
-      </div>
+      <a href="https://discourse.nixos.org/">Discourse Forum</a>
     </div>
     <div>
       <h2>Chat</h2>
@@ -33,9 +31,7 @@
       <p><a href="irc://irc.freenode.net/#nixos">#nixos</a> on the <a href="https://freenode.net/">freenode network</a>
         (<a href="https://logs.nix.samueldr.com/nixos/">logs</a> are
         available)</p>
-      <div>
-        <a class="button" href="https://webchat.freenode.net/#nixos">Open Webchat</a>
-      </div>
+      <a href="https://webchat.freenode.net/#nixos">Open Webchat</a>
     </div>
     <div>
       <h2>Other Platforms</h2>
@@ -77,8 +73,13 @@
                 <h3>NixCon 2020 - Online</h3>
                 <time datetime="2019-10-16">16-18 October 2020</time>
               </header>
+              <p>
+                NixCon is a community-oriented conference for contributors and
+                users of Nix and NixOS. It's about sharing experiences,
+                inspiring people and discussing future development.
+              </p>
               <footer>
-                <a class="button -primary" href="https://2019.nixcon.org">Read more...</a>
+                <a href="https://2019.nixcon.org">Read more...</a>
               </footer>
             </article>
           </div>
@@ -93,8 +94,13 @@
                 <h3>NixCon 2019 - Brno</h3>
                 <time datetime="2019-10-25">25-27 October 2019</time>
               </header>
+              <p>
+                NixCon is becoming a regular gathering that everybody expects
+                to happen. This year we met at Brno, Czech Republic. This was
+                the biggest conference so far.
+              </p>
               <footer>
-                <a class="button -primary" href="https://2019.nixcon.org">Read more...</a>
+                <a href="https://2019.nixcon.org">Read more...</a>
               </footer>
             </article>
             <article class="nixcon-2018 clickable-whole">
@@ -102,8 +108,13 @@
                 <h3>NixCon 2018 - London</h3>
                 <time datetime="2019-10-25">25-27 October 2018</time>
               </header>
+              <p>
+                For the first time a Nix conference outside the Germany. London
+                was the first conference that was not run over the weekend, but
+                during the week.
+              </p>
               <footer>
-                <a class="button -primary" href="https://nixcon2018.org">Read more...</a>
+                <a href="https://nixcon2018.org">Read more...</a>
               </footer>
             </article>
             <article class="nixcon-2017 clickable-whole">
@@ -111,8 +122,12 @@
                 <h3>NixCon 2017 - Munich</h3>
                 <time datetime="2019-10-28">28-31 October 2017</time>
               </header>
+              <p>
+                After a year of a break, Nix community gathered at TNG
+                Technology Consulting in Munich.
+              </p>
               <footer>
-                <a class="button -primary" href="http://nixcon2017.org">Read more...</a>
+                <a href="http://nixcon2017.org">Read more...</a>
               </footer>
             </article>
             <article class="nixcon-2015 clickable-whole">
@@ -120,8 +135,14 @@
                 <h3>NixCon 2015 - Berlin</h3>
                 <time datetime="2019-11-14">14-17 November 2015</time>
               </header>
+              <p>
+                Taking place in a Berlin-style converted loft, it was the first
+                NixOS conference. It was the first time Nix community came
+                together in such numbers. In two days there were many
+                interesting talks.
+              </p>
               <footer>
-                <a class="button -primary" href="https://conf.nixos.org">Read more...</a>
+                <a href="https://conf.nixos.org">Read more...</a>
               </footer>
             </article>
           </div>
