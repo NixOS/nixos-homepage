@@ -11,6 +11,7 @@ stdenv.mkDerivation {
   src = ./.;
 
   privateOutputs = [
+    "community"
   ];
    
   buildPhase = ''
