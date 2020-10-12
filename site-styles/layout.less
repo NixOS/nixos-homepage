@@ -27,8 +27,8 @@
 //   https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing
 @gutter: 16*@unit;
 
-* {
-  box-sizing:border-box
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 html {
