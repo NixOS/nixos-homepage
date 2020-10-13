@@ -241,3 +241,54 @@
     });
   }
 }
+
+//
+// Wedge shaped
+// ============
+//
+// The height of the diagonal section stays constant; the angle of the line
+// changes according to the width of the viewport.
+
+#flair() {
+  .wedge-shaped {
+    .base(
+      @size: 64*@unit,
+      @margin-bottom: 0rem,
+      @margin-top: 0rem
+    ) {
+      @background: #theme.color[background];
+      position: relative;
+      margin-top: calc(@size + @margin-top);
+      margin-bottom: calc(@size + @margin-bottom);
+
+      &::before, &::after {
+        content: "";
+        display: block;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: top center;
+
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: @size;
+      }
+
+      &::before {
+        bottom: calc(100% - 1*@unit);
+        transform: scaleY(-1);
+      }
+      &::after {
+        top: calc(100% - 1*@unit);
+      }
+    }
+
+    .blue-dark() {
+      background-color: #theme.color[blue-dark];
+      &::before, &::after {
+        #svg.multipurpose-wedge.blue-dark();
+      }
+    }
+  }
+}
