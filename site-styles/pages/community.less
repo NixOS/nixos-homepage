@@ -1,0 +1,281 @@
+.community-description {
+  .generic-layout();
+  .lead();
+}
+
+.community-banner {
+  .wide-banner();
+  margin-bottom: 3*@gutter;
+}
+
+.community-communication {
+  .generic-layout();
+
+  margin-bottom: 3*@gutter;
+
+  & > div {
+    #columns(3, @sm: 2);
+
+    & > div:nth-child(1) > a,
+    & > div:nth-child(2) > a {
+      .button();
+    }
+
+    & > div:last-child > ul {
+      list-style: none;
+      margin: 0;
+
+      & > li.social-icon {
+
+        & > a {
+          position: relative;
+          left: 3*@gutter;
+        }
+
+        & > a::before {
+          position: absolute;
+          display: inline-block;
+          content: "";
+          height: 26*@unit;
+          width: 26*@unit;
+          top: -2px;
+          left: -2*@gutter;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center center;
+          margin: 0;
+          padding: 0;
+        }
+
+        &.-reddit > a::before {
+          #svg.icon.social.reddit.black();
+        }
+
+        &.-discord > a::before {
+          #svg.icon.social.discord.black();
+        }
+
+        &.-stackoverflow > a::before {
+          #svg.icon.social.stackoverflow.black();
+        }
+
+        &.-twitter > a::before {
+          #svg.icon.social.twitter.black();
+        }
+
+        &.-mastodon > a::before {
+          #svg.icon.social.mastodon.black();
+        }
+      }
+    }
+  }
+}
+
+.community-nixcon {
+  #flair.wedge-shaped.base(
+    @margin-top: @gutter,
+    @margin-bottom: 2*@gutter
+  );
+  #flair.wedge-shaped.blue-dark();
+
+  padding-top: 1*@gutter;
+  padding-bottom: 1*@gutter;
+
+  & > div {
+    .generic-layout();
+
+    color: #theme.color[white];
+
+    h1, a {
+      color: #theme.color[white];
+    }
+
+    & > p {
+      .lead();
+      color: #theme.color[white];
+    }
+
+    & > div {
+      #columns(2);
+
+      #screen-md-min({
+        & > div:first-child {
+          width: 34%;
+        }
+
+        & > div:last-child {
+          width: 66%;
+        }
+      });
+
+      h2 {
+        margin-top: 0;
+        margin-bottom: 2*@gutter;
+      }
+
+      & > div > div {
+
+        h2, h3, p, a {
+          color: #theme.color[white];
+        }
+
+        h3 {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+
+        time {
+          font-size: 80%;
+          font-style: italic;
+        }
+
+        article {
+          margin-bottom: 2*@gutter;
+        }
+
+        footer {
+          text-align: right;
+        }
+
+        footer > a {
+          font-weight: bold;
+        }
+
+        p {
+          margin-bottom: 0;
+        }
+
+      }
+
+      & > div:first-child > div {
+        background: #theme.color[blue-dark2];
+        border-radius: 1*@gutter;
+        padding: 1.5*@gutter;
+
+        article {
+          margin-bottom: 0;
+        }
+
+        article::before {
+          display: inline-block;
+          content: "";
+          height: 200*@unit;
+          width: 100%;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center center;
+          margin: 0 auto 1*@gutter auto;
+          padding: 0;
+          border-radius: #theme.common[radius];
+        }
+
+        article.nixcon-2020::before {
+          // This would be the NixOS logo on a dark blue background
+          // This is a no-no, so we put it up against a white backdrop
+          background-color: #theme.color[white];
+          // And since padding wouldn't affect it, we handle it in the
+          // background-size property.
+          background-size: calc(100% - 2*@gutter) calc(100% - 2*@gutter);
+        }
+      }
+
+      & > div:last-child {
+        padding-top: 1.5*@gutter;
+        padding-bottom: 1.5*@gutter;
+        padding-right: 0; 
+        padding-left: 0.5*@gutter; 
+
+        & > div > div {
+          #columns(2, @sm: 1);
+
+          article:nth-child(even) {
+            padding-right: 0;
+            padding-left: 0.5*@gutter;
+          }
+
+          article:nth-child(odd) {
+            padding-right: 0.5*@gutter;
+            padding-left: 0;
+          }
+
+          article:nth-last-child(1),
+          article:nth-last-child(2) {
+            margin-bottom: 0;
+          }
+
+        }
+
+        #screen-sm-max({
+          padding-top: 2*@gutter;
+          padding-bottom: 0;
+
+          & > div > div > article {
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+          }
+        });
+
+        #screen-xs-max({
+          padding-left: 1.5*@gutter;
+          padding-right: 1.5*@gutter;
+          padding-top: 3*@gutter;
+          padding-bottom: 0;
+
+          & > div > div {
+
+            & > article > p,
+            & article > footer {
+              display: none;
+            }
+
+            & > article:nth-last-child(2) {
+              margin-bottom: 2*@gutter;
+            }
+          }
+        });
+      }
+    }
+  }
+
+  #screen-xs-max({
+    padding-left: 1*@gutter;
+    padding-right: 1*@gutter;
+    margin-left: -1*@gutter;
+    margin-right: -1*@gutter;
+
+    & > div > div > div {
+      padding-right: 0;
+    }
+  });
+
+}
+
+.community-meetups {
+  .generic-layout();
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+
+  & > ul {
+    #columns(3);
+    text-align: center;
+    margin: 2*@gutter 0;
+    font-size: 120%;
+
+    & > li {
+      h2 {
+        font-size: 140%;
+      }
+
+      & > ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        & > li {
+          margin: 0.5*@gutter 0;
+        }
+      }
+    }
+  }
+}

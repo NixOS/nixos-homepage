@@ -96,11 +96,9 @@ $(function () {
 
   // Make a whole element act as if the first link or button was clicked.
   $(".clickable-whole").each(function () {
-    var $link = $($(this).find("a, button")[0]);
-
     // Make the whole thing act as if it was clicked.
-    $(this).on("click", function (event) {
-      $link[0].click();
+    $(this).on("click", function () {
+      $(this).find("a, button").first()[0].click();
     });
   });
 
