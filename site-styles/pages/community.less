@@ -72,10 +72,14 @@
 }
 
 .community-nixcon {
-  background: #theme.color[blue-dark];
+  #flair.wedge-shaped.base(
+    @margin-top: @gutter,
+    @margin-bottom: 2*@gutter
+  );
+  #flair.wedge-shaped.blue-dark();
+
   padding-top: 1*@gutter;
-  padding-bottom: 3*@gutter;
-  margin-bottom: 3*@gutter;
+  padding-bottom: 1*@gutter;
 
   & > div {
     .generic-layout();
