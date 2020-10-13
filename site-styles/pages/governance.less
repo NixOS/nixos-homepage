@@ -264,3 +264,26 @@
     }
   }
 }
+
+.governance-team {
+  .generic-layout();
+
+  #screen-sm-min({
+    & > aside {
+      float: right;
+      margin-left: 1*@gutter;
+      margin-bottom: 1*@gutter;
+      background: #theme.color[blue-lighter];
+      padding: 1*@gutter;
+      border-radius: 1*@gutter;
+
+      & > *:first-child {
+        margin-top: 0;
+      }
+
+      & > *:last-child {
+        margin-bottom: 0;
+      }
+    }
+  });
+}

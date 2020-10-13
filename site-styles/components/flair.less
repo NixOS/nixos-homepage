@@ -177,6 +177,20 @@
   padding-top: @gutter * 2;
   padding-bottom: @gutter * 2;
   display: flex;
+  flex-flow: column;
+  justify-content: end;
+
+  & > div {
+    #container();
+
+    color: #theme.color[white];
+    margin-top: 0;
+    margin-bottom: 0.5*@gutter;
+
+    & > a {
+      color: #theme.color[white];
+    }
+  }
 
   // extend in a media query doesn't work.
   #svg.title-angle.white;
@@ -217,7 +231,13 @@
     margin-top: -@gutter;
   }
   & > h1 {
-    color: inherit;
     #container();
+
+    color: inherit;
+    margin-top: 0;
+
+    #screen-sm-min({
+      margin-bottom: 4.5*@gutter;
+    });
   }
 }
