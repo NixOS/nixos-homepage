@@ -6,60 +6,55 @@
   <h1>Download</h1>
 </div>
 
-<section class="generic-layout lead">
-  <p>
-    Below you will find installation instructions for Nix, the package manager.
-    Nix is currently supported on <strong>Linux</strong> and <strong>Mac</strong>.
-    The latest stable release is <strong>[%latestNixVersion%]</strong>.
-  </p>
+<section class="download-header">
+  <div>
+    <h1>Nix</h1>
+    <div>
+      <h2>Current version</h2>
+      <a href="#">[% latestNixVersion %]</a>
+    </div>
+  </div>
 </section>
 
-<section class="generic-layout">
-  <h1>Getting Nix</h1>
-  <div class="tabs-navigation">
-    <nav>
-      <ul id="getting-nix">
-        <li><a href="#nix-quick-install">Quick install</a></li>
-        <li><a href="#nix-verify-installation">Verify installation (GPG)</a></li>
-        <li><a href="#nix-uninstall">Uninstall</a></li>
-        <li><a href="#nix-more">More ...</a></li>
-      </ul>
-    </nav>
-
+<section class="download-nix">
+  <div class="collapse">
     <div>
-      <section id="nix-quick-install">
-        The quickest way to install Nix is to open a terminal and run the following
-        command (as a user other than <code>root</code> with <code>sudo</code> permission):
+      <article id="nix-quick-install">
+        <h2><span>1.</span>Quick install</h2>
+        <p>
+          The quickest way to install Nix is to open a terminal and run the following
+          command (as a user other than <code>root</code> with <code>sudo</code> permission):
+        </p>
         <pre class="terminal-console">
 <span class="shell-prompt">$ </span>curl -L https://nixos.org/nix/install | sh</pre>
         <p>Make sure to follow the instructions output by the script.</p>
         <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
-      </section>
-
-      <section id="nix-verify-installation">
+      </article>
+      <article id="nix-verify-installation">
+        <h2><span>2.</span>Verify installation</h2>
         <p>You may want to verify the integrity of the installation script using GPG:</p>
         <pre class="terminal-console">
-<span class="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install
-<span class="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc
-<span class="shell-prompt">$ </span>gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE
-<span class="shell-prompt">$ </span>gpg2 --verify ./install-nix-[%latestNixVersion%].asc
-<span class="shell-prompt">$ </span>sh ./install-nix-[%latestNixVersion%]</pre>
+<span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install
+<span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc
+<span cls="shell-prompt">$ </span>gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE
+<span cls="shell-prompt">$ </span>gpg2 --verify ./install-nix-[%latestNixVersion%].asc
+<span cls="shell-prompt">$ </span>sh ./install-nix-[%latestNixVersion%]</pre>
         <p>
           The <a href="[%root%]edolstra.gpg">signing key</a> has fingerprint
           <code>B541 D553 0127 0E0B CF15 CA5D 8170 B472 6D71 98DE</code>.
           It is also available
           <a href="https://github.com/NixOS/nixos-homepage/blob/master/edolstra.gpg">on GitHub</a>.
         </p>
-      </section>
-
-      <section id="nix-uninstall">
+      </article>
+      <article id="nix-uninstall">
+        <h2><span>3.</span>Uninstall</h2>
         <p>
           You can uninstall Nix simply by running <code>rm -rf /nix</code>.
         </p>
         <!-- TODO: expand this https://github.com/NixOS/nix/issues/1402 -->
-      </section>
-
-      <section id="nix-more">
+      </article>
+      <article id="nix-more">
+        <h2><span>4.</span>More ...</h2>
         <p>The following release items are also available:</p>
         <ul>
           <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a></li>
@@ -71,35 +66,26 @@
           </li>
           <li>Old releases are <a href="https://releases.nixos.org/?prefix=nix">also available</a>.</li>
         </ul>
-      </section>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="generic-layout">
-  <h1>Getting NixOS</h1>
-
-  <p class="lead">
-    Below you will find installation instructions for NixOS, the Linux
-    distribution. The latest stable release series is
-    <strong>[%latestNixOSSeries%]</strong>.
-  </p>
+<section class="download-header">
+  <div>
+    <h1>NixOS</h1>
+    <div>
+      <h2>Current version</h2>
+      <a href="#">[% latestNixOSSeries %]</a>
+    </div>
+  </div>
 </section>
 
-<section class="generic-layout">
-  <div class="tabs-navigation">
-    <nav>
-      <ul id="getting-nixos">
-        <li><a href="#nixos-iso">ISO image</a></li>
-        <li><a href="#nixos-virtualbox">VirtualBox</a></li>
-        <li><a href="#nixos-amazon">Amazon EC2</a></li>
-        <li><a href="#nixos-more">More ...</a></li>
-      </ul>
-
-    </nav>
-
+<section class="download-nixos">
+  <div class="collapse">
     <div>
-      <section id="nixos-iso">
+      <article id="nixos-iso">
+        <h2>ISO image</h2>
         <p>You can install NixOS on physical hardware by burning one of the CD
           images onto a blank CD/DVD disk, or <a
             href="https://nixos.org/nixos/manual/index.html#sec-booting-from-usb">by
@@ -108,105 +94,128 @@
 
         <aside class="notice-box -warning">
           Please note that NixOS at the moment lacks a nice, user-friendly
-          graphical installer. Therefore this form of installation may not be
-          suitable for novice Linux users.
+          graphical installer. Therefore this form of installation <strong>may
+            not be suitable for novice Linux users.</strong>
         </aside>
 
-        <p>The <strong>graphical installation CD</strong> contains the NixOS
-          installer as well as the KDE Desktop and several applications. It’s a
-          <em>live CD</em>, so it allows you to get an impression of NixOS (and
-          the Nix package manager) without installing it.</p>
+        <h3>Graphical ISO image</h3>
+
+        <p>The graphical installation ISO image <strong>contains NixOS
+            installer</strong> as well as <strong>Plasma Desktop</strong> and
+          several applications. It’s a <em>live CD</em>, so it allows you to
+          get an impression of NixOS (and the Nix package manager) without
+          installing it.</p>
 
         [% prefix = "https://channels.nixos.org/nixos-" _ latestNixOSSeries %]
 
-        <ul>
+        <ul class="download-buttons">
           <li>
-            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Graphical live CD, 64-bit Intel/AMD</a> (<a
-              href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso.sha256">SHA-256</a>)
-            <span class="label -info">Recommended for most users</span>
+            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Download (64bit)</a>
+            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso.sha256">(SHA-256)</a>
+            <span class="label -success">Recommended for most users</span>
           </li>
         </ul>
 
-        <p>The <strong>minimal installation CD</strong> does not contain the
-          graphical user interface, and is therefore a lot smaller. You have to run
-          the installer from the console. It contains a number of rescue tools.</p>
+        <h3>Minimal ISO image</h3>
 
-        <ul>
-          <li><a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Minimal installation CD, 64-bit Intel/AMD</a>
-            (<a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso.sha256">SHA-256</a>)</li>
-          <li><a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso">Minimal installation CD, 32-bit Intel/AMD</a> (<a
-              href="[%prefix%]/latest-nixos-minimal-i686-linux.iso.sha256">SHA-256</a>)</li>
+        <p>The minimal installation ISO image <strong>does not contain the
+            graphical user interface</strong>, and is therefore a lot smaller.
+          You have to <strong>run the installer from the console</strong>. It
+          contains a number of rescue tools.</p>
+
+        <ul class="download-buttons">
+          <li>
+            <a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Download (64bit)</a>
+            <a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso.sha256">(SHA-256)</a>
+          </li>
+          <li>
+            <a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso">Download (32bit)</a>
+            <a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso.sha256">(SHA-256)</a>
+          </li>
         </ul>
-      </section>
-
-      <section id="nixos-virtualbox">
-        <p>This is a demo appliance for VirtualBox (in OVA format) that has
-          X11 and Plasma 5 enabled, as well as the VirtualBox guest additions. To
-          use it, download the OVA file, open VirtualBox, run “File → Import
-          Appliance” from the menu, select the OVA file, and click “Import”.
-          You can then start the virtual machine. When the KDE login screen
-          appears, you can log in as <strong>user <code>demo</code></strong>,
-          <strong>password <code>demo</code></strong>. To obtain a root shell, run
-          <code>sudo -i</code> in the KDE terminal (<code>konsole</code>).</p>
-
-        <ul>
-          <li><a href="[%prefix%]/latest-nixos-x86_64-linux.ova">VirtualBox appliance, 64-bit Intel/AMD</a> (<a
-              href="[%prefix%]/latest-nixos-x86_64-linux.ova.sha256">SHA-256</a>)</li>
+      </article>
+      <article id="nixos-virtualbox">
+        <h2>VirtualBox</h2>
+        <aside class="notice-box -warning">
+          <strong>This is a demo appliance</strong> for VirtualBox (in OVA format).
+        </aside>
+        <p>VirtualBox image includes the <strong>Plasma Desktop</strong> (was KDE) as
+          well as <strong>the VirtualBox guest additions</strong>.</p>
+        <ul class="download-buttons">
+          <li>
+            <a href="[%prefix%]/latest-nixos-x86_64-linux.ova">Download (64bit)</a>
+            <a href="[%prefix%]/latest-nixos-x86_64-linux.ova.sha256">(SHA-256)</a>
+          </li>
         </ul>
-      </section>
+        <h3>To use it</h3>
+        <ul>
+          <li>Download the OVA file using the button above.</li>
+          <li>Open VirtualBox.</li>
+          <li>Run <code>File → Import Appliance</code> from the menu.</li>
+          <li>Select previously downloaded OVA file.</li>
+          <li>Click <code>Import</code>.</li>
+          <li>You can then start the virtual machine.</li>
+          <li>You can log in as <strong>user <code>demo</code></strong>,
+            <strong>password <code>demo</code></strong>.</li>
+          <li>To obtain a root shell, run
+            <code>sudo -i</code> in the terminal (<code>konsole</code>).</li>
+        </ul>
+      </article>
+      <article id="nixos-amazon">
+        <h2>Amazon EC2</h2>
+        <p>NixOS can be deployed to Amazon EC2 with a pre-generated AMI image
+          that you can select bellow.</p>
 
-      <section id="nixos-amazon">
-        <p>If you are an EC2 user, you can deploy a NixOS instance instantly
-          in your preferred region by using one of the AMIs listed below.</p>
+        <h3>Via AWS Management Console</h3>
+        <p>You can create an instance using the AWS Management Console by
+          selecting the region and clicking the Launch button.</p>
 
-        <div>
+        <div class="download-amazon">
+          <strong>Choose region:</strong>
+          <select>
+            [% amis = JSON.Escape.json_decode(IO.All.new(nixosAmis).all).$latestNixOSSeries %]
+            [% FOREACH region IN amis.keys.sort %]
+            <option value="download-amazon-[% region %]">[% region %]</option>
+            [% END %]
+          </select>
           <table>
             <thead>
               <tr>
-                <th>Region</th>
                 <th>Root storage</th>
                 <th>Virtualisation</th>
-                <th>AMI</th>
-                <th></th>
+                <th colspan="2">AMI</th>
               </tr>
             </thead>
             <tbody>
-              [% amis = JSON.Escape.json_decode(IO.All.new(nixosAmis).all).$latestNixOSSeries %]
-              [% FOREACH region IN amis.keys.sort %]
-              [% FOREACH type IN amis.$region.keys.sort; ami = amis.$region.$type %]
-              <tr>
-                <td><code>[% region %]</code></td>
-                <td>[% IF type.search("ebs"); THEN; "EBS"; ELSE; "Instance"; END; %]</td>
-                <td>[% IF type.search("hvm"); THEN; "Hardware"; ELSE; "Para"; END; %]</td>
-                <td><code>[% ami %]</code></td>
-                <td><a href="https://console.aws.amazon.com/ec2/home?region=[%region%]#launchAmi=[%ami%]"
-                    class="btn btn-primary btn-mini">Launch</a></td>
+              [% amis = JSON.Escape.json_decode(IO.All.new(nixosAmis).all).$latestNixOSSeries; type = "hvm-ebs" %]
+              [% FOREACH region IN amis.keys.sort; ami = amis.$region.$type %]
+              <tr id="download-amazon-[% region %]">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>[% ami %]</code></td>
               </tr>
-              [% END %]
               [% END %]
             </tbody>
           </table>
+          <ul class="download-buttons">
+            <li>
+              <a href="https://console.aws.amazon.com/ec2/home" class="">Launch</a>
+            </li>
+          </ul>
         </div>
 
-        <p>You can create an instance using the AWS Management Console by
-          clicking one of the Launch buttons. You can also create an instance
-          from the command line. For example, to create an instance in region
-          <code>[% region = "eu-west-1"; type = "hvm-ebs"; ami = amis.$region.$type; region %]</code>
-          using the EC2 API tools, just
-          run:</p>
+        <h3>Via Command Line</h3>
+
+        <p> You can also create an instance from the command line. For example,
+          to create an instance in region <code>[% region = "eu-west-1"; type =
+            "hvm-ebs"; ami = amis.$region.$type; region %]</code> using the EC2
+          API tools, just run:</p>
 
         <pre class="terminal-console">
-$ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre>
-      </section>
+$ nix-shell -p ec2_api_tools
+(nix-shell) $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre>
 
-      <section id="nixos-more">
-        <h2 id="unstable-releases">Unstable releases</h2>
-
-        <p>If you are a developer who wants to contribute to NixOS, or if you
-          just want the latest and greatest, you can also install the
-          <a href="https://nixos.org/channels/nixos-unstable">most recent unstable release</a>.
-        </p>
-      </section>
+      </article>
     </div>
   </div>
 </section>

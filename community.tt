@@ -1,86 +1,174 @@
+[% WRAPPER atHead %]
+  <link rel="stylesheet" href="[% root %]styles/pages/community.css" type="text/css" />
+[% END %]
 [% WRAPPER layout.tt title="Community" handlesLayout=1 %]
 
 <div class="page-title">
   <h1>Community</h1>
 </div>
 
-<section class="generic-layout lead">
-  <p>Nix and NixOS are developed and used by a diverse and welcoming community from all around the world.</p>
+<section class="community-description">
+  <p>Nix and NixOS are developed and used by a diverse and welcoming community
+    from all around the world.</p>
 </section>
 
-<section class="wide-banner clickable-whole">
-  <p>
-    Check out what the community has made recently in the <a href="https://weekly.nixos.org/">NixOS Weekly</a>
-    newsletter.
-  </p>
+<section class="community-banner clickable-whole">
+  <p>Check out what the community has made recently in the <a href="https://weekly.nixos.org/">NixOS Weekly</a>
+    newsletter.</p>
 </section>
 
-<div class="generic-layout">
-
-  <h2>Communication</h2>
-
-  <div class="columnar-layout -three">
+<section class="community-communication">
+  <h1>Where to talk?</h1>
+  <div>
     <div>
-      <h3>Forum</h3>
-      <p>The official forum is the right place to get help from other users and discuss the development of the projects.
-        There are also Announcements, Job offers and Events.</p>
-      <div>
-        <a href="https://discourse.nixos.org/">Go to Discourse Forum</a>
-      </div>
+      <h2>Forum</h2>
+      <p>The official forum is the right place to get help from other users and
+        discuss the development of the projects. There are also Announcements,
+        Job offers and Events.</p>
+      <a href="https://discourse.nixos.org/">Discourse Forum</a>
     </div>
     <div>
-      <h3>Chat</h3>
-      <p>Another place to get in contact with other users is the official IRC channel:</p>
+      <h2>Chat</h2>
+      <p>Another place to get in contact with other users is the official IRC
+        channel:</p>
       <p><a href="irc://irc.freenode.net/#nixos">#nixos</a> on the <a href="https://freenode.net/">freenode network</a>
-        (<a href="https://logs.nix.samueldr.com/nixos/">logs</a> are available)</p>
-      <div>
-        <a href="https://webchat.freenode.net/#nixos">Open Webchat</a>
-      </div>
+        (<a href="https://logs.nix.samueldr.com/nixos/">logs</a> are
+        available)</p>
+      <a href="https://webchat.freenode.net/#nixos">Open Webchat</a>
     </div>
     <div>
-      <h3>Unofficial Platforms</h3>
+      <h2>Other Platforms</h2>
       <p>The community is also active on other platforms.</p>
       <ul>
-        <li><a href="https://www.reddit.com/r/NixOS/">reddit</a></li>
-        <li><a href="https://discord.gg/RbvHtGa">Discord</a></li>
-        <li>stackoverflow: see tags <a href="https://stackoverflow.com/questions/tagged/nix">nix</a>, <a
-            href="https://stackoverflow.com/questions/tagged/nixos">nixos</a>, <a
-            href="https://stackoverflow.com/questions/tagged/nixops">nixops</a> and <a
-            href="https://stackoverflow.com/questions/tagged/nixpkgs">nixpkgs</a></li>
-        <li>Twitter: see the hashtag <a href="https://twitter.com/hashtag/NixOS">#nixos</a> (#nix is too ambiguous)</li>
-        <li>Mastodon/Fediverse: see the hashtag <a href="https://mastodon.social/tags/nixos">#nixos</a></li>
+        <li class="social-icon -reddit">
+          <a alt="Reddit" href="https://www.reddit.com/r/NixOS/">Reddit</a>
+        </li>
+        <li class="social-icon -discord">
+          <a alt="Discord" href="https://discord.gg/RbvHtGa">Discord</a>
+        </li>
+        <li class="social-icon -stackoverflow">
+          <a alt="Stackoverflow"
+            href="https://stackoverflow.com/questions/tagged/nix+or+nixpkgs+or+nixos+or+nixops">Stackoverflow</a>
+        </li>
+        <li class="social-icon -twitter">
+          <a alt="Twitter" href="https://twitter.com/hashtag/NixOS">Twitter</a>
+        </li>
+        <li class="social-icon -mastodon">
+          <a alt="Mastodon" href="https://mastodon.social/tags/nixos">Mastodon</a>
+        </li>
       </ul>
     </div>
   </div>
+</section>
 
-  <h2>Events</h2>
-
-  <div class="columnar-layout -three">
+<section class="community-nixcon">
+  <div>
+    <h1>NixCon</h1>
+    <p>The <a href="[%root%]teams/nixcon.html">NixCon Team</a> organizes a
+      conference once a year.</p>
     <div>
-      <h3>NixCon</h3>
-      <p>The <a href="[%root%]teams/nixcon.html">NixCon Team</a> organizes a conference once a year.</p>
-      <p>You can find announcements on <a href="https://twitter.com/nixconf">Twitter</a> or in the <a
-          href="https://discourse.nixos.org/c/events/13">Forum</a>.</p>
-      <h4>Previous Conferences</h4>
-      <ul>
-        <li><a href="https://blog.hackeriet.no/oslo-nixos-minicon-2020/">Oslo NixOS MiniCon 2020</a> (<a
-            href="https://www.youtube.com/channel/UCyZKWsKG3uVEfgjNwzfPhhQ">Recorded Talks</a>)</li>
-        <li><a href="https://2019.nixcon.org/">NixCon 2019</a>, Brno (<a
-            href="https://www.youtube.com/watch?v=pfg9ykBo9oM&amp;list=PLgknCdxP89Re9oFsLnAb5iLO0XG_rMuAo">Recorded
-            Talks</a>)</li>
-        <li><a href="http://nixcon2018.org/">NixCon 2018</a>, London (<a
-            href="https://www.youtube.com/watch?v=rzjMif6wvMk&amp;list=PLgknCdxP89ReJKWX3sthcsbBYsoihzSQX">Recorded
-            Talks</a>)</li>
-        <li><a href="http://nixcon2017.org/">NixCon 2017</a>, Munich (<a
-            href="https://www.youtube.com/watch?v=fdj9tzRaLn4&amp;list=PLgknCdxP89ReQzhfKwMYjLdwWsc7us8ns">Recorded
-            Talks</a>)</li>
-        <li><a href="https://conf.nixos.org/">NixCon 2015</a>, Berlin (<a
-            href="https://media.ccc.de/c/nixcon2015">Recorded Talks</a>)</li>
-      </ul>
+      <div class="clickable-whole">
+        <div>
+          <h2>Next Conference</h2>
+          <div>
+            <article class="nixcon-2020 clickable-whole">
+              <header>
+                <h3>NixCon 2020 - Online</h3>
+                <time datetime="2020-10-16">16-18 October 2020</time>
+              </header>
+              <p>
+                NixCon is a community-oriented conference for contributors and
+                users of Nix and NixOS. It's about sharing experiences,
+                inspiring people and discussing future development.
+              </p>
+              <footer>
+                <a href="https://2020.nixcon.org">Read more...</a>
+              </footer>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <h2>Previous Conferences</h2>
+          <div>
+            <article class="nixcon-2019 clickable-whole">
+              <header>
+                <h3>NixCon 2019 - Brno</h3>
+                <time datetime="2019-10-25">25-27 October 2019</time>
+              </header>
+              <p>
+                NixCon is becoming a regular gathering that everybody expects
+                to happen. This year we met at Brno, Czech Republic. This was
+                the biggest conference so far.
+              </p>
+              <footer>
+                <a href="https://2019.nixcon.org">Read more...</a>
+              </footer>
+            </article>
+            <article class="nixcon-2018 clickable-whole">
+              <header>
+                <h3>NixCon 2018 - London</h3>
+                <time datetime="2019-10-25">25-27 October 2018</time>
+              </header>
+              <p>
+                For the first time a Nix conference outside the Germany. London
+                was the first conference that was not run over the weekend, but
+                during the week.
+              </p>
+              <footer>
+                <a href="https://nixcon2018.org">Read more...</a>
+              </footer>
+            </article>
+            <article class="nixcon-2017 clickable-whole">
+              <header>
+                <h3>NixCon 2017 - Munich</h3>
+                <time datetime="2019-10-28">28-31 October 2017</time>
+              </header>
+              <p>
+                After a year of a break, Nix community gathered at TNG
+                Technology Consulting in Munich.
+              </p>
+              <footer>
+                <a href="http://nixcon2017.org">Read more...</a>
+              </footer>
+            </article>
+            <article class="nixcon-2015 clickable-whole">
+              <header>
+                <h3>NixCon 2015 - Berlin</h3>
+                <time datetime="2019-11-14">14-17 November 2015</time>
+              </header>
+              <p>
+                Taking place in a Berlin-style converted loft, it was the first
+                NixOS conference. It was the first time Nix community came
+                together in such numbers. In two days there were many
+                interesting talks.
+              </p>
+              <footer>
+                <a href="https://conf.nixos.org">Read more...</a>
+              </footer>
+            </article>
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-      <h3>Meetups</h3>
-      <h4>Europe</h4>
+  </div>
+</section>
+
+<section class="community-meetups">
+  <h1>Meetups</h1>
+  <ul>
+    <li>
+      <h2>America</h2>
+      <ul>
+        <li><a href="https://www.meetup.com/New-York-Nix-Users-Group/">New York (New York)</a></li>
+        <li><a href="https://www.meetup.com/Nova-Nix-NixOS-NixOps-Meetup/">Reston (Virginia)</a></li>
+        <li><a href="http://www.meetup.com/Bay-Area-Nix-NixOS-User-Group/">San Francisco (California)</a></li>
+        <li><a href="https://www.meetup.com/Seattle-Nix-NixOS-and-Guix-GuixSD-Users/">Seattle (Washington)</a></li>
+      </ul>
+    </li>
+    <li>
+      <h2>Europe</h2>
       <ul>
         <li><a href="http://www.meetup.com/Amsterdam-Nix-Meetup/">Amsterdam (Netherlands)</a></li>
         <li><a href="http://www.meetup.com/Berlin-NixOS-Meetup/">Berlin (Germany)</a></li>
@@ -93,24 +181,15 @@
         <li><a href="https://blog.shackspace.de/?p=5829">Stuttgart (Germany)</a></li>
         <li><a href="https://www.meetup.com/NixOS-User-Group-Zurich/">Zürich (Switzerland)</a></li>
       </ul>
-
-    </div>
-    <div>
-      <h3> </h3> <!-- dirty hack to fix layout -->
-      <h4>America</h4>
-      <ul>
-        <li><a href="https://www.meetup.com/New-York-Nix-Users-Group/">New York (New York)</a></li>
-        <li><a href="https://www.meetup.com/Nova-Nix-NixOS-NixOps-Meetup/">Reston (Virginia)</a></li>
-        <li><a href="http://www.meetup.com/Bay-Area-Nix-NixOS-User-Group/">San Francisco (California)</a></li>
-        <li><a href="https://www.meetup.com/Seattle-Nix-NixOS-and-Guix-GuixSD-Users/">Seattle (Washington)</a></li>
-      </ul>
-      <h4>Asia</h4>
+    </li>
+    <li>
+      <h2>Asia</h2>
       <ul>
         <li><a href="https://www.meetup.com/Singapore-NixOS-Nix-User-Group/">Singapore (Singapore)</a></li>
         <li><a href="http://www.meetup.com/Tokyo-NixOS-Meetup/">Tokyo (Japan)</a></li>
       </ul>
-    </div>
-  </div>
+    </li>
+  </ul>
+</section>
 
-</div>
 [% END %]
