@@ -42,12 +42,27 @@
       -->
       <div>
         <h1>NixOS T-shirts, mugs and more...</h1>
-        <p>Donate to NixOS foundation by purchasing from NixOS shop.</p>
-        <p>The community member <a href="https://discourse.nixos.org/u/mogorman/summary">mogorman</a> is running the
-          shop.
-          The profits <a href="https://discourse.nixos.org/t/nixos-merchandise-report/303">are donated</a> to the <a
-            href="[%root%]governance.html#foundation">NixOS Foundation</a> twice a year (after each release).</p>
-        <a href="https://www.redbubble.com/people/mogorman/shop">Go to the shop</a>
+        <p>Donate to NixOS foundation by purchasing NixOS merchandise.</p>
+        <div>
+          <p>
+            The community member <a href="https://discourse.nixos.org/u/mogorman/summary">mogorman</a>
+            is running the RedBubble shop
+            (<a href="https://discourse.nixos.org/t/nixos-merchandise-report/303">report</a>).
+          </p>
+          <!--
+          <p>
+            The community member <a href="https://discourse.nixos.org/u/gabor_hellotux/summary">Gabor Kum</a>
+            is running the RedBubble shop.
+            (<a href="https://discourse.nixos.org/t/hello-tux-shirts/7979/14">report</a>).
+          </p>
+          -->
+        </div>
+        <div>
+          <a href="https://www.redbubble.com/people/mogorman/shop">Go to the shop (RedBubble)</a>
+          <!--
+            <a href="https://www.hellotux.com/nixos">Go to the shop (HelloTux)</a>
+          -->
+        </div>
       </div>
 
     </div>
@@ -58,7 +73,18 @@
   <div>
     <div>
       <h2>Donate using Open Collective</h2>
-      <p>You can donate to the NixOS Foundation by using Open Collective:</p>
+      <p>
+        NixOS Foundation is using <a href="https://opencollective.com/">Open Collective</a>
+        to manage the finances so evveryone can see where money comes from and where
+        mone goes.
+      </p>
+      <p>
+        With Open Collective you can make a <strong>single</strong> or
+        <strong>recurring</strong> contribution by credit card transfer.
+      </p>
+      <p>
+        Thank you!
+      </p>
       <a href="https://opencollective.com/nixos#support">Contribute</a>
     </div>
     <div>
