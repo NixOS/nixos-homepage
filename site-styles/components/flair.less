@@ -47,14 +47,14 @@
 
 .__flair_outlined-bg_default {
   &::before {
-    #svg.background-outlines.blue-dark2;
+    #svg.background-outlines.blue-dark;
     opacity: 0.08;
   }
 }
 
 .__flair_outlined-bg_dark {
   color: #theme.color[white];
-  background-color: #theme.color[blue-dark2];
+  background-color: #theme.color[blue-dark];
   h1 {
     color: #theme.color[white];
   }
@@ -162,7 +162,7 @@
 #flair() {
   .angled-title(
     @foreground: #theme.color[white],
-    @background: #theme.color[blue-dark2],
+    @background: #theme.color[blue-dark],
   ) {
     color: @foreground;
     &:extend(.__flair_angled-title all);
@@ -177,13 +177,31 @@
   padding-top: @gutter * 2;
   padding-bottom: @gutter * 2;
   display: flex;
+  flex-flow: column;
+  justify-content: end;
+
+  & > div {
+    #container();
+
+    color: #theme.color[white];
+    margin-top: 0;
+    margin-bottom: 0.5*@gutter;
+
+    & > a {
+      color: #theme.color[white];
+    }
+  }
 
   // extend in a media query doesn't work.
   #svg.title-angle.white;
   // so we instead undo the background-image.
   #screen-xs-max({
     background-image: none !important;
-    margin-bottom: @gutter;
+    margin-bottom: 3*@gutter;
+    text-align: center;
+    padding-top: 3.5*@gutter;
+    padding-bottom: 3.5*@gutter;
+    font-size: 115%;
   });
   #screen-sm-min({
     background-repeat: no-repeat;
@@ -213,7 +231,64 @@
     margin-top: -@gutter;
   }
   & > h1 {
-    color: inherit;
     #container();
+
+    color: inherit;
+    margin-top: 0;
+
+    #screen-sm-min({
+      margin-bottom: 4.5*@gutter;
+    });
+  }
+}
+
+//
+// Wedge shaped
+// ============
+//
+// The height of the diagonal section stays constant; the angle of the line
+// changes according to the width of the viewport.
+
+#flair() {
+  .wedge-shaped {
+    .base(
+      @size: 64*@unit,
+      @margin-bottom: 0rem,
+      @margin-top: 0rem
+    ) {
+      @background: #theme.color[background];
+      position: relative;
+      margin-top: calc(@size + @margin-top);
+      margin-bottom: calc(@size + @margin-bottom);
+
+      &::before, &::after {
+        content: "";
+        display: block;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: top center;
+
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: @size;
+      }
+
+      &::before {
+        bottom: calc(100% - 1*@unit);
+        transform: scaleY(-1);
+      }
+      &::after {
+        top: calc(100% - 1*@unit);
+      }
+    }
+
+    .blue-dark() {
+      background-color: #theme.color[blue-dark];
+      &::before, &::after {
+        #svg.multipurpose-wedge.blue-dark();
+      }
+    }
   }
 }

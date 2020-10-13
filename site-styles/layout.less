@@ -1,34 +1,5 @@
-// Variables definitions
-// =====================
-
-// A unit-less, equivalent to "non-high DPI" pixels for the desired font size.
-// This ends up being "math'd" away into rem.
-@pixel-equivalent-font-size: 16;
-
-// One "unit" is equivalent to one device pixel for the "default" font size.
-// Using `@unit` ensures the design is totally scalable according to the
-// platform's font sizes.
-@unit: 1rem/@pixel-equivalent-font-size;
-
-// Equivalent, but according to the local font size
-@relative-unit: 1em/@pixel-equivalent-font-size;
-
-// Purposefully set without a unit.
-@line-height: 32 / 18;
-//             ^   ^
-//             ^   \ measured in px when `line-height` is set to 1
-//             \ measured in the mockups
-
-// Margin size between components/elements.
-// It is perfectly fine to divide this by two to share responsibility between
-// side-by-side elements.
-// For *following* elements (top to bottom), prefer relying on the browser's
-// margin collapse; do NOT divide the margin there.
-//   https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing
-@gutter: 16*@unit;
-
-* {
-  box-sizing:border-box
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 html {
@@ -168,6 +139,16 @@ pre, code {
   font-family: #theme.font[monospace];
 }
 
+code {
+  color: #theme.color[orange-dark];
+  background: #theme.color[gray-lighter];
+  display: inline-block;
+  padding: 0 0.5*@gutter;
+  border: 1px solid #theme.color[gray-light];
+  border-radius: 0.5*@gutter;
+  line-height: @line-height - (0.2); // border should not make line bigger
+}
+
 // Utility classes
 // ===============
 
@@ -193,6 +174,8 @@ img.inline {
 
   &.lead, & > .lead {
     font-size: 1.25em;
+    font-weight: bold;
+    color: #theme.color[gray-dark];
   }
 }
 
@@ -314,6 +297,14 @@ img.inline {
 
   &.-info {
     background-color: #theme.color[blue-dark];
+    color: #theme.color[white];
+  }
+  &.-warn {
+    background-color: #theme.color[orange];
+    color: #theme.color[white];
+  }
+  &.-success {
+    background-color: #theme.color[green];
     color: #theme.color[white];
   }
 }

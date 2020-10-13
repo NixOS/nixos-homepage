@@ -1,23 +1,30 @@
-[% WRAPPER layout.tt title="NixCon Team" %]
+[% WRAPPER layout.tt title="NixCon Team" handlesLayout=1 %]
 
-<h1>NixCon Team</h1>
+<div class="page-title">
+  <div>
+    <a href="[% root%]governance.html">Governance</a>
+    <span>→</span>
+  </div>
+  <h1>NixCon Team</h1>
+</div>
 
-<div class="lead">
+<section class="governance-description">
   Attending and organizing NixCon is a unique and special experience, different
   from any other OS/FOSS conference.
-</div>
+</section>
 
-<div class="alert alert-info">
-  <strong>Help needed!</strong> <a href="https://discourse.nixos.org/t/help-organize-nixcon-2020/4901" class="alert-link">Help organize NixCon 2020!</a>
-</div>
+<section class="governance-team">
 
-<h2>Members</h2>
+  <aside>
+    <h2>Members</h2>
+    <ul>
+      <li><a href="https://discourse.nixos.org/u/andir">Andreas Rammhold</a> (andir)</li>
+      <li><a href="https://discourse.nixos.org/u/flokli">Florian Klink</a> (flokli)</li>
+      <li><a href="https://discourse.nixos.org/u/addict3d">Nick Bathum</a> (addict3d)</li>
+      <li><a href="https://discourse.nixos.org/u/zimbatm">zimbatm</a> (zimbatm)</li>
+    </ul>
+  </aside>
 
-<ul>
-  <li><a href="https://discourse.nixos.org/u/andir">Andreas Rammhold</a> (andir)</li>
-  <li><a href="https://discourse.nixos.org/u/flokli">Florian Klink</a> (flokli)</li>
-  <li><a href="https://discourse.nixos.org/u/addict3d">Nick Bathum</a> (addict3d)</li>
-  <li><a href="https://discourse.nixos.org/u/zimbatm">zimbatm</a> (zimbatm)</li>
-</ul>
+</section>
 
 [% END %]

@@ -1,0 +1,250 @@
+// # `.collapse` component
+//
+// Required HTML structure:
+//   <div class="collapse">
+//     <div>
+//       <article>
+//         <h2><span>1.</span>Title</h2>
+//       </article>
+//       <article>
+//         <h2>Title 2</h2>
+//       </article>
+//       <article>
+//         <h2>Title 3</h2>
+//       </article>
+//     </div>
+//   </div>
+//
+// With above structure it will create a navigation with h2 titles as
+// navigation items. It degrades gracefully to devices with smaller screen
+// by relying on a "collapsible section" behaviour, and for user agents with 
+// JavaScript disabled by ensuring things are always visible.
+//
+// The `h2 > span` is optional.
+//
+// 1. No JavaScript (all screen sizes)
+//
+//    It leaves articles as they are it only styles the h2 titles as bubble.
+//    First span element is will be put in a green circle, this is normally
+//    used for number representing and emphasising the order of the article.
+//
+// 2. Collapsible content, needs JavaScript (on mobile devices, on sm sizes or
+//    lower)
+//
+//    Unless provided, an `id` will be created from a normalized h2 title with
+//    the `collapse-article-` prefix and added to the parent article element.
+//    `h2` titles will be wrapped with a link element (`a`) pointing to the
+//    article (`#id-of-article`).
+//
+//    Its appearance is just like without JavaScript, but the content is hidden
+//    until the title has been activated.
+//    There is a symbol (+ or -) indicator on the right side - which is
+//    added using JavaScript - that shows the state of the article (opened or 
+//    closed).
+//
+//    Collapsed content have no special class. Thy have the `-expanded` class
+//    to expand on **only** when they are in the viewport widths where the
+//    collapse view is used.
+//
+// 3. Side tab (on the left) like navigation (only for non mobile devices, on
+//    md sizes and higher)
+//
+//    JavaScript part creates a `nav` at the top of the root element, which
+//    mirrors all of the h2 titles. This redundant `nav` element will not be
+//    visible on mobile devices. The `nav` will be placed on the left side
+//    and content on the right side.
+//
+//    Hidden tabs have no special class. The `-selected` class is used to
+//    show a tab currently in view, **only** when they are in the viewport
+//    widths where the tabs view is used.
+//
+// ## Note about navigation
+//
+// Navigation from tabs forcibly collapses and expands only the selected item.
+// Navigation in collapsible form affects the tabs navigation, but does not
+// collapse other elements.
+//
+// What this means, concretely, is that someone moving the window about
+// *should* have a relatively coherent experience. Selecting any option in any
+// of the views should make it available in the other view.
+//
+// This weird complex behaviour, including the implementation with a different
+// set of classes ensures that the following scenario does not happen:
+//
+// 1. User, in narrow view expands three elements
+// 2. User resizes window, or changes from portrait to landscape
+// 3. User observes content for three tabs inexplicably open!
+//
+
+.collapse {
+
+  // Indent by 1 unit everything except h2
+  article {
+    & > * {
+      margin-left: 1*@gutter;
+      margin-right: 1*@gutter;
+    }
+    & > ul {
+      margin-left: 2*@gutter;
+    }
+    h2 {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  // 1. No Javascript (all screen sizes)
+  & > div > article > h2 {
+    #collapse-title-bubble();
+    font-size: 150%;
+  }
+
+  html.with-js & {
+
+    // 2. Collapsible content, needs javascript (on mobile devices, on sm sizes or lower)
+    & > div > article {
+      #screen-sm-max({
+        // Hide everything by default
+        & > * {
+          display: none;
+        }
+        // Only affect visibility when the collapsible version is shown.
+        &.-expanded > * {
+          display: inherit;
+        }
+      });
+      &.-expanded > a.article-title::after {
+        content: "-";
+      }
+      & > a.article-title {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        border: 0;
+        margin-left: 0;
+        margin-right: 0;
+
+        &::after {
+          color: #theme.color[white];
+          background: #theme.color[blue-light];
+          position: absolute;
+          display: block;
+          right: 2*@gutter;
+          top: 1.5*@gutter;
+          width: 2*@gutter;
+          height: 2*@gutter;
+          padding: 0;
+          margin: 0;
+          margin-top: 0.5*@gutter;
+          border: 0;
+          text-align: center;
+          line-height: 2*@gutter;
+          border-radius: 1*@gutter;
+          content: "+";
+        }
+
+        h2 {
+          #collapse-title-bubble();
+        }
+      }
+    }
+
+    // 3. Side tab (on the left) like navigation (only for non mobile devices, on md and higher)
+    & > nav {
+      display: none;
+    }
+    #screen-md-min({
+      display: flex;
+      flex-direction: row;
+
+      & > div {
+        flex-grow: 1;
+        flex-shrink: 1;
+        width: 70%;
+
+        // hide h2 titles in the article
+        & > article > a.article-title {
+          display: none;
+        }
+
+        & > * {
+          display: none;
+        }
+
+        // Only affect visibility when the tabs version is shown.
+        & > .-selected {
+          display: inherit;
+        }
+      }
+
+      & > nav {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 30%;
+        display: block;
+        margin-right: 2*@gutter;
+
+        & > ul {
+          display: block;
+          font-weight: bold;
+          margin: 0;
+          padding: 0;
+          list-style-type: none;
+          border-radius: #theme.common[radius];
+          background: #theme.color[blue-lighter];
+          padding-top: @gutter * 2;
+          padding-bottom: @gutter * 2;
+
+          & > li.-active {
+            color: #theme.color[blue-dark2];
+            background: #theme.color[white];
+            & > a {
+              color: #theme.color[blue-dark2];
+              background: #theme.color[white];
+            }
+          }
+
+          & > li > a {
+            #collapse-title-bubble(0.8);
+            color: #theme.color[blue-light];
+            margin: 0;
+            padding: 1*@gutter 2*@gutter;
+            display: block;
+            text-decoration: none;
+            border: 0;
+          }
+        }
+
+      }
+    });
+
+  }
+}
+
+#collapse-title-bubble(@scale: 1.0) {
+
+  // Creates a light blue bubble with quite some spacing around
+  color: #theme.color[blue-dark2];
+  background: #theme.color[blue-lighter];
+  margin: 0 0 1*@gutter 0;
+  padding: 1.5*@gutter;
+  border-radius: 1.5*@gutter;
+  font-size: @scale*140%;
+  line-height: 3*@gutter;
+
+  // First span element is will be put in a green circle, this is normally
+  // used for number representing and emphasising the order of the article.
+  & > span:first-child {
+    color: #theme.color[white];
+    background: #theme.color[green];
+    width: 3*@scale*@gutter;
+    display: inline-block;
+    margin-right: 1*@gutter;
+    height: 3*@scale*@gutter;
+    padding: 0.75*@scale*@gutter;
+    border-radius: 2*@gutter;
+    text-align: center;
+    line-height: (3-(2*0.75))*@scale*@gutter;
+  }
+
+};

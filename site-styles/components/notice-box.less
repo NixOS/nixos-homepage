@@ -1,7 +1,7 @@
 .notice-box {
   margin-bottom: @gutter;
   border-radius: #theme.common[radius];
-  padding: @gutter;
+  padding: 1.5*@gutter;
   overflow: auto;
 
   & > :first-child {
@@ -9,9 +9,16 @@
   }
 
   &.-info {
+    color: #theme.color[blue-dark];
     background: #theme.color[blue-lighter];
   }
   &.-warning {
-    background-color: #theme.color[yellow];
+    // The darker orange isn't dark enough against light orange.
+    // This is made worse by using s strong "night mode" with redshift or
+    // similar.
+    // Ideally we wouldn't deviate from the palette.
+    // 27% is the minimum required to get 4.5:1 contrast ratio.
+    color: darken(#theme.color[orange-dark], 27%);
+    background-color: #theme.color[orange-light];
   }
 }
