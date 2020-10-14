@@ -252,7 +252,11 @@
 #flair() {
   .wedge-shaped {
     .base(
+      @before: right,
+      @after: right,
       @size: 64*@unit,
+      @size_before: @size,
+      @size_after: @size,
       @margin-bottom: 0rem,
       @margin-top: 0rem
     ) {
@@ -272,15 +276,29 @@
         left: 0;
         right: 0;
         width: 100%;
-        height: @size;
       }
 
       &::before {
+        height: @size_before;
         bottom: calc(100% - 1*@unit);
         transform: scaleY(-1);
       }
       &::after {
+        height: @size_after;
         top: calc(100% - 1*@unit);
+      }
+
+      &::before when (@before = left) {
+        transform: scaleX(-1) scaleY(-1);
+      }
+      &::after when (@after = left) {
+        transform: scaleX(-1);
+      }
+      &::before when (@before = none) {
+        display: none;
+      }
+      &::after when (@after = none) {
+        display: none;
       }
     }
 
