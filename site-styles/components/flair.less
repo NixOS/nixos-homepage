@@ -257,10 +257,18 @@
       @size: 64*@unit,
       @size_before: @size,
       @size_after: @size,
+      @position_before: outside,
+      @position_after: outside,
+
+      // In percent
+      @scale_before: 100%,
+      @scale_after: 100%,
+
+      // Units are needed for calc()
       @margin-bottom: 0rem,
       @margin-top: 0rem
     ) {
-      @background: #theme.color[background];
+      @background-color: #theme.color[background];
       position: relative;
       margin-top: calc(@size + @margin-top);
       margin-bottom: calc(@size + @margin-bottom);
@@ -268,7 +276,6 @@
       &::before, &::after {
         content: "";
         display: block;
-        background-size: 100% 100%;
         background-repeat: no-repeat;
         background-position: top center;
 
@@ -282,10 +289,12 @@
         height: @size_before;
         bottom: calc(100% - 1*@unit);
         transform: scaleY(-1);
+        background-size: 100% @scale_before;
       }
       &::after {
         height: @size_after;
         top: calc(100% - 1*@unit);
+        background-size: 100% @scale_after;
       }
 
       &::before when (@before = left) {
@@ -299,6 +308,16 @@
       }
       &::after when (@after = none) {
         display: none;
+      }
+      &::before when (@position_before = inside) {
+        bottom: initial;
+        top: 0;
+        background-color: @background-color;
+      }
+      &::after when (@position_after = inside) {
+        top: initial;
+        bottom: 0;
+        background-color: @background-color;
       }
     }
 
