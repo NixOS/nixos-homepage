@@ -53,7 +53,16 @@
 }
 
 .donate-merch {
-  background: #theme.color[blue-lighter];
+  #flair.wedge-shaped.base(
+    @before: left,
+    @after: left,
+    @size_before: 72*@unit,
+    @size_after: 48*@unit,
+    @margin-top: @gutter,
+    @margin-bottom: 2*@gutter
+  );
+  #flair.wedge-shaped.blue-lighter();
+
   padding-top: 1*@gutter;
   padding-bottom: 2*@gutter;
   margin-bottom: 3*@gutter;
@@ -105,7 +114,14 @@
 }
 
 .donate-acknowledgements {
-  background: #theme.color[blue-lighter];
+  #flair.wedge-shaped.base(
+    @before: right,
+    @after: none,
+    @margin-top: @gutter,
+    @margin-bottom: 0
+  );
+  #flair.wedge-shaped.blue-lighter();
+
   padding-top: 1*@gutter;
   padding-bottom: 2*@gutter;
   margin-bottom: -2*@gutter;
