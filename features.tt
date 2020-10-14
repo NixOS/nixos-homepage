@@ -46,16 +46,15 @@
 
       <h2>Complete dependencies</h2>
 
-      <p>Nix helps you make sure that package dependency specifications are
+      <p>When you’re making a package for a package management system, like RPM,
+        you are supposed to declare its dependencies, but you can't easily
+        guarantee that your dependency declaration is complete. If you forget
+        a dependency, that you have separately installed on your machine, then
+        the component may build and work correctly on <em>your</em> machine,
+        but failing on the end user's machine.</p>
+
+      <p>Nix ensures that that package dependency specifications are
         complete.</p>
-      
-      <p>When you’re making a package for a package
-        management system like RPM, you are supposed to declare its dependencies,
-        but you can't easily guarantee that your dependency declaration is complete.
-        If you forget a dependency, then the
-        component may build and work correctly on <em>your</em> machine, if
-        you already have the dependency installed, while failing on the end user's
-        machine, if they don't.</p>
 
       <p>Under Nix, a build process will only find resources that have been
         declared explicitly as dependencies. There's no way it can build until
@@ -63,10 +62,7 @@
         you've provided a complete declaration.</p>
 
       <p>Once a build is complete, ongoing runtime dependencies are detected
-        automatically by scanning the package's build result files for the hash parts
-        of Nix store paths (such as <tt>r8vvq9kq…</tt>). This may sound risky,
-        but it works extremely well.</p>
-
+        automatically</p>
 
       <h2>Multi-user support</h2>
 
