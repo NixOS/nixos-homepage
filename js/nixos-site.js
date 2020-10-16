@@ -33,6 +33,17 @@ $(function () {
     ;
   };
 
+  // Takes a string and splits on the non-number components.
+  // The number components are used just like: Date.UTC(...args)
+  var fromUTCString = function (str) {
+    var args = str.split(/[^0-9]+/);
+    // Months are 0-indexed... ugh
+    if (args.length > 1) {
+      args[1] = args[1]-1;
+    }
+    return new Date(Date.UTC.apply(null, args));
+  }
+
   // Allow some parts of the site to present additional information for
   // debugging purposes. E.g. responsive width identifier.
   function setDebug(debug) {
@@ -224,13 +235,14 @@ $(function () {
   // Terrible days counter
   $(".countdown-timer").each(function () {
     var $this = $(this);
-    var when = new Date($this.data("date"));
+    var staleDate = fromUTCString($this.data("stale"))
+    var when = fromUTCString($this.data("date"));
 
     function updateCounter() {
-      var today = new Date();
-      var left = when - today;  // in miliseconds
+      var now = new Date();
+      var left = when - now;  // in miliseconds
 
-      var stale = (new Date($this.data("stale")) - today) < 0;
+      var stale = (staleDate - now) < 0;
       if (stale) {
         $($this.data("stale-hide")).remove();
       }
@@ -241,23 +253,22 @@ $(function () {
           $this.data("current")
         );
       } else {
-        var left_date = new Date(left);
-        var days = Math.round(left / (24*60*60*1000));
+        var days = Math.floor(left / (24*60*60*1000));
         if (days < 10) {
           days = "0" + days;
         }
         $(".counter-days", $this).text(days);
-        var hours = left_date.getHours();
+        var hours = Math.floor(left / (60*60*1000)) % 24;
         if (hours < 10) {
           hours = "0" + hours;
         }
         $(".counter-hours", $this).text(hours);
-        var minutes = left_date.getMinutes();
+        var minutes = Math.floor(left / (60*1000)) % 60;
         if (minutes < 10) {
           minutes = "0" + minutes;
         }
         $(".counter-minutes", $this).text(minutes);
-        var seconds = left_date.getSeconds();
+        var seconds = Math.floor(left / (1000)) % 60;
         if (seconds < 10) {
           seconds = "0" + seconds;
         }
