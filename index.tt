@@ -22,6 +22,30 @@
 <section class="wide-banner clickable-whole event-banner">
   <div>
     <div>
+      NixOS 20.09<span class="-detailed"> (codename: Nightingale)</span>
+    </div>
+    <div class="description">
+      Codename: Nightingale
+    </div>
+    <div class="countdown-timer" data-date="2021-10-16 11:00:00" data-stale="2021-10-19 0:00:00"
+      data-stale-hide="main > .event-banner" data-current="Currently happening!">
+      <ul>
+        <li><span class="counter-days">00</span>days</li>
+        <li><span class="counter-hours">00</span>hours</li>
+        <li><span class="counter-minutes">00</span>minutes</li>
+        <li><span class="counter-seconds">00</span>seconds</li>
+      </ul>
+    </div>
+    <div class="action">
+      <a href="[% root %]news.html">Announcement</a>
+    </div>
+  </div>
+</section>
+
+<!--
+<section class="wide-banner clickable-whole event-banner">
+  <div>
+    <div>
       NixCon 2020<span class="-detailed">. Talks. Discussions. Hacking.</span>
     </div>
     <div class="description">
@@ -41,6 +65,7 @@
     </div>
   </div>
 </section>
+-->
 
 <section class="home-hero">
   <div>
