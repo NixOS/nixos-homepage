@@ -53,8 +53,21 @@
 }
 
 .donate-merch {
-  background: #theme.color[blue-lighter];
-  padding-top: 1*@gutter;
+  #flair.wedge-shaped.base(
+    @before: left,
+    @after: left,
+    @size_before: 72*@unit,
+    // For when we'll have the graphical element
+    //@size_before: 2*72*@unit,
+    //@scale_before: 50%,
+    @size_after: 48*@unit,
+    @position_before: inside,
+    @margin-top: @gutter,
+    @margin-bottom: 2*@gutter
+  );
+  #flair.wedge-shaped.blue-lighter();
+
+  padding-top: 0;
   padding-bottom: 2*@gutter;
   margin-bottom: 3*@gutter;
 
@@ -105,8 +118,18 @@
 }
 
 .donate-acknowledgements {
-  background: #theme.color[blue-lighter];
-  padding-top: 1*@gutter;
+  #flair.wedge-shaped.base(
+    @before: right,
+    @after: none,
+    @size_before: 3*64*@unit,
+    @scale_before: 33%,
+    @position_before: inside,
+    @margin-top: @gutter,
+    @margin-bottom: 0px
+  );
+  #flair.wedge-shaped.blue-lighter();
+
+  padding-top: 0;
   padding-bottom: 2*@gutter;
   margin-bottom: -2*@gutter;
 

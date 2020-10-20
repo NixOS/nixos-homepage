@@ -175,7 +175,7 @@
           <select>
             [% amis = JSON.Escape.json_decode(IO.All.new(nixosAmis).all).$latestNixOSSeries %]
             [% FOREACH region IN amis.keys.sort %]
-            <option value="download-amazon-[% region %]">[% region %]</option>
+            <option value="[% region %]">[% region %]</option>
             [% END %]
           </select>
           <table>
