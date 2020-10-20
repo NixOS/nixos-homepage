@@ -19,10 +19,8 @@
       </p>
       <a href="https://github.com/NixOS/rfcs">Learn more</a>
     </div>
-    <div>
-      <a href="https://raw.githubusercontent.com/NixOS/rfcs/master/rfcs/0036-review-process.png" class="thumbnail">
-        <img src="https://raw.githubusercontent.com/NixOS/rfcs/master/rfcs/0036-review-process.png" alt="RFC Process" />
-      </a>
+    <div class="diagram">
+      [% PROCESS svg path="rfc-process.svg" %]
     </div>
   </div>
 </section>
@@ -75,7 +73,7 @@
 <section class="governance-foundation">
   <div>
     <div>
-      <h2>NixOS Foundation logo</h2>
+      <h2>NixOS Foundation</h2>
       <h3>Board members:</h3>
       <ul>
         <li>Eelco Dolstra - Chairman</li>

@@ -24,11 +24,17 @@
       padding-top: 1*@gutter;
       padding-bottom: 1*@gutter;
     }
+  }
+
+  .diagram {
     #screen-xs-max({
-      & > div:last-child {
-        display: none;
-      }
+      display: none;
     });
+    svg {
+      #no-select();
+      width: 100%;
+      height: auto;
+    }
   }
 }
 
@@ -227,30 +233,24 @@
         margin-top: 11*@gutter;
         margin-bottom: 5*@gutter;
 
-        &::before {
-          #svg.lambdaflake.color();
-
+        &::before, &::after {
           content: "";
           display: block;
-          height: 10*@gutter;
           background-repeat: no-repeat;
           background-size: contain;
           background-position: center center;
           position: relative;
+        }
+
+        &::before {
+          #svg.lambdaflake.color();
+          height: 10*@gutter;
           top: -10*@gutter;
         }
 
         &::after {
-          content: "Foundation";
-          display: block;
-          background-repeat: no-repeat;
-          background-size: contain;
-          background-position: center center;
-          font-size: 3.4*@gutter;
-          font-weight: 100;
-          text-align: center;
-          color: #theme.color[black];
-          position: relative;
+          #svg.foundation-text.black();
+          height: 54*@unit;
           top: -3*@gutter;
         }
       }

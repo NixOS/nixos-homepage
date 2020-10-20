@@ -27,6 +27,22 @@ BLOCK atEnd;
 _ignore = documentEndTags.import([content]);
 END;
 
+# SVG
+# ===
+
+# PROCESS svg path="relative/path.svg"
+
+BLOCK svg ;
+  PERL %]
+    my $path = $stash->get("path");
+    my $content = $context->include($path);
+    # Skip the `<?xml ...>` line
+    $content =~ s/^<\?xml[^>]+>//;
+    # Insert in-place
+    print $content
+  [% END;
+END;
+
 # Demos
 # =====
 
