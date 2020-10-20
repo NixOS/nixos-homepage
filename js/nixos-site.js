@@ -297,7 +297,7 @@ $(function () {
     var selectRegion = function () {
       $(".selected", $root).removeClass("selected");
       var region = $("select", $root).val();
-      var ami = $("#" + region, $root)
+      var ami = $("#download-amazon-" + region, $root)
         .addClass("selected")
         .find("code").text();
       $(".download-buttons a", $root)
