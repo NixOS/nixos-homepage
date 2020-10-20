@@ -19,6 +19,7 @@
   <aside>
     <h2>Members</h2>
     <ul>
+      <li><a href="https://discourse.nixos.org/u/jonringer">jonringer</a> (jonringer) - primary for 20.09</li>
       <li><a href="https://discourse.nixos.org/u/worldofpeace">worldofpeace</a> (worldofpeace) - primary for 20.03</li>
       <li><a href="https://discourse.nixos.org/u/disassembler">Samuel Leathers</a> (disasm) - primary for 19.09</li>
     </ul>
@@ -33,11 +34,11 @@
 
   <h2>Responsibilities</h2>
   <ul>
-    <li>manage the release process</li>
-    <li>start discussions about features and changes for a given release</li>
-    <li>create a roadmap</li>
-    <li>release in cooperation with Eelco Dolstra</li>
-    <li>decide which bug fixes, features, etc... get back ported after a release</li>
+    <li>Manage the release process</li>
+    <li>Start discussions about features and changes for a given release</li>
+    <li>Create a roadmap</li>
+    <li>Release in cooperation with Eelco Dolstra</li>
+    <li>Decide which bug fixes, features, etc... get back ported after a release</li>
   </ul>
 
   <h2>Release process</h2>
