@@ -19,10 +19,8 @@
       </p>
       <a href="https://github.com/NixOS/rfcs">Learn more</a>
     </div>
-    <div>
-      <a href="https://raw.githubusercontent.com/NixOS/rfcs/master/rfcs/0036-review-process.png" class="thumbnail">
-        <img src="https://raw.githubusercontent.com/NixOS/rfcs/master/rfcs/0036-review-process.png" alt="RFC Process" />
-      </a>
+    <div class="diagram">
+      [% PROCESS svg path="rfc-process.svg" %]
     </div>
   </div>
 </section>

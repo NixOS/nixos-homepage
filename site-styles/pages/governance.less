@@ -24,11 +24,17 @@
       padding-top: 1*@gutter;
       padding-bottom: 1*@gutter;
     }
+  }
+
+  .diagram {
     #screen-xs-max({
-      & > div:last-child {
-        display: none;
-      }
+      display: none;
     });
+    svg {
+      #no-select();
+      width: 100%;
+      height: auto;
+    }
   }
 }
 
