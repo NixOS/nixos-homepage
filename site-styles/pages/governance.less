@@ -39,10 +39,17 @@
 }
 
 .governance-teams {
-  background: #theme.color[blue-dark];
+  #flair.wedge-shaped.base(
+    @before: right,
+    @after: right,
+    @size: 96*@unit,
+    @margin-top: @gutter,
+    @margin-bottom: 2*@gutter
+  );
+  #flair.wedge-shaped.blue-dark();
+
   padding-top: 1*@gutter;
   padding-bottom: 2*@gutter;
-  margin-bottom: 3*@gutter;
 
   #screen-xs-max({
     padding-left: 1*@gutter;
