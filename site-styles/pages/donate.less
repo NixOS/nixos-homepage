@@ -10,44 +10,7 @@
     #columns(2);
 
     & > div:last-child > h2 {
-      #svg.nixos-text.black();
-
-      display: block;
-      font-size: 0.1px;
-      height: 7*@gutter;
-      width: 100%;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center center;
-      margin-top: 11*@gutter;
-      margin-bottom: 5*@gutter;
-
-      &::before {
-        #svg.lambdaflake.color();
-
-        content: "";
-        display: block;
-        height: 10*@gutter;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-        position: relative;
-        top: -10*@gutter;
-      }
-
-      &::after {
-        content: "Foundation";
-        display: block;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-        font-size: 3.4*@gutter;
-        font-weight: 100;
-        text-align: center;
-        color: #theme.color[black];
-        position: relative;
-        top: -3*@gutter;
-      }
+      #nixos-foundation-logo();
     }
   }
 }

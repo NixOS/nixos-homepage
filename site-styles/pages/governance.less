@@ -221,38 +221,7 @@
 
     & > div:first-child > {
       h2 {
-        #svg.nixos-text.black();
-
-        display: block;
-        font-size: 0.1px;
-        height: 7*@gutter;
-        width: 100%;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-        margin-top: 11*@gutter;
-        margin-bottom: 5*@gutter;
-
-        &::before, &::after {
-          content: "";
-          display: block;
-          background-repeat: no-repeat;
-          background-size: contain;
-          background-position: center center;
-          position: relative;
-        }
-
-        &::before {
-          #svg.lambdaflake.color();
-          height: 10*@gutter;
-          top: -10*@gutter;
-        }
-
-        &::after {
-          #svg.foundation-text.black();
-          height: 54*@unit;
-          top: -3*@gutter;
-        }
+        #nixos-foundation-logo();
       }
 
       text-align: center;
