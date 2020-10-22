@@ -5,21 +5,28 @@
 </div>
 
 <section class="learn-getstarted">
+  <h2>Get started</h2>
   <div>
-    <div class="learn-installnix">
-      <a href="#???">Install Nix</a>
+    <div>
+      <a href="#???">
+        [% PROCESS svg path="rfc-process.svg" %]
+        <button>Install Nix</button>
+      </a>
     </div>
-    <div class="learn-firststeps">
-      <a href="#???">First steps with Nix</a>
+    <div>
+      <a href="#???">
+        [% PROCESS svg path="rfc-process.svg" %]
+        <button>Develop with Nix</button>
+      </a>
     </div>
   </div>
 </section>
 
-<section class="generic-layout learn-search">
-  <h1>Search</h1>
+<section class="learn-search">
+  <h2>Search</h2>
   <ul>
     <li>
-      <h4>Nix packages</h4>
+      <h3>Nix packages</h3>
       <form method="get" action="https://search.nixos.org/packages">
         <div class="form-input">
           <input type="text" placeholder="Search for Nix packages" name="query" />
@@ -27,7 +34,7 @@
       </form>
     </li>
     <li>
-      <h4>NixOS options</h4>
+      <h3>NixOS options</h3>
       <form method="get" action="https://search.nixos.org/options">
         <div class="form-input">
           <input type="text" placeholder="Search for NixOS options" name="query" />
@@ -37,18 +44,18 @@
   </ul>
 </section>
 
-<section class="generic-layout learn-guides">
-  <h1>Guides</h1>
+<section class="learn-guides">
+  <h2>Guides</h2>
   <ul>
     [% INSERT "learn_guides.html.in" %]
   </ul>
 </section>
 
-<section class="generic-layout learn-manuals">
-  <h1>Manuals</h1>
+<section class="learn-manuals">
+  <h2>Manuals</h2>
   <ul>
     <li>
-      <h2>Nix Manual</h2>
+      <h3>Nix Manual</h3>
       <p>Nix is a package manager which comes in a form of many command line tools.
         Packages that Nix can build are defined with Nix Expression Language.
       </p>
@@ -84,7 +91,7 @@
     </li>
 
     <li>
-      <h2>Nixpkgs Manual</h2>
+      <h3>Nixpkgs Manual</h3>
       <p>The Nix Packages collection (Nixpkgs) is a set of thousands of packages for the Nix package manager and NixOS
         Linux distribution.</p>
       <ul>
@@ -159,7 +166,7 @@
     </li>
 
     <li>
-      <h2>NixOS Manual</h2>
+      <h3>NixOS Manual</h3>
       <p>NixOS is a Linux distribution based on Nix package manager.</p>
       <ul>
         <li><a href="[%root%]manual/nixos/stable/#sec-installation">Installing NixOS</a></li>
@@ -179,31 +186,30 @@
   </ul>
 </section>
 
-<section class="generic-layout learn-gethelp">
-  <ul>
-    <li>
-      <h1>Other learning resources</h1>
-      <ul>
-        <li>
-          <a href="[%root%]guides/nix-pills">Nix Pills</a> — At the beginning you may feel that some of the magic
-          which
-          happens behind the scenes is hard to grasp. This series aims to complement the existing explanations from
-          the
-          more formal documents.</li>
-        <li><a href="https://nixos.wiki">Wiki</a> — A user-maintained wiki for Nix and NixOS.</li>
-        <li><a href="https://nix.dev">nix.dev</a> — nix.dev presents topical,
-          practical ways of using Nix package manager ecosystem.</li>
-      </ul>
-    </li>
-    <li class="support">
-      <h1>Get help from the community</h1>
-      <p>The <a href="[%root%]community.html">Community page</a> shows where the community meets.</p>
+<section class="learn-gethelp">
+  <div>
+    <h2>Other learning resources</h2>
+    <ul>
+      <li>
+        <a href="[%root%]guides/nix-pills">Nix Pills</a> — At the beginning you may feel that some of the magic
+        which
+        happens behind the scenes is hard to grasp. This series aims to complement the existing explanations from
+        the
+        more formal documents.
+      </li>
+      <li><a href="https://nixos.wiki">Wiki</a> — A user-maintained wiki for Nix and NixOS.</li>
+      <li><a href="https://nix.dev">nix.dev</a> — nix.dev presents topical,
+        practical ways of using Nix package manager ecosystem.</li>
+      <li class="support">
+        <h1>Get help from the community</h1>
+        <p>The <a href="[%root%]community.html">Community page</a> shows where the community meets.</p>
 
-      <h1>Get commercial support</h1>
-      <p>The <a href="[%root%]commercial-support.html">Commercial support page</a> provides a list of consulting
-        companies.</p>
-    </li>
-  </ul>
+        <h1>Get commercial support</h1>
+        <p>The <a href="[%root%]commercial-support.html">Commercial support page</a> provides a list of consulting
+          companies.</p>
+      </li>
+    </ul>
+  </div>
 </section>
 
 [% END %]

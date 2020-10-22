@@ -1,3 +1,58 @@
+.learn-getstarted {
+  #container();
+
+  & > div {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1*@gutter;
+    align-items: end;
+
+    #screen-xs-min({
+      grid-template-columns: repeat(2, 1fr);
+    });
+
+    & > div {
+      border: 1px solid #theme.color[blue-dark2];
+      border-radius: 1*@gutter;
+      display: block;
+      padding: 2*@gutter;
+      position: relative;
+    }
+
+    // Intall Nix
+    & > div:first-child > a {
+      #columns(2);
+
+      border: 0;
+
+      & > * {
+        height: 4rem;
+      }
+
+      & > button {
+        .button();
+        .-primary();
+      }
+    }
+
+    // Develop with Nix
+    & > div:last-child > a{
+      #columns(2);
+
+      border: 0;
+
+      & > * {
+        height: 4rem;
+      }
+
+      & > button {
+        .button();
+        .-highlighted();
+      }
+    }
+  }
+}
+
 .learn-guides > ul {
   &:extend(.choice-smorgasboard all);
 }
@@ -28,10 +83,6 @@
     }
   }
 
-  .button {
-    width: 100%;
-    margin-bottom: @gutter;
-  }
 }
 
 .learn-gethelp {
