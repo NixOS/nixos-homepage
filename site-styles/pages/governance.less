@@ -39,10 +39,17 @@
 }
 
 .governance-teams {
-  background: #theme.color[blue-dark];
+  #flair.wedge-shaped.base(
+    @before: right,
+    @after: right,
+    @size: 96*@unit,
+    @margin-top: @gutter,
+    @margin-bottom: 2*@gutter
+  );
+  #flair.wedge-shaped.blue-dark();
+
   padding-top: 1*@gutter;
   padding-bottom: 2*@gutter;
-  margin-bottom: 3*@gutter;
 
   #screen-xs-max({
     padding-left: 1*@gutter;
@@ -79,9 +86,15 @@
       align-items: end;
       text-align: center;
 
+      & > svg {
+        margin: 0 auto;
+        margin-top: 2*@gutter;
+        height: 6*@gutter;
+      }
+
       & > h3 {
         margin: 0;
-        margin-top: 2*@gutter;
+        align-self: start;
       }
 
       & > p {
@@ -103,107 +116,145 @@
           justify-self: start;
         }
 
+        & > svg {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        & > svg:nth-of-type(1),
+        & > svg:nth-of-type(2) {
+          grid-row: 1;
+        }
+        & > svg:nth-of-type(3),
+        & > svg:nth-of-type(4) {
+          grid-row: 5;
+        }
+        & > svg:nth-of-type(5),
+        & > svg:nth-of-type(6) {
+          grid-row: 9;
+        }
+        & > svg:nth-of-type(7),
+        & > svg:nth-of-type(8) {
+          grid-row: 13;
+        }
+
         & > h3:nth-of-type(1),
         & > h3:nth-of-type(2) {
-          grid-row: 1;
+          grid-row: 2;
         }
         & > h3:nth-of-type(3),
         & > h3:nth-of-type(4) {
-          grid-row: 4;
+          grid-row: 6;
         }
         & > h3:nth-of-type(5),
         & > h3:nth-of-type(6) {
-          grid-row: 7;
+          grid-row: 10;
         }
         & > h3:nth-of-type(7),
         & > h3:nth-of-type(8) {
-          grid-row: 10;
+          grid-row: 14;
         }
 
         & > p:nth-of-type(1),
         & > p:nth-of-type(2) {
-          grid-row: 2;
+          grid-row: 3;
         }
         & > p:nth-of-type(3),
         & > p:nth-of-type(4) {
-          grid-row: 5;
+          grid-row: 7;
         }
         & > p:nth-of-type(5),
         & > p:nth-of-type(6) {
-          grid-row: 8;
+          grid-row: 11;
         }
         & > p:nth-of-type(7),
         & > p:nth-of-type(8) {
-          grid-row: 11;
+          grid-row: 15;
         }
 
         & > a:nth-of-type(1),
         & > a:nth-of-type(2) {
-          grid-row: 3;
+          grid-row: 4;
         }
         & > a:nth-of-type(3),
         & > a:nth-of-type(4) {
-          grid-row: 6;
+          grid-row: 8;
         }
         & > a:nth-of-type(5),
         & > a:nth-of-type(6) {
-          grid-row: 9;
+          grid-row: 12;
         }
         & > a:nth-of-type(7),
         & > a:nth-of-type(8) {
-          grid-row: 12;
+          grid-row: 16;
         }
       });
 
       #screen-md-min({
         grid-template-columns: repeat(3, 1fr);
 
+        & > svg:nth-of-type(1),
+        & > svg:nth-of-type(2),
+        & > svg:nth-of-type(3) {
+          grid-row: 1;
+        }
+        & > svg:nth-of-type(4),
+        & > svg:nth-of-type(5),
+        & > svg:nth-of-type(6) {
+          grid-row: 5;
+        }
+        & > svg:nth-of-type(7),
+        & > svg:nth-of-type(8),
+        & > svg:nth-of-type(9) {
+          grid-row: 9;
+        }
+
         & > h3:nth-of-type(1),
         & > h3:nth-of-type(2),
         & > h3:nth-of-type(3) {
-          grid-row: 1;
+          grid-row: 2;
         }
         & > h3:nth-of-type(4),
         & > h3:nth-of-type(5),
         & > h3:nth-of-type(6) {
-          grid-row: 4;
+          grid-row: 6;
         }
         & > h3:nth-of-type(7),
         & > h3:nth-of-type(8),
         & > h3:nth-of-type(9) {
-          grid-row: 7;
+          grid-row: 10;
         }
 
         & > p:nth-of-type(1),
         & > p:nth-of-type(2),
         & > p:nth-of-type(3) {
-          grid-row: 2;
+          grid-row: 3;
         }
         & > p:nth-of-type(4),
         & > p:nth-of-type(5),
         & > p:nth-of-type(6) {
-          grid-row: 5;
+          grid-row: 7;
         }
         & > p:nth-of-type(7),
         & > p:nth-of-type(8),
         & > p:nth-of-type(9) {
-          grid-row: 8;
+          grid-row: 11;
         }
 
         & > a:nth-of-type(1),
         & > a:nth-of-type(2),
         & > a:nth-of-type(3) {
-          grid-row: 3;
+          grid-row: 4;
         }
         & > a:nth-of-type(4),
         & > a:nth-of-type(5),
         & > a:nth-of-type(6) {
-          grid-row: 6;
+          grid-row: 8;
         }
         & > a:nth-of-type(7),
         & > a:nth-of-type(8),
         & > a:nth-of-type(9) {
-          grid-row: 9;
+          grid-row: 12;
         }
       });
     }
@@ -221,38 +272,7 @@
 
     & > div:first-child > {
       h2 {
-        #svg.nixos-text.black();
-
-        display: block;
-        font-size: 0.1px;
-        height: 7*@gutter;
-        width: 100%;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-        margin-top: 11*@gutter;
-        margin-bottom: 5*@gutter;
-
-        &::before, &::after {
-          content: "";
-          display: block;
-          background-repeat: no-repeat;
-          background-size: contain;
-          background-position: center center;
-          position: relative;
-        }
-
-        &::before {
-          #svg.lambdaflake.color();
-          height: 10*@gutter;
-          top: -10*@gutter;
-        }
-
-        &::after {
-          #svg.foundation-text.black();
-          height: 54*@unit;
-          top: -3*@gutter;
-        }
+        #nixos-foundation-logo();
       }
 
       text-align: center;

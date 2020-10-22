@@ -9,45 +9,12 @@
   & > div {
     #columns(2);
 
+    & > div:first-child {
+      align-self: center;
+    }
+
     & > div:last-child > h2 {
-      #svg.nixos-text.black();
-
-      display: block;
-      font-size: 0.1px;
-      height: 7*@gutter;
-      width: 100%;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center center;
-      margin-top: 11*@gutter;
-      margin-bottom: 5*@gutter;
-
-      &::before {
-        #svg.lambdaflake.color();
-
-        content: "";
-        display: block;
-        height: 10*@gutter;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-        position: relative;
-        top: -10*@gutter;
-      }
-
-      &::after {
-        content: "Foundation";
-        display: block;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-        font-size: 3.4*@gutter;
-        font-weight: 100;
-        text-align: center;
-        color: #theme.color[black];
-        position: relative;
-        top: -3*@gutter;
-      }
+      #nixos-foundation-logo();
     }
   }
 }
@@ -63,20 +30,14 @@
     @size_after: 48*@unit,
     @position_before: inside,
     @margin-top: @gutter,
-    @margin-bottom: 2*@gutter
+    @margin-bottom: 2*@gutter,
   );
-  #flair.wedge-shaped.blue-lighter();
+  #flair.wedge-shaped.blue-dark();
 
-  padding-top: 0;
+  padding-top: 4.5*@gutter;
   padding-bottom: 2*@gutter;
   margin-bottom: 3*@gutter;
-
-  #screen-xs-max({
-    padding-left: 1*@gutter;
-    padding-right: 1*@gutter;
-    margin-left: -1*@gutter;
-    margin-right: -1*@gutter;
-  });
+  color: #theme.color[white];
 
   & > div {
     .generic-layout();
@@ -85,11 +46,28 @@
       //#columns(2);
       #columns(1);
 
+      & > div > h1 {
+        color: #theme.color[white];
+      }
+
+      & > div > p:first-child {
+        .lead();
+      }
+
       & > div > div > a {
         .button();
+        .-primary();
       }
     }
   }
+
+  #screen-xs-max({
+    padding-left: 1*@gutter;
+    padding-right: 1*@gutter;
+    margin-left: -1*@gutter;
+    margin-right: -1*@gutter;
+  });
+
 }
 
 .donate-donate {
@@ -108,6 +86,7 @@
 
         color: #theme.color[blue-darker];
         font-size: 80%;
+        font-weight: bold;
       }
 
       & > p:last-child {
@@ -124,28 +103,21 @@
     @size_before: 3*64*@unit,
     @scale_before: 33%,
     @position_before: inside,
-    @margin-top: @gutter,
+    @margin-top: 0,
     @margin-bottom: 0px
   );
-  #flair.wedge-shaped.blue-lighter();
+  #flair.wedge-shaped.blue-dark();
 
-  padding-top: 0;
+  padding-top: 12*@gutter;
   padding-bottom: 2*@gutter;
   margin-bottom: -2*@gutter;
-
-  #screen-xs-max({
-    padding-left: 1*@gutter;
-    padding-right: 1*@gutter;
-    margin-left: -1*@gutter;
-    margin-right: -1*@gutter;
-  });
+  color: #theme.color[white];
 
   & > div {
     #container();
 
     & > div {
       #columns(2);
-
 
       & > div:first-child > {
         align-self: center;
@@ -171,9 +143,23 @@
         }
       }
 
+      & > div:last-child {
+        h2, a {
+          color: #theme.color[white];
+        }
+      }
+
       #screen-xs-max({
         flex-direction: column-reverse;
       })
     }
   }
+
+  #screen-xs-max({
+    padding-left: 1*@gutter;
+    padding-right: 1*@gutter;
+    margin-left: -1*@gutter;
+    margin-right: -1*@gutter;
+  });
+
 }
