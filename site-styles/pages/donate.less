@@ -9,6 +9,10 @@
   & > div {
     #columns(2);
 
+    & > div:first-child {
+      align-self: center;
+    }
+
     & > div:last-child > h2 {
       #nixos-foundation-logo();
     }
@@ -26,20 +30,14 @@
     @size_after: 48*@unit,
     @position_before: inside,
     @margin-top: @gutter,
-    @margin-bottom: 2*@gutter
+    @margin-bottom: 2*@gutter,
   );
-  #flair.wedge-shaped.blue-lighter();
+  #flair.wedge-shaped.blue-dark();
 
-  padding-top: 0;
+  padding-top: 4.5*@gutter;
   padding-bottom: 2*@gutter;
   margin-bottom: 3*@gutter;
-
-  #screen-xs-max({
-    padding-left: 1*@gutter;
-    padding-right: 1*@gutter;
-    margin-left: -1*@gutter;
-    margin-right: -1*@gutter;
-  });
+  color: #theme.color[white];
 
   & > div {
     .generic-layout();
@@ -48,11 +46,28 @@
       //#columns(2);
       #columns(1);
 
+      & > div > h1 {
+        color: #theme.color[white];
+      }
+
+      & > div > p:first-child {
+        .lead();
+      }
+
       & > div > div > a {
         .button();
+        .-primary();
       }
     }
   }
+
+  #screen-xs-max({
+    padding-left: 1*@gutter;
+    padding-right: 1*@gutter;
+    margin-left: -1*@gutter;
+    margin-right: -1*@gutter;
+  });
+
 }
 
 .donate-donate {
@@ -90,25 +105,18 @@
     @margin-top: @gutter,
     @margin-bottom: 0px
   );
-  #flair.wedge-shaped.blue-lighter();
+  #flair.wedge-shaped.blue-dark();
 
-  padding-top: 0;
+  padding-top: 12*@gutter;
   padding-bottom: 2*@gutter;
   margin-bottom: -2*@gutter;
-
-  #screen-xs-max({
-    padding-left: 1*@gutter;
-    padding-right: 1*@gutter;
-    margin-left: -1*@gutter;
-    margin-right: -1*@gutter;
-  });
+  color: #theme.color[white];
 
   & > div {
     #container();
 
     & > div {
       #columns(2);
-
 
       & > div:first-child > {
         align-self: center;
@@ -134,9 +142,23 @@
         }
       }
 
+      & > div:last-child {
+        h2, a {
+          color: #theme.color[white];
+        }
+      }
+
       #screen-xs-max({
         flex-direction: column-reverse;
       })
     }
   }
+
+  #screen-xs-max({
+    padding-left: 1*@gutter;
+    padding-right: 1*@gutter;
+    margin-left: -1*@gutter;
+    margin-right: -1*@gutter;
+  });
+
 }
