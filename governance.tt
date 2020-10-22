@@ -20,7 +20,7 @@
       <a href="https://github.com/NixOS/rfcs">Learn more</a>
     </div>
     <div class="diagram">
-      [% PROCESS svg path="rfc-process.svg" %]
+      [% PROCESS svg path="site-styles/assets/rfc-process.svg" %]
     </div>
   </div>
 </section>
