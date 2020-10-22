@@ -53,68 +53,87 @@
   }
 }
 
-.learn-guides > ul {
-  &:extend(.choice-smorgasboard all);
+.learn-search {
+  #flair.wedge-shaped.base(
+    @before: left,
+    @after: left,
+    @size_before: 72*@unit,
+    // For when we'll have the graphical element
+    //@size_before: 2*72*@unit,
+    //@scale_before: 50%,
+    @size_after: 48*@unit,
+    @position_before: inside,
+    @margin-top: @gutter,
+    @margin-bottom: 2*@gutter,
+  );
+  #flair.wedge-shaped.blue-dark();
+
+  & > div {
+    #container();
+
+    padding-top: 5*@gutter;
+    padding-bottom: 2*@gutter;
+    color: #theme.color[white];
+
+    h2, h3 {
+      color: #theme.color[white];
+    }
+
+    input {
+      color: #theme.color[white];
+      border-color: #theme.color[white];
+      background: #theme.color[blue-dark];
+    }
+
+    & > ul {
+      #columns(2);
+
+      & > li > form > div {
+        .form-input();
+        .form-input.with-icon({
+          #svg.icon.search.white;
+        });
+      }
+    }
+  }
+}
+
+.learn-guides {
+  #container();
 }
 
 .learn-manuals {
-  margin-bottom: @gutter;
-  & > ul {
-    #columns(3, @md: 3, @sm: 1);
-    list-style-type: none;
+  #container();
 
-    padding: 0;
-    margin: 0;
-    margin-bottom: 0;
-  }
+  & > div {
+    margin-bottom: @gutter;
 
-  & > ul ul ul {
-    margin-bottom: 0;
-  }
+    & > ul {
+      #columns(3, @md: 3, @sm: 1);
+      list-style-type: none;
 
-  ul.comma-separated {
-    &, & > li {
-      margin: 0;
       padding: 0;
-      display: inline;
+      margin: 0;
+      margin-bottom: 0;
     }
-    & > li::after {
-      content: ",";
+
+    & > ul ul ul {
+      margin-bottom: 0;
     }
-  }
 
-}
-
-.learn-gethelp {
-  & > ul {
-    #columns(2);
-  }
-  .support {
-    &:extend(.well all);
-  }
-}
-
-.learn-search {
-  & > ul {
-    #columns(2);
-    padding-bottom: 1rem;
-  }
-  form {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    & > .form-input {
-      &, input {
+    ul.comma-separated {
+      &, & > li {
         margin: 0;
+        padding: 0;
+        display: inline;
       }
-      input {
-        background-color: transparent;
+      & > li::after {
+        content: ",";
       }
-      flex-grow: 1;
-      .form-input.with-icon({
-        #svg.icon.search.blue-light;
-      });
     }
   }
 }
 
+.learn-otherresources {
+  #container();
+}

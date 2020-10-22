@@ -9,13 +9,13 @@
   <div>
     <div>
       <a href="#???">
-        [% PROCESS svg path="rfc-process.svg" %]
+        [% PROCESS svg path="site-styles/assets/gfx-release.svg" %]
         <button>Install Nix</button>
       </a>
     </div>
     <div>
       <a href="#???">
-        [% PROCESS svg path="rfc-process.svg" %]
+        [% PROCESS svg path="site-styles/assets/gfx-release.svg" %]
         <button>Develop with Nix</button>
       </a>
     </div>
@@ -23,25 +23,27 @@
 </section>
 
 <section class="learn-search">
-  <h2>Search</h2>
-  <ul>
-    <li>
-      <h3>Nix packages</h3>
-      <form method="get" action="https://search.nixos.org/packages">
-        <div class="form-input">
-          <input type="text" placeholder="Search for Nix packages" name="query" />
-        </div>
-      </form>
-    </li>
-    <li>
-      <h3>NixOS options</h3>
-      <form method="get" action="https://search.nixos.org/options">
-        <div class="form-input">
-          <input type="text" placeholder="Search for NixOS options" name="query" />
-        </div>
-      </form>
-    </li>
-  </ul>
+  <div>
+    <h2>Search</h2>
+    <ul>
+      <li>
+        <h3>Nix packages</h3>
+        <form method="get" action="https://search.nixos.org/packages">
+          <div>
+            <input type="text" placeholder="Search for Nix packages" name="query" />
+          </div>
+        </form>
+      </li>
+      <li>
+        <h3>NixOS options</h3>
+        <form method="get" action="https://search.nixos.org/options">
+          <div>
+            <input type="text" placeholder="Search for NixOS options" name="query" />
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
 </section>
 
 <section class="learn-guides">
@@ -52,141 +54,143 @@
 </section>
 
 <section class="learn-manuals">
-  <h2>Manuals</h2>
-  <ul>
-    <li>
-      <h3>Nix Manual</h3>
-      <p>Nix is a package manager which comes in a form of many command line tools.
-        Packages that Nix can build are defined with Nix Expression Language.
-      </p>
-      <ul>
-        <li><a href="[%root%]manual/nix/stable/#ch-installing-binary">Installation</a></li>
-        <li><a href="[%root%]manual/nix/stable/#ch-basic-package-mgmt">Basic package management</a></li>
-        <li><a href="[%root%]manual/nix/stable/#sec-channels">What is a channel?</a></li>
-        <li>
-          Main command line tools:
-          <ul>
-            <li><a href="[%root%]manual/nix/stable/#sec-nix-env">nix-env</a> — manipulate or query Nix user
-              environments
-            </li>
-            <li><a href="[%root%]manual/nix/stable/#sec-nix-build">nix-build</a> — build a Nix expression</li>
-            <li><a href="[%root%]manual/nix/stable/#sec-nix-shell">nix-shell</a> — start an interactive shell based on
-              a
-              Nix
-              expression</li>
-            <li><a href="[%root%]manual/nix/stable/#sec-nix-store">nix-store</a> — manipulate or query the Nix store
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="[%root%]manual/nix/stable/#ch-expression-language">Nix expression language</a>
-          <ul>
-            <li><a href="[%root%]manual/nix/stable/#ssec-builtins">Built-in functions</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-functions-library">Nixpkgs Library Functions</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-debug">Debugging Nix Expressions</a></li>
-          </ul>
-        </li>
-      </ul>
-      <a href="[%root%]manual/nix/stable" class="button">Full Nix Manual</a>
-    </li>
+  <div>
+    <h2>Manuals</h2>
+    <ul>
+      <li>
+        <h3>Nix Manual</h3>
+        <p>Nix is a package manager which comes in a form of many command line tools.
+          Packages that Nix can build are defined with Nix Expression Language.
+        </p>
+        <ul>
+          <li><a href="[%root%]manual/nix/stable/#ch-installing-binary">Installation</a></li>
+          <li><a href="[%root%]manual/nix/stable/#ch-basic-package-mgmt">Basic package management</a></li>
+          <li><a href="[%root%]manual/nix/stable/#sec-channels">What is a channel?</a></li>
+          <li>
+            Main command line tools:
+            <ul>
+              <li><a href="[%root%]manual/nix/stable/#sec-nix-env">nix-env</a> — manipulate or query Nix user
+                environments
+              </li>
+              <li><a href="[%root%]manual/nix/stable/#sec-nix-build">nix-build</a> — build a Nix expression</li>
+              <li><a href="[%root%]manual/nix/stable/#sec-nix-shell">nix-shell</a> — start an interactive shell based on
+                a
+                Nix
+                expression</li>
+              <li><a href="[%root%]manual/nix/stable/#sec-nix-store">nix-store</a> — manipulate or query the Nix store
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="[%root%]manual/nix/stable/#ch-expression-language">Nix expression language</a>
+            <ul>
+              <li><a href="[%root%]manual/nix/stable/#ssec-builtins">Built-in functions</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-functions-library">Nixpkgs Library Functions</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-debug">Debugging Nix Expressions</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a href="[%root%]manual/nix/stable" class="button">Full Nix Manual</a>
+      </li>
 
-    <li>
-      <h3>Nixpkgs Manual</h3>
-      <p>The Nix Packages collection (Nixpkgs) is a set of thousands of packages for the Nix package manager and NixOS
-        Linux distribution.</p>
-      <ul>
-        <li><a href="[%root%]manual/nixpkgs/stable/#chap-packageconfig">Configure nixpkgs</a></li>
-        <li><a href="[%root%]manual/nixpkgs/stable/#chap-overrides">Customize packages (override packages)</a></li>
-        <li><a href="[%root%]manual/nixpkgs/stable/#chap-overlays">Extend nixpkgs (via overlays)</a></li>
-        <li>
-          <a href="[%root%]manual/nixpkgs/stable/#chap-quick-start">Adding a package to nixpkgs</a>
-          <ul>
-            <li><a href="[%root%]manual/nixpkgs/stable/#chap-stdenv">The Standard Environment</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#chap-pkgs-fetchers">Fetching sources</a></li>
-            <li>
-              Building images:
-              <ul class="comma-separated">
-                <li><a href="[%root%]manual/nixpkgs/stable/#sec-pkgs-dockerTools">Docker</a></li>
-                <li><a href="[%root%]manual/nixpkgs/stable/#sec-pkgs-snapTools">Snap</a></li>
-                <li><a href="[%root%]manual/nixpkgs/stable/#sec-pkgs-appimageTools">AppImage</a></li>
-                <li><a href="[%root%]manual/nixpkgs/stable/#sec-pkgs-ociTools">OCI</a></li>
-                <li>...</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li>
-          Integrate Nix with programming languages:
-          <ul class="comma-separated">
-            <li><a href="[%root%]manual/nixpkgs/stable/#node.js">Javascript (Node)</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#python">Python</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-ruby">Ruby</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-java">Java</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-go">Go</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#rust">Rust</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#r">R</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#haskell">Haskell</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-elm">Elm</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-beam">BEAM Languages (Erlang, Elixir, LFE)</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-lua">Lua</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#idris">Idris</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-coq">Coq</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-perl">Perl</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-ocaml">OCaml</a></li>
-            <li>...</li>
-          </ul>
-        </li>
-        <li>
-          Integrate Nix with frameworks:
-          <ul class="comma-separated">
-            <li><a href="[%root%]manual/nixpkgs/stable/#android">Android</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#ios">IOS</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#titanium">Titanium</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-texlive">Tex Live</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-qt">Qt</a></li>
-            <li>...</li>
-          </ul>
-        </li>
-        <li>
-          Configure your editor with Nix:
-          <ul class="comma-separated">
-            <li><a href="[%root%]manual/nixpkgs/stable/#vim">Vim</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-emacs">Emacs</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-eclipse">Eclipse</a></li>
-            <li><a href="[%root%]manual/nixpkgs/stable/#sec-kakoune">Kakoune</a></li>
-            <!-- TODO
+      <li>
+        <h3>Nixpkgs Manual</h3>
+        <p>The Nix Packages collection (Nixpkgs) is a set of thousands of packages for the Nix package manager and NixOS
+          Linux distribution.</p>
+        <ul>
+          <li><a href="[%root%]manual/nixpkgs/stable/#chap-packageconfig">Configure nixpkgs</a></li>
+          <li><a href="[%root%]manual/nixpkgs/stable/#chap-overrides">Customize packages (override packages)</a></li>
+          <li><a href="[%root%]manual/nixpkgs/stable/#chap-overlays">Extend nixpkgs (via overlays)</a></li>
+          <li>
+            <a href="[%root%]manual/nixpkgs/stable/#chap-quick-start">Adding a package to nixpkgs</a>
+            <ul>
+              <li><a href="[%root%]manual/nixpkgs/stable/#chap-stdenv">The Standard Environment</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#chap-pkgs-fetchers">Fetching sources</a></li>
+              <li>
+                Building images:
+                <ul class="comma-separated">
+                  <li><a href="[%root%]manual/nixpkgs/stable/#sec-pkgs-dockerTools">Docker</a></li>
+                  <li><a href="[%root%]manual/nixpkgs/stable/#sec-pkgs-snapTools">Snap</a></li>
+                  <li><a href="[%root%]manual/nixpkgs/stable/#sec-pkgs-appimageTools">AppImage</a></li>
+                  <li><a href="[%root%]manual/nixpkgs/stable/#sec-pkgs-ociTools">OCI</a></li>
+                  <li>...</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Integrate Nix with programming languages:
+            <ul class="comma-separated">
+              <li><a href="[%root%]manual/nixpkgs/stable/#node.js">Javascript (Node)</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#python">Python</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-ruby">Ruby</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-java">Java</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-go">Go</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#rust">Rust</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#r">R</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#haskell">Haskell</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-elm">Elm</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-beam">BEAM Languages (Erlang, Elixir, LFE)</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-lua">Lua</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#idris">Idris</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-coq">Coq</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-perl">Perl</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-ocaml">OCaml</a></li>
+              <li>...</li>
+            </ul>
+          </li>
+          <li>
+            Integrate Nix with frameworks:
+            <ul class="comma-separated">
+              <li><a href="[%root%]manual/nixpkgs/stable/#android">Android</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#ios">IOS</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#titanium">Titanium</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-texlive">Tex Live</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-qt">Qt</a></li>
+              <li>...</li>
+            </ul>
+          </li>
+          <li>
+            Configure your editor with Nix:
+            <ul class="comma-separated">
+              <li><a href="[%root%]manual/nixpkgs/stable/#vim">Vim</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-emacs">Emacs</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-eclipse">Eclipse</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#sec-kakoune">Kakoune</a></li>
+              <!-- TODO
               <li><a href="[%root%]manual/nixpkgs/stable/#">Visual Studio Code</a></li>
             -->
-            <li>...</li>
-          </ul>
-        </li>
-        <li><a href="[%root%]manual/nixpkgs/stable/#chap-submitting-changes">Contributing to Nixpkgs</a></li>
-      </ul>
-      <a href="[%root%]manual/nixpkgs/stable" class="button">Full Nixpkgs Manual</a>
-    </li>
+              <li>...</li>
+            </ul>
+          </li>
+          <li><a href="[%root%]manual/nixpkgs/stable/#chap-submitting-changes">Contributing to Nixpkgs</a></li>
+        </ul>
+        <a href="[%root%]manual/nixpkgs/stable" class="button">Full Nixpkgs Manual</a>
+      </li>
 
-    <li>
-      <h3>NixOS Manual</h3>
-      <p>NixOS is a Linux distribution based on Nix package manager.</p>
-      <ul>
-        <li><a href="[%root%]manual/nixos/stable/#sec-installation">Installing NixOS</a></li>
-        <li><a href="[%root%]manual/nixos/stable/#sec-changing-config">Changing the Configuration</a></li>
-        <li><a href="[%root%]manual/nixos/stable/#sec-upgrading">Upgrading NixOS</a></li>
-        <li><a href="[%root%]manual/nixos/stable/#sec-configuration-syntax">Configuration Syntax</a></li>
-        <li><a href="[%root%]manual/nixos/stable/#sec-package-management">Package Management</a></li>
-        <li><a href="[%root%]manual/nixos/stable/#sec-user-management">User Management</a></li>
-        <li><a href="[%root%]manual/nixos/stable/#ch-troubleshooting">Troubleshooting</a></li>
-        <li><a href="[%root%]manual/nixos/stable/#sec-writing-modules">Writing NixOS Modules</a></li>
-        <li><a href="[%root%]manual/nixos/stable/#sec-writing-documentation">Writing NixOS Documentation</a></li>
-        <li><a href="[%root%]manual/nixos/stable/#sec-nixos-tests">Writing NixOS Tests</a></li>
-        <li><a href="[%root%]manual/nixos/stable/#sec-building-cd">Building Your Own NixOS CD</a></li>
-      </ul>
-      <a href="[%root%]manual/nixos/stable" class="button">Full NixOS Manual</a>
-    </li>
-  </ul>
+      <li>
+        <h3>NixOS Manual</h3>
+        <p>NixOS is a Linux distribution based on Nix package manager.</p>
+        <ul>
+          <li><a href="[%root%]manual/nixos/stable/#sec-installation">Installing NixOS</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#sec-changing-config">Changing the Configuration</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#sec-upgrading">Upgrading NixOS</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#sec-configuration-syntax">Configuration Syntax</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#sec-package-management">Package Management</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#sec-user-management">User Management</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#ch-troubleshooting">Troubleshooting</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#sec-writing-modules">Writing NixOS Modules</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#sec-writing-documentation">Writing NixOS Documentation</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#sec-nixos-tests">Writing NixOS Tests</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#sec-building-cd">Building Your Own NixOS CD</a></li>
+        </ul>
+        <a href="[%root%]manual/nixos/stable" class="button">Full NixOS Manual</a>
+      </li>
+    </ul>
+  </div>
 </section>
 
-<section class="learn-gethelp">
+<section class="learn-otherresources">
   <div>
     <h2>Other learning resources</h2>
     <ul>
@@ -200,14 +204,6 @@
       <li><a href="https://nixos.wiki">Wiki</a> — A user-maintained wiki for Nix and NixOS.</li>
       <li><a href="https://nix.dev">nix.dev</a> — nix.dev presents topical,
         practical ways of using Nix package manager ecosystem.</li>
-      <li class="support">
-        <h1>Get help from the community</h1>
-        <p>The <a href="[%root%]community.html">Community page</a> shows where the community meets.</p>
-
-        <h1>Get commercial support</h1>
-        <p>The <a href="[%root%]commercial-support.html">Commercial support page</a> provides a list of consulting
-          companies.</p>
-      </li>
     </ul>
   </div>
 </section>
