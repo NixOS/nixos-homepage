@@ -143,6 +143,7 @@ favicon.ico: favicon.png
 %.html: %.tt layout.tt common.tt $(DEMOS) $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 	tpage \
 	  --pre_chomp --post_chomp \
+	  --eval_perl \
 	  --define root=$(ROOT) \
 	  --define fileName=$< \
 	  --define outputName=$@ \

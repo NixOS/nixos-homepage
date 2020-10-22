@@ -68,6 +68,9 @@
 #_declare__svg(nixos-text_black, @SVG_TEXT_NIXOS, #theme.color[black]);
 #svg.nixos-text.black { &:extend(.__svg_nixos-text_black); }
 
+#_declare__svg(foundation-text_black, @SVG_TEXT_FOUNDATION, #theme.color[black]);
+#svg.foundation-text.black { &:extend(.__svg_foundation-text_black); }
+
 // NixCon logos
 // ============
 
@@ -127,9 +130,9 @@
 // When scrolling on the landing page you can see some stuttering.
 
 #screen-sm-min({
-  #_declare__svg(background-outlines_blue-dark2, @SVG_BACKGROUND_OUTLINES, #theme.color[blue-dark2]);
+  #_declare__svg(background-outlines_blue-dark, @SVG_BACKGROUND_OUTLINES, #theme.color[blue-dark]);
 });
-#svg.background-outlines.blue-dark2 { &:extend(.__svg_background-outlines_blue-dark2); }
+#svg.background-outlines.blue-dark { &:extend(.__svg_background-outlines_blue-dark); }
 
 #screen-sm-min({
   #_declare__svg(background-outlines_white, @SVG_BACKGROUND_OUTLINES, #theme.color[white]);
@@ -147,3 +150,6 @@
 
 #_declare__svg(multipurpose-wedge_blue-dark, @SVG_MULTIPURPOSE_WEDGE, #theme.color[blue-dark]);
 #svg.multipurpose-wedge.blue-dark { &:extend(.__svg_multipurpose-wedge_blue-dark); }
+
+#_declare__svg(multipurpose-wedge_blue-lighter, @SVG_MULTIPURPOSE_WEDGE, #theme.color[blue-lighter]);
+#svg.multipurpose-wedge.blue-lighter { &:extend(.__svg_multipurpose-wedge_blue-lighter); }
