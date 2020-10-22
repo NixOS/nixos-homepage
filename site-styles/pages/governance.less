@@ -86,9 +86,15 @@
       align-items: end;
       text-align: center;
 
-      & > h3 {
+      & > svg {
         margin: 0;
         margin-top: 2*@gutter;
+        height: 6*@gutter;
+      }
+
+      & > h3 {
+        margin: 0;
+        align-self: start;
       }
 
       & > p {
@@ -110,107 +116,140 @@
           justify-self: start;
         }
 
+        & > svg:nth-of-type(1),
+        & > svg:nth-of-type(2) {
+          grid-row: 1;
+        }
+        & > svg:nth-of-type(3),
+        & > svg:nth-of-type(4) {
+          grid-row: 5;
+        }
+        & > svg:nth-of-type(5),
+        & > svg:nth-of-type(6) {
+          grid-row: 9;
+        }
+        & > svg:nth-of-type(7),
+        & > svg:nth-of-type(8) {
+          grid-row: 13;
+        }
+
         & > h3:nth-of-type(1),
         & > h3:nth-of-type(2) {
-          grid-row: 1;
+          grid-row: 2;
         }
         & > h3:nth-of-type(3),
         & > h3:nth-of-type(4) {
-          grid-row: 4;
+          grid-row: 6;
         }
         & > h3:nth-of-type(5),
         & > h3:nth-of-type(6) {
-          grid-row: 7;
+          grid-row: 10;
         }
         & > h3:nth-of-type(7),
         & > h3:nth-of-type(8) {
-          grid-row: 10;
+          grid-row: 14;
         }
 
         & > p:nth-of-type(1),
         & > p:nth-of-type(2) {
-          grid-row: 2;
+          grid-row: 3;
         }
         & > p:nth-of-type(3),
         & > p:nth-of-type(4) {
-          grid-row: 5;
+          grid-row: 7;
         }
         & > p:nth-of-type(5),
         & > p:nth-of-type(6) {
-          grid-row: 8;
+          grid-row: 11;
         }
         & > p:nth-of-type(7),
         & > p:nth-of-type(8) {
-          grid-row: 11;
+          grid-row: 15;
         }
 
         & > a:nth-of-type(1),
         & > a:nth-of-type(2) {
-          grid-row: 3;
+          grid-row: 4;
         }
         & > a:nth-of-type(3),
         & > a:nth-of-type(4) {
-          grid-row: 6;
+          grid-row: 8;
         }
         & > a:nth-of-type(5),
         & > a:nth-of-type(6) {
-          grid-row: 9;
+          grid-row: 12;
         }
         & > a:nth-of-type(7),
         & > a:nth-of-type(8) {
-          grid-row: 12;
+          grid-row: 16;
         }
       });
 
       #screen-md-min({
         grid-template-columns: repeat(3, 1fr);
 
+        & > svg:nth-of-type(1),
+        & > svg:nth-of-type(2),
+        & > svg:nth-of-type(3) {
+          grid-row: 1;
+        }
+        & > svg:nth-of-type(4),
+        & > svg:nth-of-type(5),
+        & > svg:nth-of-type(6) {
+          grid-row: 5;
+        }
+        & > svg:nth-of-type(7),
+        & > svg:nth-of-type(8),
+        & > svg:nth-of-type(9) {
+          grid-row: 9;
+        }
+
         & > h3:nth-of-type(1),
         & > h3:nth-of-type(2),
         & > h3:nth-of-type(3) {
-          grid-row: 1;
+          grid-row: 2;
         }
         & > h3:nth-of-type(4),
         & > h3:nth-of-type(5),
         & > h3:nth-of-type(6) {
-          grid-row: 4;
+          grid-row: 6;
         }
         & > h3:nth-of-type(7),
         & > h3:nth-of-type(8),
         & > h3:nth-of-type(9) {
-          grid-row: 7;
+          grid-row: 10;
         }
 
         & > p:nth-of-type(1),
         & > p:nth-of-type(2),
         & > p:nth-of-type(3) {
-          grid-row: 2;
+          grid-row: 3;
         }
         & > p:nth-of-type(4),
         & > p:nth-of-type(5),
         & > p:nth-of-type(6) {
-          grid-row: 5;
+          grid-row: 7;
         }
         & > p:nth-of-type(7),
         & > p:nth-of-type(8),
         & > p:nth-of-type(9) {
-          grid-row: 8;
+          grid-row: 11;
         }
 
         & > a:nth-of-type(1),
         & > a:nth-of-type(2),
         & > a:nth-of-type(3) {
-          grid-row: 3;
+          grid-row: 4;
         }
         & > a:nth-of-type(4),
         & > a:nth-of-type(5),
         & > a:nth-of-type(6) {
-          grid-row: 6;
+          grid-row: 8;
         }
         & > a:nth-of-type(7),
         & > a:nth-of-type(8),
         & > a:nth-of-type(9) {
-          grid-row: 9;
+          grid-row: 12;
         }
       });
     }
