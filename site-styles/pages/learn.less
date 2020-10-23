@@ -1,17 +1,10 @@
 .learn-getstarted {
   #container();
 
-  & > div {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 1*@gutter;
-    align-items: end;
+  & > ul {
+    #columns(2, @sm: 1);
 
-    #screen-xs-min({
-      grid-template-columns: repeat(2, 1fr);
-    });
-
-    & > div {
+    & > li > div {
       border: 1px solid #theme.color[blue-dark2];
       border-radius: 1*@gutter;
       display: block;
@@ -20,36 +13,66 @@
     }
 
     // Intall Nix
-    & > div:first-child > a {
+    & > li:first-child > div > a {
       #columns(2);
 
       border: 0;
 
-      & > * {
-        height: 4rem;
+      & > svg {
+        height: 5*@gutter;
+        width: 6*@gutter;
       }
 
       & > button {
         .button();
-        .-primary();
+        .button.-primary();
+
+        align-self: center;
+        padding: 1*@gutter;
+        margin: 0 auto;
       }
     }
 
     // Develop with Nix
-    & > div:last-child > a{
+    & > li:last-child > div > a {
       #columns(2);
 
       border: 0;
 
-      & > * {
-        height: 4rem;
+      & > svg {
+        height: 5*@gutter;
+        width: 6*@gutter;
       }
 
       & > button {
         .button();
-        .-highlighted();
+        .button.-highlighted();
+
+        align-self: center;
+        padding: 1*@gutter;
+        margin: 0 auto;
       }
     }
+
+    #screen-sm-max({
+      svg {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1*@gutter;
+
+      }
+
+      & > li {
+        padding-right: 0;
+        & > div > a > button {
+          display: block;
+        }
+      }
+
+      & > li:first-child {
+        margin-bottom: 1*@gutter;
+      }
+    });
   }
 }
 
@@ -68,11 +91,15 @@
   );
   #flair.wedge-shaped.blue-dark();
 
+  margin-left: -1*@gutter;
+  margin-right: -1*@gutter;
+
   & > div {
     #container();
 
     padding-top: 5*@gutter;
     padding-bottom: 2*@gutter;
+    padding-left: 1*@gutter;
     color: #theme.color[white];
 
     h2, h3 {
@@ -100,40 +127,154 @@
 
 .learn-guides {
   #container();
+
+  & > h2 {
+    margin-bottom: 2*@gutter;
+  }
+
+  & > ul {
+    list-style: none;
+    margin: 0;
+
+    & > li > a {
+      display: inline-block;
+      color: #theme.color[blue-dark];
+      border: 0;
+      padding: 1*@gutter 2*@gutter;
+      font-weight: bold;
+      border-radius: 0.5*@gutter;
+      width: 100%;
+      position: relative;
+    }
+
+    & > li > a:after {
+      .button();
+      .button.-primary();
+
+      content: "Read more";
+      position: absolute;
+      right: 2*@gutter;
+      padding: 0.4*@gutter 1.5*@gutter;
+      top: 0.7*@gutter;
+      font-size: 80%;
+    }
+
+    & > li:nth-child(2n + 1) > a {
+      background: #theme.color[blue-lighter];
+      color: #theme.color[gray-dark];
+    }
+
+    #screen-xs-max({
+      & > li > a:after {
+        display: none;
+      }
+    });
+  }
 }
 
 .learn-manuals {
   #container();
 
-  & > div {
-    margin-bottom: @gutter;
+  margin-top: 4*@gutter;
 
-    & > ul {
-      #columns(3, @md: 3, @sm: 1);
-      list-style-type: none;
+  & > ul {
+    #columns(3, @md: 3, @sm: 1);
 
-      padding: 0;
-      margin: 0;
-      margin-bottom: 0;
-    }
+    & > li {
 
-    & > ul ul ul {
-      margin-bottom: 0;
-    }
+      & > div {
+        border: 1px solid #theme.color[blue-dark2];
+        border-radius: 1*@gutter;
+        padding: 1*@gutter;
+        text-align: center;
 
-    ul.comma-separated {
-      &, & > li {
-        margin: 0;
-        padding: 0;
-        display: inline;
-      }
-      & > li::after {
-        content: ",";
+        & > svg {
+          height: 4rem;
+          width: 5rem;
+          float: left;
+          margin-right: 1*@gutter;
+          margin-bottom: 1*@gutter;
+        }
+
+        & > h2 {
+          margin-top: 0;
+          text-align: left;
+        }
+
+        & > p,
+        & > ul {
+          text-align: left;
+        }
+
+        & > a {
+          .button();
+          .button.-primary();
+        }
+
+        ul.comma-separated {
+          &, & > li {
+            margin: 0;
+            padding: 0;
+            display: inline;
+          }
+          & > li::after {
+            content: ",";
+          }
+        }
       }
     }
   }
+
+  #screen-sm-max({
+    & > ul > li {
+      margin-bottom: 1*@gutter;
+      padding-right: 0;
+
+      & > div > a {
+        display: block;
+      }
+    }
+  });
 }
 
 .learn-otherresources {
-  #container();
+  #flair.wedge-shaped.base(
+    @before: right,
+    @after: none,
+    @size_before: 3*64*@unit,
+    @scale_before: 33%,
+    @position_before: inside,
+    @margin-top: 0,
+    @margin-bottom: 0px
+  );
+  #flair.wedge-shaped.blue-dark();
+
+  padding-top: 12*@gutter;
+  padding-bottom: 5*@gutter;
+  margin-bottom: -2*@gutter;
+  color: #theme.color[white];
+
+  h2, h3, a {
+    color: #theme.color[white];
+  }
+
+  & > div {
+    #container();
+
+    & > ul {
+      #columns(3);
+
+      & > li > a {
+        .button();
+        .button.-highlighted();
+      }
+    }
+  }
+
+  #screen-xs-max({
+    padding-left: 1*@gutter;
+    padding-right: 1*@gutter;
+    margin-left: -1*@gutter;
+    margin-right: -1*@gutter;
+  });
 }
