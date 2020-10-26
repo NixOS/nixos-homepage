@@ -4,119 +4,165 @@
   <h1>Donate</h1>
 </div>
 
-<section class="generic-layout lead">
+<section class="donate-description">
   <p>
     The NixOS infrastructure, development and events
     are funded by its users and sponsors.
   </p>
 </section>
 
-<section class="generic-layout">
-  <div class="columnar-layout -two">
+<section class="donate-foundation">
+  <div>
     <div>
-      <p>Maintaining our build farm and binary cache is very expensive.
-      We depend on your support to ensure the continuous operation
-      and expansion of the NixOS infrastructure.
-      Please consider donating a small amount every month
-      to contribute to sustainable funding.
-      Donations are handled by a nonprofit organization,
-      the <a href="[%root%]governance.html#foundation">NixOS Foundation</a>.</p>
+      <p>
+        Maintaining our build farm and binary cache is very expensive.
+        We depend on your support to ensure the continuous operation
+        and expansion of the NixOS infrastructure.
+      </p>
+      <p>
+        Please consider donating a small amount every month
+        to contribute to sustainable funding.
+        Donations are handled by a nonprofit organization,
+        the <a href="[%root%]governance.html#foundation">NixOS Foundation</a>.
+      </p>
     </div>
     <div>
-      <div class="well">
-        <h2>NixOS T-shirts, mugs and more...</h2>
-        <p>Donate to NixOS foundation by purchasing from NixOS shop.</p>
-        <p>The community member <a href="https://discourse.nixos.org/u/mogorman/summary">mogorman</a> is running the shop.
-        The profits <a href="https://discourse.nixos.org/t/nixos-merchandise-report/303">are donated</a> to the <a
-                       href="[%root%]governance.html#foundation">NixOS Foundation</a> twice a year (after each release).</p>
-        <a class="btn btn-block btn-success" href="https://www.redbubble.com/people/mogorman/shop">Go to the shop</a>
-      </div>
+      <h2>NixOS Foundation</h2>
     </div>
   </div>
 </section>
 
-<section class="generic-layout">
-  <h2>Donate with</h2>
-  <div class="tabs-navigation">
-    <nav>
-      <ul>
-        <li><a href="#donate-with-opencollective">Open Collective</a></li>
-        <li><a href="#donate-with-sepa">SEPA bank transfer</a></li>
-      </ul>
-    </nav>
-
+<section class="donate-merch">
+  <div>
     <div>
-      <section id="donate-with-opencollective">
-        <p>You can donate to the NixOS Foundation by using Open Collective:</p>
-        <object type="image/svg+xml"
-                data="https://opencollective.com/nixos/tiers/supporter.svg?avatarHeight=80&amp;width=1000"></object>
-      </section>
-      <section id="donate-with-sepa">
-        <p>
+      <!--
+      <div>
+        <h1>TODO: Merch image!</h1>
+      </div>
+      -->
+      <div>
+        <h1>NixOS T-shirts, mugs and more...</h1>
+        <p>Donate to NixOS foundation by purchasing NixOS merchandise.</p>
+        <div>
+          <a href="https://www.redbubble.com/people/mogorman/shop">Go to the shop (RedBubble)</a>
+          <!--
+          <a href="https://www.hellotux.com/nixos">Go to the shop (HelloTux)</a>
+          -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="donate-donate">
+  <div>
+    <div>
+      <h2>Donate using Open Collective</h2>
+      <p>
+        NixOS Foundation is using <a href="https://opencollective.com/">Open Collective</a>
+        to manage the finances so everyone can see where money comes from and where
+        mone goes.
+      </p>
+      <p>
+        With Open Collective you can make a <strong>single</strong> or
+        <strong>recurring</strong> contribution by credit card transfer.
+      </p>
+      <p>
+        Thank you!
+      </p>
+      <a href="https://opencollective.com/nixos#support">Contribute</a>
+    </div>
+    <div>
+      <h2>Donate with SEPA bank transfer</h2>
+      <p>
         The NixOS Foundation also accepts donations via SEPA bank transfer.
         Please send payments to:
-        </p>
-        <pre class="well">Stichting NixOS Foundation, De Meern, The Netherlands
+      </p>
+      <pre>Stichting NixOS Foundation, De Meern, The Netherlands
 
 IBAN: NL45 KNAB 0732 3586 98
 BIC:  KNABNL2H</pre>
-        <p>Please add your name and purpose (donation) in the description of the transfer.</p>
+      <p>
+        Please add your name and purpose (donation) in the description of the transfer.
         <i>If you would like to support us with amounts above 2000 euro per year, please contact us at
           <a href="mailto:foundation@nixos.org">foundation@nixos.org</a>, as this will have tax implications.
         </i>
-      </section>
+      </p>
     </div>
   </div>
 </section>
 
-<section class="generic-layout acknowledgements-section">
-  <h2>Acknowledgements</h2>
+<section class="donate-acknowledgements">
+  <div>
+    <div>
+      <div>
+        <ul>
+          <li>
+            <a href="http://www.logicblox.com/">
+              <img src="[% root %]logo/lb_logo_small_no_bg.png" alt="LogicBlox logo" />
+            </a>
+          </li>
+          <li>
+            <a href="http://www.tudelft.nl/">
+              <img src="[% root %]logo/tudelft.gif" alt="TU Delft logo" />
+            </a>
+          </li>
+          <li>
+            <a href="http://www.uu.nl/">
+              <img src="[% root %]logo/uu.gif" alt="UU logo" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.3tu.nl/">
+              <img src="[% root %]logo/3tu.jpg" alt="3TU logo" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.packet.com">
+              <img src="[% root %]logo/packet.net.svg" alt="Premium Bare Metal Servers and Cloud Hosting" />
+            </a>
+          </li>
+          <li>
+            <a href="https://snabb.co">
+              <img src="[% root %]logo/snabb.png" alt="Snabb.co logo" />
+            </a>
+          </li>
 
-  <p>The Nix package manager was developed by <a href="https://edolstra.github.io/">Eelco Dolstra</a> as
-  part of his PhD research in the <a href="http://www.cs.uu.nl/wiki/Trace/WebHome">TraCE project</a>,
-  funded by the <a href="http://www.jacquard.nl/">Jacquard programme</a>
-  of the <a href="http://www.nwo.nl/">Netherlands Organisation for
-    Scientific Research</a> (NWO) and <a href="http://www.serc.nl/">SERC</a>. The first prototype of NixOS was
-  developed by <a href="http://www.tjaldur.nl/">Armijn Hemel</a> as
-  his master’s thesis project. Hydra, the Nix-based continuous build
-  system, was developed as part of the LaQuSo Buildfarm project, funded
-  by <a href="https://www.4tu.nl/nirict/">NIRICT</a> and <a href="http://www.laquso.com/">LaQuSo</a>.</p>
-
-  <p>The following companies and institutes have supported
-  the development of NixOS and hosting for it's infrastructure.
-  We are very grateful for that!
-  If you would like to support us as well, please contact
-  <a href="mailto:rob.vermaas@gmail.com">Rob Vermaas</a>.</p>
-
-  <div class="sponsors">
-    <div>
-      <a href="http://www.logicblox.com/"><img src="[% root %]logo/lb_logo_small_no_bg.png" alt="LogicBlox logo" /></a>
-    </div>
-    <div>
-      <a href="http://www.tudelft.nl/"><img src="[% root %]logo/tudelft.gif" alt="TU Delft logo" /></a>
-    </div>
-    <div>
-      <a href="http://www.uu.nl/"><img src="[% root %]logo/uu.gif" alt="UU logo" /></a>
-    </div>
-
-    <div>
-      <a href="https://www.3tu.nl/"><img src="[% root %]logo/3tu.jpg" alt="3TU logo" /></a>
-    </div>
-    <div>
-      <a href="https://www.packet.com"><img src="[% root %]logo/packet.net.svg" alt="Premium Bare Metal Servers and Cloud Hosting" /></a>
-    </div>
-    <div>
-      <a href="https://snabb.co"><img src="[% root %]logo/snabb.png" alt="Snabb.co logo" /></a>
-    </div>
-
-    <div>
-      <a href="https://www.macstadium.com/"><img src="[% root %]logo/macstadium.png" alt="MacStadium logo" /></a>
-    </div>
-    <div>
-      <a href="https://www.fastly.com/"><img src="[% root %]logo/fastly.png" alt="Fastly" /></a>
-    </div>
-    <div>
-      <a href="https://www.hetzner.de/"><img src="[% root %]logo/hetzner-online.svg" alt="Hetzner Online GmbH" /></a>
+          <li>
+            <a href="https://www.macstadium.com/">
+              <img src="[% root %]logo/macstadium.png" alt="MacStadium logo" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.fastly.com/">
+              <img src="[% root %]logo/fastly.png" alt="Fastly" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.hetzner.de/">
+              <img src="[% root %]logo/hetzner-online.svg" alt="Hetzner Online GmbH" />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2>Acknowledgements</h2>
+        <p>The Nix package manager was developed by <a href="https://edolstra.github.io/">Eelco Dolstra</a> as
+          part of his PhD research in the <a href="http://www.cs.uu.nl/wiki/Trace/WebHome">TraCE project</a>,
+          funded by the <a href="http://www.jacquard.nl/">Jacquard programme</a>
+          of the <a href="http://www.nwo.nl/">Netherlands Organisation for
+            Scientific Research</a> (NWO) and <a href="http://www.serc.nl/">SERC</a>. The first prototype of NixOS was
+          developed by <a href="http://www.tjaldur.nl/">Armijn Hemel</a> as
+          his master’s thesis project. Hydra, the Nix-based continuous build
+          system, was developed as part of the LaQuSo Buildfarm project, funded
+          by <a href="https://www.4tu.nl/nirict/">NIRICT</a> and <a href="http://www.laquso.com/">LaQuSo</a>.</p>
+        <p>The following companies and institutes have supported
+          the development of NixOS and hosting for it's infrastructure.
+          We are very grateful for that!
+          If you would like to support us as well, please contact
+          <a href="mailto:rob.vermaas@gmail.com">Rob Vermaas</a>.</p>
+      </div>
     </div>
   </div>
 </section>

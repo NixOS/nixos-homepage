@@ -20,7 +20,7 @@
   <div class="collapse">
     <div>
       <article id="nix-quick-install">
-        <h2><span>1.</span>Quick install</h2>
+        <h2>Quick install</h2>
         <p>
           The quickest way to install Nix is to open a terminal and run the following
           command (as a user other than <code>root</code> with <code>sudo</code> permission):
@@ -31,7 +31,7 @@
         <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
       </article>
       <article id="nix-verify-installation">
-        <h2><span>2.</span>Verify installation</h2>
+        <h2>Verify installation</h2>
         <p>You may want to verify the integrity of the installation script using GPG:</p>
         <pre class="terminal-console">
 <span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install
@@ -47,14 +47,14 @@
         </p>
       </article>
       <article id="nix-uninstall">
-        <h2><span>3.</span>Uninstall</h2>
+        <h2>Uninstall</h2>
         <p>
           You can uninstall Nix simply by running <code>rm -rf /nix</code>.
         </p>
         <!-- TODO: expand this https://github.com/NixOS/nix/issues/1402 -->
       </article>
       <article id="nix-more">
-        <h2><span>4.</span>More ...</h2>
+        <h2>More ...</h2>
         <p>The following release items are also available:</p>
         <ul>
           <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a></li>
@@ -179,7 +179,7 @@
           <select>
             [% amis = JSON.Escape.json_decode(IO.All.new(nixosAmis).all).$latestNixOSSeries %]
             [% FOREACH region IN amis.keys.sort %]
-            <option value="download-amazon-[% region %]">[% region %]</option>
+            <option value="[% region %]">[% region %]</option>
             [% END %]
           </select>
           <table>
