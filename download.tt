@@ -16,7 +16,7 @@
   </div>
 </section>
 
-<section class="download-nix">
+<section id="download-nix" class="download-nix">
   <div class="collapse">
     <div>
       <article id="nix-quick-install">
@@ -81,7 +81,7 @@
   </div>
 </section>
 
-<section class="download-nixos">
+<section id="download-nixos" class="download-nixos">
   <div class="collapse">
     <div>
       <article id="nixos-iso">
