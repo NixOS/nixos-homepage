@@ -9,7 +9,7 @@
   <ul>
     <li>
       <div>
-        <a href="#???">
+        <a href="[%root%]guides/install-nix.html">
           [% PROCESS svg path="site-styles/assets/gfx-learn-install.svg" %]
           <button>Install Nix</button>
         </a>
@@ -17,7 +17,7 @@
     </li>
     <li>
       <div>
-        <a href="#???">
+        <a href="[%root%]guides/dev-environment.html">
           [% PROCESS svg path="site-styles/assets/gfx-learn-develop.svg" %]
           <button>Develop with Nix</button>
         </a>
