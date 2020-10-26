@@ -8,7 +8,7 @@
   <h2>Get started</h2>
   <ul>
     <li>
-      <div>
+      <div class="clickable-whole">
         <a href="[%root%]guides/install-nix.html">
           [% PROCESS svg path="site-styles/assets/gfx-learn-install.svg" %]
           <button>Install Nix</button>
@@ -16,7 +16,7 @@
       </div>
     </li>
     <li>
-      <div>
+      <div class="clickable-whole">
         <a href="[%root%]guides/dev-environment.html">
           [% PROCESS svg path="site-styles/assets/gfx-learn-develop.svg" %]
           <button>Develop with Nix</button>
