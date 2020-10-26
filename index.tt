@@ -19,7 +19,6 @@
 [% END %]
 [% WRAPPER layout.tt title="NixOS Linux" handlesLayout=1 %]
 
-<!-- Example of a countdown timer banner
 <section class="wide-banner clickable-whole event-banner">
   <div>
     <div>
@@ -42,7 +41,6 @@
     </div>
   </div>
 </section>
--->
 
 <section class="home-hero">
   <div>
