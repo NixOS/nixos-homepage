@@ -10,7 +10,7 @@
     <li>
       <div>
         <a href="#???">
-          [% PROCESS svg path="site-styles/assets/gfx-release.svg" %]
+          [% PROCESS svg path="site-styles/assets/gfx-learn-install.svg" %]
           <button>Install Nix</button>
         </a>
       </div>
@@ -18,7 +18,7 @@
     <li>
       <div>
         <a href="#???">
-          [% PROCESS svg path="site-styles/assets/gfx-release.svg" %]
+          [% PROCESS svg path="site-styles/assets/gfx-learn-develop.svg" %]
           <button>Develop with Nix</button>
         </a>
       </div>
@@ -61,7 +61,7 @@
   <ul>
     <li>
       <div>
-        [% PROCESS svg path="site-styles/assets/gfx-release.svg" %]
+        [% PROCESS svg path="site-styles/assets/gfx-learn-manual.svg" %]
         <h2>Nix Manual</h2>
         <p>Nix is a package manager which comes in a form of many command line tools.
           Packages that Nix can build are defined with Nix Expression Language.
@@ -100,7 +100,7 @@
 
     <li>
       <div>
-        [% PROCESS svg path="site-styles/assets/gfx-release.svg" %]
+        [% PROCESS svg path="site-styles/assets/gfx-learn-manual.svg" %]
         <h2>Nixpkgs Manual</h2>
         <p>The Nix Packages collection (Nixpkgs) is a set of thousands of packages for the Nix package manager and NixOS
           Linux distribution.</p>
@@ -178,7 +178,7 @@
 
     <li>
       <div>
-        [% PROCESS svg path="site-styles/assets/gfx-release.svg" %]
+        [% PROCESS svg path="site-styles/assets/gfx-learn-manual.svg" %]
         <h2>NixOS Manual</h2>
         <p>NixOS is a Linux distribution based on Nix package manager.</p>
         <ul>
