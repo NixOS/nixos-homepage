@@ -50,7 +50,7 @@
   </div>
 </section>
 
-<section class="learn-guides">
+<section id="learn-guides" class="learn-guides">
   <h2>Guides</h2>
   <ul>
     [% INSERT "learn_guides.html.in" %]
