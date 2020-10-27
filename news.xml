@@ -38,7 +38,7 @@
       </ul>
 
       <p>
-        The 20.09 release was possible because of work of <strong>1313</strong>
+        The 20.09 release was possible due to the efforts of <strong>1313</strong>
         contributors in <strong>31282</strong> commits. We would especially
         like to thank our top 10 contributors:
         <a href="https://github.com/marsam">Mario Rodas</a>,
@@ -57,11 +57,11 @@
         NixOS is already known as
         <a href="https://repology.org/repositories/statistics/newest">the most up to date distribution</a>
         and is
-        <a href="https://repology.org/repositories/statistics/total">at the top three by total number of packages</a>.
+        <a href="https://repology.org/repositories/statistics/total">in the top three by total number of packages</a>.
       </p>
 
       <p>
-        This didn't stop us. In last six months:
+        This didn't stop us. In the last six months:
       </p>
 
       <ul>
@@ -84,9 +84,9 @@
 
       <p>
         Stabilization of the NixOS happens a month before planned release. The
-        goal is to get as little as possible continuous integrations (Hydra)
+        goal is to have as little as possible continuous integration (Hydra)
         jobs failing before the release is cut. While we would like to release
-        on time, we prefer to make a release with a better quality.
+        on time, a high quality release is more important.
       </p>
 
       <p>
@@ -108,8 +108,8 @@
       <p>
         I think that the 20.09 release highlighted a few weak points with our current release schedule.
         Discussions have already began on how to improve the process from the beginning, to help minimize
-        risk and better set ourselves up for success. I do want to thank <a href="https://gihtub/worldofpeace">WORLDofPEACE</a>
-        for helping me with release management items. I also wanted to thank <a href="https://github.com/ttuegel">Thomas Tuegel</a> for
+        risk and better set ourselves up for success. I do want to thank <a href="https://github.com/worldofpeace">WORLDofPEACE</a>
+        for helping me with release management items. I also want to thank <a href="https://github.com/ttuegel">Thomas Tuegel</a> for
         helping with Qt and Plasma stabilization, as well as <a href="https://github.com/risicle">Robert Scott</a> for his work with stabilization (ZHF).
       </p>
     </description>
