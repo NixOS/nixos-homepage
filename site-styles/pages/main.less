@@ -89,6 +89,12 @@
   }
   .whynix {
     #columns(3, @spacing: @gutter*2);
+
+    #screen-xs-max({
+      & > * {
+        padding-right: 0;
+      }
+    });
   }
 }
 
