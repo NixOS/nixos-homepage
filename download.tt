@@ -16,7 +16,7 @@
   </div>
 </section>
 
-<section class="download-nix">
+<section id="download-nix" class="download-nix">
   <div class="collapse">
     <div>
       <article id="nix-quick-install">
@@ -81,7 +81,7 @@
   </div>
 </section>
 
-<section class="download-nixos">
+<section id="download-nixos" class="download-nixos">
   <div class="collapse">
     <div>
       <article id="nixos-iso">
@@ -101,18 +101,22 @@
         <h3>Graphical ISO image</h3>
 
         <p>The graphical installation ISO image <strong>contains NixOS
-            installer</strong> as well as <strong>Plasma Desktop</strong> and
-          several applications. It’s a <em>live CD</em>, so it allows you to
-          get an impression of NixOS (and the Nix package manager) without
+            installer</strong> as well as <strong>Desktop Environment</strong>
+          and several applications. It’s a <em>live CD</em>, so it allows you
+          to get an impression of NixOS (and the Nix package manager) without
           installing it.</p>
 
         [% prefix = "https://channels.nixos.org/nixos-" _ latestNixOSSeries %]
 
         <ul class="download-buttons">
           <li>
-            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Download (64bit)</a>
+            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Download (Plasma Desktop, 64bit)</a>
             <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso.sha256">(SHA-256)</a>
             <span class="label -success">Recommended for most users</span>
+          </li>
+          <li>
+            <a href="[%prefix%]/latest-nixos-gnome-x86_64-linux.iso">Download (GNOME, 64bit)</a>
+            <a href="[%prefix%]/latest-nixos-gnome-x86_64-linux.iso.sha256">(SHA-256)</a>
           </li>
         </ul>
 

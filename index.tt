@@ -19,30 +19,16 @@
 [% END %]
 [% WRAPPER layout.tt title="NixOS Linux" handlesLayout=1 %]
 
-<!-- Example of a countdown timer banner
 <section class="wide-banner clickable-whole event-banner">
   <div>
     <div>
-      NixCon 2020<span class="-detailed">. Talks. Discussions. Hacking.</span>
-    </div>
-    <div class="description">
-      October 16th-18th 2020
-    </div>
-    <div class="countdown-timer" data-date="2020-10-16 11:00:00" data-stale="2020-10-19 0:00:00"
-      data-stale-hide="main > .event-banner" data-current="Currently happening!">
-      <ul>
-        <li><span class="counter-days">00</span>days</li>
-        <li><span class="counter-hours">00</span>hours</li>
-        <li><span class="counter-minutes">00</span>minutes</li>
-        <li><span class="counter-seconds">00</span>seconds</li>
-      </ul>
+      NixOS 20.09<span class="-detailed"> "Nightingale" released!</span>
     </div>
     <div class="action">
-      <a href="https://2020.nixcon.org/#program">Program</a>
+      <a href="[% root %]news.html">Announcement</a>
     </div>
   </div>
 </section>
--->
 
 <section class="home-hero">
   <div>
