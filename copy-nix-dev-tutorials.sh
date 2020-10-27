@@ -22,19 +22,36 @@ for page in "${pages[@]}"; do
   filename="$(basename ${page%.*})"
   source="$NIX_DEV_MANUAL_IN/$page"
   target="$outDir/$filename.tt"
+  temp="$target.temp"
   title=$(xidel $source --css '.body h1' --printed-node-format=text | sed 's|¶||')
 
   echo "<li><a href=\"/$outDir/$filename.html\">$title</a></li>" >> learn_guides.html.in
 
-  printf '[%% WRAPPER layout.tt title="Guides - %s" %%]\n\n' "$title" > $target
-
-  xidel $source --css '.body > *' --printed-node-format=html \
+  xidel $source --css '.body > .section > *' --printed-node-format=html \
     | sed 's|<a class=\"headerlink\".*<\/a>||g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-attribute-name"><span class="xref std std-term">attribute name</span></a>|attribute name|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-package-name"><span class="xref std std-term">package name</span></a>|package name|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-reproducible"><span class="xref std std-term">reproducible</span></a>|reproducible|g' \
     | sed 's|../reference/pinning-nixpkgs.html#ref-pinning-nixpkgs|towards-reproducibility-pinning-nixpkgs.html|g' \
-      >> "$target"
+      > "$temp"
+
+  echo "[% WRAPPER layout.tt title=\"Guides - $title\" handlesLayout=1 %]" > $target
+  echo "<div class=\"page-title\">" >> $target
+  echo "  <div>" >> $target
+  echo "    <a href=\"[% root%]learn.html#learn-guides\">Learn</a>" >> $target
+  echo "    <span>→</span>" >> $target
+  echo "  </div>" >> $target
+  echo "  <h1>$title</h1>" >> $target
+  echo "</div>" >> $target
+
+  echo "<section class=\"learn-guide\">" >> $target
+  sed \
+    -e 's|<h1>.*</h1>||g' \
+    -e 's|<span id=.*></span>||g' \
+      $temp >> $target
+  echo "</section>" >> $target
+
+
 
   printf '\n\n[%% END %%]\n' >> $target
 done
