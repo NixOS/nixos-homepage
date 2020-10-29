@@ -12,7 +12,6 @@ HTML = \
   demos/index.html \
   donate.html \
   download.html \
-  features.html \
   governance.html \
   guides/ad-hoc-developer-environments.html \
   guides/building-and-running-docker-images.html \
@@ -25,6 +24,7 @@ HTML = \
   index.html \
   learn.html \
   news.html \
+  overview.html \
   teams/discourse.html \
   teams/infrastructure.html \
   teams/marketing.html \
