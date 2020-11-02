@@ -80,63 +80,65 @@ BLOCK navigationLink %]
   </main>
 
   <footer>
-    <div class="upper">
-      <section>
-        <h4>The project</h4>
-        <ul>
-          <li><a href="https://status.nixos.org/">Channel Status</a></li>
-          <li><a href="https://search.nixos.org/packages">Packages search</a></li>
-          <li><a href="https://search.nixos.org/options">Options search</a></li>
-          <li><a href="https://nixos.org/teams/security.html">Security</a></li>
-        </ul>
-      </section>
-      <section>
-        <h4>Get in Touch</h4>
-        <ul>
-          <li><a href="https://discourse.nixos.org/">Forum</a></li>
-          <li><a href="https://webchat.freenode.net/#nixos">Chat</a></li>
-          <li><a href="https://nixos.org/commercial-support.html">Commercial support</a></li>
-        </ul>
-      </section>
-      <section>
-        <h4>Contribute</h4>
-        <ul>
-          <li><a href="https://nixos.org/guides/contributing.html">Contributing Guide</a></li>
-          <li><a href="https://nixos.org/donate.html">Donate</a></li>
-        </ul>
-      </section>
-      <section>
-        <h4>Stay up to date</h4>
-        <ul>
-          <li><a href="https://nixos.org/news.html">Announcements</a></li>
-          <li><a href="https://weekly.nixos.org/">Newsletter</a></li>
-        </ul>
-      </section>
-    </div>
-    <hr />
-    <div class="lower">
-      <section class="footer-copyright">
-        <h4>NixOS</h4>
-        <div>
-          <span>
-            Copyright © [% date.format(date.now, '%Y') %] NixOS
-          </span>
-          <a href="https://github.com/NixOS/nixos-homepage/blob/master/LICENSES/CC-BY-SA-4.0.txt">
-            <abbr title="Creative Commons Attribution Share Alike 4.0 International">
-              CC-BY-SA-4.0
-            </abbr>
-          </a>
-        </div>
-      </section>
-      <section class="footer-social">
-        <h4>Connect with us</h4>
-        <ul>
-          <li class="social-icon -twitter"><a href="https://twitter.com/nixos_org">Twitter</a></li>
-          <li class="social-icon -youtube"><a
-              href="https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw">Youtube</a></li>
-          <li class="social-icon -github"><a href="https://github.com/NixOS">GitHub</a></li>
-        </ul>
-      </section>
+    <div>
+      <div class="upper">
+        <section>
+          <h4>The project</h4>
+          <ul>
+            <li><a href="https://status.nixos.org/">Channel Status</a></li>
+            <li><a href="https://search.nixos.org/packages">Packages search</a></li>
+            <li><a href="https://search.nixos.org/options">Options search</a></li>
+            <li><a href="https://nixos.org/teams/security.html">Security</a></li>
+          </ul>
+        </section>
+        <section>
+          <h4>Get in Touch</h4>
+          <ul>
+            <li><a href="https://discourse.nixos.org/">Forum</a></li>
+            <li><a href="https://webchat.freenode.net/#nixos">Chat</a></li>
+            <li><a href="https://nixos.org/commercial-support.html">Commercial support</a></li>
+          </ul>
+        </section>
+        <section>
+          <h4>Contribute</h4>
+          <ul>
+            <li><a href="https://nixos.org/guides/contributing.html">Contributing Guide</a></li>
+            <li><a href="https://nixos.org/donate.html">Donate</a></li>
+          </ul>
+        </section>
+        <section>
+          <h4>Stay up to date</h4>
+          <ul>
+            <li><a href="https://nixos.org/news.html">Announcements</a></li>
+            <li><a href="https://weekly.nixos.org/">Newsletter</a></li>
+          </ul>
+        </section>
+      </div>
+      <hr />
+      <div class="lower">
+        <section class="footer-copyright">
+          <h4>NixOS</h4>
+          <div>
+            <span>
+              Copyright © [% date.format(date.now, '%Y') %] NixOS
+            </span>
+            <a href="https://github.com/NixOS/nixos-homepage/blob/master/LICENSES/CC-BY-SA-4.0.txt">
+              <abbr title="Creative Commons Attribution Share Alike 4.0 International">
+                CC-BY-SA-4.0
+              </abbr>
+            </a>
+          </div>
+        </section>
+        <section class="footer-social">
+          <h4>Connect with us</h4>
+          <ul>
+            <li class="social-icon -twitter"><a href="https://twitter.com/nixos_org">Twitter</a></li>
+            <li class="social-icon -youtube"><a
+                href="https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw">Youtube</a></li>
+            <li class="social-icon -github"><a href="https://github.com/NixOS">GitHub</a></li>
+          </ul>
+        </section>
+      </div>
     </div>
   </footer>
   <script src="[% root %]js/nixos-site.js"></script>
