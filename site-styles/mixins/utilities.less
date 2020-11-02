@@ -17,6 +17,10 @@
   position: relative;
   left: -@size;
 
+  body.-debug & > * {
+    outline: 1px solid orange;
+  }
+
   & > * {
     // Sane default here
     flex-grow: 1;
@@ -41,6 +45,10 @@
   position: relative;
   margin-left: @size;
   left: -@size;
+
+  body.-debug & > * {
+    outline: 1px solid green;
+  }
 
   & > * {
     margin-right: @size;
