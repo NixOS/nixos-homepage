@@ -115,6 +115,14 @@ body > header {
     // So we simply add them up here :)
     width: @_lambdaflake_width + @_nixos_text_width;
 
+    // Strip the NixOS text as in narrow -sm widths it might not fit.
+    #screen-sm-only({
+      width: @_lambdaflake_width;
+      &::after {
+        display: none;
+      }
+    });
+
     padding: 0;
     margin-right: @gutter;
   }
