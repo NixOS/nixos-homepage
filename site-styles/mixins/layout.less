@@ -28,28 +28,35 @@
 // "under" xs cannot be forced to anything else than 1.
 // sm and md can be configured if needed, but will default to @amount.
 #columns(@amount, @xxs: 1, @xs: @xxs, @sm: @amount, @md: @amount, @spacing: @gutter) {
+  #flex-flexible-margin-between(@spacing);
+  justify-content: flex-start;
+
   // This is a sane default, and helps with using <ul>
   margin: 0;
   // Same, as <ul> can often be made a columnar layout, it is a sane default.
   list-style-type: none;
 
-  #flex-flexible-spacing(@spacing);
-  justify-content: flex-start;
+  // Needed to undo incidental margins
+  margin-right: -@spacing;
+
+  body.-debug & > * {
+    outline: 1px solid pink;
+  }
 
   & > * {
     flex-grow: 0;
-    width: 100%/@xxs;
+    width: calc(100%/@xxs - @spacing);
     #screen-xs-min({
-      width: 100%/@xs;
+      width: calc(100%/@xs - @spacing);
     });
     #screen-sm-min({
-      width: 100%/@sm;
+      width: calc(100%/@sm - @spacing);
     });
     #screen-md-min({
-      width: 100%/@md;
+      width: calc(100%/@md - @spacing);
     });
     #screen-lg-min({
-      width: 100%/@amount;
+      width: calc(100%/@amount - @spacing);
     });
   }
 }

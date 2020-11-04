@@ -96,15 +96,12 @@
     }
 
     & > div {
-      #columns(2);
+      #columns(3, @sm: 2, @spacing: @gutter);
 
       #screen-md-min({
-        & > div:first-child {
-          width: 34%;
-        }
-
         & > div:last-child {
-          width: 66%;
+          // These value is a leaky implementation details from #columns.
+          width: (100%/3*2 - 2*@gutter);
         }
       });
 
@@ -260,7 +257,8 @@
   & > ul {
     #columns(3);
     text-align: center;
-    margin: 2*@gutter 0;
+    margin-top: 2*@gutter;
+    margin-bottom: 2*@gutter;
     font-size: 120%;
 
     & > li {
