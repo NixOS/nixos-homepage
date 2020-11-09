@@ -7,42 +7,81 @@
 <section class="overview-benefits">
 
   <div>
+    <!-- sparkles, success, joy, for developers -->
     [% PROCESS svg path="site-styles/assets/gfx-overview-cloud.svg" %]
     <div>
-      <h2>Stop looking for what is missing. Let Nix remind you.</h2>
+      <h2>Always working development environment.</h2>
+      <!--
+      <h2>Never breaking development environment.</h2>
+      <h2>Complete development environment.</h2>
+      <h2>Complete and consistent development environment.</h2>
+      -->
       <p>
-        Makes sure nothing gets left behind and reduces the risk of incomplete
-        dependencies. Stop worrying if all dependencies are in order. Let Nix
-        remind you about the missing pieces.
+        With Nix every developer will enter a
+        <strong>complete and consistent development environment</strong>.
+        Stop worrying how to install dependencies for your project.
       </p>
+      <ul>
+        <!-- TODO: this should be links to a more detailed explanation
+                   in which we should explain how it works? and why it works
+                   the way it is works?
+        -->
+        <li>complete dependencies</li>
+        <li>build sandbox</li>
+      </ul>
       <div>
-        <strong>Complete dependencies</strong> are ...
-
-        Nix ensures that that package dependency specifications are complete.
-
-        Under Nix, a build process will only find resources that have been
-        declared explicitly as dependencies. There's no way it can build until
-        everything it needs has been correctly declared. If it builds, you will
-        know you've provided a complete declaration.
-
-        Once a build is complete, ongoing runtime dependencies are detected
-        automatically
+        <p>
+          Under Nix, a build process will only find resources that have been
+          declared explicitly as dependencies. There is no way it can build
+          until everything it needs has been correctly declared. If it builds,
+          you will know you've provided a complete declaration.
+        </p>
+        <p>
+          The same build process specification is than used to provide
+          development environment. With successful build, we can guarantee that
+          everything needed to building the project is available to the
+          developer. Even more, some additional development tools can be added
+          to assist the development.
+        </p>
+        <p>
+          Long are gone the days developers saying:
+          <strong>But it works on my machine!</strong>
+        </p>
       </div>
     </div>
   </div>
 
+  <!--
   <div>
     [% PROCESS svg path="site-styles/assets/gfx-overview-looking.svg" %]
     <div>
       <h2>
-        Patches? Custom changes? The sky is the limit.
+        You can only fix, what you see is broken.
       </h2>
       <p>
-        Completely customisable build tool. Get the power to adjust any part of the build environment. All changes are
-        transparent and Nix keeps it that way.
+        With Nix there are two results: the code either works or fails always
+        in the same way. This gives you the power to reproduce (or avoid) any
+        build related bugs.
+      </p>
+      </ Nix gives you the power to adjust any part of the build environment in a transparent way. </p>
+      <ul>
+        <li>reproducibility</li>
+        <li>transparent source binary model</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
+    <div>
+      <h2>
+        Move fast and fix things: quickly discover bugs.
+      </h2>
+      <p>
+        Want to boost productivity? Choose a conflict-free development environment.
       </p>
       <div>
-        transparent source binary model
+        patching, reproducibility
       </div>
     </div>
   </div>
@@ -51,7 +90,24 @@
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
     <div>
       <h2>
-        Multiple development environments. No conflicts with the operating system.
+        Be carefree. Develop with no limits.
+      </h2>
+      <p>
+        Gives you the power to build and deploy software consistently on different machines. Save time, be carefree
+        and
+        rollback anytime to the previous version. Nix will make sure all dependencies are in place.
+      </p>
+      <div>
+        reproducibility
+      </div>
+    </div>
+  </div>
+
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
+    <div>
+      <h2>
+        No conflicts with the operating system.
       </h2>
       <p>
         Securely install software with no risk of breaking anything down. Nix prevents conflicts not only between
@@ -68,7 +124,7 @@
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
     <div>
       <h2>
-        Leave nothing behind. Instantly upgrade.
+        Simple and consistent. Trust in your deployments.
       </h2>
       <p>
         To eliminate the risk of leaving any parts behind, all operations are atomic. Nix sets everything in place and
@@ -100,23 +156,6 @@
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
     <div>
       <h2>
-        Be carefree. Develop with no limits.
-      </h2>
-      <p>
-        Gives you the power to build and deploy software consistently on different machines. Save time, be carefree
-        and
-        rollback anytime to the previous version. Nix will make sure all dependencies are in place.
-      </p>
-      <div>
-        reproducibility
-      </div>
-    </div>
-  </div>
-
-  <div>
-    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
-    <div>
-      <h2>
         Simplify your development workflow. Use Nix.
       </h2>
       <p>
@@ -137,7 +176,7 @@
         No surprises. Trust in your deployments.
       </h2>
       <p>
-        Surprises only belong to birthdays, not deployments. Explain, why we trust in deployments, why are there no
+        Surprises only belong to birthdays, not deployments. TODO: Explain, why we trust in deployments, why are there no
         surprises?Boost efficiency with declarative configuration. Shorten development cycles and solve problems
         faster.
         All that in a truly all-inclusive build environment: NixOS.
@@ -148,23 +187,7 @@
     </div>
   </div>
 
-  <div>
-    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
-    <div>
-      <h2>
-        Move fast and fix things: quickly discover bugs.
-      </h2>
-      <p>
-        Want to boost productivity? Choose a conflict-free development environment. With Nix there are two results:
-        the
-        code either works or fails always in the same way. Discover bugs faster and focus on reproducing.
-      </p>
-      <div>
-        patching, reproducibility
-      </div>
-    </div>
-  </div>
-
+  -->
 </section>
 
 [% END %]

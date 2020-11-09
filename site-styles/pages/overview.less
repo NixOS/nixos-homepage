@@ -16,6 +16,27 @@
 
     & > div {
       padding-right: 0;
+
+      & > p {
+        .generic-layout.lead();
+      }
+
+      & > ul {
+        list-style: none;
+        margin-left: 0;
+
+        & > li {
+          display: inline-block;
+          color: #theme.color[white];
+          background: #theme.color[blue-dark];
+          border-radius: 1*@gutter;
+          border-radius: 0.5*@gutter;
+          font-size: 85%;
+          padding: 0 0.5*@gutter;
+          margin-right: 0.5*@gutter;
+          font-weight: bold;
+        }
+      }
     }
 
     #screen-sm-min({
@@ -88,12 +109,7 @@
         & > h2 {
           margin-top: 0;
         }
-
-        & > p {
-          .generic-layout.lead();
-        }
       }
     });
   }
-  
 }
