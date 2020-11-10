@@ -96,26 +96,39 @@
     </div>
   </div>
 
-  <!--
   <div>
     [% PROCESS svg path="site-styles/assets/gfx-overview-looking.svg" %]
     <div>
       <h2>
-        You can only fix, what you see is broken.
+        Either it works or fails always in the same way.
       </h2>
       <p>
         With Nix there are two results: the code either works or fails always
-        in the same way. This gives you the power to reproduce (or avoid) any
+        in the same way. This gives you the power to reproduce (and avoid) any
         build related bugs.
       </p>
-      </ Nix gives you the power to adjust any part of the build environment in a transparent way. </p>
       <ul>
         <li>reproducibility</li>
         <li>transparent source binary model</li>
+        <li>nix language</li>
       </ul>
+      <div>
+        <p>
+          Build instructions are written in Nix language, which allows you to
+          extend or change existing build instruction in any way you wish. This
+          makes Nix a power build tool that can be used in both simple and
+          complex project.
+        </p>
+        <p>
+          Building and running tests locally or in your CI would always result
+          in the same failure or guarantee success. This is because environment
+          is always shared wherever your run it with Nix.
+        </p>
+      </div>
     </div>
   </div>
 
+  <!--
   <div>
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
     <div>
