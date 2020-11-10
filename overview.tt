@@ -4,6 +4,12 @@
   <h1>Overview</h1>
 </div>
 
+<section class="overview-description">
+  Step on a journey to explore and learn why so many developer, system
+  administrators and other enthusiasts use Nix and can not imagine the world
+  without it.
+</section>
+
 <section class="overview-benefits">
 
   <div>
@@ -46,6 +52,45 @@
         <p>
           Long are gone the days developers saying:
           <strong>But it works on my machine!</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <!-- collaboration, sharing -->
+    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
+    <div>
+      <h2>
+        <!-- TODO: missing the emotional part
+        -->
+        One tool, many languages, many more projects.
+      </h2>
+      <p>
+        With today's polyglot development environments, each language has its
+        own way of building and testing.
+        <strong>Encourage cross-team development</strong>
+        by providing a single way of building everything.
+      </p>
+      <ul>
+        <li>language agnostic</li>
+        <li>multiple versions</li>
+        <li>portable</li>
+      </ul>
+      <div>
+        <p>
+          Keeping the project README up to date with the latest working version
+          of how to install system dependencies for you project is a never
+          ending task. Nix allows you to specify your system dependencies
+          alongside your project dependencies. Development environment is one
+          simple command away, all you need to run is
+          <code>nix-shell</code>.
+        </p>
+        <p>
+          Multiple versions or variants of a package can be installed at the
+          same time without a problem. This is important when different
+          projects have dependencies on different versions of the same package
+          — <strong>Nix prevents the “DLL hell”</strong>.
         </p>
       </div>
     </div>
@@ -156,23 +201,6 @@
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
     <div>
       <h2>
-        Simplify your development workflow. Use Nix.
-      </h2>
-      <p>
-        Keep it simple and develop with a language agnostic tool/package manager. Focus on the work and do not lose
-        time
-        with multiple tools/package managers.
-      </p>
-      <div>
-        Language agnostic
-      </div>
-    </div>
-  </div>
-
-  <div>
-    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
-    <div>
-      <h2>
         No surprises. Trust in your deployments.
       </h2>
       <p>
@@ -187,6 +215,7 @@
     </div>
   </div>
 
+  Sharing your work, configuration or deployment.
   -->
 </section>
 
