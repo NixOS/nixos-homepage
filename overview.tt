@@ -128,72 +128,6 @@
     </div>
   </div>
 
-  <!--
-  <div>
-    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
-    <div>
-      <h2>
-        Move fast and fix things: quickly discover bugs.
-      </h2>
-      <p>
-        Want to boost productivity? Choose a conflict-free development environment.
-      </p>
-      <div>
-        patching, reproducibility
-      </div>
-    </div>
-  </div>
-
-  <div>
-    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
-    <div>
-      <h2>
-        Be carefree. Develop with no limits.
-      </h2>
-      <p>
-        Gives you the power to build and deploy software consistently on different machines. Save time, be carefree
-        and
-        rollback anytime to the previous version. Nix will make sure all dependencies are in place.
-      </p>
-      <div>
-        reproducibility
-      </div>
-    </div>
-  </div>
-
-  <div>
-    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
-    <div>
-      <h2>
-        No conflicts with the operating system.
-      </h2>
-      <p>
-        Securely install software with no risk of breaking anything down. Nix prevents conflicts not only between
-        multiple environments, but also with the operating system. All packages remain installed side-by-side even if
-        different users install packages with the conflicting dependencies.
-      </p>
-      <div>
-        explain /nix/store
-      </div>
-    </div>
-  </div>
-
-  <div>
-    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
-    <div>
-      <h2>
-        Simple and consistent. Trust in your deployments.
-      </h2>
-      <p>
-        To eliminate the risk of leaving any parts behind, all operations are atomic. Nix sets everything in place and
-        once ready, there are only two possible outcomes. Upgrade was successful or upgrade did not happen.
-      </p>
-      <div>
-        link farm
-      </div>
-    </div>
-  </div>
-
   <div>
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
     <div>
@@ -201,14 +135,63 @@
         Is the previous version better? Rollback anytime.
       </h2>
       <p>
-        Packages are never overwritten, and old versions are always stored. Roll back to any previous version within
-        milliseconds. Yes, again with the trustworthy atomic operation.
+        Packages are never overwritten, and old versions are always stored.
+        Rollback to any previous version within milliseconds.
       </p>
+      <ul>
+        <li>generations</li>
+        <li>garbage collection</li>
+        <li>atomic</li>
+        <li>nix store</li>
+      </ul>
       <div>
-        profiles, generations, garbage collection
+        <p>
+          profiles, generations, garbage collection
+        </p>
       </div>
     </div>
   </div>
+
+  <div>
+    <!-- hacking, fun, party -->
+    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
+    <div>
+      <h2>
+        <!-- TODO: "have fun" can be interpreted in the wrong way.
+                   need to check with somebody english native
+        -->
+        It is important to have fun.
+      </h2>
+      <ul>
+        <li>generations</li>
+        <li>nix store</li>
+      </ul>
+      <p>
+        We don't stop playing, because we grow old; we grow old because we stop
+        playing - George Bernard Shaw.
+        Use tools that allow you to play with different software as
+        you did when the job wasn't waiting for you the next day.
+      </p>
+      <div>
+        <p>
+          Install new software with no risk of breaking anything down. Nix
+          prevents conflicts not only between multiple development environments,
+          but also with the operating system. You work environment will stay
+          intact, but allow you to experiment.
+        </p>
+        <p>
+          We could write that because of Nix you will become a better
+          programmer. You probably will, just because you will be able to
+          expose your self to different software. But none of this is relevant.
+          The most important thing is to have fun.
+          <strong>Without it, we get sick.</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  From zero to cloud.
 
   <div>
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
@@ -223,7 +206,12 @@
         All that in a truly all-inclusive build environment: NixOS.
       </p>
       <div>
+        link farm
         declarative configuration / NixOS
+      <p>
+        To eliminate the risk of leaving any parts behind, all operations are atomic. Nix sets everything in place and
+        once ready, there are only two possible outcomes. Upgrade was successful or upgrade did not happen.
+      </p>
       </div>
     </div>
   </div>
