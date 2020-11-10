@@ -223,7 +223,6 @@
       </div>
     </div>
   </div>
-  <!--
 
   <div>
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
@@ -232,24 +231,27 @@
         No surprises. Trust in your deployments.
       </h2>
       <p>
-        Surprises only belong to birthdays, not deployments. TODO: Explain, why we trust in deployments, why are there no
-        surprises?Boost efficiency with declarative configuration. Shorten development cycles and solve problems
-        faster.
-        All that in a truly all-inclusive build environment: NixOS.
+        Surprises only belong to birthdays, not deployments.
+        With Nix there are only two possible outcomes.
+        Your system was successfully upgraded or upgrade did not happen.
       </p>
+      <ul>
+        <li>nixos</li>
+        <li>atomic</li>
+        <li>generations</li>
+      </ul>
       <div>
-        link farm
-        declarative configuration / NixOS
-      <p>
-        To eliminate the risk of leaving any parts behind, all operations are atomic. Nix sets everything in place and
-        once ready, there are only two possible outcomes. Upgrade was successful or upgrade did not happen.
-      </p>
+        <p>
+          Nix will never leave your system in an unknown state. It puts you in
+          a complete control. The upgrade to new version of the system is
+          atomic, meaning that there is no point in time where your system
+          could be in a broken state. Some call it magic, Nix users call it a
+          thing that they can not leave without.
+        </p>
       </div>
     </div>
   </div>
 
-  Sharing your work, configuration or deployment.
-  -->
 </section>
 
 [% END %]
