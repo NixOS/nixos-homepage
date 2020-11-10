@@ -182,7 +182,7 @@
         <p>
           We could write that because of Nix you will become a better
           programmer. You probably will, just because you will be able to
-          expose your self to different software. But none of this is relevant.
+          expose yourself to more software. But none of this is relevant.
           The most important thing is to have fun.
           <strong>Without it, we get sick.</strong>
         </p>
@@ -190,8 +190,40 @@
     </div>
   </div>
 
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-overview-cloud.svg" %]
+    <div>
+      <h2>
+        From zero to cloud.
+      </h2>
+      <ul>
+        <li>cloud images</li>
+        <li>docker images</li>
+        <li>devops</li>
+      </ul>
+      <p>
+        Use the same tool to build one project or even one hundred projects,
+        configure machines and deploy to the cloud. Thanks to the extensible
+        Nix language, it's easy to compose parts together with little overhead.
+      </p>
+      <div>
+        <p>
+          Using one tool to build Amazon EC2, Google Cloud, Azure, Virtualbox,
+          KVM and other images in a declarative way.
+          You can then deploy them with the tools you already know and use.
+        </p>
+        <p>
+          Nix takes building docker images to the next level. Forget
+          <code>Dockerfile</code> and have a peace of mind with declarative
+          approach that Nix gives you. Automatically calculate the best
+          layer structure for your docker image and build minimal images
+          that include only software that is needed for you project. Nix and
+          Docker is a match made in heaven.
+        </p>
+      </div>
+    </div>
+  </div>
   <!--
-  From zero to cloud.
 
   <div>
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
