@@ -5,7 +5,7 @@
 </div>
 
 <section class="overview-description">
-  Step on a journey to explore and learn why so many developer, system
+  Step on a journey to explore and learn why so many developers, system
   administrators and other enthusiasts use Nix and can not imagine the world
   without it.
 </section>
@@ -64,7 +64,7 @@
       <h2>
         <!-- TODO: missing the emotional part
         -->
-        One tool, many languages, many more projects.
+        One tool, many languages.
       </h2>
       <p>
         With today's polyglot development environments, each language has its
@@ -157,18 +157,13 @@
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
     <div>
       <h2>
-        <!-- TODO: "have fun" can be interpreted in the wrong way.
-                   need to check with somebody english native
-        -->
-        It is important to have fun.
+        It is important to experiment.
       </h2>
       <ul>
         <li>generations</li>
         <li>nix store</li>
       </ul>
       <p>
-        We don't stop playing, because we grow old; we grow old because we stop
-        playing - George Bernard Shaw.
         Use tools that allow you to play with different software as
         you did when the job wasn't waiting for you the next day.
       </p>
@@ -182,9 +177,7 @@
         <p>
           We could write that because of Nix you will become a better
           programmer. You probably will, just because you will be able to
-          expose yourself to more software. But none of this is relevant.
-          The most important thing is to have fun.
-          <strong>Without it, we get sick.</strong>
+          expose yourself to more experiments.
         </p>
       </div>
     </div>
@@ -252,6 +245,8 @@
     </div>
   </div>
 
+  <!-- Community, easy to contribute -->
+  <!-- End with who is using it -->
 </section>
 
 [% END %]
