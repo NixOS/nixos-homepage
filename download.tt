@@ -110,13 +110,13 @@
 
         <ul class="download-buttons">
           <li>
-            <a href="[%prefix%]/latest-nixos-gnome-x86_64-linux.iso">Download (GNOME, 64bit)</a>
-            <a href="[%prefix%]/latest-nixos-gnome-x86_64-linux.iso.sha256">(SHA-256)</a>
+            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Download (Plasma Desktop, 64bit)</a>
+            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso.sha256">(SHA-256)</a>
             <span class="label -success">Recommended for most users</span>
           </li>
           <li>
-            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Download (Plasma Desktop, 64bit)</a>
-            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso.sha256">(SHA-256)</a>
+            <a href="[%prefix%]/latest-nixos-gnome-x86_64-linux.iso">Download (GNOME, 64bit)</a>
+            <a href="[%prefix%]/latest-nixos-gnome-x86_64-linux.iso.sha256">(SHA-256)</a>
           </li>
         </ul>
 
