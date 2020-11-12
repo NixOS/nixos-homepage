@@ -166,9 +166,7 @@
         <p>
           Since Nix never overwrites files in the Nix store, but just adds new
           versions in different paths, upgrades are atomic. During an
-          upgrade, there is no time window in which some files exists from the
-          old version and some files from the new version - which would be bad
-          because a program might crash if it's restarted during that period.
+          upgrade, there is no time window in which a package is in an inconsistent state.
         </p>
         <p>
           And since nothing is overwritten, the old versions are still there
