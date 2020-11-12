@@ -5,7 +5,7 @@
 </div>
 
 <section class="overview-description">
-  Step on a journey to explore and learn why so many developers, system
+  Step on a journey to <strong>explore and learn</strong> why so many developers, system
   administrators and other enthusiasts use Nix and can not imagine the world
   without it.
 </section>
@@ -93,7 +93,7 @@
     [% PROCESS svg path="site-styles/assets/gfx-overview-looking.svg" %]
     <div>
       <h2>
-        Either it works or fails always in the same way.
+        Either it works or fails - always in the same way.
       </h2>
       <p>
         With Nix there are two results: the code either works or fails always
@@ -128,16 +128,15 @@
       <h2>
         From zero to cloud.
       </h2>
+      <p>
+        Use the same tool to build one project or even one hundred projects,
+        configure machines and deploy to the cloud.
+      </p>
       <ul>
         <li>cloud images</li>
         <li>docker images</li>
         <li>devops</li>
       </ul>
-      <p>
-        Use the same tool to build one project or even one hundred projects,
-        configure machines and deploy to the cloud. Thanks to the extensible
-        Nix language, it's easy to compose parts together with little overhead.
-      </p>
       <div>
         <p>
           Use one tool to develop, test and build Amazon EC2, Google Cloud,
@@ -159,7 +158,7 @@
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
     <div>
       <h2>
-        Is the previous version better? Rollback anytime.
+        Previous version better? Rollback anytime.
       </h2>
       <p>
         Packages are never overwritten, and old versions are always stored.
@@ -194,13 +193,14 @@
     [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
     <div>
       <h2>
-        It is important to experiment.
+        Experiment without fear.
       </h2>
       <ul>
         <li>generations</li>
         <li>nix store</li>
       </ul>
       <p>
+        <!-- tODO: Explain fear and experiment -->
         Use tools that allow you to play with different software as
         you did when the job wasn't waiting for you the next day.
       </p>
@@ -261,6 +261,7 @@
       <ul>
         <li>community</li>
         <li>contribute</li>
+        <li>github</li>
       </ul>
       <div>
         <p>
