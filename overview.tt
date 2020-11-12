@@ -42,10 +42,9 @@
           dependencies.
         </p>
         <p>
-          The same build process specification is than used to provide
-          development environment. With successful build, we can guarantee that
-          everything needed to build the project is available. Even more,
-          additional development tools can be added to assist the development.
+          The same build process specification can be used to start
+          a development environment (optionally augmented with
+          additional development tools).
         </p>
         <p>
           Long are gone the days developers saying:
