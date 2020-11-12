@@ -45,9 +45,8 @@
         <p>
           The same build process specification is than used to provide
           development environment. With successful build, we can guarantee that
-          everything needed to building the project is available to the
-          developer. Even more, some additional development tools can be added
-          to assist the development.
+          everything needed to build the project is available. Even more,
+          additional development tools can be added to assist the development.
         </p>
         <p>
           Long are gone the days developers saying:
@@ -68,29 +67,23 @@
       </h2>
       <p>
         With today's polyglot development environments, each language has its
-        own way of building and testing.
-        <strong>Encourage cross-team development</strong>
-        by providing a single way of building everything.
+        own way of building and testing. Encourage cross-team development by
+        providing a single way of building everything.
       </p>
       <ul>
         <li>language agnostic</li>
-        <li>multiple versions</li>
         <li>portable</li>
       </ul>
       <div>
         <p>
-          Keeping the project README up to date with the latest working version
-          of how to install system dependencies for you project is a never
+          Keeping the project's installation instructions up to date is a never
           ending task. Nix allows you to specify your system dependencies
-          alongside your project dependencies. Development environment is one
-          simple command away, all you need to run is
-          <code>nix-shell</code>.
+          alongside your project's dependencies in a declarative way.
         </p>
         <p>
-          Multiple versions or variants of a package can be installed at the
-          same time without a problem. This is important when different
-          projects have dependencies on different versions of the same package
-          — <strong>Nix prevents the “DLL hell”</strong>.
+          Instead of complicated installation instructions with Nix the
+          development environment is always only one command away. And that is
+          without using any Docker or other vitalization.
         </p>
       </div>
     </div>
@@ -105,24 +98,58 @@
       <p>
         With Nix there are two results: the code either works or fails always
         in the same way. This gives you the power to reproduce (and avoid) any
-        build related bugs.
+        build related bugs .
       </p>
       <ul>
         <li>reproducibility</li>
         <li>transparent source binary model</li>
         <li>nix language</li>
+        <li>continuous integration</li>
       </ul>
       <div>
         <p>
-          Build instructions are written in Nix language, which allows you to
-          extend or change existing build instruction in any way you wish. This
-          makes Nix a power build tool that can be used in both simple and
-          complex project.
+          Trying to keep system dependencies of development environments in
+          sync with continuous integration (CI) is a disaster waiting to
+          happen. Being able to use the same environment locally or anywhere
+          else is putting a developer back in control.
         </p>
         <p>
-          Building and running tests locally or in your CI would always result
-          in the same failure or guarantee success. This is because environment
-          is always shared wherever your run it with Nix.
+          Build instructions are written in Nix language, which allows you to
+          extend or change existing build instruction in any way you wish. This
+          makes Nix a powerful build tool that can be used in both simple and
+          complex projects.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-overview-cloud.svg" %]
+    <div>
+      <h2>
+        From zero to cloud.
+      </h2>
+      <ul>
+        <li>cloud images</li>
+        <li>docker images</li>
+        <li>devops</li>
+      </ul>
+      <p>
+        Use the same tool to build one project or even one hundred projects,
+        configure machines and deploy to the cloud. Thanks to the extensible
+        Nix language, it's easy to compose parts together with little overhead.
+      </p>
+      <div>
+        <p>
+          Use one tool to develop, test and build Amazon EC2, Google Cloud,
+          Azure, Virtualbox, KVM and other images in a declarative way is a
+          DevOps dream.
+        </p>
+        <p>
+          Forget <code>Dockerfile</code> and
+          have a peace of mind with declarative approach Nix gives you. Nix
+          automatically calculates the optimal layer layout and only includes
+          software needed.
+          <strong>Nix and Docker is a match made in heaven.</strong>
         </p>
       </div>
     </div>
@@ -146,7 +173,17 @@
       </ul>
       <div>
         <p>
-          profiles, generations, garbage collection
+          Since Nix never overwrites files in the Nix store, but just adds new
+          versions in different paths, the upgrades are atomic. During an
+          upgrade, there is no time window in which some files exists from the
+          old version and some files from the new version - which would be bad
+          because a program might crash if it's restarted during that period.
+        </p>
+        <p>
+          And since nothing is overwritten, the old versions are still there
+          after an upgrade. This means that you can rollback to the old
+          version. Rollbacks are very fast: it doesn't involve lots of files
+          having to be restored from copies.
         </p>
       </div>
     </div>
@@ -171,47 +208,12 @@
         <p>
           Install new software with no risk of breaking anything down. Nix
           prevents conflicts not only between multiple development environments,
-          but also with the operating system. You work environment will stay
-          intact, but allow you to experiment.
+          but also with the operating system. Your work environment will stay
+          intact, but allow you to experiment in a safe way.
         </p>
         <p>
-          We could write that because of Nix you will become a better
-          programmer. You probably will, just because you will be able to
-          expose yourself to more experiments.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div>
-    [% PROCESS svg path="site-styles/assets/gfx-overview-cloud.svg" %]
-    <div>
-      <h2>
-        From zero to cloud.
-      </h2>
-      <ul>
-        <li>cloud images</li>
-        <li>docker images</li>
-        <li>devops</li>
-      </ul>
-      <p>
-        Use the same tool to build one project or even one hundred projects,
-        configure machines and deploy to the cloud. Thanks to the extensible
-        Nix language, it's easy to compose parts together with little overhead.
-      </p>
-      <div>
-        <p>
-          Using one tool to build Amazon EC2, Google Cloud, Azure, Virtualbox,
-          KVM and other images in a declarative way.
-          You can then deploy them with the tools you already know and use.
-        </p>
-        <p>
-          Nix takes building docker images to the next level. Forget
-          <code>Dockerfile</code> and have a peace of mind with declarative
-          approach that Nix gives you. Automatically calculate the best
-          layer structure for your docker image and build minimal images
-          that include only software that is needed for you project. Nix and
-          Docker is a match made in heaven.
+          No need to turn your system upside down just because you want to test
+          some experimental and bleeding edge versions of software.
         </p>
       </div>
     </div>
@@ -224,9 +226,9 @@
         No surprises. Trust in your deployments.
       </h2>
       <p>
-        Surprises only belong to birthdays, not deployments.
-        With Nix there are only two possible outcomes.
-        Your system was successfully upgraded or upgrade did not happen.
+        Surprises only belong to birthdays, not deployments. With Nix there
+        are only two possible outcomes. Your system was successfully upgraded
+        or upgrade did not happen.
       </p>
       <ul>
         <li>nixos</li>
@@ -238,15 +240,40 @@
           Nix will never leave your system in an unknown state. It puts you in
           a complete control. The upgrade to new version of the system is
           atomic, meaning that there is no point in time where your system
-          could be in a broken state. Some call it magic, Nix users call it a
-          thing that they can not leave without.
+          could be in a broken state. Some call it magic, Nix users call it the
+          thing that they can not live without.
         </p>
       </div>
     </div>
   </div>
 
-  <!-- Community, easy to contribute -->
-  <!-- End with who is using it -->
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-overview-gears.svg" %]
+    <div>
+      <h2>
+        Contribution is only a Pull request away.
+      </h2>
+      <p>
+        Community is at the core of Nix. Collaboration is encouraged by
+        providing low barrier to contribute and bots to guide contributors
+        through the process.
+      </p>
+      <ul>
+        <li>community</li>
+        <li>contribute</li>
+      </ul>
+      <div>
+        <p>
+          Development of Nix, Nix software collection and NixOS Linux
+          distribution happens on GitHub. To contribute to any of the Nix
+          projects a Pull request can be quickly authored. The bots and
+          community members will guide you further to through the process to
+          ensure quality.
+        </p>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 [% END %]
