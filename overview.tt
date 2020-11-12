@@ -175,8 +175,7 @@
         <p>
           And since nothing is overwritten, the old versions are still there
           after an upgrade. This means that you can rollback to the old
-          version. Rollbacks are very fast: it doesn't involve lots of files
-          having to be restored from copies.
+          version.
         </p>
       </div>
     </div>
