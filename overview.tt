@@ -98,7 +98,7 @@
       <p>
         With Nix there are two results: the code either works or fails always
         in the same way. This gives you the power to reproduce (and avoid) any
-        build related bugs .
+        build-related bugs.
       </p>
       <ul>
         <li>reproducibility</li>
