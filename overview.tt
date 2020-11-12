@@ -113,12 +113,6 @@
           happen. Being able to use the same environment locally or anywhere
           else is putting a developer back in control.
         </p>
-        <p>
-          Build instructions are written in Nix language, which allows you to
-          extend or change existing build instruction in any way you wish. This
-          makes Nix a powerful build tool that can be used in both simple and
-          complex projects.
-        </p>
       </div>
     </div>
   </div>
