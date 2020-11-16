@@ -1,0 +1,224 @@
+[% WRAPPER layout.tt title="Explore" handlesLayout=1 %]
+
+<div class="page-title">
+  <h1>Explore</h1>
+</div>
+
+<section class="explore-description">
+  Find out why so many developers, system administrators and other enthusiasts
+  use Nix and cannot imagine a world without it.
+</section>
+
+<section class="explore-benefits">
+
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-explore-cloud.svg" %]
+    <div>
+      <h2>Always working development environment.</h2>
+      <p>
+        With Nix every developer will enter a
+        <strong>complete and consistent development environment</strong>.
+        Stop worrying how to install dependencies for your project.
+      </p>
+      <ul>
+        <li>reproducibility</li>
+        <li>complete dependencies</li>
+        <li>build sandbox</li>
+      </ul>
+      <div>
+        <p>
+          Under Nix, a build process only has access to dependencies that have
+          been declared explicitly. So if a build succeeds, you know you've
+          specified all necessary dependencies.
+        </p>
+        <p>
+          The same build process specification can be used to start
+          a development environment (optionally augmented with
+          additional development tools).
+        </p>
+        <p>
+          Long are gone the days developers saying:
+          <strong>But it works on my machine!</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-explore-gears.svg" %]
+    <div>
+      <h2>
+        One tool, many languages.
+      </h2>
+      <p>
+        With today's polyglot development environments, each language has its
+        own way of building and testing. Encourage cross-team development by
+        providing a single way of building everything.
+      </p>
+      <ul>
+        <li>language agnostic</li>
+        <li>portable</li>
+      </ul>
+      <div>
+        <p>
+          Instead of complicated installation instructions, with Nix the
+          development environment is always only one command away. And that is
+          without using Docker or any other virtualization.
+        </p>
+        <p>
+          Language specific package managers are good at dependencies in their
+          specific language. But can not provide other dependencies, such as
+          the one you would usually have to install system wide.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-explore-looking.svg" %]
+    <div>
+      <h2>
+        Continuous integration for free.
+      </h2>
+      <p>
+        Your development environment is your continuous integration
+        environment. The same environment always and everywhere.
+      </p>
+      <ul>
+        <li>reproducibility</li>
+        <li>continuous integration</li>
+      </ul>
+      <div>
+        <p>
+          Being able to fix broken continuous integration run is great, but
+          being able to fix it locally, before it even happens, is priceless.
+        </p>
+        <p>
+          Trying to keep system dependencies of development environments in
+          sync with continuous integration is a disaster waiting to happen.
+          <strong>Don't wait for the disaster, prevent it</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-explore-cloud.svg" %]
+    <div>
+      <h2>
+        From zero to cloud.
+      </h2>
+      <p>
+        Use the same tool to build projects, configure machines and deploy to
+        the cloud.
+      </p>
+      <ul>
+        <li>cloud images</li>
+        <li>docker images</li>
+        <li>devops</li>
+      </ul>
+      <div>
+        <p>
+          Using one tool to develop, test and build Amazon EC2, Google Cloud,
+          Azure, Virtualbox, KVM and other images in a declarative way is a
+          DevOps dream.
+        </p>
+        <p>
+          Forget <code>Dockerfile</code> and build docker images with Nix in a
+          declarative and efficient way.
+          <strong>Nix and Docker is a match made in heaven.</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-explore-gears.svg" %]
+    <div>
+      <h2>
+         Is the previous version better? Roll back anytime.
+      </h2>
+      <p>
+        Always be able to roll back to the version that you want. Never end up
+        with a broken system.
+      </p>
+      <ul>
+        <li>rollback</li>
+        <li>garbage collection</li>
+        <li>atomic</li>
+        <li>nix store</li>
+      </ul>
+      <div>
+        <p>
+          Nix never overwrites files in the Nix store, but just adds new
+          versions in different paths.
+        </p>
+        <p>
+          And since nothing is overwritten, the old versions are still there
+          after an upgrade. This means that you can quickly rollback to the old
+          version.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-explore-gears.svg" %]
+    <div>
+      <h2>
+        Experiment without fear.
+      </h2>
+      <ul>
+        <li>rollback</li>
+        <li>nix store</li>
+      </ul>
+      <p>
+        There should be no fear of breaking your system when experimenting with
+        new software. We all learn best when we play around and push ourself to
+        the limits.
+      </p>
+      <div>
+        <p>
+          Install new software with no risk of breaking anything down. Nix
+          prevents conflicts not only between multiple development environments,
+          but also with the operating system. Your work environment will stay
+          intact, but allows you to experiment in a safe way.
+        </p>
+        <p>
+          No need to turn your system upside down just because you want to test
+          some experimental and bleeding edge versions of software.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    [% PROCESS svg path="site-styles/assets/gfx-explore-gears.svg" %]
+    <div>
+      <h2>
+        Contributing is only a pull request away.
+      </h2>
+      <p>
+        Community is at the core of Nix. Collaboration is encouraged by
+        providing a low barrier to contribute and bots to guide contributors
+        through the process.
+      </p>
+      <ul>
+        <li>community</li>
+        <li>contribute</li>
+        <li>github</li>
+      </ul>
+      <div>
+        <p>
+          Development of Nix, the Nix packages collection and the NixOS Linux
+          distribution happens on GitHub. To contribute to any of the Nix
+          projects, just open a pull request on GitHub. The bots and
+          community members will guide you further to through the process to
+          ensure quality.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+[% END %]

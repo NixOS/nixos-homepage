@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/features.html"
-  to = "/overview.html"
+  to = "/explore.html"
   status = 302
   force = true
 
@@ -90,7 +90,7 @@
 
 [[redirects]]
   from = "/nix/about.html"
-  to = "/overview.html"
+  to = "/explore.html"
   status = 302
   force = true
 
@@ -150,7 +150,7 @@
 
 [[redirects]]
   from = "/nixos/about.html"
-  to = "/overview.html"
+  to = "/explore.html"
   status = 302
   force = true
 
