@@ -10,24 +10,28 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+
     - name: Installing Nix
-      uses: cachix/install-nix-action@v10
+      uses: cachix/install-nix-action@v12
+
     - name: Installing NixFlakes
       run: |
         nix-env -iA nixpkgs.nixFlakes
-        echo "::add-path::$HOME/.nix-profile/bin"
         echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
-        nix --version
+        $HOME/.nix-profile/bin/nix --version
         cat /etc/nix/nix.conf
-    - uses: cachix/cachix-action@v6
+
+    - uses: cachix/cachix-action@v8
       with:
         name: nixos-homepage
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+
     - name: Building nixos.org
       run: |
-        nix build
+        $HOME/.nix-profile/bin/nix build
         mkdir build
         cp -RL ./result/* ./build/
+
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.1
       env:
