@@ -149,7 +149,7 @@
       </ul>
       <div>
         <p>
-          Nix never overwrites files in the Nix store, but just adds new
+          Nix never overwrites files, but just adds new
           versions in different paths.
         </p>
         <p>
