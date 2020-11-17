@@ -27,7 +27,7 @@
       </ul>
       <div>
         <p>
-          Under Nix, a build process only has access to dependencies that have
+          With Nix, a build process only has access to dependencies that have
           been declared explicitly. So if a build succeeds, you know you've
           specified all necessary dependencies.
         </p>
