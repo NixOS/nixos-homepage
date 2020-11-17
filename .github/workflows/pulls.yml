@@ -14,6 +14,11 @@ jobs:
     - name: Installing Nix
       uses: cachix/install-nix-action@v12
 
+    - name: Install unstable channel
+      run: |
+        nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+        nix-channel --update
+
     - name: Installing NixFlakes
       run: |
         nix-env -iA nixpkgs.nixFlakes
