@@ -20,6 +20,7 @@ HTML = \
   guides/contributing.html \
   guides/declarative-and-reproducible-developer-environments.html \
   guides/dev-environment.html \
+  guides/how-nix-works.html \
   guides/install-nix.html \
   guides/towards-reproducibility-pinning-nixpkgs.html \
   index.html \

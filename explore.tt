@@ -21,9 +21,9 @@
         Stop worrying how to install dependencies for your project.
       </p>
       <ul>
-        <li>reproducibility</li>
-        <li>complete dependencies</li>
-        <li>build sandbox</li>
+        <li><a href="[%root%]guides/how-nix-works.html#complete-dependencies">complete dependencies</a></li>
+        <!--<li><a href="[%root%]">reproducibility</a></li>-->
+        <!--<li><a href="[%root%]">build sandbox</a></li>-->
       </ul>
       <div>
         <p>
@@ -56,8 +56,8 @@
         providing a single way of building everything.
       </p>
       <ul>
-        <li>language agnostic</li>
-        <li>portable</li>
+        <li><a href="[%root%]guides/how-nix-works.html#multiple-versions">language agnostic</a></li>
+        <li><a href="[%root%]guides/how-nix-works.html#portable">portable</a></li>
       </ul>
       <div>
         <p>
@@ -85,8 +85,8 @@
         environment. The same environment always and everywhere.
       </p>
       <ul>
-        <li>reproducibility</li>
-        <li>continuous integration</li>
+        <!--<li><a href="[%root%]">reproducibility</a></li>-->
+        <li><a href="[%root%]guides/continuous-integration-github-actions.html">continuous integration</a></li>
       </ul>
       <div>
         <p>
@@ -112,9 +112,9 @@
         the cloud.
       </p>
       <ul>
-        <li>cloud images</li>
-        <li>docker images</li>
-        <li>devops</li>
+        <li><a href="[%root%]learn.html">cloud images</a></li>
+        <li><a href="[%root%]guides/building-and-running-docker-images.html">docker images</a></li>
+        <li><a href="[%root%]guides/how-nix-works.html#nixos">nixos</a></li>
       </ul>
       <div>
         <p>
@@ -142,10 +142,10 @@
         with a broken system.
       </p>
       <ul>
-        <li>rollback</li>
-        <li>garbage collection</li>
-        <li>atomic</li>
-        <li>nix store</li>
+        <li><a href="[%root%]guides/how-nix-works.html#atomic">rollback</a></li>
+        <li><a href="[%root%]guides/how-nix-works.html#garbage-collection">garbage collection</a></li>
+        <li><a href="[%root%]guides/how-nix-works.html#atomic">atomic</a></li>
+        <li><a href="[%root%]guides/how-nix-works.html#multiple-versions">nix store</a></li>
       </ul>
       <div>
         <p>
@@ -168,8 +168,8 @@
         Experiment without fear.
       </h2>
       <ul>
-        <li>rollback</li>
-        <li>nix store</li>
+        <li><a href="[%root%]guides/how-nix-works.html#atomic">rollback</a></li>
+        <li><a href="[%root%]guides/how-nix-works.html#multiple-versions">nix store</a></li>
       </ul>
       <p>
         There should be no fear of breaking your system when experimenting with
@@ -203,9 +203,9 @@
         through the process.
       </p>
       <ul>
-        <li>community</li>
-        <li>contribute</li>
-        <li>github</li>
+        <li><a href="[%root%]community.html">community</a></li>
+        <li><a href="[%root%]guides/contributing.html">contribute</a></li>
+        <li><a href="https://github.com/NixOS/nixpkgs">github</a></li>
       </ul>
       <div>
         <p>
