@@ -19,7 +19,15 @@
       <div class="clickable-whole">
         <a href="[%root%]guides/dev-environment.html">
           [% PROCESS svg path="site-styles/assets/gfx-learn-develop.svg" %]
-          <button>Develop with Nix</button>
+          <button>First steps with Nix</button>
+        </a>
+      </div>
+    </li>
+    <li>
+      <div class="clickable-whole">
+        <a href="[%root%]guides/how-nix-works.html">
+          [% PROCESS svg path="site-styles/assets/gfx-learn-how.svg" %]
+          <button>How Nix works?</button>
         </a>
       </div>
     </li>

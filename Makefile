@@ -198,7 +198,7 @@ endif
 ifeq ($(strip $(SITE_STYLES)),)
 # But development `make` builds will nix-build.
 styles: $(wildcard site-styles/*)
-	nix-build -A packages.x86_64-linux.siteStyles --out-link $@
+	nix-build -A packages.x86_64-linux.siteStyles --fallback --out-link $@
 else
 styles:
 	@ln -sfn $(SITE_STYLES) $@
