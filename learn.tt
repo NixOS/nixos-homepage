@@ -27,7 +27,7 @@
       <div class="clickable-whole">
         <a href="[%root%]guides/how-nix-works.html">
           [% PROCESS svg path="site-styles/assets/gfx-learn-how.svg" %]
-          <button>How Nix works?</button>
+          <button>How Nix works</button>
         </a>
       </div>
     </li>
