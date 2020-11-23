@@ -12,7 +12,7 @@
 <section class="explore-benefits">
 
   <div>
-    [% PROCESS svg path="site-styles/assets/gfx-explore-cloud.svg" %]
+    [% PROCESS svg path="site-styles/assets/gfx-explore-works.svg" %]
     <div>
       <h2>Always working development environment.</h2>
       <p>
@@ -45,7 +45,7 @@
   </div>
 
   <div>
-    [% PROCESS svg path="site-styles/assets/gfx-explore-gears.svg" %]
+    [% PROCESS svg path="site-styles/assets/gfx-explore-multi.svg" %]
     <div>
       <h2>
         One tool, many languages.
@@ -75,7 +75,7 @@
   </div>
 
   <div>
-    [% PROCESS svg path="site-styles/assets/gfx-explore-looking.svg" %]
+    [% PROCESS svg path="site-styles/assets/gfx-explore-disaster.svg" %]
     <div>
       <h2>
         Continuous integration for free.
@@ -132,7 +132,7 @@
   </div>
 
   <div>
-    [% PROCESS svg path="site-styles/assets/gfx-explore-gears.svg" %]
+    [% PROCESS svg path="site-styles/assets/gfx-explore-timemachine.svg" %]
     <div>
       <h2>
          Is the previous version better? Roll back anytime.
@@ -162,7 +162,7 @@
   </div>
 
   <div>
-    [% PROCESS svg path="site-styles/assets/gfx-explore-gears.svg" %]
+    [% PROCESS svg path="site-styles/assets/gfx-explore-experiment.svg" %]
     <div>
       <h2>
         Experiment without fear.
@@ -191,7 +191,7 @@
   </div>
 
   <div>
-    [% PROCESS svg path="site-styles/assets/gfx-explore-gears.svg" %]
+    [% PROCESS svg path="site-styles/assets/gfx-explore-community.svg" %]
     <div>
       <h2>
         Contributing is only a pull request away.
