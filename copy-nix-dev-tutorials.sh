@@ -10,6 +10,7 @@ pages=(
   "tutorials/towards-reproducibility-pinning-nixpkgs.html"
   "tutorials/continuous-integration-github-actions.html"
   "tutorials/building-and-running-docker-images.html"
+  "tutorials/deploying-nixos-using-terraform.html"
   "tutorials/contributing.html"
 )
 
