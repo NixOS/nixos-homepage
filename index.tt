@@ -34,25 +34,11 @@
   <div>
     <div class="blurb">
       <h1>Reproducible builds <span>and deployments.</span></h1>
-      <div class="columns">
-        <div>
-          <h2>Nix</h2>
-          <p>
-            A powerful package manager for Linux and other
-            Unix systems that makes package management reliable and reproducible.
-            Share your development and build environments across different machines.
-          </p>
-        </div>
-        <div>
-          <h2>NixOS</h2>
-          <p>
-            A Linux distribution with a unique approach to
-            package and configuration management. Built on top of the Nix package
-            manager, it is completely declarative, makes upgrading systems reliable,
-            and has <a href="[% root %]features.html">many other advantages</a>.
-          </p>
-        </div>
-      </div>
+      <p>
+        Nix is a tool that takes a unique approach to package management and
+        system configuration. Learn how to make reproducible, declarative and
+        reliable systems.
+      </p>
       <div class="button-tray">
         <a class="button -primary" href="[% root %]download.html">Download</a>
         <a class="button" href="[% root %]learn.html">Get started</a>
@@ -68,6 +54,7 @@
   <div>
     <ul class="whynix">
       <li>
+        [% PROCESS svg path="site-styles/assets/gfx-landing-reproducible.svg" %]
         <h2>Reproducible</h2>
         <p>
           Nix builds packages in isolation from each other. This ensures that they
@@ -76,6 +63,7 @@
         </p>
       </li>
       <li>
+        [% PROCESS svg path="site-styles/assets/gfx-landing-declarative.svg" %]
         <h2>Declarative</h2>
         <p>
           Nix makes it <strong>trivial to share development and build
@@ -84,6 +72,7 @@
         </p>
       </li>
       <li>
+        [% PROCESS svg path="site-styles/assets/gfx-landing-reliable.svg" %]
         <h2>Reliable</h2>
         <p>
           Nix ensures that installing or upgrading one package <strong>cannot
