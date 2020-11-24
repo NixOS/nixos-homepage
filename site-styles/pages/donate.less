@@ -43,8 +43,13 @@
     .generic-layout();
 
     & > div {
-      //#columns(2);
-      #columns(1);
+      #columns(2);
+
+      align-items: center;
+
+      & > div > svg {
+        width: 100%;
+      }
 
       & > div > h1 {
         color: #theme.color[white];
