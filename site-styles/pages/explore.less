@@ -1,0 +1,135 @@
+.explore-description {
+  .generic-layout();
+
+  margin-bottom: 3*@gutter;
+  font-size: 160%;
+  line-height: 1.5em;
+  text-align: center;
+  color: #theme.color[gray-dark]
+}
+
+.explore-benefits {
+  #container();
+
+  margin-bottom: 4*@gutter;
+
+  & > div {
+    #columns(2);
+
+    position: relative;
+    padding-bottom: 3*@gutter;
+
+    & > svg {
+      padding: 0 6*@gutter;
+      height: auto;
+    }
+
+    & > div {
+      padding-right: 0;
+
+      & > p {
+        .generic-layout.lead();
+      }
+
+      & > ul {
+        list-style: none;
+        margin-left: 0;
+
+        & > li {
+          display: inline-block;
+          color: #theme.color[white];
+          background: #theme.color[blue-dark];
+          border-radius: 1*@gutter;
+          border-radius: 0.5*@gutter;
+          font-size: 85%;
+          padding: 0 0.5*@gutter;
+          margin-right: 0.5*@gutter;
+          font-weight: bold;
+
+          & > a {
+            color: #theme.color[white];
+            border: 0;
+          }
+        }
+      }
+    }
+
+    #screen-sm-min({
+
+      // Line
+      &:before {
+        content: "";
+        display: block;
+        border: 2px solid #theme.color[blue-dark];
+        height: 100%;
+        position: absolute;
+        top: 2*@gutter;
+        left: calc(50% - 1px);
+      }
+
+      // Green ball
+      &:after {
+        display: block;
+        color: #theme.color[white];
+        background: #theme.color[green];
+        width: 3*@gutter;
+        height: 3*@gutter;
+        border-radius: 1.5*@gutter;
+        position: absolute;
+        width: 4*@gutter;
+        height: 4*@gutter;
+        border-radius: 2*@gutter;
+        top: 0;
+        left: calc(50% - 2*@gutter);
+        font-size: 3*@gutter;
+        line-height: 4*@gutter;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      &:nth-child(2n) {
+        flex-direction: row-reverse;
+        text-align: right;
+
+        & > div {
+          padding-right: 4*@gutter;
+
+          & > ul > li {
+            margin-right: 0;
+            margin-left: 0.5*@gutter;
+          }
+        }
+      }
+
+      &:nth-child(1):after { content: "1"; }
+      &:nth-child(2):after { content: "2"; }
+      &:nth-child(3):after { content: "3"; }
+      &:nth-child(4):after { content: "4"; }
+      &:nth-child(5):after { content: "5"; }
+      &:nth-child(6):after { content: "6"; }
+      &:nth-child(7):after { content: "7"; }
+      &:nth-child(8):after { content: "8"; }
+      &:nth-child(9):after { content: "9"; }
+      &:nth-child(10):after { content: "10"; }
+      &:nth-child(11):after { content: "11"; }
+      &:nth-child(12):after { content: "12"; }
+      &:nth-child(13):after { content: "13"; }
+      &:nth-child(14):after { content: "14"; }
+      &:nth-child(15):after { content: "15"; }
+
+      & > svg {
+        padding: 3*@gutter;
+        padding-top: 0;
+      }
+
+      & > div {
+        padding: 3*@gutter;
+        padding-top: 0;
+
+        & > h2 {
+          margin-top: 0;
+        }
+      }
+    });
+  }
+}

@@ -53,7 +53,7 @@ BLOCK navigationLink %]
       [%# ???! go read `navbar.less` and `nixos-site.js`, it's all fine I swear. %]
       <nav style="display: none;">
         <ul>
-          [% INCLUDE navigationLink href="features.html" title="Features" %]
+          [% INCLUDE navigationLink href="explore.html" title="Explore" %]
           [% INCLUDE navigationLink href="download.html" title="Download" %]
           [% INCLUDE navigationLink href="learn.html" title="Learn" %]
           [% INCLUDE navigationLink href="community.html" title="Community" %]

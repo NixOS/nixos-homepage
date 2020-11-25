@@ -12,7 +12,7 @@ HTML = \
   demos/index.html \
   donate.html \
   download.html \
-  features.html \
+  explore.html \
   governance.html \
   guides/deploying-nixos-using-terraform.html \
   guides/ad-hoc-developer-environments.html \
@@ -21,6 +21,7 @@ HTML = \
   guides/contributing.html \
   guides/declarative-and-reproducible-developer-environments.html \
   guides/dev-environment.html \
+  guides/how-nix-works.html \
   guides/install-nix.html \
   guides/towards-reproducibility-pinning-nixpkgs.html \
   index.html \
@@ -198,7 +199,7 @@ endif
 ifeq ($(strip $(SITE_STYLES)),)
 # But development `make` builds will nix-build.
 styles: $(wildcard site-styles/*)
-	nix-build -A packages.x86_64-linux.siteStyles --out-link $@
+	nix-build -A packages.x86_64-linux.siteStyles --fallback --out-link $@
 else
 styles:
 	@ln -sfn $(SITE_STYLES) $@

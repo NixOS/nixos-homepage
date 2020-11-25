@@ -1,4 +1,10 @@
 [[redirects]]
+  from = "/features.html"
+  to = "/explore.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/calendar.ics"
   to = "https://calendar.google.com/calendar/ical/b9o52fobqjak8oq8lfkhg3t0qg%40group.calendar.google.com/public/basic.ics"
   status = 200
@@ -84,7 +90,7 @@
 
 [[redirects]]
   from = "/nix/about.html"
-  to = "/features.html"
+  to = "/explore.html"
   status = 302
   force = true
 
@@ -144,7 +150,7 @@
 
 [[redirects]]
   from = "/nixos/about.html"
-  to = "/features.html"
+  to = "/explore.html"
   status = 302
   force = true
 
