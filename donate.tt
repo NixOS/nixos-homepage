@@ -35,11 +35,9 @@
 <section class="donate-merch">
   <div>
     <div>
-      <!--
       <div>
-        <h1>TODO: Merch image!</h1>
+        [% PROCESS svg path="site-styles/assets/gfx-donate-merch.svg" %]
       </div>
-      -->
       <div>
         <h1>NixOS T-shirts, mugs and more...</h1>
         <p>Donate to NixOS foundation by purchasing NixOS merchandise.</p>
