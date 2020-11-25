@@ -14,6 +14,7 @@ HTML = \
   download.html \
   features.html \
   governance.html \
+  guides/deploying-nixos-using-terraform.html \
   guides/ad-hoc-developer-environments.html \
   guides/building-and-running-docker-images.html \
   guides/continuous-integration-github-actions.html \
