@@ -22,8 +22,8 @@ $ # No problem with Nix!
 $ nix-shell -p nodejs
 (nix-shell) $ node -e "console.log(1+1)"
 2
-(nix-shell) $ # And now we are able to use node.
-(nix-shell) $ # Nix Magic! :)
+(nix-shell) $ # And now our environment has node.
+(nix-shell) $ # Without cluttering the user environment! :)
 
 --
 
