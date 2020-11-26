@@ -1,8 +1,24 @@
-NixOS.org
-=========
+# Source for nixos.org
 
-This repository contains the sources of the `nixos.org` website.  To
-build it:
+[![GitHub Workflow Status of master branch](https://img.shields.io/github/workflow/status/nixos/nixos-homepage/Build%20&%20Deploy%20to%20Netlify?style=flat)](https://github.com/NixOS/nixos-homepage/actions?query=workflow%3A%22Build+%26+Deploy+to+Netlify%22) [![Number of open GitHub issues](https://img.shields.io/github/issues/nixos/nixos-homepage?style=flat&color=red)](https://github.com/nixos/nixos-homepage/issues) [![Number of open GitHub pull requests](https://img.shields.io/github/issues-pr/nixos/nixos-homepage?style=flat&color=blue)](https://github.com/nixos/nixos-homepage/pulls) [![Month of last commit](https://img.shields.io/github/last-commit/NixOS/nixos-homepage?style=flat)](https://github.com/NixOS/nixos-homepage/commits/master) [![Number of all contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat)](https://github.com/nixos/nixos-homepage#how-to-help)
+
+Code and content for [nixos.org](https://nixos.org) website.
+
+
+# Help us!
+
+There are many ways how you can help:
+
+- if you are familiar with CSS look at the [issues tagged with `design` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Adesign).
+- if you are an native English speaker or just a person that is very good with words, please look at the [issues tagged with `content` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Acontent)
+- if you are developer and just eager to fix stuff please look at the [issues tagged with `bug` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
+If you feel lost where and how to contribute, ask [marketing team](https://nixos.org/teams/marketing.html) on [`#nixos-marketing` channel on IRC](irc://irc.freenode.net/#nixos-marketing).
+
+
+# How to help?
+
+To run local development instance follow this steps:
 
     $ git clone git@github.com:NixOS/nixos-homepage.git
     $ cd nixos-homepage
@@ -10,9 +26,9 @@ build it:
     [nix-shell]$ make
     [nix-shell]$ python -m http.server
 
-then open http://127.0.0.1:8000/index.html
+Open your browser at: http://127.0.0.1:8000/index.html
 
-To automatically rebuild on every change:
+To automatically rebuild on every change use:
 
     [nix-shell]$ fd | entr make
 
@@ -20,6 +36,7 @@ To test the complete result from a nix-build:
 
     $ nix-build
     $ nix-shell --run 'cd result/ && python -m http.server'
+
 
 ## License
 
