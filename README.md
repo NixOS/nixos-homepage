@@ -23,19 +23,22 @@ To run local development instance follow this steps:
     $ git clone git@github.com:NixOS/nixos-homepage.git
     $ cd nixos-homepage
     $ nix-shell
-    [nix-shell]$ make
-    [nix-shell]$ python -m http.server
+
+      To start developing run:
+          python run.py
+
+      and open browser on:
+          https://127.0.0.1:8000
+
+      It will rebuild the website on each change.
+
+    [nix-shell]$ python run.py
 
 Open your browser at: http://127.0.0.1:8000/index.html
 
-To automatically rebuild on every change use:
+In order for browser to automatically refresh install [Livereload extension](http://livereload.com/extensions/) for you browser.
 
-    [nix-shell]$ fd | entr make
-
-To test the complete result from a nix-build:
-
-    $ nix-build
-    $ nix-shell --run 'cd result/ && python -m http.server'
+Before creating a pull request make sure that `nix-build` runs successfully.
 
 
 ## License

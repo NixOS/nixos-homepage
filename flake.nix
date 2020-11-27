@@ -76,9 +76,6 @@
 
           buildInputs = with pkgs; [
               asciinema-scenario
-              caddy
-              entr
-              fd
               gnused
               imagemagick
               jq
@@ -93,6 +90,7 @@
               perlPackages.TemplatePluginJSONEscape
               perlPackages.TemplateToolkit
               perlPackages.XMLSimple
+              python3Packages.livereload
               xhtml1
               xidel
             ];
@@ -147,6 +145,16 @@
             # SITE_STYLES skipped by design.
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
             export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}/html"
+
+            echo ""
+            echo "  To start developing run:"
+            echo "      python run.py"
+            echo ""
+            echo "  and open browser on:"
+            echo "      https://127.0.0.1:8000"
+            echo ""
+            echo "  It will rebuild the website on each change."
+            echo ""
           '';
         };
       };
