@@ -18,6 +18,8 @@ If you feel lost where and how to contribute, ask [marketing team](https://nixos
 
 # How to help?
 
+For quick fixes you can use gitpod.io: [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/nixos/nixos-homepage)
+
 To run local development instance follow this steps:
 
     $ git clone git@github.com:NixOS/nixos-homepage.git
