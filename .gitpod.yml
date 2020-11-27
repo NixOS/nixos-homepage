@@ -1,0 +1,23 @@
+image:
+  file: .gitpod.Dockerfile
+
+vscode:
+  extensions:
+    - jnoortheen.nix-ide@0.1.3:ktd+weA1+YmzUARN482ZjA==
+
+ports:
+  - port: 8000
+    onOpen: open-preview
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+
+tasks:
+  - prebuild: nix-build
+  - name: Serving the website
+    command: nix-shell --run "python run.py"
+  - openMode: split-left
+    command: nix-shell
