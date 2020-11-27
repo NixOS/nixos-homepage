@@ -17,8 +17,8 @@ github:
 
 tasks:
   - prebuild: nix-build
-    init: nix-build
+    init: nix-shell --run "make"
   - name: Serving the website
     command: nix-shell --run "python run.py"
-  - openMode: split-left
+  - openMode: tab-before
     command: nix-shell
