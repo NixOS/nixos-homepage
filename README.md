@@ -49,8 +49,10 @@ It can take some time to enter the development environment. To speed up and avoi
 
 Add the following to the `/etc/nix/nix.conf` or `~/.config/nix/nix.conf`:
 
+```
 substituters = ... https://nixos-homepage.cachix.org
 trusted-public-keys = ... nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE=
+```
 
 
 ## License
