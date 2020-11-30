@@ -148,7 +148,7 @@
 
             echo ""
             echo "  To start developing run:"
-            echo "      python run.py"
+            echo "      ./serve"
             echo ""
             echo "  and go to the following URL in your browser:"
             echo "      https://127.0.0.1:8000/"
