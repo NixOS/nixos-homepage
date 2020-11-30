@@ -36,7 +36,7 @@ To run local development instance follow this steps:
 
     [nix-shell]$ python run.py
 
-Open your browser at: http://127.0.0.1:8000/index.html
+Open your browser at: http://127.0.0.1:8000/
 
 In order for the browser to automatically refresh, install the [Livereload extension](http://livereload.com/extensions/) for your browser.
 
