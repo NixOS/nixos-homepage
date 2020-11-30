@@ -45,7 +45,7 @@ Before creating a pull request make sure that `nix-build` runs successfully.
 
 ## Binary cache
 
-It can take some time to enter the development environment. To speed up and avoid building from source, you can use a binary cache that is also use to speed up our GitHub Actions.
+It can take some time to enter the development environment. To speed up and avoid building from source, you can use a binary cache. The same cache is used to speed up our GitHub Actions.
 
 Add the following to the `/etc/nix/nix.conf` or `~/.config/nix/nix.conf`:
 
