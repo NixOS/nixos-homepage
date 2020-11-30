@@ -47,6 +47,17 @@ Before creating a pull request make sure that `nix-build` runs successfully.
 
 It can take some time to enter the development environment. To speed up and avoid building from source, you can use a binary cache. The same cache is used to speed up our GitHub Actions.
 
+### On NixOS
+
+Add the following to your `configuration.nix`:
+
+```
+nix.binaryCaches = [ "https://nixos-homepage.cachix.org" ];
+nix.binaryCachePublicKeys = [ "nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE=" ];
+```
+
+### On non-NixOS
+
 Add the following to the `/etc/nix/nix.conf` or `~/.config/nix/nix.conf`:
 
 ```
