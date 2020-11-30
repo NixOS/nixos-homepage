@@ -16,9 +16,8 @@ github:
     pullRequests: true
 
 tasks:
-  - prebuild: nix-build
-    init: nix-shell --run "make"
-  - name: Serving the website
-    command: nix-shell --run "python run.py"
-  - openMode: tab-before
+  - prebuild: nix-shell --run "make"
     command: nix-shell
+  - name: Serving the website
+    openMode: tab-before
+    command: nix-shell --run "python run.py"
