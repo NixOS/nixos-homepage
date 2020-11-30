@@ -37,7 +37,7 @@
           additional development tools).
         </p>
         <p>
-          You won't have to hear anymore:
+          You will no longer have to hear:
           <strong>But it works on my machine!</strong>
         </p>
       </div>
@@ -90,8 +90,8 @@
       </ul>
       <div>
         <p>
-          Being able to fix broken continuous integration run is great, but
-          being able to fix it locally, before it even happens, is priceless.
+          Being able to fix broken continuous integration runs is great, but
+          being able to fix problems locally, before pushing, is priceless.
         </p>
         <p>
           Trying to keep system dependencies of development environments in
@@ -123,7 +123,7 @@
           DevOps dream.
         </p>
         <p>
-          Forget <code>Dockerfile</code> and build docker images with Nix in a
+          Forget <code>Dockerfile</code>s and build docker images with Nix in a
           declarative and efficient way.
           <strong>Nix and Docker is a match made in heaven.</strong>
         </p>
@@ -154,8 +154,8 @@
         </p>
         <p>
           And since nothing is overwritten, the old versions are still there
-          after an upgrade. This means that you can quickly rollback to the old
-          version.
+          after an upgrade. This means that you can quickly roll back to the
+          old version.
         </p>
       </div>
     </div>
