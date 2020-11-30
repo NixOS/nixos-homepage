@@ -43,6 +43,16 @@ In order for browser to automatically refresh install [Livereload extension](htt
 Before creating a pull request make sure that `nix-build` runs successfully.
 
 
+## Binary cache
+
+It can take some time to enter the development environment. To speed up and avoid building from source, you can use a binary cache that is also use to speed up our GitHub Actions.
+
+Add the following to the `/etc/nix/nix.conf` or `~/.config/nix/nix.conf`:
+
+substituters = ... https://nixos-homepage.cachix.org
+trusted-public-keys = ... nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE=
+
+
 ## License
 
 The content of the website is licensed under the [Creative Commons Attribution Share Alike 4.0 International](LICENSES/CC-BY-SA-4.0.txt) license.
