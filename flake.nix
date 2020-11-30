@@ -59,6 +59,9 @@
       nixosAmis = pkgs.writeText "ec2-amis.json"
         (builtins.toJSON (
           import (released-nixpkgs-stable + "/nixos/modules/virtualisation/ec2-amis.nix")));
+
+      serve = pkgs.writeShellScriptBin "serve" ''python ${toString ./.}/scripts/run.py'';
+
     in rec {
       defaultPackage."${system}" = packages."${system}".homepage;
 
@@ -91,6 +94,7 @@
               perlPackages.TemplateToolkit
               perlPackages.XMLSimple
               python3Packages.livereload
+              serve
               xhtml1
               xidel
             ];
@@ -148,7 +152,7 @@
 
             echo ""
             echo "  To start developing run:"
-            echo "      ./serve"
+            echo "      serve"
             echo ""
             echo "  and go to the following URL in your browser:"
             echo "      https://127.0.0.1:8000/"
