@@ -28,8 +28,6 @@ jobs:
         echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
         nix --version
         cat /etc/nix/nix.conf
-        PATH="$HOME/.nix-profile/bin:$PATH"
-        echo "PATH=${PATH}" >> $GITHUB_ENV
 
     - uses: cachix/cachix-action@v8
       with:
@@ -37,7 +35,10 @@ jobs:
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
 
     - name: Update content
-      run: ./update.sh
+      run: |
+        PATH="$HOME/.nix-profile/bin:$PATH"
+        echo "PATH=${PATH}" >> $GITHUB_ENV
+        bash ./update.sh
 
     - name: Building nixos.org
       run: |

@@ -1,8 +1,6 @@
-#! /bin/sh
+#!/usr/bin/env bash
 
 set -e
-
-UPDATE=1 nix shell nixpkgs#gnumake nixpkgs#curl -c make update --keep-going
 
 nix flake update \
   --update-input released-nixpkgs-unstable \
@@ -11,3 +9,6 @@ nix flake update \
   --update-input released-nix-stable \
   --update-input nix-pills \
   --update-input nix-dev
+
+UPDATE=1 nix shell nixpkgs#gnumake nixpkgs#curl -c make update --keep-going
+
