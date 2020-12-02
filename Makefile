@@ -50,8 +50,8 @@ NIX_DEV_MANUAL_OUT = guides
 
 all: $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 
-$(NIX_DEV_MANUAL_OUT) learn_guides.html.in: $(NIX_DEV_MANUAL_IN) layout.tt copy-nix-dev-tutorials.sh
-	bash copy-nix-dev-tutorials.sh $(NIX_DEV_MANUAL_OUT)
+$(NIX_DEV_MANUAL_OUT) learn_guides.html.in: $(NIX_DEV_MANUAL_IN) layout.tt scripts/copy-nix-dev-tutorials.sh
+	bash ./scripts/copy-nix-dev-tutorials.sh $(NIX_DEV_MANUAL_OUT)
 
 
 ### Prettify the Nix Pills
@@ -61,8 +61,8 @@ NIX_PILLS_MANUAL_OUT = guides/nix-pills
 
 all: $(NIX_PILLS_MANUAL_OUT)
 
-$(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nixos https://github.com/NixOS/nix-pills
+$(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./scripts/bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nixos https://github.com/NixOS/nix-pills
 
 
 ### Prettify the Nix manual.
@@ -72,15 +72,15 @@ NIX_MANUAL_STABLE_OUT = manual/nix/stable
 
 all: $(NIX_MANUAL_STABLE_OUT)
 
-$(NIX_MANUAL_STABLE_OUT): $(call rwildcard, $(NIX_MANUAL_STABLE_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIX_MANUAL_STABLE_IN) $(NIX_MANUAL_STABLE_OUT) 'Nix $(NIX_STABLE_VERSION) manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+$(NIX_MANUAL_STABLE_OUT): $(call rwildcard, $(NIX_MANUAL_STABLE_IN), *) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./scripts/bootstrapify-docbook.sh $(NIX_MANUAL_STABLE_IN) $(NIX_MANUAL_STABLE_OUT) 'Nix $(NIX_STABLE_VERSION) manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
 
 NIX_MANUAL_UNSTABLE_IN ?= /no-such-path
 NIX_MANUAL_UNSTABLE_OUT = manual/nix/unstable
 
 all: $(NIX_MANUAL_UNSTABLE_OUT)
 
-$(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
+$(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
 	mkdir -p $(NIX_MANUAL_UNSTABLE_OUT)
 	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_UNSTABLE_IN)/* $(NIX_MANUAL_UNSTABLE_OUT)
 
@@ -92,16 +92,16 @@ NIXPKGS_MANUAL_STABLE_OUT = manual/nixpkgs/stable
 
 all: $(NIXPKGS_MANUAL_STABLE_OUT)
 
-$(NIXPKGS_MANUAL_STABLE_OUT): $(NIXPKGS_MANUAL_STABLE_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_STABLE_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_STABLE_OUT) 'Nixpkgs $(NIXOS_STABLE_SERIES) manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+$(NIXPKGS_MANUAL_STABLE_OUT): $(NIXPKGS_MANUAL_STABLE_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./scripts/bootstrapify-docbook.sh $(NIXPKGS_MANUAL_STABLE_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_STABLE_OUT) 'Nixpkgs $(NIXOS_STABLE_SERIES) manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
 
 NIXPKGS_MANUAL_UNSTABLE_IN ?= /no-such-path
 NIXPKGS_MANUAL_UNSTABLE_OUT = manual/nixpkgs/unstable
 
 all: $(NIXPKGS_MANUAL_UNSTABLE_OUT)
 
-$(NIXPKGS_MANUAL_UNSTABLE_OUT): $(NIXPKGS_MANUAL_UNSTABLE_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIXPKGS_MANUAL_UNSTABLE_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_UNSTABLE_OUT) 'Nixpkgs $(NIXOS_UNSTABLE_SERIES) manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+$(NIXPKGS_MANUAL_UNSTABLE_OUT): $(NIXPKGS_MANUAL_UNSTABLE_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./scripts/bootstrapify-docbook.sh $(NIXPKGS_MANUAL_UNSTABLE_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_UNSTABLE_OUT) 'Nixpkgs $(NIXOS_UNSTABLE_SERIES) manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
 
 
 ### Prettify the NixOS manual.
@@ -111,16 +111,16 @@ NIXOS_MANUAL_STABLE_OUT = manual/nixos/stable
 
 all: $(NIXOS_MANUAL_STABLE_OUT)
 
-$(NIXOS_MANUAL_STABLE_OUT): $(NIXOS_MANUAL_STABLE_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIXOS_MANUAL_STABLE_IN)/share/doc/nixos $(NIXOS_MANUAL_STABLE_OUT) 'NixOS $(NIXOS_STABLE_SERIES) manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+$(NIXOS_MANUAL_STABLE_OUT): $(NIXOS_MANUAL_STABLE_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./scripts/bootstrapify-docbook.sh $(NIXOS_MANUAL_STABLE_IN)/share/doc/nixos $(NIXOS_MANUAL_STABLE_OUT) 'NixOS $(NIXOS_STABLE_SERIES) manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
 NIXOS_MANUAL_UNSTABLE_IN ?= /no-such-path
 NIXOS_MANUAL_UNSTABLE_OUT = manual/nixos/unstable
 
 all: $(NIXOS_MANUAL_UNSTABLE_OUT)
 
-$(NIXOS_MANUAL_UNSTABLE_OUT): $(NIXOS_MANUAL_UNSTABLE_IN) bootstrapify-docbook.sh bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./bootstrapify-docbook.sh $(NIXOS_MANUAL_UNSTABLE_IN)/share/doc/nixos $(NIXOS_MANUAL_UNSTABLE_OUT) 'NixOS $(NIXOS_UNSTABLE_SERIES) manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+$(NIXOS_MANUAL_UNSTABLE_OUT): $(NIXOS_MANUAL_UNSTABLE_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
+	bash ./scripts/bootstrapify-docbook.sh $(NIXOS_MANUAL_UNSTABLE_IN)/share/doc/nixos $(NIXOS_MANUAL_UNSTABLE_OUT) 'NixOS $(NIXOS_UNSTABLE_SERIES) manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
 
 all: $(HTML) favicon.png favicon.ico robots.txt \
@@ -179,7 +179,7 @@ latest-news.xhtml: news.xml news.xsl
 	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
 
 check: $(HTML)
-	bash check-links.sh
+	bash ./scripts/check-links.sh
 
 blogs.xml:
 	curl --fail https://planet.nixos.org/rss20.xml > $@.tmp
@@ -208,9 +208,9 @@ endif
 all: manuals
 
 manuals:
-	bash ./fix-manual-headers.sh manual/nix stable
-	bash ./fix-manual-headers.sh manual/nixpkgs stable
-	bash ./fix-manual-headers.sh manual/nixos stable
+	bash ./scripts/fix-manual-headers.sh manual/nix stable
+	bash ./scripts/fix-manual-headers.sh manual/nixpkgs stable
+	bash ./scripts/fix-manual-headers.sh manual/nixos stable
 
 all: $(DEMOS)
 

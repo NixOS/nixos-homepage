@@ -19,7 +19,7 @@ mkdir -p "$outDirTmp"
     if [[ $fn =~ epub ]]; then
         true
     elif [[ "$fn" =~ .html$ ]]; then
-        xsltproc --nonet bootstrapify-docbook.xsl "$inDir/$fn" > "$outDirTmp/$fn.in"
+        xsltproc --nonet ./scripts/bootstrapify-docbook.xsl "$inDir/$fn" > "$outDirTmp/$fn.in"
         root=$(realpath --relative-to="$(pwd)" "$outDirTmp/$fn" | sed -e 's|[^/]||g' -e 's|/|../|g')
         tpage --pre_chomp --post_chomp \
             --define root="${root}" \

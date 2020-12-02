@@ -59,6 +59,9 @@
       nixosAmis = pkgs.writeText "ec2-amis.json"
         (builtins.toJSON (
           import (released-nixpkgs-stable + "/nixos/modules/virtualisation/ec2-amis.nix")));
+
+      serve = pkgs.writeShellScriptBin "serve" ''python ${toString ./.}/scripts/run.py'';
+
     in rec {
       defaultPackage."${system}" = packages."${system}".homepage;
 
@@ -76,9 +79,6 @@
 
           buildInputs = with pkgs; [
               asciinema-scenario
-              caddy
-              entr
-              fd
               gnused
               imagemagick
               jq
@@ -93,6 +93,8 @@
               perlPackages.TemplatePluginJSONEscape
               perlPackages.TemplateToolkit
               perlPackages.XMLSimple
+              python3Packages.livereload
+              serve
               xhtml1
               xidel
             ];
@@ -147,6 +149,16 @@
             # SITE_STYLES skipped by design.
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
             export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}/html"
+
+            echo ""
+            echo "  To start developing run:"
+            echo "      serve"
+            echo ""
+            echo "  and go to the following URL in your browser:"
+            echo "      https://127.0.0.1:8000/"
+            echo ""
+            echo "  It will rebuild the website on each change."
+            echo ""
           '';
         };
       };
