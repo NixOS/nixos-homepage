@@ -1,46 +1,10 @@
-{ stdenv, runCommandNoCC, fetchurl, lib, nodePackages }:
-
-let
-  # "Memoize" the svg optimization.
-  # Files are not often changed, but the compilation takes some time.
-  memoizedAssets = runCommandNoCC "nixos-site-svg-assets" {
-    nativeBuildInputs = with nodePackages; [
-      svgo
-    ];
-  } ''
-    cp -r "${./assets}" assets
-    chmod -R +w assets
-
-    echo ":: Embedding SVG files"
-    (cd assets
-    # Skip the source svg files
-    rm -f *.src.svg
-
-    # Optimize svg files
-    for f in *.svg; do
-      svgo $f &
-    done 
-    # Wait until all `svgo` processes are done
-    # According to light testing, it is twice as fast that way.
-    wait
-
-    # Embed svg files in svg.less
-    for f in *.svg; do
-      token=''${f^^}
-      token=''${token//[^A-Z0-9]/_}
-      token=SVG_''${token/%_SVG/}
-      substituteInPlace svg.less --replace "@$token)" "'$(cat $f)')"
-      substituteInPlace svg.less --replace "@$token," "'$(cat $f)',"
-    done
-    )
-    mv assets $out
-  '';
-in
-
-stdenv.mkDerivation {
+{ pkgs ? import <nixpkgs> {}
+, nixos-common-styles
+}:
+pkgs.stdenv.mkDerivation {
   name = "nixos-homepage-styles";
 
-  nativeBuildInputs = with nodePackages; [
+  nativeBuildInputs = with pkgs.nodePackages; [
     less
   ];
 
@@ -51,9 +15,11 @@ stdenv.mkDerivation {
   ];
    
   buildPhase = ''
-    echo ":: Reusing memoized assets"
+    rm -rf common-styles
+    ln -sf ${nixos-common-styles.defaultPackage."${builtins.currentSystem}"} ./common-styles
+
     rm -rf assets
-    ln -sf ${memoizedAssets} ./assets
+    ln -sf ${nixos-common-styles.lib.memoizeAssets ./assets} ./assets
 
     echo ":: Building site styles"
     lessc --verbose --source-map index.less styles.css
