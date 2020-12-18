@@ -853,231 +853,6 @@ managed to propose a viable design for a content-addressed Nix.&lt;/p&gt;</descr
 	<pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
 </item>
 <item>
-	<title>Guillaume Maudoux: How to Digest Nix Hashes ?</title>
-	<guid isPermaLink="true">https://blog.layus.be/posts/2020-09-01-nix-hashes.html</guid>
-	<link>https://blog.layus.be/posts/2020-09-01-nix-hashes.html</link>
-	<description>&lt;article&gt;
-    &lt;p&gt;They say there are two hard things in computing: cache invalidation and naming things. Alas, build systems fight against these two at the same time. Because caching build results is a central feature of most build systems, they are immediately concerned by cache invalidation issues. For naming things, it is less obvious. I used to understand the naming problem as related to concepts and source code variables. Finding the right name for a class, a function or a variable can be a real headache.&lt;/p&gt;
-&lt;p&gt;But it can also be difficult to generate a meaningful name for values manipulated by programs. Nix and a range of build systems have to forge unique and deterministic names for intermediate build results. These names are used as cache keys. In the case of Nix, the names are first class citizens as they are visible in the public store, in the form of store paths.&lt;/p&gt;
-&lt;p&gt;Did you ever wonder what’s in your Nix hashes? Or how they are computed? Two different projects led me to further investigate these questions. Implementing &lt;a href=&quot;https://github.com/haskell-Nix&quot;&gt;HNix&lt;/a&gt; store and shepherding the “Content addressed paths” &lt;a href=&quot;https://github.com/NixOS/rfcs/pull/62&quot;&gt;RFC #62&lt;/a&gt;. In both cases, understanding how path names (and the other hashes) are generated took some time. Here is what I learned.&lt;/p&gt;
-&lt;h2 id=&quot;store-path-hashes&quot;&gt;Store path hashes&lt;/h2&gt;
-&lt;p&gt;The most visible digests in Nix appears in store path names. Lets take for example a pinned version of &lt;code&gt;hello&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot;&gt;&lt;pre class=&quot;sourceCode nix&quot;&gt;&lt;code class=&quot;sourceCode bash&quot;&gt;&lt;span id=&quot;cb1-1&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;bu&quot;&gt;let&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb1-2&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-2&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;ex&quot;&gt;nixpkgs&lt;/span&gt; = import (builtins.fetchTarball {&lt;/span&gt;
-&lt;span id=&quot;cb1-3&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-3&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;ex&quot;&gt;url&lt;/span&gt; = &lt;span class=&quot;st&quot;&gt;&quot;https://github.com/nixos/nixpkgs/archive/c59ea8b8a0e7f927e7291c14ea6cd1bd3a16ff38.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;kw&quot;&gt;;&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb1-4&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-4&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;ex&quot;&gt;sha256&lt;/span&gt; = &lt;span class=&quot;st&quot;&gt;&quot;1ak7jqx94fjhc68xh1lh35kh3w3ndbadprrb762qgvcfb8351x8v&quot;&lt;/span&gt;&lt;span class=&quot;kw&quot;&gt;;&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb1-5&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-5&quot;&gt;&lt;/a&gt;  }) {};&lt;/span&gt;
-&lt;span id=&quot;cb1-6&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-6&quot;&gt;&lt;/a&gt;&lt;span class=&quot;kw&quot;&gt;in&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb1-7&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb1-7&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;ex&quot;&gt;nixpkgs.hello&lt;/span&gt; # =&lt;span class=&quot;op&quot;&gt;&amp;gt;&lt;/span&gt; /nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Nix composes the hash part of the path by compressing to 32 base32 characters (160 bits or 20 bytes) a sha256 digest. Base32 encoding is unique to Nix. It uses digits and lower-case letters (except &lt;a href=&quot;https://discourse.nixos.org/t/no-hashes-starting-with-e-t-o-or-u-in-nix-store/4906/1&quot;&gt;EOUT&lt;/a&gt;) for a total of 32 characters valid in a file name. The result is more dense than base16 while avoiding the strange characters of base64 (&lt;code&gt;+&lt;/code&gt;, &lt;code&gt;/&lt;/code&gt;, &lt;code&gt;=&lt;/code&gt;) amongst which &lt;code&gt;/&lt;/code&gt; would create a lot of trouble in file names.&lt;/p&gt;
-&lt;p&gt;For example &lt;code&gt;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&lt;/code&gt; contains &lt;code&gt;&lt;b&gt;ab1pfk338f6g&lt;/b&gt;zpglsirxhvji4g9w558i&lt;/code&gt; which is the compression on 20 bytes of &lt;code&gt;0fqqilza6ifk0arlay18&lt;b&gt;ab1pfk338f6g&lt;/b&gt;zrpcb56pnaw245h8gv9r&lt;/code&gt;. Basically folding excess bits with xor. Notice how some characters are shared, as the input is so small that some of them are passed as-is.&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;pre&gt;&lt;code&gt;  ab1pfk338f6gzrpcb56pnaw245h8gv9r
-^             0fqqilza6ifk0arlay18
-  --------------------------------
-= ab1pfk338f6gzpglsirxhvji4g9w558i&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;The full (uncompressed) digest comes from hashing the string &lt;code&gt;output:out:sha256:5d4447675168bb44442f0d225ab8b50b7a67544f0ba2104dbf74926ff4df1d1e:/nix/store:hello-2.10&lt;/code&gt;. This string is a fingerprint of the important parts of that derivation. If any part changes, the hash will be different, and it will produce a different output path.&lt;/p&gt;
-&lt;p&gt;We can see four parts:&lt;/p&gt;
-&lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;&lt;code&gt;output:out&lt;/code&gt; is the type of the fingerprint. Here we fingerprint something used for an output path. The output named &lt;code&gt;out&lt;/code&gt; in this case. Nix uses various types, and each expects different things in the remainder of the string.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sha256:5d4447675168bb44442f0d225ab8b50b7a67544f0ba2104dbf74926ff4df1d1e&lt;/code&gt; is the hash of the derivation building hello. As a hash it encompasses many things, and we will explore that further below.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;/nix/store&lt;/code&gt; is the store prefix.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;hello-2.10&lt;/code&gt; is the name of the derivation.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Hashing the derivation is a tricky part. Nix store a lot of information about derivations. To read it, we can use &lt;code&gt;nix show-derivation&lt;/code&gt; on our &lt;code&gt;hello&lt;/code&gt; package.&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;div class=&quot;sourceCode&quot; id=&quot;cb3&quot;&gt;&lt;pre class=&quot;sourceCode json&quot;&gt;&lt;code class=&quot;sourceCode json&quot;&gt;&lt;span id=&quot;cb3-1&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-2&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-2&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;dt&quot;&gt;&quot;/nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-3&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-3&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;outputs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-4&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-4&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;&quot;path&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&quot;&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-5&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-5&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;},&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-6&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-6&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;inputSrcs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-7&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-7&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;inputDrvs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-8&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-8&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;/nix/store/fkz4j4zj7xaf1z1g0i29987dvvc3xxbv-hello-2.10.tar.gz.drv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-9&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-9&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;/nix/store/fsqdw7hjs2qdcy8qgcv5hnrajsr77xhc-bash-4.4-p23.drv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-10&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-10&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;/nix/store/q0kiricfc0gkwm1vy3j0svcq5jib4v1g-stdenv-linux.drv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-11&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-11&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;},&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-12&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-12&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;platform&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;x86_64-linux&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-13&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-13&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;builder&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/6737cq9nvp4k5r70qcgf61004r0l2g3v-bash-4.4-p23/bin/bash&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-14&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-14&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;-e&quot;&lt;/span&gt;&lt;span class=&quot;ot&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-15&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-15&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;env&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-16&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-16&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;hello-2.10&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-17&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-17&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-18&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-18&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/3x7dwzq014bblazs7kq20p9hyzz0qh8g-hello-2.10.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-19&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-19&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;stdenv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/50780gywsyjad8nxrf79q6qx7y7mqgal-stdenv-linux&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-20&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-20&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;[elided&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;brevity]&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-21&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-21&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-22&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-22&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb3-23&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb3-23&quot;&gt;&lt;/a&gt;&lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;code&gt;show-derivation&lt;/code&gt; pretty prints and reformats the content of the .drv file. The exact content of &lt;code&gt;/nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv&lt;/code&gt; is a nested structure starting with &lt;code&gt;&quot;Derive(&quot;&lt;/code&gt; and that’s why we will call it the &lt;em&gt;derive&lt;/em&gt; string. It is formatted as an &lt;a href=&quot;http://releases.strategoxt.org/strategoxt-manual/unstable/manual/chunk-chapter/stratego-terms.html#id3314115&quot;&gt;ATerm&lt;/a&gt; from the Stratego language. Curious readers will find more about this format in the related &lt;a href=&quot;http://lethalman.blogspot.com/2014/07/nix-pill-6-our-first-derivation.html&quot;&gt;nix pill&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;pre&gt;&lt;code&gt;$ cat /nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv
-Derive([(&quot;out&quot;,&quot;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&quot;,&quot;&quot;,&quot;&quot;)],[(&quot;/nix/store/fkz4j4zj7xaf1z1g0i29987dvvc3xxbv-hello-2.10.tar.gz.drv&quot;,[&quot;out&quot;]),(&quot;/nix/store/fsqdw7hjs2qdcy8qgcv5hnrajsr77xhc-bash-4.4-p23.drv&quot;,[&quot;out&quot;]),(&quot;/nix/store/q0kiricfc0gkwm1vy3j0svcq5jib4v1g-stdenv-linux.drv&quot;,[&quot;out&quot;])],[&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;],&quot;x86_64-linux&quot;,&quot;/nix/store/6737cq9nvp4k5r70qcgf61004r0l2g3v-bash-4.4-p23/bin/bash&quot;,[&quot;-e&quot;,&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;],[(&quot;buildInputs&quot;,&quot;&quot;),(&quot;builder&quot;,&quot;/nix/store/6737cq9nvp4k5r70qcgf61004r0l2g3v-bash-4.4-p23/bin/bash&quot;),(&quot;configureFlags&quot;,&quot;&quot;),(&quot;depsBuildBuild&quot;,&quot;&quot;),(&quot;depsBuildBuildPropagated&quot;,&quot;&quot;),(&quot;depsBuildTarget&quot;,&quot;&quot;),(&quot;depsBuildTargetPropagated&quot;,&quot;&quot;),(&quot;depsHostHost&quot;,&quot;&quot;),(&quot;depsHostHostPropagated&quot;,&quot;&quot;),(&quot;depsTargetTarget&quot;,&quot;&quot;),(&quot;depsTargetTargetPropagated&quot;,&quot;&quot;),(&quot;doCheck&quot;,&quot;1&quot;),(&quot;doInstallCheck&quot;,&quot;&quot;),(&quot;name&quot;,&quot;hello-2.10&quot;),(&quot;nativeBuildInputs&quot;,&quot;&quot;),(&quot;out&quot;,&quot;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10&quot;),(&quot;outputs&quot;,&quot;out&quot;),(&quot;patches&quot;,&quot;&quot;),(&quot;pname&quot;,&quot;hello&quot;),(&quot;propagatedBuildInputs&quot;,&quot;&quot;),(&quot;propagatedNativeBuildInputs&quot;,&quot;&quot;),(&quot;src&quot;,&quot;/nix/store/3x7dwzq014bblazs7kq20p9hyzz0qh8g-hello-2.10.tar.gz&quot;),(&quot;stdenv&quot;,&quot;/nix/store/50780gywsyjad8nxrf79q6qx7y7mqgal-stdenv-linux&quot;),(&quot;strictDeps&quot;,&quot;&quot;),(&quot;system&quot;,&quot;x86_64-linux&quot;),(&quot;version&quot;,&quot;2.10&quot;)])&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;However, hashing this derive string directly does not yield the expected hash found above. (Do you recall the &lt;code&gt;sha256:5d4447675168bb44442f0d225ab8b50b7a67544f0ba2104dbf74926ff4df1d1e&lt;/code&gt; ?)&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;pre&gt;&lt;code&gt;$ nix-hash --flat --type sha256 /nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv
-40289ac3cc7d8896122c9a93ce580fb657aa29af6cf0a2bc4a30b3c53172ccf6&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;To understand where this hash comes from, it helps to understand other types of store objects. Let’s make a small detour to simpler paths.&lt;/p&gt;
-&lt;h2 id=&quot;text-files&quot;&gt;Text files&lt;/h2&gt;
-&lt;p&gt;Raw text files whose content is know by Nix without running any builder are named by a comparatively simpler scheme. Their name is a digest over both the content and the name of the path.&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;pre&gt;&lt;code&gt;$ nix-instantiate --eval --expr 'builtins.toFile &quot;file-name&quot; &quot;some content&quot;'
-/nix/store/gn48qr23kimj8iyh50jvffjx7335k9fz-file-name
-└── gn48qr23kimj8iyh50jvffjx7335k9fz
-    └── 0cl4lvq60bp9il749fyngn48qr23kimj8xalivaxf55lnp41s7h9
-        └── &quot;text:sha256:290f493c44f5d63d06b374d0a5abd292fae38b92cab2fae5efefe1b0e9347f56:/nix/store:file-name&quot;
-            └── 290f493c44f5d63d06b374d0a5abd292fae38b92cab2fae5efefe1b0e9347f56
-                └── &quot;some content&quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;The text format is also used by .drv files. But .drv files can depend on other .drv files. All the dependencies appear between the &lt;code&gt;text:&lt;/code&gt; and &lt;code&gt;:sha256&lt;/code&gt; part of the path description.&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;pre&gt;&lt;code&gt;/nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv
-└── 4pmrswlhqyclwpv12l1h7mr9qkfhpd1c
-    └── 1c3ws0r5wm3ydx1zijcf4pmrswlhqyclxvqxqlqmv0spmfgg6zd2
-        └── &quot;text:[... dependant .drv's  ...]:sha256:40289ac3cc7d8896122c9a93ce580fb657aa29af6cf0a2bc4a30b3c53172ccf6:/nix/store:hello-2.10.drv&quot;
-            └── 40289ac3cc7d8896122c9a93ce580fb657aa29af6cf0a2bc4a30b3c53172ccf6
-                └── &quot;Derive([(&quot;out&quot;,&quot;... [content of /nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv] ...&quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;All the different store path description strings are listed in &lt;a href=&quot;https://github.com/NixOS/nix/blob/691a1bd7179bcf88f2638c1b8574c81f61e20786/src/libstore/store-api.cc#L63-L140&quot;&gt;store-api.cc&lt;/a&gt;. We have already seen ‘text’ right now and ‘output’ before. The third type is ‘source’, for some well-behaved, content addressed paths.&lt;/p&gt;
-&lt;h2 id=&quot;hashing-modulo&quot;&gt;Hashing modulo&lt;/h2&gt;
-&lt;p&gt;Back to our initial &lt;code&gt;pkgs.hello&lt;/code&gt; store path. We were stuck at understanding the hash used there.&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;pre&gt;&lt;code&gt;/nix/store/ab1pfk338f6gzpglsirxhvji4g9w558i-hello-2.10
-└── ab1pfk338f6gzpglsirxhvji4g9w558i
-    └── 0fqqilza6ifk0arlay18ab1pfk338f6gzrpcb56pnaw245h8gv9r
-        └── &quot;output:out:sha256:5d4447675168bb44442f0d225ab8b50b7a67544f0ba2104dbf74926ff4df1d1e:/nix/store:hello-2.10&quot;
-            └── 5d4447675168bb44442f0d225ab8b50b7a67544f0ba2104dbf74926ff4df1d1e
-                └── ???&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;Ideally, this would be the hash of the ‘derive’ string from the .drv. This is not the case because it would be impossible and undesirable. The impossibility comes from the fact that the output paths of a derivation are part of its ‘derive’ string. The loop needs to be broken somewhere. That is why the output paths are replaced with empty strings before hashing the ‘derive’ string used in output paths.&lt;/p&gt;
-&lt;p&gt;The other aspect comes from fixed-output paths. While the recipe to build them may vary (and hence their derive string) we would like to avoid propagating such changes to other derivations outputs. As fixed-output derivations can happen anywhere in the dependency tree, the process of replacing the hash of fixed-output derivations needs to be recursive. This is performed by &lt;code&gt;hashDerivationModulo()&lt;/code&gt; whose name hints that the hashing is made modulo the equivalence of recipes for the same fixed-output paths.&lt;/p&gt;
-&lt;p&gt;It means that instead of the former &lt;code&gt;nix show-derivation&lt;/code&gt; result, hashDerivationModulo ends up hashing a modified derive string.&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;div class=&quot;sourceCode&quot; id=&quot;cb9&quot;&gt;&lt;pre class=&quot;sourceCode json&quot;&gt;&lt;code class=&quot;sourceCode json&quot;&gt;&lt;span id=&quot;cb9-1&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-2&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-2&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;dt&quot;&gt;&quot;/nix/store/4pmrswlhqyclwpv12l1h7mr9qkfhpd1c-hello-2.10.drv +mased +modulo&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-3&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-3&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;outputs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-4&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-4&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;dt&quot;&gt;&quot;path&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;masked&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-5&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-5&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;},&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-6&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-6&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;inputSrcs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-7&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-7&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;inputDrvs&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-8&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-8&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;103f297b7051255f2b7c1cd9838ee978d6ba392fb6ae2a6112d5816279c4ed14&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt; &lt;/span&gt;
-&lt;span id=&quot;cb9-9&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-9&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;hash&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;modulo&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;fixed-ouput&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;derivations&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;/nix/store/fsqdw7hjs2qdcy8qgcv5hnrajsr77xhc-bash-4.4-p23.drv&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-10&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-10&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;26f653058a4d742a815b4d3a3c0721bca16200ffc48c22d62b3eb54164560856&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-11&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-11&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;fixed&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;hash&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;fixed-ouptut&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;derivation&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;/nix/store/3x7dwzq014bblazs7kq20p9hyzz0qh8g-hello-2.10.tar.gz&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-12&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-12&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;hash&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;'fixed&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;er&quot;&gt;out:sha256:&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;31e066137&lt;/span&gt;&lt;span class=&quot;er&quot;&gt;a962676e89f69d1b65382de95a7ef7d914b8cb956f41ea72e0f516b:/nix/store/&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;er&quot;&gt;x7dwzq014bblazs7kq20p9hyzz0qh8g-hello&lt;/span&gt;&lt;span class=&quot;fl&quot;&gt;-2.10&lt;/span&gt;&lt;span class=&quot;er&quot;&gt;.tar.gz'&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-13&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-13&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;st&quot;&gt;&quot;a9365c39d2b7a2a8f2340da6e9814ca605f8dcefe4b49f5c44db7d9ed3bb031f&quot;&lt;/span&gt;&lt;span class=&quot;er&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;out&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-14&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-14&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;hash&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;modulo&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;fixed-output&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;derivations&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;/nix/store/q0kiricfc0gkwm1vy3j0svcq5jib4v1g-stdenv-linux.drv&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-15&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-15&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;},&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-16&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-16&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;platform&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;x86_64-linux&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-17&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-17&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;builder&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/6737cq9nvp4k5r70qcgf61004r0l2g3v-bash-4.4-p23/bin/bash&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-18&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-18&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;-e&quot;&lt;/span&gt;&lt;span class=&quot;ot&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/9krlzvny65gdc8s7kpb6lkx8cd02c25b-default-builder.sh&quot;&lt;/span&gt; &lt;span class=&quot;ot&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-19&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-19&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;dt&quot;&gt;&quot;env&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;{&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-20&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-20&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;hello-2.10&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-21&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-21&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;masked&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-22&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-22&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/3x7dwzq014bblazs7kq20p9hyzz0qh8g-hello-2.10.tar.gz&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-23&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-23&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;dt&quot;&gt;&quot;stdenv&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;/nix/store/50780gywsyjad8nxrf79q6qx7y7mqgal-stdenv-linux&quot;&lt;/span&gt;&lt;span class=&quot;fu&quot;&gt;,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-24&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-24&quot;&gt;&lt;/a&gt;      &lt;span class=&quot;er&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;[still&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;elided&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;er&quot;&gt;brevity]&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-25&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-25&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-26&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-26&quot;&gt;&lt;/a&gt;  &lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb9-27&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb9-27&quot;&gt;&lt;/a&gt;&lt;span class=&quot;fu&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;h2 id=&quot;recap&quot;&gt;Recap&lt;/h2&gt;
-&lt;p&gt;As we have seen, hashing in Nix is based on several concepts.&lt;/p&gt;
-&lt;dl&gt;
-&lt;dt&gt;Description strings&lt;/dt&gt;
-&lt;dd&gt;starting with a type, and separated with colons. Highly recognisable. They describe uniquely a ressource. In practice, we never encounter them, as they are always hashed with sha256.
-&lt;/dd&gt;
-&lt;dt&gt;Hash compression&lt;/dt&gt;
-&lt;dd&gt;The hash appearing in path names is a folded version of full digests. Nix compresses the hash to 32 base32 characters.
-&lt;/dd&gt;
-&lt;dt&gt;Maksing&lt;/dt&gt;
-&lt;dd&gt;&lt;em&gt;Derive&lt;/em&gt; strings contain the output paths of the derivation. As these output paths are generated based on a digest of the derivation itself, we have to break the loop. Masking is the process of removing output paths from a &lt;em&gt;derive&lt;/em&gt; string before computing it’s hash.
-&lt;/dd&gt;
-&lt;dt&gt;Hashing modulo [other derivations]&lt;/dt&gt;
-&lt;dd&gt;Digests of derivations form a tree. Any change to a dependency’s &lt;em&gt;derive&lt;/em&gt; string will propagate to all the dependant .drv paths and output paths. But it makes little sense to propagate changes in the recipe (the &lt;em&gt;derive&lt;/em&gt; string) of a fixed output path. By definition, they will produce the same output regardless of their recipe. Nix computes output paths hashes on a tree of digests where fixed-output &lt;em&gt;derive&lt;/em&gt; strings are replaced by the fixed-output hash.
-&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;h2 id=&quot;practical-issues&quot;&gt;Practical issues&lt;/h2&gt;
-&lt;p&gt;So much for technical considerations. What is this useful for? The way hashes are computed constrains how they can be computed and generated.&lt;/p&gt;
-&lt;p&gt;In an HNix &lt;a href=&quot;https://github.com/haskell-nix/hnix-store/pull/59#discussion_r429582370-permalink&quot;&gt;discussion&lt;/a&gt;, I discovered that the Nix daemon has two API calls to build derivations.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;opBuildPaths&lt;/code&gt; is the most obvious one. It takes a list of pre-uploaded .drv files and triggers the build. Because a .drv depends on other .drv files, the full closure needs to be uploaded to the store upfront. In our example, that closure represents 280 .drv files to upload before starting the build. And &lt;code&gt;hello&lt;/code&gt; is a relatively small package. This can slow down build times in distributed remote building situation where the builder responsible for a package may not be the one that built its dependencies. The machine will have to download all the .drv files when all it really needs is the &lt;code&gt;hello&lt;/code&gt; .drv file and the build inputs paths.&lt;/p&gt;
-&lt;p&gt;That is why &lt;code&gt;opBuildDerivation&lt;/code&gt; was implemented. It takes all the information from a derivation and builds it. The input paths need to be uploaded beforehand, but nothing more. This nice feature come with a downside. As we have seen, the ouptut path of a derivation is computed with hashDerivationModulo, which requires the full closure of derivations to substitute the hashe of fixed-output ones. Without the closure, it is impossible for the builder to check the validity of an output path. That is why this API call is a privileged operation.&lt;/p&gt;
-&lt;p&gt;Allowing unprivileged builds without the .drv closure is not an easy feature. As Eelco Dolstra states in the &lt;a href=&quot;https://blog.layus.be/tags/1511aa9f488ba0762c2da0bf8ab61b5fde47305d&quot;&gt;commit introducing &lt;code&gt;opBuildDerivation&lt;/code&gt;&lt;/a&gt;, it would require changing the hashing scheme. And finding the right balance is complicated. Using a hash “without modulo” means that changing &lt;em&gt;how&lt;/em&gt; we build fixed-output derivations will propagate to all the package. Not hashing inputs makes it possible to obtain the same output path name for all the derivations that change only in their inputs. For example, updating gcc would not change our &lt;code&gt;hello&lt;/code&gt; output path. You could get different things under the same name. Not an option.&lt;/p&gt;
-&lt;p&gt;That sentence from Eelco Dolstra feels a bit like Fermat’s last theorem. While it seems to imply that there exists other hashing schemes, nothing is said about these schemes. Years later (the commit dates from 2015), the solution comes from a different angle. The long discussed, argued (and ultimately postponed) feature of a content-addressed store could bring builds without the .drv closure. Much like the proof of Fermat’s last theorem, the implementation of the content-addressed store comes long after the problem is sketched but, were it used only to solve that specific problem, would also feels like bringing an elephant to kill the mouse.&lt;/p&gt;
-&lt;h3 id=&quot;content-addressed-paths&quot;&gt;Content-addressed paths&lt;/h3&gt;
-&lt;p&gt;In the content-addressed store, output path names are not derived from their .drv, but from their content. Orthogonal changes to .drv files are not reflected in the name, and do not propagate. The name changes only if the content changes. The major downside is that output path names cannot be known before their content is made available. That’s why we need two names. On for the output path we want to build, and one for the actual content-addressed result.&lt;/p&gt;
-&lt;p&gt;In such a setup, there is no need anymore for &lt;code&gt;hashDerivationModulo&lt;/code&gt;. I tend to see &lt;code&gt;hashDerivationModulo&lt;/code&gt; as a hack, a workaround to limit useless rebuilds as much as possible without having to implement the content-addressed store in its full complexity. That hack served us well over the years, and content-addressed stores are not yet implemented.&lt;/p&gt;
-
-&lt;h2 id=&quot;closing-thoughts&quot;&gt;Closing thoughts&lt;/h2&gt;
-&lt;p&gt;There is already a lot in this article, but we did not cover everything. There are several ways to upload a content-addressed path to the store, and content-addressed paths can also depend on other content-addressed paths. There are other funny corner cases here and there. But overall, this sketches the idea behind Nix store paths generation, and gives an idea of how derivations and store paths interact.&lt;/p&gt;
-&lt;p&gt;I had to leave aside the detailed explanation of content-addressed stores, but this is perhaps not for long…&lt;/p&gt;
-&lt;p&gt;This blog is still lacking a proper way to leave comments, but I would be more than happy to receive remarks, comments, advices and praises by email, or by any other channel if you are willing to wait more.&lt;/p&gt;
-&lt;h2 id=&quot;some-more-stuff-a.k.a.-annexes&quot;&gt;Some more stuff (a.k.a. Annexes)&lt;/h2&gt;
-&lt;p&gt;Things that did not fit elsewhere.&lt;/p&gt;
-&lt;p&gt;A/ Python based hash compression.&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;div class=&quot;sourceCode&quot; id=&quot;cb10&quot;&gt;&lt;pre class=&quot;sourceCode python&quot;&gt;&lt;code class=&quot;sourceCode python&quot;&gt;&lt;span id=&quot;cb10-1&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;&quot;&quot;&quot; XORing directly in base32, thanks to python &quot;&quot;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-2&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-2&quot;&gt;&lt;/a&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-3&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-3&quot;&gt;&lt;/a&gt;h &lt;span class=&quot;op&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;0fqqilza6ifk0arlay18ab1pfk338f6gzrpcb56pnaw245h8gv9r&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-4&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-4&quot;&gt;&lt;/a&gt;key &lt;span class=&quot;op&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;0123456789abcdfghijklmnpqrsvwxyz&quot;&lt;/span&gt; &lt;span class=&quot;co&quot;&gt;# no e,o,u,t&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-5&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;# len(key) == 32&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-6&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-6&quot;&gt;&lt;/a&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-7&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-7&quot;&gt;&lt;/a&gt;&lt;span class=&quot;kw&quot;&gt;def&lt;/span&gt; xor(a, b):&lt;/span&gt;
-&lt;span id=&quot;cb10-8&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-8&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;cf&quot;&gt;return&lt;/span&gt; key[key.index(a) &lt;span class=&quot;op&quot;&gt;^&lt;/span&gt; key.index(b)]&lt;/span&gt;
-&lt;span id=&quot;cb10-9&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;# xor('0', 'a') == 'a'&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-10&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-10&quot;&gt;&lt;/a&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-11&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-11&quot;&gt;&lt;/a&gt;h1, h2 &lt;span class=&quot;op&quot;&gt;=&lt;/span&gt; h[&lt;span class=&quot;op&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;32&lt;/span&gt;:], &lt;span class=&quot;st&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;{:0&amp;gt;32}&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;&quot;&lt;/span&gt;.&lt;span class=&quot;bu&quot;&gt;format&lt;/span&gt;(h[:&lt;span class=&quot;op&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;32&lt;/span&gt;])&lt;/span&gt;
-&lt;span id=&quot;cb10-12&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-12&quot;&gt;&lt;/a&gt;res &lt;span class=&quot;op&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&quot;&quot;&lt;/span&gt;.join(xor(h1[i],h2[i]) &lt;span class=&quot;cf&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;kw&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bu&quot;&gt;range&lt;/span&gt;(&lt;span class=&quot;dv&quot;&gt;32&lt;/span&gt;))&lt;/span&gt;
-&lt;span id=&quot;cb10-13&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-13&quot;&gt;&lt;/a&gt;&lt;span class=&quot;bu&quot;&gt;print&lt;/span&gt;(&lt;span class=&quot;st&quot;&gt;&quot;  &lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;{}&lt;/span&gt;&lt;span class=&quot;ch&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;^ &lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;{}&lt;/span&gt;&lt;span class=&quot;ch&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;  ---------------------------------&lt;/span&gt;&lt;span class=&quot;ch&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;= &lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;{}&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;&quot;&lt;/span&gt;.&lt;span class=&quot;bu&quot;&gt;format&lt;/span&gt;(h1,h2,res))&lt;/span&gt;
-&lt;span id=&quot;cb10-14&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-14&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;# prints:&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-15&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-15&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-16&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;  ab1pfk338f6gzrpcb56pnaw245h8gv9r&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-17&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-17&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;^ 0000000000000fqqilza6ifk0arlay18&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-18&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-18&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;  ---------------------------------&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-19&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-19&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;= ab1pfk338f6gzpglsirxhvji4g9w558i&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb10-20&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb10-20&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;B/ Nix source code patch to trace digests being computed.&lt;/p&gt;
-&lt;div class=&quot;scroll-wrapper&quot;&gt;
-&lt;div class=&quot;sourceCode&quot; id=&quot;cb11&quot;&gt;&lt;pre class=&quot;sourceCode diff&quot;&gt;&lt;code class=&quot;sourceCode diff&quot;&gt;&lt;span id=&quot;cb11-1&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;kw&quot;&gt;diff --git a/src/libutil/hash.cc b/src/libutil/hash.cc&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-2&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-2&quot;&gt;&lt;/a&gt;index 4a94f0dfd..b06a08c79 100644&lt;/span&gt;
-&lt;span id=&quot;cb11-3&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;dt&quot;&gt;--- a/src/libutil/hash.cc&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-4&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;dt&quot;&gt;+++ b/src/libutil/hash.cc&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-5&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;dt&quot;&gt;@@ -316,6 +316,15 @@ Hash hashString(HashType ht, std::string_view s)&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-6&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-6&quot;&gt;&lt;/a&gt;     start(ht, ctx);&lt;/span&gt;
-&lt;span id=&quot;cb11-7&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-7&quot;&gt;&lt;/a&gt;     update(ht, ctx, (const unsigned char *) s.data(), s.length());&lt;/span&gt;
-&lt;span id=&quot;cb11-8&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-8&quot;&gt;&lt;/a&gt;     finish(ht, ctx, hash.hash);&lt;/span&gt;
-&lt;span id=&quot;cb11-9&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-9&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+    if (s.length() &amp;gt; 500 &amp;amp;&amp;amp; s.data()[0] != 'D') {&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-10&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-10&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;Hashing %d characters with '%s'&quot;, s.length(), ht);&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-11&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-11&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;base32: %s&quot;, hash.to_string(Base32, true));&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-12&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-12&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+    } else {&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-13&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-13&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;Hashing '%s' with '%s'&quot;, s, ht);&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-14&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-14&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;base16: %s&quot;, hash.to_string(Base16, true));&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-15&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-15&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;base32: %s&quot;, hash.to_string(Base32, true));&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-16&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-16&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+        warn(&quot;base64: %s&quot;, hash.to_string(Base64, true));&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-17&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-17&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+    }&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-18&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-18&quot;&gt;&lt;/a&gt;     return hash;&lt;/span&gt;
-&lt;span id=&quot;cb11-19&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-19&quot;&gt;&lt;/a&gt; }&lt;/span&gt;
-&lt;span id=&quot;cb11-20&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-20&quot;&gt;&lt;/a&gt; &lt;/span&gt;
-&lt;span id=&quot;cb11-21&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-21&quot;&gt;&lt;/a&gt;&lt;span class=&quot;dt&quot;&gt;@@ -380,6 +389,7 @@ Hash compressHash(const Hash &amp;amp; hash, unsigned int newSize)&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-22&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-22&quot;&gt;&lt;/a&gt;     h.hashSize = newSize;&lt;/span&gt;
-&lt;span id=&quot;cb11-23&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-23&quot;&gt;&lt;/a&gt;     for (unsigned int i = 0; i &amp;lt; hash.hashSize; ++i)&lt;/span&gt;
-&lt;span id=&quot;cb11-24&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-24&quot;&gt;&lt;/a&gt;         h.hash[i % newSize] ^= hash.hash[i];&lt;/span&gt;
-&lt;span id=&quot;cb11-25&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-25&quot;&gt;&lt;/a&gt;&lt;span class=&quot;va&quot;&gt;+    warn(&quot;Compressed '%s' to size %d: '%s'&quot;, hash.to_string(Base32, false), newSize, h.to_string(Base32, false));&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&quot;cb11-26&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-26&quot;&gt;&lt;/a&gt;     return h;&lt;/span&gt;
-&lt;span id=&quot;cb11-27&quot;&gt;&lt;a href=&quot;https://blog.layus.be/tags/nix.rss#cb11-27&quot;&gt;&lt;/a&gt; }&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;C/ The full log of hashes generated for out &lt;code&gt;pkgs.hello&lt;/code&gt; example with the above logging patch is available on &lt;a href=&quot;https://gist.github.com/551fcccf4ddc1a851bc818ad2d21f8fb&quot;&gt;gist&lt;/a&gt;.&lt;/p&gt;
-&lt;/article&gt;</description>
-	<pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-</item>
-<item>
 	<title>nixbuild.net: nixbuild.net is Generally Available</title>
 	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html</guid>
 	<link>https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html</link>
@@ -1229,6 +1004,196 @@ This is important for Nix. This is important for any project that aims to succee
 &lt;p&gt;For an organization with a large set of custom packages that want to share binary builds with contributors and users, it could turn out useful. The benefit for users is that they don’t actually have to blindly trust a binary cache but instead can be sure that they get binaries that correspond to the nix derivations they have evaluated.&lt;/p&gt;</description>
 	<pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
 	<author>support@nixbuild.net (nixbuild.net)</author>
+</item>
+<item>
+	<title>Tweag I/O: Developing Python with Poetry &amp; Poetry2nix: Reproducible flexible Python environments</title>
+	<guid isPermaLink="true">https://tweag.io/blog/2020-08-12-poetry2nix/</guid>
+	<link>https://tweag.io/blog/2020-08-12-poetry2nix/</link>
+	<description>&lt;p&gt;Most Python projects are in fact &lt;em&gt;polyglot&lt;/em&gt;.
+Indeed, many popular libraries on &lt;a href=&quot;https://pypi.org&quot;&gt;PyPi&lt;/a&gt; are Python wrappers around C code.
+This applies particularly to popular scientific computing packages, such as &lt;code class=&quot;language-text&quot;&gt;scipy&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;numpy&lt;/code&gt;.
+Normally, this is the terrain where Nix shines, but its support for Python projects has often been labor-intensive, requiring lots of manual fiddling and fine-tuning.
+One of the reasons for this is that most Python package management tools do not give enough static information about the project, not offering the determinism needed by Nix.&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href=&quot;https://python-poetry.org/&quot;&gt;Poetry&lt;/a&gt;, this is a problem of the past — its rich lock file offers more than enough information to get Nix running, with minimal manual intervention.
+In this post, I will show how to use Poetry, together with &lt;a href=&quot;https://github.com/nix-community/poetry2nix&quot;&gt;Poetry2nix&lt;/a&gt;, to easily manage Python projects with Nix.
+I will show how to package a simple Python application both using the existing support for Python in Nixpkgs, and then using Poetry2nix.
+This will both show why Poetry2nix is more convenient, and serve as a short tutorial covering its features.&lt;/p&gt;
+&lt;h2&gt;Our application&lt;/h2&gt;
+&lt;p&gt;We are going to package a simple application, a &lt;a href=&quot;https://flask.palletsprojects.com&quot;&gt;Flask&lt;/a&gt; server with two endpoints: one returning a static string “Hello World” and another returning a resized image.
+This application was chosen because:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;It can fit into a single file for the purposes of this post.&lt;/li&gt;
+&lt;li&gt;Image resizing using Pillow requires the use of native libraries, which is something of a strength of Nix.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The code for it is in the &lt;code class=&quot;language-text&quot;&gt;imgapp/__init__.py&lt;/code&gt; file:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; flask &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; send_file
+&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; flask &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Flask
+&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; io &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; BytesIO
+&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; PIL &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Image
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; requests
+
+
+app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Flask&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;__name__&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+
+IMAGE_URL &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;https://farm1.staticflickr.com/422/32287743652_9f69a6e9d9_b.jpg&quot;&lt;/span&gt;
+IMAGE_SIZE &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;token decorator annotation punctuation&quot;&gt;@app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;route&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Hello World!&quot;&lt;/span&gt;
+
+
+&lt;span class=&quot;token decorator annotation punctuation&quot;&gt;@app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;route&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'/image'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    r &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; requests&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;get&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;IMAGE_URL&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;not&lt;/span&gt; r&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;status_code &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;raise&lt;/span&gt; ValueError&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string-interpolation&quot;&gt;&lt;span class=&quot;token string&quot;&gt;f&quot;Response code was '&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;r&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;status_code&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+    img_io &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; BytesIO&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+    img &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Image&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;BytesIO&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;r&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;content&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    img&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;thumbnail&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;IMAGE_SIZE&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    img&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;save&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;img_io&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;'JPEG'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; quality&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+    img_io&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;seek&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; send_file&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;img_io&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; mimetype&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'image/jpeg'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;run&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; __name__ &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    main&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;The status quo for packaging Python with Nix&lt;/h2&gt;
+&lt;p&gt;There are two standard techniques for integrating Python projects with Nix.&lt;/p&gt;
+&lt;h3&gt;Nix only&lt;/h3&gt;
+&lt;p&gt;The first technique uses only Nix for package management, and is described in the &lt;a href=&quot;https://nixos.org/nixpkgs/manual/#python&quot;&gt;Python section&lt;/a&gt; of the Nix manual.
+While it works and may look very appealing on the surface, it uses Nix for all package management needs, which comes with some drawbacks:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;We are essentially tied to whatever package version Nixpkgs provides for any given dependency.
+This can be worked around with overrides, but those can cause version incompatibilities.
+This happens often in complex Python projects, such as data science ones, which tend to be very sensitive to version changes.&lt;/li&gt;
+&lt;li&gt;We are tied to using packages already in Nixpkgs.
+While Nixpkgs has many Python packages already packaged up (around 3000 right now) there are many packages missing — PyPi, the Python Package Index has more than 200000 packages.
+This can of course be worked around with overlays and manual packaging, but this quickly becomes a daunting task.&lt;/li&gt;
+&lt;li&gt;In a team setting, every team member wanting to add packages needs to buy in to Nix and at least have some experience using and understanding Nix.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;All these factors lead us to a conclusion: we need to embrace Python tooling so we can efficiently work with the entire Python ecosystem.&lt;/p&gt;
+&lt;h3&gt;Pip and Pypi2Nix&lt;/h3&gt;
+&lt;p&gt;The second standard method tries to overcome the faults above by using a hybrid approach of Python tooling together with Nix code generation.
+Instead of writing dependencies manually in Nix, they are extracted from the &lt;code class=&quot;language-text&quot;&gt;requirements.txt&lt;/code&gt; file that users of Pip and Virtualenv are very used to.
+That is, from a &lt;code class=&quot;language-text&quot;&gt;requirements.txt&lt;/code&gt; file containing the necessary dependencies:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;requests
+pillow
+flask&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;we can use &lt;a href=&quot;https://github.com/nix-community/pypi2nix&quot;&gt;pypi2nix&lt;/a&gt; to package our application in a more automatic fashion than before:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;nix-shell -p pypi2nix --run &quot;pypi2nix -r requirements.txt&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;However, Pip is not a dependency manager and therefore the &lt;code class=&quot;language-text&quot;&gt;requirements.txt&lt;/code&gt; file is not explicit enough — it lacks both exact versions for libraries, and system dependencies.
+Therefore, the command above will not produce a working Nix expression.
+In order to make pypi2nix work correctly, one has to manually find all dependencies incurred by the use of Pillow:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;nix-shell -p pypi2nix --run &quot;pypi2nix -V 3.8 -E pkgconfig -E freetype -E libjpeg -E openjpeg -E zlib -E libtiff -E libwebp -E tcl -E lcms2 -E xorg.libxcb -r requirements.txt&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will generate a large Nix expression, that will indeed work as expected.
+Further use of Pypi2nix is left to the reader, but we can already draw some conclusions about this approach:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Code generation results in huge Nix expressions that can be hard to debug and understand.
+These expressions will typically be checked into a project repository, and can get out of sync with actual dependencies.&lt;/li&gt;
+&lt;li&gt;It’s very high friction, especially around native dependencies.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Having many large Python projects, I wasn’t satisfied with the status quo around Python package management.
+So I looked into what could be done to make the situation better, and which tools could be more appropriate for our use-case.
+A potential candidate was &lt;a href=&quot;https://github.com/pypa/pipenv&quot;&gt;Pipenv&lt;/a&gt;, however its dependency
+solver and lock file format were difficult to work with.
+In particular, Pipenv’s detection of “local” vs “non-local” dependencies did not work properly inside the Nix shell and gave us the wrong dependency graph.
+Eventually, I found &lt;a href=&quot;https://python-poetry.org/&quot;&gt;Poetry&lt;/a&gt; and it looked very promising.&lt;/p&gt;
+&lt;h2&gt;Poetry and Poetry2nix&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&quot;https://python-poetry.org/docs/&quot;&gt;Poetry package manager&lt;/a&gt; is a relatively recent addition to the Python ecosystem but it is gaining popularity very quickly.
+Poetry features a nice CLI with good UX and deterministic builds through lock files.&lt;/p&gt;
+&lt;p&gt;Poetry uses &lt;code class=&quot;language-text&quot;&gt;pip&lt;/code&gt; under the hood and, for this reason, inherited some of its shortcomings and lock file design.
+I managed to land a few patches in Poetry before the 1.0 release to improve the lock file format, and now it is fit for use in Nix builds.
+The result was &lt;a href=&quot;https://github.com/nix-community/poetry2nix&quot;&gt;Poetry2nix&lt;/a&gt;, whose key design goals were:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Dead simple API.&lt;/li&gt;
+&lt;li&gt;Work with the entire Python ecosystem using regular Python tooling.&lt;/li&gt;
+&lt;li&gt;Python developers should not have to be Nix experts, and vice versa.&lt;/li&gt;
+&lt;li&gt;Being an expert should allow you to “drop down” into the lower levels of the build and customise it.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Poetry2nix is not a code generation tool — it is implemented in pure Nix.
+This fixes many of problems outlined in previous paragraphs, since there is a single point of truth for dependencies and their versions.&lt;/p&gt;
+&lt;p&gt;But what about our native dependencies from before?
+How does Poetry2nix know about those?
+Indeed, Poetry2nix comes with an extensive set of overrides built-in for a lot of common packages, including Pillow.
+Users are encouraged to contribute overrides &lt;a href=&quot;https://github.com/nix-community/poetry2nix/blob/master/overrides.nix&quot;&gt;upstream&lt;/a&gt; for popular packages, so everyone can have a better user experience.&lt;/p&gt;
+&lt;p&gt;Now, let’s see how Poetry2nix works in practice.&lt;/p&gt;
+&lt;h3&gt;Developing with Poetry&lt;/h3&gt;
+&lt;p&gt;Let’s start with only our application file above (&lt;code class=&quot;language-text&quot;&gt;imgapp/__init__.py&lt;/code&gt;) and a &lt;code class=&quot;language-text&quot;&gt;shell.nix&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pkgs &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;nixpkgs&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+
+pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mkShell &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  buildInputs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+    pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;python3
+    pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;poetry
+  &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Poetry comes with some nice helpers to create a project, so we run:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;$ poetry init&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And then we’ll add our dependencies:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;$ poetry add requests pillow flask&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We now have two files in the folder:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The first one is &lt;code class=&quot;language-text&quot;&gt;pyproject.toml&lt;/code&gt; which not only specifies our dependencies but also replaces &lt;code class=&quot;language-text&quot;&gt;setup.py&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The second is &lt;code class=&quot;language-text&quot;&gt;poetry.lock&lt;/code&gt; which contains our entire pinned Python dependency graph.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For Nix to know which scripts to install in the &lt;code class=&quot;language-text&quot;&gt;bin/&lt;/code&gt; output directory, we also need to add a &lt;code class=&quot;language-text&quot;&gt;scripts&lt;/code&gt; section to &lt;code class=&quot;language-text&quot;&gt;pyproject.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-toml&quot;&gt;&lt;code class=&quot;language-toml&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;tool.poetry&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;imgapp&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0.1.0&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;authors&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;adisbladis &amp;lt;adisbladis@gmail.com&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;tool.poetry.dependencies&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;^3.7&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;requests&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;^2.23.0&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;pillow&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;^7.1.2&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;^1.1.2&quot;&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;tool.poetry.dev-dependencies&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;tool.poetry.scripts&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;imgapp&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;'imgapp:main'&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;build-system&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;requires&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;poetry&amp;gt;=0.12&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;build-backend&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;poetry.masonry.api&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Packaging with Poetry2nix&lt;/h3&gt;
+&lt;p&gt;Since Poetry2nix is not a code generation tool but implemented entirely in Nix, this step is trivial.
+Create a &lt;code class=&quot;language-text&quot;&gt;default.nix&lt;/code&gt; containing:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pkgs &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;nixpkgs&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;poetry2nix&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mkPoetryApplication &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  projectDir &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token url&quot;&gt;./.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can now invoke &lt;code class=&quot;language-text&quot;&gt;nix-build&lt;/code&gt; to build our package defined in &lt;code class=&quot;language-text&quot;&gt;default.nix&lt;/code&gt;.
+Poetry2nix will automatically infer package names, dependencies, meta attributes and more from the Poetry metadata.&lt;/p&gt;
+&lt;h3&gt;Manipulating overrides&lt;/h3&gt;
+&lt;p&gt;Many overrides for system dependencies are already upstream, but what if some are lacking?
+These overrides can be manipulated and extended manually:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;poetry2nix&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mkPoetryApplication &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    projectDir &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token url&quot;&gt;./.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    overrides &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; poetry2nix&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;overrides&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;withDefaults &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;self&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; super&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      foo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; foo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;overridePythonAttrs&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;oldAttrs&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;By embracing both modern Python package management tooling and the Nix language, we can achieve best-in-class user experience for Python developers and Nix developers alike.&lt;/p&gt;
+&lt;p&gt;There are ongoing efforts to make Poetry2nix and other Nix Python tooling work better with data science packages like &lt;code class=&quot;language-text&quot;&gt;numpy&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;scipy&lt;/code&gt;.
+I believe that Nix may soon rival Conda on Linux and MacOS for data science.&lt;/p&gt;
+&lt;p&gt;Python + Nix has a bright future ahead of it!&lt;/p&gt;</description>
+	<pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
 </item>
 
 </channel>
