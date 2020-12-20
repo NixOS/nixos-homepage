@@ -8,7 +8,7 @@
 
 <section class="download-header">
   <div>
-    <h1>Nix</h1>
+    <h1>Nix: the package manager</h1>
     <div>
       <h2>Current version</h2>
       <a href="#">[% latestNixVersion %]</a>
@@ -73,7 +73,7 @@
 
 <section class="download-header">
   <div>
-    <h1>NixOS</h1>
+    <h1>NixOS: the Linux distribution</h1>
     <div>
       <h2>Current version</h2>
       <a href="#">[% latestNixOSSeries %]</a>
