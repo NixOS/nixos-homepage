@@ -1,5 +1,6 @@
 { pkgs ? import <nixpkgs> {}
 , nixos-common-styles
+, system
 }:
 pkgs.stdenv.mkDerivation {
   name = "nixos-homepage-styles";
@@ -16,7 +17,7 @@ pkgs.stdenv.mkDerivation {
    
   buildPhase = ''
     rm -rf common-styles
-    ln -sf ${nixos-common-styles.defaultPackage."${builtins.currentSystem}"} ./common-styles
+    ln -sf ${nixos-common-styles.defaultPackage."${system}"} ./common-styles
 
     rm -rf assets
     ln -sf ${nixos-common-styles.lib.memoizeAssets ./assets} ./assets

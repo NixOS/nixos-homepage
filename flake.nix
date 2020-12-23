@@ -70,7 +70,7 @@
       checks."${system}".build = defaultPackage."${system}";
 
       packages."${system}" = rec {
-        siteStyles = pkgs.callPackage ./site-styles { inherit nixos-common-styles; };
+        siteStyles = pkgs.callPackage ./site-styles { inherit nixos-common-styles system; };
 
         homepage = pkgs.stdenv.mkDerivation {
           name = "nixos-homepage-${self.lastModifiedDate}";
