@@ -11,6 +11,7 @@
   inputs.released-nix-stable = { url = "github:nixos/nix/latest-release"; flake = false; };
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
   inputs.nix-dev = { url = "github:nix-dot-dev/nix.dev"; };
+  inputs.nixos-common-styles = { url = "github:NixOS/nixos-common-styles"; };
 
   outputs =
     { self
@@ -21,6 +22,7 @@
     , released-nix-stable
     , nix-pills
     , nix-dev
+    , nixos-common-styles
     }:
     let
       system = "x86_64-linux";
@@ -68,7 +70,7 @@
       checks."${system}".build = defaultPackage."${system}";
 
       packages."${system}" = rec {
-        siteStyles = pkgs.callPackage ./site-styles {};
+        siteStyles = pkgs.callPackage ./site-styles { inherit nixos-common-styles system; };
 
         homepage = pkgs.stdenv.mkDerivation {
           name = "nixos-homepage-${self.lastModifiedDate}";
