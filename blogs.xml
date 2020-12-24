@@ -9,6 +9,16 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Cachix: Postmortem of outage on 20th December</title>
+	<guid isPermaLink="true">https://blog.cachix.org/posts/2020-12-23-post-mortem-recent-downtime/</guid>
+	<link>https://blog.cachix.org/posts/2020-12-23-post-mortem-recent-downtime/</link>
+	<description>Cachix has experienced a six hour downtime, second significant outage since the service started operating on 1st of June 2018.
+Here are the details to what exactly happened and what has been done to prevent similar events from happening.
+Timeline (UTC)  02:55:07 - Backend starts to emit errors for all HTTP requests 02:56:00 - Pagerduty tries to notify me of outage via email, phone and mobile app 09:01:00 - I wake up and see the notifications 09:02:02 - Backend is restarted and recovers  Root cause analysis All ~24k HTTP requests that have reached the backend during the outage have failed with the following exception:</description>
+	<pubDate>Thu, 24 Dec 2020 11:30:00 +0000</pubDate>
+	<author>support@cachix.org (Domen Kožar)</author>
+</item>
+<item>
 	<title>Tweag I/O: Trustix: Distributed trust and reproducibility tracking for binary caches</title>
 	<guid isPermaLink="true">https://tweag.io/blog/2020-12-16-trustix-announcement/</guid>
 	<link>https://tweag.io/blog/2020-12-16-trustix-announcement/</link>
@@ -1004,196 +1014,6 @@ This is important for Nix. This is important for any project that aims to succee
 &lt;p&gt;For an organization with a large set of custom packages that want to share binary builds with contributors and users, it could turn out useful. The benefit for users is that they don’t actually have to blindly trust a binary cache but instead can be sure that they get binaries that correspond to the nix derivations they have evaluated.&lt;/p&gt;</description>
 	<pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
 	<author>support@nixbuild.net (nixbuild.net)</author>
-</item>
-<item>
-	<title>Tweag I/O: Developing Python with Poetry &amp; Poetry2nix: Reproducible flexible Python environments</title>
-	<guid isPermaLink="true">https://tweag.io/blog/2020-08-12-poetry2nix/</guid>
-	<link>https://tweag.io/blog/2020-08-12-poetry2nix/</link>
-	<description>&lt;p&gt;Most Python projects are in fact &lt;em&gt;polyglot&lt;/em&gt;.
-Indeed, many popular libraries on &lt;a href=&quot;https://pypi.org&quot;&gt;PyPi&lt;/a&gt; are Python wrappers around C code.
-This applies particularly to popular scientific computing packages, such as &lt;code class=&quot;language-text&quot;&gt;scipy&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;numpy&lt;/code&gt;.
-Normally, this is the terrain where Nix shines, but its support for Python projects has often been labor-intensive, requiring lots of manual fiddling and fine-tuning.
-One of the reasons for this is that most Python package management tools do not give enough static information about the project, not offering the determinism needed by Nix.&lt;/p&gt;
-&lt;p&gt;Thanks to &lt;a href=&quot;https://python-poetry.org/&quot;&gt;Poetry&lt;/a&gt;, this is a problem of the past — its rich lock file offers more than enough information to get Nix running, with minimal manual intervention.
-In this post, I will show how to use Poetry, together with &lt;a href=&quot;https://github.com/nix-community/poetry2nix&quot;&gt;Poetry2nix&lt;/a&gt;, to easily manage Python projects with Nix.
-I will show how to package a simple Python application both using the existing support for Python in Nixpkgs, and then using Poetry2nix.
-This will both show why Poetry2nix is more convenient, and serve as a short tutorial covering its features.&lt;/p&gt;
-&lt;h2&gt;Our application&lt;/h2&gt;
-&lt;p&gt;We are going to package a simple application, a &lt;a href=&quot;https://flask.palletsprojects.com&quot;&gt;Flask&lt;/a&gt; server with two endpoints: one returning a static string “Hello World” and another returning a resized image.
-This application was chosen because:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;It can fit into a single file for the purposes of this post.&lt;/li&gt;
-&lt;li&gt;Image resizing using Pillow requires the use of native libraries, which is something of a strength of Nix.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;The code for it is in the &lt;code class=&quot;language-text&quot;&gt;imgapp/__init__.py&lt;/code&gt; file:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; flask &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; send_file
-&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; flask &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Flask
-&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; io &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; BytesIO
-&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; PIL &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Image
-&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; requests
-
-
-app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Flask&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;__name__&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-
-
-IMAGE_URL &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;https://farm1.staticflickr.com/422/32287743652_9f69a6e9d9_b.jpg&quot;&lt;/span&gt;
-IMAGE_SIZE &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-
-
-&lt;span class=&quot;token decorator annotation punctuation&quot;&gt;@app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;route&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Hello World!&quot;&lt;/span&gt;
-
-
-&lt;span class=&quot;token decorator annotation punctuation&quot;&gt;@app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;route&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'/image'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
-    r &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; requests&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;get&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;IMAGE_URL&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;not&lt;/span&gt; r&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;status_code &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;token keyword&quot;&gt;raise&lt;/span&gt; ValueError&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string-interpolation&quot;&gt;&lt;span class=&quot;token string&quot;&gt;f&quot;Response code was '&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;r&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;status_code&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-
-    img_io &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; BytesIO&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-
-    img &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Image&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;BytesIO&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;r&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;content&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-    img&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;thumbnail&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;IMAGE_SIZE&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-    img&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;save&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;img_io&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;'JPEG'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; quality&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-
-    img_io&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;seek&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; send_file&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;img_io&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; mimetype&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;'image/jpeg'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-
-
-&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
-    app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;run&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-
-
-&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; __name__ &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
-    main&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;The status quo for packaging Python with Nix&lt;/h2&gt;
-&lt;p&gt;There are two standard techniques for integrating Python projects with Nix.&lt;/p&gt;
-&lt;h3&gt;Nix only&lt;/h3&gt;
-&lt;p&gt;The first technique uses only Nix for package management, and is described in the &lt;a href=&quot;https://nixos.org/nixpkgs/manual/#python&quot;&gt;Python section&lt;/a&gt; of the Nix manual.
-While it works and may look very appealing on the surface, it uses Nix for all package management needs, which comes with some drawbacks:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;We are essentially tied to whatever package version Nixpkgs provides for any given dependency.
-This can be worked around with overrides, but those can cause version incompatibilities.
-This happens often in complex Python projects, such as data science ones, which tend to be very sensitive to version changes.&lt;/li&gt;
-&lt;li&gt;We are tied to using packages already in Nixpkgs.
-While Nixpkgs has many Python packages already packaged up (around 3000 right now) there are many packages missing — PyPi, the Python Package Index has more than 200000 packages.
-This can of course be worked around with overlays and manual packaging, but this quickly becomes a daunting task.&lt;/li&gt;
-&lt;li&gt;In a team setting, every team member wanting to add packages needs to buy in to Nix and at least have some experience using and understanding Nix.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;All these factors lead us to a conclusion: we need to embrace Python tooling so we can efficiently work with the entire Python ecosystem.&lt;/p&gt;
-&lt;h3&gt;Pip and Pypi2Nix&lt;/h3&gt;
-&lt;p&gt;The second standard method tries to overcome the faults above by using a hybrid approach of Python tooling together with Nix code generation.
-Instead of writing dependencies manually in Nix, they are extracted from the &lt;code class=&quot;language-text&quot;&gt;requirements.txt&lt;/code&gt; file that users of Pip and Virtualenv are very used to.
-That is, from a &lt;code class=&quot;language-text&quot;&gt;requirements.txt&lt;/code&gt; file containing the necessary dependencies:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;requests
-pillow
-flask&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;we can use &lt;a href=&quot;https://github.com/nix-community/pypi2nix&quot;&gt;pypi2nix&lt;/a&gt; to package our application in a more automatic fashion than before:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;nix-shell -p pypi2nix --run &quot;pypi2nix -r requirements.txt&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;However, Pip is not a dependency manager and therefore the &lt;code class=&quot;language-text&quot;&gt;requirements.txt&lt;/code&gt; file is not explicit enough — it lacks both exact versions for libraries, and system dependencies.
-Therefore, the command above will not produce a working Nix expression.
-In order to make pypi2nix work correctly, one has to manually find all dependencies incurred by the use of Pillow:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;nix-shell -p pypi2nix --run &quot;pypi2nix -V 3.8 -E pkgconfig -E freetype -E libjpeg -E openjpeg -E zlib -E libtiff -E libwebp -E tcl -E lcms2 -E xorg.libxcb -r requirements.txt&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This will generate a large Nix expression, that will indeed work as expected.
-Further use of Pypi2nix is left to the reader, but we can already draw some conclusions about this approach:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Code generation results in huge Nix expressions that can be hard to debug and understand.
-These expressions will typically be checked into a project repository, and can get out of sync with actual dependencies.&lt;/li&gt;
-&lt;li&gt;It’s very high friction, especially around native dependencies.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Having many large Python projects, I wasn’t satisfied with the status quo around Python package management.
-So I looked into what could be done to make the situation better, and which tools could be more appropriate for our use-case.
-A potential candidate was &lt;a href=&quot;https://github.com/pypa/pipenv&quot;&gt;Pipenv&lt;/a&gt;, however its dependency
-solver and lock file format were difficult to work with.
-In particular, Pipenv’s detection of “local” vs “non-local” dependencies did not work properly inside the Nix shell and gave us the wrong dependency graph.
-Eventually, I found &lt;a href=&quot;https://python-poetry.org/&quot;&gt;Poetry&lt;/a&gt; and it looked very promising.&lt;/p&gt;
-&lt;h2&gt;Poetry and Poetry2nix&lt;/h2&gt;
-&lt;p&gt;The &lt;a href=&quot;https://python-poetry.org/docs/&quot;&gt;Poetry package manager&lt;/a&gt; is a relatively recent addition to the Python ecosystem but it is gaining popularity very quickly.
-Poetry features a nice CLI with good UX and deterministic builds through lock files.&lt;/p&gt;
-&lt;p&gt;Poetry uses &lt;code class=&quot;language-text&quot;&gt;pip&lt;/code&gt; under the hood and, for this reason, inherited some of its shortcomings and lock file design.
-I managed to land a few patches in Poetry before the 1.0 release to improve the lock file format, and now it is fit for use in Nix builds.
-The result was &lt;a href=&quot;https://github.com/nix-community/poetry2nix&quot;&gt;Poetry2nix&lt;/a&gt;, whose key design goals were:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Dead simple API.&lt;/li&gt;
-&lt;li&gt;Work with the entire Python ecosystem using regular Python tooling.&lt;/li&gt;
-&lt;li&gt;Python developers should not have to be Nix experts, and vice versa.&lt;/li&gt;
-&lt;li&gt;Being an expert should allow you to “drop down” into the lower levels of the build and customise it.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Poetry2nix is not a code generation tool — it is implemented in pure Nix.
-This fixes many of problems outlined in previous paragraphs, since there is a single point of truth for dependencies and their versions.&lt;/p&gt;
-&lt;p&gt;But what about our native dependencies from before?
-How does Poetry2nix know about those?
-Indeed, Poetry2nix comes with an extensive set of overrides built-in for a lot of common packages, including Pillow.
-Users are encouraged to contribute overrides &lt;a href=&quot;https://github.com/nix-community/poetry2nix/blob/master/overrides.nix&quot;&gt;upstream&lt;/a&gt; for popular packages, so everyone can have a better user experience.&lt;/p&gt;
-&lt;p&gt;Now, let’s see how Poetry2nix works in practice.&lt;/p&gt;
-&lt;h3&gt;Developing with Poetry&lt;/h3&gt;
-&lt;p&gt;Let’s start with only our application file above (&lt;code class=&quot;language-text&quot;&gt;imgapp/__init__.py&lt;/code&gt;) and a &lt;code class=&quot;language-text&quot;&gt;shell.nix&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pkgs &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;nixpkgs&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
-
-pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mkShell &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-
-  buildInputs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
-    pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;python3
-    pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;poetry
-  &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Poetry comes with some nice helpers to create a project, so we run:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;$ poetry init&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And then we’ll add our dependencies:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;$ poetry add requests pillow flask&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;We now have two files in the folder:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The first one is &lt;code class=&quot;language-text&quot;&gt;pyproject.toml&lt;/code&gt; which not only specifies our dependencies but also replaces &lt;code class=&quot;language-text&quot;&gt;setup.py&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;The second is &lt;code class=&quot;language-text&quot;&gt;poetry.lock&lt;/code&gt; which contains our entire pinned Python dependency graph.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;For Nix to know which scripts to install in the &lt;code class=&quot;language-text&quot;&gt;bin/&lt;/code&gt; output directory, we also need to add a &lt;code class=&quot;language-text&quot;&gt;scripts&lt;/code&gt; section to &lt;code class=&quot;language-text&quot;&gt;pyproject.toml&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-toml&quot;&gt;&lt;code class=&quot;language-toml&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;tool.poetry&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;imgapp&quot;&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0.1.0&quot;&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;authors&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;adisbladis &amp;lt;adisbladis@gmail.com&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-
-&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;tool.poetry.dependencies&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;python&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;^3.7&quot;&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;requests&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;^2.23.0&quot;&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;pillow&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;^7.1.2&quot;&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;^1.1.2&quot;&lt;/span&gt;
-
-&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;tool.poetry.dev-dependencies&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-
-&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;tool.poetry.scripts&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;imgapp&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;'imgapp:main'&lt;/span&gt;
-
-&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;build-system&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;requires&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;poetry&amp;gt;=0.12&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;token key property&quot;&gt;build-backend&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;poetry.masonry.api&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Packaging with Poetry2nix&lt;/h3&gt;
-&lt;p&gt;Since Poetry2nix is not a code generation tool but implemented entirely in Nix, this step is trivial.
-Create a &lt;code class=&quot;language-text&quot;&gt;default.nix&lt;/code&gt; containing:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pkgs &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;nixpkgs&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
-pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;poetry2nix&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mkPoetryApplication &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-  projectDir &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token url&quot;&gt;./.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;We can now invoke &lt;code class=&quot;language-text&quot;&gt;nix-build&lt;/code&gt; to build our package defined in &lt;code class=&quot;language-text&quot;&gt;default.nix&lt;/code&gt;.
-Poetry2nix will automatically infer package names, dependencies, meta attributes and more from the Poetry metadata.&lt;/p&gt;
-&lt;h3&gt;Manipulating overrides&lt;/h3&gt;
-&lt;p&gt;Many overrides for system dependencies are already upstream, but what if some are lacking?
-These overrides can be manipulated and extended manually:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;poetry2nix&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;mkPoetryApplication &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    projectDir &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token url&quot;&gt;./.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-    overrides &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; poetry2nix&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;overrides&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;withDefaults &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;self&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; super&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-      foo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; foo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;overridePythonAttrs&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;oldAttrs&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;By embracing both modern Python package management tooling and the Nix language, we can achieve best-in-class user experience for Python developers and Nix developers alike.&lt;/p&gt;
-&lt;p&gt;There are ongoing efforts to make Poetry2nix and other Nix Python tooling work better with data science packages like &lt;code class=&quot;language-text&quot;&gt;numpy&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;scipy&lt;/code&gt;.
-I believe that Nix may soon rival Conda on Linux and MacOS for data science.&lt;/p&gt;
-&lt;p&gt;Python + Nix has a bright future ahead of it!&lt;/p&gt;</description>
-	<pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
 </item>
 
 </channel>
