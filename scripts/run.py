@@ -1,15 +1,47 @@
-from livereload import Server, shell
+import click
+import livereload
 import os
 
-server = Server()
-server.watch("./*.xml", lambda: os.system("make"))
-server.watch("./*.tt", lambda: os.system("make"))
-server.watch("./**/*.tt", lambda: os.system("make"))
-server.watch("./images/*", lambda: os.system("make"))
-server.watch("./js/*", lambda: os.system("make"))
-server.watch("./css/*", lambda: os.system("make"))
-server.watch("./demos/*.scenario", lambda: os.system("make"))
-server.watch("./site-styles/*", lambda: os.system("make"))
-server.watch("./site-styles/**/*", lambda: os.system("make"))
-server.watch("./site-styles/**/**/*", lambda: os.system("make"))
-server.serve(root="./", port=8000)
+
+@click.command()
+@click.option(
+    '--common-styles',
+    default=None,
+    type=click.Path(
+        exists=True,
+        file_okay=False,
+        dir_okay=True,
+        readable=True,
+        resolve_path=True,
+    ),
+)
+def main(common_styles):
+    server = livereload.Server()
+
+    paths_to_watch = [
+        "./**/*.tt",
+        "./*.tt",
+        "./*.xml",
+        "./Makefile",
+        "./css/*",
+        "./demos/*.scenario",
+        "./images/*",
+        "./js/*",
+        "./scripts/*",
+        "./site-styles/*",
+        "./site-styles/**/*",
+        "./site-styles/**/**/*",
+    ]
+
+    if common_styles is not None:
+        paths_to_watch.append(common_styles)
+
+    for path in paths_to_watch:
+        server.watch(path, lambda: os.system("make"))
+
+    os.system("make")
+
+    server.serve(root="./", port=os.getenv("PORT", 8000))
+
+if __name__ == "__main__":
+    main()
