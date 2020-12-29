@@ -9,6 +9,79 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>nixbuild.net: The First Year</title>
+	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-12-29-the-first-year.html</guid>
+	<link>https://blog.nixbuild.net/posts/2020-12-29-the-first-year.html</link>
+	<description>&lt;p&gt;&lt;a href=&quot;https://discourse.nixos.org/t/announcing-nixbuild-net-nix-build-as-a-service&quot;&gt;One year ago&lt;/a&gt; nixbuild.net was announced to the Nix community for the very first time. The service then ran as a closed beta for 7 months until it was made &lt;a href=&quot;https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html&quot;&gt;generally available&lt;/a&gt; on the 28th of August 2020.&lt;/p&gt;
+&lt;p&gt;This blog post will try to summarize how nixbuild.net has evolved since GA four months ago, and give a glimpse of the future for the service.&lt;/p&gt;
+
+&lt;h2 id=&quot;stability-and-performance&quot;&gt;Stability and Performance&lt;/h2&gt;
+&lt;p&gt;Thousands of Nix builds have been built by nixbuild.net so far, and every build helps in making the service more reliable by uncovering possible edge cases in the build environment.&lt;/p&gt;
+&lt;p&gt;These are some of the stability-related improvements and fixes that have been deployed since GA:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Better detection and handling of builds that time out or hang.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Improved retry logic should our backend storage not deliver Nix closures as expected.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Fixes to the virtual file system inside the KVM sandbox.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Better handling of builds that have binary data in their log output.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Changes to the virtual sandbox environment so it looks even more like a “standard” Linux environment.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Application of the &lt;a href=&quot;https://nixos.org/manual/nix/stable/#conf-sandbox&quot;&gt;Nix sandbox&lt;/a&gt; inside our KVM sandbox. This basically guarantees that the Nix environment provided through nixbuild.net is identical to the Nix environment for local builds.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Support for following HTTP redirects from binary caches.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;even-better-build-reuse&quot;&gt;Even Better Build Reuse&lt;/h2&gt;
+&lt;p&gt;One of the fundamental ideas in nixbuild.net is to try as hard as possible to &lt;em&gt;not&lt;/em&gt; build your builds, if an existing build result can be reused instead. We can trivially reuse an account’s own builds since they are implicitly trusted by the user, but also untrusted builds can be reused under certain circumstances. This has been described in detail in an &lt;a href=&quot;https://blog.nixbuild.net/posts/2020-08-13-build-reuse-in-nixbuild-net.html&quot;&gt;earlier blog post&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Since GA we’ve introduced a number of new ways build results can be reused.&lt;/p&gt;
+&lt;h3 id=&quot;reuse-of-build-failures&quot;&gt;Reuse of Build Failures&lt;/h3&gt;
+&lt;p&gt;Build failures are now also reused. This means that if someone tries to build a build that is identical (in the sense that the derivation and its transitive input closure is bit-by-bit identical) to a previously failed build, nixbuild.net will immediately serve back the failed result instead of re-running the build. You will even get the build log replayed.&lt;/p&gt;
+&lt;p&gt;Build failures can be reused since we are confident that our sandbox is pure, meaning that it will behave exactly the same as long as the build is exactly the same. Only non-transient failures will be reused. So if the builder misbehaves in some way that is out of control for Nix, that failure will not be reused. This can happen if the builder machine breaks down or something similar. In such cases we will automatically re-run the build anyway.&lt;/p&gt;
+&lt;p&gt;When we fix bugs or make major changes in our sandbox it can happen that we alter the behavior in terms of which builds succeed or fail. For example, we could find a build that fail just because we have missed implementing some specific detail in the sandbox. Once that is fixed, we don’t want to reuse such failures. To avoid that, all existing build failures will be “invalidated” on each major update of the sandbox.&lt;/p&gt;
+&lt;p&gt;If a user really wants to re-run a failed build on nixbuild.net, failure reuse can be turned off using the new &lt;em&gt;user settings&lt;/em&gt; (see below).&lt;/p&gt;
+&lt;h3 id=&quot;reuse-of-build-timeouts&quot;&gt;Reuse of Build Timeouts&lt;/h3&gt;
+&lt;p&gt;In a similar vein to reused build failures, we can also reuse build timeouts. This is not enabled by default, since users can select different timeout limits. A user can activate reuse of build timeouts through the user settings.&lt;/p&gt;
+&lt;p&gt;The reuse of timed out builds works like this: Each time a new build is submitted, we check if we have any previous build results of the exact same build. If no successful results or plain failures are found, we look for builds that have timed out. We then check if any of the existing timed out builds ran for longer than the user-specified timeout for the new build. If we can find such a result, it will be served back to the user instead of re-running the build.&lt;/p&gt;
+&lt;p&gt;This feature can be very useful if you want to avoid re-running builds that timeout over and over again (which can be a very time-consuming excercise). For example, say that you have your build timeout set to two hours, and some input needed for a build takes longer than that to build. The first time that input is needed you have to wait two hours to detect that the build will fail. If you then try building something else that happens to depend on the very same input you will save two hours by directly being served the build failure from nixbuild.net!&lt;/p&gt;
+&lt;h3 id=&quot;wait-for-running-builds&quot;&gt;Wait for Running Builds&lt;/h3&gt;
+&lt;p&gt;When a new build is submitted, nixbuild.net will now check if there is any identical build currently running (after checking for previous build results or failures). If there is, the new build will simply hold until the running build has finished. After that, the result of the running build will likely be served back as the result of the new build (as long as the running build wasn’t terminated in a transient way, in which case the new build will have to run from scratch). The identical running builds are checked and reused across accounts.&lt;/p&gt;
+&lt;p&gt;Before this change, nixbuild.net would simply start another build in parallel even if the builds were identical.&lt;/p&gt;
+&lt;h2 id=&quot;new-features&quot;&gt;New Features&lt;/h2&gt;
+&lt;h3 id=&quot;user-settings&quot;&gt;User Settings&lt;/h3&gt;
+&lt;p&gt;A completely new feature has been launched since GA: &lt;strong&gt;&lt;a href=&quot;https://docs.nixbuild.net/settings/&quot;&gt;User Settings&lt;/a&gt;&lt;/strong&gt;. This allows end users to tweak the behavior of nixbuild.net. For example, the build reuse described above can be controlled by user settings. Other settings includes &lt;a href=&quot;https://docs.nixbuild.net/settings/#max-cpu-hours-per-month&quot;&gt;controlling the maximum used build time per month&lt;/a&gt;, and the possibility to &lt;a href=&quot;https://docs.nixbuild.net/settings/#allow-override&quot;&gt;lock down&lt;/a&gt; specific SSH keys which is useful in CI setups.&lt;/p&gt;
+&lt;p&gt;The user settings can be set in various way; through the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell/index.html#configure-settings&quot;&gt;nixbuild.net shell&lt;/a&gt;, the &lt;a href=&quot;https://docs.nixbuild.net/settings/#ssh-environment&quot;&gt;SSH client environment&lt;/a&gt; and even through the &lt;a href=&quot;https://docs.nixbuild.net/settings/#nix-derivation&quot;&gt;Nix derivations&lt;/a&gt; themselves.&lt;/p&gt;
+&lt;p&gt;Even if many users probably never need to change any settings, it can be helpful to read through the &lt;a href=&quot;https://docs.nixbuild.net/settings/&quot;&gt;documentation&lt;/a&gt; to get a feeling for what is possible. If you need to differentiate permissions in any way (different settings for account administrators, developers, CI etc) you should definitely look into the various user settings.&lt;/p&gt;
+&lt;h3 id=&quot;github-ci-action&quot;&gt;GitHub CI Action&lt;/h3&gt;
+&lt;p&gt;A &lt;a href=&quot;https://github.com/marketplace/actions/nixbuild-net&quot;&gt;GitHub Action&lt;/a&gt; has been published. This action makes it very easy to use nixbuild.net as a remote Nix builder in your GitHub Actions workflows. Instead of running you Nix builds on the two vCPUs provided by GitHub you can now enjoy scale-out Nix builds on nixbuild.net with minimal setup required.&lt;/p&gt;
+&lt;p&gt;The nixbuild.net GitHub Action is developed by the nixbuild.net team and there are plans on adding more functionality that nixbuild.net can offer users, like automatically generated cost and performance reports for your Nix builds.&lt;/p&gt;
+&lt;h3 id=&quot;shell-improvements&quot;&gt;Shell Improvements&lt;/h3&gt;
+&lt;p&gt;Various minor improvements have been made to the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell/&quot;&gt;nixbuild.net shell&lt;/a&gt;. It is for example now much easier to get an overview on how large your next invoice will be, through the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell/#check-your-account-usage&quot;&gt;usage&lt;/a&gt; command.&lt;/p&gt;
+&lt;h2 id=&quot;the-future&quot;&gt;The Future&lt;/h2&gt;
+&lt;p&gt;After one year of real world usage, we are very happy with the progress of nixbuild.net. It has been well received in the Nix community, proved both reliable and scalable, and it has delivered on our initial vision of a simple service that can integrate into any setup using Nix.&lt;/p&gt;
+&lt;p&gt;We feel that we can go anywhere from here, but we also realize that we must be guided by our users’ needs. We have compiled a small and informal roadmap below. The items on this list are things that we, based on the feedback we’ve received throughout the year, think are natural next steps for nixbuild.net.&lt;/p&gt;
+&lt;p&gt;The roadmap has no dates and no prioritization, and should be seen as merely a hint about which direction the development is heading. Any question or comment concerning this list (or what’s missing from the list) is very welcome to &lt;a href=&quot;mailto:support@nixbuild.net&quot;&gt;support@nixbuild.net&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;support-aarch64-linux-builds&quot;&gt;Support aarch64-linux Builds&lt;/h3&gt;
+&lt;p&gt;Work is already underway to add support for &lt;code&gt;aarch64-linux&lt;/code&gt; builds to nixbuild.net, and so far it is looking good. With the current surge in performant ARM hardware (Apple M1, Ampere Altra etc), we think having &lt;code&gt;aarch64&lt;/code&gt; support in nixbuild.net is an obvious feature. It is also something that has been requested by our users.&lt;/p&gt;
+&lt;p&gt;We don’t know yet how the pricing of &lt;code&gt;aarch64&lt;/code&gt; builds will look, or what scalability promises we can make. If you are interested in evaluating &lt;code&gt;aarch64&lt;/code&gt; builds on nixbuild.net in an early access setting, just send us an email to &lt;a href=&quot;mailto:support@nixbuild.net&quot;&gt;support@nixbuild.net&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;provide-an-api-over-ssh-and-http&quot;&gt;Provide an API over SSH and HTTP&lt;/h3&gt;
+&lt;p&gt;Currently the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell/&quot;&gt;nixbuild.net shell&lt;/a&gt; is the administrative tool we offer end users. We will keep developing the shell and make it more intuitive for interactive use. But will also add an alternative, more scriptable variant of the shell.&lt;/p&gt;
+&lt;p&gt;This alternative version will provide roughly the same functionality as the original shell, only more adapted to scripting instead of interactive use. The reason for providing such an SSH-based API is to make it easy to integrate nixbuild.net more tightly into CI and similar scenarios.&lt;/p&gt;
+&lt;p&gt;There is in fact already a tiny version of this API deployed. You can run the following command to try it out:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ssh eu.nixbuild.net api show public-signing-key
+{&quot;keyName&quot;:&quot;nixbuild.net/bob-1&quot;,&quot;publicKey&quot;:&quot;PmUhzAc4Ug6sf1uG8aobbqMdalxW41SHWH7FE0ie1BY=&quot;}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The above API command is in use by the &lt;a href=&quot;https://github.com/nixbuild/nixbuild-action&quot;&gt;nixbuild-action&lt;/a&gt; for GitHub. So far, this is the only API command implemented, and it should be seen as a very first proof of concept. Nothing has been decided on how the API should look and work in the future.&lt;/p&gt;
+&lt;p&gt;The API will also be offered over HTTP in addition to SSH.&lt;/p&gt;
+&lt;h3 id=&quot;upload-builds-to-binary-caches&quot;&gt;Upload builds to binary caches&lt;/h3&gt;
+&lt;p&gt;Adding custom binary caches that nixbuild.net can fetch dependencies from is supported today, although such requests are still handled manually through support.&lt;/p&gt;
+&lt;p&gt;We also want to support uploading to custom binary caches. That way users could gain performance by not having to first download build results from nixbuild.net and then upload them somewhere else. This could be very useful for CI setups that can spend a considerable amount of their time just uploading closures.&lt;/p&gt;
+&lt;h3 id=&quot;provide-an-http-based-binary-cache&quot;&gt;Provide an HTTP-based binary cache&lt;/h3&gt;
+&lt;p&gt;Using nixbuild.net as a binary cache is handy since you don’t have to wait for any uploads after a build has finished. Instead, the closures will be immediately available in the binary cache, backed by nixbuild.net.&lt;/p&gt;
+&lt;p&gt;It is actually possible to use nixbuild.net as a binary cache today, by configuring an SSH-based cache (&lt;code&gt;ssh://eu.nixbuild.net&lt;/code&gt;). This works out of the box right now. You can even use &lt;code&gt;nix-copy-closure&lt;/code&gt; to upload paths to nixbuild.net. We just don’t yet give any guarantees on how long store paths are kept.&lt;/p&gt;
+&lt;p&gt;However, there are benfits to providing an HTTP-based cache. It would most probably have better performance (serving nar files over HTTP instead of using the &lt;code&gt;nix-store&lt;/code&gt; protocol over SSH), but more importantly it would let us use a CDN for serving cache contents. This could help mitigate the fact that nixbuild.net is only deployed in Europe so far.&lt;/p&gt;
+&lt;h3 id=&quot;support-builds-that-use-kvm&quot;&gt;Support builds that use KVM&lt;/h3&gt;
+&lt;p&gt;The primary motivation for this is to be able to run NixOS tests (with good performance) on nixbuild.net.&lt;/p&gt;
+&lt;h2 id=&quot;thank-you&quot;&gt;Thank You!&lt;/h2&gt;
+&lt;p&gt;Finally we’d like to thank all our users. We look forward to an exciting new year with lots of Nix builds!&lt;/p&gt;</description>
+	<pubDate>Tue, 29 Dec 2020 00:00:00 +0000</pubDate>
+	<author>support@nixbuild.net (nixbuild.net)</author>
+</item>
+<item>
 	<title>Cachix: Postmortem of outage on 20th December</title>
 	<guid isPermaLink="true">https://blog.cachix.org/posts/2020-12-23-post-mortem-recent-downtime/</guid>
 	<link>https://blog.cachix.org/posts/2020-12-23-post-mortem-recent-downtime/</link>
@@ -1196,24 +1269,6 @@ feasible to integrate content-addressing in Nix has been a long journey.&lt;/p&g
 &lt;p&gt;In a future post, I’ll explain why it was so hard, and how we finally
 managed to propose a viable design for a content-addressed Nix.&lt;/p&gt;</description>
 	<pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
-</item>
-<item>
-	<title>nixbuild.net: nixbuild.net is Generally Available</title>
-	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html</guid>
-	<link>https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html</link>
-	<description>&lt;p&gt;Today, &lt;a href=&quot;https://nixbuild.net&quot;&gt;nixbuild.net&lt;/a&gt; is exiting private beta and made generally available! Anyone can now &lt;a href=&quot;https://nixbuild.net#register&quot;&gt;sign up&lt;/a&gt; for a nixbuild.net account and immediately start building using the free CPU hours included with every account.&lt;/p&gt;
-&lt;p&gt;After the free CPU hours have been consumed, the pricing is simple: 0.12 EUR (excl. VAT) per CPU hour consumed, billed monthly.&lt;/p&gt;
-
-&lt;p&gt;As part of this GA announcement, a number of marketing and documentation improvements have been published:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;A much improved and redesigned landing page at &lt;a href=&quot;https://nixbuild.net&quot;&gt;https://nixbuild.net&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;An extensive &lt;a href=&quot;https://nixbuild.net#faq&quot;&gt;FAQ&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;A reworked &lt;a href=&quot;https://docs.nixbuild.net/getting-started&quot;&gt;Getting Started&lt;/a&gt; guide&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Proper documentation of the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell&quot;&gt;nixbuild.net shell&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;We’re really happy for nixbuild.net to enter this new phase — making simple, performant and scalable remote builds available to every Nix user! We’re excited to see how the service is used, and we have lots of plans for the future of nixbuild.net.&lt;/strong&gt;&lt;/p&gt;</description>
-	<pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
-	<author>support@nixbuild.net (nixbuild.net)</author>
 </item>
 
 </channel>
