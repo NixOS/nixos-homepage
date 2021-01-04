@@ -85,9 +85,9 @@
 	<title>Cachix: Postmortem of outage on 20th December</title>
 	<guid isPermaLink="true">https://blog.cachix.org/posts/2020-12-23-post-mortem-recent-downtime/</guid>
 	<link>https://blog.cachix.org/posts/2020-12-23-post-mortem-recent-downtime/</link>
-	<description>Cachix has experienced a six hour downtime, second significant outage since the service started operating on 1st of June 2018.
-Here are the details to what exactly happened and what has been done to prevent similar events from happening.
-Timeline (UTC)  02:55:07 - Backend starts to emit errors for all HTTP requests 02:56:00 - Pagerduty tries to notify me of outage via email, phone and mobile app 09:01:00 - I wake up and see the notifications 09:02:02 - Backend is restarted and recovers  Root cause analysis All ~24k HTTP requests that have reached the backend during the outage have failed with the following exception:</description>
+	<description>On 20 December, Cachix experienced a six-hour downtime, the second significant outage since the service started operating on 1 June 2018.
+Here are the details of what exactly happened and what has been done to prevent similar events from happening.
+Timeline (UTC)  02:55:07 - Backend starts to emit errors for all HTTP requests 02:56:00 - Pagerduty tries to notify me of outage via email, phone and mobile app 09:01:00 - I wake up and see the notifications 09:02:02 - Backend is restarted and recovers  Root cause analysis All ~24k HTTP requests that reached the backend during the outage failed with the following exception:</description>
 	<pubDate>Thu, 24 Dec 2020 11:30:00 +0000</pubDate>
 	<author>support@cachix.org (Domen Kožar)</author>
 </item>
