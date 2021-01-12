@@ -64,6 +64,15 @@
 
       serve = pkgs.writeShellScriptBin "serve" ''python ${toString ./.}/scripts/run.py'';
 
+      update_blog =
+        let
+          pythonEnv = pkgs.python3.buildEnv.override {
+            extraLibs = with pkgs.python3Packages; [ aiohttp click feedparser ];
+          };
+        in
+          #pkgs.writeShellScriptBin "update-blog" ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/update_blog.py" "$@"'';
+          pkgs.writeShellScriptBin "update-blog" ''exec "${pythonEnv}/bin/python" "$@"'';
+
     in rec {
       defaultPackage."${system}" = packages."${system}".homepage;
 
@@ -82,6 +91,7 @@
           buildInputs = with pkgs; [
               asciinema-scenario
               gnused
+              html-tidy
               imagemagick
               jq
               libxml2
@@ -97,6 +107,7 @@
               perlPackages.XMLSimple
               python3Packages.livereload
               serve
+              update_blog
               xhtml1
               xidel
             ];

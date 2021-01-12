@@ -7,13 +7,14 @@ default: all
 
 HTML = \
   404.html \
+  blog/index.html \
+  blog/community-announcements.html \
   commercial-support.html \
   community.html \
   demos/index.html \
   donate.html \
   download.html \
   explore.html \
-  governance.html \
   guides/deploying-nixos-using-terraform.html \
   guides/ad-hoc-developer-environments.html \
   guides/building-and-running-docker-images.html \
@@ -153,9 +154,10 @@ favicon.ico: favicon.png
 	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
 	  --define latestNixOSSeries=$(NIXOS_STABLE_SERIES) \
 	  --pre_process=common.tt \
-	  $< > $@.tmp
-	xmllint --nonet --noout $@.tmp
-	mv $@.tmp $@
+	  $< > $@
+	tidy -ashtml -m $@
+	#xmllint --nonet --html --noout $@.tmp
+	#mv $@.tmp $@
 
 %: %.in common.tt $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 	echo $$PATH
