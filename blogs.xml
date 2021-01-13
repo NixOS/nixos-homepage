@@ -9,6 +9,153 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>nixbuild.net: Finding Non-determinism with nixbuild.net</title>
+	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2021-01-13-finding-non-determinism-with-nixbuild-net.html</guid>
+	<link>https://blog.nixbuild.net/posts/2021-01-13-finding-non-determinism-with-nixbuild-net.html</link>
+	<description>&lt;p&gt;During the last decade, many initiatives focussing on making builds reproducible have gained momentum. &lt;a href=&quot;https://reproducible-builds.org/&quot;&gt;reproducible-builds.org&lt;/a&gt; is a great resource for anyone interested in how the work progresses in multiple software communities. &lt;a href=&quot;https://r13y.com/&quot;&gt;r13y.com&lt;/a&gt; tracks the current reproducibility metrics in &lt;a href=&quot;https://nixos.org/&quot;&gt;NixOS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Nix is particularly suited for working on reproducibility, since it by design isolates builds and comes with &lt;a href=&quot;https://nixos.org/manual/nix/stable/#chap-diff-hook&quot;&gt;tools&lt;/a&gt; for finding non-determinism. The Nix community also works on related projects, like &lt;a href=&quot;https://www.tweag.io/blog/2020-12-16-trustix-announcement/&quot;&gt;Trustix&lt;/a&gt; and the &lt;a href=&quot;https://www.tweag.io/blog/2020-09-10-nix-cas/&quot;&gt;content-addressed store&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This blog post summarises how &lt;a href=&quot;https://nixbuild.net/&quot;&gt;nixbuild.net&lt;/a&gt; can be useful for finding non-deterministic builds, and announces a new feature related to reproducibility!&lt;/p&gt;
+
+&lt;h2 id=&quot;repeated-builds&quot;&gt;Repeated Builds&lt;/h2&gt;
+&lt;p&gt;The way to find non-reproducible builds is to run the same build multiple times and check for any difference in results, when compared bit-for-bit. Since Nix guarantees that all inputs will be identical between the runs, just finding differing output results is enough to conclude that a build is non-deterministic. Of course, we can never &lt;em&gt;prove&lt;/em&gt; that a build is &lt;em&gt;deterministic&lt;/em&gt; this way, but if we run the build many times, we gain a certain confidence in it.&lt;/p&gt;
+&lt;p&gt;To run a Nix build multiple times, simply add the &lt;a href=&quot;https://nixos.org/manual/nix/stable/#conf-repeat&quot;&gt;–repeat&lt;/a&gt; option to your build command. It will run your build the number of extra times you specify.&lt;/p&gt;
+&lt;p&gt;Suppose we have the following Nix expression in &lt;code&gt;deterministic.nix&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let
+  inherit (import &amp;lt;nixpkgs&amp;gt; {}) runCommand;
+in {
+  stable = runCommand &quot;stable&quot; {} ''
+    touch $out
+  '';
+
+  unstable = runCommand &quot;unstable&quot; {} ''
+    echo $RANDOM &amp;gt; $out
+  '';
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can run repeated builds like this (note that the &lt;code&gt;--builders &quot;&quot;&lt;/code&gt; option is there to force a local build, to not use nixbuild.net):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build deterministic.nix --builders &quot;&quot; -A stable --repeat 1
+these derivations will be built:
+  /nix/store/0fj164aqyhsciy7x97s1baswygxn8lzf-stable.drv
+building '/nix/store/0fj164aqyhsciy7x97s1baswygxn8lzf-stable.drv' (round 1/2)...
+building '/nix/store/0fj164aqyhsciy7x97s1baswygxn8lzf-stable.drv' (round 2/2)...
+/nix/store/6502c5490rap0c8dhvfwm5rhi22i9clz-stable
+
+$ nix-build deterministic.nix --builders &quot;&quot; -A unstable --repeat 1
+these derivations will be built:
+  /nix/store/psmn1s3bb97989w5a5b1gmjmprqcmf0k-unstable.drv
+building '/nix/store/psmn1s3bb97989w5a5b1gmjmprqcmf0k-unstable.drv' (round 1/2)...
+building '/nix/store/psmn1s3bb97989w5a5b1gmjmprqcmf0k-unstable.drv' (round 2/2)...
+output '/nix/store/g7a5sf7iwdxs7q12ksrzlvjvz69yfq3l-unstable' of '/nix/store/psmn1s3bb97989w5a5b1gmjmprqcmf0k-unstable.drv' differs from previous round
+error: build of '/nix/store/psmn1s3bb97989w5a5b1gmjmprqcmf0k-unstable.drv' failed&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Running repeated builds on nixbuild.net works exactly the same way:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build deterministic.nix -A stable --repeat 1
+these derivations will be built:
+  /nix/store/wnd5y30jp3xwpw1bhs4bmqsg5q60vc8i-stable.drv
+building '/nix/store/wnd5y30jp3xwpw1bhs4bmqsg5q60vc8i-stable.drv' (round 1/2) on 'ssh://eu.nixbuild.net'...
+copying 1 paths...
+copying path '/nix/store/z3wlpwgz66ningdbggakqpvl0jp8bp36-stable' from 'ssh://eu.nixbuild.net'...
+/nix/store/z3wlpwgz66ningdbggakqpvl0jp8bp36-stable
+
+$ nix-build deterministic.nix -A unstable --repeat 1
+these derivations will be built:
+  /nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv
+building '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' (round 1/2) on 'ssh://eu.nixbuild.net'...
+[nixbuild.net] output '/nix/store/srch6l8pyl7z93c7gp1xzf6mq6rwqbaq-unstable' of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' differs from previous round
+error: build of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' on 'ssh://eu.nixbuild.net' failed: build was non-deterministic
+builder for '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' failed with exit code 1
+error: build of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' failed&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see, the log output differs slightly between the local and the remote builds. This is because when Nix submits a remote build, it will not do the determinism check itself, instead it will leave it up to the builder (nixbuild.net in our case). This is actually a good thing, because it allows nixbuild.net to perform some optimizations for repeated builds. The following sections will enumerate those optimizations.&lt;/p&gt;
+&lt;h2 id=&quot;finding-non-determinism-in-past-builds&quot;&gt;Finding Non-determinism in Past Builds&lt;/h2&gt;
+&lt;p&gt;If you locally try to rebuild a something that has failed due to non-determinism, Nix will build it again at least two times (due to &lt;code&gt;--repeat&lt;/code&gt;) and fail it due to non-determinism again, since it keeps no record of the previous build failure (other than the build log).&lt;/p&gt;
+&lt;p&gt;However, nixbuild.net keeps a record of every build performed, also for repeated builds. So when you try to build the same derivation again, nixbuild.net is smart enough to look at its past build and figure out that the derivation is non-deterministic without having to rebuild it. We can demonstrate this by re-running the last build from the example above:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build deterministic.nix -A unstable --repeat 1
+these derivations will be built:
+  /nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv
+building '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' (round 1/2) on 'ssh://eu.nixbuild.net'...
+[nixbuild.net] output '/nix/store/srch6l8pyl7z93c7gp1xzf6mq6rwqbaq-unstable' of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' differs from previous round
+error: build of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' on 'ssh://eu.nixbuild.net' failed: a previous build of the derivation was non-deterministic
+builder for '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' failed with exit code 1
+error: build of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' failed&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see, the exact same derivation fails again, but now the build status message says: &lt;code&gt;a previous build of the derivation was non-deterministic&lt;/code&gt;. This means nixbuild.net didn’t have to run the build, it just checked its past outputs for the derivation and noticed they differed.&lt;/p&gt;
+&lt;p&gt;When nixbuild.net looks at past builds it considers all outputs that have been signed by a key that the account trusts. That means that it can even compare outputs that have been fetched by substitution.&lt;/p&gt;
+&lt;h2 id=&quot;scaling-out-repeated-builds&quot;&gt;Scaling Out Repeated Builds&lt;/h2&gt;
+&lt;p&gt;When you use &lt;code&gt;--repeat&lt;/code&gt;, nixbuild.net will create multiple copies of the build and schedule all of them like any other build would have been scheduled. This means that every repeated build will run in parallel, saving time for the user. As soon as nixbuild.net has found proof of non-determinism, any repeated build still running will be cancelled.&lt;/p&gt;
+&lt;h2 id=&quot;provoking-non-determinism-through-filesystem-randomness&quot;&gt;Provoking Non-determinism through Filesystem Randomness&lt;/h2&gt;
+&lt;p&gt;As promised in the beginning of this blog post, we have new a feature to announce! nixbuild.net is now able to inject randomness into the filesystem that the builds see when they run. This can be used to provoke builds to uncover non-deterministic behavior.&lt;/p&gt;
+&lt;p&gt;The idea is not new, it is in fact the exact same concept as have been implemented in the &lt;a href=&quot;https://salsa.debian.org/reproducible-builds/disorderfs&quot;&gt;disorderfs&lt;/a&gt; project by &lt;a href=&quot;https://reproducible-builds.org/&quot;&gt;reproducible-builds.org&lt;/a&gt;. However, we’re happy to make it easily accessible to nixbuild.net users. The feature is disabled by default, but can be enabled through a new &lt;a href=&quot;https://docs.nixbuild.net/settings/#inject-fs-randomness&quot;&gt;user setting&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For the moment, the implementation will return directory entries in a random order when enabled. In the future we might inject more metadata randomness.&lt;/p&gt;
+&lt;p&gt;To demonstrate this feature, let’s use this build:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let
+  inherit (import &amp;lt;nixpkgs&amp;gt; {}) runCommand;
+in rec {
+  files = runCommand &quot;files&quot; {} ''
+    mkdir $out
+    touch $out/{1..10}
+  '';
+
+  list = runCommand &quot;list&quot; {} ''
+    ls -f ${files} &amp;gt; $out
+  '';
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;files&lt;/code&gt; build just creates ten empty files as its output, and the &lt;code&gt;list&lt;/code&gt; build lists those file with &lt;code&gt;ls&lt;/code&gt;. The &lt;code&gt;-f&lt;/code&gt; option of &lt;code&gt;ls&lt;/code&gt; disables sorting entirely, so the file names will be printed in the order the filesystem returns them. This means that the build output will depend on how the underlying filesystem is implemented, which could be considered a non-deterministic behavior.&lt;/p&gt;
+&lt;p&gt;First, we build it locally with &lt;code&gt;--repeat&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build non-deterministic-fs.nix --builders &quot;&quot; -A list --repeat 1
+these derivations will be built:
+  /nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv
+building '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' (round 1/2)...
+building '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' (round 2/2)...
+/nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see, the build succeeded. Then we delete the result from our Nix store so we can run the build again:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rm result
+nix-store --delete /nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We enable the &lt;code&gt;inject-fs-randomness&lt;/code&gt; feature through the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell/&quot;&gt;nixbuild.net shell&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nixbuild.net&amp;gt; set inject-fs-randomness true&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we run the build (with &lt;code&gt;--repeat&lt;/code&gt;) on nixbuild.net:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build non-deterministic-fs.nix -A list --repeat 1
+these derivations will be built:
+  /nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv
+building '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' (round 1/2) on 'ssh://eu.nixbuild.net'...
+copying 1 paths...
+copying path '/nix/store/vl13q40hqp4q8x6xjvx0by06s1v9g3jy-files' to 'ssh://eu.nixbuild.net'...
+[nixbuild.net] output '/nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list' of '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' differs from previous round
+error: build of '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' on 'ssh://eu.nixbuild.net' failed: build was non-deterministic
+builder for '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' failed with exit code 1
+error: build of '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' failed&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, nixbuild.net found the non-determinism! We can double check that the directory entries are in a random order by running without &lt;code&gt;--repeat&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build non-deterministic-fs.nix -A list
+these derivations will be built:
+  /nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv
+building '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' on 'ssh://eu.nixbuild.net'...
+copying 1 paths...
+copying path '/nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list' from 'ssh://eu.nixbuild.net'...
+/nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list
+
+$ cat /nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list
+6
+1
+2
+5
+10
+7
+8
+..
+9
+4
+3
+.&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;future-work&quot;&gt;Future Work&lt;/h2&gt;
+&lt;p&gt;There are lots of possibilities to improve the utility of nixbuild.net when it comes to reproducible builds. Your feedback and ideas are very welcome to &lt;a href=&quot;mailto:support@nixbuild.net&quot;&gt;support@nixbuild.net&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here are some of the things that could be done:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Make it possible to trigger repeated builds for any previous build, without submitting a new build with Nix. For example, there could be a command in the nixbuild.net shell allowing a user to trigger a repeated build and report back any non-determinism issues.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Implement functionality similar to &lt;a href=&quot;https://diffoscope.org/&quot;&gt;diffoscope&lt;/a&gt; to be able to find out exactly what differs between builds. This could be available as a shell command or through an API.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Make it possible to download specific build outputs. The way Nix downloads outputs (and stores them locally) doesn’t allow for having multiple variants of the same output, but nixbuild.net could provide this functionality through the shell or an API.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Inject more randomness inside the sandbox. Since we have complete control over the sandbox environment we can introduce more differences between repeated builds to provoke non-determinism. For example, we can schedule builds on different hardware or use different kernels between repeated builds.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Add support for listing known non-deterministic derivations.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+	<pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
+	<author>support@nixbuild.net (nixbuild.net)</author>
+</item>
+<item>
 	<title>nixbuild.net: The First Year</title>
 	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-12-29-the-first-year.html</guid>
 	<link>https://blog.nixbuild.net/posts/2020-12-29-the-first-year.html</link>
@@ -1177,98 +1324,6 @@ that can replace the implicit dependencies of your Bazel build and use
 &lt;a href=&quot;https://github.com/tweag/rules_nixpkgs&quot;&gt;rules_nixpkgs&lt;/a&gt; to declare them as explicit dependencies. That will yield a
 fast, correct, hermetic build.&lt;/p&gt;</description>
 	<pubDate>Wed, 16 Sep 2020 00:00:00 +0000</pubDate>
-</item>
-<item>
-	<title>Tweag I/O: Towards a content-addressed model for Nix</title>
-	<guid isPermaLink="true">https://tweag.io/blog/2020-09-10-nix-cas/</guid>
-	<link>https://tweag.io/blog/2020-09-10-nix-cas/</link>
-	<description>&lt;p&gt;This is my first post about content-addressability in Nix — a long-awaited feature that is hopefully coming soon!
-In this post I will show you how this feature will improve the Nix
-infrastructure. I’ll come back in another post to explain the technical challenges of
-adding content-addressability to Nix.&lt;/p&gt;
-&lt;p&gt;Nix has a wonderful model for handling packages.
-Because each derivation is stored under (aka &lt;em&gt;addressed by&lt;/em&gt;) a unique
-name, multiple versions of the same library can coexist on the same
-system without issues: each version of the library has a distinct
-name, as far as Nix is concerned.&lt;/p&gt;
-&lt;p&gt;What’s more, if &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; is upgraded in &lt;a href=&quot;https://github.com/NixOS/nixpkgs/&quot;&gt;Nixpkgs&lt;/a&gt;, Nix knows that all the
-packages that depend on &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; (i.e., almost everything) must be
-rebuilt, if only so that they point at the name of the new &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt;
-version. This way, a Nix installation will never feature a package
-built for one version of &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt;, but dynamically linked against
-another: as a user, it means that you will never have an &lt;em&gt;undefined
-symbol&lt;/em&gt; error. Hurray!&lt;/p&gt;
-&lt;h2&gt;The input-addressed store&lt;/h2&gt;
-&lt;p&gt;How does Nix achieve this feat? The idea is that the name of a package
-is derived from all of its inputs (that is, the complete list of
-dependencies, as well as the package description). So if you change
-the git tag from which &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; is fetched, the name changes, if the
-name of &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; changes, then the name of any package which has &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; in
-its dependencies changes.&lt;/p&gt;
-&lt;p&gt;However this can be very pessimistic: even changes that aren’t
-semantically meaningful can imply mass rebuilding and downloading. As
-a slightly extreme example, &lt;a href=&quot;https://github.com/NixOS/nixpkgs/pull/83446&quot;&gt;this merge-request on
-Nixpkgs&lt;/a&gt; makes a tiny change to the way &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; is built. It doesn’t actually
-change &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt;, yet requires rebuilding an insane amount of
-packages. Because, as far as Nix is concerned, all these packages have
-different names, hence are different packages. In reality, though,
-they weren’t.&lt;/p&gt;
-&lt;p&gt;Nevertheless, the cost of the rebuild has to be born by the Nix
-infrastructure: &lt;a href=&quot;https://hydra.nixos.org&quot;&gt;Hydra&lt;/a&gt; builds all packages to populate the cache,
-and all the newly built packages must be stored. It costs both time,
-and money (in cpu power, and storage space).&lt;/p&gt;
-&lt;h2&gt;Unnecessary rebuilds?&lt;/h2&gt;
-&lt;p&gt;Most distributions, by default, don’t rebuild packages when their dependencies change, and have a (more-or-less automated) process to detect changes that require rebuilding reverse dependencies.
-For example, Debian &lt;a href=&quot;https://www.debian.org/doc/debian-policy/policy.pdf#81&quot;&gt;tries to detect ABI changes automatically&lt;/a&gt; and Fedora has a &lt;a href=&quot;https://docs.fedoraproject.org/en-US/fesco/Updates_Policy/&quot;&gt;more manual process&lt;/a&gt;.
-But Nix doesn’t.&lt;/p&gt;
-&lt;p&gt;The issue is that the notion of a “breaking change” is a very fuzzy one.
-Should we follow Debian and consider that only ABI changes are breaking?
-This criterion only applies for shared libraries, and as the Debian policy acknowledges, only for “well-behaved” programs.
-So if we follow this criterion, there’s still need for manual curation, which is &lt;strong&gt;precisely&lt;/strong&gt; what Nix tries to avoid.&lt;/p&gt;
-&lt;h2&gt;The content-addressed model&lt;/h2&gt;
-&lt;p&gt;Quite happily, there is a criterion to avoid many useless rebuilds without sacrificing correctness: detecting when changes in a package (or one of its dependencies) yields the exact same output.
-That might seem like an edge case, but the &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; example above (and many others) shows that there’s a practical application to it.
-As another example, &lt;code class=&quot;language-text&quot;&gt;go&lt;/code&gt; depends on &lt;code class=&quot;language-text&quot;&gt;perl&lt;/code&gt; for its tests, so an upgrade of &lt;code class=&quot;language-text&quot;&gt;perl&lt;/code&gt; requires rebuilding all the Go packages in Nixpkgs, although it most likely doesn’t change the output of the &lt;code class=&quot;language-text&quot;&gt;go&lt;/code&gt; derivation.&lt;/p&gt;
-&lt;p&gt;But, for Nix to recognise that a package is not a new package, the
-new, unchanged, &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; or &lt;code class=&quot;language-text&quot;&gt;go&lt;/code&gt; packages must have &lt;em&gt;the same name&lt;/em&gt;
-as the old version. Therefore, the name of a package must not be
-derived from its inputs which have changed, but, instead, it should be
-derived from the content of the compiled package. This is called
-content addressing.&lt;/p&gt;
-&lt;p&gt;Content addressing is how you can be sure that when you and a
-colleague at the other side of the world type &lt;code class=&quot;language-text&quot;&gt;git checkout 7cc16bb8cd38ff5806e40b32978ae64d54023ce0&lt;/code&gt; you actually have the exact
-same content in your tree. Git commits are content addressed, therefore the name
-&lt;code class=&quot;language-text&quot;&gt;7cc16bb8cd38ff5806e40b32978ae64d54023ce0&lt;/code&gt; refers to that exact
-tree.&lt;/p&gt;
-&lt;p&gt;Yet another example of content-addressed storage is &lt;a href=&quot;https://ipfs.io/&quot;&gt;IPFS&lt;/a&gt;. In IPFS storage
-files can be stored in any number of computers, and even moved from
-computer to computer. The content-derived name is used as a way to give
-an intrinsic name to a file, regardless of where it is stored.&lt;/p&gt;
-&lt;p&gt;In fact, even the particular use case that we are discussing here -
-avoiding recompilation when a rebuilt dependency hasn’t changed -
-can be found in various build systems such as
-&lt;a href=&quot;https://bazel.build/&quot;&gt;Bazel&lt;/a&gt;. In build systems, such recompilation
-avoidance is sometimes known as the &lt;em&gt;early cutoff optimization&lt;/em&gt; −
-see the &lt;a href=&quot;https://www.microsoft.com/en-us/research/uploads/prod/2018/03/build-systems.pdf&quot;&gt;build systems a la carte paper&lt;/a&gt;
-for example).&lt;/p&gt;
-&lt;p&gt;So all we need to do is to move the Nix store from an input-addressed
-model to a content-addressed model, as used by many tools
-already, and we will be able to save a lot of storage space and CPU
-usage, by rebuilding many fewer packages. Nixpkgs contributors will
-see their CI time improved. It could also allow &lt;a href=&quot;https://github.com/NixOS/nix/issues/859&quot;&gt;serving a binary cache
-over IPFS&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Well, like many things with computers,
-this is actually way harder than it sounds (which explains why this
-hasn’t already been done despite being discussed nearly 15 years ago in the
-&lt;a href=&quot;https://github.com/edolstra/edolstra.github.io/raw/49a78323f6b319da6e078b4f5f6b3112a30e8db9/pubs/phd-thesis.pdf&quot;&gt;original paper&lt;/a&gt;), but we now believe that there’s &lt;a href=&quot;https://github.com/NixOS/rfcs/pull/62&quot;&gt;a way forward&lt;/a&gt;… more on that in a later post.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;A content-addressed store for Nix would help reduce the insane load
-that &lt;a href=&quot;https://hydra.nixos.org&quot;&gt;Hydra&lt;/a&gt; has to sustain. While content-addressing is a common technique both in distributed systems
-and build systems (Nix is both!), getting to the point where it was
-feasible to integrate content-addressing in Nix has been a long journey.&lt;/p&gt;
-&lt;p&gt;In a future post, I’ll explain why it was so hard, and how we finally
-managed to propose a viable design for a content-addressed Nix.&lt;/p&gt;</description>
-	<pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
 </item>
 
 </channel>
