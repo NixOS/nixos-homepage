@@ -22,6 +22,7 @@ def main(input):
     random.shuffle(providers)
 
     for provider in providers:
+        provider["name"] = provider["name"][:50]
         provider["description"] = provider["description"][:400]
         click.echo(TEMPLATE.format(**provider), nl=False)
 
