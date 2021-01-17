@@ -7,6 +7,7 @@ TEMPLATE = """
       <a href="{url}">
         <img alt="{name}" src="{url}" />
         <h2>{name}</h2>
+        {locations}
         {description}
       </a>
     </li>
@@ -23,7 +24,21 @@ def main(input):
 
     for provider in providers:
         provider["name"] = provider["name"][:50]
+
         provider["description"] = provider["description"][:400]
+
+        if len(provider["locations"]) > 0:
+            provider["locations"] = "".join([
+              "<ul>",
+              "".join([
+                  f"<li>{location}</li>"
+                  for location in provider["locations"]
+              ]),
+              "</ul>",
+            ])
+        else:
+            provider["locations"] = ""
+
         click.echo(TEMPLATE.format(**provider), nl=False)
 
 
