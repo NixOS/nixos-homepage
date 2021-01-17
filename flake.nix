@@ -62,16 +62,22 @@
         (builtins.toJSON (
           import (released-nixpkgs-stable + "/nixos/modules/virtualisation/ec2-amis.nix")));
 
-      serve = pkgs.writeShellScriptBin "serve" ''python ${toString ./.}/scripts/run.py'';
-
-      update_blog_categories =
+      mkPyScript = dependencies: name:
         let
           pythonEnv = pkgs.python3.buildEnv.override {
-            extraLibs = with pkgs.python3Packages; [ aiohttp click feedparser ];
+            extraLibs = dependencies;
           };
         in
-          #pkgs.writeShellScriptBin "update-blog-categories" ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/update_blog_categories.py" "$@"'';
-          pkgs.writeShellScriptBin "update-blog-categories" ''exec "${pythonEnv}/bin/python" "$@"'';
+          pkgs.writeShellScriptBin name ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/${name}.py" "$@"'';
+
+      serve =
+        mkPyScript [] "serve";
+
+      shuffle =
+        mkPyScript (with pkgs.python3Packages; [ click toml ]) "shuffle";
+
+      update_blog_categories =
+        mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser ]) "update-blog-categories";
 
     in rec {
       defaultPackage."${system}" = packages."${system}".homepage;
@@ -106,6 +112,7 @@
               perlPackages.XMLSimple
               python3Packages.livereload
               serve
+              shuffle
               update_blog_categories
               xhtml1
               xidel

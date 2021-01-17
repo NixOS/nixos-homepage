@@ -581,3 +581,26 @@
     }
   });
 }
+
+.community-commercial-support {
+  #container();
+
+  & > ul {
+    #columns(3);
+
+    list-style: none;
+    margin: 0;
+
+    & > li {
+      margin-bottom: 1*@gutter;
+
+      a {
+        border: 1px solid #theme.color[blue];
+        border-radius: 1*@gutter;
+        display: block;
+        padding: 1*@gutter;
+        height: 100%;
+      }
+    }
+  }
+}

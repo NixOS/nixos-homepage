@@ -1,6 +1,18 @@
 [[redirects]]
+  from = "/community.html"
+  to = "/community/index.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/commercial-support.html"
+  to = "/community/commercial-support.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/governance.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
@@ -180,7 +192,7 @@
 
 [[redirects]]
   from = "/nixos/foundation.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
@@ -192,19 +204,19 @@
 
 [[redirects]]
   from = "/nixos/security.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
 [[redirects]]
   from = "/nixos/support.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
 [[redirects]]
   from = "/nixos/community.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 

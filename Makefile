@@ -10,8 +10,8 @@ HTML = \
   blog/index.html \
   blog/archive.html \
   blog/categories.html \
-  commercial-support.html \
-  community.html \
+  community/index.html \
+  community/commercial-support.html \
   demos/index.html \
   donate.html \
   download.html \
@@ -185,6 +185,10 @@ blog/rss.xml: blog/index.xml blog/rss.xsl
 	xsltproc blog/rss.xsl blog/index.xml > $@.tmp
 	mv $@.tmp $@
 
+community/commercial-support.html: community/commercial-support.html.in
+
+community/commercial-support.html.in: community/commercial-support.toml
+	shuffle --input community/commercial-support.toml > $@
 
 index.html: $(DEMOS) blog/rss.xml blog/index.html
 

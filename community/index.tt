@@ -12,11 +12,6 @@
     from all around the world.</p>
 </section>
 
-<section class="community-banner clickable-whole">
-  <p>Check out what the community has made recently in the <a href="https://weekly.nixos.org/">NixOS Weekly</a>
-    newsletter.</p>
-</section>
-
 <section class="community-communication">
   <h1>Where to talk?</h1>
   <div>
@@ -59,6 +54,12 @@
       </ul>
     </div>
   </div>
+</section>
+
+<section class="community-banner clickable-whole">
+  <p>If you are looking for profesional help
+     <a href="[% root %]community/commercial-support.html">check out companies</a>
+     that offer Nix related services.</p>
 </section>
 
 <section class="community-nixcon">
