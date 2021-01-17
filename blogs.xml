@@ -9,12 +9,232 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>nixbuild.net: Finding Non-determinism with nixbuild.net</title>
+	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2021-01-13-finding-non-determinism-with-nixbuild-net.html</guid>
+	<link>https://blog.nixbuild.net/posts/2021-01-13-finding-non-determinism-with-nixbuild-net.html</link>
+	<description>&lt;p&gt;During the last decade, many initiatives focussing on making builds reproducible have gained momentum. &lt;a href=&quot;https://reproducible-builds.org/&quot;&gt;reproducible-builds.org&lt;/a&gt; is a great resource for anyone interested in how the work progresses in multiple software communities. &lt;a href=&quot;https://r13y.com/&quot;&gt;r13y.com&lt;/a&gt; tracks the current reproducibility metrics in &lt;a href=&quot;https://nixos.org/&quot;&gt;NixOS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Nix is particularly suited for working on reproducibility, since it by design isolates builds and comes with &lt;a href=&quot;https://nixos.org/manual/nix/stable/#chap-diff-hook&quot;&gt;tools&lt;/a&gt; for finding non-determinism. The Nix community also works on related projects, like &lt;a href=&quot;https://www.tweag.io/blog/2020-12-16-trustix-announcement/&quot;&gt;Trustix&lt;/a&gt; and the &lt;a href=&quot;https://www.tweag.io/blog/2020-09-10-nix-cas/&quot;&gt;content-addressed store&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This blog post summarises how &lt;a href=&quot;https://nixbuild.net/&quot;&gt;nixbuild.net&lt;/a&gt; can be useful for finding non-deterministic builds, and announces a new feature related to reproducibility!&lt;/p&gt;
+
+&lt;h2 id=&quot;repeated-builds&quot;&gt;Repeated Builds&lt;/h2&gt;
+&lt;p&gt;The way to find non-reproducible builds is to run the same build multiple times and check for any difference in results, when compared bit-for-bit. Since Nix guarantees that all inputs will be identical between the runs, just finding differing output results is enough to conclude that a build is non-deterministic. Of course, we can never &lt;em&gt;prove&lt;/em&gt; that a build is &lt;em&gt;deterministic&lt;/em&gt; this way, but if we run the build many times, we gain a certain confidence in it.&lt;/p&gt;
+&lt;p&gt;To run a Nix build multiple times, simply add the &lt;a href=&quot;https://nixos.org/manual/nix/stable/#conf-repeat&quot;&gt;–repeat&lt;/a&gt; option to your build command. It will run your build the number of extra times you specify.&lt;/p&gt;
+&lt;p&gt;Suppose we have the following Nix expression in &lt;code&gt;deterministic.nix&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let
+  inherit (import &amp;lt;nixpkgs&amp;gt; {}) runCommand;
+in {
+  stable = runCommand &quot;stable&quot; {} ''
+    touch $out
+  '';
+
+  unstable = runCommand &quot;unstable&quot; {} ''
+    echo $RANDOM &amp;gt; $out
+  '';
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can run repeated builds like this (note that the &lt;code&gt;--builders &quot;&quot;&lt;/code&gt; option is there to force a local build, to not use nixbuild.net):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build deterministic.nix --builders &quot;&quot; -A stable --repeat 1
+these derivations will be built:
+  /nix/store/0fj164aqyhsciy7x97s1baswygxn8lzf-stable.drv
+building '/nix/store/0fj164aqyhsciy7x97s1baswygxn8lzf-stable.drv' (round 1/2)...
+building '/nix/store/0fj164aqyhsciy7x97s1baswygxn8lzf-stable.drv' (round 2/2)...
+/nix/store/6502c5490rap0c8dhvfwm5rhi22i9clz-stable
+
+$ nix-build deterministic.nix --builders &quot;&quot; -A unstable --repeat 1
+these derivations will be built:
+  /nix/store/psmn1s3bb97989w5a5b1gmjmprqcmf0k-unstable.drv
+building '/nix/store/psmn1s3bb97989w5a5b1gmjmprqcmf0k-unstable.drv' (round 1/2)...
+building '/nix/store/psmn1s3bb97989w5a5b1gmjmprqcmf0k-unstable.drv' (round 2/2)...
+output '/nix/store/g7a5sf7iwdxs7q12ksrzlvjvz69yfq3l-unstable' of '/nix/store/psmn1s3bb97989w5a5b1gmjmprqcmf0k-unstable.drv' differs from previous round
+error: build of '/nix/store/psmn1s3bb97989w5a5b1gmjmprqcmf0k-unstable.drv' failed&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Running repeated builds on nixbuild.net works exactly the same way:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build deterministic.nix -A stable --repeat 1
+these derivations will be built:
+  /nix/store/wnd5y30jp3xwpw1bhs4bmqsg5q60vc8i-stable.drv
+building '/nix/store/wnd5y30jp3xwpw1bhs4bmqsg5q60vc8i-stable.drv' (round 1/2) on 'ssh://eu.nixbuild.net'...
+copying 1 paths...
+copying path '/nix/store/z3wlpwgz66ningdbggakqpvl0jp8bp36-stable' from 'ssh://eu.nixbuild.net'...
+/nix/store/z3wlpwgz66ningdbggakqpvl0jp8bp36-stable
+
+$ nix-build deterministic.nix -A unstable --repeat 1
+these derivations will be built:
+  /nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv
+building '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' (round 1/2) on 'ssh://eu.nixbuild.net'...
+[nixbuild.net] output '/nix/store/srch6l8pyl7z93c7gp1xzf6mq6rwqbaq-unstable' of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' differs from previous round
+error: build of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' on 'ssh://eu.nixbuild.net' failed: build was non-deterministic
+builder for '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' failed with exit code 1
+error: build of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' failed&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see, the log output differs slightly between the local and the remote builds. This is because when Nix submits a remote build, it will not do the determinism check itself, instead it will leave it up to the builder (nixbuild.net in our case). This is actually a good thing, because it allows nixbuild.net to perform some optimizations for repeated builds. The following sections will enumerate those optimizations.&lt;/p&gt;
+&lt;h2 id=&quot;finding-non-determinism-in-past-builds&quot;&gt;Finding Non-determinism in Past Builds&lt;/h2&gt;
+&lt;p&gt;If you locally try to rebuild a something that has failed due to non-determinism, Nix will build it again at least two times (due to &lt;code&gt;--repeat&lt;/code&gt;) and fail it due to non-determinism again, since it keeps no record of the previous build failure (other than the build log).&lt;/p&gt;
+&lt;p&gt;However, nixbuild.net keeps a record of every build performed, also for repeated builds. So when you try to build the same derivation again, nixbuild.net is smart enough to look at its past build and figure out that the derivation is non-deterministic without having to rebuild it. We can demonstrate this by re-running the last build from the example above:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build deterministic.nix -A unstable --repeat 1
+these derivations will be built:
+  /nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv
+building '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' (round 1/2) on 'ssh://eu.nixbuild.net'...
+[nixbuild.net] output '/nix/store/srch6l8pyl7z93c7gp1xzf6mq6rwqbaq-unstable' of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' differs from previous round
+error: build of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' on 'ssh://eu.nixbuild.net' failed: a previous build of the derivation was non-deterministic
+builder for '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' failed with exit code 1
+error: build of '/nix/store/6im1drv4pklqn8ziywbn44vq8am977vm-unstable.drv' failed&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see, the exact same derivation fails again, but now the build status message says: &lt;code&gt;a previous build of the derivation was non-deterministic&lt;/code&gt;. This means nixbuild.net didn’t have to run the build, it just checked its past outputs for the derivation and noticed they differed.&lt;/p&gt;
+&lt;p&gt;When nixbuild.net looks at past builds it considers all outputs that have been signed by a key that the account trusts. That means that it can even compare outputs that have been fetched by substitution.&lt;/p&gt;
+&lt;h2 id=&quot;scaling-out-repeated-builds&quot;&gt;Scaling Out Repeated Builds&lt;/h2&gt;
+&lt;p&gt;When you use &lt;code&gt;--repeat&lt;/code&gt;, nixbuild.net will create multiple copies of the build and schedule all of them like any other build would have been scheduled. This means that every repeated build will run in parallel, saving time for the user. As soon as nixbuild.net has found proof of non-determinism, any repeated build still running will be cancelled.&lt;/p&gt;
+&lt;h2 id=&quot;provoking-non-determinism-through-filesystem-randomness&quot;&gt;Provoking Non-determinism through Filesystem Randomness&lt;/h2&gt;
+&lt;p&gt;As promised in the beginning of this blog post, we have new a feature to announce! nixbuild.net is now able to inject randomness into the filesystem that the builds see when they run. This can be used to provoke builds to uncover non-deterministic behavior.&lt;/p&gt;
+&lt;p&gt;The idea is not new, it is in fact the exact same concept as have been implemented in the &lt;a href=&quot;https://salsa.debian.org/reproducible-builds/disorderfs&quot;&gt;disorderfs&lt;/a&gt; project by &lt;a href=&quot;https://reproducible-builds.org/&quot;&gt;reproducible-builds.org&lt;/a&gt;. However, we’re happy to make it easily accessible to nixbuild.net users. The feature is disabled by default, but can be enabled through a new &lt;a href=&quot;https://docs.nixbuild.net/settings/#inject-fs-randomness&quot;&gt;user setting&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For the moment, the implementation will return directory entries in a random order when enabled. In the future we might inject more metadata randomness.&lt;/p&gt;
+&lt;p&gt;To demonstrate this feature, let’s use this build:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let
+  inherit (import &amp;lt;nixpkgs&amp;gt; {}) runCommand;
+in rec {
+  files = runCommand &quot;files&quot; {} ''
+    mkdir $out
+    touch $out/{1..10}
+  '';
+
+  list = runCommand &quot;list&quot; {} ''
+    ls -f ${files} &amp;gt; $out
+  '';
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;files&lt;/code&gt; build just creates ten empty files as its output, and the &lt;code&gt;list&lt;/code&gt; build lists those file with &lt;code&gt;ls&lt;/code&gt;. The &lt;code&gt;-f&lt;/code&gt; option of &lt;code&gt;ls&lt;/code&gt; disables sorting entirely, so the file names will be printed in the order the filesystem returns them. This means that the build output will depend on how the underlying filesystem is implemented, which could be considered a non-deterministic behavior.&lt;/p&gt;
+&lt;p&gt;First, we build it locally with &lt;code&gt;--repeat&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build non-deterministic-fs.nix --builders &quot;&quot; -A list --repeat 1
+these derivations will be built:
+  /nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv
+building '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' (round 1/2)...
+building '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' (round 2/2)...
+/nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see, the build succeeded. Then we delete the result from our Nix store so we can run the build again:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rm result
+nix-store --delete /nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We enable the &lt;code&gt;inject-fs-randomness&lt;/code&gt; feature through the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell/&quot;&gt;nixbuild.net shell&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nixbuild.net&amp;gt; set inject-fs-randomness true&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we run the build (with &lt;code&gt;--repeat&lt;/code&gt;) on nixbuild.net:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build non-deterministic-fs.nix -A list --repeat 1
+these derivations will be built:
+  /nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv
+building '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' (round 1/2) on 'ssh://eu.nixbuild.net'...
+copying 1 paths...
+copying path '/nix/store/vl13q40hqp4q8x6xjvx0by06s1v9g3jy-files' to 'ssh://eu.nixbuild.net'...
+[nixbuild.net] output '/nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list' of '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' differs from previous round
+error: build of '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' on 'ssh://eu.nixbuild.net' failed: build was non-deterministic
+builder for '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' failed with exit code 1
+error: build of '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' failed&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, nixbuild.net found the non-determinism! We can double check that the directory entries are in a random order by running without &lt;code&gt;--repeat&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nix-build non-deterministic-fs.nix -A list
+these derivations will be built:
+  /nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv
+building '/nix/store/153s3ir379cy27wpndd94qlfhz0wj71v-list.drv' on 'ssh://eu.nixbuild.net'...
+copying 1 paths...
+copying path '/nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list' from 'ssh://eu.nixbuild.net'...
+/nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list
+
+$ cat /nix/store/h1591y02qff8vls5v41khgjz2zpdr2mg-list
+6
+1
+2
+5
+10
+7
+8
+..
+9
+4
+3
+.&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;future-work&quot;&gt;Future Work&lt;/h2&gt;
+&lt;p&gt;There are lots of possibilities to improve the utility of nixbuild.net when it comes to reproducible builds. Your feedback and ideas are very welcome to &lt;a href=&quot;mailto:support@nixbuild.net&quot;&gt;support@nixbuild.net&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here are some of the things that could be done:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Make it possible to trigger repeated builds for any previous build, without submitting a new build with Nix. For example, there could be a command in the nixbuild.net shell allowing a user to trigger a repeated build and report back any non-determinism issues.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Implement functionality similar to &lt;a href=&quot;https://diffoscope.org/&quot;&gt;diffoscope&lt;/a&gt; to be able to find out exactly what differs between builds. This could be available as a shell command or through an API.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Make it possible to download specific build outputs. The way Nix downloads outputs (and stores them locally) doesn’t allow for having multiple variants of the same output, but nixbuild.net could provide this functionality through the shell or an API.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Inject more randomness inside the sandbox. Since we have complete control over the sandbox environment we can introduce more differences between repeated builds to provoke non-determinism. For example, we can schedule builds on different hardware or use different kernels between repeated builds.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Add support for listing known non-deterministic derivations.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+	<pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
+	<author>support@nixbuild.net (nixbuild.net)</author>
+</item>
+<item>
+	<title>nixbuild.net: The First Year</title>
+	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-12-29-the-first-year.html</guid>
+	<link>https://blog.nixbuild.net/posts/2020-12-29-the-first-year.html</link>
+	<description>&lt;p&gt;&lt;a href=&quot;https://discourse.nixos.org/t/announcing-nixbuild-net-nix-build-as-a-service&quot;&gt;One year ago&lt;/a&gt; nixbuild.net was announced to the Nix community for the very first time. The service then ran as a closed beta for 7 months until it was made &lt;a href=&quot;https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html&quot;&gt;generally available&lt;/a&gt; on the 28th of August 2020.&lt;/p&gt;
+&lt;p&gt;This blog post will try to summarize how nixbuild.net has evolved since GA four months ago, and give a glimpse of the future for the service.&lt;/p&gt;
+
+&lt;h2 id=&quot;stability-and-performance&quot;&gt;Stability and Performance&lt;/h2&gt;
+&lt;p&gt;Thousands of Nix builds have been built by nixbuild.net so far, and every build helps in making the service more reliable by uncovering possible edge cases in the build environment.&lt;/p&gt;
+&lt;p&gt;These are some of the stability-related improvements and fixes that have been deployed since GA:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Better detection and handling of builds that time out or hang.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Improved retry logic should our backend storage not deliver Nix closures as expected.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Fixes to the virtual file system inside the KVM sandbox.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Better handling of builds that have binary data in their log output.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Changes to the virtual sandbox environment so it looks even more like a “standard” Linux environment.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Application of the &lt;a href=&quot;https://nixos.org/manual/nix/stable/#conf-sandbox&quot;&gt;Nix sandbox&lt;/a&gt; inside our KVM sandbox. This basically guarantees that the Nix environment provided through nixbuild.net is identical to the Nix environment for local builds.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Support for following HTTP redirects from binary caches.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;even-better-build-reuse&quot;&gt;Even Better Build Reuse&lt;/h2&gt;
+&lt;p&gt;One of the fundamental ideas in nixbuild.net is to try as hard as possible to &lt;em&gt;not&lt;/em&gt; build your builds, if an existing build result can be reused instead. We can trivially reuse an account’s own builds since they are implicitly trusted by the user, but also untrusted builds can be reused under certain circumstances. This has been described in detail in an &lt;a href=&quot;https://blog.nixbuild.net/posts/2020-08-13-build-reuse-in-nixbuild-net.html&quot;&gt;earlier blog post&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Since GA we’ve introduced a number of new ways build results can be reused.&lt;/p&gt;
+&lt;h3 id=&quot;reuse-of-build-failures&quot;&gt;Reuse of Build Failures&lt;/h3&gt;
+&lt;p&gt;Build failures are now also reused. This means that if someone tries to build a build that is identical (in the sense that the derivation and its transitive input closure is bit-by-bit identical) to a previously failed build, nixbuild.net will immediately serve back the failed result instead of re-running the build. You will even get the build log replayed.&lt;/p&gt;
+&lt;p&gt;Build failures can be reused since we are confident that our sandbox is pure, meaning that it will behave exactly the same as long as the build is exactly the same. Only non-transient failures will be reused. So if the builder misbehaves in some way that is out of control for Nix, that failure will not be reused. This can happen if the builder machine breaks down or something similar. In such cases we will automatically re-run the build anyway.&lt;/p&gt;
+&lt;p&gt;When we fix bugs or make major changes in our sandbox it can happen that we alter the behavior in terms of which builds succeed or fail. For example, we could find a build that fail just because we have missed implementing some specific detail in the sandbox. Once that is fixed, we don’t want to reuse such failures. To avoid that, all existing build failures will be “invalidated” on each major update of the sandbox.&lt;/p&gt;
+&lt;p&gt;If a user really wants to re-run a failed build on nixbuild.net, failure reuse can be turned off using the new &lt;em&gt;user settings&lt;/em&gt; (see below).&lt;/p&gt;
+&lt;h3 id=&quot;reuse-of-build-timeouts&quot;&gt;Reuse of Build Timeouts&lt;/h3&gt;
+&lt;p&gt;In a similar vein to reused build failures, we can also reuse build timeouts. This is not enabled by default, since users can select different timeout limits. A user can activate reuse of build timeouts through the user settings.&lt;/p&gt;
+&lt;p&gt;The reuse of timed out builds works like this: Each time a new build is submitted, we check if we have any previous build results of the exact same build. If no successful results or plain failures are found, we look for builds that have timed out. We then check if any of the existing timed out builds ran for longer than the user-specified timeout for the new build. If we can find such a result, it will be served back to the user instead of re-running the build.&lt;/p&gt;
+&lt;p&gt;This feature can be very useful if you want to avoid re-running builds that timeout over and over again (which can be a very time-consuming excercise). For example, say that you have your build timeout set to two hours, and some input needed for a build takes longer than that to build. The first time that input is needed you have to wait two hours to detect that the build will fail. If you then try building something else that happens to depend on the very same input you will save two hours by directly being served the build failure from nixbuild.net!&lt;/p&gt;
+&lt;h3 id=&quot;wait-for-running-builds&quot;&gt;Wait for Running Builds&lt;/h3&gt;
+&lt;p&gt;When a new build is submitted, nixbuild.net will now check if there is any identical build currently running (after checking for previous build results or failures). If there is, the new build will simply hold until the running build has finished. After that, the result of the running build will likely be served back as the result of the new build (as long as the running build wasn’t terminated in a transient way, in which case the new build will have to run from scratch). The identical running builds are checked and reused across accounts.&lt;/p&gt;
+&lt;p&gt;Before this change, nixbuild.net would simply start another build in parallel even if the builds were identical.&lt;/p&gt;
+&lt;h2 id=&quot;new-features&quot;&gt;New Features&lt;/h2&gt;
+&lt;h3 id=&quot;user-settings&quot;&gt;User Settings&lt;/h3&gt;
+&lt;p&gt;A completely new feature has been launched since GA: &lt;strong&gt;&lt;a href=&quot;https://docs.nixbuild.net/settings/&quot;&gt;User Settings&lt;/a&gt;&lt;/strong&gt;. This allows end users to tweak the behavior of nixbuild.net. For example, the build reuse described above can be controlled by user settings. Other settings includes &lt;a href=&quot;https://docs.nixbuild.net/settings/#max-cpu-hours-per-month&quot;&gt;controlling the maximum used build time per month&lt;/a&gt;, and the possibility to &lt;a href=&quot;https://docs.nixbuild.net/settings/#allow-override&quot;&gt;lock down&lt;/a&gt; specific SSH keys which is useful in CI setups.&lt;/p&gt;
+&lt;p&gt;The user settings can be set in various way; through the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell/index.html#configure-settings&quot;&gt;nixbuild.net shell&lt;/a&gt;, the &lt;a href=&quot;https://docs.nixbuild.net/settings/#ssh-environment&quot;&gt;SSH client environment&lt;/a&gt; and even through the &lt;a href=&quot;https://docs.nixbuild.net/settings/#nix-derivation&quot;&gt;Nix derivations&lt;/a&gt; themselves.&lt;/p&gt;
+&lt;p&gt;Even if many users probably never need to change any settings, it can be helpful to read through the &lt;a href=&quot;https://docs.nixbuild.net/settings/&quot;&gt;documentation&lt;/a&gt; to get a feeling for what is possible. If you need to differentiate permissions in any way (different settings for account administrators, developers, CI etc) you should definitely look into the various user settings.&lt;/p&gt;
+&lt;h3 id=&quot;github-ci-action&quot;&gt;GitHub CI Action&lt;/h3&gt;
+&lt;p&gt;A &lt;a href=&quot;https://github.com/marketplace/actions/nixbuild-net&quot;&gt;GitHub Action&lt;/a&gt; has been published. This action makes it very easy to use nixbuild.net as a remote Nix builder in your GitHub Actions workflows. Instead of running you Nix builds on the two vCPUs provided by GitHub you can now enjoy scale-out Nix builds on nixbuild.net with minimal setup required.&lt;/p&gt;
+&lt;p&gt;The nixbuild.net GitHub Action is developed by the nixbuild.net team and there are plans on adding more functionality that nixbuild.net can offer users, like automatically generated cost and performance reports for your Nix builds.&lt;/p&gt;
+&lt;h3 id=&quot;shell-improvements&quot;&gt;Shell Improvements&lt;/h3&gt;
+&lt;p&gt;Various minor improvements have been made to the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell/&quot;&gt;nixbuild.net shell&lt;/a&gt;. It is for example now much easier to get an overview on how large your next invoice will be, through the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell/#check-your-account-usage&quot;&gt;usage&lt;/a&gt; command.&lt;/p&gt;
+&lt;h2 id=&quot;the-future&quot;&gt;The Future&lt;/h2&gt;
+&lt;p&gt;After one year of real world usage, we are very happy with the progress of nixbuild.net. It has been well received in the Nix community, proved both reliable and scalable, and it has delivered on our initial vision of a simple service that can integrate into any setup using Nix.&lt;/p&gt;
+&lt;p&gt;We feel that we can go anywhere from here, but we also realize that we must be guided by our users’ needs. We have compiled a small and informal roadmap below. The items on this list are things that we, based on the feedback we’ve received throughout the year, think are natural next steps for nixbuild.net.&lt;/p&gt;
+&lt;p&gt;The roadmap has no dates and no prioritization, and should be seen as merely a hint about which direction the development is heading. Any question or comment concerning this list (or what’s missing from the list) is very welcome to &lt;a href=&quot;mailto:support@nixbuild.net&quot;&gt;support@nixbuild.net&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;support-aarch64-linux-builds&quot;&gt;Support aarch64-linux Builds&lt;/h3&gt;
+&lt;p&gt;Work is already underway to add support for &lt;code&gt;aarch64-linux&lt;/code&gt; builds to nixbuild.net, and so far it is looking good. With the current surge in performant ARM hardware (Apple M1, Ampere Altra etc), we think having &lt;code&gt;aarch64&lt;/code&gt; support in nixbuild.net is an obvious feature. It is also something that has been requested by our users.&lt;/p&gt;
+&lt;p&gt;We don’t know yet how the pricing of &lt;code&gt;aarch64&lt;/code&gt; builds will look, or what scalability promises we can make. If you are interested in evaluating &lt;code&gt;aarch64&lt;/code&gt; builds on nixbuild.net in an early access setting, just send us an email to &lt;a href=&quot;mailto:support@nixbuild.net&quot;&gt;support@nixbuild.net&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;provide-an-api-over-ssh-and-http&quot;&gt;Provide an API over SSH and HTTP&lt;/h3&gt;
+&lt;p&gt;Currently the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell/&quot;&gt;nixbuild.net shell&lt;/a&gt; is the administrative tool we offer end users. We will keep developing the shell and make it more intuitive for interactive use. But will also add an alternative, more scriptable variant of the shell.&lt;/p&gt;
+&lt;p&gt;This alternative version will provide roughly the same functionality as the original shell, only more adapted to scripting instead of interactive use. The reason for providing such an SSH-based API is to make it easy to integrate nixbuild.net more tightly into CI and similar scenarios.&lt;/p&gt;
+&lt;p&gt;There is in fact already a tiny version of this API deployed. You can run the following command to try it out:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ssh eu.nixbuild.net api show public-signing-key
+{&quot;keyName&quot;:&quot;nixbuild.net/bob-1&quot;,&quot;publicKey&quot;:&quot;PmUhzAc4Ug6sf1uG8aobbqMdalxW41SHWH7FE0ie1BY=&quot;}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The above API command is in use by the &lt;a href=&quot;https://github.com/nixbuild/nixbuild-action&quot;&gt;nixbuild-action&lt;/a&gt; for GitHub. So far, this is the only API command implemented, and it should be seen as a very first proof of concept. Nothing has been decided on how the API should look and work in the future.&lt;/p&gt;
+&lt;p&gt;The API will also be offered over HTTP in addition to SSH.&lt;/p&gt;
+&lt;h3 id=&quot;upload-builds-to-binary-caches&quot;&gt;Upload builds to binary caches&lt;/h3&gt;
+&lt;p&gt;Adding custom binary caches that nixbuild.net can fetch dependencies from is supported today, although such requests are still handled manually through support.&lt;/p&gt;
+&lt;p&gt;We also want to support uploading to custom binary caches. That way users could gain performance by not having to first download build results from nixbuild.net and then upload them somewhere else. This could be very useful for CI setups that can spend a considerable amount of their time just uploading closures.&lt;/p&gt;
+&lt;h3 id=&quot;provide-an-http-based-binary-cache&quot;&gt;Provide an HTTP-based binary cache&lt;/h3&gt;
+&lt;p&gt;Using nixbuild.net as a binary cache is handy since you don’t have to wait for any uploads after a build has finished. Instead, the closures will be immediately available in the binary cache, backed by nixbuild.net.&lt;/p&gt;
+&lt;p&gt;It is actually possible to use nixbuild.net as a binary cache today, by configuring an SSH-based cache (&lt;code&gt;ssh://eu.nixbuild.net&lt;/code&gt;). This works out of the box right now. You can even use &lt;code&gt;nix-copy-closure&lt;/code&gt; to upload paths to nixbuild.net. We just don’t yet give any guarantees on how long store paths are kept.&lt;/p&gt;
+&lt;p&gt;However, there are benfits to providing an HTTP-based cache. It would most probably have better performance (serving nar files over HTTP instead of using the &lt;code&gt;nix-store&lt;/code&gt; protocol over SSH), but more importantly it would let us use a CDN for serving cache contents. This could help mitigate the fact that nixbuild.net is only deployed in Europe so far.&lt;/p&gt;
+&lt;h3 id=&quot;support-builds-that-use-kvm&quot;&gt;Support builds that use KVM&lt;/h3&gt;
+&lt;p&gt;The primary motivation for this is to be able to run NixOS tests (with good performance) on nixbuild.net.&lt;/p&gt;
+&lt;h2 id=&quot;thank-you&quot;&gt;Thank You!&lt;/h2&gt;
+&lt;p&gt;Finally we’d like to thank all our users. We look forward to an exciting new year with lots of Nix builds!&lt;/p&gt;</description>
+	<pubDate>Tue, 29 Dec 2020 00:00:00 +0000</pubDate>
+	<author>support@nixbuild.net (nixbuild.net)</author>
+</item>
+<item>
 	<title>Cachix: Postmortem of outage on 20th December</title>
 	<guid isPermaLink="true">https://blog.cachix.org/posts/2020-12-23-post-mortem-recent-downtime/</guid>
 	<link>https://blog.cachix.org/posts/2020-12-23-post-mortem-recent-downtime/</link>
-	<description>Cachix has experienced a six hour downtime, second significant outage since the service started operating on 1st of June 2018.
-Here are the details to what exactly happened and what has been done to prevent similar events from happening.
-Timeline (UTC)  02:55:07 - Backend starts to emit errors for all HTTP requests 02:56:00 - Pagerduty tries to notify me of outage via email, phone and mobile app 09:01:00 - I wake up and see the notifications 09:02:02 - Backend is restarted and recovers  Root cause analysis All ~24k HTTP requests that have reached the backend during the outage have failed with the following exception:</description>
+	<description>On 20 December, Cachix experienced a six-hour downtime, the second significant outage since the service started operating on 1 June 2018.
+Here are the details of what exactly happened and what has been done to prevent similar events from happening.
+Timeline (UTC)  02:55:07 - Backend starts to emit errors for all HTTP requests 02:56:00 - Pagerduty tries to notify me of outage via email, phone and mobile app 09:01:00 - I wake up and see the notifications 09:02:02 - Backend is restarted and recovers  Root cause analysis All ~24k HTTP requests that reached the backend during the outage failed with the following exception:</description>
 	<pubDate>Thu, 24 Dec 2020 11:30:00 +0000</pubDate>
 	<author>support@cachix.org (Domen Kožar)</author>
 </item>
@@ -1104,116 +1324,6 @@ that can replace the implicit dependencies of your Bazel build and use
 &lt;a href=&quot;https://github.com/tweag/rules_nixpkgs&quot;&gt;rules_nixpkgs&lt;/a&gt; to declare them as explicit dependencies. That will yield a
 fast, correct, hermetic build.&lt;/p&gt;</description>
 	<pubDate>Wed, 16 Sep 2020 00:00:00 +0000</pubDate>
-</item>
-<item>
-	<title>Tweag I/O: Towards a content-addressed model for Nix</title>
-	<guid isPermaLink="true">https://tweag.io/blog/2020-09-10-nix-cas/</guid>
-	<link>https://tweag.io/blog/2020-09-10-nix-cas/</link>
-	<description>&lt;p&gt;This is my first post about content-addressability in Nix — a long-awaited feature that is hopefully coming soon!
-In this post I will show you how this feature will improve the Nix
-infrastructure. I’ll come back in another post to explain the technical challenges of
-adding content-addressability to Nix.&lt;/p&gt;
-&lt;p&gt;Nix has a wonderful model for handling packages.
-Because each derivation is stored under (aka &lt;em&gt;addressed by&lt;/em&gt;) a unique
-name, multiple versions of the same library can coexist on the same
-system without issues: each version of the library has a distinct
-name, as far as Nix is concerned.&lt;/p&gt;
-&lt;p&gt;What’s more, if &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; is upgraded in &lt;a href=&quot;https://github.com/NixOS/nixpkgs/&quot;&gt;Nixpkgs&lt;/a&gt;, Nix knows that all the
-packages that depend on &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; (i.e., almost everything) must be
-rebuilt, if only so that they point at the name of the new &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt;
-version. This way, a Nix installation will never feature a package
-built for one version of &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt;, but dynamically linked against
-another: as a user, it means that you will never have an &lt;em&gt;undefined
-symbol&lt;/em&gt; error. Hurray!&lt;/p&gt;
-&lt;h2&gt;The input-addressed store&lt;/h2&gt;
-&lt;p&gt;How does Nix achieve this feat? The idea is that the name of a package
-is derived from all of its inputs (that is, the complete list of
-dependencies, as well as the package description). So if you change
-the git tag from which &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; is fetched, the name changes, if the
-name of &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; changes, then the name of any package which has &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; in
-its dependencies changes.&lt;/p&gt;
-&lt;p&gt;However this can be very pessimistic: even changes that aren’t
-semantically meaningful can imply mass rebuilding and downloading. As
-a slightly extreme example, &lt;a href=&quot;https://github.com/NixOS/nixpkgs/pull/83446&quot;&gt;this merge-request on
-Nixpkgs&lt;/a&gt; makes a tiny change to the way &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; is built. It doesn’t actually
-change &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt;, yet requires rebuilding an insane amount of
-packages. Because, as far as Nix is concerned, all these packages have
-different names, hence are different packages. In reality, though,
-they weren’t.&lt;/p&gt;
-&lt;p&gt;Nevertheless, the cost of the rebuild has to be born by the Nix
-infrastructure: &lt;a href=&quot;https://hydra.nixos.org&quot;&gt;Hydra&lt;/a&gt; builds all packages to populate the cache,
-and all the newly built packages must be stored. It costs both time,
-and money (in cpu power, and storage space).&lt;/p&gt;
-&lt;h2&gt;Unnecessary rebuilds?&lt;/h2&gt;
-&lt;p&gt;Most distributions, by default, don’t rebuild packages when their dependencies change, and have a (more-or-less automated) process to detect changes that require rebuilding reverse dependencies.
-For example, Debian &lt;a href=&quot;https://www.debian.org/doc/debian-policy/policy.pdf#81&quot;&gt;tries to detect ABI changes automatically&lt;/a&gt; and Fedora has a &lt;a href=&quot;https://docs.fedoraproject.org/en-US/fesco/Updates_Policy/&quot;&gt;more manual process&lt;/a&gt;.
-But Nix doesn’t.&lt;/p&gt;
-&lt;p&gt;The issue is that the notion of a “breaking change” is a very fuzzy one.
-Should we follow Debian and consider that only ABI changes are breaking?
-This criterion only applies for shared libraries, and as the Debian policy acknowledges, only for “well-behaved” programs.
-So if we follow this criterion, there’s still need for manual curation, which is &lt;strong&gt;precisely&lt;/strong&gt; what Nix tries to avoid.&lt;/p&gt;
-&lt;h2&gt;The content-addressed model&lt;/h2&gt;
-&lt;p&gt;Quite happily, there is a criterion to avoid many useless rebuilds without sacrificing correctness: detecting when changes in a package (or one of its dependencies) yields the exact same output.
-That might seem like an edge case, but the &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; example above (and many others) shows that there’s a practical application to it.
-As another example, &lt;code class=&quot;language-text&quot;&gt;go&lt;/code&gt; depends on &lt;code class=&quot;language-text&quot;&gt;perl&lt;/code&gt; for its tests, so an upgrade of &lt;code class=&quot;language-text&quot;&gt;perl&lt;/code&gt; requires rebuilding all the Go packages in Nixpkgs, although it most likely doesn’t change the output of the &lt;code class=&quot;language-text&quot;&gt;go&lt;/code&gt; derivation.&lt;/p&gt;
-&lt;p&gt;But, for Nix to recognise that a package is not a new package, the
-new, unchanged, &lt;code class=&quot;language-text&quot;&gt;openssl&lt;/code&gt; or &lt;code class=&quot;language-text&quot;&gt;go&lt;/code&gt; packages must have &lt;em&gt;the same name&lt;/em&gt;
-as the old version. Therefore, the name of a package must not be
-derived from its inputs which have changed, but, instead, it should be
-derived from the content of the compiled package. This is called
-content addressing.&lt;/p&gt;
-&lt;p&gt;Content addressing is how you can be sure that when you and a
-colleague at the other side of the world type &lt;code class=&quot;language-text&quot;&gt;git checkout 7cc16bb8cd38ff5806e40b32978ae64d54023ce0&lt;/code&gt; you actually have the exact
-same content in your tree. Git commits are content addressed, therefore the name
-&lt;code class=&quot;language-text&quot;&gt;7cc16bb8cd38ff5806e40b32978ae64d54023ce0&lt;/code&gt; refers to that exact
-tree.&lt;/p&gt;
-&lt;p&gt;Yet another example of content-addressed storage is &lt;a href=&quot;https://ipfs.io/&quot;&gt;IPFS&lt;/a&gt;. In IPFS storage
-files can be stored in any number of computers, and even moved from
-computer to computer. The content-derived name is used as a way to give
-an intrinsic name to a file, regardless of where it is stored.&lt;/p&gt;
-&lt;p&gt;In fact, even the particular use case that we are discussing here -
-avoiding recompilation when a rebuilt dependency hasn’t changed -
-can be found in various build systems such as
-&lt;a href=&quot;https://bazel.build/&quot;&gt;Bazel&lt;/a&gt;. In build systems, such recompilation
-avoidance is sometimes known as the &lt;em&gt;early cutoff optimization&lt;/em&gt; −
-see the &lt;a href=&quot;https://www.microsoft.com/en-us/research/uploads/prod/2018/03/build-systems.pdf&quot;&gt;build systems a la carte paper&lt;/a&gt;
-for example).&lt;/p&gt;
-&lt;p&gt;So all we need to do is to move the Nix store from an input-addressed
-model to a content-addressed model, as used by many tools
-already, and we will be able to save a lot of storage space and CPU
-usage, by rebuilding many fewer packages. Nixpkgs contributors will
-see their CI time improved. It could also allow &lt;a href=&quot;https://github.com/NixOS/nix/issues/859&quot;&gt;serving a binary cache
-over IPFS&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Well, like many things with computers,
-this is actually way harder than it sounds (which explains why this
-hasn’t already been done despite being discussed nearly 15 years ago in the
-&lt;a href=&quot;https://github.com/edolstra/edolstra.github.io/raw/49a78323f6b319da6e078b4f5f6b3112a30e8db9/pubs/phd-thesis.pdf&quot;&gt;original paper&lt;/a&gt;), but we now believe that there’s &lt;a href=&quot;https://github.com/NixOS/rfcs/pull/62&quot;&gt;a way forward&lt;/a&gt;… more on that in a later post.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;A content-addressed store for Nix would help reduce the insane load
-that &lt;a href=&quot;https://hydra.nixos.org&quot;&gt;Hydra&lt;/a&gt; has to sustain. While content-addressing is a common technique both in distributed systems
-and build systems (Nix is both!), getting to the point where it was
-feasible to integrate content-addressing in Nix has been a long journey.&lt;/p&gt;
-&lt;p&gt;In a future post, I’ll explain why it was so hard, and how we finally
-managed to propose a viable design for a content-addressed Nix.&lt;/p&gt;</description>
-	<pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
-</item>
-<item>
-	<title>nixbuild.net: nixbuild.net is Generally Available</title>
-	<guid isPermaLink="true">https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html</guid>
-	<link>https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html</link>
-	<description>&lt;p&gt;Today, &lt;a href=&quot;https://nixbuild.net&quot;&gt;nixbuild.net&lt;/a&gt; is exiting private beta and made generally available! Anyone can now &lt;a href=&quot;https://nixbuild.net#register&quot;&gt;sign up&lt;/a&gt; for a nixbuild.net account and immediately start building using the free CPU hours included with every account.&lt;/p&gt;
-&lt;p&gt;After the free CPU hours have been consumed, the pricing is simple: 0.12 EUR (excl. VAT) per CPU hour consumed, billed monthly.&lt;/p&gt;
-
-&lt;p&gt;As part of this GA announcement, a number of marketing and documentation improvements have been published:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;A much improved and redesigned landing page at &lt;a href=&quot;https://nixbuild.net&quot;&gt;https://nixbuild.net&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;An extensive &lt;a href=&quot;https://nixbuild.net#faq&quot;&gt;FAQ&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;A reworked &lt;a href=&quot;https://docs.nixbuild.net/getting-started&quot;&gt;Getting Started&lt;/a&gt; guide&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Proper documentation of the &lt;a href=&quot;https://docs.nixbuild.net/nixbuild-shell&quot;&gt;nixbuild.net shell&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;We’re really happy for nixbuild.net to enter this new phase — making simple, performant and scalable remote builds available to every Nix user! We’re excited to see how the service is used, and we have lots of plans for the future of nixbuild.net.&lt;/strong&gt;&lt;/p&gt;</description>
-	<pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
-	<author>support@nixbuild.net (nixbuild.net)</author>
 </item>
 
 </channel>
