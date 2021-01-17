@@ -16,26 +16,27 @@
 
   <xsl:template match="news">
 
-    <section class="news-items">
+    <xsl:for-each select="item[position() &lt;= $maxItem]">
 
-      <xsl:for-each select="item[position() &lt;= $maxItem]">
+      <section class="blog-header">
+        <div>
+          <h2>
+            <xsl:apply-templates select="title/child::node()" mode="id"/>
+          </h2>
+          <time>
+            <xsl:attribute name="datetime">
+              <xsl:value-of select="substring(pubDate, 6, 11)" />
+            </xsl:attribute>
+            <xsl:value-of select="substring(pubDate, 6, 11)" />
+          </time>
+        </div>
+      </section>
 
-        <article class="news-article">
-          <header>
-            <h2>
-              <xsl:apply-templates select="title/child::node()" mode="id"/>
-            </h2>
-            <span class="date"><xsl:value-of select="substring(pubDate, 6, 11)" /></span>
-          </header>
+      <section class="blog-article">
+          <xsl:copy-of select="description/child::node()" />
+      </section>
 
-          <section>
-            <xsl:copy-of select="description/child::node()" />
-          </section>
-        </article>
-
-      </xsl:for-each>
-
-    </section>
+    </xsl:for-each>
 
   </xsl:template>
 

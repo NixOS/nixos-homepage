@@ -13,6 +13,7 @@ pkgs.stdenv.mkDerivation {
 
   privateOutputs = [
     "community"
+    "blog"
   ];
    
   buildPhase = ''

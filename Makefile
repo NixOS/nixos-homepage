@@ -8,7 +8,8 @@ default: all
 HTML = \
   404.html \
   blog/index.html \
-  blog/community-announcements.html \
+  blog/archive.html \
+  blog/categories.html \
   commercial-support.html \
   community.html \
   demos/index.html \
@@ -27,7 +28,6 @@ HTML = \
   guides/towards-reproducibility-pinning-nixpkgs.html \
   index.html \
   learn.html \
-  news.html \
   teams/discourse.html \
   teams/infrastructure.html \
   teams/marketing.html \
@@ -143,7 +143,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt $(DEMOS) $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
+%.html: %.tt blog/layout.tt layout.tt common.tt $(DEMOS) $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --eval_perl \
@@ -154,10 +154,9 @@ favicon.ico: favicon.png
 	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
 	  --define latestNixOSSeries=$(NIXOS_STABLE_SERIES) \
 	  --pre_process=common.tt \
-	  $< > $@
-	tidy -ashtml -m $@
-	#xmllint --nonet --html --noout $@.tmp
-	#mv $@.tmp $@
+	  $< > $@.tmp
+	xmllint --nonet --noout $@.tmp
+	mv $@.tmp $@
 
 %: %.in common.tt $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
 	echo $$PATH
@@ -166,36 +165,32 @@ favicon.ico: favicon.png
 	  --pre_process=common.tt $< > $@.tmp
 	mv $@.tmp $@
 
-news.html: all-news.xhtml
+#
+# -- /blog section of the website --------------------------------------------
+#
 
-all-news.xhtml: news.xml news.xsl
-	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@
+blog/index.html: blog/index.html.in
 
-news-rss.xml: news.xml news-rss.xsl
-	xsltproc news-rss.xsl news.xml > $@.tmp
+blog/index.html.in: blog/rss.xml blog/index.xsl
+	xsltproc --param maxItem 12 blog/index.xsl blog/index.xml > $@.tmp
 	mv $@.tmp $@
 
-index.html: $(DEMOS) news-rss.xml latest-news.xhtml blogs.json 
+blog/archive.html: blog/archive.html.in
 
-latest-news.xhtml: news.xml news.xsl
-	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
+blog/archive.html.in: blog/rss.xml blog/index.xsl
+	xsltproc --param maxItem 10000 blog/index.xsl blog/index.xml > $@.tmp
+	mv $@.tmp $@
+
+blog/rss.xml: blog/index.xml blog/rss.xsl
+	xsltproc blog/rss.xsl blog/index.xml > $@.tmp
+	mv $@.tmp $@
+
+
+index.html: $(DEMOS) blog/rss.xml blog/index.html
+
 
 check: $(HTML)
 	bash ./scripts/check-links.sh
-
-blogs.xml:
-	curl --fail https://planet.nixos.org/rss20.xml > $@.tmp
-	mv $@.tmp $@
-
-blogs.json: blogs.xml
-	perl -MJSON -MXML::Simple -e 'print encode_json(XMLin("blogs.xml"));' < $< > $@.tmp
-	mv $@.tmp $@
-
-ifeq ($(UPDATE), 1)
-.PHONY: blogs.xml
-update: blogs.xml
-	@true
-endif
 
 # The nix-built site will use the provided SITE_STYLES
 ifeq ($(strip $(SITE_STYLES)),)

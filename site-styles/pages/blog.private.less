@@ -1,0 +1,44 @@
+// Private styles for the community page
+// =====================================
+//
+// For embedding larger assets.
+
+@import "../setup";
+
+.blog-submenu {
+
+  & > ul > li {
+
+    &:nth-child(1) > a::before {
+      #svg.blog.latest.blue();
+    }
+    &:nth-child(1) > a:active::before,
+    &:nth-child(1) > a:hover::before {
+      #svg.blog.latest.white();
+    }
+
+    &:nth-child(2) > a::before {
+      #svg.blog.all_posts.blue();
+    }
+    &:nth-child(2) > a.active::before,
+    &:nth-child(2) > a:hover::before {
+      #svg.blog.all_posts.white();
+    }
+
+    &:nth-child(3) > a::before {
+      #svg.blog.categories.blue();
+    }
+    &:nth-child(3) > a.active::before,
+    &:nth-child(3) > a:hover::before {
+      #svg.blog.categories.white();
+    }
+
+    &:nth-child(4) > a::before {
+      #svg.blog.rss.blue();
+    }
+    &:nth-child(4) > a.active::before,
+    &:nth-child(4) > a:hover::before {
+      #svg.blog.rss.white();
+    }
+  }
+}

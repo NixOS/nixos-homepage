@@ -1,17 +1,3 @@
-[% WRAPPER layout.tt title="Blog" handlesLayout=1 %]
-
-<div class="page-title">
-  <h1>Blog</h1>
-</div>
-
-<section class="blog-categories">
-  <ul>
-    <li><a href="[%root%]all.html">All posts</a></li>
-  </ul>
-</section>
-
-<section class="blog-articles">
-  [% INSERT "blog/index.html.in" %]
-</section>
-
+[% WRAPPER blog/layout.tt title="Announcements" %]
+[% INSERT "blog/index.html.in" %]
 [% END %]

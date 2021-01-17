@@ -8,7 +8,7 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/20.09-nightingale/nightingale.png">
-        <img class="inline" src="logo/nixos-logo-20.09-nightingale-lores.png" alt="20.09 Nightingale logo" with="100" />
+        <img class="inline" src="/logo/nixos-logo-20.09-nightingale-lores.png" alt="20.09 Nightingale logo" with="100" />
       </a>
       <p>
         Hey everyone, I'm <a href="https://github.com/jonringer">Jonathan Ringer</a>,
@@ -121,7 +121,7 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/20.03-markhor/markhor.png">
-        <img class="inline" src="logo/nixos-logo-20.03-markhor-lores.png" alt="20.03 Markhor logo" with="100" />
+        <img class="inline" src="/logo/nixos-logo-20.03-markhor-lores.png" alt="20.03 Markhor logo" with="100" />
       </a>
       <p>
         Hey everyone, I am <a href="https://discourse.nixos.org/u/worldofpeace">worldofpeace</a>, one of the release
@@ -233,7 +233,7 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/19.09-loris/loris.png">
-        <img class="inline" src="logo/nixos-logo-19.09-loris-lores.png" alt="19.09 Loris logo" with="100" height="87" />
+        <img class="inline" src="/logo/nixos-logo-19.09-loris-lores.png" alt="19.09 Loris logo" with="100" height="87" />
       </a>
       NixOS 19.09 “Loris” has been released, the twelfth stable release branch.
       See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-19.09">release notes</a>
@@ -252,7 +252,7 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/19.03-koi/koi.png">
-        <img class="inline" src="logo/nixos-logo-19.03-koi-lores.png" alt="19.03 Koi logo" with="100" height="87" />
+        <img class="inline" src="/logo/nixos-logo-19.03-koi-lores.png" alt="19.03 Koi logo" with="100" height="87" />
       </a>
       NixOS 19.03 “Koi” has been released, the eleventh stable release branch.
       See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-19.03">release notes</a>
@@ -271,7 +271,7 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/18.09-jellyfish/jellyfish.png">
-        <img class="inline" src="logo/nixos-logo-18.09-jellyfish-lores.png" alt="18.09 Jellyfish logo" with="100"
+        <img class="inline" src="/logo/nixos-logo-18.09-jellyfish-lores.png" alt="18.09 Jellyfish logo" with="100"
           height="87" />
       </a>
       NixOS 18.09 “Jellyfish” has been released, the tenth stable release branch.
@@ -344,7 +344,7 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/18.03-impala/impala.png">
-        <img class="inline" src="logo/nixos-logo-18.03-impala-lores.png" alt="18.03 Impala logo" />
+        <img class="inline" src="/logo/nixos-logo-18.03-impala-lores.png" alt="18.03 Impala logo" />
       </a>
       NixOS 18.03 “Impala” has been released, the ninth stable release branch.
       See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-18.03">release notes</a>
@@ -1067,7 +1067,7 @@ $ nix-store -qR /run/current-system | grep openssl
       FOSDEM talk about NixOS
     </title>
     <description>
-      <a href="https://fosdem.org/2011"><img class="inline" src="logo/fosdem-logo.png" alt="Fosdem logo" /></a>
+      <a href="https://fosdem.org/2011"><img class="inline" src="/logo/fosdem-logo.png" alt="Fosdem logo" /></a>
       <a href="http://www.st.ewi.tudelft.nl/~sander/">Sander van der
         Burg</a> gave a talk about NixOS at the <a
         href="https://web.archive.org/web/20120107073048/https://archive.fosdem.org/2011/schedule/track/crossdistro_devroom">CrossDistro
@@ -1108,7 +1108,7 @@ $ nix-store -qR /run/current-system | grep openssl
       Xfce in NixOS
     </title>
     <description>
-      <a href="http://www.xfce.org/"><img class="inline" src="logo/xfce-small.png" alt="Xfce screenshot" /></a>
+      <a href="http://www.xfce.org/"><img class="inline" src="/logo/xfce-small.png" alt="Xfce screenshot" /></a>
       NixOS now supports <a href="http://www.xfce.org/">Xfce</a>, a
       modern, light-weight desktop environment. It can be enabled by
       setting the NixOS configuration value
@@ -1183,7 +1183,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       <a href="logo/nixos-hires.png">
-        <img class="inline" src="logo/nixos-lores.png" alt="Nix
+        <img class="inline" src="/logo/nixos-lores.png" alt="Nix
       logo" /></a> Long overdue, the Nix project finally has a logo!
       The logo was originally created by <a href="http://arbitrary.name/">Simon Frankau</a> for the <a
         href="https://www.haskell.org/haskellwiki/Haskell_logos/New_logo_ideas">Haskell
@@ -1242,8 +1242,8 @@ $ nix-store -qR /run/current-system | grep openssl
       OpenOffice.org 3 in Nixpkgs
     </title>
     <description>
-      <a href="images/screenshots/nixos-openoffice-3.png"><img class="inline screenshot"
-          src="images/screenshots/nixos-openoffice-3-small.png" alt="OpenOffice.org 3.0.1 screenshot" /></a>
+      <a href="/images/screenshots/nixos-openoffice-3.png"><img class="inline screenshot"
+         src="/images/screenshots/nixos-openoffice-3-small.png" alt="OpenOffice.org 3.0.1 screenshot" /></a>
 
       Lluís Batlle has updated OpenOffice.org in Nixpkgs to 3.0.1
       (<a href="images/screenshots/nixos-openoffice-3.png">screenshot</a>).
@@ -1256,8 +1256,8 @@ $ nix-store -qR /run/current-system | grep openssl
       KDE 4.2 in Nixpkgs/NixOS
     </title>
     <description>
-      <a href="images/screenshots/nixos-kde42-1.png"><img class="inline screenshot"
-          src="images/screenshots/nixos-kde42-1-small.png" alt="KDE 4.2 screenshot" /></a>
+      <a href="/images/screenshots/nixos-kde42-1.png"><img class="inline screenshot"
+          src="/images/screenshots/nixos-kde42-1-small.png" alt="KDE 4.2 screenshot" /></a>
 
       We now have a fairly complete set of KDE 4.2 packages in Nixpkgs
       and NixOS. Previously we had KDE 3.5, but it was rather
@@ -1459,8 +1459,8 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <p>
 
-        <a href="images/screenshots/nixos-installer-help.png"><img class="inline screenshot"
-            src="images/screenshots/nixos-installer-help-small.png" alt="NixOS installer online help" /></a>
+        <a href="/images/screenshots/nixos-installer-help.png"><img class="inline screenshot"
+            src="/images/screenshots/nixos-installer-help-small.png" alt="NixOS installer online help" /></a>
 
         New NixOS installation CD images for <tt>i686</tt> and
         <tt>x86_64</tt> are <a href="https://nixos.org/releases/nixos-0.1pre10083/">available</a>,
@@ -1513,8 +1513,8 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <p>
 
-        <a href="images/screenshots/nixos-openoffice.png"><img class="inline screenshot"
-            src="images/screenshots/nixos-openoffice-small.png" alt="OpenOffice screenshot" /></a>
+        <a href="/images/screenshots/nixos-openoffice.png"><img class="inline screenshot"
+            src="/images/screenshots/nixos-openoffice-small.png" alt="OpenOffice screenshot" /></a>
 
         <a href="https://www.openoffice.org/">OpenOffice</a> is now in
         Nixpkgs (<a href="images/screenshots/nixos-openoffice.png">screenshot of
@@ -1542,8 +1542,8 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <p>
 
-        <a href="images/screenshots/nixos-games.png"><img class="inline screenshot"
-            src="images/screenshots/nixos-games-small.png" alt="NixOS screenshot" /></a>
+        <a href="/images/screenshots/nixos-games.png"><img class="inline screenshot"
+            src="/images/screenshots/nixos-games-small.png" alt="NixOS screenshot" /></a>
 
         <a href="https://www.winehq.org/">Wine</a> now runs on NixOS!
         Finally we can run all those <a href="images/screenshots/nixos-games.png">legacy
@@ -1603,7 +1603,7 @@ $ nix-store -qR /run/current-system | grep openssl
 
       <p>
 
-        <a href="https://www.kde.org"><img class="inline screenshot" src="images/klogo-official-crystal-128x128.png"
+        <a href="https://www.kde.org"><img class="inline screenshot" src="/images/klogo-official-crystal-128x128.png"
             alt="KDE logo" /></a>
 
         We now have <a href="https://www.kde.org/">KDE</a> running on
@@ -1628,8 +1628,8 @@ $ nix-store -qR /run/current-system | grep openssl
       NixOS progress report
     </title>
     <description>
-      <a href="images/screenshots/nixos-compiz-cube.png"><img class="inline screenshot"
-          src="images/screenshots/nixos-compiz-cube-small.png" alt="NixOS screenshot" /></a>
+      <a href="/images/screenshots/nixos-compiz-cube.png"><img class="inline screenshot"
+          src="/images/screenshots/nixos-compiz-cube-small.png" alt="NixOS screenshot" /></a>
 
       NixOS is now <em>almost</em> usable as a desktop OS ;-). We
       have an X server, a bunch of Gnome packages, basic wireless

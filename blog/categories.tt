@@ -1,0 +1,223 @@
+
+[% WRAPPER blog/layout.tt title="Categories" %]
+<section class="blog-categories">
+  <ul>
+    <li id="blog-category-events">
+      <h2>Events</h2>
+      <ul>
+        <li>
+          <time datetime="2020-12-26">(2020-12-26)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nixos-assembly-on-rc3/10682">
+            NixOS assembly on rc3
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-12-15">(2020-12-15)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/bay-area-nix-nixos-user-group-virtual-meetup-on-12-21-2020/10490">
+            Bay Area Nix/NixOS User group Virtual Meetup on 12/21/2020
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-12-07">(2020-12-07)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/call-for-participation-bob-2021-february-26-online-early-bird-until-dec-31/10393">
+            Call for Participation: BOB 2021 (February 26, online, early-bird until Dec 31)
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-10-28">(2020-10-28)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nix-friday-c-c-questions-for-next-stream/9692">
+            Nix Friday: C/C++ questions for next stream
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-10-17">(2020-10-17)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nixcon-2020-hackday/9519">
+            NixCon 2020 Hackday
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-10-16">(2020-10-16)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nixcon-stream-not-working-in-firefox/9504">
+            NixCon stream not working in Firefox
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-10-14">(2020-10-14)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nixcon-ical-calendar-link-returns-404/9477">
+            NixCon iCal calendar link returns 404
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-10-13">(2020-10-13)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nixcon-2020-meeting-notes-8/9456">
+            NixCon 2020 meeting notes #8
+          </a>
+        </li>
+      </ul>
+      <a href="https://discourse.nixos.org/c/events/13">More Events ...</a>
+    </li>
+    <li id="blog-category-jobs">
+      <h2>Jobs</h2>
+      <ul>
+        <li>
+          <time datetime="2020-12-02">(2020-12-02)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/contract-setup-nix-to-build-packages-in-a-different-store-and-support-moving-packages-between-machines/10312">
+            Contract, Setup Nix to build packages in a different store and support moving packages between machines
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-11-19">(2020-11-19)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/job-internal-tooling-sre-at-noredink-nix-haskell-k8s/10100">
+            [Job] Internal Tooling &amp; SRE at NoRedInk - Nix, Haskell, k8s
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-11-17">(2020-11-17)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/sre-nixops-hydra-aws/10063">
+            SRE - NixOps, Hydra, AWS
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-11-12">(2020-11-12)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/job-devops-engineer-munich-or-remote/9985">
+            [JOB] DevOps Engineer (Munich or Remote)
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-10-07">(2020-10-07)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/software-engineer-service-reliability-nix-nixops-hydra/9352">
+            Software Engineer – Service Reliability - Nix, NixOps, Hydra
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-08-25">(2020-08-25)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/job-developer-devops-with-nixos/8753">
+            [JOB] Developer / DevOps with NixOs
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-08-04">(2020-08-04)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/job-devops-engineer-with-nixos-remote-part-time/8445">
+            [JOB] DevOps Engineer with NixOs (Remote - Part Time)
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-07-29">(2020-07-29)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/job-senior-devops-engineer-remote-full-time/8363">
+            [Job] Senior DevOps Engineer (Remote - Full Time)
+          </a>
+        </li>
+      </ul>
+      <a href="https://discourse.nixos.org/c/jobs/23">More Jobs ...</a>
+    </li>
+    <li id="blog-category-planet">
+      <h2>Planet</h2>
+      <ul>
+        <li>
+          <time datetime="2021-01-13">(2021-01-13)</time>
+          <a target="_blank" href="https://blog.nixbuild.net/posts/2021-01-13-finding-non-determinism-with-nixbuild-net.html">
+            nixbuild.net: Finding Non-determinism with nixbuild.net
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-12-29">(2020-12-29)</time>
+          <a target="_blank" href="https://blog.nixbuild.net/posts/2020-12-29-the-first-year.html">
+            nixbuild.net: The First Year
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-12-24">(2020-12-24)</time>
+          <a target="_blank" href="https://blog.cachix.org/posts/2020-12-23-post-mortem-recent-downtime/">
+            Cachix: Postmortem of outage on 20th December
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-12-23">(2020-12-23)</time>
+          <a target="_blank" href="http://ocharles.org.uk/blog/posts/2020-12-23-monad-transformers-and-effects-with-backpack.html">
+            Ollie Charles: Monad Transformers and Effects with Backpack
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-12-16">(2020-12-16)</time>
+          <a target="_blank" href="https://tweag.io/blog/2020-12-16-trustix-announcement/">
+            Tweag I/O: Trustix: Distributed trust and reproducibility tracking for binary caches
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-11-29">(2020-11-29)</time>
+          <a target="_blank" href="http://sandervanderburg.blogspot.com/2020/11/constructing-simple-alerting-system.html">
+            Sander van der Burg: Constructing a simple alerting system with well-known open source projects
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-11-18">(2020-11-18)</time>
+          <a target="_blank" href="https://tweag.io/blog/2020-11-18-nix-cas-self-references/">
+            Tweag I/O: Self-references in a content-addressed Nix
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-11-10">(2020-11-10)</time>
+          <a target="_blank" href="https://blog.cachix.org/posts/2020-11-09-write-access-control-for-binary-caches/">
+            Cachix: Write access control for binary caches
+          </a>
+        </li>
+      </ul>
+      <a href="https://planet.nixos.org">More Planet ...</a>
+    </li>
+    <li id="blog-category-announcements">
+      <h2>Announcements</h2>
+      <ul>
+        <li>
+          <time datetime="2021-01-15">(2021-01-15)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/android-nixpkgs-nix-packaged-android-sdk-updated-daily/11006">
+            Android-nixpkgs: Nix-packaged Android SDK, updated daily
+          </a>
+        </li>
+        <li>
+          <time datetime="2021-01-15">(2021-01-15)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/show-case-for-nix-ld-run-umodified-zoom/11004">
+            Show-case for nix-ld: run umodified zoom
+          </a>
+        </li>
+        <li>
+          <time datetime="2021-01-15">(2021-01-15)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/rfc-42-nixos-settings-options-has-been-accepted/10992">
+            RFC 42 &quot;NixOS settings options&quot; has been accepted
+          </a>
+        </li>
+        <li>
+          <time datetime="2021-01-14">(2021-01-14)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/rust-overlay-a-better-rust-toolchain-provider-and-drop-in-replacement-of-nixpkgs-mozilla/10986">
+            Rust-overlay: a better rust toolchain provider and drop-in replacement of nixpkgs-mozilla
+          </a>
+        </li>
+        <li>
+          <time datetime="2021-01-13">(2021-01-13)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nixbuild-net-can-inject-randomness-into-the-build-filesystem/10974">
+            Nixbuild.net can inject randomness into the build filesystem
+          </a>
+        </li>
+        <li>
+          <time datetime="2021-01-12">(2021-01-12)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/fenix-rust-nightly-toolchains-and-rust-analyzer-nightly-for-nix/10949">
+            Fenix - Rust nightly toolchains and rust analyzer nightly for nix
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-12-29">(2020-12-29)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nixbuild-net-the-first-year/10731">
+            Nixbuild.net - The First Year
+          </a>
+        </li>
+        <li>
+          <time datetime="2020-12-18">(2020-12-18)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/packages-redbeardlab-com-a-public-cernvm-filesystem-bootstrapped-thanks-to-nix/10582">
+            Packages.redbeardlab.com a public CernVM-FileSystem bootstrapped thanks to Nix
+          </a>
+        </li>
+      </ul>
+      <a href="https://discourse.nixos.org/c/announcements/8">More Announcements ...</a>
+    </li>
+  </ul>
+</section>
+[% END %]
