@@ -7,7 +7,7 @@ TEMPLATE = """
       <a href="{url}">
         <img alt="{name}" src="{url}" />
         <h2>{name}</h2>
-        <p>{description}</p>
+        {description}
       </a>
     </li>
 """
