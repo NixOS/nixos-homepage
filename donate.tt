@@ -147,10 +147,10 @@ BIC:  KNABNL2H</pre>
       <div>
         <h2>Acknowledgements</h2>
         <p>The Nix package manager was developed by <a href="https://edolstra.github.io/">Eelco Dolstra</a> as
-          part of his PhD research in the <a href="http://www.cs.uu.nl/wiki/Trace/WebHome">TraCE project</a>,
+          part of his PhD research in the <a href="https://www.nwo.nl/en/projects/638001201">TraCE project</a>,
           funded by the <a href="http://www.jacquard.nl/">Jacquard programme</a>
           of the <a href="http://www.nwo.nl/">Netherlands Organisation for
-            Scientific Research</a> (NWO) and <a href="http://www.serc.nl/">SERC</a>. The first prototype of NixOS was
+            Scientific Research</a> (NWO) and SERC. The first prototype of NixOS was
           developed by <a href="http://www.tjaldur.nl/">Armijn Hemel</a> as
           his master’s thesis project. Hydra, the Nix-based continuous build
           system, was developed as part of the LaQuSo Buildfarm project, funded
