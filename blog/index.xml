@@ -1587,7 +1587,7 @@ $ nix-store -qR /run/current-system | grep openssl
             Functional System
             Configuration Management</em></a> at the <a href="https://www.usenix.org/events/hotos07/">11th Workshop on
           Hot Topics in Operating Systems (HotOS XI)</a>. It gives an
-        overview of the ideas behind <a href="nixos/">NixOS</a>. The
+        overview of the ideas behind <a href="/">NixOS</a>. The
         <a href="http://people.cs.uu.nl/eelco/talks/hotos-may-2007.pdf">slides</a>
         are also available.
       </p>
@@ -1666,7 +1666,7 @@ $ nix-store -qR /run/current-system | grep openssl
       NixOS for x86_64
     </title>
     <description>
-      NixOS now works on x86_64 machines. A 64-bit ISO is <a href="nixos/#download">available</a>.
+      NixOS now works on x86_64 machines. A 64-bit ISO is <a href="download.html">available</a>.
     </description>
   </item>
 
