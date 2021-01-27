@@ -175,7 +175,6 @@ favicon.ico: favicon.png
 	convert -resize 200 $< $@
 
 %.html: %.tt layout.tt common.tt
->>>>>>> origin/master
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --eval_perl \
