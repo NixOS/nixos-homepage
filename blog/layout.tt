@@ -6,7 +6,7 @@
 
 [% WRAPPER atHead %]
 <link rel="alternate" type="application/rss+xml" title="RSS feed" href="/blog/rss.xml" />
-<link rel="stylesheet" href="[% root %]styles/pages/blog.css" type="text/css" />
+<link rel="stylesheet" href="[% root %]styles/blog.css" type="text/css" />
 [% END %]
 
 [% WRAPPER layout.tt title="Blog → $title" handlesLayout=1 %]

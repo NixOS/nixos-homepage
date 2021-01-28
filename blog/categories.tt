@@ -114,6 +114,18 @@
       <h2>Planet</h2>
       <ul>
         <li>
+          <time datetime="2021-01-28">(2021-01-28)</time>
+          <a target="_blank" href="https://nixos.mayflower.consulting/blog/2021/01/28/nextcloud-stateversion/">
+            Mayflower: Safe service upgrades using system.stateVersion
+          </a>
+        </li>
+        <li>
+          <time datetime="2021-01-22">(2021-01-22)</time>
+          <a target="_blank" href="https://tweag.io/blog/2021-01-22-nickel-contracts/">
+            Tweag I/O: Programming with contracts in Nickel
+          </a>
+        </li>
+        <li>
           <time datetime="2021-01-13">(2021-01-13)</time>
           <a target="_blank" href="https://blog.nixbuild.net/posts/2021-01-13-finding-non-determinism-with-nixbuild-net.html">
             nixbuild.net: Finding Non-determinism with nixbuild.net
@@ -149,24 +161,36 @@
             Sander van der Burg: Constructing a simple alerting system with well-known open source projects
           </a>
         </li>
-        <li>
-          <time datetime="2020-11-18">(2020-11-18)</time>
-          <a target="_blank" href="https://tweag.io/blog/2020-11-18-nix-cas-self-references/">
-            Tweag I/O: Self-references in a content-addressed Nix
-          </a>
-        </li>
-        <li>
-          <time datetime="2020-11-10">(2020-11-10)</time>
-          <a target="_blank" href="https://blog.cachix.org/posts/2020-11-09-write-access-control-for-binary-caches/">
-            Cachix: Write access control for binary caches
-          </a>
-        </li>
       </ul>
       <a href="https://planet.nixos.org">More Planet ...</a>
     </li>
     <li id="blog-category-announcements">
       <h2>Announcements</h2>
       <ul>
+        <li>
+          <time datetime="2021-01-25">(2021-01-25)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/rust-nix-templater-tool-to-generate-ready-to-go-nix-build-dev-files-for-rust-projects/11176">
+            Rust-nix-templater: tool to generate ready-to-go Nix build / dev files for Rust projects
+          </a>
+        </li>
+        <li>
+          <time datetime="2021-01-21">(2021-01-21)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/new-nixpkgs-maintainer-wanted-for-trilium-server-gandi-cli-matrix-appservice-slack-and-spacegund/11095">
+            New nixpkgs maintainer wanted for trilium-server, gandi-cli, matrix-appservice-slack and spacegund
+          </a>
+        </li>
+        <li>
+          <time datetime="2021-01-19">(2021-01-19)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/pkgconfig-alias-has-been-officially-aliased/11066">
+            Pkgconfig alias has been officially aliased
+          </a>
+        </li>
+        <li>
+          <time datetime="2021-01-18">(2021-01-18)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/slow-prompt-in-large-git-repos-speed-up-with-lilgit/11037">
+            Slow prompt in large git repos? speed up with lilgit
+          </a>
+        </li>
         <li>
           <time datetime="2021-01-15">(2021-01-15)</time>
           <a target="_blank" href="https://discourse.nixos.org/t/android-nixpkgs-nix-packaged-android-sdk-updated-daily/11006">
@@ -189,30 +213,6 @@
           <time datetime="2021-01-14">(2021-01-14)</time>
           <a target="_blank" href="https://discourse.nixos.org/t/rust-overlay-a-better-rust-toolchain-provider-and-drop-in-replacement-of-nixpkgs-mozilla/10986">
             Rust-overlay: a better rust toolchain provider and drop-in replacement of nixpkgs-mozilla
-          </a>
-        </li>
-        <li>
-          <time datetime="2021-01-13">(2021-01-13)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nixbuild-net-can-inject-randomness-into-the-build-filesystem/10974">
-            Nixbuild.net can inject randomness into the build filesystem
-          </a>
-        </li>
-        <li>
-          <time datetime="2021-01-12">(2021-01-12)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/fenix-rust-nightly-toolchains-and-rust-analyzer-nightly-for-nix/10949">
-            Fenix - Rust nightly toolchains and rust analyzer nightly for nix
-          </a>
-        </li>
-        <li>
-          <time datetime="2020-12-29">(2020-12-29)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nixbuild-net-the-first-year/10731">
-            Nixbuild.net - The First Year
-          </a>
-        </li>
-        <li>
-          <time datetime="2020-12-18">(2020-12-18)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/packages-redbeardlab-com-a-public-cernvm-filesystem-bootstrapped-thanks-to-nix/10582">
-            Packages.redbeardlab.com a public CernVM-FileSystem bootstrapped thanks to Nix
           </a>
         </li>
       </ul>

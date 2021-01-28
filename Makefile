@@ -232,6 +232,7 @@ SITE_STYLES_LESS := $(wildcard site-styles/*.less) $(wildcard site-styles/**/*.l
 
 STYLES = \
 	styles/fonts/*.ttf \
+	styles/blog.css \
 	styles/community.css \
 	styles/index.css
 
@@ -252,12 +253,12 @@ styles/fonts/%.ttf: $(wildcard site-styles/common-styles/fonts/*)
 	mkdir -p styles/fonts
 	cp site-styles/common-styles/fonts/*.ttf styles/fonts
 
-styles/community.css: tmp.styles $(SITE_STYLES_LESS)
+styles/%.css: tmp.styles $(SITE_STYLES_LESS)
 	mkdir -vp styles
 	lessc --verbose \
-		--source-map=styles/community.css.map \
-		tmp.styles/pages/community.private.less \
-		styles/community.css;
+		--source-map=styles/$*.css.map \
+		tmp.styles/pages/$*.private.less \
+		styles/$*.css;
 
 styles/index.css: tmp.styles $(SITE_STYLES_LESS)
 	mkdir -vp styles
