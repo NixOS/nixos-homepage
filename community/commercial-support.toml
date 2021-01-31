@@ -1,87 +1,103 @@
 [[commercial-provider]]
 name = "Black River Software"
 url = "http://blackriversoft.com/"
-locations = []
-logo = ""
+locations = ["Ohio, USA"]
+logo = "/community/commercial-support-logos/black-river-software.png"
 description = """
+Black River Software offers custom software development, software architecture
+consulting, and build and deployment engineering services.
 """
 
 [[commercial-provider]]
 name = "Enlambda"
 url = "https://www.enlambda.com/"
-locations = []
-logo = ""
+locations = ["Remote", "Estonia"]
+logo = "/community/commercial-support-logos/enlambda.png"
 description = """
+Turning operational issues into development tasks using Nix since 2013.
 """
 
 [[commercial-provider]]
 name = "five binaries"
 url = "https://www.fivebinaries.com/"
-locations = []
-logo = ""
+locations = ["Tallinn, Estonia", "Prague, Czech Republic"]
+logo = "/community/commercial-support-logos/5inaries.png"
 description = """
+Five Binaries are an infrastructure development company focused on creating
+customized highly reliable solutions for blockchain-powered industries.
 """
 
 [[commercial-provider]]
 name = "Helsinki Systems"
 url = "https://helsinki-systems.de"
-locations = []
-logo = ""
+locations = ["Stuttgart, Germany"]
+logo = "/community/commercial-support-logos/helsinki-systems.png"
 description = """
+Your partner for hosting, networks and IT solutions running on NixOS. We have
+multiple years of NixOS and decades of Linux experience to aid your NixOS
+integration and administration.
 """
 
 [[commercial-provider]]
 name = "Mayflower"
 url = "https://nixos.mayflower.consulting"
-locations = []
-logo = ""
+locations = ["Munich, Germany", "Berlin, Germany", "Würzburg, Germany"]
+logo = "/community/commercial-support-logos/mayflower.png"
 description = """
+We are Mayflower. We build infrastructure. Declarative & reproducible.
 """
 
 [[commercial-provider]]
 name = "nixcloud"
 url = "https://nixcloud.io/"
 locations = []
-logo = ""
+logo = "/community/commercial-support-logos/nixcloud.png"
 description = """
 """
 
 [[commercial-provider]]
 name = "NumTide Ltd"
 url = "https://www.numtide.com/"
-locations = []
-logo = ""
+locations = ["London, UK"]
+logo = "/community/commercial-support-logos/numtide.png"
 description = """
+DevOps consulting by Developers.
 """
 
 [[commercial-provider]]
 name = "Obsidian Systems"
 url = "https://obsidian.systems"
-locations = []
-logo = ""
+locations = ["New York, USA"]
+logo = "/community/commercial-support-logos/obsidian-systems.svg"
 description = """
+Software consultancy specializing in Haskell, Nix, curiosity, and innovation.
 """
 
 [[commercial-provider]]
 name = "Serokell"
 url = "https://serokell.io/"
-locations = []
-logo = ""
+locations = ["Remote", "Tallinn, Estonia"]
+logo = "/community/commercial-support-logos/serokell.png"
 description = """
+Serokell is a custom software engineering company that creates innovative
+solutions for complex problems. We do software development, consulting, and
+auditing.
 """
 
 [[commercial-provider]]
 name = "Tweag"
 url = "https://tweag.io/"
 locations = []
-logo = ""
+logo = "/community/commercial-support-logos/"
 description = """
 """
 
 [[commercial-provider]]
 name = "Immutable Solutions"
 url = "https://immutablesolutions.com/"
-locations = []
-logo = ""
+locations = ["Sweden"]
+logo = "/community/commercial-support-logos/immutable-solutions.png"
 description = """
+Nix specialists helping companies design, develop and deploy systems in a
+declarative fashion.
 """
