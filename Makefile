@@ -217,7 +217,7 @@ blog/categories.html: blog/layout.tt scripts/update_blog.py
 index.html: blog/announcements.xml blog/index.html
 
 
-check: $(HTML)
+check: all
 	bash ./scripts/check-links.sh
 
 
