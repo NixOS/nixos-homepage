@@ -20,6 +20,14 @@ def sanitize_weekly_news(summary):
         "<h1>Contribute to NixOS Weekly Newsletter</h1>",
         "<h2>Contribute to NixOS Weekly Newsletter</h2>",
     )
+    summary = summary.replace(
+        "https//twitter.com/garbas",
+        "https://twitter.com/garbas",
+    )
+    summary = summary.replace(
+        'src="images/',
+        'src="https://weekly.nixos.org/images/',
+    )
     return summary
 
 

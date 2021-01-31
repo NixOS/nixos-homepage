@@ -11,6 +11,18 @@
   force = true
 
 [[redirects]]
+  from = "/news.html"
+  to = "/blog/announcements.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/archive.html"
+  to = "/blog/announcements.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/governance.html"
   to = "/community/index.html"
   status = 302
