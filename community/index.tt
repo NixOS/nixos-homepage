@@ -1,5 +1,5 @@
 [% WRAPPER atHead %]
-  <link rel="stylesheet" href="[% root %]styles/pages/community.css" type="text/css" />
+  <link rel="stylesheet" href="[% root %]styles/community.css" type="text/css" />
 [% END %]
 [% WRAPPER layout.tt title="Community" handlesLayout=1 %]
 
@@ -262,7 +262,7 @@
   </div>
 </section>
 
-<section class="governance-foundation">
+<section id="foundation" class="governance-foundation">
   <div>
     <div>
       <h2>NixOS Foundation</h2>

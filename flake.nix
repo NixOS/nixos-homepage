@@ -1,4 +1,4 @@
-{
+rec {
   description = "The nixos.org homepage";
 
   # This is used to build the site.
@@ -76,8 +76,8 @@
       shuffle =
         mkPyScript (with pkgs.python3Packages; [ click toml ]) "shuffle";
 
-      update_blog_categories =
-        mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser ]) "update-blog-categories";
+      update_blog =
+        mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser ]) "update-blog";
 
     in rec {
       defaultPackage."${system}" = packages."${system}".homepage;
@@ -85,13 +85,12 @@
       checks."${system}".build = defaultPackage."${system}";
 
       packages."${system}" = rec {
-        siteStyles = pkgs.callPackage ./site-styles { inherit nixos-common-styles system; };
-
         homepage = pkgs.stdenv.mkDerivation {
           name = "nixos-homepage-${self.lastModifiedDate}";
 
           src = self;
 
+          preferLocalBuild = true;
           enableParallelBuilding = true;
 
           buildInputs = with pkgs; [
@@ -102,7 +101,9 @@
               libxml2
               libxslt
               linkchecker
-              nix
+              nixFlakes
+              nixos-common-styles.packages."${system}".embedSVG
+              nodePackages.less
               perl
               perlPackages.AppConfig
               perlPackages.JSON
@@ -110,10 +111,9 @@
               perlPackages.TemplatePluginJSONEscape
               perlPackages.TemplateToolkit
               perlPackages.XMLSimple
-              python3Packages.livereload
               serve
               shuffle
-              update_blog_categories
+              update_blog
               xhtml1
               xidel
             ];
@@ -121,6 +121,9 @@
           preBuild = ''
             export NIX_DB_DIR=$TMPDIR
             export NIX_STATE_DIR=$TMPDIR
+
+            rm -f site-styles/common-styles
+            ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
           '';
 
           makeFlags =
@@ -137,7 +140,6 @@
               "NIXOS_UNSTABLE_SERIES=${pkgs-unstable.lib.trivial.release}"
 
               "NIXOS_AMIS=${nixosAmis}"
-              "SITE_STYLES=${siteStyles}"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
               "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}/html"
 
@@ -165,9 +167,11 @@
             export NIXOS_UNSTABLE_SERIES="${pkgs-unstable.lib.trivial.release}"
 
             export NIXOS_AMIS="${nixosAmis}"
-            # SITE_STYLES skipped by design.
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
             export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}/html"
+
+            rm -f site-styles/common-styles
+            ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
 
             echo ""
             echo "  To start developing run:"
@@ -181,25 +185,5 @@
           '';
         };
       };
-
-      nixosConfigurations.container = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules =
-          [ ({ lib, ... }:
-            { system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-              boot.isContainer = true;
-              networking.useDHCP = false;
-              networking.firewall.allowedTCPPorts = [ 80 ];
-              services.httpd = {
-                enable = true;
-                adminAddr = "admin@example.org";
-                virtualHosts.default = {
-                  documentRoot = packages."${system}".homepage;
-                };
-              };
-            })
-          ];
-      };
-
   };
 }
