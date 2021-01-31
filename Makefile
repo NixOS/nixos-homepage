@@ -267,7 +267,7 @@ all: $(STYLES)
 
 ### Asciinema demos
 
-all: $(DEMOS)
+index.html: $(DEMOS)
 
 demos/%.svg: demos/%.scenario
 	echo "Generating $@ and $(patsubst %.svg,%.cast,$@) ..."
