@@ -8,7 +8,7 @@ default: all
 HTML = \
   404.html \
   blog/index.html \
-  blog/archive.html \
+  blog/announcements.html \
   blog/categories.html \
   commercial-support.html \
   community.html \
@@ -200,24 +200,21 @@ favicon.ico: favicon.png
 # -- /blog section of the website --------------------------------------------
 #
 
-blog/index.html: blog/index.html.in
-
-blog/index.html.in: blog/rss.xml blog/index.xsl
-	xsltproc --param maxItem 12 blog/index.xsl blog/index.xml > $@.tmp
+blog/announcements-rss.xml: blog/announcements.xml blog/announcements-rss.xsl
+	xsltproc blog/announcements-rss.xsl blog/announcements.xml > $@.tmp
 	mv $@.tmp $@
 
-blog/archive.html: blog/archive.html.in
+blog/announcements.html: blog/announcements.html.in blog/layout.tt
 
-blog/archive.html.in: blog/rss.xml blog/index.xsl
-	xsltproc --param maxItem 10000 blog/index.xsl blog/index.xml > $@.tmp
+blog/announcements.html.in: blog/announcements-rss.xml blog/announcements.xml blog/announcements.xsl
+	xsltproc --param maxItem 10000 blog/announcements.xsl blog/announcements.xml > $@.tmp
 	mv $@.tmp $@
 
-blog/rss.xml: blog/index.xml blog/rss.xsl
-	xsltproc blog/rss.xsl blog/index.xml > $@.tmp
-	mv $@.tmp $@
+blog/index.html: blog/layout.tt scripts/update_blog.py
 
+blog/categories.html: blog/layout.tt scripts/update_blog.py
 
-index.html: $(DEMOS) blog/rss.xml blog/index.html
+index.html: blog/announcements.xml blog/index.html
 
 
 check: $(HTML)

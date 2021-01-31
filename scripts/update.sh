@@ -12,4 +12,4 @@ nix flake update \
   --update-input nix-dev
 
 echo "Updating blog categories..."
-nix shell --command "update-blog-categories --output blog/categories.tt"
+nix shell --command "update-blog --output-dir blog/"

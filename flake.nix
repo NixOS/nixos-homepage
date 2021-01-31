@@ -70,14 +70,14 @@ rec {
         in
           pkgs.writeShellScriptBin "serve" ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/run.py" "$@"'';
 
-      update_blog_categories =
+      update_blog =
         let
           pythonEnv = pkgs.python3.buildEnv.override {
             extraLibs = with pkgs.python3Packages; [ aiohttp click feedparser ];
           };
         in
-          #pkgs.writeShellScriptBin "update-blog-categories" ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/update_blog_categories.py" "$@"'';
-          pkgs.writeShellScriptBin "update-blog-categories" ''exec "${pythonEnv}/bin/python" "$@"'';
+          pkgs.writeShellScriptBin "update-blog" ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/update_blog.py" "$@"'';
+          #pkgs.writeShellScriptBin "update-blog" ''exec "${pythonEnv}/bin/python" "$@"'';
 
     in rec {
       defaultPackage."${system}" = packages."${system}".homepage;
@@ -112,7 +112,7 @@ rec {
               perlPackages.TemplateToolkit
               perlPackages.XMLSimple
               serve
-              update_blog_categories
+              update_blog
               xhtml1
               xidel
             ];

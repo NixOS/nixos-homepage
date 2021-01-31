@@ -23,12 +23,15 @@
           <h2>
             <xsl:apply-templates select="title/child::node()" mode="id"/>
           </h2>
-          <time>
-            <xsl:attribute name="datetime">
+          <span>
+            &#8212; Published on
+            <time>
+              <xsl:attribute name="datetime">
+                <xsl:value-of select="substring(pubDate, 6, 11)" />
+              </xsl:attribute>
               <xsl:value-of select="substring(pubDate, 6, 11)" />
-            </xsl:attribute>
-            <xsl:value-of select="substring(pubDate, 6, 11)" />
-          </time>
+            </time>
+          </span>
         </div>
       </section>
 

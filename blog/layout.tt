@@ -5,7 +5,7 @@
 [% END %]
 
 [% WRAPPER atHead %]
-<link rel="alternate" type="application/rss+xml" title="RSS feed" href="/blog/rss.xml" />
+<link rel="alternate" type="application/rss+xml" title="RSS feed" href="/blog/announcements-rss.xml" />
 <link rel="stylesheet" href="[% root %]styles/blog.css" type="text/css" />
 [% END %]
 
@@ -17,10 +17,9 @@
 
 <section class="blog-submenu">
   <ul>
-    [% INCLUDE navigationLink href="blog/index.html" title="Latest" %]
-    [% INCLUDE navigationLink href="blog/archive.html" title="All Posts" %]
+    [% INCLUDE navigationLink href="blog/index.html" title="Weekly news" %]
+    [% INCLUDE navigationLink href="blog/announcements.html" title="Announcements" %]
     [% INCLUDE navigationLink href="blog/categories.html" title="Categories" %]
-    [% INCLUDE navigationLink href="blog/rss.xml" title="RSS feed" %]
   </ul>
 </section>
 
