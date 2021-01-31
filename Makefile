@@ -7,34 +7,34 @@ default: all
 
 HTML = \
   404.html \
-  blog/index.html \
   blog/announcements.html \
   blog/categories.html \
-  community/index.html \
+  blog/index.html \
   community/commercial-support.html \
+  community/index.html \
+  community/teams/discourse.html \
+  community/teams/infrastructure.html \
+  community/teams/marketing.html \
+  community/teams/nixcon.html \
+  community/teams/nixos_release.html \
+  community/teams/rfc-steering-committee.html \
+  community/teams/security.html \
   demos/index.html \
   donate.html \
   download.html \
   explore.html \
-  guides/deploying-nixos-using-terraform.html \
   guides/ad-hoc-developer-environments.html \
   guides/building-and-running-docker-images.html \
   guides/continuous-integration-github-actions.html \
   guides/contributing.html \
   guides/declarative-and-reproducible-developer-environments.html \
+  guides/deploying-nixos-using-terraform.html \
   guides/dev-environment.html \
   guides/how-nix-works.html \
   guides/install-nix.html \
   guides/towards-reproducibility-pinning-nixpkgs.html \
   index.html \
-  learn.html \
-  teams/discourse.html \
-  teams/infrastructure.html \
-  teams/marketing.html \
-  teams/nixcon.html \
-  teams/nixos_release.html \
-  teams/rfc-steering-committee.html \
-  teams/security.html
+  learn.html
 
 DEMOS = \
   demos/cover.svg \
@@ -210,9 +210,9 @@ blog/announcements.html.in: blog/announcements-rss.xml blog/announcements.xml bl
 	xsltproc --param maxItem 10000 blog/announcements.xsl blog/announcements.xml > $@.tmp
 	mv $@.tmp $@
 
-blog/index.html: blog/layout.tt scripts/update_blog.py
+blog/index.html: blog/layout.tt
 
-blog/categories.html: blog/layout.tt scripts/update_blog.py
+blog/categories.html: blog/layout.tt
 
 index.html: blog/announcements-rss.xml blog/index.html
 
