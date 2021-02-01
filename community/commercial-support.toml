@@ -50,7 +50,7 @@ We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
 [[commercial-provider]]
 name = "nixcloud"
 url = "https://nixcloud.io/"
-locations = []
+locations = ["Tübingen, Germany"]
 logo = "/community/commercial-support-logos/nixcloud.png"
 description = """
 """
@@ -87,9 +87,12 @@ auditing.
 [[commercial-provider]]
 name = "Tweag"
 url = "https://tweag.io/"
-locations = []
-logo = "/community/commercial-support-logos/"
+locations = ["Remote", "Paris, France"]
+logo = "/community/commercial-support-logos/tweag.svg"
 description = """
+Scale your engineering power. We enable deep-tech startups to achieve their
+vision, from research to product delivery. We apply mathematics, computer
+science and open source methodologies to advance software engineering.
 """
 
 [[commercial-provider]]

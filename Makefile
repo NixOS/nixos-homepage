@@ -224,7 +224,7 @@ index.html: blog/announcements-rss.xml blog/index.html
 community/commercial-support.html: community/commercial-support.html.in
 
 community/commercial-support.html.in: community/commercial-support.toml
-	shuffle --input community/commercial-support.toml > $@
+	shuffle-commercial-providers --input community/commercial-support.toml > $@
 
 
 ### Check

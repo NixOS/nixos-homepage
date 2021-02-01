@@ -73,8 +73,8 @@ rec {
       serve =
         mkPyScript (with pkgs.python3Packages; [ click livereload ]) "serve";
 
-      shuffle =
-        mkPyScript (with pkgs.python3Packages; [ click toml ]) "shuffle";
+      shuffle_commercial_providers =
+        mkPyScript (with pkgs.python3Packages; [ click toml ]) "shuffle-commercial-providers";
 
       update_blog =
         mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser ]) "update-blog";
@@ -112,7 +112,7 @@ rec {
               perlPackages.TemplateToolkit
               perlPackages.XMLSimple
               serve
-              shuffle
+              shuffle_commercial_providers
               update_blog
               xhtml1
               xidel
