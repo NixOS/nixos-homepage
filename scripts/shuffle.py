@@ -5,7 +5,7 @@ import toml
 TEMPLATE = """
     <li>
       <a href="{url}">
-        <img alt="{name}" src="{url}" />
+        <img alt="{name}" src="{logo}" />
         <h2>{name}</h2>
         {locations}
         {description}
