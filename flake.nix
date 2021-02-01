@@ -71,7 +71,7 @@ rec {
           pkgs.writeShellScriptBin name ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/${name}.py" "$@"'';
 
       serve =
-        mkPyScript [] "serve";
+        mkPyScript (with pkgs.python3Packages; [ click livereload ]) "serve";
 
       shuffle =
         mkPyScript (with pkgs.python3Packages; [ click toml ]) "shuffle";
