@@ -86,7 +86,7 @@ Of course, all dependencies to the build are listed in &lt;code class=&quot;lang
 What this means for us in Nix is that we have no good unit of incrementality — everything has to be built together — while Poetry can build dependencies separately.&lt;/p&gt;
 &lt;h3&gt;Bespoke formats&lt;/h3&gt;
 &lt;p&gt;Go modules use its own Go-like file format, while Poetry uses &lt;a href=&quot;https://en.wikipedia.org/wiki/TOML&quot;&gt;TOML&lt;/a&gt; to serialize both its manifest and lock files.&lt;/p&gt;
-&lt;p&gt;While this is format is simple and writing a parser for it isn’t hard, it makes the lives of tooling authors harder.
+&lt;p&gt;While this format is simple and writing a parser for it isn’t hard, it makes the lives of tooling authors harder.
 It would be much easier if a standard format for data interchange was used, rather than a custom format.&lt;/p&gt;
 &lt;h3&gt;Bespoke hashes&lt;/h3&gt;
 &lt;p&gt;The next problem with Go modules is its use of a custom hashing mechanism that’s fundamentally incompatible with how Nix hashes paths.&lt;/p&gt;
@@ -96,7 +96,7 @@ I don’t see how Go modules could have done this any better, but the situation 
 &lt;h3&gt;Dynamic package name resolving&lt;/h3&gt;
 &lt;p&gt;In the previous example, I showed how a Go import path looks like.
 Sadly it turns out that the surface simplicity of those paths hide a lot of underlying logic.&lt;/p&gt;
-&lt;p&gt;Internally, these import paths are handled by the &lt;a href=&quot;https://godoc.org/golang.org/x/tools/go/vcs#RepoRoot&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;RepoRootForImport&lt;/code&gt;&lt;/a&gt; family of functions in the &lt;code class=&quot;language-text&quot;&gt;vcs&lt;/code&gt; package, which maps import paths to repository URLs and VCS types.
+&lt;p&gt;Internally, these import paths are handled by the &lt;a href=&quot;https://godoc.org/golang.org/x/tools/go/vcs#RepoRoot&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;RepoRootForImport&lt;/code&gt;&lt;/a&gt; family of functions in the &lt;code class=&quot;language-text&quot;&gt;vcs&lt;/code&gt; (version control system) package, which maps import paths to repository URLs and VCS types.
 Some of these are matched statically using regex but others use active probing.&lt;/p&gt;
 &lt;p&gt;This is a true showstopper for a pure-Nix Go packaging solution, and the reason why Gomod2nix is a code generation tool — we don’t have network access in the Nix evaluator, making it impossible to correctly resolve VCS from a Nix evaluation.&lt;/p&gt;
 &lt;h1&gt;Solutions to go modules packaging&lt;/h1&gt;
@@ -106,7 +106,7 @@ With these in mind, let’s discuss how Go packaging solutions were conceived.&l
 &lt;p&gt;My first attempt at creating a tool for packaging Go modules was &lt;a href=&quot;https://github.com/nix-community/vgo2nix&quot;&gt;vgo2nix&lt;/a&gt;, another code generation tool.
 It was written very shortly after modules were announced, and at the time the tooling support for them wasn’t good.
 For example, there wasn’t a parser for &lt;code class=&quot;language-text&quot;&gt;go.mod&lt;/code&gt; published back then.&lt;/p&gt;
-&lt;p&gt;Being based on the older Nixpkgs Go abstraction &lt;code class=&quot;language-text&quot;&gt;buildGoPackage&lt;/code&gt; this method emulates a &lt;code class=&quot;language-text&quot;&gt;$GOPATH&lt;/code&gt; based builds that make some assumptions that are not true.&lt;/p&gt;
+&lt;p&gt;It was based on the older Nixpkgs Go abstraction &lt;code class=&quot;language-text&quot;&gt;buildGoPackage&lt;/code&gt;, emulating a &lt;code class=&quot;language-text&quot;&gt;$GOPATH&lt;/code&gt; based build unfortunately with some assumptions that are not true.&lt;/p&gt;
 &lt;p&gt;Let’s again look at an excerpt from &lt;code class=&quot;language-text&quot;&gt;go.sum&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;github.com/Azure/go-autorest/autorest v0.9.0/go.mod h1:xyHB1BMZT0cuDHU7I0+g046+BFDTQ8rEZB0s4Yfa6bI=
 github.com/Azure/go-autorest/autorest v0.9.3/go.mod h1:GsRuLYvwzLjjjRoWEIyMUaYq8GNUx2nRB378IPt/1p0=
@@ -131,8 +131,8 @@ buildGoModule {
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;buildGoModule&lt;/code&gt; package is designed around fixed-output derivations, which means that a single derivation is created where all the dependencies of the package you want to build are wrapped, and only a single hash of the derivation is specified.
 It fetches all dependencies in the fixed output, creating a &lt;a href=&quot;https://golang.org/ref/mod#vendoring&quot;&gt;vendor&lt;/a&gt; directory which is used for the build.&lt;/p&gt;
-&lt;p&gt;This has several issues, most notably there is no sharing of dependencies between packages that depends on the same Go module.&lt;/p&gt;
-&lt;p&gt;The other notable issue is that it forces developers to remember to edit the &lt;code class=&quot;language-text&quot;&gt;vendorSha256&lt;/code&gt; attribute separately from the already existing &lt;code class=&quot;language-text&quot;&gt;hash&lt;/code&gt;/&lt;code class=&quot;language-text&quot;&gt;sha256&lt;/code&gt; attribute on the derivation.
+&lt;p&gt;This has several issues, most notably there is no sharing of dependencies between packages that depend on the same Go module.&lt;/p&gt;
+&lt;p&gt;The other notable issue is that it forces developers to remember editing the &lt;code class=&quot;language-text&quot;&gt;vendorSha256&lt;/code&gt; attribute separately from the already existing &lt;code class=&quot;language-text&quot;&gt;hash&lt;/code&gt;/&lt;code class=&quot;language-text&quot;&gt;sha256&lt;/code&gt; attribute on the derivation.
 Forgetting to do so can not only lead to incorrect builds but also be frustrating when working with larger packages that takes a long time to build, and only very late in the build notice that something was broken so you have to start over from scratch.&lt;/p&gt;
 &lt;p&gt;Because of the lack of hash granularity the build needs to clone &lt;em&gt;every&lt;/em&gt; dependency every time the &lt;code class=&quot;language-text&quot;&gt;vendorSha256&lt;/code&gt; is invalidated, and cannot use the cache from previous builds.&lt;/p&gt;
 &lt;p&gt;Fixed-output derivations can also be considered an impurity, and there is &lt;a href=&quot;https://github.com/NixOS/nix/issues/2270&quot;&gt;a push to restrict them&lt;/a&gt;.&lt;/p&gt;
@@ -140,7 +140,7 @@ Forgetting to do so can not only lead to incorrect builds but also be frustratin
 &lt;p&gt;Approach-wise &lt;a href=&quot;https://github.com/tweag/gomod2nix&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;gomod2nix&lt;/code&gt;&lt;/a&gt; positions itself right between &lt;code class=&quot;language-text&quot;&gt;vgo2nix&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;buildGoModule&lt;/code&gt;.
 It’s still a code generation tool like &lt;code class=&quot;language-text&quot;&gt;vgo2nix&lt;/code&gt;, but fully embraces the Go modules world and only supports Go modules based builds — the old &lt;code class=&quot;language-text&quot;&gt;GOPATH&lt;/code&gt; way is unsupported.
 It uses the same vendoring approach that &lt;code class=&quot;language-text&quot;&gt;buildGoModule&lt;/code&gt; uses, but instead of vendoring the actual sources in a derivation, it uses symlinks instead.
-In that way, dependencies can be fetched separately, and identical dependencies source trees can be shared between multiple different packages in the Nix store.&lt;/p&gt;
+In that way, dependencies can be fetched separately, and identical dependency source trees can be shared between multiple different packages in the Nix store.&lt;/p&gt;
 &lt;p&gt;From a user perspective the workflow is largely similar to &lt;code class=&quot;language-text&quot;&gt;vgo2nix&lt;/code&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;You write a basic expression looking like:&lt;/li&gt;
