@@ -9,6 +9,169 @@
 	<atom:link rel="self" href="https://planet.nixos.org/rss20.xml" type="application/rss+xml"/>
 
 <item>
+	<title>Tweag I/O: Announcing Gomod2nix</title>
+	<guid isPermaLink="true">https://tweag.io/blog/2021-03-04-gomod2nix/</guid>
+	<link>https://tweag.io/blog/2021-03-04-gomod2nix/</link>
+	<description>&lt;p&gt;I’m very pleased to announce &lt;a href=&quot;https://github.com/tweag/gomod2nix&quot;&gt;Gomod2nix&lt;/a&gt;, a new tool to create Go packages with Nix!&lt;/p&gt;
+&lt;p&gt;Gomod2nix is a code generation tool whose main focus is addressing the correctness and usability concerns I have with the current Go packaging solutions.
+It offers a composable override interface, which allows overrides to be shared across projects, simplifying the packaging of complex packages.
+As a bonus, it also boasts much better cache hit rates than other similar solutions, owing to not abusing fixed-output derivations.&lt;/p&gt;
+&lt;p&gt;I also took the opportunity of this new package to address some long-standing annoyances with existing Go Nix tooling. For instance Gomod2nix disables &lt;a href=&quot;https://dave.cheney.net/2016/01/18/cgo-is-not-go&quot;&gt;CGO&lt;/a&gt; by default, this let me enable static Go binaries by default.
+Changing the defaults in existing tooling would be very difficult as it would break a lot of existing packages, especially those maintained outside of Nixpkgs, which depend on the present behavior.&lt;/p&gt;
+&lt;p&gt;In order to motivate this new tool, let’s take a look at how Go dependency management evolved.&lt;/p&gt;
+&lt;p&gt;The developmentent of &lt;a href=&quot;https://github.com/tweag/trustix&quot;&gt;Trustix&lt;/a&gt; (which Gomod2nix was developed for) is funded by &lt;a href=&quot;https://nlnet.nl/project/Trustix&quot;&gt;NLNet foundation&lt;/a&gt; and the European Commission’s &lt;a href=&quot;https://ngi.eu&quot;&gt;Next Generation Internet&lt;/a&gt; programme through the &lt;a href=&quot;https://nlnet.nl/PET&quot;&gt;NGI Zero PET&lt;/a&gt; (privacy and trust enhancing technologies) fund.&lt;/p&gt;
+&lt;h1&gt;A history of Go packaging&lt;/h1&gt;
+&lt;p&gt;In Go you don’t add dependencies to a manifest, but instead you add a dependency to your project by simply adding an import to a source file:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; main
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;fmt&quot;&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&quot;github.com/tweag/foo&quot;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;foo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;SomeVar&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and the &lt;code class=&quot;language-text&quot;&gt;go&lt;/code&gt; tool will figure out how to fetch this dependency.&lt;/p&gt;
+&lt;p&gt;From the beginning Go didn’t have package management in the traditional sense.
+Instead it enforced a directory structure that mimics the import paths.
+A project called &lt;code class=&quot;language-text&quot;&gt;github.com/tweag/foo&lt;/code&gt; that depends on &lt;code class=&quot;language-text&quot;&gt;github.com/tweag/bar&lt;/code&gt; expects to be located in a directory structure looking like:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;$GOPATH/github.com/tweag/foo
+$GOPATH/github.com/tweag/foo/main.go
+$GOPATH/github.com/tweag/bar
+$GOPATH/github.com/tweag/bar/main.go&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This may not look so bad in this very simple example, but since this structure is not only enforced for &lt;em&gt;your&lt;/em&gt; packages but also your dependencies, this quickly becomes messy.
+The &lt;code class=&quot;language-text&quot;&gt;$GOPATH&lt;/code&gt; mechanism has been one of the truly sore spots of Go development.
+Under this packaging paradigm you are expected to always use the latest Git master of all your dependencies and there is no version locking.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://golang.github.io/dep/&quot;&gt;Dep&lt;/a&gt; was the first official packaging experiment for Go.
+This tool improved upon &lt;code class=&quot;language-text&quot;&gt;$GOPATH&lt;/code&gt; not by removing it, but by hiding that complexity from the user entirely.
+Besides that, it added lock files and a SAT dependency solver.&lt;/p&gt;
+&lt;p&gt;Finally, armed with the learnings and some critique of Dep, the Go team decided to develop a new simpler solution — Go modules.
+It addressed a number of perceived problems with Dep, like the fact that the use of semver and SAT solvers are far too complicated for the requirements Go has.
+As of now, Dep is deprecated, and Go modules is the solution I developed against.&lt;/p&gt;
+&lt;h1&gt;A tale of two lock files&lt;/h1&gt;
+&lt;p&gt;Originally, I set out to design &lt;code class=&quot;language-text&quot;&gt;gomod2nix&lt;/code&gt; in the same way as &lt;a href=&quot;https://github.com/nix-community/poetry2nix&quot;&gt;poetry2nix&lt;/a&gt;, a Python packaging solution for Nix.
+In &lt;code class=&quot;language-text&quot;&gt;poetry2nix&lt;/code&gt; one refers directly to a Poetry lock file from Nix, and &lt;code class=&quot;language-text&quot;&gt;poetry2nix&lt;/code&gt; does all the job needed to create the Nix package, which is very convenient.&lt;/p&gt;
+&lt;p&gt;However, this wasn’t possible here because of the design of Go modules, for reasons that I will explain below.
+As a consequence, &lt;code class=&quot;language-text&quot;&gt;gomod2nix&lt;/code&gt; is a Nix code generation tool.
+One feeds lock files to it, and it generates Nix expressions defining the corresponding packages.&lt;/p&gt;
+&lt;p&gt;In the following, I will compare the Poetry and Go lock files, and show which limitations the Go file format and import mechanism imposes upon us.&lt;/p&gt;
+&lt;h3&gt;Exposed dependency graphs&lt;/h3&gt;
+&lt;p&gt;First, let’s look at an excerpt of &lt;a href=&quot;https://python-poetry.org/&quot;&gt;Poetry&lt;/a&gt;’s lock file:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-toml&quot;&gt;&lt;code class=&quot;language-toml&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;cachecontrol&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0.12.6&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;httplib2 caching for requests&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;category&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;main&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;optional&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;python-versions&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&amp;gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*&quot;&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token table class-name&quot;&gt;package.dependencies&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;lockfile&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token key property&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&amp;gt;=0.9&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token key property&quot;&gt;optional&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token key property&quot;&gt;markers&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;extra == \&quot;filecache\&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;msgpack&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&amp;gt;=0.5.2&quot;&lt;/span&gt;
+&lt;span class=&quot;token key property&quot;&gt;requests&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And also at &lt;code class=&quot;language-text&quot;&gt;go.sum&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
+github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
+github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/stretchr/objx v0.1.0 h1:4G4v2dO3VZwixGIRoQ5Lfboy6nUhCyYzaqnIAPPhYs4=
+github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
+gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c h1:dUUwHk2QECo/6vqA44rthZ8ie2QXMNeKRTHCNY2nXvo=
+gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After squinting at these files for a while we can already see some radical differences in semantics, most notably that &lt;code class=&quot;language-text&quot;&gt;go.sum&lt;/code&gt; is structured as a flat list rather than a graph.
+Of course, all dependencies to the build are listed in &lt;code class=&quot;language-text&quot;&gt;go.sum&lt;/code&gt;, but we don’t know what depends on what.
+What this means for us in Nix is that we have no good unit of incrementality — everything has to be built together — while Poetry can build dependencies separately.&lt;/p&gt;
+&lt;h3&gt;Bespoke formats&lt;/h3&gt;
+&lt;p&gt;Go modules use its own Go-like file format, while Poetry uses &lt;a href=&quot;https://en.wikipedia.org/wiki/TOML&quot;&gt;TOML&lt;/a&gt; to serialize both its manifest and lock files.&lt;/p&gt;
+&lt;p&gt;While this is format is simple and writing a parser for it isn’t hard, it makes the lives of tooling authors harder.
+It would be much easier if a standard format for data interchange was used, rather than a custom format.&lt;/p&gt;
+&lt;h3&gt;Bespoke hashes&lt;/h3&gt;
+&lt;p&gt;The next problem with Go modules is its use of a custom hashing mechanism that’s fundamentally incompatible with how Nix hashes paths.&lt;/p&gt;
+&lt;p&gt;As explained in &lt;a href=&quot;https://github.com/edolstra&quot;&gt;Eelco Dolstra’s&lt;/a&gt; thesis &lt;a href=&quot;https://edolstra.github.io/pubs/phd-thesis.pdf&quot;&gt;&lt;em&gt;The Purely Functional Software Deployment Model&lt;/em&gt;&lt;/a&gt; Nix uses it’s own reproducible archive format NAR, which is used for both uploading build results and for directory hashing.&lt;/p&gt;
+&lt;p&gt;The Go developers faced with similar concerns created their own directory hashing scheme, which unfortunately is fundamentally incompatible with Nix hashes.
+I don’t see how Go modules could have done this any better, but the situation is unfortunate.&lt;/p&gt;
+&lt;h3&gt;Dynamic package name resolving&lt;/h3&gt;
+&lt;p&gt;In the previous example, I showed how a Go import path looks like.
+Sadly it turns out that the surface simplicity of those paths hide a lot of underlying logic.&lt;/p&gt;
+&lt;p&gt;Internally, these import paths are handled by the &lt;a href=&quot;https://godoc.org/golang.org/x/tools/go/vcs#RepoRoot&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;RepoRootForImport&lt;/code&gt;&lt;/a&gt; family of functions in the &lt;code class=&quot;language-text&quot;&gt;vcs&lt;/code&gt; package, which maps import paths to repository URLs and VCS types.
+Some of these are matched statically using regex but others use active probing.&lt;/p&gt;
+&lt;p&gt;This is a true showstopper for a pure-Nix Go packaging solution, and the reason why Gomod2nix is a code generation tool — we don’t have network access in the Nix evaluator, making it impossible to correctly resolve VCS from a Nix evaluation.&lt;/p&gt;
+&lt;h1&gt;Solutions to go modules packaging&lt;/h1&gt;
+&lt;p&gt;The points above make our limitations clear.
+With these in mind, let’s discuss how Go packaging solutions were conceived.&lt;/p&gt;
+&lt;h3&gt;Code generation: vgo2nix&lt;/h3&gt;
+&lt;p&gt;My first attempt at creating a tool for packaging Go modules was &lt;a href=&quot;https://github.com/nix-community/vgo2nix&quot;&gt;vgo2nix&lt;/a&gt;, another code generation tool.
+It was written very shortly after modules were announced, and at the time the tooling support for them wasn’t good.
+For example, there wasn’t a parser for &lt;code class=&quot;language-text&quot;&gt;go.mod&lt;/code&gt; published back then.&lt;/p&gt;
+&lt;p&gt;Being based on the older Nixpkgs Go abstraction &lt;code class=&quot;language-text&quot;&gt;buildGoPackage&lt;/code&gt; this method emulates a &lt;code class=&quot;language-text&quot;&gt;$GOPATH&lt;/code&gt; based builds that make some assumptions that are not true.&lt;/p&gt;
+&lt;p&gt;Let’s again look at an excerpt from &lt;code class=&quot;language-text&quot;&gt;go.sum&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;github.com/Azure/go-autorest/autorest v0.9.0/go.mod h1:xyHB1BMZT0cuDHU7I0+g046+BFDTQ8rEZB0s4Yfa6bI=
+github.com/Azure/go-autorest/autorest v0.9.3/go.mod h1:GsRuLYvwzLjjjRoWEIyMUaYq8GNUx2nRB378IPt/1p0=
+github.com/Azure/go-autorest/autorest/adal v0.5.0/go.mod h1:8Z9fGy2MpX0PvDjB1pEgQTmVqjGhiHBW7RJJEciWzS0=
+github.com/Azure/go-autorest/autorest/adal v0.8.0/go.mod h1:Z6vX6WXXuyieHAXwMj0S6HY6e6wcHn37qQMBQlvY3lc=
+github.com/Azure/go-autorest/autorest/adal v0.8.1/go.mod h1:ZjhuQClTqx435SRJ2iMlOxPYt3d2C/T/7TiQCVZSn3Q=
+github.com/Azure/go-autorest/autorest/date v0.1.0/go.mod h1:plvfp3oPSKwf2DNjlBjWF/7vwR+cUD/ELuzDCXwHUVA=
+github.com/Azure/go-autorest/autorest/date v0.2.0/go.mod h1:vcORJHLJEh643/Ioh9+vPmf1Ij9AEBM5FuBIXLmIy0g=&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;These packages are all developed in the same repository but have different tags, and in this case &lt;code class=&quot;language-text&quot;&gt;vgo2nix&lt;/code&gt; would incorrectly only clone one version of the repository and sacrifice the correctness we get from modules because of how &lt;code class=&quot;language-text&quot;&gt;$GOPATH&lt;/code&gt; is set up.&lt;/p&gt;
+&lt;h3&gt;Fixed-output derivations: buildGoModule&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&quot;https://nixos.org/manual/nixpkgs/stable/#ssec-go-modules&quot;&gt;buildGoModule&lt;/a&gt; tool is the most popular solution for Go packaging right now in Nixpkgs.
+A typical buildGoModule package looks something like:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{ buildGoModule, fetchFromGitHub, lib }:
+
+buildGoModule {
+  pname = &quot;someName&quot;;
+  version = &quot;0.0.1&quot;;
+
+  src = fetchFromGitHub { ... };
+
+  vendorSha256 = &quot;1500vim2lmkkls758pwhlx3piqbw6ap0nnhdwz9pcxih4s4as2nk&quot;;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;buildGoModule&lt;/code&gt; package is designed around fixed-output derivations, which means that a single derivation is created where all the dependencies of the package you want to build are wrapped, and only a single hash of the derivation is specified.
+It fetches all dependencies in the fixed output, creating a &lt;a href=&quot;https://golang.org/ref/mod#vendoring&quot;&gt;vendor&lt;/a&gt; directory which is used for the build.&lt;/p&gt;
+&lt;p&gt;This has several issues, most notably there is no sharing of dependencies between packages that depends on the same Go module.&lt;/p&gt;
+&lt;p&gt;The other notable issue is that it forces developers to remember to edit the &lt;code class=&quot;language-text&quot;&gt;vendorSha256&lt;/code&gt; attribute separately from the already existing &lt;code class=&quot;language-text&quot;&gt;hash&lt;/code&gt;/&lt;code class=&quot;language-text&quot;&gt;sha256&lt;/code&gt; attribute on the derivation.
+Forgetting to do so can not only lead to incorrect builds but also be frustrating when working with larger packages that takes a long time to build, and only very late in the build notice that something was broken so you have to start over from scratch.&lt;/p&gt;
+&lt;p&gt;Because of the lack of hash granularity the build needs to clone &lt;em&gt;every&lt;/em&gt; dependency every time the &lt;code class=&quot;language-text&quot;&gt;vendorSha256&lt;/code&gt; is invalidated, and cannot use the cache from previous builds.&lt;/p&gt;
+&lt;p&gt;Fixed-output derivations can also be considered an impurity, and there is &lt;a href=&quot;https://github.com/NixOS/nix/issues/2270&quot;&gt;a push to restrict them&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;My solution: gomod2nix&lt;/h3&gt;
+&lt;p&gt;Approach-wise &lt;a href=&quot;https://github.com/tweag/gomod2nix&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;gomod2nix&lt;/code&gt;&lt;/a&gt; positions itself right between &lt;code class=&quot;language-text&quot;&gt;vgo2nix&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;buildGoModule&lt;/code&gt;.
+It’s still a code generation tool like &lt;code class=&quot;language-text&quot;&gt;vgo2nix&lt;/code&gt;, but fully embraces the Go modules world and only supports Go modules based builds — the old &lt;code class=&quot;language-text&quot;&gt;GOPATH&lt;/code&gt; way is unsupported.
+It uses the same vendoring approach that &lt;code class=&quot;language-text&quot;&gt;buildGoModule&lt;/code&gt; uses, but instead of vendoring the actual sources in a derivation, it uses symlinks instead.
+In that way, dependencies can be fetched separately, and identical dependencies source trees can be shared between multiple different packages in the Nix store.&lt;/p&gt;
+&lt;p&gt;From a user perspective the workflow is largely similar to &lt;code class=&quot;language-text&quot;&gt;vgo2nix&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You write a basic expression looking like:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-nix&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;buildGoApplication &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  pname &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;gomod2nix-example&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  version &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;0.1&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  src &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token url&quot;&gt;./.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  modules &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token url&quot;&gt;./gomod2nix.toml&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Run the code generation tool: &lt;code class=&quot;language-text&quot;&gt;$ gomod2nix&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Go packaging looks very simple on the surface, but murky details lure around underneath, and there are lots of tiny details to get right to correctly create a Go package in a sandboxed environment like Nix.&lt;/p&gt;
+&lt;p&gt;I couldn’t get the best-in-class user experience I was hoping for and gotten used to with Poetry2nix.
+Code generation adds extra steps to the development process and requires either a developer or a test pipeline to keep the Nix expressions in sync with the language specific lock files, something that requires discipline and takes extra time and effort.
+Despite that, it turned out there were major wins to be had regarding creating a new packaging solution.&lt;/p&gt;
+&lt;p&gt;The development of &lt;a href=&quot;https://github.com/tweag/gomod2nix&quot;&gt;gomod2nix&lt;/a&gt; is funded by &lt;a href=&quot;https://nlnet.nl/&quot;&gt;NLNet&lt;/a&gt; through the &lt;a href=&quot;https://nlnet.nl/PET/&quot;&gt;PET&lt;/a&gt;(privacy and trust enhancing technologies) fund.
+&lt;a href=&quot;https://github.com/tweag/gomod2nix&quot;&gt;gomod2nix&lt;/a&gt; is being developed as a part of &lt;a href=&quot;https://nlnet.nl/project/Trustix/&quot;&gt;Trustix&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://nlnet.nl/&quot;&gt;&lt;span class=&quot;gatsby-resp-image-wrapper&quot; style=&quot;display: block; margin-left: auto; margin-right: auto;&quot;&gt;
+      &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;display: block;&quot;&gt;&lt;/span&gt;
+  &lt;img alt=&quot;NLNet&quot; class=&quot;gatsby-resp-image-image&quot; src=&quot;https://www.tweag.io/static/efbf832b18623ce0246865138f7e61e9/fc2a6/nlnet-banner.png&quot; style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle;&quot; title=&quot;NLNet&quot; /&gt;
+    &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://nlnet.nl/NGI0&quot;&gt;&lt;span class=&quot;gatsby-resp-image-wrapper&quot; style=&quot;display: block; margin-left: auto; margin-right: auto;&quot;&gt;
+      &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;display: block;&quot;&gt;&lt;/span&gt;
+  &lt;img alt=&quot;NGI0&quot; class=&quot;gatsby-resp-image-image&quot; src=&quot;https://www.tweag.io/static/b817c1323bb0eb39e2cace92a3e9a410/9b7bd/NGI0_tag.png&quot; style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle;&quot; title=&quot;NGI0&quot; /&gt;
+    &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;</description>
+	<pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
+</item>
+<item>
 	<title>Sander van der Burg: Deploying mutable multi-process Docker containers with the Nix process management framework (or running Hydra in a Docker container)</title>
 	<guid isPermaLink="false">tag:blogger.com,1999:blog-1397115249631682228.post-415569824438519089</guid>
 	<link>http://sandervanderburg.blogspot.com/2021/02/deploying-mutable-multi-process-docker.html</link>
@@ -913,7 +1076,7 @@ Conversely, it can also be used to uncover non-reproducible builds, corrupted or
 &lt;p&gt;The initial implementation of Trustix, and its description in this post are based on the Nix package manager.
 Nix focuses on isolated builds, provides access to the hashes of all build inputs as well as a high quantity of bit-reproducible packages, making it the ideal initial testing ecosystem.
 However, Trustix was designed to be system-independent, and is not strongly tied to Nix.&lt;/p&gt;
-&lt;p&gt;The developmentent of &lt;a href=&quot;https://github.com/tweag/trustix&quot;&gt;Trustix&lt;/a&gt; is funded by &lt;a href=&quot;https://nlnet.nl/project/Trustix&quot;&gt;NLnet foundation&lt;/a&gt; and the European Commission’s &lt;a href=&quot;https://ngi.eu&quot;&gt;Next Generation Internet&lt;/a&gt; programme through the &lt;a href=&quot;https://nlnet.nl/PET&quot;&gt;NGI Zero PET&lt;/a&gt; (privacy and trust enhancing technologies) fund.
+&lt;p&gt;The developmentent of &lt;a href=&quot;https://github.com/tweag/trustix&quot;&gt;Trustix&lt;/a&gt; is funded by &lt;a href=&quot;https://nlnet.nl/project/Trustix&quot;&gt;NLNet foundation&lt;/a&gt; and the European Commission’s &lt;a href=&quot;https://ngi.eu&quot;&gt;Next Generation Internet&lt;/a&gt; programme through the &lt;a href=&quot;https://nlnet.nl/PET&quot;&gt;NGI Zero PET&lt;/a&gt; (privacy and trust enhancing technologies) fund.
 The tool is still in development, but I’m very excited to announce it already!&lt;/p&gt;
 &lt;h2&gt;How Nix verifies binary cache results&lt;/h2&gt;
 &lt;p&gt;Most Linux package managers use a very simple signature scheme to secure binary distribution to users.
@@ -1158,184 +1321,6 @@ At this point, the best option is to clear out the cache completely, and re-sign
 	<description>Some time ago, I have described &lt;a href=&quot;https://sandervanderburg.blogspot.com/2019/11/a-nix-based-functional-organization-for.html&quot;&gt;my experimental Nix-based process management framework&lt;/a&gt; that makes it possible to automatically &lt;strong&gt;deploy&lt;/strong&gt; running &lt;strong&gt;processes&lt;/strong&gt; (sometimes also ambiguously called services) from declarative specifications written in the &lt;a href=&quot;https://sandervanderburg.blogspot.com/2012/11/an-alternative-explaination-of-nix.html&quot;&gt;Nix expression language&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;The framework is built around two concepts. As its name implies, the &lt;a href=&quot;https://sandervanderburg.blogspot.com/2011/01/nix-package-manager.html&quot;&gt;&lt;strong&gt;Nix package manager&lt;/strong&gt;&lt;/a&gt; is used to deploy all required packages and static artifacts, and a &lt;a href=&quot;https://sandervanderburg.blogspot.com/2020/02/a-declarative-process-manager-agnostic.html&quot;&gt;&lt;strong&gt;process manager&lt;/strong&gt; of choice&lt;/a&gt; (e.g. sysvinit, systemd, supervisord and others) is used to manage the life-cycles of the processes.&lt;br /&gt;&lt;br /&gt;Moreover, it is built around &lt;strong&gt;flexible concepts&lt;/strong&gt; allowing integration with solutions that are not qualified as process managers (but can still be used as such), such as &lt;a href=&quot;https://docker.com&quot;&gt;Docker&lt;/a&gt; -- &lt;a href=&quot;https://sandervanderburg.blogspot.com/2020/08/experimenting-with-nix-and-service.html&quot;&gt;each process instance can be deployed as a Docker container&lt;/a&gt; with a shared Nix store using the host system's network.&lt;br /&gt;&lt;br /&gt;As explained in &lt;a href=&quot;https://sandervanderburg.blogspot.com/2020/07/on-using-nix-and-docker-as-deployment.html&quot;&gt;an earlier blog post&lt;/a&gt;, Docker has become such a popular solution that it has become a standard for deploying (micro)services (often as a utility in the &lt;a href=&quot;https://kubernetes.io&quot;&gt;Kubernetes&lt;/a&gt; solution stack).&lt;br /&gt;&lt;br /&gt;When deploying a system that consists of multiple services with Docker, a typical strategy (and recommended practice) is to use multiple containers that have &lt;a href=&quot;https://runnable.com/docker/rails/run-multiple-processes-in-a-container&quot;&gt;only one root application process&lt;/a&gt;. Advantages of this approach is that Docker can control the life-cycles of the applications, and that each process is (somewhat) isolated/protected from other processes and the host system.&lt;br /&gt;&lt;br /&gt;By default, containers are isolated, but if they need to interact with other processes, then they can use all kinds of &lt;strong&gt;integration&lt;/strong&gt; facilities -- for example, they can share namespaces, or use shared volumes.&lt;br /&gt;&lt;br /&gt;In some situations, it may also be desirable to &lt;strong&gt;deviate&lt;/strong&gt; from the one root process per container practice -- for some systems, processes may need to interact quite intensively (e.g. with IPC mechanisms, shared files or shared memory, or a combination these) in which the container boundaries introduce more inconveniences than benefits.&lt;br /&gt;&lt;br /&gt;Moreover, when running multiple processes in a single container, common dependencies can also typically be more efficiently shared leading to lower disk and RAM consumption.&lt;br /&gt;&lt;br /&gt;As explained in my previous blog post (that explores various Docker concepts), sharing dependencies between containers only works if containers are constructed from images that share the same layers with the same shared libraries. In practice, this form of sharing is not always as efficient as we want it to be.&lt;br /&gt;&lt;br /&gt;Configuring a Docker image to run multiple application processes is somewhat cumbersome -- &lt;a href=&quot;https://docs.docker.com/config/containers/multi-service_container/&quot;&gt;the official Docker documentation&lt;/a&gt; describes two solutions: one that relies on a &lt;strong&gt;wrapper&lt;/strong&gt; script that starts multiple processes in the background and a loop that waits for the &quot;main process&quot; to terminate, and the other is to use a &lt;strong&gt;process manager&lt;/strong&gt;, such as supervisord.&lt;br /&gt;&lt;br /&gt;I realised that I could solve this problem much more conveniently by combining the &lt;i&gt;dockerTools.buildImage {}&lt;/i&gt; function in Nixpkgs (that builds Docker images with the Nix package manager) with the Nix process management abstractions.&lt;br /&gt;&lt;br /&gt;I have created my own abstraction function: &lt;i&gt;createMultiProcessImage&lt;/i&gt; that builds multi-process Docker images, managed by any supported process manager that works in a Docker container.&lt;br /&gt;&lt;br /&gt;In this blog post, I will describe how this function is implemented and how it can be used.&lt;br /&gt;&lt;br /&gt;&lt;h2&gt;Creating images for single root process containers&lt;/h2&gt;&lt;br /&gt;As shown in earlier blog posts, creating a Docker image with Nix for a single root application process is very straight forward.&lt;br /&gt;&lt;br /&gt;For example, we can build an image that launches a trivial web application service with an embedded HTTP server (as shown in many of my previous blog posts), as follows:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;{dockerTools, webapp}:  &lt;br /&gt;&lt;br /&gt;dockerTools.buildImage {&lt;br /&gt;  name = &quot;webapp&quot;;&lt;br /&gt;  tag = &quot;test&quot;;&lt;br /&gt;&lt;br /&gt;  runAsRoot = ''&lt;br /&gt;    ${dockerTools.shadowSetup}&lt;br /&gt;    groupadd webapp&lt;br /&gt;    useradd webapp -g webapp -d /dev/null&lt;br /&gt;  '';&lt;br /&gt;&lt;br /&gt;  config = {&lt;br /&gt;    Env = [ &quot;PORT=5000&quot; ];&lt;br /&gt;    Cmd = [ &quot;${webapp}/bin/webapp&quot; ];&lt;br /&gt;    Expose = {&lt;br /&gt;      &quot;5000/tcp&quot; = {};&lt;br /&gt;    };&lt;br /&gt;  };&lt;br /&gt;}&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;The above Nix expression (&lt;i&gt;default.nix&lt;/i&gt;) invokes the &lt;i&gt;dockerTools.buildImage&lt;/i&gt; function to automatically construct an image with the following properties:&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;  &lt;li&gt;The image has the following name: &lt;i&gt;webapp&lt;/i&gt; and the following version tag: &lt;i&gt;test&lt;/i&gt;.&lt;/li&gt;  &lt;li&gt;The web application service requires some &lt;strong&gt;state&lt;/strong&gt; to be initialized before it can be used. To configure state, we can run instructions in a QEMU virual machine with root privileges (&lt;i&gt;runAsRoot&lt;/i&gt;).&lt;br /&gt;    &lt;br /&gt;    In the above deployment Nix expression, we create an unprivileged user and group named: &lt;i&gt;webapp&lt;/i&gt;. For production deployments, it is typically recommended to drop root privileges, for security reasons.&lt;/li&gt;  &lt;li&gt;The &lt;i&gt;Env&lt;/i&gt; directive is used to configure environment variables. The &lt;i&gt;PORT&lt;/i&gt; environment variable is used to configure the TCP port where the service should bind to.&lt;/li&gt;  &lt;li&gt;The &lt;i&gt;Cmd&lt;/i&gt; directive starts the &lt;i&gt;webapp&lt;/i&gt; process in foreground mode. The life-cycle of the container is bound to this application process.&lt;/li&gt;  &lt;li&gt;&lt;i&gt;Expose&lt;/i&gt; exposes TCP port 5000 to the public so that the service can respond to requests made by clients.&lt;/li&gt;&lt;/ul&gt;&lt;br /&gt;We can build the Docker image as follows:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ nix-build&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;load it into Docker with the following command:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ docker load -i result&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;and launch a container instance using the image as a template:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ docker run -it -p 5000:5000 webapp:test&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;If the deployment of the container succeeded, we should get a response from the &lt;i&gt;webapp&lt;/i&gt; process, by running:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ curl http://localhost:5000&lt;br /&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;br /&gt;&amp;lt;html&amp;gt;&lt;br /&gt;  &amp;lt;head&amp;gt;&lt;br /&gt;    &amp;lt;title&amp;gt;Simple test webapp&amp;lt;/title&amp;gt;&lt;br /&gt;  &amp;lt;/head&amp;gt;&lt;br /&gt;  &amp;lt;body&amp;gt;&lt;br /&gt;    Simple test webapp listening on port: 5000&lt;br /&gt;  &amp;lt;/body&amp;gt;&lt;br /&gt;&amp;lt;/html&amp;gt;&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;&lt;h2&gt;Creating multi-process images&lt;/h2&gt;&lt;br /&gt;As shown in previous blog posts, the &lt;i&gt;webapp&lt;/i&gt; process is part of a bigger system, namely: a web application system with an Nginx reverse proxy forwarding requests to multiple &lt;i&gt;webapp&lt;/i&gt; instances:&lt;br /&gt;&lt;br /&gt;&lt;pre style=&quot;overflow: auto;&quot;&gt;&lt;br /&gt;{ pkgs ? import &amp;lt;nixpkgs&amp;gt; { inherit system; }&lt;br /&gt;, system ? builtins.currentSystem&lt;br /&gt;, stateDir ? &quot;/var&quot;&lt;br /&gt;, runtimeDir ? &quot;${stateDir}/run&quot;&lt;br /&gt;, logDir ? &quot;${stateDir}/log&quot;&lt;br /&gt;, cacheDir ? &quot;${stateDir}/cache&quot;&lt;br /&gt;, tmpDir ? (if stateDir == &quot;/var&quot; then &quot;/tmp&quot; else &quot;${stateDir}/tmp&quot;)&lt;br /&gt;, forceDisableUserChange ? false&lt;br /&gt;, processManager&lt;br /&gt;}:&lt;br /&gt;&lt;br /&gt;let&lt;br /&gt;  sharedConstructors = import ../services-agnostic/constructors.nix {&lt;br /&gt;    inherit pkgs stateDir runtimeDir logDir cacheDir tmpDir forceDisableUserChange processManager;&lt;br /&gt;  };&lt;br /&gt;&lt;br /&gt;  constructors = import ./constructors.nix {&lt;br /&gt;    inherit pkgs stateDir runtimeDir logDir tmpDir forceDisableUserChange processManager;&lt;br /&gt;  };&lt;br /&gt;in&lt;br /&gt;rec {&lt;br /&gt;  webapp = rec {&lt;br /&gt;    port = 5000;&lt;br /&gt;    dnsName = &quot;webapp.local&quot;;&lt;br /&gt;&lt;br /&gt;    pkg = constructors.webapp {&lt;br /&gt;      inherit port;&lt;br /&gt;    };&lt;br /&gt;  };&lt;br /&gt;&lt;br /&gt;  nginx = rec {&lt;br /&gt;    port = 8080;&lt;br /&gt;&lt;br /&gt;    pkg = sharedConstructors.nginxReverseProxyHostBased {&lt;br /&gt;      webapps = [ webapp ];&lt;br /&gt;      inherit port;&lt;br /&gt;    } {};&lt;br /&gt;  };&lt;br /&gt;}&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;The Nix expression above shows a simple &lt;strong&gt;processes model&lt;/strong&gt; variant of that system, that consists of only two process instances:&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;  &lt;li&gt;The &lt;i&gt;webapp&lt;/i&gt; process is (as shown earlier) an application that returns a static HTML page.&lt;/li&gt;  &lt;li&gt;&lt;i&gt;nginx&lt;/i&gt; is configured as a reverse proxy to forward incoming connections to multiple &lt;i&gt;webapp&lt;/i&gt; instances using the virtual host header property (&lt;i&gt;dnsName&lt;/i&gt;).&lt;br /&gt;    &lt;br /&gt;    If somebody connects to the &lt;i&gt;nginx&lt;/i&gt; server with the following host name: &lt;i&gt;webapp.local&lt;/i&gt; then the request is forwarded to the &lt;i&gt;webapp&lt;/i&gt; service.&lt;/li&gt;&lt;/ul&gt;&lt;br /&gt;&lt;h3&gt;Configuration steps&lt;/h3&gt;&lt;br /&gt;To allow all processes in the process model shown to be deployed to a single container, we need to execute the following steps in the construction of an image:&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;  &lt;li&gt;Instead of deploying a single package, such as &lt;i&gt;webapp&lt;/i&gt;, we need to refer to a collection of packages and/or configuration files that can be managed with a process manager, such as sysvinit, systemd or supervisord.&lt;br /&gt;    &lt;br /&gt;    The Nix process management framework provides all kinds of Nix function abstractions to accomplish this.&lt;br /&gt;    &lt;br /&gt;    For example, the following function invocation builds a configuration profile for the sysvinit process manager, containing a collection of &lt;i&gt;sysvinit&lt;/i&gt; scripts (also known as &lt;a href=&quot;https://wiki.debian.org/LSBInitScripts&quot;&gt;LSB Init&lt;/a&gt; compliant scripts):&lt;br /&gt;    &lt;br /&gt;    &lt;pre style=&quot;overflow: auto;&quot;&gt;&lt;br /&gt;profile = import ../create-managed-process/sysvinit/build-sysvinit-env.nix {&lt;br /&gt;  exprFile = ./processes.nix;&lt;br /&gt;  stateDir = &quot;/var&quot;;&lt;br /&gt;};&lt;br /&gt;    &lt;/pre&gt;    &lt;br /&gt;  &lt;/li&gt;  &lt;li&gt;Similar to single root process containers, we may also need to initialize state. For example, we need to create common FHS state directories (e.g. &lt;i&gt;/tmp&lt;/i&gt;, &lt;i&gt;/var&lt;/i&gt; etc.) in which services can store their relevant state files (e.g. log files, temp files).&lt;br /&gt;    &lt;br /&gt;    This can be done by running the following command:&lt;br /&gt;    &lt;br /&gt;    &lt;pre&gt;&lt;br /&gt;nixproc-init-state --state-dir /var&lt;br /&gt;    &lt;/pre&gt;  &lt;/li&gt;  &lt;li&gt;Another property that multiple process containers have in common is that they may also require the presence of unprivileged users and groups, for security reasons.&lt;br /&gt;    &lt;br /&gt;    With the following commands, we can automatically generate all required users and groups specified in a deployment profile:&lt;br /&gt;    &lt;br /&gt;    &lt;pre&gt;&lt;br /&gt;${dysnomia}/bin/dysnomia-addgroups ${profile}&lt;br /&gt;${dysnomia}/bin/dysnomia-addusers ${profile}&lt;br /&gt;    &lt;/pre&gt;  &lt;/li&gt;  &lt;li&gt;Instead of starting a (single root) application process, we need to start a process manager that manages the processes that we want to deploy. As already explained, the framework allows you to pick multiple options.&lt;/li&gt;&lt;/ul&gt;&lt;br /&gt;&lt;h3&gt;Starting a process manager as a root process&lt;/h3&gt;&lt;br /&gt;From all process managers that the framework currently supports, the most straight forward option to use in a Docker container is: supervisord.&lt;br /&gt;&lt;br /&gt;To use it, we can create a symlink to the supervisord configuration in the deployment profile:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;ln -s ${profile} /etc/supervisor&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;and then start supervisord as a root process with the following command directive:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;Cmd = [&lt;br /&gt;  &quot;${pkgs.pythonPackages.supervisor}/bin/supervisord&quot;&lt;br /&gt;  &quot;--nodaemon&quot;&lt;br /&gt;  &quot;--configuration&quot; &quot;/etc/supervisor/supervisord.conf&quot;&lt;br /&gt;  &quot;--logfile&quot; &quot;/var/log/supervisord.log&quot;&lt;br /&gt;  &quot;--pidfile&quot; &quot;/var/run/supervisord.pid&quot;&lt;br /&gt;];&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;(As a sidenote: creating a symlink is not strictly required, but makes it possible to control running services with the &lt;i&gt;supervisorctl&lt;/i&gt; command-line tool).&lt;br /&gt;&lt;br /&gt;Supervisord is not the only option. We can also use sysvinit scripts, but doing so is a bit tricky. As explained earlier, the life-cycle of container is bound to a running root process (in foreground mode).&lt;br /&gt;&lt;br /&gt;sysvinit scripts do not run in the foreground, but start processes that daemonize and terminate immediately, leaving daemon processes behind that remain running in the background.&lt;br /&gt;&lt;br /&gt;As described in an earlier blog post about translating high-level process management concepts, it is also possible to run &quot;daemons in the foreground&quot; by creating a proxy script. We can also make a similar foreground proxy for a collection of daemons:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;#!/bin/bash -e&lt;br /&gt;&lt;br /&gt;_term()&lt;br /&gt;{&lt;br /&gt;    nixproc-sysvinit-runactivity -r stop ${profile}&lt;br /&gt;    kill &quot;$pid&quot;&lt;br /&gt;    exit 0&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;nixproc-sysvinit-runactivity start ${profile}&lt;br /&gt;&lt;br /&gt;# Keep process running, but allow it to respond to the TERM and INT&lt;br /&gt;# signals so that all scripts are stopped properly&lt;br /&gt;&lt;br /&gt;trap _term TERM&lt;br /&gt;trap _term INT&lt;br /&gt;&lt;br /&gt;tail -f /dev/null &amp;amp; pid=$!&lt;br /&gt;wait &quot;$pid&quot;&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;The above proxy script does the following:&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;  &lt;li&gt;It first starts all sysvinit scripts by invoking the &lt;i&gt;nixproc-sysvinit-runactivity start&lt;/i&gt; command.&lt;/li&gt;  &lt;li&gt;Then it registers a signal handler for the &lt;i&gt;TERM&lt;/i&gt; and &lt;i&gt;INT&lt;/i&gt; signals. The corresponding callback triggers a shutdown procedure.&lt;/li&gt;  &lt;li&gt;We invoke a dummy command that keeps running in the foreground without consuming too many system resources (&lt;i&gt;tail -f /dev/null&lt;/i&gt;) and we wait for it to terminate.&lt;/li&gt;  &lt;li&gt;The signal handler properly deactivates all processes in reverse order (with the &lt;i&gt;nixproc-sysvinit-runactivity -r stop&lt;/i&gt; command), and finally terminates the dummy command causing the script (and the container) to stop.&lt;/li&gt;&lt;/ul&gt;&lt;br /&gt;In addition supervisord and sysvinit, we can also use &lt;a href=&quot;https://sandervanderburg.blogspot.com/2020/06/using-disnix-as-simple-and-minimalistic.html&quot;&gt;Disnix as a process manager&lt;/a&gt; by using a similar strategy with a foreground proxy.&lt;br /&gt;&lt;br /&gt;&lt;h3&gt;Other configuration properties&lt;/h3&gt;&lt;br /&gt;The above configuration properties suffice to get a multi-process container running. However, to make working with such containers more practical from a user perspective, we may also want to:&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;  &lt;li&gt;Add basic shell utilities to the image, so that you can control the processes, investigate log files (in case of errors), and do other maintenance tasks.&lt;/li&gt;  &lt;li&gt;Add a &lt;i&gt;.bashrc&lt;/i&gt; configuration file to make file coloring working for the &lt;i&gt;ls&lt;/i&gt; command, and to provide a decent prompt in a shell session.&lt;/li&gt;&lt;/ul&gt;&lt;br /&gt;&lt;h2&gt;Usage&lt;/h2&gt;&lt;br /&gt;The configuration steps described in the previous section are wrapped into a function named: &lt;i&gt;createMultiProcessImage&lt;/i&gt;, which itself is a thin wrapper around the &lt;i&gt;dockerTools.buildImage&lt;/i&gt; function in Nixpkgs -- it accepts the same parameters with a number of additional parameters that are specific to multi-process configurations.&lt;br /&gt;&lt;br /&gt;The following function invocation builds a multi-process container deploying our example system, using supervisord as a process manager:&lt;br /&gt;&lt;br /&gt;&lt;pre style=&quot;overflow: auto;&quot;&gt;&lt;br /&gt;let&lt;br /&gt;  pkgs = import &amp;lt;nixpkgs&amp;gt; {};&lt;br /&gt;&lt;br /&gt;  createMultiProcessImage = import ../../nixproc/create-multi-process-image/create-multi-process-image.nix {&lt;br /&gt;    inherit pkgs system;&lt;br /&gt;    inherit (pkgs) dockerTools stdenv;&lt;br /&gt;  };&lt;br /&gt;in&lt;br /&gt;createMultiProcessImage {&lt;br /&gt;  name = &quot;multiprocess&quot;;&lt;br /&gt;  tag = &quot;test&quot;;&lt;br /&gt;  exprFile = ./processes.nix;&lt;br /&gt;  stateDir = &quot;/var&quot;;&lt;br /&gt;  processManager = &quot;supervisord&quot;;&lt;br /&gt;}&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;After building the image, and deploying a container, with the following commands:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ nix-build&lt;br /&gt;$ docker load -i result&lt;br /&gt;$ docker run -it --network host multiprocessimage:test&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;we should be able to connect to the &lt;i&gt;webapp&lt;/i&gt; instance via the &lt;i&gt;nginx&lt;/i&gt; reverse proxy:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ curl -H 'Host: webapp.local' http://localhost:8080&lt;br /&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;br /&gt;&amp;lt;html&amp;gt;&lt;br /&gt;  &amp;lt;head&amp;gt;&lt;br /&gt;    &amp;lt;title&amp;gt;Simple test webapp&amp;lt;/title&amp;gt;&lt;br /&gt;  &amp;lt;/head&amp;gt;&lt;br /&gt;  &amp;lt;body&amp;gt;&lt;br /&gt;    Simple test webapp listening on port: 5000&lt;br /&gt;  &amp;lt;/body&amp;gt;&lt;br /&gt;&amp;lt;/html&amp;gt;&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;As explained earlier, the constructed image also provides extra command-line utilities to do maintenance tasks, and control the life-cycle of the individual processes.&lt;br /&gt;&lt;br /&gt;For example, we can &quot;connect&quot; to the running container, and check which processes are running:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ docker exec -it mycontainer /bin/bash&lt;br /&gt;# supervisorctl&lt;br /&gt;nginx                            RUNNING   pid 11, uptime 0:00:38&lt;br /&gt;webapp                           RUNNING   pid 10, uptime 0:00:38&lt;br /&gt;supervisor&amp;gt;&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;If we change the &lt;i&gt;processManager&lt;/i&gt; parameter to &lt;i&gt;sysvinit&lt;/i&gt;, we can deploy a multi-process image in which the foreground proxy script is used as a root process (that starts and stops sysvinit scripts).&lt;br /&gt;&lt;br /&gt;We can control the life-cycle of each individual process by directly invoking the sysvinit scripts in the container:&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;&lt;br /&gt;$ docker exec -it mycontainer /bin/bash&lt;br /&gt;$ /etc/rc.d/init.d/webapp status&lt;br /&gt;webapp is running with Process ID(s) 33.&lt;br /&gt;&lt;br /&gt;$ /etc/rc.d/init.d/nginx status&lt;br /&gt;nginx is running with Process ID(s) 51.&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;Although having extra command-line utilities to do administration tasks is useful, a disadvantage is that they considerably increase the size of the image.&lt;br /&gt;&lt;br /&gt;To save storage costs, it is also possible to disable &lt;i&gt;interactive&lt;/i&gt; mode to exclude these packages:&lt;br /&gt;&lt;br /&gt;&lt;pre style=&quot;overflow: auto;&quot;&gt;&lt;br /&gt;let&lt;br /&gt;  pkgs = import &amp;lt;nixpkgs&amp;gt; {};&lt;br /&gt;&lt;br /&gt;  createMultiProcessImage = import ../../nixproc/create-multi-process-image/create-multi-process-image.nix {&lt;br /&gt;    inherit pkgs system;&lt;br /&gt;    inherit (pkgs) dockerTools stdenv;&lt;br /&gt;  };&lt;br /&gt;in&lt;br /&gt;createMultiProcessImage {&lt;br /&gt;  name = &quot;multiprocess&quot;;&lt;br /&gt;  tag = &quot;test&quot;;&lt;br /&gt;  exprFile = ./processes.nix;&lt;br /&gt;  stateDir = &quot;/var&quot;;&lt;br /&gt;  processManager = &quot;supervisord&quot;;&lt;br /&gt;  interactive = false; # Do not install any additional shell utilities&lt;br /&gt;}&lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;&lt;h2&gt;Discussion&lt;/h2&gt;&lt;br /&gt;In this blog post, I have described a new utility function in the Nix process management framework: &lt;i&gt;createMultiProcessImage&lt;/i&gt; -- a thin wrapper around the &lt;i&gt;dockerTools.buildImage&lt;/i&gt; function that can be used to convienently build multi-process Docker images, using any Docker-capable process manager that the Nix process management framework supports.&lt;br /&gt;&lt;br /&gt;Besides the fact that we can convienently construct multi-process images, this function also has the advantage (similar to the &lt;i&gt;dockerTools.buildImage&lt;/i&gt; function) that Nix is only required for the construction of the image. To deploy containers from a multi-process image, Nix is not a requirement.&lt;br /&gt;&lt;br /&gt;There is also a drawback: similar to &quot;ordinary&quot; multi-process container deployments, when it is desired to upgrade a process, the entire container needs to be redeployed, also requiring a user to terminate all other running processes.&lt;br /&gt;&lt;br /&gt;&lt;h2&gt;Availability&lt;/h2&gt;&lt;br /&gt;The &lt;i&gt;createMultiProcessImage&lt;/i&gt; function is part of the current development version of the &lt;a href=&quot;https://github.com/svanderburg/nix-processmgmt&quot;&gt;Nix process management framework&lt;/a&gt; that can be obtained from my GitHub page.&lt;br /&gt;&lt;br /&gt;</description>
 	<pubDate>Sat, 31 Oct 2020 15:05:00 +0000</pubDate>
 	<author>noreply@blogger.com (Sander van der Burg)</author>
-</item>
-<item>
-	<title>Tweag I/O: Nickel: better configuration for less</title>
-	<guid isPermaLink="true">https://tweag.io/blog/2020-10-22-nickel-open-sourcing/</guid>
-	<link>https://tweag.io/blog/2020-10-22-nickel-open-sourcing/</link>
-	<description>&lt;p&gt;We are making the &lt;a href=&quot;https://www.github.com/tweag/nickel&quot;&gt;Nickel&lt;/a&gt; repository public. Nickel is an experimental configuration
-language developed at Tweag. While this is not the time for the first
-release yet, it is an occasion to talk about this project. The goal of this
-post is to give a high-level overview of the project. If your curiosity is tickled
-but you are left wanting to learn more, fear not, as we will publish
-more blog posts on specific aspects of the language in the future. But for
-now, let’s have a tour!&lt;/p&gt;
-&lt;p&gt;[&lt;strong&gt;Disclaimer&lt;/strong&gt;: the actual syntax of Nickel being still worked on, I’m freely
-using as-of-yet non-existing syntax for illustrative purposes. The underlying
-features are however already supported.]&lt;/p&gt;
-&lt;h2&gt;The inception&lt;/h2&gt;
-&lt;p&gt;We, at Tweag, are avid users of the &lt;a href=&quot;https://nixos.org/&quot;&gt;Nix&lt;/a&gt; package manager. As it
-happens, the configuration language for Nix (also called Nix) is
-a pretty good configuration language, and would be applicable to many
-more things than just package management.&lt;/p&gt;
-&lt;p&gt;All in all, the Nix language is a lazy JSON with functions. It is
-simple yet powerful. It is used to generate Nix’s package descriptions
-but would be well
-suited to write any kind of configuration (&lt;a href=&quot;https://www.terraform.io/&quot;&gt;Terraform&lt;/a&gt;,
-&lt;a href=&quot;https://kubernetes.io/&quot;&gt;Kubernetes&lt;/a&gt;, etc…).&lt;/p&gt;
-&lt;p&gt;The rub is that the interpreter for Nix-the-language is tightly
-coupled with Nix-the-package manager. So, as it stands, using the
-Nix language for anything else than package management is a rather
-painful exercise.&lt;/p&gt;
-&lt;p&gt;Nickel is our attempt at answering the question: what would
-Nix-the-language look like if it was split from the package manager?
-While taking the opportunity to improve the language a little,
-building on the experience of the Nix community over the years.&lt;/p&gt;
-&lt;h2&gt;What’s Nickel, exactly ?&lt;/h2&gt;
-&lt;p&gt;Nickel is a lightweight generic configuration language. In that it can
-replace YAML as your application’s configuration language. Unlike
-YAML, though, it anticipates large configurations by being
-programmable. Another way to use Nickel is to generate static
-configuration files — &lt;em&gt;e.g.&lt;/em&gt; in JSON, YAML — that are then fed to another system. Like
-Nix, it is designed to have a simple, well-understood core: at its
-heart, it is JSON with functions.&lt;/p&gt;
-&lt;p&gt;But past experience with Nix also brings some insights on which aspects of the
-language could be improved. Whatever the initial scope of a language is, it will
-almost surely be used in a way that deviates from the original plan: you create
-a configuration language to describe software packages, and next thing you know,
-somebody needs to implement a &lt;a href=&quot;https://github.com/NixOS/nixpkgs/pull/11484&quot;&gt;topological sort&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Nickel strives to retain the simplicity of Nix, while extending it
-according to this feedback.
-Though, you can do perfectly fine without the new features and just write Nix-like code.&lt;/p&gt;
-&lt;h2&gt;Yet another configuration language&lt;/h2&gt;
-&lt;p&gt;At this point you’re probably wondering if this hasn’t already been done elsewhere.
-It seems that more and more languages are born every day, and surely there
-already exist configuration languages with a similar purpose to Nickel:
-&lt;a href=&quot;https://github.com/bazelbuild/starlark&quot;&gt;Starlark&lt;/a&gt;, &lt;a href=&quot;https://jsonnet.org/&quot;&gt;Jsonnet&lt;/a&gt;, &lt;a href=&quot;https://dhall-lang.org/&quot;&gt;Dhall&lt;/a&gt; or &lt;a href=&quot;https://cuelang.org/&quot;&gt;CUE&lt;/a&gt;, to name
-a few. So why Nickel?&lt;/p&gt;
-&lt;h2&gt;Typing&lt;/h2&gt;
-&lt;p&gt;Perhaps the most important difference with other configuration languages is
-Nickel’s approach to typing.&lt;/p&gt;
-&lt;p&gt;Some languages, such as &lt;a href=&quot;https://jsonnet.org/&quot;&gt;Jsonnet&lt;/a&gt; or &lt;a href=&quot;https://github.com/bazelbuild/starlark&quot;&gt;Starlark&lt;/a&gt;, are not
-statically typed. Indeed, static types can be seen as superflous in a configuration
-language: if your program is only run once on fixed inputs, any type error will
-be reported at run-time anyway. Why bother with a static type system?&lt;/p&gt;
-&lt;p&gt;On the other hand, more and more systems rely on complex configurations, such as
-cloud infrastructure (&lt;a href=&quot;https://www.terraform.io/&quot;&gt;Terraform&lt;/a&gt;, &lt;a href=&quot;https://kubernetes.io/&quot;&gt;Kubernetes&lt;/a&gt; or
-&lt;a href=&quot;https://github.com/NixOS/nixops&quot;&gt;NixOps&lt;/a&gt;), leading the corresponding programs to become increasingly
-complex, to the point where static types are beneficial. For reusable code —
-that is, library functions — static types add structure, serve as
-documentation, and eliminate bugs early.&lt;/p&gt;
-&lt;p&gt;Although less common, some configuration languages are statically typed,
-including &lt;a href=&quot;https://dhall-lang.org/&quot;&gt;Dhall&lt;/a&gt; and &lt;a href=&quot;https://cuelang.org/&quot;&gt;CUE&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Dhall features a powerful type system that is able to type a wide range of
-idioms. But it is complex, requiring some experience to become fluent in.&lt;/p&gt;
-&lt;p&gt;CUE is closer to what we are striving for. It has an optional and well-behaved
-type system with strong guarantees. In exchange for which, one can’t write nor
-type higher-order functions in general, even if some simple functions are
-possible to encode.&lt;/p&gt;
-&lt;h3&gt;Gradual typing&lt;/h3&gt;
-&lt;p&gt;Nickel, features a &lt;a href=&quot;https://en.wikipedia.org/wiki/Gradual_typing&quot;&gt;&lt;em&gt;gradual type system&lt;/em&gt;&lt;/a&gt;.
-Gradual types are unobtrusive: they make it possible to statically
-type reusable parts of your programs, but you are still free to write
-configurations without any types. The
-interpreter safely handles the interaction between the typed and untyped worlds.&lt;/p&gt;
-&lt;p&gt;Concretely, typed library code like this:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;// file: mylib.ncl
-{
-  numToStr : Num -&amp;gt; Str = fun n =&amp;gt; ...;
-  makeURL : Str -&amp;gt; Str -&amp;gt; Num -&amp;gt; Str = fun proto host port =&amp;gt;
-    &quot;${proto}://${host}:${numToStr port}/&quot;;
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;can coexist with untyped configuration code like this:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;// file: server.ncl
-let mylib = import &quot;mylib.ncl&quot; in
-let host = &quot;myproject.com&quot; in
-{
-  host = host;
-  port = 1;
-  urls = [
-    mylib.makeURL &quot;myproto&quot; host port,
-    {protocol = &quot;proto2&quot;; server = &quot;sndserver.net&quot;; port = 4242}
-  ];
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In the first snippet, the body of &lt;code class=&quot;language-text&quot;&gt;numToStr&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;makeURL&lt;/code&gt; are statically
-checked: wrongfully calling &lt;code class=&quot;language-text&quot;&gt;numToStr proto&lt;/code&gt; inside &lt;code class=&quot;language-text&quot;&gt;makeURL&lt;/code&gt; would raise an
-error even if &lt;code class=&quot;language-text&quot;&gt;makeURL&lt;/code&gt; is never used. On the other hand, the second snippet is
-not annotated, and thus not statically checked. In particular, we mix an URL
-represented as a string together with one represented as a record in the same
-list. The interpreter rather inserts run-time checks, or &lt;em&gt;contracts&lt;/em&gt;, such
-that if &lt;code class=&quot;language-text&quot;&gt;makeURL&lt;/code&gt; is misused then the program fails with an
-appropriate error.&lt;/p&gt;
-&lt;p&gt;Gradual types also lets us keep the type system simple: even in
-statically typed code if you want to write a component that the type
-checker doesn’t know how to verify, you don’t have to type-check that
-part.&lt;/p&gt;
-&lt;h3&gt;Contracts&lt;/h3&gt;
-&lt;p&gt;Complementary to the static type system, Nickel offers &lt;em&gt;contracts&lt;/em&gt;. Contracts
-offer precise and accurate dynamic type error reporting, even in the
-presence of function types. Contracts are used internally by
-Nickel’s interpreter to insert guards at the boundary between typed and untyped
-chunks. Contracts are available to the programmer as well, to give them the
-ability to enforce type assertions at run-time in a simple way.&lt;/p&gt;
-&lt;p&gt;One pleasant consequence of this design is that the exposure of the user to the
-type system can be progressive:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Users writing configurations can just write Nix-like code while ignoring
-(almost) everything about typing, since you can seamlessly call a typed
-function from untyped code.&lt;/li&gt;
-&lt;li&gt;Users writing consumers or verifiers of these configurations would use
-contracts to model data schemas.&lt;/li&gt;
-&lt;li&gt;Users writing libraries would instead use the static type
-system.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;An example of contract is given in the next section.&lt;/p&gt;
-&lt;h2&gt;Schemas&lt;/h2&gt;
-&lt;p&gt;While the basic computational blocks are functions, the basic data blocks in
-Nickel are records (or objects in JSON). Nickel supports writing self-documenting
-record schemas, such as:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
-  host | type: Str
-       | description: &quot;The host name of the server.&quot;
-       | default: &quot;fallback.myserver.net&quot;
-  ;
-
-  port | type: Num
-       | description: &quot;The port of the connection.&quot;
-       | default: 4242
-  ;
-
-  url | type: Url
-      | description: &quot;The host name of the server.&quot;
-  ;
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Each field can contain metadata, such as a description or default
-value. These aim at being displayed in documentation, or queried by
-tools.&lt;/p&gt;
-&lt;p&gt;The schema can then be used as a contract. Imagine that a function has
-swapped two values in its output and returns:&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
-  host = &quot;myproject.com&quot;,
-  port = &quot;myproto://myproject.com:1/&quot;,
-  url = 1
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Without types, this is hard to catch. Surely, an error will eventually pop up
-downstream in the pipeline, but how and when? Using the schema above
-will make sure that, whenever the fields are actually evaluated, the
-function will be blamed in the type error.&lt;/p&gt;
-&lt;p&gt;Schemas are actually part of a bigger story involving merging records
-together, which, in particular, lets the schema instantiate missing
-fields with their default values. It is very much inspired by the
-&lt;a href=&quot;https://nixos.org/manual/nixos/stable/index.html#sec-configuration-syntax&quot;&gt;NixOs module system&lt;/a&gt; and the &lt;a href=&quot;https://cuelang.org/&quot;&gt;CUE&lt;/a&gt; language, but
-it is a story for another time.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I hope that I gave you a sense of what Nickel is trying to achieve. I
-only presented its most salient aspects: its gradual type system with
-contracts, and built-in record schemas. But there is more to explore!
-The language is not ready to be used in real world applications yet, but a good
-share of the design presented here is implemented. If you are curious about it,
-&lt;a href=&quot;https://www.github.com/tweag/nickel&quot;&gt;check it out&lt;/a&gt;!&lt;/p&gt;</description>
-	<pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
 </item>
 
 </channel>
