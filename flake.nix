@@ -62,22 +62,22 @@ rec {
         (builtins.toJSON (
           import (released-nixpkgs-stable + "/nixos/modules/virtualisation/ec2-amis.nix")));
 
-      serve =
+      mkPyScript = dependencies: name:
         let
           pythonEnv = pkgs.python3.buildEnv.override {
-            extraLibs = with pkgs.python3Packages; [ click livereload ];
+            extraLibs = dependencies;
           };
         in
-          pkgs.writeShellScriptBin "serve" ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/run.py" "$@"'';
+          pkgs.writeShellScriptBin name ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/${name}.py" "$@"'';
+
+      serve =
+        mkPyScript (with pkgs.python3Packages; [ click livereload ]) "serve";
+
+      shuffle_commercial_providers =
+        mkPyScript (with pkgs.python3Packages; [ click toml ]) "shuffle-commercial-providers";
 
       update_blog =
-        let
-          pythonEnv = pkgs.python3.buildEnv.override {
-            extraLibs = with pkgs.python3Packages; [ aiohttp click feedparser ];
-          };
-        in
-          pkgs.writeShellScriptBin "update-blog" ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/update_blog.py" "$@"'';
-          #pkgs.writeShellScriptBin "update-blog" ''exec "${pythonEnv}/bin/python" "$@"'';
+        mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser ]) "update-blog";
 
     in rec {
       defaultPackage."${system}" = packages."${system}".homepage;
@@ -112,6 +112,7 @@ rec {
               perlPackages.TemplateToolkit
               perlPackages.XMLSimple
               serve
+              shuffle_commercial_providers
               update_blog
               xhtml1
               xidel

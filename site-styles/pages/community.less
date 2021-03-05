@@ -581,3 +581,53 @@
     }
   });
 }
+
+.community-commercial-support {
+  #container();
+
+  & > p:nth-child(1) {
+    .generic-layout.lead();
+
+    margin-bottom: 2*@gutter;
+  }
+
+  & > p:nth-child(2) {
+    text-align: center;
+  }
+
+  & > ul {
+    #columns(3);
+
+    list-style: none;
+    margin: 0;
+
+    & > li {
+      margin-bottom: 1*@gutter;
+
+      & > a {
+        border: 1px solid #theme.color[blue];
+        border-radius: 1*@gutter;
+        display: block;
+        padding: 1*@gutter;
+        height: 100%;
+
+        & > div {
+          height: 300px;
+          width: 100%;
+          position: relative;
+
+          & > img {
+            margin: auto;
+            width: 100%;
+            max-height: 100%;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            position: absolute;
+          }
+        }
+      }
+    }
+  }
+}

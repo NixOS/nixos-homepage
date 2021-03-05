@@ -1,4 +1,64 @@
 [[redirects]]
+  from = "/news.xml"
+  to = "/blog/announcements.xml"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/community.html"
+  to = "/community/index.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/discourse.html"
+  to = "/community/teams/discourse.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/infrastructure.html"
+  to = "/community/teams/infrastructure.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/marketing.html"
+  to = "/community/teams/marketing.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/nixcon.html"
+  to = "/community/teams/nixcon.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/nixos_release.html"
+  to = "/community/teams/nixos-release.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/rfc-steering-committee.html"
+  to = "/community/teams/rfc-steering-committee.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/security.html"
+  to = "/community/teams/security.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/commercial-support.html"
+  to = "/community/commercial-support.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/news.html"
   to = "/blog/announcements.html"
   status = 302
@@ -12,7 +72,7 @@
 
 [[redirects]]
   from = "/governance.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
@@ -192,7 +252,7 @@
 
 [[redirects]]
   from = "/nixos/foundation.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
@@ -204,19 +264,19 @@
 
 [[redirects]]
   from = "/nixos/security.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
 [[redirects]]
   from = "/nixos/support.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
 [[redirects]]
   from = "/nixos/community.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 

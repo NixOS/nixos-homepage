@@ -13,7 +13,7 @@ There are many ways how you can help:
 - if you are an native English speaker or just a person that is very good with words, please look at the [issues tagged with `content` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Acontent)
 - if you are developer and just eager to fix stuff please look at the [issues tagged with `bug` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
 
-If you feel lost where and how to contribute, ask the [marketing team](https://nixos.org/teams/marketing.html) on the [`#nixos-marketing` channel on IRC](irc://irc.freenode.net/#nixos-marketing).
+If you feel lost where and how to contribute, ask the [marketing team](https://nixos.org/community/teams/marketing.html) on the [`#nixos-marketing` channel on IRC](irc://irc.freenode.net/#nixos-marketing).
 
 
 # How to help?
