@@ -71,7 +71,7 @@
         [% PROCESS svg path="site-styles/assets/gfx-learn-manual.svg" %]
         <h2>Nix Manual</h2>
         <p>Nix is a package manager which comes in a form of many command line tools.
-          Packages that Nix can build are defined with Nix Expression Language.
+          Packages that Nix can build are defined with the Nix Expression Language.
         </p>
         <ul>
           <li><a href="[%root%]manual/nix/stable/#ch-installing-binary">Installation</a></li>
