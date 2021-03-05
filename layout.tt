@@ -57,7 +57,7 @@ BLOCK navigationLink %]
           [% INCLUDE navigationLink href="download.html" title="Download" %]
           [% INCLUDE navigationLink href="learn.html" title="Learn" %]
           [% INCLUDE navigationLink href="community.html" title="Community" %]
-          [% INCLUDE navigationLink href="governance.html" title="Governance" %]
+          [% INCLUDE navigationLink href="blog/index.html" title="Blog" %]
           [% INCLUDE navigationLink href="donate.html" title="Donate" %]
           [% WRAPPER navigationLink class="search" title="Search" %]
           <a href="https://search.nixos.org/packages">Search</a>
@@ -109,7 +109,7 @@ BLOCK navigationLink %]
         <section>
           <h4>Stay up to date</h4>
           <ul>
-            <li><a href="https://nixos.org/news.html">Announcements</a></li>
+            <li><a href="https://nixos.org/blog/index.html">Blog</a></li>
             <li><a href="https://weekly.nixos.org/">Newsletter</a></li>
           </ul>
         </section>

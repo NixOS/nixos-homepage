@@ -13,15 +13,13 @@
 /images/screenshots/nixos-*-small.png
 
 /build/
-/blogs.json
-/blogs.xml
 /demos/*.cast
 /demos/*.svg
 /tmp.*
 /favicon.png
 /favicon.ico
+/blog/announcements-rss.xml
 /site-styles/common-styles
-/news-rss.xml
 /nixos-release.tt
 /robots.txt
 

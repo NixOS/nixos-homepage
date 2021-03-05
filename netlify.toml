@@ -1,4 +1,22 @@
 [[redirects]]
+  from = "/news.html"
+  to = "/blog/announcements.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/archive.html"
+  to = "/blog/announcements.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/governance.html"
+  to = "/community.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/features.html"
   to = "/explore.html"
   status = 302
@@ -174,7 +192,7 @@
 
 [[redirects]]
   from = "/nixos/foundation.html"
-  to = "/governance.html"
+  to = "/community.html"
   status = 302
   force = true
 
@@ -186,7 +204,7 @@
 
 [[redirects]]
   from = "/nixos/security.html"
-  to = "/governance.html"
+  to = "/community.html"
   status = 302
   force = true
 

@@ -42,10 +42,10 @@
 // Implementation
 #_declare__svg(@name, @svg, @color: #face12) {
   .__svg_@{name} {
-    @_colorized: replace(@svg, "#face12", @color);
+    @_colorized: replace(@svg, "#face12", @color, "g");
     // ugh, that's an ugly hack... but escape() apparently doesn't deal well with percent signs.
-    @_data: replace(escape(@_colorized), "%", "PERCENT");
-    background-image: replace(~"url('data:image/svg+xml;utf8,@{_data}')", "PERCENT", "%");
+    @_data: replace(escape(@_colorized), "%", "PERCENT", "g");
+    background-image: replace(~"url('data:image/svg+xml;utf8,@{_data}')", "PERCENT", "%", "g");
   }
 }
 
@@ -60,3 +60,27 @@
 
 #_declare__svg(nixcon_2020_color, @SVG_NIXCON_2020);
 #svg.nixcon.2020.color { &:extend(.__svg_nixcon_2020_color); }
+
+#_declare__svg(nixcon_blue, @SVG_GFX_NIXCON, #theme.color[blue-dark]);
+#svg.blog.weekly_news.blue { &:extend(.__svg_nixcon_blue); }
+
+#_declare__svg(nixcon_white, @SVG_GFX_NIXCON, #theme.color[white]);
+#svg.blog.weekly_news.white{ &:extend(.__svg_nixcon_white); }
+
+#_declare__svg(rfc_steering_blue, @SVG_GFX_RFC_STEERING, #theme.color[blue-dark]);
+#svg.blog.announcements.blue { &:extend(.__svg_rfc_steering_blue); }
+
+#_declare__svg(rfc_steering_white, @SVG_GFX_RFC_STEERING, #theme.color[white]);
+#svg.blog.announcements.white{ &:extend(.__svg_rfc_steering_white); }
+
+#_declare__svg(marketing_blue, @SVG_GFX_MARKETING, #theme.color[blue-dark]);
+#svg.blog.categories.blue { &:extend(.__svg_marketing_blue); }
+
+#_declare__svg(marketing_white, @SVG_GFX_MARKETING, #theme.color[white]);
+#svg.blog.categories.white{ &:extend(.__svg_marketing_white); }
+
+#_declare__svg(release_blue, @SVG_GFX_RELEASE, #theme.color[blue-dark]);
+#svg.blog.rss.blue { &:extend(.__svg_release_blue); }
+
+#_declare__svg(release_white, @SVG_GFX_RELEASE, #theme.color[white]);
+#svg.blog.rss.white{ &:extend(.__svg_release_white); }

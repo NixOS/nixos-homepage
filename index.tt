@@ -12,7 +12,7 @@
 </li>
 [% END %]
 [% WRAPPER atHead %]
-<link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
+<link rel="alternate" type="application/rss+xml" title="RSS feed" href="/blog/announcements-rss.xml" />
 [% END %]
 [% WRAPPER atEnd %]
 <script src="[% root %]js/asciinema-player.js"></script>
@@ -25,7 +25,7 @@
       NixOS 20.09<span class="-detailed"> "Nightingale" released!</span>
     </div>
     <div class="action">
-      <a href="[% root %]news.html">Announcement</a>
+      <a href="[% root %]blog/announcements.html">Announcement</a>
     </div>
   </div>
 </section>

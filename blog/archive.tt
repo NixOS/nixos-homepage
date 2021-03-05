@@ -1,0 +1,8 @@
+[% WRAPPER blog/layout.tt title="All posts" %]
+
+<section class="blog-archive">
+  [% INSERT "blog/archive.html.in" %]
+</section>
+
+[% END %]
+

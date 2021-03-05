@@ -7,13 +7,15 @@ default: all
 
 HTML = \
   404.html \
+  blog/index.html \
+  blog/announcements.html \
+  blog/categories.html \
   commercial-support.html \
   community.html \
   demos/index.html \
   donate.html \
   download.html \
   explore.html \
-  governance.html \
   guides/deploying-nixos-using-terraform.html \
   guides/ad-hoc-developer-environments.html \
   guides/building-and-running-docker-images.html \
@@ -26,7 +28,6 @@ HTML = \
   guides/towards-reproducibility-pinning-nixpkgs.html \
   index.html \
   learn.html \
-  news.html \
   teams/discourse.html \
   teams/infrastructure.html \
   teams/marketing.html \
@@ -195,36 +196,29 @@ favicon.ico: favicon.png
 	  --pre_process=common.tt $< > $@.tmp
 	mv $@.tmp $@
 
-news.html: all-news.xhtml
+#
+# -- /blog section of the website --------------------------------------------
+#
 
-all-news.xhtml: news.xml news.xsl
-	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@
-
-news-rss.xml: news.xml news-rss.xsl
-	xsltproc news-rss.xsl news.xml > $@.tmp
+blog/announcements-rss.xml: blog/announcements.xml blog/announcements-rss.xsl
+	xsltproc blog/announcements-rss.xsl blog/announcements.xml > $@.tmp
 	mv $@.tmp $@
 
-index.html: $(DEMOS) news-rss.xml latest-news.xhtml blogs.json 
+blog/announcements.html: blog/announcements.html.in blog/layout.tt
 
-latest-news.xhtml: news.xml news.xsl
-	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
+blog/announcements.html.in: blog/announcements-rss.xml blog/announcements.xml blog/announcements.xsl
+	xsltproc --param maxItem 10000 blog/announcements.xsl blog/announcements.xml > $@.tmp
+	mv $@.tmp $@
 
-check: $(HTML)
+blog/index.html: blog/layout.tt scripts/update_blog.py
+
+blog/categories.html: blog/layout.tt scripts/update_blog.py
+
+index.html: blog/announcements.xml blog/index.html
+
+
+check: all
 	bash ./scripts/check-links.sh
-
-blogs.xml:
-	curl --fail https://planet.nixos.org/rss20.xml > $@.tmp
-	mv $@.tmp $@
-
-blogs.json: blogs.xml
-	perl -MJSON -MXML::Simple -e 'print encode_json(XMLin("blogs.xml"));' < $< > $@.tmp
-	mv $@.tmp $@
-
-ifeq ($(UPDATE), 1)
-.PHONY: blogs.xml
-update: blogs.xml
-	@true
-endif
 
 
 
@@ -235,6 +229,7 @@ SITE_STYLES_LESS := $(wildcard site-styles/*.less) $(wildcard site-styles/**/*.l
 
 STYLES = \
 	styles/fonts/*.ttf \
+	styles/blog.css \
 	styles/community.css \
 	styles/index.css
 
@@ -255,12 +250,12 @@ styles/fonts/%.ttf: $(wildcard site-styles/common-styles/fonts/*)
 	mkdir -p styles/fonts
 	cp site-styles/common-styles/fonts/*.ttf styles/fonts
 
-styles/community.css: tmp.styles $(SITE_STYLES_LESS)
+styles/%.css: tmp.styles $(SITE_STYLES_LESS)
 	mkdir -vp styles
 	lessc --verbose \
-		--source-map=styles/community.css.map \
-		tmp.styles/pages/community.private.less \
-		styles/community.css;
+		--source-map=styles/$*.css.map \
+		tmp.styles/pages/$*.private.less \
+		styles/$*.css;
 
 styles/index.css: tmp.styles $(SITE_STYLES_LESS)
 	mkdir -vp styles
@@ -272,7 +267,7 @@ all: $(STYLES)
 
 ### Asciinema demos
 
-all: $(DEMOS)
+index.html: $(DEMOS)
 
 demos/%.svg: demos/%.scenario
 	echo "Generating $@ and $(patsubst %.svg,%.cast,$@) ..."

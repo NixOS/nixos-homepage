@@ -2,6 +2,7 @@
 
 set -e
 
+echo "Updating flake inputs..."
 nix flake update \
   --update-input released-nixpkgs-unstable \
   --update-input released-nixpkgs-stable \
@@ -10,5 +11,5 @@ nix flake update \
   --update-input nix-pills \
   --update-input nix-dev
 
-UPDATE=1 nix shell nixpkgs#gnumake nixpkgs#curl -c make update --keep-going
-
+echo "Updating blog categories..."
+nix shell --command "update-blog --output-dir blog/"

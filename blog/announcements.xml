@@ -8,7 +8,7 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/20.09-nightingale/nightingale.png">
-        <img class="inline" src="logo/nixos-logo-20.09-nightingale-lores.png" alt="20.09 Nightingale logo" with="100" />
+        <img class="inline" src="/logo/nixos-logo-20.09-nightingale-lores.png" alt="20.09 Nightingale logo" with="100" />
       </a>
       <p>
         Hey everyone, I'm <a href="https://github.com/jonringer">Jonathan Ringer</a>,
@@ -18,23 +18,23 @@
 
       <ul>
         <li>
-          <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-20.09">Release manual</a>
+          <a href="/manual/nixos/stable/release-notes.html#sec-release-20.09">Release manual</a>
           <ul>
             <li><a
-                href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-20.09-highlights">Highlights</a>
+                href="/manual/nixos/stable/release-notes.html#sec-release-20.09-highlights">Highlights</a>
             </li>
-            <li><a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-20.09-new-services">New
+            <li><a href="/manual/nixos/stable/release-notes.html#sec-release-20.09-new-services">New
                 Services</a></li>
             <li><a
-                href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-20.09-incompatibilities">Backward
+                href="/manual/nixos/stable/release-notes.html#sec-release-20.09-incompatibilities">Backward
                 Incompatibilities</a></li>
             <li><a
-                href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-20.09-notable-changes">Other
+                href="/manual/nixos/stable/release-notes.html#sec-release-20.09-notable-changes">Other
                 Notable Changes</a></li>
           </ul>
         </li>
-        <li><a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">Upgrade Instructions</a></li>
-        <li><a href="https://nixos.org/download.html#download-nixos">Image downloads</a></li>
+        <li><a href="/manual/nixos/stable/index.html#sec-upgrading">Upgrade Instructions</a></li>
+        <li><a href="/download.html#download-nixos">Image downloads</a></li>
       </ul>
 
       <p>
@@ -121,7 +121,7 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/20.03-markhor/markhor.png">
-        <img class="inline" src="logo/nixos-logo-20.03-markhor-lores.png" alt="20.03 Markhor logo" with="100" />
+        <img class="inline" src="/logo/nixos-logo-20.03-markhor-lores.png" alt="20.03 Markhor logo" with="100" />
       </a>
       <p>
         Hey everyone, I am <a href="https://discourse.nixos.org/u/worldofpeace">worldofpeace</a>, one of the release
@@ -129,9 +129,9 @@
         As promised, the most glittered stable release is here: NixOS 20.03 “Markhor” ✨.
       </p>
       <ul>
-        <li><a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-20.03">Release notes</a></li>
-        <li><a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">Upgrade instructions</a></li>
-        <li><a href="https://nixos.org/download.html">Image downloads</a></li>
+        <li><a href="/manual/nixos/stable/release-notes.html#sec-release-20.03">Release notes</a></li>
+        <li><a href="/manual/nixos/stable/index.html#sec-upgrading">Upgrade instructions</a></li>
+        <li><a href="/download.html">Image downloads</a></li>
       </ul>
       <h3>NixOS 20.03 Contributors</h3>
       <p>
@@ -233,15 +233,15 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/19.09-loris/loris.png">
-        <img class="inline" src="logo/nixos-logo-19.09-loris-lores.png" alt="19.09 Loris logo" with="100" height="87" />
+        <img class="inline" src="/logo/nixos-logo-19.09-loris-lores.png" alt="19.09 Loris logo" with="100" height="87" />
       </a>
       NixOS 19.09 “Loris” has been released, the twelfth stable release branch.
-      See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-19.09">release notes</a>
+      See the <a href="/manual/nixos/stable/release-notes.html#sec-release-19.09">release notes</a>
       for details. You can get NixOS 19.09 ISOs and VirtualBox appliances
-      from the <a href="https://nixos.org/download.html">download page</a>.
+      from the <a href="/download.html">download page</a>.
       For information on how to upgrade from older release branches
       to 19.09, check out the
-      <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">manual section on upgrading</a>.
+      <a href="/manual/nixos/stable/index.html#sec-upgrading">manual section on upgrading</a>.
     </description>
   </item>
 
@@ -252,15 +252,15 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/19.03-koi/koi.png">
-        <img class="inline" src="logo/nixos-logo-19.03-koi-lores.png" alt="19.03 Koi logo" with="100" height="87" />
+        <img class="inline" src="/logo/nixos-logo-19.03-koi-lores.png" alt="19.03 Koi logo" with="100" height="87" />
       </a>
       NixOS 19.03 “Koi” has been released, the eleventh stable release branch.
-      See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-19.03">release notes</a>
+      See the <a href="/manual/nixos/stable/release-notes.html#sec-release-19.03">release notes</a>
       for details. You can get NixOS 19.03 ISOs and VirtualBox appliances
-      from the <a href="https://nixos.org/download.html">download page</a>.
+      from the <a href="/download.html">download page</a>.
       For information on how to upgrade from older release branches
       to 19.03, check out the
-      <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">manual section on upgrading</a>.
+      <a href="/manual/nixos/stable/index.html#sec-upgrading">manual section on upgrading</a>.
     </description>
   </item>
 
@@ -271,16 +271,16 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/18.09-jellyfish/jellyfish.png">
-        <img class="inline" src="logo/nixos-logo-18.09-jellyfish-lores.png" alt="18.09 Jellyfish logo" with="100"
+        <img class="inline" src="/logo/nixos-logo-18.09-jellyfish-lores.png" alt="18.09 Jellyfish logo" with="100"
           height="87" />
       </a>
       NixOS 18.09 “Jellyfish” has been released, the tenth stable release branch.
-      See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-18.09">release notes</a>
+      See the <a href="/manual/nixos/stable/release-notes.html#sec-release-18.09">release notes</a>
       for details. You can get NixOS 18.09 ISOs and VirtualBox appliances
-      from the <a href="https://nixos.org/download.html">download page</a>.
+      from the <a href="/download.html">download page</a>.
       For information on how to upgrade from older release branches
       to 18.09, check out the
-      <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">manual section on upgrading</a>.
+      <a href="/manual/nixos/stable/index.html#sec-upgrading">manual section on upgrading</a>.
     </description>
   </item>
 
@@ -305,8 +305,8 @@
       Nix 2.1 released
     </title>
     <description>
-      <a href="https://nixos.org/nix/download.html">Nix 2.1</a>
-      has been released. See the <a href="https://nixos.org/manual/nix/stable#ssec-relnotes-2.1">release
+      <a href="/download.html#download-nix">Nix 2.1</a>
+      has been released. See the <a href="/manual/nix/stable#ssec-relnotes-2.1">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -344,15 +344,15 @@
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/18.03-impala/impala.png">
-        <img class="inline" src="logo/nixos-logo-18.03-impala-lores.png" alt="18.03 Impala logo" />
+        <img class="inline" src="/logo/nixos-logo-18.03-impala-lores.png" alt="18.03 Impala logo" />
       </a>
       NixOS 18.03 “Impala” has been released, the ninth stable release branch.
-      See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-18.03">release notes</a>
+      See the <a href="/manual/nixos/stable/release-notes.html#sec-release-18.03">release notes</a>
       for details. You can get NixOS 18.03 ISOs and VirtualBox appliances
-      from the <a href="https://nixos.org/download.html">download page</a>.
+      from the <a href="/download.html">download page</a>.
       For information on how to upgrade from older release branches
       to 18.03, check out the
-      <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">manual section on upgrading</a>.
+      <a href="/manual/nixos/stable/index.html#sec-upgrading">manual section on upgrading</a>.
     </description>
   </item>
 
@@ -362,8 +362,8 @@
       Nix 2.0 released
     </title>
     <description>
-      <a href="https://nixos.org/nix/download.html">Nix 2.0</a>
-      has been released. See the <a href="https://nixos.org/manual/nix/stable#ssec-relnotes-2.0">release
+      <a href="/download.html#download-nix">Nix 2.0</a>
+      has been released. See the <a href="/manual/nix/stable#ssec-relnotes-2.0">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -375,12 +375,12 @@
     </title>
     <description>
       NixOS 17.09 “Hummingbird” has been released, the eigth stable release
-      branch. See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-17.09">release
+      branch. See the <a href="/manual/nixos/stable/release-notes.html#sec-release-17.09">release
         notes</a>
       for details. You can get NixOS 17.09 ISOs and VirtualBox
-      appliances from the <a href="https://nixos.org/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
-      branches to 17.09, check out the <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">manual
+      branches to 17.09, check out the <a href="/manual/nixos/stable/index.html#sec-upgrading">manual
         section on
         upgrading</a>.
     </description>
@@ -420,12 +420,12 @@
     </title>
     <description>
       NixOS 17.03 “Gorilla” has been released, the seventh stable release
-      branch. See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-17.03">release
+      branch. See the <a href="/manual/nixos/stable/release-notes.html#sec-release-17.03">release
         notes</a>
       for details. You can get NixOS 17.03 ISOs and VirtualBox
-      appliances from the <a href="https://nixos.org/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
-      branches to 17.03, check out the <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">manual
+      branches to 17.03, check out the <a href="/manual/nixos/stable/index.html#sec-upgrading">manual
         section on
         upgrading</a>.
     </description>
@@ -438,12 +438,12 @@
     </title>
     <description>
       NixOS 16.09 “Flounder” has been released, the sixth stable release
-      branch. See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-16.09">release
+      branch. See the <a href="/manual/nixos/stable/release-notes.html#sec-release-16.09">release
         notes</a>
       for details. You can get NixOS 16.09 ISOs and VirtualBox
-      appliances from the <a href="https://nixos.org/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
-      branches to 16.09, check out the <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">manual
+      branches to 16.09, check out the <a href="/manual/nixos/stable/index.html#sec-upgrading">manual
         section on
         upgrading</a>.
     </description>
@@ -455,7 +455,7 @@
       NixOps 1.4 released
     </title>
     <description>
-      <a href="https://nixos.org/releases/nixops/nixops-1.4/nixops-1.4.tar.bz2">NixOps
+      <a href="https://web.archive.org/web/20200423231710/https://releases.nixos.org/nixops/nixops-1.4/nixops-1.4.tar.bz2">NixOps
         1.4</a> has been released. This release contains contains many
       nice new features. See the <a
         href="https://web.archive.org/web/20200613150138/https://hydra.nixos.org/build/115931128/download/1/manual/manual.html#ssec-relnotes-1.4">manual</a>
@@ -470,12 +470,12 @@
     </title>
     <description>
       NixOS 16.03 “Emu” has been released, the fifth stable release
-      branch. See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-16.03">release
+      branch. See the <a href="/manual/nixos/stable/release-notes.html#sec-release-16.03">release
         notes</a>
       for details. You can get NixOS 16.03 ISOs and VirtualBox
-      appliances from the <a href="https://nixos.org/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
-      branches to 16.03, check out the <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">manual
+      branches to 16.03, check out the <a href="/manual/nixos/stable/index.html#sec-upgrading">manual
         section on
         upgrading</a>.
     </description>
@@ -487,8 +487,8 @@
       Nix 1.11 released
     </title>
     <description>
-      <a href="https://nixos.org/nix/download.html">Nix 1.11</a>
-      has been released. See the <a href="https://nixos.org/manual/nix/stable#ssec-relnotes-1.11">release
+      <a href="/download.html#download-nix">Nix 1.11</a>
+      has been released. See the <a href="/manual/nix/stable#ssec-relnotes-1.11">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -500,12 +500,12 @@
     </title>
     <description>
       NixOS 15.09 “Dingo” has been released, the fourth stable release
-      branch. See the <a href="https://nixos.org/manual/nixos/stable/release-notes.html#sec-release-15.09">release
+      branch. See the <a href="/manual/nixos/stable/release-notes.html#sec-release-15.09">release
         notes</a>
       for details. You can get NixOS 15.09 ISOs and VirtualBox
-      appliances from the <a href="https://nixos.org/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
-      branches to 15.09, check out the <a href="https://nixos.org/manual/nixos/stable/index.html#sec-upgrading">manual
+      branches to 15.09, check out the <a href="/manual/nixos/stable/index.html#sec-upgrading">manual
         section on
         upgrading</a>.
     </description>
@@ -517,8 +517,8 @@
       Nix 1.10 released
     </title>
     <description>
-      <a href="https://nixos.org/nix/download.html">Nix 1.10</a>
-      has been released. See the <a href="https://nixos.org/manual/nix/stable#ssec-relnotes-1.10">release
+      <a href="/download.html#download-nix">Nix 1.10</a>
+      has been released. See the <a href="/manual/nix/stable#ssec-relnotes-1.10">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -548,10 +548,10 @@
       NixOS Foundation
     </title>
     <description>
-      <a href="https://nixos.org/nixos/foundation.html">The NixOS Foundation</a>
+      <a href="/community.html#foundation">The NixOS Foundation</a>
       was started to improve our ability to maintain and extend the infrastructure
       used by the Nix related projects. If you would like to support us, please go
-      <a href="https://nixos.org/nixos/foundation.html">here</a> and donate some money!
+      <a href="/community.html#foundation">here</a> and donate some money!
     </description>
   </item>
 
@@ -562,7 +562,7 @@
     </title>
     <description>
       <a href="https://hydra.nixos.org/release/nix/nix-1.9">Nix 1.9</a>
-      has been released. See the <a href="https://nixos.org/releases/nix/nix-1.9/manual/#ssec-relnotes-1.9">release
+      has been released. See the <a href="https://web.archive.org/web/20200423231710/https://releases.nixos.org/nix/nix-1.9/manual/#ssec-relnotes-1.9">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -575,12 +575,12 @@
     <description>
       NixOS 14.12 “Caterpillar” has been released, the third stable
       release branch. It brings Linux 3.14, systemd 217, Glibc 2.20,
-      KDE 4.14.1, and much more. See the <a href="https://nixos.org/manual/nixos/stable/sec-release-14.12.html">release
+      KDE 4.14.1, and much more. See the <a href="/manual/nixos/stable/release-notes.html#sec-release-14.12">release
         notes</a>
       for details. You can get NixOS 14.12 ISOs and VirtualBox
-      appliances from the <a href="https://nixos.org/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. For information on how to upgrade from older release
-      branches to 14.12, check out the <a href="https://nixos.org/manual/nixos/stable/sec-upgrading.html">manual section
+      branches to 14.12, check out the <a href="/manual/nixos/stable/index.html#sec-upgrading">manual section
         on
         upgrading</a>.
     </description>
@@ -593,7 +593,7 @@
     </title>
     <description>
       <a href="https://hydra.nixos.org/release/nix/nix-1.8">Nix 1.8</a>
-      has been released. See the <a href="https://nixos.org/releases/nix/nix-1.8/manual/#ssec-relnotes-1.8">release
+      has been released. See the <a href="https://web.archive.org/web/20200423231710/https://releases.nixos.org/nix/nix-1.8/manual/#ssec-relnotes-1.8">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -622,11 +622,11 @@
       NixOS 14.04 “Baboon” has been released, the second stable
       release branch. It brings Linux 3.12, systemd 212, GCC 4.8,
       Glibc 2.19, KDE 4.12, light-weight NixOS containers, and much
-      more. See the <a href="https://nixos.org/manual/nixos/stable/#sec-release-14.04">release
+      more. See the <a href="/manual/nixos/stable/#sec-release-14.04">release
         notes</a> for details. You can get NixOS 14.04 ISOs and
-      VirtualBox appliances from the <a href="https://nixos.org/download.html">download page</a>. For information on
+      VirtualBox appliances from the <a href="/download.html">download page</a>. For information on
       how to upgrade a 13.10 system to 14.04, check out the <a
-        href="https://nixos.org/manual/nixos/stable/#sec-upgrading">manual
+        href="/manual/nixos/stable/#sec-upgrading">manual
         section on upgrading</a>.
     </description>
   </item>
@@ -723,12 +723,12 @@ $ nix-store -qR /run/current-system | grep openssl
       that need bug fixes and security updates, but not the
       potentially destabilising changes that sometimes occur on the
       unstable branch. You can get NixOS 13.10 ISOs and VirtualBox
-      appliances from the <a href="https://nixos.org/download.html">download
+      appliances from the <a href="/download.html">download
         page</a>. See the <a
         href="https://web.archive.org/web/20200423231710/https://releases.nixos.org/nix-dev/2013-October/011941.html">announcement</a>
       for more information. For information on how to switch an
       existing NixOS machine from the unstable channel to 13.10, check
-      out the <a href="https://nixos.org/manual/nixos/stable/#sec-upgrading">manual
+      out the <a href="/manual/nixos/stable/#sec-upgrading">manual
         section on upgrading</a>.
     </description>
   </item>
@@ -742,7 +742,7 @@ $ nix-store -qR /run/current-system | grep openssl
       <a href="https://hydra.nixos.org/release/nix/nix-1.6.1">Nix
         1.6.1</a> has been released. This is primarily a bug fix
       release but has some minor new features. See the <a
-        href="https://web.archive.org/web/20200916201737/https://nixos.org/manual/nix/stable/#ssec-relnotes-1.6.1">release
+        href="https://web.archive.org/web/20200916201737//manual/nix/stable/#ssec-relnotes-1.6.1">release
         notes</a> for details.
     </description>
   </item>
@@ -851,7 +851,7 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <a href="https://hydra.nixos.org/release/nixops/nixops-1.0">NixOps
         1.0</a> has been released, the inaugural release of the NixOS
-      cloud deployment tool. See the <a href="https://nixos.org/nix-dev/2013-June/011363.html">announcement</a>
+      cloud deployment tool. See the <a href="https://web.archive.org/web/20200423143059/https://releases.nixos.org/nix-dev/2013-June/011363.html">announcement</a>
       and the <a href="https://hydra.nixos.org/build/5426864/download/1/manual/manual.html">manual</a>
       for details.
     </description>
@@ -880,7 +880,7 @@ $ nix-store -qR /run/current-system | grep openssl
         der Burg</a> successfully defended his PhD thesis entitled <a
         href="https://web.archive.org/web/20160304065255/http://www.st.ewi.tudelft.nl/~sander/index.php/phdthesis"><em>A
           Reference Architecture for Distributed Software
-          Deployment</em></a>! It describes (among other things) <a href="https://nixos.org/disnix/">Disnix</a>, a
+          Deployment</em></a>! It describes (among other things) <a href="https://github.com/svanderburg/disnix">Disnix</a>, a
       system for
       deployment of service-oriented architectures.
     </description>
@@ -1067,7 +1067,7 @@ $ nix-store -qR /run/current-system | grep openssl
       FOSDEM talk about NixOS
     </title>
     <description>
-      <a href="https://fosdem.org/2011"><img class="inline" src="logo/fosdem-logo.png" alt="Fosdem logo" /></a>
+      <a href="https://fosdem.org/2011"><img class="inline" src="/logo/fosdem-logo.png" alt="Fosdem logo" /></a>
       <a href="http://www.st.ewi.tudelft.nl/~sander/">Sander van der
         Burg</a> gave a talk about NixOS at the <a
         href="https://web.archive.org/web/20120107073048/https://archive.fosdem.org/2011/schedule/track/crossdistro_devroom">CrossDistro
@@ -1097,7 +1097,7 @@ $ nix-store -qR /run/current-system | grep openssl
       instantiate (networks of) virtual machines. This is what we use
       for <a href="https://hydra.nixos.org/jobset/nixos/trunk/jobstatus">automated
         regression testing of NixOS itself</a>. A <a
-        href="https://nixos.org/~eelco/pubs/decvms-issre2010-submitted.pdf">draft
+        href="https://edolstra.github.io/pubs/decvms-issre2010-submitted.pdf">draft
         of the paper</a> is available.
     </description>
   </item>
@@ -1108,12 +1108,12 @@ $ nix-store -qR /run/current-system | grep openssl
       Xfce in NixOS
     </title>
     <description>
-      <a href="http://www.xfce.org/"><img class="inline" src="logo/xfce-small.png" alt="Xfce screenshot" /></a>
+      <a href="http://www.xfce.org/"><img class="inline" src="/logo/xfce-small.png" alt="Xfce screenshot" /></a>
       NixOS now supports <a href="http://www.xfce.org/">Xfce</a>, a
       modern, light-weight desktop environment. It can be enabled by
       setting the NixOS configuration value
       <tt>services.xserver.desktopManager.xfce.enable</tt> to
-      <tt>true</tt>. (<a href="images/screenshots/nixos-xfce.png">Screenshot</a>)
+      <tt>true</tt>. (<a href="/images/screenshots/nixos-xfce.png">Screenshot</a>)
     </description>
   </item>
 
@@ -1182,8 +1182,8 @@ $ nix-store -qR /run/current-system | grep openssl
       Nix logo
     </title>
     <description>
-      <a href="logo/nixos-hires.png">
-        <img class="inline" src="logo/nixos-lores.png" alt="Nix
+      <a href="/logo/nixos-hires.png">
+        <img class="inline" src="/logo/nixos-lores.png" alt="Nix
       logo" /></a> Long overdue, the Nix project finally has a logo!
       The logo was originally created by <a href="http://arbitrary.name/">Simon Frankau</a> for the <a
         href="https://www.haskell.org/haskellwiki/Haskell_logos/New_logo_ideas">Haskell
@@ -1242,11 +1242,11 @@ $ nix-store -qR /run/current-system | grep openssl
       OpenOffice.org 3 in Nixpkgs
     </title>
     <description>
-      <a href="images/screenshots/nixos-openoffice-3.png"><img class="inline screenshot"
-          src="images/screenshots/nixos-openoffice-3-small.png" alt="OpenOffice.org 3.0.1 screenshot" /></a>
+      <a href="/images/screenshots/nixos-openoffice-3.png"><img class="inline screenshot"
+         src="/images/screenshots/nixos-openoffice-3-small.png" alt="OpenOffice.org 3.0.1 screenshot" /></a>
 
       Lluís Batlle has updated OpenOffice.org in Nixpkgs to 3.0.1
-      (<a href="images/screenshots/nixos-openoffice-3.png">screenshot</a>).
+      (<a href="/images/screenshots/nixos-openoffice-3.png">screenshot</a>).
     </description>
   </item>
 
@@ -1256,8 +1256,8 @@ $ nix-store -qR /run/current-system | grep openssl
       KDE 4.2 in Nixpkgs/NixOS
     </title>
     <description>
-      <a href="images/screenshots/nixos-kde42-1.png"><img class="inline screenshot"
-          src="images/screenshots/nixos-kde42-1-small.png" alt="KDE 4.2 screenshot" /></a>
+      <a href="/images/screenshots/nixos-kde42-1.png"><img class="inline screenshot"
+          src="/images/screenshots/nixos-kde42-1-small.png" alt="KDE 4.2 screenshot" /></a>
 
       We now have a fairly complete set of KDE 4.2 packages in Nixpkgs
       and NixOS. Previously we had KDE 3.5, but it was rather
@@ -1268,8 +1268,8 @@ $ nix-store -qR /run/current-system | grep openssl
       <tt>services.xserver.sessionType</tt> option to
       <tt>kde4</tt>. Thanks go to Yury G. Kudryashov, Andrew
       Morsillo and Sander van der Burg for doing the hard work on
-      adding KDE 4 to Nixpkgs. (<a href="images/screenshots/nixos-kde42-1.png">Screenshot 1</a>,
-      <a href="images/screenshots/nixos-kde42-2.png">screenshot
+      adding KDE 4 to Nixpkgs. (<a href="/images/screenshots/nixos-kde42-1.png">Screenshot 1</a>,
+      <a href="/images/screenshots/nixos-kde42-2.png">screenshot
         2</a>)
     </description>
   </item>
@@ -1292,7 +1292,7 @@ $ nix-store -qR /run/current-system | grep openssl
       (slow) Cygwin build; build results are stored in a database,
       which will enable all sorts of interesting queries; better error
       reporting; a better web interface; and much more. We have
-      written a <a href="https://nixos.org/~eelco/pubs/hydra-scp-submitted.pdf">draft
+      written a <a href="https://edolstra.github.io/pubs/hydra-scp-submitted.pdf">draft
         paper about Hydra</a>. There are some <a
         href="https://hydra.nixos.org/job/hydra/trunk/build/latest/download-by-type/doc/manual">instructions
         available</a> about how to set up your own Hydra server.
@@ -1338,7 +1338,7 @@ $ nix-store -qR /run/current-system | grep openssl
         accepted for presentation at the <a
           href="https://web.archive.org/web/20090525100630/http://www.hotswup.org/">First ACM Workshop on Hot
           Topics in Software Upgrades (HotSWUp)</a>. A <a
-          href="https://nixos.org/~eelco/pubs/atomic-hotswup2008-submitted.pdf">draft
+          href="https://edolstra.github.io/pubs/atomic-hotswup2008-submitted.pdf">draft
           of the paper</a> is available. It describes Sander’s master’s
         thesis research on DisNix, an extension to Nix that allows
         deployment and upgrading of distributed systems from a single
@@ -1369,7 +1369,7 @@ $ nix-store -qR /run/current-system | grep openssl
         features such as laziness are important for system
         configuration management. It also provides some measurements
         on the actual purity of Nix build actions. A <a
-          href="https://nixos.org/~eelco/pubs/nixos-icfp2008-submitted.pdf">draft
+          href="https://edolstra.github.io/pubs/nixos-icfp2008-submitted.pdf">draft
           of the paper</a> is available.
       </p>
     </description>
@@ -1397,7 +1397,7 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       <p>
-        The Nix website has moved to <a href="https://nixos.org/"><tt>nixos.org</tt></a> (hosted at <a
+        The Nix website has moved to <a href="/"><tt>nixos.org</tt></a> (hosted at <a
           href="http://www.tudelft.nl/">TU Delft</a>). The Subversion
         repositories have moved to <a href="http://svn.nixos.org/"><tt>svn.nixos.org</tt></a>. See
         <a
@@ -1415,14 +1415,14 @@ $ nix-store -qR /run/current-system | grep openssl
     </title>
     <description>
       <p>
-        Eelco Dolstra presented the paper <a href="https://nixos.org/~eelco/pubs/laziness-ldta2008-final.pdf">“Maximal
+        Eelco Dolstra presented the paper <a href="https://edolstra.github.io/pubs/laziness-ldta2008-final.pdf">“Maximal
           Laziness — An Efficient Interpretation Technique for Purely
           Functional DSLs”</a> at <a href="https://web.archive.org/web/20090716235453/http://ldta2008.inf.elte.hu/">8th
           Workshop on Language
           Description, Tools and Applications (LDTA 2008)</a>. It’s about
         caching of evaluation results in the Nix expression evaluator as
         a technique to make a simple term-rewriting evaluator efficient.
-        Slides are <a href="https://nixos.org/~eelco/talks/ldta-apr-2008.pdf">here</a>.
+        Slides are <a href="https://edolstra.github.io/talks/ldta-apr-2008.pdf">here</a>.
       </p>
     </description>
   </item>
@@ -1445,7 +1445,7 @@ $ nix-store -qR /run/current-system | grep openssl
         years) and a postdoc (3 years). If you’re interested in these
         positions, please have a look at <a href="http://swerl.tudelft.nl/bin/view/Main/PDS">this page</a>,
         and don’t hesitate to contact <a href="http://swerl.tudelft.nl/bin/view/EelcoVisser">Eelco
-          Visser</a> or <a href="https://nixos.org/~eelco/">Eelco Dolstra</a>.
+          Visser</a> or <a href="https://edolstra.github.io/">Eelco Dolstra</a>.
 
       </p>
     </description>
@@ -1459,17 +1459,16 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <p>
 
-        <a href="images/screenshots/nixos-installer-help.png"><img class="inline screenshot"
-            src="images/screenshots/nixos-installer-help-small.png" alt="NixOS installer online help" /></a>
+        <a href="/images/screenshots/nixos-installer-help.png"><img class="inline screenshot"
+            src="/images/screenshots/nixos-installer-help-small.png" alt="NixOS installer online help" /></a>
 
         New NixOS installation CD images for <tt>i686</tt> and
-        <tt>x86_64</tt> are <a href="https://nixos.org/releases/nixos-0.1pre10083/">available</a>,
+        <tt>x86_64</tt> are <a href="https://web.archive.org/web/20200423231710/https://releases.nixos.org/nixos-0.1pre10083/">available</a>,
         which is a good thing as the previous ones were already a few
         months old. The new images are Nix 0.11-based, contain <a href="http://www.memtest.org/">Memtest86+</a> as a
         convenience, should support more SATA drives, and show online
-        help (the <a href="https://nixos.org/releases/nixos-unstable-latest/manual/">NixOS
-          manual</a>) on virtual console 7.
-
+        help (the <a href="/manual/nixos/unstable/">NixOS manual</a>) on
+        virtual console 7.
       </p>
     </description>
   </item>
@@ -1513,11 +1512,11 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <p>
 
-        <a href="images/screenshots/nixos-openoffice.png"><img class="inline screenshot"
-            src="images/screenshots/nixos-openoffice-small.png" alt="OpenOffice screenshot" /></a>
+        <a href="/images/screenshots/nixos-openoffice.png"><img class="inline screenshot"
+            src="/images/screenshots/nixos-openoffice-small.png" alt="OpenOffice screenshot" /></a>
 
         <a href="https://www.openoffice.org/">OpenOffice</a> is now in
-        Nixpkgs (<a href="images/screenshots/nixos-openoffice.png">screenshot of
+        Nixpkgs (<a href="/images/screenshots/nixos-openoffice.png">screenshot of
           OpenOffice 2.2.1 running under NixOS</a>, and <a
           href="https://web.archive.org/web/20160528175628if_/https://www.denbreejen.net/public/nixos/nixos-oo-scrs.png">another
           screenshot</a>). Despite being a rather gigantic package (it
@@ -1542,11 +1541,11 @@ $ nix-store -qR /run/current-system | grep openssl
     <description>
       <p>
 
-        <a href="images/screenshots/nixos-games.png"><img class="inline screenshot"
-            src="images/screenshots/nixos-games-small.png" alt="NixOS screenshot" /></a>
+        <a href="/images/screenshots/nixos-games.png"><img class="inline screenshot"
+            src="/images/screenshots/nixos-games-small.png" alt="NixOS screenshot" /></a>
 
         <a href="https://www.winehq.org/">Wine</a> now runs on NixOS!
-        Finally we can run all those <a href="images/screenshots/nixos-games.png">legacy
+        Finally we can run all those <a href="/images/screenshots/nixos-games.png">legacy
           applications</a>... Thanks to Michael Raskin for adding Wine
         and a NPTL-enabled Glibc (which Wine seems to need). This is a
         nice application of purely functional package composition, by
@@ -1603,11 +1602,11 @@ $ nix-store -qR /run/current-system | grep openssl
 
       <p>
 
-        <a href="https://www.kde.org"><img class="inline screenshot" src="images/klogo-official-crystal-128x128.png"
+        <a href="https://www.kde.org"><img class="inline screenshot" src="/images/klogo-official-crystal-128x128.png"
             alt="KDE logo" /></a>
 
         We now have <a href="https://www.kde.org/">KDE</a> running on
-        NixOS (<a href="images/screenshots/nixos-kde.png">obligatory
+        NixOS (<a href="/images/screenshots/nixos-kde.png">obligatory
           screenshot</a>). Just <tt>kdebase</tt> for now (Martin
         Bravenboer already added <tt>kdelibs</tt> a long time ago so
         that we could run the wonderful <a href="http://kcachegrind.sourceforge.net/cgi-bin/show.cgi">KCachegrind</a>),
@@ -1628,8 +1627,8 @@ $ nix-store -qR /run/current-system | grep openssl
       NixOS progress report
     </title>
     <description>
-      <a href="images/screenshots/nixos-compiz-cube.png"><img class="inline screenshot"
-          src="images/screenshots/nixos-compiz-cube-small.png" alt="NixOS screenshot" /></a>
+      <a href="/images/screenshots/nixos-compiz-cube.png"><img class="inline screenshot"
+          src="/images/screenshots/nixos-compiz-cube-small.png" alt="NixOS screenshot" /></a>
 
       NixOS is now <em>almost</em> usable as a desktop OS ;-). We
       have an X server, a bunch of Gnome packages, basic wireless
@@ -1637,13 +1636,13 @@ $ nix-store -qR /run/current-system | grep openssl
       had all along running on other Linux distributions. Here are a
       few screenshots:
       <ul>
-        <li><a href="images/screenshots/nixos-compiz-cube.png">X server
+        <li><a href="/images/screenshots/nixos-compiz-cube.png">X server
             with Compiz window manager</a>.</li>
-        <li><a href="images/screenshots/nixos-terminals.png">Emacs and
+        <li><a href="/images/screenshots/nixos-terminals.png">Emacs and
             a few terminals</a> showing off the (near) absence of
           <tt>/lib</tt>, <tt>/bin</tt> etc.; everything is in the Nix
           store.</li>
-        <li><a href="images/screenshots/nixos-apps.png">Some
+        <li><a href="/images/screenshots/nixos-apps.png">Some
             applications</a>.</li>
       </ul>
     </description>
@@ -1655,7 +1654,7 @@ $ nix-store -qR /run/current-system | grep openssl
       NixOS manual
     </title>
     <description>
-      There is now some <a href="https://nixos.org/releases/nixos/unstable/manual/">basic
+      There is now some <a href="/manual/nixos/unstable/">basic
         documentation for NixOS</a>.
     </description>
   </item>
@@ -1666,7 +1665,7 @@ $ nix-store -qR /run/current-system | grep openssl
       NixOS for x86_64
     </title>
     <description>
-      NixOS now works on x86_64 machines. A 64-bit ISO is <a href="download.html">available</a>.
+      NixOS now works on x86_64 machines. A 64-bit ISO is <a href="/download.html">available</a>.
     </description>
   </item>
 

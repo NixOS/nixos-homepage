@@ -1,0 +1,28 @@
+[% BLOCK navigationLink %]
+<li>
+  <a class="[% outputName == href ? " active" : "" %]" href="[% root %][% href %]">[% title %]</a>
+</li>
+[% END %]
+
+[% WRAPPER atHead %]
+<link rel="alternate" type="application/rss+xml" title="RSS feed" href="/blog/announcements-rss.xml" />
+<link rel="stylesheet" href="[% root %]styles/blog.css" type="text/css" />
+[% END %]
+
+[% WRAPPER layout.tt title="Blog → $title" handlesLayout=1 %]
+
+<div class="page-title">
+  <h1>Blog</h1>
+</div>
+
+<section class="blog-submenu">
+  <ul>
+    [% INCLUDE navigationLink href="blog/index.html" title="Weekly news" %]
+    [% INCLUDE navigationLink href="blog/announcements.html" title="Announcements" %]
+    [% INCLUDE navigationLink href="blog/categories.html" title="Categories" %]
+  </ul>
+</section>
+
+[%- content -%]
+
+[% END %]
