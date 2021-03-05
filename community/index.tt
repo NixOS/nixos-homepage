@@ -240,7 +240,7 @@
         the entire release process from setting the roadmap to uploading the
         artifacts.
       </p>
-      <a class="button -primary" href="[%root%]community/teams/nixos_release.html">Members &amp; Contacts</a>
+      <a class="button -primary" href="[%root%]community/teams/nixos-release.html">Members &amp; Contacts</a>
       [% PROCESS svg path="site-styles/assets/gfx-nixcon.white.svg" %]
       <h3>NixCon Team</h3>
       <p>A team that helps organize NixCon, a conference for the Nix and NixOS

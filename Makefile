@@ -16,7 +16,7 @@ HTML = \
   community/teams/infrastructure.html \
   community/teams/marketing.html \
   community/teams/nixcon.html \
-  community/teams/nixos_release.html \
+  community/teams/nixos-release.html \
   community/teams/rfc-steering-committee.html \
   community/teams/security.html \
   demos/index.html \
