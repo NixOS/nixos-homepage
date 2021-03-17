@@ -3,7 +3,7 @@
 set -e
 
 echo "Updating flake inputs..."
-nix flake update \
+nix flake lock \
   --update-input released-nixpkgs-unstable \
   --update-input released-nixpkgs-stable \
   --update-input released-nix-unstable \
