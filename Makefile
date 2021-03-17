@@ -264,14 +264,14 @@ styles/fonts/%.ttf: $(wildcard site-styles/common-styles/fonts/*)
 
 styles/%.css: tmp.styles $(SITE_STYLES_LESS)
 	mkdir -vp styles
-	lessc --verbose \
+	lessc --math=always --verbose \
 		--source-map=styles/$*.css.map \
 		tmp.styles/pages/$*.private.less \
 		styles/$*.css;
 
 styles/index.css: tmp.styles $(SITE_STYLES_LESS)
 	mkdir -vp styles
-	lessc --verbose --source-map=styles/index.css.map tmp.styles/index.less styles/index.css
+	lessc --math=always --verbose --source-map=styles/index.css.map tmp.styles/index.less styles/index.css
 
 all: $(STYLES)
 
