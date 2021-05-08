@@ -77,7 +77,7 @@ rec {
         mkPyScript (with pkgs.python3Packages; [ click toml ]) "shuffle-commercial-providers";
 
       update_blog =
-        mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser ]) "update-blog";
+        mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser cchardet ]) "update-blog";
 
     in rec {
       defaultPackage."${system}" = packages."${system}".homepage;
