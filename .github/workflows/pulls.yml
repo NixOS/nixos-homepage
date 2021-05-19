@@ -36,7 +36,7 @@ jobs:
       run: |
         nix build
         mkdir build
-        cp -RL ./result/* ./build/
+        cp -RL ./result/* ./result/.well-known/ ./build/
 
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.1
