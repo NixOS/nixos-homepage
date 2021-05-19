@@ -150,7 +150,7 @@ rec {
 
           installPhase = ''
             mkdir $out
-            cp -prd . $out/
+            cp -prd . .well-known/ $out/
           '';
 
           shellHook = ''
