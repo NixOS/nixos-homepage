@@ -430,3 +430,8 @@
   to = "/css/nixos-site.css"
   status = 302
   force = true
+
+[[headers]]
+  for = "/.well-known/matrix/client"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
