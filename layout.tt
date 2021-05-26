@@ -96,7 +96,6 @@ BLOCK navigationLink %]
           <h4>Get in Touch</h4>
           <ul>
             <li><a href="https://discourse.nixos.org/">Forum</a></li>
-            <li><a href="https://webchat.freenode.net/#nixos">Chat</a></li>
             <li><a href="[% root %]community/commercial-support.html">Commercial support</a></li>
           </ul>
         </section>
