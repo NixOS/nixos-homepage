@@ -6,7 +6,7 @@ rec {
 
   # These inputs are used for the manuals and release artifacts
   inputs.released-nixpkgs-unstable = { url = "nixpkgs/nixos-unstable"; };
-  inputs.released-nixpkgs-stable = { url = "nixpkgs/nixos-20.09"; };
+  inputs.released-nixpkgs-stable = { url = "nixpkgs/nixos-21.05"; };
   inputs.released-nix-unstable = { url = "github:nixos/nix/master"; };
   inputs.released-nix-stable = { url = "github:nixos/nix/latest-release"; flake = false; };
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
@@ -35,7 +35,7 @@ rec {
             inherit pname version;
             sha256 = "sha256-qMGi+myppWBapM7TkPeXC2g/M1FA1YGwESNrx8LVXkw=";
           };
-          cargoSha256 = "1jb34b634wkn5zhzipwi67761qsbr2qvjkd6kz3031hapl457r0b";
+          cargoSha256 = "0z4iwjm38xfgipl1pcrkl8277p627pls565k7cclrhxfcx3f513p";
         };
       };
 

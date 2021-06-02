@@ -56,11 +56,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1616016881,
-        "narHash": "sha256-dXU3Vjej+4n5V22ESyKYtKLZpT6Bkl3L2RNlTG0/33o=",
+        "lastModified": 1619640096,
+        "narHash": "sha256-gMnaDRsfLVmnBCoXwgjGJZmqBd/XUGpdZY5UkUEroEM=",
         "owner": "NixOS",
         "repo": "nixos-common-styles",
-        "rev": "94b4ed63d18d52dfa5d146d909f054006427304a",
+        "rev": "d5787c2a12922059712862e62ca2a324062b2954",
         "type": "github"
       },
       "original": {
@@ -87,11 +87,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1615797423,
-        "narHash": "sha256-5NGDZXPQzuoxf/42NiyC9YwwhwzfMfIRrz3aT0XHzSc=",
+        "lastModified": 1617082367,
+        "narHash": "sha256-W0cQPGjc4IVzryaGycuoS8KZkXafS1P23w/fcKLoD5Y=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "266dc8c3d052f549826ba246d06787a219533b8f",
+        "rev": "04a2b269d8921505a2969fc9ec25c1f517f2b307",
         "type": "github"
       },
       "original": {
@@ -102,11 +102,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1615797423,
-        "narHash": "sha256-5NGDZXPQzuoxf/42NiyC9YwwhwzfMfIRrz3aT0XHzSc=",
+        "lastModified": 1622282707,
+        "narHash": "sha256-+GOrUDsdneUqrOm9d+9bHXjEVoVcU8tm14WGVzbt6gg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "266dc8c3d052f549826ba246d06787a219533b8f",
+        "rev": "6933d068c5d2fcff398e802f7c4e271bbdab6705",
         "type": "github"
       },
       "original": {
@@ -169,16 +169,16 @@
     },
     "released-nixpkgs-stable": {
       "locked": {
-        "lastModified": 1622559709,
-        "narHash": "sha256-wnZUu3JNQTwu7q301TOsZFGxAcgBV8C3qks/aB8wztQ=",
+        "lastModified": 1622449420,
+        "narHash": "sha256-aKDhIaJqNUy7p3urHEBC/mdIAJWckhW3Fgzmv284UHg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "cee3ca37c68dad981396365bf4b1d0c807ac4eb4",
+        "rev": "d25ea6a0d2a847fb52131da546f2a866656fbafa",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "nixos-20.09",
+        "ref": "nixos-21.05",
         "type": "indirect"
       }
     },
