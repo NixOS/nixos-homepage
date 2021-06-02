@@ -1,6 +1,125 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <news>
+
+  <item>
+    <pubDate>Tue, 1 Jun 2021 07:00:00 GMT</pubDate>
+    <title>
+      <a id="21.05">NixOS 21.05 released</a>
+    </title>
+    <description>
+      <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/21.05-okapi/okapi.png">
+        <img class="inline" src="/logo/nixos-logo-21.05-okapi-lores.png" alt="21.05 Okapi logo" width="100" />
+      </a>
+      <p>
+        Hey everyone, I'm <a href="https://github.com/jonringer">Jonathan Ringer</a>,
+        the release manager for 21.05. As promised, the latest stable
+        release is here: NixOS 21.05 “Okapi”.
+      </p>
+
+      <ul>
+        <li>
+          <a href="/manual/nixos/stable/release-notes.html#sec-release-21.05">Release manual</a>
+          <ul>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-21.05-highlights">Highlights</a>
+            </li>
+            <li><a href="/manual/nixos/stable/release-notes.html#sec-release-21.05-new-services">New
+                Services</a></li>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-21.05-incompatibilities">Backward
+                Incompatibilities</a></li>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-21.05-notable-changes">Other
+                Notable Changes</a></li>
+          </ul>
+        </li>
+        <li><a href="/manual/nixos/stable/index.html#sec-upgrading">Upgrade Instructions</a></li>
+        <li><a href="/download.html#download-nixos">Image downloads</a></li>
+      </ul>
+
+      <p>
+        The 21.05 release was possible due to the efforts of <strong>1745</strong>
+        contributors in <strong>33474</strong> commits. We would especially
+        like to thank our top 10 contributors:
+        <a href="https://github.com/fabaff">Fabian Affolter</a>,
+        <a href="https://github.com/fridh">Frederik Rietdijk</a>,
+        <a href="https://github.com/supersandro2000">Sandro Jäckel</a>,
+        <a href="https://github.com/nequissimus">Tim Steinbach</a>,
+        <a href="https://github.com/jonringer">Jonathan Ringer</a>,
+        <a href="https://github.com/mweinelt">Martin Weinelt</a>,
+        <a href="https://github.com/marsam">Mario Rodas</a>,
+        <a href="https://github.com/dotlambda">Robert Schütz</a>,
+        <a href="https://github.com/jtojnar">Jan Tojnar</a>,
+        <a href="https://github.com/sternenseemann">Sterni</a>.
+      </p>
+
+      <p>
+        NixOS is already known as
+        <a href="https://repology.org/repositories/statistics/newest">the most up to date distribution</a>
+        and is
+        <a href="https://repology.org/repositories/statistics/total">in the top three by total number of packages</a>.
+      </p>
+
+      <p>
+        This didn't stop us. In the last six months:
+      </p>
+
+      <ul>
+        <li>12985 packages were added</li>
+        <li>14109 packages were removed</li>
+        <li>16768 packages were updated</li>
+      </ul>
+
+      <p>
+        Likewise, our NixOS module system got bigger and better:
+      </p>
+
+      <ul>
+        <li>1527 options were added</li>
+        <li>290 options removed</li>
+        <li>400 options were updated</li>
+      </ul>
+
+      <h3>Stabilization Contributors</h3>
+
+      <p>
+        Stabilization of the NixOS happens a month before the planned release. The
+        goal is to have as little as possible continuous integration (Hydra)
+        jobs failing before the release is cut.
+      </p>
+
+      <p>
+        Individuals who contributed to stabilizing this release:
+        <a href="https://github.com/fabaff">Fabian Affolter</a>,
+        <a href="https://github.com/sternenseemann">Sterni</a>,
+        <a href="https://github.com/stephank">Stéphan Kochen</a>,
+        <a href="https://github.com/dotlambda">Robert Schütz</a>,
+        <a href="https://github.com/mweinelt">Martin Weinelt</a>,
+        <a href="https://github.com/jonringer">Jonathan Ringer</a>,
+        <a href="https://github.com/alyssais">Alyssa Ross</a>,
+        <a href="https://github.com/thefloweringash">Andrew Childs</a>,
+        <a href="https://github.com/ttuegel">Thomas Tuegel</a>,
+        <a href="https://github.com/maralorn">Malte Brandy</a>, and 431 others!
+      </p>
+
+      <h3>Special Thanks</h3>
+      <p>
+        I would like to give a special thanks to <a href="https://github.com/jtojnar">Jan Tojnar</a> and others for the Gnome 40 stabilization effort. Another special thanks should be given to <a href="https://github.com/ttuegel">Thomas Tuegel</a> and many others for bringing Plasma 5.21 to NixOS.
+      </p>
+
+      <h3>Reflections and Closing</h3>
+
+      <p>
+          I think the <a href="https://github.com/NixOS/rfcs/pull/80">RFC80</a> and <a href="https://github.com/NixOS/rfcs/pull/85">RFC85</a>
+        changes to the release process were successful in limiting risk and making the release more deterministic.
+        This is the first release since 17.03 to have released in the intended month, although the rendered manual and
+        official announcement were delayed a day. In the future, I hope to make the release as "boring" as possible,
+        and have it be a time to improve the quality of nixpkgs' unstable and stable channels.
+      </p>
+    </description>
+  </item>
+
   <item>
     <pubDate>Tue, 27 Oct 2020 07:00:00 GMT</pubDate>
     <title>
@@ -114,6 +233,7 @@
       </p>
     </description>
   </item>
+
   <item>
     <pubDate>Mon, 20 Apr 2020 23:27:10 GMT</pubDate>
     <title>
