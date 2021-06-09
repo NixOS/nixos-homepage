@@ -5,6 +5,12 @@
   force = true
 
 [[redirects]]
+  from = "/news-rss.xml"
+  to = "/blog/announcements-rss.xml"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/community.html"
   to = "/community/index.html"
   status = 302
