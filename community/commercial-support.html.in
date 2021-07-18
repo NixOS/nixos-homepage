@@ -9,18 +9,6 @@
 
 
     <li>
-      <a href="https://www.numtide.com/">
-        <div>
-          <img alt="NumTide Ltd" src="/community/commercial-support-logos/numtide.png" />
-        </div>
-        <h2>NumTide Ltd</h2>
-        <ul><li>London, UK</li></ul>
-        DevOps consulting by Developers.
-
-      </a>
-    </li>
-
-    <li>
       <a href="https://www.fivebinaries.com/">
         <div>
           <img alt="five binaries" src="/community/commercial-support-logos/5inaries.png" />
@@ -46,6 +34,18 @@ customized highly reliable solutions for blockchain-powered industries.
     </li>
 
     <li>
+      <a href="https://www.numtide.com/">
+        <div>
+          <img alt="NumTide Ltd" src="/community/commercial-support-logos/numtide.png" />
+        </div>
+        <h2>NumTide Ltd</h2>
+        <ul><li>London, UK</li></ul>
+        DevOps consulting by Developers.
+
+      </a>
+    </li>
+
+    <li>
       <a href="http://blackriversoft.com/">
         <div>
           <img alt="Black River Software" src="/community/commercial-support-logos/black-river-software.png" />
@@ -54,18 +54,6 @@ customized highly reliable solutions for blockchain-powered industries.
         <ul><li>Ohio, USA</li></ul>
         Black River Software offers custom software development, software architecture
 consulting, and build and deployment engineering services.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://www.enlambda.com/">
-        <div>
-          <img alt="Enlambda" src="/community/commercial-support-logos/enlambda.png" />
-        </div>
-        <h2>Enlambda</h2>
-        <ul><li>Remote</li><li>Estonia</li></ul>
-        Turning operational issues into development tasks using Nix since 2013.
 
       </a>
     </li>
@@ -109,20 +97,6 @@ delivery. Top contributor to Nix and this website.
     </li>
 
     <li>
-      <a href="https://determinate.systems/">
-        <div>
-          <img alt="Determinate Systems" src="/community/commercial-support-logos/determinate-systems.svg" />
-        </div>
-        <h2>Determinate Systems</h2>
-        <ul><li>Remote</li><li>Massachusetts, USA</li></ul>
-        Confidently build and deploy to the cloud, stadium, or stock exchange.
-Expert help with the Nix ecosystem from Graham Christensen and
-collaborators.
-
-      </a>
-    </li>
-
-    <li>
       <a href="https://nixcloud.io/">
         <div>
           <img alt="nixcloud" src="/community/commercial-support-logos/nixcloud.png" />
@@ -158,6 +132,32 @@ auditing.
         Your partner for hosting, networks and IT solutions running on NixOS. We have
 multiple years of NixOS and decades of Linux experience to aid your NixOS
 integration and administration.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://determinate.systems/">
+        <div>
+          <img alt="Determinate Systems" src="/community/commercial-support-logos/determinate-systems.svg" />
+        </div>
+        <h2>Determinate Systems</h2>
+        <ul><li>Remote</li><li>Massachusetts, USA</li></ul>
+        Confidently build and deploy to the cloud, stadium, or stock exchange.
+Expert help with the Nix ecosystem from Graham Christensen and
+collaborators.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.enlambda.com/">
+        <div>
+          <img alt="Enlambda" src="/community/commercial-support-logos/enlambda.png" />
+        </div>
+        <h2>Enlambda</h2>
+        <ul><li>Remote</li><li>Estonia</li></ul>
+        Turning operational issues into development tasks using Nix since 2013.
 
       </a>
     </li>
