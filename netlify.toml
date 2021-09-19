@@ -299,6 +299,12 @@
   force = true
 
 [[redirects]]
+  from = "/tarballs/*"
+  to = "https://tarballs.nixos.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/channels/*"
   to = "https://channels.nixos.org/:splat"
   status = 302
