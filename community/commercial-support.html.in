@@ -9,25 +9,27 @@
 
 
     <li>
-      <a href="https://obsidian.systems">
+      <a href="https://helsinki-systems.de">
         <div>
-          <img alt="Obsidian Systems" src="/community/commercial-support-logos/obsidian-systems.svg" />
+          <img alt="Helsinki Systems" src="/community/commercial-support-logos/helsinki-systems.png" />
         </div>
-        <h2>Obsidian Systems</h2>
-        <ul><li>New York, USA</li></ul>
-        Software consultancy specializing in Haskell, Nix, curiosity, and innovation.
+        <h2>Helsinki Systems</h2>
+        <ul><li>Stuttgart, Germany</li></ul>
+        Your partner for hosting, networks and IT solutions running on NixOS. We have
+multiple years of NixOS and decades of Linux experience to aid your NixOS
+integration and administration.
 
       </a>
     </li>
 
     <li>
-      <a href="https://nixos.mayflower.consulting">
+      <a href="https://www.numtide.com/">
         <div>
-          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
+          <img alt="NumTide Ltd" src="/community/commercial-support-logos/numtide.png" />
         </div>
-        <h2>Mayflower</h2>
-        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
-        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
+        <h2>NumTide Ltd</h2>
+        <ul><li>London, UK</li></ul>
+        DevOps consulting by Developers.
 
       </a>
     </li>
@@ -60,13 +62,14 @@ declarative fashion.
     </li>
 
     <li>
-      <a href="https://www.enlambda.com/">
+      <a href="http://blackriversoft.com/">
         <div>
-          <img alt="Enlambda" src="/community/commercial-support-logos/enlambda.png" />
+          <img alt="Black River Software" src="/community/commercial-support-logos/black-river-software.png" />
         </div>
-        <h2>Enlambda</h2>
-        <ul><li>Remote</li><li>Estonia</li></ul>
-        Turning operational issues into development tasks using Nix since 2013.
+        <h2>Black River Software</h2>
+        <ul><li>Ohio, USA</li></ul>
+        Black River Software offers custom software development, software architecture
+consulting, and build and deployment engineering services.
 
       </a>
     </li>
@@ -85,27 +88,13 @@ delivery. Top contributor to Nix and this website.
     </li>
 
     <li>
-      <a href="https://helsinki-systems.de">
+      <a href="https://www.enlambda.com/">
         <div>
-          <img alt="Helsinki Systems" src="/community/commercial-support-logos/helsinki-systems.png" />
+          <img alt="Enlambda" src="/community/commercial-support-logos/enlambda.png" />
         </div>
-        <h2>Helsinki Systems</h2>
-        <ul><li>Stuttgart, Germany</li></ul>
-        Your partner for hosting, networks and IT solutions running on NixOS. We have
-multiple years of NixOS and decades of Linux experience to aid your NixOS
-integration and administration.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://www.numtide.com/">
-        <div>
-          <img alt="NumTide Ltd" src="/community/commercial-support-logos/numtide.png" />
-        </div>
-        <h2>NumTide Ltd</h2>
-        <ul><li>London, UK</li></ul>
-        DevOps consulting by Developers.
+        <h2>Enlambda</h2>
+        <ul><li>Remote</li><li>Estonia</li></ul>
+        Turning operational issues into development tasks using Nix since 2013.
 
       </a>
     </li>
@@ -138,14 +127,25 @@ customized highly reliable solutions for blockchain-powered industries.
     </li>
 
     <li>
-      <a href="http://blackriversoft.com/">
+      <a href="https://nixos.mayflower.consulting">
         <div>
-          <img alt="Black River Software" src="/community/commercial-support-logos/black-river-software.png" />
+          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
         </div>
-        <h2>Black River Software</h2>
-        <ul><li>Ohio, USA</li></ul>
-        Black River Software offers custom software development, software architecture
-consulting, and build and deployment engineering services.
+        <h2>Mayflower</h2>
+        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
+        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://obsidian.systems">
+        <div>
+          <img alt="Obsidian Systems" src="/community/commercial-support-logos/obsidian-systems.svg" />
+        </div>
+        <h2>Obsidian Systems</h2>
+        <ul><li>New York, USA</li></ul>
+        Software consultancy specializing in Haskell, Nix, curiosity, and innovation.
 
       </a>
     </li>
