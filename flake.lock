@@ -37,11 +37,11 @@
     "nix-pills": {
       "flake": false,
       "locked": {
-        "lastModified": 1635269931,
-        "narHash": "sha256-7exowmEhcDVWSCHwc6UXjZjVvu46cfX7Du0GkTeQV3c=",
+        "lastModified": 1635325598,
+        "narHash": "sha256-jFX0xVT9xFqXQWhoXJrENrG5933RVvll79OAeWgBdqI=",
         "owner": "NixOS",
         "repo": "nix-pills",
-        "rev": "d0a93ec5f21ec54d00be63fbba6020bb77053669",
+        "rev": "b089684f6a09f288d2b4086b82b88242ed86e707",
         "type": "github"
       },
       "original": {
@@ -152,11 +152,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1635252330,
-        "narHash": "sha256-6oJ5Hzxph/bO2/7aWgTUxFtckjtrfxYjNL99GFXNG8o=",
+        "lastModified": 1635341237,
+        "narHash": "sha256-JlxEiVZMpjCZEyc/BkoEwii3m6DstcAzuOjVA2LEYOg=",
         "owner": "nixos",
         "repo": "nix",
-        "rev": "5667822edc24598788a1f90b923b6b41b733cb8b",
+        "rev": "9559f74a997011520c096a6bf407c4f9b0b41109",
         "type": "github"
       },
       "original": {
@@ -168,11 +168,11 @@
     },
     "released-nixpkgs-stable": {
       "locked": {
-        "lastModified": 1635070614,
-        "narHash": "sha256-eRup9WsvSIhsRrSlNugPcQ7gfGOsbk3d4izufwVlz1Q=",
+        "lastModified": 1635280654,
+        "narHash": "sha256-n0DKD1rG4gLZx6vDnalrQ5obZA9Y7uaOShTDSaOWGhM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3b1789322fcbcb5cf51228d732752714f1bf77da",
+        "rev": "5ebb1dca9bb056649cbd023f953c0c4e7970bb72",
         "type": "github"
       },
       "original": {
