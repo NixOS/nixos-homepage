@@ -69,13 +69,14 @@ $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) scripts/bootstrapify-docbook.sh 
 NIX_MANUAL_STABLE_IN ?= /no-such-path
 NIX_MANUAL_STABLE_OUT = manual/nix/stable
 
-$(NIX_MANUAL_STABLE_OUT): $(call rwildcard, $(NIX_MANUAL_STABLE_IN), *) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./scripts/bootstrapify-docbook.sh $(NIX_MANUAL_STABLE_IN) $(NIX_MANUAL_STABLE_OUT) 'Nix $(NIX_STABLE_VERSION) manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+$(NIX_MANUAL_STABLE_OUT): $(call rwildcard, $(NIX_MANUAL_STABLE_IN), *)
+	mkdir -p $(NIX_MANUAL_STABLE_OUT)
+	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_STABLE_IN)/* $(NIX_MANUAL_STABLE_OUT)
 
 NIX_MANUAL_UNSTABLE_IN ?= /no-such-path
 NIX_MANUAL_UNSTABLE_OUT = manual/nix/unstable
 
-$(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
+$(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *)
 	mkdir -p $(NIX_MANUAL_UNSTABLE_OUT)
 	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_UNSTABLE_IN)/* $(NIX_MANUAL_UNSTABLE_OUT)
 
