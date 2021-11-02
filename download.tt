@@ -57,11 +57,10 @@
         <h2>More ...</h2>
         <p>The following release items are also available:</p>
         <ul>
-          <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a></li>
-          <li><a href="[%nixManual%]#sec-relnotes">Release notes</a></li>
+          <li><a href="[%nixManual%]/release-notes/rl-[%latestNixVersion%].html">Release notes</a></li>
           <li>
             <a href="[%nixManual%]">Manual</a>.
-            Please read the <a href="[%nixManual%]#chap-quick-start">“Quick Start” section of the manual</a>
+            Please read the <a href="[%nixManual%]/quick-start.html">“Quick Start” section of the manual</a>
             for an overview of how to install and use Nix.
           </li>
           <li>Old releases are <a href="https://releases.nixos.org/?prefix=nix">also available</a>.</li>
