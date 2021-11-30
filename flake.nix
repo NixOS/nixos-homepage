@@ -137,7 +137,7 @@ rec {
 
               "NIXOS_AMIS=${nixosAmis}"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
-              "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}/html"
+              "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}"
 
               "-j 1"
             ];
