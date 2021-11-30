@@ -58,24 +58,8 @@
         NixOS is already known as
         <a href="https://repology.org/repositories/statistics/newest">the most up to date distribution</a>
         and is
-        <a href="https://repology.org/repositories/statistics/total">in the top three by total number of packages</a>.
+        <a href="https://repology.org/repositories/statistics/total">in the top three by total number of packages</a> and we expect this trend to continue.
       </p>
-
-      <ul>
-        <li>XXX 12985 packages were added</li>
-        <li>XXX 14109 packages were removed</li>
-        <li>XXX 16768 packages were updated</li>
-      </ul>
-
-      <p>
-        Likewise, our NixOS module system got bigger and better:
-      </p>
-
-      <ul>
-        <li>XXX 1527 options were added</li>
-        <li>XXX 290 options removed</li>
-        <li>XXX 400 options were updated</li>
-      </ul>
 
       <h3>Stabilization Contributors</h3>
 
