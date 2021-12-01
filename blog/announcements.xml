@@ -3,6 +3,99 @@
 <news>
 
   <item>
+    <pubDate>Tue, 30 Nov 2021 18:00:00 UTC</pubDate>
+    <title>
+      <a id="21.11">NixOS 21.11 released</a>
+    </title>
+    <description>
+      <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/21.11-porcupine/porcupine.png">
+        <img class="inline" src="/logo/nixos-logo-21.11-porcupine-lores.png" alt="21.11 Porcupine logo" width="100" />
+      </a>
+      <p>
+        Hey everyone, we're <a href="https://github.com/nrdxp">Timothy DeHerrera</a> and <a href="https://github.com/tomberek">Tom Bereknyei</a>,
+        the release managers for 21.11. As promised, the latest stable
+        release is here: NixOS 21.11 “Porcupine”.
+      </p>
+
+      <ul>
+        <li>
+          <a href="/manual/nixos/stable/release-notes.html#sec-release-21.11">Release manual</a>
+          <ul>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-21.11-highlights">Highlights</a>
+            </li>
+            <li><a href="/manual/nixos/stable/release-notes.html#sec-release-21.11-new-services">New
+                Services</a></li>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-21.11-incompatibilities">Backward
+                Incompatibilities</a></li>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-21.11-notable-changes">Other
+                Notable Changes</a></li>
+          </ul>
+        </li>
+        <li><a href="/manual/nixos/stable/index.html#sec-upgrading">Upgrade Instructions</a></li>
+        <li><a href="/download.html#download-nixos">Image downloads</a></li>
+      </ul>
+
+      <p>
+        The 21.11 release was possible due to the efforts of <strong>1541</strong>
+        contributors in <strong>41960</strong> commits. We would especially
+        like to thank our top 10 contributors:
+        <a href="https://github.com/supersandro2000">Sandro Jäckel</a>,
+        <a href="https://github.com/fabaff">Fabian Affolter</a>,
+        <a href="https://github.com/mweinelt">Martin Weinelt</a>,
+        <a href="https://github.com/figsoda">figsoda</a>,
+        <a href="https://github.com/Artturin">Artturin</a>,
+        <a href="https://github.com/marsam">Mario Rodas</a>,
+        <a href="https://github.com/bobby285271">Bobby Rong</a>,
+        <a href="https://github.com/mic92">Jörg Thalheim</a>,
+        <a href="https://github.com/dotlambda">Robert Schütz</a>,
+        <a href="https://github.com/primeos">Michael Weiss</a>.
+      </p>
+
+      <p>
+        NixOS is already known as
+        <a href="https://repology.org/repositories/statistics/newest">the most up to date distribution</a>
+        and is
+        <a href="https://repology.org/repositories/statistics/total">in the top three by total number of packages</a> and we expect this trend to continue.
+      </p>
+
+      <h3>Stabilization Contributors</h3>
+
+      <p>
+        Stabilization of the NixOS happens a month before the planned release. The
+        goal is to have as little as possible continuous integration (Hydra)
+        jobs failing before the release is cut.
+      </p>
+
+      <p>
+        Individuals who contributed to stabilizing this release:
+        <a href="https://github.com/fabaff">Fabian Affolter</a>,
+        <a href="https://github.com/supersandro2000">Sandro Jäckel</a>,
+        <a href="https://github.com/figsoda">figsoda</a>,
+        <a href="https://github.com/trofi">Sergei Trofimovich</a>,
+        <a href="https://github.com/Artturin">Artturin</a>,
+        <a href="https://github.com/alyssais">Alyssa Ross</a>,
+        <a href="https://github.com/thiagokokada">Thiago Kenji Okada</a>,
+        <a href="https://github.com/sternenseemann">Lukas Epple</a>,
+        <a href="https://github.com/TredwellGit">Tredwell</a>,
+        <a href="https://github.com/lovesegfault">Bernardo Meurer</a>, and 477 others!
+      </p>
+
+      <h3>Special Thanks</h3>
+      <p>
+        Thanks to <a href="https://github.com/domenkozar">Domen Kožar</a> for revitalizing the Darwin support effort. <a href="https://github.com/jonringer">Jon Ringer</a> for guiding the release process since NixOS 20.09. <a href="https://github.com/vcunat">Vladimír Čunát</a> and <a href="https://github.com/mweinelt">Martin Weinelt</a> for their continued efforts managing and stabilizing staging. Thanks to <a href="https://github.com/grahamc">Graham Christensen</a> for organizing with <a href="https://metal.equinix.com/">Equinix Metal/</a> to ensure we head enough compute resources.
+      </p>
+
+      <h3>Reflections and Closing</h3>
+      <p>
+          The influx of additional interest in Nix/NixOS is exciting to see.  The fairly smooth release cycle is due to the dedication and time of all the volunteers in the community. The continued growth and improvements have been incredible to witness.
+      </p>
+    </description>
+  </item>
+
+  <item>
     <pubDate>Tue, 1 Jun 2021 07:00:00 GMT</pubDate>
     <title>
       <a id="21.05">NixOS 21.05 released</a>

@@ -6,7 +6,7 @@ rec {
 
   # These inputs are used for the manuals and release artifacts
   inputs.released-nixpkgs-unstable = { url = "nixpkgs/nixos-unstable"; };
-  inputs.released-nixpkgs-stable = { url = "nixpkgs/nixos-21.05"; };
+  inputs.released-nixpkgs-stable = { url = "nixpkgs/nixos-21.11"; };
   inputs.released-nix-unstable = { url = "github:nixos/nix/master"; };
   inputs.released-nix-stable = { url = "github:nixos/nix/latest-release"; };
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
@@ -137,7 +137,7 @@ rec {
 
               "NIXOS_AMIS=${nixosAmis}"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
-              "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}/html"
+              "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}"
 
               "-j 1"
             ];
