@@ -130,23 +130,53 @@
 
   <xsl:template match="x:div[@class='titlepage' and ../@class = 'book']" />
 
-  <xsl:template match="x:div[@class='warning' and count(x:p) = 1]" priority='1'>
-    <div class="alert alert-warning">
-      <strong>Warning:</strong><xsl:text> </xsl:text><xsl:apply-templates select="x:p/node()" />
-    </div>
+
+  <!--
+    Convert admonitions.
+    We mainly need to change the div classes to use the alert component.
+    https://getbootstrap.com/2.3.2/components.html#alerts
+  -->
+  <xsl:template name="alert-class">
+    <xsl:param name="admonition-type"/>
+    <xsl:choose>
+      <xsl:when test="$admonition-type = 'note'">
+        <xsl:value-of select="'alert-info'"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="concat('alert-', $admonition-type)"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="x:div[@class='warning']">
-    <div class="alert alert-warning">
-      <xsl:apply-templates select="node()[not(self::x:h3)]" />
-    </div>
+  <!--
+    It can either be a single-paragraph block (the title can be docbook-xsl’s default, or a custom one):
+
+      <div class="note">
+        <h3 class="title">Note</h3>
+        <p>Body</p>
+      </div>
+
+    in which case we turn it into a single line as prefered by Bootstrap.
+  -->
+  <xsl:template match="x:div[(@class='warning' or @class='note') and count(*) = 2]">
+    <xsl:element name="div">
+      <xsl:attribute name="class">alert <xsl:call-template name="alert-class"><xsl:with-param name="admonition-type" select="@class" /></xsl:call-template></xsl:attribute>
+      <strong><xsl:apply-templates select="x:h3[@class='title']/node()" />:</strong><xsl:text> </xsl:text><xsl:apply-templates select="x:p/node()" />
+    </xsl:element>
   </xsl:template>
 
-  <xsl:template match="x:div[@class='note' and count(x:p) = 1]" priority='1'>
-    <div class="alert alert-info">
-      <strong>Note:</strong><xsl:text> </xsl:text><xsl:apply-templates select="x:p/node()" />
-    </div>
+  <!--
+    Or there can be more elements, in which case we will switch it to “.alert-block” and
+    change the heading size to h4 as expected by Bootstrap.
+  -->
+  <xsl:template match="x:div[(@class='warning' or @class='note') and count(*) > 2]">
+    <xsl:element name="div">
+      <xsl:attribute name="class">alert <xsl:call-template name="alert-class"><xsl:with-param name="admonition-type" select="@class" /></xsl:call-template> alert-block</xsl:attribute>
+      <h4><xsl:apply-templates select="x:h3[@class='title']/node()" /></h4>
+      <xsl:apply-templates select="node()[not(self::x:h3[@class='title'])]" />
+    </xsl:element>
   </xsl:template>
+
 
   <xsl:template match="x:table">
     <table class='table table-striped'>
