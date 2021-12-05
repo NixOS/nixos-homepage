@@ -139,12 +139,24 @@
   <xsl:template name="alert-class">
     <xsl:param name="admonition-type"/>
     <xsl:choose>
+      <xsl:when test="$admonition-type = 'caution'">
+        <xsl:value-of select="'alert-danger'"/>
+      </xsl:when>
+      <xsl:when test="$admonition-type = 'danger'">
+        <xsl:value-of select="'alert-danger'"/>
+      </xsl:when>
+      <xsl:when test="$admonition-type = 'important'">
+        <xsl:value-of select="'alert-warning'"/>
+      </xsl:when>
       <xsl:when test="$admonition-type = 'note'">
         <xsl:value-of select="'alert-info'"/>
       </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="concat('alert-', $admonition-type)"/>
-      </xsl:otherwise>
+      <xsl:when test="$admonition-type = 'tip'">
+        <xsl:value-of select="'alert-info'"/>
+      </xsl:when>
+      <xsl:when test="$admonition-type = 'warning'">
+        <xsl:value-of select="'alert-warning'"/>
+      </xsl:when>
     </xsl:choose>
   </xsl:template>
 
@@ -158,7 +170,7 @@
 
     in which case we turn it into a single line as prefered by Bootstrap.
   -->
-  <xsl:template match="x:div[(@class='warning' or @class='note') and count(*) = 2]">
+  <xsl:template match="x:div[(@class='caution' or @class = 'danger' or @class = 'important' or @class = 'note' or @class = 'tip' or @class = 'warning') and count(*) = 2]">
     <xsl:element name="div">
       <xsl:attribute name="class">alert <xsl:call-template name="alert-class"><xsl:with-param name="admonition-type" select="@class" /></xsl:call-template></xsl:attribute>
       <strong><xsl:apply-templates select="x:h3[@class='title']/node()" />:</strong><xsl:text> </xsl:text><xsl:apply-templates select="x:p/node()" />
@@ -169,7 +181,7 @@
     Or there can be more elements, in which case we will switch it to “.alert-block” and
     change the heading size to h4 as expected by Bootstrap.
   -->
-  <xsl:template match="x:div[(@class='warning' or @class='note') and count(*) > 2]">
+  <xsl:template match="x:div[(@class='caution' or @class = 'danger' or @class = 'important' or @class = 'note' or @class = 'tip' or @class = 'warning') and count(*) > 2]">
     <xsl:element name="div">
       <xsl:attribute name="class">alert <xsl:call-template name="alert-class"><xsl:with-param name="admonition-type" select="@class" /></xsl:call-template> alert-block</xsl:attribute>
       <h4><xsl:apply-templates select="x:h3[@class='title']/node()" /></h4>
