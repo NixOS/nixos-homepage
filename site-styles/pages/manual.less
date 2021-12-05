@@ -123,14 +123,21 @@ div.docbook {
     &:extend(.terminal-console all);
   }
 
-  // From bootstrapify docbook
-  .alert {
+  .admonition-block {
     &:extend(.notice-box all);
-  }
-  .alert-info {
-    &:extend(.notice-box.-info);
-  }
-  .alert-warning {
-    &:extend(.notice-box.-warning);
+
+    &.-note, &.-tip {
+      &:extend(.notice-box.-info);
+    }
+    &.-important, &.-warning {
+      &:extend(.notice-box.-warning);
+    }
+    &.-important, &.-warning {
+      // TODO: Add red notice-box.
+    }
+
+    > .title {
+      // TODO: Style appropriately.
+    }
   }
 }
