@@ -24,11 +24,11 @@ for page in "${pages[@]}"; do
   source="$NIX_DEV_MANUAL_IN/$page"
   target="$outDir/$filename.tt"
   temp="$target.temp"
-  title=$(xidel $source --css '.body h1' --printed-node-format=text | sed 's|¶||')
+  title=$(xidel $source --css '#main-content h1' --printed-node-format=text | sed 's|¶||')
 
   echo "<li><a href=\"/$outDir/$filename.html\">$title</a></li>" >> learn_guides.html.in
 
-  xidel $source --css '.body > .section > *' --printed-node-format=html \
+  xidel $source --css '#main-content > div > div > .section > *' --printed-node-format=html \
     | sed 's|<a class=\"headerlink\".*<\/a>||g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-attribute-name"><span class="xref std std-term">attribute name</span></a>|attribute name|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-package-name"><span class="xref std std-term">package name</span></a>|package name|g' \
