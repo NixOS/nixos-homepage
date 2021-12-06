@@ -519,7 +519,7 @@
     </title>
     <description>
       <a href="/download.html#download-nix">Nix 2.1</a>
-      has been released. See the <a href="/manual/nix/stable#ssec-relnotes-2.1">release
+      has been released. See the <a href="/manual/nix/stable/release-notes/rl-2.1.html">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -576,7 +576,7 @@
     </title>
     <description>
       <a href="/download.html#download-nix">Nix 2.0</a>
-      has been released. See the <a href="/manual/nix/stable#ssec-relnotes-2.0">release
+      has been released. See the <a href="/manual/nix/stable/release-notes/rl-2.0.html">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -701,7 +701,7 @@
     </title>
     <description>
       <a href="/download.html#download-nix">Nix 1.11</a>
-      has been released. See the <a href="/manual/nix/stable#ssec-relnotes-1.11">release
+      has been released. See the <a href="/manual/nix/stable/release-notes/rl-1.11.html">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -731,7 +731,7 @@
     </title>
     <description>
       <a href="/download.html#download-nix">Nix 1.10</a>
-      has been released. See the <a href="/manual/nix/stable#ssec-relnotes-1.10">release
+      has been released. See the <a href="/manual/nix/stable/release-notes/rl-1.10.html">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -775,7 +775,7 @@
     </title>
     <description>
       <a href="https://hydra.nixos.org/release/nix/nix-1.9">Nix 1.9</a>
-      has been released. See the <a href="https://web.archive.org/web/20200423231710/https://releases.nixos.org/nix/nix-1.9/manual/#ssec-relnotes-1.9">release
+      has been released. See the <a href="/manual/nix/stable/release-notes/rl-1.9.html">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -806,7 +806,7 @@
     </title>
     <description>
       <a href="https://hydra.nixos.org/release/nix/nix-1.8">Nix 1.8</a>
-      has been released. See the <a href="https://web.archive.org/web/20200423231710/https://releases.nixos.org/nix/nix-1.8/manual/#ssec-relnotes-1.8">release
+      has been released. See the <a href="/manual/nix/stable/release-notes/rl-1.8.html">release
         notes</a> for a list of changes and new features.
     </description>
   </item>
@@ -865,7 +865,7 @@
     <description>
       <a href="https://hydra.nixos.org/release/nix/nix-1.7">Nix 1.7</a>
       has been released. See the <a
-        href="https://web.archive.org/web/20170723084043/https://releases.nixos.org/nix/nix-1.7/manual/#ssec-relnotes-1.7">release
+        href="/manual/nix/stable/release-notes/rl-1.7.html">release
         notes</a> for a list of new features.
     </description>
   </item>
@@ -955,7 +955,7 @@ $ nix-store -qR /run/current-system | grep openssl
       <a href="https://hydra.nixos.org/release/nix/nix-1.6.1">Nix
         1.6.1</a> has been released. This is primarily a bug fix
       release but has some minor new features. See the <a
-        href="https://web.archive.org/web/20200916201737//manual/nix/stable/#ssec-relnotes-1.6.1">release
+        href="/manual/nix/stable/release-notes/rl-1.6.1.html">release
         notes</a> for details.
     </description>
   </item>
