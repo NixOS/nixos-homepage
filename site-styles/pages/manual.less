@@ -1,4 +1,7 @@
 // Manual
+//
+// See: `scripts/bootstrapify-docbook.xsl`
+//
 
 .docbook-page {
   .hidden {
@@ -126,18 +129,24 @@ div.docbook {
   .admonition-block {
     &:extend(.notice-box all);
 
-    &.-note, &.-tip {
-      &:extend(.notice-box.-info);
-    }
-    &.-important, &.-warning {
-      &:extend(.notice-box.-warning);
-    }
-    &.-important, &.-warning {
-      // TODO: Add red notice-box.
+    > .title {
+      #theme.h6();
+      color: inherit;
+      margin-bottom: 0;
     }
 
-    > .title {
-      // TODO: Style appropriately.
+    // Variant styles
+    &.-important,
+    &.-note,
+    &.-tip {
+      &:extend(.notice-box.-info);
+    }
+    &.-caution,
+    &.-warning {
+      &:extend(.notice-box.-warning);
+    }
+    &.-danger, {
+      &:extend(.notice-box.-danger);
     }
   }
 }
