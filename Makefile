@@ -162,7 +162,7 @@ all: $(HTML) favicon.png favicon.ico robots.txt \
 
 
 robots.txt: $(HTML)
-	echo "Users-agent: *" >> $@
+	echo "User-agent: *" >> $@
 	#echo "Disallow: /" >> $@
 	#for page in $(HTML); do echo "Allow: /$$page" >> $@; done
 
