@@ -26,7 +26,7 @@
           command (as a user other than <code>root</code> with <code>sudo</code> permission):
         </p>
         <pre class="terminal-console">
-<span class="shell-prompt">$ </span>curl -L https://nixos.org/nix/install | sh</pre>
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --daemon</pre>
         <p>Make sure to follow the instructions output by the script.</p>
         <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
       </article>
@@ -38,7 +38,7 @@
 <span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc
 <span cls="shell-prompt">$ </span>gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE
 <span cls="shell-prompt">$ </span>gpg2 --verify ./install-nix-[%latestNixVersion%].asc
-<span cls="shell-prompt">$ </span>sh ./install-nix-[%latestNixVersion%]</pre>
+<span cls="shell-prompt">$ </span>sh ./install-nix-[%latestNixVersion%] --daemon</pre>
         <p>
           The <a href="[%root%]edolstra.gpg">signing key</a> has fingerprint
           <code>B541 D553 0127 0E0B CF15 CA5D 8170 B472 6D71 98DE</code>.
