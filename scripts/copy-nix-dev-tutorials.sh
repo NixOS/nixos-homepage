@@ -11,6 +11,7 @@ pages=(
   "tutorials/continuous-integration-github-actions.html"
   "tutorials/building-and-running-docker-images.html"
   "tutorials/deploying-nixos-using-terraform.html"
+  "tutorials/cross-compilation.html"
   "tutorials/contributing.html"
 )
 
