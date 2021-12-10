@@ -26,12 +26,6 @@
           <a href="https://discourse.nixos.org/u/grahamc">Graham Christensen</a>,
           <a href="mailto:graham@grahamc.com">graham@grahamc.com</a>
           (gchristensen)
-          <br />
-          <strong>GPG Fingerprint:</strong>
-          <tt>
-            <a href="https://keys.openpgp.org/vks/v1/by-fingerprint/BA94FDF11DA405212864C121FE918C3A98C1030F">BA94 FDF1
-              1DA4 0521 2864 C121 FE91 8C3A 98C1 030F</a>
-          </tt>
         </p>
       </li>
       <li>
@@ -39,12 +33,6 @@
           <a href="https://discourse.nixos.org/u/fpletz">Franz Pletz</a>,
           <a href="mailto:fpletz@fnordicwalking.de">fpletz@fnordicwalking.de</a>
           (fpletz)
-          <br />
-          <strong>GPG Fingerprint:</strong>
-          <tt>
-            <a href="https://keys.openpgp.org/vks/v1/by-fingerprint/8A39615DCE78AF082E23F303846FDED7792617B4">8A39 615D
-              CE78 AF08 2E23 F303 846F DED7 7926 17B4</a>
-          </tt>
         </p>
       </li>
     </ul>
@@ -54,7 +42,7 @@
   <p>
     To privately report a security issue with NixOS, Nix, and its ecosystem,
     please email a member of the NixOS Security Team and we will ensure the issue
-    is handled. Our responses will be signed with our GPG keys.
+    is handled.
   </p>
 
   <h2>Sources of Security Information</h2>
