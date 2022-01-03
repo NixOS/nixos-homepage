@@ -19,20 +19,85 @@
 <section class="download-nix">
   <div class="collapse">
     <div>
-      <article id="nix-quick-install">
-        <h2>Quick install</h2>
+      <article id="nix-install-linux">
+        <h2>Linux</h2>
         <p>
-          The quickest way to install Nix is to open a terminal and run the following
-          command (as a user other than <code>root</code> with <code>sudo</code> permission):
+          Install Nix on via the recommended
+          <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a>:
         </p>
         <pre class="terminal-console">
-<span class="shell-prompt">$ </span>curl -L https://nixos.org/nix/install | sh</pre>
-        <p>Make sure to follow the instructions output by the script.</p>
-        <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --daemon</pre>
+        <aside class="notice-box -warning">
+          <strong>Note:</strong>
+          For security you may want to 
+          <a href="[%root%]download.html#nix-verify-installation">verify the installation script</a>
+          using GPG signatures.
+        </aside>
       </article>
+
+      <article id="nix-install-macosx">
+        <h2>MacOS</h2>
+        <p>
+          Install Nix on via the recommended
+          <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a>:
+        </p>
+        <pre class="terminal-console">
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon</pre>
+        <aside class="notice-box -warning">
+          <strong>Note:</strong>
+          For security you may want to 
+          <a href="[%root%]download.html#nix-verify-installation">verify the installation script</a>
+          using GPG signatures.
+        </aside>
+      </article>
+
+      <article id="nix-install-windows">
+        <h2>Windows (WSL2)</h2>
+        <p>
+          Install Nix via the
+          <a href="[%nixManual%]/installation/single-user.html">single-user installation</a>:
+        </p>
+        <pre class="terminal-console">
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --no-daemon</pre>
+        <aside class="notice-box -warning">
+          <strong>Note:</strong>
+          For security you may want to
+          <a href="[%root%]download.html#nix-verify-installation">verify the installation script</a>
+          using GPG signatures.
+        </aside>
+      </article>
+
+      <article id="nix-install-docker">
+        <h2>Docker</h2>
+        <p>Start a Docker shell with Nix:</p>
+        <pre class="terminal-console">
+<span cls="shell-prompt">$ </span>docker run -it nixos/nix</pre>
+        <p>Or start a Docker shell with Nix exposing a <code>workdir</code> directory:</p>
+        <pre class="terminal-console">
+<span cls="shell-prompt">$ </span>mkdir workdir
+<span cls="shell-prompt">$ </span>docker run -it -v $(pwd)/workdir:/workdir nixos/nix</pre>
+        <p>The <code>workdir</code> example from above can be also used to start hacking on nixpkgs:</p>
+        <pre class="terminal-console">
+<span cls="shell-prompt">$ </span>git clone git@github.com:NixOS/nixpkgs
+<span cls="shell-prompt">$ </span>docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix
+<span cls="shell-prompt">docker&gt; </span>nix-build -I nixpkgs=/nixpkgs -A hello
+<span cls="shell-prompt">docker&gt; </span>find ./result # this symlink points to the build package</pre>
+      </article>
+
       <article id="nix-verify-installation">
         <h2>Verify installation</h2>
-        <p>You may want to verify the integrity of the installation script using GPG:</p>
+        <p>
+          Check that the installation by opening
+          <strong>a new terminal</strong> and typing:
+        </p>
+        <pre class="terminal-console">
+<span cls="shell-prompt">$ </span>nix-env --version
+nix-env (Nix) 2.3.15</pre>
+        <p>
+          You may want to verify the
+          <strong>integrity of the installation script</strong>
+          using GPG:
+        </p>
         <pre class="terminal-console">
 <span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install
 <span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc
@@ -45,13 +110,6 @@
           It is also available
           <a href="https://github.com/NixOS/nixos-homepage/blob/master/edolstra.gpg">on GitHub</a>.
         </p>
-      </article>
-      <article id="nix-uninstall">
-        <h2>Uninstall</h2>
-        <p>
-          You can uninstall Nix simply by running <code>rm -rf /nix</code>.
-        </p>
-        <!-- TODO: expand this https://github.com/NixOS/nix/issues/1402 -->
       </article>
       <article id="nix-more">
         <h2>More ...</h2>
