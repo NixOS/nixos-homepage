@@ -32,6 +32,7 @@ HTML = \
   guides/dev-environment.html \
   guides/how-nix-works.html \
   guides/install-nix.html \
+  guides/cross-compilation.html \
   guides/towards-reproducibility-pinning-nixpkgs.html \
   index.html \
   learn.html
