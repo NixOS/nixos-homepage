@@ -3,14 +3,17 @@
 set -e
 
 pages=(
-  "tutorials/install-nix.html"
+  # "tutorials/install-nix.html" # Not needed since this is part of Download page
   "tutorials/ad-hoc-developer-environments.html"
-  "tutorials/declarative-and-reproducible-developer-environments.html"
-  "tutorials/dev-environment.html"
   "tutorials/towards-reproducibility-pinning-nixpkgs.html"
+  "tutorials/declarative-and-reproducible-developer-environments.html"
   "tutorials/continuous-integration-github-actions.html"
+  "tutorials/dev-environment.html"
   "tutorials/building-and-running-docker-images.html"
+  "tutorials/building-bootable-iso-image.html"
   "tutorials/deploying-nixos-using-terraform.html"
+  "tutorials/installing-nixos-on-a-raspberry-pi.html"
+  "tutorials/integration-testing-using-virtual-machines.html"
   "tutorials/cross-compilation.html"
   "tutorials/contributing.html"
 )

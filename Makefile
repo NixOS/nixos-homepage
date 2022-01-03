@@ -24,16 +24,17 @@ HTML = \
   download.html \
   explore.html \
   guides/ad-hoc-developer-environments.html \
-  guides/building-and-running-docker-images.html \
-  guides/continuous-integration-github-actions.html \
-  guides/contributing.html \
-  guides/declarative-and-reproducible-developer-environments.html \
-  guides/deploying-nixos-using-terraform.html \
-  guides/dev-environment.html \
-  guides/how-nix-works.html \
-  guides/install-nix.html \
-  guides/cross-compilation.html \
   guides/towards-reproducibility-pinning-nixpkgs.html \
+  guides/declarative-and-reproducible-developer-environments.html \
+  guides/continuous-integration-github-actions.html \
+  guides/dev-environment.html \
+  guides/building-and-running-docker-images.html \
+  guides/building-bootable-iso-image.html \
+  guides/deploying-nixos-using-terraform.html \
+  guides/installing-nixos-on-a-raspberry-pi.html \
+  guides/integration-testing-using-virtual-machines.html \
+  guides/cross-compilation.html \
+  guides/contributing.html \
   index.html \
   learn.html
 

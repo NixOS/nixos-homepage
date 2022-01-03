@@ -6,7 +6,7 @@
   <h1>Download</h1>
 </div>
 
-<section class="download-header">
+<section id="download-nix" class="download-header">
   <div>
     <h1>Nix</h1>
     <div>
@@ -16,7 +16,7 @@
   </div>
 </section>
 
-<section id="download-nix" class="download-nix">
+<section class="download-nix">
   <div class="collapse">
     <div>
       <article id="nix-quick-install">
@@ -70,7 +70,7 @@
   </div>
 </section>
 
-<section class="download-header">
+<section id="download-nixos" class="download-header">
   <div>
     <h1>NixOS</h1>
     <div>
@@ -80,7 +80,7 @@
   </div>
 </section>
 
-<section id="download-nixos" class="download-nixos">
+<section class="download-nixos">
   <div class="collapse">
     <div>
       <article id="nixos-iso">
