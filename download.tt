@@ -21,34 +21,56 @@
     <div>
       <article id="nix-install-linux">
         <h2>Linux</h2>
+
+        <h3>Multi-user installation (recommended)</h3>
         <p>
-          Install Nix on via the recommended
+          Install Nix on via the
+          <strong>recommended</strong>
           <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a>:
         </p>
         <pre class="terminal-console">
 <span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --daemon</pre>
-        <aside class="notice-box -warning">
-          <strong>Note:</strong>
-          For security you may want to 
-          <a href="[%root%]download.html#nix-verify-installation">verify the installation script</a>
-          using GPG signatures.
-        </aside>
+
+        <h3>Single-user installation</h3>
+        <p>
+          Install Nix on via the
+          <a href="[%nixManual%]/installation/single-user.html">single-user installation</a>:
+        </p>
+        <pre class="terminal-console">
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --no-daemon</pre>
+
+        <h3>Which type of installation should you choose?</h3>
+        <p>
+          This boild down to your requirements, but here is a short list of
+          reasons why <strong>we recommend</strong>
+          <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a>:
+        </p>
+
+        <h5>Pros</h5>
+        <ul>
+          <li>Better build isolation (and that is what Nix all about)</li>
+          <li>Sharing builds between users</li>
+        </ul>
+
+        <h5>Cons</h5>
+        <ul>
+          <li>Requires <code>root</code> to run the daemon</li>
+          <li>More involved installation (creation of <code>nixbld* users</code>, installing a systemd unit, ...</li>
+          <li>Harder to uninstall</li>
+        </ul>
       </article>
 
       <article id="nix-install-macosx">
         <h2>MacOS</h2>
         <p>
-          Install Nix on via the recommended
+          Install Nix on via the
+          <strong>recommended</strong>
           <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a>:
         </p>
         <pre class="terminal-console">
-<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon</pre>
-        <aside class="notice-box -warning">
-          <strong>Note:</strong>
-          For security you may want to 
-          <a href="[%root%]download.html#nix-verify-installation">verify the installation script</a>
-          using GPG signatures.
-        </aside>
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) \
+        --darwin-use-unencrypted-nix-store-volume \
+        --daemon</pre>
       </article>
 
       <article id="nix-install-windows">
@@ -59,12 +81,6 @@
         </p>
         <pre class="terminal-console">
 <span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --no-daemon</pre>
-        <aside class="notice-box -warning">
-          <strong>Note:</strong>
-          For security you may want to
-          <a href="[%root%]download.html#nix-verify-installation">verify the installation script</a>
-          using GPG signatures.
-        </aside>
       </article>
 
       <article id="nix-install-docker">
