@@ -49,6 +49,7 @@
         <h5>Pros</h5>
         <ul>
           <li>Better build isolation (and that is what Nix is all about)</li>
+          <li>Better security (a build can not write somewhere in your home)</li>
           <li>Sharing builds between users</li>
         </ul>
 
