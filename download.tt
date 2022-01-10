@@ -30,6 +30,10 @@
         </p>
         <pre class="terminal-console">
 <span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --daemon</pre>
+        <p>
+          We recommend the multi-user install if it supports your platform and
+          you can authenticate with <code>sudo</code>.
+        </p>
 
         <h3>Single-user installation</h3>
         <p>
@@ -38,6 +42,13 @@
         </p>
         <pre class="terminal-console">
 <span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --no-daemon</pre>
+        <p>
+          Above command will perform a single-user installation of Nix, meaning
+          that <code>/nix</code> is owned by the invoking user. You should run
+          this under your usual user account, not as <code>root</code>. The
+          script will invoke  <code>sudo</code> to create <code>/nix</code> if
+          it doesn’t already exist.
+        </p>
 
         <h3>Which type of installation should you choose?</h3>
         <p>
@@ -72,6 +83,12 @@
 <span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) \
         --darwin-use-unencrypted-nix-store-volume \
         --daemon</pre>
+        <p>
+          We believe we have ironed out how to cleanly support the read-only
+          root on modern macOS. Please 
+          <a href="https://nixos.org/manual/nix/stable/installation/installing-binary.html#multi-user-installation">consult the manual</a>
+          on details what the installation script does.
+        </p>
       </article>
 
       <article id="nix-install-windows">
