@@ -74,6 +74,7 @@
 
       <article id="nix-install-macosx">
         <h2>MacOS</h2>
+        <h3>Multi-user installation</h3>
         <p>
           Install Nix via the
           <strong>recommended</strong>
@@ -85,7 +86,7 @@
         --daemon</pre>
         <p>
           We believe we have ironed out how to cleanly support the read-only
-          root on modern macOS. Please 
+          root on modern macOS. Please
           <a href="https://nixos.org/manual/nix/stable/installation/installing-binary.html#multi-user-installation">consult the manual</a>
           on details what the installation script does.
         </p>
@@ -93,6 +94,7 @@
 
       <article id="nix-install-windows">
         <h2>Windows (WSL2)</h2>
+        <h3>Single-user installation</h3>
         <p>
           Install Nix via the
           <a href="[%nixManual%]/installation/single-user.html">single-user installation</a>:
@@ -310,6 +312,15 @@ nix-env (Nix) 2.3.15</pre>
 $ nix-shell -p ec2_api_tools
 (nix-shell) $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre>
 
+      </article>
+      <article id="nixos-more">
+        <h2>More ...</h2>
+        <p>The following release items are also available:</p>
+        <ul>
+          <li><a href="[%nixosManual%]/release-notes.html#sec-release-[%latestNixOSSeries%]">Release notes</a></li>
+          <li><a href="[%nixosManual%]">Manual</a>.</li>
+          <li>Old releases are <a href="https://releases.nixos.org/?prefix=nixos">also available</a>.</li>
+        </ul>
       </article>
     </div>
   </div>
