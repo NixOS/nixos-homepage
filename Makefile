@@ -23,6 +23,7 @@ HTML = \
   donate.html \
   download.html \
   explore.html \
+  guides/how-nix-works.html \
   guides/ad-hoc-developer-environments.html \
   guides/towards-reproducibility-pinning-nixpkgs.html \
   guides/declarative-and-reproducible-developer-environments.html \
