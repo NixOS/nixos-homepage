@@ -32,7 +32,7 @@ for page in "${pages[@]}"; do
 
   echo "<li><a href=\"/$outDir/$filename.html\">$title</a></li>" >> learn_guides.html.in
 
-  xidel $source --css '#main-content > div > div > .section > *' --printed-node-format=html \
+  xidel $source --css '#main-content > div > div > .section > *' --printed-node-format=xml \
     | sed 's|<a class=\"headerlink\".*<\/a>||g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-attribute-name"><span class="xref std std-term">attribute name</span></a>|attribute name|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-package-name"><span class="xref std std-term">package name</span></a>|package name|g' \
