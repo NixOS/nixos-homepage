@@ -1,4 +1,88 @@
 [[redirects]]
+  from = "/news.xml"
+  to = "/blog/announcements.xml"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/news-rss.xml"
+  to = "/blog/announcements-rss.xml"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/community.html"
+  to = "/community/index.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/discourse.html"
+  to = "/community/teams/discourse.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/infrastructure.html"
+  to = "/community/teams/infrastructure.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/marketing.html"
+  to = "/community/teams/marketing.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/nixcon.html"
+  to = "/community/teams/nixcon.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/nixos_release.html"
+  to = "/community/teams/nixos-release.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/rfc-steering-committee.html"
+  to = "/community/teams/rfc-steering-committee.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/teams/security.html"
+  to = "/community/teams/security.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/commercial-support.html"
+  to = "/community/commercial-support.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/news.html"
+  to = "/blog/announcements.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/archive.html"
+  to = "/blog/announcements.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/governance.html"
+  to = "/community/index.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/features.html"
   to = "/explore.html"
   status = 302
@@ -174,7 +258,7 @@
 
 [[redirects]]
   from = "/nixos/foundation.html"
-  to = "/governance.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
@@ -186,19 +270,19 @@
 
 [[redirects]]
   from = "/nixos/security.html"
-  to = "/governance.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
 [[redirects]]
   from = "/nixos/support.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
 [[redirects]]
   from = "/nixos/community.html"
-  to = "/community.html"
+  to = "/community/index.html"
   status = 302
   force = true
 
@@ -212,6 +296,12 @@
   from = "/nix-dev/*"
   to = "https://releases.nixos.org/nix-dev/:splat"
   status = 302
+  force = true
+
+[[redirects]]
+  from = "/tarballs/*"
+  to = "https://tarballs.nixos.org/:splat"
+  status = 301
   force = true
 
 [[redirects]]
@@ -352,3 +442,8 @@
   to = "/css/nixos-site.css"
   status = 302
   force = true
+
+[[headers]]
+  for = "/.well-known/matrix/client"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"

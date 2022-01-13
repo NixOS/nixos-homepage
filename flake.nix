@@ -1,4 +1,4 @@
-{
+rec {
   description = "The nixos.org homepage";
 
   # This is used to build the site.
@@ -6,11 +6,12 @@
 
   # These inputs are used for the manuals and release artifacts
   inputs.released-nixpkgs-unstable = { url = "nixpkgs/nixos-unstable"; };
-  inputs.released-nixpkgs-stable = { url = "nixpkgs/nixos-20.09"; };
+  inputs.released-nixpkgs-stable = { url = "nixpkgs/nixos-21.11"; };
   inputs.released-nix-unstable = { url = "github:nixos/nix/master"; };
-  inputs.released-nix-stable = { url = "github:nixos/nix/latest-release"; flake = false; };
+  inputs.released-nix-stable = { url = "github:nixos/nix/latest-release"; };
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
   inputs.nix-dev = { url = "github:nix-dot-dev/nix.dev"; };
+  inputs.nixos-common-styles = { url = "github:NixOS/nixos-common-styles"; };
 
   outputs =
     { self
@@ -21,6 +22,7 @@
     , released-nix-stable
     , nix-pills
     , nix-dev
+    , nixos-common-styles
     }:
     let
       system = "x86_64-linux";
@@ -33,7 +35,7 @@
             inherit pname version;
             sha256 = "sha256-qMGi+myppWBapM7TkPeXC2g/M1FA1YGwESNrx8LVXkw=";
           };
-          cargoSha256 = "1jb34b634wkn5zhzipwi67761qsbr2qvjkd6kz3031hapl457r0b";
+          cargoSha256 = "0z4iwjm38xfgipl1pcrkl8277p627pls565k7cclrhxfcx3f513p";
         };
       };
 
@@ -43,11 +45,7 @@
       pkgs-unstable = import released-nixpkgs-unstable { inherit system; };
       pkgs-stable = import released-nixpkgs-stable { inherit system; };
 
-      nix_stable = (import "${released-nix-stable}/release.nix" {
-        nix = released-nix-stable;
-        nixpkgs = released-nixpkgs-stable;
-        officialRelease = true;
-      }).build."${system}";
+      nix_stable = released-nix-stable.packages."${system}".nix;
       nix_unstable = released-nix-unstable.packages."${system}".nix;
 
       nixPills = import nix-pills {
@@ -60,7 +58,22 @@
         (builtins.toJSON (
           import (released-nixpkgs-stable + "/nixos/modules/virtualisation/ec2-amis.nix")));
 
-      serve = pkgs.writeShellScriptBin "serve" ''python ${toString ./.}/scripts/run.py'';
+      mkPyScript = dependencies: name:
+        let
+          pythonEnv = pkgs.python3.buildEnv.override {
+            extraLibs = dependencies;
+          };
+        in
+          pkgs.writeShellScriptBin name ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/${name}.py" "$@"'';
+
+      serve =
+        mkPyScript (with pkgs.python3Packages; [ click livereload ]) "serve";
+
+      shuffle_commercial_providers =
+        mkPyScript (with pkgs.python3Packages; [ click toml ]) "shuffle-commercial-providers";
+
+      update_blog =
+        mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser cchardet ]) "update-blog";
 
     in rec {
       defaultPackage."${system}" = packages."${system}".homepage;
@@ -68,13 +81,12 @@
       checks."${system}".build = defaultPackage."${system}";
 
       packages."${system}" = rec {
-        siteStyles = pkgs.callPackage ./site-styles {};
-
         homepage = pkgs.stdenv.mkDerivation {
           name = "nixos-homepage-${self.lastModifiedDate}";
 
           src = self;
 
+          preferLocalBuild = true;
           enableParallelBuilding = true;
 
           buildInputs = with pkgs; [
@@ -85,7 +97,9 @@
               libxml2
               libxslt
               linkchecker
-              nix
+              nixFlakes
+              nixos-common-styles.packages."${system}".embedSVG
+              nodePackages.less
               perl
               perlPackages.AppConfig
               perlPackages.JSON
@@ -93,8 +107,9 @@
               perlPackages.TemplatePluginJSONEscape
               perlPackages.TemplateToolkit
               perlPackages.XMLSimple
-              python3Packages.livereload
               serve
+              shuffle_commercial_providers
+              update_blog
               xhtml1
               xidel
             ];
@@ -102,11 +117,14 @@
           preBuild = ''
             export NIX_DB_DIR=$TMPDIR
             export NIX_STATE_DIR=$TMPDIR
+
+            rm -f site-styles/common-styles
+            ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
           '';
 
           makeFlags =
             [ "NIX_STABLE_VERSION=${getVersion nix_stable.name}"
-              "NIX_MANUAL_STABLE_IN=${nix_stable}/share/doc/nix/manual"
+              "NIX_MANUAL_STABLE_IN=${nix_stable.doc}/share/doc/nix/manual"
               "NIXPKGS_MANUAL_STABLE_IN=${released-nixpkgs-stable.htmlDocs.nixpkgsManual}"
               "NIXOS_MANUAL_STABLE_IN=${released-nixpkgs-stable.htmlDocs.nixosManual}"
               "NIXOS_STABLE_SERIES=${pkgs-stable.lib.trivial.release}"
@@ -118,9 +136,8 @@
               "NIXOS_UNSTABLE_SERIES=${pkgs-unstable.lib.trivial.release}"
 
               "NIXOS_AMIS=${nixosAmis}"
-              "SITE_STYLES=${siteStyles}"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
-              "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}/html"
+              "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}"
 
               "-j 1"
             ];
@@ -129,12 +146,12 @@
 
           installPhase = ''
             mkdir $out
-            cp -prd . $out/
+            cp -prd . .well-known/ $out/
           '';
 
           shellHook = ''
             export NIX_STABLE_VERSION="${getVersion nix_stable.name}"
-            export NIX_MANUAL_STABLE_IN="${nix_stable}/share/doc/nix/manual"
+            export NIX_MANUAL_STABLE_IN="${nix_stable.doc}/share/doc/nix/manual"
             export NIXPKGS_MANUAL_STABLE_IN="${released-nixpkgs-stable.htmlDocs.nixpkgsManual}"
             export NIXOS_MANUAL_STABLE_IN="${released-nixpkgs-stable.htmlDocs.nixosManual}"
             export NIXOS_STABLE_SERIES="${pkgs-stable.lib.trivial.release}"
@@ -146,9 +163,11 @@
             export NIXOS_UNSTABLE_SERIES="${pkgs-unstable.lib.trivial.release}"
 
             export NIXOS_AMIS="${nixosAmis}"
-            # SITE_STYLES skipped by design.
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
-            export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}/html"
+            export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}"
+
+            rm -f site-styles/common-styles
+            ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
 
             echo ""
             echo "  To start developing run:"
@@ -162,25 +181,5 @@
           '';
         };
       };
-
-      nixosConfigurations.container = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules =
-          [ ({ lib, ... }:
-            { system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-              boot.isContainer = true;
-              networking.useDHCP = false;
-              networking.firewall.allowedTCPPorts = [ 80 ];
-              services.httpd = {
-                enable = true;
-                adminAddr = "admin@example.org";
-                virtualHosts.default = {
-                  documentRoot = packages."${system}".homepage;
-                };
-              };
-            })
-          ];
-      };
-
   };
 }

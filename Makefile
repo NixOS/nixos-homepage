@@ -7,33 +7,37 @@ default: all
 
 HTML = \
   404.html \
-  commercial-support.html \
-  community.html \
+  blog/announcements.html \
+  blog/categories.html \
+  blog/index.html \
+  community/commercial-support.html \
+  community/index.html \
+  community/teams/discourse.html \
+  community/teams/infrastructure.html \
+  community/teams/marketing.html \
+  community/teams/nixcon.html \
+  community/teams/nixos-release.html \
+  community/teams/rfc-steering-committee.html \
+  community/teams/security.html \
   demos/index.html \
   donate.html \
   download.html \
   explore.html \
-  governance.html \
-  guides/deploying-nixos-using-terraform.html \
-  guides/ad-hoc-developer-environments.html \
-  guides/building-and-running-docker-images.html \
-  guides/continuous-integration-github-actions.html \
-  guides/contributing.html \
-  guides/declarative-and-reproducible-developer-environments.html \
-  guides/dev-environment.html \
   guides/how-nix-works.html \
-  guides/install-nix.html \
+  guides/ad-hoc-developer-environments.html \
   guides/towards-reproducibility-pinning-nixpkgs.html \
+  guides/declarative-and-reproducible-developer-environments.html \
+  guides/continuous-integration-github-actions.html \
+  guides/dev-environment.html \
+  guides/building-and-running-docker-images.html \
+  guides/building-bootable-iso-image.html \
+  guides/deploying-nixos-using-terraform.html \
+  guides/installing-nixos-on-a-raspberry-pi.html \
+  guides/integration-testing-using-virtual-machines.html \
+  guides/cross-compilation.html \
+  guides/contributing.html \
   index.html \
-  learn.html \
-  news.html \
-  teams/discourse.html \
-  teams/infrastructure.html \
-  teams/marketing.html \
-  teams/nixcon.html \
-  teams/nixos_release.html \
-  teams/rfc-steering-committee.html \
-  teams/security.html
+  learn.html
 
 DEMOS = \
   demos/cover.svg \
@@ -43,7 +47,6 @@ DEMOS = \
   demos/example_4.svg \
   demos/example_5.svg \
   demos/example_6.svg
-
 
 NIX_DEV_MANUAL_IN ?= /no-such-path
 NIX_DEV_MANUAL_OUT = guides
@@ -64,33 +67,41 @@ all: $(NIX_PILLS_MANUAL_OUT)
 $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
 	bash ./scripts/bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nixos https://github.com/NixOS/nix-pills
 
-
 ### Prettify the Nix manual.
 
 NIX_MANUAL_STABLE_IN ?= /no-such-path
 NIX_MANUAL_STABLE_OUT = manual/nix/stable
 
-all: $(NIX_MANUAL_STABLE_OUT)
-
-$(NIX_MANUAL_STABLE_OUT): $(call rwildcard, $(NIX_MANUAL_STABLE_IN), *) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./scripts/bootstrapify-docbook.sh $(NIX_MANUAL_STABLE_IN) $(NIX_MANUAL_STABLE_OUT) 'Nix $(NIX_STABLE_VERSION) manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+$(NIX_MANUAL_STABLE_OUT): $(call rwildcard, $(NIX_MANUAL_STABLE_IN), *)
+	mkdir -p $(NIX_MANUAL_STABLE_OUT)
+	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_STABLE_IN)/* $(NIX_MANUAL_STABLE_OUT)
 
 NIX_MANUAL_UNSTABLE_IN ?= /no-such-path
 NIX_MANUAL_UNSTABLE_OUT = manual/nix/unstable
 
-all: $(NIX_MANUAL_UNSTABLE_OUT)
-
-$(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
+$(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *)
 	mkdir -p $(NIX_MANUAL_UNSTABLE_OUT)
 	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_UNSTABLE_IN)/* $(NIX_MANUAL_UNSTABLE_OUT)
 
+manual/nix/index.html: $(NIX_MANUAL_STABLE_OUT) $(NIX_MANUAL_UNSTABLE_OUT)
+	bash ./scripts/fix-manual-headers.sh manual/nix stable
+	@echo "<!DOCTYPE html>" > $@
+	@echo "<html>" >> $@
+	@echo "  <head>" >> $@
+	@echo "    <meta http-equiv=\"refresh\" content=\"7; url='stable/index.html'\" />" >> $@
+	@echo "  </head>" >> $@
+	@echo "  <body>" >> $@
+	@echo "    <h1>Redirecting...</h1>" >> $@
+	@echo "    <p>Please follow <a href=\"stable/index.html\">this link</a>.</p>" >> $@
+	@echo "  </body>" >> $@
+	@echo "</html>" >> $@
+
+all: manual/nix/index.html
 
 ### Prettify the Nixpkgs manual.
 
 NIXPKGS_MANUAL_STABLE_IN ?= /no-such-path
 NIXPKGS_MANUAL_STABLE_OUT = manual/nixpkgs/stable
-
-all: $(NIXPKGS_MANUAL_STABLE_OUT)
 
 $(NIXPKGS_MANUAL_STABLE_OUT): $(NIXPKGS_MANUAL_STABLE_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
 	bash ./scripts/bootstrapify-docbook.sh $(NIXPKGS_MANUAL_STABLE_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_STABLE_OUT) 'Nixpkgs $(NIXOS_STABLE_SERIES) manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
@@ -98,10 +109,23 @@ $(NIXPKGS_MANUAL_STABLE_OUT): $(NIXPKGS_MANUAL_STABLE_IN) scripts/bootstrapify-d
 NIXPKGS_MANUAL_UNSTABLE_IN ?= /no-such-path
 NIXPKGS_MANUAL_UNSTABLE_OUT = manual/nixpkgs/unstable
 
-all: $(NIXPKGS_MANUAL_UNSTABLE_OUT)
-
 $(NIXPKGS_MANUAL_UNSTABLE_OUT): $(NIXPKGS_MANUAL_UNSTABLE_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
 	bash ./scripts/bootstrapify-docbook.sh $(NIXPKGS_MANUAL_UNSTABLE_IN)/share/doc/nixpkgs $(NIXPKGS_MANUAL_UNSTABLE_OUT) 'Nixpkgs $(NIXOS_UNSTABLE_SERIES) manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+
+manual/nixpkgs/index.html: $(NIXPKGS_MANUAL_STABLE_OUT) $(NIXPKGS_MANUAL_UNSTABLE_OUT)
+	bash ./scripts/fix-manual-headers.sh manual/nixpkgs stable
+	@echo "<!DOCTYPE html>" > $@
+	@echo "<html>" >> $@
+	@echo "  <head>" >> $@
+	@echo "    <meta http-equiv=\"refresh\" content=\"7; url='stable/index.html'\" />" >> $@
+	@echo "  </head>" >> $@
+	@echo "  <body>" >> $@
+	@echo "    <h1>Redirecting...</h1>" >> $@
+	@echo "    <p>Please follow <a href=\"stable/index.html\">this link</a>.</p>" >> $@
+	@echo "  </body>" >> $@
+	@echo "</html>" >> $@
+
+all: manual/nixpkgs/index.html
 
 
 ### Prettify the NixOS manual.
@@ -109,27 +133,39 @@ $(NIXPKGS_MANUAL_UNSTABLE_OUT): $(NIXPKGS_MANUAL_UNSTABLE_IN) scripts/bootstrapi
 NIXOS_MANUAL_STABLE_IN ?= /no-such-path
 NIXOS_MANUAL_STABLE_OUT = manual/nixos/stable
 
-all: $(NIXOS_MANUAL_STABLE_OUT)
-
 $(NIXOS_MANUAL_STABLE_OUT): $(NIXOS_MANUAL_STABLE_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
 	bash ./scripts/bootstrapify-docbook.sh $(NIXOS_MANUAL_STABLE_IN)/share/doc/nixos $(NIXOS_MANUAL_STABLE_OUT) 'NixOS $(NIXOS_STABLE_SERIES) manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
 NIXOS_MANUAL_UNSTABLE_IN ?= /no-such-path
 NIXOS_MANUAL_UNSTABLE_OUT = manual/nixos/unstable
 
-all: $(NIXOS_MANUAL_UNSTABLE_OUT)
-
 $(NIXOS_MANUAL_UNSTABLE_OUT): $(NIXOS_MANUAL_UNSTABLE_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
 	bash ./scripts/bootstrapify-docbook.sh $(NIXOS_MANUAL_UNSTABLE_IN)/share/doc/nixos $(NIXOS_MANUAL_UNSTABLE_OUT) 'NixOS $(NIXOS_UNSTABLE_SERIES) manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
 
+manual/nixos/index.html: $(NIXOS_MANUAL_STABLE_OUT) $(NIXOS_MANUAL_UNSTABLE_OUT)
+	bash ./scripts/fix-manual-headers.sh manual/nixos stable
+	@echo "<!DOCTYPE html>" > $@
+	@echo "<html>" >> $@
+	@echo "  <head>" >> $@
+	@echo "    <meta http-equiv=\"refresh\" content=\"7; url='stable/index.html'\" />" >> $@
+	@echo "  </head>" >> $@
+	@echo "  <body>" >> $@
+	@echo "    <h1>Redirecting...</h1>" >> $@
+	@echo "    <p>Please follow <a href=\"stable/index.html\">this link</a>.</p>" >> $@
+	@echo "  </body>" >> $@
+	@echo "</html>" >> $@
+
+all: manual/nixos/index.html
+
+
+### Non HTML files (images/icons/etc...)
 
 all: $(HTML) favicon.png favicon.ico robots.txt \
-	styles \
 	$(subst .png,-small.png,$(filter-out %-small.png,$(wildcard images/screenshots/*)))
 
 
 robots.txt: $(HTML)
-	echo "Users-agent: *" >> $@
+	echo "User-agent: *" >> $@
 	#echo "Disallow: /" >> $@
 	#for page in $(HTML); do echo "Allow: /$$page" >> $@; done
 
@@ -142,7 +178,7 @@ favicon.ico: favicon.png
 %-small.png: %.png
 	convert -resize 200 $< $@
 
-%.html: %.tt layout.tt common.tt $(DEMOS) $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
+%.html: %.tt layout.tt common.tt
 	tpage \
 	  --pre_chomp --post_chomp \
 	  --eval_perl \
@@ -157,62 +193,97 @@ favicon.ico: favicon.png
 	xmllint --nonet --noout $@.tmp
 	mv $@.tmp $@
 
-%: %.in common.tt $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
+%: %.in common.tt
 	echo $$PATH
 	tpage \
 	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
 	  --pre_process=common.tt $< > $@.tmp
 	mv $@.tmp $@
 
-news.html: all-news.xhtml
+#
+# -- /blog section -----------------------------------------------------------
+#
 
-all-news.xhtml: news.xml news.xsl
-	xsltproc --param maxItem 10000 news.xsl news.xml > $@ || rm -f $@
-
-news-rss.xml: news.xml news-rss.xsl
-	xsltproc news-rss.xsl news.xml > $@.tmp
+blog/announcements-rss.xml: blog/announcements.xml blog/announcements-rss.xsl
+	xsltproc blog/announcements-rss.xsl blog/announcements.xml > $@.tmp
 	mv $@.tmp $@
 
-index.html: $(DEMOS) news-rss.xml latest-news.xhtml blogs.json 
+blog/announcements.html: blog/announcements.html.in blog/layout.tt
 
-latest-news.xhtml: news.xml news.xsl
-	xsltproc --param maxItem 12 news.xsl news.xml > $@ || rm -f $@
+blog/announcements.html.in: blog/announcements-rss.xml blog/announcements.xml blog/announcements.xsl
+	xsltproc --param maxItem 10000 blog/announcements.xsl blog/announcements.xml > $@.tmp
+	mv $@.tmp $@
 
-check: $(HTML)
+blog/index.html: blog/layout.tt
+
+blog/categories.html: blog/layout.tt
+
+index.html: blog/announcements-rss.xml blog/index.html
+
+
+#
+# -- /community section ------------------------------------------------------
+#
+
+community/commercial-support.html: community/commercial-support.html.in
+
+community/commercial-support.html.in: community/commercial-support.toml
+	shuffle-commercial-providers --input community/commercial-support.toml > $@
+
+
+### Check
+
+check: all
 	bash ./scripts/check-links.sh
 
-blogs.xml:
-	curl --fail https://planet.nixos.org/rss20.xml > $@.tmp
-	mv $@.tmp $@
 
-blogs.json: blogs.xml
-	perl -MJSON -MXML::Simple -e 'print encode_json(XMLin("blogs.xml"));' < $< > $@.tmp
-	mv $@.tmp $@
 
-ifeq ($(UPDATE), 1)
-.PHONY: blogs.xml
-update: blogs.xml
-	@true
-endif
+### Styles (css/svg/...)
 
-# The nix-built site will use the provided SITE_STYLES
-ifeq ($(strip $(SITE_STYLES)),)
-# But development `make` builds will nix-build.
-styles: $(wildcard site-styles/*)
-	nix-build -A packages.x86_64-linux.siteStyles --fallback --out-link $@
-else
-styles:
-	@ln -sfn $(SITE_STYLES) $@
-endif
 
-all: manuals
+SITE_STYLES_LESS := $(wildcard site-styles/*.less) $(wildcard site-styles/**/*.less)
 
-manuals:
-	bash ./scripts/fix-manual-headers.sh manual/nix stable
-	bash ./scripts/fix-manual-headers.sh manual/nixpkgs stable
-	bash ./scripts/fix-manual-headers.sh manual/nixos stable
+STYLES = \
+	styles/fonts/*.ttf \
+	styles/blog.css \
+	styles/community.css \
+	styles/index.css
 
-all: $(DEMOS)
+tmp.svg.less: $(wildcard site-styles/assets/*)
+	embed-svg site-styles/assets tmp.svg.less
+
+tmp.styles: tmp.svg.less $(SITE_STYLES_LESS)
+	rm -rf tmp.styles
+	
+	mkdir -p tmp.styles
+	cp -fR site-styles/* tmp.styles/
+	
+	rm -rf tmp.styles/assets/*
+	cp tmp.svg.less tmp.styles/assets/svg.less
+
+styles/fonts/%.ttf: $(wildcard site-styles/common-styles/fonts/*)
+	rm -rf styles/fonts
+	mkdir -p styles/fonts
+	cp site-styles/common-styles/fonts/*.ttf styles/fonts
+
+styles/%.css: tmp.styles $(SITE_STYLES_LESS)
+	mkdir -vp styles
+	lessc --math=always --verbose \
+		--source-map=styles/$*.css.map \
+		tmp.styles/pages/$*.private.less \
+		styles/$*.css;
+
+styles/index.css: tmp.styles $(SITE_STYLES_LESS)
+	mkdir -vp styles
+	lessc --math=always --verbose --source-map=styles/index.css.map tmp.styles/index.less styles/index.css
+
+all: $(STYLES)
+
+
+
+### Asciinema demos
+
+index.html: $(DEMOS)
 
 demos/%.svg: demos/%.scenario
 	echo "Generating $@ and $(patsubst %.svg,%.cast,$@) ..."

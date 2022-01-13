@@ -1,11 +1,10 @@
 #! /usr/bin/env bash
 
-LINKCHECK_PORT=8137
+export PORT=8137
 
-caddy -port $LINKCHECK_PORT &
+serve &
 server_pid=$!
-linkchecker http://localhost:$LINKCHECK_PORT \
-    --ignore-url /nixpkgs/
+linkchecker http://localhost:$PORT --ignore-url /nixpkgs/
 status=$?
 kill $server_pid
 exit $status

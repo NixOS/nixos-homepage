@@ -5,11 +5,10 @@
 </div>
 
 <section class="learn-getstarted">
-  <h2>Get started</h2>
   <ul>
     <li>
       <div class="clickable-whole">
-        <a href="[%root%]guides/install-nix.html">
+        <a href="[%root%]download.html#download-nix">
           [% PROCESS svg path="site-styles/assets/gfx-learn-install.svg" %]
           <button>Install Nix</button>
         </a>
@@ -36,7 +35,7 @@
 
 <section class="learn-search">
   <div>
-    <h2>Search</h2>
+    <h1>Search</h1>
     <ul>
       <li>
         <h3>Nix packages</h3>
@@ -59,7 +58,7 @@
 </section>
 
 <section id="learn-guides" class="learn-guides">
-  <h2>Guides</h2>
+  <h1>Guides</h1>
   <ul>
     [% INSERT "learn_guides.html.in" %]
   </ul>
@@ -72,37 +71,37 @@
         [% PROCESS svg path="site-styles/assets/gfx-learn-manual.svg" %]
         <h2>Nix Manual</h2>
         <p>Nix is a package manager which comes in a form of many command line tools.
-          Packages that Nix can build are defined with Nix Expression Language.
+          Packages that Nix can build are defined with the Nix Expression Language.
         </p>
         <ul>
-          <li><a href="[%root%]manual/nix/stable/#ch-installing-binary">Installation</a></li>
-          <li><a href="[%root%]manual/nix/stable/#ch-basic-package-mgmt">Basic package management</a></li>
-          <li><a href="[%root%]manual/nix/stable/#sec-channels">What is a channel?</a></li>
+          <li><a href="[%root%]manual/nix/stable/installation/installing-binary.html">Installation</a></li>
+          <li><a href="[%root%]manual/nix/stable/package-management/basic-package-mgmt.html">Basic package management</a></li>
+          <li><a href="[%root%]manual/nix/stable/package-management/channels.html">What is a channel?</a></li>
           <li>
             Main command line tools:
             <ul>
-              <li><a href="[%root%]manual/nix/stable/#sec-nix-env">nix-env</a> — manipulate or query Nix user
+              <li><a href="[%root%]manual/nix/stable/command-ref/nix-env.html">nix-env</a> — manipulate or query Nix user
                 environments
               </li>
-              <li><a href="[%root%]manual/nix/stable/#sec-nix-build">nix-build</a> — build a Nix expression</li>
-              <li><a href="[%root%]manual/nix/stable/#sec-nix-shell">nix-shell</a> — start an interactive shell based on
+              <li><a href="[%root%]manual/nix/stable/command-ref/nix-build.html">nix-build</a> — build a Nix expression</li>
+              <li><a href="[%root%]manual/nix/stable/command-ref/nix-shell.html">nix-shell</a> — start an interactive shell based on
                 a
                 Nix
                 expression</li>
-              <li><a href="[%root%]manual/nix/stable/#sec-nix-store">nix-store</a> — manipulate or query the Nix store
+              <li><a href="[%root%]manual/nix/stable/command-ref/nix-store.html">nix-store</a> — manipulate or query the Nix store
               </li>
             </ul>
           </li>
           <li>
-            <a href="[%root%]manual/nix/stable/#ch-expression-language">Nix expression language</a>
+            <a href="[%root%]manual/nix/stable/expressions/expression-language.html">Nix expression language</a>
             <ul>
-              <li><a href="[%root%]manual/nix/stable/#ssec-builtins">Built-in functions</a></li>
+              <li><a href="[%root%]manual/nix/stable/expressions/builtins.html">Built-in functions</a></li>
               <li><a href="[%root%]manual/nixpkgs/stable/#sec-functions-library">Nixpkgs Library Functions</a></li>
               <li><a href="[%root%]manual/nixpkgs/stable/#sec-debug">Debugging Nix Expressions</a></li>
             </ul>
           </li>
         </ul>
-        <a href="[%root%]manual/nix/stable">Full Nix Manual</a>
+        <a href="[%root%]manual/nix/stable/">Full Nix Manual</a>
       </div>
     </li>
 
@@ -210,7 +209,7 @@
 
 <section class="learn-otherresources">
   <div>
-    <h2>Other learning resources</h2>
+    <h1>Other learning resources</h1>
     <ul>
       <li class="clickable-whole">
         <h3>Nix Pills</h3>

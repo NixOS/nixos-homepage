@@ -42,34 +42,12 @@
 // Implementation
 #_declare__svg(@name, @svg, @color: #face12) {
   .__svg_@{name} {
-    @_colorized: replace(@svg, "#face12", @color);
+    @_colorized: replace(@svg, "#face12", @color, "g");
     // ugh, that's an ugly hack... but escape() apparently doesn't deal well with percent signs.
-    @_data: replace(escape(@_colorized), "%", "PERCENT");
-    background-image: replace(~"url('data:image/svg+xml;utf8,@{_data}')", "PERCENT", "%");
+    @_data: replace(escape(@_colorized), "%", "PERCENT", "g");
+    background-image: replace(~"url('data:image/svg+xml;utf8,@{_data}')", "PERCENT", "%", "g");
   }
 }
-
-// * * *
-
-// NixOS branding
-// ==============
-
-// The NixOS logo lambdaflake, alone
-#_declare__svg(lambdaflake_color, @SVG_LAMBDAFLAKE);
-#svg.lambdaflake.color { &:extend(.__svg_lambdaflake_color); }
-
-// The NixOS logo lambdaflake, alone
-#_declare__svg(lambdaflake_white, @SVG_LAMBDAFLAKE_WHITE);
-#svg.lambdaflake.white { &:extend(.__svg_lambdaflake_white); }
-
-#_declare__svg(nixos-text_white, @SVG_TEXT_NIXOS, #theme.color[white]);
-#svg.nixos-text.white { &:extend(.__svg_nixos-text_white); }
-
-#_declare__svg(nixos-text_black, @SVG_TEXT_NIXOS, #theme.color[black]);
-#svg.nixos-text.black { &:extend(.__svg_nixos-text_black); }
-
-#_declare__svg(foundation-text_black, @SVG_TEXT_FOUNDATION, #theme.color[black]);
-#svg.foundation-text.black { &:extend(.__svg_foundation-text_black); }
 
 // NixCon logos
 // ============
@@ -83,76 +61,26 @@
 #_declare__svg(nixcon_2020_color, @SVG_NIXCON_2020);
 #svg.nixcon.2020.color { &:extend(.__svg_nixcon_2020_color); }
 
-// Icons
-// =====
+#_declare__svg(nixcon_blue, @SVG_GFX_NIXCON, #theme.color[blue-dark]);
+#svg.blog.weekly_news.blue { &:extend(.__svg_nixcon_blue); }
 
-#_declare__svg(icon_search_blue-light, @SVG_SEARCH, #theme.color[blue-light]);
-#svg.icon.search.blue-light { &:extend(.__svg_icon_search_blue-light); }
+#_declare__svg(nixcon_white, @SVG_GFX_NIXCON, #theme.color[white]);
+#svg.blog.weekly_news.white{ &:extend(.__svg_nixcon_white); }
 
-#_declare__svg(icon_search_white, @SVG_SEARCH, #theme.color[white]);
-#svg.icon.search.white { &:extend(.__svg_icon_search_white); }
+#_declare__svg(rfc_steering_blue, @SVG_GFX_RFC_STEERING, #theme.color[blue-dark]);
+#svg.blog.announcements.blue { &:extend(.__svg_rfc_steering_blue); }
 
-#_declare__svg(icon_social_twitter_white, @SVG_SOCIAL_TWITTER, #theme.color[white]);
-#svg.icon.social.twitter.white { &:extend(.__svg_icon_social_twitter_white); }
+#_declare__svg(rfc_steering_white, @SVG_GFX_RFC_STEERING, #theme.color[white]);
+#svg.blog.announcements.white{ &:extend(.__svg_rfc_steering_white); }
 
-#_declare__svg(icon_social_twitter_black, @SVG_SOCIAL_TWITTER, #theme.color[black]);
-#svg.icon.social.twitter.black { &:extend(.__svg_icon_social_twitter_black); }
+#_declare__svg(marketing_blue, @SVG_GFX_MARKETING, #theme.color[blue-dark]);
+#svg.blog.categories.blue { &:extend(.__svg_marketing_blue); }
 
-#_declare__svg(icon_social_youtube_white, @SVG_SOCIAL_YOUTUBE, #theme.color[white]);
-#svg.icon.social.youtube.white { &:extend(.__svg_icon_social_youtube_white); }
+#_declare__svg(marketing_white, @SVG_GFX_MARKETING, #theme.color[white]);
+#svg.blog.categories.white{ &:extend(.__svg_marketing_white); }
 
-#_declare__svg(icon_social_github_white, @SVG_SOCIAL_GITHUB, #theme.color[white]);
-#svg.icon.social.github.white { &:extend(.__svg_icon_social_github_white); }
+#_declare__svg(release_blue, @SVG_GFX_RELEASE, #theme.color[blue-dark]);
+#svg.blog.rss.blue { &:extend(.__svg_release_blue); }
 
-#_declare__svg(icon_social_reddit_black, @SVG_SOCIAL_REDDIT, #theme.color[black]);
-#svg.icon.social.reddit.black { &:extend(.__svg_icon_social_reddit_black); }
-
-#_declare__svg(icon_social_mastodon_black, @SVG_SOCIAL_MASTODON, #theme.color[black]);
-#svg.icon.social.mastodon.black { &:extend(.__svg_icon_social_mastodon_black); }
-
-#_declare__svg(icon_social_discord_black, @SVG_SOCIAL_DISCORD, #theme.color[black]);
-#svg.icon.social.discord.black { &:extend(.__svg_icon_social_discord_black); }
-
-#_declare__svg(icon_social_stackoverflow_black, @SVG_SOCIAL_STACKOVERFLOW, #theme.color[black]);
-#svg.icon.social.stackoverflow.black { &:extend(.__svg_icon_social_stackoverflow_black); }
-
-// Misc. elements
-// ==============
-
-#_declare__svg(icon_play, @SVG_PLAY);
-#svg.play { &:extend(.__svg_icon_play); }
-
-#_declare__svg(icon_world, @SVG_WORLD);
-#svg.world { &:extend(.__svg_icon_world); }
-
-// Flair
-// =====
-
-// XXX: This needs further investigation
-// Performance is hindered on small devices.
-// When scrolling on the landing page you can see some stuttering.
-
-#screen-sm-min({
-  #_declare__svg(background-outlines_blue-dark, @SVG_BACKGROUND_OUTLINES, #theme.color[blue-dark]);
-});
-#svg.background-outlines.blue-dark { &:extend(.__svg_background-outlines_blue-dark); }
-
-#screen-sm-min({
-  #_declare__svg(background-outlines_white, @SVG_BACKGROUND_OUTLINES, #theme.color[white]);
-});
-#svg.background-outlines.white { &:extend(.__svg_background-outlines_white); }
-
-#_declare__svg(big-angles-1, @SVG_BIG_ANGLES_1);
-#svg.big-angles-1 { &:extend(.__svg_big-angles-1); }
-
-#_declare__svg(big-angles-2, @SVG_BIG_ANGLES_2);
-#svg.big-angles-2 { &:extend(.__svg_big-angles-2); }
-
-#_declare__svg(title-angle_white, @SVG_TITLE_ANGLE, #theme.color[white]);
-#svg.title-angle.white { &:extend(.__svg_title-angle_white); }
-
-#_declare__svg(multipurpose-wedge_blue-dark, @SVG_MULTIPURPOSE_WEDGE, #theme.color[blue-dark]);
-#svg.multipurpose-wedge.blue-dark { &:extend(.__svg_multipurpose-wedge_blue-dark); }
-
-#_declare__svg(multipurpose-wedge_blue-lighter, @SVG_MULTIPURPOSE_WEDGE, #theme.color[blue-lighter]);
-#svg.multipurpose-wedge.blue-lighter { &:extend(.__svg_multipurpose-wedge_blue-lighter); }
+#_declare__svg(release_white, @SVG_GFX_RELEASE, #theme.color[white]);
+#svg.blog.rss.white{ &:extend(.__svg_release_white); }

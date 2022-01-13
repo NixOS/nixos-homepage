@@ -29,9 +29,10 @@ BLOCK navigationLink %]
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0" />
-  <link rel="stylesheet" href="[% root %]styles/styles.css" type="text/css" />
+  <link rel="stylesheet" href="[% root %]styles/index.css" type="text/css" />
 
   <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+  <meta property="og:image" content="/logo/nixos-lores.png" />
   <meta name="google-site-verification" content="ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE" />
 
   [%# This has to happen ASAP, even before jQuery is initialized. %]
@@ -56,8 +57,8 @@ BLOCK navigationLink %]
           [% INCLUDE navigationLink href="explore.html" title="Explore" %]
           [% INCLUDE navigationLink href="download.html" title="Download" %]
           [% INCLUDE navigationLink href="learn.html" title="Learn" %]
-          [% INCLUDE navigationLink href="community.html" title="Community" %]
-          [% INCLUDE navigationLink href="governance.html" title="Governance" %]
+          [% INCLUDE navigationLink href="community/index.html" title="Community" %]
+          [% INCLUDE navigationLink href="blog/index.html" title="Blog" %]
           [% INCLUDE navigationLink href="donate.html" title="Donate" %]
           [% WRAPPER navigationLink class="search" title="Search" %]
           <a href="https://search.nixos.org/packages">Search</a>
@@ -88,28 +89,28 @@ BLOCK navigationLink %]
             <li><a href="https://status.nixos.org/">Channel Status</a></li>
             <li><a href="https://search.nixos.org/packages">Packages search</a></li>
             <li><a href="https://search.nixos.org/options">Options search</a></li>
-            <li><a href="https://nixos.org/teams/security.html">Security</a></li>
+            <li><a href="[% root %]community/teams/security.html">Security</a></li>
           </ul>
         </section>
         <section>
           <h4>Get in Touch</h4>
           <ul>
             <li><a href="https://discourse.nixos.org/">Forum</a></li>
-            <li><a href="https://webchat.freenode.net/#nixos">Chat</a></li>
-            <li><a href="https://nixos.org/commercial-support.html">Commercial support</a></li>
+            <li><a href="https://matrix.to/#/#community:nixos.org">Matrix Chat</a></li>
+            <li><a href="[% root %]community/commercial-support.html">Commercial support</a></li>
           </ul>
         </section>
         <section>
           <h4>Contribute</h4>
           <ul>
-            <li><a href="https://nixos.org/guides/contributing.html">Contributing Guide</a></li>
-            <li><a href="https://nixos.org/donate.html">Donate</a></li>
+            <li><a href="[% root %]guides/contributing.html">Contributing Guide</a></li>
+            <li><a href="[% root %]donate.html">Donate</a></li>
           </ul>
         </section>
         <section>
           <h4>Stay up to date</h4>
           <ul>
-            <li><a href="https://nixos.org/news.html">Announcements</a></li>
+            <li><a href="[% root %]blog/index.html">Blog</a></li>
             <li><a href="https://weekly.nixos.org/">Newsletter</a></li>
           </ul>
         </section>
@@ -120,7 +121,7 @@ BLOCK navigationLink %]
           <h4>NixOS</h4>
           <div>
             <span>
-              Copyright © [% date.format(date.now, '%Y') %] NixOS
+              Copyright © [% date.format(date.now, '%Y') %] NixOS contributors
             </span>
             <a href="https://github.com/NixOS/nixos-homepage/blob/master/LICENSES/CC-BY-SA-4.0.txt">
               <abbr title="Creative Commons Attribution Share Alike 4.0 International">

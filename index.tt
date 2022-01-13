@@ -12,7 +12,7 @@
 </li>
 [% END %]
 [% WRAPPER atHead %]
-<link rel="alternate" type="application/rss+xml" title="RSS" href="/news-rss.xml" />
+<link rel="alternate" type="application/rss+xml" title="RSS feed" href="/blog/announcements-rss.xml" />
 [% END %]
 [% WRAPPER atEnd %]
 <script src="[% root %]js/asciinema-player.js"></script>
@@ -22,10 +22,10 @@
 <section class="wide-banner clickable-whole event-banner">
   <div>
     <div>
-      NixOS 20.09<span class="-detailed"> "Nightingale" released!</span>
+      NixOS 21.11 has been released!
     </div>
     <div class="action">
-      <a href="[% root %]news.html">Announcement</a>
+      <a href="/blog/announcements.html#21.11">Announcement</a>
     </div>
   </div>
 </section>

@@ -1,0 +1,80 @@
+[% WRAPPER layout.tt title="Security Team" handlesLayout=1 %]
+
+<div class="page-title">
+  <div>
+    <a href="[% root%]community/index.html#governance-teams">Community</a>
+    <span>→</span>
+  </div>
+  <h1>Security Team</h1>
+</div>
+
+<section class="governance-description">
+  In addition to community-sourced developments, NixOS has a dedicated security
+  team. If the above sources are not enough to answer your question, please
+  reach out to a member of the team listed below.
+</section>
+
+
+<section class="governance-team">
+
+  <aside>
+    <h2>Members</h2>
+
+    <ul>
+      <li>
+        <p>
+          <a href="https://discourse.nixos.org/u/grahamc">Graham Christensen</a>,
+          <a href="mailto:graham@grahamc.com">graham@grahamc.com</a>
+          (gchristensen)
+          <br />
+          <strong>GPG Fingerprint:</strong>
+          <tt>
+            <a href="https://keys.openpgp.org/vks/v1/by-fingerprint/BA94FDF11DA405212864C121FE918C3A98C1030F">BA94 FDF1
+              1DA4 0521 2864 C121 FE91 8C3A 98C1 030F</a>
+          </tt>
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://discourse.nixos.org/u/fpletz">Franz Pletz</a>,
+          <a href="mailto:fpletz@fnordicwalking.de">fpletz@fnordicwalking.de</a>
+          (fpletz)
+          <br />
+          <strong>GPG Fingerprint:</strong>
+          <tt>
+            <a href="https://keys.openpgp.org/vks/v1/by-fingerprint/8A39615DCE78AF082E23F303846FDED7792617B4">8A39 615D
+              CE78 AF08 2E23 F303 846F DED7 7926 17B4</a>
+          </tt>
+        </p>
+      </li>
+    </ul>
+  </aside>
+  <h3>Security Disclosures</h3>
+
+  <p>
+    To privately report a security issue with NixOS, Nix, and its ecosystem,
+    please email a member of the NixOS Security Team and we will ensure the issue
+    is handled. Our responses will be signed with our GPG keys.
+  </p>
+
+  <h2>Sources of Security Information</h2>
+
+  <p>
+    Security is a priority for the NixOS community. A variety of channels are used
+    to coordinate development in this vein. Three of the main modes of communication
+    about NixOS security are:
+  </p>
+
+  <ul>
+    <li>The issues tagged "Security" on <a
+        href="https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%221.severity%3A+security%22">GitHub/NixOS</a>
+    </li>
+    <li>The <a href="https://matrix.to/#/#security:nixos.org">#security:nixos.org</a> room on Matrix
+    </li>
+    <li>The NixOS security <a href="https://discourse.nixos.org/c/dev/security">discourse</a>
+    </li>
+  </ul>
+
+
+</section>
+[% END %]

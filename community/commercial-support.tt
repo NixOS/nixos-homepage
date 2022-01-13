@@ -1,0 +1,25 @@
+[% WRAPPER layout.tt title="Commercial support" handlesLayout=1 %]
+
+<div class="page-title">
+  <div>
+    <a href="[% root%]community/index.html">Community</a>
+    <span>→</span>
+  </div>
+  <h1>Commercial support</h1>
+</div>
+
+<section class="community-commercial-support">
+  <p>Consulting companies available for professional support.</p>
+  <p>
+    Please
+    <a href="https://github.com/NixOS/nixos-homepage/edit/master/community/commercial-support.toml">submit a pull
+      request</a>
+    to add your company
+    (the list is randomized on each website update).
+  </p>
+  <ul>
+    [% INSERT "community/commercial-support.html.in" %]
+  </ul>
+</section>
+
+[% END %]

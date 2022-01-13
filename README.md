@@ -13,7 +13,7 @@ There are many ways how you can help:
 - if you are an native English speaker or just a person that is very good with words, please look at the [issues tagged with `content` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Acontent)
 - if you are developer and just eager to fix stuff please look at the [issues tagged with `bug` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
 
-If you feel lost where and how to contribute, ask the [marketing team](https://nixos.org/teams/marketing.html) on the [`#nixos-marketing` channel on IRC](irc://irc.freenode.net/#nixos-marketing).
+If you feel lost where and how to contribute, ask the [marketing team](https://nixos.org/community/teams/marketing.html) on the [`#marketing` room on Matrix](https://matrix.to/#/#marketing:nixos.org).
 
 
 # How to help?
@@ -25,23 +25,23 @@ To run local development instance follow this steps:
     $ nix-shell
 
       To start developing run:
-          python run.py
+          serve
 
       and open browser on:
-          https://127.0.0.1:8000
+          https://localhost:8000
 
       It will rebuild the website on each change.
 
-    [nix-shell]$ python run.py
+    [nix-shell]$ serve
 
-Open your browser at: http://127.0.0.1:8000/
+Open your browser at: http://localhost:8000/
 
 In order for the browser to automatically refresh, install the [Livereload extension](http://livereload.com/extensions/) for your browser.
 
 Before creating a pull request make sure that `nix-build` runs successfully.
 
 
-## Binary cache
+## Binary cache (Optional)
 
 It can take some time to enter the development environment. To speed up and avoid building from source, you can use a binary cache. The same cache is used to speed up our GitHub Actions.
 

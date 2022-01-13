@@ -26,7 +26,7 @@ Loaded image: nix-hello:latest
 $ # You can see that the Docker layers were automatically calculated.
 $ docker images | grep nix-hello
 nix-hello     latest     83667617cdb9    50 years ago    32.9MB
-$ # And for the final thing lets test that it really works
+$ # And for the final thing let's test that it really works
 $ docker run -ti nix-hello:latest hello
 Hello World!
 $ # There is a lot we didn't cover in this little demo, but we hope

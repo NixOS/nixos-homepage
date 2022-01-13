@@ -17,7 +17,6 @@ for path in $dir/*; do
       fileName=${htmlFile#"./"}
       filePath="$path/$fileName"
 
-      echo -n "Patching <head> of $filePath ..."
       canonicalFileName="$dir/$canonical/$fileName"
       canonicalUrl=$baseUrl
       if [ -e $canonicalFileName ]; then
@@ -26,23 +25,17 @@ for path in $dir/*; do
         fi
       fi
       canonicalTag="<link rel=\"canonical\" url=\"$canonicalUrl\" />"
-      if grep -Fq "$canonicalTag" $filePath; then
-        echo " Already patched!"
-      else
+      if ! grep -Fq "$canonicalTag" $filePath; then
         sed -i -e "s|</head>|  $canonicalTag\n</head>|" $filePath
-        echo " Patched!"
+        echo "Patched <head> of $filePath."
       fi
 
-      echo -n "Injecting channel switcher for $filePath ..."
       injectedTag="<script src=\"/js/manual-version-switch.js\"></script>"
-      if grep -Fq "$injectedTag" $filePath; then
-        echo " Already injected!"
-      else
+      if ! grep -Fq "$injectedTag" $filePath; then
         sed -i -e "s|</body>|\n  $injectedTag\n</body>|" $filePath
-        echo " Injected!"
+        echo "Injected channel switcher for $filePath."
       fi
 
-      echo -n "Injecting list of channels in $filePath ..."
       injectedTag="data-$project-channels='["
       if [[ "$project" == "nix" ]]; then
         injectedTag+="{\"channel\":\"unstable\",\"version\":\"$NIX_UNSTABLE_VERSION\"},"
@@ -52,11 +45,9 @@ for path in $dir/*; do
         injectedTag+="{\"channel\":\"stable\",\"version\":\"$NIXOS_STABLE_SERIES\"}"
       fi
       injectedTag+="]'"
-      if grep -Fq "$injectedTag" $filePath; then
-        echo " Already injected!"
-      else
+      if ! grep -Fq "$injectedTag" $filePath; then
         sed -i -e "s|<body|<body $injectedTag|" $filePath
-        echo " Injected!"
+        echo "Injected list of channels in $filePath."
       fi
     fi
   done

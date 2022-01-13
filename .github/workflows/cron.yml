@@ -28,6 +28,7 @@ jobs:
         echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
         nix --version
         cat /etc/nix/nix.conf
+        echo "$HOME/.nix-profile/bin" >> $GITHUB_PATH
 
     - uses: cachix/cachix-action@v8
       with:
@@ -36,15 +37,13 @@ jobs:
 
     - name: Update content
       run: |
-        PATH="$HOME/.nix-profile/bin:$PATH"
-        echo "PATH=${PATH}" >> $GITHUB_ENV
         bash ./scripts/update.sh
 
     - name: Building nixos.org
       run: |
         nix build
         mkdir build
-        cp -RL ./result/* ./build/
+        cp -RL ./result/* ./result/.well-known/ ./build/
 
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.1
@@ -62,12 +61,12 @@ jobs:
         overwrites-pull-request-comment: false
       if: github.repository == 'NixOS/nixos-homepage'
 
-    - name: Commit flake.lock, blogs.xml and push to master branch
+    - name: Commit updated files and push them to master branch
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: 'Update flake.lock and blogs.xml [ci skip]'
+        commit_message: 'Hourly update [ci skip]'
         branch: 'master'
-        file_pattern: flake.lock blogs.xml
+        file_pattern: flake.lock community/commercial-support.html.in blog/announcements.xml
         commit_user_name: NixOS webmaster
         commit_user_email: webmaster@nixos.org
         commit_author: GitHub Actions <webmaster@nixos.org>

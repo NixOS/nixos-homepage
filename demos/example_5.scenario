@@ -21,7 +21,7 @@ $ cat -n amazon.nix
     15      };
     16    };
     17  }
-$ # Pause the video to understand the default.nix
+$ # Pause the video to understand the amazon.nix
 $ # Now we just need to build it.
 $ nix-build '<nixpkgs/nixos/release.nix>' \
     -A amazonImage.x86_64-linux \

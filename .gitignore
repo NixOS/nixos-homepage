@@ -2,6 +2,8 @@
 *.html.in
 *.xhtml
 
+!/community/commercial-support.html.in
+
 /nixos/manual/
 /nixos/nix-pills/
 /nixpkgs/manual/
@@ -13,13 +15,13 @@
 /images/screenshots/nixos-*-small.png
 
 /build/
-/blogs.json
-/blogs.xml
 /demos/*.cast
 /demos/*.svg
+/tmp.*
 /favicon.png
 /favicon.ico
-/news-rss.xml
+/blog/announcements-rss.xml
+/site-styles/common-styles
 /nixos-release.tt
 /robots.txt
 

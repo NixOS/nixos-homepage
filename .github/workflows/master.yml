@@ -27,8 +27,7 @@ jobs:
         echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
         nix --version
         cat /etc/nix/nix.conf
-        PATH="$HOME/.nix-profile/bin:$PATH"
-        echo "PATH=${PATH}" >> $GITHUB_ENV
+        echo "$HOME/.nix-profile/bin" >> $GITHUB_PATH
 
     - uses: cachix/cachix-action@v8
       with:
@@ -39,7 +38,7 @@ jobs:
       run: |
         nix build
         mkdir build
-        cp -RL ./result/* ./build/
+        cp -RL ./result/* ./result/.well-known/ ./build/
 
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.1
