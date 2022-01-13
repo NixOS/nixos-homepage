@@ -72,7 +72,7 @@
         </ul>
       </article>
 
-      <article id="nix-install-macosx">
+      <article id="nix-install-macos">
         <h2>MacOS</h2>
         <h3>Multi-user installation</h3>
         <p>
@@ -81,9 +81,7 @@
           <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a>:
         </p>
         <pre class="terminal-console">
-<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) \
-        --darwin-use-unencrypted-nix-store-volume \
-        --daemon</pre>
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install)</pre>
         <p>
           We believe we have ironed out how to cleanly support the read-only
           root on modern macOS. Please
