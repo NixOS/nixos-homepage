@@ -164,7 +164,7 @@ rec {
 
             export NIXOS_AMIS="${nixosAmis}"
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
-            export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}/html"
+            export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}"
 
             rm -f site-styles/common-styles
             ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
