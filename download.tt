@@ -8,7 +8,7 @@
 
 <section id="download-nix" class="download-header">
   <div>
-    <h1>Nix</h1>
+    <h1>Nix<span>: the package manager</span></h1>
     <div>
       <h2>Current version</h2>
       <a href="#">[% latestNixVersion %]</a>
@@ -164,7 +164,7 @@ nix-env (Nix) 2.3.15</pre>
 
 <section id="download-nixos" class="download-header">
   <div>
-    <h1>NixOS</h1>
+    <h1>NixOS<span>: the Linux distribution</span></h1>
     <div>
       <h2>Current version</h2>
       <a href="#">[% latestNixOSSeries %]</a>
