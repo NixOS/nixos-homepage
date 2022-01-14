@@ -6,9 +6,9 @@ rec {
 
   # These inputs are used for the manuals and release artifacts
   inputs.released-nixpkgs-unstable = { url = "nixpkgs/nixos-unstable"; };
-  inputs.released-nixpkgs-stable = { url = "nixpkgs/nixos-21.05"; };
+  inputs.released-nixpkgs-stable = { url = "nixpkgs/nixos-21.11"; };
   inputs.released-nix-unstable = { url = "github:nixos/nix/master"; };
-  inputs.released-nix-stable = { url = "github:nixos/nix/latest-release"; flake = false; };
+  inputs.released-nix-stable = { url = "github:nixos/nix/latest-release"; };
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
   inputs.nix-dev = { url = "github:nix-dot-dev/nix.dev"; };
   inputs.nixos-common-styles = { url = "github:NixOS/nixos-common-styles"; };
@@ -45,11 +45,7 @@ rec {
       pkgs-unstable = import released-nixpkgs-unstable { inherit system; };
       pkgs-stable = import released-nixpkgs-stable { inherit system; };
 
-      nix_stable = (import "${released-nix-stable}/release.nix" {
-        nix = released-nix-stable;
-        nixpkgs = released-nixpkgs-stable;
-        officialRelease = true;
-      }).build."${system}";
+      nix_stable = released-nix-stable.packages."${system}".nix;
       nix_unstable = released-nix-unstable.packages."${system}".nix;
 
       nixPills = import nix-pills {
@@ -128,7 +124,7 @@ rec {
 
           makeFlags =
             [ "NIX_STABLE_VERSION=${getVersion nix_stable.name}"
-              "NIX_MANUAL_STABLE_IN=${nix_stable}/share/doc/nix/manual"
+              "NIX_MANUAL_STABLE_IN=${nix_stable.doc}/share/doc/nix/manual"
               "NIXPKGS_MANUAL_STABLE_IN=${released-nixpkgs-stable.htmlDocs.nixpkgsManual}"
               "NIXOS_MANUAL_STABLE_IN=${released-nixpkgs-stable.htmlDocs.nixosManual}"
               "NIXOS_STABLE_SERIES=${pkgs-stable.lib.trivial.release}"
@@ -141,7 +137,7 @@ rec {
 
               "NIXOS_AMIS=${nixosAmis}"
               "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
-              "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}/html"
+              "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}"
 
               "-j 1"
             ];
@@ -155,7 +151,7 @@ rec {
 
           shellHook = ''
             export NIX_STABLE_VERSION="${getVersion nix_stable.name}"
-            export NIX_MANUAL_STABLE_IN="${nix_stable}/share/doc/nix/manual"
+            export NIX_MANUAL_STABLE_IN="${nix_stable.doc}/share/doc/nix/manual"
             export NIXPKGS_MANUAL_STABLE_IN="${released-nixpkgs-stable.htmlDocs.nixpkgsManual}"
             export NIXOS_MANUAL_STABLE_IN="${released-nixpkgs-stable.htmlDocs.nixosManual}"
             export NIXOS_STABLE_SERIES="${pkgs-stable.lib.trivial.release}"
@@ -168,7 +164,7 @@ rec {
 
             export NIXOS_AMIS="${nixosAmis}"
             export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
-            export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}/html"
+            export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}"
 
             rm -f site-styles/common-styles
             ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles

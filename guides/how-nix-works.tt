@@ -58,7 +58,7 @@
     </p>
 
     <p>
-      Nix ensures that that package dependency specifications are complete.
+      Nix ensures that package dependency specifications are complete.
     </p>
 
     <p>
@@ -103,7 +103,7 @@
     </p>
 
     <pre class="terminal-console"><span class="shell-prompt">$ </span>nix-env --upgrade <em>some-packages</em>
-  <span class="shell-prompt">$ </span>nix-env --rollback</pre>
+<span class="shell-prompt">$ </span>nix-env --rollback</pre>
 
 
     <h2 id="garbage-collection">Garbage collection</h2>
@@ -220,10 +220,10 @@
     </p>
 
     <pre class="terminal-console"><span class="shell-prompt">[nix-shell]$ </span>tar xf $src
-  <span class="shell-prompt">[nix-shell]$ </span>cd pan-*
-  <span class="shell-prompt">[nix-shell]$ </span>./configure
-  <span class="shell-prompt">[nix-shell]$ </span>make
-  <span class="shell-prompt">[nix-shell]$ </span>./pan/gui/pan</pre>
+<span class="shell-prompt">[nix-shell]$ </span>cd pan-*
+<span class="shell-prompt">[nix-shell]$ </span>./configure
+<span class="shell-prompt">[nix-shell]$ </span>make
+<span class="shell-prompt">[nix-shell]$ </span>./pan/gui/pan</pre>
 
     <p>
       Since Nix packages are reproducible and have complete dependency
@@ -403,7 +403,7 @@
     </p>
 
     <pre class="terminal-console"><span class="shell-prompt">$ </span>nixos-rebuild build-vm
-  <span class="shell-prompt">$ </span>./result/bin/run-*-vm</pre>
+<span class="shell-prompt">$ </span>./result/bin/run-*-vm</pre>
 
     <p>
       This builds and starts a virtual machine that contains the new system

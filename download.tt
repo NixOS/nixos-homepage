@@ -6,7 +6,7 @@
   <h1>Download</h1>
 </div>
 
-<section class="download-header">
+<section id="download-nix" class="download-header">
   <div>
     <h1>Nix</h1>
     <div>
@@ -16,23 +16,124 @@
   </div>
 </section>
 
-<section id="download-nix" class="download-nix">
+<section class="download-nix">
   <div class="collapse">
     <div>
-      <article id="nix-quick-install">
-        <h2>Quick install</h2>
+      <article id="nix-install-linux">
+        <h2>Linux</h2>
+
+        <h3>Multi-user installation (recommended)</h3>
         <p>
-          The quickest way to install Nix is to open a terminal and run the following
-          command (as a user other than <code>root</code> with <code>sudo</code> permission):
+          Install Nix via the
+          <strong>recommended</strong>
+          <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a>:
         </p>
         <pre class="terminal-console">
-<span class="shell-prompt">$ </span>curl -L https://nixos.org/nix/install | sh</pre>
-        <p>Make sure to follow the instructions output by the script.</p>
-        <p>The installation script requires that you have <code>sudo</code> access to <code>root</code>.</p>
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --daemon</pre>
+        <p>
+          We recommend the multi-user install if it supports your platform and
+          you can authenticate with <code>sudo</code>.
+        </p>
+
+        <h3>Single-user installation</h3>
+        <p>
+          Install Nix via the
+          <a href="[%nixManual%]/installation/single-user.html">single-user installation</a>:
+        </p>
+        <pre class="terminal-console">
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --no-daemon</pre>
+        <p>
+          Above command will perform a single-user installation of Nix, meaning
+          that <code>/nix</code> is owned by the invoking user. You should run
+          this under your usual user account, not as <code>root</code>. The
+          script will invoke  <code>sudo</code> to create <code>/nix</code> if
+          it doesn’t already exist.
+        </p>
+
+        <h3>Which type of installation should you choose?</h3>
+        <p>
+          This depends on your requirements, but here is a short list of
+          reasons why <strong>we recommend</strong>
+          <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a>:
+        </p>
+
+        <h5>Pros</h5>
+        <ul>
+          <li>Better build isolation (and that is what Nix is all about)</li>
+          <li>Better security (a build can not write somewhere in your home)</li>
+          <li>Sharing builds between users</li>
+        </ul>
+
+        <h5>Cons</h5>
+        <ul>
+          <li>Requires <code>root</code> to run the daemon</li>
+          <li>More involved installation (creation of <code>nixbld* users</code>, installing a systemd unit, ...</li>
+          <li>Harder to uninstall</li>
+        </ul>
       </article>
+
+      <article id="nix-install-macosx">
+        <h2>MacOS</h2>
+        <h3>Multi-user installation</h3>
+        <p>
+          Install Nix via the
+          <strong>recommended</strong>
+          <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a>:
+        </p>
+        <pre class="terminal-console">
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) \
+        --darwin-use-unencrypted-nix-store-volume \
+        --daemon</pre>
+        <p>
+          We believe we have ironed out how to cleanly support the read-only
+          root on modern macOS. Please
+          <a href="https://nixos.org/manual/nix/stable/installation/installing-binary.html#multi-user-installation">consult the manual</a>
+          on details what the installation script does.
+        </p>
+      </article>
+
+      <article id="nix-install-windows">
+        <h2>Windows (WSL2)</h2>
+        <h3>Single-user installation</h3>
+        <p>
+          Install Nix via the
+          <a href="[%nixManual%]/installation/single-user.html">single-user installation</a>:
+        </p>
+        <pre class="terminal-console">
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --no-daemon</pre>
+      </article>
+
+      <article id="nix-install-docker">
+        <h2>Docker</h2>
+        <p>Start a Docker shell with Nix:</p>
+        <pre class="terminal-console">
+<span cls="shell-prompt">$ </span>docker run -it nixos/nix</pre>
+        <p>Or start a Docker shell with Nix exposing a <code>workdir</code> directory:</p>
+        <pre class="terminal-console">
+<span cls="shell-prompt">$ </span>mkdir workdir
+<span cls="shell-prompt">$ </span>docker run -it -v $(pwd)/workdir:/workdir nixos/nix</pre>
+        <p>The <code>workdir</code> example from above can be also used to start hacking on nixpkgs:</p>
+        <pre class="terminal-console">
+<span cls="shell-prompt">$ </span>git clone git@github.com:NixOS/nixpkgs
+<span cls="shell-prompt">$ </span>docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix
+<span cls="shell-prompt">docker&gt; </span>nix-build -I nixpkgs=/nixpkgs -A hello
+<span cls="shell-prompt">docker&gt; </span>find ./result # this symlink points to the build package</pre>
+      </article>
+
       <article id="nix-verify-installation">
         <h2>Verify installation</h2>
-        <p>You may want to verify the integrity of the installation script using GPG:</p>
+        <p>
+          Check the installation by opening
+          <strong>a new terminal</strong> and typing:
+        </p>
+        <pre class="terminal-console">
+<span cls="shell-prompt">$ </span>nix-env --version
+nix-env (Nix) 2.3.15</pre>
+        <p>
+          You may want to verify the
+          <strong>integrity of the installation script</strong>
+          using GPG:
+        </p>
         <pre class="terminal-console">
 <span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install
 <span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc
@@ -46,22 +147,14 @@
           <a href="https://github.com/NixOS/nixos-homepage/blob/master/edolstra.gpg">on GitHub</a>.
         </p>
       </article>
-      <article id="nix-uninstall">
-        <h2>Uninstall</h2>
-        <p>
-          You can uninstall Nix simply by running <code>rm -rf /nix</code>.
-        </p>
-        <!-- TODO: expand this https://github.com/NixOS/nix/issues/1402 -->
-      </article>
       <article id="nix-more">
         <h2>More ...</h2>
         <p>The following release items are also available:</p>
         <ul>
-          <li><a href="[%latestNixMirror%]/nix-[%latestNixVersion%].tar.xz">Source tarball</a></li>
-          <li><a href="[%nixManual%]#sec-relnotes">Release notes</a></li>
+          <li><a href="[%nixManual%]/release-notes/rl-[%latestNixVersion%].html">Release notes</a></li>
           <li>
             <a href="[%nixManual%]">Manual</a>.
-            Please read the <a href="[%nixManual%]#chap-quick-start">“Quick Start” section of the manual</a>
+            Please read the <a href="[%nixManual%]/quick-start.html">“Quick Start” section of the manual</a>
             for an overview of how to install and use Nix.
           </li>
           <li>Old releases are <a href="https://releases.nixos.org/?prefix=nix">also available</a>.</li>
@@ -71,7 +164,7 @@
   </div>
 </section>
 
-<section class="download-header">
+<section id="download-nixos" class="download-header">
   <div>
     <h1>NixOS</h1>
     <div>
@@ -81,7 +174,7 @@
   </div>
 </section>
 
-<section id="download-nixos" class="download-nixos">
+<section class="download-nixos">
   <div class="collapse">
     <div>
       <article id="nixos-iso">
@@ -219,6 +312,15 @@
 $ nix-shell -p ec2_api_tools
 (nix-shell) $ ec2-run-instances [% ami %] --region [% region %] -k <em>my-key-pair</em></pre>
 
+      </article>
+      <article id="nixos-more">
+        <h2>More ...</h2>
+        <p>The following release items are also available:</p>
+        <ul>
+          <li><a href="[%nixosManual%]/release-notes.html#sec-release-[%latestNixOSSeries%]">Release notes</a></li>
+          <li><a href="[%nixosManual%]">Manual</a>.</li>
+          <li>Old releases are <a href="https://releases.nixos.org/?prefix=nixos">also available</a>.</li>
+        </ul>
       </article>
     </div>
   </div>

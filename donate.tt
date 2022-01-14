@@ -60,7 +60,7 @@
       <p>
         NixOS Foundation is using <a href="https://opencollective.com/">Open Collective</a>
         to manage the finances so everyone can see where money comes from and where
-        mone goes.
+        money goes.
       </p>
       <p>
         With Open Collective you can make a <strong>single</strong> or
@@ -77,10 +77,10 @@
         The NixOS Foundation also accepts donations via SEPA bank transfer.
         Please send payments to:
       </p>
-      <pre>Stichting NixOS Foundation, De Meern, The Netherlands
+      <pre>Stichting NixOS Foundation, Frederiksoord, The Netherlands
 
-IBAN: NL45 KNAB 0732 3586 98
-BIC:  KNABNL2H</pre>
+IBAN: NL13 BUNQ 2061 2530 32
+BIC:  BUNQNL2AXXX</pre>
       <p>
         Please add your name and purpose (donation) in the description of the transfer.
         <i>If you would like to support us with amounts above 2000 euro per year, please contact us at
@@ -142,6 +142,11 @@ BIC:  KNABNL2H</pre>
               <img src="[% root %]logo/hetzner-online.svg" alt="Hetzner Online GmbH" />
             </a>
           </li>
+          <li>
+            <a href="https://www.antithesis.com/">
+              <img src="[% root %]logo/antithesis-small.png" alt="Antithesis" />
+            </a>
+          </li>
         </ul>
       </div>
       <div>
@@ -159,7 +164,7 @@ BIC:  KNABNL2H</pre>
           the development of NixOS and hosting for its infrastructure.
           We are very grateful for that!
           If you would like to support us as well, please contact
-          <a href="mailto:rob.vermaas@gmail.com">Rob Vermaas</a>.</p>
+          <a href="mailto:foundation@nixos.org">The NixOS Foundation</a>.</p>
       </div>
     </div>
   </div>

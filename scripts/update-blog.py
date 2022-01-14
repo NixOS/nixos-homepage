@@ -122,7 +122,7 @@ async def fetch_feed(session, feed_id, feed):
     if isinstance(feed, Feed):
         click.echo(f"     Fetching {feed.title} via `{feed.url}`")
         async with session.get(feed.rss_url) as response:
-            content = await response.text()
+            content = await response.read()
             click.echo(f"      Fetched {feed.title}")
             return (feed_id, feedparser.parse(content))
     elif isinstance(feed, Categories):

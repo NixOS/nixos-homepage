@@ -1,6 +1,10 @@
 .community-description {
   .generic-layout();
-  .lead();
+
+  // Only apply `lead` to the first paragraph of the community statement.
+  & > :first-child {
+	.lead();
+  }
 }
 
 .community-banner {
@@ -629,6 +633,7 @@
             left: 0;
             right: 0;
             position: absolute;
+            object-fit: contain;
           }
         }
       }

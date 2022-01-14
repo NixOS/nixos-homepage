@@ -23,16 +23,19 @@ HTML = \
   donate.html \
   download.html \
   explore.html \
-  guides/ad-hoc-developer-environments.html \
-  guides/building-and-running-docker-images.html \
-  guides/continuous-integration-github-actions.html \
-  guides/contributing.html \
-  guides/declarative-and-reproducible-developer-environments.html \
-  guides/deploying-nixos-using-terraform.html \
-  guides/dev-environment.html \
   guides/how-nix-works.html \
-  guides/install-nix.html \
+  guides/ad-hoc-developer-environments.html \
   guides/towards-reproducibility-pinning-nixpkgs.html \
+  guides/declarative-and-reproducible-developer-environments.html \
+  guides/continuous-integration-github-actions.html \
+  guides/dev-environment.html \
+  guides/building-and-running-docker-images.html \
+  guides/building-bootable-iso-image.html \
+  guides/deploying-nixos-using-terraform.html \
+  guides/installing-nixos-on-a-raspberry-pi.html \
+  guides/integration-testing-using-virtual-machines.html \
+  guides/cross-compilation.html \
+  guides/contributing.html \
   index.html \
   learn.html
 
@@ -69,13 +72,14 @@ $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) scripts/bootstrapify-docbook.sh 
 NIX_MANUAL_STABLE_IN ?= /no-such-path
 NIX_MANUAL_STABLE_OUT = manual/nix/stable
 
-$(NIX_MANUAL_STABLE_OUT): $(call rwildcard, $(NIX_MANUAL_STABLE_IN), *) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
-	bash ./scripts/bootstrapify-docbook.sh $(NIX_MANUAL_STABLE_IN) $(NIX_MANUAL_STABLE_OUT) 'Nix $(NIX_STABLE_VERSION) manual' nix https://github.com/NixOS/nix/tree/master/doc/manual
+$(NIX_MANUAL_STABLE_OUT): $(call rwildcard, $(NIX_MANUAL_STABLE_IN), *)
+	mkdir -p $(NIX_MANUAL_STABLE_OUT)
+	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_STABLE_IN)/* $(NIX_MANUAL_STABLE_OUT)
 
 NIX_MANUAL_UNSTABLE_IN ?= /no-such-path
 NIX_MANUAL_UNSTABLE_OUT = manual/nix/unstable
 
-$(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
+$(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *)
 	mkdir -p $(NIX_MANUAL_UNSTABLE_OUT)
 	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_UNSTABLE_IN)/* $(NIX_MANUAL_UNSTABLE_OUT)
 
@@ -161,7 +165,7 @@ all: $(HTML) favicon.png favicon.ico robots.txt \
 
 
 robots.txt: $(HTML)
-	echo "Users-agent: *" >> $@
+	echo "User-agent: *" >> $@
 	#echo "Disallow: /" >> $@
 	#for page in $(HTML); do echo "Allow: /$$page" >> $@; done
 
