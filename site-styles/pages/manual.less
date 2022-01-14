@@ -1,4 +1,7 @@
 // Manual
+//
+// See: `scripts/bootstrapify-docbook.xsl`
+//
 
 .docbook-page {
   .hidden {
@@ -123,14 +126,27 @@ div.docbook {
     &:extend(.terminal-console all);
   }
 
-  // From bootstrapify docbook
-  .alert {
+  .admonition-block {
     &:extend(.notice-box all);
-  }
-  .alert-info {
-    &:extend(.notice-box.-info);
-  }
-  .alert-warning {
-    &:extend(.notice-box.-warning);
+
+    > .title {
+      #theme.h6();
+      color: inherit;
+      margin-bottom: 0;
+    }
+
+    // Variant styles
+    &.-important,
+    &.-note,
+    &.-tip {
+      &:extend(.notice-box.-info);
+    }
+    &.-caution,
+    &.-warning {
+      &:extend(.notice-box.-warning);
+    }
+    &.-danger, {
+      &:extend(.notice-box.-danger);
+    }
   }
 }

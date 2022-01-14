@@ -130,23 +130,26 @@
 
   <xsl:template match="x:div[@class='titlepage' and ../@class = 'book']" />
 
-  <xsl:template match="x:div[@class='warning' and count(x:p) = 1]" priority='1'>
-    <div class="alert alert-warning">
-      <strong>Warning:</strong><xsl:text> </xsl:text><xsl:apply-templates select="x:p/node()" />
-    </div>
+
+  <!--
+    Allow more precise targetting of admonitions by using more distinct class name.
+    Also use semantic markup and follow rscss guidelines.
+  -->
+  <xsl:template match="x:div[(@class='caution' or @class = 'danger' or @class = 'important' or @class = 'note' or @class = 'tip' or @class = 'warning')]">
+    <xsl:element name="aside">
+      <xsl:attribute name="class">admonition-block -<xsl:value-of select="@class" /></xsl:attribute>
+      <xsl:attribute name="role">note</xsl:attribute>
+      <xsl:apply-templates select="@*[not(name() = 'class')]|node()" />
+    </xsl:element>
   </xsl:template>
 
-  <xsl:template match="x:div[@class='warning']">
-    <div class="alert alert-warning">
-      <xsl:apply-templates select="node()[not(self::x:h3)]" />
-    </div>
+  <!-- Use div for the admonition title so it does not mess up the document outline. -->
+  <xsl:template match="x:div[(@class='caution' or @class = 'danger' or @class = 'important' or @class = 'note' or @class = 'tip' or @class = 'warning')]/x:h3[@class='title']">
+    <xsl:element name="div">
+      <xsl:apply-templates select="@*|node()" />
+    </xsl:element>
   </xsl:template>
 
-  <xsl:template match="x:div[@class='note' and count(x:p) = 1]" priority='1'>
-    <div class="alert alert-info">
-      <strong>Note:</strong><xsl:text> </xsl:text><xsl:apply-templates select="x:p/node()" />
-    </div>
-  </xsl:template>
 
   <xsl:template match="x:table">
     <table class='table table-striped'>
