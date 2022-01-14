@@ -135,7 +135,7 @@ nix-env (Nix) 2.3.15</pre>
         <pre class="terminal-console">
 <span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install
 <span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc
-<span cls="shell-prompt">$ </span>gpg2 --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE
+<span cls="shell-prompt">$ </span>gpg2 --keyserver hkps://keyserver.ubuntu.com --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE
 <span cls="shell-prompt">$ </span>gpg2 --verify ./install-nix-[%latestNixVersion%].asc
 <span cls="shell-prompt">$ </span>sh ./install-nix-[%latestNixVersion%]</pre>
         <p>
