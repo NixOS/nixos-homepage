@@ -40,6 +40,10 @@ In order for the browser to automatically refresh, install the [Livereload exten
 
 Before creating a pull request make sure that `nix-build` runs successfully.
 
+## Hacking on the common styles?
+
+Use the `scripts/nixos-common-styles-dev-setup.sh` script to build them locally.
+
 
 ## Binary cache (Optional)
 
