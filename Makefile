@@ -241,43 +241,40 @@ check: all
 ### Styles (css/svg/...)
 
 
-SITE_STYLES_LESS := $(wildcard site-styles/*.less) $(wildcard site-styles/**/*.less)
+# Additional styles dependencies
+COMMON_STYLES_LESS := $(wildcard site-styles/common-styles/*.less) $(wildcard site-styles/common-styles/**/*.less)
+SITE_STYLES_LESS   := $(wildcard site-styles/*.less) $(wildcard site-styles/**/*.less) $(COMMON_STYLES_LESS)
+COMMON_STYLES_SVGS := $(wildcard site-styles/common-styles/*.svg) $(wildcard site-styles/common-styles/**/*.svg)
+SITE_STYLES_SVGS   := $(wildcard site-styles/*.svg) $(wildcard site-styles/**/*.svg) $(COMMON_STYLES_SVGS)
 
-STYLES = \
+# These should be *direct* dependencies only.
+# E.g. less input and svg inputs are described in the previous variables
+SITE_STYLES_DEPENDENCIES = \
 	styles/fonts/*.ttf \
 	styles/blog.css \
 	styles/community.css \
 	styles/index.css
-
-tmp.svg.less: $(wildcard site-styles/assets/*)
-	embed-svg site-styles/assets tmp.svg.less
-
-tmp.styles: tmp.svg.less $(SITE_STYLES_LESS)
-	rm -rf tmp.styles
-	
-	mkdir -p tmp.styles
-	cp -fR site-styles/* tmp.styles/
-	
-	rm -rf tmp.styles/assets/*
-	cp tmp.svg.less tmp.styles/assets/svg.less
 
 styles/fonts/%.ttf: $(wildcard site-styles/common-styles/fonts/*)
 	rm -rf styles/fonts
 	mkdir -p styles/fonts
 	cp site-styles/common-styles/fonts/*.ttf styles/fonts
 
-styles/%.css: tmp.styles $(SITE_STYLES_LESS)
+styles:
 	mkdir -vp styles
+
+styles/%.css: styles $(SITE_STYLES_LESS) $(SITE_STYLES_SVGS)
+	@echo ":: Compiling page-specific styles ($*)"
 	lessc --math=always --verbose \
 		--source-map=styles/$*.css.map \
-		tmp.styles/pages/$*.private.less \
+		site-styles/pages/$*.private.less \
 		styles/$*.css;
 
-styles/index.css: tmp.styles $(SITE_STYLES_LESS)
-	mkdir -vp styles
-	lessc --math=always --verbose --source-map=styles/index.css.map tmp.styles/index.less styles/index.css
+styles/index.css: styles $(SITE_STYLES_LESS) $(SITE_STYLES_SVGS)
+	@echo " :: Compiling site styles"
+	lessc --math=always --verbose --source-map=styles/index.css.map site-styles/index.less styles/index.css
 
-all: $(STYLES)
+all: $(SITE_STYLES_DEPENDENCIES)
 
 
 
