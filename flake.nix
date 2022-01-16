@@ -98,8 +98,8 @@ rec {
               libxslt
               linkchecker
               nixFlakes
-              nixos-common-styles.packages."${system}".embedSVG
               nodePackages.less
+              nodePackages.svgo
               perl
               perlPackages.AppConfig
               perlPackages.JSON
@@ -119,7 +119,17 @@ rec {
             export NIX_STATE_DIR=$TMPDIR
 
             rm -f site-styles/common-styles
-            ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
+            cp -r ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
+            chmod -R +w site-styles/common-styles
+
+            # First delete source SVG files.
+            # This serves two purposes:
+            #   - Validate they're not accidentally used in the final build
+            #   - Skip needlessly optimizing them
+            find site-styles -name '*.src.svg' -delete
+            # Then optimize the remaining SVGs
+            find site-styles -name '*.svg' -print0 \
+              | xargs --null --max-procs=$NIX_BUILD_CORES --max-args=1 svgo
           '';
 
           makeFlags =
