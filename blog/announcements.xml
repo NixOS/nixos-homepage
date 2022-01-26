@@ -50,7 +50,7 @@
           conform to repository conventions.
         </li>
         <li>
-          docker run -ti nixos/nix:master will place you in the Docker container with the latest version of Nix from the master branch.
+          <code>docker run -ti nixos/nix:master</code> will place you in the Docker container with the latest version of Nix from the master branch.
         </li>
       </ul>
       <p>
