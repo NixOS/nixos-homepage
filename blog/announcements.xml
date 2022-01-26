@@ -35,7 +35,7 @@
           compliant one</a>.
         </li>
         <li>
-          Added :st/:show-trace commands to nix repl, which are used to set or
+          Added <code>:st</code>/<code>:show-trace</code> commands to nix repl, which are used to set or
           toggle display of error traces.
         </li>
         <li>
