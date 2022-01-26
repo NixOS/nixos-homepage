@@ -21,7 +21,7 @@
       <ul>
         <li>
           New builtin function <code>builtins.zipAttrsWith</code> with the same
-          functionality as M<code>lib.zipAttrsWith</code> from Nixpkgs, but
+          functionality as <code>lib.zipAttrsWith</code> from Nixpkgs, but
           much more efficient.
         </li>
         <li>
