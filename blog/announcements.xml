@@ -31,7 +31,8 @@
         </li>
         <li>
           The TOML parser used by <code>builtins.fromTOML</code> has been
-          replaced by a more compliant one 27.
+          replaced by <a href="https://github.com/ToruNiina/toml11">a more 
+          compliant one</a>.
         </li>
         <li>
           Added :st/:show-trace commands to nix repl, which are used to set or
