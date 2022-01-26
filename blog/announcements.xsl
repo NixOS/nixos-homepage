@@ -19,6 +19,9 @@
     <xsl:for-each select="item[position() &lt;= $maxItem]">
 
       <section class="blog-header">
+        <xsl:attribute name="id">
+          <xsl:value-of select="title/@id" />
+        </xsl:attribute>
         <div>
           <h2>
             <xsl:apply-templates select="title/child::node()" mode="id"/>
