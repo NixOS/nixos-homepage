@@ -1,11 +1,72 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <news>
+  <item>
+    <pubDate>Tue, 26 Jan 2022 18:00:00 UTC</pubDate>
+    <title id="nix-2.6.0">
+      Nix 2.6.0 released
+    </title>
+    <description>
+      <p>
+        We're pleased to announce the availability of
+        <a href="https://releases.nixos.org/?prefix=nix/nix-2.6.0/">Nix 2.6.0</a>.
+      </p>
+      <p>
+        Instructions how to install Nix on different platforms can be found on
+        <a href="/download.html#download-nix">the download page</a>.
+      </p>
+      <p>
+        Here are the release notes:
+      </p>
+      <ul>
+        <li>
+          New builtin function <code>builtins.zipAttrsWith</code> with the same
+          functionality as <code>lib.zipAttrsWith</code> from Nixpkgs, but
+          much more efficient.
+        </li>
+        <li>
+          The Nix CLI now searches for a <code>flake.nix</code> up until the
+          root of the current Git repository or a filesystem boundary rather
+          than just in the current directory.
+        </li>
+        <li>
+          The TOML parser used by <code>builtins.fromTOML</code> has been
+          replaced by <a href="https://github.com/ToruNiina/toml11">a more 
+          compliant one</a>.
+        </li>
+        <li>
+          Added <code>:st</code>/<code>:show-trace</code> commands to nix repl, which are used to set or
+          toggle display of error traces.
+        </li>
+        <li>
+          New command <code>nix store copy-log</code> to copy build logs from
+          one store to another.
+        </li>
+        <li>
+          The <code>commit-lockfile-summary</code> option can be set to a
+          non-empty string to override the commit summary used when commiting
+          an updated lockfile. This may be used in conjunction with the 
+          <code>nixConfig</code> attribute in <code>flake.nix</code> to better
+          conform to repository conventions.
+        </li>
+        <li>
+          <code>docker run -ti nixos/nix:master</code> will place you in the Docker container with the latest version of Nix from the master branch.
+        </li>
+      </ul>
+      <p>
+        The <a href="https://github.com/NixOS/nix/milestone/15">next release</a>
+        is scheduled for <time>2022-03-07</time>.
+      </p>
+      <p>
+        Thank you to all the contributors!
+      </p>
+    </description>
+  </item>
 
   <item>
     <pubDate>Tue, 30 Nov 2021 18:00:00 UTC</pubDate>
-    <title>
-      <a id="21.11">NixOS 21.11 released</a>
+    <title id="21.11">
+      NixOS 21.11 released
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/21.11-porcupine/porcupine.png">
@@ -97,8 +158,8 @@
 
   <item>
     <pubDate>Tue, 1 Jun 2021 07:00:00 GMT</pubDate>
-    <title>
-      <a id="21.05">NixOS 21.05 released</a>
+    <title id="21.05">
+      NixOS 21.05 released
     </title>
     <description>
       <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/21.05-okapi/okapi.png">
