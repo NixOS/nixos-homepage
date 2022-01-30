@@ -28,7 +28,8 @@ for page in "${pages[@]}"; do
   source="$NIX_DEV_MANUAL_IN/$page"
   target="$outDir/$filename.tt"
   temp="$target.temp"
-  title=$(xidel $source --css '#main-content h1' --printed-node-format=text | sed 's|¶||')
+
+  title=$(xidel $source --css '#main-content > div > div > .section > h1' --printed-node-format=text | sed 's|¶||')
 
   echo "<li><a href=\"/$outDir/$filename.html\">$title</a></li>" >> learn_guides.html.in
 
@@ -58,7 +59,8 @@ for page in "${pages[@]}"; do
       $temp >> $target
   echo "</section>" >> $target
 
-
-
   printf '\n\n[%% END %%]\n' >> $target
+
+  rm $temp
+
 done
