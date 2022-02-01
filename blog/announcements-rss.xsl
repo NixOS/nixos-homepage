@@ -32,6 +32,7 @@
         <xsl:for-each select="item">
           <item>
             <title><xsl:apply-templates select="title/child::node()" mode="id" /></title>
+            <link>https://nixos.org/blog/announcements.html#<xsl:value-of select="title/@id" /></link>
             <description><xsl:apply-templates select="description/child::node()" mode="serialize" /></description>
             <pubDate><xsl:value-of select="pubDate" /></pubDate>
             <guid isPermaLink="false"><xsl:value-of select="pubDate" /></guid>
