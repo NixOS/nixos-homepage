@@ -35,6 +35,7 @@ for page in "${pages[@]}"; do
 
   xidel $source --css '#main-content > div > div > .section > *' --printed-node-format=xml \
     | sed 's|<a class=\"headerlink\".*<\/a>||g' \
+    | sed 's|href="install-nix.html#install-nix"|href="[% root %]download.html#download-nix"|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-attribute-name"><span class="xref std std-term">attribute name</span></a>|attribute name|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-package-name"><span class="xref std std-term">package name</span></a>|package name|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-reproducible"><span class="xref std std-term">reproducible</span></a>|reproducible|g' \
@@ -46,7 +47,7 @@ for page in "${pages[@]}"; do
   echo "[% WRAPPER layout.tt title=\"Guides - $title\" handlesLayout=1 %]" >> $target
   echo "<div class=\"page-title\">" >> $target
   echo "  <div>" >> $target
-  echo "    <a href=\"[% root%]learn.html#learn-guides\">Learn</a>" >> $target
+  echo "    <a href=\"[% root %]learn.html#learn-guides\">Learn</a>" >> $target
   echo "    <span>→</span>" >> $target
   echo "  </div>" >> $target
   echo "  <h1>$title</h1>" >> $target
