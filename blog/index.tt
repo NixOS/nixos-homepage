@@ -3,6 +3,405 @@
 
 <section class="blog-header">
   <div>
+    <h2>#05 - NixOS Weekly</h2>
+    <span>
+      &#8212; Published on
+      <time datetime="2021-09-05">05 Sep 2021</time>
+    </span>
+  </div>
+</section>
+<section class="blog-article">
+
+<h2>Announcements</h2>
+<ul>
+<li><a href="https://github.com/fluidattacks/makes">Makes</a></li>
+</ul>
+<p>A DevSecOps framework powered by Nix and the NixOS module system.
+  Our goal is to help people setup a powerful CI/CD system
+  in just a few steps, in any provider,
+  while lowering the barrier to entry for the community.</p>
+<ul>
+<li>
+<p><a href="https://mobile.nixos.org/news/2021-08-03-july-2021-round-up.html">Mobile NixOS: July 2021 round-up</a></p>
+</li>
+<li>
+<p><a href="https://discourse.nixos.org/t/nix-macos-monthly/12330/9">Nix 🖤 macOS: June/July 2021 update</a></p>
+</li>
+</ul>
+<p>The Ongoing effort at bumping LLVM and macOS SDK.</p>
+<h2>Tutorials &amp; Resources</h2>
+<ul>
+<li><a href="https://determinate.systems/posts/terraform-provider-hydra/">terraform-provider-hydra</a></li>
+</ul>
+<p>A Terraform provider for declaratively managing Hydra projects and jobsets, Determinate Systems'
+  first open source release.</p>
+<ul>
+<li><a href="https://github.com/mkaito/nixos-modded-minecraft-servers">Modded Minecraft Servers</a></li>
+</ul>
+<p>A NixOS module to help run modded minecraft servers, as a Nix flake, as well
+  as a simple rsync wrapper script to help manage remote state of such
+  a server.</p>
+<ul>
+<li>
+<p><a href="https://github.com/NixOS/nixpkgs/pull/125494">stdenv.lib has been removed from Nixpkgs</a></p>
+</li>
+<li>
+<p><a href="https://blog.tjll.net/container-scheduling-without-containers/">Unbreakable Builds On Container Schedulers Without Containers</a></p>
+</li>
+<li>
+<p><a href="https://nix.dev/tutorials/cross-compilation">Cross compilation tutorial</a></p>
+</li>
+<li>
+<p><a href="https://blog.replit.com/nix_dynamic_version">repl.it: Dynamic version for Nix derivations</a></p>
+</li>
+<li>
+<p><a href="https://grahamc.com/blog/nixos-on-framework">NixOS on the Framework</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ls1-sys-prog-course/task8-container">Container assignment</a></p>
+</li>
+</ul>
+<p>University lecture + assignment + tutorial on how to build a shell for the nix build sandbox with 
+  automated tests suite</p>
+<ul>
+<li>Gitpod <a href="https://twitter.com/gitpod/status/1412207422165241858">has shipped a template</a></li>
+</ul>
+<p>Configured for Nix, it gives you pre-built, ephemeral reproducible development environments in the 
+cloud.</p>
+<ul>
+<li>
+<p><a href="https://christine.website/blog/paranoid-nixos-2021-07-18">Paranoid NixOS Setup</a></p>
+</li>
+<li>
+<p><a href="https://gvolpe.com/blog/nixos-binary-cache-ci/">NixOS: build your system on Github actions!</a></p>
+</li>
+<li>
+<p><a href="https://domenkozar.com/2021/08/06/new-laptop-thinkpad-p14s/">New laptop - ThinkPad P14s</a></p>
+</li>
+<li>
+<p><a href="https://blog.thomasheartman.com/posts/bevy-getting-started-on-nixos">Bevy: getting started on NixOS</a></p>
+</li>
+<li>
+<p><a href="https://gitea.xndr.de/philipp/nixcitizen">Nix Citizen</a></p>
+</li>
+</ul>
+<p>Experimental attempt of packaging a demanding and somewhat complex (in terms of wine setup) 
+  wine application by dynamically creating a wine prefix from the nix store path of a generated 
+  wrapper script.</p>
+<ul>
+<li><a href="https://blog.helsinki-systems.de/solving-the-y2038-problem-with-nixos-and-xfs/">Solving the y2038 Problem with NixOS and XFS</a></li>
+</ul>
+<p>Or how to teach your initrd to add features to a filesystem on bootup.</p>
+<ul>
+<li><a href="https://github.com/astro/microvm.nix">microvm.nix</a> </li>
+</ul>
+<p>A Nix Flake to build NixOS and run it on one of several KVM-Hypervisors
+  (cloud-hypervisor, qemu, firecracker, kvmtool, crosvm).</p>
+<ul>
+<li><a href="https://nixos.mayflower.consulting/blog/2021/09/06/coredumpctl/">Inspecting coredumps like it's 2021</a></li>
+</ul>
+<h2>Jobs</h2>
+<ul>
+<li>
+<p><a href="https://discourse.nixos.org/t/seeking-nix-contractor/14722">Seeking a Nix contractor</a></p>
+</li>
+<li>
+<p><a href="https://discourse.nixos.org/t/remote-senior-sre-position-at-serokell/14563">Senior SRE position @ Serokell</a></p>
+</li>
+<li>
+<p><a href="https://discourse.nixos.org/t/two-software-engineer-positions-remote/13886">Two software engineer positions (remote) @ RJG</a></p>
+</li>
+<li>
+<p><a href="https://discourse.nixos.org/t/job-tweag-hiring-nix-developers/14086">Hiring Nix developers @ Tweag</a></p>
+</li>
+<li>
+<p><a href="https://discourse.nixos.org/t/mercury-bank-nix-engineers/13784">Nix Engineers @ Mercury Bank</a></p>
+</li>
+<li>
+<p><a href="https://discourse.nixos.org/t/the-d-e-shaw-group-quant-systems-build-and-release-engineer/13686">Build and Release Engineer @ The D. E. Shaw Group</a></p>
+</li>
+</ul>
+<h1>Contribute to NixOS Weekly</h1>
+<p>This work would not be possible without the many contributions of the community.</p>
+<p>You can help too! Create or comment on the <a href="https://github.com/NixOS/nixos-weekly/pulls">pull request</a>
+for the next edition or look at the
+<a href="https://github.com/NixOS/nixos-weekly/issues">issue tracker</a> to add other improvements.</p>
+</section>
+<section class="blog-header">
+  <div>
+    <h2>#04 - NixOS Weekly</h2>
+    <span>
+      &#8212; Published on
+      <time datetime="2021-06-07">07 Jun 2021</time>
+    </span>
+  </div>
+</section>
+<section class="blog-article">
+
+<h2>Announcements</h2>
+<ul>
+<li><a href="https://nixos.org/blog/announcements.html#21.05">NixOS 21.05 released!</a></li>
+</ul>
+<p>Jonathan Ringer, release manager, announces NixOS 21.05 release with 1745 contributors in 33474 commits.</p>
+<ul>
+<li><a href="https://blog.replit.com/nix">How we went from supporting 50 languages to all of them</a></li>
+</ul>
+<p>Replit replaces Docker with Nix and drastically improves support for languages.</p>
+<ul>
+<li><a href="https://discourse.nixos.org/t/im-retiring-from-haskell-maintenance-in-nixpkgs/12739">Peter Simons has retired from Haskell maintenance in  Nixpkgs</a></li>
+</ul>
+<p>Please thank him for all his hard work!</p>
+<ul>
+<li><a href="https://changelog.com/podcast/437">The Changelog #437</a></li>
+</ul>
+<p>Domen Kožar introduces the Nix ecosystem.</p>
+<ul>
+<li><a href="https://www.compositional.fm/domenkozar">Compositional podcast</a></li>
+</ul>
+<p>Nix in Production with Domen Kožar</p>
+<ul>
+<li><a href="https://gitea.redalder.org/Magic_RB/NixNG">NixNG, a late sibling distribution to NixOS, without systemd!</a></li>
+</ul>
+<p>NixNG is a proof-of-concept distribution which works very similarly to NixOS, but aims to run well 
+  in containers and also smells more BSD-esque. Currently, it uses runit instead of systemd, but we're 
+  open to multi-init support and also to our own init system.</p>
+<ul>
+<li><a href="https://discourse.nixos.org/t/nix-macos-monthly/12330/4?u=domenkozar">Nix 🖤 macOS May Update</a></li>
+</ul>
+<h2>Tutorials &amp; Resources</h2>
+<ul>
+<li>
+<p><a href="https://lambdablob.com/posts/nix-language-primer/">Introduction to the Nix language for OO-Programmers</a></p>
+</li>
+<li>
+<p><a href="https://cs-syd.eu/posts/2021-04-11-the-ci-nix-pattern">CS SYD - The <code>ci.nix</code> pattern</a></p>
+</li>
+<li>
+<p><a href="https://blog.nixbuild.net/posts/2021-04-26-data-science-with-nix-parameter-sweeps.html">Data Science with Nix: Parameter Sweeps</a></p>
+</li>
+<li>
+<p><a href="https://notes.srid.ca/rust-nix">Nix-ifying Rust projects</a> </p>
+</li>
+</ul>
+<p>A template Nix setup for new Rust projects.</p>
+<ul>
+<li><a href="https://youtu.be/5F-1Q3nk4Es">Nix syntax basics</a></li>
+</ul>
+<p>Everything that you need to read, write and understand Nix expressions.</p>
+<ul>
+<li><a href="https://github.com/yusdacra/nix-cargo-integration">Nix Cargo integration</a></li>
+</ul>
+<p>Utility to easily integrate Cargo projects with Nix. Tries to handle (almost) everything for you
+  and enables configuration from <code>Cargo.toml</code> files.</p>
+<ul>
+<li><a href="https://github.com/yusdacra/rust-nix-templater">Rust Nix templater</a></li>
+</ul>
+<p>Utility to set up a template that uses <code>nix-cargo-integration</code>.</p>
+<ul>
+<li><a href="https://github.com/gytis-ivaskevicius/flake-utils-plus">flake-utils-plus</a></li>
+</ul>
+<p>Use Nix flakes without any fluff! (extension of flake-utils) </p>
+<ul>
+<li><a href="https://serokell.io/blog/practical-nix-flakes">Practical Nix Flakes</a></li>
+</ul>
+<p>Learn about Nix, Nix flakes, and how to use Nix flakes to build applications in various languages.</p>
+<ul>
+<li><a href="https://sandervanderburg.blogspot.com/2021/04/a-test-framework-for-nix-process.html">A test framework for the Nix process management framework</a></li>
+</ul>
+<p>With the Nix process management framework you can write high-level deployment specifications of 
+  running processes, that can be managed with a variety of process managers (e.g. systemd, 
+  supervisord, launchd, s6-rc). Furthermore, you can construct multiple instances of the same 
+  processes and deploy them as an unprivileged user. The testing framework allows you to validate a 
+  service under all these conditions.</p>
+<ul>
+<li>
+<p><a href="https://nix.dev/tutorials/installing-nixos-on-a-raspberry-pi">Tutorial: Installing NixOS on a Raspberry Pi</a></p>
+</li>
+<li>
+<p><a href="https://nix.dev/tutorials/integration-testing-using-virtual-machines">Tutorial: Integration testing using virtual machines (VMs)</a></p>
+</li>
+<li>
+<p><a href="https://christine.website/blog/my-homelab-2021-06-08">My Homelab Build</a></p>
+</li>
+<li>
+<p><a href="https://justin.restivo.me/posts/2021-05-30-nix-rust-riscv-toy-kernel.html">Writing a “Hello World” RiscV Kernel with Nix in Rust</a></p>
+</li>
+</ul>
+<p>Use Nix Flakes to build and run a 64 bit RiscV Kernel written in Rust.</p>
+<h2>Jobs</h2>
+<ul>
+<li>
+<p><a href="https://wrkbl.ink/iTrGmT2">Backend Engineer (Haskell/Nix) at Feeld</a></p>
+</li>
+<li>
+<p><a href="https://serokell.io/blog/hiring-senior-sre">Senior Site Reliability Engineer at Serokell</a></p>
+</li>
+<li>
+<p><a href="https://boards.greenhouse.io/tweag/jobs/4212663002">Software Engineer (Developer Productivity) at Tweag</a></p>
+</li>
+</ul>
+<h1>Contribute to NixOS Weekly</h1>
+<p>This work would not be possible without the many contributions of the community.</p>
+<p>You can help too! Create or comment on the <a href="https://github.com/NixOS/nixos-weekly/pulls">pull request</a>
+for the next edition or look at the
+<a href="https://github.com/NixOS/nixos-weekly/issues">issue tracker</a> to add other improvements.</p>
+</section>
+<section class="blog-header">
+  <div>
+    <h2>#03 - NixOS Weekly</h2>
+    <span>
+      &#8212; Published on
+      <time datetime="2021-04-08">08 Apr 2021</time>
+    </span>
+  </div>
+</section>
+<section class="blog-article">
+
+<h2>Announcements</h2>
+<ul>
+<li><a href="https://github.com/NixOS/rfcs/pull/85">RFC 0085 FCP NixOS Release Stabilization: ZHF on master, new timeline</a></li>
+</ul>
+<p>RFC 0085 has been accepted!</p>
+<ul>
+<li><a href="https://github.com/DavHau/nix-portable">Nix Portable</a></li>
+</ul>
+<p>Nix - Static, Permissionless, Install-free, Pre-configured</p>
+<ul>
+<li><a href="https://summer.nixos.org/">The Summer of Nix</a></li>
+</ul>
+<p>A two month train and work program from August 2nd to October 15th 2021 - great for anyone who wants to rapidly increase their Nix skills while doing useful work.</p>
+<ul>
+<li>
+<p><a href="https://discourse.nixos.org/t/nix-macos-monthly/12330">Nix 🖤 macOS Monthly Update</a></p>
+</li>
+<li>
+<p><a href="https://tech.channable.com/posts/2021-04-09-nix-is-the-ultimate-devops-toolkit.html">Nix is the ultimate DevOps toolkit</a></p>
+</li>
+<li>
+<p><a href="https://bytes.zone/posts/nix-script/">nix-script: nix-shell shebangs for speed and flexibility</a></p>
+</li>
+</ul>
+<h2>Tutorials &amp; Resources</h2>
+<ul>
+<li>
+<p><a href="https://thewagner.net/blog/2021/02/25/building-container-images-with-nix/">Building container images with Nix</a></p>
+</li>
+<li>
+<p><a href="https://ghedam.at/24353/tutorial-getting-started-with-home-manager-for-nix">Getting started with Home Manager</a></p>
+</li>
+<li>
+<p><a href="https://francis.begyn.be/blog/nixos-home-router">Using NixOS as a Router (NaaR)</a></p>
+</li>
+<li>
+<p><a href="https://christine.website/blog/my-wireguard-setup-2021-02-06">My Automagic NixOS Wireguard Setup</a></p>
+</li>
+<li>
+<p><a href="https://roscidus.com/blog/blog/2021/03/07/qubes-lite-with-kvm-and-wayland/">Qubes-lite With KVM and Wayland</a></p>
+</li>
+<li>
+<p><a href="https://ihpcafe.ihpapp.com/TodaysNixCoffee">Installing NixOS on a Mac</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=QKoQ1gKJY5A&amp;list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-">Video Series: Introduction To Nix and NixOS</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=98EwejpIJzE&amp;list=PLZmotIJq3yOKew30oT8aEbPUOEKBmNpY1">Video tutorial of Flakes in Nix 2.4</a></p>
+</li>
+</ul>
+<p>Video explains how to improve the reproducibility of nix expressions, why and for what we may need flakes and how to use them.</p>
+<ul>
+<li><a href="https://github.com/boredom101/nixduino">Build Arduino sketches like any other nix derivation.</a></li>
+</ul>
+<h2>Jobs</h2>
+<ul>
+<li><a href="https://discourse.nixos.org/t/devops-engineer-at-secure-compute-startup/12008">DevOps Engineer at Secure Compute Startup</a></li>
+</ul>
+<p>Drive the adoption of Nix at a secure compute startup by developing and maintaining our CI pipeline and infrastructure.</p>
+<h1>Contribute to NixOS Weekly</h1>
+<p>This work would not be possible without the many contributions of the community.</p>
+<p>You can help too! Create or comment on the <a href="https://github.com/NixOS/nixos-weekly/pulls">pull request</a>
+for the next edition or look at the
+<a href="https://github.com/NixOS/nixos-weekly/issues">issue tracker</a> to add other improvements.</p>
+</section>
+<section class="blog-header">
+  <div>
+    <h2>#02 - NixOS Weekly</h2>
+    <span>
+      &#8212; Published on
+      <time datetime="2021-02-22">22 Feb 2021</time>
+    </span>
+  </div>
+</section>
+<section class="blog-article">
+
+<h2>Announcements</h2>
+<ul>
+<li><a href="https://discourse.nixos.org/t/introducing-flox-nix-for-simplicity-and-scale/11275">Introducing flox - Nix for simplicity and scale</a></li>
+</ul>
+<p><a href="https://floxdev.com">flox</a> makes it easy to build software or manage development environments with Nix at any scale.</p>
+<ul>
+<li><a href="https://www.tweag.io/blog/2020-12-16-trustix-announcement/">Trustix</a></li>
+</ul>
+<p>Distributed trust and reproducibility tracking for binary caches.</p>
+<ul>
+<li><a href="https://discourse.nixos.org/t/recurring-funding-for-making-macos-first-class-citizen-in-nix-ecosystem/11386">Recurring funding for making macOS a first-class citizen in Nix ecosystem</a></li>
+</ul>
+<p>A call for companies/developers to contribute financially towards addressing major macOS issues in the ecosystem.</p>
+<h2>Tutorials</h2>
+<ul>
+<li>
+<p><a href="https://sgt.hootr.club/molten-matter/nix-distributed-builds/">Offloading NixOS builds to a faster machine</a></p>
+</li>
+<li>
+<p><a href="https://github.com/lucernae/nixos-pi/">Build your NixOS Raspberry Pi Image using Github Action</a></p>
+</li>
+<li>
+<p><a href="https://nixos.mayflower.consulting/blog/2021/01/28/nextcloud-stateversion/">Safe service upgrades using system.stateVersion</a></p>
+</li>
+</ul>
+<h2>Resources</h2>
+<ul>
+<li>
+<p><a href="https://sandervanderburg.blogspot.com/2021/02/developing-s6-rc-backend-for-nix.html">Developing an s6-rc backend for the Nix process management framework</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Mic92/envfs">envfs</a></p>
+</li>
+</ul>
+<p>Fuse filesystem that returns symlinks to executables based on the PATH of the requesting process
+  (fixes shebang problems on NixOS).</p>
+<ul>
+<li><a href="https://github.com/SuperSandro2000/nixpkgs-review-checks">nixpkgs-review-checks</a></li>
+</ul>
+<p>Add additional checks and more information from build logs and outputs to the reports generated by nixpkgs-review.</p>
+<ul>
+<li><a href="https://www.compositional.fm/hosts/rok">Podcasts about Nix</a></li>
+</ul>
+<p>A content addressable store for Nix with Théophane Hufschmitt and Binary Verification with Trustix 
+  starring Adam Höse.</p>
+<h2>Jobs</h2>
+<ul>
+<li>
+<p><a href="https://discourse.nixos.org/t/devops-service-reliability-engineer-nix-nixops-flakes-hydra/11353">IOHK: DevOps / Service Reliability Engineer (Remote)</a></p>
+</li>
+<li>
+<p><a href="https://boards.greenhouse.io/pdtpartners/jobs/1473543">PDT Partners: Experienced DevOps Engineer (New York)</a></p>
+</li>
+<li>
+<p><a href="https://discourse.nixos.org/t/job-devops-engineer-at-kitty-hawk-sf-bay-area/11636">KittyHawk: DevOps Engineer (SF Bay Area)</a></p>
+</li>
+<li>
+<p><a href="https://boards.greenhouse.io/tweag/jobs/4212663002">Tweag: Software Engineer - Developer Productivity (Remote or Paris)</a></p>
+</li>
+</ul>
+<h1>Contribute to NixOS Weekly</h1>
+<p>This work would not be possible without the many contributions of the community.</p>
+<p>You can help too! Create or comment on the <a href="https://github.com/NixOS/nixos-weekly/pulls">pull request</a>
+for the next edition or look at the
+<a href="https://github.com/NixOS/nixos-weekly/issues">issue tracker</a> to add other improvements.</p>
+</section>
+<section class="blog-header">
+  <div>
     <h2>#01 - NixOS Weekly</h2>
     <span>
       &#8212; Published on
@@ -1526,7 +1925,7 @@ for the next edition or look at the
 <p>lorri is based around fast direnv integration for robust CLI and editor integration.</p>
 <p><a href="http://github.com/target/lorri">Try it out</a></p>
 <ul>
-<li><a href="https://releases.nixos.org/?prefix=patchelf/patchelf-0.10/">PatchELF 0.10 released</a></li>
+<li><a href="https://nixos.org/releases/patchelf/patchelf-0.10/">PatchELF 0.10 released</a></li>
 </ul>
 <h2>Contribute to NixOS Weekly Newsletter</h2>
 <p>This work would not be possible without the many contributions of the community.</p>
@@ -2968,8 +3367,8 @@ easier.</p>
 </li>
 <li><p class="first"><a class="reference external" href="https://styx-static.github.io/styx-site/">styx</a>, a static site generator in Nix expression language.</p>
 <p>To give it a quick try:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> nix-shell -p styx
-<span class="gp">$</span> styx new site mysite <span class="o">&amp;&amp;</span> <span class="nb">cd</span> mysite
+<div class="highlight"><pre><span></span><span class="gp">$ </span>nix-shell -p styx
+<span class="gp">$ </span>styx new site mysite <span class="o">&amp;&amp;</span> <span class="nb">cd</span> mysite
 </pre></div>
 </li>
 <li><p class="first">NixOS at Linux Infotag Augsburg</p>
