@@ -25,7 +25,7 @@
 </section>
 
 <section class="community-communication">
-  <h1>Where to talk?</h1>
+  <h1 id="platforms">Where to talk?</h1>
   <div>
     <div>
       <h2>Chat</h2>
@@ -264,9 +264,9 @@
       </p>
       <a class="button -primary" href="[%root%]community/teams/marketing.html">Members &amp; Contacts</a>
       [% PROCESS svg path="site-styles/assets/gfx-discourse.white.svg" %]
-      <h3>Discourse Team</h3>
-      <p>It configures and moderates the Discourse forum.</p>
-      <a class="button -primary" href="[%root%]community/teams/discourse.html">Members &amp; Contacts</a>
+      <h3>Moderation Team</h3>
+      <p>Moderates partitcipation on official community platforms</p>
+      <a class="button -primary" href="[%root%]community/teams/moderation.html">Members &amp; Contacts</a>
     </div>
   </div>
 </section>

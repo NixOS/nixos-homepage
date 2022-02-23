@@ -18,7 +18,13 @@
 
 [[redirects]]
   from = "/teams/discourse.html"
-  to = "/community/teams/discourse.html"
+  to = "/community/teams/moderation.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/community/teams/discourse.html"
+  to = "/community/teams/moderation.html"
   status = 302
   force = true
 
