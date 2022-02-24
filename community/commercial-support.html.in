@@ -9,6 +9,19 @@
 
 
     <li>
+      <a href="https://immutablesolutions.com/">
+        <div>
+          <img alt="Immutable Solutions" src="/community/commercial-support-logos/immutable-solutions.png" />
+        </div>
+        <h2>Immutable Solutions</h2>
+        <ul><li>Sweden</li></ul>
+        Nix specialists helping companies design, develop and deploy systems in a
+declarative fashion.
+
+      </a>
+    </li>
+
+    <li>
       <a href="http://blackriversoft.com/">
         <div>
           <img alt="Black River Software" src="/community/commercial-support-logos/black-river-software.png" />
@@ -22,13 +35,15 @@ consulting, and build and deployment engineering services.
     </li>
 
     <li>
-      <a href="https://www.numtide.com/">
+      <a href="https://serokell.io/">
         <div>
-          <img alt="NumTide Ltd" src="/community/commercial-support-logos/numtide.png" />
+          <img alt="Serokell" src="/community/commercial-support-logos/serokell.png" />
         </div>
-        <h2>NumTide Ltd</h2>
-        <ul><li>London, UK</li></ul>
-        DevOps consulting by Developers.
+        <h2>Serokell</h2>
+        <ul><li>Remote</li><li>Tallinn, Estonia</li></ul>
+        Serokell is a custom software engineering company that creates innovative
+solutions for complex problems. We do software development, consulting, and
+auditing.
 
       </a>
     </li>
@@ -47,32 +62,6 @@ delivery. Top contributor to Nix and this website.
     </li>
 
     <li>
-      <a href="https://nixos.mayflower.consulting">
-        <div>
-          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
-        </div>
-        <h2>Mayflower</h2>
-        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
-        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://platonic.systems/">
-        <div>
-          <img alt="Platonic.Systems" src="/community/commercial-support-logos/platonic-systems.svg" />
-        </div>
-        <h2>Platonic.Systems</h2>
-        <ul><li>Remote</li></ul>
-        Solving your toughest software problems
-Trying to build an innovative software solution? Is it behind schedule?
-Over budget? Not working properly? Growing with bugs? We can help.
-
-      </a>
-    </li>
-
-    <li>
       <a href="https://obsidian.systems">
         <div>
           <img alt="Obsidian Systems" src="/community/commercial-support-logos/obsidian-systems.svg" />
@@ -80,18 +69,6 @@ Over budget? Not working properly? Growing with bugs? We can help.
         <h2>Obsidian Systems</h2>
         <ul><li>New York, USA</li></ul>
         Software consultancy specializing in Haskell, Nix, curiosity, and innovation.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://www.enlambda.com/">
-        <div>
-          <img alt="Enlambda" src="/community/commercial-support-logos/enlambda.png" />
-        </div>
-        <h2>Enlambda</h2>
-        <ul><li>Remote</li><li>Estonia</li></ul>
-        Turning operational issues into development tasks using Nix since 2013.
 
       </a>
     </li>
@@ -124,28 +101,39 @@ customized highly reliable solutions for blockchain-powered industries.
     </li>
 
     <li>
-      <a href="https://serokell.io/">
+      <a href="https://nixos.mayflower.consulting">
         <div>
-          <img alt="Serokell" src="/community/commercial-support-logos/serokell.png" />
+          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
         </div>
-        <h2>Serokell</h2>
-        <ul><li>Remote</li><li>Tallinn, Estonia</li></ul>
-        Serokell is a custom software engineering company that creates innovative
-solutions for complex problems. We do software development, consulting, and
-auditing.
+        <h2>Mayflower</h2>
+        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
+        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
 
       </a>
     </li>
 
     <li>
-      <a href="https://immutablesolutions.com/">
+      <a href="https://platonic.systems/">
         <div>
-          <img alt="Immutable Solutions" src="/community/commercial-support-logos/immutable-solutions.png" />
+          <img alt="Platonic.Systems" src="/community/commercial-support-logos/platonic-systems.svg" />
         </div>
-        <h2>Immutable Solutions</h2>
-        <ul><li>Sweden</li></ul>
-        Nix specialists helping companies design, develop and deploy systems in a
-declarative fashion.
+        <h2>Platonic.Systems</h2>
+        <ul><li>Remote</li></ul>
+        Solving your toughest software problems
+Trying to build an innovative software solution? Is it behind schedule?
+Over budget? Not working properly? Growing with bugs? We can help.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.enlambda.com/">
+        <div>
+          <img alt="Enlambda" src="/community/commercial-support-logos/enlambda.png" />
+        </div>
+        <h2>Enlambda</h2>
+        <ul><li>Remote</li><li>Estonia</li></ul>
+        Turning operational issues into development tasks using Nix since 2013.
 
       </a>
     </li>
@@ -160,6 +148,18 @@ declarative fashion.
         Your partner for hosting, networks and IT solutions running on NixOS. We have
 multiple years of NixOS and decades of Linux experience to aid your NixOS
 integration and administration.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.numtide.com/">
+        <div>
+          <img alt="NumTide Ltd" src="/community/commercial-support-logos/numtide.png" />
+        </div>
+        <h2>NumTide Ltd</h2>
+        <ul><li>London, UK</li></ul>
+        DevOps consulting by Developers.
 
       </a>
     </li>
