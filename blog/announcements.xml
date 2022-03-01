@@ -2,6 +2,55 @@
 
 <news>
   <item>
+    <pubDate>Tue, 1 March 2022 18:00:00 UTC</pubDate>
+    <title id="community-survey-2022">
+      NixOS Community Survey 2022
+    </title>
+    <description>
+      <p>
+        The NixOS Marketing Team is pleased to announce the first offical 
+        <a target="_blank" href="https://survey.nixos.org/2022">NixOS Community Survey</a>. 
+        Please take 5-10 minutes to complete <a target="_blank" href="https://survey.nixos.org/2022">it</a>.
+      </p>
+      <p>
+        Since the Nix community has been growing faster and larger every month, it's gotten harder to 
+        understand who makes up the community and what everyone cares about. So we're conducting this survey 
+        to improve our understanding of those questions. We hope to use your responses to develop Nix, NixOS, 
+        and Nixpkgs to match your needs and come up with new ideas for growing and serving the community. And 
+        we'll publish major findings on Discourse and nixos.org. 
+      </p>
+      <p>
+        All the questions are optional, and all responses are automatically anonymized. We will NOT collect your 
+        name, phone number, GitHub handle, IP address, or any other identifying information.
+      </p>
+      <p>
+      The questions in the survey cover:
+      </p>
+      <ul>
+        <li>
+          Your background (e.g. What region of the world are you from?)
+        </li>
+        <li>
+          The projects you use in the ecosystem (e.g. Are you using NixOS?)
+        </li>
+        <li>
+          How you use the projects (e.g. Do you use Nix in production servers?)
+        </li>
+        <li>
+          What you like and dislike about the projects (e.g. What do you think is already great about Nix? 
+          What do you think contributors should focus on improving?)
+        </li>
+      </ul>
+      <p>
+      This is our first time running a survey like this, so we're also looking for feedback on the survey itself to 
+      understand how we can do this better in the future! Thanks!
+      </p>
+      <p>
+      -Barry @ <a target="_blank" href="https://floxdev.com">flox</a> (bpiv400) and <a href="/teams/marketing.html">the NixOS Marketing Team</a>
+      </p>
+    </description>
+  </item>
+  <item>
     <pubDate>Tue, 26 Jan 2022 18:00:00 UTC</pubDate>
     <title id="nix-2.6.0">
       Nix 2.6.0 released
