@@ -12,7 +12,7 @@ HTML = \
   blog/index.html \
   community/commercial-support.html \
   community/index.html \
-  community/teams/discourse.html \
+  community/teams/moderation.html \
   community/teams/infrastructure.html \
   community/teams/marketing.html \
   community/teams/nixcon.html \
