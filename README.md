@@ -63,6 +63,35 @@ substituters = ... https://nixos-homepage.cachix.org
 trusted-public-keys = ... nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE=
 ```
 
+## Development under MacOS (via Docker)
+
+The website cannot be served natively yet, but with the help of [docker](https://www.docker.com/products/docker-desktop).
+(You may need to increase the maximum "Disk image size" in Docker's Resources Preferences.)
+
+1. Pull in the latest nixos container image from [dockerhub](https://hub.docker.com/r/nixos/nix)
+
+    `$ docker pull nixos/nix`
+
+2. Start and enter a container:
+
+    `$ docker run -p 8000:8000 -it --name nixos-homepage nixos/nix`
+
+3. (Optional) Having entr, fd and vim at place is helpful for automatic rebuilds of the site and enabling binary cache as described in [non-NixOs](#on-non-nixos).
+
+    `nix-shell -p entr fd vim`
+
+4. To prepare and serve the project:
+
+    ```
+    $ git clone https://github.com/NixOS/nixos-homepage.git
+    $ cd nixos-homepage
+    $ nix-shell
+    [nix-shell]$ make
+    [nix-shell]$ python -m http.server --bind 0.0.0.0
+    ```
+
+    Note: to continuously rebuild the site on changes use `[nix-shell]$ fd | entr make` instead.
+
 
 ## License
 
