@@ -31,7 +31,7 @@
         <pre class="terminal-console">
 <span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --daemon</pre>
         <p>
-          We recommend the multi-user install if it supports your platform and
+          We recommend the multi-user install if you are on Linux running systemd, with SELinux disabled and
           you can authenticate with <code>sudo</code>.
         </p>
 
