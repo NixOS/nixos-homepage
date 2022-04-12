@@ -11,7 +11,9 @@ USE date;
 # class: Additional classes
 BLOCK navigationLink %]
 
-<li class="[% outputName == href ? " active" : "" %] [% class %]">
+[% SET outputPrefix = outputName.split('/').first %]
+
+<li class="[% outputPrefix == href ? " active" : "" %] [% class %]">
   [%- IF href -%]
   <a href="[% root %][% href %]">[% title %]</a>
   [%- ELSE -%]
@@ -57,8 +59,8 @@ BLOCK navigationLink %]
           [% INCLUDE navigationLink href="explore.html" title="Explore" %]
           [% INCLUDE navigationLink href="download.html" title="Download" %]
           [% INCLUDE navigationLink href="learn.html" title="Learn" %]
-          [% INCLUDE navigationLink href="community/index.html" title="Community" %]
-          [% INCLUDE navigationLink href="blog/index.html" title="Blog" %]
+          [% INCLUDE navigationLink href="community" title="Community" %]
+          [% INCLUDE navigationLink href="blog" title="Blog" %]
           [% INCLUDE navigationLink href="donate.html" title="Donate" %]
           [% WRAPPER navigationLink class="search" title="Search" %]
           <a href="https://search.nixos.org/packages">Search</a>
