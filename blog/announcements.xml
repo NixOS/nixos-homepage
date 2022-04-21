@@ -2,6 +2,202 @@
 
 <news>
   <item>
+    <pubDate>Thu, 21 Apr 2022 18:00:00 UTC</pubDate>
+    <title id="nix-2.8.0">
+      Nix 2.8.0 released
+    </title>
+    <description>
+      <p>
+        We're pleased to announce the availability of Nix 2.8.0. It will be
+        available from <a href="https://nixos.org/download.html">NixOS -
+        Getting Nix / NixOS</a>.
+      </p>
+      <p>
+        Here are the release notes:
+      </p>
+      <ul>
+        <li>
+          New experimental command: <code>nix fmt</code>, which applies a
+          formatter defined by the <code>formatter.&lt;system&gt;</code> flake
+          output to the Nix expressions in a flake.
+        </li>
+        <li>
+          Various Nix commands can now read expressions from standard input 
+          using <code>--file -</code>.
+        </li>
+        <li>
+          <p>
+            New experimental builtin function
+            <code>builtins.fetchClosure</code> that copies a closure from a
+            binary cache at evaluation time and rewrites it to
+            content-addressed form (if it isn’t already). Like
+            <code>builtins.storePath</code>, this allows importing pre-built
+            store paths; the difference is that it doesn’t require the user to
+            configure binary caches and trusted public keys.
+          </p>
+          <p>
+            This function is only available if you enable the experimental
+            feature <code>fetch-closure</code>.
+          </p>
+        </li>
+        <li>
+          <p>
+            New experimental feature: <i>impure derivations</i>. These are
+            derivations that can produce a different result every time they’re
+            built. Here is an example:
+          </p>
+      <pre class="terminal-console">
+stdenv.mkDerivation {
+  name = "impure";
+  __impure = true; # marks this derivation as impure
+  buildCommand = "date > $out";
+}
+</pre>
+          <p>
+            Running nix build twice on this expression will build the
+            derivation twice, producing two different content-addressed store
+            paths. Like fixed-output derivations, impure derivations have
+            access to the network. Only fixed-output derivations and impure
+            derivations can depend on an impure derivation.
+          </p>
+        </li>
+        <li>
+          <code>nix store make-content-addressable</code> has been renamed to
+          nix store <code>make-content-addressed</code>.
+        </li>
+        <li>
+          <p>
+            The <code>nixosModule</code> flake output attribute has been
+            renamed consistent with the <code>.default</code> renames in Nix
+            2.7.
+          </p>
+          <ul>
+            <li>
+              <code>nixosModule</code> → <code>nixosModules.default</code>
+            </li>
+          </ul>
+          <p>
+            As before, the old output will continue to work, but <code>nix
+            flake check</code> will issue a warning about it.
+          </p>
+        </li>
+        <li>
+          <code>nix run</code> is now stricter in what it accepts: members of
+          the <code>apps</code> flake output are now required to be apps (as
+          defined in
+          <a href="https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-run.html#apps">the manual</a>),
+          and members of <code>packages</code> or <code>legacyPackages</code>
+          must be derivations (not apps).
+        </li>
+      </ul>
+      <p>
+        The <a href="https://github.com/NixOS/nix/milestone/17">next release</a>
+        is scheduled for <time>2022-05-30</time>.
+      </p>
+      <p>
+        Thank you to all the contributors!
+      </p>
+    </description>
+  </item>
+
+  <item>
+    <pubDate>Mon, 14 Mar 2022 18:00:00 UTC</pubDate>
+    <title id="nix-2.7.0">
+      Nix 2.7.0 released
+    </title>
+    <description>
+      <p>
+        We're pleased to announce the availability of Nix 2.7.0. It will be 
+        available from 
+        <a href="https://nixos.org/download.html">NixOS - Getting Nix / NixOS</a>.
+      </p>
+      <p>
+        <iframe
+          width="560" height="315"
+          src="https://www.youtube.com/embed/TzQpmDrnRQA"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          alallowfullscreen="allowfullscreen"
+          > </iframe>
+      </p>
+      <p>
+        Here are the release notes:
+      </p>
+      <ul>
+        <li>
+          Nix will now make some helpful suggestions when you mistype something
+          on the command line. For instance, if you type nix build
+          <code>nixpkgs#thunderbrd</code>, it will suggest
+          <code>thunderbird</code>.
+        </li>
+
+        <li>
+          <p>
+            A number of “default” flake output attributes have been renamed.
+            These are:
+          </p>
+          <ul>
+            <li>
+              <code>defaultPackage.&lt;system&gt;</code> → <code>packages.&lt;system&gt;.default</code>
+            </li>
+            <li>
+              <code>defaultApps.&lt;system&gt;</code> → <code>apps.&lt;system&gt;.default</code>
+            </li>
+            <li>
+              <code>defaultTemplate</code> → <code>templates.default</code>
+            </li>
+            <li>
+              <code>defaultBundler.&lt;system&gt;</code> → <code>bundlers.&lt;system&gt;.default</code>
+            </li>
+            <li>
+              <code>overlay</code> → <code>overlays.default</code>
+            </li>
+            <li>
+              <code>devShell.&lt;system&gt;</code> → <code>devShells.&lt;system&gt;.default</code>
+            </li>
+          </ul>
+          <p>
+            The old flake output attributes still work, but
+            <code>nix flake check</code> will warn about them.
+          </p>
+        </li>
+
+        <li>
+          Breaking API change: <code>nix bundle</code> now supports bundlers of
+          the form <code>bundler.&lt;system&gt;.&lt;name&gt;= derivation:
+          another-derivation;</code>. This supports additional functionality
+          to inspect evaluation information during bundling. A new repository
+          73 has various bundlers implemented.
+        </li>
+
+        <li>
+          <code>nix store ping</code> now reports the version of the remote Nix
+          daemon.
+        </li>
+
+        <li>
+          <code>nix flake {init,new}</code> now display information about which
+          files have been created.
+        </li>
+
+        <li>
+          Templates can now define a <code>welcomeText</code> attribute, which
+          is printed out by <code>nix flake {init,new} --template &lt;template&gt;</code>.
+        </li>
+      </ul>
+      <p>
+        The next release 149 is scheduled for .
+        The <a href="https://github.com/NixOS/nix/milestone/16">next release</a>
+        is scheduled for <time>2022-04-18</time>.
+      </p>
+      <p>
+        Thank you to all the contributors!
+      </p>
+    </description>
+  </item>
+
+  <item>
     <pubDate>Tue, 1 March 2022 18:00:00 UTC</pubDate>
     <title id="community-survey-2022">
       NixOS Community Survey 2022
