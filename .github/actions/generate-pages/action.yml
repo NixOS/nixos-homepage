@@ -1,0 +1,31 @@
+name: Update pages
+description: Updates the page for the current branch
+runs:
+  using: composite
+  steps:
+    - name: Build
+      shell: bash
+      run: |
+        set -x
+        # Find the name of the branch/tag
+        # ref_name doesn't work for pull requests as head_ref points to the source ref
+        ref_name="${{ github.head_ref || github.ref_name }}"
+        tmp_page_dir="/tmp/${ref_name}"
+        
+        # Update the "webroot" for the generated homepage
+        repo_name="$(echo ${{ github.repository }} | cut -d / -f 2)"
+        sed -i -re "s|ROOT = .+|ROOT = \"/$repo_name/pages/$ref_name/\"|g" Makefile
+        grep ROOT Makefile
+        
+        # Build the homepage
+        nix build
+        
+        # Undo changes to Makefile
+        git checkout -- .
+        
+        # Checkout pages branch and be ready to commit the generated homepage
+        mkdir -p "$tmp_page_dir"
+        cp -RL ./result/* ./result/.well-known/ "${tmp_page_dir}"
+        git checkout pages
+        rm -rf "pages/${ref_name}"
+        cp -RL "${tmp_page_dir}" "pages/${ref_name}"

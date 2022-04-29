@@ -1,0 +1,54 @@
+name: "Build Github Pages for pull requests"
+
+on:
+  pull_request:
+jobs:
+  generate-pages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checking out the repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: "Install deps"
+        if: github.event.pull_request.merged != true
+        uses: ./.github/actions/install-deps
+
+      - name: "Generate pages"
+        if: github.event.pull_request.merged != true
+        uses: ./.github/actions/generate-pages
+
+      - name: "Delete pages"
+        if: github.event.pull_request.merged == true
+        run: |
+          rm -rf "pages/${{ github.head_ref || github.ref_name }}"
+
+      - name: "Update page index"
+        run: |
+          index(){
+            echo "<h1>Branches</h1>"
+            echo "<ul>"
+            for dir in $(ls pages) ; do
+              echo "<li><a href='pages/$dir'>$dir</a></li>"
+            done
+            echo "</ul>"
+          }
+          index > index.html
+
+      - name: Commit updated files and push them to master branch
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update ${{ github.head_ref || github.ref_name }}"
+          branch: 'pages'
+          file_pattern: index.html pages
+          commit_user_name: NixOS webmaster
+          commit_user_email: webmaster@nixos.org
+          commit_author: GitHub Actions <webmaster@nixos.org>
+
+      - name: Check out the repository again for post action steps
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
