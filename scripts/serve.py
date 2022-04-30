@@ -41,7 +41,7 @@ def main(common_styles):
 
     os.system("make")
 
-    server.serve(root="./", port=os.getenv("PORT", 8000))
+    server.serve(host=os.getenv("HOST", "localhost"), root="./", port=os.getenv("PORT", 8000))
 
 if __name__ == "__main__":
     main()
