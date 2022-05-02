@@ -11,23 +11,23 @@
 <div class="generic-layout">
   <div>
     <p>
-      Nix provides <em>reproducible builds</em> and <em>correct deployment</em> of build results by ensuring <em>complete, exact dependencies</em> both at build time and run time.
+      Nix provides <em>reproducible builds</em> and <em>correct deployment</em> of build results by ensuring <a hrefs="#complete-dependencies">complete, exact dependencies</a> both at build time and run time.
     </p>
     <p>
-      Exact dependencies enable presence of <em>multiple versions</em> of a software package at the same time without conflicts.
+      Exact dependencies enable presence of <a href="#multiple-versions">multiple versions</a> of a software package at the same time without conflicts.
     </p>
     <p>
-      Since different package versions are fully separated, Nix has <em>atomic upgrades and rollbacks</em> of package versions, user environments, or system configurations:
+      Since different package versions are fully separated, Nix has <a href="#atomic">atomic upgrades and rollbacks</a> of package versions, user environments, or system configurations:
       it only requires changing a single symlink, which connects to the entire dependency tree.
     </p>
     <p>
-      Nix <em>transparently reuses build results</em> from your machine or a remote cache, as long as their build inputs or build plans do not change.
+      Nix <a href="#source-binary">transparently reuses build results</a> from your machine or a remote cache, as long as their build inputs or build plans do not change.
     </p>
     <p>
-      The <em>Nix package collection</em> holds tens of thousands of working packages <em>built from source</em> and <em>instantly available in binary form</em>, and provides mechanisms to <em>adapt or compose packages</em> according to your needs.
+      The <a href="#nix-packages-collection">Nix package collection</a> holds tens of thousands of working packages <em>built from source</em> and <em>instantly available in binary form</em>, and provides mechanisms to <em>adapt or compose packages</em> according to your needs.
     </p>
     <p>
-      Nix build plans are declared in a <em>purely functional configuration language</em>, the Nix expression language.
+      Nix build plans are declared in a <a href="#nix-language">purely functional configuration language</a>, the Nix expression language.
       It allows precise specification of build inputs and build instructions, and arbitrary composition of packages in a flexible, concise manner.
     </p>
     <p>
