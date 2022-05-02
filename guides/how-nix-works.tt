@@ -11,20 +11,41 @@
 <div class="generic-layout">
   <div>
     <p>
-      Nix is a <em>purely functional package manager</em>. This means that it
-      treats packages like values in purely functional programming languages such
-      as Haskell — they are built by functions that don’t have side-effects, and
-      they never change after they have been built. Nix stores packages in the
-      <em>Nix store</em>, usually the directory <tt>/nix/store</tt>, where each
-      package has its own unique subdirectory such as
+      Nix provides <em>reproducible builds</em> and <em>correct deployment</em> of build results by ensuring <em>complete, exact dependencies</em> both at build time and run time.
     </p>
-
-    <pre class="file-listing">/nix/store/b6gvzjyb2pg0kjfwrjmg1vfhh54ad73z-firefox-33.1/</pre>
-
     <p>
-      where <tt>b6gvzjyb2pg0…</tt> is a unique identifier for the package that
-      captures all its dependencies (it’s a cryptographic hash of the package’s
-      build dependency graph). This enables many powerful features.
+      Exact dependencies enable presence of <em>multiple versions</em> of a software package at the same time without conflicts.
+    </p>
+    <p>
+      Since different package versions are fully separated, Nix has <em>atomic upgrades and rollbacks</em> of package versions, user environments, or system configurations:
+      it only requires changing a single symlink, which connects to the entire dependency tree.
+    </p>
+    <p>
+      Nix <em>transparently reuses build results</em> from your machine or a remote cache, as long as their build inputs or build plans do not change.
+    </p>
+    <p>
+      The <em>Nix package collection</em> holds tens of thousands of working packages <em>built from source</em> and <em>instantly available in binary form</em>, and provides mechanisms to <em>adapt or compose packages</em> according to your needs.
+    </p>
+    <p>
+      Nix build plans are declared in a <em>purely functional configuration language</em>, the Nix expression language.
+      It allows precise specification of build inputs and build instructions, and arbitrary composition of packages in a flexible, concise manner.
+    </p>
+    <p>
+      In practice, Nix can
+      <ul>
+        <li>
+          run programs ad-hoc without installing them
+        </li>
+        <li>
+          establish temporary environments with all required dependencies
+        </li>
+        <li>
+          install programs and keep them up to date
+        </li>
+        <li>
+          provide reproducible, portable development environments, user environments, and entire operating system configurations.
+        </li>
+      </ul>
     </p>
 
     <h2 id="complete-dependencies">Complete dependencies</h2>
