@@ -244,7 +244,7 @@
     <h2 id="multi-user-support">Multi-user support</h2>
 
     <p>
-      Starting at version 0.11, Nix has multi-user support. This means that
+      Nix has multi-user support, meaning that
       non-privileged users can securely install software. Each user can have a
       different <em>profile</em>, a set of packages in the Nix store that appear
       in the user’s <tt>PATH</tt>. If a user installs a package that another user
