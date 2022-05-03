@@ -10,6 +10,7 @@
 
 <div class="generic-layout">
   <div>
+    <h1 id="overview">Overview</h1>
     <p>
       Nix provides <em>reproducible builds</em> and <em>correct deployment</em> of build results by ensuring <a hrefs="#complete-dependencies">complete, exact dependencies</a> both at build time and run time.
     </p>
