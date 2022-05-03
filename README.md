@@ -18,7 +18,7 @@ If you feel lost where and how to contribute, ask the [marketing team](https://n
 
 # How to help?
 
-To run local development instance follow this steps:
+To run local development instance follow this steps to start a local server
 
     $ git clone git@github.com:NixOS/nixos-homepage.git
     $ cd nixos-homepage
@@ -34,12 +34,20 @@ To run local development instance follow this steps:
 
     [nix-shell]$ serve
 
+If you have [Docker] and [Docker Compose] installed, you can alternatively run
+
+    $ docker-compose up
+
+Once everything's ready, you'll be able to access 
+
 Open your browser at: http://localhost:8000/
 
 In order for the browser to automatically refresh, install the [Livereload extension](http://livereload.com/extensions/) for your browser.
 
 Before creating a pull request make sure that `nix-build` runs successfully.
 
+[Docker]: https://docs.docker.com/get-docker/
+[Docker Compose]: https://docs.docker.com/compose/install/  
 
 ## Binary cache (Optional)
 
