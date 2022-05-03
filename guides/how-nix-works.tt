@@ -236,6 +236,67 @@
 
     <p>Nix runs on Linux and macOS.</p>
 
+  <h1 id="architecture">Architecture</h1>
+
+    <p>
+      Nix consists of hierarchical <a href="https://en.m.wikipedia.org/wiki/Multitier_architecture#Layers">layers</a>.
+    </p>
+
+<!--
+We currently have no machinery to render mermaid diagrams directly.
+
+```mermaid
+flowchart
+  subgraph store
+    direction LR
+    input[build input] --> |referenced by| drv[build step] --> |builds| out[build output]
+  end
+  cli[command line interface] --> |evaluates| expr[configuration language] --> |evaluates to| drv
+  cli --> |manages|store
+```
+-->
+
+    <img src="architecture-overview.svg" />
+
+    <p>
+      At the top is the <em>command line interface</em>, translating from invocations of Nix executables to interactions with the underlying layers.
+    </p>
+    <p>
+      Below that is the <em>Nix language</em>, a <a href="https://en.m.wikipedia.org/wiki/Purely_functional_programming">purely functional</a> configuration language.
+      It is used to compose expressions which ultimately evaluate to self-contained <em>build rules</em>, used to derive <em>build results</em> from referenced <em>build inputs</em>.
+    </p>
+
+    <aside>
+      <p>
+        The Nix language itself does not have a notion of <em>packages</em> or <em>configurations</em>.
+        As far as build rules are concerned, the inputs and results of a derivation are just data.
+        In practice this amounts to a set of files in a file system.
+      </p>
+    </aside>
+
+    <p>
+      The command line and Nix language are what users interact with most.
+    </p>
+    <p>
+      Underlying everything is the <em>Nix store</em>, a mechanism to keep track of build rules, data, and references between them.
+      It can also execute <em>build instructions</em>, captured in the build rules, to produce new data.
+    </p>
+    <p>
+      Nix has commands to hook build results into the operating system, by symlinking files to certain locations and setting environment variables.
+      This allows the data Nix manages to take on meaning as software packages or system configuration files
+    </p>
+
+    <aside>
+      <p>
+        The store and its capabilities make Nix a build system.
+      </p>
+      <p>
+        The language makes Nix a configuration management system.
+      </p>
+      <p>
+        The commands make Nix a package manager and software deployment framework.
+      </p>
+    </aside>
 
     <h1 id="nixos">How NixOS works?</h1>
 
