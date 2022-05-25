@@ -80,7 +80,11 @@ flowchart
     </p>
     <p>
       Below that is the <em>Nix language</em>, a <a href="https://en.m.wikipedia.org/wiki/Purely_functional_programming">purely functional</a> configuration language.
-      It is used to compose expressions which ultimately evaluate to self-contained <em>build rules</em>, used to derive <em>build results</em> from referenced <em>build inputs</em>.
+      It is used to compose expressions which ultimately evaluate to self-contained <em>build plans</em>, used to derive <em>build results</em> from referenced <em>build inputs</em>.
+    </p>
+
+    <p>
+      The command line and Nix language are what users interact with most.
     </p>
 
     <aside>
@@ -92,15 +96,13 @@ flowchart
     </aside>
 
     <p>
-      The command line and Nix language are what users interact with most.
+      Underlying these is the <em>Nix store</em>, a mechanism to keep track of build plans, data, and references between them.
+      It can also execute build plans to produce new data.
     </p>
-    <p>
-      Underlying everything is the <em>Nix store</em>, a mechanism to keep track of build rules, data, and references between them.
-      It can also execute <em>build instructions</em>, captured in the build rules, to produce new data.
-    </p>
+
     <p>
       Nix has commands to hook build results into the operating system, by symlinking files to certain locations and setting environment variables.
-      This allows the data Nix manages to take on meaning as software packages or system configuration files
+      This allows the data Nix manages to take on meaning as software packages or system configuration files.
     </p>
 
     <aside>
