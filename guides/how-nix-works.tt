@@ -66,10 +66,10 @@ We currently have no machinery to render mermaid diagrams directly.
 flowchart
   subgraph store
     direction LR
-    input[build input] --> |referenced by| drv[build step] --> |builds| out[build output]
+    input[build input] -.-> |referenced by| drv[build step] -.-> |builds| out[build output]
   end
-  cli[command line interface] --> |evaluates| expr[configuration language] --> |evaluates to| drv
-  cli --> |manages|store
+  cli[command line interface] -.-> |evaluates| expr[configuration language] -.-> |evaluates to| drv
+  cli -.-> |manages|store
 ```
 -->
 
