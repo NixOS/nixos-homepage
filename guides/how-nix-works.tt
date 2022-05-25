@@ -12,6 +12,28 @@
   <div>
     <h1 id="overview">Overview</h1>
     <p>
+      Nix can
+      <ul>
+        <li>
+          run any packaged program ad-hoc without installing it
+        </li>
+        <li>
+          establish temporary environments with all required dependencies
+        </li>
+        <li>
+          install programs and keep them up to date
+        </li>
+        <li>
+          provide reproducible, portable development environments, user environments, and entire operating system configurations.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      This is achieved as follows:
+    </p>
+
+    <p>
       Nix enforces <a hrefs="#complete-dependencies">complete, exact dependencies</a> both at build time and run time.
     </p>
     <p>
@@ -29,23 +51,6 @@
     <p>
       Nix build plans are declared in a <a href="#nix-language">purely functional configuration language</a>, the Nix expression language.
       It allows precise specification of build inputs and build instructions, and arbitrary composition of packages in a flexible, concise manner.
-    </p>
-    <p>
-      In practice, Nix can
-      <ul>
-        <li>
-          run programs ad-hoc without installing them
-        </li>
-        <li>
-          establish temporary environments with all required dependencies
-        </li>
-        <li>
-          install programs and keep them up to date
-        </li>
-        <li>
-          provide reproducible, portable development environments, user environments, and entire operating system configurations.
-        </li>
-      </ul>
     </p>
 
     <h1 id="features">Features</h1>
