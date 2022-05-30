@@ -212,15 +212,6 @@
     <h1>Other learning resources</h1>
     <ul>
       <li class="clickable-whole">
-        <h3>Nix Pills</h3>
-        <p>
-          At the beginning you may feel that some of the magic which happens
-          behind the scenes is hard to grasp. This series aims to complement
-          the existing explanations from the more formal documents.
-        </p>
-        <a href="[%root%]guides/nix-pills">Read more</a>
-      </li>
-      <li class="clickable-whole">
         <h3>Unofficial Wiki</h3>
         <p>A user-maintained wiki for Nix and NixOS.</p>
         <a href="https://nixos.wiki">Read more</a>
@@ -232,6 +223,13 @@
           done using the Nix ecosystem.
         </p>
         <a href="https://nix.dev">Read more</a>
+      </li>
+      <li class="clickable-whole">
+        <h3>Nix Pills</h3>
+        <p>
+          A low-level tutorial on building software packages with Nix, showing in detail how <tt>nixpkgs</tt> is constructed.
+        </p>
+        <a href="[%root%]guides/nix-pills">Read more</a>
       </li>
     </ul>
   </div>
