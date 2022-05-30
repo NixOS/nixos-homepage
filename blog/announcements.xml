@@ -2,6 +2,106 @@
 
 <news>
   <item>
+    <pubDate>Tue, 30 May 2022 19:00:00 UTC</pubDate>
+    <title id="nixos-22.05">
+      NixOS 22.05 released
+    </title>
+    <description>
+      <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/22.05-quokka/quokka.png">
+        <img class="inline" src="/logo/nixos-logo-22.05-quokka-lores.png" alt="22.05 Quokka logo" width="100" />
+      </a>
+      <p>
+        Hey everyone, I'm <a href="https://github.com/dasJ">Janne Heß</a>,
+        the release manager for 22.05. As promised, the latest stable
+        release is here: NixOS 22.05 “Quokka”.
+      </p>
+
+      <ul>
+        <li>
+          <a href="/manual/nixos/stable/release-notes.html#sec-release-22.05">Release manual</a>
+          <ul>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-22.05-highlights">Highlights</a>
+            </li>
+            <li><a href="/manual/nixos/stable/release-notes.html#sec-release-22.05-new-services">New
+                Services</a></li>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-22.05-incompatibilities">Backward
+                Incompatibilities</a></li>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-22.05-notable-changes">Other
+                Notable Changes</a></li>
+          </ul>
+        </li>
+        <li><a href="/manual/nixos/stable/index.html#sec-upgrading">Upgrade Instructions</a></li>
+        <li><a href="/download.html#download-nixos">Image downloads</a></li>
+      </ul>
+
+      <p>
+        The 22.05 release was possible due to the efforts of <strong>1611</strong>
+        contributors in <strong>46727</strong> commits. We would especially
+        like to thank our top 10 contributors:
+        <a href="https://github.com/fabaff">Fabian Affolter</a>,
+        <a href="https://github.com/supersandro2000">Sandro Jäckel</a>,
+        <a href="https://github.com/mweinelt">Martin Weinelt</a>,
+        <a href="https://github.com/bobby285271">Bobby Rong</a>,
+        <a href="https://github.com/marsam">Mario Rodas</a>,
+        <a href="https://github.com/jonringer">Jonathan Ringer</a>,
+        <a href="https://github.com/jtojnar">Jan Tojnar</a>,
+        <a href="https://github.com/mic92">Jörg Thalheim</a>,
+        <a href="https://github.com/sternenseemann">sternenseemann</a>, and
+        <a href="https://github.com/dotlambda">Robert Schütz</a>.
+      </p>
+
+      <p>
+        NixOS is already known as
+        <a href="https://repology.org/repositories/statistics/newest">the most up to date distribution</a>
+        and is
+        <a href="https://repology.org/repositories/statistics/total">the distribution with the most packages</a>.
+        This release saw <strong>9345 new</strong> packages and <strong>10666 updated</strong> packages.
+        Removal of unmaintained packages is also important to keep the package set working and secure.
+        This release <strong>removed 5874</strong> packages that were available in 21.11.
+        <br/>
+        nixpkgs also includes a lot of modules that make NixOS what it is. This release brought <strong>89 new</strong> modules and <strong>removed 27</strong>. In that process, the contributors <strong>added 1304</strong> options and <strong>removed 359</strong>.
+      </p>
+
+      <h3>Nix 2.8</h3>
+
+      <p>
+        This release brings nix 2.8 as the default nix package. This brings users a lot of fixes, general improvements
+        and increased performance. The main feature that was awaited for a long time is the introduction of experimental
+        features, namely the <strong>flakes</strong> experimental feature. Users still have to opt into the feature manually
+        (as well as the <strong>nix-command</strong> feature that was enabled by default in previous nix versions).
+      </p>
+
+      <h3>Graphical installer</h3>
+
+      <p>
+        <a href="/images/screenshots/nixos-installer.png">
+          <img class="inline" src="/images/screenshots/nixos-installer-small.png" alt="Screenshot of the NixOS graphical installer" width="100" />
+        </a>
+
+        Improving experience for new users is something that the NixOS project has been working on for a long time. After all,
+        NixOS is a very different compared to traditional distributions. To make it easier to get started with a new NixOS
+        system, a graphical installer based on <a href="https://calamares.io">Calamares</a> is now provided. This installer
+        starts by default when launching the GNOME or Plasma ISO and allows for one-time configuration of a new system.
+      </p>
+
+      <h3>Special Thanks</h3>
+      <p>
+        Thanks to <a href="https://github.com/Mic92">Jörg Thalheim</a> who helped with the changelog as the release editor. Also to <a href="https://github.com/jonringer">Jon Ringer</a> for guiding the release process since NixOS 20.09. <a href="https://github.com/vcunat">Vladimír Čunát</a> and <a href="https://github.com/mweinelt">Martin Weinelt</a> for their continued efforts managing and stabilizing staging. More thanks go out to <a href="https://github.com/mweinelt">Martin Weinelt</a> for helping me with a lot of questions about the process and some subsystems, your help was greatly appreciated. Also thanks a lot to <a href="https://github.com/grahamc">Graham Christensen</a> for organizing with <a href="https://metal.equinix.com/">Equinix Metal</a> to ensure we had enough compute resources and the entire infrastructure team.
+        <br/>
+        Additional thanks go out to <a href="https://github.com/Mindavi">Rick van Schijndel</a> for going through all the pain of marking packages that do not build anymore as broken. I hope we can make the process more straightforward in future releases.
+      </p>
+
+      <h3>Reflections and Closing</h3>
+      <p>
+        This release brought a lot of features and improvements I've been waiting to see in a release channel. It was a great pleasure working with the community and seeing incredible amounts of work being done by the entire community.
+      </p>
+    </description>
+  </item>
+
+  <item>
     <pubDate>Thu, 21 Apr 2022 18:00:00 UTC</pubDate>
     <title id="nix-2.8.0">
       Nix 2.8.0 released

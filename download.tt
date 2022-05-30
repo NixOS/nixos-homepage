@@ -183,16 +183,10 @@ nix-env (Nix) 2.3.15</pre>
             copying it onto a USB stick</a>. For <strong>installation
             instructions</strong>, please see the <a href="[%nixosManual%]">manual</a>.</p>
 
-        <aside class="notice-box -warning">
-          Please note that NixOS at the moment lacks a nice, user-friendly
-          graphical installer. Therefore this form of installation <strong>may
-            not be suitable for novice Linux users.</strong>
-        </aside>
-
         <h3>Graphical ISO image</h3>
 
-        <p>The graphical installation ISO image <strong>contains NixOS
-            installer</strong> as well as <strong>Desktop Environment</strong>
+        <p>The graphical installation ISO image <strong>contains the graphical NixOS
+            installer</strong> as well as a <strong>Desktop Environment</strong>
           and several applications. It’s a <em>live CD</em>, so it allows you
           to get an impression of NixOS (and the Nix package manager) without
           installing it.</p>
