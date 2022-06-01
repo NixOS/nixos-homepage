@@ -16,7 +16,7 @@
     </li>
     <li>
       <div class="clickable-whole">
-        <a href="[%root%]guides/dev-environment.html">
+        <a href="[%root%]guides/ad-hoc-developer-environments.html">
           [% PROCESS svg path="site-styles/assets/gfx-learn-develop.svg" %]
           <button>First steps with Nix</button>
         </a>
