@@ -149,7 +149,7 @@ nix-env (Nix) 2.3.15</pre>
         <h2>More ...</h2>
         <p>The following release items are also available:</p>
         <ul>
-          <li><a href="[%nixManual%]/release-notes/rl-[%latestNixVersion | remove('\.0$')%].html">Release notes</a></li>
+          <li><a href="[%nixManual%]/release-notes/rl-[%latestNixVersion | remove('\.\d*$')%].html">Release notes</a></li>
           <li>
             <a href="[%nixManual%]">Manual</a>.
             Please read the <a href="[%nixManual%]/quick-start.html">“Quick Start” section of the manual</a>
