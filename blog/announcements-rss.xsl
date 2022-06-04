@@ -19,7 +19,7 @@
       <channel>
         <title>NixOS News</title>
         <link>https://nixos.org/news.html</link>
-        <atom:link href="https://nixos.org/news-rss.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://nixos.org/blog/announcements-rss.xml" rel="self" type="application/rss+xml" />
         <description>News for NixOS, the purely functional Linux distribution.</description>
         <fh:complete xmlns:fh="http://purl.org/syndication/history/1.0"/>
 
