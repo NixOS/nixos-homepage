@@ -8,14 +8,31 @@
   <h1>Security Team</h1>
 </div>
 
-<section class="governance-description">
-  In addition to community-sourced developments, NixOS has a dedicated security
-  team. If the above sources are not enough to answer your question, please
-  reach out to a member of the team listed below.
-</section>
-
-
 <section class="governance-team">
+
+  <h2>Sources of Security Information</h2>
+
+  <p>
+    Security is a priority for the NixOS community. A variety of channels are used
+    to coordinate development in this vein. Three of the main modes of communication
+    about NixOS security are:
+  </p>
+
+  <ul>
+    <li>The issues tagged "Security" on <a
+        href="https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%221.severity%3A+security%22">GitHub/NixOS</a>
+    </li>
+    <li>The <a href="https://matrix.to/#/#security:nixos.org">#security:nixos.org</a> room on Matrix
+    </li>
+    <li>The NixOS security <a href="https://discourse.nixos.org/c/dev/security">discourse</a>
+    </li>
+  </ul>
+
+  <p>
+    In addition to community-sourced developments, NixOS has a dedicated security
+    team. If the above sources are not enough to answer your question, please
+    reach out to the team.
+  </p>
 
   <aside>
     <h2>Members</h2>
@@ -56,6 +73,7 @@
       </li>
     </ul>
   </aside>
+
   <h3>Security Disclosures</h3>
 
   <p>
@@ -63,25 +81,6 @@
     please email a member of the NixOS Security Team and we will ensure the issue
     is handled.
   </p>
-
-  <h2>Sources of Security Information</h2>
-
-  <p>
-    Security is a priority for the NixOS community. A variety of channels are used
-    to coordinate development in this vein. Three of the main modes of communication
-    about NixOS security are:
-  </p>
-
-  <ul>
-    <li>The issues tagged "Security" on <a
-        href="https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%221.severity%3A+security%22">GitHub/NixOS</a>
-    </li>
-    <li>The <a href="https://matrix.to/#/#security:nixos.org">#security:nixos.org</a> room on Matrix
-    </li>
-    <li>The NixOS security <a href="https://discourse.nixos.org/c/dev/security">discourse</a>
-    </li>
-  </ul>
-
 
 </section>
 [% END %]
