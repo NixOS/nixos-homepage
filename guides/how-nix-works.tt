@@ -192,46 +192,6 @@
           Packages collection</em> (Nixpkgs)</a>.
     </p>
 
-
-    <h2 id="managing-build-environments">Managing build environments</h2>
-
-    <p>
-      Nix is extremely useful for developers as it makes it easy to automatically
-      set up the build environment for a package. Given a Nix expression that
-      describes the dependencies of your package, the command
-      <strong>nix-shell</strong> will build or download those dependencies if
-      they’re not already in your Nix store, and then start a Bash shell in which
-      all necessary environment variables (such as compiler search paths) are
-      set.
-    </p>
-
-    <p>
-      For example, the following command gets all dependencies of the Pan
-      newsreader, as described by
-      <a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/newsreaders/pan/default.nix">
-        its Nix expression</a>:
-    </p>
-
-    <pre class="terminal-console"><span class="shell-prompt">$ </span>nix-shell '&lt;nixpkgs&gt;' -A pan</pre>
-
-    <p>
-      You’re then dropped into a shell where you can edit, build and test the
-      package:
-    </p>
-
-    <pre class="terminal-console"><span class="shell-prompt">[nix-shell]$ </span>tar xf $src
-<span class="shell-prompt">[nix-shell]$ </span>cd pan-*
-<span class="shell-prompt">[nix-shell]$ </span>./configure
-<span class="shell-prompt">[nix-shell]$ </span>make
-<span class="shell-prompt">[nix-shell]$ </span>./pan/gui/pan</pre>
-
-    <p>
-      Since Nix packages are reproducible and have complete dependency
-      specifications, Nix makes an excellent basis for <a href="https://github.com/NixOS/hydra">a continuous build
-        system</a>.
-    </p>
-
-
     <h2 id="portable">Portability</h2>
 
     <p>Nix runs on Linux and macOS.</p>
