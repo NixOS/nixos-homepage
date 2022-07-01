@@ -9,8 +9,10 @@ $ cat -n docker.nix
     3  pkgs.dockerTools.buildLayeredImage { # helper to build Docker image
     4    name = "nix-hello";                # give docker image a name
     5    tag = "latest";                    # provide a tag
-    6    contents = [ pkgs.hello ];         # packages in docker image
-    7  }
+    6    config.Entrypoint = [              # only one command => Entrypoint
+    7      "${pkgs.hello}/bin/hello"        # hello package added automatically
+    8    ];
+    9  }
 $ # Pause the video to read and understand the docker.nix
 $ # Now we build a Docker image with nix-build
 $ nix-build docker.nix -o result
@@ -27,7 +29,7 @@ $ # You can see that the Docker layers were automatically calculated.
 $ docker images | grep nix-hello
 nix-hello     latest     83667617cdb9    50 years ago    32.9MB
 $ # And for the final thing let's test that it really works
-$ docker run -ti nix-hello:latest hello
+$ docker run -ti nix-hello:latest
 Hello World!
 $ # There is a lot we didn't cover in this little demo, but we hope
 $ # it shows that declarative docker images are possible.
