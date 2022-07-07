@@ -1,0 +1,124 @@
+[% WRAPPER layout.tt title="Governance &gt; Documentation team" handlesLayout=1 %]
+
+<div class="page-title">
+  <div>
+    <a href="[% root%]community/index.html#governance-teams">Community</a>
+    <span>→</span>
+  </div>
+  <h1>Documentation team</h1>
+</div>
+
+<section class="governance-description">
+  The Nix documentation team was formed to flatten the infamous learning curve.
+</section>
+
+<section class="governance-team">
+
+  <aside>
+    <h2>Members</h2>
+
+    <ul>
+      <li>
+        Valentin Gagarin (<a href="https://discourse.nixos.org/u/fricklerhandwerk">@fricklerhandwerk</a>) (lead until 2022-10-31)<br>
+        Nix documentarian, <a href="https://tweag.io">Tweag</a>
+      </li>
+      <li>
+        Jörg Thalheim (<a href="https://discourse.nixos.org/u/Mic92">@Mic92</a>)<br>
+        <a href="https://nixos.wiki">NixOS Wiki</a> maintainer
+      </li>
+      <li>
+        Domen Kožar (<a href="https://discourse.nixos.org/u/domenkozar">@domenkozar</a>)<br>
+        <a href="https://nix.dev">nix.dev</a> author, <a href="https://cachix.org">Cachix</a>
+      </li>
+      <li>
+        Silvan Mosberger (<a href="https://discourse.nixos.org/u/infinisil">@infinisil</a>)<br>
+        <a href="https://nixpkgs.org">nixpkgs</a> maintainer, <a href="https://tweag.io">Tweag</a>
+      </li>
+    </ul>
+
+    <h2>Contact</h2>
+    <ul>
+      <li><a href="https://discourse.nixos.org/c/dev/marketing-team/28">Discourse</a></li>
+      <li><a href="https://matrix.to/#/#marketing:nixos.org">Matrix</a></li>
+      <li><a href="mailto:webmaster@nixos.org">Email</a></li>
+    </ul>
+  </aside>
+
+  <h2>Goals and responsibilities</h2>
+
+  <ul>
+    <li>
+      ease Nix learning, increase onboarding success and user retention
+    </li>
+    <li>
+      improve organization of Nix knowledge
+    </li>
+    <li>
+      lead, guide, and support community efforts
+    </li>
+  </ul>
+
+  <h2>Motivation</h2>
+
+  <p>
+    To improve the state of affairs with Nix onboarding and documentation, we have to tackle some big issues and work through many small ones:
+    implement structural changes after gathering the necessary social support;
+    fix numerous little problems and help people get their contributions merged.
+  </p>
+
+  <p>
+    It requires significant time or resources to do this effectively and consistently.
+    The team is built around that limitation, and therefore organized as a praxicracy:
+    you are in charge if and only if you get the work done.
+  </p>
+
+  <p>
+    The team’s reason to exist is to make that principle discoverable and reproducible by laying groundwork and setting examples.
+  </p>
+
+  <h2>Meeting protocol</h2>
+
+  <p>
+    The team holds bi-weekly meetings on Thursdays 17:30-18:30 (Europe/Berlin).
+    Meetings are announced on the <a href="https://discourse.nixos.org/t/community-calendar/18589">Discourse community calendar</a>.
+  </p>
+
+  <p>
+    Meeting agendas are set on <a href="https://github.com/orgs/NixOS/projects/15">the team's GitHub project board</a> from issues and pull requests.
+    Pull requests have priority, and authors are invited to the meetings.
+    Estimated discussion time is annotated for each agenda item and should be followed.
+  </p>
+
+  <p>
+    Notes are prepared in a <a href="https://hackmd.io/">HackMD</a> scratchpad, and added to the respective issue or pull request as a comment.
+  </p>
+
+  <p>
+    All notes are posted on the <a href="https://discourse.nixos.org/c/governance/documentation-team/43">Discourse documentation team category</a>.
+  </p>
+
+  <p>
+    Meeting notes should contain:
+    <ul>
+      <li>date of meeting</li>
+      <li>list of attendees</li>
+      <li>results and links to GitHub comments from agenda item</li>
+    </ul>
+  </p>
+
+  <h2>Team lead</h2>
+
+  <p>
+    The team lead's responsibilities are to
+    <ul>
+      <li>set the agenda</li>
+      <li>moderate and keep schedule</li>
+      <li>take and publish notes</li>
+      <li>announce meetings on the calendar</li>
+      <li>invite participants</li>
+    </ul>
+  </p>
+
+</section>
+
+[% END %]
