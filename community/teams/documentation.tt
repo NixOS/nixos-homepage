@@ -223,6 +223,19 @@
       <ul>
         <li>working on <a href="https://github.com/nix-dot-dev/nix.dev/issues">open issues</a></li>
         <li>reviewing <a href="https://github.com/nix-dot-dev/nix.dev/pulls">pull requests</a> by testing new material or features</li>
+        <li>adding guides following the <a href="https://github.com/nix-dot-dev/nix.dev/pull/265">proposed outline</a>
+          <ul>
+            <li>follow <a href="https://github.com/nix-dot-dev/nix.dev/pull/261">proposed contribution guide</a></li>
+          </ul>
+        </li>
+      </ul>
+      <p>New guides or articles providing overview can be based on videos such as</p>
+      <ul>
+        <li>some of the ~100 <a href="https://www.youtube.com/c/NixCon">NixCon</a> recordings</li>
+        <li><a href="https://www.youtube.com/channel/UC-cY3DcYladGdFQWIKL90SQ">Nix video guides</a> by @jonringer.</li>
+        <li><a href="https://www.youtube.com/playlist?list=PLt4-_lkyRrOMWyp5G-m_d1wtTcbBaOxZk">Summer of Nix 2022 talks</a></li>
+      </ul>
+      <p>Since writing a guide is a lot of work, please make sure to coordinate with nix.dev maintainers, for example by first opening an issue to make sure it will be worthwhile.</p>
       </ul>
     </li>
     <li>
