@@ -112,6 +112,39 @@
   status = 302
   force = true
 
+# IMPORTANT: add `stable` variants to the following Nix manual redirects
+# once https://github.com/NixOS/nix/pull/6863 is on a release branch!
+
+[[redirects]]
+  from = "/manual/nix/unstable/expressions/expression-language.html"
+  to = "/manual/nix/unstable/language/index.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix/unstable/expressions/language-values.html"
+  to = "/manual/nix/unstable/language/values.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix/unstable/expressions/language-constructs.html"
+  to = "/manual/nix/unstable/language/constructs.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix/unstable/expressions/language-operators.html"
+  to = "/manual/nix/unstable/language/operators.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix/unstable/expressions/*"
+  to = "/manual/nix/unstable/language/:splat"
+  status = 302
+  force = true
+
 [[redirects]]
   from = "/manual/nixpkgs"
   to = "/manual/nixpkgs/stable"
