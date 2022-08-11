@@ -209,21 +209,21 @@
 
 <section class="learn-otherresources">
   <div>
-    <h1>Other learning resources</h1>
+    <h1>Learning resources</h1>
     <ul>
+      <li class="clickable-whole">
+        <h3>nix.dev</h3>
+        <p>
+          Guides to getting things done in the Nix ecosystem.
+        </p>
+        <a href="https://nix.dev">Read more</a>
+      </li>
       <li class="clickable-whole">
         <h3>Unofficial Wiki</h3>
         <p>
           A user-maintained wiki for Nix and NixOS.
         </p>
         <a href="https://nixos.wiki">Read more</a>
-      </li>
-      <li class="clickable-whole">
-        <h3>nix.dev</h3>
-        <p>
-          An unofficial and opinionated guide for developers getting things done using the Nix ecosystem.
-        </p>
-        <a href="https://nix.dev">Read more</a>
       </li>
       <li class="clickable-whole">
         <h3>Nix Pills</h3>
