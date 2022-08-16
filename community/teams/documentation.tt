@@ -1,0 +1,249 @@
+[% WRAPPER layout.tt title="Governance &gt; Documentation team" handlesLayout=1 %]
+
+<div class="page-title">
+  <div>
+    <a href="[% root%]community/index.html#governance-teams">Community</a>
+    <span>→</span>
+  </div>
+  <h1>Documentation team</h1>
+</div>
+
+<section class="governance-description">
+  The Nix documentation team was formed to flatten the infamous learning curve.
+</section>
+
+<section class="governance-team">
+
+  <aside>
+    <h2>Members</h2>
+
+    <ul>
+      <li>
+        Valentin Gagarin (<a href="https://discourse.nixos.org/u/fricklerhandwerk">@fricklerhandwerk</a>) (lead until 2022-10-31)<br>
+        Nix documentarian, <a href="https://tweag.io">Tweag</a>
+      </li>
+      <li>
+        Jörg Thalheim (<a href="https://discourse.nixos.org/u/Mic92">@Mic92</a>)<br>
+        <a href="https://nixos.wiki">NixOS Wiki</a> maintainer
+      </li>
+      <li>
+        Domen Kožar (<a href="https://discourse.nixos.org/u/domenkozar">@domenkozar</a>)<br>
+        <a href="https://nix.dev">nix.dev</a> author, <a href="https://cachix.org">Cachix</a>
+      </li>
+      <li>
+        Silvan Mosberger (<a href="https://discourse.nixos.org/u/infinisil">@infinisil</a>)<br>
+        <a href="https://nixpkgs.org">nixpkgs</a> maintainer, <a href="https://tweag.io">Tweag</a>
+      </li>
+    </ul>
+
+    <h2>Contact</h2>
+    <ul>
+      <li><a href="https://discourse.nixos.org/c/dev/marketing-team/28">Discourse</a></li>
+      <li><a href="https://matrix.to/#/#marketing:nixos.org">Matrix</a></li>
+    </ul>
+  </aside>
+
+  <h2>Goals and responsibilities</h2>
+
+  <ul>
+    <li>
+      ease Nix learning, increase onboarding success and user retention
+    </li>
+    <li>
+      improve organization of Nix knowledge
+    </li>
+    <li>
+      lead, guide, and support community efforts
+    </li>
+  </ul>
+
+  <h2>Motivation</h2>
+
+  <p>
+    To improve the state of affairs with Nix onboarding and documentation, we have to tackle some big issues and work through many small ones:
+    implement structural changes after gathering the necessary social support;
+    fix numerous little problems and help people get their contributions merged.
+  </p>
+
+  <p>
+    It requires significant time or resources to do this effectively and consistently.
+    The team is built around that limitation, and therefore organized as a praxicracy:
+    you are in charge if and only if you get the work done.
+  </p>
+
+  <p>
+    The team’s reason to exist is to make that principle discoverable and reproducible by laying groundwork and setting examples.
+  </p>
+
+  <h2>Meeting protocol</h2>
+
+  <p>
+    The team holds bi-weekly meetings on Thursdays 17:30-18:30 (Europe/Berlin).
+    Meetings are announced on the <a href="https://discourse.nixos.org/t/community-calendar/18589">Discourse community calendar</a>.
+  </p>
+
+  <p>
+    Meeting agendas are set on <a href="https://github.com/orgs/NixOS/projects/15">the team's GitHub project board</a> from issues and pull requests.
+    Pull requests have priority, and authors are invited to the meetings.
+    Estimated discussion time is annotated for each agenda item and should be followed.
+  </p>
+
+  <p>
+    Notes are prepared in a <a href="https://hackmd.io/">HackMD</a> scratchpad, and added to the respective issue or pull request as a comment.
+  </p>
+
+  <p>
+    All notes are posted on the <a href="https://discourse.nixos.org/c/governance/documentation-team/43">Discourse documentation team category</a>.
+  </p>
+
+  <p>
+    Meeting notes should contain:
+    <ul>
+      <li>date of meeting</li>
+      <li>list of attendees</li>
+      <li>results and links to GitHub comments from agenda item</li>
+    </ul>
+  </p>
+
+  <h2>Team lead</h2>
+
+  <p>
+    The team lead's responsibilities are to
+    <ul>
+      <li>set the agenda</li>
+      <li>moderate and keep schedule</li>
+      <li>take and publish notes</li>
+      <li>announce meetings on the calendar</li>
+      <li>invite participants</li>
+    </ul>
+  </p>
+
+  <h2>How to contribute</h2>
+
+  <p>Different audiences require different levels of sophistication, and both readers' and contributors' available time and expertise varies widely.</p>
+  <p>The following diagram shows a pipeline for contributions to learning material and documentation. Use it to decide where to best put the results of your efforts, depending on how much time you can spend on refining them to get accepted.</p>
+  <p>Communication platforms are distinguished by mode of interaction:</p>
+  <ul>
+    <li>append to streams
+      <ul>
+        <li>amount of infomation grows without bounds</li>
+        <li>only recent items are relevant</li>
+      </ul>
+    </li>
+    <li>change artifacts
+      <ul>
+        <li>amount of information is strictly bounded</li>
+        <li>all items should be up to date</li>
+      </ul>
+    </li>
+  </ul>
+  <p>Arrows point towards</p>
+  <ul>
+    <li>decreasing rate of change</li>
+    <li>increasing public visibility</li>
+    <li>increasing amount of scrutiny.</li>
+  </ul>
+  <p>Arrows indicate possibilities to promote existing material to more prominent and more easily discoverable locations.</p>
+
+  <img src="communication-architecture.svg">
+
+  <ul>
+    <li>
+      <p>Matrix</p>
+      <p>Use Matrix for casual communication.</p>
+      <p>The documentation team frequents the <a href="https://app.element.io/#/room/#docs:nixos.org">Nix* Documentation</a> room.</p>
+      <p>Old messages are extremely improbable to be read by anyone. Feel free to post what you have found valuable on <a href="https://discourse.nixos.org/">Discourse</a>.</p>
+    </li>
+    <li>
+      <p>meetings and events</p>
+      <p>Check the <a href="https://discourse.nixos.org/t/community-calendar/18589">Discourse community calendar</a> for real-time events.</p>
+      <p>The documentation team holds regular meetings and posts meeting notes in the <a href="https://discourse.nixos.org/c/dev/documentation/25">Documentation</a> category.</p>
+    </li>
+    <li>
+      <p>external sources</p>
+      <p>The Internet is full of helpful resources concerning Nix. Feel free to share what you have found valuable on Discourse in the <a href="https://discourse.nixos.org/c/links/12">Links</a> category.</p>
+    </li>
+    <li>
+      <p>Discourse</p>
+      <p><a href="https://discourse.nixos.org/">Discourse</a> is the central community hub. This is the place for your questions, suggestions, and discussion.</p>
+      <p>The documentation team monitors the <a href="https://discourse.nixos.org/c/dev/documentation/25">Documentation</a> category.</p>
+      <p>Old threads and especially posts in long threads are improbable to be read by many people.</p>
+      <p>You can help by</p>
+      <ul>
+        <li>asking informed questions, showing what you have done so far</li>
+        <li>writing down what you have learned by updateing or adding a <a href="https://nixos.wiki/">NixOS Wiki</a> article.</li>
+      </ul>
+    </li>
+    <li>
+      <p>Wiki</p>
+      <p><a href="https://nixos.wiki/">NixOS Wiki</a> is a collection of interlinked guides to solve well-known problems. It is collectively edited by the community.</p>
+      <p>The Wiki is a dumping ground for Nix knowledge. Its purpose is to quickly and conveniently collect insights and make them readily available when needed. It covers a broad range of topics, is only loosely organized, and does not impose quality standards.</p>
+      <p>The documentation team monitors changes to maintain an overview of topics of interest and prevent vandalism.</p>
+      <p>You can help with</p>
+      <ul>
+        <li>improving discoverability by adding categorization and relevant links</li>
+        <li>clarifying articles and correcting errors</li>
+        <li>removing redundant information that is already present in curated sources</li>
+        <li>migrating information to other resources.</li>
+      </ul>
+      <p>Guidelines for migration:</p>
+      <ul>
+        <li>Nix interaction: <a href="https://nixos.org/manual/nix/stable/">Nix manual</a></li>
+        <li>Language-specific build instructions: <a href="https://nixos.org/manual/nixpkgs/stable/">Nixpkgs manual</a></li>
+        <li>Package, service, or hardware configuration: <a href="https://nixos.org/manual/nixos/stable/">NixOS manual</a></li>
+        <li>Ecosystem overview and best practices: <a href="https://nix.dev">nix.dev</a></li>
+      </ul>
+    </li>
+    <li>
+      <p>manuals</p>
+      <p>The manuals for</p>
+      <ul>
+        <li><a href="https://nixos.org/manual/nix/stable/">Nix</a> (<a href="https://github.com/NixOS/nix/tree/master/doc/manual">source</a>)</li>
+        <li><a href="https://nixos.org/manual/nixpkgs/stable/">Nixpkgs</a> (<a href="https://github.com/NixOS/nixpkgs/tree/master/doc">source</a>)</li>
+        <li><a href="https://nixos.org/manual/nixos/stable/">NixOS</a> (<a href="https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual">source</a>)</li>
+      </ul>
+      <p>are primarily reference documentation, specifying interfaces and behavior. They also show example interactions to show how to use its components, and explain mechanisms where necessary.</p>
+      <p>The documentation team watches all pull requests to the manuals and assists contributors to get their changes merged.</p>
+      <p>You can help by</p>
+      <ul>
+        <li>working on <a href="https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%229.needs%3A+documentation%22"><code>nixpkgs</code> and NixOS issues</a> or <a href="https://github.com/NixOS/nix/labels/documentation">Nix issues</a> concerning documentation</li>
+        <li>reviewing <a href="https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+label%3A%228.has%3A+documentation%22"><code>nixpkgs</code> and NixOS pull requests</a> concerning documentation</li>
+        <li>making pull requests to correct contents or clarify language</li>
+        <li>expanding on sections that appear incomplete</li>
+        <li>documenting how the manuals are built and organized</li>
+        <li>identifying sections that are not specific enough and should be moved to nix.dev or NixOS Wiki</li>
+      </ul>
+    </li>
+    <li>
+      <p>nix.dev</p>
+      <p>The purpose of <a href="https://nix.dev">nix.dev</a> (<a href="https://github.com/nix-dot-dev/nix.dev">source</a>) is to guide newcomers by teaching essential Nix knowledge, show best practices, and help orient users in the Nix ecosystem. It goes into breadth, not depth.</p>
+      <p>The documentation team maintains nix.dev as editors.</p>
+      <p>You can help by</p>
+      <ul>
+        <li>working on <a href="https://github.com/nix-dot-dev/nix.dev/issues">open issues</a></li>
+        <li>reviewing <a href="https://github.com/nix-dot-dev/nix.dev/pulls">pull requests</a> by testing new material or features</li>
+        <li>adding guides following the <a href="https://github.com/nix-dot-dev/nix.dev/pull/265">proposed outline</a>
+          <ul>
+            <li>follow <a href="https://github.com/nix-dot-dev/nix.dev/pull/261">proposed contribution guide</a></li>
+          </ul>
+        </li>
+      </ul>
+      <p>New guides or articles providing overview can be based on videos such as</p>
+      <ul>
+        <li>some of the ~100 <a href="https://www.youtube.com/c/NixCon">NixCon</a> recordings</li>
+        <li><a href="https://www.youtube.com/channel/UC-cY3DcYladGdFQWIKL90SQ">Nix video guides</a> by @jonringer.</li>
+        <li><a href="https://www.youtube.com/playlist?list=PLt4-_lkyRrOMWyp5G-m_d1wtTcbBaOxZk">Summer of Nix 2022 talks</a></li>
+      </ul>
+      <p>Since writing a guide is a lot of work, please make sure to coordinate with nix.dev maintainers, for example by first opening an issue to make sure it will be worthwhile.</p>
+      </ul>
+    </li>
+    <li>
+      <p>nixos.org</p>
+      <p>The Nix project web site is <a href="https://nixos.org">nixos.org</a>. Web site contents that concern learning Nix should reference or include material from nix.dev.</p>
+      <p>The <a href="https://nixos.org/community/teams/marketing.html">Nix markting team</a> is responsible for the web site, and the documentation team assists with maintaining contents related to onboarding new users.</p>
+    </li>
+  </ul>
+
+</section>
+
+[% END %]
