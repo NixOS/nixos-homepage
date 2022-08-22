@@ -19,6 +19,7 @@ HTML = \
   community/teams/nixos-release.html \
   community/teams/rfc-steering-committee.html \
   community/teams/security.html \
+  community/teams/documentation.html \
   demos/index.html \
   donate.html \
   download.html \
