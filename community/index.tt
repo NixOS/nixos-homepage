@@ -66,7 +66,7 @@
 </section>
 
 <section class="community-banner clickable-whole">
-  <p>If you are looking for profesional help
+  <p>If you are looking for professional help
      <a href="[% root %]community/commercial-support.html">check out companies</a>
      that offer Nix related services.</p>
 </section>
@@ -267,6 +267,9 @@
       <h3>Moderation Team</h3>
       <p>Moderates partitcipation on official community platforms</p>
       <a class="button -primary" href="[%root%]community/teams/moderation.html">Members &amp; Contacts</a>
+      <h3>Documentation Team</h3>
+      <p>Works on improving learning experience and documentation</p>
+      <a class="button -primary" href="[%root%]community/teams/documentation.html">Members &amp; Contacts</a>
     </div>
   </div>
 </section>

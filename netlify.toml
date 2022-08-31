@@ -113,6 +113,36 @@
   force = true
 
 [[redirects]]
+  from = "/manual/nix/:version/expressions/expression-language.html"
+  to = "/manual/nix/:version/language/index.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix/:version/expressions/language-values.html"
+  to = "/manual/nix/:version/language/values.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix/:version/expressions/language-constructs.html"
+  to = "/manual/nix/:version/language/constructs.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix/:version/expressions/language-operators.html"
+  to = "/manual/nix/:version/language/operators.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix/:version/expressions/*"
+  to = "/manual/nix/:version/language/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/manual/nixpkgs"
   to = "/manual/nixpkgs/stable"
   status = 302

@@ -135,7 +135,7 @@
           <li>
             Integrate Nix with programming languages:
             <ul class="comma-separated">
-              <li><a href="[%root%]manual/nixpkgs/stable/#node.js">Javascript (Node)</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#language-javascript">Javascript (Node)</a></li>
               <li><a href="[%root%]manual/nixpkgs/stable/#python">Python</a></li>
               <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-ruby">Ruby</a></li>
               <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-java">Java</a></li>
@@ -145,7 +145,7 @@
               <li><a href="[%root%]manual/nixpkgs/stable/#haskell">Haskell</a></li>
               <li><a href="[%root%]manual/nixpkgs/stable/#sec-elm">Elm</a></li>
               <li><a href="[%root%]manual/nixpkgs/stable/#sec-beam">BEAM Languages (Erlang, Elixir, LFE)</a></li>
-              <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-lua">Lua</a></li>
+              <li><a href="[%root%]manual/nixpkgs/stable/#users-guide-to-lua-infrastructure">Lua</a></li>
               <li><a href="[%root%]manual/nixpkgs/stable/#idris">Idris</a></li>
               <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-coq">Coq</a></li>
               <li><a href="[%root%]manual/nixpkgs/stable/#sec-language-perl">Perl</a></li>
