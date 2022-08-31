@@ -205,6 +205,10 @@ nix-env (Nix) 2.3.15</pre>
           </li>
         </ul>
 
+        <p>Note that while the image itself only comes in GNOME and Plasma
+        variations, the included installer also allows installing various other
+        desktops, or installing without a desktop.</p>
+
         <h3>Minimal ISO image</h3>
 
         <p>The minimal installation ISO image <strong>does not contain the
