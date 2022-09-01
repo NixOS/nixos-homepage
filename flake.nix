@@ -140,6 +140,7 @@ rec {
 
               "NIXOS_AMIS=${nixosAmis}"
               "NIX_PILLS_MANUAL_IN=${nixPills.html-split}/share/doc/nix-pills"
+              "NIX_PILLS_MANUAL_EPUB=${nixPills.epub}/share/doc/nix-pills/nix-pills.epub"
               "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}"
 
               "-j 1"
@@ -167,6 +168,7 @@ rec {
 
             export NIXOS_AMIS="${nixosAmis}"
             export NIX_PILLS_MANUAL_IN="${nixPills.html-split}/share/doc/nix-pills"
+            export NIX_PILLS_MANUAL_EPUB="${nixPills.epub}/share/doc/nix-pills/nix-pills.epub"
             export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}"
 
             rm -f site-styles/common-styles
