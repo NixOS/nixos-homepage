@@ -68,6 +68,17 @@ all: $(NIX_PILLS_MANUAL_OUT)
 $(NIX_PILLS_MANUAL_OUT): $(NIX_PILLS_MANUAL_IN) scripts/bootstrapify-docbook.sh scripts/bootstrapify-docbook.xsl layout.tt common.tt
 	bash ./scripts/bootstrapify-docbook.sh $(NIX_PILLS_MANUAL_IN) $(NIX_PILLS_MANUAL_OUT) 'Nix Pills' nixos https://github.com/NixOS/nix-pills
 
+### Copy Nix pills EPUB
+
+NIX_PILLS_MANUAL_EPUB ?= /no-such-path
+NIX_PILLS_MANUAL_EPUB_OUT = $(NIX_PILLS_MANUAL_OUT)/nix-pills.epub
+
+all: $(NIX_PILLS_MANUAL_EPUB_OUT)
+
+$(NIX_PILLS_MANUAL_EPUB_OUT): $(NIX_PILLS_MANUAL_EPUB)
+	mkdir -p "$(NIX_PILLS_MANUAL_OUT)"
+	cp --no-preserve=mode,ownership -L "$(NIX_PILLS_MANUAL_EPUB)" $@
+
 ### Prettify the Nix manual.
 
 NIX_MANUAL_STABLE_IN ?= /no-such-path
