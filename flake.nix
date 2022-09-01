@@ -139,7 +139,7 @@ rec {
               "NIXOS_UNSTABLE_SERIES=${pkgs-unstable.lib.trivial.release}"
 
               "NIXOS_AMIS=${nixosAmis}"
-              "NIX_PILLS_MANUAL_IN=${nixPills}/share/doc/nix-pills"
+              "NIX_PILLS_MANUAL_IN=${nixPills.html-split}/share/doc/nix-pills"
               "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.x86_64-linux}"
 
               "-j 1"
@@ -166,7 +166,7 @@ rec {
             export NIXOS_UNSTABLE_SERIES="${pkgs-unstable.lib.trivial.release}"
 
             export NIXOS_AMIS="${nixosAmis}"
-            export NIX_PILLS_MANUAL_IN="${nixPills}/share/doc/nix-pills"
+            export NIX_PILLS_MANUAL_IN="${nixPills.html-split}/share/doc/nix-pills"
             export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.x86_64-linux}"
 
             rm -f site-styles/common-styles
