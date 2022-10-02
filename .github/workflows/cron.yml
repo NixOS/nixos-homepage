@@ -16,21 +16,11 @@ jobs:
       uses: cachix/install-nix-action@v17
       with:
         nix_path: nixpkgs=channel:nixos-unstable
+        extra_nix_config: |
+          experimental-features = nix-command flakes
 
-    - name: Install unstable channel
-      run: |
-        nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-        nix-channel --update
-
-    - name: Installing NixFlakes
-      run: |
-        nix-env -iA nixpkgs.nixFlakes
-        echo 'experimental-features = nix-command flakes' | sudo tee -a /etc/nix/nix.conf
-        nix --version
-        cat /etc/nix/nix.conf
-        echo "$HOME/.nix-profile/bin" >> $GITHUB_PATH
-
-    - uses: cachix/cachix-action@v10
+    - name: Setup Cachix
+      uses: cachix/cachix-action@v10
       with:
         name: nixos-homepage
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
