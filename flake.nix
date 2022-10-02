@@ -100,7 +100,7 @@ rec {
               libxml2
               libxslt
               linkchecker
-              nixFlakes
+              nixVersions.stable
               nixos-common-styles.packages."${system}".embedSVG
               nodePackages.less
               perl
