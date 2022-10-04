@@ -1,7 +1,7 @@
 [% WRAPPER atHead %]
   <link rel="stylesheet" href="[% root %]styles/community.css" type="text/css" />
 [% END %]
-[% WRAPPER layout.tt title="Community" handlesLayout=1 %]
+[% WRAPPER layout.tt title="Nix Community" handlesLayout=1 %]
 
 <div class="page-title">
   <h1>Community</h1>

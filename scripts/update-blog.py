@@ -76,7 +76,7 @@ FEEDS = {
 
 
 FILE_TEMPLATE = '''
-[% WRAPPER blog/layout.tt title="{title}" %]
+[% WRAPPER blog/layout.tt title="Nix {title}" %]
 {content}
 [% END %]'''
 
