@@ -41,7 +41,7 @@ for page in "${pages[@]}"; do
     | sed 's|<a class="reference internal" href="../glossary.html#term-reproducible"><span class="xref std std-term">reproducible</span></a>|reproducible|g' \
     | sed 's|../reference/pinning-nixpkgs.html#ref-pinning-nixpkgs|towards-reproducibility-pinning-nixpkgs.html|g' \
       > "$temp"
-  
+
   echo "[% WRAPPER atHead %] <link rel=\"canonical\" href=\"https://nix.dev/$page\" /> [% END %]" > $target
 
   echo "[% WRAPPER layout.tt title=\"Guides - $title\" handlesLayout=1 %]" >> $target
@@ -59,6 +59,7 @@ for page in "${pages[@]}"; do
     -e 's|<span id=.*></span>||g' \
       $temp >> $target
   echo "</section>" >> $target
+  echo "<p><a href=\"https://nix.dev/$page\">View original article on nix.dev.</a></p>" >> $target
 
   printf '\n\n[%% END %%]\n' >> $target
 
