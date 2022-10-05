@@ -265,10 +265,10 @@
       <a class="button -primary" href="[%root%]community/teams/marketing.html">Read more</a>
       [% PROCESS svg path="site-styles/assets/gfx-discourse.white.svg" %]
       <h3>Moderation Team</h3>
-      <p>Moderates partitcipation on official community platforms</p>
+      <p>Moderates partitcipation on official community platforms.</p>
       <a class="button -primary" href="[%root%]community/teams/moderation.html">Read more</a>
       <h3>Documentation Team</h3>
-      <p>Works on improving learning experience and documentation</p>
+      <p>Works on improving learning experience and documentation.</p>
       <a class="button -primary" href="[%root%]community/teams/documentation.html">Read more</a>
     </div>
   </div>
