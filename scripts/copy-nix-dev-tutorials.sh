@@ -58,8 +58,8 @@ for page in "${pages[@]}"; do
     -e 's|<h1>.*</h1>||g' \
     -e 's|<span id=.*></span>||g' \
       $temp >> $target
+  echo "<p><a href=\"https://nix.dev/$page\">View original article on nix.dev</a></p>" >> $target
   echo "</section>" >> $target
-  echo "<p><a href=\"https://nix.dev/$page\">View original article on nix.dev.</a></p>" >> $target
 
   printf '\n\n[%% END %%]\n' >> $target
 
