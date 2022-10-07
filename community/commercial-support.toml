@@ -59,12 +59,12 @@ We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
 """
 
 [[commercial-provider]]
-name = "NumTide Ltd"
+name = "Numtide Ltd"
 url = "https://www.numtide.com/"
-locations = ["London, UK"]
+locations = ["London, UK", "Remote"]
 logo = "/community/commercial-support-logos/numtide.png"
 description = """
-DevOps consulting by Developers.
+Numtide is a Nix and DevOps consulting company. We help our customers with declarative development, cloud and bare-metal infrastructures.
 """
 
 [[commercial-provider]]
