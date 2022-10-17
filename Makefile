@@ -20,6 +20,7 @@ HTML = \
   community/teams/rfc-steering-committee.html \
   community/teams/security.html \
   community/teams/documentation.html \
+  community/teams/nixpkgs-architecture.html \
   demos/index.html \
   donate.html \
   download.html \
