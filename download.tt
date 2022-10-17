@@ -112,7 +112,7 @@
 <span cls="shell-prompt">$ </span>docker run -it -v $(pwd)/workdir:/workdir nixos/nix</pre>
         <p>The <code>workdir</code> example from above can be also used to start hacking on nixpkgs:</p>
         <pre class="terminal-console">
-<span cls="shell-prompt">$ </span>git clone git@github.com:NixOS/nixpkgs
+<span cls="shell-prompt">$ </span>git clone --depth=1 https://github.com/NixOS/nixpkgs.git
 <span cls="shell-prompt">$ </span>docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix
 <span cls="shell-prompt">docker&gt; </span>nix-build -I nixpkgs=/nixpkgs -A hello
 <span cls="shell-prompt">docker&gt; </span>find ./result # this symlink points to the build package</pre>
