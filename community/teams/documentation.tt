@@ -32,7 +32,7 @@
       </li>
       <li>
         Silvan Mosberger (<a href="https://discourse.nixos.org/u/infinisil">@infinisil</a>)<br/>
-        <a href="https://nixpkgs.org">nixpkgs</a> maintainer, <a href="https://tweag.io">Tweag</a>
+        <a href="https://nixpkgs.org">Nixpkgs</a> maintainer, <a href="https://tweag.io">Tweag</a>
       </li>
     </ul>
 
@@ -84,8 +84,8 @@
   <ul>
     <li>establish and maintain guidelines for contributing to documentation</li>
     <li>extend and curate <a href="https://nix.dev">nix.dev</a> as the central learning resource - long-term vision: The Nix Book</li>
-    <li>review and merge <a href="https://github.com/NixOS/nix/pulls">Nix pull requests</a> and <a href="https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+label%3A%228.has%3A+documentation%22"><code>nixpkgs</code> and NixOS pull requests</a> concerning documentation</li>
-    <li>keep track of <a href="https://github.com/NixOS/nix/labels/documentation">Nix issues</a> and <a href="https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%229.needs%3A+documentation%22"><code>nixpkgs</code> and NixOS issues</a> concerning documentation</li>
+    <li>review and merge <a href="https://github.com/NixOS/nix/pulls">Nix pull requests</a> and <a href="https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+label%3A%228.has%3A+documentation%22">Nixpkgs and NixOS pull requests</a> concerning documentation</li>
+    <li>keep track of <a href="https://github.com/NixOS/nix/labels/documentation">Nix issues</a> and <a href="https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%229.needs%3A+documentation%22">Nixpkgs and NixOS issues</a> concerning documentation</li>
     <li>monitor the <a href="https://discourse.nixos.org/c/dev/documentation/25">Documentation Discouse category</a></li>
     <li>monitor the <a href="https://app.element.io/#/room/#docs:nixos.org">Nix* Documentation Matrix room</a></li>
     <li>monitor <a href="https://matrix.to/#/#nixos-wiki:utzutzutz.net">changes to the NixOS Wiki</a></li>
