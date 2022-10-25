@@ -195,13 +195,21 @@ nix-env (Nix) 2.3.15</pre>
 
         <ul class="download-buttons">
           <li>
-            <a href="[%prefix%]/latest-nixos-gnome-x86_64-linux.iso">Download (GNOME, 64bit)</a>
+            <a href="[%prefix%]/latest-nixos-gnome-x86_64-linux.iso">Download (GNOME, 64-bit Intel/AMD, x86_64)</a>
             <a href="[%prefix%]/latest-nixos-gnome-x86_64-linux.iso.sha256">(SHA-256)</a>
             <span class="label -success">Recommended for most users</span>
           </li>
           <li>
-            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Download (Plasma Desktop, 64bit)</a>
+            <a href="[%prefix%]/latest-nixos-gnome-aarch64-linux.iso">Download (GNOME, 64-bit ARM, aarch64)</a>
+            <a href="[%prefix%]/latest-nixos-gnome-aarch64-linux.iso.sha256">(SHA-256)</a>
+          </li>
+          <li>
+            <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso">Download (Plasma Desktop, 64-bit Intel/AMD, x86_64)</a>
             <a href="[%prefix%]/latest-nixos-plasma5-x86_64-linux.iso.sha256">(SHA-256)</a>
+          </li>
+          <li>
+            <a href="[%prefix%]/latest-nixos-plasma5-aarch64-linux.iso">Download (Plasma Desktop, 64-bit ARM, aarch64)</a>
+            <a href="[%prefix%]/latest-nixos-plasma5-aarch64-linux.iso.sha256">(SHA-256)</a>
           </li>
         </ul>
 
@@ -218,11 +226,15 @@ nix-env (Nix) 2.3.15</pre>
 
         <ul class="download-buttons">
           <li>
-            <a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Download (64bit)</a>
+            <a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso">Download (64-bit Intel/AMD, x86_64)</a>
             <a href="[%prefix%]/latest-nixos-minimal-x86_64-linux.iso.sha256">(SHA-256)</a>
           </li>
+	  <li>
+            <a href="[%prefix%]/latest-nixos-minimal-aarch64-linux.iso">Download (64-bit Intel/AMD, aarch64)</a>
+            <a href="[%prefix%]/latest-nixos-minimal-aarch64-linux.iso.sha256">(SHA-256)</a>
+          </li>
           <li>
-            <a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso">Download (32bit)</a>
+            <a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso">Download (32-bit Intel/AMD, i686)</a>
             <a href="[%prefix%]/latest-nixos-minimal-i686-linux.iso.sha256">(SHA-256)</a>
           </li>
         </ul>
