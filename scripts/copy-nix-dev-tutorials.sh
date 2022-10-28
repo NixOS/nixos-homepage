@@ -4,6 +4,7 @@ set -e
 
 pages=(
   # "tutorials/install-nix.html" # Not needed since this is part of Download page
+  "tutorials/nix-language.html"
   "tutorials/ad-hoc-developer-environments.html"
   "tutorials/towards-reproducibility-pinning-nixpkgs.html"
   "tutorials/declarative-and-reproducible-developer-environments.html"
