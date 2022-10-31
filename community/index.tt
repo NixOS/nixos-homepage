@@ -81,6 +81,27 @@
         <div>
           <h2>Last Conference</h2>
           <div>
+            <article class="nixcon-2022 clickable-whole">
+              <header>
+                <h3>NixCon 2022 - Paris</h3>
+                <time datetime="2022-10-20">20-22 October 2022</time>
+              </header>
+              <p>
+                NixCon is a community-oriented conference for contributors and
+                users of Nix and NixOS. It's about sharing experiences,
+                inspiring people and discussing future development.
+              </p>
+              <footer>
+                <a href="https://2022.nixcon.org">Read more...</a>
+              </footer>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <h2>Previous Conferences</h2>
+          <div>
             <article class="nixcon-2020 clickable-whole">
               <header>
                 <h3>NixCon 2020 - Online</h3>
@@ -92,16 +113,9 @@
                 inspiring people and discussing future development.
               </p>
               <footer>
-                <a href="https://2020.nixcon.org">Read more...</a>
+                <a href="https://2019.nixcon.org">Read more...</a>
               </footer>
             </article>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <h2>Previous Conferences</h2>
-          <div>
             <article class="nixcon-2019 clickable-whole">
               <header>
                 <h3>NixCon 2019 - Brno</h3>
