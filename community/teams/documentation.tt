@@ -19,7 +19,7 @@
 
     <ul>
       <li>
-        Valentin Gagarin (<a href="https://discourse.nixos.org/u/fricklerhandwerk">@fricklerhandwerk</a>) (lead until 2022-10-31)<br/>
+        Valentin Gagarin (<a href="https://discourse.nixos.org/u/fricklerhandwerk">@fricklerhandwerk</a>)<br/>
         Nix documentarian, <a href="https://tweag.io">Tweag</a>
       </li>
       <li>
@@ -57,110 +57,20 @@
     </li>
   </ul>
 
-  <h2>Motivation</h2>
+
+  <h2>Contact and Information</h2>
 
   <p>
-    To improve the state of affairs with Nix onboarding and documentation, we have to tackle some big issues and work through many small ones:
-    implement structural changes after gathering the necessary social support;
-    fix numerous little problems and help people get their contributions merged.
+    Information about team procedures can be found in the Team handbook.
+    Discussions are held on Matrix, Discourse, and on GitHub issues and pull requests.
   </p>
-
   <p>
-    It requires significant time or resources to do this effectively and consistently.
-    The team is built around that limitation, and therefore organized as a praxicracy:
-    you are in charge if and only if you get the work done.
+    <a class="button" href="https://github.com/NixOS/nix.dev/tree/master/maintainers">Team handbook</a>
+    <a class="button" href="https://discourse.nixos.org/c/dev/documentation/25">Discourse</a>
+    <a class="button" href="https://app.element.io/#/room/#docs:nixos.org">Matrix</a>
+    <a class="button" href="https://github.com/orgs/NixOS/projects/15">GitHub Project board</a>
+    <a class="button" href="https://github.com/orgs/NixOS/teams/documentation-team">GitHub Team page</a>
   </p>
-
-  <p>
-    The team’s reason to exist is to make that principle discoverable and reproducible by laying groundwork and setting examples.
-  </p>
-
-  <h2>Responsibilities</h2>
-
-  <h3>Team</h3>
-
-  <p>Ordered by priority:</p>
-
-  <ul>
-    <li>establish and maintain guidelines for contributing to documentation</li>
-    <li>extend and curate <a href="https://nix.dev">nix.dev</a> as the central learning resource - long-term vision: The Nix Book</li>
-    <li>review and merge <a href="https://github.com/NixOS/nix/pulls">Nix pull requests</a> and <a href="https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+label%3A%228.has%3A+documentation%22">Nixpkgs and NixOS pull requests</a> concerning documentation</li>
-    <li>keep track of <a href="https://github.com/NixOS/nix/labels/documentation">Nix issues</a> and <a href="https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%229.needs%3A+documentation%22">Nixpkgs and NixOS issues</a> concerning documentation</li>
-    <li>monitor the <a href="https://discourse.nixos.org/c/dev/documentation/25">Documentation Discouse category</a></li>
-    <li>monitor the <a href="https://app.element.io/#/room/#docs:nixos.org">Nix* Documentation Matrix room</a></li>
-    <li>monitor <a href="https://matrix.to/#/#nixos-wiki:utzutzutz.net">changes to the NixOS Wiki</a></li>
-  </ul>
-
-  <h3>Team lead</h3>
-
-  <ul>
-    <li>represent the team:
-      <ul>
-        <li>publish announcements and reports</li>
-        <li>keep team information up to date</li>
-      </ul>
-    </li>
-    <li>lead team meetings:
-      <ul>
-        <li>set the agenda</li>
-        <li>invite participants</li>
-        <li>announce meetings on the calendar</li>
-        <li>moderate and keep schedule</li>
-        <li>take and publish notes</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h2>Meeting protocol</h2>
-
-  <p>The team holds bi-weekly meetings on Thursdays 17:30-18:30 (Europe/Berlin):</p>
-
-  <ul>
-    <li><a href="https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com">NixOS calendar</a></li>
-    <li><a href="https://discourse.nixos.org/t/community-calendar/18589">Discourse community calendar</a></li>
-  </ul>
-
-  <p>The purpose of the meetings is to</p>
-
-  <ul>
-    <li>make strategic decisions</li>
-    <li>coordinate efforts</li>
-    <li>exchange experience and insights.</li>
-  </ul>
-
-  <p>As the Nix community is distributed globally, available time for synchronous communication is highly limited and therefore very valuable. Writing is still the primary medium of communication.</p>
-  <p>To keep discussions highly focused and make their results accessible, we will:</p>
-
-  <ul>
-    <li>set meeting agendas on <a href="https://github.com/orgs/NixOS/projects/15">the team's GitHub project board</a> from issues and pull requests
-      <ul>
-        <li>pull requests have priority, invite authors to the meetings</li>
-        <li>annotate estimated discussion time for each agenda item, it should be followed</li>
-      </ul>
-    </li>
-    <li>post meeting protocols on the <a href="https://discourse.nixos.org/c/dev/documentation/25">Discourse documentation category</a>
-      <ul>
-        <li>add notes to the respective issue or pull request as a comment
-          <ul>
-            <li>prepare notes collaboratively, e.g. in a <a href="https://hackmd.io/">HackMD</a> scratchpad</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-
-  <p>Meeting notes should contain:</p>
-
-  <ul>
-    <li>date of meeting</li>
-    <li>list of attendees</li>
-    <li>results and links to GitHub comments for agenda item.</li>
-  </ul>
-
-  <h2>Contributing</h2>
-
-  <p>If you want to help immediately, please see <a href="https://discourse.nixos.org/t/how-to-contribute-to-documentation/21028">How to contribute to documentation</a>.</p>
-
 </section>
 
 [% END %]
