@@ -14,6 +14,7 @@
 
 /images/screenshots/nixos-*-small.png
 
+/.direnv/
 /build/
 /demos/*.cast
 /demos/*.svg
@@ -22,6 +23,7 @@
 /favicon.ico
 /blog/announcements-rss.xml
 /site-styles/common-styles
+/site-styles/assets.tmp/
 /nixos-release.tt
 /robots.txt
 
