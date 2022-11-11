@@ -85,7 +85,7 @@
         <p>
           We believe we have ironed out how to cleanly support the read-only
           root on modern macOS. Please
-          <a href="https://nixos.org/manual/nix/stable/installation/installing-binary.html#multi-user-installation">consult the manual</a>
+          <a href="[%nixManual%]/installation/installing-binary.html#macos-installation">consult the manual</a>
           on details what the installation script does.
         </p>
       </article>
