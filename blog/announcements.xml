@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <news>
+<item>
+    <pubDate>Tue, 30 November 2022 19:00:00 UTC</pubDate>
+    <title id="nixos-22.05">
+      NixOS 22.11 released
+    </title>
+    <description>
+      <figure>
+        <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/22.11-raccoon/raccoon.png">
+          <img class="inline" src="/logo/nixos-logo-22.11-raccoon-lores.png" alt="NixOS 22.11 Raccoon logo" width="100" />
+        </a>
+      </figure>
+      <p>
+        Hey everyone, we are <a href="https://github.com/mweinelt">Martin Weinelt</a> and <a href="https://github.com/dasj">Janne Heß</a>,
+        the release managers for this stable release and we are very proud to announce the public availability of NixOS 22.11 “Raccoon”.
+      </p>
+
+      <p>
+        This release will receive bugfixes and security updates for seven months (up until 2023-06-30).
+      </p>
+
+      <ul>
+        <li>
+          <a href="/manual/nixos/stable/release-notes.html#sec-release-22.11">Release manual</a>
+          <ul>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-22.11-highlights">Highlights</a>
+            </li>
+            <li><a href="/manual/nixos/stable/release-notes.html#sec-release-22.11-new-services">New
+                Services</a></li>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-22.11-incompatibilities">Backward
+                Incompatibilities</a></li>
+            <li><a
+                href="/manual/nixos/stable/release-notes.html#sec-release-22.11-notable-changes">Other
+                Notable Changes</a></li>
+          </ul>
+        </li>
+        <li><a href="/manual/nixos/stable/index.html#sec-upgrading">Upgrade Instructions</a></li>
+        <li><a href="/download.html#download-nixos">ISO Image Downloads</a></li>
+      </ul>
+
+      <p>
+        The 22.11 release was made possible due to the efforts of <strong>1652</strong>
+        contributors, who authored <strong>30371</strong> commits since the previous release.
+        <br />
+        Our thanks go the contributors who also take care of the continued stability and
+        security of our stable distribution.
+      </p>
+
+      <p>
+        NixOS is already known as
+        <a href="https://repology.org/repositories/statistics/newest">the most up to date distribution</a>
+        while also being
+        <a href="https://repology.org/repositories/statistics/total">the distribution with the most packages</a>.
+        This release saw <strong>16678 new</strong> packages and <strong>14680 updated</strong> packages in nixpkgs.
+        We also <strong>removed 2812</strong> packages in an effort to keep the package set maintainable and secure.
+        <br />
+        In addition to packages the NixOS distribution also features modules and tests that make it what it is.
+        This release brought <strong>91 new</strong> modules and <strong>removed 20</strong>.
+        In that process we <strong>added 1322</strong> options and <strong>removed 487</strong>.
+      </p>
+
+      <h3>Password hashing migration</h3>
+
+      <p>
+        During the NixOS 22.11 lifecycle old password hashes may need to be updated, because we plan to disable
+        weak password hashes in NixOS 23.05. We consider password hashing methods weak, if
+        the libxcrypt project did not flag them <a href="https://github.com/besser82/libxcrypt/blob/v4.4.30/lib/hashes.conf#L41">strong</a>.
+        If your system is configured with weak hashes a script will emit a warning during activation. We expect
+        most users accounts to be set up with sha512crypt (hash prefixed with <i>$6$</i>) which we will continue to support.
+        Interactively configured passwords can be updated using <strong>passwd</strong>, new password hashes can be generated through <strong>mkpasswd</strong>.
+      </p>
+
+      <h3>aarch64-linux channel merge</h3>
+
+      <p>
+        The separate aarch64-linux specific channels have been discontinued. Their jobs have been merged into the generic
+        <strong>nixos-22.11</strong> and <strong>nixos-22.11-small</strong> channels and will thereby receive
+        updates at the same time as their x86_64-linux counterparts.
+      </p>
+
+      <h3>Special Thanks</h3>
+      <p>
+        We want to personally thank <a href="https://github.com/winterqt">Winter</a> and <a href="https://github.com/mic92">Jörg Thalheim</a> for editorializing the release notes,
+        <a href="https://github.com/vcunat">Vladimír Čunát</a> for his tireless effort in managing jobsets and staging cycles,
+        and <a href="https://github.com/grahamc">Graham Christensen</a> for dutifully tending to our build infrastructure.
+      </p>
+
+      <h3>Reflections and Closing</h3>
+      <p>
+        I'm thankful for being given the chance to guide the release process. It is an exciting experience and seeing the tremendous collaborative effort
+        the community invests to make the release a success is inspiring.
+        While previous release managers made great strides to document the process there are lots of steps that could be benefit from better documentation
+        and more tooling. It is our hope that future release managers and the community will iterate further on this.
+      </p>
+    </description>
+  </item>
+
   <item>
     <pubDate>Tue, 30 May 2022 19:00:00 UTC</pubDate>
     <title id="nixos-22.05">
