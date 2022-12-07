@@ -1,19 +1,5 @@
 
     <li>
-      <a href="https://platonic.systems/">
-        <div>
-          <img alt="Platonic.Systems" src="/community/commercial-support-logos/platonic-systems.svg" />
-        </div>
-        <h2>Platonic.Systems</h2>
-        <ul><li>Remote</li></ul>
-        Solving your toughest software problems
-Trying to build an innovative software solution? Is it behind schedule?
-Over budget? Not working properly? Growing with bugs? We can help.
-
-      </a>
-    </li>
-
-    <li>
       <a href="https://www.numtide.com/">
         <div>
           <img alt="Numtide Ltd" src="/community/commercial-support-logos/numtide.png" />
@@ -21,6 +7,33 @@ Over budget? Not working properly? Growing with bugs? We can help.
         <h2>Numtide Ltd</h2>
         <ul><li>London, UK</li><li>Remote</li></ul>
         Numtide is a Nix and DevOps consulting company. We help our customers with declarative development, cloud and bare-metal infrastructures.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="http://blackriversoft.com/">
+        <div>
+          <img alt="Black River Software" src="/community/commercial-support-logos/black-river-software.png" />
+        </div>
+        <h2>Black River Software</h2>
+        <ul><li>Ohio, USA</li></ul>
+        Black River Software offers custom software development, software architecture
+consulting, and build and deployment engineering services.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://determinate.systems/">
+        <div>
+          <img alt="Determinate Systems" src="/community/commercial-support-logos/determinate-systems.svg" />
+        </div>
+        <h2>Determinate Systems</h2>
+        <ul><li>Remote</li><li>Massachusetts, USA</li></ul>
+        Confidently build and deploy to the cloud, stadium, or stock exchange.
+Expert help with the Nix ecosystem from Graham Christensen and
+collaborators.
 
       </a>
     </li>
@@ -40,13 +53,13 @@ integration and administration.
     </li>
 
     <li>
-      <a href="https://obsidian.systems">
+      <a href="https://www.enlambda.com/">
         <div>
-          <img alt="Obsidian Systems" src="/community/commercial-support-logos/obsidian-systems.svg" />
+          <img alt="Enlambda" src="/community/commercial-support-logos/enlambda.png" />
         </div>
-        <h2>Obsidian Systems</h2>
-        <ul><li>New York, USA</li></ul>
-        Software consultancy specializing in Haskell, Nix, curiosity, and innovation.
+        <h2>Enlambda</h2>
+        <ul><li>Remote</li><li>Estonia</li></ul>
+        Turning operational issues into development tasks using Nix since 2013.
 
       </a>
     </li>
@@ -78,14 +91,13 @@ customized highly reliable solutions for blockchain-powered industries.
     </li>
 
     <li>
-      <a href="http://blackriversoft.com/">
+      <a href="https://nixos.mayflower.consulting">
         <div>
-          <img alt="Black River Software" src="/community/commercial-support-logos/black-river-software.png" />
+          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
         </div>
-        <h2>Black River Software</h2>
-        <ul><li>Ohio, USA</li></ul>
-        Black River Software offers custom software development, software architecture
-consulting, and build and deployment engineering services.
+        <h2>Mayflower</h2>
+        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
+        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
 
       </a>
     </li>
@@ -105,30 +117,6 @@ auditing.
     </li>
 
     <li>
-      <a href="https://www.enlambda.com/">
-        <div>
-          <img alt="Enlambda" src="/community/commercial-support-logos/enlambda.png" />
-        </div>
-        <h2>Enlambda</h2>
-        <ul><li>Remote</li><li>Estonia</li></ul>
-        Turning operational issues into development tasks using Nix since 2013.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://nixos.mayflower.consulting">
-        <div>
-          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
-        </div>
-        <h2>Mayflower</h2>
-        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
-        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
-
-      </a>
-    </li>
-
-    <li>
       <a href="https://tweag.io/">
         <div>
           <img alt="Tweag" src="/community/commercial-support-logos/tweag.svg" />
@@ -142,15 +130,27 @@ delivery. Top contributor to Nix and this website.
     </li>
 
     <li>
-      <a href="https://determinate.systems/">
+      <a href="https://platonic.systems/">
         <div>
-          <img alt="Determinate Systems" src="/community/commercial-support-logos/determinate-systems.svg" />
+          <img alt="Platonic.Systems" src="/community/commercial-support-logos/platonic-systems.svg" />
         </div>
-        <h2>Determinate Systems</h2>
-        <ul><li>Remote</li><li>Massachusetts, USA</li></ul>
-        Confidently build and deploy to the cloud, stadium, or stock exchange.
-Expert help with the Nix ecosystem from Graham Christensen and
-collaborators.
+        <h2>Platonic.Systems</h2>
+        <ul><li>Remote</li></ul>
+        Solving your toughest software problems
+Trying to build an innovative software solution? Is it behind schedule?
+Over budget? Not working properly? Growing with bugs? We can help.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://obsidian.systems">
+        <div>
+          <img alt="Obsidian Systems" src="/community/commercial-support-logos/obsidian-systems.svg" />
+        </div>
+        <h2>Obsidian Systems</h2>
+        <ul><li>New York, USA</li></ul>
+        Software consultancy specializing in Haskell, Nix, curiosity, and innovation.
 
       </a>
     </li>
