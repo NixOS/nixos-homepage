@@ -6,7 +6,7 @@ rec {
 
   # These inputs are used for the manuals and release artifacts
   inputs.released-nixpkgs-unstable = { url = "nixpkgs/nixos-unstable"; };
-  inputs.released-nixpkgs-stable = { url = "nixpkgs/nixos-22.05"; };
+  inputs.released-nixpkgs-stable = { url = "nixpkgs/nixos-22.11"; };
   inputs.released-nix-unstable = { url = "github:nixos/nix/master"; };
   inputs.released-nix-stable = { url = "github:nixos/nix/latest-release"; };
   inputs.nix-pills = { url = "github:NixOS/nix-pills"; flake = false; };
@@ -180,15 +180,15 @@ rec {
             rm -f site-styles/common-styles
             ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
 
-            echo ""
-            echo "  To start developing run:"
-            echo "      serve"
-            echo ""
-            echo "  and go to the following URL in your browser:"
-            echo "      https://127.0.0.1:8000/"
-            echo ""
-            echo "  It will rebuild the website on each change."
-            echo ""
+            >&2 echo ""
+            >&2 echo "  To start developing run:"
+            >&2 echo "      serve"
+            >&2 echo ""
+            >&2 echo "  and go to the following URL in your browser:"
+            >&2 echo "      https://127.0.0.1:8000/"
+            >&2 echo ""
+            >&2 echo "  It will rebuild the website on each change."
+            >&2 echo ""
           '';
         };
       };
