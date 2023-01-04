@@ -21,6 +21,7 @@ HTML = \
   community/teams/security.html \
   community/teams/documentation.html \
   community/teams/nixpkgs-architecture.html \
+  community/teams/nix.html \
   demos/index.html \
   donate.html \
   download.html \
