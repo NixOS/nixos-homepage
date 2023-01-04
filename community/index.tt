@@ -237,6 +237,7 @@
   <div>
     <h2>Teams</h2>
     <div>
+
       [% PROCESS svg path="site-styles/assets/gfx-rfc-steering.white.svg" %]
       <h3>RFC Steering Committee</h3>
       <p>Responsible for forming an RFC Shepherd team from the available
@@ -244,6 +245,7 @@
         rejecting a specific RFC.
       </p>
       <a class="button -primary" href="[%root%]community/teams/rfc-steering-committee.html">Read more</a>
+
       [% PROCESS svg path="site-styles/assets/gfx-security.white.svg" %]
       <h3>Security Team</h3>
       <p>Security is a priority for the NixOS community. In addition to
@@ -251,42 +253,49 @@
         privately reported security issues.
       </p>
       <a class="button -primary" href="[%root%]community/teams/security.html">Read more</a>
+
       [% PROCESS svg path="site-styles/assets/gfx-infra.white.svg" %]
       <h3>Infrastructure Team</h3>
-      <p>The responsibility of this team is to provide infrastructure for the Nix and
-        NixOS community.
+      <p>Provides infrastructure for the Nix and NixOS community.
       </p>
       <a class="button -primary" href="[%root%]community/teams/infrastructure.html">Read more</a>
+
       [% PROCESS svg path="site-styles/assets/gfx-release.white.svg" %]
       <h3>NixOS Release Team</h3>
-      <p>A team that twice a year manages a release of NixOS. It is responsible
+      <p>Manages the twice-yearly releases of NixOS. It is responsible
         the entire release process from setting the roadmap to uploading the
         artifacts.
       </p>
       <a class="button -primary" href="[%root%]community/teams/nixos-release.html">Read more</a>
+
       [% PROCESS svg path="site-styles/assets/gfx-nixcon.white.svg" %]
       <h3>NixCon Team</h3>
-      <p>A team that helps organize NixCon, a conference for the Nix and NixOS
+      <p>Helps organize NixCon, a conference for the Nix and NixOS
         community.
       </p>
       <a class="button -primary" href="[%root%]community/teams/nixcon.html">Read more</a>
+
       [% PROCESS svg path="site-styles/assets/gfx-marketing.white.svg" %]
       <h3>Marketing Team</h3>
-      <p>Its main responsibility is this website and the content on it. Apart from
-        the team looks for ways to help and improve general communication of
+      <p>Maintains this website and its content, and
+        looks for ways to improve general communication of
         the project.
       </p>
       <a class="button -primary" href="[%root%]community/teams/marketing.html">Read more</a>
+
       [% PROCESS svg path="site-styles/assets/gfx-discourse.white.svg" %]
       <h3>Moderation Team</h3>
-      <p>Moderates partitcipation on official community platforms.</p>
+      <p>Moderates participation on official community platforms.</p>
       <a class="button -primary" href="[%root%]community/teams/moderation.html">Read more</a>
+
       <h3>Documentation Team</h3>
       <p>Works on improving learning experience and documentation.</p>
       <a class="button -primary" href="[%root%]community/teams/documentation.html">Read more</a>
+
       <h3>Nixpkgs Architecture Team</h3>
-      <p>There to solve architectural Nixpkgs issues that are too big in scope for any single person to undertake.</p>
+      <p>Solves architectural Nixpkgs issues that are too big in scope for any single person to undertake.</p>
       <a class="button -primary" href="[%root%]community/teams/nixpkgs-architecture.html">Read more</a>
+
     </div>
   </div>
 </section>
