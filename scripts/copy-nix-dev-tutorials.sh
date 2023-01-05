@@ -16,7 +16,7 @@ pages=(
   "tutorials/installing-nixos-on-a-raspberry-pi.html"
   "tutorials/integration-testing-using-virtual-machines.html"
   "tutorials/cross-compilation.html"
-  "tutorials/contributing.html"
+  "contributing/index.html"
 )
 
 outDir=$1

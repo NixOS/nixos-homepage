@@ -39,7 +39,7 @@ HTML = \
   guides/installing-nixos-on-a-raspberry-pi.html \
   guides/integration-testing-using-virtual-machines.html \
   guides/cross-compilation.html \
-  guides/contributing.html \
+  contributing/index.html \
   index.html \
   learn.html
 
