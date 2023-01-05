@@ -16,7 +16,7 @@ pages=(
   "tutorials/installing-nixos-on-a-raspberry-pi.html"
   "tutorials/integration-testing-using-virtual-machines.html"
   "tutorials/cross-compilation.html"
-  "tutorials/contributing.html"
+  "contributing/index.html"
 )
 
 outDir=$1
@@ -26,6 +26,9 @@ rm -f learn_guides.html.in
 
 for page in "${pages[@]}"; do
   filename="$(basename ${page%.*})"
+  if [[ "$filename" == "index" ]]; then
+    filename=$(basename "$(dirname "$page")")
+  fi
   source="$NIX_DEV_MANUAL_IN/$page"
   target="$outDir/$filename.tt"
   temp="$target.temp"
