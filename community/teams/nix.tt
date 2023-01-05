@@ -57,10 +57,13 @@
   and PRs, and a weekly working session to review PRs and hack on
   code.</p>
 
-  <ul>
-    <li><a href="https://github.com/NixOS/nix/blob/master/maintainers/README.md">Team process</a></li>
-    <li><a href="https://discourse.nixos.org/c/dev/nix/50">Meeting notes</a></li>
-  </ul>
+  <p>
+    <a class="button" href="https://github.com/NixOS/nix/tree/master/maintainers">Team handbook</a>
+    <a class="button" href="https://discourse.nixos.org/c/dev/nix/50">Discourse</a>
+    <a class="button" href="https://matrix.to/#/#nix-dev:nixos.org">Matrix</a>
+    <a class="button" href="https://github.com/orgs/NixOS/projects/19">GitHub Project board</a>
+    <a class="button" href="https://github.com/orgs/NixOS/teams/nix-team">GitHub Team page</a>
+  </p>
 
 </section>
 
