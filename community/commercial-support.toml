@@ -117,3 +117,13 @@ description = """
 Nix specialists helping companies design, develop and deploy systems in a
 declarative fashion.
 """
+
+[[commercial-provider]]
+name = "Nix.How"
+url = "https://nix.how"
+locations = ["Remote", "United Kingdom"]
+logo = "/community/commercial-support-logos/nix-how.png"
+description = """
+Nix experts specialising in converting legacy infrastructure to a Nix/NixOS
+methodology and workflow
+"""
