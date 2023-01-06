@@ -212,25 +212,32 @@
     <h1>Other learning resources</h1>
     <ul>
       <li class="clickable-whole">
-        <h3>Unofficial Wiki</h3>
-        <p>
-          A user-maintained wiki for Nix and NixOS.
-        </p>
-        <a href="https://nixos.wiki">Read more</a>
-      </li>
-      <li class="clickable-whole">
         <h3>nix.dev</h3>
         <p>
-          An unofficial and opinionated guide for developers getting things done using the Nix ecosystem.
+          A collection of opinionated guides to getting things done in the Nix ecosystem.
         </p>
-        <a href="https://nix.dev">Read more</a>
+        <a href="https://nix.dev">Get things done</a>
+      </li>
+      <li class="clickable-whole">
+        <h3>The Nix Hour</h3>
+        <p>
+          A weekly beginner-oriented interactive video lecture on all things Nix. Running since October 2022.
+        </p>
+        <a href="https://www.youtube.com/playlist?list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in">Watch on YouTube</a>
+      </li>
+      <li class="clickable-whole">
+        <h3>NixOS Wiki</h3>
+        <p>
+          A unofficial, user-maintained wiki for Nix and NixOS.
+        </p>
+        <a href="https://nixos.wiki">Check the wiki</a>
       </li>
       <li class="clickable-whole">
         <h3>Nix Pills</h3>
         <p>
           A low-level tutorial on building software packages with Nix, showing in detail how Nixpkgs is constructed.
         </p>
-        <a href="[%root%]guides/nix-pills">Read more</a>
+        <a href="[%root%]guides/nix-pills">Take the Pills</a>
       </li>
     </ul>
   </div>
