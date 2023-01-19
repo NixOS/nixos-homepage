@@ -1,27 +1,12 @@
 
     <li>
-      <a href="https://helsinki-systems.de">
+      <a href="https://www.enlambda.com/">
         <div>
-          <img alt="Helsinki Systems" src="/community/commercial-support-logos/helsinki-systems.png" />
+          <img alt="Enlambda" src="/community/commercial-support-logos/enlambda.png" />
         </div>
-        <h2>Helsinki Systems</h2>
-        <ul><li>Stuttgart, Germany</li></ul>
-        Your partner for hosting, networks and IT solutions running on NixOS. We have
-multiple years of NixOS and decades of Linux experience to aid your NixOS
-integration and administration.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://www.fivebinaries.com/">
-        <div>
-          <img alt="five binaries" src="/community/commercial-support-logos/5inaries.png" />
-        </div>
-        <h2>five binaries</h2>
-        <ul><li>Tallinn, Estonia</li><li>Prague, Czech Republic</li></ul>
-        Five Binaries are an infrastructure development company focused on creating
-customized highly reliable solutions for blockchain-powered industries.
+        <h2>Enlambda</h2>
+        <ul><li>Remote</li><li>Estonia</li></ul>
+        Turning operational issues into development tasks using Nix since 2013.
 
       </a>
     </li>
@@ -40,32 +25,6 @@ consulting, and build and deployment engineering services.
     </li>
 
     <li>
-      <a href="https://immutablesolutions.com/">
-        <div>
-          <img alt="Immutable Solutions" src="/community/commercial-support-logos/immutable-solutions.png" />
-        </div>
-        <h2>Immutable Solutions</h2>
-        <ul><li>Sweden</li></ul>
-        Nix specialists helping companies design, develop and deploy systems in a
-declarative fashion.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://nix.how">
-        <div>
-          <img alt="Nix.How" src="/community/commercial-support-logos/nix-how.png" />
-        </div>
-        <h2>Nix.How</h2>
-        <ul><li>Remote</li><li>United Kingdom</li></ul>
-        Nix experts specialising in converting legacy infrastructure to a Nix/NixOS
-methodology and workflow
-
-      </a>
-    </li>
-
-    <li>
       <a href="https://tweag.io/">
         <div>
           <img alt="Tweag" src="/community/commercial-support-logos/tweag.svg" />
@@ -79,13 +38,26 @@ delivery. Top contributor to Nix and this website.
     </li>
 
     <li>
-      <a href="https://www.enlambda.com/">
+      <a href="https://nixos.mayflower.consulting">
         <div>
-          <img alt="Enlambda" src="/community/commercial-support-logos/enlambda.png" />
+          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
         </div>
-        <h2>Enlambda</h2>
-        <ul><li>Remote</li><li>Estonia</li></ul>
-        Turning operational issues into development tasks using Nix since 2013.
+        <h2>Mayflower</h2>
+        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
+        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://immutablesolutions.com/">
+        <div>
+          <img alt="Immutable Solutions" src="/community/commercial-support-logos/immutable-solutions.png" />
+        </div>
+        <h2>Immutable Solutions</h2>
+        <ul><li>Sweden</li></ul>
+        Nix specialists helping companies design, develop and deploy systems in a
+declarative fashion.
 
       </a>
     </li>
@@ -115,6 +87,33 @@ delivery. Top contributor to Nix and this website.
     </li>
 
     <li>
+      <a href="https://determinate.systems/">
+        <div>
+          <img alt="Determinate Systems" src="/community/commercial-support-logos/determinate-systems.svg" />
+        </div>
+        <h2>Determinate Systems</h2>
+        <ul><li>Remote</li><li>Massachusetts, USA</li></ul>
+        Confidently build and deploy to the cloud, stadium, or stock exchange.
+Expert help with the Nix ecosystem from Graham Christensen and
+collaborators.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.fivebinaries.com/">
+        <div>
+          <img alt="five binaries" src="/community/commercial-support-logos/5inaries.png" />
+        </div>
+        <h2>five binaries</h2>
+        <ul><li>Tallinn, Estonia</li><li>Prague, Czech Republic</li></ul>
+        Five Binaries are an infrastructure development company focused on creating
+customized highly reliable solutions for blockchain-powered industries.
+
+      </a>
+    </li>
+
+    <li>
       <a href="https://serokell.io/">
         <div>
           <img alt="Serokell" src="/community/commercial-support-logos/serokell.png" />
@@ -129,6 +128,33 @@ auditing.
     </li>
 
     <li>
+      <a href="https://nix.how">
+        <div>
+          <img alt="Nix.How" src="/community/commercial-support-logos/nix-how.png" />
+        </div>
+        <h2>Nix.How</h2>
+        <ul><li>Remote</li><li>United Kingdom</li></ul>
+        Nix experts specialising in converting legacy infrastructure to a Nix/NixOS
+methodology and workflow
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://helsinki-systems.de">
+        <div>
+          <img alt="Helsinki Systems" src="/community/commercial-support-logos/helsinki-systems.png" />
+        </div>
+        <h2>Helsinki Systems</h2>
+        <ul><li>Stuttgart, Germany</li></ul>
+        Your partner for hosting, networks and IT solutions running on NixOS. We have
+multiple years of NixOS and decades of Linux experience to aid your NixOS
+integration and administration.
+
+      </a>
+    </li>
+
+    <li>
       <a href="https://platonic.systems/">
         <div>
           <img alt="Platonic.Systems" src="/community/commercial-support-logos/platonic-systems.svg" />
@@ -138,32 +164,6 @@ auditing.
         Solving your toughest software problems
 Trying to build an innovative software solution? Is it behind schedule?
 Over budget? Not working properly? Growing with bugs? We can help.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://nixos.mayflower.consulting">
-        <div>
-          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
-        </div>
-        <h2>Mayflower</h2>
-        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
-        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://determinate.systems/">
-        <div>
-          <img alt="Determinate Systems" src="/community/commercial-support-logos/determinate-systems.svg" />
-        </div>
-        <h2>Determinate Systems</h2>
-        <ul><li>Remote</li><li>Massachusetts, USA</li></ul>
-        Confidently build and deploy to the cloud, stadium, or stock exchange.
-Expert help with the Nix ecosystem from Graham Christensen and
-collaborators.
 
       </a>
     </li>
