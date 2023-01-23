@@ -118,33 +118,6 @@
 <span cls="shell-prompt">docker&gt; </span>find ./result # this symlink points to the build package</pre>
       </article>
 
-      <article id="nix-verify-installation">
-        <h2>Verify installation</h2>
-        <p>
-          Check the installation by opening
-          <strong>a new terminal</strong> and typing:
-        </p>
-        <pre class="terminal-console">
-<span cls="shell-prompt">$ </span>nix-env --version
-nix-env (Nix) 2.3.15</pre>
-        <p>
-          You may want to verify the
-          <strong>integrity of the installation script</strong>
-          using GPG:
-        </p>
-        <pre class="terminal-console">
-<span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%] https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install
-<span cls="shell-prompt">$ </span>curl -o install-nix-[%latestNixVersion%].asc https://releases.nixos.org/nix/nix-[%latestNixVersion%]/install.asc
-<span cls="shell-prompt">$ </span>gpg2 --keyserver hkps://keyserver.ubuntu.com --recv-keys B541D55301270E0BCF15CA5D8170B4726D7198DE
-<span cls="shell-prompt">$ </span>gpg2 --verify ./install-nix-[%latestNixVersion%].asc
-<span cls="shell-prompt">$ </span>sh ./install-nix-[%latestNixVersion%]</pre>
-        <p>
-          The <a href="[%root%]edolstra.gpg">signing key</a> has fingerprint
-          <code>B541 D553 0127 0E0B CF15 CA5D 8170 B472 6D71 98DE</code>.
-          It is also available
-          <a href="https://github.com/NixOS/nixos-homepage/blob/master/edolstra.gpg">on GitHub</a>.
-        </p>
-      </article>
       <article id="nix-more">
         <h2>More ...</h2>
         <p>The following release items are also available:</p>
