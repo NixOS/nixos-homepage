@@ -43,7 +43,7 @@ for page in "${pages[@]}"; do
     | sed 's|<a class="reference internal" href="../glossary.html#term-attribute-name"><span class="xref std std-term">attribute name</span></a>|attribute name|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-package-name"><span class="xref std std-term">package name</span></a>|package name|g' \
     | sed 's|<a class="reference internal" href="../glossary.html#term-reproducible"><span class="xref std std-term">reproducible</span></a>|reproducible|g' \
-    | sed 's|../reference/pinning-nixpkgs.html#ref-pinning-nixpkgs|towards-reproducibility-pinning-nixpkgs.html|g' \
+    | sed 's|../reference/pinning-nixpkgs.html#ref-pinning-nixpkgs|https://nix.dev/reference/pinning-nixpkgs#ref-pinning-nixpkgs|g' \
       > "$temp"
 
   echo "[% WRAPPER atHead %] <link rel=\"canonical\" href=\"https://nix.dev/$page\" /> [% END %]" > $target
