@@ -173,6 +173,12 @@
   force = true
 
 [[redirects]]
+  from = "/nixos/manual/unstable/*"
+  to = "/manual/nixos/stable/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nixos/manual/*"
   to = "/manual/nixos/stable/:splat"
   status = 302
