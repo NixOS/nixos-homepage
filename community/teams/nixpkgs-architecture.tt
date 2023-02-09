@@ -70,7 +70,7 @@
   </p>
 
   <p>
-    Since nixpkgs is widely used by third-party code, this team needs to be very careful to ensure reasonabe backwards-compatibility.
+    Since nixpkgs is widely used by third-party code, this team needs to be very careful to ensure reasonable backwards-compatibility.
     Backwards incompatible changes are only in scope after a deprecation window of an appropriate duration and accompanying warning.
   </p>
 
