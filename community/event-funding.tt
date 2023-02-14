@@ -1,0 +1,71 @@
+[% WRAPPER layout.tt title="Event funding" handlesLayout=1 %]
+
+<div class="page-title">
+  <div>
+    <a href="[% root%]community/index.html">Community</a>
+    <span>→</span>
+  </div>
+  <h1>Event funding</h1>
+</div>
+
+<section class="community-event-funding-intro">
+  <p>The NixOS community is awesome! You guys have been generously donating throughout the year to keep the NixOS projects running smoothly. We want to show our appreciation by launching a new grant program that will help our community thrive even more.</p>
+  <p>This program will be aimed at supporting and boosting the NixOS community, which has been instrumental in getting us where we are today. We hope that it will continue to reward and encourage amazing folks like you to volunteer your time and talent for years to come.</p>
+</section>
+
+<section class="community-event-funding-who">
+<h1>Who can apply?</h1>
+<ul>
+  <li>Any active community member that’s looking to organize an event with Nix developers, publicly announced.</li>
+  <li>Recipient must be in a SEPA country or in a country supported by Wise (India excluded as it proved to be difficult unless you have a company there)</li>
+</ul>
+
+<h1>Examples of things that this is intended for</h1>
+<ul>
+  <li>Nix meetups, where a few people can make a presentation to showcase Nix to the audience</li>
+  <li>Sprints, focused hacking for a period of time</li>
+  <li>Smaller Nix based togethers</li>
+</ul>
+<h1>Budget</h1>
+
+Generally up to €500 (for a meetup) or €2000 (for a sprint). But exceptions are possible.
+</section>
+
+<section class="community-event-funding-deadline">
+<h1>When should I apply? What’s the timeline?</h1>
+
+<p>Deadline: <strong>7th of every month</strong>. Decision by the board is made before <strong>end of month</strong>.</p>
+</section>
+
+<section class="community-event-funding-requirements">
+Events that are funded by this process shoud be:
+
+<ul>
+  <li>Open and advertized in public</li>
+  <li>Write-up a short public report after the fact, with a live picture and a summary of what the event was about.</li>
+</ul>
+</section>
+
+<section class="community-event-funding-proval-faq">
+<h1>FAQ</h1>
+
+<h2>Can we apply for recurring events?</h2>
+<p>We prefer you apply for each instance to be fair to other events happening but you may apply as a larger event that is spread across the year. The bar for larger events/funding is higher.</p>
+
+<h2>What’s the approval process like at the board?</h2>
+<ol>
+  <li>Collection of all responses between the submission times</li>
+  <li>Board will review the requests and prioritize</li>
+  <li>
+    Examples of events we’re willing to sponsor (in that order)
+    <ol>
+      <li>Events that are focused on advocating Nix to bring new community members</li>
+      <li>Events that are focused on building in Nix</li>
+    </ol>
+  </li>
+</ol>
+</section>
+
+<a href="https://886ae3fg27i.typeform.com/to/wnhFtaFm">Apply</a>
+
+[% END %]
