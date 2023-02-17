@@ -1,27 +1,36 @@
 
     <li>
-      <a href="https://www.fivebinaries.com/">
+      <a href="https://www.numtide.com/">
         <div>
-          <img alt="five binaries" src="/community/commercial-support-logos/5inaries.png" />
+          <img alt="Numtide Ltd" src="/community/commercial-support-logos/numtide.png" />
         </div>
-        <h2>five binaries</h2>
-        <ul><li>Tallinn, Estonia</li><li>Prague, Czech Republic</li></ul>
-        Five Binaries are an infrastructure development company focused on creating
-customized highly reliable solutions for blockchain-powered industries.
+        <h2>Numtide Ltd</h2>
+        <ul><li>London, UK</li><li>Remote</li></ul>
+        Numtide is a Nix and DevOps consulting company. We help our customers with declarative development, cloud and bare-metal infrastructures.
 
       </a>
     </li>
 
     <li>
-      <a href="https://helsinki-systems.de">
+      <a href="https://nixos.mayflower.consulting">
         <div>
-          <img alt="Helsinki Systems" src="/community/commercial-support-logos/helsinki-systems.png" />
+          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
         </div>
-        <h2>Helsinki Systems</h2>
-        <ul><li>Stuttgart, Germany</li></ul>
-        Your partner for hosting, networks and IT solutions running on NixOS. We have
-multiple years of NixOS and decades of Linux experience to aid your NixOS
-integration and administration.
+        <h2>Mayflower</h2>
+        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
+        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://obsidian.systems">
+        <div>
+          <img alt="Obsidian Systems" src="/community/commercial-support-logos/obsidian-systems.svg" />
+        </div>
+        <h2>Obsidian Systems</h2>
+        <ul><li>New York, USA</li></ul>
+        Software consultancy specializing in Haskell, Nix, curiosity, and innovation.
 
       </a>
     </li>
@@ -41,6 +50,19 @@ auditing.
     </li>
 
     <li>
+      <a href="http://blackriversoft.com/">
+        <div>
+          <img alt="Black River Software" src="/community/commercial-support-logos/black-river-software.png" />
+        </div>
+        <h2>Black River Software</h2>
+        <ul><li>Ohio, USA</li></ul>
+        Black River Software offers custom software development, software architecture
+consulting, and build and deployment engineering services.
+
+      </a>
+    </li>
+
+    <li>
       <a href="https://tweag.io/">
         <div>
           <img alt="Tweag" src="/community/commercial-support-logos/tweag.svg" />
@@ -54,13 +76,42 @@ delivery. Top contributor to Nix and this website.
     </li>
 
     <li>
-      <a href="https://www.numtide.com/">
+      <a href="https://www.fivebinaries.com/">
         <div>
-          <img alt="Numtide Ltd" src="/community/commercial-support-logos/numtide.png" />
+          <img alt="five binaries" src="/community/commercial-support-logos/5inaries.png" />
         </div>
-        <h2>Numtide Ltd</h2>
-        <ul><li>London, UK</li><li>Remote</li></ul>
-        Numtide is a Nix and DevOps consulting company. We help our customers with declarative development, cloud and bare-metal infrastructures.
+        <h2>five binaries</h2>
+        <ul><li>Tallinn, Estonia</li><li>Prague, Czech Republic</li></ul>
+        Five Binaries are an infrastructure development company focused on creating
+customized highly reliable solutions for blockchain-powered industries.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://determinate.systems/">
+        <div>
+          <img alt="Determinate Systems" src="/community/commercial-support-logos/determinate-systems.svg" />
+        </div>
+        <h2>Determinate Systems</h2>
+        <ul><li>Remote</li><li>Massachusetts, USA</li></ul>
+        Confidently build and deploy to the cloud, stadium, or stock exchange.
+Expert help with the Nix ecosystem from Graham Christensen and
+collaborators.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://helsinki-systems.de">
+        <div>
+          <img alt="Helsinki Systems" src="/community/commercial-support-logos/helsinki-systems.png" />
+        </div>
+        <h2>Helsinki Systems</h2>
+        <ul><li>Stuttgart, Germany</li></ul>
+        Your partner for hosting, networks and IT solutions running on NixOS. We have
+multiple years of NixOS and decades of Linux experience to aid your NixOS
+integration and administration.
 
       </a>
     </li>
@@ -105,45 +156,6 @@ declarative fashion.
     </li>
 
     <li>
-      <a href="https://obsidian.systems">
-        <div>
-          <img alt="Obsidian Systems" src="/community/commercial-support-logos/obsidian-systems.svg" />
-        </div>
-        <h2>Obsidian Systems</h2>
-        <ul><li>New York, USA</li></ul>
-        Software consultancy specializing in Haskell, Nix, curiosity, and innovation.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="http://blackriversoft.com/">
-        <div>
-          <img alt="Black River Software" src="/community/commercial-support-logos/black-river-software.png" />
-        </div>
-        <h2>Black River Software</h2>
-        <ul><li>Ohio, USA</li></ul>
-        Black River Software offers custom software development, software architecture
-consulting, and build and deployment engineering services.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://determinate.systems/">
-        <div>
-          <img alt="Determinate Systems" src="/community/commercial-support-logos/determinate-systems.svg" />
-        </div>
-        <h2>Determinate Systems</h2>
-        <ul><li>Remote</li><li>Massachusetts, USA</li></ul>
-        Confidently build and deploy to the cloud, stadium, or stock exchange.
-Expert help with the Nix ecosystem from Graham Christensen and
-collaborators.
-
-      </a>
-    </li>
-
-    <li>
       <a href="https://nix.how">
         <div>
           <img alt="Nix.How" src="/community/commercial-support-logos/nix-how.png" />
@@ -152,18 +164,6 @@ collaborators.
         <ul><li>Remote</li><li>United Kingdom</li></ul>
         Nix experts specialising in converting legacy infrastructure to a Nix/NixOS
 methodology and workflow
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://nixos.mayflower.consulting">
-        <div>
-          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
-        </div>
-        <h2>Mayflower</h2>
-        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
-        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
 
       </a>
     </li>
