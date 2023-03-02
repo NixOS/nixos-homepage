@@ -127,3 +127,13 @@ description = """
 Nix experts specialising in converting legacy infrastructure to a Nix/NixOS
 methodology and workflow
 """
+
+[[commercial-provider]]
+name = "flox"
+url = "https://floxdev.com"
+locations = ["Remote", "San Francisco", "London"]
+logo = "/community/commercial-support-logos/flox.png"
+description = """
+flox is a platform for building, sharing, and collaborating across the entire
+development lifecycle.
+"""
