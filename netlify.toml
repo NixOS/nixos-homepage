@@ -143,6 +143,12 @@
   force = true
 
 [[redirects]]
+  from = "/manual/nix/:version/package-management/channels.html"
+  to = "/manual/nix/:version/command-ref/nix-channel.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/manual/nixpkgs"
   to = "/manual/nixpkgs/stable"
   status = 302
