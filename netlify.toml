@@ -143,6 +143,12 @@
   force = true
 
 [[redirects]]
+  from = "/manual/nix/:version/package-management/s3-substituter*"
+  to = "/manual/nix/:version/command-ref/conf-file.html#conf-substituters"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/manual/nixpkgs"
   to = "/manual/nixpkgs/stable"
   status = 302
