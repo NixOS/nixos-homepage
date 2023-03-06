@@ -24,7 +24,7 @@ Date:   Fri Mar 3 15:05:51 2023 +0100
 </pre>
       <p>The original PR for this is 
       <a href="https://github.com/NixOS/nixpkgs/pull/219037">#219037</a>. The motivation is to update the version of
-      the openai Python package. It looks like along the way there is also a related update to shell-genie and some
+      the <code>openai</code> Python package. It looks like along the way there is also a related update to <code>shell-genie</code> and some
       improvements to the metadata in Nixpkgs. A simple version bump is usually simpler, but this example is good
       because it will help us explain a few things along the way.</p>
       <p>The entails taking a look at the build recipe and updating a few things:</p>
@@ -67,8 +67,8 @@ index ede1a7a3d84..92f2e327eb3 100644
       <p>First off, we see a bump in version from 0.26.5 to 0.27.0. Next we see the source is also updated with its
       hash providing an integrity check. (Note: these two steps are often performed by automation, stay tuned for
       future episodes). Lastly we see an improvement to the metadata pointing at a consistent location for the
-      changelog of the openai project.</p>
-      <p>Next we see changes to shell-genie. This is an application that uses openai to provide helpful command-line
+      changelog of the OpenAI project.</p>
+      <p>Next we see changes to <code>shell-genie</code>. This is an application that uses <code>openai</code> to provide helpful command-line
       suggestions and it uses openai as a dependency.</p>
       <pre class="prettyprint">
 git diff 785bafc33818503172c7eecb60af711d794195b3~1 785bafc33818503172c7eecb60af711d794195b3
@@ -133,10 +133,10 @@ index 1429aabcd80..7225eb4c3fc 100644
       other package managers.</p>
       <p>So we have a fairly simple update, but also improvements to metadata and collaboration with other communities.
       Next in the PR we see some testing of the new recipe across various architectures and an approval from 
-      <a href="https://github.com/malob">malob</a>. With the approval and all checks+tests in the green, the PR was
+      <a href="https://github.com/malob">@malob</a>. With the approval and all checks and tests in the green, the PR was
       merged. Sounds like success!</p>
       <p>Thank you 
-      <a href="https://github.com/fabaff">@fabaff</a> for your contribution.</p>
+      <a href="https://github.com/fabaff">@fabaff</a> for your contribution!</p>
     </description>
   </item>
 </news>
