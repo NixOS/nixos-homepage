@@ -7,6 +7,7 @@ default: all
 
 HTML = \
   404.html \
+  blog/stories.html \
   blog/announcements.html \
   blog/categories.html \
   blog/index.html \
@@ -227,6 +228,16 @@ blog/announcements.html: blog/announcements.html.in blog/layout.tt
 
 blog/announcements.html.in: blog/announcements-rss.xml blog/announcements.xml blog/announcements.xsl
 	xsltproc --param maxItem 10000 blog/announcements.xsl blog/announcements.xml > $@.tmp
+	mv $@.tmp $@
+
+blog/stories-rss.xml: blog/stories.xml blog/stories-rss.xsl
+	xsltproc blog/stories-rss.xsl blog/stories.xml > $@.tmp
+	mv $@.tmp $@
+
+blog/stories.html: blog/stories.html.in blog/layout.tt
+
+blog/stories.html.in: blog/stories-rss.xml blog/stories.xml blog/stories.xsl
+	xsltproc --param maxItem 10000 blog/stories.xsl blog/stories.xml > $@.tmp
 	mv $@.tmp $@
 
 blog/index.html: blog/layout.tt

@@ -32,5 +32,13 @@
     &:nth-child(3) > a:hover::before {
       #svg.blog.categories.white();
     }
+
+    &:nth-child(4) > a::before {
+      #svg.blog.book.blue();
+    }
+    &:nth-child(4) > a.active::before,
+    &:nth-child(4) > a:hover::before {
+      #svg.blog.book.white();
+    }
   }
 }
