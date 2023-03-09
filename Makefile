@@ -11,6 +11,7 @@ HTML = \
   blog/announcements.html \
   blog/categories.html \
   blog/index.html \
+  community/event-funding.html \
   community/commercial-support.html \
   community/index.html \
   community/teams/moderation.html \

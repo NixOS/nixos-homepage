@@ -2,6 +2,21 @@
   "nodes": {
     "flake-utils": {
       "locked": {
+        "lastModified": 1676283394,
+        "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3db36a8b464d0c4532ba1c7dda728f4576d6d073",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
         "lastModified": 1656065134,
         "narHash": "sha256-oc6E6ByIw3oJaIyc67maaFcnjYOz1mMcOtHxbEf9NwQ=",
         "owner": "numtide",
@@ -50,7 +65,7 @@
     },
     "nix-dev": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs",
         "poetry2nix": "poetry2nix"
       },
@@ -86,14 +101,17 @@
     },
     "nixos-common-styles": {
       "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1641822737,
-        "narHash": "sha256-w5qIrnLiaWm/YhIEpgwQrhr3dZgnBP//a7ueDSm63ho=",
+        "lastModified": 1676674622,
+        "narHash": "sha256-VTJOGiHTjpnsK5NzuIzKJhKt7m2Nb6M/1mkyszBdTGE=",
         "owner": "NixOS",
         "repo": "nixos-common-styles",
-        "rev": "9c6e596c8f76f3a1746b333289def78ab8df3cb0",
+        "rev": "db7d8a3b60905c36c503940ddc7fa66f4079f8fa",
         "type": "github"
       },
       "original": {
@@ -152,11 +170,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1617082367,
-        "narHash": "sha256-W0cQPGjc4IVzryaGycuoS8KZkXafS1P23w/fcKLoD5Y=",
+        "lastModified": 1642635915,
+        "narHash": "sha256-vabPA32j81xBO5m3+qXndWp5aqepe+vu96Wkd9UnngM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "04a2b269d8921505a2969fc9ec25c1f517f2b307",
+        "rev": "6d8215281b2f87a5af9ed7425a26ac575da0438f",
         "type": "github"
       },
       "original": {
@@ -312,6 +330,7 @@
     },
     "root": {
       "inputs": {
+        "flake-utils": "flake-utils",
         "nix-dev": "nix-dev",
         "nix-pills": "nix-pills",
         "nixos-common-styles": "nixos-common-styles",
