@@ -10,96 +10,89 @@
 
 <section class="community-event-funding">
   <p>
-    The NixOS community is awesome! You guys have been generously donating
-    throughout the year to keep the NixOS projects running smoothly. We want to
-    show our appreciation by launching a new grant program that will help our
-    community thrive even more.
+    The NixOS community is awesome! Our friends and members have been donating
+  throughout the year, and now we'd like to put the money to work. We are launching
+a new grant program that will help our community thrive and widen. 
+      
+In particular, we are planning to  fund meet-ups and conferences as in-person communication can inspire developers to new ideas and experiments and lead to teaming up and building new projects.        
   </p>
   <p>
-    This program will be aimed at supporting and boosting the NixOS community,
-    which has been instrumental in getting us where we are today. We hope that
+    This program will be aimed at supporting and boosting the NixOS community. It has been instrumental in getting us where we are today, and we hope that
     it will continue to reward and encourage amazing folks like you to
-    volunteer your time and talent for years to come.
+    volunteer time and talent for years to come.
   </p>
 
+  <h2>Who can apply?</h2>
+ Any active community member that’s looking to organize a publicly-announced
+event with Nix developers
+ can apply.
+  The recipient must be located in a SEPA country or in a country supported by Wise. This allows to avoid money transfer issues. Unfortunately, individuals from India are excluded: it proved to be difficult to deal with India in terms of transactions. However, if you have a company, you can apply: things are easier this way.
+    
+  <h2>What events can be funded?</h2>
+    
+Events that are funded by this process should be open and advertised in the public. They should be followed by a short by a short public report including a photo and a summary of the event and the outcomes.
+
+For instance, you can apply if you're planning to organize:
+
+  <ul>
+    <li>
+      Nix meetups where a few people can make a presentation to showcase Nix
+      to the audience
+    </li>
+    <li>
+      Sprints: focused hacking for a period of time
+    </li>
+    <li>
+      Smaller Nix-based get-togethers
+    </li>
+  </ul>
+    If you are planning an event that doesn't look like any of these, but you think it may be important for the Nix community, feel free to reach out.
+  <h2>Budget</h2>
+  <p>
+   We can spare up to €500 for a meetup and €2000 for a sprint. But we're flexible, so exceptions
+    are possible.
+  </p>
+
+  <h2>When should I apply?</h2>
+  <p>
+    <strong>Deadline</strong>: 7th of every month. 
+      
+<strong>Board decision</strong>: by the end of each month.
+  </p>
+    
   <div class="community-event-funding-button">
     <a href="https://commotion.page/view/event-funding">Apply</a>
   </div>
 
-  <h2>Who can apply?</h2>
-  <ul>
-    <li>
-      Any active community member that’s looking to organize an event with Nix
-      developers, publicly announced.
-    </li>
-    <li>
-      Recipient must be in a SEPA country or in a country supported by Wise
-      (India excluded as it proved to be difficult unless you have a company
-      there)
-    </li>
-  </ul>
-
-  <h2>Examples of things that this is intended for</h2>
-  <ul>
-    <li>
-      Nix meetups, where a few people can make a presentation to showcase Nix
-      to the audience
-    </li>
-    <li>
-      Sprints, focused hacking for a period of time
-    </li>
-    <li>
-      Smaller Nix based togethers
-    </li>
-  </ul>
-  <h2>Budget</h2>
-  <p>
-    Generally up to €500 (for a meetup) or €2000 (for a sprint). But exceptions
-    are possible.
-  </p>
-
-  <h2>When should I apply? What’s the timeline?</h2>
-  <p>
-    Deadline: <strong>7th of every month</strong>. Decision by the board is
-    made before <strong>end of month</strong>.
-  </p>
-
-  <p>Events that are funded by this process should be:</p>
-  <ul>
-    <li>Open and advertised in public</li>
-    <li>Followed by a short public report after the fact, with a live picture and a summary of what the event was about.</li>
-  </ul>
-
   <h2>FAQ</h2>
-  <h3>Can we apply for recurring events?</h3>
+  <h3>Can we apply with recurring events?</h3>
   <p>
-    We prefer you apply for each instance to be fair to other events happening
-    but you may apply as a larger event that is spread across the year. The bar
-    for larger events/funding is higher.
+   
+We prefer you to apply for each instance of the recurring event. This way, we will be able to be fair and consider other events.
+
+Actually, you may apply with a larger event spread across the year. But the assessment for larger events requiring more funding is way thorougher.
+
   </p>
-  <h3>What’s the approval process like at the board?</h3>
+  <h3>How will the approval process look like?</h3>
+    In our selection process, the board will follow these steps:
+    
   <ol>
     <li>
       Collection of all responses between the submission times
     </li>
     <li>
-      Board will review the requests and prioritize
-    </li>
-    <li>
-      <p>Examples of events we’re willing to sponsor, by priority:</p>
-      <ol>
-        <li>
-          Events that are focused on advocating Nix and attracting new
-          community members
+      Reviewing and prioritising the applications
+      </li>  </ol>
+    
+<h3>What events are we willing to sponsor?</h3>
+<p>
+Here's an example of how we prioritize applications. Among the two listed options, the first one would be more favorable:</p>
+          <ol><li>Events that are focused on advocating Nix and attracting new community members
         </li>
-        <li>
-          Events that are focused on building in Nix
+        <li>Events that are focused on building in the Nix ecosystem
         </li>
       </ol>
-    </li>
-  </ol>
 
 </section>
-
 
 [% END %]
