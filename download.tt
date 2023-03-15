@@ -194,7 +194,10 @@
 
         <p>The minimal installation ISO image <strong>does not contain the
             graphical user interface</strong>, and is therefore a lot smaller.
-          You have to <strong>run the installer from the console</strong>. It
+          You have to
+          <a href="[%root%]manual/nixos/stable/index.html#ch-installation">
+            <strong>run the installer from the console</strong>
+          </a>. It
           contains a number of rescue tools.</p>
 
         <ul class="download-buttons">
