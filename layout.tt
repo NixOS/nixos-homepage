@@ -36,6 +36,7 @@ BLOCK navigationLink %]
   <link rel="shortcut icon" type="image/png" href="/favicon.png" />
   <meta property="og:image" content="/logo/nixos-lores.png" />
   <meta name="google-site-verification" content="ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE" />
+  <meta name="description" content="A package manager and operating system providing an unique approach to packaging and system configuration" />
 
   [%# This has to happen ASAP, even before jQuery is initialized. %]
   <script>
