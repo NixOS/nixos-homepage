@@ -196,7 +196,7 @@ favicon.ico: favicon.png
 	convert -resize 200 $< $@
 
 %.html: %.tt layout.tt common.tt
-	tpage \
+	perl `which tpage` \
 	  --pre_chomp --post_chomp \
 	  --eval_perl \
 	  --define root=$(ROOT) \
@@ -212,7 +212,7 @@ favicon.ico: favicon.png
 
 %: %.in common.tt
 	echo $$PATH
-	tpage \
+	perl `which tpage` \
 	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
 	  --pre_process=common.tt $< > $@.tmp
 	mv $@.tmp $@

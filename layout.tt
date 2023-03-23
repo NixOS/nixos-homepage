@@ -24,10 +24,21 @@ BLOCK navigationLink %]
 
 -%]
 
+[% DEFAULT
+    defaultTitle = 'Nix &amp; NixOS | Reproducible builds and deployments'
+    description = 'Nix is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems. '
+%]
+
 <html lang="en" class="without-js">
 
 <head>
-  <title>[% title %]</title>
+  [% IF title %]
+  <title>[% title %] | Nix &amp; NixOS </title>
+  [% ELSE %]
+  <title>[% metaTitle %]</title>
+  [% END %]
+  <meta name="description" content="[% description %]" />
+
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0" />
@@ -36,7 +47,6 @@ BLOCK navigationLink %]
   <link rel="shortcut icon" type="image/png" href="/favicon.png" />
   <meta property="og:image" content="/logo/nixos-lores.png" />
   <meta name="google-site-verification" content="ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE" />
-  <meta name="description" content="A package manager and operating system providing an unique approach to packaging and system configuration" />
 
   [%# This has to happen ASAP, even before jQuery is initialized. %]
   <script>

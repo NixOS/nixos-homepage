@@ -21,7 +21,7 @@ mkdir -p "$outDirTmp"
     elif [[ "$fn" =~ .html$ ]]; then
         xsltproc --nonet ./scripts/bootstrapify-docbook.xsl "$inDir/$fn" > "$outDirTmp/$fn.in"
         root=$(realpath --relative-to="$(pwd)" "$outDirTmp/$fn" | sed -e 's|[^/]||g' -e 's|/|../|g')
-        tpage --pre_chomp --post_chomp \
+        perl $(which tpage) --pre_chomp --post_chomp \
             --define root="${root}" \
             --pre_process=common.tt \
             > "$outDirTmp/$fn" <<EOF
