@@ -10,6 +10,9 @@ rec {
   inputs.released-nixpkgs-stable.url = "nixpkgs/nixos-22.11";
   inputs.released-nix-unstable.url = "github:nixos/nix/master";
   inputs.released-nix-stable.url = "github:nixos/nix/latest-release";
+  inputs.nix-2-12.url = "github:nixos/nix/2.12.1";
+  inputs.nix-2-11.url = "github:nixos/nix/2.11.1";
+  inputs.nix-2-10.url = "github:nixos/nix/2.10.3";
   inputs.nix-pills.url = "github:NixOS/nix-pills";
   inputs.nix-pills.flake = false;
   inputs.nix-dev.url = "github:nix-dot-dev/nix.dev";
@@ -33,6 +36,9 @@ rec {
     , released-nixpkgs-stable
     , released-nix-unstable
     , released-nix-stable
+    , nix-2-12
+    , nix-2-11
+    , nix-2-10
     , nix-pills
     , nix-dev
     , nixos-common-styles
@@ -59,6 +65,9 @@ rec {
 
         nix_stable = released-nix-stable.packages."${system}".nix;
         nix_unstable = released-nix-unstable.packages."${system}".nix;
+        nix_2_12 = nix-2-12.packages."${system}".nix;
+        nix_2_11 = nix-2-11.packages."${system}".nix;
+        nix_2_10 = nix-2-10.packages."${system}".nix;
 
         nixPills = import nix-pills {
           inherit pkgs;
@@ -152,6 +161,15 @@ rec {
                 "NIX_PILLS_MANUAL_EPUB=${nixPills.epub}/share/doc/nix-pills/nix-pills.epub"
                 "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.${system}}"
 
+                "NIX_2_12_VERSION=${getVersion nix_2_12.name}"
+                "NIX_MANUAL_2_12_IN=${nix_2_12.doc}/share/doc/nix/manual"
+
+                "NIX_2_11_VERSION=${getVersion nix_2_11.name}"
+                "NIX_MANUAL_2_11_IN=${nix_2_11.doc}/share/doc/nix/manual"
+
+                "NIX_2_10_VERSION=${getVersion nix_2_10.name}"
+                "NIX_MANUAL_2_10_IN=${nix_2_10.doc}/share/doc/nix/manual"
+
                 "-j 1"
               ];
 
@@ -179,6 +197,15 @@ rec {
               export NIX_PILLS_MANUAL_IN="${nixPills.html-split}/share/doc/nix-pills"
               export NIX_PILLS_MANUAL_EPUB="${nixPills.epub}/share/doc/nix-pills/nix-pills.epub"
               export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.${system}}"
+
+              export NIX_2_12_VERSION="${getVersion nix_2_12.name}"
+              export NIX_MANUAL_2_12_IN="${nix_2_12.doc}/share/doc/nix/manual"
+
+              export NIX_2_11_VERSION="${getVersion nix_2_11.name}"
+              export NIX_MANUAL_2_11_IN="${nix_2_11.doc}/share/doc/nix/manual"
+
+              export NIX_2_10_VERSION="${getVersion nix_2_10.name}"
+              export NIX_MANUAL_2_10_IN="${nix_2_10.doc}/share/doc/nix/manual"
 
               rm -f site-styles/common-styles
               ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles

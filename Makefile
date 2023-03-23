@@ -93,6 +93,24 @@ $(NIX_MANUAL_STABLE_OUT): $(call rwildcard, $(NIX_MANUAL_STABLE_IN), *)
 	mkdir -p $(NIX_MANUAL_STABLE_OUT)
 	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_STABLE_IN)/* $(NIX_MANUAL_STABLE_OUT)
 
+NIX_MANUAL_2_12_IN ?= /no-such-path
+NIX_MANUAL_2_12_OUT = manual/nix/2.12
+$(NIX_MANUAL_2_12_OUT): $(call rwildcard, $(NIX_MANUAL_2_12_IN), *)
+	mkdir -p $(NIX_MANUAL_2_12_OUT)
+	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_2_12_IN)/* $(NIX_MANUAL_2_12_OUT)
+
+NIX_MANUAL_2_11_IN ?= /no-such-path
+NIX_MANUAL_2_11_OUT = manual/nix/2.11
+$(NIX_MANUAL_2_11_OUT): $(call rwildcard, $(NIX_MANUAL_2_11_IN), *)
+	mkdir -p $(NIX_MANUAL_2_11_OUT)
+	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_2_11_IN)/* $(NIX_MANUAL_2_11_OUT)
+
+NIX_MANUAL_2_10_IN ?= /no-such-path
+NIX_MANUAL_2_10_OUT = manual/nix/2.10
+$(NIX_MANUAL_2_10_OUT): $(call rwildcard, $(NIX_MANUAL_2_10_IN), *)
+	mkdir -p $(NIX_MANUAL_2_10_OUT)
+	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_2_10_IN)/* $(NIX_MANUAL_2_10_OUT)
+
 NIX_MANUAL_UNSTABLE_IN ?= /no-such-path
 NIX_MANUAL_UNSTABLE_OUT = manual/nix/unstable
 
@@ -100,7 +118,7 @@ $(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *)
 	mkdir -p $(NIX_MANUAL_UNSTABLE_OUT)
 	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_UNSTABLE_IN)/* $(NIX_MANUAL_UNSTABLE_OUT)
 
-manual/nix/index.html: $(NIX_MANUAL_STABLE_OUT) $(NIX_MANUAL_UNSTABLE_OUT)
+manual/nix/index.html: $(NIX_MANUAL_STABLE_OUT) $(NIX_MANUAL_UNSTABLE_OUT) $(NIX_MANUAL_2_12_OUT) $(NIX_MANUAL_2_11_OUT) $(NIX_MANUAL_2_10_OUT)
 	bash ./scripts/fix-manual-headers.sh manual/nix stable
 	@echo "<!DOCTYPE html>" > $@
 	@echo "<html>" >> $@
