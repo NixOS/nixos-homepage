@@ -143,12 +143,6 @@
   force = true
 
 [[redirects]]
-  from = "/manual/nix/:version/advanced-topics/post-build-hook.html"
-  to = "/manual/nix/:version/command-ref/conf-file.html#conf-post-build-hook"
-  status = 302
-  force = true
-
-[[redirects]]
   from = "/manual/nixpkgs"
   to = "/manual/nixpkgs/stable"
   status = 302
