@@ -123,7 +123,7 @@ rec {
                 shuffle_commercial_providers
                 update_blog
                 xhtml1
-                xidel
+                which
               ];
 
             preBuild = ''
