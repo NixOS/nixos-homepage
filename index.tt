@@ -17,7 +17,7 @@
 [% WRAPPER atEnd %]
 <script src="[% root %]js/asciinema-player.js"></script>
 [% END %]
-[% WRAPPER layout.tt title="Nix: reproducible builds and deployments" handlesLayout=1 %]
+[% WRAPPER layout.tt handlesLayout=1 %]
 
 <section class="wide-banner clickable-whole event-banner">
   <div>
