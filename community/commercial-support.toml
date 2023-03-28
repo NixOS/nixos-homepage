@@ -137,3 +137,13 @@ description = """
 flox is a platform for building, sharing, and collaborating across the entire
 development lifecycle.
 """
+
+[[commercial-provider]]
+name = "core.gen.tr"
+url = "https://core.gen.tr"
+locations = ["Remote" "Istanbul"]
+logo = "/community/commercial-support-logos/core-gen-tr.png"
+description = """
+We develop and deploy custom cryptographic and post-quantum
+cryptographic systems via Nix.
+"""
