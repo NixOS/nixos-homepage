@@ -37,7 +37,7 @@
                    "text-decoration: none;"],
         ["href", "/manual/" + project + "/" + name]
       ],
-      name + ( name === cleanedVersion? "": " (" + cleanedVersion + ")")
+      name + " (" + cleanedVersion + ")"
     );
   }
 
@@ -90,7 +90,7 @@
     } else {
       plus.setAttribute("style", "display: none;");
       minus.removeAttribute("style");
-      channels.setAttribute("style", channels.getAttribute("style").replace("display: none;", "display: grid;"));
+      channels.setAttribute("style", channels.getAttribute("style").replace("display: none;", ""));
     }
   }
 
