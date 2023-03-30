@@ -20,6 +20,16 @@ collaborators.
 """
 
 [[commercial-provider]]
+name = "Engelen Open Source"
+url = "https://arnout.engelen.eu"
+locations = ["Remote", "Netherlands"]
+logo = "/community/commercial-support-logos/engelen-open-source.png"
+description = """
+Arnout 'raboof' Engelen is an independent consultant available for
+support and small- to medium-sized projects around Nix and Open Source.
+"""
+
+[[commercial-provider]]
 name = "Enlambda"
 url = "https://www.enlambda.com/"
 locations = ["Remote", "Estonia"]
