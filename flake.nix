@@ -52,7 +52,7 @@ rec {
         };
 
         pkgs = import nixpkgs { inherit system; overlays = [ overlay ]; };
-        inherit (pkgs.lib) getVersion;
+        inherit (pkgs.lib) getVersion versions versionOlder importJSON;
 
         pkgs-unstable = import released-nixpkgs-unstable { inherit system; };
         pkgs-stable = import released-nixpkgs-stable { inherit system; };
@@ -86,6 +86,39 @@ rec {
 
         update_blog =
           mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser cchardet ]) "update-blog";
+
+        update_nix_versions =
+          mkPyScript (with pkgs.python3Packages; [ click PyGithub semver ]) "update-nix-versions";
+
+        nix_docs_info = pkgs.writeTextFile {
+          name = "nix_docs_info.json";
+          text =
+            builtins.toJSON (
+              builtins.map
+              (info: {
+                version = versions.majorMinor info.version;
+                doc_path = (builtins.getFlake "github:NixOS/nix/${info.sha}").packages."${system}".default.doc;
+              })
+              (importJSON ./nix_versions.json)
+            );
+        };
+
+        nix_old_versions =
+          pkgs.lib.take 3 (
+            builtins.filter
+            (x: versionOlder x.version (getVersion nix_stable.name))
+            (builtins.map
+              (x: {
+                version = x.version;
+                channel = versions.majorMinor x.version;
+              })
+              (importJSON ./nix_versions.json))
+          );
+
+        nix_old_versions_formatted = let
+          json = builtins.toJSON nix_old_versions;
+        in
+          builtins.substring 1 (builtins.stringLength json - 2) json;
 
       in rec {
         defaultPackage = packages.homepage;
@@ -122,6 +155,7 @@ rec {
                 serve
                 shuffle_commercial_providers
                 update_blog
+                update_nix_versions
                 xhtml1
                 xidel
               ];
@@ -146,6 +180,8 @@ rec {
                 "NIXPKGS_MANUAL_UNSTABLE_IN=${released-nixpkgs-unstable.htmlDocs.nixpkgsManual}"
                 "NIXOS_MANUAL_UNSTABLE_IN=${released-nixpkgs-unstable.htmlDocs.nixosManual}"
                 "NIXOS_UNSTABLE_SERIES=${pkgs-unstable.lib.trivial.release}"
+                "NIX_DOCS_INFO=${nix_docs_info}"
+                "NIX_OLD_VERSIONS=${nix_old_versions_formatted}"
 
                 "NIXOS_AMIS=${nixosAmis}"
                 "NIX_PILLS_MANUAL_IN=${nixPills.html-split}/share/doc/nix-pills"

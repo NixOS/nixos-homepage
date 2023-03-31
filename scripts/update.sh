@@ -16,3 +16,6 @@ nix develop --command shuffle-commercial-providers --input community/commercial-
 
 echo "Updating blog..."
 nix develop --command update-blog --output-dir blog/
+
+echo "Updating nix versions file..."
+nix develop --command update-nix-versions --file nix_versions.json

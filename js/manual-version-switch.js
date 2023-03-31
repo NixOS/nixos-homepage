@@ -90,7 +90,7 @@
     } else {
       plus.setAttribute("style", "display: none;");
       minus.removeAttribute("style");
-      channels.setAttribute("style", channels.getAttribute("style").replace("display: none;", ""));
+      channels.setAttribute("style", channels.getAttribute("style").replace("display: none;", "display: grid;"));
     }
   }
 

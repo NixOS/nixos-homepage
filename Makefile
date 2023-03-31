@@ -100,7 +100,10 @@ $(NIX_MANUAL_UNSTABLE_OUT): $(call rwildcard, $(NIX_MANUAL_UNSTABLE_IN), *)
 	mkdir -p $(NIX_MANUAL_UNSTABLE_OUT)
 	cp --no-preserve=mode,ownership -RL $(NIX_MANUAL_UNSTABLE_IN)/* $(NIX_MANUAL_UNSTABLE_OUT)
 
-manual/nix/index.html: $(NIX_MANUAL_STABLE_OUT) $(NIX_MANUAL_UNSTABLE_OUT)
+versioned_manuals: $(NIX_DOCS_INFO)
+	bash ./scripts/nix-versioned-manual.sh $(NIX_DOCS_INFO)
+
+manual/nix/index.html: $(NIX_MANUAL_STABLE_OUT) $(NIX_MANUAL_UNSTABLE_OUT) versioned_manuals
 	bash ./scripts/fix-manual-headers.sh manual/nix stable
 	@echo "<!DOCTYPE html>" > $@
 	@echo "<html>" >> $@

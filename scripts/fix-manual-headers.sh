@@ -39,7 +39,8 @@ for path in $dir/*; do
       injectedTag="data-$project-channels='["
       if [[ "$project" == "nix" ]]; then
         injectedTag+="{\"channel\":\"unstable\",\"version\":\"$NIX_UNSTABLE_VERSION\"},"
-        injectedTag+="{\"channel\":\"stable\",\"version\":\"$NIX_STABLE_VERSION\"}"
+        injectedTag+="{\"channel\":\"stable\",\"version\":\"$NIX_STABLE_VERSION\"},"
+        injectedTag+="$NIX_OLD_VERSIONS"
       else
         injectedTag+="{\"channel\":\"unstable\",\"version\":\"$NIXOS_UNSTABLE_SERIES\"},"
         injectedTag+="{\"channel\":\"stable\",\"version\":\"$NIXOS_STABLE_SERIES\"}"
