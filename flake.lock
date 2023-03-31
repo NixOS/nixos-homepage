@@ -86,11 +86,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1680189146,
-        "narHash": "sha256-0rXgINMCugH0co7cniepxzSZzvItzUnh/SSULwyHTus=",
+        "lastModified": 1680258548,
+        "narHash": "sha256-qq1DBn7hyiNNLqPfNvqi0Zqo5Y2NWF6/3k8egSF/uTU=",
         "owner": "nix-dot-dev",
         "repo": "nix.dev",
-        "rev": "a0fc4f1dcdba68ae6b2e397dbef57e7d896bd444",
+        "rev": "c379d55ae0c1c1c7905157f4c8c96ce9f1fcc6e6",
         "type": "github"
       },
       "original": {
@@ -301,11 +301,11 @@
         "nixpkgs-regression": "nixpkgs-regression_2"
       },
       "locked": {
-        "lastModified": 1680239960,
-        "narHash": "sha256-ERe8vFFC7HpGKcYzxSB0sxfNM/Ch5UfOmHfHl5vDrEE=",
+        "lastModified": 1680257170,
+        "narHash": "sha256-JgEozNb7cTvX83n+U9ZrV0njyvPxmYH9/gJskYoOwpI=",
         "owner": "nixos",
         "repo": "nix",
-        "rev": "623115fc0f265b74a60c67b58dff3442678fe841",
+        "rev": "e32ca3cf16a421297a545607c95dbe9918505987",
         "type": "github"
       },
       "original": {
