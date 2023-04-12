@@ -78,6 +78,16 @@ Numtide is a Nix and DevOps consulting company. We help our customers with decla
 """
 
 [[commercial-provider]]
+name = "Nixcademy"
+url = "https://nixcademy.com"
+locations = ["Remote", "Germany"]
+logo = "/community/commercial-support-logos/nixcademy.svg"
+description = """
+Elevate your organization's expertise with Nix and NixOS through our comprehensive corporate training classes, personalized mentoring, and expert consulting services.
+Empower your team with the latest knowledge and best practices.
+"""
+
+[[commercial-provider]]
 name = "Obsidian Systems"
 url = "https://obsidian.systems"
 locations = ["New York, USA"]
