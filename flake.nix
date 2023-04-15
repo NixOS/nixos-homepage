@@ -12,7 +12,7 @@ rec {
   inputs.released-nix-stable.url = "github:nixos/nix/latest-release";
   inputs.nix-pills.url = "github:NixOS/nix-pills";
   inputs.nix-pills.flake = false;
-  inputs.nix-dev.url = "github:nix-dot-dev/nix.dev";
+  inputs.nix-dev.url = "github:NixOS/nix.dev";
   inputs.nixos-common-styles.url = "github:NixOS/nixos-common-styles";
   inputs.nixos-common-styles.inputs.flake-utils.follows = "flake-utils";
 
