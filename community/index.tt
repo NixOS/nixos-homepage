@@ -288,6 +288,11 @@
       <p>Moderates participation on official community platforms.</p>
       <a class="button -primary" href="[%root%]community/teams/moderation.html">Read more</a>
 
+      [% PROCESS svg path="site-styles/assets/gfx-gpu.white.svg" %]
+      <h3>CUDA Team</h3>
+      <p>Making Nix and NixOS the first choice for users of CUDA-accelerated software.</p>
+      <a class="button -primary" href="[%root%]community/teams/cuda.html">Read more</a>
+
       <h3>Documentation Team</h3>
       <p>Works on improving learning experience and documentation.</p>
       <a class="button -primary" href="[%root%]community/teams/documentation.html">Read more</a>
