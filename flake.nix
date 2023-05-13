@@ -81,8 +81,8 @@ rec {
         serve =
           mkPyScript (with pkgs.python3Packages; [ click livereload ]) "serve";
 
-        shuffle_commercial_providers =
-          mkPyScript (with pkgs.python3Packages; [ click toml ]) "shuffle-commercial-providers";
+        update_providers =
+          mkPyScript (with pkgs.python3Packages; [ click toml ]) "update-commercial-providers";
 
         update_blog =
           mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser cchardet ]) "update-blog";
@@ -120,8 +120,8 @@ rec {
                 perlPackages.TemplateToolkit
                 perlPackages.XMLSimple
                 serve
-                shuffle_commercial_providers
                 update_blog
+                update_providers
                 xhtml1
                 which
               ];

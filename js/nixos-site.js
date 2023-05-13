@@ -1,3 +1,25 @@
+$.fn.shuffleChildren = function() {
+  $.each(this.get(), function(index, el) {
+      var random = function(s = Date.now()) {
+        return function() {
+            s = Math.sin(s) * 10000;
+
+            return s - Math.floor(s);
+        };
+      };
+
+      var $el = $(el);
+      var $find = $el.children();
+
+      $find.sort(function() {
+          return 0.5 - random((new Date).getHours());
+      });
+
+      $el.empty();
+      $find.appendTo($el);
+  });
+};
+
 $(function () {
   // Special "pseudo-global" variable to track whether we are synthetically
   // activating an event. In that case some semantics are different.
@@ -324,4 +346,5 @@ $(function () {
   // This way tabs and panes are active as intended.
   handleNavigation();
 
+  $("section.community-commercial-support > ul").shuffleChildren();
 });

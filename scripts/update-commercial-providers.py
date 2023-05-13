@@ -1,5 +1,4 @@
 import click
-import random
 import toml
 
 TEMPLATE = """
@@ -21,8 +20,6 @@ def main(input):
 
     with open(input) as f:
         providers = toml.load(f)["commercial-provider"]
-
-    random.shuffle(providers)
 
     for provider in providers:
         provider["name"] = provider["name"][:50]
