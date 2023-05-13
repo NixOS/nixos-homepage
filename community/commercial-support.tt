@@ -15,7 +15,7 @@
     <a href="https://github.com/NixOS/nixos-homepage/edit/master/community/commercial-support.toml">submit a pull
       request</a>
     to add your company
-    (the list is randomized on each website update).
+    (the list is randomized each hour).
   </p>
   <ul>
     [% INSERT "community/commercial-support.html.in" %]

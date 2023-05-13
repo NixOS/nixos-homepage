@@ -11,8 +11,5 @@ nix flake lock \
   --update-input nix-pills \
   --update-input nix-dev
 
-echo "Shuffle commercial providers ..."
-nix develop --command shuffle-commercial-providers --input community/commercial-support.toml > community/commercial-support.html.in
-
 echo "Updating blog..."
 nix develop --command update-blog --output-dir blog/
