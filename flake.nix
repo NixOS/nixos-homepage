@@ -92,7 +92,7 @@ rec {
 
         checks.build = defaultPackage;
 
-        packages = rec {
+        packages = {
           homepage = pkgs.stdenv.mkDerivation {
             name = "nixos-homepage-${self.lastModifiedDate}";
 
