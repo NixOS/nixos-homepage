@@ -1,22 +1,22 @@
-$.fn.shuffleChildren = function() {
+// FisherYates implementation
+$.fn.shuffleChildren = function(seedParam = Date.now()) {
+  var randomish = function(s) {
+    s = Math.sin(s) * 10000;
+    return s - Math.floor(s);
+  };
+
   $.each(this.get(), function(index, el) {
-      var random = function(s = Date.now()) {
-        return function() {
-            s = Math.sin(s) * 10000;
+    var $el = $(el);
+    var $find = $el.children();
+    var len = $find.length;
+    var seed = randomish(seedParam);
 
-            return s - Math.floor(s);
-        };
-      };
+    while (--len) {
+      let randIndex = Math.floor(seed * (len + 1));
+      [$find[randIndex], $find[len]] = [$find[len], $find[randIndex]];
+    }
 
-      var $el = $(el);
-      var $find = $el.children();
-
-      $find.sort(function() {
-          return 0.5 - random((new Date).getHours());
-      });
-
-      $el.empty();
-      $find.appendTo($el);
+    $el.empty().append($find);
   });
 };
 
@@ -346,5 +346,5 @@ $(function () {
   // This way tabs and panes are active as intended.
   handleNavigation();
 
-  $("section.community-commercial-support > ul").shuffleChildren();
+  $("section.community-commercial-support > ul").shuffleChildren((new Date).getHours());
 });
