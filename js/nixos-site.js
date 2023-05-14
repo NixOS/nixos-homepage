@@ -1,22 +1,16 @@
+// FisherYates implementation
 $.fn.shuffleChildren = function() {
   $.each(this.get(), function(index, el) {
-      var random = function(s = Date.now()) {
-        return function() {
-            s = Math.sin(s) * 10000;
+    var $el = $(el);
+    var $find = $el.children();
+    var len = $find.length;
 
-            return s - Math.floor(s);
-        };
-      };
+    while (--len) {
+      let randIndex = Math.floor(Math.random() * len);
+      [$find[randIndex], $find[len]] = [$find[len], $find[randIndex]];
+    }
 
-      var $el = $(el);
-      var $find = $el.children();
-
-      $find.sort(function() {
-          return 0.5 - random((new Date).getHours());
-      });
-
-      $el.empty();
-      $find.appendTo($el);
+    $el.empty().append($find);
   });
 };
 
