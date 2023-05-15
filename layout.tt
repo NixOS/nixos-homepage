@@ -118,7 +118,7 @@ BLOCK navigationLink %]
         <section>
           <h4>Contribute</h4>
           <ul>
-            <li><a href="[% root %]guides/contributing.html">Contributing Guide</a></li>
+            <li><a href="https://nix.dev/contributing/how-to-contribute">Contributing Guide</a></li>
             <li><a href="[% root %]donate.html">Donate</a></li>
           </ul>
         </section>
