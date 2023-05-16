@@ -24,6 +24,7 @@ HTML = \
   community/teams/documentation.html \
   community/teams/nixpkgs-architecture.html \
   community/teams/nix.html \
+  community/teams/cuda.html \
   demos/index.html \
   donate.html \
   download.html \
