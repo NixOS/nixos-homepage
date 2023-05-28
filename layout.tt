@@ -104,6 +104,7 @@ BLOCK navigationLink %]
             <li><a href="https://status.nixos.org/">Channel Status</a></li>
             <li><a href="https://search.nixos.org/packages">Packages search</a></li>
             <li><a href="https://search.nixos.org/options">Options search</a></li>
+            <li><a href="https://reproducible.nixos.org/">Reproducible Builds Status</a></li>
             <li><a href="[% root %]community/teams/security.html">Security</a></li>
           </ul>
         </section>
