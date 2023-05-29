@@ -85,8 +85,8 @@
         environment. The same environment always and everywhere.
       </p>
       <ul>
-        <!--<li><a href="[%root%]">reproducibility</a></li>-->
-        <li><a href="[%root%]guides/continuous-integration-github-actions.html">continuous integration</a></li>
+        <li>reproducibility</li>
+        <li>>continuous integration</li>
       </ul>
       <div>
         <p>
@@ -112,9 +112,9 @@
         the cloud.
       </p>
       <ul>
-        <li><a href="[%root%]learn.html">cloud images</a></li>
-        <li><a href="[%root%]guides/building-and-running-docker-images.html">docker images</a></li>
-        <li><a href="[%root%]guides/how-nix-works.html#nixos">nixos</a></li>
+        <li>cloud images</li>
+        <li>docker images</li>
+        <li>declarative configuration</li>
       </ul>
       <div>
         <p>
@@ -203,7 +203,7 @@
       </p>
       <ul>
         <li><a href="[%root%]community/index.html">community</a></li>
-        <li><a href="[%root%]guides/contributing.html">contribute</a></li>
+        <li><a href="https://nix.dev/contributing/how-to-contribute">contribute</a></li>
         <li><a href="https://github.com/NixOS/nixpkgs">github</a></li>
       </ul>
       <div>

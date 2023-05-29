@@ -30,19 +30,6 @@ HTML = \
   download.html \
   explore.html \
   guides/how-nix-works.html \
-  guides/nix-language.html \
-  guides/ad-hoc-developer-environments.html \
-  guides/towards-reproducibility-pinning-nixpkgs.html \
-  guides/declarative-and-reproducible-developer-environments.html \
-  guides/continuous-integration-github-actions.html \
-  guides/dev-environment.html \
-  guides/building-and-running-docker-images.html \
-  guides/building-bootable-iso-image.html \
-  guides/deploying-nixos-using-terraform.html \
-  guides/installing-nixos-on-a-raspberry-pi.html \
-  guides/integration-testing-using-virtual-machines.html \
-  guides/cross-compilation.html \
-  guides/contributing.html \
   index.html \
   learn.html
 
@@ -54,14 +41,6 @@ DEMOS = \
   demos/example_4.svg \
   demos/example_5.svg \
   demos/example_6.svg
-
-NIX_DEV_MANUAL_IN ?= /no-such-path
-NIX_DEV_MANUAL_OUT = guides
-
-all: $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
-
-$(NIX_DEV_MANUAL_OUT) learn_guides.html.in: $(NIX_DEV_MANUAL_IN) layout.tt scripts/copy-nix-dev-tutorials.sh
-	bash ./scripts/copy-nix-dev-tutorials.sh $(NIX_DEV_MANUAL_OUT)
 
 
 ### Prettify the Nix Pills
