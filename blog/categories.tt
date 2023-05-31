@@ -1,5 +1,5 @@
 
-[% WRAPPER blog/layout.tt title="Categories" %]
+[% WRAPPER blog/layout.tt title="Nix Categories" %]
 
 <section class="blog-categories">
   <ul>
@@ -7,51 +7,51 @@
       <h2>Events</h2>
       <ul>
         <li>
-          <time datetime="2022-01-10">(10 Jan 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/call-for-participation-bob-2022-march-11-berlin-or-online/17071">
-            Call for Participation: BOB 2022 (March 11, Berlin or online)
+          <time datetime="2023-05-29">(29 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nix-camp-2023-is-on/28537">
+            Nix Camp 2023 is On!
           </a>
         </li>
         <li>
-          <time datetime="2021-11-19">(19 Nov 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/conflang-talks-available-online/16154">
-            CONFLANG: talks available online
+          <time datetime="2023-05-04">(04 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nixos-meetup-in-munich-actually-garching-tum-on-the-12th-may-2023/27872">
+            NixOS Meetup in Munich (actually Garching, @ TUM) on the 12th May 2023
           </a>
         </li>
         <li>
-          <time datetime="2021-10-29">(29 Oct 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/call-for-contributions-bob-2022-march-11-deadline-dec-6/15757">
-            Call for Contributions: BOB 2022 [March 11, Deadline Dec 6]
+          <time datetime="2023-05-02">(02 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/london-nix-user-group/27825">
+            London Nix User Group
           </a>
         </li>
         <li>
-          <time datetime="2021-10-08">(08 Oct 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/call-for-participation-nix-workshop-at-vandyhacks/15401">
-            Call for participation: Nix workshop at VandyHacks
+          <time datetime="2023-04-25">(25 Apr 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/2023-05-27-28-saturday-sunday-nix-developer-workshop-and-zhf-23-05-hackathon-ost-zurich-rapperswil-jona/27596">
+            2023-05-27–28 (Saturday, Sunday) Nix developer workshop and ZHF 23.05 hackathon – OST, Zürich (Rapperswil-Jona)
           </a>
         </li>
         <li>
-          <time datetime="2021-10-01">(01 Oct 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nixpkgs-for-hacktoberfest/15302">
-            Nixpkgs for hacktoberfest?
+          <time datetime="2023-04-24">(24 Apr 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/new-york-nix-meetup-04-26-2023/27554">
+            New York Nix Meetup - 04/26/2023
           </a>
         </li>
         <li>
-          <time datetime="2021-07-08">(08 Jul 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nix-camp-a-small-event-for-nix-enthusiasts/13978">
-            Nix Camp - A Small Event for Nix Enthusiasts
+          <time datetime="2023-04-17">(17 Apr 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/new-york-nix-users-group-revival/27359">
+            New York Nix Users Group revival
           </a>
         </li>
         <li>
-          <time datetime="2021-06-02">(02 Jun 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nix-and-haskell-at-zurihac-2021/13417">
-            Nix and Haskell at ZuriHac 2021
+          <time datetime="2023-04-06">(06 Apr 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/casual-nix-nixos-meetup-in-paris-april-27th/27038">
+            Casual Nix/NixOS meetup in Paris - April 27th
           </a>
         </li>
         <li>
-          <time datetime="2021-05-19">(19 May 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nixcon-2020-broken-out-videos/13174">
-            NixCon 2020 broken out videos
+          <time datetime="2023-04-03">(03 Apr 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nixos-colorado-meetup/26952">
+            NixOS Colorado Meetup?
           </a>
         </li>
       </ul>
@@ -61,51 +61,51 @@
       <h2>Jobs</h2>
       <ul>
         <li>
-          <time datetime="2022-01-10">(10 Jan 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/senior-devops-engineer-contextflow/17070">
-            Senior DevOps Engineer @contextflow
+          <time datetime="2023-05-22">(22 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/ngi-project-manager-part-time-nixos-foundation/28369">
+            NGI Project Manager (part-time) – NixOS Foundation
           </a>
         </li>
         <li>
-          <time datetime="2021-12-28">(28 Dec 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/flox-mission-and-hiring/16843">
-            Flox Mission and Hiring
+          <time datetime="2023-05-10">(10 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/looking-for-a-part-time-freelance-to-work-on-a-transition-to-nixos-in-a-bare-metal-environment/28015">
+            Looking for a part-time/freelance to work on a transition to NixOS in a bare metal environment
           </a>
         </li>
         <li>
-          <time datetime="2021-12-28">(28 Dec 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/comm-needs-help/16840">
-            Comm needs help
+          <time datetime="2023-05-04">(04 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/devops-engineer-at-superfluid-finance-a-tech-hearted-web3-company/27870">
+            DevOps Engineer at Superfluid Finance (A Tech-Hearted Web3 Company)
           </a>
         </li>
         <li>
-          <time datetime="2021-12-11">(11 Dec 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nix-engineers-tvbeat-remote/16549">
-            Nix engineers @ TVbeat (remote)
+          <time datetime="2023-04-20">(20 Apr 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/editorial-lead-or-nix-expert-documentation-project-2023-nixos-foundation/27471">
+            Editorial lead or Nix expert – Documentation Project 2023 (NixOS Foundation)
           </a>
         </li>
         <li>
-          <time datetime="2021-12-10">(10 Dec 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/system-engineer-flying-circus/16527">
-            System Engineer @ Flying Circus
+          <time datetime="2023-04-07">(07 Apr 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/core-infrastructure-engineer-at-kuutamo/27075">
+            Core Infrastructure Engineer at kuutamo
           </a>
         </li>
         <li>
-          <time datetime="2021-11-25">(25 Nov 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/cisco-threatgrid-has-a-senior-appliance-engineering-opening/16252">
-            Cisco ThreatGRID has a senior appliance engineering opening
+          <time datetime="2023-03-23">(23 Mar 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/job-devops-engineer-nix-remote-in-spain/26659">
+            [Job] DevOps Engineer (Nix) - Remote in Spain
           </a>
         </li>
         <li>
-          <time datetime="2021-11-24">(24 Nov 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/tulip-co-hiring-nix-devops-engineers/16231">
-            Tulip.co - Hiring Nix/DevOps Engineers
+          <time datetime="2023-03-14">(14 Mar 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/looking-for-a-devops-engineer-in-london/26322">
+            Looking for a devops engineer in London
           </a>
         </li>
         <li>
-          <time datetime="2021-11-15">(15 Nov 2021)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/naersk-is-looking-for-help/16075">
-            Naersk is looking for help
+          <time datetime="2023-03-14">(14 Mar 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/chordify-looking-for-a-devops-engineer-in-the-netherlands/26311">
+            Chordify looking for a DevOps Engineer in the Netherlands
           </a>
         </li>
       </ul>
@@ -115,12 +115,6 @@
       <h2>Planet</h2>
       <ul>
         <li>
-          <time datetime="2022-03-1">(1 March 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nixos-community-survey-2022/">
-            NixOS Community Survey 2022
-          </a>
-	</li>
-	<li>
           <time datetime="2022-02-03">(03 Feb 2022)</time>
           <a target="_blank" href="https://tweag.io/blog/2022-02-03-trustix-voting/">
             Tweag I/O: Trustix - Consensus and voting
@@ -175,51 +169,51 @@
       <h2>Community announcements</h2>
       <ul>
         <li>
-          <time datetime="2022-02-07">(07 Feb 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/self-signed-tls-certificates-as-a-flake/17548">
-            Self signed TLS certificates as a Flake
+          <time datetime="2023-05-31">(31 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/nix-2-16-released/28597">
+            Nix 2.16 released
           </a>
         </li>
         <li>
-          <time datetime="2022-02-06">(06 Feb 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/vim-nixhash-a-neovim-plugin-to-fix-the-fake-tofu-sha256-in-your-nix-files/17538">
-            Vim-nixhash: a neovim plugin to fix the fake TOFU sha256 in your nix files
+          <time datetime="2023-05-31">(31 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/combined-manager-new-structure-for-personal-nixos-configs/28596">
+            Combined Manager: New structure for personal NixOS configs
           </a>
         </li>
         <li>
-          <time datetime="2022-02-01">(01 Feb 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nix-as-a-package-manager-for-quantum-chemistry-packages/17454">
-            Nix as a package manager for quantum chemistry packages
+          <time datetime="2023-05-31">(31 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/rfc-0140-fcp-simple-package-paths/28589">
+            RFC 0140 FCP: Simple Package Paths
           </a>
         </li>
         <li>
-          <time datetime="2022-01-26">(26 Jan 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/rfc-0097-fcp-unset-read-permission-bit-on-nix-store-for-other-users/17351">
-            RFC 0097 FCP: Unset read permission bit on /nix/store for other users
+          <time datetime="2023-05-29">(29 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/utf-8-support-for-nix/28530">
+            UTF-8 support for Nix
           </a>
         </li>
         <li>
-          <time datetime="2022-01-26">(26 Jan 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/rfc-0089-fcp-collect-non-source-package-meta-attribute/17350">
-            RFC 0089 FCP: Collect non-source package meta attribute
+          <time datetime="2023-05-25">(25 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/hdn-1-0-0-install-a-package-with-hdn-add-pkgs-hello/28469">
+            `hdn` 1.0.0: install a package with `hdn add pkgs.hello`
           </a>
         </li>
         <li>
-          <time datetime="2022-01-25">(25 Jan 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nix-2-6-0-released/17324">
-            Nix 2.6.0 released
+          <time datetime="2023-05-25">(25 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/super-colliding-nix-stores/28462">
+            Super Colliding Nix Stores
           </a>
         </li>
         <li>
-          <time datetime="2022-01-24">(24 Jan 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/nixinate-a-simple-proof-of-concept-deployment-tool/17320">
-            🕶️ Nixinate - A Simple Proof of Concept Deployment Tool
+          <time datetime="2023-05-25">(25 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/the-fourth-ocean-sprint-2023-is-happening-from-oct-16th-until-20th/28453">
+            The fourth Ocean Sprint 2023 is happening from Oct 16th until 20th
           </a>
         </li>
         <li>
-          <time datetime="2022-01-22">(22 Jan 2022)</time>
-          <a target="_blank" href="https://discourse.nixos.org/t/introducing-crane-composable-and-cacheable-builds-with-cargo/17275">
-            Introducing Crane: Composable and Cacheable Builds with Cargo
+          <time datetime="2023-05-23">(23 May 2023)</time>
+          <a target="_blank" href="https://discourse.nixos.org/t/pins-permanent-nix-binary-storage/28401">
+            Pins: Permanent Nix Binary Storage
           </a>
         </li>
       </ul>
