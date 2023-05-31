@@ -32,29 +32,34 @@
                 Highlights
               </a>
             </li>
+
             <li>
-              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-nixpkgs-internals">
-                Internal changes
+              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-new-services">
+                New Services
               </a>
             </li>
-            <li>
-              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-migration">
-                Detailed migration information
-              </a>
-            </li>
+
             <li>
               <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-incompatibilities">
                 Backward Incompatibilities
               </a>
             </li>
+
             <li>
               <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-notable-changes">
                 Other Notable Changes
               </a>
             </li>
+
             <li>
-              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-new-services">
-                New Services
+              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-nixpkgs-internals">
+                Nixpkgs internals
+              </a>
+            </li>
+
+            <li>
+              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-migration">
+                Detailed migration information
               </a>
             </li>
           </ul>
