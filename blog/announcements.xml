@@ -84,14 +84,24 @@
         In that process we <strong>added 2882</strong> options and <strong>removed 728</strong>.
       </p>
 
-      <h3>Password hashing migration</h3>
+      <h3>Removal of weak hashing algorithms</h3>
 
       <p>
-        Weak password hashes in NixOS 23.05 are now disabled. We consider password hashing methods weak if
-        the libxcrypt project did not flag them <a href="https://github.com/besser82/libxcrypt/blob/v4.4.33/lib/hashes.conf#L41">strong</a>.
-        If your system is configured with weak hashes, a script will emit a warning during activation. We expect
-        most users accounts to be set up with sha512crypt (hash prefixed with <i>$6$</i>) which we will continue to support.
+        The support for weak password hashing algorithms through the <code>crypt(3)</code> API was disabled in NixOS
+        23.05. We consider password hashing methods weak if the libxcrypt project did not flag them <a href="https://github.com/besser82/libxcrypt/blob/v4.4.33/lib/hashes.conf#L41">strong</a>.
+
+        This change affects both user accounts on the local system, as well as the supported algorithms in many applications
+        that rely on that API. Examples are authentication services like OpenLDAP or PAM, databases like PostgreSQL and, more generally speaking,
+        programming languages that offer a password hashing interface. These services should be migrated away from weak password
+        hashes before upgrading to NixOS 23.05, as the lack of support for these algorithms may make authentication for these
+        applications impossible.
+
+        If your system has user accounts that rely on such weak hashing algorithms, a warning will be emitted during activation. 
+        Existing users accounts are most likely using sha512crypt, for which the hash is prefixed with <i>$6$</i>. These will continue to
+        work for the foreseeable future, but migrating to more modern hashes is strongly recommended anyway.
         Interactively configured passwords can be updated using <strong>passwd</strong>, new password hashes can be generated through <strong>mkpasswd</strong>.
+
+        Note, that we do offer <code>libxcrypt-legacy</code> as an escape hatch, that affected packages can be overridden with.
       </p>
 
       <h3>Bootspec (RFC-125)</h3>
