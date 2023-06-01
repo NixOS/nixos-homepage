@@ -277,9 +277,9 @@
 
       [% PROCESS svg path="site-styles/assets/gfx-marketing.white.svg" %]
       <h3>Marketing Team</h3>
-      <p>Maintains this website and its content, and
-        looks for ways to improve general communication of
-        the project.
+      <p>
+        Maintains this website, responsible for social media outreach, collects metrics.
+        Mission: help grow the Nix user base.
       </p>
       <a class="button -primary" href="[%root%]community/teams/marketing.html">Read more</a>
 
