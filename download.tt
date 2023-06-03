@@ -91,7 +91,7 @@
       </article>
 
       <article id="nix-install-windows">
-        <h2>Windows Subsystem for Linux (WSL)</h2>
+        <h2>Windows (WSL2)</h2>
         <h3>Multi-user installation (Requires WSL with systemd enabled)</h3>
         <p>
           WSL versions 0.67.6 and above has systemd support. Follow <a href="https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/">Microsoft's systemd guide</a> to configure it, and then install Nix using:
