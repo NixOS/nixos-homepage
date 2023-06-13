@@ -1,51 +1,12 @@
 
     <li>
-      <a href="https://determinate.systems/">
+      <a href="https://www.numtide.com/">
         <div>
-          <img alt="Determinate Systems" src="/community/commercial-support-logos/determinate-systems.svg" />
+          <img alt="Numtide Ltd" src="/community/commercial-support-logos/numtide.png" />
         </div>
-        <h2>Determinate Systems</h2>
-        <ul><li>Remote</li><li>Massachusetts, USA</li></ul>
-        Confidently build and deploy to the cloud, stadium, or stock exchange.
-Expert help with the Nix ecosystem from Graham Christensen and
-collaborators.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://nixos.mayflower.consulting">
-        <div>
-          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
-        </div>
-        <h2>Mayflower</h2>
-        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
-        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://tweag.io/">
-        <div>
-          <img alt="Tweag" src="/community/commercial-support-logos/tweag.svg" />
-        </div>
-        <h2>Tweag</h2>
-        <ul><li>Remote</li><li>Paris, France</li><li>London, UK</li><li>Zurich, Switzerland</li></ul>
-        We enable deep-tech startups to achieve their vision, from research to product
-delivery. Top contributor to Nix and this website.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://obsidian.systems">
-        <div>
-          <img alt="Obsidian Systems" src="/community/commercial-support-logos/obsidian-systems.svg" />
-        </div>
-        <h2>Obsidian Systems</h2>
-        <ul><li>New York, USA</li></ul>
-        Software consultancy specializing in Haskell, Nix, curiosity, and innovation.
+        <h2>Numtide Ltd</h2>
+        <ul><li>Switzerland</li><li>Remote</li></ul>
+        Numtide is a Nix and DevOps consulting company. We help our customers with declarative development, cloud and bare-metal infrastructures.
 
       </a>
     </li>
@@ -63,41 +24,28 @@ delivery. Top contributor to Nix and this website.
     </li>
 
     <li>
-      <a href="https://nix.how">
+      <a href="https://floxdev.com">
         <div>
-          <img alt="Nix.How" src="/community/commercial-support-logos/nix-how.png" />
+          <img alt="flox" src="/community/commercial-support-logos/flox.png" />
         </div>
-        <h2>Nix.How</h2>
-        <ul><li>Remote</li><li>United Kingdom</li></ul>
-        Nix experts specialising in converting legacy infrastructure to a Nix/NixOS
-methodology and workflow
+        <h2>flox</h2>
+        <ul><li>Remote</li><li>San Francisco</li><li>London</li></ul>
+        flox is a platform for building, sharing, and collaborating across the entire
+development lifecycle.
 
       </a>
     </li>
 
     <li>
-      <a href="https://helsinki-systems.de">
+      <a href="https://determinate.systems/">
         <div>
-          <img alt="Helsinki Systems" src="/community/commercial-support-logos/helsinki-systems.png" />
+          <img alt="Determinate Systems" src="/community/commercial-support-logos/determinate-systems.svg" />
         </div>
-        <h2>Helsinki Systems</h2>
-        <ul><li>Stuttgart, Germany</li></ul>
-        Your partner for hosting, networks and IT solutions running on NixOS. We have
-multiple years of NixOS and decades of Linux experience to aid your NixOS
-integration and administration.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="http://blackriversoft.com/">
-        <div>
-          <img alt="Black River Software" src="/community/commercial-support-logos/black-river-software.png" />
-        </div>
-        <h2>Black River Software</h2>
-        <ul><li>Ohio, USA</li></ul>
-        Black River Software offers custom software development, software architecture
-consulting, and build and deployment engineering services.
+        <h2>Determinate Systems</h2>
+        <ul><li>Remote</li><li>Massachusetts, USA</li></ul>
+        Confidently build and deploy to the cloud, stadium, or stock exchange.
+Expert help with the Nix ecosystem from Graham Christensen and
+collaborators.
 
       </a>
     </li>
@@ -129,6 +77,32 @@ Empower your team with the latest knowledge and best practices.
     </li>
 
     <li>
+      <a href="https://nix.how">
+        <div>
+          <img alt="Nix.How" src="/community/commercial-support-logos/nix-how.png" />
+        </div>
+        <h2>Nix.How</h2>
+        <ul><li>Remote</li><li>United Kingdom</li></ul>
+        Nix experts specialising in converting legacy infrastructure to a Nix/NixOS
+methodology and workflow
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://tweag.io/">
+        <div>
+          <img alt="Tweag" src="/community/commercial-support-logos/tweag.svg" />
+        </div>
+        <h2>Tweag</h2>
+        <ul><li>Remote</li><li>Paris, France</li><li>London, UK</li><li>Zurich, Switzerland</li></ul>
+        We enable deep-tech startups to achieve their vision, from research to product
+delivery. Top contributor to Nix and this website.
+
+      </a>
+    </li>
+
+    <li>
       <a href="https://arnout.engelen.eu">
         <div>
           <img alt="Engelen Open Source" src="/community/commercial-support-logos/engelen-open-source.png" />
@@ -142,15 +116,65 @@ support and small- to medium-sized projects around Nix and Open Source.
     </li>
 
     <li>
-      <a href="https://serokell.io/">
+      <a href="http://blackriversoft.com/">
         <div>
-          <img alt="Serokell" src="/community/commercial-support-logos/serokell.png" />
+          <img alt="Black River Software" src="/community/commercial-support-logos/black-river-software.png" />
         </div>
-        <h2>Serokell</h2>
-        <ul><li>Remote</li><li>Tallinn, Estonia</li></ul>
-        Serokell is a custom software engineering company that creates innovative
-solutions for complex problems. We do software development, consulting, and
-auditing.
+        <h2>Black River Software</h2>
+        <ul><li>Ohio, USA</li></ul>
+        Black River Software offers custom software development, software architecture
+consulting, and build and deployment engineering services.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://helsinki-systems.de">
+        <div>
+          <img alt="Helsinki Systems" src="/community/commercial-support-logos/helsinki-systems.png" />
+        </div>
+        <h2>Helsinki Systems</h2>
+        <ul><li>Stuttgart, Germany</li></ul>
+        Your partner for hosting, networks and IT solutions running on NixOS. We have
+multiple years of NixOS and decades of Linux experience to aid your NixOS
+integration and administration.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://immutablesolutions.com/">
+        <div>
+          <img alt="Immutable Solutions" src="/community/commercial-support-logos/immutable-solutions.png" />
+        </div>
+        <h2>Immutable Solutions</h2>
+        <ul><li>Sweden</li></ul>
+        Nix specialists helping companies design, develop and deploy systems in a
+declarative fashion.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://obsidian.systems">
+        <div>
+          <img alt="Obsidian Systems" src="/community/commercial-support-logos/obsidian-systems.svg" />
+        </div>
+        <h2>Obsidian Systems</h2>
+        <ul><li>New York, USA</li></ul>
+        Software consultancy specializing in Haskell, Nix, curiosity, and innovation.
+
+      </a>
+    </li>
+
+    <li>
+      <a href="https://nixos.mayflower.consulting">
+        <div>
+          <img alt="Mayflower" src="/community/commercial-support-logos/mayflower.png" />
+        </div>
+        <h2>Mayflower</h2>
+        <ul><li>Munich, Germany</li><li>Berlin, Germany</li><li>Würzburg, Germany</li></ul>
+        We are Mayflower. We build infrastructure. Declarative &amp; reproducible.
 
       </a>
     </li>
@@ -170,39 +194,15 @@ Over budget? Not working properly? Growing with bugs? We can help.
     </li>
 
     <li>
-      <a href="https://floxdev.com">
+      <a href="https://serokell.io/">
         <div>
-          <img alt="flox" src="/community/commercial-support-logos/flox.png" />
+          <img alt="Serokell" src="/community/commercial-support-logos/serokell.png" />
         </div>
-        <h2>flox</h2>
-        <ul><li>Remote</li><li>San Francisco</li><li>London</li></ul>
-        flox is a platform for building, sharing, and collaborating across the entire
-development lifecycle.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://www.numtide.com/">
-        <div>
-          <img alt="Numtide Ltd" src="/community/commercial-support-logos/numtide.png" />
-        </div>
-        <h2>Numtide Ltd</h2>
-        <ul><li>Switzerland</li><li>Remote</li></ul>
-        Numtide is a Nix and DevOps consulting company. We help our customers with declarative development, cloud and bare-metal infrastructures.
-
-      </a>
-    </li>
-
-    <li>
-      <a href="https://immutablesolutions.com/">
-        <div>
-          <img alt="Immutable Solutions" src="/community/commercial-support-logos/immutable-solutions.png" />
-        </div>
-        <h2>Immutable Solutions</h2>
-        <ul><li>Sweden</li></ul>
-        Nix specialists helping companies design, develop and deploy systems in a
-declarative fashion.
+        <h2>Serokell</h2>
+        <ul><li>Remote</li><li>Tallinn, Estonia</li></ul>
+        Serokell is a custom software engineering company that creates innovative
+solutions for complex problems. We do software development, consulting, and
+auditing.
 
       </a>
     </li>
