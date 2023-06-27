@@ -81,9 +81,6 @@ rec {
         serve =
           mkPyScript (with pkgs.python3Packages; [ click livereload ]) "serve";
 
-        shuffle_commercial_providers =
-          mkPyScript (with pkgs.python3Packages; [ click toml ]) "shuffle-commercial-providers";
-
         update_blog =
           mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser cchardet ]) "update-blog";
 
@@ -92,7 +89,7 @@ rec {
 
         checks.build = defaultPackage;
 
-        packages = rec {
+        packages = {
           homepage = pkgs.stdenv.mkDerivation {
             name = "nixos-homepage-${self.lastModifiedDate}";
 
@@ -120,7 +117,6 @@ rec {
                 perlPackages.TemplateToolkit
                 perlPackages.XMLSimple
                 serve
-                shuffle_commercial_providers
                 update_blog
                 xhtml1
                 which
