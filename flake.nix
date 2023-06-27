@@ -81,9 +81,6 @@ rec {
         serve =
           mkPyScript (with pkgs.python3Packages; [ click livereload ]) "serve";
 
-        update_providers =
-          mkPyScript (with pkgs.python3Packages; [ click toml ]) "update-commercial-providers";
-
         update_blog =
           mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser cchardet ]) "update-blog";
 
@@ -121,7 +118,6 @@ rec {
                 perlPackages.XMLSimple
                 serve
                 update_blog
-                update_providers
                 xhtml1
                 which
               ];

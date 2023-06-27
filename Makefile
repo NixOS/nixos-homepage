@@ -228,16 +228,6 @@ blog/categories.html: blog/layout.tt
 index.html: blog/announcements-rss.xml blog/index.html
 
 
-#
-# -- /community section ------------------------------------------------------
-#
-
-community/commercial-support.html: community/commercial-support.html.in
-
-community/commercial-support.html.in: community/commercial-support.toml
-	update-commercial-providers --input community/commercial-support.toml > $@
-
-
 ### Check
 
 check: all
@@ -261,10 +251,10 @@ tmp.svg.less: $(wildcard site-styles/assets/*)
 
 tmp.styles: tmp.svg.less $(SITE_STYLES_LESS)
 	rm -rf tmp.styles
-	
+
 	mkdir -p tmp.styles
 	cp -fR site-styles/* tmp.styles/
-	
+
 	rm -rf tmp.styles/assets/*
 	cp tmp.svg.less tmp.styles/assets/svg.less
 
