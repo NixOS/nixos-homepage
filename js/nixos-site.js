@@ -1,3 +1,19 @@
+// FisherYates implementation
+$.fn.shuffleChildren = function() {
+  $.each(this.get(), function(index, el) {
+    var $el = $(el);
+    var $find = $el.children();
+    var len = $find.length;
+
+    while (--len) {
+      let randIndex = Math.floor(Math.random() * len);
+      [$find[randIndex], $find[len]] = [$find[len], $find[randIndex]];
+    }
+
+    $el.empty().append($find);
+  });
+};
+
 $(function () {
   // Special "pseudo-global" variable to track whether we are synthetically
   // activating an event. In that case some semantics are different.
@@ -324,4 +340,5 @@ $(function () {
   // This way tabs and panes are active as intended.
   handleNavigation();
 
+  $("section.community-commercial-support > ul").shuffleChildren();
 });
