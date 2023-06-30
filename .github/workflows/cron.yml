@@ -56,7 +56,7 @@ jobs:
       with:
         commit_message: 'Hourly update [ci skip]'
         branch: 'master'
-        file_pattern: flake.lock community/commercial-support.html.in blog/announcements.xml
+        file_pattern: flake.lock blog/announcements.xml
         commit_user_name: NixOS webmaster
         commit_user_email: webmaster@nixos.org
         commit_author: GitHub Actions <webmaster@nixos.org>
