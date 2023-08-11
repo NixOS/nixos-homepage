@@ -79,7 +79,28 @@
     <div>
       <div class="clickable-whole">
         <div>
-          <h2>Last Conference</h2>
+          <h2>Next Conference</h2>
+          <div>
+            <article class="nixcon-left nixcon-2023 clickable-whole">
+              <header>
+                <h3>NixCon 2023 - Darmstadt</h3>
+                <time datetime="2023-09-08">8-10 September 2023</time>
+              </header>
+              <p>
+                NixCon is a community-oriented conference for contributors and
+                users of Nix and NixOS. It's about sharing experiences,
+                inspiring people and discussing future development.
+              </p>
+              <footer>
+                <a href="https://2023.nixcon.org">Read more...</a>
+              </footer>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <h2>Previous Conferences</h2>
           <div>
             <article class="nixcon-2022 clickable-whole">
               <header>
@@ -95,13 +116,6 @@
                 <a href="https://2022.nixcon.org">Read more...</a>
               </footer>
             </article>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <h2>Previous Conferences</h2>
-          <div>
             <article class="nixcon-2020 clickable-whole">
               <header>
                 <h3>NixCon 2020 - Online</h3>
