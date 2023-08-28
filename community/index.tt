@@ -253,6 +253,12 @@
     <h2>Teams</h2>
     <div>
 
+      [% PROCESS svg path="site-styles/assets/gfx-foundation-board.white.svg" %]
+      <h3>Foundation board</h3>
+      <p>Responsible for providing operational and organizational support to
+      the NixOS project and community.
+      </p>
+      <a class="button -primary" href="[%root%]community/teams/foundation-board.html">Read more</a>
       [% PROCESS svg path="site-styles/assets/gfx-rfc-steering.white.svg" %]
       <h3>RFC Steering Committee</h3>
       <p>Responsible for forming an RFC Shepherd team from the available
