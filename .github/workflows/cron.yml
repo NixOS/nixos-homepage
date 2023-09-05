@@ -8,7 +8,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
       - name: Checking out the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Installing Nix
         uses: cachix/install-nix-action@v22
