@@ -99,6 +99,8 @@ rec {
             enableParallelBuilding = true;
 
             buildInputs = with pkgs; [
+                nodejs_latest
+
                 asciinema-scenario
                 gnused
                 imagemagick
