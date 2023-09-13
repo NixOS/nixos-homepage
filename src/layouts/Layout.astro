@@ -18,9 +18,15 @@ const { title } = Astro.props
   </body>
 </html>
 
+<script>
+
+import "htmx.org"
+
+</script>
+
 <style is:global>
 
-// Fonts - Roboto
+/* Fonts - Roboto */
 @font-face {
   font-family: 'Roboto';
   font-style: italic;
@@ -94,7 +100,7 @@ const { title } = Astro.props
   src: url('/fonts/Roboto-Black.ttf') format('truetype');
 }
 
-// Fonts - Overpass
+/* Fonts - Overpass */
 @font-face {
   font-family: 'Overpass';
   font-style: italic;
@@ -192,7 +198,7 @@ const { title } = Astro.props
   src: url('/fonts/Overpass-Black.ttf') format('truetype');
 }
 
-// Fonts - FiraCode
+/* Fonts - FiraCode */
 @font-face {
   font-family: 'Fira Mono';
   font-style: normal;
