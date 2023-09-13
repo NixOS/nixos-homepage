@@ -11,6 +11,10 @@ module.exports = {
         mono: ["Fira\\ Mono", ...defaultTheme.fontFamily.mono],
       },
     },
+    container: {
+      // https://tailwindcss.com/docs/container#centering-by-default
+      center: true,
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),
