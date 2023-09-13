@@ -1,0 +1,77 @@
+name: "CI"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - preview
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+  statuses: write
+  deployments: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+
+  build:
+    name: "Build nixos.org"
+    runs-on: ubuntu-latest
+
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+
+      - name: "Checking out the repository"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: "Installing Nix"
+        uses: cachix/install-nix-action@v23
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: "Setup Cachix"
+        uses: cachix/cachix-action@v12
+        with:
+          name: nixos-homepage
+          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+
+      - name: "Build"
+        run: |
+          nix develop --command "npm run build"
+          mkdir build
+          cp -RL ./dist/* ./build/
+          cp -RL ./netlify.toml ./build/
+
+      - name: "Publish to Netlify"
+        if: github.repository == 'NixOS/nixos-homepage'
+        uses: nwtgck/actions-netlify@v2.1.0
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: 'Published from GitHub Actions'
+          publish-dir: './build'
+
+          enable-pull-request-comment: true
+          overwrites-pull-request-comment: false
+          enable-commit-comment: false
+          enable-commit-status: true
+
+          production-branch: 'main'
+          production-deploy: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+
+          alias: ${{ github.event_name == 'push' && github.ref_name || '' }}
+
+          enable-github-deployment: ${{ github.event_name == 'push' && 'true' || 'false' }}
+          github-deployment-environment: ${{ github.event_name == 'push' && github.ref_name || format('pull-request-{0}', github.event.number) }}
