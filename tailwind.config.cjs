@@ -5,6 +5,11 @@ module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      colors: {
+        "nixlightblue": "#7ebae4",
+        "nixdarkblue": "#5277c3",
+        "nixdarkerblue": "#27385d",
+      },
       fontFamily: {
         sans: ["Roboto", ...defaultTheme.fontFamily.sans],
         serif: ["Overpass", ...defaultTheme.fontFamily.serif],
