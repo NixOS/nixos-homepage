@@ -99,7 +99,7 @@ rec {
             enableParallelBuilding = true;
 
             buildInputs = with pkgs; [
-                nodejs_latest
+                nodejs_18
 
                 asciinema-scenario
                 gnused
