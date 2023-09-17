@@ -2,32 +2,8 @@
 import {Icon} from "astro-icon";
 import { Image } from 'astro:assets';
 import flakeBlue from "../assets/image/flake-blue.svg";
-const menuItems = [
-    {
-        name: "Explore",
-        link: "/explore"
-    },
-    {
-        name: "Download",
-        link: "/download"
-    },
-    {
-        name: "Learn",
-        link: "/learn"
-    },
-    {
-        name: "Community",
-        link: "/community"
-    },
-    {
-        name: "Blog",
-        link: "/blog"
-    },
-    {
-        name: "Donate",
-        link: "/donate"
-    }
-]
+import { getEntry } from 'astro:content';
+const headerMenu = await getEntry('menus', 'header');
 ---
 
 <header class="bg-white text-black font-light shadow-lg">
@@ -37,7 +13,7 @@ const menuItems = [
             <span class="invisible lg:visible">Nix</span>
         </div>
         <div class="flex gap-8 flex-col md:flex-row">
-            {menuItems.map((item) => (
+            {headerMenu.data.items.map((item) => (
                 <a class="pt-8 pb-6 border-b-transparent hover:border-b-nixlightblue border-b-4" href={item.link}>{item.name}</a>
             ))}
             <a class="pt-7 pb-6 border-b-transparent hover:border-b-nixlightblue border-b-4" href="/search">
