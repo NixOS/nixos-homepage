@@ -3,11 +3,12 @@ import {Icon} from "astro-icon";
 import { Image } from 'astro:assets';
 import flakeBlue from "../assets/image/flake-blue.svg";
 import { getEntry } from 'astro:content';
+import Container from "../components/layout/Container.astro";
 const headerMenu = await getEntry('menus', 'header');
 ---
 
 <header class="bg-white text-black font-light shadow-lg">
-    <div class="mx-4 md:mx-auto md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl flex flex-col md:flex-row justify-between items-center">
+    <Container class="flex flex-col md:flex-row justify-between items-center">
         <div class="text-5xl font-normal gap-2 flex justify-start items-center">
             <Image class="h-16 w-16" src={flakeBlue} alt="Nix Logo" />
             <span class="invisible lg:visible">Nix</span>
@@ -20,5 +21,5 @@ const headerMenu = await getEntry('menus', 'header');
                 <Icon alt="Search" class="h-8 text-nixdarkblue" pack="mdi" name="search" />
             </a>
         </div>
-    </div>
+    </Container>
 </header>
