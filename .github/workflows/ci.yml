@@ -69,6 +69,7 @@ jobs:
           enable-commit-comment: false
           enable-commit-status: true
 
+          # TODO: once we make main branch default we should change master->main
           production-branch: 'master'
           production-deploy: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
 
