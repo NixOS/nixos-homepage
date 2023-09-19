@@ -6,8 +6,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        "nixlighterblue": "#f2f8fd",
         "nixlightblue": "#7ebae4",
         "nixdarkblue": "#5277c3",
+        "nixsemidarkblue": "#405D99",
         "nixdarkerblue": "#27385d",
       },
       fontFamily: {
