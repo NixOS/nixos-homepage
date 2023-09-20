@@ -47,7 +47,8 @@ jobs:
 
       - name: "Build"
         run: |
-          nix develop --command "npm run build"
+          nix develop --command npm install
+          nix develop --command npm run build
           mkdir build
           cp -RL ./dist/* ./build/
           cp -RL ./netlify.toml ./build/
@@ -68,8 +69,9 @@ jobs:
           enable-commit-comment: false
           enable-commit-status: true
 
-          production-branch: 'main'
-          production-deploy: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+          # TODO: once we make main branch default we should change master->main
+          production-branch: 'master'
+          production-deploy: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
 
           alias: ${{ github.event_name == 'push' && github.ref_name || '' }}
 
