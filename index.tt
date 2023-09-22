@@ -54,31 +54,36 @@
   <div>
     <ul class="whynix">
       <li>
-        [% PROCESS svg path="site-styles/assets/gfx-landing-reproducible.svg" %]
-        <h2>Reproducible</h2>
+        [% PROCESS svg path="site-styles/assets/gfx-landing-declarative.svg" %]
+        <h2>Declaration</h2>
         <p>
-          Nix builds packages in isolation from each other. This ensures that they
-          are reproducible and don't have undeclared dependencies, so <strong>if a
-            package works on one machine, it will also work on another</strong>.
+          Nix makes it <strong>trivial to share development and build
+          environments</strong> for your projects, supporting many programming
+          languages and tools, through
+          <a href="https://nix.dev/tutorials/first-steps/towards-reproducibility-pinning-nixpkgs">pinning</a>
+          and caching.
+          If a package works on one machine, it will also work on another.
         </p>
       </li>
       <li>
-        [% PROCESS svg path="site-styles/assets/gfx-landing-declarative.svg" %]
-        <h2>Declarative</h2>
+        [% PROCESS svg path="site-styles/assets/gfx-landing-reproducible.svg" %]
+        <h2>Reproducibility</h2>
         <p>
-          Nix makes it <strong>trivial to share development and build
-            environments</strong> for your projects, regardless of what programming
-          languages and tools you’re using.
+          Nix <strong>builds packages in isolation</strong> from each other to enable
+          <a href="https://reproducible-builds.org/">reproducible builds</a>.
+          The <a href="https://nixos.wiki/wiki/Binary_Cache">Nix cache</a
+          keeps build toolchains available in their exact binary version.
         </p>
       </li>
       <li>
         [% PROCESS svg path="site-styles/assets/gfx-landing-reliable.svg" %]
-        <h2>Reliable</h2>
+        <h2>Consistency</h2>
         <p>
-          Nix ensures that installing or upgrading one package <strong>cannot
-            break other packages</strong>. It allows you to <strong>roll back to
-            previous versions</strong>, and ensures that no package is in an
-          inconsistent state during an upgrade.
+          Nix ensures that installing or upgrading one package cannot break
+          other packages via consistent package source snapshots named
+          <a href="https://nixos.wiki/wiki/Nix_channels">channels</a>.
+          That allows you to <strong>roll back to previous versions</strong>,
+          and keeps the entire system is in a consistent state during upgrades.
         </p>
       </li>
     </ul>
