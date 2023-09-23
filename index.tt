@@ -70,7 +70,7 @@
         <h2>Reproducibility</h2>
         <p>
           Nix <strong>builds packages in isolation</strong> from each other to enable
-          <a href="https://reproducible-builds.org/">reproducible builds</a>.
+          <a href="https://reproducible.nixos.org/">reproducible builds</a>.
           The <a href="https://nixos.wiki/wiki/Binary_Cache">Nix cache</a
           keeps build toolchains available in their exact binary version.
         </p>
