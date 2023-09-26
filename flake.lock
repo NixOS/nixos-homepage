@@ -120,11 +120,11 @@
     "nix-pills": {
       "flake": false,
       "locked": {
-        "lastModified": 1689441739,
-        "narHash": "sha256-kzOdZxlROcmt2BYE3R4bk4hpFjSyTp7fCAOXefuv/Y0=",
+        "lastModified": 1695651422,
+        "narHash": "sha256-NSsxLQRTwwWJy27CoN5/47jp12TdPJCDhIVmJH9RQMs=",
         "owner": "NixOS",
         "repo": "nix-pills",
-        "rev": "961fa9fed41cbbb96e27bb62db8285ad2be2ebbd",
+        "rev": "b54b78be8030df398540056fc3e07c29ee38a32e",
         "type": "github"
       },
       "original": {
@@ -250,16 +250,16 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1695124524,
-        "narHash": "sha256-trXDytVCqf3KryQQQrHOZKUabu1/lB8/ndOAuZKQrOE=",
-        "owner": "edolstra",
+        "lastModified": 1695283060,
+        "narHash": "sha256-CJz71xhCLlRkdFUSQEL0pIAAfcnWFXMzd9vXhPrnrEg=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a3d30b525535e3158221abc1a957ce798ab159fe",
+        "rev": "31ed632c692e6a36cfc18083b88ece892f863ed4",
         "type": "github"
       },
       "original": {
-        "owner": "edolstra",
-        "ref": "fix-aws-sdk-cpp",
+        "owner": "NixOS",
+        "ref": "nixos-23.05-small",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -319,11 +319,11 @@
         "nixpkgs-regression": "nixpkgs-regression_2"
       },
       "locked": {
-        "lastModified": 1695580114,
-        "narHash": "sha256-ebYhL81xPlx2Uo1oYpWGPKuUVWrN7FcWOH+JH+ZyDe0=",
+        "lastModified": 1695685327,
+        "narHash": "sha256-F6gS6n44zKZvO3lJTcD0YsIfLbST9dPzZOc+lfWvOLY=",
         "owner": "nixos",
         "repo": "nix",
-        "rev": "89e5e68799132bc2f1d2551002dab84b63fde9ac",
+        "rev": "b7d88fe56ad733c99e508191393c63c0dc6085ee",
         "type": "github"
       },
       "original": {
@@ -335,11 +335,11 @@
     },
     "released-nixpkgs-stable": {
       "locked": {
-        "lastModified": 1695416179,
-        "narHash": "sha256-610o1+pwbSu+QuF3GE0NU5xQdTHM3t9wyYhB9l94Cd8=",
+        "lastModified": 1695559356,
+        "narHash": "sha256-kXZ1pUoImD9OEbPCwpTz4tHsNTr4CIyIfXb3ocuR8sI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "715d72e967ec1dd5ecc71290ee072bcaf5181ed6",
+        "rev": "261abe8a44a7e8392598d038d2e01f7b33cf26d0",
         "type": "github"
       },
       "original": {
