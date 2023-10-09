@@ -144,7 +144,7 @@
 
 [[redirects]]
   from = "/manual/nix/:version/package-management/s3-substituter*"
-  to = "/manual/nix/:version/command-ref/conf-file.html#conf-substituters"
+  to = "/manual/nix/:version/command-ref/new-cli/nix3-help-stores#s3-binary-cache-store"
   status = 302
   force = true
 
