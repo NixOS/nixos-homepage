@@ -11,6 +11,8 @@ module.exports = {
         "nixdarkblue": "#5277c3",
         "nixsemidarkblue": "#405D99",
         "nixdarkerblue": "#27385d",
+        "nixorange": "#ffab0d",
+        "nixgreen": "#6ad541"
       },
       fontFamily: {
         sans: ["Roboto", ...defaultTheme.fontFamily.sans],
@@ -27,4 +29,7 @@ module.exports = {
     require('@tailwindcss/typography'),
     require("daisyui"),
   ],
+  daisyui: {
+    themes: [], // Disable all themes for the current time being
+  },
 }

@@ -1,0 +1,23 @@
+---
+interface Props {
+    color: ["orange", "green", "blue"]
+    size: ["sm", "lg"]
+}
+
+const colorMap = {
+    "orange": "bg-nixorange",
+    "blue": "bg-nixlightblue",
+    "green": "bg-nixgreen"
+}
+
+const sizeMap = {
+    "sm": "px-10 py-2.5  rounded-3xl",
+    "lg": "px-12 py-4 rounded-2xl"
+}
+
+const { color = "orange", size = "sm" } = Astro.props;
+---
+
+<button class={`${colorMap[color]} text-white font-bold ${sizeMap[size]} drop-shadow-[0_4px_1px_rgba(0,0,0,0.2)]`}>
+    <slot/>
+</button>

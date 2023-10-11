@@ -1,10 +1,29 @@
 ---
 
 import Layout from '../layouts/Layout.astro';
+import Container from "../components/layout/Container.astro";
+import Button from "../components/ui/Button.astro";
 
 ---
 
-<Layout title="WORKS">
-  <h1 class="text-blue-600">WORKS!!!</h1>
+<Layout title="Nix & NixOS">
+  <div class="bg-nixlighterblue">
+    <Container class="flex items-center justify-between py-4">
+      <b class="text-nixsemidarkblue text-lg">NixOS 23.05 released.</b>
+      <Button>Announcement</Button>
+    </Container>
+  </div>
+  <div class="bg-nixdarkblue">
+    <Container class="text-white grid grid-cols-2 py-16">
+      <div class="flex flex-col gap-4">
+        <h1 class="font-bold text-5xl">Declarative builds and deployments.</h1>
+        <p class="text-lg">Nix is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems.</p>
+        <div class="flex justify-stretch gap-4">
+          <Button color="green" size="lg">Download</Button>
+          <Button color="blue" size="lg">Get Started</Button>
+        </div>
+      </div>
+    </Container>
+  </div>
 </Layout>
 
