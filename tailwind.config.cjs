@@ -17,6 +17,7 @@ module.exports = {
       fontFamily: {
         sans: ["Roboto", ...defaultTheme.fontFamily.sans],
         serif: ["Overpass", ...defaultTheme.fontFamily.serif],
+        heading: ["Overpass", ...defaultTheme.fontFamily.serif],
         mono: ["Fira\\ Mono", ...defaultTheme.fontFamily.mono],
       },
     },
