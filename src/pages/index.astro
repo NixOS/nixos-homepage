@@ -1,4 +1,5 @@
 ---
+import {Icon} from "astro-icon";
 import Layout from "../layouts/Layout.astro";
 import Container from "../components/layout/Container.astro";
 import Button from "../components/ui/Button.astro";
@@ -9,13 +10,13 @@ const landingFeatures = await getCollection("landing-features");
 
 <Layout title="Nix & NixOS">
   <div class="bg-nixlighterblue">
-    <Container class="flex items-center justify-between py-4">
+    <Container class="flex flex-col md:flex-row items-center justify-between py-4">
       <b class="text-nixsemidarkblue text-lg">NixOS 23.05 released.</b>
       <Button>Announcement</Button>
     </Container>
   </div>
   <div class="bg-nixdarkblue">
-    <Container class="text-white grid grid-cols-2 py-32">
+    <Container class="text-white grid md:grid-cols-2 py-16 md:py-32">
       <div class="flex flex-col gap-4">
         <h1 class="text-6xl font-heading font-bold leading-none">
           Declarative builds and deployments.
@@ -25,15 +26,15 @@ const landingFeatures = await getCollection("landing-features");
           system configuration. Learn how to make reproducible, declarative and
           reliable systems.
         </p>
-        <div class="flex justify-stretch gap-4">
+        <div class="flex flex-col md:flex-row justify-stretch gap-4">
           <Button color="green" size="lg">Download</Button>
           <Button color="blue" size="lg">Get Started</Button>
         </div>
       </div>
     </Container>
   </div>
-  <div class="bg-[url('/divider/landing_search_top.svg')] pb-48 pt-16 bg-bottom">
-    <Container class="grid grid-cols-3 gap-4">
+  <div class="bg-[url('/divider/landing_search_top.svg')] pb-48 pt-16">
+    <Container class="grid md:grid-cols-3 gap-4">
       {
         landingFeatures.map(async (feature) => {
           const { Content } = await feature.render();
@@ -61,16 +62,20 @@ const landingFeatures = await getCollection("landing-features");
   <div class="bg-nixlighterblue py-4">
     <Container class="flex justify-center flex-col w-full items-center gap-4">
       <h2
-        class="text-4xl text-center w-1/3 text-nixdarkblue font-heading font-bold pb-2"
+        class="text-4xl text-center md:w-1/3 text-nixdarkblue font-heading font-bold pb-2"
       >
         Choose from Thousands of Packages
       </h2>
-      <p class="font-light leading-relaxed text-2xl w-3/5 text-center">
+      <p class="font-light leading-relaxed text-2xl md:w-3/5 text-center">
         The Nix Packages collection (Nixpkgs) is a set of over 80 000 packages
         for the Nix package manager.
       </p>
+      <div class="relative">
+        <Icon alt="Search" class="h-8 text-nixdarkblue hidden md:block absolute top-2.5 left-2" pack="mdi" name="search" />
+        <input type="text" class="rounded-full text-xl placeholder-gray-400 py-3 pl-11 pr-4 w-96" placeholder="Search for a package" />
+      </div>
       <Button color="green">Search</Button>
-    </Container>
+    </input>
   </div>
-  <img src="/divider/landing_search_bottom.svg" class="w-full" />
+  <img src="/divider/landing_search_bottom.svg" class="w-full object-cover object-[60%_top] h-80" />
 </Layout>
