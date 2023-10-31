@@ -15,11 +15,11 @@ const landingFeatures = await getCollection("landing-features");
       <Button>Announcement</Button>
     </Container>
   </div>
-  <div class="bg-nixdarkblue">
+  <div class="bg-[url('/hero-bg.svg')] bg-cover bg-no-repeat bg-left">
     <Container class="text-white grid md:grid-cols-2 py-16 md:py-32">
       <div class="flex flex-col gap-4">
         <h1 class="text-6xl font-heading font-bold leading-none">
-          Declarative builds and deployments.
+          Declarative builds<br/> and deployments.
         </h1>
         <p class="text-xl font-light">
           Nix is a tool that takes a unique approach to package management and
@@ -33,7 +33,7 @@ const landingFeatures = await getCollection("landing-features");
       </div>
     </Container>
   </div>
-  <div class="bg-[url('/divider/landing_search_top.svg')] pb-48 pt-16">
+  <div class="bg-[url('/divider/landing_search_top.svg')] bg-bottom bg-no-repeat pb-48 pt-16">
     <Container class="grid md:grid-cols-3 gap-4">
       {
         landingFeatures.map(async (feature) => {
@@ -50,7 +50,7 @@ const landingFeatures = await getCollection("landing-features");
               <h2 class="text-4xl text-nixdarkblue font-heading font-bold leading-none mb-4">
                 {feature.data.title}
               </h2>
-              <div class="leading-loose text-lg">
+              <div class="leading-loose text-lg font-light">
                 <Content />
               </div>
             </div>
@@ -71,11 +71,28 @@ const landingFeatures = await getCollection("landing-features");
         for the Nix package manager.
       </p>
       <div class="relative">
-        <Icon alt="Search" class="h-8 text-nixdarkblue hidden md:block absolute top-2.5 left-2" pack="mdi" name="search" />
-        <input type="text" class="rounded-full text-xl placeholder-gray-400 py-3 pl-11 pr-4 w-96" placeholder="Search for a package" />
+        <Icon alt="Search" class="h-8 text-nixdarkblue hidden md:block absolute top-3 left-3" pack="mdi" name="search" />
+        <input type="text" class="border-2 rounded-full text-xl placeholder-gray-400 py-3 pl-11 pr-4 w-96" placeholder="Search for a package" />
       </div>
       <Button color="green">Search</Button>
-    </input>
+    </Container>
   </div>
   <img src="/divider/landing_search_bottom.svg" class="w-full object-cover object-[60%_top] h-80" />
+  <div>
+    <Container>
+      <h2
+          class="text-4xl text-center w-full text-nixdarkblue font-heading font-bold pb-2"
+      >
+        Examples
+      </h2>
+      <div class="grid md:grid-cols-3 items-center">
+        <div class="bg-black w-64 h-64"></div>
+        <div class="bg-black w-64 h-64"></div>
+        <div class="bg-black w-64 h-64"></div>
+        <div class="bg-black w-64 h-64"></div>
+        <div class="bg-black w-64 h-64"></div>
+        <div class="bg-black w-64 h-64"></div>
+      </div>
+    </Container>
+  </div>
 </Layout>
