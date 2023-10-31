@@ -8,7 +8,7 @@
   <ul>
     <li>
       <div class="clickable-whole">
-        <a href="[%root%]download.html#download-nix">
+        <a href="https://nix.dev/install-nix">
           [% PROCESS svg path="site-styles/assets/gfx-learn-install.svg" %]
           <button>Install Nix</button>
         </a>
