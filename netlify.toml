@@ -151,7 +151,7 @@
 [[redirects]]
   from = "/manual/nix/:version/package-management/profiles.html"
   to = "/manual/nix/:version/command-ref/files/profiles.html"
-  status = 301
+  status = 302
   force = true
 
 [[redirects]]
