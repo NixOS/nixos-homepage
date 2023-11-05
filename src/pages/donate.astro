@@ -1,0 +1,187 @@
+---
+
+import Layout from '../layouts/Layout.astro';
+
+---
+
+<Layout title="Donate">
+  <div class="flex flex-col gap-4">
+
+    <h1 class="text-6xl font-heading font-bold leading-none">
+      Donate
+    </h1>
+
+    <section>
+      <p>
+        The NixOS infrastructure, development and events are funded by its users and sponsors.
+      </p>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+      <div class="flex flex-col justify-center">
+        <p>
+          Maintaining our build farm and binary cache is very expensive.
+          We depend on your support to ensure the continuous operation and expansion of the NixOS infrastructure.
+        </p>
+        <p>
+          Please consider donating a small amount every month to contribute to sustainable funding.
+          Donations are handled by a nonprofit organization, the <a href="/governance.html#foundation">NixOS Foundation</a>.
+        </p>
+      </div>
+      <div class="flex flex-col gap-4">
+        <img src="/images/logos/nixos_flake.svg" class="h-40" />
+        <p class="text-center font-nixos font-regular text-7xl">
+          NixOS
+        </p>
+        <p class="text-center font-nixos font-light text-5xl">
+          Foundation
+        </p>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+      <div class="flex flex-col gap-4">
+        <img src="/images/donate/merch.svg" class="h-80" />
+      </div>
+      <div class="flex flex-col justify-center">
+        <h1>
+          NixOS T-shirts, mugs and more...
+        </h1>
+        <p>
+          Donate to NixOS foundation by purchasing NixOS merchandise.
+        </p>
+        <button type="button">
+          <a href="https://www.redbubble.com/people/mogorman/shop">
+            Go to the shop (RedBubble)
+          </a>
+        </button>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+      <div class="flex flex-col">
+        <h2>
+          Donate using Open Collective
+        </h2>
+        <p>
+          NixOS Foundation is using
+          <a href="https://opencollective.com/">Open Collective</a>
+          to manage the finances so everyone can see where money comes from and where money goes.
+        </p>
+        <p>
+          With Open Collective you can make a <strong>single</strong> or <strong>recurring</strong> contribution by credit card transfer.
+        </p>
+        <p>
+          Thank you!
+        </p>
+        <button type="button">
+          <a href="https://opencollective.com/nixos#support">
+            Contribute
+          </a>
+        </button>
+      </div>
+      <div class="flex flex-col gap-4 justify-center">
+        <h2>
+          Donate with SEPA bank transfer
+        </h2>
+        <p>
+          The NixOS Foundation also accepts donations via SEPA bank transfer. Please send payments to:
+        </p>
+        <pre>
+Stichting NixOS Foundation, Utrecht, The Netherlands
+
+IBAN: NL13 BUNQ 2061 2530 32
+BIC:  BUNQNL2AXXX
+        </pre>
+        <p>
+          Please add your name and purpose (donation) in the description of the transfer.
+          <i>
+            If you would like to support us with amounts above 2000 euro per year, please contact us at
+            <a href="mailto:foundation@nixos.org">foundation@nixos.org</a>
+            , as this will have tax implications.
+          </i>
+        </p>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+      <div class="flex flex-col">
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="flex flex-col justify-center">
+              <a href="https://www.4tu.nl/">
+                <img src="/images/logos/4tu.svg" alt="4TU logo">
+              </a>
+          </div>
+          <div class="flex flex-col justify-center">
+              <a href="https://www.antithesis.com/">
+                <img src="/images/logos/antithesis.svg" alt="Antithesis logo">
+              </a>
+          </div>
+          <div class="flex flex-col justify-center">
+              <a href="https://deploy.equinix.com/">
+                <img src="/images/logos/equinix_metal.svg" alt="Equinix logo">
+              </a>
+          </div>
+          <div class="flex flex-col justify-center">
+              <a href="https://www.fastly.com/">
+                <img src="/images/logos/fastly.svg" alt="Fastly logo">
+              </a>
+          </div>
+          <div class="flex flex-col justify-center">
+              <a href="https://www.hetzner.com/">
+                <img src="/images/logos/hetzner.png" alt="Hetzner logo">
+              </a>
+          </div>
+          <div class="flex flex-col justify-center">
+              <a href="https://www.logicblox.com">
+                <img src="/images/logos/logicblox.png" alt="LogicBlox logo">
+              </a>
+          </div>
+          <div class="flex flex-col justify-center">
+              <a href="https://www.macstadium.com/">
+                <img src="/images/logos/macstadium.png" alt="MacStadium logo">
+              </a>
+          </div>
+          <div class="flex flex-col justify-center">
+              <a href="https://github.com/snabbco/snabb">
+                <img src="/images/logos/snabb.png" alt="Snabb logo">
+              </a>
+          </div>
+          <div class="flex flex-col justify-center">
+              <a href="https://www.tudelft.nl/">
+                <img src="/images/logos/tudelft.png" alt="TU Delft logo">
+              </a>
+          </div>
+          <div class="flex flex-col justify-center">
+              <a href="https://www.uu.nl/">
+                <img src="/images/logos/universiteit_utrecht.png" alt="Universiteit Utrecht logo">
+              </a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-4 justify-center">
+        <h1>
+          Acknowledgements
+        </h1>
+        <p>
+          The Nix package manager was developed by
+          <a href="https://edolstra.github.io/">Eelco Dolstra</a>
+          as part of his PhD research in the
+          <a href="https://www.nwo.nl/en/projects/638001201">TraCE project</a>,
+          funded by the
+          <a href="http://www.jacquard.nl/">Jacquard programme</a>
+          of the
+          <a href="http://www.nwo.nl/">Netherlands Organisation for Scientific Research</a>
+          (NWO) and SERC. The first prototype of NixOS was developed by
+          <a href="http://www.tjaldur.nl/">Armijn Hemel</a>
+          as his master’s thesis project.
+          Hydra, the Nix-based continuous build system, was developed as part of the LaQuSo Buildfarm project, funded by
+          <a href="https://www.4tu.nl/nirict/">NIRICT</a>
+          and
+          <a href="http://www.laquso.com/">LaQuSo</a>.
+        </p>
+      </div>
+    </section>
+
+</Layout>
+
