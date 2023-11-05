@@ -1,24 +1,27 @@
 ---
 
 import Layout from '../layouts/Layout.astro';
+import Container from "../components/layout/Container.astro";
 
 ---
 
 <Layout title="Donate">
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col">
 
-    <h1 class="text-6xl font-heading font-bold leading-none">
-      Donate
-    </h1>
+    <Container class="grid py-16">
+      <h1 class="text-6xl font-heading font-bold leading-none">
+        Donate
+      </h1>
+    </Container>
 
-    <section>
+    <Container class="grid">
       <p>
         The NixOS infrastructure, development and events are funded by its users and sponsors.
       </p>
-    </section>
+    </Container>
 
-    <section class="grid md:grid-cols-2 gap-4">
-      <div class="flex flex-col justify-center">
+    <Container class="grid md:grid-cols-2 gap-4">
+      <div class="flex flex-col justify-center gap-4">
         <p>
           Maintaining our build farm and binary cache is very expensive.
           We depend on your support to ensure the continuous operation and expansion of the NixOS infrastructure.
@@ -37,9 +40,9 @@ import Layout from '../layouts/Layout.astro';
           Foundation
         </p>
       </div>
-    </section>
+    </Container>
 
-    <section class="grid md:grid-cols-2 gap-4">
+    <Container class="grid md:grid-cols-2 gap-4">
       <div class="flex flex-col gap-4">
         <img src="/images/donate/merch.svg" class="h-80" />
       </div>
@@ -56,9 +59,9 @@ import Layout from '../layouts/Layout.astro';
           </a>
         </button>
       </div>
-    </section>
+    </Container>
 
-    <section class="grid md:grid-cols-2 gap-4">
+    <Container class="grid md:grid-cols-2 gap-4">
       <div class="flex flex-col">
         <h2>
           Donate using Open Collective
@@ -102,9 +105,9 @@ BIC:  BUNQNL2AXXX
           </i>
         </p>
       </div>
-    </section>
+    </Container>
 
-    <section class="grid md:grid-cols-2 gap-4">
+    <Container class="grid md:grid-cols-2 gap-4">
       <div class="flex flex-col">
         <div class="grid md:grid-cols-3 gap-4">
           <div class="flex flex-col justify-center">
@@ -181,7 +184,7 @@ BIC:  BUNQNL2AXXX
           <a href="http://www.laquso.com/">LaQuSo</a>.
         </p>
       </div>
-    </section>
+    </Container>
 
 </Layout>
 
