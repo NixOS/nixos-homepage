@@ -2,6 +2,7 @@
 
 import Layout from '../layouts/Layout.astro';
 import Container from "../components/layout/Container.astro";
+import ExternalLogo from "../components/layout/ExternalLogo.astro";
 
 ---
 
@@ -115,56 +116,16 @@ BIC:  BUNQNL2AXXX</pre>
       <Container class="grid md:grid-cols-2 gap-4">
         <div class="flex flex-col justify-center">
           <div class="grid md:grid-cols-4 gap-4">
-            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
-                <a href="https://www.4tu.nl/">
-                  <img src="/images/logos/4tu.svg" alt="4TU logo">
-                </a>
-            </div>
-            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
-                <a href="https://www.antithesis.com/">
-                  <img src="/images/logos/antithesis.svg" alt="Antithesis logo">
-                </a>
-            </div>
-            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
-                <a href="https://deploy.equinix.com/">
-                  <img src="/images/logos/equinix_metal.svg" alt="Equinix logo">
-                </a>
-            </div>
-            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
-                <a href="https://www.fastly.com/">
-                  <img src="/images/logos/fastly.svg" alt="Fastly logo">
-                </a>
-            </div>
-            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
-                <a href="https://www.hetzner.com/">
-                  <img src="/images/logos/hetzner.png" alt="Hetzner logo">
-                </a>
-            </div>
-            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
-                <a href="https://www.logicblox.com">
-                  <img src="/images/logos/logicblox.png" alt="LogicBlox logo">
-                </a>
-            </div>
-            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
-                <a href="https://www.macstadium.com/">
-                  <img src="/images/logos/macstadium.png" alt="MacStadium logo">
-                </a>
-            </div>
-            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
-                <a href="https://github.com/snabbco/snabb">
-                  <img src="/images/logos/snabb.png" alt="Snabb logo">
-                </a>
-            </div>
-            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
-                <a href="https://www.tudelft.nl/">
-                  <img src="/images/logos/tudelft.png" alt="TU Delft logo">
-                </a>
-            </div>
-            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
-                <a href="https://www.uu.nl/">
-                  <img src="/images/logos/universiteit_utrecht.png" alt="Universiteit Utrecht logo">
-                </a>
-            </div>
+            <ExternalLogo class="p-5" href="https://www.4tu.nl/" src="/images/logos/4tu.svg" alt="4TU logo" />
+            <ExternalLogo class="" href="https://www.antithesis.com/" src="/images/logos/antithesis.svg" alt="Antithesis logo" />
+            <ExternalLogo class="p-5" href="https://deploy.equinix.com/" src="/images/logos/equinix_metal.svg" alt="Equinix logo" />
+            <ExternalLogo class="p-5" href="https://www.fastly.com/" src="/images/logos/fastly.svg" alt="Fastly logo" />
+            <ExternalLogo class="" href="https://www.hetzner.com/" src="/images/logos/hetzner.png" alt="Hetzner logo" />
+            <ExternalLogo class="p-5" href="https://www.logicblox.com" src="/images/logos/logicblox.png" alt="LogicBlox logo" />
+            <ExternalLogo class="p-3" href="https://www.macstadium.com/" src="/images/logos/macstadium.png" alt="MacStadium logo" />
+            <ExternalLogo class="p-3" href="https://github.com/snabbco/snabb" src="/images/logos/snabb.png" alt="Snabb logo" />
+            <ExternalLogo class="" href="https://www.tudelft.nl/" src="/images/logos/tudelft.png" alt="TU Delft logo" />
+            <ExternalLogo class="p-0" href="https://www.uu.nl/" src="/images/logos/universiteit_utrecht.png" alt="Universiteit Utrecht logo" />
           </div>
         </div>
         <div class="flex flex-col gap-4 justify-center">

@@ -1,0 +1,13 @@
+---
+const {
+    class: extraClasses,
+    href: externalLink,
+    src: imageSource,
+    alt: altText
+    } = Astro.props;
+---
+<div class=`flex flex-col justify-center bg-white p-2 rounded-lg ${extraClasses}`>
+  <a href={externalLink}>
+    <img src={imageSource} alt={altText}>
+  </a>
+</div>
