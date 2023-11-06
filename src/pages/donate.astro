@@ -42,26 +42,30 @@ import Container from "../components/layout/Container.astro";
       </div>
     </Container>
 
-    <Container class="grid md:grid-cols-2 gap-4">
-      <div class="flex flex-col gap-4">
-        <img src="/images/donate/merch.svg" class="h-80" />
-      </div>
-      <div class="flex flex-col justify-center">
-        <h1>
-          NixOS T-shirts, mugs and more...
-        </h1>
-        <p>
-          Donate to NixOS foundation by purchasing NixOS merchandise.
-        </p>
-        <button type="button">
-          <a href="https://www.redbubble.com/people/mogorman/shop">
-            Go to the shop (RedBubble)
-          </a>
-        </button>
-      </div>
-    </Container>
+    <img src="/divider/slope_down.svg" class="w-full object-fill object-[60%_top] h-16 -scale-y-100" />
+    <div class="bg-nixdarkblue py-16 text-white">
+      <Container class="grid md:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-4">
+          <img src="/images/donate/merch.svg" class="h-[28rem]" />
+        </div>
+        <div class="flex flex-col justify-center">
+          <h1>
+            NixOS T-shirts, mugs and more...
+          </h1>
+          <p>
+            Donate to NixOS foundation by purchasing NixOS merchandise.
+          </p>
+          <button type="button">
+            <a href="https://www.redbubble.com/people/mogorman/shop">
+              Go to the shop (RedBubble)
+            </a>
+          </button>
+        </div>
+      </Container>
+    </div>
+    <img src="/divider/slope_down.svg" class="w-full object-fill object-[60%_top] h-16" />
 
-    <Container class="grid md:grid-cols-2 gap-4">
+    <Container class="grid md:grid-cols-2 gap-4 py-16">
       <div class="flex flex-col">
         <h2>
           Donate using Open Collective
@@ -90,12 +94,11 @@ import Container from "../components/layout/Container.astro";
         <p>
           The NixOS Foundation also accepts donations via SEPA bank transfer. Please send payments to:
         </p>
-        <pre>
+        <pre class="font-mono bg-nixlighterblue text-nixdarkerblue font-bold p-8 rounded-3xl">
 Stichting NixOS Foundation, Utrecht, The Netherlands
 
 IBAN: NL13 BUNQ 2061 2530 32
-BIC:  BUNQNL2AXXX
-        </pre>
+BIC:  BUNQNL2AXXX</pre>
         <p>
           Please add your name and purpose (donation) in the description of the transfer.
           <i>
@@ -107,84 +110,87 @@ BIC:  BUNQNL2AXXX
       </div>
     </Container>
 
-    <Container class="grid md:grid-cols-2 gap-4">
-      <div class="flex flex-col">
-        <div class="grid md:grid-cols-3 gap-4">
-          <div class="flex flex-col justify-center">
-              <a href="https://www.4tu.nl/">
-                <img src="/images/logos/4tu.svg" alt="4TU logo">
-              </a>
-          </div>
-          <div class="flex flex-col justify-center">
-              <a href="https://www.antithesis.com/">
-                <img src="/images/logos/antithesis.svg" alt="Antithesis logo">
-              </a>
-          </div>
-          <div class="flex flex-col justify-center">
-              <a href="https://deploy.equinix.com/">
-                <img src="/images/logos/equinix_metal.svg" alt="Equinix logo">
-              </a>
-          </div>
-          <div class="flex flex-col justify-center">
-              <a href="https://www.fastly.com/">
-                <img src="/images/logos/fastly.svg" alt="Fastly logo">
-              </a>
-          </div>
-          <div class="flex flex-col justify-center">
-              <a href="https://www.hetzner.com/">
-                <img src="/images/logos/hetzner.png" alt="Hetzner logo">
-              </a>
-          </div>
-          <div class="flex flex-col justify-center">
-              <a href="https://www.logicblox.com">
-                <img src="/images/logos/logicblox.png" alt="LogicBlox logo">
-              </a>
-          </div>
-          <div class="flex flex-col justify-center">
-              <a href="https://www.macstadium.com/">
-                <img src="/images/logos/macstadium.png" alt="MacStadium logo">
-              </a>
-          </div>
-          <div class="flex flex-col justify-center">
-              <a href="https://github.com/snabbco/snabb">
-                <img src="/images/logos/snabb.png" alt="Snabb logo">
-              </a>
-          </div>
-          <div class="flex flex-col justify-center">
-              <a href="https://www.tudelft.nl/">
-                <img src="/images/logos/tudelft.png" alt="TU Delft logo">
-              </a>
-          </div>
-          <div class="flex flex-col justify-center">
-              <a href="https://www.uu.nl/">
-                <img src="/images/logos/universiteit_utrecht.png" alt="Universiteit Utrecht logo">
-              </a>
+    <img src="/divider/slope_down.svg" class="w-full object-fill object-[60%_top] h-16 -scale-y-100" />
+    <div class="bg-nixdarkblue py-16 text-white">
+      <Container class="grid md:grid-cols-2 gap-4">
+        <div class="flex flex-col justify-center">
+          <div class="grid md:grid-cols-4 gap-4">
+            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
+                <a href="https://www.4tu.nl/">
+                  <img src="/images/logos/4tu.svg" alt="4TU logo">
+                </a>
+            </div>
+            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
+                <a href="https://www.antithesis.com/">
+                  <img src="/images/logos/antithesis.svg" alt="Antithesis logo">
+                </a>
+            </div>
+            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
+                <a href="https://deploy.equinix.com/">
+                  <img src="/images/logos/equinix_metal.svg" alt="Equinix logo">
+                </a>
+            </div>
+            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
+                <a href="https://www.fastly.com/">
+                  <img src="/images/logos/fastly.svg" alt="Fastly logo">
+                </a>
+            </div>
+            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
+                <a href="https://www.hetzner.com/">
+                  <img src="/images/logos/hetzner.png" alt="Hetzner logo">
+                </a>
+            </div>
+            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
+                <a href="https://www.logicblox.com">
+                  <img src="/images/logos/logicblox.png" alt="LogicBlox logo">
+                </a>
+            </div>
+            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
+                <a href="https://www.macstadium.com/">
+                  <img src="/images/logos/macstadium.png" alt="MacStadium logo">
+                </a>
+            </div>
+            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
+                <a href="https://github.com/snabbco/snabb">
+                  <img src="/images/logos/snabb.png" alt="Snabb logo">
+                </a>
+            </div>
+            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
+                <a href="https://www.tudelft.nl/">
+                  <img src="/images/logos/tudelft.png" alt="TU Delft logo">
+                </a>
+            </div>
+            <div class="flex flex-col justify-center bg-white p-2 rounded-lg">
+                <a href="https://www.uu.nl/">
+                  <img src="/images/logos/universiteit_utrecht.png" alt="Universiteit Utrecht logo">
+                </a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="flex flex-col gap-4 justify-center">
-        <h1>
-          Acknowledgements
-        </h1>
-        <p>
-          The Nix package manager was developed by
-          <a href="https://edolstra.github.io/">Eelco Dolstra</a>
-          as part of his PhD research in the
-          <a href="https://www.nwo.nl/en/projects/638001201">TraCE project</a>,
-          funded by the
-          <a href="http://www.jacquard.nl/">Jacquard programme</a>
-          of the
-          <a href="http://www.nwo.nl/">Netherlands Organisation for Scientific Research</a>
-          (NWO) and SERC. The first prototype of NixOS was developed by
-          <a href="http://www.tjaldur.nl/">Armijn Hemel</a>
-          as his master’s thesis project.
-          Hydra, the Nix-based continuous build system, was developed as part of the LaQuSo Buildfarm project, funded by
-          <a href="https://www.4tu.nl/nirict/">NIRICT</a>
-          and
-          <a href="http://www.laquso.com/">LaQuSo</a>.
-        </p>
-      </div>
-    </Container>
+        <div class="flex flex-col gap-4 justify-center">
+          <h1>
+            Acknowledgements
+          </h1>
+          <p>
+            The Nix package manager was developed by
+            <a href="https://edolstra.github.io/">Eelco Dolstra</a>
+            as part of his PhD research in the
+            <a href="https://www.nwo.nl/en/projects/638001201">TraCE project</a>,
+            funded by the
+            <a href="http://www.jacquard.nl/">Jacquard programme</a>
+            of the
+            <a href="http://www.nwo.nl/">Netherlands Organisation for Scientific Research</a>
+            (NWO) and SERC. The first prototype of NixOS was developed by
+            <a href="http://www.tjaldur.nl/">Armijn Hemel</a>
+            as his master’s thesis project.
+            Hydra, the Nix-based continuous build system, was developed as part of the LaQuSo Buildfarm project, funded by
+            <a href="https://www.4tu.nl/nirict/">NIRICT</a>
+            and
+            <a href="http://www.laquso.com/">LaQuSo</a>.
+          </p>
+        </div>
+      </Container>
+    </div>
 
 </Layout>
 
