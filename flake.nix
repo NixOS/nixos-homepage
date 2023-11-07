@@ -13,6 +13,7 @@ rec {
   inputs.nix-pills.url = "github:NixOS/nix-pills";
   inputs.nix-pills.flake = false;
   inputs.nix-dev.url = "github:NixOS/nix.dev";
+  inputs.nix-dev.flake = false;
   inputs.nixos-common-styles.url = "github:NixOS/nixos-common-styles";
   inputs.nixos-common-styles.inputs.flake-utils.follows = "flake-utils";
 
@@ -65,6 +66,8 @@ rec {
           revCount = nix-pills.lastModifiedDate; # FIXME
           shortRev = nix-pills.shortRev;
         };
+
+        nixDev = import nix-dev { inherit system; };
 
         nixosAmis = pkgs.writeText "ec2-amis.json"
           (builtins.toJSON (
@@ -146,7 +149,7 @@ rec {
                 "NIXOS_AMIS=${nixosAmis}"
                 "NIX_PILLS_MANUAL_IN=${nixPills.html-split}/share/doc/nix-pills"
                 "NIX_PILLS_MANUAL_EPUB=${nixPills.epub}/share/doc/nix-pills/nix-pills.epub"
-                "NIX_DEV_MANUAL_IN=${nix-dev.packages.${system}.default}"
+                "NIX_DEV_MANUAL_IN=${nixDev.build}"
 
                 "-j 1"
               ];
@@ -174,7 +177,7 @@ rec {
               export NIXOS_AMIS="${nixosAmis}"
               export NIX_PILLS_MANUAL_IN="${nixPills.html-split}/share/doc/nix-pills"
               export NIX_PILLS_MANUAL_EPUB="${nixPills.epub}/share/doc/nix-pills/nix-pills.epub"
-              export NIX_DEV_MANUAL_IN="${nix-dev.packages.${system}.default}"
+              export NIX_DEV_MANUAL_IN="${nixDev.build}"
 
               rm -f site-styles/common-styles
               ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
