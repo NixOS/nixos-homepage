@@ -1,0 +1,10 @@
+/* The integration's default injected base.css file */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    main a:-webkit-any-link {
+        @apply underline decoration-1 underline-offset-2 text-nixsemidarkblue;
+    }
+}
