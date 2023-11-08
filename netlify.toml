@@ -155,6 +155,12 @@
   force = true
 
 [[redirects]]
+  from = "/manual/nix/:version/package-management/basic-package-mgmt.html"
+  to = "/manual/nix/:version/command-ref/nix-env.html"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/manual/nixpkgs"
   to = "/manual/nixpkgs/stable"
   status = 302
