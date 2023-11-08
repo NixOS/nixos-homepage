@@ -5,6 +5,7 @@ import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Container from "../components/layout/Container.astro";
 import SponsorLogo from "../components/layout/SponsorLogo.astro";
+import Button from "../components/ui/Button.astro";
 
 const sponsors = await  getEntry('sponsors', 'info');
 
@@ -63,11 +64,11 @@ const sponsors = await  getEntry('sponsors', 'info');
           <p class="font-light">
             Donate to NixOS foundation by purchasing NixOS merchandise.
           </p>
-          <button type="button">
-            <a href="https://www.redbubble.com/people/mogorman/shop">
+          <div class="flex flex-col md:flex-row justify-stretch gap-4">
+            <Button color="green" size="sm" href="https://www.redbubble.com/people/mogorman/shop">
               Go to the shop (RedBubble)
-            </a>
-          </button>
+            </Button>
+          </div>
         </div>
       </Container>
     </div>
@@ -89,11 +90,11 @@ const sponsors = await  getEntry('sponsors', 'info');
         <p class="font-light">
           Thank you!
         </p>
-        <button type="button">
-          <a href="https://opencollective.com/nixos#support">
+        <div class="flex flex-col md:flex-row justify-stretch gap-4">
+          <Button color="blue" size="sm" href="https://opencollective.com/nixos#support">
             Contribute
-          </a>
-        </button>
+          </Button>
+        </div>
       </div>
       <div class="flex flex-col gap-4 justify-center">
         <h2 class="text-4xl font-bold text-nixdarkblue pb-2">

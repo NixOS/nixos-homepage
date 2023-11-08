@@ -15,9 +15,11 @@ const sizeMap = {
     "lg": "px-14 py-4 rounded-2xl"
 }
 
-const { color = "orange", size = "sm" } = Astro.props;
+const { color = "orange", size = "sm", href = "" } = Astro.props;
 ---
 
 <button class={`${colorMap[color]} text-white font-bold ${sizeMap[size]} drop-shadow-[0_4px_1px_rgba(0,0,0,0.2)]`}>
+  <a href={href}>
     <slot/>
+  </a>
 </button>
