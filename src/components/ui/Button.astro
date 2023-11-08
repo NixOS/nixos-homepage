@@ -19,8 +19,8 @@ const sizeMap = {
 const { color = "orange", size = "sm", href = "" } = Astro.props;
 ---
 
-<button class={`${colorMap[color]} text-white font-bold ${sizeMap[size]} drop-shadow-[0_4px_1px_rgba(0,0,0,0.2)]`}>
-  <a href={href}>
+<button class={`${colorMap[color]} font-bold ${sizeMap[size]} drop-shadow-[0_4px_1px_rgba(0,0,0,0.2)]`}>
+  <a href={href} class="!text-white !no-underline">
     <slot/>
   </a>
 </button>
