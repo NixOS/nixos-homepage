@@ -16,12 +16,12 @@ const landingFeatures = await getCollection("landing-features");
     </Container>
   </div>
   <div class="bg-[url('/hero-bg.svg')] bg-cover bg-no-repeat bg-left">
-    <Container class="text-white grid md:grid-cols-2 py-16 md:py-32">
+    <Container class="text-white grid md:grid-cols-2 py-16 md:py-36">
       <div class="flex flex-col gap-4">
-        <h1 class="text-5xl md:text-6xl font-heading font-bold leading-none">
+        <h1 class="text-5xl font-heading font-bold leading-none">
           Declarative builds<br class="hidden md:inline-block" /> and deployments.
         </h1>
-        <p class="text-xl font-light">
+        <p class="text-lg font-light leading-7">
           Nix is a tool that takes a unique approach to package management and
           system configuration. Learn how to make reproducible, declarative and
           reliable systems.
@@ -47,10 +47,10 @@ const landingFeatures = await getCollection("landing-features");
                 width="200"
                 height="200"
               />
-              <h2 class="text-4xl text-nixdarkblue font-heading font-bold leading-none mb-4">
+              <h2 class="text-3xl text-nixdarkblue font-heading font-bold leading-none mb-2">
                 {feature.data.title}
               </h2>
-              <div class="leading-loose text-lg font-light">
+              <div class="leading-loose text-light-bold">
                 <Content />
               </div>
             </div>
@@ -62,12 +62,12 @@ const landingFeatures = await getCollection("landing-features");
   <div class="bg-nixlighterblue py-4">
     <Container class="flex justify-center flex-col w-full items-center gap-4">
       <h2
-        class="text-4xl text-center md:w-1/3 text-nixdarkblue font-heading font-bold pb-2"
+        class="text-4xl text-center md:w-2/3 text-nixdarkblue leading-tight font-heading font-bold pb-2"
       >
         Choose from Thousands of Packages
       </h2>
-      <p class="font-light leading-relaxed text-2xl md:w-3/5 text-center">
-        The Nix Packages collection (Nixpkgs) is a set of over 80 000 packages
+      <p class="font-light leading-relaxed text-2xl md:w-5/6 text-center">
+        The Nix Packages collection (<a class="font-bold !text-nixdarkblue" href="#">Nixpkgs</a>) is a set of <span class="text-nixgreen font-bold">over 80 000 packages</span>
         for the Nix package manager.
       </p>
       <div class="relative">

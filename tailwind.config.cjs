@@ -20,6 +20,15 @@ module.exports = {
         heading: ["Overpass", ...defaultTheme.fontFamily.serif],
         mono: ["Fira\\ Mono", ...defaultTheme.fontFamily.mono],
       },
+      fontSize: {
+        base: '1rem',
+        lg: '1.2rem',
+        xl: '1.4rem',
+        '2xl': '1.625rem',
+        '3xl': '1.953rem',
+        '4xl': '2.441rem',
+        '5xl': '3.052rem',
+      }
     },
     container: {
       // https://tailwindcss.com/docs/container#centering-by-default

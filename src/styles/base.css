@@ -8,3 +8,12 @@
         @apply underline decoration-1 underline-offset-2 text-nixsemidarkblue;
     }
 }
+
+@layer components {
+    .text-light-bold {
+        @apply font-light;
+    }
+    .text-light-bold strong {
+        @apply font-bold;
+    }
+}
