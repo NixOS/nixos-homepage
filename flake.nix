@@ -12,7 +12,6 @@ rec {
   inputs.released-nix-stable.url = "github:nixos/nix/latest-release";
   inputs.nix-pills.url = "github:NixOS/nix-pills";
   inputs.nix-pills.flake = false;
-  inputs.nix-dev.url = "github:NixOS/nix.dev";
   inputs.nixos-common-styles.url = "github:NixOS/nixos-common-styles";
   inputs.nixos-common-styles.inputs.flake-utils.follows = "flake-utils";
 
@@ -34,7 +33,6 @@ rec {
     , released-nix-unstable
     , released-nix-stable
     , nix-pills
-    , nix-dev
     , nixos-common-styles
     }:
     flake-utils.lib.eachDefaultSystem (system:
@@ -146,7 +144,6 @@ rec {
                 "NIXOS_AMIS=${nixosAmis}"
                 "NIX_PILLS_MANUAL_IN=${nixPills.html-split}/share/doc/nix-pills"
                 "NIX_PILLS_MANUAL_EPUB=${nixPills.epub}/share/doc/nix-pills/nix-pills.epub"
-                "NIX_DEV_MANUAL_IN=${nix-dev.packages.${system}.default}"
 
                 "-j 1"
               ];
@@ -174,7 +171,6 @@ rec {
               export NIXOS_AMIS="${nixosAmis}"
               export NIX_PILLS_MANUAL_IN="${nixPills.html-split}/share/doc/nix-pills"
               export NIX_PILLS_MANUAL_EPUB="${nixPills.epub}/share/doc/nix-pills/nix-pills.epub"
-              export NIX_DEV_MANUAL_IN="${nix-dev.packages.${system}.default}"
 
               rm -f site-styles/common-styles
               ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
