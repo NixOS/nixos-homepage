@@ -16,7 +16,7 @@
     </li>
     <li>
       <div class="clickable-whole">
-        <a href="[%root%]guides/ad-hoc-developer-environments.html">
+        <a href="https://nix.dev/tutorials/first-steps/">
           [% PROCESS svg path="site-styles/assets/gfx-learn-develop.svg" %]
           <button>First steps with Nix</button>
         </a>
@@ -55,13 +55,6 @@
       </li>
     </ul>
   </div>
-</section>
-
-<section id="learn-guides" class="learn-guides">
-  <h1>Guides</h1>
-  <ul>
-    [% INSERT "learn_guides.html.in" %]
-  </ul>
 </section>
 
 <section id="learn-manuals" class="learn-manuals">
@@ -199,7 +192,7 @@
           <li><a href="[%root%]manual/nixos/stable/#sec-writing-modules">Writing NixOS Modules</a></li>
           <li><a href="[%root%]manual/nixos/stable/#sec-writing-documentation">Writing NixOS Documentation</a></li>
           <li><a href="[%root%]manual/nixos/stable/#sec-nixos-tests">Writing NixOS Tests</a></li>
-          <li><a href="[%root%]manual/nixos/stable/#sec-building-cd">Building Your Own NixOS CD</a></li>
+          <li><a href="[%root%]manual/nixos/stable/#sec-building-image">Building Your Own NixOS CD</a></li>
         </ul>
         <a href="[%root%]manual/nixos/stable">Full NixOS Manual</a>
       </div>
@@ -211,13 +204,6 @@
   <div>
     <h1>Other learning resources</h1>
     <ul>
-      <li class="clickable-whole">
-        <h3>nix.dev</h3>
-        <p>
-          A collection of opinionated guides to getting things done in the Nix ecosystem.
-        </p>
-        <a href="https://nix.dev">Get things done</a>
-      </li>
       <li class="clickable-whole">
         <h3>The Nix Hour</h3>
         <p>

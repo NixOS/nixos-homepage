@@ -149,6 +149,12 @@
   force = true
 
 [[redirects]]
+  from = "/manual/nix/:version/package-management/channels.html"
+  to = "/manual/nix/:version/command-ref/nix-channel.html"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/manual/nixpkgs"
   to = "/manual/nixpkgs/stable"
   status = 302
@@ -164,6 +170,84 @@
   from = "/nixos/nix-pills/*"
   to = "/guides/nix-pills/:splat"
   status = 302
+  force = true
+
+[[redirects]]
+  from = "/guides/nix-language.html"
+  to = "https://nix.dev/tutorials/first-steps/nix-language"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/ad-hoc-developer-environments.html"
+  to = "https://nix.dev/tutorials/first-steps/ad-hoc-developer-environments"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/towards-reproducibility-pinning-nixpkgs.html"
+  to = "https://nix.dev/tutorials/first-steps/towards-reproducibility-pinning-nixpkgs"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/declarative-and-reproducible-developer-environments.html"
+  to = "https://nix.dev/tutorials/first-steps/declarative-and-reproducible-developer-environments"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/continuous-integration-github-actions.html"
+  to = "https://nix.dev/tutorials/nixos/build-and-deploy/continuous-integration-github-actions"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/dev-environment.html"
+  to = "https://nix.dev/tutorials/first-steps/dev-environment"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/building-and-running-docker-images.html"
+  to = "https://nix.dev/tutorials/nixos/build-and-deploy/building-and-running-docker-images"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/building-bootable-iso-image.html"
+  to = "https://nix.dev/tutorials/nixos/build-and-deploy/building-bootable-iso-image"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/deploying-nixos-using-terraform.html"
+  to = "https://nix.dev/tutorials/nixos/build-and-deploy/deploying-nixos-using-terraform"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/installing-nixos-on-a-raspberry-pi.html"
+  to = "https://nix.dev/tutorials/nixos/build-and-deploy/installing-nixos-on-a-raspberry-pi"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/integration-testing-using-virtual-machines.html"
+  to = "https://nix.dev/tutorials/nixos/build-and-deploy/integration-testing-using-virtual-machines"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/cross-compilation.html"
+  to = "https://nix.dev/tutorials/nixos/build-and-deploy/cross-compilation"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/contributing.html"
+  to = "https://nix.dev/contributing/how-to-contribute"
+  status = 301
   force = true
 
 [[redirects]]

@@ -79,7 +79,28 @@
     <div>
       <div class="clickable-whole">
         <div>
-          <h2>Last Conference</h2>
+          <h2>Next Conference</h2>
+          <div>
+            <article class="nixcon-left nixcon-2023 clickable-whole">
+              <header>
+                <h3>NixCon 2023 - Darmstadt</h3>
+                <time datetime="2023-09-08">8-10 September 2023</time>
+              </header>
+              <p>
+                NixCon is a community-oriented conference for contributors and
+                users of Nix and NixOS. It's about sharing experiences,
+                inspiring people and discussing future development.
+              </p>
+              <footer>
+                <a href="https://2023.nixcon.org">Read more...</a>
+              </footer>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <h2>Previous Conferences</h2>
           <div>
             <article class="nixcon-2022 clickable-whole">
               <header>
@@ -95,13 +116,6 @@
                 <a href="https://2022.nixcon.org">Read more...</a>
               </footer>
             </article>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <h2>Previous Conferences</h2>
-          <div>
             <article class="nixcon-2020 clickable-whole">
               <header>
                 <h3>NixCon 2020 - Online</h3>
@@ -200,6 +214,7 @@
         <li><a href="https://www.meetup.com/Suisse-Romande-NixOS-User-Group/">Lausanne (Switzerland)</a></li>
         <li><a href="https://www.meetup.com/NixOS-London/">London (United Kingdom)</a></li>
         <li><a href="https://mobilizon.fr/@nix-mtp">Montpellier (France)</a></li>
+        <li><a href="https://matrix.to/#/#nixos-nuernberg:matrix.org">Nürnberg (Germany)</a></li>
         <li><a href="http://www.meetup.com/Munich-NixOS-Meetup/">Munich (Germany)</a></li>
         <li><a href="https://www.meetup.com/Oslo-NixOS-User-Group/">Oslo (Norway)</a></li>
         <li><a href="https://blog.shackspace.de/?p=5829">Stuttgart (Germany)</a></li>
@@ -238,6 +253,12 @@
     <h2>Teams</h2>
     <div>
 
+      [% PROCESS svg path="site-styles/assets/gfx-foundation-board.white.svg" %]
+      <h3>Foundation board</h3>
+      <p>Responsible for providing operational and organizational support to
+      the NixOS project and community.
+      </p>
+      <a class="button -primary" href="[%root%]community/teams/foundation-board.html">Read more</a>
       [% PROCESS svg path="site-styles/assets/gfx-rfc-steering.white.svg" %]
       <h3>RFC Steering Committee</h3>
       <p>Responsible for forming an RFC Shepherd team from the available
@@ -277,9 +298,9 @@
 
       [% PROCESS svg path="site-styles/assets/gfx-marketing.white.svg" %]
       <h3>Marketing Team</h3>
-      <p>Maintains this website and its content, and
-        looks for ways to improve general communication of
-        the project.
+      <p>
+        Maintains this website, responsible for social media outreach, collects metrics.
+        Mission: help grow the Nix user base.
       </p>
       <a class="button -primary" href="[%root%]community/teams/marketing.html">Read more</a>
 
@@ -288,6 +309,16 @@
       <p>Moderates participation on official community platforms.</p>
       <a class="button -primary" href="[%root%]community/teams/moderation.html">Read more</a>
 
+      [% PROCESS svg path="site-styles/assets/gfx-gpu.white.svg" %]
+      <h3>CUDA Team</h3>
+      <p>Making Nix and NixOS the first choice for users of CUDA-accelerated software.</p>
+      <a class="button -primary" href="[%root%]community/teams/cuda.html">Read more</a>
+
+      [% PROCESS svg path="site-styles/assets/gfx-nix-maintenance-team.white.svg" %]
+      <h3>Nix Team</h3>
+      <p>Maintains and releases the Nix package manager.</p>
+      <a class="button -primary" href="[%root%]community/teams/nix.html">Read more</a>
+
       <h3>Documentation Team</h3>
       <p>Works on improving learning experience and documentation.</p>
       <a class="button -primary" href="[%root%]community/teams/documentation.html">Read more</a>
@@ -295,10 +326,6 @@
       <h3>Nixpkgs Architecture Team</h3>
       <p>Solves architectural Nixpkgs issues that are too big in scope for any single person to undertake.</p>
       <a class="button -primary" href="[%root%]community/teams/nixpkgs-architecture.html">Read more</a>
-
-      <h3>Nix Team</h3>
-      <p>Maintains and releases the Nix package manager.</p>
-      <a class="button -primary" href="[%root%]community/teams/nix.html">Read more</a>
 
     </div>
   </div>
@@ -311,9 +338,8 @@
       <h3>Board members:</h3>
       <ul>
         <li>Eelco Dolstra - President</li>
-        <li>Armijn Hemel - Secretary</li>
-        <li>Théophane Hufschmitt</li>
-        <li>Ron Efroni</li>
+        <li>Théophane Hufschmitt - Secretary</li>
+        <li>Ron Efroni - Treasurer</li>
         <li>Domen Kožar</li>
       </ul>
     </div>
@@ -335,6 +361,8 @@
           build farm, consisting of hundreds of macOS, x86-64 (Linux) and
           aarch64 (Linux) build cores. Hydra executes over 350,000 builds each
           week.</li>
+        
+        <li><a href="[% root%]community/event-funding.html">Event Funding</a></li>
       </ul>
 
       <p>The NixOS Foundation is a registered non-profit organisation at the Chamber of

@@ -92,6 +92,13 @@
 
       <article id="nix-install-windows">
         <h2>Windows (WSL2)</h2>
+        <h3>Multi-user installation (Requires WSL with systemd enabled)</h3>
+        <p>
+          WSL versions 0.67.6 and above has systemd support. Follow <a href="https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/">Microsoft's systemd guide</a> to configure it, and then install Nix using:
+        <pre class="terminal-console">
+<span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install) --daemon
+        </pre>
+        </p>
         <h3>Single-user installation</h3>
         <p>
           Install Nix via the
@@ -194,7 +201,10 @@
 
         <p>The minimal installation ISO image <strong>does not contain the
             graphical user interface</strong>, and is therefore a lot smaller.
-          You have to <strong>run the installer from the console</strong>. It
+          You have to
+          <a href="[%root%]manual/nixos/stable/index.html#ch-installation">
+            <strong>run the installer from the console</strong>
+          </a>. It
           contains a number of rescue tools.</p>
 
         <ul class="download-buttons">

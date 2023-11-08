@@ -24,10 +24,23 @@ BLOCK navigationLink %]
 
 -%]
 
+[% DEFAULT
+    title = ''
+    description = 'Nix is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems. '
+%]
+
 <html lang="en" class="without-js">
 
 <head>
-  <title>[% title %]</title>
+
+  [% IF title != "" %]
+  <title>[% title %] | Nix &amp; NixOS </title>
+  [% ELSE %]
+  <title>Nix &amp; NixOS | Reproducible builds and deployments</title>
+  [% END %]
+
+  <meta name="description" content="[% description %]" />
+
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0" />
@@ -91,6 +104,7 @@ BLOCK navigationLink %]
             <li><a href="https://status.nixos.org/">Channel Status</a></li>
             <li><a href="https://search.nixos.org/packages">Packages search</a></li>
             <li><a href="https://search.nixos.org/options">Options search</a></li>
+            <li><a href="https://reproducible.nixos.org/">Reproducible Builds Status</a></li>
             <li><a href="[% root %]community/teams/security.html">Security</a></li>
           </ul>
         </section>
@@ -105,7 +119,7 @@ BLOCK navigationLink %]
         <section>
           <h4>Contribute</h4>
           <ul>
-            <li><a href="[% root %]guides/contributing.html">Contributing Guide</a></li>
+            <li><a href="https://nix.dev/contributing/how-to-contribute">Contributing Guide</a></li>
             <li><a href="[% root %]donate.html">Donate</a></li>
           </ul>
         </section>
@@ -135,6 +149,7 @@ BLOCK navigationLink %]
         <section class="footer-social">
           <h4>Connect with us</h4>
           <ul>
+            <li class="social-icon -mastodon"><a href="https://chaos.social/@nixos_org">Mastodon</a></li>
             <li class="social-icon -twitter"><a href="https://twitter.com/nixos_org">Twitter</a></li>
             <li class="social-icon -youtube"><a
                 href="https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw">Youtube</a></li>

@@ -22,6 +22,7 @@ def main(common_styles):
         "./**/*.tt",
         "./*.tt",
         "./*.xml",
+        "./**/*.xml",
         "./Makefile",
         "./css/*",
         "./demos/*.scenario",

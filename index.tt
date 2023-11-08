@@ -17,15 +17,15 @@
 [% WRAPPER atEnd %]
 <script src="[% root %]js/asciinema-player.js"></script>
 [% END %]
-[% WRAPPER layout.tt title="Nix: reproducible builds and deployments" handlesLayout=1 %]
+[% WRAPPER layout.tt handlesLayout=1 %]
 
 <section class="wide-banner clickable-whole event-banner">
   <div>
     <div>
-      NixOS 22.11 <span class="-detailed">released.</span>
+      NixOS 23.05 <span class="-detailed">released.</span>
     </div>
     <div class="action">
-      <a target="_blank" href="[% root %]blog/announcements.html#nixos-22.11">Announcement</a>
+      <a target="_blank" href="[% root %]blog/announcements.html#nixos-23.05">Announcement</a>
     </div>
   </div>
 </section>
@@ -33,7 +33,7 @@
 <section class="home-hero">
   <div>
     <div class="blurb">
-      <h1>Reproducible builds <span>and deployments.</span></h1>
+      <h1>Declarative builds <span>and deployments.</span></h1>
       <p>
         Nix is a tool that takes a unique approach to package management and
         system configuration. Learn how to make reproducible, declarative and

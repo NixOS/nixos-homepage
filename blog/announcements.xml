@@ -2,6 +2,146 @@
 
 <news>
 <item>
+    <pubDate>Wed, 31 May 2023 11:00:00 UTC</pubDate>
+    <title id="nixos-23.05">
+      NixOS 23.05 released
+    </title>
+    <description>
+      <figure>
+        <a href="https://github.com/NixOS/nixos-artwork/blob/master/releases/23.05-stoat/stoat.png">
+          <img class="inline" src="/logo/nixos-logo-23.05-stoat-lores.png" alt="NixOS 23.05 Stoat logo" width="83" />
+        </a>
+      </figure>
+      <p>
+        Hey everyone, we are <a href="https://github.com/RaitoBezarius">Ryan Lahfa</a> and <a href="https://github.com/mweinelt">Martin Weinelt</a>,
+        the release managers for this stable release and we are very proud to announce the public availability of NixOS 23.05 “Stoat”.
+      </p>
+
+      <p>
+        This release will receive bugfixes and security updates for seven months (up until 2023-12-31).
+      </p>
+
+      <ul>
+        <li>
+          <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05">
+            Release manual
+          </a>
+          <ul>
+            <li>
+              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-highlights">
+                Highlights
+              </a>
+            </li>
+
+            <li>
+              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-new-services">
+                New Services
+              </a>
+            </li>
+
+            <li>
+              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-incompatibilities">
+                Backward Incompatibilities
+              </a>
+            </li>
+
+            <li>
+              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-notable-changes">
+                Other Notable Changes
+              </a>
+            </li>
+
+            <li>
+              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-nixpkgs-internals">
+                Nixpkgs internals
+              </a>
+            </li>
+
+            <li>
+              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.05-migration">
+                Detailed migration information
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="/manual/nixos/stable/index.html#sec-upgrading">Upgrade Instructions</a></li>
+        <li><a href="/download.html#download-nixos">ISO Image Downloads</a></li>
+      </ul>
+
+      <p>
+        The 23.05 release was made possible due to the efforts of <strong>1867</strong>
+        contributors, who authored <strong>36566</strong> commits since the previous release.
+        <br />
+        Our thanks go the contributors who also take care of the continued stability and
+        security of our stable release.
+      </p>
+
+      <p>
+        NixOS is already known as
+        <a href="https://repology.org/repositories/statistics/newest">the most up to date distribution</a>
+        while also being
+        <a href="https://repology.org/repositories/statistics/total">the distribution with the most packages</a>.
+        This release saw <strong>16240 new</strong> packages and <strong>13524 updated</strong> packages in Nixpkgs.
+        We also <strong>removed 13466</strong> packages in an effort to keep the package set maintainable and secure.
+        <br />
+        In addition to packages the NixOS distribution also features modules and tests that make it what it is.
+        This release brought <strong>282 new</strong> modules and <strong>removed 183</strong>.
+        In that process we <strong>added 2882</strong> options and <strong>removed 728</strong>.
+      </p>
+
+      <h3>Removal of weak hashing algorithms</h3>
+
+      <p>
+        The support for weak password hashing algorithms through the <code>crypt(3)</code> API was disabled in NixOS
+        23.05. We consider password hashing methods weak if the libxcrypt project did not flag them <a href="https://github.com/besser82/libxcrypt/blob/v4.4.33/lib/hashes.conf#L41">strong</a>.
+
+        This change affects user accounts on the local system, as well as the supported algorithms in many applications
+        that rely on that API. Examples are authentication services like OpenLDAP or PAM, databases like PostgreSQL and, more generally speaking,
+        programming languages that offer a password hashing interface like Python. These applications should be migrated away from weak password
+        hashes before upgrading to NixOS 23.05, as the lack of support for these algorithms may make authentication for these
+        applications impossible.
+
+        If your system has user accounts that rely on such weak hashing algorithms, a warning will be emitted during activation. 
+        Existing users accounts are most likely using sha512crypt, for which the hash is prefixed with <i>$6$</i>. These will continue to
+        work for the foreseeable future, but migrating to more modern hashes is strongly recommended anyway.
+        Interactively configured passwords can be updated using <strong>passwd</strong>, new password hashes can be generated through <strong>mkpasswd</strong>.
+
+        Note, that we do offer <code>libxcrypt-legacy</code> as an escape hatch, that affected packages can be overridden with.
+      </p>
+
+      <h3>Bootspec (RFC-125)</h3>
+
+      <p>
+        As part of standardization efforts in <a href="https://github.com/NixOS/rfcs/blob/master/rfcs/0125-bootspec.md">RFC 125</a>, also called "Bootspec", all new users have a <code>boot.json</code> file in their system top-level derivation,
+        you can check the one on the system you are running in <i>/run/current-system/boot.json</i> for example.
+        <br />
+        The idea behind Bootspec is to enable new boot usecases in NixOS: UEFI Secure Boot, unifying bootloader installer scripts,
+        multiple initrds or systemd system extensions and A/B schemas.
+      </p>
+
+
+      <h3>Special Thanks</h3>
+      <p>
+        We want to personally thank <a href="https://github.com/riotbib">Lennart Mühlenmeier</a> and <a href="https://github.com/winterqt">Winter</a> for editorializing the release notes,
+        <a href="https://github.com/vcunat">Vladimír Čunát</a> for his tireless effort in managing jobsets, staging cycles and build infrastructure,
+        <a href="https://github.com/cole-h">Cole Helbling</a> for his epic effort in bisecting kernel issues with ARM64 for our remote builders,
+        and <a href="https://github.com/grahamc">Graham Christensen</a> for dutifully tending to our build infrastructure.
+      </p>
+
+      <h3>Reflections and Closing</h3>
+      <p>
+        I am very grateful for being given the opportunity to learn about the release process and run it with the help of everyone in the NixOS community.
+        It has been a very exciting ride and witnessing the efforts of everyone poured in the project made me want to work towards supporting
+        those efforts in many areas of the project, e.g. CI, infrastructure and more.
+
+        Now that the process documentation has reached, in my experience, a high level of maturity. I believe it is now time for tooling to
+        become consolidated, professional, comfortable and helpful for release managers and editors but also to all the persons close to the release process.
+
+        As a previous release manager said it, the release process shall become only more boring in the future!
+      </p>
+    </description>
+  </item>
+<item>
     <pubDate>Thu, 1 December 2022 11:00:00 UTC</pubDate>
     <title id="nixos-22.11">
       NixOS 22.11 released

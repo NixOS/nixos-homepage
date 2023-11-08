@@ -7,9 +7,11 @@ default: all
 
 HTML = \
   404.html \
+  blog/stories.html \
   blog/announcements.html \
   blog/categories.html \
   blog/index.html \
+  community/event-funding.html \
   community/commercial-support.html \
   community/index.html \
   community/teams/moderation.html \
@@ -22,24 +24,13 @@ HTML = \
   community/teams/documentation.html \
   community/teams/nixpkgs-architecture.html \
   community/teams/nix.html \
+  community/teams/cuda.html \
+  community/teams/foundation-board.html \
   demos/index.html \
   donate.html \
   download.html \
   explore.html \
   guides/how-nix-works.html \
-  guides/nix-language.html \
-  guides/ad-hoc-developer-environments.html \
-  guides/towards-reproducibility-pinning-nixpkgs.html \
-  guides/declarative-and-reproducible-developer-environments.html \
-  guides/continuous-integration-github-actions.html \
-  guides/dev-environment.html \
-  guides/building-and-running-docker-images.html \
-  guides/building-bootable-iso-image.html \
-  guides/deploying-nixos-using-terraform.html \
-  guides/installing-nixos-on-a-raspberry-pi.html \
-  guides/integration-testing-using-virtual-machines.html \
-  guides/cross-compilation.html \
-  guides/contributing.html \
   index.html \
   learn.html
 
@@ -51,14 +42,6 @@ DEMOS = \
   demos/example_4.svg \
   demos/example_5.svg \
   demos/example_6.svg
-
-NIX_DEV_MANUAL_IN ?= /no-such-path
-NIX_DEV_MANUAL_OUT = guides
-
-all: $(NIX_DEV_MANUAL_OUT) learn_guides.html.in
-
-$(NIX_DEV_MANUAL_OUT) learn_guides.html.in: $(NIX_DEV_MANUAL_IN) layout.tt scripts/copy-nix-dev-tutorials.sh
-	bash ./scripts/copy-nix-dev-tutorials.sh $(NIX_DEV_MANUAL_OUT)
 
 
 ### Prettify the Nix Pills
@@ -194,7 +177,7 @@ favicon.ico: favicon.png
 	convert -resize 200 $< $@
 
 %.html: %.tt layout.tt common.tt
-	tpage \
+	perl `which tpage` \
 	  --pre_chomp --post_chomp \
 	  --eval_perl \
 	  --define root=$(ROOT) \
@@ -210,7 +193,7 @@ favicon.ico: favicon.png
 
 %: %.in common.tt
 	echo $$PATH
-	tpage \
+	perl `which tpage` \
 	  --define latestNixVersion=$(NIX_STABLE_VERSION) \
 	  --pre_process=common.tt $< > $@.tmp
 	mv $@.tmp $@
@@ -229,21 +212,21 @@ blog/announcements.html.in: blog/announcements-rss.xml blog/announcements.xml bl
 	xsltproc --param maxItem 10000 blog/announcements.xsl blog/announcements.xml > $@.tmp
 	mv $@.tmp $@
 
+blog/stories-rss.xml: blog/stories.xml blog/stories-rss.xsl
+	xsltproc blog/stories-rss.xsl blog/stories.xml > $@.tmp
+	mv $@.tmp $@
+
+blog/stories.html: blog/stories.html.in blog/layout.tt
+
+blog/stories.html.in: blog/stories-rss.xml blog/stories.xml blog/stories.xsl
+	xsltproc --param maxItem 10000 blog/stories.xsl blog/stories.xml > $@.tmp
+	mv $@.tmp $@
+
 blog/index.html: blog/layout.tt
 
 blog/categories.html: blog/layout.tt
 
 index.html: blog/announcements-rss.xml blog/index.html
-
-
-#
-# -- /community section ------------------------------------------------------
-#
-
-community/commercial-support.html: community/commercial-support.html.in
-
-community/commercial-support.html.in: community/commercial-support.toml
-	shuffle-commercial-providers --input community/commercial-support.toml > $@
 
 
 ### Check
@@ -269,10 +252,10 @@ tmp.svg.less: $(wildcard site-styles/assets/*)
 
 tmp.styles: tmp.svg.less $(SITE_STYLES_LESS)
 	rm -rf tmp.styles
-	
+
 	mkdir -p tmp.styles
 	cp -fR site-styles/* tmp.styles/
-	
+
 	rm -rf tmp.styles/assets/*
 	cp tmp.svg.less tmp.styles/assets/svg.less
 
