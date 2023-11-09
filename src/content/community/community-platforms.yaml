@@ -1,0 +1,23 @@
+main:
+  - href: https://discourse.nixos.org/
+    name: NixOS Forum on Discourse
+    description: The official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.
+  - href: https://matrix.to/#/#community:nixos.org
+    name: NixOS Matrix Space
+    description: Real-time help, development chat, and off-topic community discussion takes place on Matrix.
+other:
+  - href: https://mastodon.social/tags/nixos
+    name: Mastodon
+    logo: /images/community-platforms-logos/mastodon.svg
+  - href: https://twitter.com/hashtag/NixOS
+    name: Twitter
+    logo: /images/community-platforms-logos/twitter.svg
+  - href: https://stackoverflow.com/questions/tagged/nix+or+nixpkgs+or+nixos+or+nixops
+    name: Stackoverflow
+    logo: /images/community-platforms-logos/stackoverflow.svg
+  - href: https://discord.gg/RbvHtGa
+    name: Discord
+    logo: /images/community-platforms-logos/discord.svg
+  - href: https://www.reddit.com/r/NixOS/
+    name: Reddit
+    logo: /images/community-platforms-logos/reddit.svg
