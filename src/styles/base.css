@@ -7,4 +7,7 @@
     main a:-webkit-any-link {
         @apply underline decoration-1 underline-offset-2 text-nixsemidarkblue;
     }
+    main a:any-link {
+        @apply underline decoration-1 underline-offset-2 text-nixsemidarkblue;
+    }
 }

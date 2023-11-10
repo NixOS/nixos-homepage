@@ -19,6 +19,7 @@ module.exports = {
         serif: ["Overpass", ...defaultTheme.fontFamily.serif],
         heading: ["Overpass", ...defaultTheme.fontFamily.serif],
         mono: ["Fira\\ Mono", ...defaultTheme.fontFamily.mono],
+        nixos: ["Vegur"],
       },
     },
     container: {
