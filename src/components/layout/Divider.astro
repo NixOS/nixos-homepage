@@ -1,0 +1,20 @@
+---
+interface Props {
+    style?: "slope",
+    mirrorX?: boolean,
+    mirrorY?: boolean
+}
+
+const styleMap = {
+    "slope": "/divider/slope_down.svg"
+}
+
+const { style = "slope", mirrorX = false, mirrorY = false } = Astro.props;
+---
+
+<img src={styleMap[style]} class:list={["w-full object-fill object-[60%_top] h-16",
+    {
+        "-scale-x-100": mirrorX,
+        "-scale-y-100": mirrorY
+    }
+]} />
