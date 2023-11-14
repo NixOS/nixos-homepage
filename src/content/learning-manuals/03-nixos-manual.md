@@ -1,0 +1,18 @@
+---
+title: NixOS Manual
+url:
+---
+
+NixOS is a Linux distribution based on Nix package manager.
+
+- [Installing NixOS]([%root%]manual/nixos/stable/#sec-installation)
+- [Changing the Configuration]([%root%]manual/nixos/stable/#sec-changing-config)
+- [Upgrading NixOS]([%root%]manual/nixos/stable/#sec-upgrading)
+- [Configuration Syntax]([%root%]manual/nixos/stable/#sec-configuration-syntax)
+- [Package Management]([%root%]manual/nixos/stable/#sec-package-management)
+- [User Management]([%root%]manual/nixos/stable/#sec-user-management)
+- [Troubleshooting]([%root%]manual/nixos/stable/#ch-troubleshooting)
+- [Writing NixOS Modules]([%root%]manual/nixos/stable/#sec-writing-modules)
+- [Writing NixOS Documentation]([%root%]manual/nixos/stable/#sec-writing-documentation)
+- [Writing NixOS Tests]([%root%]manual/nixos/stable/#sec-nixos-tests)
+- [Building Your Own NixOS CD]([%root%]manual/nixos/stable/#sec-building-image)

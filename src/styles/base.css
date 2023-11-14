@@ -10,4 +10,11 @@
     main a:any-link {
         @apply underline decoration-1 underline-offset-2 text-nixsemidarkblue;
     }
+
+    article ul {
+        @apply list-disc list-inside;
+    }
+    article ul > li > ul {
+        @apply list-disc list-inside ml-4;
+    }
 }

@@ -1,0 +1,38 @@
+---
+import Icon from "astro-icon";
+
+interface Props {
+    color?: "nixdarkblue" | "white",
+    size?: "sm" | "lg" | "sm-full";
+    icon?: "search" | null;
+    placeholder?: string;
+}
+
+const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "" } = Astro.props;
+
+---
+
+<div class="relative">
+  <Icon
+    alt="Search"
+    class:list={["h-8 w-8 hidden md:block absolute", {
+        "text-nixdarkblue": color === "nixdarkblue",
+        "text-white": color === "white",
+        "top-3 left-3": size === "lg",
+        "top-2 left-2.5": size === "sm-full"
+    }]}
+    pack="mdi"
+    name="search"
+  />
+  <input
+    type="text"
+    class:list={["rounded-full text-xl placeholder-gray-400 text-normal", {
+        "text-nixdarkblue placeholder-white": color === "nixdarkblue",
+        "border-white text-white placeholder-white bg-transparent": color === "white",
+        "py-3 pl-4 md:pl-11 pr-4 md:w-96 border-2": size === "lg",
+        "px-10 pl-11 py-2 w-full border-1": size === "sm-full"
+    }]}
+    placeholder={placeholder}
+  />
+</div>
+
