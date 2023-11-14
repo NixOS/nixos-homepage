@@ -1,1 +1,55 @@
+---
+import { getEntry } from "astro:content"
 
+import Layout from "../layouts/Layout.astro"
+import PageHeader from "../components/layout/PageHeader.astro"
+import Container from "../components/layout/Container.astro"
+
+const platforms = await getEntry("community", "community-platforms")
+---
+<Layout title="Community">
+  <PageHeader text="Community"/>
+  <Container>
+    <p class="text-xl font-bold text-gray-500 mt-16">
+      Nix and NixOS are developed and used by a diverse and welcoming community from all around the world.
+    </p>
+    <p class="mt-4 font-light">
+      The NixOS Foundation aims to promote participation without regard to gender, sexual orientation, disability, ethnicity, age, or similar personal characteristics.
+    </p>
+    <p class="mt-4 font-light">
+      We want to strive to create and foster community by providing an intentionally welcoming and safe environment where all feel valued and cared for, and where all are given opportunity to participate meaningfully. The Foundation will work with the community in service of this goal.
+    </p>
+    <p class="mt-4 font-light">
+      Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at <a href="mailto:community@nixos.org">community@nixos.org</a>. The project team is obligated to maintain confidentiality with regard to the reporter of an incident.
+    </p>
+    <h2 class="text-4xl font-bold text-nixdarkblue mt-8">
+      Where to talk?
+    </h2>
+    <ul class="grid gap-4 mt-4 md:grid-flow-col auto-cols-fr">
+      {platforms.data.main.map((platform) => (
+        <li class="bg-nixdarkblue rounded-xl p-4 hover:box-shadow-xl hover:bg-nixsemidarkblue">
+          <a href={platform.href} class="!no-underline !text-white">
+            <div class="flex gap-2 text-xl font-bold">
+              <img src={platform.logo} alt={"logo of " + platform.name} class="w-8 h-8 invert"/>
+              <span class="leading-8 ml-2">
+                {platform.name}
+              </span>
+            </div>
+            <div class="mt-4">
+              {platform.description}
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <ul class="flex gap-4 mt-4">
+      {platforms.data.other.map((platform) => (
+        <li class="basis-full bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
+          <a href={platform.href}>
+            <img src={platform.logo} alt={"logo of " + platform.name} class="mx-auto w-8 h-8 invert"/>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Container>
+</Layout>
