@@ -1,0 +1,155 @@
+---
+
+import { getEntry } from 'astro:content';
+
+import Layout from '../layouts/Layout.astro';
+import Container from "../components/layout/Container.astro";
+import PageHeader from "../components/layout/PageHeader.astro";
+import SponsorLogo from "../components/layout/SponsorLogo.astro";
+import Button from "../components/ui/Button.astro";
+
+const sponsors = await  getEntry('sponsors', 'info');
+
+---
+
+<Layout title="Donate">
+  <PageHeader text="Donate" />
+
+  <Container class="grid px-12 pt-16">
+    <p class="text-xl font-bold text-gray-500">
+      The NixOS infrastructure, development and events are funded by its users and sponsors.
+    </p>
+  </Container>
+
+  <Container class="grid md:grid-cols-2 gap-8 px-12 pt-8 pb-20">
+    <div class="flex flex-col justify-center font-light gap-4">
+      <p>
+        Maintaining our build farm and binary cache is very expensive.
+        We depend on your support to ensure the continuous operation and expansion of the NixOS infrastructure.
+      </p>
+      <p>
+        Please consider donating a small amount every month to contribute to sustainable funding.
+        Donations are handled by a nonprofit organization, the <a href="/governance.html#foundation">NixOS Foundation</a>.
+      </p>
+    </div>
+    <div class="flex flex-col gap-4">
+      <img src="/images/logos/nixos_flake.svg" class="h-40" />
+      <p class="text-center font-nixos font-regular text-8xl">
+        NixOS
+      </p>
+      <p class="text-center font-nixos font-light text-7xl">
+        Foundation
+      </p>
+    </div>
+  </Container>
+
+  <img src="/divider/slope_down.svg" class="w-full object-fill object-[60%_top] h-16 -scale-y-100 -scale-x-100" />
+  <div class="bg-nixdarkblue py-16 px-12 text-white">
+    <Container class="grid md:grid-cols-2 gap-8 px-12">
+      <div class="flex flex-col gap-4">
+        <img src="/images/donate/merch.svg" class="h-[28rem]" />
+      </div>
+      <div class="flex flex-col justify-center gap-4">
+        <h1 class="text-4xl font-bold pb-2">
+          NixOS T-shirts, mugs and more...
+        </h1>
+        <p class="font-light">
+          Donate to NixOS foundation by purchasing NixOS merchandise.
+        </p>
+        <div class="flex flex-col md:flex-row justify-stretch gap-4">
+          <Button color="green" size="sm" href="https://www.redbubble.com/people/mogorman/shop">
+            Go to the shop (RedBubble)
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </div>
+  <img src="/divider/slope_down.svg" class="w-full object-fill object-[60%_top] h-16 -scale-x-100" />
+
+  <Container class="grid md:grid-cols-2 gap-8 py-16 px-12">
+    <div class="flex flex-col gap-4">
+      <h2 class="text-4xl font-bold text-nixdarkblue pb-2">
+        Donate using Open Collective
+      </h2>
+      <p class="font-light">
+        NixOS Foundation is using
+        <a href="https://opencollective.com/">Open Collective</a>
+        to manage the finances so everyone can see where money comes from and where money goes.
+      </p>
+      <p class="font-light">
+        With Open Collective you can make a <strong>single</strong> or <strong>recurring</strong> contribution by credit card transfer.
+      </p>
+      <p class="font-light">
+        Thank you!
+      </p>
+      <div class="flex flex-col md:flex-row justify-stretch gap-4">
+        <Button color="semidarkblue" size="sm" href="https://opencollective.com/nixos#support">
+          Contribute
+        </Button>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4 justify-center">
+      <h2 class="text-4xl font-bold text-nixdarkblue pb-2">
+        Donate with SEPA bank transfer
+      </h2>
+      <p class="font-light">
+        The NixOS Foundation also accepts donations via SEPA bank transfer. Please send payments to:
+      </p>
+      <pre class="font-mono bg-nixlighterblue text-nixdarkerblue font-bold whitespace-pre-line p-8 rounded-3xl">
+Stichting NixOS Foundation, Utrecht, The Netherlands
+
+IBAN: NL13 BUNQ 2061 2530 32
+BIC:  BUNQNL2AXXX</pre>
+      <p class="text-xs font-light">
+        Please add your name and purpose (donation) in the description of the transfer.
+        <i>
+          If you would like to support us with amounts above 2000 euro per year, please contact us at
+          <a href="mailto:foundation@nixos.org">foundation@nixos.org</a>
+          , as this will have tax implications.
+        </i>
+      </p>
+    </div>
+  </Container>
+
+  <img src="/divider/slope_down.svg" class="w-full object-fill object-[60%_top] h-16 -scale-y-100" />
+  <div class="bg-nixdarkblue py-16 text-white">
+    <Container class="grid md:grid-cols-2 gap-8 px-12">
+      <div class="flex flex-col justify-center">
+        <div class="grid grid-cols-2 sm:grid-cols-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {sponsors.data.items.map((item) => (
+            <SponsorLogo class={item.class} href={item.href} src={item.src} alt={item.alt} />
+          ))}
+        </div>
+      </div>
+      <div class="flex flex-col gap-4 justify-center">
+        <h1 class="text-4xl font-bold pb-2">
+          Acknowledgements
+        </h1>
+        <p class="font-light">
+          The Nix package manager was developed by
+          <a href="https://edolstra.github.io/" class="!text-white">Eelco Dolstra</a>
+          as part of his PhD research in the
+          <a href="https://www.nwo.nl/en/projects/638001201" class="!text-white">TraCE project</a>,
+          funded by the
+          <a href="http://www.jacquard.nl/" class="!text-white">Jacquard programme</a>
+          of the
+          <a href="http://www.nwo.nl/" class="!text-white">Netherlands Organisation for Scientific Research</a>
+          (NWO) and SERC. The first prototype of NixOS was developed by
+          <a href="http://www.tjaldur.nl/" class="!text-white">Armijn Hemel</a>
+          as his master’s thesis project.
+          Hydra, the Nix-based continuous build system, was developed as part of the LaQuSo Buildfarm project, funded by
+          <a href="https://www.4tu.nl/nirict/" class="!text-white">NIRICT</a>
+          and
+          <a href="http://www.laquso.com/" class="!text-white">LaQuSo</a>.
+        </p>
+        <p class="font-light">
+          The following companies and institutes have supported the development of NixOS and hosting for its infrastructure.
+          We are very grateful for that!
+          If you would like to support us as well, please contact
+          <a href="mailto:foundation@nixos.org" class="!text-white">The NixOS Foundation</a>.</p>
+      </div>
+    </Container>
+  </div>
+
+</Layout>
+
