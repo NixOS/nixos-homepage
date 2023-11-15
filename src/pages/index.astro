@@ -3,7 +3,7 @@ import {Icon} from "astro-icon";
 import Layout from "../layouts/Layout.astro";
 import Container from "../components/layout/Container.astro";
 import Button from "../components/ui/Button.astro";
-import Input from "../components/ui/Input.astro";
+import NixosSearchInput from "../components/ui/NixosSearchInput.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 const landingFeatures = await getCollection("landing-features");
@@ -71,8 +71,10 @@ const landingFeatures = await getCollection("landing-features");
         The Nix Packages collection (Nixpkgs) is a set of over 80 000 packages
         for the Nix package manager.
       </p>
-      <Input placeholder="Search packages" />
-      <Button color="green">Search</Button>
+      <NixosSearchInput
+        collection="packages"
+        withSubmit
+        />
     </Container>
   </div>
   <img src="/divider/landing_search_bottom.svg" class="w-full object-cover object-[60%_top] h-80" />

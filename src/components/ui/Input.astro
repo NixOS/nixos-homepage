@@ -6,9 +6,10 @@ interface Props {
     size?: "sm" | "lg" | "sm-full";
     icon?: "search" | null;
     placeholder?: string;
+    name?: string;
 }
 
-const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "" } = Astro.props;
+const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "", name = null } = Astro.props;
 
 ---
 
@@ -26,12 +27,14 @@ const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "" } = As
   />
   <input
     type="text"
+    class="outline-nixlightblue outline-2 focus:outline focus:border-nixlightblue"
     class:list={["rounded-full text-xl placeholder-gray-400 text-normal", {
-        "text-nixdarkblue placeholder-white": color === "nixdarkblue",
-        "border-white text-white placeholder-white bg-transparent": color === "white",
+        "text-nixdarkblue placeholder-grey-200": color === "nixdarkblue",
+        "border-white text-white placeholder-nixlighterblue bg-transparent": color === "white",
         "py-3 pl-4 md:pl-11 pr-4 md:w-96 border-2": size === "lg",
         "px-10 pl-11 py-2 w-full border-1": size === "sm-full"
     }]}
+    name={name}
     placeholder={placeholder}
   />
 </div>

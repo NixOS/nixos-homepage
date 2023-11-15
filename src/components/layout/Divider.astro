@@ -12,9 +12,9 @@ const styleMap = {
 const { style = "slope", mirrorX = false, mirrorY = false } = Astro.props;
 ---
 
-<img src={styleMap[style]} class:list={["w-full object-fill object-[60%_top] h-16",
+<img src={styleMap[style]} class:list={["w-full object-fill object-[60%_top] h-16 select-none",
     {
         "-scale-x-100": mirrorX,
         "-scale-y-100": mirrorY
     }
-]} />
+]} aria-hidden="true" />

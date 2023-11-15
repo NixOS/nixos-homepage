@@ -12,9 +12,22 @@
     }
 
     article ul {
-        @apply list-disc list-inside;
+        @apply list-circle list-inside;
     }
+
     article ul > li > ul {
         @apply list-disc list-inside ml-4;
+    }
+    article ul.inlinelist {
+        @apply list-none flex flex-col ml-6;
+    }
+    article ul.inlinelist li {
+        @apply inline-block;
+    }
+    article ul.inlinelist li::after {
+        content: ", ";
+    }
+    article ul.inlinelist li:last-child::after {
+        content: "";
     }
 }
