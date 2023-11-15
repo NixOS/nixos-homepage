@@ -32,6 +32,6 @@ module.exports = {
     require("daisyui"),
   ],
   daisyui: {
-    themes: [], // Disable all themes for the current time being
+    themes: false, // Disable all themes for the current time being
   },
 }
