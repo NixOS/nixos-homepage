@@ -6,6 +6,7 @@ import PageHeader from "../components/layout/PageHeader.astro"
 import Container from "../components/layout/Container.astro"
 
 const platforms = await getEntry("community", "community-platforms")
+const meetups = await getEntry("community", "meetups")
 const nixcons = await getCollection("nixcons")
 ---
 <Layout title="Community">
@@ -81,7 +82,57 @@ const nixcons = await getCollection("nixcons")
             <hr/>
           </li>
         ))}
+      </ul>
     </Container>
   </div>
   <img src="/divider/slope_down.svg" class="mb-8 w-full object-fill object-[60%_top] h-16"/>
+  <Container>
+    <h2 class="text-4xl font-bold text-nixdarkblue mt-8">
+      Meetups
+    </h2>
+    <div class="mt-4 grid md:grid-flow-col auto-cols-fr font-light text-center text-lg bg-[url(/images/world-map.svg)] bg-cover">
+      <div>
+        <h3 class="mt-4 md:mt-2 font-bold text-2xl text-nixdarkblue">
+          America
+        </h3>
+        <ul class="mt-2 space-y-2">
+          {meetups.data.america.map((meetup) => (
+            <li>
+              <a href={meetup.href}>
+                {meetup.location}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="mt-4 md:mt-2 font-bold text-2xl text-nixdarkblue">
+          Europe
+        </h3>
+        <ul class="mt-2 space-y-2">
+          {meetups.data.europe.map((meetup) => (
+            <li>
+              <a href={meetup.href}>
+                {meetup.location}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="mt-4 md:mt-2 font-bold text-2xl text-nixdarkblue">
+          Asia
+        </h3>
+        <ul class="mt-2 space-y-2">
+          {meetups.data.asia.map((meetup) => (
+            <li>
+              <a href={meetup.href}>
+                {meetup.location}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Container>
 </Layout>
