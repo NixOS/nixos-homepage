@@ -1,0 +1,89 @@
+---
+import Container from "../components/layout/Container.astro";
+import PageHeader from "../components/layout/PageHeader.astro";
+import Layout from "../layouts/Layout.astro";
+import { getCollection, getEntry } from "astro:content";
+import Button from "../components/ui/Button.astro";
+import Divider from "../components/layout/Divider.astro";
+import NixosSearchInput from "../components/ui/NixosSearchInput.astro";
+const learningManuals = await getCollection("learning-manuals");
+const { data: learningFeatures } = await getEntry('learning', 'features');
+const { data: learningResources } = await getEntry('learning', 'resources');
+---
+
+<Layout title="Learn Nix | Nix & NixOS">
+  <PageHeader text="Learn" />
+  <Container class="grid md:grid-cols-3 py-16 gap-4">
+    {
+      learningFeatures.map((feature) => (
+        <div class="border-0.5 border-nixdarkerblue rounded-2xl p-8 flex flex-col justify-center gap-8">
+          <img src={feature.imgUrl} class="h-28" />
+          <Button size="lg-full" color={feature.color} href={feature.url}>
+            {feature.title}
+          </Button>
+        </div>
+      ))
+    }
+  </Container>
+  <Divider style="slope" mirrorY mirrorX />
+  <div class="bg-nixdarkblue text-white py-8 md:px-8">
+    <Container>
+      <h2 class="text-4xl font-extrabold font-heading pb-8">Search</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <h3 class="text-2xl font-extrabold font-heading mb-4">Nix packages</h3>
+          <NixosSearchInput color="white" size="sm-full" collection="packages" />
+        </div>
+        <div>
+          <h3 class="text-2xl font-extrabold font-heading mb-4">NixOS options</h3>
+          <NixosSearchInput color="white" size="sm-full" collection="options" />
+        </div>
+      </div>
+    </Container>
+  </div>
+  <Divider style="slope" mirrorX />
+  <Container class="grid md:grid-cols-3 py-16 gap-4 items-start">
+    {
+      learningManuals.map(async (manual) => {
+        const { Content } = await manual.render();
+        return (
+          <div class="border-0.5 border-nixdarkerblue rounded-2xl p-4 flex flex-col gap-4 justify-start items-center">
+            <article>
+              <img src="/doc-icon.svg" class="h-20 w-20 float-left inline pr-4 pb-4" />
+              <h2 class="text-4xl text-nixdarkblue font-heading font-extrabold leading-none mb-4">
+                {manual.data.title}
+              </h2>
+              <div class="leading-relaxed text-lg font-light">
+                <Content />
+              </div>
+            </article>
+              <Button size="sm-mobfull" color="green" href={manual.data.url}>
+                Full {manual.data.title}
+              </Button>
+          </div>
+        );
+      })
+    }
+  </Container>
+  <Divider style="slope" mirrorY />
+  <div class="bg-nixdarkblue text-white py-8 md:px-8">
+    <Container>
+      <h2 class="text-4xl font-heading font-extrabold pb-8">
+        Other Learning Resources
+      </h2>
+      <div class="grid md:grid-cols-3 gap-12 md:gap-4 pb-12">
+        {
+          learningResources.map((item) => (
+            <div class="flex flex-col items-start">
+              <h3 class="text-2xl font-extrabold mb-2 font-heading">{item.title}</h3>
+              <p class="mb-4 font-light leading-relaxed">{item.description}</p>
+              <Button size="sm-mobfull" color="orange" href={item.url}>
+                {item.buttonText}
+              </Button>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </div>
+</Layout>

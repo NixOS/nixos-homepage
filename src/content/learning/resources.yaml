@@ -1,0 +1,14 @@
+- title: The Nix Hour
+  description: A weekly beginner-oriented interactive video lecture on all things
+    Nix. Running since October 2022.
+  url: https://www.youtube.com/playlist?list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in
+  buttonText: Watch on Youtube
+- title: NixOS Wiki
+  description: A unofficial, user-maintained wiki for Nix and NixOS
+  url: https://nixos.wiki/
+  buttonText: Check the wiki
+- title: Nix Pills
+  description: A low-level tutorial on building software packages with Nix, showing
+    in detail how Nixpkgs is constructed.
+  url: "/guides/nix-pills"
+  buttonText: Take the Pills
