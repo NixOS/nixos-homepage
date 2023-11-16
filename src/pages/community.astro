@@ -134,5 +134,51 @@ const nixcons = await getCollection("nixcons")
         </ul>
       </div>
     </div>
+    <h2 class="text-4xl font-bold text-nixdarkblue mt-8">
+      RFC Process
+    </h2>
+    <div>
+      <div class="space-y-8 mt-4">
+        <div class="border-2 border-gray-300 bg-gray-100 rounded-xl px-4 py-4 text-lg w-64">
+          New submission
+        </div>
+        <div class="border-2 border-gray-300 bg-gray-100 rounded-xl px-4 py-4 text-lg w-64 relative">
+          Nomination phase
+          <hr class="absolute border border-gray-200 h-8 w-0 -top-[calc(2rem_+_2px)]"/>
+        </div>
+        <div class="border-2 border-gray-300 bg-gray-100 rounded-xl px-4 py-4 text-lg w-64 relative">
+          Discussion phase
+          <hr class="absolute border border-gray-200 h-8 w-0 -top-[calc(2rem_+_2px)]"/>
+        </div>
+        <div class="border-2 border-gray-300 bg-gray-100 rounded-xl px-4 py-4 text-lg w-64 relative">
+          Final comment phase
+          <hr class="absolute border border-gray-200 h-8 w-0 -top-[calc(2rem_+_2px)]"/>
+        </div>
+        <div class="border-2 border-gray-300 bg-gray-100 rounded-xl px-4 py-4 text-lg w-64 relative ml-12">
+          FCP cancelled
+          <svg class="absolute w-8 h-8 -left-[calc(2rem_+_2px)] top-0" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="stroke-2 stroke-gray-200" d="M30 29.5C26.126 29.5 22.2899 28.737 18.7108 27.2544C15.1317 25.7719 11.8797 23.599 9.14035 20.8596C6.40102 18.1203 4.22807 14.8683 2.74555 11.2892C1.26304 7.71005 0.5 3.87399 0.5 -2.57897e-06"/>
+          </svg>
+          <hr class="absolute border border-gray-200 h-24 w-0 -left-[calc(2rem_+_2px)] -top-[calc(2rem_+_2px)]"/>
+        </div>
+        <div class="border-2 border-gray-300 bg-gray-100 rounded-xl px-4 py-4 text-lg w-64 relative ml-12">
+          Submission rejected
+          <svg class="absolute w-8 h-8 -left-[calc(2rem_+_2px)] top-0" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="stroke-2 stroke-gray-200" d="M30 29.5C26.126 29.5 22.2899 28.737 18.7108 27.2544C15.1317 25.7719 11.8797 23.599 9.14035 20.8596C6.40102 18.1203 4.22807 14.8683 2.74555 11.2892C1.26304 7.71005 0.5 3.87399 0.5 -2.57897e-06"/>
+          </svg>
+          <hr class="absolute border border-gray-200 h-24 w-0 -left-[calc(2rem_+_2px)] -top-[calc(2rem_+_2px)]"/>
+        </div>
+        <div class="border-2 border-gray-300 bg-gray-100 rounded-xl px-4 py-4 text-lg w-64 relative ml-12">
+          Submission accepted
+          <svg class="absolute w-8 h-8 -left-[calc(2rem_+_2px)] top-0" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="stroke-2 stroke-gray-200" d="M30 29.5C26.126 29.5 22.2899 28.737 18.7108 27.2544C15.1317 25.7719 11.8797 23.599 9.14035 20.8596C6.40102 18.1203 4.22807 14.8683 2.74555 11.2892C1.26304 7.71005 0.5 3.87399 0.5 -2.57897e-06"/>
+          </svg>
+          <hr class="absolute border border-gray-200 h-[calc(2rem_+_2px)] w-0 -left-[calc(2rem_+_2px)] -top-[calc(2rem_+_2px)]"/>
+        </div>
+      </div>
+      <p class="mt-4 font-light">
+        The "RFC" (request for comments) process is intended to provide a consistent and controlled path for new features to enter the Nix language, packages and OS, so that all community can be confident about the direction the ecosystem is evolving in.
+      </p>
+    </div>
   </Container>
 </Layout>
