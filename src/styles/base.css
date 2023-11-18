@@ -11,3 +11,107 @@
         @apply underline decoration-1 underline-offset-2 text-nixsemidarkblue;
     }
 }
+
+@layer components {
+
+    @keyframes rfc-box-0 {
+        0% {
+            @apply border-gray-300 bg-gray-100;
+        }
+        15% {
+            @apply border-nixgreen bg-green-100;
+        }
+        90% {
+            @apply border-nixgreen bg-green-100;
+        }
+    }
+    @keyframes rfc-box-1 {
+        0% {
+            @apply border-gray-300 bg-gray-100;
+        }
+        15% {
+            @apply border-gray-300 bg-gray-100;
+        }
+        30% {
+            @apply border-nixgreen bg-green-100;
+        }
+        90% {
+            @apply border-nixgreen bg-green-100;
+        }
+    }
+    @keyframes rfc-box-2 {
+        0% {
+            @apply border-gray-300 bg-gray-100;
+        }
+        30% {
+            @apply border-gray-300 bg-gray-100;
+        }
+        45% {
+            @apply border-nixgreen bg-green-100;
+        }
+        90% {
+            @apply border-nixgreen bg-green-100;
+        }
+    }
+    @keyframes rfc-box-3 {
+        0% {
+            @apply border-gray-300 bg-gray-100;
+        }
+        45% {
+            @apply border-gray-300 bg-gray-100;
+        }
+        60% {
+            @apply border-nixgreen bg-green-100;
+        }
+        90% {
+            @apply border-nixgreen bg-green-100;
+        }
+    }
+    @keyframes rfc-box-4 {
+        0% {
+            @apply border-gray-300 bg-gray-100;
+        }
+        60% {
+            @apply border-gray-300 bg-gray-100;
+        }
+        75% {
+            @apply border-nixgreen bg-green-100;
+        }
+        90% {
+            @apply border-nixgreen bg-green-100;
+        }
+    }
+    @keyframes rfc-box-x {
+        0% {
+            @apply opacity-100;
+        }
+        60% {
+            @apply opacity-100;
+        }
+        75% {
+            @apply opacity-75;
+        }
+        90% {
+            @apply opacity-75;
+        }
+    }
+
+    .rfc-box-0 {
+        animation: 10s linear infinite rfc-box-0
+    }
+    .rfc-box-1 {
+        animation: 10s linear infinite rfc-box-1
+    }
+    .rfc-box-2 {
+        animation: 10s linear infinite rfc-box-2
+    }
+    .rfc-box-3 {
+        animation: 10s linear infinite rfc-box-3
+    }
+    .rfc-box-4 {
+        animation: 10s linear infinite rfc-box-4
+    }
+    .rfc-box-x {
+        animation: 10s linear infinite rfc-box-x
+    }
+}
