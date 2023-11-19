@@ -13,7 +13,6 @@
 }
 
 @layer components {
-
     @keyframes rfc-box-0 {
         0% {
             @apply border-gray-300 bg-gray-100;
