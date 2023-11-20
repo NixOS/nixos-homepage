@@ -9,6 +9,7 @@ import Button from "../components/ui/Button.astro";
 const platforms = await getEntry("community", "community-platforms")
 const meetups = await getEntry("community", "meetups")
 const nixcons = await getCollection("nixcons")
+const teams = await getCollection("teams")
 ---
 <Layout title="Community">
   <PageHeader text="Community"/>
@@ -138,7 +139,18 @@ const nixcons = await getCollection("nixcons")
     <h2 class="text-4xl font-bold text-nixdarkblue mt-8">
       RFC Process
     </h2>
-    <div class="flex flex-wrap gap-4 mt-4">
+    <div class="flex flex-wrap gap-8 mt-4">
+      <div class="basis-96 space-y-2">
+        <p class="font-light text-lg">
+          Many changes, including bug fixes and documentation improvements can be implemented and reviewed via the normal GitHub pull request workflow. Some changes though are "substantial", and we ask that these be put through a bit of a design process and produce a consensus among the Nix community.
+        </p>
+        <p class="font-light text-lg">
+          The "RFC" (request for comments) process is intended to provide a consistent and controlled path for new features to enter the Nix language, packages and OS, so that all community can be confident about the direction the ecosystem is evolving in.
+        </p>
+        <Button href="https://github.com/NixOS/rfcs">
+          Learn more
+        </Button>
+      </div>
       <div class="space-y-8">
         <div class="border-2 border-gray-300 bg-gray-100 rounded-xl px-4 py-4 text-lg w-64 rfc-box-0">
           <svg class="inline relative stroke-base-content -top-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus-2"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="M3 15h6"/><path d="M6 12v6"/></svg>
@@ -184,16 +196,31 @@ const nixcons = await getCollection("nixcons")
           <hr class="absolute border border-gray-300 h-[calc(2rem_+_2px)] w-0 -left-[calc(2rem_+_2px)] -top-[calc(2rem_+_2px)]"/>
         </div>
       </div>
-      <div class="basis-96 space-y-2">
-        <p class="font-light text-lg">
-          Many changes, including bug fixes and documentation improvements can be implemented and reviewed via the normal GitHub pull request workflow. Some changes though are "substantial", and we ask that these be put through a bit of a design process and produce a consensus among the Nix community.
-        </p>
-        <p class="font-light text-lg">
-          The "RFC" (request for comments) process is intended to provide a consistent and controlled path for new features to enter the Nix language, packages and OS, so that all community can be confident about the direction the ecosystem is evolving in.
-        </p>
-        <Button href="https://github.com/NixOS/rfcs">
-          Learn more
-        </Button>
     </div>
   </Container>
+   <div class="bg-nixdarkblue py-8">
+    <Container>
+      <h2 class="text-4xl font-bold text-white mt-8">
+        Teams
+      </h2>
+      <ul class="flex flex-wrap gap-4 mt-4">
+        {teams.map((team) => (
+          <li>          
+            <a href={"/community/teams/" + team.slug} class="!no-underline !text-white w-96 h-40 block hover:bg-nixsemidarkblue group transition-[background] rounded-xl p-2">
+              <div class="flex justify-between">
+                <h3 class="text-2xl">
+                  <img src={"/images/teams/" + team.slug + ".svg"} alt="icon" class="inline invert -top-0.5 relative mr-2"/>
+                  {team.data.name}
+                </h3>
+                <img src="/images/external-link.svg" class="inline invert -top-0.5 relative opacity-0 group-hover:opacity-100 transition-opacity"/>
+              </div>
+              <div class="font-light mt-1">
+                {team.data.description}
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Container>
+  </div>
 </Layout>
