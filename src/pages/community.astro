@@ -31,7 +31,7 @@ const teams = await getCollection("teams")
     </h2>
     <ul class="grid gap-4 mt-4 md:grid-flow-col auto-cols-fr">
       {platforms.data.main.map((platform) => (
-        <li class="bg-nixdarkblue rounded-xl p-4 hover:box-shadow-xl hover:bg-nixsemidarkblue">
+        <li class="bg-nixdarkblue rounded-xl p-4 hover:box-shadow-xl hover:bg-nixsemidarkblue transition-all">
           <a href={platform.href} class="!no-underline !text-white">
             <div class="flex gap-2 text-xl font-bold">
               <img src={platform.logo} alt={"logo of " + platform.name} class="w-8 h-8 invert"/>
