@@ -67,7 +67,7 @@ const teams = await getCollection("teams")
       </p>
       <ul class="timeline timeline-vertical mt-4 text-white">
         {nixcons.reverse().map((nixcon) => (
-          <li class="[&:first-child_>_hr:first-child]:hidden [&:last-child_>_hr:last-child]:hidden">
+          <li class="[&:first-child_>_hr:first-child]:hidden [&:last-child_>_hr:last-child]:hidden first:font-bold">
             <hr/>
             <div class="timeline-start">
               {nixcon.data.date}
