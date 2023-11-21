@@ -1,0 +1,78 @@
+---
+import { getEntry, getCollection } from "astro:content"
+
+import Layout from "../../layouts/Layout.astro"
+import PageHeader from "../../components/layout/PageHeader.astro"
+import Container from "../../components/layout/Container.astro"
+import Button from "../../components/ui/Button.astro"
+
+const companies = await getEntry("community", "commercial-support")
+
+function shuffleArray(array) {
+  // source: https://stackoverflow.com/a/2450976
+
+  let currentIndex = array.length
+  let randomIndex;
+
+  while (currentIndex > 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+---
+<Layout title="Community">
+  <PageHeader text="Community"/>
+  <Container>
+    <ul class="flex flex-row flex-wrap gap-8 my-8">
+      {shuffleArray(companies.data).map((company) => (
+        <li>
+          <div class="card w-72 bg-base-100 hover:shadow-xl h-full">
+          <figure class="min-h-[16rem]">
+            <img src={company.logo} alt={company.name + " logo"}/>
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">
+              {company.name}
+            </h2>
+            <p>
+              {company.description}
+            </p>
+            <div class="card-actions">
+              {company.locations.map((location) => (
+                <div class="badge badge-outline">
+                  {location}
+                </div>
+              ))}
+            </div>
+            <div class="card-actions justify-end mt-2">
+              <Button href={company.href}>
+                Visit website
+              </Button>
+            </div>
+            </div>
+          </div>
+        </li>
+      ))}
+      <li>
+        <div class="card w-72 bg-base-100 hover:shadow-xl h-full">
+        <div class="card-body">
+          <h2 class="card-title">
+            Want to see your company here?
+          </h2>
+          <p>
+            Please submit a pull request to add your company. To prevent bias the list is randomized on each page load, using Fisher-Yates shuffle.
+          </p>
+          <div class="card-actions justify-end">
+            <Button href="https://github.com/NixOS/nixos-homepage/edit/main/src/content/community/commercial-support.yaml">
+              Submit a Pull Request
+            </Button>
+          </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </Container>
+</Layout>
