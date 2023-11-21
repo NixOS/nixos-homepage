@@ -29,7 +29,7 @@ function shuffleArray(array) {
     <ul class="flex flex-row flex-wrap gap-8 my-8">
       {shuffleArray(companies.data).map((company) => (
         <li>
-          <div class="card w-72 bg-base-100 hover:shadow-xl h-full">
+          <div class="card w-72 bg-base-100 h-full">
           <figure class="min-h-[16rem]">
             <img src={company.logo} alt={company.name + " logo"}/>
           </figure>
@@ -57,7 +57,7 @@ function shuffleArray(array) {
         </li>
       ))}
       <li>
-        <div class="card w-72 bg-base-100 hover:shadow-xl h-full">
+        <div class="card w-72 bg-base-100 h-full">
         <div class="card-body">
           <h2 class="card-title">
             Want to see your company here?
