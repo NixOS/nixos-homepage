@@ -206,7 +206,7 @@ const teams = await getCollection("teams")
       <ul class="flex flex-wrap gap-4 mt-4">
         {teams.map((team) => (
           <li>          
-            <a href={"/community/teams/" + team.slug} class="!no-underline !text-white w-96 h-40 block hover:bg-nixsemidarkblue group transition-[background] rounded-xl p-2">
+            <a href={"/community/teams/" + team.slug} class="!no-underline !text-white w-96 h-[11rem] block hover:bg-nixsemidarkblue group transition-[background] rounded-xl p-2">
               <div class="flex justify-between">
                 <h3 class="text-2xl">
                   <img src={"/images/teams/" + team.slug + ".svg"} alt="icon" class="inline invert -top-0.5 relative mr-2"/>
@@ -214,9 +214,12 @@ const teams = await getCollection("teams")
                 </h3>
                 <img src="/images/external-link.svg" class="inline invert -top-0.5 relative opacity-0 group-hover:opacity-100 transition-opacity"/>
               </div>
-              <div class="font-light mt-1">
+              <p class="font-light mt-1">
                 {team.data.description}
-              </div>
+                <span class="block font-bold group-hover:underline">
+                  Read more
+                </span>
+              </p>
             </a>
           </li>
         ))}
