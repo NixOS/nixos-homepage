@@ -21,6 +21,13 @@ module.exports = {
         mono: ["Fira\\ Mono", ...defaultTheme.fontFamily.mono],
         nixos: ["Vegur"],
       },
+      borderWidth: {
+        '0.5': '0.5px',
+        '1': '1px'
+      },
+      listStyleType: {
+        "circle": "circle",
+      },
     },
     container: {
       // https://tailwindcss.com/docs/container#centering-by-default
