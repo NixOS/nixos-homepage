@@ -14,6 +14,7 @@ root%]community/index.html#platforms">official community platforms</a>
 in accord with <a
 href="https://github.com/NixOS/rfcs/blob/master/rfcs/0102-moderation-team.md">RFC
 102</a>.
+  More information can be found at <a href="https://github.com/NixOS/moderation">the team's GitHub repository</a>.
 </section>
 
 <section class="governance-team">
@@ -31,11 +32,17 @@ href="https://github.com/NixOS/rfcs/blob/master/rfcs/0102-moderation-team.md">RF
 
   <h2>Reporting issues</h2>
 
-  <p>Instances of abusive, harassing, or otherwise unacceptable behavior may be
-    reported by contacting the project team at
-    <a href="mailto:community@nixos.org">community@nixos.org</a>.
-    The project team is obligated to maintain confidentiality with regard to the
-    reporter of an incident.</p>
+  <p>
+  <ul>
+    <li>E-mail: <a href="mailto:community@nixos.org">community@nixos.org</a></li>
+    <li>Matrix room: <a href="https://matrix.to/#/#moderation:nixos.org">#moderation:nixos.org</a></li>
+    <li>On Discourse: <a href="https://discourse.nixos.org/g/moderators">moderators group</a></li>
+    <li>On GitHub, ping <a href="https://nixos.org/community/teams/moderation">@NixOS/moderation</a></li>
+  </ul>
+
+  Or contact any of the current team members directly, e.g. via Matrix.
+  </p>
+  <p>The project team is obligated to maintain confidentiality with regard to the reporter of an incident.</p>
 
 </section>
 
