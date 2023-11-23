@@ -12,6 +12,7 @@ module.exports = {
         "nixsemidarkblue": "#405D99",
         "nixdarkerblue": "#27385d",
         "nixorange": "#ffab0d",
+        "nixdarkorange": "#ff8657",
         "nixgreen": "#6ad541"
       },
       fontFamily: {
