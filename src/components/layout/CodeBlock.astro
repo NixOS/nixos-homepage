@@ -1,5 +1,12 @@
 ---
 
+interface Props {
+  code?: String;
+  shellPrompt?: string;
+}
+
+const { code = "", shellPrompt = "$" } = Astro.props;
+
 ---
 
-<pre class="font-mono bg-[#3a3a3a] text-white whitespace-pre-line p-4 rounded-3xl"><slot /></pre>
+<pre class="font-mono bg-[#3a3a3a] text-white whitespace-pre-line p-4 rounded-3xl"><span class="font-bold">{shellPrompt}</span> {code}</pre>
