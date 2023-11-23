@@ -1,12 +1,19 @@
 ---
 
 interface Props {
-  code?: String;
-  shellPrompt?: string;
+  lines: Array<{ shellPrompt: string, code: string }>;
 }
 
-const { code = "", shellPrompt = "$" } = Astro.props;
+const { lines } = Astro.props;
 
 ---
 
-<pre class="font-mono bg-[#3a3a3a] text-white whitespace-pre-line p-4 rounded-3xl"><span class="font-bold">{shellPrompt}</span> {code}</pre>
+<pre class="font-mono bg-[#3a3a3a] text-white whitespace-pre-line p-4 rounded-3xl">
+{lines.map((line, idx, {length}) => {
+  if (length - 1 === idx) {
+    return <span class="font-bold">{line.shellPrompt}</span><span>{line.code}</span>
+  } else {
+    return <span class="font-bold">{line.shellPrompt}</span><span>{line.code}</span><br>
+  }
+})}
+</pre>

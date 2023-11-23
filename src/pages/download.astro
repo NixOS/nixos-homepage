@@ -8,6 +8,35 @@ import PageHeader from "../components/layout/PageHeader.astro";
 import Tabs from "../components/layout/Tabs.astro";
 import Button from "../components/ui/Button.astro";
 
+const nixLinuxMultiUserInstall = [
+  {"shellPrompt":"$", "code":" sh <(curl -L https://nixos.org/nix/install) --daemon" },
+];
+const nixLinuxSingleUserInstall = [
+  {"shellPrompt":"$", "code":" sh <(curl -L https://nixos.org/nix/install) --no-daemon" },
+];
+const nixMacOSMultiUserInstall = [
+  {"shellPrompt":"$", "code":" sh <(curl -L https://nixos.org/nix/install)" },
+];
+const nixWSL2MultiUserInstall = [
+  {"shellPrompt":"$", "code":" sh <(curl -L https://nixos.org/nix/install) --daemon" },
+];
+const nixWSL2SingleUserInstall = [
+  {"shellPrompt":"$", "code":" sh <(curl -L https://nixos.org/nix/install) --no-daemon" },
+];
+const nixDockerInstallInstruction1 = [
+  {"shellPrompt":"$", "code":" docker run -it nixos/nix" },
+];
+const nixDockerInstallInstruction2 = [
+  {"shellPrompt":"$", "code":" mkdir workdir" },
+  {"shellPrompt":"$", "code":" docker run -it -v $(pwd)/workdir:/workdir nixos/nix" },
+];
+const nixDockerInstallInstruction3 = [
+  {"shellPrompt":"$", "code":" git clone --depth=1 https://github.com/NixOS/nixpkgs.git" },
+  {"shellPrompt":"$", "code":" docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix" },
+  {"shellPrompt":"docker>", "code":" nix-build -I nixpkgs=/nixpkgs -A hello" },
+  {"shellPrompt":"docker>", "code":" find ./result # this symlink points to the build package" },
+];
+
 ---
 
 <Layout title="Download">
@@ -17,6 +46,8 @@ import Button from "../components/ui/Button.astro";
     <Fragment slot="tab-1">Linux</Fragment>
     <Fragment slot="tab-2">MacOS</Fragment>
     <Fragment slot="tab-3">Windows (WSL2)</Fragment>
+    <Fragment slot="tab-4">Docker</Fragment>
+    <Fragment slot="tab-5">More ...</Fragment>
 
     <Fragment slot="panel-1">
       <div class="flex flex-col justify-center gap-4 font-light">
@@ -28,7 +59,7 @@ import Button from "../components/ui/Button.astro";
           <span class="font-bold">recommended </span>
           <a href="/manual/nix/stable/installation/multi-user">multi-user installation</a>:
         </p>
-        <CodeBlock shellPrompt="$" code=" sh &lt;(curl -L https://nixos.org/nix/install) --daemon" />
+        <CodeBlock lines={nixLinuxMultiUserInstall} />
         <p>
           We recommend the multi-user install if you are on Linux running systemd,
           with SELinux disabled and you can authenticate with <CodeInline>sudo</CodeInline>.
@@ -40,7 +71,7 @@ import Button from "../components/ui/Button.astro";
           Install Nix via the
           <a href="/manual/nix/stable/installation/single-user">single-user installation</a>:
         </p>
-        <CodeBlock shellPrompt="$" code=" sh &lt;(curl -L https://nixos.org/nix/install) --no-daemon" />
+        <CodeBlock lines={nixLinuxSingleUserInstall} />
         <p>
           Above command will perform a single-user installation of Nix,
           meaning that <CodeInline>/nix</CodeInline> is owned by the invoking user.
@@ -82,7 +113,7 @@ import Button from "../components/ui/Button.astro";
           Install Nix via the <span class="font-bold">recommended </span>
           <a href="/manual/nix/stable/installation/multi-user">multi-user installation</a>:
         </p>
-        <CodeBlock shellPrompt="$" code=" sh &lt;(curl -L https://nixos.org/nix/install)" />
+        <CodeBlock lines={nixMacOSMultiUserInstall} />
         <p>
           We believe we have ironed out how to cleanly support the read-only root on modern macOS.
           Please
@@ -103,7 +134,7 @@ import Button from "../components/ui/Button.astro";
           <a href="https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/">Microsoft's systemd guide</a>
           to configure it, and then install Nix using:
         </p>
-        <CodeBlock shellPrompt="$" code=" sh &lt;(curl -L https://nixos.org/nix/install) --daemon" />
+        <CodeBlock lines={nixWSL2MultiUserInstall} />
         <h3 class="text-2xl font-bold text-nixdarkblue pb-2">
           Single-user installation
         </h3>
@@ -111,7 +142,45 @@ import Button from "../components/ui/Button.astro";
           Install Nix via the
           <a href="/manual/nix/stable/installation/single-user">single-user installation</a>:
         </p>
-        <CodeBlock shellPrompt="$" code=" sh &lt;(curl -L https://nixos.org/nix/install) --no-daemon" />
+        <CodeBlock lines={nixWSL2SingleUserInstall} />
+      </div>
+    </Fragment>
+
+    <Fragment slot="panel-4">
+      <div class="flex flex-col justify-center gap-4 font-light">
+        <p>
+          Start a Docker shell with Nix:
+        </p>
+        <CodeBlock lines={nixDockerInstallInstruction1} />
+        <p>
+          Or start a Docker shell with Nix exposing a <CodeInline>workdir</CodeInline> directory:
+        </p>
+        <CodeBlock lines={nixDockerInstallInstruction2} />
+        <p>
+          The <CodeInline>workdir</CodeInline> example from above can be also used to start hacking on nixpkgs:
+        </p>
+        <CodeBlock lines={nixDockerInstallInstruction3} />
+      </div>
+    </Fragment>
+
+    <Fragment slot="panel-5">
+      <div class="flex flex-col justify-center gap-4 font-light">
+        <p>
+          The following release items are also available:
+        </p>
+        <ul>
+          <li>
+            <a href="/manual/nix/stable/release-notes/rl-2.19">Release notes</a>
+          </li>
+          <li>
+            <a href="/manual/nix/stable">Manual</a>.
+            Please read the <a href="/manual/nix/stable/quick-start">“Quick Start” section of the manual</a>
+            for an overview of how to install and use Nix.
+          </li>
+          <li>
+            Old releases are <a href="https://releases.nixos.org/?prefix=nix">also available</a>.
+          </li>
+        </ul>
       </div>
     </Fragment>
   </Tabs>
