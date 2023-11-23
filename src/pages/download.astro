@@ -89,14 +89,14 @@ const nixDockerInstallInstruction3 = [
         </p>
 
         <h5 class="text-2xl font-bold text-neutral-500">Pros</h5>
-        <ul>
+        <ul class="list-disc ml-[1rem]">
           <li>Better build isolation (and that is what Nix is all about)</li>
           <li>Better security (a build can not write somewhere in your home)</li>
           <li>Sharing builds between users</li>
         </ul>
 
         <h5 class="text-2xl font-bold text-neutral-500">Cons</h5>
-        <ul>
+        <ul class="list-disc ml-[1rem]">
           <li>Requires <CodeInline>root</CodeInline> to run the daemon</li>
           <li>More involved installation (creation of <CodeInline>nixbld* users</CodeInline>, installing a systemd unit, ...</li>
           <li>Harder to uninstall</li>
@@ -168,7 +168,7 @@ const nixDockerInstallInstruction3 = [
         <p>
           The following release items are also available:
         </p>
-        <ul>
+        <ul class="list-disc ml-[1rem]">
           <li>
             <a href="/manual/nix/stable/release-notes/rl-2.19">Release notes</a>
           </li>
