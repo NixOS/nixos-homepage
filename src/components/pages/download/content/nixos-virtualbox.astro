@@ -1,7 +1,7 @@
 ---
 
 import CodeInline from "../../../layout/CodeInline.astro";
-import Button from "../../../ui/Button.astro";
+import DownloadButtonAndSHA from "../components/DownloadButtonAndSHA.astro";
 
 ---
 
@@ -24,17 +24,12 @@ import Button from "../../../ui/Button.astro";
 </p>
 
 <div class="my-[1rem]">
-  <Button
-    color="semidarkblue"
-    size="sm"
-    href="https://channels.nixos.org/nixos-23.05/latest-nixos-x86_64-linux.ova"
-    classList={['w-full md:w-auto block md:inline text-center md:text-left']}
-  >
-    Download (64-bit)
-  </Button>
-  <span class="mx-[0.5rem] hidden md:inline">
-    <a href="https://channels.nixos.org/nixos-23.05/latest-nixos-x86_64-linux.ova.sha256">(SHA-256)</a>
-  </span>
+  <DownloadButtonAndSHA
+    buttonHref="https://channels.nixos.org/nixos-23.05/latest-nixos-x86_64-linux.ova"
+    buttonText="Download (64-bit)"
+    shaHref="https://channels.nixos.org/nixos-23.05/latest-nixos-x86_64-linux.ova.sha256"
+    shaText="(SHA-256)"
+  />
 </div>
 
 <h3 class="text-2xl font-bold text-nixdarkblue pb-1">

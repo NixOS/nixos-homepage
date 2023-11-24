@@ -1,0 +1,46 @@
+---
+
+import DownloadButton from "./DownloadButton.astro";
+import SHA from "./sha.astro";
+
+interface Props {
+  buttonColor?: string;
+  buttonSize?: string;
+  buttonHref?: string;
+  buttonClassList?: string[];
+  buttonText?: string;
+  shaHref?: string;
+  shaClassList?: string[];
+  shaText?: string;
+}
+
+const {
+  buttonColor = "semidarkblue",
+  buttonSize = "sm",
+  buttonHref = "#",
+  buttonClassList = [],
+  buttonText = "",
+  shaHref = "#",
+  shaClassList = [],
+  shaText = "",
+  } = Astro.props;
+
+---
+
+<div>
+  <DownloadButton
+    color={buttonColor}
+    size={buttonSize}
+    href={buttonHref}
+    classList={buttonClassList}
+  >
+    {buttonText}
+  </DownloadButton>
+  <SHA
+    href={shaHref}
+    classList={shaClassList}
+  >
+    {shaText}
+  </SHA>
+  <slot />
+</div>
