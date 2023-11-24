@@ -1,0 +1,65 @@
+---
+
+import CodeBlock from "../../layout/CodeBlock.astro";
+import CodeInline from "../../layout/CodeInline.astro";
+
+const nixLinuxMultiUserInstall = [
+  {"shellPrompt":"$", "code":" sh <(curl -L https://nixos.org/nix/install) --daemon" },
+];
+const nixLinuxSingleUserInstall = [
+  {"shellPrompt":"$", "code":" sh <(curl -L https://nixos.org/nix/install) --no-daemon" },
+];
+
+---
+
+<h3 class="text-2xl font-bold text-nixdarkblue pb-2">
+  Multi-user installation (recommended)
+</h3>
+<p>
+  Install Nix via the
+  <span class="font-bold">recommended </span>
+  <a href="/manual/nix/stable/installation/multi-user">multi-user installation</a>:
+</p>
+<CodeBlock lines={nixLinuxMultiUserInstall} />
+<p>
+  We recommend the multi-user install if you are on Linux running systemd,
+  with SELinux disabled and you can authenticate with <CodeInline>sudo</CodeInline>.
+</p>
+<h3 class="text-2xl font-bold text-nixdarkblue pb-2">
+  Single-user installation
+</h3>
+<p>
+  Install Nix via the
+  <a href="/manual/nix/stable/installation/single-user">single-user installation</a>:
+</p>
+<CodeBlock lines={nixLinuxSingleUserInstall} />
+<p>
+  Above command will perform a single-user installation of Nix,
+  meaning that <CodeInline>/nix</CodeInline> is owned by the invoking user.
+  You should run this under your usual user account,
+  not as <CodeInline>root</CodeInline>.
+  The script will invoke  <CodeInline>sudo</CodeInline> to create <CodeInline>/nix</CodeInline> if it doesn’t already exist.
+</p>
+
+<h3 class="text-2xl font-bold text-nixdarkblue pb-2">
+  Which type of installation should you choose?
+</h3>
+<p>
+  This depends on your requirements, but here is a short list of reasons why <span class="font-bold">we recommend </span>
+  <a href="/manual/nix/stable/installation/multi-user">multi-user installation</a>:
+</p>
+
+<h5 class="text-2xl font-bold text-neutral-500">Pros</h5>
+<ul class="list-disc ml-[1rem]">
+  <li>Better build isolation (and that is what Nix is all about)</li>
+  <li>Better security (a build can not write somewhere in your home)</li>
+  <li>Sharing builds between users</li>
+</ul>
+
+<h5 class="text-2xl font-bold text-neutral-500">Cons</h5>
+<ul class="list-disc ml-[1rem]">
+  <li>Requires <CodeInline>root</CodeInline> to run the daemon</li>
+  <li>More involved installation (creation of <CodeInline>nixbld* users</CodeInline>, installing a systemd unit, ...</li>
+  <li>Harder to uninstall</li>
+</ul>
+

@@ -1,0 +1,32 @@
+---
+
+import CodeBlock from "../../layout/CodeBlock.astro";
+
+const nixWSL2MultiUserInstall = [
+  {"shellPrompt":"$", "code":" sh <(curl -L https://nixos.org/nix/install) --daemon" },
+];
+const nixWSL2SingleUserInstall = [
+  {"shellPrompt":"$", "code":" sh <(curl -L https://nixos.org/nix/install) --no-daemon" },
+];
+
+---
+
+<h3 class="text-2xl font-bold text-nixdarkblue pb-2">
+  Multi-user installation (Requires WSL with systemd enabled)
+</h3>
+<p>
+  WSL versions 0.67.6 and above has systemd support.
+  Follow
+  <a href="https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/">Microsoft's systemd guide</a>
+  to configure it, and then install Nix using:
+</p>
+<CodeBlock lines={nixWSL2MultiUserInstall} />
+<h3 class="text-2xl font-bold text-nixdarkblue pb-2">
+  Single-user installation
+</h3>
+<p>
+  Install Nix via the
+  <a href="/manual/nix/stable/installation/single-user">single-user installation</a>:
+</p>
+<CodeBlock lines={nixWSL2SingleUserInstall} />
+
