@@ -9,6 +9,8 @@ import PageHeader from "../components/layout/PageHeader.astro";
 import Tabs from "../components/layout/Tabs.astro";
 import Button from "../components/ui/Button.astro";
 
+import PanelWrapper from "../components/pages/download/panel-wrapper.astro";
+
 import DownloadNixLinux from "../components/pages/download/nix-linux.astro";
 import DownloadNixMacOS from "../components/pages/download/nix-macos.astro";
 import DownloadNixWSL2 from "../components/pages/download/nix-wsl2.astro";
@@ -35,33 +37,33 @@ import DownloadNixosMore from "../components/pages/download/nix-more.astro";
     <Fragment slot="tab-5">More ...</Fragment>
 
     <Fragment slot="panel-1">
-      <div class="flex flex-col justify-center gap-4 font-light">
+      <PanelWrapper>
         <DownloadNixLinux />
-      </div>
+      </PanelWrapper>
     </Fragment>
 
     <Fragment slot="panel-2">
-      <div class="flex flex-col justify-center gap-4 font-light">
+      <PanelWrapper>
         <DownloadNixMacOS />
-      </div>
+      </PanelWrapper>
     </Fragment>
 
     <Fragment slot="panel-3">
-      <div class="flex flex-col justify-center gap-4 font-light">
+      <PanelWrapper>
         <DownloadNixWSL2 />
-      </div>
+      </PanelWrapper>
     </Fragment>
 
     <Fragment slot="panel-4">
-      <div class="flex flex-col justify-center gap-4 font-light">
+      <PanelWrapper>
         <DownloadNixDocker />
-      </div>
+      </PanelWrapper>
     </Fragment>
 
     <Fragment slot="panel-5">
-      <div class="flex flex-col justify-center gap-4 font-light">
+      <PanelWrapper>
         <DownloadNixMore />
-      </div>
+      </PanelWrapper>
     </Fragment>
   </Tabs>
 
@@ -74,27 +76,27 @@ import DownloadNixosMore from "../components/pages/download/nix-more.astro";
     <Fragment slot="tab-4">More ...</Fragment>
 
     <Fragment slot="panel-1">
-      <div class="flex flex-col justify-center gap-4 font-light">
+      <PanelWrapper>
         <DownloadNixosIsoimage />
-      </div>
+      </PanelWrapper>
     </Fragment>
 
     <Fragment slot="panel-2">
-      <div class="flex flex-col justify-center gap-4 font-light">
+      <PanelWrapper>
         <DownloadNixosVirtualBox />
-      </div>
+      </PanelWrapper>
     </Fragment>
 
     <Fragment slot="panel-3">
-      <div class="flex flex-col justify-center gap-4 font-light">
+      <PanelWrapper>
         <DownloadNixosAmazon />
-      </div>
+      </PanelWrapper>
     </Fragment>
 
     <Fragment slot="panel-4">
-      <div class="flex flex-col justify-center gap-4 font-light">
+      <PanelWrapper>
         <DownloadNixosMore />
-      </div>
+      </PanelWrapper>
     </Fragment>
 
   </Tabs>
