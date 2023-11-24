@@ -1,0 +1,26 @@
+---
+
+import Container from "./Container.astro";
+
+interface Props {
+  title: string;
+  currentVersion: string;
+}
+
+const { title, currentVersion } = Astro.props;
+
+---
+
+<Container class="grid md:grid-cols-2 bg-nixdarkblue text-white py-4 mt-16">
+  <h1 class="text-4xl font-bold pb-2">
+    {title}
+  </h1>
+  <div class="flex flex-col justify-center">
+    <div class="text-end">
+      <h2 class="text-2xl font-bold pb-2 inline">
+        Current version
+      </h2>
+      <a href="#" class="!text-white !no-underline font-bold text-2xl text-center bg-nixgreen rounded-2xl px-4 py-2">{currentVersion}</a>
+    </div>
+  </div>
+</Container>
