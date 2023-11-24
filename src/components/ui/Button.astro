@@ -1,9 +1,10 @@
 ---
 interface Props {
-    color?: "orange" | "green" | "lightblue" | "semidarkblue",
-    size?: "sm" | "lg" | "lg-full" | "sm-mobfull",
-    href?: string | null
-    type?: "button" | "submit" | "reset"
+    color?: "orange" | "green" | "lightblue" | "semidarkblue";
+    size?: "sm" | "lg" | "lg-full" | "sm-mobfull";
+    href?: string | null;
+    type?: "button" | "submit" | "reset";
+    classList?: string[];
 }
 
 const colorMap = {
@@ -20,16 +21,23 @@ const sizeMap = {
     "lg-full": "text-center py-4 w-full rounded-2xl"
 }
 
-const { color = "orange", size = "sm", href = null, type = "button" } = Astro.props;
-const classList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white drop-shadow-[0_4px_1px_rgba(0,0,0,0.2)]`;
+const {
+    color = "orange",
+    size = "sm",
+    href = null,
+    type = "button",
+    classList = [],
+    } = Astro.props;
+
+const localClassList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white drop-shadow-[0_4px_1px_rgba(0,0,0,0.2)]`;
 ---
 
 {href ? (
-  <a href={href} class:list={["!text-white !no-underline", classList]}>
+  <a href={href} class:list={["!text-white !no-underline", localClassList, classList]}>
     <slot/>
   </a>
 ) : (
-  <button type={type} class={classList}>
+  <button type={type} class={localClassList}>
     <slot/>
   </button>
 )}
