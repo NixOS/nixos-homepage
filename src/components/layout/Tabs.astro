@@ -170,6 +170,7 @@ const uid = crypto.randomUUID();
             class:list={[
               'panel',
               `panel-${index + 1}`,
+              'w-full',
             ]}
             set:html={await Astro.slots.render(name)}
             hidden
