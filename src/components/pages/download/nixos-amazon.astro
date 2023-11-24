@@ -1,0 +1,242 @@
+---
+
+import CodeBlock from "../../layout/CodeBlock.astro";
+import CodeInline from "../../layout/CodeInline.astro";
+import Button from "../../ui/Button.astro";
+
+---
+
+<style>
+.launch-amazon tr.selected {
+  display: table-row;
+}
+</style>
+
+<script>
+  const awsSelection = document.querySelector(".select-region");
+  const awsUrl = "https://console.aws.amazon.com/ec2/home"
+
+  function updateAwsLaunch(region, ami) {
+    document
+      .querySelector(".launch-aws")
+      .setAttribute("href", awsUrl + "?region=" + region + "#launchAmi=" + ami);
+  }
+
+  // Display the current AMI and set correct Launch link.
+  // Need if page is soft reloaded.
+  function setupAwsLaunch() {
+    const region = awsSelection.value;
+    const ami = document.querySelector("#launch-amazon-" + region);
+    ami.classList.add("selected");
+    const amiText = document.querySelector("#launch-amazon-" + region + " code").innerText;
+
+    updateAwsLaunch(region, amiText);
+  }
+  setupAwsLaunch();
+
+  // when client changes AWS region
+  awsSelection.addEventListener('change', function(event) {
+
+    // remove all AMIs from table
+    const allAmis = document.querySelectorAll("[id^=launch-amazon-");
+    Array.from(allAmis).forEach((ami) => ami.classList.remove("selected"));
+
+    // add new AMI to table
+    const newRegion = this.value;
+    const newAmi = document.querySelector("#launch-amazon-" + newRegion);
+    newAmi.classList.add("selected");
+
+    const newAmiText = document.querySelector("#launch-amazon-" + newRegion + " code").innerText;
+
+    console.log(newAmi);
+
+    updateAwsLaunch(newRegion, newAmiText);
+  });
+</script>
+
+<p>
+  NixOS can be deployed to Amazon EC2 with a pre-generated AMI image that you can select below.
+</p>
+
+<h3 class="text-2xl font-bold text-nixdarkblue">
+  Via AWS Management Console
+</h3>
+
+<p>
+  You can create an instance using the AWS Management Console by selecting the region and clicking the Launch button.
+</p>
+
+<div class="launch-amazon">
+  <span class="font-bold text-xl">Choose region: </span>
+  <select class="select-region text-xl font-normal bg-white border-solid border-1 border-neutral-500">
+    <option value="af-south-1">af-south-1</option>
+    <option value="ap-east-1" selected>ap-east-1</option>
+    <option value="ap-northeast-1">ap-northeast-1</option>
+    <option value="ap-northeast-2">ap-northeast-2</option>
+    <option value="ap-northeast-3">ap-northeast-3</option>
+    <option value="ap-south-1">ap-south-1</option>
+    <option value="ap-southeast-1">ap-southeast-1</option>
+    <option value="ap-southeast-2">ap-southeast-2</option>
+    <option value="ap-southeast-3">ap-southeast-3</option>
+    <option value="ca-central-1">ca-central-1</option>
+    <option value="eu-central-1">eu-central-1</option>
+    <option value="eu-north-1">eu-north-1</option>
+    <option value="eu-south-1">eu-south-1</option>
+    <option value="eu-west-1">eu-west-1</option>
+    <option value="eu-west-2">eu-west-2</option>
+    <option value="eu-west-3">eu-west-3</option>
+    <option value="me-south-1">me-south-1</option>
+    <option value="sa-east-1">sa-east-1</option>
+    <option value="us-east-1">us-east-1</option>
+    <option value="us-east-2">us-east-2</option>
+    <option value="us-west-1">us-west-1</option>
+    <option value="us-west-2">us-west-2</option>
+  </select>
+  <table class="bg-nixlighterblue p-[1rem] my-[1rem] border-separate rounded-2xl w-full">
+    <thead class="text-lg text-nixlightblue">
+      <tr>
+        <th>Root storage</th>
+        <th>Virtualisation</th>
+        <th colspan="2">AMI</th>
+      </tr>
+    </thead>
+    <tbody class="[&>tr]:hidden text-center font-bold text-lg">
+      <tr id="launch-amazon-af-south-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0df2f7b42bfbd53e5</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-ap-east-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-07ba84d7321f6f4bb</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-ap-northeast-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0e37827874573dbbf</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-ap-northeast-2">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0ff5b3b7738651895</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-ap-northeast-3">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0a7861571eb44c70c</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-ap-south-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-05c4802ca81d7c95b</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-ap-southeast-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0aee8193da16bd2db</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-ap-southeast-2">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-008be032289f60d16</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-ap-southeast-3">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-033debde7c1659c96</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-ca-central-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-031821b5f83896474</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-eu-central-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0d6ee9d5e1c985df6</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-eu-north-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0cecb1f67b2a837f6</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-eu-south-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0f9fee15eb5a64ac4</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-eu-west-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0fc7825fe890f87d1</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-eu-west-2">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0e62fef78d2c4f031</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-eu-west-3">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-01a6e4c1659b08390</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-me-south-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0a01a7eeffa8f0fd5</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-sa-east-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-09a1760227f929ccf</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-us-east-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-07df5833f04703a2a</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-us-east-2">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-04dd2f100d9665df5</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-us-west-1">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0fe502361fea4216c</CodeInline></td>
+      </tr>
+      <tr id="launch-amazon-us-west-2">
+        <td>EBS</td>
+        <td>Hardware</td>
+        <td colspan="2"><CodeInline>ami-0749963dd978a57c7</CodeInline></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <Button
+    color="semidarkblue"
+    size="sm"
+    href="#"
+    classList = {["launch-aws", "my-[0.5rem]", "inline-block"]}
+  >
+    Launch
+  </Button>
+</div>
+
+<h3 class="text-2xl font-bold text-nixdarkblue">
+  Via Command Line
+</h3>
+
+<p>
+  You can also create an instance from the command line.
+  For example, to create an instance in region
+  <CodeInline>eu-west-1</CodeInline>
+  using the EC2 API tools, just run:
+</p>
+
+<CodeBlock lines={[
+  {"shellPrompt":"$", "code":" nix-shell -p ec2_api_tools" },
+  {"shellPrompt":"(nix-shell) $", "code":" ec2-run-instances ami-0fc7825fe890f87d1 --region eu-west-1 -k my-key-pair" },
+]} />
+
