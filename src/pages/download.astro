@@ -42,6 +42,20 @@ const nixDockerInstallInstruction3 = [
 <Layout title="Download">
   <PageHeader text="Download" />
 
+  <Container class="grid md:grid-cols-2 bg-nixdarkblue text-white py-4 mt-16">
+    <h1 class="text-4xl font-bold pb-2">
+      Nix: the package manager
+    </h1>
+    <div class="flex flex-col justify-center">
+      <div class="text-end">
+        <h2 class="text-2xl font-bold pb-2 inline">
+          Current version
+        </h2>
+        <a href="#" class="!text-white !no-underline font-bold text-2xl text-center bg-nixgreen rounded-2xl px-4 py-2">2.19.1</a>
+      </div>
+    </div>
+  </Container>
+
   <Tabs class="" class:list={['']}>
     <Fragment slot="tab-1">Linux</Fragment>
     <Fragment slot="tab-2">MacOS</Fragment>
