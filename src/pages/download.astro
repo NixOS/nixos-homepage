@@ -23,7 +23,7 @@ import DownloadNixosMore from "../components/pages/download/nix-more.astro";
 <Layout title="Download">
   <PageHeader text="Download" />
 
-  <DownloadHeader title="Nix: the package manager" currentVersion="2.19.1" />
+  <DownloadHeader title = "Nix" subTitle=": the package manager" currentVersion="2.19.1" />
 
   <Tabs class="" class:list={['']}>
     <Fragment slot="tab-1">Linux</Fragment>
@@ -63,7 +63,7 @@ import DownloadNixosMore from "../components/pages/download/nix-more.astro";
     </Fragment>
   </Tabs>
 
-  <DownloadHeader title="NixOS: the Linux distribution" currentVersion="23.05" />
+  <DownloadHeader title="NixOS" subTitle=": the Linux distribution" currentVersion="23.05" />
 
   <Tabs class="" class:list={['pb-16']}>
     <Fragment slot="tab-1">ISO image</Fragment>
