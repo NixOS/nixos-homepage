@@ -388,6 +388,222 @@ const nixDockerInstallInstruction3 = [
       </div>
     </Fragment>
 
+    <Fragment slot="panel-3">
+      <div class="flex flex-col justify-center gap-4 font-light">
+
+        <p>
+          NixOS can be deployed to Amazon EC2 with a pre-generated AMI image that you can select below.
+        </p>
+
+        <h3 class="text-2xl font-bold text-nixdarkblue">
+          Via AWS Management Console
+        </h3>
+
+        <p>
+          You can create an instance using the AWS Management Console by selecting the region and clicking the Launch button.
+        </p>
+
+        <div class="download-amazon">
+          <span class="font-bold text-xl">Choose region: </span>
+          <select class="text-xl font-normal bg-white border-solid border-1 border-neutral-500">
+            <option value="af-south-1">af-south-1</option>
+            <option value="ap-east-1">ap-east-1</option>
+            <option value="ap-northeast-1">ap-northeast-1</option>
+            <option value="ap-northeast-2">ap-northeast-2</option>
+            <option value="ap-northeast-3">ap-northeast-3</option>
+            <option value="ap-south-1">ap-south-1</option>
+            <option value="ap-southeast-1">ap-southeast-1</option>
+            <option value="ap-southeast-2">ap-southeast-2</option>
+            <option value="ap-southeast-3">ap-southeast-3</option>
+            <option value="ca-central-1">ca-central-1</option>
+            <option value="eu-central-1">eu-central-1</option>
+            <option value="eu-north-1">eu-north-1</option>
+            <option value="eu-south-1">eu-south-1</option>
+            <option value="eu-west-1">eu-west-1</option>
+            <option value="eu-west-2">eu-west-2</option>
+            <option value="eu-west-3">eu-west-3</option>
+            <option value="me-south-1">me-south-1</option>
+            <option value="sa-east-1">sa-east-1</option>
+            <option value="us-east-1">us-east-1</option>
+            <option value="us-east-2">us-east-2</option>
+            <option value="us-west-1">us-west-1</option>
+            <option value="us-west-2">us-west-2</option>
+          </select>
+          <table>
+            <thead>
+              <tr>
+                <th>Root storage</th>
+                <th>Virtualisation</th>
+                <th colspan="2">AMI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="download-amazon-af-south-1" class="">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0df2f7b42bfbd53e5</code></td>
+              </tr>
+              <tr id="download-amazon-ap-east-1" class="selected">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-07ba84d7321f6f4bb</code></td>
+              </tr>
+              <tr id="download-amazon-ap-northeast-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0e37827874573dbbf</code></td>
+              </tr>
+              <tr id="download-amazon-ap-northeast-2">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0ff5b3b7738651895</code></td>
+              </tr>
+              <tr id="download-amazon-ap-northeast-3">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0a7861571eb44c70c</code></td>
+              </tr>
+              <tr id="download-amazon-ap-south-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-05c4802ca81d7c95b</code></td>
+              </tr>
+              <tr id="download-amazon-ap-southeast-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0aee8193da16bd2db</code></td>
+              </tr>
+              <tr id="download-amazon-ap-southeast-2">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-008be032289f60d16</code></td>
+              </tr>
+              <tr id="download-amazon-ap-southeast-3">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-033debde7c1659c96</code></td>
+              </tr>
+              <tr id="download-amazon-ca-central-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-031821b5f83896474</code></td>
+              </tr>
+              <tr id="download-amazon-eu-central-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0d6ee9d5e1c985df6</code></td>
+              </tr>
+              <tr id="download-amazon-eu-north-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0cecb1f67b2a837f6</code></td>
+              </tr>
+              <tr id="download-amazon-eu-south-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0f9fee15eb5a64ac4</code></td>
+              </tr>
+              <tr id="download-amazon-eu-west-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0fc7825fe890f87d1</code></td>
+              </tr>
+              <tr id="download-amazon-eu-west-2">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0e62fef78d2c4f031</code></td>
+              </tr>
+              <tr id="download-amazon-eu-west-3">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-01a6e4c1659b08390</code></td>
+              </tr>
+              <tr id="download-amazon-me-south-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0a01a7eeffa8f0fd5</code></td>
+              </tr>
+              <tr id="download-amazon-sa-east-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-09a1760227f929ccf</code></td>
+              </tr>
+              <tr id="download-amazon-us-east-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-07df5833f04703a2a</code></td>
+              </tr>
+              <tr id="download-amazon-us-east-2">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-04dd2f100d9665df5</code></td>
+              </tr>
+              <tr id="download-amazon-us-west-1">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0fe502361fea4216c</code></td>
+              </tr>
+              <tr id="download-amazon-us-west-2">
+                <td>EBS</td>
+                <td>Hardware</td>
+                <td colspan="2"><code>ami-0749963dd978a57c7</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <Button
+            color="semidarkblue"
+            size="sm"
+            href="https://console.aws.amazon.com/ec2/home?region=ap-east-1#launchAmi=ami-07ba84d7321f6f4bb"
+          >
+            Launch
+          </Button>
+          <ul class="download-buttons">
+            <li>
+              <a href="https://console.aws.amazon.com/ec2/home?region=ap-east-1#launchAmi=ami-07ba84d7321f6f4bb" class="">Launch</a>
+            </li>
+          </ul>
+        </div>
+
+        <h3 class="text-2xl font-bold text-nixdarkblue">
+          Via Command Line
+        </h3>
+
+        <p>
+          You can also create an instance from the command line.
+          For example, to create an instance in region
+          <CodeInline>eu-west-1</CodeInline>
+          using the EC2 API tools, just run:
+        </p>
+
+        <CodeBlock lines={[
+          {"shellPrompt":"$", "code":" nix-shell -p ec2_api_tools" },
+          {"shellPrompt":"(nix-shell) $", "code":" ec2-run-instances ami-0fc7825fe890f87d1 --region eu-west-1 -k my-key-pair" },
+        ]} />
+
+      </div>
+    </Fragment>
+
+    <Fragment slot="panel-4">
+      <div class="flex flex-col justify-center gap-4 font-light">
+
+        <p>The following release items are also available:</p>
+
+        <ul class="list-disc ml-[1rem]">
+          <li>
+            <a href="/manual/nixos/stable/release-notes#sec-release-23.05">Release notes</a>
+          </li>
+          <li>
+            <a href="/manual/nixos/stable">Manual</a>.
+          </li>
+          <li>
+            Old releases are <a href="https://releases.nixos.org/?prefix=nixos">also available</a>.
+          </li>
+        </ul>
+
+      </div>
+    </Fragment>
+
   </Tabs>
 
 </Layout>
