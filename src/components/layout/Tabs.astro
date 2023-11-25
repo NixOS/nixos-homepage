@@ -40,18 +40,9 @@ const uid = crypto.randomUUID();
 
 <style>
 
-.tab {
-  cursor: pointer;
-}
-
 .radio {
-  position: absolute;
-  width: 0px;
-  height: 0px;
-  overflow: hidden;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
-  white-space: nowrap;
 }
 
 .panel-visible {
@@ -129,6 +120,11 @@ const uid = crypto.randomUUID();
                     `radio-${index}`,
                     'tab-selector',
                     'peer',
+                    'absolute',
+                    'w-0',
+                    'h-0',
+                    'overflow-hidden',
+                    'whitespace-nowrap',
                   ]}
                   type="radio"
                   name={uid}

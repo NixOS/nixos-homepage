@@ -10,12 +10,6 @@ const amis = await getEntry('aws-ec2', 'options');
 
 ---
 
-<style>
-.launch-amazon tr.selected {
-  display: table-row;
-}
-</style>
-
 <script>
   const awsSelection = document.querySelector(".select-region");
   const awsUrl = "https://console.aws.amazon.com/ec2/home"
@@ -70,7 +64,7 @@ const amis = await getEntry('aws-ec2', 'options');
   You can create an instance using the AWS Management Console by selecting the region and clicking the Launch button.
 </p>
 
-<div class="launch-amazon">
+<div class="launch-amazon [&_tr.selected]:table-row">
   <span class="font-bold text-xl">Choose region: </span>
   <select class="select-region text-xl font-normal bg-white border-solid border-1 border-neutral-500">
     {amis.data.options.map((option) => {
