@@ -67,23 +67,23 @@ const teams = await getCollection("teams")
       <p class="mt-2 text-white">
         NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.
       </p>
-      <ul class="timeline timeline-vertical mt-4 text-white">
+      <ul class="timeline timeline-vertical lg:timeline-horizontal mt-4 text-white text-lg overflow-scroll lg:pb-3 [scrollbar-color:_white_theme(colors.nixsemidarkblue)]">
         {nixcons.reverse().map((nixcon) => (
-          <li class="[&:first-child_>_hr:first-child]:hidden [&:last-child_>_hr:last-child]:hidden first:font-bold">
-            <hr/>
-            <div class="timeline-start">
+          <li class="[&:first-child_>_hr:first-child]:hidden [&:last-child_>_hr:last-child]:hidden lg:first:font-bold grid-cols-[4fr_auto_5fr]">
+            <hr class="bg-white"/>
+            <div class="timeline-start text-right">
               {nixcon.data.date}
             </div>
             <div class="timeline-middle">
-              <div class="h-6 w-6 rounded-full border-4 border-white mx-2">
+              <div class="h-6 w-6 rounded-full border-4 border-white mx-2 lg:mx-0">
               </div>
             </div>
-            <div class="timeline-end timeline-box text-lg">
+            <div class="timeline-end timeline-box">
               <a href={nixcon.data.href}>
                 {nixcon.data.title}
               </a>
             </div>
-            <hr/>
+            <hr class="bg-white"/>
           </li>
         ))}
       </ul>
