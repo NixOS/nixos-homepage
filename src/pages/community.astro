@@ -15,7 +15,7 @@ const teams = await getCollection("teams")
 ---
 <Layout title="Community">
   <PageHeader text="Community"/>
-  <Container>
+  <Container class="mb-8">
     <p class="text-xl font-bold text-gray-500 mt-16">
       Nix and NixOS are developed and used by a diverse and welcoming community from all around the world.
     </p>
@@ -58,9 +58,7 @@ const teams = await getCollection("teams")
       ))}
     </ul>
   </Container>
-  <div class="mt-8">
-    <Divider mirrorY/>
-  </div>
+  <Divider mirrorY/>
   <div class="bg-nixdarkblue py-8">
     <Container>
       <h2 class="text-4xl font-bold text-white">
