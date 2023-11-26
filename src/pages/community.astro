@@ -1,5 +1,6 @@
 ---
 import { getEntry, getCollection } from "astro:content"
+import { Icon } from "astro-icon"
 
 import Layout from "../layouts/Layout.astro"
 import PageHeader from "../components/layout/PageHeader.astro"
@@ -35,7 +36,7 @@ const teams = await getCollection("teams")
         <li class="bg-nixdarkblue rounded-xl p-4 hover:box-shadow-xl hover:bg-nixsemidarkblue transition-all">
           <a href={platform.href} class="!no-underline !text-white">
             <div class="flex gap-2 text-xl font-bold">
-              <img src={platform.logo} alt={"logo of " + platform.name} class="w-8 h-8 invert"/>
+              <Icon name={platform.iconName} alt={"logo of " + platform.name} class="w-8 h-8"/>
               <span class="leading-8 ml-2">
                 {platform.name}
               </span>
@@ -51,7 +52,7 @@ const teams = await getCollection("teams")
       {platforms.data.other.map((platform) => (
         <li class="basis-full bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
           <a href={platform.href}>
-            <img src={platform.logo} alt={"logo of " + platform.name} class="mx-auto w-8 h-8 invert"/>
+            <Icon name={platform.iconName} alt={"logo of " + platform.name} class="mx-auto w-8 h-8 text-white"/>
           </a>
         </li>
       ))}
