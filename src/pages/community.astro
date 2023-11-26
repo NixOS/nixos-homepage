@@ -48,9 +48,9 @@ const teams = await getCollection("teams")
         </li>
       ))}
     </ul>
-    <ul class="flex gap-4 mt-4">
+    <ul class="flex gap-4 mt-4 flex-wrap">
       {platforms.data.other.map((platform) => (
-        <li class="basis-full bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
+        <li class="basis-24 grow bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
           <a href={platform.href}>
             <Icon name={platform.iconName} alt={"logo of " + platform.name} class="mx-auto w-8 h-8 text-white"/>
           </a>
