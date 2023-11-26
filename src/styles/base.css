@@ -115,22 +115,22 @@
         }
     }
 
-    .rfc-box-0 {
-        animation: 10s linear infinite rfc-box-0
+    .is-in-viewport .rfc-box-0 {
+        animation: 10s linear infinite rfc-box-0;
     }
-    .rfc-box-1 {
-        animation: 10s linear infinite rfc-box-1
+    .is-in-viewport .rfc-box-1 {
+        animation: 10s linear infinite rfc-box-1;
     }
-    .rfc-box-2 {
-        animation: 10s linear infinite rfc-box-2
+    .is-in-viewport .rfc-box-2 {
+        animation: 10s linear infinite rfc-box-2;
     }
-    .rfc-box-3 {
-        animation: 10s linear infinite rfc-box-3
+    .is-in-viewport .rfc-box-3 {
+        animation: 10s linear infinite rfc-box-3;
     }
-    .rfc-box-4 {
-        animation: 10s linear infinite rfc-box-4
+    .is-in-viewport .rfc-box-4 {
+        animation: 10s linear infinite rfc-box-4;
     }
-    .rfc-box-x {
-        animation: 10s linear infinite rfc-box-x
+    .is-in-viewport .rfc-box-x {
+        animation: 10s linear infinite rfc-box-x;
     }
 }

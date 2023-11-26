@@ -156,7 +156,7 @@ const teams = await getCollection("teams")
           </Button>
         </div>
       </div>
-      <div class="space-y-8">
+      <div class="space-y-8" id="rfc-animation">
         <div class="border-2 border-gray-300 bg-gray-100 rounded-xl px-4 py-4 text-lg w-64 rfc-box-0">
           <svg class="inline relative stroke-base-content -top-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus-2"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="M3 15h6"/><path d="M6 12v6"/></svg>
           New submission
@@ -301,3 +301,13 @@ const teams = await getCollection("teams")
     </div>
   </Container>
 </Layout>
+<script>
+  // trigger animation when whole flowchart is visible
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle("is-in-viewport", entry.isIntersecting)
+    })    
+  })
+  const rfcAnimation = document.getElementById("rfc-animation")
+  observer.observe(rfcAnimation)
+</script>
