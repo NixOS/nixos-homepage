@@ -29,7 +29,7 @@ const teams = await getCollection("teams")
       Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at <a href="mailto:community@nixos.org">community@nixos.org</a>. The project team is obligated to maintain confidentiality with regard to the reporter of an incident.
     </p>
   </Container>
-  <Container class="mb-8">
+  <Container>
     <h2 class="text-4xl font-bold text-nixdarkblue mt-8">
       Where to talk?
     </h2>
@@ -60,6 +60,11 @@ const teams = await getCollection("teams")
       ))}
     </ul>
   </Container>
+  <aside class="my-8 bg-nixlighterblue p-4 font-bold text-nixsemidarkblue">
+    <Container>
+      If you are looking for professional help, <a href="/community/commercial-support">check out companies</a> that offer Nix related services.
+    </Container>
+  </aside>
   <Divider mirrorY/>
   <div class="bg-nixdarkblue py-8">
     <Container>
