@@ -2,6 +2,8 @@ name: "Hourly Build & Deploy to Netlify"
 on:
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
+
 jobs:
   hourly-build-and-deploy:
     runs-on: ubuntu-latest
