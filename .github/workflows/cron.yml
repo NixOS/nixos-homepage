@@ -18,7 +18,7 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
 
       - name: Setup Cachix
-        uses: cachix/cachix-action@v12
+        uses: cachix/cachix-action@v13
         with:
           name: nixos-homepage
           signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
