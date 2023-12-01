@@ -180,7 +180,7 @@ rec {
               >&2 echo "      serve"
               >&2 echo ""
               >&2 echo "  and go to the following URL in your browser:"
-              >&2 echo "      https://127.0.0.1:8000/"
+              >&2 echo "      http://127.0.0.1:8000/"
               >&2 echo ""
               >&2 echo "  It will rebuild the website on each change."
               >&2 echo ""
