@@ -28,38 +28,38 @@
           </a>
           <ul>
             <li>
-              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.11-highlights">
-                Highlights
+              <a href="/manual/nixos/stable/release-notes#sec-release-23.11-nixos-breaking-changes">
+                NixOS breaking changes
               </a>
             </li>
 
             <li>
-              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.11-new-services">
-                New Services
+              <a href="/manual/nixos/stable/release-notes#sec-release-23.11-nixos-new-services">
+                New NixOS services
               </a>
             </li>
 
             <li>
-              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.11-incompatibilities">
-                Backward Incompatibilities
+              <a href="/manual/nixos/stable/release-notes#sec-release-23.11-nixos-notable-changes">
+                Other notable NixOS changes
               </a>
             </li>
 
             <li>
-              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.11-notable-changes">
-                Other Notable Changes
+              <a href="/manual/nixos/stable/release-notes#sec-release-23.11-lib-breaking">
+                Nixpkgs library breaking changes
               </a>
             </li>
 
             <li>
-              <a href="/manual/nixos/stable/release-notes.html#sec-release-23.11-nixpkgs-internals">
-                Nixpkgs internals
+              <a href="/manual/nixos/stable/release-notes#sec-release-23.11-lib-additions-improvements">
+                Nixpkgs library additions and improvements
               </a>
             </li>
 
             <li>
-              <a href="/manual/nixos/stable/release-notes#sec-release-23.11-lib">
-                Nixpkgs library changes
+              <a href="/manual/nixos/stable/release-notes#sec-release-23.11-lib-deprecations">
+                Nixpkgs library deprecations
               </a>
             </li>
           </ul>
