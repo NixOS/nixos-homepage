@@ -28,7 +28,7 @@ To run local development instance follow this steps to start a local server
           serve
 
       and open browser on:
-          https://localhost:8000
+          http://localhost:8000
 
       It will rebuild the website on each change.
 
