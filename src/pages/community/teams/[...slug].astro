@@ -18,19 +18,21 @@ const { Content } = await entry.render();
 <Layout title={entry.data.name}>
   <PageHeader text={entry.data.name}/>
   <Container class="my-8 prose prose-headings:text-nixdarkblue">
-    <h1>
-      Members
-    </h1>
-    <ul>
-      {entry.data.members.map((member) => (
-        <li>
-          {member.name}&nbsp;<a href={"https://discourse.nixos.org/u/" + member.username}>@{member.username}</a>
-          {member.title &&
-            <span class="badge badge-outline ml-2 mb-0">{member.title}</span>
-          }
-        </li>
-      ))}
-    </ul>
+    <aside class="float-right bg-nixlighterblue rounded-xl px-4 py-3 not-prose">
+      <h1 class="text-4xl font-extrabold text-nixdarkblue">
+        Members
+      </h1>
+      <ul class="mt-4 list-disc ml-4">
+        {entry.data.members.map((member) => (
+          <li>
+            {member.name}&nbsp;<a href={"https://discourse.nixos.org/u/" + member.username}>@{member.username}</a>
+            {member.title &&
+              <span class="badge badge-outline ml-2 mb-0">{member.title}</span>
+            }
+          </li>
+        ))}
+      </ul>
+    </aside>
     <Content />
   </Container>
 </Layout>
