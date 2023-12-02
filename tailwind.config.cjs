@@ -19,6 +19,14 @@ module.exports = {
         serif: ["Overpass", ...defaultTheme.fontFamily.serif],
         heading: ["Overpass", ...defaultTheme.fontFamily.serif],
         mono: ["Fira\\ Mono", ...defaultTheme.fontFamily.mono],
+        nixos: ["Vegur"],
+      },
+      borderWidth: {
+        '0.5': '0.5px',
+        '1': '1px'
+      },
+      listStyleType: {
+        "circle": "circle",
       },
       fontSize: {
         base: '1rem',
