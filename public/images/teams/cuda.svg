@@ -1,1 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cpu"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 150 100"
+   width="150" height="100">
+   <defs>
+      <g id="gpuBody" stroke="white" fill="none" stroke-width="4">
+         <!--
+            Outer rectangle.
+            - x and y are half the stroke width
+            - height is half the width
+            - maximum width is 138 less the stroke width
+         -->
+         <rect x="0" y="0" width="138" height="68" rx="10" ry="10" />
+         <!-- Bar with ports -->
+         <path d="m0,0 h-10 h10 v90" />
+      </g>
+      <g id="fan" stroke="white" fill="none" stroke-width="4">
+         <!-- Outer circle -->
+         <circle r="25" />
+         <!-- Inner circle -->
+         <circle r="8" fill="white" />
+         <!-- Fan blades -->
+         <g stroke-width="2">
+            <path id="fanBlade" d="m0,-8 c-6,20 8,-8 -2,-17" />
+            <use xlink:href="#fanBlade" transform="rotate(45)" />
+            <use xlink:href="#fanBlade" transform="rotate(90)" />
+            <use xlink:href="#fanBlade" transform="rotate(135)" />
+            <use xlink:href="#fanBlade" transform="rotate(180)" />
+            <use xlink:href="#fanBlade" transform="rotate(225)" />
+            <use xlink:href="#fanBlade" transform="rotate(270)" />
+            <use xlink:href="#fanBlade" transform="rotate(315)" />
+         </g>
+      </g>
+      <!-- Pattern is too detailed for small thumbnail -->
+      <!-- <pattern id="pcieEdgeConnectorPinPattern" width="1" height="5" patternUnits="userSpaceOnUse"
+         patternContentUnits="userSpaceOnUse">
+         <line x1="0.5" x2="0.5" y1="0" y2="4" stroke-width="0.5" stroke="white" stroke-linecap="round"
+            stroke-linejoin="round" />
+      </pattern> -->
+      <g id="pcieEdgeConnector" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round"
+         stroke-width="2">
+         <!-- PCIe edge connector -->
+         <path d="m0,0 v10 h6 v-6 a1,1,0,0,1,3,0 v6 h60 v-4 a1,1,0,0,1,3,0 v2 h7 v-3 h-3 v-5" />
+         <!-- PCIe edge connector pins for the first component -->
+         <!-- <rect width="6" height="5" fill="url(#pcieEdgeConnectorPinPattern)" stroke="none"
+            transform="translate(6,10), rotate(180)" /> -->
+         <!-- PCIe edge connector pins for the second component -->
+         <!-- <rect width="60" height="5" fill="url(#pcieEdgeConnectorPinPattern)" stroke="none"
+            transform="translate(68,10), rotate(180)" /> -->
+      </g>
+   </defs>
+
+   <metadata>
+      <rdf:RDF>
+         <cc:Work rdf:about="">
+            <dc:format>image/svg+xml</dc:format>
+            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+            <dc:title />
+         </cc:Work>
+      </rdf:RDF>
+   </metadata>
+
+   <g stroke="white" fill="none" stroke-width="0" transform="translate(10,2)">
+      <use xlink:href="#gpuBody" />
+      <use xlink:href="#pcieEdgeConnector" transform="translate(20,69)" />
+      <use xlink:href="#fan" transform="translate(35,34)" />
+      <use xlink:href="#fan" transform="translate(102,34)" />
+   </g>
+</svg>
