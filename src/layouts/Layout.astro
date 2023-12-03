@@ -5,26 +5,49 @@ import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 
 import '../styles/base.css';
+import { getImage } from "astro:assets";
+
+import faviconSvgSrc from "../assets/image/flake-blue.svg";
 
 const {
   title = "Nix &amp; NixOS | Reproducible builds and deployments",
   description = "Nix is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems.",
 } = Astro.props
 
+const faviconSvg = await getImage({ src: faviconSvgSrc, format: 'svg' })
 ---
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-
-    <link rel="sitemap" href="/sitemap-index.xml" />
-
     <SEO
       title={title}
+      titleTemplate={ Astro.url.pathname === '/' ? title : '%s | Nix & NixOS'}
+      titleDefault={title}
       description={description}
+      charset="utf-8"
+      extend={{
+        link: [{
+          rel: "sitemap",
+          href: "/sitemap-index.xml"
+        }, {
+          rel: "icon",
+          href: faviconSvg.src,
+          type: "image/svg+xml"
+        }],
+        meta: [{
+          name: "viewport",
+          content: "width=device-width"
+        }, {
+          name: "generator",
+          content: Astro.generator
+        }, {
+          name: "google-site-verification",
+          content: "ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE"
+        }, {
+          httpEquiv: "Content-Type",
+          content: "text/html; charset=utf-8"
+        }]
+      }}
       />
   </head>
   <body>
