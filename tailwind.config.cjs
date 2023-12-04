@@ -15,10 +15,10 @@ module.exports = {
         "nixgreen": "#6ad541"
       },
       fontFamily: {
-        sans: ["Roboto", ...defaultTheme.fontFamily.sans],
-        serif: ["Overpass", ...defaultTheme.fontFamily.serif],
-        heading: ["Overpass", ...defaultTheme.fontFamily.serif],
-        mono: ["Fira\\ Mono", ...defaultTheme.fontFamily.mono],
+        sans: ["Roboto Flex Variable", ...defaultTheme.fontFamily.sans],
+        serif: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
+        heading: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
+        mono: ["Fira Code Variable", ...defaultTheme.fontFamily.mono],
         nixos: ["Vegur"],
       },
       borderWidth: {
