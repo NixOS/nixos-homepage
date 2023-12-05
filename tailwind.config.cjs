@@ -19,7 +19,6 @@ module.exports = {
         serif: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
         heading: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
         mono: ["Fira Code Variable", ...defaultTheme.fontFamily.mono],
-        nixos: ["Vegur"],
       },
       borderWidth: {
         '0.5': '0.5px',
