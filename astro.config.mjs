@@ -12,4 +12,5 @@ export default defineConfig({
     mdx(),
     sitemap(),
   ],
+  compressHTML: true,
 });
