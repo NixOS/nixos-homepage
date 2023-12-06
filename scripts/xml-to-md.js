@@ -17,7 +17,8 @@ title:${title}
 date: ${pubDate.toISOString()}
 category: ${collectionName}
 ---
-${content}`, { flag: 'ax' })
+${content}
+`, { flag: 'ax' })
     })
 }
 
