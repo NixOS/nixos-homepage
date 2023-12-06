@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import Container from "../components/layout/Container.astro";
+import PageHeader from "../components/layout/PageHeader.astro";
+import Button from "../components/ui/Button.astro";
+import Layout from "../layouts/Layout.astro";
+const posts = await getCollection("blog");
+---
+
+<Layout title="Blog">
+  <PageHeader text="Blog" />
+  <Container class="flex flex-col gap-8">
+    {
+      posts.reverse().map(async (post) => {
+        const { Content } = await post.render();
+        return (
+          <article class="font-light">
+            <h2 class="text-4xl text-nixdarkblue font-heading font-extrabold">{post.data.title}</h2>
+            <p class="text-gray-500 text-sm mb-2">- Published on {post.data.date}</p>
+            <Content />
+          </article>
+        );
+      })
+    }
+  </Container>
+</Layout>

@@ -30,4 +30,20 @@
     article ul.inlinelist li:last-child::after {
         content: "";
     }
+
+    article b, article strong {
+        @apply font-bold;
+    }
+
+    article h3 {
+        @apply text-2xl font-bold text-nixdarkblue;
+    }
+
+    article p {
+        @apply pb-2;
+    }
+
+    article br {
+        @apply block h-2;
+    }
 }

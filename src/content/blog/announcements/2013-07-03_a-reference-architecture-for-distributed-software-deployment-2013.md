@@ -1,6 +1,6 @@
 ---
 id: a-reference-architecture-for-distributed-software-deployment-2013
-title: PhD thesis: A Reference Architecture for Distributed Software Deployment 
+title: "PhD thesis: A Reference Architecture for Distributed Software Deployment"
 date: 2013-07-03T00:00:00.000Z
 category: announcements
 ---
