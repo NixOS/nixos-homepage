@@ -6,9 +6,9 @@ interface Props {
     size?: "sm" | "lg" | "lg-full" | "sm-mobfull";
     href?: string | null;
     type?: "button" | "submit" | "reset";
-    classList?: string[];
+    classList?: string;
     shaHref?: string | null;
-    shaClassList?: string[];
+    shaClassList?: string;
     shaText?: string;
 }
 
@@ -31,9 +31,9 @@ const {
     size = "sm",
     href = null,
     type = "button",
-    classList = [],
+    classList = "",
     shaHref = null,
-    shaClassList = [],
+    shaClassList = "",
     shaText = "",
     } = Astro.props;
 
