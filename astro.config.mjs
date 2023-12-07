@@ -12,4 +12,10 @@ export default defineConfig({
     mdx(),
     sitemap(),
   ],
+  markdown: {
+    shikiConfig: {
+      theme: 'light-plus',
+      wrap: true,
+    },
+  },
 });

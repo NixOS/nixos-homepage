@@ -54,4 +54,16 @@
     article code {
         @apply bg-gray-100 border-1 border-gray-300 px-1 pt-0.5 pb-1 rounded text-orange-400;
     }
+
+    article pre {
+        @apply border-1 border-gray-600 px-1 pt-0.5 pb-1 rounded mb-2;
+    }
+
+    article pre code {
+        @apply bg-transparent border-none;
+    }
+
+    article img {
+        @apply float-right inline ml-8 h-32 w-32;
+    }
 }
