@@ -40,7 +40,7 @@ const footerMenu = await getEntry('menus', 'footer');
           <h4 class="my-auto">Connect with us:</h4>
           <div class="my-auto flex flex-row gap-2">
             {footerMenu.data.social.map((item) =>(
-                <a href={item.link} aria-label={`Connext with us on ${item.name}`}>
+                <a href={item.link} aria-label={`Connect with us on ${item.name}`}>
                   <Icon alt={item.name} class="w-8" pack="mdi" name={item.name.toLowerCase()} />
                 </a>
             ))}
