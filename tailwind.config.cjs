@@ -11,8 +11,12 @@ module.exports = {
         "nixdarkblue": "#5277c3",
         "nixsemidarkblue": "#405D99",
         "nixdarkerblue": "#27385d",
+        "nixlightorange": "#fff5e1",
         "nixorange": "#ffab0d",
-        "nixgreen": "#6ad541"
+        "nixdarkorange": "#ff8657",
+        "nixdarkerorange": "#cc3900",
+        "nixgreen": "#6ad541",
+        "nixdarkgreen": "#51ba29",
       },
       fontFamily: {
         sans: ["Roboto", ...defaultTheme.fontFamily.sans],

@@ -1,0 +1,74 @@
+---
+
+import Button from "../../../ui/Button.astro";
+import CodeInline from "../../../layout/CodeInline.astro";
+
+---
+
+<div class="bg-nixlightorange text-nixdarkerorange p-6 rounded-2xl mb-[1rem]">
+  <span class="font-bold">
+    This is a demo appliance
+  </span>
+  for VirtualBox (in OVA format).
+</div>
+
+<p>
+  VirtualBox image includes the
+  <span class="font-bold">
+    Plasma Desktop
+  </span>
+  (was KDE) as well as
+  <span class="font-bold">
+    the VirtualBox guest additions.
+  </span>
+</p>
+
+<div class="my-[1rem]">
+  <Button
+    color="semidarkblue"
+    href="https://channels.nixos.org/nixos-23.05/latest-nixos-x86_64-linux.ova"
+    shaHref="https://channels.nixos.org/nixos-23.05/latest-nixos-x86_64-linux.ova.sha256"
+    shaText="(SHA-256)"
+    classList = {["w-full", "md:w-auto", "block", "md:inline", "text-center", "md:text-left"]}
+  >
+    Download (64-bit)
+  </Button>
+</div>
+
+<h3 class="text-2xl font-bold text-nixdarkblue pb-1">
+  To use it
+</h3>
+
+<ul class="list-disc ml-[1rem]">
+  <li>
+    Download the OVA file using the button above.
+  </li>
+  <li>
+    Open VirtualBox.
+  </li>
+  <li>
+    Run <CodeInline>File → Import Appliance</CodeInline> from the menu.
+  </li>
+  <li>
+    Select previously downloaded OVA file.
+  </li>
+  <li>
+    Click <CodeInline>Import</CodeInline>.
+  </li>
+  <li>
+    You can then start the virtual machine.
+  </li>
+  <li>
+    You can log in as
+    <span class="font-bold">user </span>
+    <CodeInline>demo</CodeInline>,
+    <span class="font-bold">password </span>
+    <CodeInline>demo</CodeInline>.
+  </li>
+  <li>
+    To obtain a root shell, run
+    <CodeInline>sudo -i</CodeInline>
+    in the terminal
+    (<CodeInline>konsole</CodeInline>).
+  </li>
+</ul>

@@ -1,0 +1,25 @@
+---
+
+interface Props {
+  color?: "orange" | "darkgreen" | "lightblue" | "semidarkblue";
+  classList?: string[];
+}
+
+const colorMap = {
+  "orange": "bg-nixorange",
+  "lightblue": "bg-nixlightblue",
+  "semidarkblue": "bg-nixsemidarkblue",
+  "darkgreen": "bg-nixdarkgreen"
+}
+
+const {
+  color = "semidarkblue",
+  classList = [],
+} = Astro.props;
+
+const localClassList = `${colorMap[color]} rounded-lg font-bold text-white text-sm px-[0.5rem] py-[0.25rem]`;
+---
+
+<span class:list={[localClassList, classList]}>
+  <slot/>
+</span>
