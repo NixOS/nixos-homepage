@@ -1,0 +1,105 @@
+---
+title: "#04 - NixOS Weekly"
+date: 2021-06-08
+description: Never give up on a dream just because of the time it will take to accomplish it. The time will pass anyway. – Earl Nightingale
+---
+
+# News
+## Announcements
+
+- [NixOS 21.05 released!](https://nixos.org/blog/announcements.html#21.05)
+
+  Jonathan Ringer, release manager, announces NixOS 21.05 release with 1745 contributors in 33474 commits.
+
+- [How we went from supporting 50 languages to all of them](https://blog.replit.com/nix)
+
+  Replit replaces Docker with Nix and drastically improves support for languages.
+
+- [Peter Simons has retired from Haskell maintenance in  Nixpkgs](https://discourse.nixos.org/t/im-retiring-from-haskell-maintenance-in-nixpkgs/12739)
+
+  Please thank him for all his hard work!
+
+- [The Changelog #437](https://changelog.com/podcast/437)
+
+  Domen Kožar introduces the Nix ecosystem.
+
+- [Compositional podcast](https://www.compositional.fm/domenkozar)
+
+  Nix in Production with Domen Kožar
+
+- [NixNG, a late sibling distribution to NixOS, without systemd!](https://gitea.redalder.org/Magic_RB/NixNG)
+
+  NixNG is a proof-of-concept distribution which works very similarly to NixOS, but aims to run well
+  in containers and also smells more BSD-esque. Currently, it uses runit instead of systemd, but we're
+  open to multi-init support and also to our own init system.
+
+- [Nix 🖤 macOS May Update](https://discourse.nixos.org/t/nix-macos-monthly/12330/4?u=domenkozar)
+
+
+## Tutorials & Resources
+
+- [Introduction to the Nix language for OO-Programmers](https://lambdablob.com/posts/nix-language-primer/)
+
+- [CS SYD - The `ci.nix` pattern](https://cs-syd.eu/posts/2021-04-11-the-ci-nix-pattern)
+
+- [Data Science with Nix: Parameter Sweeps](https://blog.nixbuild.net/posts/2021-04-26-data-science-with-nix-parameter-sweeps.html)
+
+- [Nix-ifying Rust projects](https://notes.srid.ca/rust-nix)
+
+  A template Nix setup for new Rust projects.
+
+- [Nix syntax basics](https://youtu.be/5F-1Q3nk4Es)
+
+  Everything that you need to read, write and understand Nix expressions.
+
+- [Nix Cargo integration](https://github.com/yusdacra/nix-cargo-integration)
+
+  Utility to easily integrate Cargo projects with Nix. Tries to handle (almost) everything for you
+  and enables configuration from `Cargo.toml` files.
+
+- [Rust Nix templater](https://github.com/yusdacra/rust-nix-templater)
+
+  Utility to set up a template that uses `nix-cargo-integration`.
+
+- [flake-utils-plus](https://github.com/gytis-ivaskevicius/flake-utils-plus)
+
+  Use Nix flakes without any fluff! (extension of flake-utils)
+
+- [Practical Nix Flakes](https://serokell.io/blog/practical-nix-flakes)
+
+  Learn about Nix, Nix flakes, and how to use Nix flakes to build applications in various languages.
+
+- [A test framework for the Nix process management framework](https://sandervanderburg.blogspot.com/2021/04/a-test-framework-for-nix-process.html)
+
+  With the Nix process management framework you can write high-level deployment specifications of
+  running processes, that can be managed with a variety of process managers (e.g. systemd,
+  supervisord, launchd, s6-rc). Furthermore, you can construct multiple instances of the same
+  processes and deploy them as an unprivileged user. The testing framework allows you to validate a
+  service under all these conditions.
+
+- [Tutorial: Installing NixOS on a Raspberry Pi](https://nix.dev/tutorials/installing-nixos-on-a-raspberry-pi)
+
+- [Tutorial: Integration testing using virtual machines (VMs)](https://nix.dev/tutorials/integration-testing-using-virtual-machines)
+
+- [My Homelab Build](https://christine.website/blog/my-homelab-2021-06-08)
+
+- [Writing a “Hello World” RiscV Kernel with Nix in Rust](https://justin.restivo.me/posts/2021-05-30-nix-rust-riscv-toy-kernel.html)
+
+  Use Nix Flakes to build and run a 64 bit RiscV Kernel written in Rust.
+
+
+## Jobs
+
+- [Backend Engineer (Haskell/Nix) at Feeld](https://wrkbl.ink/iTrGmT2)
+
+- [Senior Site Reliability Engineer at Serokell](https://serokell.io/blog/hiring-senior-sre)
+
+- [Software Engineer (Developer Productivity) at Tweag](https://boards.greenhouse.io/tweag/jobs/4212663002)
+
+# Contribute to NixOS Weekly
+
+This work would not be possible without the many contributions of the community.
+
+You can help too! Create or comment on the [pull request](https://github.com/NixOS/nixos-weekly/pulls)
+for the next edition or look at the
+[issue tracker](https://github.com/NixOS/nixos-weekly/issues) to add other improvements.

@@ -1,0 +1,116 @@
+---
+title: "#08 - NixOS Weekly"
+date: 2020-10-12
+description:
+---
+
+# News
+
+## Announcements
+
+- [NixCon 2020 Call-for-Participation is open!](https://cfp.nixcon.org/nixcon2020/cfp)
+
+  Conference dates: Oct. 16th – 18th, 2020. Live streaming on 2020.nixcon.org
+
+- [20.09 Zero Hydra Failures has begun!](https://github.com/NixOS/nixpkgs/issues/97479)
+
+  Help stabilize NixOS for the upcoming 20.09 Release
+
+- [Cachix: Changes to Garbage Collection](https://blog.cachix.org/posts/2020-10-01-changes-to-garbage-collection/)
+
+  Based on your feedback there are two minor changes to how garbage collection behaves in Cachix.
+
+- [nixbuild.net is Generally Available](https://blog.nixbuild.net/posts/2020-08-28-nixbuild-net-is-generally-available.html)
+
+- [Nix × IPFS – Milestone 1](https://blog.ipfs.io/2020-09-08-nix-ipfs-milestone-1/)
+
+## Tutorials & Resources
+
+- [fromElisp](https://github.com/talyz/fromElisp)
+
+  An Emacs Lisp reader in Nix.
+
+- [dconf2nix](https://github.com/gvolpe/dconf2nix)
+
+  Nixify your DConf files (Gnome3 configuration) as expected by Home Manager's dconf settings.
+
+- [pynixify - Nix expression generator for Python projects](https://github.com/cript0nauta/pynixify)
+
+  A tool made to adopt Nix in your Python project, and to contribute to Nixpkgs with package definitions.
+
+- [Experimenting with Nix and the service management properties of Docker](https://sandervanderburg.blogspot.com/2020/08/experimenting-with-nix-and-service.html)
+
+  Demonstrates how we can combine Nix and Docker in unorthodox ways -- we can replace traditional
+  Docker images for dependency management by a shared Nix store, use Docker as a backend for my
+  experimental [Nix process management framework](https://github.com/svanderburg/nix-processmgmt) and
+  use Disnix as a simple orchestrator for Docker containers.
+
+- [Manix - Documentation Searcher for Nix](https://github.com/mlvzk/manix)
+
+  A fast Documentation Searcher for Nix. Its database consists of Nixpkgs Documentation, Nixpkgs
+  Comments, Nixpkgs Tree (pkgs., pkgs.lib.), NixOS Options and Home-Manager Options.
+
+- [Searching and installing old versions of Nix packages](https://lazamar.github.io/download-specific-package-version-with-nix/)
+
+  Installing older versions of packages in Nix is easy but currently there is no official way to find
+  out what revision has the package version that I need.
+
+- [Local Nix without Root](https://rgoswami.me/posts/local-nix-no-root/)
+
+  Monkeying around with nix for HPC systems which have no root access and NFS filesystems.
+
+- [BigBlueButton packaging and modules for NixOS](https://github.com/helsinki-systems/bbb4nix)
+
+  First preliminary release of bbb4nix, a way to run BigBlueButton on NixOS.
+
+- [Working Through the Jepsen Tutorial with a NixOS Container Cluster](https://mt-caret.github.io/blog/posts/2020-08-07-jepsen-nixos-containers.html)
+
+- [Developing Python with Poetry & Poetry2nix: Reproducible flexible Python environments](https://www.tweag.io/blog/2020-08-12-poetry2nix/)
+
+- ["Cloud-like" Infrastructure at Home - Part 1: LoadBalancers on the Metal](https://cmacr.ae/post/2020-08-10-cloud-like-infra-at-home-part-1/)
+
+- [The easiest way (I've found) to create your own Nix channel](https://lucperkins.dev/blog/nix-channel/)
+
+- [Caching your nix-shell](https://fzakaria.com/2020/08/11/caching-your-nix-shell.html)
+
+- [Have you heard the good news about NixOS?](https://hamster.dance/blog/article/good-news-about-nixos/)
+
+- [Oneshot systemd tasks on NixOS](https://fmnxl.com/blog/oneshot-systemd-tasks-on-nixos/)
+
+- [A Tutorial Introduction to Nix](https://rgoswami.me/posts/ccon-tut-nix/)
+
+- [Setting Up a Nix Binary Cache](https://fmnxl.com/blog/setting-up-nix-binary-cache/)
+
+- [Thoughts on NixOS](https://peppe.rs/posts/nixOS/)
+
+- [Building and Importing NixOS AMIs on EC2](http://jackkelly.name/blog/archives/2020/08/30/building_and_importing_nixos_amis_on_ec2/)
+
+- [Niv and Mach-Nix for Nix Python](https://rgoswami.me/posts/mach-nix-niv-python/)
+
+- [10 unoffical NixOS packages worth checking out](https://blog.project-insanity.org/2020/09/24/10-unoffical-nixos-packages-worth-checking-out/)
+
+- [Towards a content-addressed model for Nix](https://www.tweag.io/blog/2020-09-10-nix-cas/)
+
+- [swift2nix: Run Swift inside Nix builds](https://euandre.org/2020/10/05/swift2nix-run-swift-inside-nix-builds.html)
+
+- [cargo2nix: Dramatically simpler Rust inside Nix](https://euandre.org/2020/10/05/cargo2nix-dramatically-simpler-rust-in-nix.html)
+
+- [Publishing Doxygen and Sphinx with Nix and Rake](https://rgoswami.me/posts/pub-doc-cpp-dox-sph-nix/)
+
+- [Tailscale is magic; even more so with NixOS](https://fzakaria.com/2020/09/17/tailscale-is-magic-even-more-so-with-nixos.html)
+
+- [Assigning unique IDs to services in Disnix deployment models](https://sandervanderburg.blogspot.com/2020/09/assigning-unique-ids-to-services-in.html)
+
+- [nix-copy-closure your nix-shell](https://fzakaria.com/2020/09/28/nix-copy-closure-your-nix-shell.html)
+
+- [Fully statically linked Haskell binaries with Bazel and Nix](https://www.tweag.io/blog/2020-09-30-bazel-static-haskell/)
+
+- [Automated test on NixOS repository with Gitlab CI/CD](https://blog.project-insanity.org/2020/10/02/automated-test-on-nixos-repository-with-gitlab-ci-cd/)
+
+# Contribute to NixOS Weekly Newsletter
+
+This work would not be possible without the many contributions of the community.
+
+You can help too! Create or comment on the [pull request](https://github.com/NixOS/nixos-weekly/pulls)
+for the next edition or look at the
+[issue tracker](https://github.com/NixOS/nixos-weekly/issues) to add other improvements.

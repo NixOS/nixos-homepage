@@ -2,9 +2,13 @@
 import { getCollection } from "astro:content";
 import Container from "../components/layout/Container.astro";
 import PageHeader from "../components/layout/PageHeader.astro";
-import Button from "../components/ui/Button.astro";
 import Layout from "../layouts/Layout.astro";
 const posts = await getCollection("blog");
+posts.sort((a, b) => {
+  const dateA = new Date(a.data.date);
+  const dateB = new Date(b.data.date);
+  return dateA < dateB ? -1 : 1;
+});
 ---
 
 <Layout title="Blog">
