@@ -16,7 +16,7 @@ const posts = await getCollection("blog");
         return (
           <article class="font-light">
             <h2 class="text-4xl text-nixdarkblue font-heading font-extrabold">{post.data.title}</h2>
-            <p class="text-gray-500 text-sm mb-2">- Published on {post.data.date}</p>
+            <p class="text-gray-700 text-xs mb-2">- Published on {post.data.date}</p>
             <Content />
           </article>
         );

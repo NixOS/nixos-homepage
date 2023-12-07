@@ -11,15 +11,19 @@
         @apply underline decoration-1 underline-offset-2 text-nixsemidarkblue;
     }
 
+    article {
+        @apply leading-7;
+    }
+
     article ul {
-        @apply list-circle list-inside;
+        @apply list-circle list-inside mb-4;
     }
 
     article ul > li > ul {
         @apply list-disc list-inside ml-4;
     }
     article ul.inlinelist {
-        @apply list-none flex flex-col ml-6;
+        @apply list-none flex flex-col ml-6 mb-0;
     }
     article ul.inlinelist li {
         @apply inline-block;
@@ -36,7 +40,7 @@
     }
 
     article h3 {
-        @apply text-2xl font-bold text-nixdarkblue;
+        @apply text-2xl font-bold text-nixdarkblue mb-4;
     }
 
     article p {
@@ -45,5 +49,9 @@
 
     article br {
         @apply block h-2;
+    }
+
+    article code {
+        @apply bg-gray-100 border-1 border-gray-300 px-1 pt-0.5 pb-1 rounded text-orange-400;
     }
 }
