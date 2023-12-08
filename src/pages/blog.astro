@@ -1,30 +1,46 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import Container from "../components/layout/Container.astro";
 import PageHeader from "../components/layout/PageHeader.astro";
 import Layout from "../layouts/Layout.astro";
+import Icon from "astro-icon";
 const posts = await getCollection("blog");
 posts.sort((a, b) => {
   const dateA = new Date(a.data.date);
   const dateB = new Date(b.data.date);
   return dateA < dateB ? -1 : 1;
 });
+const blogMenu = await getEntry('menus', 'blog');
 ---
+
+<script>
+
+</script>
 
 <Layout title="Blog">
   <PageHeader text="Blog" />
-  <Container class="flex flex-col gap-8">
-    {
-      posts.reverse().map(async (post) => {
-        const { Content } = await post.render();
-        return (
-          <article class="font-light">
-            <h2 class="text-4xl text-nixdarkblue font-heading font-extrabold">{post.data.title}</h2>
-            <p class="text-gray-700 text-xs mb-2">- Published on {post.data.date}</p>
-            <Content />
-          </article>
-        );
-      })
-    }
+  <Container class="py-8">
+    <div class="flex flex-col md:flex-row justify-center items-center gap-4 pb-8">
+      {blogMenu.data.map((e) => (
+        <a class="p-4 md:p-8 gap-2 w-full md:w-auto text-nixdarkblue border-1 fill-nixdarkblue hover:fill-white border-nixdarkblue rounded-2xl flex md:flex-col items-center hover:bg-nixdarkblue hover:text-white cursor-pointer">
+          <Icon name={e.icon} class="w-12 md:w-24"/>
+          <span class="font-light">{e.title}</span>
+        </a>
+      ))}
+    </div>
+    <div class="flex flex-col gap-8">
+      {
+        posts.reverse().map(async (post) => {
+          const { Content } = await post.render();
+          return (
+            <article class="font-light">
+              <h2 class="text-4xl text-nixdarkblue font-heading font-extrabold">{post.data.title}</h2>
+              <p class="text-gray-700 text-xs mb-2">- Published on {post.data.date}</p>
+              <Content />
+            </article>
+          );
+        })
+      }
+    </div>
   </Container>
 </Layout>
