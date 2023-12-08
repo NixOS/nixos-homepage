@@ -66,4 +66,16 @@
     article img {
         @apply float-right inline ml-8 h-32 w-32;
     }
+
+    article blockquote {
+        @apply border-l-4 border-gray-600 pl-2 mb-4;
+    }
+
+    article ul > li > p {
+        @apply inline;
+    }
+
+    article ul > li > p:first-child {
+        @apply ml-0;
+    }
 }
