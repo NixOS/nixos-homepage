@@ -17,7 +17,7 @@ const {
   classList = [],
 } = Astro.props;
 
-const localClassList = `${colorMap[color]} rounded-lg font-bold text-white text-sm px-[0.5rem] py-[0.25rem]`;
+const localClassList = `${colorMap[color]} w-fit rounded-lg font-bold text-white text-sm px-[0.5rem] py-[0.25rem]`;
 ---
 
 <span class:list={[localClassList, classList]}>
