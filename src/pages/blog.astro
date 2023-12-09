@@ -34,9 +34,10 @@ const blogMenu = await getEntry('menus', 'blog');
           const { Content } = await post.render();
           return (
             <article class="font-light">
-              <h2 class="text-4xl text-nixdarkblue font-heading font-extrabold">{post.data.title}</h2>
+              <a href={`/blog/${post.slug}`}>
+                <h2 class="text-4xl text-nixdarkblue font-heading font-extrabold">{post.data.title}</h2>
+              </a>
               <p class="text-gray-700 text-xs mb-2">- Published on {post.data.date}</p>
-              <Content />
             </article>
           );
         })

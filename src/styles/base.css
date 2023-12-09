@@ -12,7 +12,7 @@
     }
 
     article {
-        @apply leading-7;
+        @apply leading-7 font-light;
     }
 
     article ul {
@@ -22,9 +22,19 @@
     article ul > li > ul {
         @apply list-disc list-inside ml-4;
     }
+
+    article ul > li > p:first-child {
+        @apply ml-0 inline-block;
+    }
+
+    article ul > li > p {
+        @apply ml-5 block;
+    }
+
     article ul.inlinelist {
         @apply list-none flex flex-col ml-6 mb-0;
     }
+
     article ul.inlinelist li {
         @apply inline-block;
     }
@@ -71,11 +81,27 @@
         @apply border-l-4 border-gray-600 pl-2 mb-4;
     }
 
-    article ul > li > p {
-        @apply inline;
-    }
-
     article ul > li > p:first-child {
         @apply ml-0;
+    }
+
+    article h1, article h2, article h3, article h4, article h5, article h6 {
+        @apply font-bold font-heading text-nixdarkblue;
+    }
+
+    article h1 {
+        @apply text-4xl mb-4;
+    }
+
+    article h2 {
+        @apply text-3xl mb-4;
+    }
+
+    article h3 {
+        @apply text-2xl mb-4;
+    }
+
+    article h4 {
+        @apply text-xl mb-4;
     }
 }
