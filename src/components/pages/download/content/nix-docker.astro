@@ -1,0 +1,34 @@
+---
+
+import CodeBlock from "../../../layout/CodeBlock.astro";
+import CodeInline from "../../../layout/CodeInline.astro";
+
+const nixDockerInstallInstruction1 = [
+  {"shellPrompt":"$", "code":" docker run -it nixos/nix" },
+];
+const nixDockerInstallInstruction2 = [
+  {"shellPrompt":"$", "code":" mkdir workdir" },
+  {"shellPrompt":"$", "code":" docker run -it -v $(pwd)/workdir:/workdir nixos/nix" },
+];
+const nixDockerInstallInstruction3 = [
+  {"shellPrompt":"$", "code":" git clone --depth=1 https://github.com/NixOS/nixpkgs.git" },
+  {"shellPrompt":"$", "code":" docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix" },
+  {"shellPrompt":"docker>", "code":" nix-build -I nixpkgs=/nixpkgs -A hello" },
+  {"shellPrompt":"docker>", "code":" find ./result # this symlink points to the build package" },
+];
+
+---
+
+<p>
+  Start a Docker shell with Nix:
+</p>
+<CodeBlock lines={nixDockerInstallInstruction1} />
+<p>
+  Or start a Docker shell with Nix exposing a <CodeInline>workdir</CodeInline> directory:
+</p>
+<CodeBlock lines={nixDockerInstallInstruction2} />
+<p>
+  The <CodeInline>workdir</CodeInline> example from above can be also used to start hacking on nixpkgs:
+</p>
+<CodeBlock lines={nixDockerInstallInstruction3} />
+

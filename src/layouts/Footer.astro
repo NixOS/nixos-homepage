@@ -14,7 +14,7 @@ const footerMenu = await getEntry('menus', 'footer');
         {footerMenu.data.sections.map((menu) =>(
             <div class="basis-1/2 lg:basis-1/4">
               <h4 class="text-xl font-bold text-nixdarkblue mb-4">{menu.name}</h4>
-              <ul class="space-y-2">
+              <ul class="space-y-2 font-extralight">
                 {menu.items.map((item) => (
                     <li><a href={item.link}>{item.name}</a></li>
                 ))}
@@ -23,7 +23,7 @@ const footerMenu = await getEntry('menus', 'footer');
         ))}
       </div>
       <hr class="border-nixlightblue">
-      <div class="flex flex-col lg:flex-row flex-wrap py-8 gap-8 lg:gap-0">
+      <div class="flex flex-col lg:flex-row flex-wrap py-8 gap-8 lg:gap-0 font-extralight">
         <div class="basis-1/2 flex flex-row flex flex-row gap-2">
           <Image src={flakeWhite} alt="Nix Logo White" class="inline-block w-16 h-16" />
           <div class="flex flex-col justify-center">
@@ -36,11 +36,11 @@ const footerMenu = await getEntry('menus', 'footer');
           </div>
         </div>
         <hr class="lg:hidden border-nixlightblue">
-        <div class="basis-1/2 flex flex-row justify-between lg:justify-end gap-4">
+        <div class="basis-1/2 flex flex-row justify-between lg:justify-end gap-4 font-extralight">
           <h4 class="my-auto">Connect with us:</h4>
           <div class="my-auto flex flex-row gap-2">
             {footerMenu.data.social.map((item) =>(
-                <a href={item.link}>
+                <a href={item.link} aria-label={`Connect with us on ${item.name}`}>
                   <Icon alt={item.name} class="w-8" pack="mdi" name={item.name.toLowerCase()} />
                 </a>
             ))}

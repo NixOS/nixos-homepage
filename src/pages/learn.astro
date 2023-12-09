@@ -49,11 +49,11 @@ const { data: learningResources } = await getEntry('learning', 'resources');
         return (
           <div class="border-0.5 border-nixdarkerblue rounded-2xl p-4 flex flex-col gap-4 justify-start items-center">
             <article>
-              <img src="/doc-icon.svg" class="pl-0 h-20 w-20 float-left inline pr-4 pb-4" />
-              <h2 class="text-4xl text-nixdarkblue font-heading font-extrabold leading-none mb-4">
+              <img src="/doc-icon.svg" class="h-20 w-20 float-left inline pr-4 pb-4" />
+              <h2 class="text-3xl text-nixdarkblue font-heading font-bold leading-none mb-4">
                 {manual.data.title}
               </h2>
-              <div class="leading-relaxed text-lg font-light">
+              <div class="leading-relaxed font-extralight">
                 <Content />
               </div>
             </article>
