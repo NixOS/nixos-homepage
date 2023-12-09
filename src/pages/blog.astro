@@ -3,8 +3,9 @@ import { getCollection, getEntry } from "astro:content";
 import Container from "../components/layout/Container.astro";
 import PageHeader from "../components/layout/PageHeader.astro";
 import Layout from "../layouts/Layout.astro";
-import PostExcerpt from '@igor.dvlpr/astro-post-excerpt'
 import Icon from "astro-icon";
+import { generatePathFromPost, createExcerpt } from "../lib/utils"
+
 const posts = await getCollection("blog");
 posts.sort((a, b) => {
   const dateA = new Date(a.data.date);
@@ -63,14 +64,13 @@ const blogMenu = await getEntry('menus', 'blog');
     <div class="flex flex-col gap-8">
       {
         posts.reverse().map(async (post) => {
-          const { Content } = await post.render();
           return (
             <article data-category={post.slug.split("/")[0]} class="font-light" aria-hidden="false">
-              <a href={`/blog/${post.slug.split("/")[0] + "/" + post.slug.split("/").pop().split("_").pop()}`}>
+              <a href={generatePathFromPost(post)}>
                 <h2 class="text-4xl text-nixdarkblue font-heading font-extrabold">{post.data.title}</h2>
               </a>
-              <PostExcerpt post={post} />
               <p class="text-gray-700 text-xs mb-2">- Published on {post.data.date ? post.data.date.toDateString() : ""}</p>
+              <p>{createExcerpt(post.body)}...</p>
             </article>
           );
         })

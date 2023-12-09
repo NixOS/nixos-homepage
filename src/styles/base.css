@@ -16,23 +16,27 @@
     }
 
     article ul {
-        @apply list-circle list-inside mb-4;
+        @apply list-circle list-outside mb-4 ml-6;
     }
 
     article ul > li > ul {
-        @apply list-disc list-inside ml-4;
+        @apply list-disc list-outside;
     }
 
     article ul > li > p:first-child {
-        @apply ml-0 inline-block;
+        @apply ml-0 inline;
     }
 
     article ul > li > p {
-        @apply ml-5 block;
+        @apply block;
     }
 
     article ul.inlinelist {
-        @apply list-none flex flex-col ml-6 mb-0;
+        @apply list-none flex flex-col ml-0 mb-0;
+    }
+
+    article ul.inlinelist ul {
+        @apply ml-0;
     }
 
     article ul.inlinelist li {
@@ -90,18 +94,18 @@
     }
 
     article h1 {
-        @apply text-4xl mb-4;
+        @apply text-4xl mb-2;
     }
 
     article h2 {
-        @apply text-3xl mb-4;
+        @apply text-3xl mb-2;
     }
 
     article h3 {
-        @apply text-2xl mb-4;
+        @apply text-2xl mb-2;
     }
 
     article h4 {
-        @apply text-xl mb-4;
+        @apply text-xl mb-2;
     }
 }

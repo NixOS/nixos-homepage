@@ -5,14 +5,24 @@ import Button from "../components/ui/Button.astro";
 import NixosSearchInput from "../components/ui/NixosSearchInput.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import { generatePathFromPost, createExcerpt } from "../lib/utils"
 const landingFeatures = await getCollection("landing-features");
+
+const posts = await getCollection("blog");
+posts.sort((a, b) => {
+  const dateA = new Date(a.data.date);
+  const dateB = new Date(b.data.date);
+  return dateA > dateB ? -1 : 1;
+}).filter((p) => {
+  return p.slug.split("/")?.[0] === "announcements";
+}).reverse();
 ---
 
 <Layout title="Nix & NixOS">
   <div class="bg-nixlighterblue">
     <Container class="flex flex-col md:flex-row items-center justify-between py-4">
-      <b class="text-nixsemidarkblue text-lg">NixOS 23.05 released.</b>
-      <Button>Announcement</Button>
+      <b class="text-nixsemidarkblue text-lg">{posts[0].data.title}</b>
+      <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
     </Container>
   </div>
   <div class="bg-[url('/hero-bg.svg')] bg-cover bg-no-repeat bg-left">
@@ -27,8 +37,8 @@ const landingFeatures = await getCollection("landing-features");
           reliable systems.
         </p>
         <div class="flex flex-col md:flex-row justify-stretch gap-4">
-          <Button color="green" size="lg">Download</Button>
-          <Button color="lightblue" size="lg">Get Started</Button>
+          <Button href="/download" color="green" size="lg">Download</Button>
+          <Button href="/learn" color="lightblue" size="lg">Get Started</Button>
         </div>
       </div>
     </Container>
