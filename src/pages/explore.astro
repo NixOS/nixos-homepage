@@ -9,7 +9,6 @@ import PageHeader from "../components/layout/PageHeader.astro";
 import Timeline from "../components/pages/explore/Timeline.astro";
 
 const exploreInfo = await getEntry('explore', 'info');
-console.log(exploreInfo.data.content.map)
 
 ---
 
@@ -22,13 +21,16 @@ console.log(exploreInfo.data.content.map)
     </h1>
   </Container>
 
-  <Container>
-    <div class="timeline !px-0 grid md:grid-cols-2 gap-x-[6rem] pb-16">
+  <Container class="pb-16">
       {exploreInfo.data.content.map((item, idx) => {
         const side = idx % 2 ? "right" : "left";
-        return <Timeline number={ idx + 1 } imageLocation={ side } { ...item } />
+        const flexColDir = idx % 2 ? "flex-col-reverse" : "flex-col";
+        return (
+          <div class=`!px-0 grid md:grid-cols-2 gap-x-[6rem]`>
+            <Timeline number={ idx + 1 } imageLocation={ side } { ...item } />
+          </div>
+        )
       })}
-    </div>
   </Container>
 
 </Layout>

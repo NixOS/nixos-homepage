@@ -35,7 +35,7 @@ const textCommonClasses = "flex flex-col justify-center font-light gap-4";
       <TimelineText {...textProps} />
     </div>
   :
-    <div class:list={[textCommonClasses, "md:text-right"]}>
+    <div class:list={[textCommonClasses, "order-last md:order-first", "text-left md:text-right"]}>
       <TimelineText {...textProps} />
     </div>
 
