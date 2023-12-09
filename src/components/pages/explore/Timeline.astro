@@ -26,7 +26,7 @@ const textCommonClasses = "flex flex-col justify-center font-light gap-4";
 ---
 { imageLocation === "left"
   ?
-    <div class="justify-self-end">
+    <div class="md:justify-self-end">
       <img src={imageSrc} class="pb-24" />
     </div>
 
@@ -35,11 +35,11 @@ const textCommonClasses = "flex flex-col justify-center font-light gap-4";
       <TimelineText {...textProps} />
     </div>
   :
-    <div class:list={[textCommonClasses, "text-right"]}>
+    <div class:list={[textCommonClasses, "md:text-right"]}>
       <TimelineText {...textProps} />
     </div>
 
-    <div class="justify-self-start relative">
+    <div class="md:justify-self-start relative">
       <TimelineCenter number={number}/>
       <img src={imageSrc} class="pb-24" />
     </div>
