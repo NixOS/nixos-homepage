@@ -1,7 +1,7 @@
 ---
 
 interface Props {
-  color?: "orange" | "darkgreen" | "lightblue" | "semidarkblue";
+  color?: "orange" | "darkgreen" | "lightblue" | "darkblue";
   classList?: string[];
   href?: string | null;
 }
@@ -9,12 +9,12 @@ interface Props {
 const colorMap = {
   "orange": "bg-nixorange",
   "lightblue": "bg-nixlightblue",
-  "semidarkblue": "bg-nixsemidarkblue",
+  "darkblue": "bg-nixdarkblue",
   "darkgreen": "bg-nixdarkgreen"
 }
 
 const {
-  color = "semidarkblue",
+  color = "darkblue",
   classList = [],
   href = null,
 } = Astro.props;
