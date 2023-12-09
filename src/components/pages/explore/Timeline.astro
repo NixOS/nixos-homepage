@@ -2,36 +2,45 @@
 
 interface Props {
   number: string;
-  image?: "left" | "right";
+  imageLocation?: "left" | "right";
+  imageSrc: string;
+  heading: string;
+  subHeading: string;
+  tags: Array<{ href: string | null, text:string}>;
+  paragraphs: string[];
+  emphasis?: string | null;
 }
 
 const {
   number = 0,
-  image = "left"
+  imageLocation = "left",
+  imageSrc,
+  ...textProps
 } = Astro.props;
 
 import TimelineCenter from "./TimelineCenter.astro";
+import TimelineText from "./TimelineText.astro";
 
 const textCommonClasses = "flex flex-col justify-center font-light gap-4";
 
 ---
-{ image === "left"
+{ imageLocation === "left"
   ?
     <div class="justify-self-end">
-      <slot name="image"/>
+      <img src={imageSrc} class="mb-12" />
     </div>
 
     <div class:list={[textCommonClasses, "text-left", "relative"]}>
       <TimelineCenter number={number}/>
-      <slot name="text"/>
+      <TimelineText {...textProps} />
     </div>
   :
     <div class:list={[textCommonClasses, "text-right"]}>
-      <slot name="text"/>
+      <TimelineText {...textProps} />
     </div>
 
     <div class="justify-self-start relative">
       <TimelineCenter number={number}/>
-      <slot name="image"/>
+      <img src={imageSrc} class="mb-12" />
     </div>
 }

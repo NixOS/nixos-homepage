@@ -5,7 +5,6 @@ import Container from "../components/layout/Container.astro";
 import PageHeader from "../components/layout/PageHeader.astro";
 
 import Timeline from "../components/pages/explore/Timeline.astro";
-import TimelineText from "../components/pages/explore/TimelineText.astro";
 
 ---
 
@@ -21,61 +20,60 @@ import TimelineText from "../components/pages/explore/TimelineText.astro";
   <Container>
     <div class="timeline !px-0 grid md:grid-cols-2 gap-x-[6rem]">
 
-      <Timeline number="1">
-          <img slot="image" src="/images/explore/works.svg" class="h-[34rem] mb-12" />
-          <Fragment slot="text">
-            <TimelineText
-              heading = "Always working development environment."
-              subHeading = "Nix provides developers with a complete and consistent development environment. Stop worrying how to install dependencies for your project.";
-              tags = {[
-                {
-                  href: "https://nixos.org/guides/how-nix-works#complete-dependencies",
-                  text: "complete dependencies",
-                }
-              ]}
-              paragraphs = {[
-                `
-                  With Nix, a build process only has access to dependencies that have been declared explicitly.
-                  So if a build succeeds, you know you've specified all necessary dependencies.
-                `,
-                `
-                  The same build process specification can be used to start a development environment
-                  (optionally augmented with additional development tools).
-                `,
-                "You will no longer have to hear:",
-              ]}
-              emphasis = "But it works on my machine!"
-            />
-          </Fragment>
-      </Timeline>
+      <Timeline
+        number="1"
+        imageLocation="left"
+        imageSrc="/images/explore/works.svg"
+        heading = "Always working development environment."
+        subHeading = "Nix provides developers with a complete and consistent development environment. Stop worrying how to install dependencies for your project.";
+        tags = {[
+          {
+            href: "https://nixos.org/guides/how-nix-works#complete-dependencies",
+            text: "complete dependencies",
+          }
+        ]}
+        paragraphs = {[
+          `
+            With Nix, a build process only has access to dependencies that have been declared explicitly.
+            So if a build succeeds, you know you've specified all necessary dependencies.
+          `,
+          `
+            The same build process specification can be used to start a development environment
+            (optionally augmented with additional development tools).
+          `,
+          "You will no longer have to hear:",
+        ]}
+        emphasis = "But it works on my machine!"
+      />
 
-      <Timeline number="2" image="right">
-          <img slot="image" src="/images/explore/works.svg" class="h-[34rem] mb-12" />
-          <Fragment slot="text">
-            <TimelineText
-              heading = "Always working development environment."
-              subHeading = "Nix provides developers with a complete and consistent development environment. Stop worrying how to install dependencies for your project.";
-              tags = {[
-                {
-                  href: "https://nixos.org/guides/how-nix-works#complete-dependencies",
-                  text: "complete dependencies",
-                }
-              ]}
-              paragraphs = {[
-                `
-                  With Nix, a build process only has access to dependencies that have been declared explicitly.
-                  So if a build succeeds, you know you've specified all necessary dependencies.
-                `,
-                `
-                  The same build process specification can be used to start a development environment
-                  (optionally augmented with additional development tools).
-                `,
-                "You will no longer have to hear:",
-              ]}
-              emphasis = "But it works on my machine!"
-            />
-          </Fragment>
-      </Timeline>
+      <Timeline
+        number="2"
+        imageLocation="right"
+        imageSrc="/images/explore/multi.svg"
+        heading = "One tool, many languages."
+        subHeading = "With today's polyglot development environments, each language has its own way of building and testing. Encourage cross-team development by providing a single way of building everything.";
+        tags = {[
+          {
+            href: "https://nixos.org/guides/how-nix-works#multiple-versions",
+            text: "language agnostic",
+          },
+          {
+            href: "https://nixos.org/guides/how-nix-works#portable",
+            text: "portable",
+          }
+        ]}
+        paragraphs = {[
+          `
+            Instead of complicated installation instructions, with Nix the development environment is always only one command away.
+            And that is without using Docker or any other virtualization.
+          `,
+          `
+            Language specific package managers are good at dependencies in their specific language.
+            But they cannot provide other dependencies, like the ones you would usually have to install system-wide.
+          `,
+        ]}
+      />
+
     </div>
   </Container>
 

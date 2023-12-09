@@ -22,9 +22,11 @@ import Tag from "../../ui/Tag.astro";
 
 <h2 class="text-3xl font-bold text-nixdarkblue">{heading}</h2>
 <p class="text-xl font-bold text-neutral-500">{subHeading}</p>
+<div class="inline-block">
 {tags.map((tag) => (
-  <Tag href={tag.href}>{tag.text}</Tag>
+  <Tag href={tag.href} classList={["mx-1"]}>{tag.text}</Tag>
 ))}
+</div>
 {paragraphs.map((paragraph, idx, array) => {
   return (idx + 1 === array.length)
   ? <p>{paragraph}&nbsp;<span class="font-bold">{emphasis}</span></p>
