@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from "../components/layout/Container.astro";
+import PageHeader from "../components/layout/PageHeader.astro";
+
+import Tag from "../components/ui/Tag.astro";
+---
+
+<Layout title="Explore">
+  <PageHeader text="Explore" />
+
+  <Container class="py-16">
+    <h1 class="text-2xl text-center font-light text-neutral-500">
+      Find out why so many developers, system administrators and other enthusiasts use Nix and cannot imagine a world without it.
+    </h1>
+  </Container>
+
+  <Container>
+    <div class="timeline !px-0 grid md:grid-cols-2 gap-x-[6rem]">
+      <img src="/images/explore/works.svg" class="h-[34rem] mb-12 justify-self-end" />
+      <div class="relative flex flex-col justify-center font-light gap-4">
+        <div class="absolute w-1 h-full bg-nixdarkblue top-0 left-[-3rem]"/>
+        <div class="absolute text-white text-center leading-[4rem] rounded-[2rem] font-bold text-[3rem] w-[4rem] h-[4rem] bg-nixgreen top-0 left-[-5rem]">
+          1
+        </div>
+        <h2 class="text-3xl font-bold text-nixdarkblue">
+          Always working development environment.
+        </h2>
+
+        <p class="text-xl font-bold text-neutral-500">
+          Nix provides developers with a complete and consistent development environment. Stop worrying how to install dependencies for your project.
+        </p>
+        <Tag href="https://nixos.org/guides/how-nix-works#complete-dependencies" classList={["w-fit"]}>complete dependencies</Tag>
+        <p> 
+          With Nix, a build process only has access to dependencies that have been declared explicitly.
+          So if a build succeeds, you know you've specified all necessary dependencies.
+        </p>
+        <p> 
+          The same build process specification can be used to start a development environment (optionally augmented with additional development tools).
+        </p>
+        <p>
+          You will no longer have to hear:
+          <span class="font-bold">
+            But it works on my machine!
+          </span>
+        </p>
+      </div>
+      <div class="flex flex-col justify-center font-light gap-4">
+        <p>
+          Always working development environment.
+
+          Nix provides developers with a complete and consistent development environment. Stop worrying how to install dependencies for your project.
+        </p>
+      </div>
+      <div class="flex flex-col justify-center font-light gap-4">
+        <p>
+          Always working development environment.
+
+          Nix provides developers with a complete and consistent development environment. Stop worrying how to install dependencies for your project.
+        </p>
+      </div>
+      <div class="flex flex-col justify-center font-light gap-4">
+        <p> Always working development environment.
+
+          Nix provides developers with a complete and consistent development environment. Stop worrying how to install dependencies for your project.
+        </p>
+      </div>
+    </div>
+  </Container>
+
+</Layout>
