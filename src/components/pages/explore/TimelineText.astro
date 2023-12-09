@@ -20,8 +20,8 @@ import Tag from "../../ui/Tag.astro";
 
 ---
 
-<h2 class="text-3xl font-bold text-nixdarkblue">{heading}</h2>
-<p class="text-xl font-bold text-neutral-500">{subHeading}</p>
+<h2 class="text-[2rem] leading-[2.2rem] font-bold text-nixdarkblue">{heading}</h2>
+<p class="text-xl leading-[2.2rem] font-bold text-neutral-500">{subHeading}</p>
 <div class="inline-block">
 {tags.map((tag) => (
   <Tag href={tag.href} classList={["mx-1"]}>{tag.text}</Tag>
@@ -29,6 +29,6 @@ import Tag from "../../ui/Tag.astro";
 </div>
 {paragraphs.map((paragraph, idx, array) => {
   return (idx + 1 === array.length ) && emphasis
-  ? <p>{paragraph}&nbsp;<span class="font-bold">{emphasis}</span></p>
-  : <p>{paragraph}</p>
+  ? <p class="leading-[1.75rem]">{paragraph}&nbsp;<span class="font-bold">{emphasis}</span></p>
+  : <p class="leading-[1.75rem]">{paragraph}</p>
 })}
