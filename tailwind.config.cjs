@@ -19,11 +19,10 @@ module.exports = {
         "nixdarkgreen": "#51ba29",
       },
       fontFamily: {
-        sans: ["Roboto", ...defaultTheme.fontFamily.sans],
-        serif: ["Overpass", ...defaultTheme.fontFamily.serif],
-        heading: ["Overpass", ...defaultTheme.fontFamily.serif],
-        mono: ["Fira\\ Mono", ...defaultTheme.fontFamily.mono],
-        nixos: ["Vegur"],
+        sans: ["Roboto Flex Variable", ...defaultTheme.fontFamily.sans],
+        serif: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
+        heading: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
+        mono: ["Fira Code Variable", ...defaultTheme.fontFamily.mono],
       },
       borderWidth: {
         '0.5': '0.5px',
@@ -32,6 +31,18 @@ module.exports = {
       listStyleType: {
         "circle": "circle",
       },
+      fontSize: {
+        base: '1rem',
+        lg: '1.2rem',
+        xl: '1.4rem',
+        '2xl': '1.625rem',
+        '3xl': '1.953rem',
+        '4xl': '2.441rem',
+        '5xl': '3.052rem',
+      },
+      textDecorationThickness: {
+        '0.5': '0.5px'
+      }
     },
     container: {
       // https://tailwindcss.com/docs/container#centering-by-default

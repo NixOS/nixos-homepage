@@ -5,18 +5,32 @@
 
 @layer base {
     main a:-webkit-any-link {
-        @apply underline decoration-1 underline-offset-2 text-nixsemidarkblue;
+        @apply underline decoration-1 underline-offset-4 text-nixsemidarkblue;
     }
+}
+
+@layer components {
+    .text-light-bold {
+        @apply font-extralight;
+    }
+    .text-light-bold strong {
+        @apply font-bold;
+    }
+
     main a:any-link {
-        @apply underline decoration-1 underline-offset-2 text-nixsemidarkblue;
+        @apply underline decoration-0.5  underline-offset-4 text-nixsemidarkblue;
     }
 
     article ul {
         @apply list-circle list-inside;
     }
 
+    article ul > li {
+        @apply mb-1;
+    }
+
     article ul > li > ul {
-        @apply list-disc list-inside ml-4;
+        @apply list-disc list-inside ml-4 mt-1;
     }
     article ul.inlinelist {
         @apply list-none flex flex-col ml-6;

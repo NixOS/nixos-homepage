@@ -7,6 +7,9 @@ import Container from "../components/layout/Container.astro";
 import PageHeader from "../components/layout/PageHeader.astro";
 import SponsorLogo from "../components/layout/SponsorLogo.astro";
 import Button from "../components/ui/Button.astro";
+import { Image } from 'astro:assets';
+
+import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
 
 const sponsors = await  getEntry('sponsors', 'info');
 
@@ -22,7 +25,7 @@ const sponsors = await  getEntry('sponsors', 'info');
   </Container>
 
   <Container class="grid md:grid-cols-2 gap-8 px-12 pt-8 pb-20">
-    <div class="flex flex-col justify-center font-light gap-4">
+    <div class="flex flex-col justify-center font-extralight gap-4 leading-relaxed">
       <p>
         Maintaining our build farm and binary cache is very expensive.
         We depend on your support to ensure the continuous operation and expansion of the NixOS infrastructure.
@@ -32,14 +35,8 @@ const sponsors = await  getEntry('sponsors', 'info');
         Donations are handled by a nonprofit organization, the <a href="/governance.html#foundation">NixOS Foundation</a>.
       </p>
     </div>
-    <div class="flex flex-col gap-4">
-      <img src="/images/logos/nixos_flake.svg" class="h-40" />
-      <p class="text-center font-nixos font-regular text-8xl">
-        NixOS
-      </p>
-      <p class="text-center font-nixos font-light text-7xl">
-        Foundation
-      </p>
+    <div class="flex flex-col items-center justify-center">
+      <Image src={nixosFoundationLogo} alt='NixOS Foundation Logo' class="h-96" />
     </div>
   </Container>
 
@@ -53,7 +50,7 @@ const sponsors = await  getEntry('sponsors', 'info');
         <h1 class="text-4xl font-bold pb-2">
           NixOS T-shirts, mugs and more...
         </h1>
-        <p class="font-light">
+        <p class="font-extralight">
           Donate to NixOS foundation by purchasing NixOS merchandise.
         </p>
         <div class="flex flex-col md:flex-row justify-stretch gap-4">
@@ -68,18 +65,18 @@ const sponsors = await  getEntry('sponsors', 'info');
 
   <Container class="grid md:grid-cols-2 gap-8 py-16 px-12">
     <div class="flex flex-col gap-4">
-      <h2 class="text-4xl font-bold text-nixdarkblue pb-2">
+      <h2 class="text-3xl font-bold text-nixdarkblue pb-2">
         Donate using Open Collective
       </h2>
-      <p class="font-light">
+      <p class="font-extralight leading-relaxed">
         NixOS Foundation is using
         <a href="https://opencollective.com/">Open Collective</a>
         to manage the finances so everyone can see where money comes from and where money goes.
       </p>
-      <p class="font-light">
+      <p class="font-extralight text-light-bold leading-relaxed">
         With Open Collective you can make a <strong>single</strong> or <strong>recurring</strong> contribution by credit card transfer.
       </p>
-      <p class="font-light">
+      <p class="font-extralight leading-relaxed">
         Thank you!
       </p>
       <div class="flex flex-col md:flex-row justify-stretch gap-4">
@@ -89,10 +86,10 @@ const sponsors = await  getEntry('sponsors', 'info');
       </div>
     </div>
     <div class="flex flex-col gap-4 justify-center">
-      <h2 class="text-4xl font-bold text-nixdarkblue pb-2">
+      <h2 class="text-3xl font-bold text-nixdarkblue pb-2">
         Donate with SEPA bank transfer
       </h2>
-      <p class="font-light">
+      <p class="font-extralight">
         The NixOS Foundation also accepts donations via SEPA bank transfer. Please send payments to:
       </p>
       <pre class="font-mono bg-nixlighterblue text-nixdarkerblue font-bold whitespace-pre-line p-8 rounded-3xl">
@@ -100,7 +97,7 @@ Stichting NixOS Foundation, Utrecht, The Netherlands
 
 IBAN: NL13 BUNQ 2061 2530 32
 BIC:  BUNQNL2AXXX</pre>
-      <p class="text-xs font-light">
+      <p class="text-xs font-extralight leading-relaxed">
         Please add your name and purpose (donation) in the description of the transfer.
         <i>
           If you would like to support us with amounts above 2000 euro per year, please contact us at
@@ -125,7 +122,7 @@ BIC:  BUNQNL2AXXX</pre>
         <h1 class="text-4xl font-bold pb-2">
           Acknowledgements
         </h1>
-        <p class="font-light">
+        <p class="font-extralight">
           The Nix package manager was developed by
           <a href="https://edolstra.github.io/" class="!text-white">Eelco Dolstra</a>
           as part of his PhD research in the

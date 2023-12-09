@@ -2,6 +2,6 @@
 const { class: extraClasses } = Astro.props;
 ---
 
-<div class={`md:mx-auto px-4 md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl ${extraClasses}`}>
+<div class={`md:mx-auto px-4 sm:max-w-[736px] md:max-w-[960px] lg:max-w-[1168px] ${extraClasses}`}>
     <slot />
 </div>
