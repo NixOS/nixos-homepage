@@ -22,6 +22,13 @@ const {
 const localClassList = `${colorMap[color]} w-fit rounded-lg font-bold !text-white !no-underline text-sm px-[0.5rem] py-[0.25rem]`;
 ---
 
-<a href={href} class:list={[localClassList, classList]}>
-  <slot/>
-</a>
+{href
+  ?
+    <a href={href} class:list={[localClassList, classList]}>
+      <slot/>
+    </a>
+  :
+    <span href={href} class:list={[localClassList, classList]}>
+      <slot/>
+    </span>
+}
