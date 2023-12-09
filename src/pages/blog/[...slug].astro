@@ -8,7 +8,7 @@ import { generatePathFromPost } from "../../lib/utils";
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
   return blogEntries.map((entry) => ({
-    params: { slug: generatePathFromPost(entry) },
+    params: { slug: generatePathFromPost(entry, false) },
     props: { entry },
   }));
 }

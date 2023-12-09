@@ -1,8 +1,7 @@
-import sanitizeHtml from "sanitize-html";
 import MarkdownIt from "markdown-it";
 
-export function generatePathFromPost(post) {
-  return `/blog/${
+export function generatePathFromPost(post, attachBlog = true) {
+  return `/${attachBlog ? "blog/" : ""}${
     post.slug.split("/")[0] + "/" + post.slug.split("/").pop().split("_").pop()
   }`;
 }
