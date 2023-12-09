@@ -2,6 +2,7 @@ import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import sanitizeHtml from 'sanitize-html';
 import MarkdownIt from 'markdown-it';
+import { generatePathFromPost } from "../../lib/utils";
 const parser = new MarkdownIt();
 
 export async function GET(context) {
@@ -20,7 +21,7 @@ export async function GET(context) {
       title: post.data.title ?? "Untitled",
       pubDate: post.data.date ?? new Date().toISOString(),
       content: sanitizeHtml(parser.render(post.body)),
-      link: `/blog/${post.slug.split("/")[0] + "/" + post.slug.split("/").pop().split("_").pop()}`,
+      link: generatePathFromPost(post),
     })),
     customData: `<language>en-us</language>`,
   });
