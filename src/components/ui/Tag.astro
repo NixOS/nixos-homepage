@@ -3,6 +3,7 @@
 interface Props {
   color?: "orange" | "darkgreen" | "lightblue" | "semidarkblue";
   classList?: string[];
+  href?: string | null;
 }
 
 const colorMap = {
@@ -15,11 +16,12 @@ const colorMap = {
 const {
   color = "semidarkblue",
   classList = [],
+  href = null,
 } = Astro.props;
 
-const localClassList = `${colorMap[color]} w-fit rounded-lg font-bold text-white text-sm px-[0.5rem] py-[0.25rem]`;
+const localClassList = `${colorMap[color]} w-fit rounded-lg font-bold !text-white !no-underline text-sm px-[0.5rem] py-[0.25rem]`;
 ---
 
-<span class:list={[localClassList, classList]}>
+<a href={href} class:list={[localClassList, classList]}>
   <slot/>
-</span>
+</a>
