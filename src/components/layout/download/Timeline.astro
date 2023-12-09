@@ -2,15 +2,36 @@
 
 interface Props {
   number: string;
+  image?: "left" | "right";
 }
 
-const { number } = Astro.props;
+const {
+  number = 0,
+  image = "left"
+} = Astro.props;
+
+import TimelineCenter from "./TimelineCenter.astro";
+
+const textCommonClasses = "flex flex-col justify-center font-light gap-4";
 
 ---
-<slot name="left-side"/>
+{ image === "left"
+  ?
+    <div class="justify-self-end">
+      <slot name="image"/>
+    </div>
 
-<div class="relative flex flex-col justify-center font-light gap-4">
-    <div class="absolute w-1 h-full bg-nixdarkblue top-0 left-[-3rem]"/>
-    <div class="absolute text-white text-center leading-[4rem] rounded-[2rem] font-bold text-[3rem] w-[4rem] h-[4rem] bg-nixgreen top-0 left-[-5rem]">{number}</div>
-    <slot name="right-side"/>
-</div>
+    <div class:list={[textCommonClasses, "text-left", "relative"]}>
+      <TimelineCenter number={number}/>
+      <slot name="text"/>
+    </div>
+  :
+    <div class:list={[textCommonClasses, "text-right"]}>
+      <slot name="text"/>
+    </div>
+
+    <div class="justify-self-start relative">
+      <TimelineCenter number={number}/>
+      <slot name="image"/>
+    </div>
+}
