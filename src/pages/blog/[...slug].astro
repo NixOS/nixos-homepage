@@ -17,7 +17,7 @@ const { Content } = await entry.render();
 ---
 
 <Layout title="Blog">
-  <PageHeader text={entry.data.title} subtext={`Published on ${entry.data.date}`} />
+  <PageHeader text={entry.data.title} subtext={`Published on ${entry.data.date.toDateString() }`} />
   <Container class="flex flex-col gap-8 mt-8 mb-4">
     <article>
         <Content />
