@@ -28,7 +28,7 @@ import Tag from "../../ui/Tag.astro";
 ))}
 </div>
 {paragraphs.map((paragraph, idx, array) => {
-  return (idx + 1 === array.length)
+  return (idx + 1 === array.length ) && emphasis
   ? <p>{paragraph}&nbsp;<span class="font-bold">{emphasis}</span></p>
   : <p>{paragraph}</p>
 })}
