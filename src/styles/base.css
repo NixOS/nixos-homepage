@@ -95,8 +95,8 @@
         @apply bg-transparent border-none;
     }
 
-    article img {
-        @apply float-right inline ml-8 h-32 w-32;
+    article img:not(.img-noadjust) {
+        @apply float-right inline ml-8 h-48 w-auto;
     }
 
     article blockquote {

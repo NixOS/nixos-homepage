@@ -115,7 +115,7 @@ merged](https://github.com/NixOS/nix/pull/1027)
 As you can see last weeks were quite busy for NixOS community. What does
 that mean in numbers for last month?
 
-![Monthly activity in NixOS/nixpkgs](/images/newsletter/06-montly-activity.png)
+![Monthly activity in NixOS/nixpkgs](../../../assets/image/newsletter/06-montly-activity.png)
 
 Source: <https://github.com/NixOS/nixpkgs/pulse/monthly>
 
