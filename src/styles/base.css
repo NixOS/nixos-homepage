@@ -103,8 +103,22 @@
         @apply border-l-4 border-gray-600 pl-2 mb-4;
     }
 
-    article h1, article h2, article h3, article h4, article h5, article h6 {
-        @apply font-bold font-heading text-nixdarkblue;
+    article h1,
+    article h2,
+    article h3,
+    article h4,
+    article h5,
+    article h6 {
+        @apply font-bold font-heading text-nixdarkblue leading-tight;
+    }
+
+    article h1:not(:first-child),
+    article h2:not(:first-child),
+    article h3:not(:first-child),
+    article h4:not(:first-child),
+    article h5:not(:first-child),
+    article h6:not(:first-child) {
+        @apply mt-4;
     }
 
     article h1 {
