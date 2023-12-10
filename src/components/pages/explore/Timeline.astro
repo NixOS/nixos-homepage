@@ -22,12 +22,13 @@ import TimelineCenter from "./TimelineCenter.astro";
 import TimelineText from "./TimelineText.astro";
 
 const textCommonClasses = "flex flex-col justify-center font-light gap-4";
+const imageCommonClasses = "px-12 my-12";
 
 ---
 { imageLocation === "left"
   ?
-    <div class="md:justify-self-end">
-      <img src={imageSrc} class="pb-24" />
+    <div class="justify-self-center md:justify-self-end">
+      <img src={imageSrc} class:list={[imageCommonClasses]} />
     </div>
 
     <div class:list={[textCommonClasses, "text-left", "relative"]}>
@@ -39,8 +40,8 @@ const textCommonClasses = "flex flex-col justify-center font-light gap-4";
       <TimelineText {...textProps} />
     </div>
 
-    <div class="md:justify-self-start relative">
+    <div class="justify-self-center md:justify-self-start relative">
       <TimelineCenter number={number}/>
-      <img src={imageSrc} class="pb-24" />
+      <img src={imageSrc} class:list={[imageCommonClasses]} />
     </div>
 }
