@@ -1,0 +1,36 @@
+---
+
+import { getEntry } from 'astro:content';
+
+import Layout from '../layouts/Layout.astro';
+import Container from "../components/layout/Container.astro";
+import PageHeader from "../components/layout/PageHeader.astro";
+
+import Timeline from "../components/pages/explore/Timeline.astro";
+
+const exploreInfo = await getEntry('explore', 'info');
+
+---
+
+<Layout title="Explore">
+  <PageHeader text="Explore" />
+
+  <Container class="py-16">
+    <h1 class="text-2xl text-center font-extralight text-neutral-500">
+      Find out why so many developers, system administrators and other enthusiasts use Nix and cannot imagine a world without it.
+    </h1>
+  </Container>
+
+  <Container class="pb-16">
+      {exploreInfo.data.content.map((item, idx) => {
+        const side = idx % 2 ? "right" : "left";
+        const flexColDir = idx % 2 ? "flex-col-reverse" : "flex-col";
+        return (
+          <div class="!px-0 grid md:grid-cols-2 gap-x-[6rem]">
+            <Timeline number={ idx + 1 } imageLocation={ side } { ...item } />
+          </div>
+        )
+      })}
+  </Container>
+
+</Layout>
