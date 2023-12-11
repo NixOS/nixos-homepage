@@ -41,7 +41,7 @@ const localClassList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white
 ---
 
 {href ? (
-  <span>
+  <>
     <a href={href} class:list={["!text-white !no-underline", localClassList, classList]}>
       <slot/>
     </a>
@@ -50,7 +50,7 @@ const localClassList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white
         {shaText}
       </SHA>
     )}
-  </span>
+  </>
 ) : (
   <button type={type} class={localClassList}>
     <slot/>

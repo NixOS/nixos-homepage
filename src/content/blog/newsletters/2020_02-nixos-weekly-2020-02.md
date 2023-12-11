@@ -1,0 +1,49 @@
+---
+title: "#02 - NixOS Weekly"
+date: 2020-02-06
+description: We are here to make another world - W. Edwards Deming
+---
+
+# News
+
+- [nix-simple-deploy](https://github.com/misuzu/nix-simple-deploy)
+
+  A Rust rewrite of unmaintained [nix-deploy](https://github.com/awakesecurity/nix-deploy). Any feedback appreciated!
+
+- [cached-nix-shell: Instant startup time for nix-shell](https://github.com/xzfc/cached-nix-shell)
+
+  Caching layer for nix-shell featuring instant startup time on subsequent runs.
+  It supports NixOS and Linux.
+
+- [structured-attrs](https://nixos.mayflower.consulting/blog/2020/01/20/structured-attrs/)
+
+  An explanation of __structuredAttrs in stdenv and why enabling it would be desirable.
+
+- [nix-bisect: Bisect Nix Builds](https://discourse.nixos.org/t/nix-bisect-bisect-nix-builds/5584/3)
+
+  A small command-line tool and python library that makes bisecting nix builds much more convenient.
+  It prevents common pitfalls in simple cases and saves a lot of time in more complicated ones.
+
+- [Job: ShowSeeker is looking for DevOps and SRE engineers](https://discourse.nixos.org/t/job-devops-engineer-and-sre-nixos-remote/5413/3)
+
+- [Cachix: CDN and double storage](https://blog.cachix.org/post/2020-01-28-cdn-and-double-storage/)
+
+  Cachix infrastructure has been revamped to scale with recent
+  growth in traffic.
+
+- [NixOS: For developers](https://myme.no/posts/2020-01-26-nixos-for-development.html)
+
+- [Oslo NixOS MiniCon 2020](https://blog.hackeriet.no/oslo-nixos-minicon-2020/)
+
+- [Running NixOS on a consumer NAS](https://www.codedbearder.com/posts/nixos-terramaster-f2-221/)
+
+- [How I Work From Anywhere in the World](https://jezenthomas.com/how-i-work-from-anywhere-in-the-world/)
+
+# Contribute to NixOS Weekly Newsletter
+
+This work would not be possible without the many contributions of the community.
+
+You can help too! Create or comment on the [pull request](https://github.com/NixOS/nixos-weekly/pulls)
+for the next edition or look at the
+[issue tracker](https://github.com/NixOS/nixos-weekly/issues) to add other improvements.
+

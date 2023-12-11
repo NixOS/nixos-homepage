@@ -1,0 +1,64 @@
+---
+title: "#03 - NixOS Weekly"
+date: 2021-04-09
+description: The most wasted of all days is one without laughter - e. e. cummings
+---
+
+# News
+## Announcements
+
+- [RFC 0085 FCP NixOS Release Stabilization: ZHF on master, new timeline](https://github.com/NixOS/rfcs/pull/85)
+
+  RFC 0085 has been accepted!
+
+- [Nix Portable](https://github.com/DavHau/nix-portable)
+
+  Nix - Static, Permissionless, Install-free, Pre-configured
+
+- [The Summer of Nix](https://summer.nixos.org/)
+
+  A two month train and work program from August 2nd to October 15th 2021 - great for anyone who wants to rapidly increase their Nix skills while doing useful work.
+
+- [Nix 🖤 macOS Monthly Update](https://discourse.nixos.org/t/nix-macos-monthly/12330)
+
+- [Nix is the ultimate DevOps toolkit](https://tech.channable.com/posts/2021-04-09-nix-is-the-ultimate-devops-toolkit.html)
+
+- [nix-script: nix-shell shebangs for speed and flexibility](https://bytes.zone/posts/nix-script/)
+
+## Tutorials & Resources
+
+- [Building container images with Nix](https://thewagner.net/blog/2021/02/25/building-container-images-with-nix/)
+
+- [Getting started with Home Manager](https://ghedam.at/24353/tutorial-getting-started-with-home-manager-for-nix)
+
+- [Using NixOS as a Router (NaaR)](https://francis.begyn.be/blog/nixos-home-router)
+
+- [My Automagic NixOS Wireguard Setup](https://christine.website/blog/my-wireguard-setup-2021-02-06)
+
+- [Qubes-lite With KVM and Wayland](https://roscidus.com/blog/blog/2021/03/07/qubes-lite-with-kvm-and-wayland/)
+
+- [Installing NixOS on a Mac](https://ihpcafe.ihpapp.com/TodaysNixCoffee)
+
+- [Video Series: Introduction To Nix and NixOS](https://www.youtube.com/watch?v=QKoQ1gKJY5A&list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-)
+
+- [Video tutorial of Flakes in Nix 2.4](https://www.youtube.com/watch?v=98EwejpIJzE&list=PLZmotIJq3yOKew30oT8aEbPUOEKBmNpY1)
+
+  Video explains how to improve the reproducibility of nix expressions, why and for what we may need flakes and how to use them.
+
+- [Build Arduino sketches like any other nix derivation.](https://github.com/boredom101/nixduino)
+
+## Jobs
+
+- [DevOps Engineer at Secure Compute Startup](https://discourse.nixos.org/t/devops-engineer-at-secure-compute-startup/12008)
+
+  Drive the adoption of Nix at a secure compute startup by developing and maintaining our CI pipeline and infrastructure.
+
+# Contribute to NixOS Weekly
+
+This work would not be possible without the many contributions of the community.
+
+You can help too! Create or comment on the [pull request](https://github.com/NixOS/nixos-weekly/pulls)
+for the next edition or look at the
+[issue tracker](https://github.com/NixOS/nixos-weekly/issues) to add other improvements.
+
+

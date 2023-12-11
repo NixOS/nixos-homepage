@@ -1,0 +1,105 @@
+---
+title: "#05 - NixOS Weekly"
+date: 2021-09-06
+description: “We often take for granted the very things that most deserve our gratitude.” – Cynthia Ozick
+---
+
+# News
+
+## Announcements
+
+- [Makes](https://github.com/fluidattacks/makes)
+
+  A DevSecOps framework powered by Nix and the NixOS module system.
+  Our goal is to help people setup a powerful CI/CD system
+  in just a few steps, in any provider,
+  while lowering the barrier to entry for the community.
+
+- [Mobile NixOS: July 2021 round-up](https://mobile.nixos.org/news/2021-08-03-july-2021-round-up.html)
+
+- [Nix 🖤 macOS: June/July 2021 update](https://discourse.nixos.org/t/nix-macos-monthly/12330/9)
+
+  The Ongoing effort at bumping LLVM and macOS SDK.
+
+
+## Tutorials & Resources
+
+- [terraform-provider-hydra](https://determinate.systems/posts/terraform-provider-hydra/)
+
+  A Terraform provider for declaratively managing Hydra projects and jobsets, Determinate Systems'
+  first open source release.
+
+- [Modded Minecraft Servers](https://github.com/mkaito/nixos-modded-minecraft-servers)
+
+  A NixOS module to help run modded minecraft servers, as a Nix flake, as well
+  as a simple rsync wrapper script to help manage remote state of such
+  a server.
+
+- [stdenv.lib has been removed from Nixpkgs](https://github.com/NixOS/nixpkgs/pull/125494)
+
+- [Unbreakable Builds On Container Schedulers Without Containers](https://blog.tjll.net/container-scheduling-without-containers/)
+
+- [Cross compilation tutorial](https://nix.dev/tutorials/cross-compilation)
+
+- [repl.it: Dynamic version for Nix derivations](https://blog.replit.com/nix_dynamic_version)
+
+- [NixOS on the Framework](https://grahamc.com/blog/nixos-on-framework)
+
+- [Container assignment](https://github.com/ls1-sys-prog-course/task8-container)
+
+  University lecture + assignment + tutorial on how to build a shell for the nix build sandbox with
+  automated tests suite
+
+- Gitpod [has shipped a template](https://twitter.com/gitpod/status/1412207422165241858)
+
+  Configured for Nix, it gives you pre-built, ephemeral reproducible development environments in the
+cloud.
+
+- [Paranoid NixOS Setup](https://christine.website/blog/paranoid-nixos-2021-07-18)
+
+- [NixOS: build your system on Github actions!](https://gvolpe.com/blog/nixos-binary-cache-ci/)
+
+- [New laptop - ThinkPad P14s](https://domenkozar.com/2021/08/06/new-laptop-thinkpad-p14s/)
+
+- [Bevy: getting started on NixOS](https://blog.thomasheartman.com/posts/bevy-getting-started-on-nixos)
+
+- [Nix Citizen](https://gitea.xndr.de/philipp/nixcitizen)
+
+  Experimental attempt of packaging a demanding and somewhat complex (in terms of wine setup)
+  wine application by dynamically creating a wine prefix from the nix store path of a generated
+  wrapper script.
+
+- [Solving the y2038 Problem with NixOS and XFS](https://blog.helsinki-systems.de/solving-the-y2038-problem-with-nixos-and-xfs/)
+
+  Or how to teach your initrd to add features to a filesystem on bootup.
+
+- [microvm.nix](https://github.com/astro/microvm.nix)
+
+  A Nix Flake to build NixOS and run it on one of several KVM-Hypervisors
+  (cloud-hypervisor, qemu, firecracker, kvmtool, crosvm).
+
+- [Inspecting coredumps like it's 2021](https://nixos.mayflower.consulting/blog/2021/09/06/coredumpctl/)
+
+
+## Jobs
+
+- [Seeking a Nix contractor](https://discourse.nixos.org/t/seeking-nix-contractor/14722)
+
+- [Senior SRE position @ Serokell](https://discourse.nixos.org/t/remote-senior-sre-position-at-serokell/14563)
+
+- [Two software engineer positions (remote) @ RJG](https://discourse.nixos.org/t/two-software-engineer-positions-remote/13886)
+
+- [Hiring Nix developers @ Tweag](https://discourse.nixos.org/t/job-tweag-hiring-nix-developers/14086)
+
+- [Nix Engineers @ Mercury Bank](https://discourse.nixos.org/t/mercury-bank-nix-engineers/13784)
+
+- [Build and Release Engineer @ The D. E. Shaw Group](https://discourse.nixos.org/t/the-d-e-shaw-group-quant-systems-build-and-release-engineer/13686)
+
+
+# Contribute to NixOS Weekly
+
+This work would not be possible without the many contributions of the community.
+
+You can help too! Create or comment on the [pull request](https://github.com/NixOS/nixos-weekly/pulls)
+for the next edition or look at the
+[issue tracker](https://github.com/NixOS/nixos-weekly/issues) to add other improvements.

@@ -21,8 +21,16 @@
         @apply underline decoration-0.5  underline-offset-4 text-nixsemidarkblue;
     }
 
+    article {
+        @apply leading-7 font-light;
+    }
+
     article ul {
-        @apply list-circle list-inside;
+        @apply list-circle list-outside mb-2 ml-6;
+    }
+
+    article ul > li {
+        @apply mb-1;
     }
 
     article ul > li {
@@ -30,11 +38,25 @@
     }
 
     article ul > li > ul {
-        @apply list-disc list-inside ml-4 mt-1;
+        @apply list-disc list-outside mt-1;
     }
+
+    article ul > li > p:first-child {
+        @apply ml-0 block;
+    }
+
+    article ul > li > p {
+        @apply inline-block pb-1;
+    }
+
     article ul.inlinelist {
-        @apply list-none flex flex-col ml-6;
+        @apply list-none flex flex-col ml-0 mb-0;
     }
+
+    article ul.inlinelist ul {
+        @apply ml-0;
+    }
+
     article ul.inlinelist li {
         @apply inline-block;
     }
@@ -43,5 +65,75 @@
     }
     article ul.inlinelist li:last-child::after {
         content: "";
+    }
+
+    article b, article strong {
+        @apply font-bold;
+    }
+
+    article h3 {
+        @apply text-2xl font-bold text-nixdarkblue mb-4;
+    }
+
+    article p {
+        @apply pb-2;
+    }
+
+    article br {
+        @apply block h-2;
+    }
+
+    article code {
+        @apply bg-gray-100 border-1 border-gray-300 px-1 pt-0.5 pb-1 rounded text-orange-400;
+    }
+
+    article pre {
+        @apply border-1 border-gray-600 px-1 pt-0.5 pb-1 rounded mb-2;
+    }
+
+    article pre code {
+        @apply bg-transparent border-none;
+    }
+
+    article img:not(.img-noadjust) {
+        @apply float-right inline ml-8 h-48 w-auto;
+    }
+
+    article blockquote {
+        @apply border-l-4 border-gray-600 pl-2 mb-4;
+    }
+
+    article h1,
+    article h2,
+    article h3,
+    article h4,
+    article h5,
+    article h6 {
+        @apply font-bold font-heading text-nixdarkblue leading-tight;
+    }
+
+    article h1:not(:first-child),
+    article h2:not(:first-child),
+    article h3:not(:first-child),
+    article h4:not(:first-child),
+    article h5:not(:first-child),
+    article h6:not(:first-child) {
+        @apply mt-4;
+    }
+
+    article h1 {
+        @apply text-4xl mb-2;
+    }
+
+    article h2 {
+        @apply text-3xl mb-2;
+    }
+
+    article h3 {
+        @apply text-2xl mb-2;
+    }
+
+    article h4 {
+        @apply text-xl mb-2;
     }
 }

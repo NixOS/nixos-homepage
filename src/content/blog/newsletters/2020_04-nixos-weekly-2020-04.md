@@ -1,0 +1,68 @@
+---
+title: "#04 - NixOS Weekly"
+date: 2020-04-24
+description: You must do the things you think you cannot do - Eleanor Roosevelt
+---
+
+# News
+
+## Announcements
+
+- [NixOS 20.03 was released](https://discourse.nixos.org/t/nixos-20-03-release)
+
+  NixOS 20.03 “Markhor” had 1014 people contribute 21597 contributions.
+
+- [Announcing Nixiosk](http://matthewbauer.us/blog/nixiosk.html)
+
+  Declarative Kiosk systems built with NixOS.
+
+- [Announcing Marketing Team](https://discourse.nixos.org/t/marketing-team-can-we-present-nix-nixos-better/6249)
+
+  The marketing team was founded and had their few meetings. They already improved the website (see
+  [Learn page](https://nixos.org/learn.html)). If you want to join, you  will find the details in the
+  announcement post. Let's improve the presentation of Nix/NixOS!
+
+- [nix-update](https://github.com/Mic92/nix-update/)
+
+  A tool for updating nix packages semi-automatically
+
+## Tutorials & Resources
+
+- [The journey of packaging a .NET app on Nix](https://sgt.hootr.club/molten-matter/dotnet-on-nix/)
+
+- [Create and Publish a Website with Hakyll, HAProxy and NixOS](https://www.thomasbach.dev/posts/2020-04-03-website-init.html)
+
+- [Declarative, Decentralised, and Secure communication via Matrix, Jitsi, & NixOS](https://kaushikc.org/posts/matrix-jitsi-nixos.html)
+
+- [Project isolation beyond requirements.txt](https://blog.niteo.co/project-isolation-beyond-requirements-txt/)
+
+  How simple nix-shell integration can really make an impact on
+  developer productivity.
+
+- [Erase your darlings](https://grahamc.com/blog/erase-your-darlings)
+
+  Graham talks about why and how he erases his systems on each boot.
+
+- [Using Emacs in a local Nix environment](https://splintah.gitlab.io/posts/2020-04-13-emacs-local-nix-environment.html)
+
+- [Building a reproducible blog with Nix](https://blog.ysndr.de/posts/internals/2020-04-10-built-with-nix/)
+
+- [Building a web app with functional programming](https://blog.patchgirl.io/2020/02/29/building-a-web-app-with-fp-intro.html)
+
+  A long report on building a web app with functional programming - Haskell, Elm and NixOS.
+
+## Jobs
+
+- [Serokell is hiring an SRE](https://serokell.io/blog/hiring-sre)
+
+- [Nix packaging work for the Next Generation Internet](https://discourse.nixos.org/t/contract-work-for-the-next-generation-internet/6840)
+
+
+# Contribute to NixOS Weekly Newsletter
+
+This work would not be possible without the many contributions of the community.
+
+You can help too! Create or comment on the [pull request](https://github.com/NixOS/nixos-weekly/pulls)
+for the next edition or look at the
+[issue tracker](https://github.com/NixOS/nixos-weekly/issues) to add other improvements.
+
