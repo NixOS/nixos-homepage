@@ -195,7 +195,7 @@ const teams = await getCollection("teams");
       <ul class="flex flex-wrap gap-x-6 gap-y-24 mt-24 justify-stretch">
         {
           teams.map((team) => (
-            <li class="text-white [&>a]:inline-block basis-72 flex-grow flex flex-col items-start gap-2">
+            <li class="text-white [&>a]:inline-block basis-72 flex-grow flex flex-col items-center text-center md:items-start md:text-left gap-2">
               <img
                 src={`/images/teams/${team.slug}.svg`}
                 alt={`${team.slug} team icon`}
