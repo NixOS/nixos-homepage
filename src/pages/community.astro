@@ -284,78 +284,72 @@ const teams = await getCollection("teams");
   const boxes = document
     .getElementById("rfc-diagram")
     .getElementsByTagName("rect");
-  const finalCommentPhase = boxes[0];
-  const newSubmission2 = boxes[1];
-  const refineSubmission = boxes[2];
-  const submissionRejected = boxes[3];
-  const submissionAccepted = boxes[4];
-  const fcpCanceled = boxes[5];
-  const discussionPhase = boxes[7];
-  const nominationPhase = boxes[8];
-  const newSubmission = boxes[9];
-
-  const durationMiliseconds = 1000;
-  // TODO: temporary style
-  const activatedClass = "stroke-blue-500";
-  const successActivatedClass = "stroke-green-500";
-  const failureActivatedClass = "stroke-red-500";
+  const diagram = document.getElementById("rfc-diagram");
+  const durationMiliseconds = 1500;
+  const baseActivationClasses = ["stroke-nixdarkblue"];
+  const successActivationClasses = ["stroke-nixgreen"];
+  const failureActivationClasses = ["stroke-nixorange", "opacity-50"];
+  const fadedActivationClasses = ["opacity-50"];
   const timeline = [
     {
-      element: newSubmission,
+      element: boxes[9], // New Submission
       index: 0,
-      class: activatedClass,
+      classes: baseActivationClasses,
     },
     {
-      element: nominationPhase,
+      element: boxes[8], // Nomination Phase
       index: 1,
-      class: activatedClass,
+      classes: baseActivationClasses,
     },
     {
-      element: discussionPhase,
+      element: boxes[7], // Discussion Phase
       index: 2,
-      class: activatedClass,
+      classes: baseActivationClasses,
     },
     {
-      element: finalCommentPhase,
+      element: boxes[0], // Final Comment Phase
       index: 3,
-      class: activatedClass,
+      classes: baseActivationClasses,
     },
     {
-      element: submissionRejected,
+      element: boxes[3], // Submission Rejected
       index: 4,
-      class: failureActivatedClass,
+      classes: failureActivationClasses,
     },
     {
-      element: newSubmission2,
+      element: boxes[1], // New Submission 2
       index: 4,
-      class: activatedClass,
+      classes: fadedActivationClasses,
     },
     {
-      element: fcpCanceled,
+      element: boxes[5], // FCP Canceled
       index: 4,
-      class: failureActivatedClass,
+      classes: failureActivationClasses,
     },
     {
-      element: refineSubmission,
+      element: boxes[2], // Refine Submission
       index: 4,
-      class: activatedClass,
+      classes: fadedActivationClasses,
     },
     {
-      element: submissionAccepted,
+      element: boxes[4], // Submission Accepted
       index: 4,
-      class: successActivatedClass,
+      classes: successActivationClasses,
     },
   ];
   let isAnimating = false;
-  function getHighestIndex() {
-    let highestIndex = 0;
-    timeline.forEach((box) => {
-      if (box.index > highestIndex) {
-        highestIndex = box.index;
-      }
-    });
-    return highestIndex;
-  }
+
+  timeline.forEach((box) => {
+    box.element.classList.add("transition-all", "duration-500", "ease-in");
+  });
+
+  let highestIndex = 0;
+  timeline.forEach((box) => {
+    if (box.index > highestIndex) {
+      highestIndex = box.index;
+    }
+  });
+
   function triggerAnimation() {
     // prevent multiple animations at the same time
     if (isAnimating) {
@@ -366,31 +360,43 @@ const teams = await getCollection("teams");
       () => {
         isAnimating = false;
       },
-      (getHighestIndex() + 1) * durationMiliseconds,
+      (highestIndex + 1) * durationMiliseconds,
     );
 
     // trigger animation on each box
     timeline.forEach((box) => {
-      // set class after a delay and remove it after another delay
       setTimeout(() => {
-        box.element.classList.add(box.class);
-        setTimeout(() => {
-          box.element.classList.remove(box.class);
-        }, durationMiliseconds);
+        box.element.classList.add(...box.classes);
       }, box.index * durationMiliseconds);
     });
   }
-  const observer = new IntersectionObserver(
+
+  const activatorObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          triggerAnimation();
+        if (isAnimating || !entry.isIntersecting) {
+          return;
         }
+        triggerAnimation();
       });
-    },
-    {
-      threshold: 1.0,
-    },
+    }, {
+      threshold: 1,
+    }
   );
-  observer.observe(document.getElementById("rfc-diagram"));
+  const deactivatorObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (isAnimating || entry.isIntersecting) {
+          return;
+        }
+        timeline.forEach((box) => {
+          box.element.classList.remove(...box.classes);
+        });
+      });
+    }, {
+      threshold: 0,
+    }
+  );
+  activatorObserver.observe(diagram);
+  deactivatorObserver.observe(diagram);
 </script>
