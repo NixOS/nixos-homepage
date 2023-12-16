@@ -181,7 +181,7 @@ const teams = await getCollection("teams");
           <Button href="https://github.com/NixOS/rfcs">Learn more</Button>
         </div>
       </div>
-      <div>
+      <div class="grow hidden lg:flex justify-center">
         <RfcDiagram />
       </div>
     </div>
@@ -279,8 +279,6 @@ const teams = await getCollection("teams");
   </Container>
 </Layout>
 <script>
-  // get diagram boxes
-  // this depends on order of elements in the svg, so needs to be updated if the diagram changes
   const boxes = document
     .getElementById("rfc-diagram")
     .getElementsByTagName("rect");
@@ -379,9 +377,10 @@ const teams = await getCollection("teams");
         }
         triggerAnimation();
       });
-    }, {
+    },
+    {
       threshold: 1,
-    }
+    },
   );
   const deactivatorObserver = new IntersectionObserver(
     (entries) => {
@@ -393,9 +392,10 @@ const teams = await getCollection("teams");
           box.element.classList.remove(...box.classes);
         });
       });
-    }, {
+    },
+    {
       threshold: 0,
-    }
+    },
   );
   activatorObserver.observe(diagram);
   deactivatorObserver.observe(diagram);
