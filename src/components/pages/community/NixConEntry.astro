@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  description: string;
+  href: string;
+}
+
+const { title, date, description, href } = Astro.props;
+---
+
+<div class="font-extralight flex flex-col gap-1">
+  <h4 class="text-lg font-bold">{title}</h4>
+  <div class="text-sm">{date}</div>
+  <div class="leading-relaxed">{description}</div>
+  <div class="!text-white text-right font-bold">
+    <a href={href} class="!text-white">Read more...</a>
+  </div>
+</div>

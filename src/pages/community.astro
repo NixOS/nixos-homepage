@@ -10,19 +10,22 @@ import Divider from "../components/layout/Divider.astro";
 import Button from "../components/ui/Button.astro";
 import RfcDiagram from "../components/ui/RfcDiagram.astro";
 import Tag from "../components/ui/Tag.astro";
+import NixConEntry from "../components/pages/community/NixConEntry.astro";
 
 const platforms = await getEntry("community", "community-platforms");
 const meetups = await getEntry("community", "meetups");
 const nixcons = await getCollection("nixcons");
 const teams = await getCollection("teams");
 
+nixcons.reverse();
+
 import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
 ---
 
 <Layout title="Community">
   <PageHeader text="Community" />
-  <Container class="font-light space-y-4 mt-16">
-    <p class="text-xl font-bold text-gray-500">
+  <Container class="font-extralight leading-relaxed space-y-4 mt-16">
+    <p class="text-lg font-bold text-gray-700">
       Nix and NixOS are developed and used by a diverse and welcoming community
       from all around the world.
     </p>
@@ -91,40 +94,43 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     </Container>
   </aside>
   <Divider mirrorY />
-  <div class="bg-nixdarkblue py-8">
+  <div class="bg-nixdarkblue text-white py-8">
     <Container>
-      <h2 class="text-4xl font-bold text-white">NixCon</h2>
-      <p class="mt-2 text-white">
-        NixCon is a community-oriented conference for contributors and users of
-        Nix and NixOS. It's about sharing experiences, inspiring people and
-        discussing future development.
+      <h2 class="text-4xl font-bold font-heading">NixCon</h2>
+      <p class="mt-2 text-xl font-bold mb-4">
+        The NixCon Team organizes a conference once a year.
       </p>
-      <ul
-        class="timeline timeline-vertical lg:timeline-horizontal mt-4 text-white text-lg overflow-scroll lg:pb-3 [scrollbar-color:_white_theme(colors.nixsemidarkblue)]"
-      >
-        {
-          nixcons.reverse().map((nixcon) => (
-            <li class="[&:first-child_>_hr:first-child]:hidden [&:last-child_>_hr:last-child]:hidden lg:first:font-bold grid-cols-[4fr_auto_5fr]">
-              <hr class="bg-white" />
-              <div class="timeline-start text-right">{nixcon.data.date}</div>
-              <div class="timeline-middle">
-                <div class="h-6 w-6 rounded-full border-4 border-white mx-2 lg:mx-0" />
-              </div>
-              <div class="timeline-end timeline-box">
-                <a href={nixcon.data.href}>{nixcon.data.title}</a>
-              </div>
-              <hr class="bg-white" />
-            </li>
-          ))
-        }
-      </ul>
+      <div class="grid md:grid-cols-3">
+        <div class="col-span-1 bg-nixsemidarkblue p-4 rounded-xl">
+          <h3 class="text-3xl font-heading font-bold mb-4">Next Conference</h3>
+          <NixConEntry
+            title={nixcons[0].data.title}
+            date={nixcons[0].data.date}
+            description={nixcons[0].data.description}
+            href={nixcons[0].data.href} />
+        </div>
+        <div class="col-span-2 md:p-4">
+          <h3 class="text-3xl font-heading font-bold">Previous Conferences</h3>
+          <div class="grid md:grid-cols-2 gap-4 mt-4">
+            {
+              nixcons.slice(1).map((nixcon) => (
+                <NixConEntry
+                  title={nixcon.data.title}
+                  date={nixcon.data.date}
+                  description={nixcon.data.description}
+                  href={nixcon.data.href} />
+              ))
+            }
+          </div>
+        </div>
+      </div>
     </Container>
   </div>
   <Divider />
   <Container>
     <h2 class="text-4xl font-bold text-nixdarkblue mt-8">Meetups</h2>
     <div
-      class="mt-4 grid md:grid-flow-col auto-cols-fr font-light text-center text-lg bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat"
+      class="mt-4 grid md:grid-flow-col auto-cols-fr font-extralight text-center text-lg bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat"
     >
       <div>
         <h3 class="mt-4 md:mt-2 font-bold text-2xl text-nixdarkblue">
@@ -165,21 +171,21 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         </ul>
       </div>
     </div>
-    <div class="flex flex-wrap-reverse gap-8 font-extralight leading-relaxed mt-16">
-      <div class="flex-1 flex flex-col items-start gap-4">
-        <h2 class="text-4xl font-bold text-nixdarkblue leading-tight">RFC Process</h2>
+    <div class="flex flex-wrap-reverse gap-8 font-extralight leading-loose mt-16">
+      <div class="flex-1 flex flex-col items-start gap-8 justify-center">
+        <h2 class="text-4xl font-bold text-nixdarkblue leading-none">RFC Process</h2>
         <p>
           The "RFC" (request for comments) process is intended to provide a consistent and controlled path for new features to enter the Nix language, packages and OS, so that all community can be confident about the direction the ecosystem is evolving in.
         </p>
-        <Button color="green" href="https://github.com/NixOS/rfcs">Learn more</Button>
+        <Button color="green" size="lg" href="https://github.com/NixOS/rfcs">Learn more</Button>
       </div>
-      <div class="flex-0 max-w-2xl w-3/6 mt-2">
+      <div class="flex-0 md:max-w-2xl w-full md:w-3/6 mt-2">
         <RfcDiagram />
       </div>
     </div>
   </Container>
   <div class="mt-8">
-    <Divider mirrorY mirrorX />
+    <Divider mirrorY />
   </div>
   <div class="bg-nixdarkblue py-8">
     <Container>
@@ -194,7 +200,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
                 class="h-24"
               />
               <h3 class="text-2xl font-bold font-heading">{team.data.name}</h3>
-              <p class="font-extralight grow mb-2">{team.data.description}</p>
+              <p class="font-extralight leading-relaxed grow mb-2">{team.data.description}</p>
               <Button color="green" href={"/community/teams/" + team.slug.split("_")[1]}>
                 Read more
               </Button>
@@ -204,7 +210,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
       </ul>
     </Container>
   </div>
-  <Divider mirrorX />
+  <Divider />
   <Container class="grid md:grid-cols-2 mb-16 mt-8">
     <div>
       <div class="flex flex-col items-center justify-center">
