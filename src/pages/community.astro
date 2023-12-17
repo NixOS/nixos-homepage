@@ -1,6 +1,7 @@
 ---
 import { getEntry, getCollection } from "astro:content";
 import { Icon } from "astro-icon";
+import { Image } from 'astro:assets';
 
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/layout/PageHeader.astro";
@@ -8,11 +9,14 @@ import Container from "../components/layout/Container.astro";
 import Divider from "../components/layout/Divider.astro";
 import Button from "../components/ui/Button.astro";
 import RfcDiagram from "../components/ui/RfcDiagram.astro";
+import Tag from "../components/ui/Tag.astro";
 
 const platforms = await getEntry("community", "community-platforms");
 const meetups = await getEntry("community", "meetups");
 const nixcons = await getCollection("nixcons");
 const teams = await getCollection("teams");
+
+import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
 ---
 
 <Layout title="Community">
@@ -126,7 +130,7 @@ const teams = await getCollection("teams");
         <h3 class="mt-4 md:mt-2 font-bold text-2xl text-nixdarkblue">
           America
         </h3>
-        <ul class="mt-2 space-y-2">
+        <ul class="mt-2 space-y-4">
           {
             meetups.data.america.map((meetup) => (
               <li>
@@ -138,7 +142,7 @@ const teams = await getCollection("teams");
       </div>
       <div>
         <h3 class="mt-4 md:mt-2 font-bold text-2xl text-nixdarkblue">Europe</h3>
-        <ul class="mt-2 space-y-2">
+        <ul class="mt-2 space-y-4">
           {
             meetups.data.europe.map((meetup) => (
               <li>
@@ -150,7 +154,7 @@ const teams = await getCollection("teams");
       </div>
       <div>
         <h3 class="mt-4 md:mt-2 font-bold text-2xl text-nixdarkblue">Asia</h3>
-        <ul class="mt-2 space-y-2">
+        <ul class="mt-2 space-y-4">
           {
             meetups.data.asia.map((meetup) => (
               <li>
@@ -161,27 +165,15 @@ const teams = await getCollection("teams");
         </ul>
       </div>
     </div>
-    <h2 class="text-4xl font-bold text-nixdarkblue mt-8">RFC Process</h2>
-    <div class="flex flex-wrap-reverse gap-8 mt-4">
-      <div class="basis-64 grow space-y-2">
-        <p class="font-light text-lg">
-          Many changes, including bug fixes and documentation improvements can
-          be implemented and reviewed via the normal GitHub pull request
-          workflow. Some changes though are "substantial", and we ask that these
-          be put through a bit of a design process and produce a consensus among
-          the Nix community.
+    <div class="flex flex-wrap-reverse gap-8 font-extralight leading-relaxed mt-16">
+      <div class="flex-1 flex flex-col items-start gap-4">
+        <h2 class="text-4xl font-bold text-nixdarkblue leading-tight">RFC Process</h2>
+        <p>
+          The "RFC" (request for comments) process is intended to provide a consistent and controlled path for new features to enter the Nix language, packages and OS, so that all community can be confident about the direction the ecosystem is evolving in.
         </p>
-        <p class="font-light text-lg">
-          The "RFC" (request for comments) process is intended to provide a
-          consistent and controlled path for new features to enter the Nix
-          language, packages and OS, so that all community can be confident
-          about the direction the ecosystem is evolving in.
-        </p>
-        <div class="!mt-4">
-          <Button href="https://github.com/NixOS/rfcs">Learn more</Button>
-        </div>
+        <Button color="green" href="https://github.com/NixOS/rfcs">Learn more</Button>
       </div>
-      <div class="grow hidden lg:flex justify-center">
+      <div class="flex-0 max-w-2xl w-3/6 mt-2">
         <RfcDiagram />
       </div>
     </div>
@@ -192,18 +184,18 @@ const teams = await getCollection("teams");
   <div class="bg-nixdarkblue py-8">
     <Container>
       <h2 class="text-4xl font-bold text-white mt-8">Teams</h2>
-      <ul class="flex flex-wrap gap-x-6 gap-y-24 mt-24 justify-stretch">
+      <ul class="flex flex-wrap gap-x-6 gap-y-16 mt-8 justify-stretch">
         {
           teams.map((team) => (
             <li class="text-white [&>a]:inline-block basis-72 flex-grow flex flex-col items-center text-center md:items-start md:text-left gap-2">
               <img
-                src={`/images/teams/${team.slug}.svg`}
-                alt={`${team.slug} team icon`}
+                src={`/images/teams/${team.slug.split("_")[1]}.svg`}
+                alt={`${team.data.name} Logo`}
                 class="h-24"
               />
-              <h3 class="text-2xl font-bold">{team.data.name}</h3>
-              <p class="font-light grow">{team.data.description}</p>
-              <Button color="green" href={"/community/teams/" + team.slug}>
+              <h3 class="text-2xl font-bold font-heading">{team.data.name}</h3>
+              <p class="font-extralight grow mb-2">{team.data.description}</p>
+              <Button color="green" href={"/community/teams/" + team.slug.split("_")[1]}>
                 Read more
               </Button>
             </li>
@@ -215,30 +207,28 @@ const teams = await getCollection("teams");
   <Divider mirrorX />
   <Container class="grid md:grid-cols-2 mb-16 mt-8">
     <div>
-      <div class="flex flex-col gap-4 text-center font-nixos">
-        <img src="/images/logos/nixos_flake.svg" class="h-40" />
-        <p class="font-regular text-8xl">NixOS</p>
-        <p class="font-light text-7xl">Foundation</p>
+      <div class="flex flex-col items-center justify-center">
+        <Image src={nixosFoundationLogo} alt='NixOS Foundation Logo' class="h-72" />
       </div>
-      <h2 class="mt-4 text-center text-3xl text-nixdarkblue font-bold">
+      <h2 class="text-center text-3xl text-nixdarkblue font-bold">
         Board members:
       </h2>
-      <ul class="mt-2 w-64 mx-auto list-disc">
+      <ul class="mt-2 w-72 mx-auto pl-10 list-disc">
         {
           teams
-            .filter((team) => team.slug === "foundation-board")[0]
+            .filter((team) => team.slug.split("_")[1] === "foundation-board")[0]
             .data.members.map((member) => (
-              <li>
-                {member.name}
+              <li class="mb-1">
+                {member.name + " "}
                 {member.title && (
-                  <span class="badge border-nixgreen ml-2">{member.title}</span>
+                  <Tag outline>{member.title}</Tag>
                 )}
               </li>
             ))
         }
       </ul>
     </div>
-    <div class="space-y-4 font-light">
+    <div class="space-y-4 font-extralight leading-relaxed">
       <h2 class="text-3xl text-nixdarkblue font-bold">The mission!</h2>
       <p>
         The mission of the foundation is to support the Nix ecosystem's

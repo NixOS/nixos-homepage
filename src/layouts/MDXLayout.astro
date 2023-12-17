@@ -13,7 +13,9 @@ const { frontmatter, url } = Astro.props;
 ---
 <Layout title={frontmatter.title}>
   <PageHeader text={frontmatter.title}/>
-  <Container class="my-8 prose prose-headings:text-nixdarkblue">
-    <slot/>
+  <Container class="my-8">
+    <article>
+      <slot/>
+    </article>
   </Container>
 </Layout>
