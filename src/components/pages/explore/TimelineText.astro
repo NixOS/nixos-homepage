@@ -1,0 +1,40 @@
+---
+
+interface Props {
+  heading: string;
+  subHeading: string;
+  tags: Array<{ href: string | null, text:string}>;
+  paragraphs: string[];
+  emphasis?: string | null;
+}
+
+const {
+  heading,
+  subHeading,
+  tags,
+  paragraphs,
+  emphasis = null,
+} = Astro.props;
+
+import Tag from "../../ui/Tag.astro";
+
+---
+
+<h2 class="text-[2rem] leading-[2.2rem] font-bold text-nixdarkblue">{heading}</h2>
+<p class="text-xl leading-[2.2rem] font-bold text-neutral-500">{subHeading}</p>
+<div class="inline-block">
+{tags.map((tag) => (
+  <Tag href={tag.href} classList={["mx-1"]}>{tag.text}</Tag>
+))}
+</div>
+{paragraphs.map((paragraph, idx, array) => {
+  return (
+    <p class="leading-[1.75rem]">
+      {paragraph}
+      {
+        (idx + 1 === array.length) && emphasis &&
+        <>&nbsp;<span class="font-bold">{emphasis}</span></>
+      }
+    </p>
+  )
+})}

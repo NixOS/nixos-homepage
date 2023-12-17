@@ -1,0 +1,92 @@
+---
+title: "#07 - NixOS Weekly"
+date: 2020-08-05
+description: Try not to become a person of success, but rather try to become a person of value - Albert Einstein
+---
+
+# News
+
+## Announcements
+
+- [NixOS | Installation and First Impressions](https://www.youtube.com/watch?v=IdoCOqkAexY)
+
+- [Why IHP is Using The Nix Package Manager](https://ihp.digitallyinduced.com/blog/2020-07-22-why-ihp-is-using-nix.html)
+
+- [Cachix Blog: Documentation and More Documentation](https://blog.cachix.org/posts/2020-07-20-documentation-and-more-documentation/)
+
+- [Cachix Blog: Upstream caches: avoiding pushing paths in cache.nixos.org](https://blog.cachix.org/posts/2020-07-28-upstream-caches-avoiding-pushing-paths-in-cache-nixos-org/)
+
+- [Redox added to Nixpkgs](https://redox-os.org/news/redox-plus-nix-0/)
+
+  Nixpkgs now supports cross-compiling to the [Redox](https://redox-os.org) operating system.
+  The [redoxpkgs](https://github.com/aaronjanse/redoxpkgs) overlay has been created to fix packages for Redox
+
+## Tutorials & Resources
+
+- [An introduction to nix-shell](https://ghedam.at/15978/an-introduction-to-nix-shell)
+
+  What is nix-shell and how to use it.
+
+- [Windows Functional Virtual Machine](https://git.m-labs.hk/M-Labs/wfvm)
+
+  **WFVM** automatically bootstraps a Windows image inside QEMU that you can use
+ to run unit tests on Hydra for example.
+
+- [Nix-Bitcoin: A Security Focused Bitcoin Node](https://stephanlivera.com/episode/195/)
+
+- [django-nixos](https://github.com/DavHau/django-nixos)
+
+  NixOS-based Django deployment
+
+- [systemd2nix](https://github.com/DavHau/systemd2nix)
+
+  Convert systemd service files to nixpkgs syntax
+
+- [On using Nix and Docker as deployment automation solutions: similarities and differences](https://sandervanderburg.blogspot.com/2020/07/on-using-nix-and-docker-as-deployment.html)
+
+  Explores the concepts behind Nix and Docker, explains in which ways they are different and similar, and shows some examples how both tools can be combined.
+
+- [nix-sops](https://github.com/Mic92/sops-nix)
+
+  Atomic secret provisioning for NixOS based on [sops](https://github.com/mozilla/sops).
+
+- [Custom home-manager installation with NixOS](https://www.lafuente.me/posts/installing-home-manager/)
+
+- [Using Nix to build multi-package, full stack Haskell apps](https://lfcode.ca/blog/nix-and-haskell)
+
+- [Gnome 3 on NixOS](https://gvolpe.github.io/blog/gnome3-on-nixos/)
+
+- [How to Setup Nextcloud on NixOS](https://jacobneplokh.com/how-to-setup-nextcloud-on-nixos)
+
+- [Can't Hack This: A hard-headed introduction to Nix](https://www.youtube.com/watch?v=LBrWwZOjsQ4) ([slides](https://github.com/fp-wroc/talks/blob/d73faea27b96e873d7ecda0f1aaa8b4ebd513341/files/cant_hack_this.pdf))
+
+- [Migrate from RAID1 disk to ZFS on NixOS](https://www.immae.eu/blog/2020/06/06/migrate-from-raid1-disk-to-zfs-on-nixos/)
+
+- [How to Make Sure Nixpkgs Can Evaluate](https://functor.tokyo/blog/2020-06-02-evaluating-nixpkgs)
+
+- [NixOS Raspberry Pi 4 Google Fiber Router](http://www.willghatch.net/blog/2020/06/22/nixos-raspberry-pi-4-google-fiber-router/)
+
+- [Setting up Buildkite for Nix-based projects using Terraform and GCP](https://www.tweag.io/blog/2020-07-08-buildkite-for-nix-ci/)
+
+- [NixOS: the good, the bad, and the ugly](http://www.willghatch.net/blog/2020/06/27/nixos-the-good-the-bad-and-the-ugly/)
+
+- [mvn2nix](https://github.com/fzakaria/mvn2nix)
+
+  An alternative solution (in-development) to convert a _pom.xml_ file into a Nix expression to help package Maven applications within Nix.
+
+- [Packaging a maven application with Nix](https://fzakaria.com/2020/07/20/packaging-a-maven-application-with-nix.html)
+
+- [Nix's Ruby & bundler ecosystem](https://fzakaria.com/2020/07/18/what-is-bundlerenv-doing.html)
+
+- [How to setup a Nix binary cache using S3](https://fzakaria.com/2020/07/15/setting-up-a-nix-s3-binary-cache.html)
+
+- [Setting up LDAP Authentication with NixOS](https://mt-caret.github.io/blog/posts/2020-07-25-ldap-client-with-nixos.html)
+
+# Contribute to NixOS Weekly Newsletter
+
+This work would not be possible without the many contributions of the community.
+
+You can help too! Create or comment on the [pull request](https://github.com/NixOS/nixos-weekly/pulls)
+for the next edition or look at the
+[issue tracker](https://github.com/NixOS/nixos-weekly/issues) to add other improvements.
+

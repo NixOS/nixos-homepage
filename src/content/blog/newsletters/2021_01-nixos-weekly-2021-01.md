@@ -1,0 +1,63 @@
+---
+title: "#01 - NixOS Weekly"
+date: 2021-01-21
+description: The only journey is the one within - Rainer Maria Rilke
+---
+
+# News
+
+## Announcements
+
+- [RFC 0080 Change NixOS releases to YY.05,YY.11 accepted](https://github.com/NixOS/rfcs/pull/80)
+
+  The next NixOS stable release will be 21.05.
+
+- [agenix - manage NixOS secrets - public beta](https://discourse.nixos.org/t/agenix-manage-nixos-secrets-public-beta/10580)
+
+  Agenix is a command-line tool for managing secrets encrypted with your existing SSH keys. It includes a NixOS module, age, for adding encrypted secrets into the Nix store and decrypting them.
+
+- [Cachix: Postmortem of outage on 20th December](https://blog.cachix.org/posts/2020-12-23-post-mortem-recent-downtime/)
+
+## Tutorials
+
+- [Deploying with GitHub Actions and more Nix](https://thewagner.net/blog/2020/12/06/deploying-with-github-actions-and-more-nix/)
+
+- [Scrive Nix Workshop specialized for Haskell developers](https://scrive.github.io/nix-workshop/)
+
+- [Installing NixOS on a raspberry pi 4](https://schauderbasis.de/posts/install_nixos_on_raspberry_pi_4/)
+
+  As the raspberry pi 4 is still not officially supported, this is a tutorial on how to get a base installation going if necessary without a screen.
+
+- [Tailscale on NixOS: A New Minecraft Server in Ten Minutes](https://tailscale.com/blog/nixos-minecraft/)
+
+- [Encrypted Secrets with NixOS](https://christine.website/blog/nixos-encrypted-secrets-2021-01-20)
+
+## Resources
+
+- [autopatchelf - allowing arbitrary binaries to run on NixOS](https://fzakaria.com/2020/12/01/autopatchelf-what-it-can-look-like.html)
+
+- [Podcast: A content addressable store for Nix with Théophane Hufschmitt](https://www.compositional.fm/content-addressable-nix-1)
+
+- [Mobile NixOS: November 2020 round-up](https://mobile.nixos.org/news/2020-12-01-november-2020-round-up.html)
+
+- [tex2nix](https://github.com/Mic92/tex2nix)
+
+  Generate small texlive environments for your document.
+
+- [NixOS in the Cloud, step-by-step: part 1](https://justinas.org/nixos-in-the-cloud-step-by-step-part-1)
+
+- [nix-ld](https://github.com/Mic92/nix-ld)
+
+  Run unpatched dynamic binaries on NixOS.
+
+- [NixOS cloud images](https://nixos.cloud/)
+
+  Additional NixOS install images for Amazon (aarch64, x86_64), openstack and kexec.
+
+# Contribute to the NixOS Weekly
+
+This work would not be possible without the many contributions of the community.
+
+You can help too! Create or comment on the [pull request](https://github.com/NixOS/nixos-weekly/pulls)
+for the next edition or look at the
+[issue tracker](https://github.com/NixOS/nixos-weekly/issues) to add other improvements.

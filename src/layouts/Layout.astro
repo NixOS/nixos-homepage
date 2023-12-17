@@ -5,31 +5,54 @@ import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 
 import '../styles/base.css';
+import { getImage } from "astro:assets";
+
+import faviconSvgSrc from "../assets/image/flake-blue.svg";
 
 const {
   title = "Nix &amp; NixOS | Reproducible builds and deployments",
   description = "Nix is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems.",
 } = Astro.props
 
+const faviconSvg = await getImage({ src: faviconSvgSrc, format: 'svg' })
 ---
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-
-    <link rel="sitemap" href="/sitemap-index.xml" />
-
     <SEO
       title={title}
+      titleTemplate={ Astro.url.pathname === '/' ? title : '%s | Nix & NixOS'}
+      titleDefault={title}
       description={description}
+      charset="utf-8"
+      extend={{
+        link: [{
+          rel: "sitemap",
+          href: "/sitemap-index.xml"
+        }, {
+          rel: "icon",
+          href: faviconSvg.src,
+          type: "image/svg+xml"
+        }],
+        meta: [{
+          name: "viewport",
+          content: "width=device-width"
+        }, {
+          name: "generator",
+          content: Astro.generator
+        }, {
+          name: "google-site-verification",
+          content: "ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE"
+        }, {
+          httpEquiv: "Content-Type",
+          content: "text/html; charset=utf-8"
+        }]
+      }}
       />
   </head>
-  <body>
+  <body class="min-h-screen flex flex-col">
     <Header />
-    <main>
+    <main class="flex-1">
       <slot />
     </main>
     <Footer />
@@ -40,226 +63,15 @@ const {
 
 import "htmx.org"
 
+// Fonts
+import '@fontsource-variable/overpass';
+import '@fontsource-variable/fira-code';
+import '@fontsource-variable/roboto-flex/wdth.css';
+
 </script>
 
-<style is:global>
-
-/* Fonts - Roboto */
-@font-face {
-  font-family: 'Roboto';
-  font-style: italic;
-  font-weight: 100;
-  src: url('/fonts/Roboto-ThinItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: italic;
-  font-weight: 300;
-  src: url('/fonts/Roboto-LightItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: italic;
-  font-weight: 400;
-  src: url('/fonts/Roboto-Italic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: italic;
-  font-weight: 500;
-  src: url('/fonts/Roboto-MediumItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: italic;
-  font-weight: 700;
-  src: url('/fonts/Roboto-BoldItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: italic;
-  font-weight: 900;
-  src: url('/fonts/Roboto-BlackItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 100;
-  src: url('/fonts/Roboto-Thin.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 300;
-  src: url('/fonts/Roboto-Light.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: url('/fonts/Roboto-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  src: url('/fonts/Roboto-Medium.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  src: url('/fonts/Roboto-Bold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 900;
-  src: url('/fonts/Roboto-Black.ttf') format('truetype');
-}
-
-/* Fonts - Overpass */
-@font-face {
-  font-family: 'Overpass';
-  font-style: italic;
-  font-weight: 100;
-  src: url('/fonts/Overpass-ThinItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: italic;
-  font-weight: 200;
-  src: url('/fonts/Overpass-ExtraLightItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: italic;
-  font-weight: 300;
-  src: url('/fonts/Overpass-LightItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: italic;
-  font-weight: 400;
-  src: url('/fonts/Overpass-Italic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: italic;
-  font-weight: 600;
-  src: url('/fonts/Overpass-SemiBoldItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: italic;
-  font-weight: 700;
-  src: url('/fonts/Overpass-BoldItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: italic;
-  font-weight: 800;
-  src: url('/fonts/Overpass-ExtraBoldItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: italic;
-  font-weight: 900;
-  src: url('/fonts/Overpass-BlackItalic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: normal;
-  font-weight: 100;
-  src: url('/fonts/Overpass-Thin.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: normal;
-  font-weight: 200;
-  src: url('/fonts/Overpass-ExtraLight.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: normal;
-  font-weight: 300;
-  src: url('/fonts/Overpass-Light.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: normal;
-  font-weight: 400;
-  src: url('/fonts/Overpass-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: normal;
-  font-weight: 600;
-  src: url('/fonts/Overpass-SemiBold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: normal;
-  font-weight: 700;
-  src: url('/fonts/Overpass-Bold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: normal;
-  font-weight: 800;
-  src: url('/fonts/Overpass-ExtraBold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Overpass';
-  font-style: normal;
-  font-weight: 900;
-  src: url('/fonts/Overpass-Black.ttf') format('truetype');
-}
-
-/* Fonts - FiraCode */
-@font-face {
-  font-family: 'Fira Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: url('/fonts/FiraMono-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Fira Mono';
-  font-style: normal;
-  font-weight: 500;
-  src: url('/fonts/FiraMono-Medium.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Fira Mono';
-  font-style: normal;
-  font-weight: 700;
-  src: url('/fonts/FiraMono-Bold.ttf') format('truetype');
-}
-
-/* Fonts - Vegur */
-@font-face {
-  font-family: 'Vegur';
-  font-style: normal;
-  font-weight: 300;
-  src: url('/fonts/Vegur-0.602-Light.otf') format('opentype');
-}
-@font-face {
-  font-family: 'Vegur';
-  font-style: normal;
-  font-weight: 400;
-  src: url('/fonts/Vegur-0.602-Regular.otf') format('opentype');
-}
-@font-face {
-  font-family: 'Vegur';
-  font-style: normal;
-  font-weight: 500;
-  src: url('/fonts/Vegur-0.602-Medium.otf') format('opentype');
-}
-@font-face {
-  font-family: 'Vegur';
-  font-style: normal;
-  font-weight: 700;
-  src: url('/fonts/Vegur-0.602-Bold.otf') format('opentype');
-}
-
+<style>
+  @font-face {
+    font-family: 'Roboto Flex Variable';
+  }
 </style>

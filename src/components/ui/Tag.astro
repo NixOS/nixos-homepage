@@ -1,0 +1,34 @@
+---
+
+interface Props {
+  color?: "orange" | "darkgreen" | "lightblue" | "darkblue";
+  classList?: string[];
+  href?: string | null;
+}
+
+const colorMap = {
+  "orange": "bg-nixorange",
+  "lightblue": "bg-nixlightblue",
+  "darkblue": "bg-nixdarkblue",
+  "darkgreen": "bg-nixdarkgreen"
+}
+
+const {
+  color = "darkblue",
+  classList = [],
+  href = null,
+} = Astro.props;
+
+const localClassList = `${colorMap[color]} w-fit rounded-lg font-bold !text-white !no-underline text-sm px-[0.5rem] py-[0.25rem]`;
+---
+
+{href
+  ?
+    <a href={href} class:list={[localClassList, classList]}>
+      <slot/>
+    </a>
+  :
+    <span href={href} class:list={[localClassList, classList]}>
+      <slot/>
+    </span>
+}

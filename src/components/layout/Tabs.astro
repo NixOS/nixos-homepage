@@ -1,0 +1,180 @@
+---
+import crypto from 'node:crypto';
+
+export interface Props extends astroHTML.JSX.HTMLAttributes {}
+
+import Container from "./Container.astro";
+
+const props = Astro.props as Props;
+/* ·········································································· */
+
+const tabs: string[] = [];
+const panels: string[] = [];
+
+let inlineStyles = '';
+
+{
+  let index = 0;
+  const classes: string[] = [];
+  Object.entries(Astro.slots).forEach(([name]) => {
+    if (name.startsWith('tab')) {
+      index += 1;
+
+      tabs.push(name);
+    } else {
+      panels.push(name);
+    }
+  });
+  inlineStyles += classes.join(',\n');
+}
+inlineStyles +=
+  ` {` +
+  //
+  `\n  visibility: visible;\n` +
+  `  display: inline-block;\n` +
+  `}`;
+
+const uid = crypto.randomUUID();
+
+---
+
+<style>
+
+.radio {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+
+.panel-visible {
+  visibility: visible;
+  display: inline-block;
+}
+
+</style>
+
+<script>
+  const buttons = document.querySelectorAll(['input.tab-selector']);
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', function(event) {
+      const radioMatch = Array
+        .from(this.classList)
+        .find(value => /^radio-\d+$/.test(value));
+
+      const radioIdx = radioMatch.match(/\d+/g)[0];
+
+      const panels = document.querySelectorAll(
+        `div[panels-id='${this.name}'] div.panel`
+      );
+
+      panels.forEach( panel => panel.classList.remove("panel-visible") );
+
+      const panel = document.querySelector(
+        `div[panels-id='${this.name}'] div.panel-${radioIdx}`
+      );
+
+      panel.classList.add("panel-visible")
+
+      Array.from(this.parentNode.parentNode.children)
+        .forEach( tab => tab.classList.remove("bg-white") );
+      this.parentNode.classList.add("bg-white");
+
+    });
+  });
+
+  // show the first panel
+  document
+    .querySelectorAll(".panels div:first-child")
+    .forEach( panel => panel.classList.add("panel-visible") );
+
+  // style the background of the first tab
+  document
+    .querySelectorAll(".tab-bar .tab-wrapper:first-child")
+    .forEach( tab => tab.classList.add("bg-white") );
+</script>
+
+<div
+    {...{ ...props, class: undefined, 'class:list': undefined }}
+    class:list={['tabs', props['class:list'], props.class]}
+>
+  <style set:html={inlineStyles}></style>
+
+  <Container class="grid lg:grid-cols-[30%_auto] gap-8 px-12 pt-8 w-full">
+    <nav class:list={['tab-bar']}>
+      <Container class="grid md:grid-cols-1 gap-0 !px-0 py-8 bg-nixlighterblue rounded-3xl">
+      {
+        tabs.map(async (name, idx) => {
+          const index = idx + 1;
+          if (name.startsWith('tab')) {
+            const render = await Astro.slots.render(name);
+            return (
+              <div 
+                class:list={[
+                  'tab-wrapper',
+                  `tab-${index}`,
+                ]}
+              >
+                <input
+                  class:list={[
+                    'radio',
+                    `radio-${index}`,
+                    'tab-selector',
+                    'peer',
+                    'absolute',
+                    'w-0',
+                    'h-0',
+                    'overflow-hidden',
+                    'whitespace-nowrap',
+                  ]}
+                  type="radio"
+                  name={uid}
+                  checked={name.endsWith('active') || index === 1}
+                  id={`${uid}-${index}`}
+                />
+                <label
+                  class:list={[
+                    'tab',
+                    'text-nixlightblue',
+                    'text-lg',
+                    'font-bold',
+                    'peer-checked:text-nixdarkblue',
+                    'py-12',
+                    'px-8',
+                    'w-full',
+                    'justify-start',
+                    'content-center',
+                  ]}
+                  for={`${uid}-${index}`}
+                >
+                  <Fragment set:html={render} />
+                </label>
+              </div>
+            );
+          }
+          return null;
+        })
+      }
+      </Container>
+    </nav>
+
+    <div
+      class:list={['panels']}
+      panels-id={uid}
+    >
+      {
+        panels.map(async (name, index) => (
+          <div
+            class:list={[
+              'panel',
+              `panel-${index + 1}`,
+              'w-full',
+            ]}
+            set:html={await Astro.slots.render(name)}
+            hidden
+            invisible
+          />
+        ))
+      }
+    </div>
+  </Container>
+</div>

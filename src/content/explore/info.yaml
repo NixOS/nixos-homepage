@@ -1,0 +1,119 @@
+content:
+  - imageSrc: "/images/explore/works.svg"
+    heading: Always working development environment.
+    subHeading: >
+      Nix provides developers with a complete and consistent development environment.
+      Stop worrying how to install dependencies for your project.
+    tags:
+      - text: complete dependencies
+        href: "https://nixos.org/guides/how-nix-works#complete-dependencies"
+    paragraphs:
+      - >
+        With Nix, a build process only has access to dependencies that have been declared explicitly.
+        So if a build succeeds, you know you've specified all necessary dependencies.
+      - >
+        The same build process specification can be used to start a development environment
+        (optionally augmented with additional development tools).
+      - >
+        You will no longer have to hear:,
+    emphasis: But it works on my machine!
+  - imageSrc: "/images/explore/multi.svg"
+    heading: One tool, many languages.
+    subHeading: >
+      With today's polyglot development environments, each language has its own way of building and testing.
+      Encourage cross-team development by providing a single way of building everything.
+    tags:
+      - text: language agnostic
+        href: "https://nixos.org/guides/how-nix-works#multiple-versions"
+      - text: portable
+        href: "https://nixos.org/guides/how-nix-works#portable"
+    paragraphs:
+      - >
+        Instead of complicated installation instructions, with Nix the development environment is always only one command away.
+        And that is without using Docker or any other virtualization.
+      - >
+        Language specific package managers are good at dependencies in their specific language.
+        But they cannot provide other dependencies, like the ones you would usually have to install system-wide.
+  - imageSrc: "/images/explore/disaster.svg"
+    heading: Continuous integration for free.
+    subHeading: >
+      Your development environment is your continuous integration environment.
+      The same environment always and everywhere.
+    tags:
+      - text: reproducibility
+      - text: continuous integration
+    paragraphs:
+      - >
+        Being able to fix broken continuous integration runs is great, but being able to fix problems locally, before pushing, is priceless.
+      - >
+        Trying to keep system dependencies of development environments in sync with continuous integration is a disaster waiting to happen.
+    emphasis: Don't wait for the disaster, prevent it.
+  - imageSrc: "/images/explore/cloud.svg"
+    heading: From zero to cloud.
+    subHeading: >
+      Use the same tool to build projects, configure machines and deploy to the cloud.
+    tags:
+      - text: cloud images
+      - text: docker images
+      - text: declarative configurations
+    paragraphs:
+      - >
+        Using one tool to develop, test and build Amazon EC2, Google Cloud,
+        Azure, Virtualbox, KVM and other images in a declarative way is a DevOps dream.
+      - >
+        Forget Dockerfiles and build docker images with Nix in a declarative and efficient way.
+    emphasis: Nix and Docker is a match made in heaven.
+  - imageSrc: "/images/explore/timemachine.svg"
+    heading: Is the previous version better? Roll back anytime.
+    subHeading: >
+      Always be able to roll back to the version that you want.
+      Never end up with a broken system.
+    tags:
+      - text: rollback
+        href: "https://nixos.org/guides/how-nix-works#atomic"
+      - text: garbage collection
+        href: "https://nixos.org/guides/how-nix-works#garbage-collection"
+      - text: atomic
+        href: "https://nixos.org/guides/how-nix-works#atomic"
+      - text: nix store
+        href: "https://nixos.org/guides/how-nix-works#multiple-versions"
+    paragraphs:
+      - >
+        Nix never overwrites files, but just adds new versions in different paths.
+      - >
+        And since nothing is overwritten, the old versions are still there after an upgrade.
+        This means that you can quickly roll back to the old version.
+  - imageSrc: "/images/explore/experiment.svg"
+    heading: Experiment without fear.
+    subHeading: >
+      There should be no fear of breaking your system when experimenting with new software.
+      We all learn best when we play around.
+    tags:
+      - text: rollback
+        href: "https://nixos.org/guides/how-nix-works#atomic"
+      - text: nix store
+        href: "https://nixos.org/guides/how-nix-works#multiple-versions"
+    paragraphs:
+      - >
+        Install new software without risk of things breaking.
+        Nix prevents conflicts not only between multiple development environments, but also with the operating system.
+        Your work environment will stay intact, but allows you to experiment in a safe way.
+      - >
+        No need to turn your system upside down just because you want to test some experimental and bleeding edge versions of software.
+  - imageSrc: "images/explore/community.svg"
+    heading: Contributing is only a pull request away.
+    subHeading: >
+      Community is at the core of Nix.
+      Collaboration is encouraged by providing a low barrier to contribute and bots to guide contributors through the process.
+    tags:
+      - text: community
+        href: "https://nixos.org/community/"
+      - text: contribute
+        href: "https://nix.dev/contributing/how-to-contribute"
+      - text: github
+        href: "https://github.com/NixOS/nixpkgs"
+    paragraphs:
+      - >
+        Development of Nix, the Nix packages collection and the NixOS Linux distribution happens on GitHub.
+        To contribute to any of the Nix projects, just open a pull request on GitHub.
+        The bots and community members will guide you through the process to ensure quality.

@@ -1,0 +1,47 @@
+---
+
+interface Props {
+  number: string;
+  imageLocation?: "left" | "right";
+  imageSrc: string;
+  heading: string;
+  subHeading: string;
+  tags: Array<{ href: string | null, text:string}>;
+  paragraphs: string[];
+  emphasis?: string | null;
+}
+
+const {
+  number = 0,
+  imageLocation = "left",
+  imageSrc,
+  ...textProps
+} = Astro.props;
+
+import TimelineCenter from "./TimelineCenter.astro";
+import TimelineText from "./TimelineText.astro";
+
+const textCommonClasses = "flex flex-col justify-start font-extralight gap-4";
+const imageCommonClasses = "px-12 my-12";
+
+---
+{ imageLocation === "left"
+  ?
+    <div class="justify-self-center md:justify-self-end">
+      <img src={imageSrc} class:list={[imageCommonClasses]} />
+    </div>
+
+    <div class:list={[textCommonClasses, "text-left", "relative"]}>
+      <TimelineCenter number={number}/>
+      <TimelineText {...textProps} />
+    </div>
+  :
+    <div class:list={[textCommonClasses, "order-last md:order-first", "text-left md:text-right"]}>
+      <TimelineText {...textProps} />
+    </div>
+
+    <div class="justify-self-center md:justify-self-start relative">
+      <TimelineCenter number={number}/>
+      <img src={imageSrc} class:list={[imageCommonClasses]} />
+    </div>
+}
