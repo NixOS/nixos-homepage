@@ -1,0 +1,50 @@
+---
+import "asciinema-player/dist/bundle/asciinema-player.css";
+
+interface Props {
+  src: string;
+  rows?: number;
+  cols?: number;
+  autoPlay?: boolean;
+  loop?: boolean;
+  controls?: boolean;
+}
+
+const {
+  src,
+  rows = 10,
+  cols = 50,
+  autoPlay = true,
+  loop = true,
+  controls = true,
+}: Props = Astro.props;
+---
+
+<asciinema-player
+  data-src={src}
+  data-rows={rows}
+  data-cols={cols}
+  data-autoplay={`${autoPlay}`}
+  data-loop={`${loop}`}
+  data-controls={`${controls}`}
+>
+</asciinema-player>
+
+<script>
+  import * as AsciinemaPlayer from "asciinema-player";
+  class Asciinema extends HTMLElement {
+    constructor() {
+      super();
+
+      AsciinemaPlayer.create(this.dataset.src, this, {
+        autoPlay: Boolean(this.dataset.autoplay),
+        loop: this.dataset.loop,
+        controls: true,
+        rows: this.dataset.rows,
+        cols: this.dataset.cols,
+      });
+    }
+  }
+
+  customElements.define("asciinema-player", Asciinema);
+</script>
