@@ -73,7 +73,7 @@ BLOCK navigationLink %]
           [% INCLUDE navigationLink href="download.html" title="Download" %]
           [% INCLUDE navigationLink href="learn.html" title="Learn" %]
           [% INCLUDE navigationLink href="community" title="Community" %]
-          [% INCLUDE navigationLink href="blog" title="Blog" %]
+          [% INCLUDE navigationLink href="blog/announcements.html" title="Blog" %]
           [% INCLUDE navigationLink href="donate.html" title="Donate" %]
           [% WRAPPER navigationLink class="search" title="Search" %]
           <a href="https://search.nixos.org/packages">Search</a>
