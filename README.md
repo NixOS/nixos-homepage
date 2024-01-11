@@ -44,6 +44,20 @@ Open your browser at: http://localhost:8000/
 
 In order for the browser to automatically refresh, install the [Livereload extension](http://livereload.com/extensions/) for your browser.
 
+If you want to build the site with [Docker] and without automatic refresh, here the steps:
+(Works on Windows, MacOS and NixOS with Docker)
+
+In the terminal:
+    $ docker run -p 8000:8000 -it --name nixos-homepage nixos/nix
+    # nix-shell -p git
+    [nix-shell]$ git clone git@github.com:NixOS/nixos-homepage.git
+    [nix-shell]$ cd nixos-homepage
+    [nix-shell]$ nix-shell
+    [nix-shell]$ make
+    [nix-shell]$ python -m http.server --bind 0.0.0.0
+
+Then browse to http://localhost:8000/ in the browser 
+
 Before creating a pull request make sure that `nix-build` runs successfully.
 
 [Docker]: https://docs.docker.com/get-docker/
