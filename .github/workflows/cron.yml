@@ -16,6 +16,9 @@ jobs:
         uses: cachix/install-nix-action@v24
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+          # Pin Nix so that CI doesn't randomly break again
+          # And we don't want 2.19.1 because that doesn't have backwards compatible support for --update-input
+          install_url: https://releases.nixos.org/nix/nix-2.19.2/install
 
       - name: Setup Cachix
         uses: cachix/cachix-action@v13
