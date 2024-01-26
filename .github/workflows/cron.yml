@@ -21,7 +21,7 @@ jobs:
           install_url: https://releases.nixos.org/nix/nix-2.19.2/install
 
       - name: Setup Cachix
-        uses: cachix/cachix-action@v13
+        uses: cachix/cachix-action@v14
         with:
           name: nixos-homepage
           signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
