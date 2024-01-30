@@ -17,6 +17,33 @@ posts.sort((a, b) => {
 }).filter((p) => {
   return p.slug.split("/")?.[0] === "announcements";
 }).reverse();
+
+const demos = [
+  {
+    file: "/demos/example_1.cast",
+    title: "Try new tools without fear",
+  },
+  {
+    file: "/demos/example_2.cast",
+    title: "Multiple languages, one tool",
+  },
+  {
+    file: "/demos/example_3.cast",
+    title: "Declarative dev-environments",
+  },
+  {
+    file: "/demos/example_4.cast",
+    title: "Minimal docker images",
+  },
+  {
+    file: "/demos/example_5.cast",
+    title: "Declarative cloud images",
+  },
+  {
+    file: "/demos/example_6.cast",
+    title: "Test your configurations",
+  },
+]
 ---
 
 <Layout title="Nix & NixOS">
@@ -42,7 +69,7 @@ posts.sort((a, b) => {
           <Button href="/learn" color="lightblue" size="lg">Get Started</Button>
         </div>
       </div>
-      <Asciinema src="/demos/cover.cast" rows={17} cols={65} controls={true} />
+      <Asciinema src="/demos/cover.cast" rows={20} cols={65} controls={true} poster="npt:0:01:22" large />
     </Container>
   </div>
   <div class="bg-[url('/divider/landing_search_top.svg')] bg-bottom bg-no-repeat pb-48 pt-16">
@@ -96,13 +123,17 @@ posts.sort((a, b) => {
       >
         Examples
       </h2>
-      <div class="grid md:grid-cols-3 items-center">
-        <div class="bg-black w-64 h-64"></div>
-        <div class="bg-black w-64 h-64"></div>
-        <div class="bg-black w-64 h-64"></div>
-        <div class="bg-black w-64 h-64"></div>
-        <div class="bg-black w-64 h-64"></div>
-        <div class="bg-black w-64 h-64"></div>
+      <div class="grid md:grid-cols-3 items-center gap-4 pb-8">
+        {
+          demos.map((demo) => {
+            return (
+              <div class="flex flex-col self-end gap-4">
+                <p class="text-nixdarkblue text-2xl font-bold">{demo.title}</p>
+                <Asciinema src={demo.file} rows={17} cols={65} controls={true} autoPlay={false} />
+              </div>
+            )
+          })
+        }
       </div>
     </Container>
   </div>

@@ -8,6 +8,8 @@ interface Props {
   autoPlay?: boolean;
   loop?: boolean;
   controls?: boolean;
+  poster?: string;
+  large?: boolean;
 }
 
 const {
@@ -17,16 +19,44 @@ const {
   autoPlay = true,
   loop = true,
   controls = true,
+  poster = "npt:0:00:30",
+  large = false,
 }: Props = Astro.props;
+
+const border = large ? `
+    before:border-[1rem]
+    before:w-[calc(100%+2rem)]
+    before:h-[calc(100%+2rem)]
+    before:ml-[-1rem]
+    before:mt-[-1rem]
+    drop-shadow-[0_8px_2px_rgba(0,0,0,0.2)]
+    m-4
+    md:m-0
+` : `
+    before:border-[0.5rem]
+    before:w-[calc(100%+1rem)]
+    before:h-[calc(100%+1rem)]
+    before:ml-[-0.5rem]
+    before:mt-[-0.5rem]
+    drop-shadow-none
+`;
 ---
 
 <asciinema-player
+  class={`
+    before:border-white
+    before:block
+    before:absolute
+    before:z-10
+    before:rounded-3xl
+    ${border}`}
   data-src={src}
   data-rows={rows}
   data-cols={cols}
   data-autoplay={`${autoPlay}`}
   data-loop={`${loop}`}
   data-controls={`${controls}`}
+  data-poster={`${poster}`}
 >
 </asciinema-player>
 
@@ -36,13 +66,16 @@ const {
     constructor() {
       super();
 
-      AsciinemaPlayer.create(this.dataset.src, this, {
-        autoPlay: Boolean(this.dataset.autoplay),
-        loop: this.dataset.loop,
-        controls: true,
+      const options = {
+        autoPlay: this.dataset.autoPlay === "true",
+        loop: this.dataset.loop === "true",
+        controls: "auto",
+        poster: this.dataset.poster,
         rows: this.dataset.rows,
         cols: this.dataset.cols,
-      });
+      };
+
+      AsciinemaPlayer.create(this.dataset.src, this, options);
     }
   }
 
