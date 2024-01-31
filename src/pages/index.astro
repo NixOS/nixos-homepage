@@ -3,11 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import Container from "../components/layout/Container.astro";
 import Button from "../components/ui/Button.astro";
 import NixosSearchInput from "../components/ui/NixosSearchInput.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import { Image } from "astro:assets";
 import { generatePathFromPost, createExcerpt } from "../lib/utils"
+import Asciinema from "../components/ui/Asciinema.astro";
 const landingFeatures = await getCollection("landing-features");
-
+const demos = await getEntry("landing", "demos");
 const posts = await getCollection("blog");
 posts.sort((a, b) => {
   const dateA = new Date(a.data.date);
@@ -26,8 +27,8 @@ posts.sort((a, b) => {
     </Container>
   </div>
   <div class="bg-[url('/hero-bg.svg')] bg-cover bg-no-repeat bg-left">
-    <Container class="text-white grid md:grid-cols-2 py-16 md:py-36">
-      <div class="flex flex-col gap-4">
+    <Container class="text-white grid md:grid-cols-2 gap-8 py-16 md:py-24">
+      <div class="flex flex-col gap-4 self-center">
         <h1 class="text-5xl font-heading font-bold leading-none">
           Declarative builds<br class="hidden md:inline-block" /> and deployments.
         </h1>
@@ -41,6 +42,7 @@ posts.sort((a, b) => {
           <Button href="/learn" color="lightblue" size="lg">Get Started</Button>
         </div>
       </div>
+      <Asciinema src="/demos/cover.cast" rows={20} cols={65} controls={true} poster="npt:0:01:22" large />
     </Container>
   </div>
   <div class="bg-[url('/divider/landing_search_top.svg')] bg-bottom bg-no-repeat pb-48 pt-16">
@@ -94,13 +96,17 @@ posts.sort((a, b) => {
       >
         Examples
       </h2>
-      <div class="grid md:grid-cols-3 items-center">
-        <div class="bg-black w-64 h-64"></div>
-        <div class="bg-black w-64 h-64"></div>
-        <div class="bg-black w-64 h-64"></div>
-        <div class="bg-black w-64 h-64"></div>
-        <div class="bg-black w-64 h-64"></div>
-        <div class="bg-black w-64 h-64"></div>
+      <div class="grid md:grid-cols-3 items-center gap-4 pb-8">
+        {
+          demos.data.map((demo) => {
+            return (
+              <div class="flex flex-col self-end gap-4">
+                <p class="text-nixdarkblue text-2xl font-bold">{demo.title}</p>
+                <Asciinema src={demo.file} rows={17} cols={65} controls={true} autoPlay={false} />
+              </div>
+            )
+          })
+        }
       </div>
     </Container>
   </div>

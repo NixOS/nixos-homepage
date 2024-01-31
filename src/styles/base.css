@@ -137,3 +137,7 @@
         @apply text-xl mb-2;
     }
 }
+
+.ap-play-button {
+    position: relative !important; /* Override the absolute positioning of the play button (TODO: remove this hack) */
+}
