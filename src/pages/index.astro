@@ -3,12 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import Container from "../components/layout/Container.astro";
 import Button from "../components/ui/Button.astro";
 import NixosSearchInput from "../components/ui/NixosSearchInput.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import { Image } from "astro:assets";
 import { generatePathFromPost, createExcerpt } from "../lib/utils"
 import Asciinema from "../components/ui/Asciinema.astro";
 const landingFeatures = await getCollection("landing-features");
-
+const demos = await getEntry("landing", "demos");
 const posts = await getCollection("blog");
 posts.sort((a, b) => {
   const dateA = new Date(a.data.date);
@@ -17,33 +17,6 @@ posts.sort((a, b) => {
 }).filter((p) => {
   return p.slug.split("/")?.[0] === "announcements";
 }).reverse();
-
-const demos = [
-  {
-    file: "/demos/example_1.cast",
-    title: "Try new tools without fear",
-  },
-  {
-    file: "/demos/example_2.cast",
-    title: "Multiple languages, one tool",
-  },
-  {
-    file: "/demos/example_3.cast",
-    title: "Declarative dev-environments",
-  },
-  {
-    file: "/demos/example_4.cast",
-    title: "Minimal docker images",
-  },
-  {
-    file: "/demos/example_5.cast",
-    title: "Declarative cloud images",
-  },
-  {
-    file: "/demos/example_6.cast",
-    title: "Test your configurations",
-  },
-]
 ---
 
 <Layout title="Nix & NixOS">
@@ -125,7 +98,7 @@ const demos = [
       </h2>
       <div class="grid md:grid-cols-3 items-center gap-4 pb-8">
         {
-          demos.map((demo) => {
+          demos.data.map((demo) => {
             return (
               <div class="flex flex-col self-end gap-4">
                 <p class="text-nixdarkblue text-2xl font-bold">{demo.title}</p>
