@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  date: string;
+  description: string;
+  href: string;
+  imagePath?: string;
+}
+
+const { title, date, description, href, imagePath = null } = Astro.props;
+---
+
+<div class="font-extralight flex flex-col gap-1">
+  {imagePath && (
+    <div class="flex justify-center bg-white rounded-xl mb-4 p-4 h-48">
+      <Image src={imagePath} alt={`${title} Logo`} width="200" height="200" />
+    </div>
+  )}
+  <h4 class="text-lg font-bold">{title}</h4>
+  <div class="text-sm">{date}</div>
+  <div class="leading-relaxed">{description}</div>
+  <div class="!text-white text-right font-bold">
+    <a href={href} class="!text-white">Read more...</a>
+  </div>
+</div>

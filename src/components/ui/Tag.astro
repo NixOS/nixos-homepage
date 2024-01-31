@@ -2,24 +2,26 @@
 
 interface Props {
   color?: "orange" | "darkgreen" | "lightblue" | "darkblue";
+  outline?: boolean;
   classList?: string[];
   href?: string | null;
-}
-
-const colorMap = {
-  "orange": "bg-nixorange",
-  "lightblue": "bg-nixlightblue",
-  "darkblue": "bg-nixdarkblue",
-  "darkgreen": "bg-nixdarkgreen"
 }
 
 const {
   color = "darkblue",
   classList = [],
   href = null,
+  outline = false
 } = Astro.props;
 
-const localClassList = `${colorMap[color]} w-fit rounded-lg font-bold !text-white !no-underline text-sm px-[0.5rem] py-[0.25rem]`;
+const colorMap = {
+  "orange": outline ? "bg-transparent border-nixorange" : "bg-nixorange",
+  "lightblue": outline ? "bg-transparent border-nixlightblue" : "bg-nixlightblue",
+  "darkblue": outline ? "bg-transparent border-nixdarkblue" : "bg-nixdarkblue",
+  "darkgreen": outline ? "bg-transparent border-nixdarkgreen" : "bg-nixdarkgreen"
+}
+
+const localClassList = `${colorMap[color]} w-fit rounded-lg font-bold ${outline ? "text-black border-2" : "!text-white"} !no-underline text-sm px-[0.5rem] py-[0.25rem]`;
 ---
 
 {href
