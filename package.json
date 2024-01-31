@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build:manuals": "nix build .#manuals -o ./result && mkdir -p ./dist/manual && cp -R ./result/* ./dist/manual/",
+    "build:pills": "nix build .#pills -o ./result && mkdir -p ./dist/guides/nix-pills && cp -R ./result/* ./dist/guides/nix-pills/",
+    "build:well-known": "cp -prd ./.well-known ./dist/",
+    "build": "npm run build:manuals && npm run build:pills && npm run build:well-known && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },

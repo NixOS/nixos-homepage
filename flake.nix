@@ -12,9 +12,6 @@ rec {
   inputs.released-nix-stable.url = "github:nixos/nix/latest-release";
   inputs.nix-pills.url = "github:NixOS/nix-pills";
   inputs.nix-pills.flake = false;
-  inputs.nix-dev.url = "github:NixOS/nix.dev";
-  inputs.nixos-common-styles.url = "github:NixOS/nixos-common-styles";
-  inputs.nixos-common-styles.inputs.flake-utils.follows = "flake-utils";
 
   nixConfig.extra-substituters = [
     "https://nixos-homepage.cachix.org"
@@ -34,8 +31,6 @@ rec {
     , released-nix-unstable
     , released-nix-stable
     , nix-pills
-    , nix-dev
-    , nixos-common-styles
     }:
     flake-utils.lib.eachDefaultSystem (system:
       let
@@ -66,132 +61,73 @@ rec {
           shortRev = nix-pills.shortRev;
         };
 
-        nixosAmis = pkgs.writeText "ec2-amis.json"
+        # TODO: change structure to conform to ./src/content/download/aws-ec2.yaml but in json
+        NIXOS_AMIS = pkgs.writeText "ec2-amis.json"
           (builtins.toJSON (
             import (released-nixpkgs-stable + "/nixos/modules/virtualisation/ec2-amis.nix")));
 
-        mkPyScript = dependencies: name:
-          let
-            pythonEnv = pkgs.python3.buildEnv.override {
-              extraLibs = dependencies;
-            };
-          in
-            pkgs.writeShellScriptBin name ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/${name}.py" "$@"'';
+        NIX_STABLE_VERSION = getVersion nix_stable.name;
+        NIX_UNSTABLE_VERSION = getVersion nix_unstable.name;
+        NIXOS_STABLE_SERIES = pkgs-stable.lib.trivial.release;
+        NIXOS_UNSTABLE_SERIES = pkgs-unstable.lib.trivial.release;
 
-        serve =
-          mkPyScript (with pkgs.python3Packages; [ click livereload ]) "serve";
+        manuals = pkgs.runCommand "manuals" {} ''
+          #TODO: add redirect pages
 
-        update_blog =
-          mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser cchardet ]) "update-blog";
+          mkdir -p $out/nix/stable
+          mkdir -p $out/nix/unstable
+          cp --no-preserve=mode,ownership -RL ${nix_stable.doc}/share/doc/nix/manual $out/nix/stable
+          cp --no-preserve=mode,ownership -RL ${nix_unstable.doc}/share/doc/nix/manual $out/nix/unstable
+
+          mkdir -p $out/nixpkgs/stable
+          mkdir -p $out/nixpkgs/unstable
+          # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-stable.htmlDocs.nixpkgsManual}/share/doc/nixpkgs $out/nixpkgs/stable 'Nixpkgs ${NIXOS_STABLE_SERIES} manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+          # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-unstable.htmlDocs.nixpkgsManual}/share/doc/nixpkgs $out/nixpkgs/unstable 'Nixpkgs ${NIXOS_UNSTABLE_SERIES} manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+
+          mkdir -p $out/nixos/stable
+          mkdir -p $out/nixos/unstable
+          # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-stable.htmlDocs.nixosManual}/share/doc/nixos $out/nixos/stable 'NixOS ${NIXOS_STABLE_SERIES} manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+          # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-unstable.htmlDocs.nixosManual}/share/doc/nixos $out/nixos/unstable 'NixOS ${NIXOS_UNSTABLE_SERIES} manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+        '';
+
+        pills = pkgs.runCommand "pills" {} ''
+          mkdir -p $out
+          cp ${nixPills.epub}/share/doc/nix-pills/nix-pills.epub $out/nix-pills.epub
+          #bash ./scripts/bootstrapify-docbook.sh ${nixPills.html-split}/share/doc/nix-pills} $out 'Nix Pills' nixos https://github.com/NixOS/nix-pills
+        '';
 
       in rec {
-        defaultPackage = packages.homepage;
+        packages.manuals = manuals;
+        #packages.pills = pills;
 
-        checks.build = defaultPackage;
+        devShells.default = pkgs.mkShell {
+          name = "nixos-homepage";
 
-        packages = {
-          homepage = pkgs.stdenv.mkDerivation {
-            name = "nixos-homepage-${self.lastModifiedDate}";
+          packages = with pkgs; [
+            nodejs_18
+            asciinema-scenario
+          ];
 
-            src = self;
+          shellHook = ''
+            export NIX_STABLE_VERSION="${NIX_STABLE_VERSION}"
+            export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
+            export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
+            export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
+            export NIXOS_AMIS="${NIXOS_AMIS}"
 
-            preferLocalBuild = true;
-            enableParallelBuilding = true;
-
-            buildInputs = with pkgs; [
-                nodejs_18
-
-                asciinema-scenario
-                gnused
-                imagemagick
-                jq
-                libxml2
-                libxslt
-                linkchecker
-                nixVersions.stable
-                nixos-common-styles.packages."${system}".embedSVG
-                nodePackages.less
-                perl
-                perlPackages.AppConfig
-                perlPackages.JSON
-                perlPackages.TemplatePluginIOAll
-                perlPackages.TemplatePluginJSONEscape
-                perlPackages.TemplateToolkit
-                perlPackages.XMLSimple
-                serve
-                update_blog
-                xhtml1
-                which
-              ];
-
-            preBuild = ''
-              export NIX_DB_DIR=$TMPDIR
-              export NIX_STATE_DIR=$TMPDIR
-
-              rm -f site-styles/common-styles
-              ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
-            '';
-
-            makeFlags =
-              [ "NIX_STABLE_VERSION=${getVersion nix_stable.name}"
-                "NIX_MANUAL_STABLE_IN=${nix_stable.doc}/share/doc/nix/manual"
-                "NIXPKGS_MANUAL_STABLE_IN=${released-nixpkgs-stable.htmlDocs.nixpkgsManual}"
-                "NIXOS_MANUAL_STABLE_IN=${released-nixpkgs-stable.htmlDocs.nixosManual}"
-                "NIXOS_STABLE_SERIES=${pkgs-stable.lib.trivial.release}"
-
-                "NIX_UNSTABLE_VERSION=${getVersion nix_unstable.name}"
-                "NIX_MANUAL_UNSTABLE_IN=${nix_unstable.doc}/share/doc/nix/manual"
-                "NIXPKGS_MANUAL_UNSTABLE_IN=${released-nixpkgs-unstable.htmlDocs.nixpkgsManual}"
-                "NIXOS_MANUAL_UNSTABLE_IN=${released-nixpkgs-unstable.htmlDocs.nixosManual}"
-                "NIXOS_UNSTABLE_SERIES=${pkgs-unstable.lib.trivial.release}"
-
-                "NIXOS_AMIS=${nixosAmis}"
-                "NIX_PILLS_MANUAL_IN=${nixPills.html-split}/share/doc/nix-pills"
-                "NIX_PILLS_MANUAL_EPUB=${nixPills.epub}/share/doc/nix-pills/nix-pills.epub"
-                "NIX_DEV_MANUAL_IN=${nix-dev.defaultPackage.${system}}"
-
-                "-j 1"
-              ];
-
-            doCheck = true;
-
-            installPhase = ''
-              mkdir $out
-              cp -prd . .well-known/ $out/
-            '';
-
-            shellHook = ''
-              export NIX_STABLE_VERSION="${getVersion nix_stable.name}"
-              export NIX_MANUAL_STABLE_IN="${nix_stable.doc}/share/doc/nix/manual"
-              export NIXPKGS_MANUAL_STABLE_IN="${released-nixpkgs-stable.htmlDocs.nixpkgsManual}"
-              export NIXOS_MANUAL_STABLE_IN="${released-nixpkgs-stable.htmlDocs.nixosManual}"
-              export NIXOS_STABLE_SERIES="${pkgs-stable.lib.trivial.release}"
-
-              export NIX_UNSTABLE_VERSION="${getVersion nix_unstable.name}"
-              export NIX_MANUAL_UNSTABLE_IN="${nix_unstable.doc}/share/doc/nix/manual"
-              export NIXPKGS_MANUAL_UNSTABLE_IN="${released-nixpkgs-unstable.htmlDocs.nixpkgsManual}"
-              export NIXOS_MANUAL_UNSTABLE_IN="${released-nixpkgs-unstable.htmlDocs.nixosManual}"
-              export NIXOS_UNSTABLE_SERIES="${pkgs-unstable.lib.trivial.release}"
-
-              export NIXOS_AMIS="${nixosAmis}"
-              export NIX_PILLS_MANUAL_IN="${nixPills.html-split}/share/doc/nix-pills"
-              export NIX_PILLS_MANUAL_EPUB="${nixPills.epub}/share/doc/nix-pills/nix-pills.epub"
-              export NIX_DEV_MANUAL_IN="${nix-dev.defaultPackage.${system}}"
-
-              rm -f site-styles/common-styles
-              ln -s ${nixos-common-styles.packages."${system}".commonStyles} site-styles/common-styles
-
-              >&2 echo ""
-              >&2 echo "  To start developing run:"
-              >&2 echo "      serve"
-              >&2 echo ""
-              >&2 echo "  and go to the following URL in your browser:"
-              >&2 echo "      https://127.0.0.1:8000/"
-              >&2 echo ""
-              >&2 echo "  It will rebuild the website on each change."
-              >&2 echo ""
-            '';
-          };
+            >&2 echo ""
+            >&2 echo "  To bootstrap developing environment run:"
+            >&2 echo "      npm install"
+            >&2 echo ""
+            >&2 echo "  To start developing run:"
+            >&2 echo "      npm run dev"
+            >&2 echo ""
+            >&2 echo "  and go to the following URL in your browser:"
+            >&2 echo "      http://localhost:4321"
+            >&2 echo ""
+            >&2 echo "  It will rebuild the website on each change."
+            >&2 echo ""
+          '';
         };
     });
 }
