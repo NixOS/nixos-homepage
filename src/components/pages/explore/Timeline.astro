@@ -33,11 +33,11 @@ const imageCommonClasses = "px-12 my-12";
 
     <div class:list={[textCommonClasses, "text-left", "relative"]}>
       <TimelineCenter number={number}/>
-      <TimelineText {...textProps} />
+      <TimelineText location="right" {...textProps} />
     </div>
   :
     <div class:list={[textCommonClasses, "order-last md:order-first", "text-left md:text-right"]}>
-      <TimelineText {...textProps} />
+      <TimelineText location="left" {...textProps} />
     </div>
 
     <div class="justify-self-center md:justify-self-start relative">

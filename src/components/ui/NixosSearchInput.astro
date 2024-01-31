@@ -20,7 +20,7 @@ const { color = "nixdarkblue", size = "lg", collection = "packages", withSubmit 
 ---
 
 <form method="get" action={`https://search.nixos.org/${collection}`} class:list={[{
-    "flex flex-col items-center justify-center gap-4": withSubmit,
+    "flex flex-col items-center justify-center gap-6": withSubmit,
 }]}>
     <Input color={color} size={size} placeholder={`Search for ${collectionMap[collection]}`} name="query" />
     {withSubmit && <Button color="green" type='submit'>Search</Button>}
