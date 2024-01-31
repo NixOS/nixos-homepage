@@ -76,8 +76,8 @@ rec {
 
           mkdir -p $out/nix/stable
           mkdir -p $out/nix/unstable
-          cp --no-preserve=mode,ownership -RL ${nix_stable.doc}/share/doc/nix/manual $out/nix/stable
-          cp --no-preserve=mode,ownership -RL ${nix_unstable.doc}/share/doc/nix/manual $out/nix/unstable
+          cp -R ${nix_stable.doc}/share/doc/nix/manual $out/nix/stable
+          cp -R ${nix_unstable.doc}/share/doc/nix/manual $out/nix/unstable
 
           mkdir -p $out/nixpkgs/stable
           mkdir -p $out/nixpkgs/unstable
