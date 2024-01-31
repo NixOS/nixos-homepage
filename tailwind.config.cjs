@@ -50,10 +50,12 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
     require("daisyui"),
   ],
   daisyui: {
-    themes: [], // Disable all themes for the current time being
+    // Disable all themes for the current time being
+    themes: false,
+    darkTheme: false,
+    base: false,
   },
 }
