@@ -78,8 +78,10 @@ rec {
           in
             pkgs.writeShellScriptBin name ''exec "${pythonEnv}/bin/python" "${toString ./.}/scripts/${name}.py" "$@"'';
 
-        serve =
-          mkPyScript (with pkgs.python3Packages; [ click livereload ]) "serve";
+        serve = pkgs.writeShellScriptBin "serve" ''
+          ${pkgs.nodejs_18}/bin/npm install
+          ${pkgs.nodejs_18}/bin/npm run dev
+        '';
 
         update_blog =
           mkPyScript (with pkgs.python3Packages; [ aiohttp click feedparser cchardet ]) "update-blog";

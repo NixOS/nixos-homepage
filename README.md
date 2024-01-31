@@ -26,11 +26,11 @@ To run local development instance follow this steps to start a local server
     [nix-shell]$ npm install
     [nix-shell]$ npm run dev
 
-<!-- If you have [Docker] and [Docker Compose] installed, you can alternatively run
+If you have [Docker] and [Docker Compose] installed, you can alternatively run
 
     $ docker-compose up
 
-Once everything's ready, you'll be able to access -->
+Once everything's ready, you'll be able to access
 
 Open your browser at: http://localhost:4321/
 
