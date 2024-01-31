@@ -213,14 +213,14 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
   </div>
   <Divider />
   <Container class="grid md:grid-cols-2 mb-16 mt-8">
-    <div>
+    <div class="md:pb-0 pb-4">
       <div class="flex flex-col items-center justify-center">
         <Image src={nixosFoundationLogo} alt='NixOS Foundation Logo' class="h-72" />
       </div>
-      <h2 class="text-center text-3xl text-nixdarkblue font-bold">
+      <h2 class="md:text-center text-3xl text-nixdarkblue font-bold font-heading">
         Board members:
       </h2>
-      <ul class="mt-2 w-72 mx-auto pl-10 list-disc">
+      <ul class="mt-2 md:w-72 mx-auto pl-4 md:pl-10 list-disc">
         {
           teams
             .filter((team) => team.slug.split("_")[1] === "foundation-board")[0]
@@ -236,7 +236,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
       </ul>
     </div>
     <div class="space-y-4 font-extralight leading-relaxed">
-      <h2 class="text-3xl text-nixdarkblue font-bold">The mission!</h2>
+      <h2 class="text-3xl text-nixdarkblue font-heading font-bold">The mission!</h2>
       <p>
         The mission of the foundation is to support the Nix ecosystem's
         infrastructure, and projects implementing the purely functional
