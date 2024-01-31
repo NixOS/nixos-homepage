@@ -98,7 +98,7 @@ rec {
 
       in rec {
         packages.manuals = manuals;
-        #packages.pills = pills;
+        packages.pills = pills;
 
         devShells.default = pkgs.mkShell {
           name = "nixos-homepage";
