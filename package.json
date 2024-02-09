@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "linkcheck:minimal": "linkchecker http://localhost:4321 --ignore-url /manual --ignore-url /guides --ignore-url /tutorials",
+    "linkcheck:full": "linkchecker http://localhost:4321"
   },
   "dependencies": {
     "@astrojs/mdx": "^2.0.0",

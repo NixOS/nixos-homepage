@@ -122,6 +122,7 @@ rec {
                 update_blog
                 xhtml1
                 which
+                linkchecker
               ];
 
             preBuild = ''
