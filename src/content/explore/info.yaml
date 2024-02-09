@@ -100,7 +100,7 @@ content:
         Your work environment will stay intact, but allows you to experiment in a safe way.
       - >
         No need to turn your system upside down just because you want to test some experimental and bleeding edge versions of software.
-  - imageSrc: "images/explore/community.svg"
+  - imageSrc: "/images/explore/community.svg"
     heading: Contributing is only a pull request away.
     subHeading: >
       Community is at the core of Nix.
