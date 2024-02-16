@@ -1,6 +1,6 @@
 ---
 id: community-survey-2022
-title: NixOS Community Survey 2022 
+title: NixOS Community Survey 2022
 date: 2022-03-01T18:00:00.000Z
 category: announcements
 ---
@@ -19,4 +19,4 @@ The questions in the survey cover:
 
 This is our first time running a survey like this, so we're also looking for feedback on the survey itself to understand how we can do this better in the future! Thanks!
 
-\-Barry @ [flox](https://floxdev.com) (bpiv400) and [the NixOS Marketing Team](/teams/marketing.html)
+\-Barry @ [flox](https://floxdev.com) (bpiv400) and [the NixOS Marketing Team](/community/teams/marketing/)

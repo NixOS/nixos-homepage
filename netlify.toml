@@ -305,8 +305,8 @@
   force = true
 
 [[redirects]]
-  from = "/nix/download.html"
-  to = "/download.html"
+  from = "/nix/download"
+  to = "/download"
   status = 302
   force = true
 
@@ -323,8 +323,8 @@
   force = true
 
 [[redirects]]
-  from = "/nixpkgs/download.html"
-  to = "/download.html"
+  from = "/nixpkgs/download"
+  to = "/download"
   status = 302
   force = true
 
@@ -371,8 +371,8 @@
   force = true
 
 [[redirects]]
-  from = "/nixos/download.html"
-  to = "/download.html"
+  from = "/nixos/download"
+  to = "/download"
   status = 302
   force = true
 
