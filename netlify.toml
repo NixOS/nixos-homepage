@@ -481,7 +481,7 @@
 
 [[redirects]]
   from  = "/hydra/manual"
-  to = "https://hydra.nixos.org/job/hydra/master/manual/latest/download-by-type/doc/manual"
+  to = "https://hydra.nixos.org/job/hydra/master/manual.x86_64-linux/latest/download-by-type/doc/manual"
   status = 302
   force = true
 
