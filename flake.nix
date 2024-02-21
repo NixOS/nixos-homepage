@@ -71,23 +71,41 @@ rec {
         NIXOS_STABLE_SERIES = pkgs-stable.lib.trivial.release;
         NIXOS_UNSTABLE_SERIES = pkgs-unstable.lib.trivial.release;
 
+        redirectManualHTML = redirectURL: out: ''
+          cat <<EOT >> ${out}
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta http-equiv="refresh" content="7; url='${redirectURL}'"/>
+            </head>
+            <body>
+              <h1>Redirecting...</h1>
+              <p>Please follow <a href="${redirectURL}">this link</a>.</p>
+            </body>
+          </html>
+          EOT
+        '';
+
         manuals = pkgs.runCommand "manuals" {} ''
-          #TODO: add redirect pages
 
           mkdir -p $out/nix/stable
           mkdir -p $out/nix/unstable
+
           cp -R ${nix_stable.doc}/share/doc/nix/manual $out/nix/stable
           cp -R ${nix_unstable.doc}/share/doc/nix/manual $out/nix/unstable
+          ${redirectManualHTML "/manual/nix/stable" "$out/nix/index.html"}
 
           mkdir -p $out/nixpkgs/stable
           mkdir -p $out/nixpkgs/unstable
           # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-stable.htmlDocs.nixpkgsManual}/share/doc/nixpkgs $out/nixpkgs/stable 'Nixpkgs ${NIXOS_STABLE_SERIES} manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
           # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-unstable.htmlDocs.nixpkgsManual}/share/doc/nixpkgs $out/nixpkgs/unstable 'Nixpkgs ${NIXOS_UNSTABLE_SERIES} manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
+          ${redirectManualHTML "/manual/nix/stable" "$out/nix/index.html"}
 
           mkdir -p $out/nixos/stable
           mkdir -p $out/nixos/unstable
           # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-stable.htmlDocs.nixosManual}/share/doc/nixos $out/nixos/stable 'NixOS ${NIXOS_STABLE_SERIES} manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
           # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-unstable.htmlDocs.nixosManual}/share/doc/nixos $out/nixos/unstable 'NixOS ${NIXOS_UNSTABLE_SERIES} manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
+          ${redirectManualHTML "/manual/nixos/stable" "$out/nixos/index.html"}
         '';
 
         pills = pkgs.runCommand "pills" {} ''
