@@ -172,16 +172,28 @@ rec {
           cp ${nixPills.epub}/share/doc/nix-pills/nix-pills.epub $out/nix-pills.epub
         '';
 
+        demos = pkgs.runCommand "demos" { nativeBuildInputs = with pkgs; [ asciinema-scenario gnused ]; } ''
+          mkdir -p $out
+          for scenario in ${./public/demos}/*.scenario; do
+            scenarioFileName=$out/$(basename $scenario .scenario)
+            echo "Generating $scenarioFileName.cast and $scenarioFileName.svg ..."
+            asciinema-scenario --preview-file $scenarioFileName.svg $scenario > $scenarioFileName.cast
+            # XXX: this in until asciinema-scenario is fixed
+            #      https://github.com/garbas/asciinema-scenario/issues/3
+            sed -i -e "s|<nixpkgs|\&lt;nixpkgs|g" $scenarioFileName.svg
+          done
+        '';
+
       in rec {
         packages.manuals = manuals;
         packages.pills = pills;
+        packages.demos = demos;
 
         devShells.default = pkgs.mkShell {
           name = "nixos-homepage";
 
           packages = with pkgs; [
             nodejs_18
-            asciinema-scenario
           ];
 
           shellHook = ''
