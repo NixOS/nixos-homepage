@@ -47,15 +47,15 @@ jobs:
           cp -RL ./netlify.toml ./build/
 
       - name: "Deploy to Netlify"
-        if: github.repository == 'NixOS/nixos-homepage'
+        if: ${{ github.repository == 'NixOS/nixos-homepage' }}
         uses: "nwtgck/actions-netlify@v2.1.0"
         env:
           NETLIFY_AUTH_TOKEN: "${{ secrets.NETLIFY_AUTH_TOKEN }}"
           NETLIFY_SITE_ID: "${{ secrets.NETLIFY_SITE_ID }}"
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-          deploy-message: 'Published from GitHub Actions'
-          publish-dir: './build'
+          deploy-message: "Published from GitHub Actions"
+          publish-dir: "./build"
 
           enable-pull-request-comment: true
           overwrites-pull-request-comment: false
@@ -63,16 +63,16 @@ jobs:
           enable-commit-status: true
 
           # TODO: once we make main branch default we should change master->main
-          production-branch: 'master'
+          production-branch: "master"
           production-deploy: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
 
-          alias: ${{ github.event_name == 'push' && github.ref_name || '' }}
+          alias: "${{ github.event_name == 'push' && github.ref_name || '' }}"
 
-          enable-github-deployment: ${{ github.event_name == 'push' && 'true' || 'false' }}
-          github-deployment-environment: ${{ github.event_name == 'push' && github.ref_name || format('pull-request-{0}', github.event.number) }}
+          enable-github-deployment: ${{ github.event_name == 'push' }}
+          github-deployment-environment: "${{ github.event_name == 'push' && github.ref_name || format('pull-request-{0}', github.event.number) }}"
 
       - name: "Commit updated files and push them to master branch"
-        if: github.repository == 'NixOS/nixos-homepage'
+        if: ${{ github.repository == 'NixOS/nixos-homepage' }}
         uses: "stefanzweifel/git-auto-commit-action@v4"
         with:
           commit_message: "Daily update [ci skip]"
