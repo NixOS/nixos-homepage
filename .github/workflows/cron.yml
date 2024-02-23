@@ -44,7 +44,6 @@ jobs:
           nix develop --command npm run build
           mkdir build
           cp -RL ./dist/* ./build/
-          cp -RL ./netlify.toml ./build/
 
       - name: "Deploy to Netlify"
         if: ${{ github.repository == 'NixOS/nixos-homepage' }}
