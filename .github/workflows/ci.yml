@@ -43,8 +43,8 @@ jobs:
 
       - name: "Build"
         run: |
-          nix develop --command npm install
-          nix develop --command npm run build
+          nix develop --accept-flake-config --command npm install
+          nix develop --accept-flake-config --command npm run build
           mkdir build
           cp -RL ./dist/* ./build/
 
