@@ -72,11 +72,11 @@ rec {
         NIXOS_UNSTABLE_SERIES = pkgs-unstable.lib.trivial.release;
 
         redirectManualHTML = redirectURL: out: ''
-          cat <<EOT >> ${out}
+          cat <<EOT > ${out}
           <!DOCTYPE html>
           <html>
             <head>
-              <meta http-equiv="refresh" content="7; url='${redirectURL}'"/>
+              <meta http-equiv="refresh" content="1; url='${redirectURL}'"/>
             </head>
             <body>
               <h1>Redirecting...</h1>
@@ -86,32 +86,90 @@ rec {
           EOT
         '';
 
-        manuals = pkgs.runCommand "manuals" {} ''
+        manualVersionSwitch = dir: canonical:
+          let 
+            baseUrl = "https://nixos.org/${dir}/${canonical}";
+          in ''
+          project=$(basename ${dir})
+          # loop over each channel/version
+          for path in ${dir}/*; do
+            # loop over each html file
+            (cd $path && find -type f -print) | while read htmlFile; do
+              if [[ "$htmlFile" == *.html ]]; then
+                fileName=''${htmlFile#"./"}
+                filePath="$path/$fileName"
+                echo "Patching $fileName"
+                echo "Patching $filePath"
 
-          mkdir -p $out/nix/stable
-          mkdir -p $out/nix/unstable
+                canonicalFileName="${dir}/${canonical}/$fileName"
+                canonicalUrl=$baseUrl
+                if [ -e $canonicalFileName ]; then
+                  if [ "$fileName" != "index.html" ]; then
+                    canonicalUrl="$baseUrl/$fileName"
+                  fi
+                fi
+                canonicalTag="<link rel=\"canonical\" url=\"$canonicalUrl\" />"
+                if ! grep -Fq "$canonicalTag" $filePath; then
+                  sed -i -e "s|</head>|  $canonicalTag\n</head>|" $filePath
+                  echo "Patched <head> of $filePath."
+                fi
 
-          cp -R ${nix_stable.doc}/share/doc/nix/manual $out/nix/stable
-          cp -R ${nix_unstable.doc}/share/doc/nix/manual $out/nix/unstable
-          ${redirectManualHTML "/manual/nix/stable" "$out/nix/index.html"}
+                injectedTag="<script src=\"/js/manual-version-switch.js\"></script>"
+                if ! grep -Fq "$injectedTag" $filePath; then
+                  sed -i -e "s|</body>|\n  $injectedTag\n</body>|" $filePath
+                  echo "Injected channel switcher for $filePath."
+                fi
 
-          mkdir -p $out/nixpkgs/stable
-          mkdir -p $out/nixpkgs/unstable
-          # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-stable.htmlDocs.nixpkgsManual}/share/doc/nixpkgs $out/nixpkgs/stable 'Nixpkgs ${NIXOS_STABLE_SERIES} manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
-          # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-unstable.htmlDocs.nixpkgsManual}/share/doc/nixpkgs $out/nixpkgs/unstable 'Nixpkgs ${NIXOS_UNSTABLE_SERIES} manual' nixpkgs https://github.com/NixOS/nixpkgs/tree/master/doc
-          ${redirectManualHTML "/manual/nix/stable" "$out/nix/index.html"}
+                injectedTag="data-$project-channels='["
+                if [[ "$project" == "nix" ]]; then
+                  injectedTag+="{\"channel\":\"unstable\",\"version\":\"${NIX_UNSTABLE_VERSION}\"},"
+                  injectedTag+="{\"channel\":\"stable\",\"version\":\"${NIX_STABLE_VERSION}\"}"
+                else
+                  injectedTag+="{\"channel\":\"unstable\",\"version\":\"${NIXOS_UNSTABLE_SERIES}\"},"
+                  injectedTag+="{\"channel\":\"stable\",\"version\":\"${NIXOS_STABLE_SERIES}\"}"
+                fi
+                injectedTag+="]'"
+                if ! grep -Fq "$injectedTag" $filePath; then
+                  sed -i -e "s|<body|<body $injectedTag|" $filePath
+                  echo "Injected list of channels in $filePath."
+                fi
+              fi
+            done
+          done
+        '';
 
-          mkdir -p $out/nixos/stable
-          mkdir -p $out/nixos/unstable
-          # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-stable.htmlDocs.nixosManual}/share/doc/nixos $out/nixos/stable 'NixOS ${NIXOS_STABLE_SERIES} manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
-          # bash ./scripts/bootstrapify-docbook.sh ${released-nixpkgs-unstable.htmlDocs.nixosManual}/share/doc/nixos $out/nixos/unstable 'NixOS ${NIXOS_UNSTABLE_SERIES} manual' nixos https://github.com/NixOS/nixpkgs/tree/master/nixos/doc/manual
-          ${redirectManualHTML "/manual/nixos/stable" "$out/nixos/index.html"}
+        manuals = pkgs.runCommand "manuals" { nativeBuildInputs = with pkgs; [ gnused gnugrep ]; } ''
+          mkdir -p $out
+          ${redirectManualHTML "/learn" "$out/index.html"}
+
+          nix_dir=$PWD/nix && mkdir -p $nix_dir
+          cp -R --no-preserve=mode,ownership ${nix_stable.doc}/share/doc/nix/manual $nix_dir/stable
+          cp -R --no-preserve=mode,ownership ${nix_unstable.doc}/share/doc/nix/manual $nix_dir/unstable
+          ${manualVersionSwitch "$nix_dir" "stable"}
+          ${redirectManualHTML "/manual/nix/stable" "$nix_dir/index.html"}
+          mv $nix_dir $out
+
+          nixpkgs_dir=$PWD/nixpkgs && mkdir -p $nixpkgs_dir
+          cp -R --no-preserve=mode,ownership ${released-nixpkgs-stable.htmlDocs.nixpkgsManual}/share/doc/nixpkgs $nixpkgs_dir/stable
+          cp -R --no-preserve=mode,ownership ${released-nixpkgs-unstable.htmlDocs.nixpkgsManual}/share/doc/nixpkgs $nixpkgs_dir/unstable
+          mv $nixpkgs_dir/stable/manual.html $nixpkgs_dir/stable/index.html
+          mv $nixpkgs_dir/unstable/manual.html $nixpkgs_dir/unstable/index.html
+          ${manualVersionSwitch "$nixpkgs_dir" "stable"}
+          ${redirectManualHTML "/manual/nixpkgs/stable" "$nixpkgs_dir/index.html"}
+          mv $nixpkgs_dir $out
+
+          nixos_dir=$PWD/nixos && mkdir -p $nixos_dir
+          cp -R --no-preserve=mode,ownership ${released-nixpkgs-stable.htmlDocs.nixosManual}/share/doc/nixos $nixos_dir/stable
+          cp -R --no-preserve=mode,ownership ${released-nixpkgs-unstable.htmlDocs.nixosManual}/share/doc/nixos $nixos_dir/unstable
+          ${manualVersionSwitch "$nixos_dir" "stable"}
+          ${redirectManualHTML "/manual/nixos/stable" "$nixos_dir/index.html"}
+          mv $nixos_dir $out
         '';
 
         pills = pkgs.runCommand "pills" {} ''
           mkdir -p $out
+          cp -R ${nixPills.html-split}/share/doc/nix-pills/* $out
           cp ${nixPills.epub}/share/doc/nix-pills/nix-pills.epub $out/nix-pills.epub
-          #bash ./scripts/bootstrapify-docbook.sh ${nixPills.html-split}/share/doc/nix-pills} $out 'Nix Pills' nixos https://github.com/NixOS/nix-pills
         '';
 
       in rec {
