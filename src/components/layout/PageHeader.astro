@@ -6,9 +6,7 @@ interface Props {
   parentPath?: string;
 }
 
-const path = Astro.url.pathname.split('/');
-const autoParentPath = path.slice(0, path.length - 1).join('/');
-const { text = '', subtext, parentPath = autoParentPath }: Props = Astro.props;
+const { text = '', subtext, parentPath = undefined }: Props = Astro.props;
 
 import Container from "./Container.astro";
 
@@ -16,8 +14,8 @@ import Container from "./Container.astro";
 <div class="bg-[url('/divider/header_nixdarkblue.svg')] bg-bottom bg-no-repeat bg-cover py-24 hidden md:block">
   <Container class="text-white grid grid-cols-3">
     <div class="flex flex-col gap-4 col-span-2">
-      {path.length > 2 && (
-        <a href={parentPath}>
+      {parentPath && (
+        <a href={parentPath} class="!text-white -mb-4 -mt-6 invisible md:visible">
           <span class="text-nixblue">←</span> Back
         </a>
       )}
