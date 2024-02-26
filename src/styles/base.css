@@ -92,7 +92,7 @@
     }
 
     article pre code {
-        @apply bg-transparent border-none w-full;
+        @apply bg-transparent border-none w-full p-0;
     }
 
     article .astro-code {
