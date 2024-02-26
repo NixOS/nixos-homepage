@@ -18,12 +18,15 @@ import DownloadNixosVirtualBox from "../components/pages/download/content/nixos-
 import DownloadNixosAmazon from "../components/pages/download/content/nixos-amazon.astro";
 import DownloadNixosMore from "../components/pages/download/content/nixos-more.astro";
 
+const NIX_VERSION = import.meta.env.NIX_STABLE_VERSION;
+const NIXOS_VERSION = import.meta.env.NIXOS_STABLE_SERIES;
+
 ---
 
 <Layout title="Download">
   <PageHeader text="Download" />
 
-  <DownloadHeader title = "Nix" subTitle=": the package manager" currentVersion="2.19.1" />
+  <DownloadHeader title = "Nix" subTitle=": the package manager" currentVersion={NIX_VERSION} />
 
   <Tabs class="" class:list={['']}>
     <Fragment slot="tab-1">Linux</Fragment>
@@ -63,7 +66,7 @@ import DownloadNixosMore from "../components/pages/download/content/nixos-more.a
     </Fragment>
   </Tabs>
 
-  <DownloadHeader title="NixOS" subTitle=": the Linux distribution" currentVersion="23.05" />
+  <DownloadHeader title="NixOS" subTitle=": the Linux distribution" currentVersion={NIXOS_VERSION} />
 
   <Tabs class="" class:list={['pb-16']}>
     <Fragment slot="tab-1">ISO image</Fragment>

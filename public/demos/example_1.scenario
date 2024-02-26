@@ -1,0 +1,12 @@
+#! { "step": 0.10, "width": 77, "height": 20 }
+
+$ # Lets see if python is present on the system
+$ python --version
+python: command not found
+$ # Use nix-shell to create a shell environment with python
+$ nix-shell -p python3
+(nix-shell) $ python --version
+Python 3.7.7
+(nix-shell) $ # YAAAY! Python is available
+(nix-shell) $ exit
+$ # And this is how you create on demand environments

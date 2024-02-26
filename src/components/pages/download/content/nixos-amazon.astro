@@ -1,12 +1,28 @@
 ---
 
-import { getEntry } from 'astro:content';
+import fs from "node:fs";
 
 import CodeBlock from "../../../layout/CodeBlock.astro";
 import CodeInline from "../../../layout/CodeInline.astro";
 import Button from "../../../ui/Button.astro";
 
-const amis = await getEntry('download', 'aws-ec2');
+const NIXOS_VERSION = import.meta.env.NIXOS_STABLE_SERIES;
+// TODO: amis for 23.11 do not exist yet, use latest for now
+const NIXOS_AMIS = JSON.parse(fs.readFileSync(import.meta.env.NIXOS_AMIS, 'utf8')).latest
+
+const amis = Object.entries(NIXOS_AMIS)
+  .map(([region, value]) => {
+    if (!("hvm-ebs" in value)) {
+      return null;
+    }
+    return {
+      region,
+      ami: value["hvm-ebs"],
+      storage: "EBS",
+      virtualisation: "Hardware",
+    }
+  })
+  .filter((x) => x !== null);
 
 ---
 
@@ -67,7 +83,7 @@ const amis = await getEntry('download', 'aws-ec2');
 <div class="launch-amazon [&_tr.selected]:table-row">
   <span class="font-bold text-xl">Choose region: </span>
   <select class="select-region text-xl font-normal bg-white border-solid border-1 border-neutral-500">
-    {amis.data.options.map((option) => {
+    {amis.map((option) => {
       const selected = (option.region === "ap-east-1")
       return (<option value={option.region} {selected}>{option.region}</option>)
     })}
@@ -81,8 +97,8 @@ const amis = await getEntry('download', 'aws-ec2');
       </tr>
     </thead>
     <tbody class="[&>tr]:hidden text-center font-bold text-lg">
-      {amis.data.options.map((option) => (
-        <tr id={amis.data.idPrefix+option.region}>
+      {amis.map((option) => (
+        <tr id={"launch-amazon-"+option.region}>
           <td>{option.storage}</td>
           <td>{option.storage}</td>
           <td colspan="2"><CodeInline>{option.ami}</CodeInline></td>
