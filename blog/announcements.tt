@@ -1,3 +1,0 @@
-[% WRAPPER blog/layout.tt title="Announcements" %]
-[% INSERT "blog/announcements.html.in" %]
-[% END %]

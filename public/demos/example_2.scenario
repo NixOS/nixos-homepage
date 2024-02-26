@@ -1,0 +1,14 @@
+#! { "step": 0.10, "width": 77, "height": 20 }
+
+$ # Lets create an environment with multiple packages
+$ nix-shell -p python3 nodejs go rustc
+(nix-shell) $ node --version
+v10.20.1
+(nix-shell) $ go version
+go version go1.14.1 linux/amd64
+(nix-shell) $ rustc --version
+rustc 1.42.0
+(nix-shell) $ # Imagine how easy
+(nix-shell) $ exit
+$ # And POOF, just like that you are back to your normal environment after
+$ # playing around. No system was hurt during this time :)

@@ -1,3 +1,0 @@
-[% WRAPPER blog/layout.tt title="Tales from Nixpkgs" %]
-[% INSERT "blog/stories.html.in" %]
-[% END %]
