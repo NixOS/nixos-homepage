@@ -15,8 +15,7 @@ export default defineConfig({
   ],
   markdown: {
     shikiConfig: {
-      theme: 'light-plus',
-      wrap: true,
+      theme: 'one-dark-pro',
     },
   },
   compressHTML: true,

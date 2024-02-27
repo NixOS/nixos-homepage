@@ -7,12 +7,16 @@ import Container from "../components/layout/Container.astro";
 
 type Props = MarkdownLayoutProps<{
   title: string;
+  parentPath?: string;
 }>;
 
 const { frontmatter, url } = Astro.props;
 ---
 <Layout title={frontmatter.title}>
-  <PageHeader text={frontmatter.title}/>
+  <PageHeader
+    text={frontmatter.title}
+    parentPath={frontmatter.parentPath}
+    />
   <Container class="my-8">
     <article>
       <slot/>
