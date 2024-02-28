@@ -21,7 +21,7 @@ const colorMap = {
   "darkgreen": outline ? "bg-transparent border-nixdarkgreen" : "bg-nixdarkgreen"
 }
 
-const localClassList = `${colorMap[color]} inline-block w-fit rounded-lg font-bold !text-white !no-underline text-sm px-[0.5rem] py-[0.25rem]`;
+const localClassList = `${colorMap[color]} ${outline ? "border-1 !text-black py-[0.125rem]" : "border-0 !text-white py-[0.25rem]"} inline-block w-fit rounded-lg font-bold !no-underline text-sm px-[0.5rem]`;
 ---
 
 {href
