@@ -6,7 +6,9 @@ import NixosSearchInput from "../components/ui/NixosSearchInput.astro";
 import { getCollection, getEntry } from "astro:content";
 import { Image } from "astro:assets";
 import { generatePathFromPost, createExcerpt } from "../lib/utils"
+
 import Asciinema from "../components/ui/Asciinema.astro";
+
 const landingFeatures = await getCollection("landing-features");
 const demos = await getEntry("landing", "demos");
 const posts = await getCollection("blog");
@@ -27,8 +29,8 @@ posts.sort((a, b) => {
     </Container>
   </div>
   <div class="bg-[url('/hero-bg.svg')] bg-cover bg-no-repeat bg-left">
-    <Container class="text-white grid md:grid-cols-2 gap-8 py-16 md:py-24">
-      <div class="flex flex-col gap-4 self-center">
+    <Container class="text-white grid grid-cols-1 lg:grid-cols-2 gap-8 py-16 lg:py-24">
+      <div class="flex flex-col gap-4 my-auto mx-0">
         <h1 class="text-5xl font-heading font-bold leading-none">
           Declarative builds<br class="hidden md:inline-block" /> and deployments.
         </h1>
@@ -37,12 +39,30 @@ posts.sort((a, b) => {
           system configuration. Learn how to make reproducible, declarative and
           reliable systems.
         </p>
-        <div class="flex flex-col md:flex-row justify-stretch gap-4">
+        <div class="flex flex-col md:flex-row justify-center lg:justify-stretch gap-4 text-center">
           <Button href="/download" color="green" size="lg">Download</Button>
           <Button href="/learn" color="lightblue" size="lg">Get Started</Button>
         </div>
       </div>
-      <Asciinema src="/demos/cover.cast" rows={20} cols={65} controls={true} poster="npt:0:01:22" large />
+      <div class="
+          bg-[#121314]
+          border-white
+          border-[1rem]
+          rounded-3xl
+          drop-shadow-[0_8px_2px_rgba(0,0,0,0.2)]
+          min-h-[300px]
+        ">
+        <Asciinema
+          src="/demos/cover.cast"
+          settings={{
+            autoPlay: false,
+            loop: true,
+            controls: true,
+            fit: false,
+            poster: 'npt:0:01:22',
+            terminalFontSize: 'small',
+          }} />
+        </div>
     </Container>
   </div>
   <div class="bg-[url('/divider/landing_search_top.svg')] bg-bottom bg-no-repeat pb-48 pt-16">
@@ -96,13 +116,23 @@ posts.sort((a, b) => {
       >
         Examples
       </h2>
-      <div class="grid md:grid-cols-3 items-center gap-4 pb-8">
+      <div class="grid md:grid-cols-2 items-center gap-4 pb-8">
         {
           demos.data.map((demo) => {
             return (
-              <div class="flex flex-col self-end gap-4">
+              <div class="flex flex-col items-start gap-2 overflow-hidden">
                 <p class="text-nixdarkblue text-2xl font-bold">{demo.title}</p>
-                <Asciinema src={demo.file} rows={17} cols={65} controls={true} autoPlay={false} />
+                <Asciinema
+                  class="max-w-full self-center md:self-start"
+                  src={demo.file}
+                  settings={{
+                    autoPlay: false,
+                    loop: true,
+                    controls: true,
+                    fit: false,
+                    poster: 'npt:0:00:30',
+                    terminalFontSize: 'small',
+                  }} />
               </div>
             )
           })
