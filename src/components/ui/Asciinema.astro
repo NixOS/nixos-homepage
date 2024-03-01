@@ -5,16 +5,19 @@ import { AsciinemaSettings } from "asciinema-player";
 interface Props {
   src: string;
   settings?: AsciinemaSettings;
+  class?: string;
 }
 
 const {
   src,
   settings = {},
+  class: extraClasses = "",
 }: Props = Astro.props;
 
 ---
 
 <asciinema-player
+  class={extraClasses}
   data-src={src}
   data-settings={JSON.stringify(settings)}
 >
