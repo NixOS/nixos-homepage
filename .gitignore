@@ -1,48 +1,11 @@
-*.html
-*.html.in
-*.xhtml
-
-/nixos/manual/
-/nixos/nix-pills/
-/nixpkgs/manual/
-/nix/manual/
-
-/manual/
-/guides/
-
-/images/screenshots/nixos-*-small.png
-
 /.direnv/
-/build/
-/demos/*.cast
-/demos/*.svg
-/tmp.*
-/favicon.png
-/favicon.ico
-/blog/announcements-rss.xml
-/blog/stories-rss.xml
-/site-styles/common-styles
-/site-styles/assets.tmp/
-/nixos-release.tt
-/robots.txt
-
 /result*
-/styles
-
-
-# build output
 /dist/
-# generated types
 /.astro/
-
-# dependencies
 /node_modules/
-
-# logs
 /npm-debug.log*
-/yarn-debug.log*
-/yarn-error.log*
-/pnpm-debug.log*
-
-# macOS-specific files
 .DS_Store
+/public/manual/
+/public/guides/nix-pills/
+/public/demos/*.cast
+/public/demos/*.svg

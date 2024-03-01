@@ -94,7 +94,7 @@ can do better.
 
 -   [Nix at
     Mozilla](https://skillsmatter.com/skillscasts/9473-london-nixos-january-meetup)
-    (login required) by [Rok Garbas](https//twitter.com/garbas)
+    (login required) by [Rok Garbas](https://twitter.com/garbas)
 -   NYLUG Presents: [Charles
     Strahan](https://twitter.com/charlesstrahan) -on- [Introduction to
     NixOS](https://www.youtube.com/watch?v=VivXSoovUFI)

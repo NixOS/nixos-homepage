@@ -6,6 +6,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'static',
   site: 'https://nixos.org',
   integrations: [
     tailwind(),
@@ -14,8 +15,7 @@ export default defineConfig({
   ],
   markdown: {
     shikiConfig: {
-      theme: 'light-plus',
-      wrap: true,
+      theme: 'one-dark-pro',
     },
   },
   compressHTML: true,

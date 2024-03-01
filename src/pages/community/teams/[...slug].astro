@@ -19,23 +19,28 @@ const { Content } = await entry.render();
 ---
 
 <Layout title={entry.data.name}>
-  <PageHeader text={entry.data.name} />
+  <PageHeader text={entry.data.name} parentPath="/community" />
   <Container class="my-8">
     <aside
-      class="float-right bg-nixlighterblue rounded-xl px-4 py-3 mb-4 ml-4"
+      class="float-right bg-nixlighterblue rounded-xl px-4 py-3 mb-4 ml-4 w-full sm:w-1/2 md:max-w-96"
     >
-      <h1 class="text-4xl font-extrabold text-nixdarkblue">Members</h1>
-      <ul class="mt-2 list-disc ml-4">
+      <h1 class="text-3xl font-heading font-bold text-nixdarkblue">Members</h1>
+      <ul class="mt-2 list-disc ml-4 font-light">
         {
           entry.data.members.map((member) => (
-            <li>
-              {member.name}&nbsp;
-              {member.username && (
+            <li class="mb-1 last:mb-0">
+              {member.username ? (
+                <>
                 <a href={"https://discourse.nixos.org/u/" + member.username}>
-                  @{member.username}
-                </a>
+                  {member.name}
+                </a>&nbsp;
+                ({member.username})
+                </>
+              ) : (
+                member.name
               )}
               {member.title && (
+                -
                 <Tag outline>
                   {member.title}
                 </Tag>
@@ -44,11 +49,11 @@ const { Content } = await entry.render();
           ))
         }
       </ul>
-      <h1 class="text-4xl font-extrabold text-nixdarkblue mt-8">Contact</h1>
+      <h1 class="text-3xl font-heading font-bold text-nixdarkblue mt-4">Contact</h1>
       <ul class="mt-2 list-disc ml-4">
         {
           entry.data.contact.map((contact) => (
-            <li>
+            <li class="mb-1 last:mb-0">
               <a href={contact.href}>{contact.name}</a>
             </li>
           ))
