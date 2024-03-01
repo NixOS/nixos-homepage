@@ -1,0 +1,15 @@
+services:
+  nixos-homepage:
+    build:
+      context: .
+    environment:
+      HOST: "0.0.0.0"
+    ports:
+      - 4321:4321
+    volumes:
+      - .:/app
+    command:
+      - nix
+      - develop
+      - --command
+      - serve
