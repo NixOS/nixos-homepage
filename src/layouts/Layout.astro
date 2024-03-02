@@ -8,15 +8,40 @@ import '../styles/base.css';
 import { getImage } from "astro:assets";
 
 import faviconSvgSrc from "../assets/image/flake-blue.svg";
+import { getEntry } from "astro:content";
 
 const {
   title = "Nix &amp; NixOS | Reproducible builds and deployments",
   description = "Nix is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems.",
 } = Astro.props
 
-const faviconSvg = await getImage({ src: faviconSvgSrc, format: 'svg' })
----
+const blogMenu = await getEntry('menus', 'blog');
 
+const faviconSvg = await getImage({ src: faviconSvgSrc, format: 'svg' })
+
+const headLinks = [{
+          rel: "sitemap",
+          href: "/sitemap-index.xml"
+        }, {
+          rel: "icon",
+          href: faviconSvg.src,
+          type: "image/svg+xml"
+        }, {
+          rel: "alternate",
+          type: "application/rss+xml",
+          title: "Complete RSS Feed",
+          href: "/blog/feed.xml"
+        }]
+
+const headFeedLinks = blogMenu.data.map((e) => {
+  return {
+    rel: "alternate",
+    type: "application/rss+xml",
+    title: `${e.title} RSS Feed`,
+    href: `/blog/${e.id}-rss.xml`
+  }
+})
+---
 <html lang="en">
   <head>
     <SEO
@@ -26,14 +51,7 @@ const faviconSvg = await getImage({ src: faviconSvgSrc, format: 'svg' })
       description={description}
       charset="utf-8"
       extend={{
-        link: [{
-          rel: "sitemap",
-          href: "/sitemap-index.xml"
-        }, {
-          rel: "icon",
-          href: faviconSvg.src,
-          type: "image/svg+xml"
-        }],
+        link: headLinks.concat(headFeedLinks),
         meta: [{
           name: "viewport",
           content: "width=device-width"
