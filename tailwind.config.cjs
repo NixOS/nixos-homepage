@@ -44,6 +44,23 @@ module.exports = {
         '0.5': '0.5px'
       }
     },
+    screens: {
+      'sm': '480px',
+      'md': '768px',
+      'lg': '992px',
+      'xl': '1200px',
+    },
+    fontSize: {
+      'xs': '0.75rem',
+      'sm': '0.875rem',
+      'base': '1rem',
+      'lg': '1.125rem',
+      'xl': '1.3-rem',
+      '2xl': '1.4rem',
+      '3xl': '1.5rem',
+      '4xl': '2rem',
+      '5xl': '2.5rem',
+    },
     container: {
       // https://tailwindcss.com/docs/container#centering-by-default
       center: true,

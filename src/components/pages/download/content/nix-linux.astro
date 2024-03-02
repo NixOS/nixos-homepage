@@ -12,7 +12,7 @@ const nixLinuxSingleUserInstall = [
 
 ---
 
-<h3 class="text-2xl font-bold text-nixdarkblue pb-2">
+<h3 class="text-2xl font-heading font-bold text-nixdarkblue pb-2">
   Multi-user installation (recommended)
 </h3>
 <p>
@@ -25,7 +25,7 @@ const nixLinuxSingleUserInstall = [
   We recommend the multi-user install if you are on Linux running systemd,
   with SELinux disabled and you can authenticate with <CodeInline>sudo</CodeInline>.
 </p>
-<h3 class="text-2xl font-bold text-nixdarkblue pb-2">
+<h3 class="text-2xl font-heading font-bold text-nixdarkblue pb-2">
   Single-user installation
 </h3>
 <p>
@@ -41,7 +41,7 @@ const nixLinuxSingleUserInstall = [
   The script will invoke  <CodeInline>sudo</CodeInline> to create <CodeInline>/nix</CodeInline> if it doesn’t already exist.
 </p>
 
-<h3 class="text-2xl font-bold text-nixdarkblue pb-2">
+<h3 class="text-2xl font-heading font-bold text-nixdarkblue pb-2">
   Which type of installation should you choose?
 </h3>
 <p>
@@ -49,14 +49,14 @@ const nixLinuxSingleUserInstall = [
   <a href="/manual/nix/stable/installation/multi-user">multi-user installation</a>:
 </p>
 
-<h5 class="text-2xl font-bold text-neutral-500">Pros</h5>
+<h5 class="text-2xl font-heading font-bold text-neutral-500">Pros</h5>
 <ul class="list-disc ml-[1rem]">
   <li>Better build isolation (and that is what Nix is all about)</li>
   <li>Better security (a build can not write somewhere in your home)</li>
   <li>Sharing builds between users</li>
 </ul>
 
-<h5 class="text-2xl font-bold text-neutral-500">Cons</h5>
+<h5 class="text-2xl font-heading font-bold text-neutral-500">Cons</h5>
 <ul class="list-disc ml-[1rem]">
   <li>Requires <CodeInline>root</CodeInline> to run the daemon</li>
   <li>More involved installation (creation of <CodeInline>nixbld* users</CodeInline>, installing a systemd unit, ...</li>
