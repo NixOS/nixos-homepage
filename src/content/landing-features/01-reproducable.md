@@ -1,5 +1,5 @@
 ---
-title: Reproducable
+title: Reproducible
 img: /images/features/reproducable.svg
 ---
 
