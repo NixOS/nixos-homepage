@@ -6,8 +6,8 @@ const {
     alt: altText
     } = Astro.props;
 ---
-<div class=`flex flex-col justify-center bg-white p-4 rounded-lg ${extraClasses}`>
+<div class=`flex min-h-24 xl:min-h-20 flex-col justify-center bg-white p-4 rounded-lg ${extraClasses}`>
   <a href={externalLink}>
-    <img src={imageSource} alt={altText}>
+    <img class="h-full w-full" src={imageSource} alt={altText}>
   </a>
 </div>
