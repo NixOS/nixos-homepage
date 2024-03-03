@@ -72,7 +72,7 @@ const amis = Object.entries(NIXOS_AMIS)
   NixOS can be deployed to Amazon EC2 with a pre-generated AMI image that you can select below.
 </p>
 
-<h3 class="text-2xl font-bold text-nixdarkblue">
+<h3 class="text-2xl font-bold font-heading text-nixdarkblue">
   Via AWS Management Console
 </h3>
 
@@ -82,7 +82,7 @@ const amis = Object.entries(NIXOS_AMIS)
 
 <div class="launch-amazon [&_tr.selected]:table-row">
   <span class="font-bold text-xl">Choose region: </span>
-  <select class="select-region text-xl font-normal bg-white border-solid border-1 border-neutral-500">
+  <select class="text-xl px-2 py-1 border-1 w-full md:w-auto border-gray-950 font-normal outline-nixlightblue outline-2 focus:outline focus:border-nixlightblue bg-transparent rounded-full placeholder-gray-400 text-normal text-nixdarkblue placeholder-grey-200">
     {amis.map((option) => {
       const selected = (option.region === "ap-east-1")
       return (<option value={option.region} {selected}>{option.region}</option>)
@@ -117,7 +117,7 @@ const amis = Object.entries(NIXOS_AMIS)
   </Button>
 </div>
 
-<h3 class="text-2xl font-bold text-nixdarkblue">
+<h3 class="text-2xl font-bold font-heading text-nixdarkblue">
   Via Command Line
 </h3>
 

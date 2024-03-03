@@ -12,7 +12,7 @@ interface Props {
 const { title, date, description, href, imagePath = null } = Astro.props;
 ---
 
-<div class="font-extralight flex flex-col gap-1">
+<a href={href} target="_blank" rel="noopener noreferrer" class="!no-underline !text-white font-extralight flex flex-col gap-1">
   {imagePath && (
     <div class="flex justify-center bg-white rounded-xl mb-4 p-4 h-48">
       <Image src={imagePath} alt={`${title} Logo`} width="200" height="200" />
@@ -22,6 +22,6 @@ const { title, date, description, href, imagePath = null } = Astro.props;
   <div class="text-sm">{date}</div>
   <div class="leading-relaxed">{description}</div>
   <div class="!text-white text-right font-bold">
-    <a href={href} class="!text-white">Read more...</a>
+    <span class=" underline">Read more...</span>
   </div>
-</div>
+</a>

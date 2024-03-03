@@ -6,7 +6,7 @@ content:
       Stop worrying how to install dependencies for your project.
     tags:
       - text: complete dependencies
-        href: "https://nixos.org/guides/how-nix-works#complete-dependencies"
+        href: "/guides/how-nix-works#complete-dependencies"
     paragraphs:
       - >
         With Nix, a build process only has access to dependencies that have been declared explicitly.
@@ -24,9 +24,9 @@ content:
       Encourage cross-team development by providing a single way of building everything.
     tags:
       - text: language agnostic
-        href: "https://nixos.org/guides/how-nix-works#multiple-versions"
+        href: "/guides/how-nix-works#multiple-versions"
       - text: portable
-        href: "https://nixos.org/guides/how-nix-works#portable"
+        href: "/guides/how-nix-works#portable"
     paragraphs:
       - >
         Instead of complicated installation instructions, with Nix the development environment is always only one command away.
@@ -70,13 +70,13 @@ content:
       Never end up with a broken system.
     tags:
       - text: rollback
-        href: "https://nixos.org/guides/how-nix-works#atomic"
+        href: "/guides/how-nix-works#atomic"
       - text: garbage collection
-        href: "https://nixos.org/guides/how-nix-works#garbage-collection"
+        href: "/guides/how-nix-works#garbage-collection"
       - text: atomic
-        href: "https://nixos.org/guides/how-nix-works#atomic"
+        href: "/guides/how-nix-works#atomic"
       - text: nix store
-        href: "https://nixos.org/guides/how-nix-works#multiple-versions"
+        href: "/guides/how-nix-works#multiple-versions"
     paragraphs:
       - >
         Nix never overwrites files, but just adds new versions in different paths.
@@ -90,9 +90,9 @@ content:
       We all learn best when we play around.
     tags:
       - text: rollback
-        href: "https://nixos.org/guides/how-nix-works#atomic"
+        href: "/guides/how-nix-works#atomic"
       - text: nix store
-        href: "https://nixos.org/guides/how-nix-works#multiple-versions"
+        href: "/guides/how-nix-works#multiple-versions"
     paragraphs:
       - >
         Install new software without risk of things breaking.
@@ -107,7 +107,7 @@ content:
       Collaboration is encouraged by providing a low barrier to contribute and bots to guide contributors through the process.
     tags:
       - text: community
-        href: "https://nixos.org/community/"
+        href: "/community/"
       - text: contribute
         href: "https://nix.dev/contributing/how-to-contribute"
       - text: github
