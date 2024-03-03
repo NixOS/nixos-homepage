@@ -16,6 +16,7 @@ export function getStaticPaths() {
 
 export async function GET(context) {
   const blog = await getCollection("blog");
+  const title = context.params.id.charAt(0).toUpperCase() + context.params.id.slice(1);
   blog.sort((a, b) => {
     const dateA = new Date(a.data.date);
     const dateB = new Date(b.data.date);
@@ -24,15 +25,23 @@ export async function GET(context) {
     return e.data.category === context.params.id;
   });
   return rss({
-    title: "NixOS Blog",
-    site: context.site,
-    description: "NixOS Blog",
+    title: `NixOS ${title}`,
+    site: `${context.site}/blog`,
+    description: `${title} on NixOS, the purely functional Linux distribution.`,
     items: blog.map((post) => ({
       title: post.data.title ?? "Untitled",
       pubDate: post.data.date ?? new Date().toISOString(),
       content: sanitizeHtml(parser.render(post.body)),
       link: generatePathFromPost(post),
     })),
-    customData: `<language>en-us</language>`,
+    customData: `
+      <language>en-us</language>
+      <fh:complete xmlns:fh="http://purl.org/syndication/history/1.0"/>
+      <image>
+        <title>NixOS ${title}</title>
+        <url>https://nixos.org/logo/nixos-logo-only-hires.png</url>
+        <link>${context.site}/blog</link>
+      </image>
+    `,
   });
 }
