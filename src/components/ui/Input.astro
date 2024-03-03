@@ -16,11 +16,11 @@ const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "", name 
 <div class="relative">
   <Icon
     alt="Search"
-    class:list={["h-8 w-8 hidden md:block absolute", {
+    class:list={["h-8 w-8 absolute", {
         "text-nixdarkblue": color === "nixdarkblue",
         "text-white": color === "white",
-        "top-3.5 left-3": size === "lg",
-        "top-2.5 left-2.5": size === "sm-full"
+        "top-3.5 left-3 hidden md:block": size === "lg",
+        "top-1.5 left-2.5": size === "sm-full"
     }]}
     pack="mdi"
     name="search"
@@ -28,11 +28,11 @@ const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "", name 
   <input
     type="text"
     class="outline-nixlightblue outline-2 focus:outline focus:border-nixlightblue"
-    class:list={["rounded-full text-xl placeholder-gray-400 text-normal", {
+    class:list={["rounded-full placeholder-gray-400 text-normal", {
         "text-nixdarkblue placeholder-grey-200": color === "nixdarkblue",
-        "border-white text-white placeholder-nixlighterblue bg-transparent": color === "white",
-        "py-3 pl-4 md:pl-11 pr-4 md:w-[30rem] border-2": size === "lg",
-        "px-4 md:px-10 md:pl-11 py-2 w-full border-1": size === "sm-full"
+        "border-white text-white placeholder-gray-200 bg-transparent": color === "white",
+        "py-3 text-xl pl-4 md:pl-11 pr-4 md:w-[30rem] border-2": size === "lg",
+        "px-10 md:pl-11 py-2 w-full border-1": size === "sm-full"
     }]}
     name={name}
     placeholder={placeholder}
