@@ -7,7 +7,6 @@ import Container from "../components/layout/Container.astro";
 const headerMenu = await getEntry('menus', 'header');
 
 const currentTopRoute = `/${Astro.url.pathname.split("/")[1]}`
-console.log(currentTopRoute);
 
 const navbarItemStyle = `text-center text-nixsemidarkblue md:text-black md:hover:border-b-nixlightblue border-b-4`;
 const navbarItemInactiveStyle = `border-b-nixlighterblue md:border-b-transparent bg-nixlighterblue md:bg-transparent`;
