@@ -1,8 +1,9 @@
 import MarkdownIt from "markdown-it";
 
 export function generatePathFromPost(post, attachBlog = true) {
+  const postDate = new Date(post.data.date);
   return `/${attachBlog ? "blog/" : ""}${
-    post.slug.split("/")[0] + "/" + post.slug.split("/").pop().split("_").pop()
+    post.slug.split("/")[0] + "/" + postDate.getFullYear() + "/" + post.slug.split("/").pop().split("_").pop()
   }`;
 }
 
