@@ -4,6 +4,9 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
+// theme derivated from https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/main/packages/tm-themes/themes/vesper.json
+import syntaxTheme from "./src/lib/shiki/theme.json"
+
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
@@ -15,7 +18,7 @@ export default defineConfig({
   ],
   markdown: {
     shikiConfig: {
-      theme: 'one-dark-pro',
+      theme: syntaxTheme,
     },
   },
   compressHTML: true,

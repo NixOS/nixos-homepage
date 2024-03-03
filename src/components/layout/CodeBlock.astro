@@ -1,19 +1,22 @@
 ---
-
 interface Props {
   lines: Array<{ shellPrompt: string, code: string }>;
+  type?: "code" | "storepath";
 }
 
-const { lines } = Astro.props;
-
+const { lines, type = "code" } = Astro.props;
 ---
 
-<pre class="font-mono bg-[#3a3a3a] text-white whitespace-pre-line p-4 rounded-3xl overflow-x-scroll">
+<pre class:list={[
+  "border-1 bg-[#3a3a3a] px-4 py-4 rounded-3xl my-2 mb-4 overflow-x-auto",
+  { "bg-[#3a3a3a] text-white": type === "code" },
+  { "font-mono font-[500] bg-nixlighterblue border-nixlighterblue text-black shadow-[inset_0_0_1rem_0_rgba(0,0,0,0.1)]": type === "storepath" }
+  ]}>
 {lines.map((line, idx, {length}) => {
   if (length - 1 === idx) {
-    return <span class="font-bold">{line.shellPrompt}</span><span>{line.code}</span>
+    return <code class="font-bold bg-transparent border-none w-full p-0">{line.shellPrompt}</code><span>{line.code}</span>
   } else {
-    return <span class="font-bold">{line.shellPrompt}</span><span>{line.code}</span><br>
+    return <code class="font-bold bg-transparent border-none w-full p-0">{line.shellPrompt}</code><span>{line.code}</span><br>
   }
 })}
 </pre>
