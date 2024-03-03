@@ -19,7 +19,7 @@ const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "", name 
     class:list={["h-8 w-8 absolute", {
         "text-nixdarkblue": color === "nixdarkblue",
         "text-white": color === "white",
-        "top-3.5 left-3 hidden md:block": size === "lg",
+        "top-3.5 left-3 md:block": size === "lg",
         "top-1.5 left-2.5": size === "sm-full"
     }]}
     pack="mdi"
@@ -30,8 +30,8 @@ const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "", name 
     class="outline-nixlightblue outline-2 focus:outline focus:border-nixlightblue"
     class:list={["rounded-full placeholder-gray-400 text-normal", {
         "text-nixdarkblue placeholder-grey-200": color === "nixdarkblue",
-        "border-white text-white placeholder-gray-200 bg-transparent": color === "white",
-        "py-3 text-xl pl-4 md:pl-11 pr-4 md:w-[30rem] border-2": size === "lg",
+        "border-white text-white placeholder-nixlighterblue-dimmed bg-transparent": color === "white",
+        "w-full py-3 text-xl pl-11 pr-4 md:w-[30rem] border-2": size === "lg",
         "px-10 md:pl-11 py-2 w-full border-1": size === "sm-full"
     }]}
     name={name}

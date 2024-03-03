@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         "nixlighterblue": "#f2f8fd",
+        "nixlighterblue-dimmed": "#e6ecf5",
         "nixlightblue": "#7ebae4",
         "nixdarkblue": "#5277c3",
         "nixsemidarkblue": "#405D99",
