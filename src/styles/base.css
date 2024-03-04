@@ -25,12 +25,16 @@
         @apply leading-7 font-light;
     }
 
-    article ul {
-        @apply list-circle list-outside mb-2 ml-6;
+    article ol {
+        @apply list-decimal list-outside mb-2 ml-6;
     }
 
-    article ul > li {
+    article ol > li {
         @apply mb-1;
+    }
+
+    article ul {
+        @apply list-disc list-outside mb-2 ml-6;
     }
 
     article ul > li {
@@ -38,7 +42,7 @@
     }
 
     article ul > li > ul {
-        @apply list-disc list-outside mt-1;
+        @apply list-circle list-outside mt-1;
     }
 
     article ul > li > p:first-child {
