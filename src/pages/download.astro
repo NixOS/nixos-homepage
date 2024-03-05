@@ -2,11 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/layout/PageHeader.astro";
 import DownloadHeader from "../components/pages/download/DownloadHeader.astro";
+import DownloadAccordion from "../components/pages/download/DownloadAccordion.astro";
 
 import Container from "../components/layout/Container.astro";
-import { getCollection } from "astro:content";
-
-const downloadOptions = await getCollection("download");
 
 const NIX_VERSION = import.meta.env.NIX_STABLE_VERSION;
 const NIXOS_VERSION = import.meta.env.NIXOS_STABLE_SERIES;
@@ -14,147 +12,12 @@ const NIXOS_VERSION = import.meta.env.NIXOS_STABLE_SERIES;
 
 <Layout title="Download">
   <PageHeader text="Download" />
-
   <DownloadHeader title = "Nix" subTitle=": the package manager" currentVersion={NIX_VERSION} />
   <Container>
-    <div id="download-accordion" class="download-accordion">
-      <div>
-      {
-        downloadOptions.map(async (option) => {
-          const { Content } = await option.render();
-          const needsInstallInfix = option.data.family === "nix" && option.data.platform !== "more";
-          const optionId = `${option.data.family}-${needsInstallInfix ? "install-" : ""}${option.data.platform}`;
-
-          return (
-            <>
-              <h3>
-                <button
-                  id={`${optionId}-trigger`}
-                  aria-expanded="true"
-                  aria-controls={optionId}
-                  class:list={[
-                    "bg-nixlighterblue",
-                    'flex',
-                    'text-nixdarkerblue',
-                    'text-xl',
-                    'font-bold',
-                    'py-8',
-                    'px-8',
-                    'w-full',
-                    'rounded-2xl',
-                    'justify-between',
-                    'content-start',
-                    'my-4'
-                  ]}
-                >
-                  <span>{option.data.title}</span>
-                  <span class="hidden">
-                    X
-                  </span>
-                </button>
-              </h3>
-              <div
-                id={optionId}
-                role="region"
-                aria-labelledby={`${optionId}-trigger`}
-                class="block"
-              >
-                <article>
-                  <Content />
-                </article>
-              </div>
-            </>
-          );
-        })
-      }
-
-      </div>
-    </div>
+    <DownloadAccordion family="nix" />
   </Container>
   <DownloadHeader title="NixOS" subTitle=": the Linux distribution" currentVersion={NIXOS_VERSION} />
+  <Container>
+    <DownloadAccordion family="nixos" />
+  </Container>
 </Layout>
-
-<script>
-  const acc = document.getElementById("download-accordion");
-  const panels = acc.querySelectorAll("[role=region]");
-  const triggers = acc.querySelectorAll("[aria-expanded]");
-  let activePanel = panels[0];
-  let currentWindowWidth = window.innerWidth;
-  const accContentArea = acc.appendChild(document.createElement("div"));
-  accContentArea.classList.add("col-span-2");
-  accContentArea.classList.add("mt-4");
-
-  if (window.innerWidth > 768) {
-    enterDesktopMode();
-  } else {
-    enterMobileMode();
-  }
-
-  window.onresize = () => {
-    if (window.innerWidth > 768 && currentWindowWidth <= 768) {
-      enterDesktopMode();
-    } else if (window.innerWidth <= 768 && currentWindowWidth > 768) {
-      enterMobileMode();
-    }
-    currentWindowWidth = window.innerWidth;
-  };
-
-  acc.classList.add("md:grid");
-  acc.classList.add("md:grid-cols-1");
-  acc.classList.add("md:grid-cols-3");
-  acc.classList.add("gap-4");
-
-  function enterDesktopMode() {
-    for (let i = 0; i < panels.length; i++) {
-      accContentArea.appendChild(panels[i]);
-    }
-  }
-
-  function enterMobileMode() {
-    for (let i = 0; i < triggers.length; i++) {
-      triggers[i].after(panels[i])
-    }
-  }
-
-  if (window.location.hash !== "") {
-    activePanel = acc.querySelector(window.location.hash);
-  }
-
-  function updateAccordion() {
-    for (let i = 0; i < panels.length; i++) {
-      if (panels[i] === activePanel) {
-        togglePanelVisibility(panels[i], true);
-        continue;
-      }
-      togglePanelVisibility(panels[i], false);
-    }
-  }
-
-  function togglePanelVisibility(panel, visible = false) {
-    if (visible) {
-      panel.classList.remove("hidden");
-      panel.classList.add("block");
-      panel.setAttribute("aria-expanded", "true");
-      return;
-    } else {
-      panel.classList.remove("block");
-      panel.classList.add("hidden");
-      panel.setAttribute("aria-expanded", "false");
-    }
-  }
-
-  function togglePanel(e) {
-    const panel = acc.querySelector(`#${e.target.getAttribute("aria-controls")}`);
-    if (panel === activePanel) {
-      return;
-    }
-    activePanel = panel;
-    updateAccordion();
-  }
-
-  updateAccordion();
-
-  for (let i = 0; i < triggers.length; i++) {
-    triggers[i].addEventListener("click", togglePanel);
-  }
-</script>
