@@ -26,7 +26,7 @@
     }
 
     article ul {
-        @apply list-circle list-outside mb-2 ml-6;
+        @apply list-disc list-outside mb-2 ml-6;
     }
 
     article ul > li {
