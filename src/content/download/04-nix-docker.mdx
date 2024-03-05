@@ -1,0 +1,28 @@
+---
+title: Docker
+family: nix
+platform: docker
+---
+
+Start a Docker shell with Nix:
+
+```bash
+$ docker run -it nixos/nix
+```
+
+Or start a Docker shell with Nix exposing a `workdir` directory:
+
+```bash
+$ mkdir workdir
+$ docker run -it -v $(pwd)/workdir:/workdir nixos/nix
+```
+
+The `workdir` example from above can be also used to start hacking on nixpkgs:
+
+```bash
+$ git clone --depth=1 https://github.com/NixOS/nixpkgs.git
+$ docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix
+docker> nix-build -I nixpkgs=/nixpkgs -A hello
+docker> find ./result # this symlink points to the build package
+```
+

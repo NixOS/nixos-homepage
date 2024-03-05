@@ -1,0 +1,23 @@
+---
+title: Amazon
+family: nixos
+platform: amazon
+---
+import AWSTable from "../../components/pages/download/AWSTable.astro"
+
+NixOS can be deployed to Amazon EC2 with a pre-generated AMI image that you can select below.
+
+### Via AWS Management Console
+
+You can create an instance using the AWS Management Console by selecting the region and clicking the Launch button.
+
+<AWSTable />
+
+### Via Command Line
+
+You can also create an instance from the command line. For example, to create an instance in region `eu-west-1` using the EC2 API tools, just run:
+
+```bash
+$ nix-shell -p ec2_api_tools
+(nix-shell) $ ec2-run-instances ami-0fc7825fe890f87d1 --region eu-west-1 -k my-key-pair
+```
