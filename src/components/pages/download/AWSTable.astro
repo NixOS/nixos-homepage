@@ -2,9 +2,8 @@
 
 import fs from "node:fs";
 
-import CodeBlock from "../../../layout/CodeBlock.astro";
-import CodeInline from "../../../layout/CodeInline.astro";
-import Button from "../../../ui/Button.astro";
+import CodeInline from "../../layout/CodeInline.astro";
+import Button from "../../ui/Button.astro";
 
 const NIXOS_VERSION = import.meta.env.NIXOS_STABLE_SERIES;
 // TODO: amis for 23.11 do not exist yet, use latest for now
@@ -68,18 +67,6 @@ const amis = Object.entries(NIXOS_AMIS)
   });
 </script>
 
-<p>
-  NixOS can be deployed to Amazon EC2 with a pre-generated AMI image that you can select below.
-</p>
-
-<h3 class="text-2xl font-bold font-heading text-nixdarkblue">
-  Via AWS Management Console
-</h3>
-
-<p>
-  You can create an instance using the AWS Management Console by selecting the region and clicking the Launch button.
-</p>
-
 <div class="launch-amazon [&_tr.selected]:table-row">
   <span class="font-bold text-xl">Choose region: </span>
   <select class="text-xl px-2 py-1 border-1 w-full md:w-auto border-gray-950 font-normal outline-nixlightblue outline-2 focus:outline focus:border-nixlightblue bg-transparent rounded-full placeholder-gray-400 text-normal text-nixdarkblue placeholder-grey-200">
@@ -116,20 +103,3 @@ const amis = Object.entries(NIXOS_AMIS)
     Launch
   </Button>
 </div>
-
-<h3 class="text-2xl font-bold font-heading text-nixdarkblue">
-  Via Command Line
-</h3>
-
-<p>
-  You can also create an instance from the command line.
-  For example, to create an instance in region
-  <CodeInline>eu-west-1</CodeInline>
-  using the EC2 API tools, just run:
-</p>
-
-<CodeBlock lines={[
-  {"shellPrompt":"$", "code":" nix-shell -p ec2_api_tools" },
-  {"shellPrompt":"(nix-shell) $", "code":" ec2-run-instances ami-0fc7825fe890f87d1 --region eu-west-1 -k my-key-pair" },
-]} />
-

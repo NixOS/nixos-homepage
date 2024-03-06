@@ -3,12 +3,11 @@ layout: ../../layouts/MDXLayout.astro
 title: How Nix Works
 parentPath: "/learn"
 ---
+import StorePathBlock from "./../../components/layout/StorePathBlock.astro"
 
 Nix is a _purely functional package manager_. This means that it treats packages like values in purely functional programming languages such as Haskell — they are built by functions that don’t have side-effects, and they never change after they have been built. Nix stores packages in the _Nix store_, usually the directory `/nix/store`, where each package has its own unique subdirectory such as
 
-```bash
-/nix/store/b6gvzjyb2pg0kjfwrjmg1vfhh54ad73z-firefox-33.1/
-```
+<StorePathBlock path="/nix/store/b6gvzjyb2pg0kjfwrjmg1vfhh54ad73z-firefox-33.1/" />
 
 where `b6gvzjyb2pg0…` is a unique identifier for the package that captures all its dependencies (it’s a cryptographic hash of the package’s build dependency graph). This enables many powerful features.
 
@@ -97,15 +96,11 @@ How NixOS works?
 
 NixOS is based on [Nix](/), a purely functional package management system. Nix stores all packages in isolation from each other under paths such as
 
-```bash
-/nix/store/5rnfzla9kcx4mj5zdc7nlnv8na1najvg-firefox-3.5.4/
-```
+<StorePathBlock path="/nix/store/5rnfzla9kcx4mj5zdc7nlnv8na1najvg-firefox-3.5.4/" />
 
 The string `5rnf...` is a cryptographic hash of all input used to build the package. Packages are never overwritten after they have been built; instead, if you change the build description of a package (its ‘Nix expression’), it’s rebuilt and installed in a different path in `/nix/store` so it doesn’t interfere with the old version. NixOS extends this by using Nix not only to build packages, but also things like configuration files. For instance, the configuration of the SSH daemon is also built from a Nix expression and stored under a path like
 
-```bash
-/nix/store/s2sjbl85xnrc18rl4fhn56irkxqxyk4p-sshd\_config
-```
+<StorePathBlock path="/nix/store/s2sjbl85xnrc18rl4fhn56irkxqxyk4p-sshd\_config" />
 
 By building entire system configurations from a Nix expression, NixOS ensures that such configurations don’t overwrite each other, can be rolled back, and so on.
 
@@ -160,7 +155,7 @@ In fact, all old system configurations automatically show up in the Grub boot me
 Reproducible system configurations
 ----------------------------------
 
-NixOS’ declarative configuration model makes it easy to reproduce a system configuration on another machine (for instance, to test a change in a test environment before doing it on the production server). You just copy the configuration.nix file to the target NixOS machine and run nixos-rebuild switch. This will give you the same configuration (kernel, applications, system services, and so on) except for ‘mutable state’ (such as the stuff that lives in /var).
+NixOS’ declarative configuration model makes it easy to reproduce a system configuration on another machine (for instance, to test a change in a test environment before doing it on the production server). You just copy the `configuration.nix` file to the target NixOS machine and run `nixos-rebuild switch`. This will give you the same configuration (kernel, applications, system services, and so on) except for ‘mutable state’ (such as the stuff that lives in `/var`).
 
 Safe to test changes
 --------------------
@@ -180,4 +175,4 @@ $ nixos-rebuild build-vm
 $ ./result/bin/run-\*-vm
 ```
 
-This builds and starts a virtual machine that contains the new system configuration (i.e. a clone of the configuration of the host machine, with any changes that you made to configuration.nix). The VM doesn’t share any data with the host, so you can safely experiment inside the VM. The build-vm command is very efficient (it doesn’t require a disk image for the VM to be created), so it’s a very effective way to test changes.
+This builds and starts a virtual machine that contains the new system configuration (i.e. a clone of the configuration of the host machine, with any changes that you made to configuration.nix). The VM doesn’t share any data with the host, so you can safely experiment inside the VM. The `build-vm` command is very efficient (it doesn’t require a disk image for the VM to be created), so it’s a very effective way to test changes.

@@ -1,103 +1,23 @@
 ---
-
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/layout/PageHeader.astro";
-import Tabs from "../components/layout/Tabs.astro";
+import DownloadHeader from "../components/pages/download/DownloadHeader.astro";
+import DownloadAccordion from "../components/pages/download/DownloadAccordion.astro";
 
-import PanelWrapper from "../components/pages/download/components/panel-wrapper.astro";
-import DownloadHeader from "../components/pages/download/components/DownloadHeader.astro";
-
-import DownloadNixLinux from "../components/pages/download/content/nix-linux.astro";
-import DownloadNixMacOS from "../components/pages/download/content/nix-macos.astro";
-import DownloadNixWSL2 from "../components/pages/download/content/nix-wsl2.astro";
-import DownloadNixDocker from "../components/pages/download/content/nix-docker.astro";
-import DownloadNixMore from "../components/pages/download/content/nix-more.astro";
-
-import DownloadNixosIsoimage from "../components/pages/download/content/nixos-isoimage.astro";
-import DownloadNixosVirtualBox from "../components/pages/download/content/nixos-virtualbox.astro";
-import DownloadNixosAmazon from "../components/pages/download/content/nixos-amazon.astro";
-import DownloadNixosMore from "../components/pages/download/content/nixos-more.astro";
+import Container from "../components/layout/Container.astro";
 
 const NIX_VERSION = import.meta.env.NIX_STABLE_VERSION;
 const NIXOS_VERSION = import.meta.env.NIXOS_STABLE_SERIES;
-
 ---
 
 <Layout title="Download">
   <PageHeader text="Download" />
-
   <DownloadHeader title = "Nix" subTitle=": the package manager" currentVersion={NIX_VERSION} />
-
-  <Tabs class="" class:list={['']}>
-    <Fragment slot="tab-1">Linux</Fragment>
-    <Fragment slot="tab-2">MacOS</Fragment>
-    <Fragment slot="tab-3">Windows (WSL2)</Fragment>
-    <Fragment slot="tab-4">Docker</Fragment>
-    <Fragment slot="tab-5">More ...</Fragment>
-
-    <Fragment slot="panel-1">
-      <PanelWrapper>
-        <DownloadNixLinux />
-      </PanelWrapper>
-    </Fragment>
-
-    <Fragment slot="panel-2">
-      <PanelWrapper>
-        <DownloadNixMacOS />
-      </PanelWrapper>
-    </Fragment>
-
-    <Fragment slot="panel-3">
-      <PanelWrapper>
-        <DownloadNixWSL2 />
-      </PanelWrapper>
-    </Fragment>
-
-    <Fragment slot="panel-4">
-      <PanelWrapper>
-        <DownloadNixDocker />
-      </PanelWrapper>
-    </Fragment>
-
-    <Fragment slot="panel-5">
-      <PanelWrapper>
-        <DownloadNixMore />
-      </PanelWrapper>
-    </Fragment>
-  </Tabs>
-
+  <Container>
+    <DownloadAccordion family="nix" />
+  </Container>
   <DownloadHeader title="NixOS" subTitle=": the Linux distribution" currentVersion={NIXOS_VERSION} />
-
-  <Tabs class="" class:list={['pb-16']}>
-    <Fragment slot="tab-1">ISO image</Fragment>
-    <Fragment slot="tab-2">VirtualBox</Fragment>
-    <Fragment slot="tab-3">Amazon EC2</Fragment>
-    <Fragment slot="tab-4">More ...</Fragment>
-
-    <Fragment slot="panel-1">
-      <PanelWrapper>
-        <DownloadNixosIsoimage />
-      </PanelWrapper>
-    </Fragment>
-
-    <Fragment slot="panel-2">
-      <PanelWrapper>
-        <DownloadNixosVirtualBox />
-      </PanelWrapper>
-    </Fragment>
-
-    <Fragment slot="panel-3">
-      <PanelWrapper>
-        <DownloadNixosAmazon />
-      </PanelWrapper>
-    </Fragment>
-
-    <Fragment slot="panel-4">
-      <PanelWrapper>
-        <DownloadNixosMore />
-      </PanelWrapper>
-    </Fragment>
-
-  </Tabs>
-
+  <Container>
+    <DownloadAccordion family="nixos" />
+  </Container>
 </Layout>

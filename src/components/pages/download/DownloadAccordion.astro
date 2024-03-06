@@ -1,0 +1,175 @@
+---
+import { getCollection } from "astro:content";
+
+const { family = "nix" } = Astro.props;
+const accordionId = `download-${family}-accordion`;
+
+let downloadOptions = (await getCollection("download")).filter(
+  (option) => option.data.family === family
+);
+---
+
+<div id={accordionId} class="download-accordion">
+  <div class="download-accordion-menu">
+    {
+      downloadOptions.map(async (option) => {
+        const { Content } = await option.render();
+        const needsInstallInfix =
+          option.data.family === "nix" && option.data.platform !== "more";
+        const optionId = `${option.data.family}-${needsInstallInfix ? "install-" : ""}${option.data.platform}`;
+
+        return (
+          <>
+            <h3>
+              <button
+                id={`${optionId}-trigger`}
+                aria-expanded="true"
+                aria-controls={optionId}
+                class:list={[
+                  "bg-nixlighterblue",
+                  "flex",
+                  "text-nixsemidarkblue",
+                  "text-lg",
+                  "font-bold",
+                  "py-6",
+                  "px-8",
+                  "w-full",
+                  "rounded-2xl",
+                  "justify-start",
+                  "content-start",
+                  "my-4",
+                ]}
+              >
+                <span>{option.data.title}</span>
+              </button>
+            </h3>
+            <div
+              id={optionId}
+              role="region"
+              aria-labelledby={`${optionId}-trigger`}
+              class="block"
+            >
+              <article>
+                <Content />
+              </article>
+            </div>
+          </>
+        );
+      })
+    }
+  </div>
+</div>
+
+<script define:vars={{ id: accordionId }}>
+  const acc = document.getElementById(id);
+  const panels = acc.querySelectorAll("[role=region]");
+  const triggers = acc.querySelectorAll("[aria-expanded]");
+  const menuContainer = acc.querySelector(".download-accordion-menu");
+
+  let activePanel = panels[0];
+  let currentWindowWidth = window.innerWidth;
+  const accContentArea = acc.appendChild(document.createElement("div"));
+  accContentArea.classList.add("col-span-2", "mt-4", "px-8");
+  menuContainer.classList.add(
+    "md:bg-nixlighterblue",
+    "md:py-8",
+    "md:rounded-2xl",
+    "self-start"
+  );
+
+  if (window.innerWidth > 768) {
+    enterDesktopMode();
+  } else {
+    enterMobileMode();
+  }
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768 && currentWindowWidth <= 768) {
+      enterDesktopMode();
+    } else if (window.innerWidth <= 768 && currentWindowWidth > 768) {
+      enterMobileMode();
+    }
+    currentWindowWidth = window.innerWidth;
+  });
+
+  acc.classList.add(
+    "md:grid",
+    "md:grid-cols-1",
+    "md:grid-cols-3",
+    "gap-4",
+    "md:py-8"
+  );
+
+  if (window.location.hash) {
+    const hash = window.location.hash.substring(1);
+    const panel = acc.querySelector(`#${hash}`);
+    if (panel) {
+      activePanel = panel;
+    }
+  }
+
+  function enterDesktopMode() {
+    for (let i = 0; i < panels.length; i++) {
+      accContentArea.appendChild(panels[i]);
+    }
+  }
+
+  function enterMobileMode() {
+    for (let i = 0; i < triggers.length; i++) {
+      triggers[i].after(panels[i]);
+    }
+  }
+
+  function updateAccordion() {
+    for (let i = 0; i < panels.length; i++) {
+      if (panels[i] === activePanel) {
+        togglePanelVisibility(panels[i], triggers[i], true);
+        continue;
+      }
+      togglePanelVisibility(panels[i], triggers[i], false);
+    }
+  }
+
+  function togglePanelVisibility(panel, trigger, visible = false) {
+    if (visible) {
+      panel.classList.remove("hidden");
+      panel.classList.add("block");
+      trigger.setAttribute("aria-expanded", "true");
+    } else {
+      panel.classList.remove("block");
+      panel.classList.add("hidden");
+      trigger.setAttribute("aria-expanded", "false");
+    }
+  }
+
+  function togglePanel(e) {
+    const panel = acc.querySelector(
+      `#${e.target.getAttribute("aria-controls")}`
+    );
+    if (panel === activePanel) {
+      return;
+    }
+    updateURLHash(panel.id);
+    activePanel = panel;
+    updateAccordion();
+  }
+
+  function updateURLHash(newHash) {
+    window.location.hash = newHash;
+  }
+
+  for (let i = 0; i < triggers.length; i++) {
+    triggers[i].addEventListener("click", togglePanel);
+    triggers[i].classList.add(
+      "md:my-0",
+      "md:text-nixlightblue",
+      "md:rounded-none",
+      "md:aria-expanded:bg-white",
+      "md:aria-expanded:text-nixsemidarkblue",
+      "before:icon_arrow-up-drop-circle",
+      "aria-expanded:before:icon_arrow-down-drop-circle"
+    );
+  }
+
+  updateAccordion();
+</script>
