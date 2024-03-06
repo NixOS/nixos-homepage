@@ -1,0 +1,42 @@
+---
+title: Linux
+family: nix
+platform: linux
+---
+
+### Multi-user installation (recommended)
+
+Install Nix via the <span class="font-bold">recommended</span> [multi-user installation](/manual/nix/stable/installation/multi-user):
+
+```bash
+$ sh <(curl -L https://nixos.org/nix/install) --daemon
+```
+
+We recommend the multi-user install if you are on Linux running systemd, with SELinux disabled and you can authenticate with `sudo`.
+
+### Single-user installation
+
+Install Nix via the [single-user installation](/manual/nix/stable/installation/single-user):
+
+```bash
+$ sh <(curl -L https://nixos.org/nix/install) --no-daemon
+```
+
+Above command will perform a single-user installation of Nix, meaning that `nix` is owned by the invoking user. You should run this under your usual user account, not as `root`. The script will invoke `sudo` to create `/nix` if it doesn’t already exist.
+
+### Which type of installation should you choose?
+
+This depends on your requirements, but here is a short list of reasons why <span class="font-bold">we recommend</span> [multi-user installation](/manual/nix/stable/installation/multi-user):
+
+#### Pros
+
+*   Better build isolation (and that is what Nix is all about)
+*   Better security (a build can not write somewhere in your home)
+*   Sharing builds between users
+
+#### Cons
+
+*   Requires `root` to run the daemon
+*   More involved installation (creation of `nixbld* users`, installing a systemd unit, ...
+*   Harder to uninstall
+

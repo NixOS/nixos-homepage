@@ -66,18 +66,16 @@ posts.sort((a, b) => {
     </Container>
   </div>
   <div class="bg-[url('/divider/landing_search_top.svg')] bg-bottom bg-no-repeat pb-48 pt-16">
-    <Container class="grid md:grid-cols-3 gap-4">
+    <Container class="grid md:grid-cols-3 gap-8 md:gap-4">
       {
         landingFeatures.map(async (feature) => {
           const { Content } = await feature.render();
           return (
             <div class="text-center flex flex-col">
-              <Image
+              <img
                 src={feature.data.img}
-                class="w-1/2 h-32 mx-auto mb-6"
+                class="w-auto h-32 mx-auto mb-6"
                 alt={feature.data.title}
-                width="200"
-                height="200"
               />
               <h2 class="text-3xl text-nixdarkblue font-heading font-bold leading-none mb-2">
                 {feature.data.title}

@@ -111,7 +111,14 @@ BIC:  BUNQNL2AXXX</pre>
   <img src="/divider/slope_down.svg" class="w-full object-fill object-[60%_top] h-16 -scale-y-100" />
   <div class="bg-nixdarkblue py-16 text-white">
     <Container class="grid md:grid-cols-2 gap-8 px-12">
-      <div class="flex flex-col gap-4 justify-center md:order-last">
+      <div class="flex flex-col justify-center">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {sponsors.data.items.map((item) => (
+            <SponsorLogo class={item.class} href={item.href} src={item.src} alt={item.alt} />
+          ))}
+        </div>
+      </div>
+      <div class="flex flex-col gap-4 justify-center">
         <h1 class="text-4xl font-bold pb-2">
           Acknowledgements
         </h1>
@@ -137,13 +144,6 @@ BIC:  BUNQNL2AXXX</pre>
           We are very grateful for that!
           If you would like to support us as well, please contact
           <a href="mailto:foundation@nixos.org" class="!text-white">The NixOS Foundation</a>.</p>
-      </div>
-      <div class="flex flex-col justify-center">
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-          {sponsors.data.items.map((item) => (
-            <SponsorLogo class={item.class} href={item.href} src={item.src} alt={item.alt} />
-          ))}
-        </div>
       </div>
     </Container>
   </div>
