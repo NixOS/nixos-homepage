@@ -4,7 +4,8 @@ import Container from "../components/layout/Container.astro";
 import PageHeader from "../components/layout/PageHeader.astro";
 import Layout from "../layouts/Layout.astro";
 import Icon from "astro-icon";
-import { generatePathFromPost, createExcerpt } from "../lib/utils"
+import BlogListEntry from "../components/pages/blog/BlogListEntry.astro";
+import BlogList from "../components/pages/blog/BlogList.astro";
 
 const posts = await getCollection("blog");
 posts.sort((a, b) => {
@@ -75,20 +76,14 @@ const blogMenu = await getEntry('menus', 'blog');
         </div>
       ))}
     </div>
-    <div class="flex flex-col gap-8">
+    <BlogList />
       {
         posts.reverse().map(async (post) => {
           return (
-            <article data-category={post.slug.split("/")[0]} class="font-light" aria-hidden="false">
-              <a href={generatePathFromPost(post)}>
-                <h2 class="text-4xl leading-tight text-nixdarkblue font-heading font-extrabold">{post.data.title}</h2>
-              </a>
-              <p class="text-gray-700 text-xs mb-2">- Published on {post.data.date ? post.data.date.toDateString() : ""}</p>
-              <p class="font-extralight">{createExcerpt(post.body)}...</p>
-            </article>
+            <BlogListEntry post={post} />
           );
         })
       }
-    </div>
+    </BlogListEnt>
   </Container>
 </Layout>
