@@ -4,7 +4,9 @@ import { getCollection } from "astro:content";
 const { family = "nix" } = Astro.props;
 const accordionId = `download-${family}-accordion`;
 
-let downloadOptions = (await getCollection("download")).filter((option) => option.data.family === family);
+let downloadOptions = (await getCollection("download")).filter(
+  (option) => option.data.family === family
+);
 ---
 
 <div id={accordionId} class="download-accordion">
@@ -33,9 +35,9 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
                   "px-8",
                   "w-full",
                   "rounded-2xl",
-                  "justify-between",
+                  "justify-start",
                   "content-start",
-                  "my-4"
+                  "my-4",
                 ]}
               >
                 <span>{option.data.title}</span>
@@ -68,7 +70,12 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
   let currentWindowWidth = window.innerWidth;
   const accContentArea = acc.appendChild(document.createElement("div"));
   accContentArea.classList.add("col-span-2", "mt-4", "px-8");
-  menuContainer.classList.add("md:bg-nixlighterblue", "md:py-8", "md:rounded-2xl", "self-start");
+  menuContainer.classList.add(
+    "md:bg-nixlighterblue",
+    "md:py-8",
+    "md:rounded-2xl",
+    "self-start"
+  );
 
   if (window.innerWidth > 768) {
     enterDesktopMode();
@@ -85,7 +92,21 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
     currentWindowWidth = window.innerWidth;
   });
 
-  acc.classList.add("md:grid", "md:grid-cols-1", "md:grid-cols-3", "gap-4", "md:py-8");
+  acc.classList.add(
+    "md:grid",
+    "md:grid-cols-1",
+    "md:grid-cols-3",
+    "gap-4",
+    "md:py-8"
+  );
+
+  if (window.location.hash) {
+    const hash = window.location.hash.substring(1);
+    const panel = acc.querySelector(`#${hash}`);
+    if (panel) {
+      activePanel = panel;
+    }
+  }
 
   function enterDesktopMode() {
     for (let i = 0; i < panels.length; i++) {
@@ -97,10 +118,6 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
     for (let i = 0; i < triggers.length; i++) {
       triggers[i].after(panels[i]);
     }
-  }
-
-  if (window.location.hash !== "") {
-    activePanel = acc.querySelector(window.location.hash);
   }
 
   function updateAccordion() {
@@ -118,14 +135,10 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
       panel.classList.remove("hidden");
       panel.classList.add("block");
       trigger.setAttribute("aria-expanded", "true");
-      trigger.querySelector(".nav-arrow").classList.add("icon_arrow-down-drop-circle");
-      trigger.querySelector(".nav-arrow").classList.remove("icon_arrow-up-drop-circle");
     } else {
       panel.classList.remove("block");
       panel.classList.add("hidden");
       trigger.setAttribute("aria-expanded", "false");
-      trigger.querySelector(".nav-arrow").classList.add("icon_arrow-up-drop-circle");
-      trigger.querySelector(".nav-arrow").classList.remove("icon_arrow-down-drop-circle");
     }
   }
 
@@ -136,16 +149,26 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
     if (panel === activePanel) {
       return;
     }
+    updateURLHash(panel.id);
     activePanel = panel;
     updateAccordion();
   }
 
+  function updateURLHash(newHash) {
+    window.location.hash = newHash;
+  }
+
   for (let i = 0; i < triggers.length; i++) {
     triggers[i].addEventListener("click", togglePanel);
-    triggers[i].classList.add("md:my-0", "md:text-nixlightblue", "md:rounded-none", "md:aria-expanded:bg-white", "md:aria-expanded:text-nixsemidarkblue");
-    navArrow = document.createElement("div")
-    navArrow.classList.add("h-8", "w-8", "nav-arrow", "md:hidden");
-    triggers[i].appendChild(navArrow);
+    triggers[i].classList.add(
+      "md:my-0",
+      "md:text-nixlightblue",
+      "md:rounded-none",
+      "md:aria-expanded:bg-white",
+      "md:aria-expanded:text-nixsemidarkblue",
+      "before:icon_arrow-up-drop-circle",
+      "aria-expanded:before:icon_arrow-down-drop-circle"
+    );
   }
 
   updateAccordion();
