@@ -8,7 +8,7 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
 ---
 
 <div id={accordionId} class="download-accordion">
-  <div>
+  <div class="download-accordion-menu">
     {
       downloadOptions.map(async (option) => {
         const { Content } = await option.render();
@@ -26,20 +26,19 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
                 class:list={[
                   "bg-nixlighterblue",
                   "flex",
-                  "text-nixdarkerblue",
-                  "text-xl",
+                  "text-nixsemidarkblue",
+                  "text-lg",
                   "font-bold",
-                  "py-8",
+                  "py-6",
                   "px-8",
                   "w-full",
                   "rounded-2xl",
                   "justify-between",
                   "content-start",
-                  "my-4",
+                  "my-4"
                 ]}
               >
                 <span>{option.data.title}</span>
-                <span class="hidden">X</span>
               </button>
             </h3>
             <div
@@ -63,11 +62,13 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
   const acc = document.getElementById(id);
   const panels = acc.querySelectorAll("[role=region]");
   const triggers = acc.querySelectorAll("[aria-expanded]");
+  const menuContainer = acc.querySelector(".download-accordion-menu");
+
   let activePanel = panels[0];
   let currentWindowWidth = window.innerWidth;
   const accContentArea = acc.appendChild(document.createElement("div"));
-  accContentArea.classList.add("col-span-2");
-  accContentArea.classList.add("mt-4");
+  accContentArea.classList.add("col-span-2", "mt-4", "px-8");
+  menuContainer.classList.add("md:bg-nixlighterblue", "md:py-8", "md:rounded-2xl", "self-start");
 
   if (window.innerWidth > 768) {
     enterDesktopMode();
@@ -75,19 +76,16 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
     enterMobileMode();
   }
 
-  window.onresize = () => {
+  window.addEventListener("resize", () => {
     if (window.innerWidth > 768 && currentWindowWidth <= 768) {
       enterDesktopMode();
     } else if (window.innerWidth <= 768 && currentWindowWidth > 768) {
       enterMobileMode();
     }
     currentWindowWidth = window.innerWidth;
-  };
+  });
 
-  acc.classList.add("md:grid");
-  acc.classList.add("md:grid-cols-1");
-  acc.classList.add("md:grid-cols-3");
-  acc.classList.add("gap-4");
+  acc.classList.add("md:grid", "md:grid-cols-1", "md:grid-cols-3", "gap-4", "md:py-8");
 
   function enterDesktopMode() {
     for (let i = 0; i < panels.length; i++) {
@@ -108,23 +106,26 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
   function updateAccordion() {
     for (let i = 0; i < panels.length; i++) {
       if (panels[i] === activePanel) {
-        togglePanelVisibility(panels[i], true);
+        togglePanelVisibility(panels[i], triggers[i], true);
         continue;
       }
-      togglePanelVisibility(panels[i], false);
+      togglePanelVisibility(panels[i], triggers[i], false);
     }
   }
 
-  function togglePanelVisibility(panel, visible = false) {
+  function togglePanelVisibility(panel, trigger, visible = false) {
     if (visible) {
       panel.classList.remove("hidden");
       panel.classList.add("block");
-      panel.setAttribute("aria-expanded", "true");
-      return;
+      trigger.setAttribute("aria-expanded", "true");
+      trigger.querySelector(".nav-arrow").classList.add("icon_arrow-down-drop-circle");
+      trigger.querySelector(".nav-arrow").classList.remove("icon_arrow-up-drop-circle");
     } else {
       panel.classList.remove("block");
       panel.classList.add("hidden");
-      panel.setAttribute("aria-expanded", "false");
+      trigger.setAttribute("aria-expanded", "false");
+      trigger.querySelector(".nav-arrow").classList.add("icon_arrow-up-drop-circle");
+      trigger.querySelector(".nav-arrow").classList.remove("icon_arrow-down-drop-circle");
     }
   }
 
@@ -139,9 +140,13 @@ let downloadOptions = (await getCollection("download")).filter((option) => optio
     updateAccordion();
   }
 
-  updateAccordion();
-
   for (let i = 0; i < triggers.length; i++) {
     triggers[i].addEventListener("click", togglePanel);
+    triggers[i].classList.add("md:my-0", "md:text-nixlightblue", "md:rounded-none", "md:aria-expanded:bg-white", "md:aria-expanded:text-nixsemidarkblue");
+    navArrow = document.createElement("div")
+    navArrow.classList.add("h-8", "w-8", "nav-arrow", "md:hidden");
+    triggers[i].appendChild(navArrow);
   }
+
+  updateAccordion();
 </script>
