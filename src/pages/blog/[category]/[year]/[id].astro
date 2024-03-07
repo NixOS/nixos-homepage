@@ -1,14 +1,18 @@
 ---
 import { getCollection } from "astro:content";
-import Container from "../../components/layout/Container.astro";
-import PageHeader from "../../components/layout/PageHeader.astro";
-import Layout from "../../layouts/Layout.astro";
-import { generatePathFromPost } from "../../lib/utils";
+import Container from "../../../../components/layout/Container.astro";
+import PageHeader from "../../../../components/layout/PageHeader.astro";
+import Layout from "../../../../layouts/Layout.astro";
+import { generatePathFromPost } from "../../../../lib/utils";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
   return blogEntries.map((entry) => ({
-    params: { slug: generatePathFromPost(entry, false) },
+    params: {
+        category: entry.slug.split("/")[0],
+        year: (new Date(entry.data.date)).getFullYear(),
+        id: entry.slug.split("/").pop().split("_").pop()
+    },
     props: { entry },
   }));
 }

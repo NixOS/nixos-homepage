@@ -1,0 +1,23 @@
+---
+import { generatePathFromPost, createExcerpt } from "../../../lib/utils";
+
+const { post } = Astro.props;
+---
+
+<article
+  data-category={post.slug.split("/")[0]}
+  class="font-light"
+  aria-hidden="false"
+>
+  <a href={generatePathFromPost(post)}>
+    <h2
+      class="text-4xl leading-tight text-nixdarkblue font-heading font-ned, composition in a document, page, applicaextrabold"
+    >
+      {post.data.title}
+    </h2>
+  </a>
+  <p class="text-gray-700 text-xs mb-2">
+    - Published on {post.data.date ? post.data.date.toDateString() : ""}
+  </p>
+  <p class="font-extralight">{createExcerpt(post.body)}...</p>
+</article>
