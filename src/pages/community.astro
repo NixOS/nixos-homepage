@@ -8,6 +8,7 @@ import PageHeader from "../components/layout/PageHeader.astro";
 import Container from "../components/layout/Container.astro";
 import Divider from "../components/layout/Divider.astro";
 import Button from "../components/ui/Button.astro";
+import Banner from "../components/ui/Banner.astro";
 import RfcDiagram from "../components/ui/RfcDiagram.astro";
 import Tag from "../components/ui/Tag.astro";
 import NixConEntry from "../components/pages/community/NixConEntry.astro";
@@ -175,13 +176,11 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
       }
     </ul>
   </Container>
-  <aside class="my-8 bg-nixlighterblue p-4 font-bold text-nixsemidarkblue">
-    <Container>
-      If you are looking for professional help, <a
-        href="/community/commercial-support">check out companies</a
-      > that offer Nix related services.
-    </Container>
-  </aside>
+  <Banner>
+    If you are looking for professional help, <a
+      href="/community/commercial-support">check out companies</a
+    > that offer Nix related services.
+  </Banner>
   <Divider mirrorY />
   <div class="bg-nixdarkblue text-white py-8">
     <Container>

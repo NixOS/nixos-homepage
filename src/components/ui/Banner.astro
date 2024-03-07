@@ -1,0 +1,20 @@
+---
+
+import Container from "../layout/Container.astro";
+
+---
+
+<aside class="clickable my-8 bg-nixlighterblue p-4 font-bold text-nixsemidarkblue">
+  <Container>
+      <slot/>
+  </Container>
+</aside>
+
+<script>
+  let clickables = document.querySelectorAll('.clickable');
+  clickables.forEach(clickable => {
+    clickable.addEventListener('click', () => {
+      clickable.querySelector("a, button").click();
+    });
+  });
+</script>
