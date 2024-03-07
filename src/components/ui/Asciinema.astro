@@ -8,6 +8,17 @@ interface Props {
   class?: string;
 }
 
+const defaultSettings = {
+  cols: 77,
+  rows: 24,
+  autoPlay: false,
+  loop: true,
+  controls: 'auto',
+  fit: false,
+  terminalFontFamily: 'Fira Code Variable',
+  terminalFontSize: '0.6rem',
+};
+
 const {
   src,
   settings = {},
@@ -19,7 +30,7 @@ const {
 <asciinema-player
   class={extraClasses}
   data-src={src}
-  data-settings={JSON.stringify(settings)}
+  data-settings={JSON.stringify({...defaultSettings, ...settings})}
 >
 </asciinema-player>
 
