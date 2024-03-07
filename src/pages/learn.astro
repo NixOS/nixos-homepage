@@ -7,8 +7,49 @@ import Button from "../components/ui/Button.astro";
 import Divider from "../components/layout/Divider.astro";
 import NixosSearchInput from "../components/ui/NixosSearchInput.astro";
 const learningManuals = await getCollection("learning-manuals");
-const { data: learningFeatures } = await getEntry('learning', 'features');
-const { data: learningResources } = await getEntry('learning', 'resources');
+
+const learningFeatures = [
+  {
+    imgUrl: "/images/learn/installGfx.svg",
+    title: "Install Nix",
+    color: "green",
+    url: "/download#download-nix",
+  },
+  {
+    imgUrl: "/images/learn/firstStepsGfx.svg",
+    title: "First steps with Nix",
+    color: "orange",
+    url: "https://nix.dev/tutorials/first-steps/",
+  },
+  {
+    imgUrl: "/images/learn/howItWorksGfx.svg",
+    title: "How Nix works",
+    color: "lightblue",
+    url: "/guides/how-nix-works",
+  },
+];
+
+const learningResources = [
+  {
+    title: "The Nix hour",
+    description: "A weekly beginner-oriented interactive video lecture on all things Nix. Running since October 2022.",
+    url: "https://www.youtube.com/playlist?list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in",
+    buttonText: "Watch on Youtube",
+  },
+  {
+    title: "NixOS Wiki",
+    description: "A unofficial, user-maintained wiki for Nix and NixOS",
+    url: "https://nixos.wiki/",
+    buttonText: "Check the wiki",
+  },
+  {
+    title: "Nix Pills",
+    description: "A low-level tutorial on building software packages with Nix, showing in detail how Nixpkgs is constructed.",
+    url: "/guides/nix-pills",
+    buttonText: "Take the Pills",
+  },
+];
+
 ---
 
 <Layout title="Learn Nix | Nix & NixOS">
@@ -69,7 +110,7 @@ const { data: learningResources } = await getEntry('learning', 'resources');
   <div class="bg-nixdarkblue text-white py-8 md:px-8">
     <Container>
       <h2 class="text-4xl font-heading font-extrabold pb-8">
-        Other Learning Resources
+        Other learning resources
       </h2>
       <div class="grid md:grid-cols-3 gap-12 md:gap-4 pb-12">
         {
