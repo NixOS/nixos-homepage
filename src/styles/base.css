@@ -18,7 +18,7 @@
     }
 
     main a:any-link {
-        @apply underline decoration-0.5  underline-offset-4 text-nixsemidarkblue;
+        @apply underline decoration-1 underline-offset-4 text-nixsemidarkblue;
     }
 
     article {
