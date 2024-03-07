@@ -52,7 +52,7 @@ const blogMenu = await getEntry('menus', 'blog');
   <PageHeader text="Blog" />
   <Container class="py-8">
     <p class="text-nixdarkblue font-light text-2xl text-center mb-2">Click boxes to filter content</p>
-    <div role="group" class="flex flex-col md:flex-row justify-center md:items-center gap-4 pb-8">
+    <div role="group" class="flex flex-col md:flex-row justify-center md:items-center md:gap-4 pb-8">
       {blogMenu.data.map((e) => (
         <div>
           <input name="category" type="checkbox" role="checkbox" id={`check-${e.id}`} value={e.id} class="peer h-0 w-0" checked />
