@@ -24,7 +24,7 @@ posts.sort((a, b) => {
 <Layout>
   <div class="bg-nixlighterblue">
     <Container class="flex flex-col md:flex-row items-center justify-between py-4">
-      <b class="text-nixsemidarkblue text-lg">{posts[0].data.title}</b>
+      <b class="text-nixsemidarkblue text-lg font-heading">{posts[0].data.title}</b>
       <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
     </Container>
   </div>
@@ -119,7 +119,7 @@ posts.sort((a, b) => {
           demos.data.map((demo) => {
             return (
               <div class="flex flex-col items-start gap-2 overflow-hidden">
-                <p class="text-nixdarkblue text-2xl font-bold">{demo.title}</p>
+                <h3 class="text-nixdarkblue text-xl font-heading font-bold">{demo.title}</h3>
                 <Asciinema
                   class="max-w-full self-center md:self-start"
                   src={demo.file}
