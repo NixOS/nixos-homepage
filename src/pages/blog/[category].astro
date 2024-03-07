@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import Container from ".././../components/layout/Container.astro";
+import PageHeader from "../../components/layout/PageHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+import BlogListEntry from "../../components/pages/blog/BlogListEntry.astro";
+import BlogList from "../../components/pages/blog/BlogList.astro";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+
+  const filteredEntries = blogEntries.reduce((groups, entry) => {
+    const category = entry.slug.split("/")[0];
+    if (!groups[category]) {
+      groups[category] = {
+        params: {
+          category: category,
+        },
+        props: { entries: [], category: category },
+      };
+    }
+    groups[category].props.entries.push(entry);
+    return groups;
+  }, {});
+
+  return Array.from( Object.keys(filteredEntries), key => filteredEntries[key] );
+}
+
+const { entries, category } = Astro.props;
+---
+
+<Layout title={`Blog/${category}`}>
+  <PageHeader text={`Blog / ${category}`} />
+  <Container class="py-8">
+    <BlogList />
+      {
+        entries.reverse().map(async (post) => {
+          return (
+            <BlogListEntry post={post} />
+          );
+        })
+      }
+    </BlogList>
+  </Container>
+</Layout>
