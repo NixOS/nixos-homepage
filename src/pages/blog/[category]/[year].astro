@@ -29,14 +29,16 @@ export async function getStaticPaths() {
 }
 
 const { entries, category, year } = Astro.props;
+
+const upperCaseCategory = category.charAt(0).toUpperCase() + category.slice(1);
 ---
 
-<Layout title={`Blog/${category}/${year}`}>
-    <PageHeader text={`Blog / ${category} / ${year}`} />
+<Layout title={`Blog/${upperCaseCategory}/${year}`}>
+    <PageHeader text={`Blog / ${upperCaseCategory} / ${year}`} />
     <Container class="py-8">
       <BlogList />
         {
-          entries.reverse().map(async (post) => {
+          entries.map(async (post) => {
             return (
               <BlogListEntry post={post} />
             );
