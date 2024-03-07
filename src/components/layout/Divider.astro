@@ -1,4 +1,6 @@
 ---
+import InlineSVG from '../util/InlineSVG.astro';
+
 interface Props {
     style?: "slope",
     mirrorX?: boolean,
@@ -6,15 +8,16 @@ interface Props {
 }
 
 const styleMap = {
-    "slope": "/divider/slope_down.svg"
+    "slope": "/src/assets/image/divider/slope_down.svg"
 }
 
 const { style = "slope", mirrorX = false, mirrorY = false } = Astro.props;
 ---
 
-<img src={styleMap[style]} class:list={["w-full object-fill object-[60%_top] h-16 select-none",
-    {
-        "-scale-x-100": mirrorX,
-        "-scale-y-100": mirrorY
-    }
-]} aria-hidden="true" />
+<InlineSVG src={styleMap[style]} class:list={["select-none",
+{
+    "-scale-x-100": mirrorX,
+    "-scale-y-100": mirrorY
+}
+]} role="divider" style=`${mirrorY ? "margin-bottom: -0.1px;" : "margin-top: -0.1px;"}`/>
+

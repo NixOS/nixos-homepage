@@ -1,0 +1,22 @@
+---
+import { parse } from 'node-html-parser';
+
+export interface Props {
+  src: string;
+}
+
+const { src, ...attributes } = Astro.props as Props;
+const { default: innerHTML } = await import(`${src}?raw`);
+
+const root = parse(innerHTML);
+let svg = root.querySelector('svg');
+delete svg.attrs.height;
+delete svg.attrs.width;
+svg.setAttributes({...svg.attrs, ...attributes});
+
+const html = root.toString();
+
+---
+
+<Fragment set:html={html} />
+
