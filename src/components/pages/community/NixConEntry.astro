@@ -18,7 +18,7 @@ const { title, date, description, href, imagePath = null } = Astro.props;
       <Image src={imagePath} alt={`${title} Logo`} width="200" height="200" />
     </div>
   )}
-  <h4 class="text-lg font-bold">{title}</h4>
+  <h4 class="text-lg font-bold font-heading">{title}</h4>
   <div class="text-sm">{date}</div>
   <div class="leading-relaxed">{description}</div>
   <div class="!text-white text-right font-bold">
