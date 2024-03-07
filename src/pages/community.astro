@@ -12,12 +12,101 @@ import RfcDiagram from "../components/ui/RfcDiagram.astro";
 import Tag from "../components/ui/Tag.astro";
 import NixConEntry from "../components/pages/community/NixConEntry.astro";
 
-const platforms = await getEntry("community", "community-platforms");
 const meetups = await getEntry("community", "meetups");
-const nixcons = await getCollection("nixcons");
 const teams = await getCollection("teams");
 
-nixcons.reverse();
+const nixcons = [
+  {
+    title: "NixCon 2023 - Darmstadt",
+    date: "8-10 September 2023",
+    href: "https://2023.nixcon.org/",
+    description: "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
+    imagePath: "/images/nixcon/nixcon.2023.svg",
+  },
+  {
+    title: "NixCon 2022 - Paris",
+    date: "20-22 October 2022",
+    href: "https://2022.nixcon.org/",
+    description: "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
+    imagePath: "/images/nixcon/nixcon.2022.svg",
+  },
+  {
+    title: "NixCon 2020 - Online",
+    date: "16-18 October 2020",
+    href: "https://2019.nixcon.org/",
+    description: "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
+    imagePath: "/images/nixcon/nixcon.2020.svg",
+  },
+  {
+    title: "NixCon 2019 - Brno",
+    date: "25-27 October 2019",
+    href: "https://2019.nixcon.org/",
+    description: "NixCon is becoming a regular gathering that everybody expects to happen. This year we met at Brno, Czech Republic. This was the biggest conference so far.",
+    imagePath: "/images/nixcon/nixcon.2019.svg",
+  },
+  {
+    title: "NixCon 2018 - London",
+    date: "25-27 October 2018",
+    href: "https://nixcon2018.org/",
+    description: "For the first time a Nix conference outside the Germany. London was the first conference that was not run over the weekend, but during the week.",
+    imagePath: "/images/nixcon/nixcon.2018.svg",
+  },
+  {
+    title: "NixCon 2017 - Munich",
+    date: "28-31 October 2017",
+    href: "http://nixcon2017.org/",
+    description: "After a year of a break, Nix community gathered at TNG Technology Consulting in Munich.",
+  },
+  {
+    title: "NixCon 2015 - Berlin",
+    date: "14-17 November 2015",
+    href: "https://conf.nixos.org/",
+    description: "Taking place in a Berlin-style converted loft, it was the first NixOS conference. It was the first time Nix community came together in such numbers. In two days there were many interesting talks.",
+  },
+];
+
+const platformsMain = [
+  {
+    href: "https://discourse.nixos.org/",
+    name: "NixOS forum on Discourse",
+    iconName: "simple-icons:discourse",
+    description: "The official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.",
+  },
+  {
+    href: "https://matrix.to/#/#community:nixos.org",
+    name: "NixOS Matrix space",
+    iconName: "simple-icons:matrix",
+    description: "Real-time help, development chat, and off-topic community discussion takes place on Matrix.",
+  },
+];
+
+const platformsOther = [
+  {
+    href: "https://mastodon.social/tags/nixos",
+    name: "Mastodon",
+    iconName: "simple-icons:mastodon",
+  },
+  {
+    href: "https://twitter.com/hashtag/NixOS",
+    name: "Twitter",
+    iconName: "simple-icons:twitter",
+  },
+  {
+    href: "https://stackoverflow.com/questions/tagged/nix+or+nixpkgs+or+nixos+or+nixops",
+    name: "Stackoverflow",
+    iconName: "simple-icons:stackoverflow",
+  },
+  {
+    href: "https://discord.gg/RbvHtGa",
+    name: "Discord",
+    iconName: "simple-icons:discord",
+  },
+  {
+    href: "https://www.reddit.com/r/NixOS/",
+    name: "Reddit",
+    iconName: "simple-icons:reddit",
+  },
+];
 
 import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
 ---
@@ -53,7 +142,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     <h2 class="text-4xl font-bold text-nixdarkblue mt-8">Where to talk?</h2>
     <ul class="grid gap-4 mt-4 md:grid-flow-col auto-cols-fr">
       {
-        platforms.data.main.map((platform) => (
+        platformsMain.map((platform) => (
           <li class="bg-nixdarkblue rounded-xl p-4 hover:box-shadow-xl hover:bg-nixsemidarkblue transition-all">
             <a href={platform.href} class="!no-underline !text-white">
               <div class="flex gap-2 text-xl font-bold">
@@ -72,7 +161,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     </ul>
     <ul class="flex gap-4 mt-4 flex-wrap">
       {
-        platforms.data.other.map((platform) => (
+        platformsOther.map((platform) => (
           <li class="basis-24 grow bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
             <a href={platform.href}>
               <Icon
@@ -106,11 +195,11 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         <div class="col-span-2 md:col-span-1 bg-nixsemidarkblue p-4 rounded-xl">
           <h3 class="text-3xl font-heading font-bold mb-4">Next Conference</h3>
           <NixConEntry
-            imagePath={nixcons[0].data.imagePath}
-            title={nixcons[0].data.title}
-            date={nixcons[0].data.date}
-            description={nixcons[0].data.description}
-            href={nixcons[0].data.href} />
+            imagePath={nixcons[0].imagePath}
+            title={nixcons[0].title}
+            date={nixcons[0].date}
+            description={nixcons[0].description}
+            href={nixcons[0].href} />
         </div>
         <div class="col-span-2 md:py-4">
           <h3 class="text-3xl font-heading font-bold">Previous Conferences</h3>
@@ -118,10 +207,10 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
             {
               nixcons.slice(1).map((nixcon) => (
                 <NixConEntry
-                  title={nixcon.data.title}
-                  date={nixcon.data.date}
-                  description={nixcon.data.description}
-                  href={nixcon.data.href} />
+                  title={nixcon.title}
+                  date={nixcon.date}
+                  description={nixcon.description}
+                  href={nixcon.href} />
               ))
             }
           </div>
@@ -178,7 +267,10 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
       <div class="flex-1 flex flex-col items-start gap-8 justify-center">
         <h2 class="text-4xl font-bold text-nixdarkblue leading-none">RFC Process</h2>
         <p>
-          The "RFC" (request for comments) process is intended to provide a consistent and controlled path for new features to enter the Nix language, packages and OS, so that all community can be confident about the direction the ecosystem is evolving in.
+          The "RFC" (request for comments) process is intended to provide a
+          consistent and controlled path for new features to enter the Nix
+          language, packages and OS, so that all community can be confident
+          about the direction the ecosystem is evolving in.
         </p>
         <Button color="green" size="lg" href="https://github.com/NixOS/rfcs">Learn more</Button>
       </div>
@@ -228,9 +320,9 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
             .filter((team) => team.slug.split("_")[1] === "foundation-board")[0]
             .data.members.map((member) => (
               <li class="mb-1">
-                {member.name + " "}
+                <a href={"https://discourse.nixos.org/u/" + member.username}>{member.name}</a>
                 {member.title && (
-                  <Tag outline>{member.title}</Tag>
+                  <span> - {member.title}</span>
                 )}
               </li>
             ))
