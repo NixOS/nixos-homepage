@@ -6,23 +6,24 @@ import { getCollection, getEntry } from "astro:content";
 import Button from "../components/ui/Button.astro";
 import Divider from "../components/layout/Divider.astro";
 import NixosSearchInput from "../components/ui/NixosSearchInput.astro";
+import InlineSVG from "../components/util/InlineSVG.astro";
 const learningManuals = await getCollection("learning-manuals");
 
 const learningFeatures = [
   {
-    imgUrl: "/images/learn/installGfx.svg",
+    imgUrl: "/src/assets/image/learn/installGfx.svg",
     title: "Install Nix",
     color: "green",
     url: "/download#download-nix",
   },
   {
-    imgUrl: "/images/learn/firstStepsGfx.svg",
+    imgUrl: "/src/assets/image/learn/firstStepsGfx.svg",
     title: "First steps with Nix",
     color: "orange",
     url: "https://nix.dev/tutorials/first-steps/",
   },
   {
-    imgUrl: "/images/learn/howItWorksGfx.svg",
+    imgUrl: "/src/assets/image/learn/howItWorksGfx.svg",
     title: "How Nix works",
     color: "lightblue",
     url: "/guides/how-nix-works",
@@ -58,7 +59,7 @@ const learningResources = [
     {
       learningFeatures.map((feature) => (
         <div class="border-0.5 border-nixdarkerblue rounded-2xl p-8 flex flex-col justify-center gap-8">
-          <img src={feature.imgUrl} class="h-28" />
+          <InlineSVG src={feature.imgUrl} class="h-28" />
           <Button size="lg-full" color={feature.color} href={feature.url}>
             {feature.title}
           </Button>
