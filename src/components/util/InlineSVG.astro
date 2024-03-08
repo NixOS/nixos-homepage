@@ -1,5 +1,7 @@
 ---
-import { parse } from 'node-html-parser';
+import { parse } from "node-html-parser";
+// svgo is a peer dependency of astro-icon
+import { optimize } from "svgo";
 
 export interface Props {
   src: string;
@@ -11,17 +13,33 @@ interface SVGFile {
 }
 
 const { src, ...attributes } = Astro.props as Props;
-const res = import.meta.glob("/src/**/*.svg", { eager: true, query: '?raw' })
+const res = import.meta.glob("/src/**/*.svg", { eager: true, query: "?raw" });
 
 if (!(src in res)) {
   throw new Error(`${src} not found`);
 }
 
-const root = parse(res[src].default);
-let svg = root.querySelector('svg');
+// parse to sanitize
+const pre = parse(res[src].default).toString();
+const { data: optimized } = optimize(pre, {
+  multipass: true,
+  plugins: [
+    {
+      name: "preset-default",
+      params: {
+        overrides: {
+          removeViewBox: false,
+        },
+      },
+    },
+  ],
+});
+
+const root = parse(optimized);
+let svg = root.querySelector("svg");
 delete svg.attrs.height;
 delete svg.attrs.width;
-svg.setAttributes({...svg.attrs, ...attributes});
+svg.setAttributes({ ...svg.attrs, ...attributes });
 
 const html = root.toString();
 ---
