@@ -25,9 +25,12 @@ const {
   class: extraClasses = "",
 }: Props = Astro.props;
 
+
+const demoId = "asciinema-demo-" + src.split("/").pop().split(".")[0];
 ---
 
 <asciinema-player
+  id={demoId}
   class={extraClasses}
   data-src={src}
   data-settings={JSON.stringify({...defaultSettings, ...settings})}
@@ -40,9 +43,15 @@ const {
     constructor() {
       super();
       const src = this.dataset.src;
-      const settings = JSON.parse(this.dataset.settings);
-      AsciinemaPlayer.create(src, this, settings)
+      let settings = JSON.parse(this.dataset.settings);
+
+      if (window.location.hash === `#${this.id}`) {
+        settings.autoPlay = true;
       }
+
+      AsciinemaPlayer.create(src, this, settings)
+
+    }
   }
 
   customElements.define("asciinema-player", Asciinema);
