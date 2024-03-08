@@ -8,6 +8,7 @@ import { Image } from "astro:assets";
 import { generatePathFromPost, createExcerpt } from "../lib/utils"
 
 import Asciinema from "../components/ui/Asciinema.astro";
+import Divider from "../components/layout/Divider.astro";
 
 const landingFeatures = await getCollection("landing-features");
 const demos = await getEntry("landing", "demos");
@@ -101,7 +102,7 @@ posts.sort((a, b) => {
         />
     </Container>
   </div>
-  <img src="/divider/landing_search_bottom.svg" class="w-full object-cover object-[60%_top] h-80" />
+  <Divider style="landing_search_bottom" />
   <div>
     <Container>
       <h2
