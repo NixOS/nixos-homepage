@@ -1,14 +1,14 @@
 ---
+const { class: extraClasses, wrapperClasses, id = null } = Astro.props;
 
 import Container from "../layout/Container.astro";
-
 ---
 
-<aside class="clickable my-8 bg-nixlighterblue p-4 font-bold font-heading text-nixsemidarkblue">
-  <Container>
+<div class:list={["clickable bg-nixlighterblue font-bold font-heading text-nixsemidarkblue", wrapperClasses]}>
+  <Container class:list={["p-4", extraClasses]}>
       <slot/>
   </Container>
-</aside>
+</div>
 
 <script>
   let clickables = document.querySelectorAll('.clickable');
