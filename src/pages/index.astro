@@ -84,24 +84,37 @@ posts.sort((a, b) => {
       }
     </Container>
   </div>
-  <div class="bg-nixlighterblue py-4">
-    <Container class="flex justify-center flex-col w-full items-center gap-4">
-      <h2
-        class="text-4xl text-center md:w-2/3 text-nixdarkblue leading-tight font-heading font-bold pb-0"
-      >
-        Choose from Thousands of Packages
-      </h2>
-      <p class="font-extralight leading-relaxed text-2xl md:w-5/6 text-center pb-2">
-        The Nix Packages collection (<a class="font-bold !text-nixdarkblue" href="#">Nixpkgs</a>) is a set of <span class="text-nixgreen font-bold">over 80 000 packages</span>
-        for the Nix package manager.
-      </p>
-      <NixosSearchInput
-        collection="packages"
-        withSubmit
-        />
-    </Container>
+  <div class="relative
+  after:block
+  after:bg-[url(/divider/landing_search_bottom.svg)]
+  after:bsolute
+  after:left-0
+  after:bottom-0
+  after:w-full
+  after:bg-divider
+  after:overflow-hidden
+  after:bg-[60%_100%]
+  after:h-[30rem]
+  after:-mb-16
+  after:-mt-48">
+    <div class="bg-nixlighterblue pt-4">
+      <Container class="flex justify-center pb-8 flex-col w-full items-center gap-4 pt-8">
+        <h2
+          class="text-4xl text-center md:w-2/3 text-nixdarkblue leading-tight font-heading font-bold pb-0"
+        >
+          Choose from Thousands of Packages
+        </h2>
+        <p class="font-extralight leading-relaxed text-2xl md:w-5/6 text-center pb-2">
+          The Nix Packages collection (<a class="font-bold !text-nixdarkblue" href="#">Nixpkgs</a>) is a set of <span class="text-nixgreen font-bold">over 80 000 packages</span>
+          for the Nix package manager.
+        </p>
+        <NixosSearchInput
+          collection="packages"
+          withSubmit
+          />
+      </Container>
+    </div>
   </div>
-  <Divider style="landing_search_bottom" />
   <div>
     <Container>
       <h2
