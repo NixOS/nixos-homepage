@@ -22,7 +22,6 @@ HTML = \
   community/teams/rfc-steering-committee.html \
   community/teams/security.html \
   community/teams/documentation.html \
-  community/teams/nixpkgs-architecture.html \
   community/teams/nix.html \
   community/teams/cuda.html \
   community/teams/foundation-board.html \

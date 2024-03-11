@@ -65,6 +65,12 @@
   force = true
 
 [[redirects]]
+  from = "/community/teams/nixpkgs-architecture"
+  to = "https://github.com/nixpkgs-architecture"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/commercial-support.html"
   to = "/community/commercial-support.html"
   status = 302
