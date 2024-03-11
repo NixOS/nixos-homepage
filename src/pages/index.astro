@@ -24,7 +24,7 @@ posts.sort((a, b) => {
 ---
 
 <Layout>
-  <Banner class="flex flex-col md:flex-row items-center justify-between">
+  <Banner class="flex flex-col md:flex-row items-center justify-between gap-1 text-lg font-heading">
     <b>{posts[0].data.title}</b>
     <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
   </Banner>
