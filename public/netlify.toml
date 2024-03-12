@@ -1,4 +1,10 @@
 [[redirects]]
+  from = "/community/teams/nixpkgs-architecture"
+  to = "https://github.com/nixpkgs-architecture"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/news.xml"
   to = "/blog/announcements.xml"
   status = 302
