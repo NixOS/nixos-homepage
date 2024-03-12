@@ -61,21 +61,20 @@ jobs:
           enable-commit-comment: false
           enable-commit-status: true
 
-          # TODO: once we make main branch default we should change master->main
-          production-branch: "master"
-          production-deploy: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
+          production-branch: "main"
+          production-deploy: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
 
           alias: "${{ github.event_name == 'push' && github.ref_name || '' }}"
 
           enable-github-deployment: ${{ github.event_name == 'push' }}
           github-deployment-environment: "${{ github.event_name == 'push' && github.ref_name || format('pull-request-{0}', github.event.number) }}"
 
-      - name: "Commit updated files and push them to master branch"
+      - name: "Commit updated files and push them to main branch"
         if: ${{ github.repository == 'NixOS/nixos-homepage' }}
         uses: "stefanzweifel/git-auto-commit-action@v4"
         with:
           commit_message: "Daily update [ci skip]"
-          branch: "master"
+          branch: "main"
           file_pattern: "flake.lock blog/announcements.xml"
           commit_user_name: "NixOS webmaster"
           commit_user_email: "webmaster@nixos.org"
