@@ -320,9 +320,12 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
             .filter((team) => team.slug.split("_")[1] === "foundation-board")[0]
             .data.members.map((member) => (
               <li class="mb-1">
-                <a href={"https://discourse.nixos.org/u/" + member.username}>{member.name}</a>
+                {member.name}
                 {member.title && (
-                  <span> - {member.title}</span>
+                  <>
+                  &mdash;
+                  {member.title}
+                  </>
                 )}
               </li>
             ))

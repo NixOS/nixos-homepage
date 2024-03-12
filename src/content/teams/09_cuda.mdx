@@ -19,26 +19,66 @@ contact:
 - name: GitHub project board
   href: https://github.com/orgs/NixOS/projects/27
 ---
-# Motivation
 
-GPU-acceleration has become a fundamental prerequisite to machine learning work and scientific computing. Without support for GPU-acceleration, the Nixpkgs ecosystem will remain largely invisible to practitioners.
+The CUDA team is responsible for everything related to
+[CUDA](https://developer.nvidia.com/cuda-zone) in
+[Nixpkgs](https://github.com/NixOS/nixpkgs).
 
-Nixpkgs and NixOS give us the tools we need to build reproducible and robust packages and environments. However, the state of scientific computing in Nixpkgs does not reflect this.
+## Motivation
 
-# Goals and Responsibilities
+GPU-acceleration has become a fundamental prerequisite to machne learning work
+and scientific computing. Without support for GPU-acceleration, the Nixpkgs
+ecosystem will remain largely invisible to practitioners.
 
-The singular focus of the CUDA-maintainers team is to make Nixpkgs the best repository of packages leveraging CUDA, especially in machine learning and scientific computing. Towards that end, we seek to:
+Nixpkgs and NixOS give us the tools we need to build reproducile and robust
+packages and environments. However, the state of scientific computing in
+Nixpkgs does not reflect this.
 
-- improve the quantity and quality of CUDA-enabled package in Nixpkgs
-- document CUDA packaging best practices, guidelines, and patterns
-- support community efforts involving packaging or distributing CUDA-enabled software
+## Goals and Responsibilities
 
-# Call for Sponsors
+The singular focus of the CUDA-maintainers team is to make Nixkgs the best
+repository of packages leveraging CUDA, especially in machine learning and
+scientific computing. Towards that end, we seek to:
 
-The CUDA-maintainers team is seeking sponsors to help fund or supply technical infrastructure related to our mission. Therefore, if you or your organization:
+- improve the quantity and quality of CUDA-enabled package in ixpkgs
+- document CUDA packaging best practices, guidelines, and pattrns
+- support community efforts involving packaging or distributin CUDA-enabled
+  software
+
+## Call for Sponsors
+
+The CUDA-maintainers team is seeking sponsors to help fund or upply technical
+infrastructure related to our mission. Therefore, if you or your organization:
 
 - are impacted by these issues,
 - have related issues with Nixpkgs CUDA support,
 - would like to prioritize or accelerate certain work,
 
-please consider supporting this effort directly or through the NixOS Foundation. Reach out via GitHub [@connorbaker](https://github.com/connorbaker), or email connor.baker@tweag.io to get involved.
+Please consider supporting this effort directly or through theNixOS Foundation.
+Reach out via GitHub [@connorbaker](https://github.com/connorbaker), or email
+connor.baker@tweag.io to get involved.
+
+## Contact and Information
+
+Discussions are held on Matrix, Discourse, and on GitHub issues and pull
+requests.
+
+import Button from "../../components/ui/Button.astro";
+
+<div class="flex flex-wrap gap-4">
+  <Button
+    href="https://nixos.org/manual/nixpkgs/unstable/#cuda"
+    color="semidarkblue" size="sm">Nixpkgs manual's CUDA section</Button>
+  <Button
+    href="https://discourse.nixos.org/t/announcing-the-nixos-cuda-maintainers-team-and-a-call-for-maintainers/18074"
+    color="semidarkblue" size="sm">Discourse</Button>
+  <Button
+    href="https://app.element.io/#/room/#cuda:nixos.org"
+    color="semidarkblue" size="sm">Matrix</Button>
+  <Button
+    href="https://github.com/orgs/NixOS/projects/27"
+    color="semidarkblue" size="sm">GitHub Project board</Button>
+  <Button
+    href="https://github.com/orgs/NixOS/teams/cuda-maintainers"
+    color="semidarkblue" size="sm">GitHub Team page</Button>
+</div>

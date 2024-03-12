@@ -29,21 +29,17 @@ const { Content } = await entry.render();
         {
           entry.data.members.map((member) => (
             <li class="mb-1 last:mb-0">
-              {member.username ? (
+              {member.name}
+              {member.username && (
                 <>
-                <a href={"https://discourse.nixos.org/u/" + member.username}>
-                  {member.name}
-                </a>&nbsp;
-                ({member.username})
+                (<a href={"https://discourse.nixos.org/u/" + member.username}>@{member.username}</a>)
                 </>
-              ) : (
-                member.name
               )}
               {member.title && (
-                -
-                <Tag outline>
-                  {member.title}
-                </Tag>
+                <>
+                &mdash;
+                {member.title}
+                </>
               )}
             </li>
           ))
