@@ -14,20 +14,20 @@ const navbarItemInactiveStyle = `border-b-nixlighterblue md:border-b-transparent
 const navbarItemActiveStyle = `border-b-nixlightblue bg-nixlightblue text-white md:text-black md:bg-transparent font-bold`;
 ---
 
-<header class="bg-white text-black font-extralight drop-shadow-[0_8px_2px_rgba(0,0,0,0.2)]">
+<header role="banner" class="bg-white text-black font-extralight drop-shadow-[0_8px_2px_rgba(0,0,0,0.2)]">
     <Container class="flex flex-col md:flex-row justify-between md:items-center">
         <div class="text-4xl font-normal gap-2 flex justify-between md:justify-start items-center my-2">
             <a href="/" class="select-none gap-2 flex justify-between md:justify-start items-center">
                 <Image class="h-16 w-auto" src={nixosLogoNoText} alt="Nixos Logo" />
                 <Image class="h-16 block md:hidden xl:block w-auto" src={nixosLogoText} alt="Nixos Logo Text" />
             </a>
-            <div class="bg-nixlightblue block md:hidden p-4 rounded-lg" id="navigation-toggle" tabindex="2">
+            <button aria-label="Main Navigation Toggle" class="bg-nixlightblue block md:hidden p-4 rounded-lg" id="navigation-toggle">
                 <span class="bg-white block w-8 h-1 mb-1.5"></span>
                 <span class="bg-white block w-8 h-1 mb-1.5"></span>
                 <span class="bg-white block w-8 h-1"></span>
-            </div>
+            </button>
         </div>
-        <div class="flex pb-4 md:pb-0 flex-col md:flex-row gap-0.5 md:gap-5 md:flex" id="navbar-menu">
+        <nav aria-label="Main Navigation" role="menubar" class="flex pb-4 md:pb-0 flex-col md:flex-row gap-0.5 md:gap-5 md:flex" id="navbar-menu">
             {headerMenu.data.items.map((item) => (
                 <a
                 class:list={[
@@ -40,7 +40,7 @@ const navbarItemActiveStyle = `border-b-nixlightblue bg-nixlightblue text-white 
                 <Icon alt="Search" class="h-8 text-nixdarkblue hidden md:block" pack="mdi" name="search" />
                 <span class="inline-block md:hidden">Search</span>
             </a>
-        </div>
+        </nav>
     </Container>
 </header>
 
@@ -52,13 +52,7 @@ const navbarItemActiveStyle = `border-b-nixlightblue bg-nixlightblue text-white 
         navbarMenu.classList.toggle("hidden");
         navbarMenu.classList.toggle("flex")
     }
-    toggleMenu()
-
-    navigationToggle.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            toggleMenu()
-        }
-    });
+    toggleMenu();
 
     navigationToggle.addEventListener("click", () => toggleMenu());
 </script>

@@ -43,7 +43,10 @@ module.exports = {
       },
       textDecorationThickness: {
         '0.5': '0.5px'
-      }
+      },
+      backgroundSize: {
+        'divider': 'auto 100%',
+      },
     },
     screens: {
       'sm': '480px',

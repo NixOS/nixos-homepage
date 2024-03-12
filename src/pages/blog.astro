@@ -55,7 +55,7 @@ const blogMenu = await getEntry('menus', 'blog');
     <div role="group" class="flex flex-col md:flex-row justify-center md:items-center md:gap-4 pb-8">
       {blogMenu.data.map((e) => (
         <div>
-          <input name="category" type="checkbox" role="checkbox" id={`check-${e.id}`} value={e.id} class="peer h-0 w-0" checked />
+          <input name="category" type="checkbox" role="checkbox" id={`check-${e.id}`} value={e.id} class="peer h-0 w-0 opacity-0" checked />
           <label for={`check-${e.id}`} class="
           before:icon_checkbox-blank-outline_nixdarkblue
           before:absolute

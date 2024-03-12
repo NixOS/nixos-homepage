@@ -8,6 +8,8 @@ import { Image } from "astro:assets";
 import { generatePathFromPost, createExcerpt } from "../lib/utils"
 
 import Asciinema from "../components/ui/Asciinema.astro";
+import Divider from "../components/layout/Divider.astro";
+import Banner from "../components/ui/Banner.astro";
 
 const landingFeatures = await getCollection("landing-features");
 const demos = await getEntry("landing", "demos");
@@ -22,12 +24,10 @@ posts.sort((a, b) => {
 ---
 
 <Layout>
-  <div class="bg-nixlighterblue">
-    <Container class="flex flex-col md:flex-row items-center justify-between py-4">
-      <b class="text-nixsemidarkblue text-lg font-heading">{posts[0].data.title}</b>
-      <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
-    </Container>
-  </div>
+  <Banner class="flex flex-col md:flex-row items-center justify-between gap-1 text-lg font-heading">
+    <b>{posts[0].data.title}</b>
+    <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
+  </Banner>
   <div class="bg-[url('/hero-bg.svg')] bg-cover bg-no-repeat bg-left">
     <Container class="text-white grid grid-cols-1 lg:grid-cols-2 gap-8 py-16 lg:py-24">
       <div class="flex flex-col gap-4 my-auto mx-0">
@@ -60,7 +60,7 @@ posts.sort((a, b) => {
         </div>
     </Container>
   </div>
-  <div class="bg-[url('/divider/landing_search_top.svg')] bg-bottom bg-no-repeat pb-48 pt-16">
+  <div class="bg-[url('/divider/landing_search_top.svg')] bg-[39%_100%] md:bg-bottom bg-no-repeat pb-48 pt-16">
     <Container class="grid md:grid-cols-3 gap-8 md:gap-4">
       {
         landingFeatures.map(async (feature) => {
@@ -84,24 +84,38 @@ posts.sort((a, b) => {
       }
     </Container>
   </div>
-  <div class="bg-nixlighterblue py-4">
-    <Container class="flex justify-center flex-col w-full items-center gap-4">
-      <h2
-        class="text-4xl text-center md:w-2/3 text-nixdarkblue leading-tight font-heading font-bold pb-0"
-      >
-        Choose from Thousands of Packages
-      </h2>
-      <p class="font-extralight leading-relaxed text-2xl md:w-5/6 text-center pb-2">
-        The Nix Packages collection (<a class="font-bold !text-nixdarkblue" href="#">Nixpkgs</a>) is a set of <span class="text-nixgreen font-bold">over 80 000 packages</span>
-        for the Nix package manager.
-      </p>
-      <NixosSearchInput
-        collection="packages"
-        withSubmit
-        />
-    </Container>
+  <div class="relative
+  after:block
+  after:bg-[url(/divider/landing_search_bottom.svg)]
+  after:bsolute
+  after:left-0
+  after:bottom-0
+  after:w-full
+  after:bg-divider
+  after:overflow-hidden
+  after:bg-[60%_100%]
+  after:bg-no-repeat
+  after:h-[30rem]
+  after:-mb-16
+  after:-mt-48">
+    <div class="bg-nixlighterblue pt-4">
+      <Container class="flex justify-center pb-8 flex-col w-full items-center gap-4 pt-8">
+        <h2
+          class="text-4xl text-center md:w-2/3 text-nixdarkblue leading-tight font-heading font-bold pb-0"
+        >
+          Choose from Thousands of Packages
+        </h2>
+        <p class="font-extralight leading-relaxed text-2xl md:w-5/6 text-center pb-2">
+          The Nix Packages collection (<a class="font-bold !text-nixdarkblue" href="#">Nixpkgs</a>) is a set of <span class="text-nixgreen font-bold">over 80 000 packages</span>
+          for the Nix package manager.
+        </p>
+        <NixosSearchInput
+          collection="packages"
+          withSubmit
+          />
+      </Container>
+    </div>
   </div>
-  <img src="/divider/landing_search_bottom.svg" class="w-full object-cover object-[60%_top] h-80" />
   <div>
     <Container>
       <h2
@@ -114,8 +128,8 @@ posts.sort((a, b) => {
           demos.data.map((demo) => {
             return (
               <div class="flex flex-col items-start gap-2 overflow-hidden">
-                <h3 class="text-nixdarkblue text-xl font-heading font-bold">{demo.title}</h3>
                 <Asciinema
+                  title={demo.title}
                   class="max-w-full self-center md:self-start"
                   src={demo.file}
                   settings={{

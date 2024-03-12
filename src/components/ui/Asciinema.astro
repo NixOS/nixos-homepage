@@ -6,6 +6,7 @@ interface Props {
   src: string;
   settings?: AsciinemaSettings;
   class?: string;
+  title?: string;
 }
 
 const defaultSettings = {
@@ -23,16 +24,29 @@ const {
   src,
   settings = {},
   class: extraClasses = "",
+  title = undefined,
 }: Props = Astro.props;
 
+
+const demoId = "asciinema-demo-" + src.split("/").pop().split(".")[0];
 ---
 
-<asciinema-player
-  class={extraClasses}
-  data-src={src}
-  data-settings={JSON.stringify({...defaultSettings, ...settings})}
->
-</asciinema-player>
+<>
+  {title && (
+    <a href={`#${demoId}`} class="!no-underline" id={`${demoId}-link`}>
+      <h3 class="text-nixdarkblue text-xl font-heading font-bold">{title}</h3>
+    </a>
+  )}
+  <asciinema-player
+    id={demoId}
+    class={extraClasses}
+    data-src={src}
+    data-title={title}
+    data-settings={JSON.stringify({...defaultSettings, ...settings})}
+  >
+  </asciinema-player>
+</>
+
 
 <script>
   import * as AsciinemaPlayer from "asciinema-player";
@@ -40,9 +54,20 @@ const {
     constructor() {
       super();
       const src = this.dataset.src;
-      const settings = JSON.parse(this.dataset.settings);
-      AsciinemaPlayer.create(src, this, settings)
+      let settings = JSON.parse(this.dataset.settings);
+
+      if (window.location.hash === `#${this.id}`) {
+        settings.autoPlay = true;
       }
+
+      const player = AsciinemaPlayer.create(src, this, settings)
+
+      if (this.dataset.title) {
+        document.getElementById(`${this.id}-link`).addEventListener("click", (e) => {
+          player.play();
+        });
+      }
+    }
   }
 
   customElements.define("asciinema-player", Asciinema);

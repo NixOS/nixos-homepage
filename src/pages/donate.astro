@@ -10,6 +10,7 @@ import Button from "../components/ui/Button.astro";
 import { Image } from 'astro:assets';
 
 import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
+import Divider from '../components/layout/Divider.astro';
 
 const sponsors = await  getEntry('sponsors', 'info');
 
@@ -39,8 +40,7 @@ const sponsors = await  getEntry('sponsors', 'info');
       <Image src={nixosFoundationLogo} alt='NixOS Foundation Logo' class="h-96" />
     </div>
   </Container>
-
-  <img src="/divider/slope_down.svg" class="w-full object-fill object-[60%_top] h-16 -scale-y-100 -scale-x-100" />
+  <Divider style='slope' mirrorX mirrorY />
   <div class="bg-nixdarkblue py-16 md:py-16 md:px-12 text-white">
     <Container class="grid md:grid-cols-2 gap-8 md:px-12">
       <div class="flex flex-col gap-4">
@@ -61,8 +61,7 @@ const sponsors = await  getEntry('sponsors', 'info');
       </div>
     </Container>
   </div>
-  <img src="/divider/slope_down.svg" class="w-full object-fill object-[60%_top] h-16 -scale-x-100" />
-
+  <Divider style='slope' mirrorX />
   <Container class="grid md:grid-cols-2 gap-8 py-16 px-12">
     <div class="flex flex-col gap-4">
       <h2 class="text-3xl font-bold font-heading text-nixdarkblue pb-2">
@@ -107,8 +106,7 @@ BIC:  BUNQNL2AXXX</pre>
       </p>
     </div>
   </Container>
-
-  <img src="/divider/slope_down.svg" class="w-full object-fill object-[60%_top] h-16 -scale-y-100" />
+  <Divider style='slope' mirrorY />
   <div class="bg-nixdarkblue py-16 text-white">
     <Container class="grid md:grid-cols-2 gap-8 px-12">
       <div class="flex flex-col justify-center">
