@@ -78,7 +78,7 @@
         <p>
           Install Nix via the
           <strong>recommended</strong>
-          <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a>:
+          <a href="[%nixManual%]/installation/multi-user.html">multi-user installation</a> by running as a normal user with `sudo` permissions:
         </p>
         <pre class="terminal-console">
 <span class="shell-prompt">$ </span>sh &lt;(curl -L https://nixos.org/nix/install)</pre>
