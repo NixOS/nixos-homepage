@@ -1,5 +1,5 @@
 ---
-import Icon from "astro-icon";
+import { Icon } from "astro-icon/components";
 
 interface Props {
     color?: "nixdarkblue" | "white",
@@ -22,8 +22,7 @@ const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "", name 
         "top-3.5 left-3 md:block": size === "lg",
         "top-1.5 left-2.5": size === "sm-full"
     }]}
-    pack="mdi"
-    name="search"
+    name="mdi:search"
   />
   <input
     type="text"

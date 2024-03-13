@@ -1,3 +1,5 @@
+const { addDynamicIconSelectors } = require('@iconify/tailwind');
+
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
@@ -71,7 +73,7 @@ module.exports = {
     },
   },
   plugins: [
-    require("daisyui"),
+    addDynamicIconSelectors(),
   ],
   daisyui: {
     // Disable all themes for the current time being

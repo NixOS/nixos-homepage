@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon'
+import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets';
 import { getEntry } from 'astro:content';
 import flakeWhite from "../assets/image/flake-white.svg";
@@ -38,10 +38,10 @@ const footerMenu = await getEntry('menus', 'footer');
         <hr class="lg:hidden border-nixlightblue">
         <div class="basis-1/2 flex flex-row justify-between lg:justify-end gap-4 font-extralight">
           <h4 class="my-auto">Connect with us:</h4>
-          <div class="my-auto flex flex-row gap-2">
+          <div class="my-auto flex flex-row gap-3">
             {footerMenu.data.social.map((item) =>(
                 <a href={item.link} aria-label={`Connect with us on ${item.name}`}>
-                  <Icon alt={item.name} class="w-8" pack="mdi" name={item.name.toLowerCase()} />
+                  <Icon alt={item.name} class="w-7 h-7"  name={`simple-icons:${item.name.toLowerCase()}`} />
                 </a>
             ))}
           </div>

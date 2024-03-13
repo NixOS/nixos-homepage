@@ -1,6 +1,6 @@
 ---
 import { getEntry, getCollection } from "astro:content";
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import { Image } from 'astro:assets';
 
 import Layout from "../layouts/Layout.astro";
@@ -70,13 +70,13 @@ const platformsMain = [
   {
     href: "https://discourse.nixos.org/",
     name: "NixOS forum on Discourse",
-    iconName: "simple-icons:discourse",
+    iconName: "discourse",
     description: "The official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.",
   },
   {
     href: "https://matrix.to/#/#community:nixos.org",
     name: "NixOS Matrix space",
-    iconName: "simple-icons:matrix",
+    iconName: "matrix",
     description: "Real-time help, development chat, and off-topic community discussion takes place on Matrix.",
   },
 ];
@@ -85,27 +85,27 @@ const platformsOther = [
   {
     href: "https://mastodon.social/tags/nixos",
     name: "Mastodon",
-    iconName: "simple-icons:mastodon",
+    iconName: "mastodon",
   },
   {
     href: "https://twitter.com/hashtag/NixOS",
     name: "Twitter",
-    iconName: "simple-icons:twitter",
+    iconName: "twitter",
   },
   {
     href: "https://stackoverflow.com/questions/tagged/nix+or+nixpkgs+or+nixos+or+nixops",
     name: "Stackoverflow",
-    iconName: "simple-icons:stackoverflow",
+    iconName: "stackoverflow",
   },
   {
     href: "https://discord.gg/RbvHtGa",
     name: "Discord",
-    iconName: "simple-icons:discord",
+    iconName: "discord",
   },
   {
     href: "https://www.reddit.com/r/NixOS/",
     name: "Reddit",
-    iconName: "simple-icons:reddit",
+    iconName: "reddit",
   },
 ];
 
@@ -148,7 +148,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
             <a href={platform.href} class="!no-underline !text-white">
               <div class="flex gap-2 text-xl font-bold">
                 <Icon
-                  name={platform.iconName}
+                  name={`simple-icons:${platform.iconName}`}
                   alt={"logo of " + platform.name}
                   class="w-8 h-8"
                 />
@@ -166,7 +166,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
           <li class="basis-24 grow bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
             <a href={platform.href}>
               <Icon
-                name={platform.iconName}
+                name={`simple-icons:${platform.iconName}`}
                 alt={"logo of " + platform.name}
                 class="mx-auto w-8 h-8 text-white"
               />

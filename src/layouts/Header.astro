@@ -1,5 +1,5 @@
 ---
-import {Icon} from "astro-icon";
+import {Icon} from "astro-icon/components";
 import { Image } from 'astro:assets';
 import nixosLogoNoText from "../assets/image/nixos-logo-notext.svg";
 import nixosLogoText from "../assets/image/nixos-logo-text.svg";
@@ -37,7 +37,7 @@ const navbarItemActiveStyle = `border-b-nixlightblue bg-nixlightblue text-white 
                 ]}  href={item.link}>{item.name}</a>
             ))}
             <a target="_blank" rel="noreferrer noopener" class={`pt-8 md:pt-7 pb-6 ${navbarItemStyle} ${navbarItemInactiveStyle}`} href="https://search.nixos.org" arial-label="Nixos package and options search">
-                <Icon alt="Search" class="h-8 text-nixdarkblue hidden md:block" pack="mdi" name="search" />
+                <Icon alt="Search" class="h-8 w-8 text-nixdarkblue hidden md:block" name="mdi:search" />
                 <span class="inline-block md:hidden">Search</span>
             </a>
         </nav>
