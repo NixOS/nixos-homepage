@@ -97,6 +97,9 @@ const platformsOther = [
     name: "Stackoverflow",
     iconName: "simple-icons:stackoverflow",
   },
+];
+
+const platformsOutside = [
   {
     href: "https://discord.gg/RbvHtGa",
     name: "Discord",
@@ -163,7 +166,28 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     <ul class="flex gap-4 mt-4 flex-wrap">
       {
         platformsOther.map((platform) => (
-          <li class="basis-24 grow bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
+          <li class="basis-24 grow-0 bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
+            <a href={platform.href}>
+              <Icon
+                name={platform.iconName}
+                alt={"logo of " + platform.name}
+                class="mx-auto w-8 h-8 text-white"
+              />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+  <Container>
+    <h2 class="text-4xl font-bold font-heading text-nixdarkblue mt-8">Outside spaces</h2>
+    <p class="text-gray-700">
+        These spaces are not monitored and not moderated by the NixOS Moderation Team.
+    </p>
+    <ul class="flex gap-4 mt-4 flex-wrap">
+      {
+        platformsOutside.map((platform) => (
+          <li class="basis-24 grow-0 bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
             <a href={platform.href}>
               <Icon
                 name={platform.iconName}
