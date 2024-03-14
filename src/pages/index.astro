@@ -29,7 +29,7 @@ posts.sort((a, b) => {
     <b>{posts[0].data.title}</b>
     <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
   </Banner>
-  <div class="bg-[url('/hero-bg.svg')] bg-cover bg-no-repeat bg-left">
+  <div class="inline-svg-hero bg-cover bg-no-repeat bg-left">
     <Container class="text-white grid grid-cols-1 lg:grid-cols-2 gap-8 py-16 lg:py-24">
       <div class="flex flex-col gap-4 my-auto mx-0">
         <h1 class="text-5xl font-heading font-bold leading-none">
@@ -61,7 +61,7 @@ posts.sort((a, b) => {
         </div>
     </Container>
   </div>
-  <div class="bg-[url('/divider/landing_search_top.svg')] bg-[39%_100%] md:bg-bottom bg-no-repeat pb-48 pt-16">
+  <div class="inline-svg-landing-search-top bg-[39%_100%] md:bg-bottom bg-no-repeat pb-48 pt-16">
     <Container class="grid md:grid-cols-3 gap-8 md:gap-4">
       {
         landingFeatures.map(async (feature) => {
