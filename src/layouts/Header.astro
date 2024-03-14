@@ -1,10 +1,8 @@
 ---
 import {Icon} from "astro-icon/components";
-import { Image } from 'astro:assets';
-import nixosLogoNoText from "../assets/image/nixos-logo-notext.svg";
-import nixosLogoText from "../assets/image/nixos-logo-text.svg";
 import { getEntry } from 'astro:content';
 import Container from "../components/layout/Container.astro";
+import InlineSVG from "../components/util/InlineSVG.astro";
 const headerMenu = await getEntry('menus', 'header');
 
 const currentTopRoute = `/${Astro.url.pathname.split("/")[1]}`
@@ -18,8 +16,8 @@ const navbarItemActiveStyle = `border-b-nixlightblue bg-nixlightblue text-white 
     <Container class="flex flex-col md:flex-row justify-between md:items-center">
         <div class="text-4xl font-normal gap-2 flex justify-between md:justify-start items-center my-2">
             <a href="/" class="select-none gap-2 flex justify-between md:justify-start items-center">
-                <Image class="h-16 w-auto" src={nixosLogoNoText} alt="Nixos Logo" />
-                <Image class="h-16 block md:hidden xl:block w-auto" src={nixosLogoText} alt="Nixos Logo Text" />
+                <InlineSVG class="h-16 w-auto" src="/src/assets/image/nixos-logo-notext.svg" alt="Nixos Logo" />
+                <InlineSVG class="h-16 block md:hidden xl:block w-auto" src="/src/assets/image/nixos-logo-text.svg" alt="Nixos Logo Text" />
             </a>
             <button aria-label="Main Navigation Toggle" class="bg-nixlightblue block md:hidden p-4 rounded-lg" id="navigation-toggle">
                 <span class="bg-white block w-8 h-1 mb-1.5"></span>

@@ -10,6 +10,7 @@ import { generatePathFromPost, createExcerpt } from "../lib/utils"
 import Asciinema from "../components/ui/Asciinema.astro";
 import Divider from "../components/layout/Divider.astro";
 import Banner from "../components/ui/Banner.astro";
+import InlineSVG from "../components/util/InlineSVG.astro";
 
 const landingFeatures = await getCollection("landing-features");
 const demos = await getEntry("landing", "demos");
@@ -67,10 +68,9 @@ posts.sort((a, b) => {
           const { Content } = await feature.render();
           return (
             <div class="text-center flex flex-col">
-              <img
+              <InlineSVG
                 src={feature.data.img}
-                class="w-auto h-32 mx-auto mb-6"
-                alt={feature.data.title}
+                class="w-32 h-32 mx-auto mb-6"
               />
               <h2 class="text-3xl text-nixdarkblue font-heading font-bold leading-none mb-2">
                 {feature.data.title}

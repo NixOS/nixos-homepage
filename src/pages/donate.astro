@@ -9,8 +9,8 @@ import SponsorLogo from "../components/layout/SponsorLogo.astro";
 import Button from "../components/ui/Button.astro";
 import { Image } from 'astro:assets';
 
-import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
 import Divider from '../components/layout/Divider.astro';
+import InlineSVG from '../components/util/InlineSVG.astro';
 
 const sponsors = await  getEntry('sponsors', 'info');
 
@@ -37,7 +37,7 @@ const sponsors = await  getEntry('sponsors', 'info');
       </p>
     </div>
     <div class="flex flex-col items-center justify-center">
-      <Image src={nixosFoundationLogo} alt='NixOS Foundation Logo' class="h-96" />
+      <InlineSVG src="/src/assets/image/nixos-foundation-logo.svg" class="h-96" />
     </div>
   </Container>
   <Divider style='slope' mirrorX mirrorY />
