@@ -569,6 +569,12 @@
   status = 302
   force = true
 
+[[redirects]]
+  from = "/.well_known/*"
+  to = "/well_known/:splat"
+  status = 200
+  force = true
+
 [[headers]]
   for = "/.well-known/matrix/client"
     [headers.values]
