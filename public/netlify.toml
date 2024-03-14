@@ -570,8 +570,8 @@
   force = true
 
 [[redirects]]
-  from = "/.well_known/*"
-  to = "/well_known/:splat"
+  from = "/.well-known/*"
+  to = "/well-known/:splat"
   status = 200
   force = true
 
