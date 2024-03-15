@@ -1,6 +1,5 @@
 ---
 import { getEntry, getCollection } from "astro:content";
-import { Icon } from "astro-icon";
 import { Image } from 'astro:assets';
 
 import Layout from "../layouts/Layout.astro";
@@ -10,8 +9,8 @@ import Divider from "../components/layout/Divider.astro";
 import Button from "../components/ui/Button.astro";
 import Banner from "../components/ui/Banner.astro";
 import RfcDiagram from "../components/ui/RfcDiagram.astro";
-import Tag from "../components/ui/Tag.astro";
 import NixConEntry from "../components/pages/community/NixConEntry.astro";
+import CommunityLink from "../components/pages/community/CommunityLink.astro";
 
 const meetups = await getEntry("community", "meetups");
 const teams = await getCollection("teams");
@@ -69,13 +68,13 @@ const nixcons = [
 const platformsMain = [
   {
     href: "https://discourse.nixos.org/",
-    name: "NixOS forum on Discourse",
+    name: "Discourse",
     iconName: "simple-icons:discourse",
-    description: "The official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.",
+    description: "Our official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.",
   },
   {
     href: "https://matrix.to/#/#community:nixos.org",
-    name: "NixOS Matrix space",
+    name: "Matrix space",
     iconName: "simple-icons:matrix",
     description: "Real-time help, development chat, and off-topic community discussion takes place on Matrix.",
   },
@@ -104,11 +103,13 @@ const platformsOutside = [
     href: "https://discord.gg/RbvHtGa",
     name: "Discord",
     iconName: "simple-icons:discord",
+    description: "This community run Discord server is a place for real-time help, development chat, and off-topic community discussion. Please note that this Discord is not affiliated or moderated by the NixOS organization.",
   },
   {
     href: "https://www.reddit.com/r/NixOS/",
     name: "Reddit",
     iconName: "simple-icons:reddit",
+    description: "The NixOS subreddit is a place for news, discussion and questions about NixOS and Nix. Please note that this subreddit is not affiliated or moderated by the NixOS organization.",
   },
 ];
 
@@ -143,62 +144,53 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     </p>
   </Container>
   <Container>
-    <h2 class="text-4xl font-bold font-heading text-nixdarkblue mt-8">Where to talk?</h2>
-    <ul class="grid gap-4 mt-4 md:grid-flow-col auto-cols-fr">
-      {
-        platformsMain.map((platform) => (
-          <li class="bg-nixdarkblue rounded-xl p-4 hover:box-shadow-xl hover:bg-nixsemidarkblue transition-all">
-            <a href={platform.href} class="!no-underline !text-white">
-              <div class="flex gap-2 text-xl font-bold">
-                <Icon
-                  name={platform.iconName}
-                  alt={"logo of " + platform.name}
-                  class="w-8 h-8"
-                />
-                <span class="leading-8 ml-2">{platform.name}</span>
-              </div>
-              <div class="mt-4">{platform.description}</div>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    <ul class="flex gap-4 mt-4 flex-wrap">
-      {
-        platformsOther.map((platform) => (
-          <li class="basis-24 grow-0 bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
-            <a href={platform.href}>
-              <Icon
-                name={platform.iconName}
-                alt={"logo of " + platform.name}
-                class="mx-auto w-8 h-8 text-white"
-              />
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </Container>
-  <Container>
-    <h2 class="text-4xl font-bold font-heading text-nixdarkblue mt-8">Outside spaces</h2>
+    <h2 class="text-4xl font-bold font-heading leading-none text-nixdarkblue mt-8">Where to talk?</h2>
+    <p class="font-extralight leading-relaxed mt-2">
+      The Nix community is spread across various platforms. Here are the
+      official and unofficial spaces where you can find help, discuss
+      development, and chat with other users.
+    <h3 class="text-3xl font-bold font-heading text-nixdarkblue mt-4">Official spaces</h3>
+    <p class="text-gray-700">
+      These spaces are monitored and moderated by the NixOS Moderation Team.
+    </p>
+    <div class="grid md:grid-cols-3 gap-4 mt-4">
+        <ul class="flex gap-4 flex-col md:col-span-2">
+          {
+            platformsMain.map((platform) => (
+              <CommunityLink
+                href={platform.href}
+                name={platform.name}
+                iconName={platform.iconName}
+                description={platform.description} />
+            ))
+          }
+        </ul>
+        <ul class="flex md:flex-col gap-4 flex-wrap">
+          {
+            platformsOther.map((platform) => (
+              <CommunityLink
+                href={platform.href}
+                name={platform.name}
+                iconName={platform.iconName}
+                type="mobile_icon_desktop_name" />
+            ))
+          }
+        </ul>
+    </div>
+    <h3 class="text-3xl font-bold font-heading text-nixdarkblue mt-6">Unofficial spaces</h3>
     <p class="text-gray-700">
         These spaces are not monitored and not moderated by the NixOS Moderation Team.
+        <ul class="flex flex-col md:flex-row gap-4 mt-4 flex-wrap">
+          {platformsOutside.map((platform) => (
+              <CommunityLink
+                href={platform.href}
+                name={platform.name}
+                iconName={platform.iconName}
+                description={platform.description} />
+            ))
+          }
+        </ul>
     </p>
-    <ul class="flex gap-4 mt-4 flex-wrap">
-      {
-        platformsOutside.map((platform) => (
-          <li class="basis-24 grow-0 bg-nixdarkblue rounded-xl p-4 hover:drop-shadow-md hover:bg-nixsemidarkblue">
-            <a href={platform.href}>
-              <Icon
-                name={platform.iconName}
-                alt={"logo of " + platform.name}
-                class="mx-auto w-8 h-8 text-white"
-              />
-            </a>
-          </li>
-        ))
-      }
-    </ul>
   </Container>
   <Banner wrapperClasses="my-8">
     If you are looking for professional help, <a
