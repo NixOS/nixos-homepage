@@ -6,6 +6,12 @@ const svgo = require('svgo');
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 
+const inlineSvgs = {
+  'hero': './src/assets/image/hero-bg.svg',
+  'landing-search-top': './src/assets/image/divider/landing_search_top.svg',
+  'header-nixdarkblue': './src/assets/image/divider/header_nixdarkblue.svg',
+}
+
 function inlineSvg({ svg }) {
   // load file
   const file = fs.readFileSync(svg, "utf8");
@@ -25,7 +31,6 @@ function inlineSvg({ svg }) {
     ],
   });
   const base64 = Buffer.from(optimized.data).toString('base64');
-  console.log(base64);
   return "data:image/svg+xml;base64," + base64;
 }
 
@@ -102,21 +107,18 @@ module.exports = {
   plugins: [
     addDynamicIconSelectors(),
     plugin(function({ addUtilities }) {
-      addUtilities({
-        '.inline-svg-hero': {
-          'background-image': `url(${inlineSvg({ svg: './src/assets/image/hero-bg.svg' })})`,
-        },
-        '.inline-svg-landing-search-top': {
-          'background-image': `url(${inlineSvg({ svg: './src/assets/image/divider/landing_search_top.svg' })})`,
-        },
-        '.inline-svg-header-nixdarkblue': {
-          'background-image': `url(${inlineSvg({ svg: './src/assets/image/divider/header_nixdarkblue.svg' })})`,
-        },
-      })
+      res = {}
+
+      for (const [key, value] of Object.entries(inlineSvgs)) {
+        res[`.inline-svg-${key}`] = {
+          'background-image': `url(${inlineSvg({ svg: value })})`,
+        }
+      }
+
+      addUtilities(res)
     })
   ],
   daisyui: {
-    // Disable all themes for the current time being
     themes: false,
     darkTheme: false,
     base: false,
