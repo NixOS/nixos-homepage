@@ -51,7 +51,7 @@ module.exports = {
       fontFamily: {
         sans: ["Roboto Flex Variable", ...defaultTheme.fontFamily.sans],
         serif: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
-        heading: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
+        heading: ["Overpass Variable", ...defaultTheme.fontFamily.sans],
         mono: ["Fira Code Variable", ...defaultTheme.fontFamily.mono],
       },
       borderWidth: {

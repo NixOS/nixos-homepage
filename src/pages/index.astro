@@ -29,7 +29,7 @@ posts.sort((a, b) => {
     <b>{posts[0].data.title}</b>
     <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
   </Banner>
-  <div class="inline-svg-hero bg-cover bg-no-repeat bg-left">
+  <div class="bg-nixdarkblue inline-svg-hero bg-cover bg-no-repeat bg-left">
     <Container class="text-white grid grid-cols-1 lg:grid-cols-2 gap-8 py-16 lg:py-24">
       <div class="flex flex-col gap-4 my-auto mx-0">
         <h1 class="text-5xl font-heading font-bold leading-none">
@@ -70,7 +70,7 @@ posts.sort((a, b) => {
             <div class="text-center flex flex-col">
               <InlineSVG
                 src={feature.data.img}
-                class="w-32 h-32 mx-auto mb-6"
+                class="w-auto h-32 mx-auto mb-6"
               />
               <h2 class="text-3xl text-nixdarkblue font-heading font-bold leading-none mb-2">
                 {feature.data.title}
