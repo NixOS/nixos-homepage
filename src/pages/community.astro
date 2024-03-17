@@ -103,13 +103,11 @@ const platformsOutside = [
     href: "https://discord.gg/RbvHtGa",
     name: "Discord",
     iconName: "simple-icons:discord",
-    description: "This community run Discord server is a place for real-time help, development chat, and off-topic community discussion. Please note that this Discord is not affiliated or moderated by the NixOS organization.",
   },
   {
     href: "https://www.reddit.com/r/NixOS/",
     name: "Reddit",
     iconName: "simple-icons:reddit",
-    description: "The NixOS subreddit is a place for news, discussion and questions about NixOS and Nix. Please note that this subreddit is not affiliated or moderated by the NixOS organization.",
   },
 ];
 
@@ -180,13 +178,14 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     <h3 class="text-3xl font-bold font-heading text-nixdarkblue mt-6">Unofficial spaces</h3>
     <p class="text-gray-700">
         These spaces are not monitored and not moderated by the NixOS Moderation Team.
-        <ul class="flex flex-col md:flex-row gap-4 mt-4 flex-wrap">
+        <ul class="grid md:grid-cols-2 gap-4 mt-4 flex-wrap">
           {platformsOutside.map((platform) => (
               <CommunityLink
                 href={platform.href}
                 name={platform.name}
                 iconName={platform.iconName}
-                description={platform.description} />
+                description={platform.description}
+                type="mobile_icon_desktop_name" />
             ))
           }
         </ul>

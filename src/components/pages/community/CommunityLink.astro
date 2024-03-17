@@ -21,6 +21,7 @@ const { href, iconName, name = "", description = "", type = "full" } = Astro.pro
     <a href={href} class="!no-underline !text-white">
       <div class:list={[
         "flex gap-2 text-xl font-bold",
+        (type !== "full" || description === "") && "h-full",
         type === "mobile_icon_desktop_name" && "flex-col md:flex-row items-center justify-center md:justify-start",
         ]}>
         <Icon
@@ -33,6 +34,6 @@ const { href, iconName, name = "", description = "", type = "full" } = Astro.pro
           type === "mobile_icon_desktop_name" && "hidden md:block",
           ]}>{name}</span>}
       </div>
-      {type === "full" && <div class="mt-2">{description}</div>}
+      {description !== "" && type === "full" && <div class="mt-2">{description}</div>}
     </a>
   </li>
