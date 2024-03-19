@@ -22,11 +22,47 @@ const amis = Object.entries(NIXOS_AMIS)
     }
   })
   .filter((x) => x !== null);
-
 ---
 
+<div class="launch-amazon [&_tr.selected]:table-row">
+  <span class="font-bold text-xl">Choose region: </span>
+  <select id="select-region" class="text-xl px-2 py-1 border-1 w-full md:w-auto border-gray-950 font-normal outline-nixlightblue outline-2 focus:outline focus:border-nixlightblue bg-transparent rounded-full placeholder-gray-400 text-normal text-nixdarkblue placeholder-grey-200">
+    {amis.map((option) => {
+      const selected = (option.region === "ap-east-1")
+      return (<option value={option.region} {selected}>{option.region}</option>)
+    })}
+  </select>
+  <table class="bg-nixlighterblue p-[1rem] my-[1rem] border-separate rounded-2xl w-full">
+    <thead class="text-lg text-nixlightblue">
+      <tr>
+        <th>Root storage</th>
+        <th>Virtualisation</th>
+        <th colspan="2">AMI</th>
+      </tr>
+    </thead>
+    <tbody class="[&>tr]:hidden text-center font-bold text-lg">
+      {amis.map((option) => (
+        <tr id={"launch-amazon-"+option.region}>
+          <td>{option.storage}</td>
+          <td>{option.storage}</td>
+          <td colspan="2"><CodeInline>{option.ami}</CodeInline></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <Button
+    color="semidarkblue"
+    size="sm"
+    href="#"
+    classList={['launch-aws', 'w-full md:w-auto block md:inline text-center md:text-left']}
+  >
+    Launch
+  </Button>
+</div>
+
 <script>
-  const awsSelection = document.querySelector(".select-region");
+  const awsSelection = document.querySelector("#select-region");
   const awsUrl = "https://console.aws.amazon.com/ec2/home"
 
   function updateAwsLaunch(region, ami) {
@@ -61,45 +97,6 @@ const amis = Object.entries(NIXOS_AMIS)
 
     const newAmiText = document.querySelector("#launch-amazon-" + newRegion + " code").innerText;
 
-    console.log(newAmi);
-
     updateAwsLaunch(newRegion, newAmiText);
   });
 </script>
-
-<div class="launch-amazon [&_tr.selected]:table-row">
-  <span class="font-bold text-xl">Choose region: </span>
-  <select class="text-xl px-2 py-1 border-1 w-full md:w-auto border-gray-950 font-normal outline-nixlightblue outline-2 focus:outline focus:border-nixlightblue bg-transparent rounded-full placeholder-gray-400 text-normal text-nixdarkblue placeholder-grey-200">
-    {amis.map((option) => {
-      const selected = (option.region === "ap-east-1")
-      return (<option value={option.region} {selected}>{option.region}</option>)
-    })}
-  </select>
-  <table class="bg-nixlighterblue p-[1rem] my-[1rem] border-separate rounded-2xl w-full">
-    <thead class="text-lg text-nixlightblue">
-      <tr>
-        <th>Root storage</th>
-        <th>Virtualisation</th>
-        <th colspan="2">AMI</th>
-      </tr>
-    </thead>
-    <tbody class="[&>tr]:hidden text-center font-bold text-lg">
-      {amis.map((option) => (
-        <tr id={"launch-amazon-"+option.region}>
-          <td>{option.storage}</td>
-          <td>{option.storage}</td>
-          <td colspan="2"><CodeInline>{option.ami}</CodeInline></td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-
-  <Button
-    color="semidarkblue"
-    size="sm"
-    href="#"
-    classList={['launch-aws', 'w-full md:w-auto block md:inline text-center md:text-left']}
-  >
-    Launch
-  </Button>
-</div>
