@@ -1,4 +1,38 @@
+const { addDynamicIconSelectors } = require('@iconify/tailwind');
+const plugin = require('tailwindcss/plugin')
+const fs = require('node:fs');
+const parser = require('node-html-parser');
+const svgo = require('svgo');
+
 const defaultTheme = require("tailwindcss/defaultTheme");
+
+const inlineSvgs = {
+  'hero': './src/assets/image/hero-bg.svg',
+  'landing-search-top': './src/assets/image/divider/landing_search_top.svg',
+  'header-nixdarkblue': './src/assets/image/divider/header_nixdarkblue.svg',
+}
+
+function inlineSvg({ svg }) {
+  // load file
+  const file = fs.readFileSync(svg, "utf8");
+  const stringified = parser.parse(file).toString();
+  const optimized = svgo.optimize(stringified, {
+    multipass: true,
+    plugins: [
+      {
+        name: "preset-default",
+        params: {
+          overrides: {
+            removeViewBox: false,
+            cleanupIds: false,
+          },
+        },
+      },
+    ],
+  });
+  const base64 = Buffer.from(optimized.data).toString('base64');
+  return "data:image/svg+xml;base64," + base64;
+}
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -22,7 +56,7 @@ module.exports = {
       fontFamily: {
         sans: ["Roboto Flex Variable", ...defaultTheme.fontFamily.sans],
         serif: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
-        heading: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
+        heading: ["Overpass Variable", ...defaultTheme.fontFamily.sans],
         mono: ["Fira Code Variable", ...defaultTheme.fontFamily.mono],
       },
       borderWidth: {
@@ -71,10 +105,20 @@ module.exports = {
     },
   },
   plugins: [
-    require("daisyui"),
+    addDynamicIconSelectors(),
+    plugin(function({ addUtilities }) {
+      res = {}
+
+      for (const [key, value] of Object.entries(inlineSvgs)) {
+        res[`.inline-svg-${key}`] = {
+          'background-image': `url(${inlineSvg({ svg: value })})`,
+        }
+      }
+
+      addUtilities(res)
+    })
   ],
   daisyui: {
-    // Disable all themes for the current time being
     themes: false,
     darkTheme: false,
     base: false,
