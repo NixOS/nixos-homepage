@@ -67,6 +67,23 @@ let downloadOptions = (await getCollection("download")).filter(
   const menuContainer = acc.querySelector(".download-accordion-menu");
 
   let activePanel = panels[0];
+
+  if (id === "download-nix-accordion") {
+    const userPlatform = navigator.userAgent.toLowerCase();
+    let os = "linux";
+    if (userPlatform.includes("macintosh")) {
+      os = "macos";
+    } else if(userPlatform.includes("windows")) {
+      os = "windows";
+    }
+    for (let i = 0; i < panels.length; i++) {
+      if (panels[i].id === `nix-install-${os}`) {
+        activePanel = panels[i];
+        break;
+      }
+    }
+  }
+
   let currentWindowWidth = window.innerWidth;
   const accContentArea = acc.appendChild(document.createElement("div"));
   accContentArea.classList.add("col-span-2", "mt-4", "px-8");
