@@ -87,7 +87,7 @@ rec {
         '';
 
         manualVersionSwitch = dir: canonical:
-          let 
+          let
             baseUrl = "https://nixos.org/${dir}/${canonical}";
           in ''
           project=$(basename ${dir})
@@ -193,7 +193,7 @@ rec {
           name = "nixos-homepage";
 
           packages = with pkgs; [
-            nodejs_18
+            nodejs_20
           ];
 
           shellHook = ''
