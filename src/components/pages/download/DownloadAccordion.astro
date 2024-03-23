@@ -76,12 +76,7 @@ let downloadOptions = (await getCollection("download")).filter(
     } else if(userPlatform.includes("windows")) {
       os = "windows";
     }
-    for (let i = 0; i < panels.length; i++) {
-      if (panels[i].id === `nix-install-${os}`) {
-        activePanel = panels[i];
-        break;
-      }
-    }
+    activePanel = acc.querySelector(`#nix-install-${os}`);
   }
 
   let currentWindowWidth = window.innerWidth;
