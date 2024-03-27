@@ -5,6 +5,7 @@ platform: virtualbox
 ---
 import Button from "../../components/ui/Button.astro";
 import CodeInline from "../../components/layout/CodeInline.astro";
+import { nixosDownloadLink } from "../../lib/links";
 
 <div class="bg-nixlightorange text-nixdarkerorange p-6 rounded-2xl mb-[1rem]">
   <span class="font-bold">
@@ -18,8 +19,8 @@ VirtualBox image includes the **Plasma Desktop** (was KDE) as well as **the Virt
 <div class="my-[1rem]">
   <Button
     color="semidarkblue"
-    href="https://channels.nixos.org/nixos-23.11/latest-nixos-x86_64-linux.ova"
-    shaHref="https://channels.nixos.org/nixos-23.11/latest-nixos-x86_64-linux.ova.sha256"
+    href={nixosDownloadLink(null, "x86_64-linux", "ova", false)}
+    shaHref={nixosDownloadLink(null, "x86_64-linux", "ova", true)}
     shaText="(SHA-256)"
     classList = {["w-full", "md:w-auto", "block", "md:inline", "text-center", "md:text-left"]}
   >Download (64-bit)</Button>
