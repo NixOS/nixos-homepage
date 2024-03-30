@@ -4,7 +4,7 @@ $ # How hard would it be to build and configure an Amazon EC2 image?
 $ # Let us configure a Nginx to serve a "Welcome to nginx!" page, with a
 $ # valid SSL certificate (via LetsEncrypt) and recommended security settings
 $ cat -n amazon.nix
-     1  { pkgs, ...}:
+     1  { pkgs, ... }:
      2  {
      3    security.acme.acceptTerms = true;
      4    security.acme.email = "nix@example.com";

@@ -4,13 +4,15 @@ $ # We all love docker. But over time it can become tedious to write
 $ # reliable docker files.
 $ # What if you could use the power of Nix to build Docker images?
 $ cat -n docker.nix
-    1  { pkgs ? import <nixpkgs> { system = "x86_64-linux";}
-    2  }:                                   # nixpkgs package set
-    3  pkgs.dockerTools.buildLayeredImage { # helper to build Docker image
-    4    name = "nix-hello";                # give docker image a name
-    5    tag = "latest";                    # provide a tag
-    6    contents = [ pkgs.hello ];         # packages in docker image
-    7  }
+    1  {
+    2    pkgs ? import <nixpkgs> { system = "x86_64-linux"; }, # nixpkgs package set
+    3  }:
+    4  # helper to build Docker image
+    5  pkgs.dockerTools.buildLayeredImage {
+    6    name = "nix-hello"; # give docker image a name
+    7    tag = "latest"; # provide a tag
+    8    contents = [ pkgs.hello ]; # packages in docker image
+    9  }
 $ # Pause the video to read and understand the docker.nix
 $ # Now we build a Docker image with nix-build
 $ nix-build docker.nix -o result
