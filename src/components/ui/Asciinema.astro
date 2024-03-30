@@ -16,7 +16,7 @@ const defaultSettings = {
   loop: true,
   controls: 'auto',
   fit: 'width',
-  //terminalFontFamily: 'Fira Code Variable',
+  terminalFontFamily: 'Fira Code Variable',
 };
 
 const {
@@ -59,7 +59,9 @@ const demoId = "asciinema-demo-" + src.split("/").pop().split(".")[0];
         settings.autoPlay = true;
       }
 
-      const player = AsciinemaPlayer.create(src, this, settings)
+      document.fonts.load('1em ' + settings.terminalFontFamily).then(() => {
+        const player = AsciinemaPlayer.create(src, this, settings)
+      });
 
       if (this.dataset.title) {
         document.getElementById(`${this.id}-link`).addEventListener("click", (e) => {
