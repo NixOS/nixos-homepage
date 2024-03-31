@@ -1,4 +1,4 @@
-#! { "step": 0.10, "width": 77, "height": 20 }
+#! { "step": 0.10, "width": 81, "height": 20 }
 
 $ # In this example we will look into how to test your NixOS configuration
 $ # We will create a simple configuration with the `hello` package installed

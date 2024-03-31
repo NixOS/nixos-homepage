@@ -1,4 +1,4 @@
-#! { "step": 0.10, "width": 77, "height": 20 }
+#! { "step": 0.10, "width": 81, "height": 20 }
 
 $ # Lets create an environment with multiple packages
 $ nix-shell -p python3 nodejs go rustc
