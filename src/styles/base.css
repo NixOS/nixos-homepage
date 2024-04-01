@@ -150,6 +150,10 @@
     position: relative !important; /* Override the absolute positioning of the play button (TODO: remove this hack) */
 }
 
+pre.ap-terminal {
+  transform: translateZ(0);
+}
+
 @layer utilities {
     .icon_arrow-up-drop-circle {
         @apply block absolute h-8 w-8 right-10 md:hidden;
