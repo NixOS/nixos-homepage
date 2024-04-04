@@ -201,7 +201,7 @@ Love](https://www.reddit.com/r/NixOS/comments/5uc9ms/in_love/):
     locking](https://www.mail-archive.com/nix-dev@lists.science.uu.nl/msg31433.html)
 -   [How to nix-build again a built store
     path?](http://stackoverflow.com/questions/41486747/how-to-nix-build-again-a-built-store-path)
--   [NixOs, Haskell, opengl : problems with building and running openGL
+-   [NixOS, Haskell, opengl : problems with building and running openGL
     programs](http://stackoverflow.com/questions/41527061/nixos-haskell-opengl-problems-with-building-and-running-opengl-programs)
 -   [lib.mapAttrsToList and infinite
     recursion](http://stackoverflow.com/questions/42150082/lib-mapattrstolist-and-infinite-recursion)
