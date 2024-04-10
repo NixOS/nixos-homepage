@@ -7,6 +7,10 @@
     main a:-webkit-any-link {
         @apply underline decoration-1 underline-offset-4 text-nixsemidarkblue;
     }
+
+    .ap-terminal {
+      @apply transform-gpu;
+    }
 }
 
 @layer components {
