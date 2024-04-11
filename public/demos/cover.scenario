@@ -85,21 +85,23 @@ $ # The redis packaged in nixpkgs is not optimized for small size
 $ # Let us fix this!
 $ cat -n redis-minimal.nix
     1  {
-    2    pkgs ? import <nixpkgs> { },
-    3  }:
-    4  pkgs.redis.overrideAttrs (old: {
-    5    # no need for systemd support in our docker image
-    6    makeFlags = old.makeFlags ++ [ "USE_SYSTEMD=no" ];
-    7    # build static binary with musl
-    8    preBuild = ''
-    9      makeFlagsArray=(PREFIX="$out"
-   10                      CC="${pkgs.musl.dev}/bin/musl-gcc -static"
-   11                      CFLAGS="-I${pkgs.musl.dev}/include"
-   12                      LDFLAGS="-L${pkgs.musl.dev}/lib")
-   13    '';
-   14    # Let's remove some binaries which we don't need
-   15    postInstall = "rm -f $out/bin/redis-{benchmark,check-*,cli}";
-   16  })
+    2    pkgs ? import <nixpkgs> { system = "x86_64-linux"; },
+    3  }: # nixpkgs package set
+    4  pkgs.redis.override {
+    5    withSystemd = false;  # Build without systemd
+    6    tlsSupport = false;  # Build without tls support
+    7    useSystemJemalloc = false;  # Dont use system jemalloc
+    8  }).overrideAttrs (old: {
+    9    doCheck = false;  # So we dont wait for tests
+   10    preBuild = ''
+   11      makeFlagsArray=(PREFIX="$out"
+   12                      CC="${pkgs.musl.dev}/bin/musl-gcc -static"
+   13                      CFLAGS="-I${pkgs.musl.dev}/include -static"
+   14                      LDFLAGS="-L${pkgs.musl.dev}/lib -static");
+   15    '';  # Static build
+   16    # Let's remove some binaries which we don't need
+   17    postInstall = "rm -f $out/bin/redis-{benchmark,check-*,cli}";
+   18  })
 $ # In redis-minimal.nix we override the default redis build with three changes:
 $ # 1.) Remove the redis systemd support
 $ # 2.) Build a statically linked binary with musl
@@ -113,11 +115,16 @@ $ cat -n docker-redis-minimal.nix
     5    redisMinimal = import ./redis-minimal.nix { inherit pkgs; };
     6  in
     7  pkgs.dockerTools.buildLayeredImage {
-    8    # helper to build docker image
-    9    name = "nix-redis-minimal"; # give docker image a name
-   10    tag = "latest"; # provide a tag
-   11    contents = [ redisMinimal ]; # use redisMinimal package
-   12  }
+    8    name = "nix-redis-minimal";  # give docker image a name
+    9    tag = "latest";  # provide a tag
+   10    fromImage = null;  # scratch image as base image
+   11    created = "now";  # set creation time
+   12    contents = [ redisMinimal ]; # use redisMinimal package
+   13    config = {
+   14      Env = ["PATH=/bin"];
+   15      Cmd = [ "/bin/redis-server" ];  # run redis-server on start
+   16    };  
+   17  }
 $ # Let's build the new docker image now
 $ nix-build docker-redis-minimal.nix -o ./result 
 ... SKIPPING OUTPUT ...
