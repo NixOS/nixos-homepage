@@ -115,9 +115,9 @@ You configure a NixOS system by writing a specification of the functionality tha
 
 ```nix
 {
-    boot.loader.grub.device = "/dev/sda";
-    fileSystems."/".device = "/dev/sda1";
-    services.sshd.enable = true;
+  boot.loader.grub.device = "/dev/sda";
+  fileSystems."/".device = "/dev/sda1";
+  services.sshd.enable = true;
 }
 ```
 

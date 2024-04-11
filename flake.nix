@@ -57,8 +57,6 @@ rec {
 
         nixPills = import nix-pills {
           inherit pkgs;
-          revCount = nix-pills.lastModifiedDate; # FIXME
-          shortRev = nix-pills.shortRev;
         };
 
         # TODO: change structure to conform to ./src/content/download/aws-ec2.yaml but in json
