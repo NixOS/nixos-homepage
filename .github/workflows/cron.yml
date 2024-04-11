@@ -75,7 +75,7 @@ jobs:
         with:
           commit_message: "Daily update [ci skip]"
           branch: "main"
-          file_pattern: "flake.lock blog/announcements.xml"
+          file_pattern: "flake.lock"
           commit_user_name: "NixOS webmaster"
           commit_user_email: "webmaster@nixos.org"
           commit_author: "GitHub Actions <webmaster@nixos.org>"
