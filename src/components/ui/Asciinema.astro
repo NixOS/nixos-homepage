@@ -10,14 +10,13 @@ interface Props {
 }
 
 const defaultSettings = {
-  cols: 77,
+  cols: 81,
   rows: 24,
   autoPlay: false,
   loop: true,
   controls: 'auto',
-  fit: false,
+  fit: 'width',
   terminalFontFamily: 'Fira Code Variable',
-  terminalFontSize: '0.6rem',
 };
 
 const {
@@ -60,7 +59,9 @@ const demoId = "asciinema-demo-" + src.split("/").pop().split(".")[0];
         settings.autoPlay = true;
       }
 
-      const player = AsciinemaPlayer.create(src, this, settings)
+      document.fonts.load('1em ' + settings.terminalFontFamily).then(() => {
+        const player = AsciinemaPlayer.create(src, this, settings)
+      });
 
       if (this.dataset.title) {
         document.getElementById(`${this.id}-link`).addEventListener("click", (e) => {

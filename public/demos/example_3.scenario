@@ -1,22 +1,26 @@
-#! { "step": 0.10, "width": 77, "height": 20 }
+#! { "step": 0.10, "width": 81, "height": 20 }
 
 $ # You can also persist your development environment.
 $ # Here is a short example with python and nodejs:
 $ cat -n shell.nix
-     1  { pkgs ? import <nixpkgs> {} # here we import the nixpkgs package set
-     2  }:
-     3  pkgs.mkShell {               # mkShell is a helper function
-     4    name="dev-environment";    # that requires a name
-     5    buildInputs = [            # and a list of packages
-     6      pkgs.python3
-     7      pkgs.python3Packages.virtualenv
-     8      pkgs.nodejs
-     9      pkgs.yarn
-    10    ];
-    11    shellHook = ''             # bash to run when you enter the shell
-    12      echo "Start developing..."
-    13    '';
-    14  }
+     1  {
+     2    pkgs ? import <nixpkgs> { }, # here we import the nixpkgs packages
+     3  }:
+     4  # mkShell is a helper function
+     5  pkgs.mkShell {
+     6    name = "dev-environment"; # that requires a name
+     7    buildInputs = [
+     8      # and a list of packages
+     9      pkgs.python3
+    10      pkgs.python3Packages.virtualenv
+    11      pkgs.nodejs
+    12      pkgs.yarn
+    13    ];
+    14    shellHook = ''
+    15       # bash to run when you enter the shell
+    16      echo "Start developing..."
+    17    '';
+    18  }
 $ # Pause the video to read and understand the shell.nix
 $ # To enter the dev-environment simply run:
 $ nix-shell

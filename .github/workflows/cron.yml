@@ -21,10 +21,10 @@ jobs:
           fetch-depth: 0
 
       - name: "Installing Nix"
-        uses: "cachix/install-nix-action@v23"
+        uses: "cachix/install-nix-action@v26"
 
       - name: "Setup Cachix"
-        uses: "cachix/cachix-action@v12"
+        uses: "cachix/cachix-action@v14"
         with:
           name: "nixos-homepage"
           signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
@@ -47,7 +47,7 @@ jobs:
 
       - name: "Deploy to Netlify"
         if: ${{ github.repository == 'NixOS/nixos-homepage' }}
-        uses: "nwtgck/actions-netlify@v2.1.0"
+        uses: "nwtgck/actions-netlify@v3.0.0"
         env:
           NETLIFY_AUTH_TOKEN: "${{ secrets.NETLIFY_AUTH_TOKEN }}"
           NETLIFY_SITE_ID: "${{ secrets.NETLIFY_SITE_ID }}"
@@ -71,7 +71,7 @@ jobs:
 
       - name: "Commit updated files and push them to main branch"
         if: ${{ github.repository == 'NixOS/nixos-homepage' }}
-        uses: "stefanzweifel/git-auto-commit-action@v4"
+        uses: "stefanzweifel/git-auto-commit-action@v5"
         with:
           commit_message: "Daily update [ci skip]"
           branch: "main"

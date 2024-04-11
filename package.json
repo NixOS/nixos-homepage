@@ -16,25 +16,30 @@
     "linkcheck:full": "linkchecker http://localhost:4321"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.0.0",
+    "@astrojs/mdx": "^2.2.4",
     "@astrojs/rss": "^4.0.1",
-    "@astrojs/sitemap": "^3.0.5",
+    "@astrojs/sitemap": "^3.1.2",
     "@astrojs/tailwind": "^5.0.3",
     "@fontsource-variable/fira-code": "^5.0.16",
     "@fontsource-variable/overpass": "^5.0.17",
     "@fontsource-variable/roboto-flex": "^5.0.8",
     "@xmldom/xmldom": "^0.8.10",
-    "asciinema-player": "^3.6.3",
-    "astro": "^4.0.3",
-    "astro-heroicons": "^0.3.0",
-    "astro-icon": "^0.8.2",
+    "asciinema-player": "^3.7.1",
+    "astro": "^4.5.16",
+    "astro-heroicons": "^2.1.1",
+    "astro-icon": "^1.1.0",
     "astro-seo": "^0.8.0",
-    "daisyui": "^4.0.4",
+    "daisyui": "^4.10.1",
     "htmx.org": "^1.9.9",
     "markdown-it": "^14.0.0",
-    "node-html-parser": "^6.1.12",
+    "node-html-parser": "^6.1.13",
     "sanitize-html": "^2.11.0",
-    "tailwindcss": "^3.3.6",
+    "tailwindcss": "^3.4.3",
     "turndown": "^7.1.2"
+  },
+  "devDependencies": {
+    "@iconify-json/mdi": "^1.1.66",
+    "@iconify-json/simple-icons": "^1.1.99",
+    "@iconify/tailwind": "^0.1.4"
   }
 }
