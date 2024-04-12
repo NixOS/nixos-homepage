@@ -15,14 +15,16 @@ rec {
     nix-pills.flake = false;
   };
 
-  nixConfig.extra-substituters = [
-    "https://nixos-homepage.cachix.org"
-    "https://nixos-nix-install-tests.cachix.org"
-  ];
-  nixConfig.extra-trusted-public-keys = [
-    "nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE="
-    "nixos-nix-install-tests.cachix.org-1:Le57vOUJjOcdzLlbwmZVBuLGoDC+Xg2rQDtmIzALgFU="
-  ];
+  nixConfig = {
+    extra-substituters = [
+      "https://nixos-homepage.cachix.org"
+      "https://nixos-nix-install-tests.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE="
+      "nixos-nix-install-tests.cachix.org-1:Le57vOUJjOcdzLlbwmZVBuLGoDC+Xg2rQDtmIzALgFU="
+    ];
+  };
 
   outputs =
     { self
