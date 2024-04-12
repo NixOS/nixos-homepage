@@ -1,26 +1,30 @@
 rec {
   description = "The nixos.org homepage";
 
-  # This is used to build the site.
-  inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs = {
+    # This is used to build the site.
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
 
-  # These inputs are used for the manuals and release artifacts
-  inputs.released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-  inputs.released-nixpkgs-stable.url = "nixpkgs/nixos-23.11";
-  inputs.released-nix-unstable.url = "github:nixos/nix/master";
-  inputs.released-nix-stable.url = "github:nixos/nix/latest-release";
-  inputs.nix-pills.url = "github:NixOS/nix-pills";
-  inputs.nix-pills.flake = false;
+    # These inputs are used for the manuals and release artifacts
+    released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    released-nixpkgs-stable.url = "nixpkgs/nixos-23.11";
+    released-nix-unstable.url = "github:nixos/nix/master";
+    released-nix-stable.url = "github:nixos/nix/latest-release";
+    nix-pills.url = "github:NixOS/nix-pills";
+    nix-pills.flake = false;
+  };
 
-  nixConfig.extra-substituters = [
-    "https://nixos-homepage.cachix.org"
-    "https://nixos-nix-install-tests.cachix.org"
-  ];
-  nixConfig.extra-trusted-public-keys = [
-    "nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE="
-    "nixos-nix-install-tests.cachix.org-1:Le57vOUJjOcdzLlbwmZVBuLGoDC+Xg2rQDtmIzALgFU="
-  ];
+  nixConfig = {
+    extra-substituters = [
+      "https://nixos-homepage.cachix.org"
+      "https://nixos-nix-install-tests.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE="
+      "nixos-nix-install-tests.cachix.org-1:Le57vOUJjOcdzLlbwmZVBuLGoDC+Xg2rQDtmIzALgFU="
+    ];
+  };
 
   outputs =
     { self
