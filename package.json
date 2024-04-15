@@ -16,7 +16,7 @@
     "linkcheck:full": "linkchecker http://localhost:4321"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.2.4",
+    "@astrojs/mdx": "^2.3.0",
     "@astrojs/rss": "^4.0.1",
     "@astrojs/sitemap": "^3.1.2",
     "@astrojs/tailwind": "^5.0.3",
@@ -25,7 +25,7 @@
     "@fontsource-variable/roboto-flex": "^5.0.8",
     "@xmldom/xmldom": "^0.8.10",
     "asciinema-player": "^3.7.1",
-    "astro": "^4.5.16",
+    "astro": "^4.6.1",
     "astro-heroicons": "^2.1.1",
     "astro-icon": "^1.1.0",
     "astro-seo": "^0.8.0",
