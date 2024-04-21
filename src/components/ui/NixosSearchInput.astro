@@ -3,7 +3,7 @@ import Button from './Button.astro';
 import Input from './Input.astro';
 
 interface Props {
-    color?: "nixdarkblue" | "white",
+    color?: "nix-blue" | "white",
     size?: "sm" | "lg" | "sm-full";
     collection?: "packages" | "options";
     withSubmit?: boolean;
@@ -15,7 +15,7 @@ const collectionMap = {
     options: "NixOS options",
 }
 
-const { color = "nixdarkblue", size = "lg", collection = "packages", withSubmit = false } = Astro.props;
+const { color = "nix-blue", size = "lg", collection = "packages", withSubmit = false } = Astro.props;
 
 ---
 

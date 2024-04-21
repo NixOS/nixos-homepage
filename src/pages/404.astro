@@ -5,7 +5,7 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Not Found">
     <Container>
-        <h1 class="mt-10 text-4xl text-nixdarkblue font-heading font-extrabold leading-none mb-4">Not found</h1>
+        <h1 class="mt-10 text-4xl text-nix-blue font-heading font-extrabold leading-none mb-4">Not found</h1>
         <p class="font-light">The requested content<span id="signpost"></span> could not be found.</p>
         <script is:inline>
             document.getElementById("signpost").innerHTML = ` at <code>${window.location.pathname}</code>`;

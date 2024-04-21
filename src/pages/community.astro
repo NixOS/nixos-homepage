@@ -142,12 +142,12 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     </p>
   </Container>
   <Container>
-    <h2 class="text-4xl font-bold font-heading leading-none text-nixdarkblue mt-8">Where to talk?</h2>
+    <h2 class="text-4xl font-bold font-heading leading-none text-nix-blue mt-8">Where to talk?</h2>
     <p class="font-extralight leading-relaxed mt-2">
       The Nix community is spread across various platforms. Here are the
       official and unofficial spaces where you can find help, discuss
       development, and chat with other users.
-    <h3 class="text-3xl font-bold font-heading text-nixdarkblue mt-4">Official spaces</h3>
+    <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">Official spaces</h3>
     <p class="text-gray-700">
       These spaces are monitored and moderated by the NixOS Moderation Team.
     </p>
@@ -175,7 +175,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
           }
         </ul>
     </div>
-    <h3 class="text-3xl font-bold font-heading text-nixdarkblue mt-6">Unofficial spaces</h3>
+    <h3 class="text-3xl font-bold font-heading text-nix-blue mt-6">Unofficial spaces</h3>
     <p class="text-gray-700">
         These spaces are not monitored and not moderated by the NixOS Moderation Team.
         <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 flex-wrap">
@@ -197,7 +197,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     > that offer Nix related services.
   </Banner>
   <Divider mirrorY />
-  <div class="bg-nixdarkblue text-white py-8">
+  <div class="bg-nix-blue text-white py-8">
     <Container>
       <h2 class="text-4xl font-bold font-heading">NixCon</h2>
       <p class="mt-2 text-xl font-bold mb-4">
@@ -206,7 +206,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         organizes a conference once a year.
       </p>
       <div class="grid md:grid-cols-3 gap-4">
-        <div class="col-span-2 md:col-span-1 bg-nixsemidarkblue p-4 rounded-xl">
+        <div class="col-span-2 md:col-span-1 bg-nix-blue-dark p-4 rounded-xl">
           <h3 class="text-3xl font-heading font-bold mb-4">Next Conference</h3>
           <NixConEntry
             imagePath={nixcons[0].imagePath}
@@ -234,12 +234,12 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
   </div>
   <Divider />
   <Container>
-    <h2 class="text-4xl font-bold font-heading text-nixdarkblue mt-8">Meetups</h2>
+    <h2 class="text-4xl font-bold font-heading text-nix-blue mt-8">Meetups</h2>
     <div
       class="mt-4 grid md:grid-flow-col auto-cols-fr font-extralight text-center text-lg bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat"
     >
       <div>
-        <h3 class="mt-4 md:mt-2 font-bold font-heading text-2xl text-nixdarkblue">
+        <h3 class="mt-4 md:mt-2 font-bold font-heading text-2xl text-nix-blue">
           America
         </h3>
         <ul class="mt-2 space-y-4">
@@ -253,7 +253,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         </ul>
       </div>
       <div>
-        <h3 class="mt-4 md:mt-2 font-bold font-heading text-2xl text-nixdarkblue">Europe</h3>
+        <h3 class="mt-4 md:mt-2 font-bold font-heading text-2xl text-nix-blue">Europe</h3>
         <ul class="mt-2 space-y-4">
           {
             meetups.data.europe.map((meetup) => (
@@ -265,7 +265,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         </ul>
       </div>
       <div>
-        <h3 class="mt-4 md:mt-2 font-bold font-heading text-2xl text-nixdarkblue">Asia</h3>
+        <h3 class="mt-4 md:mt-2 font-bold font-heading text-2xl text-nix-blue">Asia</h3>
         <ul class="mt-2 space-y-4">
           {
             meetups.data.asia.map((meetup) => (
@@ -279,7 +279,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     </div>
     <div class="flex flex-wrap-reverse gap-8 font-extralight leading-loose mt-16">
       <div class="flex-1 flex flex-col items-start gap-8 justify-center">
-        <h2 class="text-4xl font-bold text-nixdarkblue leading-none">RFC Process</h2>
+        <h2 class="text-4xl font-bold text-nix-blue leading-none">RFC Process</h2>
         <p>
           The "RFC" (request for comments) process is intended to provide a
           consistent and controlled path for new features to enter the Nix
@@ -296,7 +296,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
   <div class="mt-8">
     <Divider mirrorY />
   </div>
-  <div class="bg-nixdarkblue py-8">
+  <div class="bg-nix-blue py-8">
     <Container>
       <h2 class="text-4xl font-bold text-white mt-8" id="governance-teams">Teams</h2>
       <ul class="flex flex-wrap gap-x-6 gap-y-16 mt-8 justify-stretch">
@@ -326,7 +326,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         <Image src={nixosFoundationLogo} alt='NixOS Foundation Logo' class="h-72" />
       </div>
       <div class="text-left inline-block mb-4 mt-4">
-      <h2 class="md:text-center text-3xl text-nixdarkblue font-bold font-heading">
+      <h2 class="md:text-center text-3xl text-nix-blue font-bold font-heading">
         Board members:
       </h2>
       <ul class="mt-2 md:w-72 mx-auto pl-8 md:pl-10 list-disc">
@@ -350,7 +350,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
 
     </div>
     <div class="space-y-4 font-extralight leading-relaxed">
-      <h2 class="text-3xl text-nixdarkblue font-heading font-bold">The mission!</h2>
+      <h2 class="text-3xl text-nix-blue font-heading font-bold">The mission!</h2>
       <p>
         The mission of the foundation is to support the Nix ecosystem's
         infrastructure, and projects implementing the purely functional
@@ -395,9 +395,9 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     .getElementsByTagName("rect");
   const diagram = document.getElementById("rfc-diagram");
   const durationMiliseconds = 1500;
-  const baseActivationClasses = ["stroke-nixdarkblue"];
-  const successActivationClasses = ["stroke-nixgreen"];
-  const failureActivationClasses = ["stroke-nixorange", "opacity-50"];
+  const baseActivationClasses = ["stroke-nix-blue"];
+  const successActivationClasses = ["stroke-nix-green"];
+  const failureActivationClasses = ["stroke-nix-orange", "opacity-50"];
   const fadedActivationClasses = ["opacity-50"];
   const timeline = [
     {

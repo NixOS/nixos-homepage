@@ -12,7 +12,7 @@ const { title, subTitle, currentVersion } = Astro.props;
 
 ---
 
-<Container class="grid grid-cols-2 bg-nixdarkblue text-white py-8 md:py-6 mt-16">
+<Container class="grid grid-cols-2 bg-nix-blue text-white py-8 md:py-6 mt-16">
   <h1 class="text-3xl font-heading font-bold leading-none self-center">
     {title}
     <span class="hidden lg:inline">
@@ -24,7 +24,7 @@ const { title, subTitle, currentVersion } = Astro.props;
       <h2 class="text-2xl font-bold font-heading pb-2 hidden md:inline">
         Current version
       </h2>
-      <a href="#" class="!text-white !no-underline font-bold text-2xl text-center bg-nixgreen rounded-2xl px-4 py-2">{currentVersion}</a>
+      <a href="#" class="!text-white !no-underline font-bold text-2xl text-center bg-nix-green rounded-2xl px-4 py-2">{currentVersion}</a>
     </div>
   </div>
 </Container>

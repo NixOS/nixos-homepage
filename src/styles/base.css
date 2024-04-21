@@ -5,11 +5,11 @@
 
 @layer base {
     main a:-webkit-any-link {
-        @apply underline decoration-1 underline-offset-4 text-nixsemidarkblue;
+        @apply underline decoration-1 underline-offset-4 text-nix-blue-dark;
     }
 
     main a:any-link {
-        @apply underline decoration-1 underline-offset-4 text-nixsemidarkblue;
+        @apply underline decoration-1 underline-offset-4 text-nix-blue-dark;
     }
 }
 
@@ -73,7 +73,7 @@
     }
 
     article h3 {
-        @apply text-2xl font-bold text-nixdarkblue mb-4;
+        @apply text-2xl font-bold text-nix-blue mb-4;
     }
 
     article p {
@@ -114,7 +114,7 @@
     article h4,
     article h5,
     article h6 {
-        @apply font-bold font-heading text-nixdarkblue leading-tight;
+        @apply font-bold font-heading text-nix-blue leading-tight;
     }
 
     article h1:not(:first-child),
