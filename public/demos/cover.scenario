@@ -45,13 +45,15 @@ $ cat -n shell.nix
     13      echo "Start developing..."
     14    '';
     15  }
-$ # Pause the video to understand the shell.nix
-$ # To enter dev-environment simply run:
+$ # This snippet provides a developer environment named "dev-environment"
+$ # with the node command line tool available
+$ # and which will print "Start developing..." on first start.
+$ # To enter this developer environment, run:
 $ nix-shell
 Start developing...
 (nix-shell) $ node -e "console.log(1+1)"
 2
-(nix-shell) $ # Now go ahead commit shell.nix to your repository
+(nix-shell) $ # Now go ahead and commit shell.nix to your repository
 (nix-shell) $ # and share your development environment with your coworkers
 
 --
@@ -68,8 +70,10 @@ $ cat -n docker-redis.nix
     8    tag = "latest"; # provide a tag
     9    contents = [ pkgs.redis ]; # packages in docker image
    10  }
-$ # Pause the video and take the time to understand docker-redis.nix file
-$ # Now let's build the docker image and load it into docker
+$ # This snippet constructs a docker image named "nix-redis"
+$ # with the tag "latest" and containing the package redis
+$ # which includes the command-line tool redis and all its runtime dependencies.
+$ # Now let's build this docker image and load it into docker:
 $ nix-build docker-redis.nix -o ./result
 ... SKIPPING OUTPUT ...
 /nix/store/1crapx24sjgqm2j1wmq17k6f6a9wy66d-docker-image-nix-redis.tar.gz

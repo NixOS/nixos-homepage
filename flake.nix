@@ -209,7 +209,7 @@ rec {
             >&2 echo "  To bootstrap developing environment run:"
             >&2 echo "      npm install"
             >&2 echo ""
-            >&2 echo "  To start developing run:"
+            >&2 echo "  Afterwards, to start developing, run:"
             >&2 echo "      npm run dev"
             >&2 echo ""
             >&2 echo "  and go to the following URL in your browser:"
