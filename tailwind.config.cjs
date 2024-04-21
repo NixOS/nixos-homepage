@@ -13,6 +13,13 @@ const inlineSvgs = {
   'header-nixdarkblue': './src/assets/image/divider/header_nixdarkblue.svg',
 }
 
+const shadow = {
+  md: '0 8px 2px rgba(0,0,0,0.2)',
+  DEFAULT: '0 4px 1px rgba(0,0,0,0.2)',
+  inner: 'inset 0 0 1rem 0 rgba(0,0,0,0.1)',
+  none: 'none',
+};
+
 function inlineSvg({ svg }) {
   const file = fs.readFileSync(svg, "utf8");
   const stringified = parser.parse(file).toString();
@@ -71,6 +78,8 @@ module.exports = {
       "black": colors.black,
       "transparent": colors.transparent,
     },
+    boxShadow: shadow,
+    dropShadow: shadow,
     extend: {
       borderWidth: {
         '0.5': '0.5px',
