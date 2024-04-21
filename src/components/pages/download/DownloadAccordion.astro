@@ -178,8 +178,20 @@ let downloadOptions = (await getCollection("download")).filter(
       "md:rounded-none",
       "md:aria-expanded:bg-white",
       "md:aria-expanded:text-nixsemidarkblue",
-      "before:icon_arrow-up-drop-circle",
-      "aria-expanded:before:icon_arrow-down-drop-circle"
+      "before:icon-[mdi--arrow-up-drop-circle]",
+      "before:block",
+      "before:absolute",
+      "before:h-8",
+      "before:w-8",
+      "before:right-10",
+      "before:md:hidden",
+      "aria-expanded:before:block",
+      "aria-expanded:before:absolute",
+      "aria-expanded:before:h-8",
+      "aria-expanded:before:w-8",
+      "aria-expanded:before:right-10",
+      "aria-expanded:before:md:hidden",
+      "aria-expanded:before:icon-[mdi--arrow-down-drop-circle]"
     );
   }
 

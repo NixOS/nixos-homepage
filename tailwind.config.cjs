@@ -13,7 +13,6 @@ const inlineSvgs = {
 }
 
 function inlineSvg({ svg }) {
-  // load file
   const file = fs.readFileSync(svg, "utf8");
   const stringified = parser.parse(file).toString();
   const optimized = svgo.optimize(stringified, {
@@ -121,9 +120,4 @@ module.exports = {
       addUtilities(res)
     })
   ],
-  daisyui: {
-    themes: false,
-    darkTheme: false,
-    base: false,
-  },
 }
