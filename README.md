@@ -52,8 +52,8 @@ It can take some time to enter the development environment. To speed up and avoi
 Add the following to your `configuration.nix`:
 
 ```
-nix.binaryCaches = [ "https://nixos-homepage.cachix.org" ];
-nix.binaryCachePublicKeys = [ "nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE=" ];
+nix.settings.substituters = [ "https://nixos-homepage.cachix.org" ];
+nix.settings.trusted-public-keys = [ "nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE=" ];
 ```
 
 ### On non-NixOS

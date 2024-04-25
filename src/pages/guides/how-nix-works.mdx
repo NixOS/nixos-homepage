@@ -148,9 +148,9 @@ Because the files of a new configuration don’t overwrite old ones, you can (at
 $ nixos-rebuild switch --rollback
 ```
 
-[![Grub boot menu](/images/screenshots/nixos-grub.png)](/images/screenshots/nixos-grub.png)
+In fact, all old system configurations automatically show up in the boot menu. So if the new configuration crashes or doesn’t boot properly, you can just roll back by selecting an older configuration in the boot menu. Rollbacks are very fast: it doesn’t involve lots of files having to be restored from copies.
 
-In fact, all old system configurations automatically show up in the Grub boot menu. So if the new configuration crashes or doesn’t boot properly, you can just roll back by selecting an older configuration in the [Grub boot menu](/images/screenshots/nixos-grub.png). Rollbacks are very fast: it doesn’t involve lots of files having to be restored from copies.
+[![NixOS boot menu](/images/screenshots/nixos-boot-menu.png)](/images/screenshots/nixos-boot-menu.png)
 
 Reproducible system configurations
 ----------------------------------
