@@ -18,6 +18,10 @@
         @apply font-extralight;
     }
 
+    .text-light-bold strong {
+        @apply font-extrabold;
+    }
+
     article {
         @apply leading-7 font-light;
     }
