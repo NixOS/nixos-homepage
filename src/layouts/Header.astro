@@ -7,19 +7,19 @@ const headerMenu = await getEntry('menus', 'header');
 
 const currentTopRoute = `/${Astro.url.pathname.split("/")[1]}`
 
-const navbarItemStyle = `text-center text-nixsemidarkblue md:text-black md:hover:border-b-nixlightblue border-b-4`;
-const navbarItemInactiveStyle = `border-b-nixlighterblue md:border-b-transparent bg-nixlighterblue md:bg-transparent`;
-const navbarItemActiveStyle = `border-b-nixlightblue bg-nixlightblue text-white md:text-black md:bg-transparent font-bold`;
+const navbarItemStyle = `text-center text-nix-blue-dark md:text-black md:hover:border-b-nix-blue-light border-b-4`;
+const navbarItemInactiveStyle = `border-b-nix-blue-extralight md:border-b-transparent bg-nix-blue-extralight md:bg-transparent`;
+const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-white md:text-black md:bg-transparent font-bold`;
 ---
 
-<header role="banner" class="bg-white text-black font-extralight drop-shadow-[0_8px_2px_rgba(0,0,0,0.2)]">
+<header role="banner" class="bg-white text-black font-extralight drop-shadow-md">
     <Container class="flex flex-col md:flex-row justify-between md:items-center">
         <div class="text-4xl font-normal gap-2 flex justify-between md:justify-start items-center my-2">
             <a href="/" class="select-none gap-2 flex justify-between md:justify-start items-center">
                 <InlineSVG class="h-16 w-auto" src="/src/assets/image/nixos-logo-notext.svg" alt="Nixos Logo" />
                 <InlineSVG class="h-16 block md:hidden xl:block w-auto" src="/src/assets/image/nixos-logo-text.svg" alt="Nixos Logo Text" />
             </a>
-            <button aria-label="Main Navigation Toggle" class="bg-nixlightblue block md:hidden p-4 rounded-lg" id="navigation-toggle">
+            <button aria-label="Main Navigation Toggle" class="bg-nix-blue-light block md:hidden p-4 rounded-lg" id="navigation-toggle">
                 <span class="bg-white block w-8 h-1 mb-1.5"></span>
                 <span class="bg-white block w-8 h-1 mb-1.5"></span>
                 <span class="bg-white block w-8 h-1"></span>
@@ -35,7 +35,7 @@ const navbarItemActiveStyle = `border-b-nixlightblue bg-nixlightblue text-white 
                 ]}  href={item.link}>{item.name}</a>
             ))}
             <a target="_blank" rel="noreferrer noopener" class={`pt-8 md:pt-7 pb-6 ${navbarItemStyle} ${navbarItemInactiveStyle}`} href="https://search.nixos.org" arial-label="Nixos package and options search">
-                <Icon alt="Search" class="h-8 w-8 text-nixdarkblue hidden md:block" name="mdi:search" />
+                <Icon alt="Search" class="h-8 w-8 text-nix-blue hidden md:block" name="mdi:search" />
                 <span class="inline-block md:hidden">Search</span>
             </a>
         </nav>

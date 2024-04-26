@@ -3,6 +3,7 @@ const plugin = require('tailwindcss/plugin')
 const fs = require('node:fs');
 const parser = require('node-html-parser');
 const svgo = require('svgo');
+const colors = require('tailwindcss/colors')
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 
@@ -12,8 +13,14 @@ const inlineSvgs = {
   'header-nixdarkblue': './src/assets/image/divider/header_nixdarkblue.svg',
 }
 
+const shadow = {
+  md: '0 8px 2px rgba(0,0,0,0.2)',
+  DEFAULT: '0 4px 1px rgba(0,0,0,0.2)',
+  inner: 'inset 0 0 1rem 0 rgba(0,0,0,0.1)',
+  none: 'none',
+};
+
 function inlineSvg({ svg }) {
-  // load file
   const file = fs.readFileSync(svg, "utf8");
   const stringified = parser.parse(file).toString();
   const optimized = svgo.optimize(stringified, {
@@ -41,42 +48,45 @@ module.exports = {
     "./node_modules/asciinema-player/**/*.js"
   ],
   theme: {
+    fontFamily: {
+      sans: ["Roboto Flex Variable", ...defaultTheme.fontFamily.sans],
+      serif: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
+      heading: ["Overpass Variable", ...defaultTheme.fontFamily.sans],
+      mono: ["Fira Code Variable", ...defaultTheme.fontFamily.mono],
+    },
+    colors: {
+      "nix-blue": {
+        "extralight": "#f2f8fd", // nixlighterblue
+        "lighter": "#e6ecf5", // nixlighterblue-dimmed
+        "light": "#7ebae4", // nixlightblue
+        DEFAULT: "#5277c3", // nixdarkblue
+        "dark": "#405D99", // nixsemidarkblue
+        "darker": "#27385d", // nixdarkerblue
+      },
+      "nix-orange": {
+        "lighter": "#fff5e1", // nixlightorange
+        DEFAULT: "#ffab0d", // nixorange
+        "dark": "#ff8657", // nixdarkorange
+        "darker": "#cc3900", // nixdarkerorange
+      },
+      "nix-green": {
+        DEFAULT: "#6ad541", // nixgreen
+        "dark": "#51ba29", // nixdarkgreen
+      },
+      "gray": colors.gray,
+      "white": colors.white,
+      "black": colors.black,
+      "transparent": colors.transparent,
+    },
+    boxShadow: shadow,
+    dropShadow: shadow,
     extend: {
-      colors: {
-        "nixlighterblue": "#f2f8fd",
-        "nixlighterblue-dimmed": "#e6ecf5",
-        "nixlightblue": "#7ebae4",
-        "nixdarkblue": "#5277c3",
-        "nixsemidarkblue": "#405D99",
-        "nixdarkerblue": "#27385d",
-        "nixlightorange": "#fff5e1",
-        "nixorange": "#ffab0d",
-        "nixdarkorange": "#ff8657",
-        "nixdarkerorange": "#cc3900",
-        "nixgreen": "#6ad541",
-        "nixdarkgreen": "#51ba29",
-      },
-      fontFamily: {
-        sans: ["Roboto Flex Variable", ...defaultTheme.fontFamily.sans],
-        serif: ["Overpass Variable", ...defaultTheme.fontFamily.serif],
-        heading: ["Overpass Variable", ...defaultTheme.fontFamily.sans],
-        mono: ["Fira Code Variable", ...defaultTheme.fontFamily.mono],
-      },
       borderWidth: {
         '0.5': '0.5px',
         '1': '1px'
       },
       listStyleType: {
         "circle": "circle",
-      },
-      fontSize: {
-        base: '1rem',
-        lg: '1.2rem',
-        xl: '1.4rem',
-        '2xl': '1.625rem',
-        '3xl': '1.953rem',
-        '4xl': '2.441rem',
-        '5xl': '3.052rem',
       },
       textDecorationThickness: {
         '0.5': '0.5px'
@@ -95,15 +105,14 @@ module.exports = {
       'xs': '0.75rem',
       'sm': '0.875rem',
       'base': '1rem',
-      'lg': '1.125rem',
-      'xl': '1.3-rem',
-      '2xl': '1.4rem',
-      '3xl': '1.5rem',
-      '4xl': '2rem',
-      '5xl': '2.5rem',
+      'lg': '1.2rem',
+      'xl': '1.4rem',
+      '2xl': '1.625rem',
+      '3xl': '1.953rem',
+      '4xl': '2.441rem',
+      '5xl': '3.052rem',
     },
     container: {
-      // https://tailwindcss.com/docs/container#centering-by-default
       center: true,
     },
   },
@@ -121,9 +130,4 @@ module.exports = {
       addUtilities(res)
     })
   ],
-  daisyui: {
-    themes: false,
-    darkTheme: false,
-    base: false,
-  },
 }

@@ -26,9 +26,9 @@ let downloadOptions = (await getCollection("download")).filter(
                 aria-expanded="true"
                 aria-controls={optionId}
                 class:list={[
-                  "bg-nixlighterblue",
+                  "bg-nix-blue-extralight",
                   "flex",
-                  "text-nixsemidarkblue",
+                  "text-nix-blue-dark",
                   "text-lg",
                   "font-bold",
                   "py-6",
@@ -83,7 +83,7 @@ let downloadOptions = (await getCollection("download")).filter(
   const accContentArea = acc.appendChild(document.createElement("div"));
   accContentArea.classList.add("col-span-2", "mt-4", "px-8");
   menuContainer.classList.add(
-    "md:bg-nixlighterblue",
+    "md:bg-nix-blue-extralight",
     "md:py-8",
     "md:rounded-2xl",
     "self-start"
@@ -174,12 +174,24 @@ let downloadOptions = (await getCollection("download")).filter(
     triggers[i].addEventListener("click", togglePanel);
     triggers[i].classList.add(
       "md:my-0",
-      "md:text-nixlightblue",
+      "md:text-nix-blue-light",
       "md:rounded-none",
       "md:aria-expanded:bg-white",
-      "md:aria-expanded:text-nixsemidarkblue",
-      "before:icon_arrow-up-drop-circle",
-      "aria-expanded:before:icon_arrow-down-drop-circle"
+      "md:aria-expanded:text-nix-blue-dark",
+      "before:icon-[mdi--arrow-up-drop-circle]",
+      "before:block",
+      "before:absolute",
+      "before:h-8",
+      "before:w-8",
+      "before:right-10",
+      "before:md:hidden",
+      "aria-expanded:before:block",
+      "aria-expanded:before:absolute",
+      "aria-expanded:before:h-8",
+      "aria-expanded:before:w-8",
+      "aria-expanded:before:right-10",
+      "aria-expanded:before:md:hidden",
+      "aria-expanded:before:icon-[mdi--arrow-down-drop-circle]"
     );
   }
 

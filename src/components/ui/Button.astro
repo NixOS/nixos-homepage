@@ -13,10 +13,10 @@ interface Props {
 }
 
 const colorMap = {
-    "orange": "bg-nixorange",
-    "lightblue": "bg-nixlightblue",
-    "semidarkblue": "bg-nixsemidarkblue",
-    "green": "bg-nixgreen"
+    "orange": "bg-nix-orange",
+    "lightblue": "bg-nix-blue-light",
+    "semidarkblue": "bg-nix-blue-dark",
+    "green": "bg-nix-green"
 }
 
 const sizeMap = {
@@ -37,7 +37,7 @@ const {
     shaText = "",
     } = Astro.props;
 
-const localClassList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white drop-shadow-[0_4px_1px_rgba(0,0,0,0.2)]`;
+const localClassList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white drop-shadow`;
 ---
 
 {href ? (

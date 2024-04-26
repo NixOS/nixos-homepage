@@ -2,14 +2,14 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-    color?: "nixdarkblue" | "white",
+    color?: "nix-blue" | "white",
     size?: "sm" | "lg" | "sm-full";
     icon?: "search" | null;
     placeholder?: string;
     name?: string;
 }
 
-const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "", name = null } = Astro.props;
+const { color = "nix-blue", size = "lg", icon = null, placeholder = "", name = null } = Astro.props;
 
 ---
 
@@ -17,7 +17,7 @@ const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "", name 
   <Icon
     alt="Search"
     class:list={["h-8 w-8 absolute", {
-        "text-nixdarkblue": color === "nixdarkblue",
+        "text-nix-blue": color === "nix-blue",
         "text-white": color === "white",
         "top-3.5 left-3 md:block": size === "lg",
         "top-1.5 left-2.5": size === "sm-full"
@@ -26,10 +26,10 @@ const { color = "nixdarkblue", size = "lg", icon = null, placeholder = "", name 
   />
   <input
     type="text"
-    class="outline-nixlightblue outline-2 focus:outline focus:border-nixlightblue"
+    class="outline-nix-blue-light outline-2 focus:outline focus:border-nix-blue-light"
     class:list={["rounded-full placeholder-gray-400 text-normal", {
-        "text-nixdarkblue placeholder-grey-200": color === "nixdarkblue",
-        "border-white text-white placeholder-nixlighterblue-dimmed bg-transparent": color === "white",
+        "text-nix-blue placeholder-grey-200": color === "nix-blue",
+        "border-white text-white placeholder-nix-blue-extralight bg-transparent": color === "white",
         "w-full py-3 text-xl pl-11 pr-4 md:w-[30rem] border-2": size === "lg",
         "px-10 md:pl-11 py-2 w-full border-1": size === "sm-full"
     }]}

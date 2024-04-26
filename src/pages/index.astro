@@ -29,7 +29,7 @@ posts.sort((a, b) => {
     <b>{posts[0].data.title}</b>
     <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
   </Banner>
-  <div class="bg-nixdarkblue inline-svg-hero bg-cover bg-no-repeat bg-left">
+  <div class="bg-nix-blue inline-svg-hero bg-cover bg-no-repeat bg-left">
     <Container class="text-white grid grid-cols-1 lg:grid-cols-2 gap-8 py-16 lg:py-24">
       <div class="flex flex-col gap-4 my-auto mx-0">
         <h1 class="text-5xl font-heading font-bold leading-none">
@@ -50,7 +50,7 @@ posts.sort((a, b) => {
           border-white
           border-[1rem]
           rounded-3xl
-          drop-shadow-[0_8px_2px_rgba(0,0,0,0.2)]
+          drop-shadow-md
           min-h-[300px]
         ">
         <Asciinema
@@ -79,7 +79,7 @@ posts.sort((a, b) => {
                 src={feature.data.img}
                 class="w-auto h-32 mx-auto mb-6"
               />
-              <h2 class="text-3xl text-nixdarkblue font-heading font-bold leading-none mb-2">
+              <h2 class="text-3xl text-nix-blue font-heading font-bold leading-none mb-2">
                 {feature.data.title}
               </h2>
               <div class="leading-loose text-light-bold">
@@ -105,15 +105,15 @@ posts.sort((a, b) => {
   after:h-[30rem]
   after:-mb-16
   after:-mt-48">
-    <div class="bg-nixlighterblue pt-4">
+    <div class="bg-nix-blue-extralight pt-4">
       <Container class="flex justify-center pb-8 flex-col w-full items-center gap-4 pt-8">
         <h2
-          class="text-4xl text-center md:w-2/3 text-nixdarkblue leading-tight font-heading font-bold pb-0"
+          class="text-4xl text-center md:w-2/3 text-nix-blue leading-tight font-heading font-bold pb-0"
         >
           Choose from Thousands of Packages
         </h2>
         <p class="font-extralight leading-relaxed text-2xl md:w-5/6 text-center pb-2">
-          The Nix Packages collection (<a class="font-bold !text-nixdarkblue" href="#">Nixpkgs</a>) is a set of <span class="text-nixgreen font-bold">over 80 000 packages</span>
+          The Nix Packages collection (<a class="font-bold !text-nix-blue" href="#">Nixpkgs</a>) is a set of <span class="text-nix-green font-bold">over 80 000 packages</span>
           for the Nix package manager.
         </p>
         <NixosSearchInput
@@ -126,7 +126,7 @@ posts.sort((a, b) => {
   <div>
     <Container>
       <h2
-          class="text-4xl text-center w-full text-nixdarkblue font-heading font-bold pb-2"
+          class="text-4xl text-center w-full text-nix-blue font-heading font-bold pb-2"
       >
         Examples
       </h2>
