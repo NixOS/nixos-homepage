@@ -16,7 +16,7 @@
     "linkcheck:full": "linkchecker http://localhost:4321"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.3.1",
+    "@astrojs/mdx": "^3.0.0",
     "@astrojs/rss": "^4.0.1",
     "@astrojs/sitemap": "^3.1.4",
     "@astrojs/tailwind": "^5.0.3",
