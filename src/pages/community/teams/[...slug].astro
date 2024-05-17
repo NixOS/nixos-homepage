@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import PageHeader from "../../../components/layout/PageHeader.astro";
 import Container from "../../../components/layout/Container.astro";
-import Tag from "../../../components/ui/Tag.astro";
+import MembersDisplay from "../../../components/pages/community/teams/MembersDisplay.astro";
 
 export async function getStaticPaths() {
   const teamEntries = await getCollection("teams");
@@ -21,48 +21,30 @@ const { Content } = await entry.render();
 <Layout title={entry.data.name}>
   <PageHeader text={entry.data.name} parentPath="/community" />
   <Container class="my-8">
-    <aside
-      class="float-right bg-nix-blue-extralight rounded-xl px-4 py-3 mb-4 ml-4 w-full sm:w-1/2 md:max-w-96"
-    >
-      <h1 class="text-3xl font-heading font-bold text-nix-blue">Members</h1>
-      <ul class="mt-2 list-disc ml-4 font-light">
-        {
-          entry.data.members.map((member) => (
-            <li class="mb-1 last:mb-0">
-              {member.name}
-              {member.discourse && (
-                <>
-                (<a href={"https://discourse.nixos.org/u/" + member.discourse}>@{member.discourse}</a>)
-                </>
-              )}
-              {member.github && (
-                <>
-                (<a href={"https://github.com/" + member.github}>@{member.github}</a>)
-                </>
-              )}
-              {member.title && (
-                <>
-                &mdash;
-                {member.title}
-                </>
-              )}
-            </li>
-          ))
-        }
-      </ul>
-      <h1 class="text-3xl font-heading font-bold text-nix-blue mt-4">Contact</h1>
-      <ul class="mt-2 list-disc ml-4">
-        {
-          entry.data.contact.map((contact) => (
-            <li class="mb-1 last:mb-0">
-              <a href={contact.href}>{contact.name}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </aside>
+    <MembersDisplay
+      class="float-right mb-4 ml-4 sm:w-1/2 md:max-w-96"
+      members={entry.data.members}
+      contact={entry.data.contact}
+    />
     <article>
       <Content />
     </article>
+    {
+      entry.data.subteams && entry.data.subteams.length > 0 && (
+        <>
+          <div class="flex gap-4 flex-wrap pt-4">
+              {entry.data.subteams.map((subteam) => (
+              <MembersDisplay
+                key={subteam.name}
+                title={subteam.name}
+                class="mb-4"
+                members={subteam.members}
+                isSubteam
+              />
+            ))}
+          </div>
+        </>
+      )
+    }
   </Container>
 </Layout>
