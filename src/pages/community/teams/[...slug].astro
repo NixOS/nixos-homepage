@@ -5,6 +5,7 @@ import Layout from "../../../layouts/Layout.astro";
 import PageHeader from "../../../components/layout/PageHeader.astro";
 import Container from "../../../components/layout/Container.astro";
 import Tag from "../../../components/ui/Tag.astro";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
   const teamEntries = await getCollection("teams");
@@ -30,20 +31,36 @@ const { Content } = await entry.render();
           entry.data.members.map((member) => (
             <li class="mb-1 last:mb-0">
               {member.name}
-              {member.discourse && (
-                <>
-                (<a href={"https://discourse.nixos.org/u/" + member.discourse}>@{member.discourse}</a>)
-                </>
-              )}
-              {member.github && (
-                <>
-                (<a href={"https://github.com/" + member.github}>@{member.github}</a>)
-                </>
-              )}
               {member.title && (
                 <>
                 &mdash;
                 {member.title}
+                </>
+              )}
+              {member.discourse && (
+                <br />
+                <>
+                  <a href={"https://discourse.nixos.org/u/" + member.discourse}>
+                    <Icon
+                      name="simple-icons:discourse"
+                      alt="logo of discourse"
+                      class="inline-block"
+                    />
+                    @{member.discourse}
+                  </a>
+                </>
+              )}
+              {member.github && (
+                <br />
+                <>
+                  <a href={"https://github.com/" + member.github}>
+                    <Icon
+                      name="simple-icons:github"
+                      alt="logo of github"
+                      class="inline-block"
+                    />
+                    @{member.github}
+                  </a>
                 </>
               )}
             </li>
