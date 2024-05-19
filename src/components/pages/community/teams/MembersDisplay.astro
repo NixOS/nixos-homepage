@@ -1,0 +1,65 @@
+---
+const { title = "Members", isSubteam = false, members, contact, class: extraClasses } = Astro.props;
+const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
+---
+
+<aside
+    class:list={[
+        !isSubteam && "bg-nix-blue-extralight rounded-xl px-4 py-3 w-full",
+        extraClasses]}>
+    <h2 class={titleClasses}>{title}</h2>
+    <ul class="mt-2 list-disc ml-4 font-light">
+        {
+            members.map((member) => (
+                <li class="mb-1 last:mb-0">
+                    {member.name}
+                    {member.discourse && (
+                        <>
+                            (
+                            <a
+                                href={
+                                    "https://discourse.nixos.org/u/" +
+                                    member.discourse
+                                }
+                            >
+                                @{member.discourse}
+                            </a>
+                            )
+                        </>
+                    )}
+                    {member.github && (
+                        <>
+                            (
+                            <a href={"https://github.com/" + member.github}>
+                                @{member.github}
+                            </a>
+                            )
+                        </>
+                    )}
+                    {member.title && (
+                        <>
+                            &mdash;
+                            {member.title}
+                        </>
+                    )}
+                </li>
+            ))
+        }
+    </ul>
+    {
+        contact && (
+            <>
+                <h2 class="text-3xl font-heading font-bold text-nix-blue mt-4">
+                    Contact
+                </h2>
+                <ul class="mt-2 list-disc ml-4">
+                    {contact.map((contact) => (
+                        <li class="mb-1 last:mb-0">
+                            <a href={contact.href}>{contact.name}</a>
+                        </li>
+                    ))}
+                </ul>
+            </>
+        )
+    }
+</aside>
