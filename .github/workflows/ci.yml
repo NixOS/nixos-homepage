@@ -33,7 +33,7 @@ jobs:
           fetch-depth: 0
 
       - name: "Installing Nix"
-        uses: "cachix/install-nix-action@v26"
+        uses: "cachix/install-nix-action@V27"
 
       - name: "Setup Cachix"
         uses: "cachix/cachix-action@v14"
