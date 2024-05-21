@@ -3,21 +3,59 @@ title: Amazon
 family: nixos
 platform: amazon
 ---
-import AWSTable from "../../components/pages/download/AWSTable.astro"
 
-NixOS can be deployed to Amazon EC2 with a pre-generated AMI image that you can select below.
+## NixOS AMIs
 
-### Via AWS Management Console
+NixOS can be deployed to Amazon EC2 using our official AMI. We publish
+AMIs to all AWS regions for both `x86_64` and `arm64` on a weekly basis.
 
-You can create an instance using the AWS Management Console by selecting the region and clicking the Launch button.
+We will start deprecating and garbage collecting images older than 90 days
+in the future.
+This is why we suggest using a terraform data source or the AWS API to query
+for the latest AMI.
 
-<AWSTable />
+### Via Terraform / OpenTofu
 
-### Via Command Line
+You can easily query for the latest AMI using a data source:
 
-You can also create an instance from the command line. For example, to create an instance in region `eu-west-1` using the EC2 API tools, just run:
+```terraform
+provider "aws" {
+  region = "eu-central-1"
+}
+
+data "aws_ami" "nixos_arm64" {
+  owners      = ["427812963091"]
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["nixos/24.05*"]
+  }
+  filter {
+    name   = "architecture"
+    values = ["arm64"] # or "x86_64"
+  }
+}
+
+resource "aws_instance" "nixos_arm64" {
+  ami           = data.aws_ami.nixos_arm64.id
+  instance_type = "t4g.nano"
+}
+```
+
+### Via Command Line / AWS API
+
+The [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html) API
+can be used to query the latest AMI too:
 
 ```bash
-$ nix-shell -p ec2_api_tools
-(nix-shell) $ ec2-run-instances ami-0fc7825fe890f87d1 --region eu-west-1 -k my-key-pair
+aws ec2 describe-images --owners 427812963091 \
+  --filter 'Name=name,Values=nixos/24.05*' \
+  --filter 'Name=architecture,Values=arm64'
 ```
+
+### Search for specific AMIs
+
+You can also use the [Image searcher](https://nixos.github.io/amis/) to find
+a specific AMI. Do note that we intend to deprecate images older than 90 days
+automatically and we do not recommend hardcoding AMI ids.
