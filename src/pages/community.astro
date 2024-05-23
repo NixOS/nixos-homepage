@@ -98,19 +98,6 @@ const platformsOther = [
   },
 ];
 
-const platformsOutside = [
-  {
-    href: "https://discord.gg/RbvHtGa",
-    name: "Discord",
-    iconName: "simple-icons:discord",
-  },
-  {
-    href: "https://www.reddit.com/r/NixOS/",
-    name: "Reddit",
-    iconName: "simple-icons:reddit",
-  },
-];
-
 import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
 ---
 
@@ -145,7 +132,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     <h2 class="text-4xl font-bold font-heading leading-none text-nix-blue mt-8">Where to talk?</h2>
     <p class="font-extralight leading-relaxed mt-2">
       The Nix community is spread across various platforms. Here are the
-      official and unofficial spaces where you can find help, discuss
+      official spaces where you can find help, discuss
       development, and chat with other users.
     <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">Official spaces</h3>
     <p class="text-gray-700">
@@ -175,21 +162,6 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
           }
         </ul>
     </div>
-    <h3 class="text-3xl font-bold font-heading text-nix-blue mt-6">Unofficial spaces</h3>
-    <p class="text-gray-700">
-        These spaces are not monitored and not moderated by the NixOS Moderation Team.
-        <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 flex-wrap">
-          {platformsOutside.map((platform) => (
-              <CommunityLink
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-                description={platform.description}
-                type="mobile_icon_desktop_name" />
-            ))
-          }
-        </ul>
-    </p>
   </Container>
   <Banner wrapperClasses="my-8">
     If you are looking for professional help, <a
