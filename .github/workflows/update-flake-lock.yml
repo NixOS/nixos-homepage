@@ -19,5 +19,3 @@ jobs:
 
       - name: "Update flake.lock"
         uses: "DeterminateSystems/update-flake-lock@v21"
-        with:
-          inputs: nixpkgs flake-utils
