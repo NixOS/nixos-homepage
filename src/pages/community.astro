@@ -86,9 +86,6 @@ const platformsMain = [
   }
 ];
 
-const platformsOther = [
-];
-
 const platformsOutside = [
   {
     href: "https://mastodon.social/tags/nixos",
@@ -158,7 +155,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
       These spaces are monitored and moderated by the NixOS Moderation Team.
     </p>
     <div class="grid md:grid-cols-3 gap-4 mt-4">
-        <ul class="flex gap-4 flex-col md:col-span-2">
+        <ul class="flex gap-4 flex-col md:col-span-3">
           {
             platformsMain.map((platform) => (
               <CommunityLink
@@ -166,17 +163,6 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
                 name={platform.name}
                 iconName={platform.iconName}
                 description={platform.description} />
-            ))
-          }
-        </ul>
-        <ul class="flex md:flex-col gap-4 flex-wrap">
-          {
-            platformsOther.map((platform) => (
-              <CommunityLink
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-                type="mobile_icon_desktop_name" />
             ))
           }
         </ul>
@@ -332,28 +318,27 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         <Image src={nixosFoundationLogo} alt='NixOS Foundation Logo' class="h-72" />
       </div>
       <div class="text-left inline-block mb-4 mt-4">
-      <h2 class="md:text-center text-3xl text-nix-blue font-bold font-heading">
-        Board members:
-      </h2>
-      <ul class="mt-2 md:w-72 mx-auto pl-8 md:pl-10 list-disc">
-        {
-          teams
-            .filter((team) => team.slug.split("_")[1] === "foundation-board")[0]
-            .data.members.map((member) => (
-              <li class="mb-1">
-                {member.name}
-                {member.title && (
-                  <>
-                  &mdash;
-                  {member.title}
-                  </>
-                )}
-              </li>
-            ))
-        }
-      </ul>
-        </div>
-
+        <h2 class="md:text-center text-3xl text-nix-blue font-bold font-heading">
+          Board members:
+        </h2>
+        <ul class="mt-2 md:w-72 mx-auto pl-8 md:pl-10 list-disc">
+          {
+            teams
+              .filter((team) => team.slug.split("_")[1] === "foundation-board")[0]
+              .data.members.map((member) => (
+                <li class="mb-1">
+                  {member.name}
+                  {member.title && (
+                    <>
+                    &mdash;
+                    {member.title}
+                    </>
+                  )}
+                </li>
+              ))
+          }
+        </ul>
+      </div>
     </div>
     <div class="space-y-4 font-extralight leading-relaxed">
       <h2 class="text-3xl text-nix-blue font-heading font-bold">The mission!</h2>
