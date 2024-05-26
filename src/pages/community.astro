@@ -153,23 +153,23 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">Official spaces</h3>
     <p class="text-gray-700">
       These spaces are monitored and moderated by the NixOS Moderation Team.
+        
+      <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 flex-wrap">
+        {
+          platformsMain.map((platform) => (
+            <CommunityLink
+              href={platform.href}
+              name={platform.name}
+              iconName={platform.iconName}
+              description={platform.description} />
+          ))
+        }
+      </ul>    
     </p>
-    <div class="grid md:grid-cols-3 gap-4 mt-4">
-        <ul class="flex gap-4 flex-col md:col-span-3">
-          {
-            platformsMain.map((platform) => (
-              <CommunityLink
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-                description={platform.description} />
-            ))
-          }
-        </ul>
-    </div>
     <h3 class="text-3xl font-bold font-heading text-nix-blue mt-6">Unofficial spaces</h3>
     <p class="text-gray-700">
         These spaces are not monitored and not moderated by the NixOS Moderation Team.
+
         <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 flex-wrap">
           {platformsOutside.map((platform) => (
               <CommunityLink
