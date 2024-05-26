@@ -80,24 +80,6 @@ const platformsMain = [
   },
 ];
 
-const platformsOther = [
-  {
-    href: "https://mastodon.social/tags/nixos",
-    name: "Mastodon",
-    iconName: "simple-icons:mastodon",
-  },
-  {
-    href: "https://twitter.com/hashtag/NixOS",
-    name: "Twitter",
-    iconName: "simple-icons:twitter",
-  },
-  {
-    href: "https://stackoverflow.com/questions/tagged/nix+or+nixpkgs+or+nixos+or+nixops",
-    name: "Stackoverflow",
-    iconName: "simple-icons:stackoverflow",
-  },
-];
-
 import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
 ---
 
@@ -147,17 +129,6 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
                 name={platform.name}
                 iconName={platform.iconName}
                 description={platform.description} />
-            ))
-          }
-        </ul>
-        <ul class="flex md:flex-col gap-4 flex-wrap">
-          {
-            platformsOther.map((platform) => (
-              <CommunityLink
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-                type="mobile_icon_desktop_name" />
             ))
           }
         </ul>
