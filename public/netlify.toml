@@ -113,44 +113,8 @@
   force = true
 
 [[redirects]]
-  from = "/manual/nix"
-  to = "/manual/nix/stable"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/manual/nix/:version/expressions/expression-language.html"
-  to = "/manual/nix/:version/language/index.html"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/manual/nix/:version/expressions/language-values.html"
-  to = "/manual/nix/:version/language/values.html"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/manual/nix/:version/expressions/language-constructs.html"
-  to = "/manual/nix/:version/language/constructs.html"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/manual/nix/:version/expressions/language-operators.html"
-  to = "/manual/nix/:version/language/operators.html"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/manual/nix/:version/expressions/*"
-  to = "/manual/nix/:version/language/:splat"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/manual/nix/:version/package-management/channels.html"
-  to = "/manual/nix/:version/command-ref/nix-channel.html"
+  from = "/manual/nix/*"
+  to = "https://nix.dev/manual/nix/stable/:splat"
   status = 302
   force = true
 
