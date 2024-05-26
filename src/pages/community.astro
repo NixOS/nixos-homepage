@@ -10,7 +10,8 @@ import Button from "../components/ui/Button.astro";
 import Banner from "../components/ui/Banner.astro";
 import RfcDiagram from "../components/ui/RfcDiagram.astro";
 import NixConEntry from "../components/pages/community/NixConEntry.astro";
-import CommunityLink from "../components/pages/community/CommunityLink.astro";
+import OfficialCommunityLink from "../components/pages/community/OfficialCommunityLink.astro";
+import UnofficialCommunityLink from "../components/pages/community/UnofficialCommunityLink.astro";
 
 const meetups = await getEntry("community", "meetups");
 const teams = await getCollection("teams");
@@ -157,7 +158,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
       <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 flex-wrap">
         {
           platformsMain.map((platform) => (
-            <CommunityLink
+            <OfficialCommunityLink
               href={platform.href}
               name={platform.name}
               iconName={platform.iconName}
@@ -172,7 +173,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
 
         <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 flex-wrap">
           {platformsOutside.map((platform) => (
-              <CommunityLink
+              <UnofficialCommunityLink
                 href={platform.href}
                 name={platform.name}
                 iconName={platform.iconName}
