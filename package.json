@@ -16,16 +16,16 @@
     "linkcheck:full": "linkchecker http://localhost:4321"
   },
   "dependencies": {
-    "@astrojs/mdx": "^3.0.0",
+    "@astrojs/mdx": "^3.0.1",
     "@astrojs/rss": "^4.0.6",
-    "@astrojs/sitemap": "^3.1.4",
+    "@astrojs/sitemap": "^3.1.5",
     "@astrojs/tailwind": "^5.0.3",
     "@fontsource-variable/fira-code": "^5.0.18",
     "@fontsource-variable/overpass": "^5.0.19",
     "@fontsource-variable/roboto-flex": "^5.0.15",
     "@xmldom/xmldom": "^0.8.10",
     "asciinema-player": "^3.7.1",
-    "astro": "^4.8.6",
+    "astro": "^4.9.1",
     "astro-icon": "^1.1.0",
     "astro-seo": "^0.8.0",
     "htmx.org": "^1.9.12",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.66",
-    "@iconify-json/simple-icons": "^1.1.101",
+    "@iconify-json/simple-icons": "^1.1.102",
     "@iconify/tailwind": "^1.1.1"
   }
 }
