@@ -107,30 +107,6 @@
   force = true
 
 [[redirects]]
-  from = "/manual"
-  to = "/learn.html"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/manual/nix/*"
-  to = "https://nix.dev/manual/nix/stable/:splat"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/manual/nixpkgs"
-  to = "/manual/nixpkgs/stable"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/manual/nixos"
-  to = "/manual/nixos/stable"
-  status = 302
-  force = true
-
-[[redirects]]
   from = "/nixos/nix-pills/*"
   to = "/guides/nix-pills/:splat"
   status = 302
@@ -215,14 +191,27 @@
   force = true
 
 [[redirects]]
-  from = "/nix/manual/unstable/*"
-  to = "/manual/nix/development/:splat"
+  from = "/manual"
+  to = "/learn.html"
   status = 302
   force = true
 
 [[redirects]]
-  from = "/nix/manual/stable/*"
-  to = "/manual/nix/latest/:splat"
+  # these rather old links are still used in the Nixpkgs manual
+  from = "/nix/manual/*"
+  to = "https://nix.dev/manual/nix/stable/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix/stable/*"
+  to = "https://nix.dev/manual/nix/latest/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nix/manual/unstable/*"
+  to = "https://nix.dev/manual/nix/development/:splat"
   status = 302
   force = true
 
@@ -233,8 +222,20 @@
   force = true
 
 [[redirects]]
+  from = "/manual/nixpkgs"
+  to = "/manual/nixpkgs/stable"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/nixos/manual/*"
   to = "/manual/nixos/stable/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nixos"
+  to = "/manual/nixos/stable"
   status = 302
   force = true
 
