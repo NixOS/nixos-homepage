@@ -155,7 +155,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     <p class="text-gray-700">
       These spaces are monitored and moderated by the NixOS Moderation Team.
         
-      <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 flex-wrap">
+      <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 flex-wrap">
         {
           platformsMain.map((platform) => (
             <OfficialCommunityLink
@@ -171,7 +171,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     <p class="text-gray-700">
         These spaces are not monitored and not moderated by the NixOS Moderation Team.
 
-        <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 flex-wrap">
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 flex-wrap">
           {platformsOutside.map((platform) => (
               <UnofficialCommunityLink
                 href={platform.href}
