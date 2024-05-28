@@ -15,10 +15,10 @@ const { href, iconName, name = "", description = "", type = "full" } = Astro.pro
 ---
 
 <li class:list={[
-  "bg-nix-blue-light flex-1 rounded-xl p-4 hover:bg-nix-blue transition-all cursor-pointer",
+  "bg-white border-2 border-nix-blue hover:bg-nix-blue-extralight flex-1 rounded-xl p-4 transition-all cursor-pointer",
   type === "icon" && "flex flex-col items-center justify-center",
   ]}>
-    <a href={href} class="!no-underline !text-white">
+    <a href={href} class="!no-underline !text-nix-blue">
       <div class:list={[
         "flex gap-2 text-xl font-bold",
         (type !== "full" || description === "") && "h-full",
