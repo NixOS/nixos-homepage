@@ -10,7 +10,8 @@ import Button from "../components/ui/Button.astro";
 import Banner from "../components/ui/Banner.astro";
 import RfcDiagram from "../components/ui/RfcDiagram.astro";
 import NixConEntry from "../components/pages/community/NixConEntry.astro";
-import CommunityLink from "../components/pages/community/CommunityLink.astro";
+import OfficialCommunityLink from "../components/pages/community/OfficialCommunityLink.astro";
+import UnofficialCommunityLink from "../components/pages/community/UnofficialCommunityLink.astro";
 
 const meetups = await getEntry("community", "meetups");
 const teams = await getCollection("teams");
@@ -78,9 +79,15 @@ const platformsMain = [
     iconName: "simple-icons:matrix",
     description: "Real-time help, development chat, and off-topic community discussion takes place on Matrix.",
   },
+  {
+    href: "https://github.com/NixOS/",
+    name: "Github",
+    iconName: "simple-icons:github",
+    description: "Official organization page on Github, where you can find nix, nixpkgs, and other repositories."
+  }
 ];
 
-const platformsOther = [
+const platformsOutside = [
   {
     href: "https://mastodon.social/tags/nixos",
     name: "Mastodon",
@@ -96,9 +103,6 @@ const platformsOther = [
     name: "Stackoverflow",
     iconName: "simple-icons:stackoverflow",
   },
-];
-
-const platformsOutside = [
   {
     href: "https://discord.gg/BqdJJFER4H",
     name: "Discord",
@@ -150,37 +154,26 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">Official spaces</h3>
     <p class="text-gray-700">
       These spaces are monitored and moderated by the NixOS Moderation Team.
+        
+      <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 flex-wrap">
+        {
+          platformsMain.map((platform) => (
+            <OfficialCommunityLink
+              href={platform.href}
+              name={platform.name}
+              iconName={platform.iconName}
+              description={platform.description} />
+          ))
+        }
+      </ul>    
     </p>
-    <div class="grid md:grid-cols-3 gap-4 mt-4">
-        <ul class="flex gap-4 flex-col md:col-span-2">
-          {
-            platformsMain.map((platform) => (
-              <CommunityLink
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-                description={platform.description} />
-            ))
-          }
-        </ul>
-        <ul class="flex md:flex-col gap-4 flex-wrap">
-          {
-            platformsOther.map((platform) => (
-              <CommunityLink
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-                type="mobile_icon_desktop_name" />
-            ))
-          }
-        </ul>
-    </div>
     <h3 class="text-3xl font-bold font-heading text-nix-blue mt-6">Unofficial spaces</h3>
     <p class="text-gray-700">
         These spaces are not monitored and not moderated by the NixOS Moderation Team.
-        <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 flex-wrap">
+
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 flex-wrap">
           {platformsOutside.map((platform) => (
-              <CommunityLink
+              <UnofficialCommunityLink
                 href={platform.href}
                 name={platform.name}
                 iconName={platform.iconName}
@@ -326,28 +319,27 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         <Image src={nixosFoundationLogo} alt='NixOS Foundation Logo' class="h-72" />
       </div>
       <div class="text-left inline-block mb-4 mt-4">
-      <h2 class="md:text-center text-3xl text-nix-blue font-bold font-heading">
-        Board members:
-      </h2>
-      <ul class="mt-2 md:w-72 mx-auto pl-8 md:pl-10 list-disc">
-        {
-          teams
-            .filter((team) => team.slug.split("_")[1] === "foundation-board")[0]
-            .data.members.map((member) => (
-              <li class="mb-1">
-                {member.name}
-                {member.title && (
-                  <>
-                  &mdash;
-                  {member.title}
-                  </>
-                )}
-              </li>
-            ))
-        }
-      </ul>
-        </div>
-
+        <h2 class="md:text-center text-3xl text-nix-blue font-bold font-heading">
+          Board members:
+        </h2>
+        <ul class="mt-2 md:w-72 mx-auto pl-8 md:pl-10 list-disc">
+          {
+            teams
+              .filter((team) => team.slug.split("_")[1] === "foundation-board")[0]
+              .data.members.map((member) => (
+                <li class="mb-1">
+                  {member.name}
+                  {member.title && (
+                    <>
+                    &mdash;
+                    {member.title}
+                    </>
+                  )}
+                </li>
+              ))
+          }
+        </ul>
+      </div>
     </div>
     <div class="space-y-4 font-extralight leading-relaxed">
       <h2 class="text-3xl text-nix-blue font-heading font-bold">The mission!</h2>

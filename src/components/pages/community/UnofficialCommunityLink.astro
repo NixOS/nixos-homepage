@@ -1,0 +1,39 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    href: string;
+    iconName: string;
+    name?: string;
+    description?: string;
+    type?: "full" | "mobile_icon_desktop_name" | "icon";
+}
+
+const { href, iconName, name = "", description = "", type = "full" } = Astro.props;
+
+
+---
+
+<li class:list={[
+  "bg-white border-2 border-nix-blue hover:bg-nix-blue-extralight flex-1 rounded-xl p-4 transition-all cursor-pointer",
+  type === "icon" && "flex flex-col items-center justify-center",
+  ]}>
+    <a href={href} class="!no-underline !text-nix-blue">
+      <div class:list={[
+        "flex gap-2 text-xl font-bold",
+        (type !== "full" || description === "") && "h-full",
+        type === "mobile_icon_desktop_name" && "flex-col md:flex-row items-center justify-center md:justify-start",
+        ]}>
+        <Icon
+          name={iconName}
+          alt={"logo of " + name}
+          class="w-8 h-8"
+        />
+        {type !== "icon" && <span class:list={[
+          "leading-8 ml-2",
+          type === "mobile_icon_desktop_name" && "hidden md:block",
+          ]}>{name}</span>}
+      </div>
+      {description !== "" && type === "full" && <div class="mt-2">{description}</div>}
+    </a>
+  </li>
