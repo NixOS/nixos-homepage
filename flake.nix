@@ -8,7 +8,7 @@ rec {
 
     # These inputs are used for the manuals and release artifacts
     released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    released-nixpkgs-stable.url = "nixpkgs/nixos-23.11";
+    released-nixpkgs-stable.url = "nixpkgs/nixos-24.05";
     released-nix-unstable.url = "github:nixos/nix/master";
     released-nix-stable.url = "github:nixos/nix/latest-release";
     nix-pills.url = "github:NixOS/nix-pills";
