@@ -204,13 +204,19 @@
   force = true
 
 [[redirects]]
+  from = "/manual/nix"
+  to = "https://nix.dev/manual/nix/latest/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/manual/nix/stable/*"
   to = "https://nix.dev/manual/nix/latest/:splat"
   status = 302
   force = true
 
 [[redirects]]
-  from = "/nix/manual/unstable/*"
+  from = "/manual/nix/unstable/*"
   to = "https://nix.dev/manual/nix/development/:splat"
   status = 302
   force = true
