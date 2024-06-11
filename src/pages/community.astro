@@ -87,7 +87,7 @@ const platformsMain = [
   }
 ];
 
-const platformsOutside = [
+const socialMediaMain = [
   {
     href: "https://mastodon.social/tags/nixos",
     name: "Mastodon",
@@ -98,6 +98,14 @@ const platformsOutside = [
     name: "Twitter",
     iconName: "simple-icons:twitter",
   },
+  {
+    href: "https://www.linkedin.com/company/nixpkgs",
+    name: "LinkedIn",
+    iconName: "simple-icons:linkedin"
+  }
+]
+
+const platformsOutside = [
   {
     href: "https://stackoverflow.com/questions/tagged/nix+or+nixpkgs+or+nixos+or+nixops",
     name: "Stackoverflow",
@@ -151,25 +159,48 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
       The Nix community is spread across various platforms. Here are the
       official and unofficial spaces where you can find help, discuss
       development, and chat with other users.
-    <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">Official spaces</h3>
-    <p class="text-gray-700">
-      These spaces are monitored and moderated by the NixOS Moderation Team.
-        
-      <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 flex-wrap">
-        {
-          platformsMain.map((platform) => (
-            <OfficialCommunityLink
-              href={platform.href}
-              name={platform.name}
-              iconName={platform.iconName}
-              description={platform.description} />
-          ))
-        }
-      </ul>    
-    </p>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="col-span-2">
+        <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">Official spaces</h3>
+        <p class="text-gray-700">
+          These spaces are monitored and moderated by the NixOS Moderation Team. This means they are moderated in such a way that they follow the standards and moral values of our community. You can find out more about our moderaiton team <a href="http://localhost:4321/community/teams/moderation">here</a>.
+            
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 flex-wrap">
+            {
+              platformsMain.map((platform, i) => (
+                <OfficialCommunityLink
+                  href={platform.href}
+                  name={platform.name}
+                  iconName={platform.iconName}
+                  description={platform.description}
+                  class={i === 0 && "col-span-2"}
+                />
+              ))
+            }
+          </ul>    
+        </p>
+      </div>
+      <div class="col-span-1">
+        <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">Official social-media</h3>
+        <p class="text-gray-700">
+          These spaces are maintained by our NixOS Marketing Team though not monitored and not moderated by the NixOS Moderation Team.
+            
+          <ul class="grid grid-cols-1 gap-4 mt-4 flex-wrap">
+            {
+              socialMediaMain.map((platform) => (
+                <OfficialCommunityLink
+                  href={platform.href}
+                  name={platform.name}
+                  iconName={platform.iconName} />
+              ))
+            }
+          </ul>    
+        </p>
+      </div>
+    </div>
     <h3 class="text-3xl font-bold font-heading text-nix-blue mt-6">Unofficial spaces</h3>
     <p class="text-gray-700">
-        These spaces are not monitored and not moderated by the NixOS Moderation Team.
+        These spaces are not monitored and not moderated by the NixOS Moderation Team. Please be aware that different moral values and rules may apply in these spaces. The NixOS moderation team may advise moderators in these spaces, though does not control or enforce our community values.
 
         <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 flex-wrap">
           {platformsOutside.map((platform) => (

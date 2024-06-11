@@ -7,9 +7,10 @@ interface Props {
     name?: string;
     description?: string;
     type?: "full" | "mobile_icon_desktop_name" | "icon";
+    class?: string;
 }
 
-const { href, iconName, name = "", description = "", type = "full" } = Astro.props;
+const { href, iconName, name = "", description = "", type = "full", class: extraClasses } = Astro.props;
 
 
 ---
@@ -17,6 +18,7 @@ const { href, iconName, name = "", description = "", type = "full" } = Astro.pro
 <li class:list={[
   "bg-nix-blue flex-1 rounded-xl p-4 hover:bg-nix-blue-dark transition-all cursor-pointer",
   type === "icon" && "flex flex-col items-center justify-center",
+  extraClasses
   ]}>
     <a href={href} class="!no-underline !text-white">
       <div class:list={[
