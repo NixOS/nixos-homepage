@@ -24,8 +24,8 @@
     "@fontsource-variable/overpass": "^5.0.19",
     "@fontsource-variable/roboto-flex": "^5.0.15",
     "@xmldom/xmldom": "^0.8.10",
-    "asciinema-player": "^3.7.1",
-    "astro": "^4.10.1",
+    "asciinema-player": "^3.8.0",
+    "astro": "^4.10.2",
     "astro-icon": "^1.1.0",
     "astro-seo": "^0.8.4",
     "htmx.org": "^1.9.12",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.66",
-    "@iconify-json/simple-icons": "^1.1.104",
+    "@iconify-json/simple-icons": "^1.1.105",
     "@iconify/tailwind": "^1.1.1"
   }
 }
