@@ -204,7 +204,7 @@
   force = true
 
 [[redirects]]
-  from = "/manual/nix"
+  from = "/manual/nix/*"
   to = "https://nix.dev/manual/nix/latest/:splat"
   status = 302
   force = true
