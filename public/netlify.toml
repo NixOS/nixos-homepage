@@ -197,27 +197,45 @@
   force = true
 
 [[redirects]]
-  # these rather old links are still used in the Nixpkgs manual
-  from = "/nix/manual/*"
+  from = "/manual/nix/stable/*"
   to = "https://nix.dev/manual/nix/stable/:splat"
   status = 302
   force = true
 
 [[redirects]]
-  from = "/manual/nix/*"
-  to = "https://nix.dev/manual/nix/latest/:splat"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "/manual/nix/stable/*"
-  to = "https://nix.dev/manual/nix/latest/:splat"
-  status = 302
-  force = true
-
-[[redirects]]
   from = "/manual/nix/unstable/*"
-  to = "https://nix.dev/manual/nix/development/:splat"
+  to = "https://nix.dev/manual/nix/latest/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  # catch links to the top-level
+  from = "/manual/nix"
+  # this must not have a trailing slash!
+  # otherwise, CSS won't be loaded
+  to = "https://nix.dev/manual/nix"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/manual/nix/*"
+  to = "https://nix.dev/manual/nix/:splat"
+  status = 302
+  force = true
+
+# these rather old links are still used in the Nixpkgs manual
+[[redirects]]
+  # catch links to the top-level
+  from = "/nix/manual"
+  # this must not have a trailing slash!
+  # otherwise, CSS won't be loaded
+  to = "https://nix.dev/manual/nix"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/nix/manual/*"
+  to = "https://nix.dev/manual/nix/:splat"
   status = 302
   force = true
 
