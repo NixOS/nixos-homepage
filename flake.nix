@@ -196,6 +196,7 @@ rec {
 
           packages = with pkgs; [
             nodejs_20
+            netlify-cli
           ];
 
           shellHook = ''
@@ -205,18 +206,23 @@ rec {
             export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
             export NIXOS_AMIS="${NIXOS_AMIS}"
 
-            >&2 echo ""
-            >&2 echo "  To bootstrap developing environment run:"
-            >&2 echo "      npm install"
-            >&2 echo ""
-            >&2 echo "  Afterwards, to start developing, run:"
-            >&2 echo "      npm run dev"
-            >&2 echo ""
-            >&2 echo "  and go to the following URL in your browser:"
-            >&2 echo "      http://localhost:4321"
-            >&2 echo ""
-            >&2 echo "  It will rebuild the website on each change."
-            >&2 echo ""
+            cat >&2 << EOF
+            To fetch all dependencies:
+                npm install
+
+            Afterwards, to start a local development server:
+                npm run dev
+
+            Then go to the following URL in your browser:
+                http://localhost:4321
+
+            It will rebuild the website on each change.
+
+            To test redirects:
+                npm run build
+                cd dist
+                netlify dev
+            EOF
           '';
         };
     });
