@@ -30,16 +30,16 @@ everyone who helped make this happen.
 -   [Nix has learned to load
     plugins](https://github.com/NixOS/nix/pull/1854)
 
--   [Nix workgroups area](https://nixos.wiki/wiki/Workgroup)
+-   [Nix workgroups area](https://wiki.nixos.org/wiki/Workgroup)
 
     Workgroups are used to facilitate working on components of the Nix
     ecosystems. As of this writing there exists:
 
     -   [container
-        workgroup](https://nixos.wiki/wiki/Workgroup:Container):
+        workgroup](https://wiki.nixos.org/wiki/Workgroup:Container):
         \"building (minimal) OCI containers from the nixpkgs
         ecosystem.\"
-    -   [router workgroup](https://nixos.wiki/wiki/Workgroup:Router):
+    -   [router workgroup](https://wiki.nixos.org/wiki/Workgroup:Router):
         running NixOS on your router.
 
 -   [Google Summer of Code 2018 proposals were not
