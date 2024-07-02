@@ -2,8 +2,9 @@
 import { parse } from "node-html-parser";
 // svgo is a peer dependency of astro-icon
 import { optimize } from "svgo";
+import type { Attributes } from "node-html-parser/dist/nodes/html";
 
-export interface Props {
+export interface Props extends Attributes {
   src: string;
 }
 
@@ -12,8 +13,11 @@ interface SVGFile {
   file: string;
 }
 
-const { src, ...attributes } = Astro.props as Props;
-const res = import.meta.glob("/src/**/*.svg", { eager: true, query: "?raw" });
+const { src, ...attributes } = Astro.props;
+const res = import.meta.glob("/src/**/*.svg", {
+  eager: true,
+  query: "?raw",
+}) as Record<string, SVGFile>;
 
 if (!(src in res)) {
   throw new Error(`${src} not found`);
