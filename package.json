@@ -13,7 +13,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "linkcheck:minimal": "linkchecker http://localhost:4321 --ignore-url /manual --ignore-url /guides --ignore-url /tutorials",
-    "linkcheck:full": "linkchecker http://localhost:4321"
+    "linkcheck:full": "linkchecker http://localhost:4321",
+    "format": "prettier --write ./src",
+    "format:check": "prettier --check ./src"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.2",
@@ -37,7 +39,9 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.67",
+    "@iconify/tailwind": "^1.1.1",
     "@iconify-json/simple-icons": "^1.1.107",
-    "@iconify/tailwind": "^1.1.1"
+    "prettier": "^3.3.2",
+    "prettier-plugin-astro": "^0.14.0"
   }
 }
