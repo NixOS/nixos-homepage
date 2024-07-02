@@ -24,8 +24,8 @@ description: The things that we love tell us what we are - Thomas Aquinas
   bandwidth throughput and it's overridable via `--compression-level`.
 
 - [Hercules CI #5 update requiredSystemFeatures, Cachix and Darwin
-support](https://blog.hercules-ci.com/sprints,/hercules-ci/2019/07/09/development-update-5-cachix-da
-rwin/)
+  support](https://blog.hercules-ci.com/sprints,/hercules-ci/2019/07/09/development-update-5-cachix-da
+  rwin/)
 
   Preview access for the CI has been given to all subscribers as we've reached feature parity for the
   public launch.
@@ -45,7 +45,6 @@ rwin/)
 - [Nixery is a tiny service that implements Docker’s registry protocol for serving images](https://discourse.nixos.org/t/nixery-serve-container-images-straight-from-nix/3579)
 
 - [Nix and NixOS: first impressions](https://ian.pw/posts/2019-07-19-nix-nixos-first-impressions.html)
-
 
 # Contribute to NixOS Weekly Newsletter
 

@@ -18,7 +18,7 @@ description: Today is the only day. Yesterday is gone.
 
   Compare original [MPlayer expression](https://github.com/NixOS/nixpkgs/blob/0.4/pkgs/MPlayer/MPlayer.fix), it's [first rewrite](https://github.com/NixOS/nixpkgs/blob/0.4/pkgs-ng/applications/video/MPlayer/default.fix) and [modern view](https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/video/mplayer/default.nix)
 
-- [hydra-in-a-bag]( https://github.com/samueldr/hydra-in-a-bag )
+- [hydra-in-a-bag](https://github.com/samueldr/hydra-in-a-bag)
 
   by @samueldr aims to provide a **one-click** command solution to running a hydra instance **for development purposes**.
 
@@ -41,7 +41,6 @@ description: Today is the only day. Yesterday is gone.
 - [How we use Nix at IOHK](https://iohk.io/blog/how-we-use-nix-at-iohk/)
 
 - [Dhall - Year in review](http://www.haskellforall.com/2019/01/dhall-year-in-review-2018-2019.html)
-
 
 # Contribute to NixOS Weekly Newsletter
 

@@ -33,7 +33,8 @@ const learningFeatures = [
 const learningResources = [
   {
     title: "The Nix hour",
-    description: "A weekly beginner-oriented interactive video lecture on all things Nix. Running since October 2022.",
+    description:
+      "A weekly beginner-oriented interactive video lecture on all things Nix. Running since October 2022.",
     url: "https://www.youtube.com/playlist?list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in",
     buttonText: "Watch on Youtube",
   },
@@ -45,12 +46,12 @@ const learningResources = [
   },
   {
     title: "Nix Pills",
-    description: "A low-level tutorial on building software packages with Nix, showing in detail how Nixpkgs is constructed.",
+    description:
+      "A low-level tutorial on building software packages with Nix, showing in detail how Nixpkgs is constructed.",
     url: "/guides/nix-pills",
     buttonText: "Take the Pills",
   },
 ];
-
 ---
 
 <Layout title="Learn Nix | Nix & NixOS">
@@ -73,11 +74,19 @@ const learningResources = [
       <h2 class="text-4xl font-extrabold font-heading pb-8">Search</h2>
       <div class="grid md:grid-cols-2 gap-4">
         <div>
-          <h3 class="text-2xl font-extrabold font-heading mb-4">Nix packages</h3>
-          <NixosSearchInput color="white" size="sm-full" collection="packages" />
+          <h3 class="text-2xl font-extrabold font-heading mb-4">
+            Nix packages
+          </h3>
+          <NixosSearchInput
+            color="white"
+            size="sm-full"
+            collection="packages"
+          />
         </div>
         <div>
-          <h3 class="text-2xl font-extrabold font-heading mb-4">NixOS options</h3>
+          <h3 class="text-2xl font-extrabold font-heading mb-4">
+            NixOS options
+          </h3>
           <NixosSearchInput color="white" size="sm-full" collection="options" />
         </div>
       </div>
@@ -91,7 +100,10 @@ const learningResources = [
         return (
           <div class="border-0.5 border-nix-blue-darker rounded-2xl p-4 flex flex-col gap-4 justify-start items-center">
             <article>
-              <InlineSVG src="/src/assets/image/doc-icon.svg" class="h-20 w-20 float-left inline pr-6 img-noadjust" />
+              <InlineSVG
+                src="/src/assets/image/doc-icon.svg"
+                class="h-20 w-20 float-left inline pr-6 img-noadjust"
+              />
               <h2 class="text-3xl text-nix-blue font-heading font-bold leading-none mb-4">
                 {manual.data.title}
               </h2>
@@ -99,9 +111,9 @@ const learningResources = [
                 <Content />
               </div>
             </article>
-              <Button size="sm-mobfull" color="green" href={manual.data.url}>
-                Full {manual.data.title}
-              </Button>
+            <Button size="sm-mobfull" color="green" href={manual.data.url}>
+              Full {manual.data.title}
+            </Button>
           </div>
         );
       })
@@ -117,7 +129,9 @@ const learningResources = [
         {
           learningResources.map((item) => (
             <div class="flex flex-col items-start">
-              <h3 class="text-2xl font-extrabold mb-2 font-heading">{item.title}</h3>
+              <h3 class="text-2xl font-extrabold mb-2 font-heading">
+                {item.title}
+              </h3>
               <p class="mb-4 font-light leading-relaxed">{item.description}</p>
               <Button size="sm-mobfull" color="orange" href={item.url}>
                 {item.buttonText}

@@ -47,7 +47,6 @@ description: Someone is sitting in the shade today because someone planted a tre
   The [nixpkgs-tungsten](https://github.com/cloudwatt/nixpkgs-tungsten) project provides
   tools and workflows that make it much easier to work with, and on Tungsten Fabric itself.
 
-
 # Contribute to NixOS Weekly Newsletter
 
 This work would not be possible without the many contributions of the community.

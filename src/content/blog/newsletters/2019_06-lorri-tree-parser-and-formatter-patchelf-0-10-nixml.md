@@ -3,6 +3,7 @@ title: "#06 - Lorri, tree parser and formatter, patchelf 0.10, NixML"
 date: 2019-04-03
 description: Let us sacrifice our today so that our children can have a better tomorrow
 ---
+
 # News
 
 - [NIXML: nix + YAML for easy reproducible environments](https://metarabbit.wordpress.com/2019/03/12/nixml-nix-yaml-for-easy-reproducible-environments/)
@@ -24,7 +25,6 @@ description: Let us sacrifice our today so that our children can have a better t
   [Try it out](http://github.com/target/lorri)
 
 - [PatchELF 0.10 released](https://nixos.org/releases/patchelf/patchelf-0.10/)
-
 
 # Contribute to NixOS Weekly Newsletter
 

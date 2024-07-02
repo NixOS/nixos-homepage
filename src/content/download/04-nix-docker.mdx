@@ -25,4 +25,3 @@ $ docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix
 docker> nix-build -I nixpkgs=/nixpkgs -A hello
 docker> find ./result # this symlink points to the build package
 ```
-

@@ -8,16 +8,16 @@ title: "#11 - NixOS 18.09 release, Fastly CDN for cache, your first
 
 # News
 
--   cache.nixos.org
-    [moved](https://discourse.nixos.org/t/the-nixos-cache-is-now-hosted-by-fastly/1061)
-    from Amazon to Fastly.
--   [A very hacky proof of concept of a lisp in
-    Nix](https://github.com/Infinisil/nixlisp)
--   [NixOS 18.09 Jellyfish
-    released](https://discourse.nixos.org/t/nixos-18-09-jellyfish-released/1076)
--   Request for maintenance: [Azure
-    blobs](https://github.com/NixOS/nixpkgs/issues/36262)
--   [Your First Hydra](http://qfpl.io/posts/nix/starting-simple-hydra/)
+- cache.nixos.org
+  [moved](https://discourse.nixos.org/t/the-nixos-cache-is-now-hosted-by-fastly/1061)
+  from Amazon to Fastly.
+- [A very hacky proof of concept of a lisp in
+  Nix](https://github.com/Infinisil/nixlisp)
+- [NixOS 18.09 Jellyfish
+  released](https://discourse.nixos.org/t/nixos-18-09-jellyfish-released/1076)
+- Request for maintenance: [Azure
+  blobs](https://github.com/NixOS/nixpkgs/issues/36262)
+- [Your First Hydra](http://qfpl.io/posts/nix/starting-simple-hydra/)
 
 # Contribute to NixOS Weekly Newsletter
 

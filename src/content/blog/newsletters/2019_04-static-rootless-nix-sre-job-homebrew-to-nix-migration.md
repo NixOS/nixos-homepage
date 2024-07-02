@@ -17,9 +17,9 @@ description: I love those who yearn for the impossible
 
 - [Static Nix: a command-line swiss army knife](https://matthewbauer.us/blog/static-nix.html)
 
-   Matthew shows how using statically linked Nix in a 5MB binary,
-   one can use Nix without root. With an one-liner shell, you can
-   use Nix to install any software on a Linux machine.
+  Matthew shows how using statically linked Nix in a 5MB binary,
+  one can use Nix without root. With an one-liner shell, you can
+  use Nix to install any software on a Linux machine.
 
 - [Nix SRE position in San Francisco, CA](https://jobs.lever.co/keeptruckin/464c5b6a-ccad-467e-a7c6-c96ec6cb4ce0)
 

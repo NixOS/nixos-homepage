@@ -23,7 +23,10 @@ export async function getStaticPaths() {
     return groups;
   }, {});
 
-  return Array.from( Object.keys(filteredEntries), key => filteredEntries[key] );
+  return Array.from(
+    Object.keys(filteredEntries),
+    (key) => filteredEntries[key],
+  );
 }
 
 const { entries, category } = Astro.props;
@@ -35,13 +38,10 @@ const upperCaseCategory = category.charAt(0).toUpperCase() + category.slice(1);
   <PageHeader text={`Blog / ${upperCaseCategory}`} />
   <Container class="py-8">
     <BlogList />
-      {
-        entries.map(async (post) => {
-          return (
-            <BlogListEntry post={post} />
-          );
-        })
-      }
-    </BlogList>
+    {
+      entries.map(async (post) => {
+        return <BlogListEntry post={post} />;
+      })
+    }
   </Container>
 </Layout>

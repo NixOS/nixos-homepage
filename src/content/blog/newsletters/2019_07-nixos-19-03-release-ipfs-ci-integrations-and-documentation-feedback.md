@@ -39,7 +39,6 @@ Description: With pride, there are many curses. With humility, there come many b
   Garry shares a trick how to use packages from different channels. Useful
   when NixOS upgrade/update is blocked due to a broken package.
 
-
 # Contribute to NixOS Weekly Newsletter
 
 This work would not be possible without the many contributions of the community.

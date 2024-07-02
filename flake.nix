@@ -186,7 +186,7 @@ rec {
           done
         '';
 
-      in rec {
+      in {
         packages.manuals = manuals;
         packages.pills = pills;
         packages.demos = demos;

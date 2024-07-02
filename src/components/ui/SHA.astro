@@ -1,15 +1,10 @@
 ---
-
 interface Props {
   href?: string;
   classList?: string[];
 }
 
-const {
-  href = "#",
-  classList = [],
-  } = Astro.props;
-
+const { href = "#", classList = [] } = Astro.props;
 ---
 
 <span class="mx-[0.5rem] hidden md:inline">
@@ -17,4 +12,3 @@ const {
     <slot />
   </a>
 </span>
-

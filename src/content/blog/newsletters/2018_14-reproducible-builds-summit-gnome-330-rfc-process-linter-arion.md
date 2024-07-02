@@ -8,7 +8,7 @@ description: Start by doing what's necessary; then do what's possible; and sudde
 
 - Gnome 3.30 with [wayland support](https://github.com/NixOS/nixpkgs/pull/44497) has hit master
 
-  To launch a wayland session simply use [GDM](https://nixos.org/nixos/options.html#gdm) or [SDDM](https://nixos.org/nixos/options.html#sddm) and select the `gnome` session.  Select `gnome-xorg` to run an X11 session. If you encounter a bug please cc @hedning on github.
+  To launch a wayland session simply use [GDM](https://nixos.org/nixos/options.html#gdm) or [SDDM](https://nixos.org/nixos/options.html#sddm) and select the `gnome` session. Select `gnome-xorg` to run an X11 session. If you encounter a bug please cc @hedning on github.
 
 - Fast Docker Compose 'deployments' for development with [Arion](https://github.com/hercules-ci/arion#readme)
 

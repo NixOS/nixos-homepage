@@ -1,9 +1,8 @@
 ---
-
 interface Props {
   heading: string;
   subHeading: string;
-  tags: Array<{ href: string | null, text:string}>;
+  tags: Array<{ href: string | null; text: string }>;
   paragraphs: string[];
   emphasis?: string | null;
   location?: "left" | "right";
@@ -19,27 +18,34 @@ const {
 } = Astro.props;
 
 import Tag from "../../ui/Tag.astro";
-
 ---
 
-<h2 class="text-[2rem] leading-[2.2rem] font-heading font-bold text-nix-blue">{heading}</h2>
+<h2 class="text-[2rem] leading-[2.2rem] font-heading font-bold text-nix-blue">
+  {heading}
+</h2>
 <p class="text-xl leading-[2.2rem] font-bold text-neutral-500">{subHeading}</p>
-<div class="flex flex-wrap gap-1" class:list={[{
-  "justify-start md:justify-end": location === "left",
-  "justify-start": location === "right",
-}]}>
-{tags.map((tag) => (
-  <Tag href={tag.href}>{tag.text}</Tag>
-))}
+<div
+  class="flex flex-wrap gap-1"
+  class:list={[
+    {
+      "justify-start md:justify-end": location === "left",
+      "justify-start": location === "right",
+    },
+  ]}
+>
+  {tags.map((tag) => <Tag href={tag.href}>{tag.text}</Tag>)}
 </div>
-{paragraphs.map((paragraph, idx, array) => {
-  return (
-    <p class="leading-[1.75rem]">
-      {paragraph}
-      {
-        (idx + 1 === array.length) && emphasis &&
-        <>&nbsp;<span class="font-bold">{emphasis}</span></>
-      }
-    </p>
-  )
-})}
+{
+  paragraphs.map((paragraph, idx, array) => {
+    return (
+      <p class="leading-[1.75rem]">
+        {paragraph}
+        {idx + 1 === array.length && emphasis && (
+          <>
+            &nbsp;<span class="font-bold">{emphasis}</span>
+          </>
+        )}
+      </p>
+    );
+  })
+}

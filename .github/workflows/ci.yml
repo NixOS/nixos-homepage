@@ -18,7 +18,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
   build:
     name: "Build nixos.org"
     runs-on: "ubuntu-latest"
@@ -26,7 +25,6 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
     steps:
-
       - name: "Checking out the repository"
         uses: "actions/checkout@v4"
         with:
@@ -39,7 +37,12 @@ jobs:
         uses: "cachix/cachix-action@v15"
         with:
           name: "nixos-homepage"
-          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+
+      - name: "Check formatting"
+        run: |
+          npm install
+          npm run format:check
 
       - name: "Build"
         run: |

@@ -4,7 +4,7 @@ import { SEO } from "astro-seo";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 
-import '../styles/base.css';
+import "../styles/base.css";
 import { getImage } from "astro:assets";
 
 import faviconSvgSrc from "../assets/image/flake-blue.svg";
@@ -13,60 +13,70 @@ import { getEntry } from "astro:content";
 const {
   title = "Nix &amp; NixOS | Declarative builds and deployments",
   description = "Nix is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems.",
-} = Astro.props
+} = Astro.props;
 
-const blogMenu = await getEntry('menus', 'blog');
+const blogMenu = await getEntry("menus", "blog");
 
-const faviconSvg = await getImage({ src: faviconSvgSrc, format: 'svg' })
+const faviconSvg = await getImage({ src: faviconSvgSrc, format: "svg" });
 
-const headLinks = [{
-          rel: "sitemap",
-          href: "/sitemap-index.xml"
-        }, {
-          rel: "icon",
-          href: faviconSvg.src,
-          type: "image/svg+xml"
-        }, {
-          rel: "alternate",
-          type: "application/rss+xml",
-          title: "Complete RSS Feed",
-          href: "/blog/feed.xml"
-        }]
+const headLinks = [
+  {
+    rel: "sitemap",
+    href: "/sitemap-index.xml",
+  },
+  {
+    rel: "icon",
+    href: faviconSvg.src,
+    type: "image/svg+xml",
+  },
+  {
+    rel: "alternate",
+    type: "application/rss+xml",
+    title: "Complete RSS Feed",
+    href: "/blog/feed.xml",
+  },
+];
 
 const headFeedLinks = blogMenu.data.map((e) => {
   return {
     rel: "alternate",
     type: "application/rss+xml",
     title: `${e.title} RSS Feed`,
-    href: `/blog/${e.id}-rss.xml`
-  }
-})
+    href: `/blog/${e.id}-rss.xml`,
+  };
+});
 ---
+
 <html lang="en">
   <head>
     <SEO
       title={title}
-      titleTemplate={ Astro.url.pathname === '/' ? title : '%s | Nix & NixOS'}
+      titleTemplate={Astro.url.pathname === "/" ? title : "%s | Nix & NixOS"}
       titleDefault={title}
       description={description}
       charset="utf-8"
       extend={{
         link: headLinks.concat(headFeedLinks),
-        meta: [{
-          name: "viewport",
-          content: "width=device-width"
-        }, {
-          name: "generator",
-          content: Astro.generator
-        }, {
-          name: "google-site-verification",
-          content: "ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE"
-        }, {
-          httpEquiv: "Content-Type",
-          content: "text/html; charset=utf-8"
-        }]
+        meta: [
+          {
+            name: "viewport",
+            content: "width=device-width",
+          },
+          {
+            name: "generator",
+            content: Astro.generator,
+          },
+          {
+            name: "google-site-verification",
+            content: "ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE",
+          },
+          {
+            httpEquiv: "Content-Type",
+            content: "text/html; charset=utf-8",
+          },
+        ],
       }}
-      />
+    />
   </head>
   <body class="min-h-screen flex flex-col bg-white text-gray-950">
     <Header />
@@ -74,22 +84,19 @@ const headFeedLinks = blogMenu.data.map((e) => {
       <slot />
     </main>
     <Footer />
+    <script>
+      import "htmx.org";
+
+      // Fonts
+      import "@fontsource-variable/overpass";
+      import "@fontsource-variable/fira-code";
+      import "@fontsource-variable/roboto-flex/wdth.css";
+    </script>
+
+    <style>
+      @font-face {
+        font-family: "Roboto Flex Variable";
+      }
+    </style>
   </body>
 </html>
-
-<script>
-
-import "htmx.org"
-
-// Fonts
-import '@fontsource-variable/overpass';
-import '@fontsource-variable/fira-code';
-import '@fontsource-variable/roboto-flex/wdth.css';
-
-</script>
-
-<style>
-  @font-face {
-    font-family: 'Roboto Flex Variable';
-  }
-</style>

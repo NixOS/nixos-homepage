@@ -18,7 +18,7 @@ description: From what we get, we can make a living; what we give, however, make
 
   It can be enabled with `services.xserver.desktopManager.pantheon.enable`.
 
-- [The case of the supersized shebang]( https://lwn.net/SubscriberLink/779997/11de2bdc8dbc0d69/ )
+- [The case of the supersized shebang](https://lwn.net/SubscriberLink/779997/11de2bdc8dbc0d69/)
 
   Regression in the linux kernel all together with backporting the issue into all stable kernels.
 
@@ -43,8 +43,6 @@ description: From what we get, we can make a living; what we give, however, make
 - [Nix SRE position in Helsinki, Finland](https://relex.recruiterbox.com/jobs/fk0jx41/)
 
 - [IOHK is hiring devops engineers in US/Europe](https://iohk.io/careers/#op-291346-devops-engineer--nix-nixos-nixops-hydra)
-
-
 
 # Contribute to NixOS Weekly Newsletter
 

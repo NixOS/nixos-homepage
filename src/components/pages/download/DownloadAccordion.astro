@@ -5,7 +5,7 @@ const { family = "nix" } = Astro.props;
 const accordionId = `download-${family}-accordion`;
 
 let downloadOptions = (await getCollection("download")).filter(
-  (option) => option.data.family === family
+  (option) => option.data.family === family,
 );
 ---
 
@@ -73,7 +73,7 @@ let downloadOptions = (await getCollection("download")).filter(
     let os = "linux";
     if (userPlatform.includes("macintosh")) {
       os = "macos";
-    } else if(userPlatform.includes("windows")) {
+    } else if (userPlatform.includes("windows")) {
       os = "windows";
     }
     activePanel = acc.querySelector(`#nix-install-${os}`);
@@ -86,7 +86,7 @@ let downloadOptions = (await getCollection("download")).filter(
     "md:bg-nix-blue-extralight",
     "md:py-8",
     "md:rounded-2xl",
-    "self-start"
+    "self-start",
   );
 
   if (window.innerWidth > 768) {
@@ -109,7 +109,7 @@ let downloadOptions = (await getCollection("download")).filter(
     "md:grid-cols-1",
     "md:grid-cols-3",
     "gap-4",
-    "md:py-8"
+    "md:py-8",
   );
 
   if (window.location.hash) {
@@ -156,7 +156,7 @@ let downloadOptions = (await getCollection("download")).filter(
 
   function togglePanel(e) {
     const panel = acc.querySelector(
-      `#${e.target.getAttribute("aria-controls")}`
+      `#${e.target.getAttribute("aria-controls")}`,
     );
     if (panel === activePanel) {
       return;
@@ -191,7 +191,7 @@ let downloadOptions = (await getCollection("download")).filter(
       "aria-expanded:before:w-8",
       "aria-expanded:before:right-10",
       "aria-expanded:before:md:hidden",
-      "aria-expanded:before:icon-[mdi--arrow-down-drop-circle]"
+      "aria-expanded:before:icon-[mdi--arrow-down-drop-circle]",
     );
   }
 

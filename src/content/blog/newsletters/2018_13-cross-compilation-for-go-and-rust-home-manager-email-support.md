@@ -3,6 +3,7 @@ title: "#13 - Cross compilation for Go and Rust, home-manager email support"
 date: 2018-12-04
 description: No act of kindness, no matter how small, is ever wasted.
 ---
+
 # News
 
 - NixOS 19.03 will leverage [multiple cores](https://github.com/NixOS/nixpkgs/pull/50440)
@@ -11,7 +12,6 @@ description: No act of kindness, no matter how small, is ever wasted.
   on Linux
 
 - [Deploy a C++ web app on Heroku using Docker and Nix](https://nokomprendo.frama.io/tuto_fonctionnel/posts/tuto_fonctionnel_30/2018-11-08-README.html)
-
 
 - [Meson 0.48 landed in staging again](https://github.com/NixOS/nixpkgs/pull/46020#event-1973394287)
 
@@ -32,8 +32,8 @@ description: No act of kindness, no matter how small, is ever wasted.
 
 - [Call for new stickers design for events](https://discourse.nixos.org/t/nixos-stickers-for-35c3-and-fosdem/1540)
 
- - [OfBorg now uses checks](https://discourse.nixos.org/t/ofborg-now-uses-checks/1558)
-   for build status reports, greatly reducing Nixpkgs reviewers' email load.
+- [OfBorg now uses checks](https://discourse.nixos.org/t/ofborg-now-uses-checks/1558)
+  for build status reports, greatly reducing Nixpkgs reviewers' email load.
 
 # Contribute to NixOS Weekly Newsletter
 

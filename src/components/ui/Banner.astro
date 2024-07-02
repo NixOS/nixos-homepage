@@ -4,17 +4,22 @@ const { class: extraClasses, wrapperClasses, id = null } = Astro.props;
 import Container from "../layout/Container.astro";
 ---
 
-<div class:list={["clickable bg-nix-blue-extralight font-bold font-heading text-nix-blue-dark", wrapperClasses]}>
+<div
+  class:list={[
+    "clickable bg-nix-blue-extralight font-bold font-heading text-nix-blue-dark",
+    wrapperClasses,
+  ]}
+>
   <Container class:list={["p-4", extraClasses]}>
-      <slot/>
+    <slot />
   </Container>
 </div>
 
 <script>
-  let clickables = document.querySelectorAll('.clickable');
-  clickables.forEach(clickable => {
-    clickable.classList.add('cursor-pointer');
-    clickable.addEventListener('click', () => {
+  let clickables = document.querySelectorAll(".clickable");
+  clickables.forEach((clickable) => {
+    clickable.classList.add("cursor-pointer");
+    clickable.addEventListener("click", () => {
       clickable.querySelector("a, button").click();
     });
   });
