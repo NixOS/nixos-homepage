@@ -1,15 +1,11 @@
 ---
 import CodeBlock from "./CodeBlock.astro";
 
-
 interface Props {
-    path: string;
+  path: string;
 }
 
 const { path = "/" } = Astro.props;
-
 ---
 
-<CodeBlock lines={[
-    {"shellPrompt":"", "code": path },
-  ]} type="storepath"></CodeBlock>
+<CodeBlock lines={[{ shellPrompt: "", code: path }]} type="storepath" />

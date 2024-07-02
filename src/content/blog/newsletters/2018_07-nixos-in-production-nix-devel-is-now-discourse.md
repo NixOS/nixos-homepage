@@ -7,15 +7,15 @@ title: "#07 - NixOS in production, nix-devel is now Discourse"
 
 # News
 
--   [NixOS in
-    production](http://www.haskellforall.com/2018/08/nixos-in-production.html)
+- [NixOS in
+  production](http://www.haskellforall.com/2018/08/nixos-in-production.html)
 
-    Gabriel Gonzalez shows how to do a remote [nixos-rebuild
-    switch]{.title-ref} while pinning nixpkgs
+  Gabriel Gonzalez shows how to do a remote [nixos-rebuild
+  switch]{.title-ref} while pinning nixpkgs
 
--   The [nix-devel]{.title-ref} mailing list is now replaced by our
-    [discourse.nixos.org](https://discourse.nixos.org/) forum instance
-    which is also usable by email
+- The [nix-devel]{.title-ref} mailing list is now replaced by our
+  [discourse.nixos.org](https://discourse.nixos.org/) forum instance
+  which is also usable by email
 
 # Contribute to NixOS Weekly Newsletter
 

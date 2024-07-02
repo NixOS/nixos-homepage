@@ -12,7 +12,7 @@ description: What we think, we become
 
 - [TerraNix](https://github.com/mrVanDalo/terranix)
 
-  Terraform is awesome, it would be much more awesome with a NixOS  module system.
+  Terraform is awesome, it would be much more awesome with a NixOS module system.
 
 - [Debian is packaging Nix](https://lists.debian.org/debian-devel/2019/01/msg00013.html)
 

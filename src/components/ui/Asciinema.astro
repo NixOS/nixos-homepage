@@ -15,8 +15,8 @@ const defaultSettings = {
   autoPlay: false,
   loop: true,
   controls: true,
-  fit: 'width',
-  terminalFontFamily: 'Fira Code Variable',
+  fit: "width",
+  terminalFontFamily: "Fira Code Variable",
 };
 
 const {
@@ -26,26 +26,26 @@ const {
   title = undefined,
 }: Props = Astro.props;
 
-
 const demoId = "asciinema-demo-" + src.split("/").pop().split(".")[0];
 ---
 
 <>
-  {title && (
-    <a href={`#${demoId}`} class="!no-underline" id={`${demoId}-link`}>
-      <h3 class="text-nix-blue text-xl font-heading font-bold">{title}</h3>
-    </a>
-  )}
+  {
+    title && (
+      <a href={`#${demoId}`} class="!no-underline" id={`${demoId}-link`}>
+        <h3 class="text-nix-blue text-xl font-heading font-bold">{title}</h3>
+      </a>
+    )
+  }
   <asciinema-player
     id={demoId}
     class={extraClasses}
     data-src={src}
     data-title={title}
-    data-settings={JSON.stringify({...defaultSettings, ...settings})}
+    data-settings={JSON.stringify({ ...defaultSettings, ...settings })}
   >
   </asciinema-player>
 </>
-
 
 <script>
   import * as AsciinemaPlayer from "asciinema-player";
@@ -59,14 +59,16 @@ const demoId = "asciinema-demo-" + src.split("/").pop().split(".")[0];
         settings.autoPlay = true;
       }
 
-      document.fonts.load('1em ' + settings.terminalFontFamily).then(() => {
-        const player = AsciinemaPlayer.create(src, this, settings)
+      document.fonts.load("1em " + settings.terminalFontFamily).then(() => {
+        const player = AsciinemaPlayer.create(src, this, settings);
       });
 
       if (this.dataset.title) {
-        document.getElementById(`${this.id}-link`).addEventListener("click", (e) => {
-          player.play();
-        });
+        document
+          .getElementById(`${this.id}-link`)
+          .addEventListener("click", (e) => {
+            player.play();
+          });
       }
     }
   }

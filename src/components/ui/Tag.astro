@@ -1,5 +1,4 @@
 ---
-
 interface Props {
   color?: "orange" | "darkgreen" | "lightblue" | "darkblue";
   outline?: boolean;
@@ -11,26 +10,31 @@ const {
   color = "darkblue",
   classList = [],
   href = null,
-  outline = false
+  outline = false,
 } = Astro.props;
 
 const colorMap = {
-  "orange": outline ? "bg-transparent border-nix-orange" : "bg-nix-orange",
-  "lightblue": outline ? "bg-transparent border-nix-blue-light" : "bg-nix-blue-light",
-  "darkblue": outline ? "bg-transparent border-nix-blue" : "bg-nix-blue",
-  "darkgreen": outline ? "bg-transparent border-nix-green-dark" : "bg-nix-green-dark"
-}
+  orange: outline ? "bg-transparent border-nix-orange" : "bg-nix-orange",
+  lightblue: outline
+    ? "bg-transparent border-nix-blue-light"
+    : "bg-nix-blue-light",
+  darkblue: outline ? "bg-transparent border-nix-blue" : "bg-nix-blue",
+  darkgreen: outline
+    ? "bg-transparent border-nix-green-dark"
+    : "bg-nix-green-dark",
+};
 
 const localClassList = `${colorMap[color]} ${outline ? "border-1 !text-black py-[0.125rem]" : "border-0 !text-white py-[0.25rem]"} inline-block w-fit rounded-lg font-bold !no-underline text-sm px-[0.5rem]`;
 ---
 
-{href
-  ?
+{
+  href ? (
     <a href={href} class:list={[localClassList, classList]}>
-      <slot/>
+      <slot />
     </a>
-  :
+  ) : (
     <span href={href} class:list={[localClassList, classList]}>
-      <slot/>
+      <slot />
     </span>
+  )
 }

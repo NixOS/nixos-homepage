@@ -1,32 +1,34 @@
 ---
-
 interface Props {
   text?: string;
   subtext?: string;
   parentPath?: string;
 }
 
-const { text = '', subtext, parentPath = undefined }: Props = Astro.props;
+const { text = "", subtext, parentPath = undefined }: Props = Astro.props;
 
 import Container from "./Container.astro";
-
 ---
-<div class="inline-svg-header-nixdarkblue bg-bottom bg-no-repeat bg-cover py-24 hidden md:block">
+
+<div
+  class="inline-svg-header-nixdarkblue bg-bottom bg-no-repeat bg-cover py-24 hidden md:block"
+>
   <Container class="text-white grid grid-cols-3">
     <div class="flex flex-col gap-4 col-span-2">
-      {parentPath && (
-        <a href={parentPath} class="!text-white -mb-4 -mt-6 invisible md:visible">
-          <span class="text-nixblue">←</span> Back
-        </a>
-      )}
+      {
+        parentPath && (
+          <a
+            href={parentPath}
+            class="!text-white -mb-4 -mt-6 invisible md:visible"
+          >
+            <span class="text-nixblue">←</span> Back
+          </a>
+        )
+      }
       <h1 class="text-4xl font-bold font-heading text-left">
         {text}
       </h1>
-      {subtext && (
-        <p class="text text-left">
-          {subtext}
-        </p>
-      )}
+      {subtext && <p class="text text-left">{subtext}</p>}
     </div>
   </Container>
 </div>

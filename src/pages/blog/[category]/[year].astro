@@ -11,21 +11,24 @@ export async function getStaticPaths() {
 
   const filteredEntries = blogEntries.reduce((groups, entry) => {
     const category = entry.slug.split("/")[0];
-    const postYear = (new Date(entry.data.date)).getFullYear()
-    if (!groups[category+postYear]) {
-      groups[category+postYear] = {
+    const postYear = new Date(entry.data.date).getFullYear();
+    if (!groups[category + postYear]) {
+      groups[category + postYear] = {
         params: {
           category: category,
-          year: postYear
+          year: postYear,
         },
         props: { entries: [], category: category, year: postYear },
       };
     }
-    groups[category+postYear].props.entries.push(entry);
+    groups[category + postYear].props.entries.push(entry);
     return groups;
   }, {});
 
-  return Array.from( Object.keys(filteredEntries), key => filteredEntries[key] );
+  return Array.from(
+    Object.keys(filteredEntries),
+    (key) => filteredEntries[key],
+  );
 }
 
 const { entries, category, year } = Astro.props;
@@ -34,16 +37,13 @@ const upperCaseCategory = category.charAt(0).toUpperCase() + category.slice(1);
 ---
 
 <Layout title={`Blog/${upperCaseCategory}/${year}`}>
-    <PageHeader text={`Blog / ${upperCaseCategory} / ${year}`} />
-    <Container class="py-8">
-      <BlogList />
-        {
-          entries.map(async (post) => {
-            return (
-              <BlogListEntry post={post} />
-            );
-          })
-        }
-      </BlogList>
-    </Container>
-  </Layout>
+  <PageHeader text={`Blog / ${upperCaseCategory} / ${year}`} />
+  <Container class="py-8">
+    <BlogList />
+    {
+      entries.map(async (post) => {
+        return <BlogListEntry post={post} />;
+      })
+    }
+  </Container>
+</Layout>

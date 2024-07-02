@@ -1,13 +1,13 @@
 items:
-- name: Explore
-  link: /explore
-- name: Download
-  link: /download
-- name: Learn
-  link: /learn
-- name: Community
-  link: /community
-- name: Blog
-  link: /blog
-- name: Donate
-  link: /donate
+  - name: Explore
+    link: /explore
+  - name: Download
+    link: /download
+  - name: Learn
+    link: /learn
+  - name: Community
+    link: /community
+  - name: Blog
+    link: /blog
+  - name: Donate
+    link: /donate

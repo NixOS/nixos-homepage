@@ -1,58 +1,65 @@
 ---
-import { getEntry, getCollection } from "astro:content"
+import { getEntry, getCollection } from "astro:content";
 
-import Layout from "../../layouts/Layout.astro"
-import PageHeader from "../../components/layout/PageHeader.astro"
-import Container from "../../components/layout/Container.astro"
-import Button from "../../components/ui/Button.astro"
+import Layout from "../../layouts/Layout.astro";
+import PageHeader from "../../components/layout/PageHeader.astro";
+import Container from "../../components/layout/Container.astro";
+import Button from "../../components/ui/Button.astro";
 
-const companies = await getEntry("community", "commercial-support")
+const companies = await getEntry("community", "commercial-support");
 
 function shuffleArray(array) {
   // source: https://stackoverflow.com/a/2450976
 
-  let currentIndex = array.length
+  let currentIndex = array.length;
   let randomIndex;
 
   while (currentIndex > 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
   }
 
   return array;
 }
 ---
+
 <Layout title="Community">
-  <PageHeader text="Commercial support"/>
+  <PageHeader text="Commercial support" />
   <Container>
     <p class="text-center font-bold text-gray-600 text-xl">
       Consulting companies available for professional support.
     </p>
     <p class="text-center mt-2">
-      Please <a href="https://github.com/NixOS/nixos-homepage/edit/main/src/content/community/commercial-support.yaml">submit a pull request</a> to add your company. The list is randomized at each page load.
+      Please <a
+        href="https://github.com/NixOS/nixos-homepage/edit/main/src/content/community/commercial-support.yaml"
+        >submit a pull request</a
+      > to add your company. The list is randomized at each page load.
     </p>
     <ul class="flex flex-row flex-wrap m-4 gap-4">
-      {shuffleArray(companies.data).map((company) => (
-        <li class="basis-72 xl:basis-80 border border-nix-blue text-nix-blue font-light rounded-xl flex-grow p-4">
-          <a href={company.href} class="!no-underline space-y-4">
-            <img src={company.logo} alt={company.name + " logo"} class="h-80 object-contain mx-auto"/>
-            <h3 class="text-4xl font-bold">
-              {company.name}
-            </h3>
-            <ul>
-              {company.locations.map((location) => (
-                <li class="list-disc list-inside">
-                  {location}
-                </li>
-              ))}
-            </ul>
-            <p>
-              {company.description}
-            </p>
-          </a>
-        </li>
-      ))}
+      {
+        shuffleArray(companies.data).map((company) => (
+          <li class="basis-72 xl:basis-80 border border-nix-blue text-nix-blue font-light rounded-xl flex-grow p-4">
+            <a href={company.href} class="!no-underline space-y-4">
+              <img
+                src={company.logo}
+                alt={company.name + " logo"}
+                class="h-80 object-contain mx-auto"
+              />
+              <h3 class="text-4xl font-bold">{company.name}</h3>
+              <ul>
+                {company.locations.map((location) => (
+                  <li class="list-disc list-inside">{location}</li>
+                ))}
+              </ul>
+              <p>{company.description}</p>
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </Container>
 </Layout>

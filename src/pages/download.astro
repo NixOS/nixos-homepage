@@ -12,11 +12,19 @@ const NIXOS_VERSION = import.meta.env.NIXOS_STABLE_SERIES;
 
 <Layout title="Download">
   <PageHeader text="Download" />
-  <DownloadHeader title = "Nix" subTitle=": the package manager" currentVersion={NIX_VERSION} />
+  <DownloadHeader
+    title="Nix"
+    subTitle=": the package manager"
+    currentVersion={NIX_VERSION}
+  />
   <Container>
     <DownloadAccordion family="nix" />
   </Container>
-  <DownloadHeader title="NixOS" subTitle=": the Linux distribution" currentVersion={NIXOS_VERSION} />
+  <DownloadHeader
+    title="NixOS"
+    subTitle=": the Linux distribution"
+    currentVersion={NIXOS_VERSION}
+  />
   <Container>
     <DownloadAccordion family="nixos" />
   </Container>

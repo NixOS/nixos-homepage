@@ -33,7 +33,7 @@ const { Content } = await entry.render();
       entry.data.subteams && entry.data.subteams.length > 0 && (
         <>
           <div class="flex gap-4 flex-wrap pt-4">
-              {entry.data.subteams.map((subteam) => (
+            {entry.data.subteams.map((subteam) => (
               <MembersDisplay
                 key={subteam.name}
                 title={subteam.name}

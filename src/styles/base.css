@@ -4,145 +4,146 @@
 @tailwind utilities;
 
 @layer base {
-    main a:-webkit-any-link {
-        @apply underline decoration-1 underline-offset-4 text-nix-blue-dark;
-    }
+  main a:-webkit-any-link {
+    @apply underline decoration-1 underline-offset-4 text-nix-blue-dark;
+  }
 
-    main a:any-link {
-        @apply underline decoration-1 underline-offset-4 text-nix-blue-dark;
-    }
+  main a:any-link {
+    @apply underline decoration-1 underline-offset-4 text-nix-blue-dark;
+  }
 }
 
 @layer components {
-    .text-light-bold {
-        @apply font-extralight;
-    }
+  .text-light-bold {
+    @apply font-extralight;
+  }
 
-    .text-light-bold strong {
-        @apply font-extrabold;
-    }
+  .text-light-bold strong {
+    @apply font-extrabold;
+  }
 
-    article {
-        @apply leading-7 font-light;
-    }
+  article {
+    @apply leading-7 font-light;
+  }
 
-    article ol {
-        @apply list-decimal list-outside mb-2 ml-6;
-    }
+  article ol {
+    @apply list-decimal list-outside mb-2 ml-6;
+  }
 
-    article ol > li {
-        @apply mb-1;
-    }
+  article ol > li {
+    @apply mb-1;
+  }
 
-    article ul {
-        @apply list-disc list-outside mb-2 ml-6;
-    }
+  article ul {
+    @apply list-disc list-outside mb-2 ml-6;
+  }
 
-    article ul > li {
-        @apply mb-1;
-    }
+  article ul > li {
+    @apply mb-1;
+  }
 
-    article ul > li > ul {
-        @apply list-circle list-outside mt-1;
-    }
+  article ul > li > ul {
+    @apply list-circle list-outside mt-1;
+  }
 
-    article ul > li > p:first-child {
-        @apply ml-0 block;
-    }
+  article ul > li > p:first-child {
+    @apply ml-0 block;
+  }
 
-    article ul > li > p {
-        @apply inline-block pb-1;
-    }
+  article ul > li > p {
+    @apply inline-block pb-1;
+  }
 
-    article ul.inlinelist {
-        @apply list-none flex flex-col ml-0 mb-0;
-    }
+  article ul.inlinelist {
+    @apply list-none flex flex-col ml-0 mb-0;
+  }
 
-    article ul.inlinelist ul {
-        @apply ml-0;
-    }
+  article ul.inlinelist ul {
+    @apply ml-0;
+  }
 
-    article ul.inlinelist li {
-        @apply inline-block;
-    }
-    article ul.inlinelist li::after {
-        content: ", ";
-    }
-    article ul.inlinelist li:last-child::after {
-        content: "";
-    }
+  article ul.inlinelist li {
+    @apply inline-block;
+  }
+  article ul.inlinelist li::after {
+    content: ", ";
+  }
+  article ul.inlinelist li:last-child::after {
+    content: "";
+  }
 
-    article b, article strong {
-        @apply font-bold;
-    }
+  article b,
+  article strong {
+    @apply font-bold;
+  }
 
-    article h3 {
-        @apply text-2xl font-bold text-nix-blue mb-4;
-    }
+  article h3 {
+    @apply text-2xl font-bold text-nix-blue mb-4;
+  }
 
-    article p {
-        @apply pb-2;
-    }
+  article p {
+    @apply pb-2;
+  }
 
-    article br {
-        @apply block h-2;
-    }
+  article br {
+    @apply block h-2;
+  }
 
-    article code {
-        @apply bg-gray-100 border-1 border-gray-300 px-1 pt-1 pb-1 rounded text-black font-mono font-[500];
-    }
+  article code {
+    @apply bg-gray-100 border-1 border-gray-300 px-1 pt-1 pb-1 rounded text-black font-mono font-[500];
+  }
 
-    article pre {
-        @apply border-1 bg-[#3a3a3a] border-[#3a3a3a] px-4 py-4 rounded-3xl my-2 mb-4 overflow-x-auto;
-    }
+  article pre {
+    @apply border-1 bg-[#3a3a3a] border-[#3a3a3a] px-4 py-4 rounded-3xl my-2 mb-4 overflow-x-auto;
+  }
 
-    article pre code {
-        @apply bg-transparent border-none w-full p-0;
-    }
+  article pre code {
+    @apply bg-transparent border-none w-full p-0;
+  }
 
-    article .astro-code {
-        @apply rounded-full
-    }
+  article .astro-code {
+    @apply rounded-full;
+  }
 
-    article img:not(.img-noadjust) {
-        @apply float-right inline ml-8 h-48 w-auto;
-    }
+  article img:not(.img-noadjust) {
+    @apply float-right inline ml-8 h-48 w-auto;
+  }
 
-    article blockquote {
-        @apply border-l-4 border-gray-600 pl-2 mb-4;
-    }
+  article blockquote {
+    @apply border-l-4 border-gray-600 pl-2 mb-4;
+  }
 
-    article h1,
-    article h2,
-    article h3,
-    article h4,
-    article h5,
-    article h6 {
-        @apply font-bold font-heading text-nix-blue leading-tight;
-    }
+  article h1,
+  article h2,
+  article h3,
+  article h4,
+  article h5,
+  article h6 {
+    @apply font-bold font-heading text-nix-blue leading-tight;
+  }
 
-    article h1:not(:first-child),
-    article h2:not(:first-child),
-    article h3:not(:first-child),
-    article h4:not(:first-child),
-    article h5:not(:first-child),
-    article h6:not(:first-child) {
-        @apply mt-4;
-    }
+  article h1:not(:first-child),
+  article h2:not(:first-child),
+  article h3:not(:first-child),
+  article h4:not(:first-child),
+  article h5:not(:first-child),
+  article h6:not(:first-child) {
+    @apply mt-4;
+  }
 
-    article h1 {
-        @apply text-4xl mb-2;
-    }
+  article h1 {
+    @apply text-4xl mb-2;
+  }
 
-    article h2 {
-        @apply text-3xl mb-2;
-    }
+  article h2 {
+    @apply text-3xl mb-2;
+  }
 
-    article h3 {
-        @apply text-2xl mb-2;
-    }
+  article h3 {
+    @apply text-2xl mb-2;
+  }
 
-    article h4 {
-        @apply text-xl mb-2;
-    }
+  article h4 {
+    @apply text-xl mb-2;
+  }
 }

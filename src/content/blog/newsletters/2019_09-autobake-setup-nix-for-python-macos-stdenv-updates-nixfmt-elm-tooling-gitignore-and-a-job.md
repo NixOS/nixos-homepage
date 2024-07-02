@@ -14,14 +14,14 @@ description: The essence of all art is to have pleasure in giving pleasure - Dal
 
   Asko proposes [a new Python development tool](https://github.com/datakurre/setup.nix)
 
-- [SNM release compatible with NixOS 19.03]( https://www.freelists.org/post/snm/SNM-Version-220,1)
+- [SNM release compatible with NixOS 19.03](https://www.freelists.org/post/snm/SNM-Version-220,1)
 
 - [nixpkgs macOS stdenv updates](https://matthewbauer.us/blog/darwin-stdenv-update.html)
 
   Matthew's overview of recent stdenv updates, which also bumps minimal supported version to 10.12.
 
 - [Phoronix: NixOS Takes Action After 1.2GB/s ZFS Encryption Speed Drops To 200MB/s With Linux
-5.0+](https://www.phoronix.com/scan.php?page=news_item&px=NixOS-Linux-5.0-ZFS-FPU-Drop)
+  5.0+](https://www.phoronix.com/scan.php?page=news_item&px=NixOS-Linux-5.0-ZFS-FPU-Drop)
 
 - [nixfmt](https://medium.com/@Serokell/an-opinionated-formatter-for-nix-40b4dbb69ddf)
 
@@ -39,9 +39,9 @@ description: The essence of all art is to have pleasure in giving pleasure - Dal
 
 - [Hercules CI sprint #3 report](https://blog.hercules-ci.com/sprints,/hercules-ci/2019/05/14/sprint-3-report/)
 
-     * hercules-agent-0.2 release
-     * precise derivations support for upcoming multi-agent and multi-architecture support
-     * focus for next two weeks is Cachix and Darwin support
+  - hercules-agent-0.2 release
+  - precise derivations support for upcoming multi-agent and multi-architecture support
+  - focus for next two weeks is Cachix and Darwin support
 
 - [gitignore for Nix](https://blog.hercules-ci.com/nix/2019/05/15/nix-gitignore/)
 

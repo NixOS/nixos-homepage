@@ -47,7 +47,6 @@ description: People Who Are Crazy Enough To Think They Can Change The World, Are
   [nix-gitignore](https://github.com/siers/nix-gitignore) tries to convert the fnmatch(3) strings in a .gitignore file to perl regexes valid in nix’s match.
   filterSourceGitignore opts for translation to nix boolean predicates instead and implements a subset of the gitignore logic as nix functions, aborting for unsupported parts.
 
-
 # Contribute to NixOS Weekly Newsletter
 
 This work would not be possible without the many contributions of the community.
