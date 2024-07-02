@@ -105,6 +105,20 @@ const socialMediaMain = [
   }
 ]
 
+const calendarsMain = [
+  {
+    href: "https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com",
+    name: "Official NixOS Calendar",
+    iconName: "mdi:calendar",
+  },
+  {
+    href: "https://discourse.nixos.org/t/community-calendar/18589",
+    name: "Community Calendar",
+    iconName: "mdi:calendar",
+  },
+] as const;
+
+
 const platformsOutside = [
   {
     href: "https://stackoverflow.com/questions/tagged/nix+or+nixpkgs+or+nixos+or+nixops",
@@ -159,12 +173,12 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
       The Nix community is spread across various platforms. Here are the
       official and unofficial spaces where you can find help, discuss
       development, and chat with other users.
-    <div class="grid md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div class="md:col-span-2">
         <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">Official spaces</h3>
         <p class="text-gray-700">
           These spaces are monitored and moderated by the NixOS Moderation Team. This means they are moderated in such a way that they follow the standards and moral values of our community. You can find out more about our moderation team <a href="/community/teams/moderation">here</a>.
-            
+
           <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 flex-wrap">
             {
               platformsMain.map((platform, i) => (
@@ -177,14 +191,14 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
                 />
               ))
             }
-          </ul>    
+          </ul>
         </p>
       </div>
       <div class="col-span-1">
         <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">Official social-media</h3>
         <p class="text-gray-700">
           These spaces are maintained by our NixOS Marketing Team though not monitored and not moderated by the NixOS Moderation Team.
-            
+
           <ul class="grid grid-cols-1 gap-4 mt-4 flex-wrap">
             {
               socialMediaMain.map((platform) => (
@@ -194,7 +208,26 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
                   iconName={platform.iconName} />
               ))
             }
-          </ul>    
+          </ul>
+        </p>
+      </div>
+      <div class="md:col-span-3">
+        <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">
+          Our calendars
+        </h3>
+        <p class="text-gray-700">
+          We use these calendars to schedule events, meetings, and other.
+          <ul class="grid md:grid-cols-3 gap-4 mt-4 flex-wrap">
+            {
+              calendarsMain.map((platform) => (
+                <OfficialCommunityLink
+                  href={platform.href}
+                  name={platform.name}
+                  iconName={platform.iconName}
+                />
+              ))
+            }
+          </ul>
         </p>
       </div>
     </div>
