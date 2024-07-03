@@ -10,6 +10,7 @@ interface Props {
   shaHref?: string | null;
   shaClassList?: string[];
   shaText?: string;
+  label?: string;
 }
 
 const colorMap = {
@@ -35,6 +36,7 @@ const {
   shaHref = null,
   shaClassList = [],
   shaText = "",
+  label,
 } = Astro.props;
 
 const localClassList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white drop-shadow`;
@@ -47,7 +49,7 @@ const localClassList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white
         href={href}
         class:list={["!text-white !no-underline", localClassList, classList]}
       >
-        <slot />
+        {label || <slot />}
       </a>
       {shaHref && (
         <SHA href={shaHref} classList={shaClassList}>
