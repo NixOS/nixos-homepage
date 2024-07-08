@@ -27,7 +27,7 @@
     "@fontsource-variable/roboto-flex": "^5.0.15",
     "@xmldom/xmldom": "^0.8.10",
     "asciinema-player": "^3.8.0",
-    "astro": "^4.11.3",
+    "astro": "^4.11.5",
     "astro-icon": "^1.1.0",
     "astro-seo": "^0.8.4",
     "htmx.org": "^1.9.12",
@@ -40,7 +40,7 @@
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.67",
     "@iconify/tailwind": "^1.1.1",
-    "@iconify-json/simple-icons": "^1.1.107",
+    "@iconify-json/simple-icons": "^1.1.108",
     "prettier": "^3.3.2",
     "prettier-plugin-astro": "^0.14.0"
   }
