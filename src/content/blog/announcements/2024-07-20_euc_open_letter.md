@@ -1,7 +1,7 @@
 ---
 id: euc-ngi-open-letter
 title: Open Letter to the European Commission
-date: 2024-07-20T00:00:00.000Z
+date: 2024-07-21T00:00:00.000Z
 category: announcements
 ---
 
