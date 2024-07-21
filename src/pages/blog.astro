@@ -65,6 +65,7 @@ const blogMenu = await getEntry("menus", "blog");
     >
       {
         blogMenu.data.map((e) => (
+	<div class="flex flex-col">
           <div>
             <input
               name="category"
@@ -96,7 +97,11 @@ const blogMenu = await getEntry("menus", "blog");
               <InlineSVG src={e.icon} class="w-12 md:w-24" />
               <span class="font-light">{e.title}</span>
             </label>
-          </div>
+	  </div>
+	  <div class="flex flex-row" style="justify-content: center">
+	    <a href={"/blog/" + e.id + "-rss.xml"}><InlineSVG src="/src/assets/image/blog-menu/rss.svg" class="inline-block w-5 h-5" />rss</a>
+	  </div>
+	</div>
         ))
       }
     </div>

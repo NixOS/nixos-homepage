@@ -17,7 +17,8 @@ export async function GET(context) {
   const blog = await getCollection("blog");
   const title =
     context.params.id.charAt(0).toUpperCase() + context.params.id.slice(1);
-  blog
+  const numOfPosts = 10;
+  const posts = blog
     .sort((a, b) => {
       const dateA = new Date(a.data.date);
       const dateB = new Date(b.data.date);
@@ -30,7 +31,7 @@ export async function GET(context) {
     title: `NixOS ${title}`,
     site: `${context.site}/blog`,
     description: `${title} on NixOS, the purely functional Linux distribution.`,
-    items: blog.map((post) => ({
+    items: posts.slice(0,numOfPosts).map((post) => ({
       title: post.data.title ?? "Untitled",
       pubDate: post.data.date ?? new Date().toISOString(),
       content: sanitizeHtml(parser.render(post.body)),
