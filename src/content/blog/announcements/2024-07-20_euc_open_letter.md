@@ -5,7 +5,7 @@ date: 2024-07-21T00:00:00.000Z
 category: announcements
 ---
 
-Initially published by [petites singularités](https://ps.zoethical.org/pub/lettre-publique-aux-ncp-au-sujet-de-ngi/). English translation provided by [OW2](https://www.ow2.org/view/Events/The_European_Union_must_keep_funding_free_software_open_letter). 
+Initially published by [petites singularités](https://ps.zoethical.org/pub/lettre-publique-aux-ncp-au-sujet-de-ngi/). English translation provided by [OW2](https://www.ow2.org/view/Events/The_European_Union_must_keep_funding_free_software_open_letter).
 
 If you want to sign the letter, please [re-publish the original letter](https://pad.public.cat/lettre-NCP-NGI?both) on your website and add to the list of signatories.
 
