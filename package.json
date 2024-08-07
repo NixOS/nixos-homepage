@@ -27,7 +27,7 @@
     "@fontsource-variable/roboto-flex": "^5.0.15",
     "@xmldom/xmldom": "^0.8.10",
     "asciinema-player": "^3.8.0",
-    "astro": "^4.12.2",
+    "astro": "^4.13.1",
     "astro-icon": "^1.1.0",
     "astro-seo": "^0.8.4",
     "htmx.org": "^2.0.1",
@@ -38,9 +38,9 @@
     "turndown": "^7.2.0"
   },
   "devDependencies": {
-    "@iconify-json/mdi": "^1.1.67",
+    "@iconify-json/mdi": "^1.1.68",
     "@iconify/tailwind": "^1.1.2",
-    "@iconify-json/simple-icons": "^1.1.110",
+    "@iconify-json/simple-icons": "^1.1.112",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1"
   }
