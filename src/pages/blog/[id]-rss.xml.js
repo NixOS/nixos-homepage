@@ -31,7 +31,7 @@ export async function GET(context) {
     title: `NixOS ${title}`,
     site: `${context.site}/blog`,
     description: `${title} on NixOS, the purely functional Linux distribution.`,
-    items: posts.slice(0,numOfPosts).map((post) => ({
+    items: posts.slice(0, numOfPosts).map((post) => ({
       title: post.data.title ?? "Untitled",
       pubDate: post.data.date ?? new Date().toISOString(),
       content: sanitizeHtml(parser.render(post.body)),
