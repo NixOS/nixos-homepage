@@ -110,7 +110,7 @@
   }
 
   article blockquote {
-    @apply border-l-4 border-gray-600 pl-2 mb-4;
+    @apply border-l-4 border-nix-blue-darker px-4 mb-4 bg-nix-blue-extralight pt-2;
   }
 
   article h1,
