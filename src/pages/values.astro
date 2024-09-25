@@ -1,0 +1,209 @@
+---
+import { getEntry, getCollection } from "astro:content";
+
+
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/layout/PageHeader.astro";
+import Container from "../components/layout/Container.astro";
+import Divider from "../components/layout/Divider.astro";
+
+import Citation from "../components/ui/Citation.astro";
+import Quotation from "../components/ui/Quotation.astro";
+---
+
+<Layout title="Values">
+  <PageHeader text="Values" />
+  <Container class="font-extralight leading-relaxed space-y-4 mt-16">    
+      <h2
+        class="text-4xl font-bold font-heading text-nix-blue mt-4"
+        id="community-values-intro"
+      >
+        Introduction
+        <a href="#community-values-intro" class="text-lg">🔗</a>
+      </h2>
+
+      <Quotation>
+        <p>
+          Communities form when different people unite around a common purpose.
+          Shared values guide decision making, and community goals supersede
+          individual interests and agendas.
+        </p>
+
+        <p class="text-right py-2 italic">
+          <a href="https://opensource.com/open-source-way" class="text-lg"
+            >The Open Source Way</a
+          >
+        </p>
+      </Quotation>
+
+      <p class="font-extralight leading-relaxed mt-2">
+      Our common purpose is to develop, propagate, and promote the adoption of
+      the <a href="https://edolstra.github.io/pubs/phd-thesis.pdf"
+        >purely functional software deployment model</a
+      >. Our values help us achieve this purpose by guiding decisionmaking
+      across the community, keeping us moving in a common direction. This
+      document captures our core values so that they can be shared and
+      referenced by everyone in the community.
+      </p>
+
+      <h3
+        class="text-3xl font-bold font-heading text-nix-blue mt-4"
+        id="community-values-whatis"
+      >
+        What is a value?
+        <a href="#community-values-whatis" class="text-lg">🔗</a>
+      </h3>
+
+      <p class="font-extralight leading-relaxed mt-2">
+      Values are <span class="italic">not</span> a Code of Conduct, they do not define
+      governance structures, and they do not provide specific policies. Instead,
+      values inform the decisions we make about these things. A good test for <a
+        href="https://medium.com/the-u-s-digital-service/our-values-1fc02b53598"
+        >whether something is a value</a
+      > is:
+      </p>
+
+      <Quotation>
+        If a statement can be invoked by anyone in an organization, and cause a
+        decision to be re-evaluated or changed, without regard to anyone’s rank
+        or title, then you have a bona fide [i.e. genuine] value. If it doesn’t
+        work that way, then it’s not a value.
+      </Quotation>
+
+      <p class="font-extralight leading-relaxed mt-2">
+      To apply in many situations, values must be high-level, abstract concepts.
+      Therefore, in the text below, each value is presented as a heading
+      followed by an elaboration of its meaning. This is meant as a starting
+      point for interpretation, not a comprehensive definition. The heading and
+      the elaboration have equal importance.
+      </p>
+      </Container>
+      <Divider mirrorY />
+
+      <div class="bg-nix-blue text-white py-8">
+      <Container>        
+          <h2
+            class="text-3xl font-bold font-heading text-nix-white mt-4"
+            id="community-values-values"
+          >
+            The values
+            <a href="#community-values-values" class="text-lg">🔗</a>
+          </h2>
+
+          <h3
+            class="text-2xl font-bold font-heading text-nix-white mt-4"
+            id="community-values-respect"
+          >
+            Respect and civility
+            <a href="#community-values-respect" class="text-lg">🔗</a>
+          </h3>
+
+          <p>
+            We treat each other with respect and civility. No matter one's
+            individual identity, circumstances, level of contribution to the
+            project, or status, everyone has the right to respect, and everyone
+            has the duty to treat others with respect. We prioritise project
+            health over individual interests. People with higher visibility
+            within the project or towards the public are subject to higher
+            expectations for their conduct.
+          </p>
+
+          <h3
+            class="text-2xl font-bold font-heading text-nix-white mt-4"
+            id="community-values-people"
+          >
+            People come first
+            <a href="#community-values-people" class="text-lg">🔗</a>
+          </h3>
+
+          <p>
+            We are here, first and foremost, as individuals working together.
+            Our priority here is to work on Nix projects for the benefit of all
+            their contributors and users. We value building excellent software
+            with a vibrant and diverse community. Individuals gain trust and
+            status by doing the work. Organisations gain prestige by funding the
+            work of individuals and providing resources to support the project.
+          </p>
+
+          <h3
+            class="text-2xl font-bold font-heading text-nix-white mt-4"
+            id="community-values-choice"
+          >
+            Free software and choice over lock-in
+            <a href="#community-values-choice" class="text-lg">🔗</a>
+          </h3>
+
+          <p>
+            Nix projects are and will always remain <a
+              href="https://www.gnu.org/philosophy/free-sw.en.html"
+              >free software</a
+            >. We value working together with the broader free software
+            community. Free software is our priority, but we also support our
+            users' needs to use non-free software, when practical.
+          </p>
+
+          <h3
+            class="text-2xl font-bold font-heading text-nix-white mt-4"
+            id="community-values-decisionmaking"
+          >
+            Distribute decisionmaking widely
+            <a href="#community-values-decisionmaking" class="text-lg">🔗</a>
+          </h3>
+
+          <p>
+            We are a synthesis of varied but overlapping communities. We rely on
+            distributed approaches: asynchronous communication, clear ownership,
+            deep-dive taskforces, and local decisionmaking. We focus our
+            attention on working together on our shared goals and working
+            separately in a non-interfering way when our goals are independent.
+            We build trust primarily by working together on Nix projects.
+          </p>
+
+          <h3
+            class="text-2xl font-bold font-heading text-nix-white mt-4"
+            id="community-values-automation"
+          >
+            Automation over process and toil
+            <a href="#community-values-automation" class="text-lg">🔗</a>
+            <Citation id={1}>
+              <a
+                href="https://web.archive.org/web/20240717145635/https://sre.google/sre-book/eliminating-toil/"
+                >Toil</a
+              > is work that tends to be manual, repetitive, automatable, interrupt-driven,
+              devoid of enduring value, and scaling linearly with growth.
+            </Citation>
+          </h3>
+
+          <p>
+            We are a global community, and disseminating information and
+            maintaining processes can be difficult. We are also a large project
+            with a lot of hard and repetitive work. Therefore, we value
+            automation over toil, while recognizing that not all toil can be
+            automated. Automation reduces toil, but people are still
+            accountable. Adding new toil needs a very strong justification. We
+            build automation and processes that make the best use of our
+            contributors' limited time and energy.
+          </p>
+
+          <h3
+            class="text-2xl font-bold font-heading text-nix-white mt-4"
+            id="community-values-stability"
+          >
+            Stable evolution over stagnation or chaos
+            <a href="#community-values-stability" class="text-lg">🔗</a>
+          </h3>
+
+          <p>
+            Openness to new ideas and evolution is part of what made Nix great.
+            We continue to foster that evolution while encouraging development
+            of re-usable building blocks and well-defined, stable interfaces. We
+            value experimenting with designs and concepts, and folding
+            successful experiments back into continuous improvement for stable
+            components. The larger the impact an action has, the more care and
+            discussion is warranted before taking the action. Our leaders have a
+            duty to find, support, and promote new contributors — and eventually
+            step aside for new leaders.
+          </p>
+        </div>    
+  </Container>
+</Layout>
