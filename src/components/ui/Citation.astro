@@ -1,0 +1,55 @@
+---
+export interface Props {
+  id: number;
+  onBlueBackground?: boolean;
+}
+
+const { id, onBlueBackground } = Astro.props;
+---
+
+<span class="inline-block">
+  <details class="inline">
+    <summary class="inline-block cursor-pointer">
+      <sup
+        class:list={[
+          onBlueBackground && "text-white hover:text-gray-100",
+          !onBlueBackground && "text-nix-blue hover:text-nix-blue",
+        ]}>[{id}]</sup
+      >
+    </summary>
+    <div
+      class:list={[
+        "absolute border border-gray-300 p-2 mt-1 rounded shadow-lg max-w-sm text-sm",
+        !onBlueBackground && "!bg-white",
+        onBlueBackground && "!bg-nix-blue-darker",
+      ]}
+    >
+      <slot />
+    </div>
+  </details>
+</span>
+
+<style>
+  details[open] > summary > sup.text-white {
+    @apply text-gray-100;
+  }
+  details[open] > summary > sup.text-nix-blue {
+    @apply text-nix-blue-dark;
+  }
+</style>
+
+<script>
+  // Optional: Close other open details when one is opened
+  document.addEventListener("click", (event) => {
+    if (
+      event.target instanceof HTMLElement &&
+      event.target.tagName === "SUMMARY"
+    ) {
+      document.querySelectorAll("details[open]").forEach((detail) => {
+        if (detail !== event.target.parentElement) {
+          detail.removeAttribute("open");
+        }
+      });
+    }
+  });
+</script>
