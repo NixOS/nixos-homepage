@@ -10,10 +10,12 @@ const { id, onBlueBackground } = Astro.props;
 <span class="inline-block">
   <details class="inline">
     <summary class="inline-block cursor-pointer">
-      <sup class:list={[
-        onBlueBackground && "text-white hover:text-gray-100",
-        !onBlueBackground && "text-nix-blue hover:text-nix-blue"
-      ]}>[{id}]</sup>
+      <sup
+        class:list={[
+          onBlueBackground && "text-white hover:text-gray-100",
+          !onBlueBackground && "text-nix-blue hover:text-nix-blue",
+        ]}>[{id}]</sup
+      >
     </summary>
     <div
       class:list={[
