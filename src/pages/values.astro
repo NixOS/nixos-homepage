@@ -163,7 +163,7 @@ import Quotation from "../components/ui/Quotation.astro";
       >
         Automation over process and toil
         <a href="#community-values-automation" class="text-lg">🔗</a>
-        <Citation id={1}>
+        <Citation id={1} onBlueBackground>
           <a
             href="https://web.archive.org/web/20240717145635/https://sre.google/sre-book/eliminating-toil/"
             >Toil</a
@@ -204,3 +204,9 @@ import Quotation from "../components/ui/Quotation.astro";
     </Container>
   </div>
 </Layout>
+
+<style>
+  .bg-nix-blue a {
+    @apply text-white hover:text-gray-100;
+  }
+</style>

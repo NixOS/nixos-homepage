@@ -1,18 +1,26 @@
 ---
 export interface Props {
   id: number;
+  onBlueBackground?: boolean;
 }
 
-const { id } = Astro.props;
+const { id, onBlueBackground } = Astro.props;
 ---
 
 <span class="inline-block">
   <details class="inline">
     <summary class="inline-block cursor-pointer">
-      <sup class="text-nix-blue hover:text-nix-blue">[{id}]</sup>
+      <sup class:list={[
+        onBlueBackground && "text-white hover:text-gray-100",
+        !onBlueBackground && "text-nix-blue hover:text-nix-blue"
+      ]}>[{id}]</sup>
     </summary>
     <div
-      class="absolute bg-white border border-gray-300 p-2 mt-1 rounded shadow-lg max-w-sm text-sm"
+      class:list={[
+        "absolute border border-gray-300 p-2 mt-1 rounded shadow-lg max-w-sm text-sm",
+        !onBlueBackground && "!bg-white",
+        onBlueBackground && "!bg-nix-blue-darker",
+      ]}
     >
       <slot />
     </div>
@@ -20,8 +28,11 @@ const { id } = Astro.props;
 </span>
 
 <style>
-  details[open] > summary > sup {
-    @apply text-nix-blue;
+  details[open] > summary > sup.text-white {
+    @apply text-gray-100;
+  }
+  details[open] > summary > sup.text-nix-blue {
+    @apply text-nix-blue-dark;
   }
 </style>
 
