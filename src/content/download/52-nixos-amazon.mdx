@@ -49,9 +49,7 @@ The [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_
 can be used to query the latest AMI too:
 
 ```bash
-aws ec2 describe-images --owners 427812963091 \
-  --filter 'Name=name,Values=nixos/24.05*' \
-  --filter 'Name=architecture,Values=arm64'
+aws ec2 describe-images --owners 427812963091  --filter 'Name=name,Values=nixos/24.05*' 'Name=architecture,Values=arm64' --query 'sort_by(Images, &CreationDate)'
 ```
 
 ### Search for specific AMIs
