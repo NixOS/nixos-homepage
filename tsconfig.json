@@ -5,5 +5,6 @@
     "paths": {
       "@/*": ["src/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", "result-demos", "result-manuals", "result-pills"]
 }
