@@ -3,8 +3,8 @@ export default {
   singleQuote: true,
   plugins: [
     'prettier-plugin-astro',
-    'prettier-plugin-astro-organize-imports',
     'prettier-plugin-tailwindcss',
+    'prettier-plugin-astro-organize-imports',
   ],
   overrides: [
     {
