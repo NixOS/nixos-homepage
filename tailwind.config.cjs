@@ -1,6 +1,7 @@
 const { addDynamicIconSelectors } = require('@iconify/tailwind');
 const plugin = require('tailwindcss/plugin');
 const fs = require('node:fs');
+const path = require('node:path');
 const parser = require('node-html-parser');
 const svgo = require('svgo');
 const colors = require('tailwindcss/colors');
@@ -21,8 +22,10 @@ const inlineSvgs = {
 // };
 
 function inlineSvg({ svg }) {
-  const file = fs.readFileSync(svg, 'utf8');
+  const filePath = path.resolve(__dirname, svg);
+  const file = fs.readFileSync(filePath, 'utf8');
   const stringified = parser.parse(file).toString();
+
   const optimized = svgo.optimize(stringified, {
     multipass: true,
     plugins: [
@@ -37,7 +40,9 @@ function inlineSvg({ svg }) {
       },
     ],
   });
+
   const base64 = Buffer.from(optimized.data).toString('base64');
+
   return 'data:image/svg+xml;base64,' + base64;
 }
 
