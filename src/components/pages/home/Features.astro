@@ -1,0 +1,34 @@
+---
+import Container from '@/components/layout/Container.astro';
+import InlineSVG from '@/components/util/InlineSVG.astro';
+
+const { landingFeatures = [] } = Astro.props;
+---
+
+<section
+  class="bg-[39%_100%] bg-no-repeat pb-48 pt-16 inline-svg-landing-search-top md:bg-bottom md:pt-32"
+>
+  <Container class="grid gap-8 md:grid-cols-3 md:gap-6">
+    {
+      landingFeatures.map(async (feature) => {
+        const { Content } = await feature.render();
+        return (
+          <div class="flex flex-col text-center">
+            <InlineSVG
+              src={feature.data.img}
+              class="mx-auto mb-6 h-24 w-auto"
+            />
+
+            <h2 class="mb-2 font-heading text-3xl font-bold leading-none text-nix-blue">
+              {feature.data.title}
+            </h2>
+
+            <div class="leading-relaxed">
+              <Content />
+            </div>
+          </div>
+        );
+      })
+    }
+  </Container>
+</section>

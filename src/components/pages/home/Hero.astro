@@ -1,0 +1,47 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Asciinema from '@/components/ui/Asciinema.astro';
+import Button from '@/components/ui/Button.astro';
+import Card from '@/components/ui/Card.astro';
+---
+
+<section
+  class="bg-nix-blue bg-cover bg-left bg-no-repeat py-16 inline-svg-hero lg:py-20"
+>
+  <Container class="grid grid-cols-1 gap-8 text-white lg:grid-cols-2">
+    <div class="mx-0 my-auto flex flex-col gap-4">
+      <h1 class="font-heading text-5xl font-bold leading-none">
+        Declarative builds<br class="hidden md:inline-block" /> and deployments.
+      </h1>
+
+      <p class="text-lg leading-7">
+        Nix is a tool that takes a unique approach to package management and
+        system configuration. Learn how to make reproducible, declarative and
+        reliable systems.
+      </p>
+
+      <div
+        class="flex flex-col justify-center gap-4 md:flex-row lg:justify-stretch"
+      >
+        <Button href="/download" color="green" size="lg">Download</Button>
+        <Button href="/learn" color="lightblue" size="lg">Get started</Button>
+      </div>
+    </div>
+
+    <Card class="min-h-[300px] bg-white/40 backdrop-blur-sm">
+      <Asciinema
+        src="/demos/cover.cast"
+        settings={{
+          cols: 84,
+          poster: 'npt:0:01:22',
+          markers: [
+            [11.5, 'Ad-Hoc development environments'],
+            [41.5, 'Declarative development environments'],
+            [85.0, 'Build docker image with Nix'],
+            [122.0, 'Build minimal docker image with Nix'],
+          ],
+        }}
+      />
+    </Card>
+  </Container>
+</section>
