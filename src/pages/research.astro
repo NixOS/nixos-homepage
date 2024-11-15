@@ -8,7 +8,7 @@ import Divider from "../components/layout/Divider.astro";
 
 interface Author {
   name: string;
-  orcid?: string;
+  orcidUrl?: string;
 }
 
 interface ConferencePaper {
@@ -54,19 +54,22 @@ const papers: Paper[] = [
     authors: [
       {
         name: "Martin Schwaighofer",
+        orcidUrl: "https://orcid.org/0009-0001-1572-0495",
       },
       {
         name: "Michael Roland",
+        orcidUrl: "https://orcid.org/0000-0003-4675-0539",
       },
       {
         name: "René Mayrhofer",
+        orcidUrl: "https://orcid.org/0000-0003-1566-4646",
       },
     ],
     year: 2024,
     abstract:
       "Trusting the output of a build process requires trusting the build process itself, and the build process of all inputs to that process, and so on. Cloud build systems, like Nix or Bazel, allow their users to precisely specify the build steps making up the intended software supply chain, build the desired outputs as specified, and on this basis delegate build steps to other builders or fill shared caches with their outputs. Delegating build steps or consuming artifacts from shared caches, however, requires trusting the executing builders, which makes cloud build systems better suited for centrally managed deployments than for use across distributed ecosystems. We propose two key extensions to make cloud build systems better suited for use in distributed ecosystems. Our approach attaches metadata to the existing cryptographically secured data structures and protocols, which already link build inputs and outputs for the purpose of caching. Firstly, we include builder provenance data, recording which builder executed the build, its software stack, and a remote attestation, making this information verifiable. Secondly, we include a record of the outcome of how the builder resolved each dependency. Together, these two measures eliminate transitive trust in software dependencies, by enabling users to perform verification of transitive dependencies independently, and against their own criteria, at time of use. Finally, we explain how our proposed extensions could theoretically be implemented in Nix in the future.",
     doiOrPublisherUrl: "https://doi.org/10.1145/3689944.3696169",
-    preprintUrl:
+    preprintOrArchiveUrl:
       "https://www.digidow.eu/publications/2024-schwaighofer-scored/Schwaighofer_2024_SCORED24_CloudBuildSystemsTrust.pdf",
     publicationInfo: {
       type: "conference",
@@ -79,18 +82,13 @@ const papers: Paper[] = [
   {
     title: "Source Code Archiving to the Rescue of Reproducible Deployment",
     authors: [
-      {
-        name: "Ludovic Courtès",
-      },
-      {
-        name: "Timothy Sample",
-      },
+      { name: "Ludovic Courtès" },
+      { name: "Timothy Sample" },
       {
         name: "Stefano Zacchiroli",
+        orcidUrl: "https://orcid.org/0000-0002-4576-136X",
       },
-      {
-        name: "Simon Tournier",
-      },
+      { name: "Simon Tournier" },
     ],
     year: 2024,
     abstract:
@@ -110,6 +108,7 @@ const papers: Paper[] = [
     authors: [
       {
         name: "Pol Dellaiera",
+        orcidUrl: "https://orcid.org/0009-0008-7972-7160",
       },
     ],
     year: 2024,
@@ -128,12 +127,15 @@ const papers: Paper[] = [
     authors: [
       {
         name: "Julien Malka",
+        orcidUrl: "https://orcid.org/0009-0008-9845-6300",
       },
       {
         name: "Stefano Zacchiroli",
+        orcidUrl: "https://orcid.org/0000-0002-4576-136X",
       },
       {
         name: "Théo Zimmermann",
+        orcidUrl: "https://orcid.org/0000-0002-3580-8806",
       },
     ],
     year: 2024,
@@ -151,11 +153,7 @@ const papers: Paper[] = [
   },
   {
     title: "Secure Nix Expression Updates",
-    authors: [
-      {
-        name: "Finn Landweber",
-      },
-    ],
+    authors: [{ name: "Finn Landweber" }],
     year: 2024,
     abstract:
       "Projects and individual users often struggle to keep track of their deployed software and update vulnerable versions quickly. Nix, an increasingly popular package manager, provides a rigorous approach to dependency management and transparency and could be used to improve this situation significantly. However, updates to its build instructions are not cryptographically secured and thus give way to machine-in-the-middle attacks. This thesis demonstrates that instruction updates can be protected from these kinds of attacks with minimal changes to the update mechanism. It takes Git as the basis for distributing versioned and signed Nix code and explores multiple ways in which the origins of downloaded instructions can be verified automatically. The work contributes a structured analysis of Nix instruction update security based in literature. From there, it derives novel interfaces from Nix to two preexisting Git signature verification solutions and presents a new tool tailored to the needs of the Nix ecosystem. Although not all attacks on Nix expression updates can be mitigated by the suggested tools, they can provide a practical security gain for Nix users. The findings may help conceptualize a path towards a higher security standard for Nix deployments.",
@@ -173,6 +171,7 @@ const papers: Paper[] = [
     authors: [
       {
         name: "Julien Malka",
+        orcidUrl: "https://orcid.org/0009-0008-9845-6300",
       },
     ],
     year: 2024,
@@ -190,15 +189,9 @@ const papers: Paper[] = [
   {
     title: "Build systems à la carte: Theory and practice",
     authors: [
-      {
-        name: "Andrey Mokhov",
-      },
-      {
-        name: "Neil Mitchell",
-      },
-      {
-        name: "Simon Peyton Jones",
-      },
+      { name: "Andrey Mokhov" },
+      { name: "Neil Mitchell" },
+      { name: "Simon Peyton Jones" },
     ],
     year: 2020,
     abstract:
@@ -215,15 +208,9 @@ const papers: Paper[] = [
   {
     title: "Build systems à la carte",
     authors: [
-      {
-        name: "Andrey Mokhov",
-      },
-      {
-        name: "Neil Mitchell",
-      },
-      {
-        name: "Simon Peyton Jones",
-      },
+      { name: "Andrey Mokhov" },
+      { name: "Neil Mitchell" },
+      { name: "Simon Peyton Jones" },
     ],
     year: 2018,
     abstract:
@@ -272,7 +259,10 @@ const papers: Paper[] = [
     title: "NixOS: A Purely Functional Linux Distribution",
     authors: [
       { name: "Eelco Dolstra" },
-      { name: "Andres Löh" },
+      {
+        name: "Andres Löh",
+        orcidUrl: "https://orcid.org/0000-0002-7492-7293",
+      },
       { name: "Nicolas Pierron" },
     ],
     year: 2010,
@@ -294,7 +284,10 @@ const papers: Paper[] = [
       { name: "Sander van der Burg" },
       { name: "Eelco Dolstra" },
       { name: "Merijn de Jonge" },
-      { name: "Eelco Visser" },
+      {
+        name: "Eelco Visser",
+        orcidUrl: "https://orcid.org/0000-0002-7384-3370",
+      },
     ],
     year: 2009,
     abstract:
@@ -330,7 +323,13 @@ const papers: Paper[] = [
   },
   {
     title: "NixOS: A Purely Functional Linux Distribution",
-    authors: [{ name: "Eelco Dolstra" }, { name: "Andres Löh" }],
+    authors: [
+      { name: "Eelco Dolstra" },
+      {
+        name: "Andres Löh",
+        orcidUrl: "https://orcid.org/0000-0002-7492-7293",
+      },
+    ],
     year: 2008,
     abstract:
       "Existing package and system configuration management tools suffer from an imperative model, where system administration actions such as upgrading packages or changes to system configuration files are stateful: they destructively update the state of the system. This leads to many problems, such as the inability to roll back changes easily, to run multiple versions of a package side-by-side, to reproduce a configuration deterministically on another machine, or to reliably upgrade a system. In this paper we show that we can overcome these problems by moving to a purely functional system configuration model. This means that all static parts of a system (such as software packages, configuration files and system startup scripts) are built by pure functions and are immutable, stored in a way analogously to a heap in a purely function language. We have implemented this model in NixOS, a non-trivial Linux distribution that uses the Nix package manager to build the entire system configuration from a purely functional specification.",
@@ -347,7 +346,13 @@ const papers: Paper[] = [
   {
     title:
       "The Nix Build Farm: A Declarative Approach to Continuous Integration",
-    authors: [{ name: "Eelco Dolstra" }, { name: "Eelco Visser" }],
+    authors: [
+      { name: "Eelco Dolstra" },
+      {
+        name: "Eelco Visser",
+        orcidUrl: "https://orcid.org/0000-0002-7384-3370",
+      },
+    ],
     year: 2008,
     abstract:
       "There are many tools to support continuous integration (the process of automatically and continuously building a project from a version management repository). However, they do not have good support for variability in the build environment: dependencies such as compilers, libraries or testing tools must typically be installed manually on all machines on which automated builds are performed. The Nix package manager solves this problem: it has a purely functional language for describing package build actions and their dependencies, allowing the build environment for projects to be produced automatically and deterministically. We have used Nix to build a continuous integration tool, the Nix build farm, that is in use to continuously build and release a large set of projects.",
@@ -396,7 +401,13 @@ const papers: Paper[] = [
   },
   {
     title: "Automated Software Testing and Release with Nix Build Farms",
-    authors: [{ name: "Eelco Dolstra" }, { name: "Eelco Visser" }],
+    authors: [
+      { name: "Eelco Dolstra" },
+      {
+        name: "Eelco Visser",
+        orcidUrl: "https://orcid.org/0000-0002-7384-3370",
+      },
+    ],
     year: 2007,
     publicationInfo: {
       type: "conference",
@@ -455,7 +466,10 @@ const papers: Paper[] = [
     authors: [
       { name: "Eelco Dolstra" },
       { name: "Martin Bravenboer" },
-      { name: "Eelco Visser" },
+      {
+        name: "Eelco Visser",
+        orcidUrl: "https://orcid.org/0000-0002-7384-3370",
+      },
     ],
     year: 2005,
     abstract:
@@ -510,7 +524,10 @@ const papers: Paper[] = [
     title: "Imposing a Memory Management Discipline on Software Deployment",
     authors: [
       { name: "Eelco Dolstra" },
-      { name: "Eelco Visser" },
+      {
+        name: "Eelco Visser",
+        orcidUrl: "https://orcid.org/0000-0002-7384-3370",
+      },
       { name: "Merijn de Jonge" },
     ],
     year: 2004,
