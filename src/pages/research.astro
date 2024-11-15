@@ -77,6 +77,35 @@ const papers: Paper[] = [
     },
   },
   {
+    title: "Source Code Archiving to the Rescue of Reproducible Deployment",
+    authors: [
+      {
+        name: "Ludovic Courtès",
+      },
+      {
+        name: "Timothy Sample",
+      },
+      {
+        name: "Stefano Zacchiroli",
+      },
+      {
+        name: "Simon Tournier",
+      },
+    ],
+    year: 2024,
+    abstract:
+      "The ability to verify research results and to experiment with methodologies are core tenets of science. As research results are increasingly the outcome of computational processes, software plays a central role. GNU Guix is a software deployment tool that supports reproducible software deployment, making it a foundation for computational research workflows. To achieve reproducibility, we must first ensure the source code of software packages Guix deploys remains available. We describe our work connecting Guix with Software Heritage, the universal source code archive, making Guix the first free software distribution and tool backed by a stable archive. Our contribution is twofold: we explain the rationale and present the design and implementation we came up with; second, we report on the archival coverage for package source code with data collected over five years and discuss remaining challenges.",
+    doiOrPublisherUrl: "https://doi.org/10.1145/3641525.3663622",
+    publicationInfo: {
+      type: "conference",
+      conference:
+        "2nd ACM Conference on Reproducibility and Replicability (ACM REP '24)",
+      location: "Rennes, France",
+      publisher: "ACM",
+      pages: "36-45",
+    },
+  },
+  {
     title: "Reproducibility in Software Engineering",
     authors: [
       {
@@ -156,6 +185,57 @@ const papers: Paper[] = [
       conference:
         "46th International Conference on Software Engineering (ICSE 2024) - Doctoral Symposium",
       location: "Lisbon, Portugal",
+    },
+  },
+  {
+    title: "Build systems à la carte: Theory and practice",
+    authors: [
+      {
+        name: "Andrey Mokhov",
+      },
+      {
+        name: "Neil Mitchell",
+      },
+      {
+        name: "Simon Peyton Jones",
+      },
+    ],
+    year: 2020,
+    abstract:
+      "Build systems are awesome, terrifying – and unloved. They are used by every developer around the world, but are rarely the object of study. In this paper, we offer a systematic, and executable, framework for developing and comparing build systems, viewing them as related points in a landscape rather than as isolated phenomena. By teasing apart existing build systems, we can recombine their components, allowing us to prototype new build systems with desired properties.",
+    doiOrPublisherUrl: "10.1017/S0956796820000088",
+    publicationInfo: {
+      type: "journal",
+      journal: "Journal of Functional Programming",
+      volume: "30",
+      publisher: "Cambridge University Press",
+      pages: "e11",
+    },
+  },
+  {
+    title: "Build systems à la carte",
+    authors: [
+      {
+        name: "Andrey Mokhov",
+      },
+      {
+        name: "Neil Mitchell",
+      },
+      {
+        name: "Simon Peyton Jones",
+      },
+    ],
+    year: 2018,
+    abstract:
+      "Build systems are awesome, terrifying -- and unloved. They are used by every developer around the world, but are rarely the object of study. In this paper we offer a systematic, and executable, framework for developing and comparing build systems, viewing them as related points in landscape rather than as isolated phenomena. By teasing apart existing build systems, we can recombine their components, allowing us to prototype new build systems with desired properties.",
+    doiOrPublisherUrl: "10.1145/3236774",
+    publicationInfo: {
+      type: "journal",
+      journal: "Proceedings of the ACM on Programming Languages",
+      volume: "2",
+      number: "ICFP",
+      publisher: "ACM",
+      pages: "1-29",
     },
   },
   {
