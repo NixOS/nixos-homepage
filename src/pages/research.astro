@@ -637,15 +637,15 @@ function getVenueString(pubInfo: PublicationType) {
                         <p class="text-sm text-gray-600">
                           {paper.authors.map((a, i) => (
                             <>
-                              {a.name}
-                              {a.orcid && (
+                              {a.orcidUrl ? (
                                 <a
-                                  href={`https://orcid.org/${a.orcid}`}
-                                  class="ml-1 text-blue-600 hover:text-blue-800"
+                                  href={a.orcidUrl}
+                                  class="hover:text-blue-600 transition-colors"
                                 >
-                                  <span class="sr-only">ORCID</span>
-                                  <i class="ai ai-orcid" />
+                                  {a.name}
                                 </a>
+                              ) : (
+                                <span>{a.name}</span>
                               )}
                               {i < paper.authors.length - 1 ? ", " : ""}
                             </>
