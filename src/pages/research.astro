@@ -6,38 +6,38 @@ import PageHeader from "../components/layout/PageHeader.astro";
 
 import Divider from "../components/layout/Divider.astro";
 
-interface Author {
+type Author = {
   name: string;
   orcidUrl?: string;
-}
+};
 
-interface ConferencePaper {
+type ConferencePaper = {
   type: "conference";
   conference: string;
   location: string;
   publisher?: string;
   pages?: string;
-}
+};
 
-interface JournalPaper {
+type JournalPaper = {
   type: "journal";
   journal: string;
   volume?: string;
   number?: string;
   publisher?: string;
   pages?: string;
-}
+};
 
-interface ThesisPaper {
+type ThesisPaper = {
   type: "thesis";
   thesisType: "PhD" | "Master's" | "Bachelor's" | "Diplomarbeit";
   institution: string;
   location: string;
-}
+};
 
 type PublicationType = ConferencePaper | JournalPaper | ThesisPaper;
 
-interface Paper {
+type Paper = {
   title: string;
   authors: Author[];
   year: number;
@@ -46,9 +46,185 @@ interface Paper {
   preprintOrArchiveUrl?: string;
   bibtex?: string;
   publicationInfo: PublicationType;
+};
+
+function validatePaper(paper: any): void {
+  // Helper to check if value exists and is of type
+  const isType = (value: any, type: string, path: string) => {
+    if (value === undefined && type !== "undefined")
+      throw new Error(`Missing required field: ${path}`);
+    if (value !== undefined && typeof value !== type)
+      throw new Error(
+        `Invalid type for ${path}: expected ${type}, got ${typeof value}`,
+      );
+  };
+
+  // Validate basic paper fields
+  isType(paper.title, "string", "title");
+  isType(paper.year, "number", "year");
+  if (paper.abstract !== undefined)
+    isType(paper.abstract, "string", "abstract");
+  if (paper.doiOrPublisherUrl !== undefined)
+    isType(paper.doiOrPublisherUrl, "string", "doiOrPublisherUrl");
+  if (paper.preprintOrArchiveUrl !== undefined)
+    isType(paper.preprintOrArchiveUrl, "string", "preprintOrArchiveUrl");
+  if (paper.bibtex !== undefined) isType(paper.bibtex, "string", "bibtex");
+
+  // Validate authors array
+  if (!Array.isArray(paper.authors))
+    throw new Error("authors must be an array");
+  if (paper.authors.length === 0)
+    throw new Error("authors array cannot be empty");
+
+  paper.authors.forEach((author, index) => {
+    isType(author.name, "string", `authors[${index}].name`);
+    if (author.orcidUrl !== undefined)
+      isType(author.orcidUrl, "string", `authors[${index}].orcidUrl`);
+
+    const validAuthorProps = ["name", "orcidUrl"];
+    const extraProps = Object.keys(author).filter(
+      (key) => !validAuthorProps.includes(key),
+    );
+    if (extraProps.length > 0) {
+      throw new Error(
+        `Extra properties found in author[${index}]: ${extraProps.join(", ")}`,
+      );
+    }
+  });
+
+  // Validate publicationInfo
+  if (!paper.publicationInfo) throw new Error("Missing publicationInfo");
+  if (typeof paper.publicationInfo !== "object")
+    throw new Error("publicationInfo must be an object");
+
+  const { publicationInfo } = paper;
+
+  switch (publicationInfo.type) {
+    case "conference": {
+      isType(
+        publicationInfo.conference,
+        "string",
+        "publicationInfo.conference",
+      );
+      isType(publicationInfo.location, "string", "publicationInfo.location");
+      if (publicationInfo.publisher !== undefined)
+        isType(
+          publicationInfo.publisher,
+          "string",
+          "publicationInfo.publisher",
+        );
+      if (publicationInfo.pages !== undefined)
+        isType(publicationInfo.pages, "string", "publicationInfo.pages");
+
+      const validConfProps = [
+        "type",
+        "conference",
+        "location",
+        "publisher",
+        "pages",
+      ];
+      const extraProps = Object.keys(publicationInfo).filter(
+        (key) => !validConfProps.includes(key),
+      );
+      if (extraProps.length > 0) {
+        throw new Error(
+          `Extra properties found in conference publicationInfo: ${extraProps.join(", ")}`,
+        );
+      }
+      break;
+    }
+    case "journal": {
+      isType(publicationInfo.journal, "string", "publicationInfo.journal");
+      if (publicationInfo.volume !== undefined)
+        isType(publicationInfo.volume, "string", "publicationInfo.volume");
+      if (publicationInfo.number !== undefined)
+        isType(publicationInfo.number, "string", "publicationInfo.number");
+      if (publicationInfo.publisher !== undefined)
+        isType(
+          publicationInfo.publisher,
+          "string",
+          "publicationInfo.publisher",
+        );
+      if (publicationInfo.pages !== undefined)
+        isType(publicationInfo.pages, "string", "publicationInfo.pages");
+
+      const validJournalProps = [
+        "type",
+        "journal",
+        "volume",
+        "number",
+        "publisher",
+        "pages",
+      ];
+      const extraProps = Object.keys(publicationInfo).filter(
+        (key) => !validJournalProps.includes(key),
+      );
+      if (extraProps.length > 0) {
+        throw new Error(
+          `Extra properties found in journal publicationInfo: ${extraProps.join(", ")}`,
+        );
+      }
+      break;
+    }
+    case "thesis": {
+      isType(
+        publicationInfo.institution,
+        "string",
+        "publicationInfo.institution",
+      );
+      isType(publicationInfo.location, "string", "publicationInfo.location");
+      if (
+        !["PhD", "Master's", "Bachelor's", "Diplomarbeit"].includes(
+          publicationInfo.thesisType,
+        )
+      ) {
+        throw new Error(`Invalid thesis type: ${publicationInfo.thesisType}`);
+      }
+
+      const validThesisProps = [
+        "type",
+        "thesisType",
+        "institution",
+        "location",
+      ];
+      const extraProps = Object.keys(publicationInfo).filter(
+        (key) => !validThesisProps.includes(key),
+      );
+      if (extraProps.length > 0) {
+        throw new Error(
+          `Extra properties found in thesis publicationInfo: ${extraProps.join(", ")}`,
+        );
+      }
+      break;
+    }
+    default:
+      throw new Error(
+        `Invalid publication type: ${(publicationInfo as any).type}`,
+      );
+  }
+
+  // Check for extra properties in Paper
+  const validPaperProps = [
+    "title",
+    "authors",
+    "year",
+    "abstract",
+    "doiOrPublisherUrl",
+    "preprintOrArchiveUrl",
+    "bibtex",
+    "publicationInfo",
+  ];
+  const extraProps = Object.keys(paper).filter(
+    (key) => !validPaperProps.includes(key),
+  );
+  if (extraProps.length > 0) {
+    throw new Error(
+      `Extra properties found in paper: ${extraProps.join(", ")}`,
+    );
+  }
 }
 
-const papers: Paper[] = [
+const papers: ReadonlyArray<Paper> = [
   {
     title: "Extending Cloud Build Systems to Eliminate Transitive Trust",
     authors: [
@@ -117,7 +293,7 @@ const papers: Paper[] = [
     doiOrPublisherUrl: "https://doi.org/10.5281/zenodo.13894231",
     publicationInfo: {
       type: "thesis",
-      thesisType: "Masters's",
+      thesisType: "Master's",
       institution: "University of Mons",
       location: "Mons, Belgium",
     },
@@ -178,7 +354,7 @@ const papers: Paper[] = [
     abstract:
       "Functional package managers (FPMs) and reproducible builds (R-B) are technologies and methodologies that are conceptually very different from the traditional software deployment model, and that have promising properties for software supply chain security. This thesis aims to evaluate the impact of FMPs and R-B on the security of the software supply chain and propose improvements to the FPM model to further improve trust in the open source supply chain.",
     doiOrPublisherUrl: "10.1145/3639478.3639806",
-    preprintUrl: "https://hal.science/hal-04482192/file/main.pdf",
+    preprintOrArchiveUrl: "https://hal.science/hal-04482192/file/main.pdf",
     publicationInfo: {
       type: "conference",
       conference:
@@ -414,7 +590,7 @@ const papers: Paper[] = [
       conference: "Verification and Validation of Software Systems (VVSS-2007)",
       location: "Eindhoven, The Netherlands",
     },
-    preprintUrl: "https://pure.tue.nl/ws/files/2239914/628612.pdf",
+    preprintOrArchiveUrl: "https://pure.tue.nl/ws/files/2239914/628612.pdf",
   },
   {
     title: "NixOS: the Nix based operating system",
@@ -442,7 +618,7 @@ const papers: Paper[] = [
       institution: "Faculty of Science, Utrecht University",
       location: "Utrecht, The Netherlands",
     },
-    preprintUrl: "https://nixos.org/~eelco/pubs/phd-thesis.pdf",
+    preprintOrArchiveUrl: "https://nixos.org/~eelco/pubs/phd-thesis.pdf",
   },
   {
     title:
@@ -459,7 +635,8 @@ const papers: Paper[] = [
       publisher: "ACM Press",
       pages: "154–163",
     },
-    preprintUrl: "https://nixos.org/~eelco/pubs/secsharing-ase2005-final.pdf",
+    preprintOrArchiveUrl:
+      "https://nixos.org/~eelco/pubs/secsharing-ase2005-final.pdf",
   },
   {
     title: "Service Configuration Management",
@@ -481,7 +658,8 @@ const papers: Paper[] = [
       location: "Long Beach, California, USA",
       pages: "83–98",
     },
-    preprintUrl: "https://nixos.org/~eelco/pubs/servicecm-scm12-final.pdf",
+    preprintOrArchiveUrl:
+      "https://nixos.org/~eelco/pubs/servicecm-scm12-final.pdf",
   },
   {
     title:
@@ -498,7 +676,8 @@ const papers: Paper[] = [
       publisher: "Springer-Verlag",
       pages: "219–234",
     },
-    preprintUrl: "https://nixos.org/~eelco/pubs/eupfcdm-cbse2005-final.pdf",
+    preprintOrArchiveUrl:
+      "https://nixos.org/~eelco/pubs/eupfcdm-cbse2005-final.pdf",
   },
   {
     title: "Nix: A Safe and Policy-Free System for Software Deployment",
@@ -518,7 +697,8 @@ const papers: Paper[] = [
       publisher: "USENIX",
       pages: "79–92",
     },
-    preprintUrl: "https://nixos.org/~eelco/pubs/nspfssd-lisa2004-final.pdf",
+    preprintOrArchiveUrl:
+      "https://nixos.org/~eelco/pubs/nspfssd-lisa2004-final.pdf",
   },
   {
     title: "Imposing a Memory Management Discipline on Software Deployment",
@@ -541,7 +721,8 @@ const papers: Paper[] = [
       publisher: "IEEE Computer Society",
       pages: "583–592",
     },
-    preprintUrl: "https://nixos.org/~eelco/pubs/immdsd-icse2004-final.pdf",
+    preprintOrArchiveUrl:
+      "https://nixos.org/~eelco/pubs/immdsd-icse2004-final.pdf",
   },
   {
     title: "Integrating Software Construction and Software Deployment",
@@ -556,13 +737,14 @@ const papers: Paper[] = [
       location: "Portland, Oregon, USA",
       pages: "102–117",
     },
-    preprintUrl: "https://nixos.org/~eelco/pubs/iscsd-scm11-final.pdf",
+    preprintOrArchiveUrl: "https://nixos.org/~eelco/pubs/iscsd-scm11-final.pdf",
   },
 ];
 
 const sponsors = await getEntry("sponsors", "info");
 
 const papersByYear = papers.reduce((acc, paper) => {
+  validatePaper(paper);
   const year = paper.year;
   if (!acc[year]) acc[year] = [];
   acc[year].push(paper);
