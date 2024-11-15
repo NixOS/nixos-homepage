@@ -856,7 +856,9 @@ function getVenueString(pubInfo: PublicationType) {
                                 <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
                                 <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
                               </svg>
-                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">CITE</span>
+                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                                CITE
+                              </span>
                             </button>
                           )}
                           {paper.preprintOrArchiveUrl && (
@@ -878,7 +880,9 @@ function getVenueString(pubInfo: PublicationType) {
                                   clip-rule="evenodd"
                                 />
                               </svg>
-                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">PREPRINT</span>
+                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                                PREPRINT
+                              </span>
                             </a>
                           )}
                           {paper.doiOrPublisherUrl && (
@@ -891,7 +895,9 @@ function getVenueString(pubInfo: PublicationType) {
                               class="btn-action flex items-center"
                               aria-label="View publisher version"
                             >
-                              <span class="sr-only">View publisher version</span>
+                              <span class="sr-only">
+                                View publisher version
+                              </span>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 class="h-5 w-5"
@@ -901,33 +907,39 @@ function getVenueString(pubInfo: PublicationType) {
                                 <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
                                 <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
                               </svg>
-                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">DOI</span>
+                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                                DOI
+                              </span>
                             </a>
                           )}
                         </div>
                         <div class="ml-2">
-                        {paper.abstract && (
-                          <button class="btn-action" aria-label="Show abstract">
-                            <span class="sr-only">Show abstract</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-5 w-5"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
+                          {paper.abstract && (
+                            <button
+                              class="btn-action abstract-toggle"
+                              aria-label="Toggle abstract"
+                              aria-expanded="false"
                             >
-                              <path
-                                fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        )}
+                              <span class="sr-only">Toggle abstract</span>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 transform transition-transform duration-200"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"
+                                />
+                              </svg>
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>
                     {paper.abstract && (
-                      <div class="abstract hidden mt-4 text-sm text-gray-600">
+                      <div class="abstract-content mt-4 text-sm text-gray-600 hidden">
                         <p>{paper.abstract}</p>
                       </div>
                     )}
@@ -965,7 +977,9 @@ function getVenueString(pubInfo: PublicationType) {
     font-size: 12px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
+    transition:
+      opacity 0.2s,
+      visibility 0.2s;
   }
 
   .tooltip.show {
@@ -1003,16 +1017,15 @@ function getVenueString(pubInfo: PublicationType) {
     margin-left: 0.5rem;
   }
 
-  /* Demo layout */
   .paper-entry {
     padding: 1.5rem;
     background: white;
     border-radius: 0.5rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
 
   .paper-entry:hover {
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .btn-action svg {
@@ -1023,20 +1036,58 @@ function getVenueString(pubInfo: PublicationType) {
     transform: rotate(180deg);
   }
 
-  .abstract,
-  .bibtex {
+  .abstract-content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
+    opacity: 0;
   }
 
-  .abstract.show,
-  .bibtex.show {
-    max-height: 500px;
+  .abstract-content.show {
+    max-height: none;
+    opacity: 1;
+  }
+
+  .abstract-toggle svg {
+    transition: transform 0.2s ease;
+  }
+
+  .abstract-toggle[aria-expanded="true"] svg {
+    transform: rotate(-180deg);
   }
 </style>
 
 <script>
+  function setupAbstractToggles() {
+    const toggleButtons = document.querySelectorAll(".abstract-toggle");
+
+    toggleButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const article = button.closest(".paper-entry");
+        const abstractContent = article.querySelector(".abstract-content");
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+        // Toggle the abstract visibility
+        abstractContent.classList.toggle("hidden");
+        abstractContent.classList.toggle("show");
+
+        // Update the button state
+        button.setAttribute("aria-expanded", !isExpanded);
+      });
+    });
+  }
+  document.addEventListener("DOMContentLoaded", setupAbstractToggles);
+  document.querySelectorAll(".move-button").forEach((button) => {
+    const textWidth = button.offsetWidth;
+    button.closest(".btn-action").style.setProperty("--text-width", textWidth);
+  });
+  document
+    .querySelectorAll('.btn-action[aria-label="Show abstract"]')
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("expanded");
+      });
+    });
   document.addEventListener("DOMContentLoaded", () => {
     document
       .querySelectorAll('.btn-action[aria-label="Show abstract"]')
@@ -1048,40 +1099,10 @@ function getVenueString(pubInfo: PublicationType) {
           abstract.classList.toggle("show");
         });
       });
-
     document
       .querySelectorAll('.btn-action[aria-label="Show BibTeX"]')
       .forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const article = btn.closest(".paper-entry");
-          const bibtex = article.querySelector(".bibtex");
-          bibtex.classList.toggle("hidden");
-          bibtex.classList.toggle("show");
-        });
-      });
-  });
-  document.querySelectorAll('.move-button').forEach(button => {
-    const textWidth = button.offsetWidth;
-    button.closest('.btn-action').style.setProperty('--text-width', textWidth);
-  });
-  document.querySelectorAll('.btn-action[aria-label="Show abstract"]').forEach(btn => {
-    btn.addEventListener("click", () => {
-      btn.classList.toggle("expanded");
-    });
-  });
-  document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.btn-action[aria-label="Show abstract"]')
-    .forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const article = btn.closest(".paper-entry");
-        const abstract = article.querySelector(".abstract");
-        abstract.classList.toggle("hidden");
-        abstract.classList.toggle("show");
-      });
-    });
-    document.querySelectorAll('.btn-action[aria-label="Show BibTeX"]')
-      .forEach((btn) => {
-        const buttonText = btn.querySelector('.move-button');
+        const buttonText = btn.querySelector(".move-button");
         const originalText = buttonText.textContent;
 
         btn.addEventListener("click", async () => {
@@ -1094,16 +1115,15 @@ function getVenueString(pubInfo: PublicationType) {
             await navigator.clipboard.writeText(bibtexText);
 
             // Change button text
-            buttonText.textContent = 'COPIED!';
+            buttonText.textContent = "COPIED!";
 
             // Reset button text after 2 seconds
             setTimeout(() => {
               buttonText.textContent = originalText;
             }, 2000);
-
           } catch (err) {
-            console.error('Failed to copy text: ', err);
-            buttonText.textContent = 'FAILED';
+            console.error("Failed to copy text: ", err);
+            buttonText.textContent = "FAILED";
 
             setTimeout(() => {
               buttonText.textContent = originalText;
