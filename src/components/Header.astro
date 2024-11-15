@@ -1,0 +1,90 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getEntry } from 'astro:content';
+
+import Container from '@/components/layout/Container.astro';
+import InlineSVG from '@/components/util/InlineSVG.astro';
+
+const headerMenu = await getEntry('menus', 'header');
+const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
+
+const navbarItemStyle = `text-center text-nix-blue-dark md:text-black md:hover:border-b-nix-blue-light border-b-4`;
+const navbarItemInactiveStyle = `border-b-nix-blue-extralight md:border-b-transparent bg-nix-blue-extralight md:bg-transparent`;
+const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-white md:text-black md:bg-transparent font-bold`;
+---
+
+<header role="banner" class="sticky top-0 z-50 bg-white text-black drop-shadow">
+  <Container class="flex flex-col justify-between md:flex-row md:items-center">
+    <div class="my-2 flex items-center justify-between gap-2 text-4xl">
+      <a href="/" class="flex select-none items-center gap-2">
+        <InlineSVG
+          class="h-12 w-auto"
+          src="/src/assets/image/nixos-logo-notext.svg"
+          alt="Nixos Logo"
+        />
+        <InlineSVG
+          class="block h-12 w-auto md:hidden xl:block"
+          src="/src/assets/image/nixos-logo-text.svg"
+          alt="Nixos Logo Text"
+        />
+      </a>
+
+      <button
+        aria-label="Main Navigation Toggle"
+        class="block rounded-lg bg-nix-blue-light p-4 md:hidden"
+        id="navigation-toggle"
+      >
+        <span class="mb-1.5 block h-1 w-8 bg-white"></span>
+        <span class="mb-1.5 block h-1 w-8 bg-white"></span>
+        <span class="block h-1 w-8 bg-white"></span>
+      </button>
+    </div>
+
+    <nav
+      id="navbar-menu"
+      class="flex flex-col gap-0.5 pb-4 font-medium leading-none md:flex md:flex-row md:gap-5 md:pb-0"
+      role="menubar"
+      aria-label="Main Navigation"
+    >
+      {
+        headerMenu.data.items.map((item) => (
+          <a
+            class:list={[
+              'pb-6 pt-7',
+              navbarItemStyle,
+              currentTopRoute === item.link
+                ? navbarItemActiveStyle
+                : navbarItemInactiveStyle,
+            ]}
+            href={item.link}
+          >
+            {item.name}
+          </a>
+        ))
+      }
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        class={`pt-7 pb-6 md:pt-5 md:pb-3 ${navbarItemStyle} ${navbarItemInactiveStyle}`}
+        href="https://search.nixos.org"
+        arial-label="Nixos package and options search"
+      >
+        <Icon class="hidden h-8 w-8 text-nix-blue md:block" name="mdi:search" />
+        <span class="inline-block md:hidden">Search</span>
+      </a>
+    </nav>
+  </Container>
+</header>
+
+<script lang="ts">
+  const navigationToggle = document.getElementById('navigation-toggle');
+  const navbarMenu = document.getElementById('navbar-menu');
+
+  function toggleMenu() {
+    navbarMenu.classList.toggle('hidden');
+    navbarMenu.classList.toggle('flex');
+  }
+  toggleMenu();
+
+  navigationToggle.addEventListener('click', () => toggleMenu());
+</script>
