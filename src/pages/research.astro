@@ -247,6 +247,7 @@ const papers: ReadonlyArray<Paper> = [
     doiOrPublisherUrl: "https://doi.org/10.1145/3689944.3696169",
     preprintOrArchiveUrl:
       "https://www.digidow.eu/publications/2024-schwaighofer-scored/Schwaighofer_2024_SCORED24_CloudBuildSystemsTrust.pdf",
+    bibtex: "dummy data",
     publicationInfo: {
       type: "conference",
       conference:
@@ -852,11 +853,8 @@ function getVenueString(pubInfo: PublicationType) {
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                               >
-                                <path
-                                  fill-rule="evenodd"
-                                  d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                  clip-rule="evenodd"
-                                />
+                                <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
                               </svg>
                               <span class="ml-2 text-sm font-bold text-gray-400 move-button">CITE</span>
                             </button>
@@ -933,13 +931,6 @@ function getVenueString(pubInfo: PublicationType) {
                         <p>{paper.abstract}</p>
                       </div>
                     )}
-                    {paper.bibtex && (
-                      <div class="bibtex hidden mt-4">
-                        <pre class="text-sm bg-gray-50 p-4 rounded overflow-x-auto">
-                          {paper.bibtex}
-                        </pre>
-                      </div>
-                    )}
                   </article>
                 ))}
               </div>
@@ -952,6 +943,36 @@ function getVenueString(pubInfo: PublicationType) {
 </Layout>
 
 <style>
+  .btn-action {
+    @apply p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition;
+    padding: 0.5rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+  }
+
+  .tooltip.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
   .btn-action {
     @apply p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition;
     padding: 0.5rem;
@@ -1047,5 +1068,52 @@ function getVenueString(pubInfo: PublicationType) {
     btn.addEventListener("click", () => {
       btn.classList.toggle("expanded");
     });
+  });
+  document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.btn-action[aria-label="Show abstract"]')
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const article = btn.closest(".paper-entry");
+        const abstract = article.querySelector(".abstract");
+        abstract.classList.toggle("hidden");
+        abstract.classList.toggle("show");
+      });
+    });
+    document.querySelectorAll('.btn-action[aria-label="Show BibTeX"]')
+      .forEach((btn) => {
+        const buttonText = btn.querySelector('.move-button');
+        const originalText = buttonText.textContent;
+
+        btn.addEventListener("click", async () => {
+          const article = btn.closest(".paper-entry");
+          const bibtex = article.querySelector(".bibtex");
+          const bibtexText = btn.dataset.bibtex;
+
+          // Copy to clipboard
+          try {
+            await navigator.clipboard.writeText(bibtexText);
+
+            // Change button text
+            buttonText.textContent = 'COPIED!';
+
+            // Reset button text after 2 seconds
+            setTimeout(() => {
+              buttonText.textContent = originalText;
+            }, 2000);
+
+          } catch (err) {
+            console.error('Failed to copy text: ', err);
+            buttonText.textContent = 'FAILED';
+
+            setTimeout(() => {
+              buttonText.textContent = originalText;
+            }, 2000);
+          }
+
+          // Toggle bibtex visibility
+          bibtex.classList.toggle("hidden");
+          bibtex.classList.toggle("show");
+        });
+      });
   });
 </script>
