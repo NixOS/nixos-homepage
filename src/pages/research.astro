@@ -838,8 +838,8 @@ function getVenueString(pubInfo: PublicationType) {
                           {getVenueString(paper.publicationInfo)}
                         </p>
                       </div>
-                      <div class="flex items-center">
-                        <div class="action-buttons flex space-x-2">
+                      <div class="action-buttons flex">
+                        <div class="flex gap-2">
                           {paper.bibtex && (
                             <button
                               class="btn-action flex items-center"
@@ -962,59 +962,31 @@ function getVenueString(pubInfo: PublicationType) {
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    position: relative;
   }
 
-  .tooltip {
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    opacity: 0;
-    visibility: hidden;
-    transition:
-      opacity 0.2s,
-      visibility 0.2s;
-  }
-
-  .tooltip.show {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .btn-action {
-    @apply p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition;
-    padding: 0.5rem;
-    border-radius: 9999px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-  }
-
-  .btn-action:hover {
-    color: rgb(75, 85, 99);
-    background-color: rgb(243, 244, 246);
-  }
-
+  /* Default styles - buttons always visible */
   .btn-action .move-button {
-    width: 0;
-    overflow: hidden;
-    opacity: 0;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-    font-weight: bold;
-    margin-left: 0;
-  }
-
-  .paper-entry:hover .btn-action .move-button {
     width: auto;
     opacity: 1;
     margin-left: 0.5rem;
+    white-space: nowrap;
+  }
+
+  /* Only apply hover animations on devices that support hover */
+  @media (hover: hover) {
+    .btn-action .move-button {
+      width: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+      margin-left: 0;
+    }
+
+    .paper-entry:hover .btn-action .move-button {
+      width: auto;
+      opacity: 1;
+      margin-left: 0.5rem;
+    }
   }
 
   .paper-entry {
@@ -1028,12 +1000,19 @@ function getVenueString(pubInfo: PublicationType) {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  .btn-action svg {
-    transition: transform 0.3s ease;
-  }
+  /* Layout adjustments for touch devices */
+  @media (hover: none) {
+    .paper-entry > div:first-child {
+      flex-direction: column;
+    }
 
-  .btn-action.expanded svg {
-    transform: rotate(180deg);
+    .paper-entry .action-buttons {
+      margin-top: 1rem;
+      display: flex;
+      margin-left: auto;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
   }
 
   .abstract-content {
