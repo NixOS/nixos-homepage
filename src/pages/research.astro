@@ -837,7 +837,77 @@ function getVenueString(pubInfo: PublicationType) {
                           {getVenueString(paper.publicationInfo)}
                         </p>
                       </div>
-                      <div class="flex space-x-2">
+                      <div class="flex items-center">
+                        <div class="action-buttons flex space-x-2">
+                          {paper.bibtex && (
+                            <button
+                              class="btn-action flex items-center"
+                              aria-label="Show BibTeX"
+                              data-bibtex={paper.bibtex}
+                            >
+                              <span class="sr-only">Show BibTeX</span>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                                  clip-rule="evenodd"
+                                />
+                              </svg>
+                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">CITE</span>
+                            </button>
+                          )}
+                          {paper.preprintOrArchiveUrl && (
+                            <a
+                              href={paper.preprintOrArchiveUrl}
+                              class="btn-action flex items-center"
+                              aria-label="Download preprint"
+                            >
+                              <span class="sr-only">Download preprint</span>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
+                                  clip-rule="evenodd"
+                                />
+                              </svg>
+                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">PREPRINT</span>
+                            </a>
+                          )}
+                          {paper.doiOrPublisherUrl && (
+                            <a
+                              href={
+                                paper.doiOrPublisherUrl.startsWith("10.")
+                                  ? `https://doi.org/${paper.doiOrPublisherUrl}`
+                                  : paper.doiOrPublisherUrl
+                              }
+                              class="btn-action flex items-center"
+                              aria-label="View publisher version"
+                            >
+                              <span class="sr-only">View publisher version</span>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                              </svg>
+                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">DOI</span>
+                            </a>
+                          )}
+                        </div>
+                        <div class="ml-2">
                         {paper.abstract && (
                           <button class="btn-action" aria-label="Show abstract">
                             <span class="sr-only">Show abstract</span>
@@ -855,70 +925,7 @@ function getVenueString(pubInfo: PublicationType) {
                             </svg>
                           </button>
                         )}
-                        {paper.preprintOrArchiveUrl && (
-                          <a
-                            href={paper.preprintOrArchiveUrl}
-                            class="btn-action"
-                            aria-label="Download preprint"
-                          >
-                            <span class="sr-only">Download preprint</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-5 w-5"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
-                                clip-rule="evenodd"
-                              />
-                            </svg>
-                          </a>
-                        )}
-                        {paper.doiOrPublisherUrl && (
-                          <a
-                            href={
-                              paper.doiOrPublisherUrl.startsWith("10.")
-                                ? `https://doi.org/${paper.doiOrPublisherUrl}`
-                                : paper.doiOrPublisherUrl
-                            }
-                            class="btn-action"
-                            aria-label="View publisher version"
-                          >
-                            <span class="sr-only">View publisher version</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-5 w-5"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                            </svg>
-                          </a>
-                        )}
-                        {paper.bibtex && (
-                          <button
-                            class="btn-action"
-                            aria-label="Show BibTeX"
-                            data-bibtex={paper.bibtex}
-                          >
-                            <span class="sr-only">Show BibTeX</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-5 w-5"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                                clip-rule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        )}
+                        </div>
                       </div>
                     </div>
                     {paper.abstract && (
@@ -947,6 +954,52 @@ function getVenueString(pubInfo: PublicationType) {
 <style>
   .btn-action {
     @apply p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition;
+    padding: 0.5rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+  }
+
+  .btn-action:hover {
+    color: rgb(75, 85, 99);
+    background-color: rgb(243, 244, 246);
+  }
+
+  .btn-action .move-button {
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    margin-left: 0;
+  }
+
+  .paper-entry:hover .btn-action .move-button {
+    width: auto;
+    opacity: 1;
+    margin-left: 0.5rem;
+  }
+
+  /* Demo layout */
+  .paper-entry {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  .paper-entry:hover {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .btn-action svg {
+    transition: transform 0.3s ease;
+  }
+
+  .btn-action.expanded svg {
+    transform: rotate(180deg);
   }
 
   .abstract,
@@ -985,5 +1038,14 @@ function getVenueString(pubInfo: PublicationType) {
           bibtex.classList.toggle("show");
         });
       });
+  });
+  document.querySelectorAll('.move-button').forEach(button => {
+    const textWidth = button.offsetWidth;
+    button.closest('.btn-action').style.setProperty('--text-width', textWidth);
+  });
+  document.querySelectorAll('.btn-action[aria-label="Show abstract"]').forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("expanded");
+    });
   });
 </script>
