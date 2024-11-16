@@ -1,0 +1,25 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Divider from '@/components/layout/Divider.astro';
+import NixosSearchInput from '@/components/ui/NixosSearchInput.astro';
+---
+
+<Divider style="slope" mirrorY mirrorX />
+
+<div class="bg-nix-blue py-8 text-white md:px-8">
+  <Container>
+    <h2 class="pb-8 font-heading text-4xl font-extrabold">Search</h2>
+    <div class="grid gap-4 md:grid-cols-2">
+      <div>
+        <h3 class="mb-4 font-heading text-2xl font-extrabold">Nix packages</h3>
+        <NixosSearchInput color="white" size="sm-full" collection="packages" />
+      </div>
+      <div>
+        <h3 class="mb-4 font-heading text-2xl font-extrabold">NixOS options</h3>
+        <NixosSearchInput color="white" size="sm-full" collection="options" />
+      </div>
+    </div>
+  </Container>
+</div>
+
+<Divider style="slope" mirrorX />
