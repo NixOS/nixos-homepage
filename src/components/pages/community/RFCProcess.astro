@@ -1,0 +1,151 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import RfcDiagram from '@/components/ui/RfcDiagram.astro';
+---
+
+<Container>
+  <div class="mt-16 flex flex-wrap-reverse gap-8 leading-loose">
+    <div class="flex flex-1 flex-col items-start justify-center gap-8">
+      <h2 class="text-4xl font-bold leading-none text-nix-blue">RFC Process</h2>
+
+      <p>
+        The "RFC" (request for comments) process is intended to provide a
+        consistent and controlled path for new features to enter the Nix
+        language, packages and OS, so that all community can be confident about
+        the direction the ecosystem is evolving in.
+      </p>
+
+      <Button color="green" size="lg" href="https://github.com/NixOS/rfcs"
+        >Learn more</Button
+      >
+    </div>
+
+    <div class="flex-0 mt-2 w-full md:w-3/6 md:max-w-2xl">
+      <RfcDiagram />
+    </div>
+  </div>
+</Container>
+
+<script>
+  const boxes = document
+    .getElementById('rfc-diagram')
+    .getElementsByTagName('rect');
+  const diagram = document.getElementById('rfc-diagram');
+  const durationMiliseconds = 1500;
+  const baseActivationClasses = ['stroke-nix-blue'];
+  const successActivationClasses = ['stroke-nix-green'];
+  const failureActivationClasses = ['stroke-nix-orange', 'opacity-50'];
+  const fadedActivationClasses = ['opacity-50'];
+  const timeline = [
+    {
+      element: boxes[9], // New Submission
+      index: 0,
+      classes: baseActivationClasses,
+    },
+    {
+      element: boxes[8], // Nomination Phase
+      index: 1,
+      classes: baseActivationClasses,
+    },
+    {
+      element: boxes[7], // Discussion Phase
+      index: 2,
+      classes: baseActivationClasses,
+    },
+    {
+      element: boxes[0], // Final Comment Phase
+      index: 3,
+      classes: baseActivationClasses,
+    },
+    {
+      element: boxes[3], // Submission Rejected
+      index: 4,
+      classes: failureActivationClasses,
+    },
+    {
+      element: boxes[1], // New Submission 2
+      index: 4,
+      classes: fadedActivationClasses,
+    },
+    {
+      element: boxes[5], // FCP Canceled
+      index: 4,
+      classes: failureActivationClasses,
+    },
+    {
+      element: boxes[2], // Refine Submission
+      index: 4,
+      classes: fadedActivationClasses,
+    },
+    {
+      element: boxes[4], // Submission Accepted
+      index: 4,
+      classes: successActivationClasses,
+    },
+  ];
+  let isAnimating = false;
+
+  timeline.forEach((box) => {
+    box.element.classList.add('transition-all', 'duration-500', 'ease-in');
+  });
+
+  let highestIndex = 0;
+  timeline.forEach((box) => {
+    if (box.index > highestIndex) {
+      highestIndex = box.index;
+    }
+  });
+
+  function triggerAnimation() {
+    // prevent multiple animations at the same time
+    if (isAnimating) {
+      return;
+    }
+    isAnimating = true;
+    setTimeout(
+      () => {
+        isAnimating = false;
+      },
+      (highestIndex + 1) * durationMiliseconds,
+    );
+
+    // trigger animation on each box
+    timeline.forEach((box) => {
+      setTimeout(() => {
+        box.element.classList.add(...box.classes);
+      }, box.index * durationMiliseconds);
+    });
+  }
+
+  const activatorObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (isAnimating || !entry.isIntersecting) {
+          return;
+        }
+        triggerAnimation();
+      });
+    },
+    {
+      threshold: 1,
+    },
+  );
+  const deactivatorObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (isAnimating || entry.isIntersecting) {
+          return;
+        }
+        timeline.forEach((box) => {
+          box.element.classList.remove(...box.classes);
+        });
+      });
+    },
+    {
+      threshold: 0,
+    },
+  );
+  activatorObserver.observe(diagram);
+  deactivatorObserver.observe(diagram);
+</script>

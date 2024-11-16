@@ -1,0 +1,115 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Card from '@/components/ui/Card.astro';
+import NixConEntry from './NixConEntry.astro';
+
+const nixcons = [
+  {
+    title: 'NixCon 2024 - Berlin',
+    date: '25-27 October 2024',
+    href: 'https://2024.nixcon.org/',
+    description:
+      "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
+    imagePath: '/images/nixcon/nixcon.2024.svg',
+  },
+  {
+    title: 'NixCon 2023 - Darmstadt',
+    date: '8-10 September 2023',
+    href: 'https://2023.nixcon.org/',
+    description:
+      "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
+    imagePath: '/images/nixcon/nixcon.2023.svg',
+  },
+  {
+    title: 'NixCon 2022 - Paris',
+    date: '20-22 October 2022',
+    href: 'https://2022.nixcon.org/',
+    description:
+      "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
+    imagePath: '/images/nixcon/nixcon.2022.svg',
+  },
+  {
+    title: 'NixCon 2020 - Online',
+    date: '16-18 October 2020',
+    href: 'https://2019.nixcon.org/',
+    description:
+      "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
+    imagePath: '/images/nixcon/nixcon.2020.svg',
+  },
+  {
+    title: 'NixCon 2019 - Brno',
+    date: '25-27 October 2019',
+    href: 'https://2019.nixcon.org/',
+    description:
+      'NixCon is becoming a regular gathering that everybody expects to happen. This year we met at Brno, Czech Republic. This was the biggest conference so far.',
+    imagePath: '/images/nixcon/nixcon.2019.svg',
+  },
+  {
+    title: 'NixCon 2018 - London',
+    date: '25-27 October 2018',
+    href: 'https://nixcon2018.org/',
+    description:
+      'For the first time a Nix conference outside the Germany. London was the first conference that was not run over the weekend, but during the week.',
+    imagePath: '/images/nixcon/nixcon.2018.svg',
+  },
+  {
+    title: 'NixCon 2017 - Munich',
+    date: '28-31 October 2017',
+    href: 'http://nixcon2017.org/',
+    description:
+      'After a year of a break, Nix community gathered at TNG Technology Consulting in Munich.',
+  },
+  {
+    title: 'NixCon 2015 - Berlin',
+    date: '14-17 November 2015',
+    href: 'https://conf.nixos.org/',
+    description:
+      'Taking place in a Berlin-style converted loft, it was the first NixOS conference. It was the first time Nix community came together in such numbers. In two days there were many interesting talks.',
+  },
+];
+---
+
+<div class="bg-nix-blue py-8 text-white">
+  <Container>
+    <h2 class="font-heading text-4xl font-bold">NixCon</h2>
+
+    <p class="mb-4 mt-2 text-xl font-bold">
+      The
+      <a class="!text-white" href="/community/teams/nixcon">NixCon Team</a>
+      organizes a conference once a year.
+    </p>
+
+    <div class="grid gap-4 md:grid-cols-3">
+      <Card class="col-span-2 bg-nix-blue-dark md:col-span-1">
+        <h3 class="mb-4 font-heading text-3xl font-bold">Next Conference</h3>
+
+        <NixConEntry
+          imagePath={nixcons[0].imagePath}
+          title={nixcons[0].title}
+          date={nixcons[0].date}
+          description={nixcons[0].description}
+          href={nixcons[0].href}
+        />
+      </Card>
+
+      <div class="col-span-2 md:py-4">
+        <h3 class="font-heading text-3xl font-bold">Previous Conferences</h3>
+
+        <div class="mt-4 grid gap-4 md:grid-cols-2">
+          {
+            nixcons
+              .slice(1)
+              .map((nixcon) => (
+                <NixConEntry
+                  title={nixcon.title}
+                  date={nixcon.date}
+                  description={nixcon.description}
+                  href={nixcon.href}
+                />
+              ))
+          }
+        </div>
+      </div>
+    </div>
+  </Container>
+</div>

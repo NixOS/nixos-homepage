@@ -1,15 +1,15 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection } from 'astro:content';
 
-import Layout from "../../../layouts/Layout.astro";
-import PageHeader from "../../../components/layout/PageHeader.astro";
-import Container from "../../../components/layout/Container.astro";
-import MembersDisplay from "../../../components/pages/community/teams/MembersDisplay.astro";
+import Container from '@/components/layout/Container.astro';
+import PageHeader from '@/components/layout/PageHeader.astro';
+import MembersDisplay from '@/components/pages/community/teams/MembersDisplay.astro';
+import Layout from '@/layouts/Layout.astro';
 
 export async function getStaticPaths() {
-  const teamEntries = await getCollection("teams");
+  const teamEntries = await getCollection('teams');
   return teamEntries.map((entry) => ({
-    params: { slug: entry.slug.split("_")[1] },
+    params: { slug: entry.slug.split('_')[1] },
     props: { entry },
   }));
 }
@@ -20,30 +20,31 @@ const { Content } = await entry.render();
 
 <Layout title={entry.data.name}>
   <PageHeader text={entry.data.name} parentPath="/community" />
+
   <Container class="my-8">
     <MembersDisplay
       class="float-right mb-4 ml-4 sm:w-1/2 md:max-w-96"
       members={entry.data.members}
       contact={entry.data.contact}
     />
+
     <article>
       <Content />
     </article>
+
     {
       entry.data.subteams && entry.data.subteams.length > 0 && (
-        <>
-          <div class="flex gap-4 flex-wrap pt-4">
-            {entry.data.subteams.map((subteam) => (
-              <MembersDisplay
-                key={subteam.name}
-                title={subteam.name}
-                class="mb-4"
-                members={subteam.members}
-                isSubteam
-              />
-            ))}
-          </div>
-        </>
+        <div class="flex flex-wrap gap-4 pt-4">
+          {entry.data.subteams.map((subteam) => (
+            <MembersDisplay
+              key={subteam.name}
+              title={subteam.name}
+              class="mb-4"
+              members={subteam.members}
+              isSubteam
+            />
+          ))}
+        </div>
       )
     }
   </Container>

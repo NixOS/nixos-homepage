@@ -1,0 +1,61 @@
+---
+import Container from '@/components/layout/Container.astro';
+
+const { meetups } = Astro.props;
+---
+
+<Container>
+  <h2 class="mt-8 font-heading text-4xl font-bold text-nix-blue">Meetups</h2>
+
+  <div
+    class="mt-4 grid auto-cols-fr bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat text-center text-lg md:grid-flow-col"
+  >
+    <div>
+      <h3 class="mt-4 font-heading text-2xl font-bold text-nix-blue md:mt-2">
+        America
+      </h3>
+
+      <ul class="mt-2 space-y-4">
+        {
+          meetups.data.america.map((meetup) => (
+            <li>
+              <a href={meetup.href}>{meetup.location}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="mt-4 font-heading text-2xl font-bold text-nix-blue md:mt-2">
+        Europe
+      </h3>
+
+      <ul class="mt-2 space-y-4">
+        {
+          meetups.data.europe.map((meetup) => (
+            <li>
+              <a href={meetup.href}>{meetup.location}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="mt-4 font-heading text-2xl font-bold text-nix-blue md:mt-2">
+        Asia
+      </h3>
+
+      <ul class="mt-2 space-y-4">
+        {
+          meetups.data.asia.map((meetup) => (
+            <li>
+              <a href={meetup.href}>{meetup.location}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</Container>

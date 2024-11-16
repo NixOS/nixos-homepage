@@ -1,0 +1,40 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Button from '@/components/ui/Button.astro';
+
+const { teams = [] } = Astro.props;
+---
+
+<div class="bg-nix-blue py-8">
+  <Container>
+    <h2 class="mt-8 text-4xl font-bold text-white" id="governance-teams">
+      Teams
+    </h2>
+
+    <ul class="mt-8 flex flex-wrap justify-stretch gap-x-6 gap-y-16">
+      {
+        teams.map((team) => (
+          <li class="flex flex-grow basis-72 flex-col items-center gap-2 text-center text-white md:items-start md:text-left [&>a]:inline-block">
+            <img
+              src={`/images/teams/${team.slug.split('_')[1]}.svg`}
+              alt={`${team.data.name} Logo`}
+              class="mb-2 h-16"
+            />
+
+            <div>
+              <h3 class="font-heading text-2xl font-bold">{team.data.name}</h3>
+              <p class="mb-2 grow leading-relaxed">{team.data.description}</p>
+            </div>
+
+            <Button
+              color="green"
+              href={'/community/teams/' + team.slug.split('_')[1]}
+            >
+              Read more
+            </Button>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</div>

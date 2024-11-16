@@ -1,0 +1,192 @@
+---
+import Container from '@/components/layout/Container.astro';
+import OfficialCommunityLink from './OfficialCommunityLink.astro';
+import UnofficialCommunityLink from './UnofficialCommunityLink.astro';
+
+const platformsMain = [
+  {
+    href: 'https://discourse.nixos.org/',
+    name: 'Discourse',
+    iconName: 'simple-icons:discourse',
+    description:
+      'Our official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.',
+  },
+  {
+    href: 'https://matrix.to/#/#community:nixos.org',
+    name: 'Matrix space',
+    iconName: 'simple-icons:matrix',
+    description:
+      'Real-time help, development chat, and off-topic community discussion takes place on Matrix.',
+  },
+  {
+    href: 'https://github.com/NixOS/',
+    name: 'Github',
+    iconName: 'simple-icons:github',
+    description:
+      'Official organization page on Github, where you can find nix, nixpkgs, and other repositories.',
+  },
+];
+
+const socialMediaMain = [
+  {
+    href: 'https://chaos.social/@nixos_org',
+    name: 'Mastodon',
+    iconName: 'simple-icons:mastodon',
+  },
+  {
+    href: 'https://twitter.com/nixos_org',
+    name: 'Twitter',
+    iconName: 'simple-icons:twitter',
+  },
+  {
+    href: 'https://www.linkedin.com/company/nixos-foundation/',
+    name: 'LinkedIn',
+    iconName: 'simple-icons:linkedin',
+  },
+  {
+    href: 'https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw',
+    name: 'YouTube',
+    iconName: 'simple-icons:youtube',
+  },
+];
+
+const calendarsMain = [
+  {
+    href: 'https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com',
+    name: 'Official NixOS Calendar',
+    iconName: 'mdi:calendar',
+  },
+  {
+    href: 'https://discourse.nixos.org/t/community-calendar/18589',
+    name: 'Community Calendar',
+    iconName: 'mdi:calendar',
+  },
+] as const;
+
+const platformsOutside = [
+  {
+    href: 'https://stackoverflow.com/questions/tagged/nix+or+nixpkgs+or+nixos+or+nixops',
+    name: 'Stackoverflow',
+    iconName: 'simple-icons:stackoverflow',
+  },
+  {
+    href: 'https://discord.gg/BqdJJFER4H',
+    name: 'Discord',
+    iconName: 'simple-icons:discord',
+  },
+  {
+    href: 'https://www.reddit.com/r/NixOS/',
+    name: 'Reddit',
+    iconName: 'simple-icons:reddit',
+  },
+];
+---
+
+<Container>
+  <h2 class="mt-8 font-heading text-4xl font-bold leading-none text-nix-blue">
+    Where to talk?
+  </h2>
+
+  <p class="mt-2 leading-relaxed">
+    The Nix community is spread across various platforms. Here are the official
+    and unofficial spaces where you can find help, discuss development, and chat
+    with other users.
+  </p>
+
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+    <div class="md:col-span-2">
+      <h3 class="mt-4 font-heading text-3xl font-bold text-nix-blue">
+        Official spaces
+      </h3>
+
+      <p class="text-gray-700">
+        These spaces are monitored and moderated by the NixOS Moderation Team.
+        This means they are moderated in such a way that they follow the
+        standards and moral values of our community. You can find out more about
+        our moderation team <a href="/community/teams/moderation">here</a>.
+      </p>
+
+      <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-2">
+        {
+          platformsMain.map((platform, i) => (
+            <OfficialCommunityLink
+              href={platform.href}
+              name={platform.name}
+              iconName={platform.iconName}
+              description={platform.description}
+              class={i === 0 && 'md:col-span-2'}
+            />
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="col-span-1">
+      <h3 class="mt-4 font-heading text-3xl font-bold text-nix-blue">
+        Official social-media
+      </h3>
+      <p class="text-gray-700">
+        These spaces are maintained by our NixOS Marketing Team though not
+        monitored and not moderated by the NixOS Moderation Team.
+      </p>
+
+      <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4">
+        {
+          socialMediaMain.map((platform) => (
+            <OfficialCommunityLink
+              href={platform.href}
+              name={platform.name}
+              iconName={platform.iconName}
+            />
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="md:col-span-3">
+      <h3 class="mt-4 font-heading text-3xl font-bold text-nix-blue">
+        Our calendars
+      </h3>
+
+      <p class="text-gray-700">
+        We use these calendars to schedule events, meetings, and other.
+      </p>
+
+      <ul class="mt-4 grid flex-wrap gap-4 md:grid-cols-3">
+        {
+          calendarsMain.map((platform) => (
+            <OfficialCommunityLink
+              href={platform.href}
+              name={platform.name}
+              iconName={platform.iconName}
+            />
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="mt-6 font-heading text-3xl font-bold text-nix-blue">
+    Unofficial spaces
+  </h3>
+
+  <p class="text-gray-700">
+    These spaces are not monitored and not moderated by the NixOS Moderation
+    Team. Please be aware that different moral values and rules may apply in
+    these spaces. The NixOS moderation team may advise moderators in these
+    spaces, though does not control or enforce our community values.
+  </p>
+
+  <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
+    {
+      platformsOutside.map((platform) => (
+        <UnofficialCommunityLink
+          href={platform.href}
+          name={platform.name}
+          iconName={platform.iconName}
+          type="mobile_icon_desktop_name"
+        />
+      ))
+    }
+  </ul>
+</Container>

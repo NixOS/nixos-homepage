@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+
+import nixosFoundationLogo from '@/assets/image/nixos-foundation-logo.svg';
+import Container from '@/components/layout/Container.astro';
+
+const { teams = [] } = Astro.props;
+---
+
+<Container class="mb-16 mt-8 grid md:grid-cols-2" id="foundation">
+  <div class="pb-4 text-center md:pb-0">
+    <div class="flex flex-col items-center justify-center">
+      <Image
+        src={nixosFoundationLogo}
+        alt="NixOS Foundation Logo"
+        class="h-72"
+      />
+    </div>
+
+    <div class="mb-4 mt-4 inline-block text-left">
+      <h2 class="font-heading text-3xl font-bold text-nix-blue md:text-center">
+        Board members:
+      </h2>
+
+      <ul class="mx-auto mt-2 list-disc pl-8 md:w-72 md:pl-10">
+        {
+          teams
+            .filter((team) => team.slug.split('_')[1] === 'foundation-board')[0]
+            .data.members.map((member) => (
+              <li class="mb-1">
+                {member.name}
+                {member.title && (
+                  <>
+                    &mdash;
+                    {member.title}
+                  </>
+                )}
+              </li>
+            ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="space-y-4 leading-relaxed">
+    <h2 class="font-heading text-3xl font-bold text-nix-blue">The mission!</h2>
+
+    <p>
+      The mission of the foundation is to support the Nix ecosystem's
+      infrastructure, and projects implementing the purely functional deployment
+      model.
+    </p>
+
+    <p>
+      In particular, the foundation supports Nix, Nixpkgs, NixOS, and operates:
+    </p>
+
+    <ul class="ml-4 list-disc">
+      <li>
+        <a href="https://cache.nixos.org"> cache.nixos.org</a>
+        - the NixOS binary cache, containing over 120TB of prebuilt Nix packages.
+      </li>
+      <li>
+        <a href="https://hydra.nixos.org"> hydra.nixos.org</a>
+        - a Nix build farm, consisting of hundreds of macOS, x86-64 (Linux) and aarch64
+        (Linux) build cores. Hydra executes over 350,000 builds each week.
+      </li>
+      <li>
+        <a href="/community/event-funding"> Event Funding</a>
+      </li>
+    </ul>
+
+    <p>
+      The NixOS Foundation is a registered non-profit organisation at the
+      Chamber of commerce (Kamer van Koophandel) in Utrecht, The Netherlands.
+      The KvK number is <code>63520583</code>.
+    </p>
+
+    <p>
+      You can contact the foundation by writing an email to <a
+        href="mailto:foundation@nixos.org">foundation@nixos.org</a
+      >.
+    </p>
+  </div>
+</Container>

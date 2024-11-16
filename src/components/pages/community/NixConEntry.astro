@@ -1,5 +1,7 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets';
+
+import Card from '@/components/ui/Card.astro';
 
 interface Props {
   title: string;
@@ -16,19 +18,22 @@ const { title, date, description, href, imagePath = null } = Astro.props;
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="!no-underline !text-white font-extralight flex flex-col gap-1"
+  class="flex flex-col gap-1 !text-white !no-underline"
 >
   {
     imagePath && (
-      <div class="flex justify-center bg-white rounded-xl mb-4 p-4 h-48">
+      <Card class="mb-4 flex h-48 justify-center bg-white shadow-none">
         <Image src={imagePath} alt={`${title} Logo`} width="200" height="200" />
-      </div>
+      </Card>
     )
   }
-  <h4 class="text-lg font-bold font-heading">{title}</h4>
-  <div class="text-sm">{date}</div>
+  <div class="mb-2">
+    <h4 class="font-heading text-lg font-bold">{title}</h4>
+    <p class="text-xs font-medium">{date}</p>
+  </div>
+
   <div class="leading-relaxed">{description}</div>
-  <div class="!text-white text-right font-bold">
+  <div class="text-right font-bold">
     <span class="underline">Read more...</span>
   </div>
 </a>
