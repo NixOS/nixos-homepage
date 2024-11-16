@@ -2,7 +2,6 @@
 import { getEntry } from 'astro:content';
 
 import Container from '@/components/layout/Container.astro';
-import Divider from '@/components/layout/Divider.astro';
 import PageHeader from '@/components/layout/PageHeader.astro';
 import Acknowledgements from '@/components/pages/donate/Acknowledgements.astro';
 import Donations from '@/components/pages/donate/Donations.astro';
@@ -45,15 +44,9 @@ const sponsors = await getEntry('sponsors', 'info');
     </div>
   </Container>
 
-  <Divider style="slope" mirrorX mirrorY />
-
   <Merchandise />
 
-  <Divider style="slope" mirrorX />
-
   <Donations />
-
-  <Divider style="slope" mirrorY />
 
   <Acknowledgements sponsors={sponsors} />
 </Layout>

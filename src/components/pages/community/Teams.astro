@@ -1,9 +1,14 @@
 ---
 import Container from '@/components/layout/Container.astro';
+import Divider from '@/components/layout/Divider.astro';
 import Button from '@/components/ui/Button.astro';
 
 const { teams = [] } = Astro.props;
 ---
+
+<div class="mt-8">
+  <Divider mirrorY />
+</div>
 
 <div class="bg-nix-blue py-8">
   <Container>
@@ -38,3 +43,5 @@ const { teams = [] } = Astro.props;
     </ul>
   </Container>
 </div>
+
+<Divider />

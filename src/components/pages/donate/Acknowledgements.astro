@@ -1,9 +1,12 @@
 ---
 import Container from '@/components/layout/Container.astro';
+import Divider from '@/components/layout/Divider.astro';
 import SponsorLogo from '@/components/layout/SponsorLogo.astro';
 
 const { sponsors } = Astro.props;
 ---
+
+<Divider style="slope" mirrorY />
 
 <div class="bg-nix-blue py-16 text-white">
   <Container class="grid gap-8 px-12 md:grid-cols-2">

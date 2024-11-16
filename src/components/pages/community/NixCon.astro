@@ -1,5 +1,6 @@
 ---
 import Container from '@/components/layout/Container.astro';
+import Divider from '@/components/layout/Divider.astro';
 import Card from '@/components/ui/Card.astro';
 import NixConEntry from './NixConEntry.astro';
 
@@ -69,6 +70,8 @@ const nixcons = [
 ];
 ---
 
+<Divider mirrorY />
+
 <div class="bg-nix-blue py-8 text-white">
   <Container>
     <h2 class="font-heading text-4xl font-bold">NixCon</h2>
@@ -113,3 +116,5 @@ const nixcons = [
     </div>
   </Container>
 </div>
+
+<Divider />

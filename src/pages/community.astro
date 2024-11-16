@@ -2,7 +2,6 @@
 import { getCollection, getEntry } from 'astro:content';
 
 import Container from '@/components/layout/Container.astro';
-import Divider from '@/components/layout/Divider.astro';
 import PageHeader from '@/components/layout/PageHeader.astro';
 import Foundation from '@/components/pages/community/Foundation.astro';
 import Meetups from '@/components/pages/community/Meetups.astro';
@@ -54,23 +53,13 @@ const teams = await getCollection('teams');
     > that offer Nix related services.
   </Banner>
 
-  <Divider mirrorY />
-
   <NixCon />
-
-  <Divider />
 
   <Meetups meetups={meetups} />
 
   <RFCProcess />
 
-  <div class="mt-8">
-    <Divider mirrorY />
-  </div>
-
   <Teams teams={teams} />
-
-  <Divider />
 
   <Foundation teams={teams} />
 </Layout>
