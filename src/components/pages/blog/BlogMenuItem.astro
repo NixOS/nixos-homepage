@@ -1,6 +1,7 @@
 ---
 import Card from '@/components/ui/Card.astro';
 import InlineSVG from '@/components/util/InlineSVG.astro';
+import Link from '@/components/util/Link.astro';
 
 const { menuItem } = Astro.props;
 ---
@@ -47,22 +48,22 @@ const { menuItem } = Astro.props;
       as="label"
       class="relative flex w-full cursor-pointer items-center gap-2 border-1 border-nix-blue fill-nix-blue p-4 text-nix-blue hover:bg-nix-blue-hover hover:fill-white hover:text-white peer-checked:bg-nix-blue peer-checked:fill-white peer-checked:text-white hover:peer-checked:border-nix-blue-hover hover:peer-checked:bg-nix-blue-hover peer-focus:ring-2 peer-focus:ring-black peer-focus:ring-offset-2 md:w-auto md:flex-col"
     >
-      <a href={'/blog/' + menuItem.id + '-rss.xml'}>
+      <Link href={'/blog/' + menuItem.id + '-rss.xml'}>
         <InlineSVG
           src="/src/assets/image/blog-menu/rss.svg"
           class="inline-block h-12 w-12"
         />
-      </a>
+      </Link>
     </Card>
   </div>
 
   <div class="rss-small hidden flex-row justify-center md:flex">
-    <a href={'/blog/' + menuItem.id + '-rss.xml'}>
+    <Link href={'/blog/' + menuItem.id + '-rss.xml'}>
       <InlineSVG
         src="/src/assets/image/blog-menu/rss.svg"
         class="inline-block h-4 w-4"
       />
       rss
-    </a>
+    </Link>
   </div>
 </div>

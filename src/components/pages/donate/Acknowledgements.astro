@@ -2,6 +2,7 @@
 import Container from '@/components/layout/Container.astro';
 import Divider from '@/components/layout/Divider.astro';
 import SponsorLogo from '@/components/layout/SponsorLogo.astro';
+import Link from '@/components/util/Link.astro';
 
 const { sponsors } = Astro.props;
 ---
@@ -34,29 +35,30 @@ const { sponsors } = Astro.props;
 
       <p>
         The Nix package manager was developed by
-        <a href="https://edolstra.github.io/">Eelco Dolstra</a>
+        <Link href="https://edolstra.github.io/">Eelco Dolstra</Link>
         as part of his PhD research in the
-        <a href="https://www.nwo.nl/en/projects/638001201">TraCE project</a>,
-        funded by the
-        <a href="http://www.jacquard.nl/">Jacquard programme</a>
+        <Link href="https://www.nwo.nl/en/projects/638001201"
+          >TraCE project</Link
+        >, funded by the
+        <Link href="http://www.jacquard.nl/">Jacquard programme</Link>
         of the
-        <a href="http://www.nwo.nl/"
-          >Netherlands Organisation for Scientific Research</a
+        <Link href="http://www.nwo.nl/"
+          >Netherlands Organisation for Scientific Research</Link
         >
         (NWO) and SERC. The first prototype of NixOS was developed by
-        <a href="http://www.tjaldur.nl/">Armijn Hemel</a>
+        <Link href="http://www.tjaldur.nl/">Armijn Hemel</Link>
         as his master’s thesis project. Hydra, the Nix-based continuous build system,
         was developed as part of the LaQuSo Buildfarm project, funded by
-        <a href="https://www.4tu.nl/nirict/">NIRICT</a>
+        <Link href="https://www.4tu.nl/nirict/">NIRICT</Link>
         and
-        <a href="http://www.laquso.com/">LaQuSo</a>.
+        <Link href="http://www.laquso.com/">LaQuSo</Link>.
       </p>
 
       <p>
         The following companies and institutes have supported the development of
         NixOS and hosting for its infrastructure. We are very grateful for that!
         If you would like to support us as well, please contact
-        <a href="mailto:foundation@nixos.org">The NixOS Foundation</a>.
+        <Link href="mailto:foundation@nixos.org">The NixOS Foundation</Link>.
       </p>
     </div>
   </Container>

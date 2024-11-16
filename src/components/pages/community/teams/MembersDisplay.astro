@@ -1,5 +1,6 @@
 ---
 import Card from '@/components/ui/Card.astro';
+import Link from '@/components/util/Link.astro';
 
 const {
   title = 'Members',
@@ -29,18 +30,18 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
           {member.discourse && (
             <>
               (
-              <a href={'https://discourse.nixos.org/u/' + member.discourse}>
+              <Link href={'https://discourse.nixos.org/u/' + member.discourse}>
                 @{member.discourse}
-              </a>
+              </Link>
               )
             </>
           )}
           {member.github && (
             <>
               (
-              <a href={'https://github.com/' + member.github}>
+              <Link href={'https://github.com/' + member.github}>
                 @{member.github}
-              </a>
+              </Link>
               )
             </>
           )}
@@ -64,7 +65,7 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
         <ul class="ml-4 mt-2 list-disc">
           {contact.map((contact) => (
             <li class="mb-1 last:mb-0">
-              <a href={contact.href}>{contact.name}</a>
+              <Link href={contact.href}>{contact.name}</Link>
             </li>
           ))}
         </ul>

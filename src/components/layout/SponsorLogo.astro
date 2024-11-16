@@ -1,5 +1,6 @@
 ---
 import Card from '@/components/ui/Card.astro';
+import Link from '@/components/util/Link.astro';
 
 const {
   class: extraClasses,
@@ -12,7 +13,7 @@ const {
 <Card
   class=`flex min-h-24 xl:min-h-20 flex-col justify-center bg-white ${extraClasses}`
 >
-  <a href={externalLink}>
+  <Link href={externalLink}>
     <img class="h-full w-full" src={imageSource} alt={altText} />
-  </a>
+  </Link>
 </Card>

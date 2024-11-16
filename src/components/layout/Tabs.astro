@@ -1,9 +1,9 @@
 ---
 import crypto from 'node:crypto';
 
-export interface Props extends astroHTML.JSX.HTMLAttributes {}
+import Container from '@/components/layout/Container.astro';
 
-import Container from './Container.astro';
+export interface Props extends astroHTML.JSX.HTMLAttributes {}
 
 const props = Astro.props as Props;
 /* ·········································································· */

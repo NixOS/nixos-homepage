@@ -2,6 +2,7 @@
 import Container from '@/components/layout/Container.astro';
 import Divider from '@/components/layout/Divider.astro';
 import Card from '@/components/ui/Card.astro';
+import Link from '@/components/util/Link.astro';
 import NixConEntry from './NixConEntry.astro';
 
 const nixcons = [
@@ -78,7 +79,8 @@ const nixcons = [
 
     <p class="mb-4 mt-2 text-xl font-bold">
       The
-      <a class="!text-white" href="/community/teams/nixcon">NixCon Team</a>
+      <Link class="!text-white" href="/community/teams/nixcon">NixCon Team</Link
+      >
       organizes a conference once a year.
     </p>
 

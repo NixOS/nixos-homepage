@@ -1,5 +1,6 @@
 ---
 import Container from '@/components/layout/Container.astro';
+import Link from '@/components/util/Link.astro';
 
 const { meetups } = Astro.props;
 ---
@@ -19,7 +20,7 @@ const { meetups } = Astro.props;
         {
           meetups.data.america.map((meetup) => (
             <li>
-              <a href={meetup.href}>{meetup.location}</a>
+              <Link href={meetup.href}>{meetup.location}</Link>
             </li>
           ))
         }
@@ -35,7 +36,7 @@ const { meetups } = Astro.props;
         {
           meetups.data.europe.map((meetup) => (
             <li>
-              <a href={meetup.href}>{meetup.location}</a>
+              <Link href={meetup.href}>{meetup.location}</Link>
             </li>
           ))
         }
@@ -51,7 +52,7 @@ const { meetups } = Astro.props;
         {
           meetups.data.asia.map((meetup) => (
             <li>
-              <a href={meetup.href}>{meetup.location}</a>
+              <Link href={meetup.href}>{meetup.location}</Link>
             </li>
           ))
         }

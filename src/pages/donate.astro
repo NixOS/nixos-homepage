@@ -7,6 +7,7 @@ import Acknowledgements from '@/components/pages/donate/Acknowledgements.astro';
 import Donations from '@/components/pages/donate/Donations.astro';
 import Merchandise from '@/components/pages/donate/Merchandise.astro';
 import InlineSVG from '@/components/util/InlineSVG.astro';
+import Link from '@/components/util/Link.astro';
 import Layout from '@/layouts/Layout.astro';
 
 const sponsors = await getEntry('sponsors', 'info');
@@ -32,7 +33,7 @@ const sponsors = await getEntry('sponsors', 'info');
       <p>
         Please consider donating a small amount every month to contribute to
         sustainable funding. Donations are handled by a nonprofit organization,
-        the <a href="/community#foundation">NixOS Foundation</a>.
+        the <Link href="/community#foundation">NixOS Foundation</Link>.
       </p>
     </div>
 

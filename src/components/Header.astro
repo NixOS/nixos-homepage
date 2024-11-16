@@ -4,6 +4,7 @@ import { getEntry } from 'astro:content';
 
 import Container from '@/components/layout/Container.astro';
 import InlineSVG from '@/components/util/InlineSVG.astro';
+import Link from '@/components/util/Link.astro';
 
 const headerMenu = await getEntry('menus', 'header');
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
@@ -16,7 +17,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
 <header role="banner" class="sticky top-0 z-50 bg-white text-black drop-shadow">
   <Container class="flex flex-col justify-between md:flex-row md:items-center">
     <div class="my-2 flex items-center justify-between gap-2 text-4xl">
-      <a href="/" class="flex select-none items-center gap-2">
+      <Link href="/" class="flex select-none items-center gap-2">
         <InlineSVG
           class="h-12 w-auto"
           src="/src/assets/image/nixos-logo-notext.svg"
@@ -27,7 +28,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
           src="/src/assets/image/nixos-logo-text.svg"
           alt="Nixos Logo Text"
         />
-      </a>
+      </Link>
 
       <button
         aria-label="Main Navigation Toggle"
@@ -48,7 +49,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
     >
       {
         headerMenu.data.items.map((item) => (
-          <a
+          <Link
             class:list={[
               'pb-6 pt-7',
               navbarItemStyle,
@@ -59,19 +60,17 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
             href={item.link}
           >
             {item.name}
-          </a>
+          </Link>
         ))
       }
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
+      <Link
         class={`pt-7 pb-6 md:pt-5 md:pb-3 ${navbarItemStyle} ${navbarItemInactiveStyle}`}
         href="https://search.nixos.org"
         arial-label="Nixos package and options search"
       >
         <Icon class="hidden h-8 w-8 text-nix-blue md:block" name="mdi:search" />
         <span class="inline-block md:hidden">Search</span>
-      </a>
+      </Link>
     </nav>
   </Container>
 </header>

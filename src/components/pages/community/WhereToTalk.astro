@@ -1,5 +1,6 @@
 ---
 import Container from '@/components/layout/Container.astro';
+import Link from '@/components/util/Link.astro';
 import OfficialCommunityLink from './OfficialCommunityLink.astro';
 import UnofficialCommunityLink from './UnofficialCommunityLink.astro';
 
@@ -103,7 +104,8 @@ const platformsOutside = [
         These spaces are monitored and moderated by the NixOS Moderation Team.
         This means they are moderated in such a way that they follow the
         standards and moral values of our community. You can find out more about
-        our moderation team <a href="/community/teams/moderation">here</a>.
+        our moderation team <Link href="/community/teams/moderation">here</Link
+        >.
       </p>
 
       <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-2">

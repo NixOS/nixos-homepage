@@ -2,6 +2,7 @@
 import Container from '@/components/layout/Container.astro';
 import Divider from '@/components/layout/Divider.astro';
 import Citation from '@/components/ui/Citation.astro';
+import Link from '@/components/util/Link.astro';
 ---
 
 <Divider mirrorY />
@@ -13,7 +14,7 @@ import Citation from '@/components/ui/Citation.astro';
       id="community-values-values"
     >
       The values
-      <a href="#community-values-values" class="text-lg">🔗</a>
+      <Link href="#community-values-values" class="text-lg">🔗</Link>
     </h2>
 
     <h3
@@ -21,7 +22,7 @@ import Citation from '@/components/ui/Citation.astro';
       id="community-values-respect"
     >
       Respect and civility
-      <a href="#community-values-respect" class="text-lg">🔗</a>
+      <Link href="#community-values-respect" class="text-lg">🔗</Link>
     </h3>
 
     <p>
@@ -38,7 +39,7 @@ import Citation from '@/components/ui/Citation.astro';
       id="community-values-people"
     >
       People come first
-      <a href="#community-values-people" class="text-lg">🔗</a>
+      <Link href="#community-values-people" class="text-lg">🔗</Link>
     </h3>
 
     <p>
@@ -55,12 +56,13 @@ import Citation from '@/components/ui/Citation.astro';
       id="community-values-choice"
     >
       Free software and choice over lock-in
-      <a href="#community-values-choice" class="text-lg">🔗</a>
+      <Link href="#community-values-choice" class="text-lg">🔗</Link>
     </h3>
 
     <p>
-      Nix projects are and will always remain <a
-        href="https://www.gnu.org/philosophy/free-sw.en.html">free software</a
+      Nix projects are and will always remain <Link
+        href="https://www.gnu.org/philosophy/free-sw.en.html"
+        >free software</Link
       >. We value working together with the broader free software community.
       Free software is our priority, but we also support our users' needs to use
       non-free software, when practical.
@@ -71,7 +73,7 @@ import Citation from '@/components/ui/Citation.astro';
       id="community-values-decisionmaking"
     >
       Distribute decisionmaking widely
-      <a href="#community-values-decisionmaking" class="text-lg">🔗</a>
+      <Link href="#community-values-decisionmaking" class="text-lg">🔗</Link>
     </h3>
 
     <p>
@@ -88,11 +90,11 @@ import Citation from '@/components/ui/Citation.astro';
       id="community-values-automation"
     >
       Automation over process and toil
-      <a href="#community-values-automation" class="text-lg">🔗</a>
+      <Link href="#community-values-automation" class="text-lg">🔗</Link>
       <Citation id={1} onBlueBackground>
-        <a
+        <Link
           href="https://web.archive.org/web/20240717145635/https://sre.google/sre-book/eliminating-toil/"
-          >Toil</a
+          >Toil</Link
         > is work that tends to be manual, repetitive, automatable, interrupt-driven,
         devoid of enduring value, and scaling linearly with growth.
       </Citation>
@@ -113,7 +115,7 @@ import Citation from '@/components/ui/Citation.astro';
       id="community-values-stability"
     >
       Stable evolution over stagnation or chaos
-      <a href="#community-values-stability" class="text-lg">🔗</a>
+      <Link href="#community-values-stability" class="text-lg">🔗</Link>
     </h3>
 
     <p>

@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 
 import Card from '@/components/ui/Card.astro';
+import Link from '@/components/util/Link.astro';
 
 interface Props {
   href: string;
@@ -30,7 +31,7 @@ const {
     extraClasses,
   ]}
 >
-  <a href={href} class="!text-white !no-underline">
+  <Link href={href} class="!text-white !no-underline">
     <div
       class:list={[
         'flex gap-2 text-xl font-bold',
@@ -58,5 +59,5 @@ const {
         <div class="mt-2">{description}</div>
       )
     }
-  </a>
+  </Link>
 </Card>

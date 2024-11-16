@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 
 import Card from '@/components/ui/Card.astro';
+import Link from '@/components/util/Link.astro';
 
 interface Props {
   title: string;
@@ -14,12 +15,7 @@ interface Props {
 const { title, date, description, href, imagePath = null } = Astro.props;
 ---
 
-<a
-  href={href}
-  target="_blank"
-  rel="noopener noreferrer"
-  class="flex flex-col gap-1 !text-white !no-underline"
->
+<Link href={href} class="flex flex-col gap-1 !text-white !no-underline">
   {
     imagePath && (
       <Card class="mb-4 flex h-48 justify-center bg-white shadow-none">
@@ -36,4 +32,4 @@ const { title, date, description, href, imagePath = null } = Astro.props;
   <div class="text-right font-bold">
     <span class="underline">Read more...</span>
   </div>
-</a>
+</Link>

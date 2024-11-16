@@ -1,5 +1,6 @@
 ---
-import Container from './Container.astro';
+import Container from '@/components/layout/Container.astro';
+import Link from '@/components/util/Link.astro';
 
 interface Props {
   text?: string;
@@ -17,12 +18,12 @@ const { text = '', subtext, parentPath = undefined }: Props = Astro.props;
     <div class="col-span-2 flex flex-col gap-4">
       {
         parentPath && (
-          <a
+          <Link
             href={parentPath}
             class="invisible -mb-4 -mt-6 !text-white md:visible"
           >
             <span>←</span> Back
-          </a>
+          </Link>
         )
       }
       <h1 class="text-left font-heading text-4xl font-bold">

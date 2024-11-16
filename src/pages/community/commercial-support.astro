@@ -4,6 +4,7 @@ import { getEntry } from 'astro:content';
 import Container from '@/components/layout/Container.astro';
 import PageHeader from '@/components/layout/PageHeader.astro';
 import Card from '@/components/ui/Card.astro';
+import Link from '@/components/util/Link.astro';
 import Layout from '@/layouts/Layout.astro';
 
 const companies = await getEntry('community', 'commercial-support');
@@ -36,9 +37,9 @@ function shuffleArray(array) {
     </p>
 
     <p class="mt-2 text-center">
-      Please <a
+      Please <Link
         href="https://github.com/NixOS/nixos-homepage/edit/main/src/content/community/commercial-support.yaml"
-        >submit a pull request</a
+        >submit a pull request</Link
       > to add your company. The list is randomized at each page load.
     </p>
 
@@ -49,7 +50,7 @@ function shuffleArray(array) {
             as="li"
             class="flex-grow basis-72 border border-nix-blue text-nix-blue xl:basis-80"
           >
-            <a href={company.href} class="space-y-4 !no-underline">
+            <Link href={company.href} class="space-y-4 !no-underline">
               <img
                 src={company.logo}
                 alt={company.name + ' logo'}
@@ -62,7 +63,7 @@ function shuffleArray(array) {
                 ))}
               </ul>
               <p>{company.description}</p>
-            </a>
+            </Link>
           </Card>
         ))
       }

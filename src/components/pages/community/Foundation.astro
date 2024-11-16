@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 
 import nixosFoundationLogo from '@/assets/image/nixos-foundation-logo.svg';
 import Container from '@/components/layout/Container.astro';
+import Link from '@/components/util/Link.astro';
 
 const { teams = [] } = Astro.props;
 ---
@@ -57,16 +58,16 @@ const { teams = [] } = Astro.props;
 
     <ul class="ml-4 list-disc">
       <li>
-        <a href="https://cache.nixos.org"> cache.nixos.org</a>
+        <Link href="https://cache.nixos.org"> cache.nixos.org</Link>
         - the NixOS binary cache, containing over 120TB of prebuilt Nix packages.
       </li>
       <li>
-        <a href="https://hydra.nixos.org"> hydra.nixos.org</a>
+        <Link href="https://hydra.nixos.org"> hydra.nixos.org</Link>
         - a Nix build farm, consisting of hundreds of macOS, x86-64 (Linux) and aarch64
         (Linux) build cores. Hydra executes over 350,000 builds each week.
       </li>
       <li>
-        <a href="/community/event-funding"> Event Funding</a>
+        <Link href="/community/event-funding"> Event Funding</Link>
       </li>
     </ul>
 
@@ -77,8 +78,8 @@ const { teams = [] } = Astro.props;
     </p>
 
     <p>
-      You can contact the foundation by writing an email to <a
-        href="mailto:foundation@nixos.org">foundation@nixos.org</a
+      You can contact the foundation by writing an email to <Link
+        href="mailto:foundation@nixos.org">foundation@nixos.org</Link
       >.
     </p>
   </div>

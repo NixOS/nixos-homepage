@@ -10,6 +10,7 @@ import RFCProcess from '@/components/pages/community/RFCProcess.astro';
 import Teams from '@/components/pages/community/Teams.astro';
 import WhereToTalk from '@/components/pages/community/WhereToTalk.astro';
 import Banner from '@/components/ui/Banner.astro';
+import Link from '@/components/util/Link.astro';
 import Layout from '@/layouts/Layout.astro';
 
 const meetups = await getEntry('community', 'meetups');
@@ -38,8 +39,8 @@ const teams = await getCollection('teams');
     </p>
     <p>
       Instances of abusive, harassing, or otherwise unacceptable behavior may be
-      reported by contacting the project team at <a
-        href="mailto:community@nixos.org">community@nixos.org</a
+      reported by contacting the project team at <Link
+        href="mailto:community@nixos.org">community@nixos.org</Link
       >. The project team is obligated to maintain confidentiality with regard
       to the reporter of an incident.
     </p>
@@ -48,8 +49,8 @@ const teams = await getCollection('teams');
   <WhereToTalk />
 
   <Banner wrapperClasses="my-8">
-    If you are looking for professional help, <a
-      href="/community/commercial-support">check out companies</a
+    If you are looking for professional help, <Link
+      href="/community/commercial-support">check out companies</Link
     > that offer Nix related services.
   </Banner>
 
