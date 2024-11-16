@@ -1,0 +1,68 @@
+---
+import Container from '@/components/layout/Container.astro';
+import SponsorLogo from '@/components/layout/SponsorLogo.astro';
+
+const { sponsors } = Astro.props;
+---
+
+<div class="bg-nix-blue py-16 text-white">
+  <Container class="grid gap-8 px-12 md:grid-cols-2">
+    <div class="flex flex-col justify-center">
+      <div
+        class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      >
+        {
+          sponsors.data.items.map((item) => (
+            <SponsorLogo
+              class={item.class}
+              href={item.href}
+              src={item.src}
+              alt={item.alt}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="acknowledgements-section flex flex-col justify-center gap-4">
+      <h2 class="font-heading text-3xl font-bold sm:pb-2 sm:text-4xl">
+        Acknowledgements
+      </h2>
+
+      <p>
+        The Nix package manager was developed by
+        <a href="https://edolstra.github.io/">Eelco Dolstra</a>
+        as part of his PhD research in the
+        <a href="https://www.nwo.nl/en/projects/638001201">TraCE project</a>,
+        funded by the
+        <a href="http://www.jacquard.nl/">Jacquard programme</a>
+        of the
+        <a href="http://www.nwo.nl/"
+          >Netherlands Organisation for Scientific Research</a
+        >
+        (NWO) and SERC. The first prototype of NixOS was developed by
+        <a href="http://www.tjaldur.nl/">Armijn Hemel</a>
+        as his master’s thesis project. Hydra, the Nix-based continuous build system,
+        was developed as part of the LaQuSo Buildfarm project, funded by
+        <a href="https://www.4tu.nl/nirict/">NIRICT</a>
+        and
+        <a href="http://www.laquso.com/">LaQuSo</a>.
+      </p>
+
+      <p>
+        The following companies and institutes have supported the development of
+        NixOS and hosting for its infrastructure. We are very grateful for that!
+        If you would like to support us as well, please contact
+        <a href="mailto:foundation@nixos.org">The NixOS Foundation</a>.
+      </p>
+    </div>
+  </Container>
+</div>
+
+<style>
+  .acknowledgements-section {
+    a {
+      @apply text-white;
+    }
+  }
+</style>

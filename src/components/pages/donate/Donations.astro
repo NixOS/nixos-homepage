@@ -1,0 +1,72 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import Card from '@/components/ui/Card.astro';
+---
+
+<Container class="grid gap-8 px-12 py-16 md:grid-cols-2">
+  <div class="flex flex-col gap-4">
+    <h2 class="pb-2 font-heading text-3xl font-bold text-nix-blue">
+      Donate using Open Collective
+    </h2>
+
+    <p class="leading-relaxed">
+      NixOS Foundation is using
+      <a href="https://opencollective.com/">Open Collective</a>
+      to manage the finances so everyone can see where money comes from and where
+      money goes.
+    </p>
+
+    <p class="text-light-bold leading-relaxed">
+      With Open Collective you can make a <strong>single</strong> or <strong
+        >recurring</strong
+      > contribution by credit card transfer.
+    </p>
+
+    <p class="leading-relaxed">Thank you!</p>
+
+    <div class="flex flex-col justify-stretch gap-4 md:flex-row">
+      <Button
+        color="semidarkblue"
+        size="sm"
+        href="https://opencollective.com/nixos#support"
+      >
+        Contribute
+      </Button>
+    </div>
+  </div>
+
+  <div class="flex flex-col justify-center gap-4">
+    <h2 class="pb-2 text-3xl font-bold text-nix-blue">
+      Donate with SEPA bank transfer
+    </h2>
+
+    <p>
+      The NixOS Foundation also accepts donations via SEPA bank transfer. Please
+      send payments to:
+    </p>
+
+    <Card
+      as="pre"
+      class="whitespace-pre-line bg-nix-blue-extralight font-mono font-bold text-nix-blue-darker shadow-none"
+    >
+      {
+        `Stichting NixOS Foundation, Utrecht, The Netherlands
+
+        IBAN: NL13 BUNQ 2061 2530 32
+        BIC: BUNQNL2AXXX`
+      }
+    </Card>
+
+    <p class="text-xs font-medium">
+      Please add your name and purpose (donation) in the description of the
+      transfer.
+      <i>
+        If you would like to support us with amounts above 2000 euro per year,
+        please contact us at
+        <a href="mailto:foundation@nixos.org">foundation@nixos.org</a>
+        , as this will have tax implications.
+      </i>
+    </p>
+  </div>
+</Container>
