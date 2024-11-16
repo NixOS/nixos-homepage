@@ -86,7 +86,7 @@
   }
 
   article pre {
-    @apply my-2 mb-4 overflow-x-auto rounded-lg border-1 border-[#3a3a3a] bg-[#3a3a3a] px-4 py-4;
+    @apply my-2 mb-4 overflow-x-auto rounded border-1 border-[#3a3a3a] bg-[#3a3a3a] px-4 py-4;
   }
 
   article pre code {

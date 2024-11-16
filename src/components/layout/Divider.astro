@@ -1,35 +1,35 @@
 ---
-import InlineSVG from "@/components/util/InlineSVG.astro";
+import InlineSVG from '@/components/util/InlineSVG.astro';
 
 interface Props {
-  style?: "slope" | "landing_search_bottom";
+  style?: 'slope' | 'landing_search_bottom';
   mirrorX?: boolean;
   mirrorY?: boolean;
 }
 
 const styleMap = {
-  slope: "/src/assets/image/divider/slope_down.svg",
-  landing_search_bottom: "/src/assets/image/divider/landing_search_bottom.svg",
+  slope: '/src/assets/image/divider/slope_down.svg',
+  landing_search_bottom: '/src/assets/image/divider/landing_search_bottom.svg',
 };
 
 const heightMap = {
-  slope: "h-16",
-  landing_search_bottom: "h-16 md:h-48",
+  slope: 'h-16',
+  landing_search_bottom: 'h-16 md:h-48',
 };
 
-const { style = "slope", mirrorX = false, mirrorY = false } = Astro.props;
+const { style = 'slope', mirrorX = false, mirrorY = false } = Astro.props;
 ---
 
 <InlineSVG
   role="separator"
   src={styleMap[style]}
   class:list={[
-    "block left-0 right-0 h-16 w-full",
+    'left-0 right-0 block h-16 w-full',
     heightMap[style],
-    mirrorY ? "translate-y-[1px]" : "translate-y-[-1px]",
+    mirrorY ? 'translate-y-[1px]' : 'translate-y-[-1px]',
     {
-      "-scale-x-100": mirrorX,
-      "-scale-y-100": mirrorY,
+      '-scale-x-100': mirrorX,
+      '-scale-y-100': mirrorY,
     },
   ]}
   aria-hidden="true"
