@@ -1,4 +1,6 @@
 ---
+import Container from "./Container.astro";
+
 interface Props {
   text?: string;
   subtext?: string;
@@ -6,8 +8,6 @@ interface Props {
 }
 
 const { text = "", subtext, parentPath = undefined }: Props = Astro.props;
-
-import Container from "./Container.astro";
 ---
 
 <div

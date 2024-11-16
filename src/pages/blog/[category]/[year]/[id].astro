@@ -1,17 +1,17 @@
 ---
-import { getCollection } from "astro:content";
-import Container from "../../../../components/layout/Container.astro";
-import PageHeader from "../../../../components/layout/PageHeader.astro";
-import Layout from "../../../../layouts/Layout.astro";
-import { generatePathFromPost } from "../../../../lib/utils";
+import { getCollection } from 'astro:content';
+
+import Container from '@/components/layout/Container.astro';
+import PageHeader from '@/components/layout/PageHeader.astro';
+import Layout from '@/layouts/Layout.astro';
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("blog");
+  const blogEntries = await getCollection('blog');
   return blogEntries.map((entry) => ({
     params: {
-      category: entry.slug.split("/")[0],
+      category: entry.slug.split('/')[0],
       year: new Date(entry.data.date).getFullYear(),
-      id: entry.slug.split("/").pop().split("_").pop(),
+      id: entry.slug.split('/').pop().split('_').pop(),
     },
     props: { entry },
   }));
@@ -28,7 +28,8 @@ const { Content } = await entry.render();
       ? `Published on ${entry.data.date.toDateString()}`
       : null}
   />
-  <Container class="flex flex-col gap-8 mt-8 mb-4">
+
+  <Container class="mb-4 mt-8 flex flex-col gap-8">
     <article class="text-light-bold">
       <Content />
     </article>

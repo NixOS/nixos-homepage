@@ -1,11 +1,11 @@
 ---
-import SHA from "./SHA.astro";
+import SHA from './SHA.astro';
 
 interface Props {
-  color?: "orange" | "green" | "lightblue" | "semidarkblue";
-  size?: "sm" | "lg" | "lg-full" | "sm-mobfull";
+  color?: 'orange' | 'green' | 'lightblue' | 'semidarkblue';
+  size?: 'sm' | 'lg' | 'lg-full' | 'sm-mobfull';
   href?: string | null;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   classList?: string[];
   shaHref?: string | null;
   shaClassList?: string[];
@@ -14,32 +14,32 @@ interface Props {
 }
 
 const colorMap = {
-  orange: "bg-nix-orange",
-  lightblue: "bg-nix-blue-light",
-  semidarkblue: "bg-nix-blue-dark",
-  green: "bg-nix-green",
+  orange: 'bg-nix-orange hover:bg-nix-orange-hover',
+  lightblue: 'bg-nix-blue-light hover:bg-nix-blue-light-hover',
+  semidarkblue: 'bg-nix-blue-dark hover:bg-nix-blue-dark-hover',
+  green: 'bg-nix-green hover:bg-nix-green-hover',
 };
 
 const sizeMap = {
-  sm: "px-10 py-2.5 rounded-3xl text-center",
-  "sm-mobfull": "px-8 py-2.5 rounded-3xl md:w-auto w-full text-center",
-  lg: "px-10 py-2.5 md:px-14 md:py-4 rounded-full md:rounded-2xl text-center w-full md:w-auto",
-  "lg-full": "text-center py-4 block rounded-2xl",
+  sm: 'px-10 py-2.5 rounded-3xl text-center',
+  'sm-mobfull': 'px-8 py-2.5 rounded-3xl md:w-auto w-full text-center',
+  lg: 'px-10 py-2.5 md:px-14 md:py-4 rounded-full text-center w-full md:w-auto',
+  'lg-full': 'text-center py-4 block rounded-2xl',
 };
 
 const {
-  color = "orange",
-  size = "sm",
+  color = 'orange',
+  size = 'sm',
   href = null,
-  type = "button",
+  type = 'button',
   classList = [],
   shaHref = null,
   shaClassList = [],
-  shaText = "",
+  shaText = '',
   label,
 } = Astro.props;
 
-const localClassList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white drop-shadow`;
+const localClassList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white drop-shadow transition-colors`;
 ---
 
 {
@@ -47,7 +47,7 @@ const localClassList = `${colorMap[color]} font-bold ${sizeMap[size]} text-white
     <>
       <a
         href={href}
-        class:list={["!text-white !no-underline", localClassList, classList]}
+        class:list={['!text-white !no-underline', localClassList, classList]}
       >
         {label || <slot />}
       </a>

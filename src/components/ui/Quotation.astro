@@ -1,11 +1,11 @@
 ---
+import Card from './Card.astro';
+
 export interface Props {}
 
 const {} = Astro.props;
 ---
 
-<div
-  class="bg-nix-blue-extralight text-nix-blue-darker font-bold p-8 rounded-3xl"
->
+<Card class="bg-nix-blue-extralight font-bold text-nix-blue-darker shadow-none">
   <slot />
-</div>
+</Card>

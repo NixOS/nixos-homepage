@@ -1,0 +1,68 @@
+---
+import Card from '@/components/ui/Card.astro';
+import InlineSVG from '@/components/util/InlineSVG.astro';
+
+const { menuItem } = Astro.props;
+---
+
+<div class="flex flex-row gap-4 md:flex-col">
+  <div class="flex-1">
+    <input
+      name="category"
+      type="checkbox"
+      role="checkbox"
+      id={`check-${menuItem.id}`}
+      value={menuItem.id}
+      class="peer h-0 w-0 opacity-0"
+      checked
+    />
+
+    <Card
+      as="label"
+      for={`check-${menuItem.id}`}
+      class={`
+        before:block
+        before:absolute
+        before:h-8
+        before:w-8
+        before:icon-[mdi--checkbox-blank-outline]
+        md:before:top-2
+        md:before:right-2
+        before:right-4
+        peer-checked:before:block
+        peer-checked:before:absolute
+        peer-checked:before:h-8
+        peer-checked:before:w-8
+        peer-checked:before:icon-[mdi--checkbox-marked-outline]
+        relative p-4 md:p-8 gap-2 w-full md:w-auto text-nix-blue border-1 fill-nix-blue hover:fill-white border-nix-blue flex md:flex-col items-center hover:bg-nix-blue-hover hover:text-white cursor-pointer peer-checked:bg-nix-blue peer-checked:text-white peer-checked:fill-white hover:peer-checked:border-nix-blue-hover hover:peer-checked:bg-nix-blue-hover peer-focus:ring-2 peer-focus:ring-black peer-focus:ring-offset-2
+      `}
+    >
+      <InlineSVG src={menuItem.icon} class="w-12 md:w-24" />
+      <span>{menuItem.title}</span>
+    </Card>
+  </div>
+
+  <div class="pt-6 md:hidden">
+    <Card
+      as="label"
+      class="relative flex w-full cursor-pointer items-center gap-2 border-1 border-nix-blue fill-nix-blue p-4 text-nix-blue hover:bg-nix-blue-hover hover:fill-white hover:text-white peer-checked:bg-nix-blue peer-checked:fill-white peer-checked:text-white hover:peer-checked:border-nix-blue-hover hover:peer-checked:bg-nix-blue-hover peer-focus:ring-2 peer-focus:ring-black peer-focus:ring-offset-2 md:w-auto md:flex-col"
+    >
+      <a href={'/blog/' + menuItem.id + '-rss.xml'}>
+        <InlineSVG
+          src="/src/assets/image/blog-menu/rss.svg"
+          class="inline-block h-12 w-12"
+        />
+      </a>
+    </Card>
+  </div>
+
+  <div class="rss-small hidden flex-row justify-center md:flex">
+    <a href={'/blog/' + menuItem.id + '-rss.xml'}>
+      <InlineSVG
+        src="/src/assets/image/blog-menu/rss.svg"
+        class="inline-block h-4 w-4"
+      />
+      rss
+    </a>
+  </div>
+</div>
