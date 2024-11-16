@@ -1,4 +1,6 @@
 ---
+import Tag from '@/components/ui/Tag.astro';
+
 interface Props {
   heading: string;
   subHeading: string;
@@ -16,8 +18,6 @@ const {
   emphasis = null,
   location = 'left',
 } = Astro.props;
-
-import Tag from '../../ui/Tag.astro';
 ---
 
 <h2 class="font-heading text-[2rem] font-bold leading-[2.2rem] text-nix-blue">

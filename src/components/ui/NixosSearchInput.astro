@@ -1,10 +1,10 @@
 ---
-import Button from './Button.astro';
-import Input from './Input.astro';
+import type { VariantProps } from 'class-variance-authority';
 
-interface Props {
-  color?: 'nix-blue' | 'white';
-  size?: 'sm' | 'lg' | 'sm-full';
+import Button from '@/components/ui/Button.astro';
+import Input, { inputVariants } from '@/components/ui/Input.astro';
+
+interface Props extends VariantProps<typeof inputVariants> {
   collection?: 'packages' | 'options';
   withSubmit?: boolean;
   withSubmitClass?: string;

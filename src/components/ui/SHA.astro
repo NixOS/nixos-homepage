@@ -1,14 +1,15 @@
 ---
-interface Props {
-  href?: string;
-  classList?: string[];
-}
+import type { HTMLAttributes } from 'astro/types';
 
-const { href = '#', classList = [] } = Astro.props;
+import Link from '@/components/util/Link.astro';
+
+interface Props extends HTMLAttributes<'a'> {}
+
+const { href = '#', ...props } = Astro.props;
 ---
 
 <span class="mx-[0.5rem] hidden md:inline">
-  <a href={href} class:list={[classList]}>
+  <Link href={href} {...props}>
     <slot />
-  </a>
+  </Link>
 </span>

@@ -1,9 +1,26 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-interface Props {
-  color?: 'nix-blue' | 'white';
-  size?: 'sm' | 'lg' | 'sm-full';
+export const inputVariants = cva(
+  'text-normal rounded-full placeholder-gray-400',
+  {
+    variants: {
+      color: {
+        'nix-blue': 'placeholder-grey-200 text-nix-blue',
+        white:
+          'border-white bg-transparent text-white placeholder-nix-blue-extralight',
+      },
+      size: {
+        sm: '',
+        lg: 'w-full border-2 py-3 pl-11 pr-4 text-xl md:w-[30rem]',
+        'sm-full': 'w-full border-1 px-10 py-2 md:pl-11',
+      },
+    },
+  },
+);
+
+interface Props extends VariantProps<typeof inputVariants> {
   icon?: 'search' | null;
   placeholder?: string;
   name?: string;
@@ -36,13 +53,7 @@ const {
     class="outline-2 outline-nix-blue-light focus:border-nix-blue-light focus:outline"
     class:list={[
       'text-normal rounded-full placeholder-gray-400',
-      {
-        'placeholder-grey-200 text-nix-blue': color === 'nix-blue',
-        'border-white bg-transparent text-white placeholder-nix-blue-extralight':
-          color === 'white',
-        'w-full border-2 py-3 pl-11 pr-4 text-xl md:w-[30rem]': size === 'lg',
-        'w-full border-1 px-10 py-2 md:pl-11': size === 'sm-full',
-      },
+      inputVariants({ color, size }),
     ]}
     name={name}
     placeholder={placeholder}
