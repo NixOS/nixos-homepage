@@ -27,14 +27,14 @@
     "@fontsource-variable/roboto-flex": "^5.1.0",
     "@xmldom/xmldom": "^0.9.5",
     "asciinema-player": "^3.8.1",
-    "astro": "^4.16.10",
+    "astro": "^4.16.13",
     "astro-icon": "^1.1.2",
     "astro-seo": "^0.8.4",
     "htmx.org": "^2.0.3",
     "markdown-it": "^14.0.0",
     "node-html-parser": "^6.1.13",
     "sanitize-html": "^2.13.1",
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^3.4.15",
     "turndown": "^7.2.0"
   },
   "devDependencies": {
