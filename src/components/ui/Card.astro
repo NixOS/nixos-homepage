@@ -1,0 +1,13 @@
+---
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+}
+
+const { as: Element = 'div', class: extraClasses, ...props } = Astro.props;
+---
+
+<Element class:list={['rounded-lg p-4 shadow-lg', extraClasses]} {...props}>
+  <slot />
+</Element>

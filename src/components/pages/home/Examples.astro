@@ -1,0 +1,35 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Asciinema from '@/components/ui/Asciinema.astro';
+
+const { demos } = Astro.props;
+---
+
+<section class="py-16 lg:py-20">
+  <Container>
+    <h2
+      class="w-full pb-2 text-center font-heading text-4xl font-bold text-nix-blue"
+    >
+      Examples
+    </h2>
+
+    <div class="grid items-center gap-6 md:grid-cols-2">
+      {
+        demos.data.map((demo) => {
+          return (
+            <div class="flex flex-col items-start gap-2">
+              <Asciinema
+                title={demo.title}
+                class="w-full self-center drop-shadow-lg md:self-start"
+                src={demo.file}
+                settings={{
+                  poster: 'npt:0:00:30',
+                }}
+              />
+            </div>
+          );
+        })
+      }
+    </div>
+  </Container>
+</section>

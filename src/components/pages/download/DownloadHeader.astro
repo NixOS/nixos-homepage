@@ -1,5 +1,5 @@
 ---
-import Container from "../../layout/Container.astro";
+import Card from '@/components/ui/Card.astro';
 
 interface Props {
   title: string;
@@ -10,23 +10,22 @@ interface Props {
 const { title, subTitle, currentVersion } = Astro.props;
 ---
 
-<Container class="grid grid-cols-2 bg-nix-blue text-white py-8 md:py-6 mt-16">
-  <h1 class="text-3xl font-heading font-bold leading-none self-center">
+<Card class="mt-16 flex items-center justify-between bg-nix-blue text-white">
+  <h2 class="font-heading text-3xl font-bold">
     {title}
     <span class="hidden lg:inline">
       {subTitle}
     </span>
-  </h1>
-  <div class="flex flex-col justify-center self-center">
-    <div class="text-end">
-      <h2 class="text-2xl font-bold font-heading pb-2 hidden md:inline">
-        Current version
-      </h2>
-      <a
-        href="#"
-        class="!text-white !no-underline font-bold text-2xl text-center bg-nix-green rounded-2xl px-4 py-2"
-        >{currentVersion}</a
-      >
-    </div>
+  </h2>
+
+  <div>
+    <span class="hidden font-heading text-2xl font-bold md:inline">
+      Current version
+    </span>
+    <span
+      class="rounded-lg bg-nix-green px-2 py-1 text-center text-2xl font-bold"
+    >
+      {currentVersion}
+    </span>
   </div>
-</Container>
+</Card>

@@ -1,0 +1,53 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Divider from '@/components/layout/Divider.astro';
+import Button from '@/components/ui/Button.astro';
+
+const learningResources = [
+  {
+    title: 'The Nix hour',
+    description:
+      'A weekly beginner-oriented interactive video lecture on all things Nix. Running since October 2022.',
+    url: 'https://www.youtube.com/playlist?list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in',
+    buttonText: 'Watch on Youtube',
+  },
+  {
+    title: 'NixOS Wiki',
+    description: 'A user-maintained wiki for Nix and NixOS',
+    url: 'https://wiki.nixos.org/',
+    buttonText: 'Check the wiki',
+  },
+  {
+    title: 'Nix Pills',
+    description:
+      'A low-level tutorial on building software packages with Nix, showing in detail how Nixpkgs is constructed.',
+    url: '/guides/nix-pills',
+    buttonText: 'Take the Pills',
+  },
+] as const;
+---
+
+<Divider style="slope" mirrorY />
+
+<div class="bg-nix-blue py-8 text-white md:px-8">
+  <Container>
+    <h2 class="pb-8 font-heading text-4xl font-extrabold">
+      Other learning resources
+    </h2>
+    <div class="grid gap-12 pb-12 md:grid-cols-3 md:gap-4">
+      {
+        learningResources.map((item) => (
+          <div class="flex flex-col items-start">
+            <h3 class="mb-2 font-heading text-2xl font-extrabold">
+              {item.title}
+            </h3>
+            <p class="mb-4 leading-relaxed">{item.description}</p>
+            <Button size="sm-mobfull" color="orange" href={item.url}>
+              {item.buttonText}
+            </Button>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</div>

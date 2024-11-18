@@ -1,4 +1,7 @@
 ---
+import Card from '@/components/ui/Card.astro';
+import Link from '@/components/util/Link.astro';
+
 const {
   class: extraClasses,
   href: externalLink,
@@ -7,10 +10,10 @@ const {
 } = Astro.props;
 ---
 
-<div
-  class=`flex min-h-24 xl:min-h-20 flex-col justify-center bg-white p-4 rounded-lg ${extraClasses}`
+<Card
+  class=`flex min-h-24 xl:min-h-20 flex-col justify-center bg-white ${extraClasses}`
 >
-  <a href={externalLink}>
+  <Link href={externalLink}>
     <img class="h-full w-full" src={imageSource} alt={altText} />
-  </a>
-</div>
+  </Link>
+</Card>

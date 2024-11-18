@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+
+import Container from '@/components/layout/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import Card from '@/components/ui/Card.astro';
+import InlineSVG from '@/components/util/InlineSVG.astro';
+
+const learningManuals = await getCollection('learning-manuals');
+---
+
+<Container class="grid items-start gap-4 py-16 md:grid-cols-3">
+  {
+    learningManuals.map(async (manual) => {
+      const { Content } = await manual.render();
+      return (
+        <Card class="flex flex-col items-center justify-start gap-4 border-2 border-nix-blue">
+          <article>
+            <InlineSVG
+              src="/src/assets/image/doc-icon.svg"
+              class="img-noadjust float-left inline h-20 w-20 pr-6"
+            />
+            <h2 class="mb-4 font-heading text-3xl font-bold leading-none text-nix-blue">
+              {manual.data.title}
+            </h2>
+            <div class="leading-relaxed">
+              <Content />
+            </div>
+          </article>
+          <Button size="sm-mobfull" color="green" href={manual.data.url}>
+            Full {manual.data.title}
+          </Button>
+        </Card>
+      );
+    })
+  }
+</Container>

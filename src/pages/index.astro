@@ -1,20 +1,19 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Container from "../components/layout/Container.astro";
-import Button from "../components/ui/Button.astro";
-import NixosSearchInput from "../components/ui/NixosSearchInput.astro";
-import { getCollection, getEntry } from "astro:content";
-import { Image } from "astro:assets";
-import { generatePathFromPost, createExcerpt } from "../lib/utils";
+import { getCollection, getEntry } from 'astro:content';
 
-import Asciinema from "../components/ui/Asciinema.astro";
-import Divider from "../components/layout/Divider.astro";
-import Banner from "../components/ui/Banner.astro";
-import InlineSVG from "../components/util/InlineSVG.astro";
+import Layout from '@/layouts/Layout.astro';
+import Button from '@/components/ui/Button.astro';
+import Banner from '@/components/ui/Banner.astro';
+import Hero from '@/components/pages/home/Hero.astro';
+import Features from '@/components/pages/home/Features.astro';
+import SearchPackages from '@/components/pages/home/SearchPackages.astro';
+import Examples from '@/components/pages/home/Examples.astro';
 
-const landingFeatures = await getCollection("landing-features");
-const demos = await getEntry("landing", "demos");
-const posts = await getCollection("blog");
+import { generatePathFromPost } from '@/lib/utils';
+
+const landingFeatures = await getCollection('landing-features');
+const demos = await getEntry('landing', 'demos');
+const posts = await getCollection('blog');
 posts
   .sort((a, b) => {
     const dateA = new Date(a.data.date);
@@ -22,152 +21,24 @@ posts
     return dateA > dateB ? -1 : 1;
   })
   .filter((p) => {
-    return p.slug.split("/")?.[0] === "announcements";
+    return p.slug.split('/')?.[0] === 'announcements';
   })
   .reverse();
 ---
 
 <Layout>
   <Banner
-    class="flex flex-col md:flex-row items-center justify-between gap-1 text-lg font-heading"
+    class="flex flex-col items-center justify-between gap-1 text-lg md:flex-row"
   >
-    <b>{posts[0].data.title}</b>
+    <p>{posts[0].data.title}</p>
     <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
   </Banner>
-  <div class="bg-nix-blue inline-svg-hero bg-cover bg-no-repeat bg-left">
-    <Container
-      class="text-white grid grid-cols-1 lg:grid-cols-2 gap-8 py-16 lg:py-24"
-    >
-      <div class="flex flex-col gap-4 my-auto mx-0">
-        <h1 class="text-5xl font-heading font-bold leading-none">
-          Declarative builds<br class="hidden md:inline-block" /> and deployments.
-        </h1>
-        <p class="text-lg font-extralight leading-7">
-          Nix is a tool that takes a unique approach to package management and
-          system configuration. Learn how to make reproducible, declarative and
-          reliable systems.
-        </p>
-        <div
-          class="flex flex-col md:flex-row justify-center lg:justify-stretch gap-4 text-center"
-        >
-          <Button href="/download" color="green" size="lg">Download</Button>
-          <Button href="/learn" color="lightblue" size="lg">Get started</Button>
-        </div>
-      </div>
-      <div
-        class="bg-[#121314]
-          border-white
-          border-[1rem]
-          rounded-3xl
-          drop-shadow-md
-          min-h-[300px]"
-      >
-        <Asciinema
-          src="/demos/cover.cast"
-          settings={{
-            cols: 84,
-            poster: "npt:0:01:22",
-            markers: [
-              [11.5, "Ad-Hoc development environments"],
-              [41.5, "Declarative development environments"],
-              [85.0, "Build docker image with Nix"],
-              [122.0, "Build minimal docker image with Nix"],
-            ],
-          }}
-        />
-      </div>
-    </Container>
-  </div>
-  <div
-    class="inline-svg-landing-search-top bg-[39%_100%] md:bg-bottom bg-no-repeat pb-48 pt-16"
-  >
-    <Container class="grid md:grid-cols-3 gap-8 md:gap-4">
-      {
-        landingFeatures.map(async (feature) => {
-          const { Content } = await feature.render();
-          return (
-            <div class="text-center flex flex-col">
-              <InlineSVG
-                src={feature.data.img}
-                class="w-auto h-32 mx-auto mb-6"
-              />
-              <h2 class="text-3xl text-nix-blue font-heading font-bold leading-none mb-2">
-                {feature.data.title}
-              </h2>
-              <div class="leading-loose text-light-bold">
-                <Content />
-              </div>
-            </div>
-          );
-        })
-      }
-    </Container>
-  </div>
-  <div
-    class="relative
-  after:block
-  after:bg-[url(/divider/landing_search_bottom.svg)]
-  after:bsolute
-  after:left-0
-  after:bottom-0
-  after:w-full
-  after:bg-divider
-  after:overflow-hidden
-  after:bg-[60%_100%]
-  after:bg-no-repeat
-  after:h-[30rem]
-  after:-mb-16
-  after:-mt-48"
-  >
-    <div class="bg-nix-blue-extralight pt-4">
-      <Container
-        class="flex justify-center pb-8 flex-col w-full items-center gap-4 pt-8"
-      >
-        <h2
-          class="text-4xl text-center md:w-2/3 text-nix-blue leading-tight font-heading font-bold pb-0"
-        >
-          Choose from Thousands of Packages
-        </h2>
-        <p
-          class="font-extralight leading-relaxed text-2xl md:w-5/6 text-center pb-2"
-        >
-          The Nix Packages collection (<a
-            class="font-bold !text-nix-blue"
-            href="#">Nixpkgs</a
-          >) is a set of <span class="text-nix-green font-bold"
-            >over 100 000 packages</span
-          >
-          for the Nix package manager.
-        </p>
-        <NixosSearchInput collection="packages" withSubmit />
-      </Container>
-    </div>
-  </div>
-  <div>
-    <Container>
-      <h2
-        class="text-4xl text-center w-full text-nix-blue font-heading font-bold pb-2"
-      >
-        Examples
-      </h2>
-      <div class="grid md:grid-cols-2 items-center gap-4 pb-8">
-        {
-          demos.data.map((demo) => {
-            return (
-              <div class="flex flex-col items-start gap-2 overflow-hidden">
-                <Asciinema
-                  title={demo.title}
-                  class="w-full self-center md:self-start"
-                  src={demo.file}
-                  settings={{
-                    poster: "npt:0:00:30",
-                  }}
-                />
-              </div>
-            );
-          })
-        }
-      </div>
-    </Container>
-  </div>
+
+  <Hero />
+
+  <Features landingFeatures={landingFeatures} />
+
+  <SearchPackages />
+
+  <Examples demos={demos} />
 </Layout>

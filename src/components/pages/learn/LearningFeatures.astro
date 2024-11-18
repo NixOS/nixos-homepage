@@ -1,0 +1,40 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import Card from '@/components/ui/Card.astro';
+import InlineSVG from '@/components/util/InlineSVG.astro';
+
+const learningFeatures = [
+  {
+    imgUrl: '/src/assets/image/learn/installGfx.svg',
+    title: 'Install Nix',
+    color: 'green',
+    url: '/download#download-nix',
+  },
+  {
+    imgUrl: '/src/assets/image/learn/firstStepsGfx.svg',
+    title: 'First steps with Nix',
+    color: 'orange',
+    url: 'https://nix.dev/tutorials/first-steps/',
+  },
+  {
+    imgUrl: '/src/assets/image/learn/howItWorksGfx.svg',
+    title: 'How Nix works',
+    color: 'lightblue',
+    url: '/guides/how-nix-works',
+  },
+] as const;
+---
+
+<Container class="grid gap-4 py-16 md:grid-cols-3">
+  {
+    learningFeatures.map((feature) => (
+      <Card class="flex flex-col justify-center gap-8 border-2 border-nix-blue p-8">
+        <InlineSVG src={feature.imgUrl} class="h-28" />
+        <Button size="lg" color={feature.color} href={feature.url}>
+          {feature.title}
+        </Button>
+      </Card>
+    ))
+  }
+</Container>
