@@ -1,0 +1,46 @@
+---
+import { getEntry, getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/layout/PageHeader.astro";
+import Container from "../components/layout/Container.astro";
+import Divider from "../components/layout/Divider.astro";
+import Button from "../components/ui/Button.astro";
+import OfficialCommunityLink from "../components/pages/community/OfficialCommunityLink.astro";
+import UnofficialCommunityLink from "../components/pages/community/UnofficialCommunityLink.astro";
+
+const teams = await getCollection("teams");
+
+import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
+---
+
+<Layout title="Teams">
+  <PageHeader text="Teams" />
+  <Container class="font-extralight leading-relaxed space-y-4 mt-16 mb-16">
+    <div class="grid md:grid-cols-3 grid-cols-1 gap-16">
+      {
+        teams.map((team) => (
+          <div class="text-black [&>a]:inline-block flex-grow flex flex-col items-center text-center md:items-start md:text-left gap-2 p-4">
+            <img
+              src={`/images/teams/${team.slug.split("_")[1]}.svg`}
+              alt={`${team.data.name} Logo`}
+              class="h-24"
+              style="filter: invert(1);"
+            />
+            <h3 class="text-2xl font-bold font-heading">{team.data.name}</h3>
+            <p class="font-extralight leading-relaxed grow mb-2">
+              {team.data.description}
+            </p>
+            <Button
+              color="green"
+              href={"/community/teams/" + team.slug.split("_")[1]}
+            >
+              Read more
+            </Button>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</Layout>
