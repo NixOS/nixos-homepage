@@ -869,7 +869,7 @@ function getVenueString(pubInfo: PublicationType) {
                         <h3 class="text-lg font-medium text-gray-900 max-w-[650px]">
                           {paper.title}
                         </h3>
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-gray-700">
                           {paper.authors.map((a, i) => (
                             <>
                               {a.orcidUrl ? (
@@ -886,7 +886,7 @@ function getVenueString(pubInfo: PublicationType) {
                             </>
                           ))}
                         </p>
-                        <p class="text-sm text-gray-500">
+                        <p class="text-sm text-gray-700">
                           {getVenueString(paper.publicationInfo)}
                         </p>
                       </div>
@@ -962,7 +962,7 @@ function getVenueString(pubInfo: PublicationType) {
                       </div>
                     </div>
                     {paper.abstract && (
-                      <div class="abstract-content mt-4 text-sm text-gray-600">
+                      <div class="abstract-content mt-4 text-sm text-gray-700">
                         <p>{paper.abstract}</p>
                       </div>
                     )}
