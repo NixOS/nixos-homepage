@@ -883,12 +883,18 @@ function getVenueString(pubInfo: PublicationType) {
                                   href={a.orcidUrl}
                                   class="hover:text-blue-600 transition-colors"
                                 >
-                                  {a.name}
+                                  <span class="whitespace-nowrap">
+                                    {a.name}
+                                    {i < paper.authors.length - 1 ? "," : ""}
+                                  </span>
                                 </a>
                               ) : (
-                                <span>{a.name}</span>
+                                <span class="whitespace-nowrap">
+                                  {a.name}
+                                  {i < paper.authors.length - 1 ? "," : ""}
+                                </span>
                               )}
-                              {i < paper.authors.length - 1 ? ", " : ""}
+                              {i < paper.authors.length - 1 ? " " : ""}
                             </>
                           ))}
                         </p>
@@ -1005,9 +1011,12 @@ function getVenueString(pubInfo: PublicationType) {
                       </div>
                     </div>
                     <div class="abstract-content mt-4 text-sm text-gray-700">
-                      {paper.abstract && paper.abstract.split('\n\n').map((paragraph, i) => (
-                        <p class={i > 0 ? 'mt-4' : ''}>{paragraph}</p>
-                      ))}
+                      {paper.abstract &&
+                        paper.abstract
+                          .split("\n\n")
+                          .map((paragraph, i) => (
+                            <p class={i > 0 ? "mt-4" : ""}>{paragraph}</p>
+                          ))}
                     </div>
                   </article>
                 ))}
