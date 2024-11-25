@@ -882,6 +882,7 @@ function getVenueString(pubInfo: PublicationType) {
                                 <a
                                   href={a.orcidUrl}
                                   class="hover:text-blue-600 transition-colors"
+                                  target="_blank"
                                 >
                                   <span class="whitespace-nowrap">
                                     {a.name}
@@ -930,6 +931,7 @@ function getVenueString(pubInfo: PublicationType) {
                             href={paper.preprintOrArchiveUrl}
                             class="btn-action flex items-center"
                             aria-label="Download preprint"
+                            target="_blank"
                           >
                             <span class="sr-only">Download preprint</span>
                             <span class="ml-2 text-sm font-bold text-gray-400 move-button">
@@ -959,6 +961,7 @@ function getVenueString(pubInfo: PublicationType) {
                             }
                             class="btn-action flex items-center"
                             aria-label="View publisher version"
+                            target="_blank"
                           >
                             <span class="sr-only">View publisher version</span>
                             <span class="ml-2 text-sm font-bold text-gray-400 move-button">
