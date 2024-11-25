@@ -799,10 +799,15 @@ const papers: ReadonlyArray<Paper> = [
 
 const sponsors = await getEntry("sponsors", "info");
 
-const papersByYear = papers.reduce((acc, paper) => {
+function getToggleAbstractId(paper) {
+    return `toggle-abstract-${paper.id}`;
+}
+
+const papersByYear = papers.reduce((acc, paper, index) => {
   validatePaper(paper);
   const year = paper.year;
   if (!acc[year]) acc[year] = [];
+  paper.id = index;
   acc[year].push(paper);
   return acc;
 }, {});
@@ -857,6 +862,8 @@ function getVenueString(pubInfo: PublicationType) {
               <div class="space-y-6">
                 {papersByYear[year].map((paper) => (
                   <article class="paper-entry bg-white shadow-sm rounded-lg p-6 transition hover:shadow-md">
+                    <!-- Hidden Checkbox -->
+                    <input type="checkbox" id={getToggleAbstractId(paper)} class="abstract-toggle-checkbox hidden" />
                     <div class="flex justify-between items-start">
                       <div class="space-y-2">
                         <h3 class="text-lg font-medium text-gray-900 max-w-[650px]">
@@ -935,31 +942,24 @@ function getVenueString(pubInfo: PublicationType) {
                                 <!-- source https://heroicons.com v1.0.6, MIT licensed -->
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                               </svg>
-                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
-                                DOI
-                              </span>
                             </a>
                           )}
-                        </div>
-                        <div class="ml-2">
                           {paper.abstract && (
-                            <button
-                              class="btn-action abstract-toggle"
-                              aria-label="Toggle abstract"
-                              aria-expanded="false"
-                            >
-                              <span class="sr-only">Toggle abstract</span>
+                            <label for={getToggleAbstractId(paper)} class="btn-action abstract-toggle" aria-label="Toggle abstract" aria-expanded="false">
+                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                                ABSTRACT
+                              </span>
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 transform transition-transform duration-200" stroke="currentColor" stroke-width="2">
                                 <!-- source https://heroicons.com v1.0.6, MIT licensed -->
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                               </svg>
-                            </button>
+                            </label>
                           )}
                         </div>
                       </div>
                     </div>
                     {paper.abstract && (
-                      <div class="abstract-content mt-4 text-sm text-gray-600 hidden">
+                      <div class="abstract-content mt-4 text-sm text-gray-600">
                         <p>{paper.abstract}</p>
                       </div>
                     )}
@@ -1035,72 +1035,44 @@ function getVenueString(pubInfo: PublicationType) {
     }
   }
 
-  .abstract-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    opacity: 0;
-  }
+.hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 
-  .abstract-content.show {
-    max-height: none;
-    max-width: 600px;
-    opacity: 1;
-    margin: 0 auto;
-    padding-top: 30px;
-    text-align: justify;
-  }
+/* Abstract Content Hidden by Default */
+.abstract-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  opacity: 0;
+}
 
-  .abstract-toggle svg {
-    transition: transform 0.2s ease;
-  }
+/* When Checkbox is Checked, Show Abstract Content */
+.abstract-toggle-checkbox:checked ~ .abstract-content {
+  max-height: 1000px; /* Adjust as needed */
+  opacity: 1;
+  margin: 0 auto;
+  padding-top: 30px;
+  text-align: justify;
+}
 
-  .abstract-toggle[aria-expanded="true"] svg {
-    transform: rotate(-180deg);
-  }
+/* Rotate the SVG Icon When Checked */
+.abstract-toggle-checkbox:checked + .ml-2 .abstract-toggle svg {
+  transform: rotate(-180deg);
+}
+
+/* Transition for the SVG Icon */
+.abstract-toggle svg {
+  transition: transform 0.2s ease;
+}
 </style>
 
 <script>
-  function setupAbstractToggles() {
-    const toggleButtons = document.querySelectorAll(".abstract-toggle");
-
-    toggleButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const article = button.closest(".paper-entry");
-        const abstractContent = article.querySelector(".abstract-content");
-        const isExpanded = button.getAttribute("aria-expanded") === "true";
-
-        // Toggle the abstract visibility
-        abstractContent.classList.toggle("hidden");
-        abstractContent.classList.toggle("show");
-
-        // Update the button state
-        button.setAttribute("aria-expanded", !isExpanded);
-      });
-    });
-  }
-  document.addEventListener("DOMContentLoaded", setupAbstractToggles);
   document.querySelectorAll(".move-button").forEach((button) => {
     const textWidth = button.offsetWidth;
     button.closest(".btn-action").style.setProperty("--text-width", textWidth);
-  });
-  document
-    .querySelectorAll('.btn-action[aria-label="Show abstract"]')
-    .forEach((btn) => {
-      btn.addEventListener("click", () => {
-        btn.classList.toggle("expanded");
-      });
-    });
-  document.addEventListener("DOMContentLoaded", () => {
-    document
-      .querySelectorAll('.btn-action[aria-label="Show abstract"]')
-      .forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const article = btn.closest(".paper-entry");
-          const abstract = article.querySelector(".abstract");
-          abstract.classList.toggle("hidden");
-          abstract.classList.toggle("show");
-        });
-      });
   });
 </script>
