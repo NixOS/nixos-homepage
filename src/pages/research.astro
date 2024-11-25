@@ -1102,41 +1102,5 @@ function getVenueString(pubInfo: PublicationType) {
           abstract.classList.toggle("show");
         });
       });
-    document
-      .querySelectorAll('.btn-action[aria-label="Show BibTeX"]')
-      .forEach((btn) => {
-        const buttonText = btn.querySelector(".move-button");
-        const originalText = buttonText.textContent;
-
-        btn.addEventListener("click", async () => {
-          const article = btn.closest(".paper-entry");
-          const bibtex = article.querySelector(".bibtex");
-          const bibtexText = btn.dataset.bibtex;
-
-          // Copy to clipboard
-          try {
-            await navigator.clipboard.writeText(bibtexText);
-
-            // Change button text
-            buttonText.textContent = "COPIED!";
-
-            // Reset button text after 2 seconds
-            setTimeout(() => {
-              buttonText.textContent = originalText;
-            }, 2000);
-          } catch (err) {
-            console.error("Failed to copy text: ", err);
-            buttonText.textContent = "FAILED";
-
-            setTimeout(() => {
-              buttonText.textContent = originalText;
-            }, 2000);
-          }
-
-          // Toggle bibtex visibility
-          bibtex.classList.toggle("hidden");
-          bibtex.classList.toggle("show");
-        });
-      });
   });
 </script>
