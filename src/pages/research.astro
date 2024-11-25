@@ -899,14 +899,14 @@ function getVenueString(pubInfo: PublicationType) {
                               data-bibtex={paper.bibtex}
                             >
                               <span class="sr-only">Show BibTeX</span>
+                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                                CITE
+                              </span>
                               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <!-- source https://heroicons.com v1.0.6, MIT licensed -->
                                 <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
                                 <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
                               </svg>
-                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
-                                CITE
-                              </span>
                             </button>
                           )}
                           {paper.preprintOrArchiveUrl && (
@@ -916,13 +916,13 @@ function getVenueString(pubInfo: PublicationType) {
                               aria-label="Download preprint"
                             >
                               <span class="sr-only">Download preprint</span>
+                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                                PREPRINT
+                              </span>
                               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <!-- source https://heroicons.com v1.0.6, MIT licensed -->
                                 <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd" />
                               </svg>
-                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
-                                PREPRINT
-                              </span>
                             </a>
                           )}
                           {paper.doiOrPublisherUrl && (
@@ -937,6 +937,9 @@ function getVenueString(pubInfo: PublicationType) {
                             >
                               <span class="sr-only">
                                 View publisher version
+                              </span>
+                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                                DOI
                               </span>
                               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <!-- source https://heroicons.com v1.0.6, MIT licensed -->
