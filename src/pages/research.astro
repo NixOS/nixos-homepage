@@ -437,7 +437,8 @@ const papers: ReadonlyArray<Paper> = [
     doiOrPublisherUrl: "10.1145/3236774",
     publicationInfo: {
       type: "conference",
-      conference: "International Conference on Functional Programming 2018 (ACM ICFP '18)",
+      conference:
+        "International Conference on Functional Programming 2018 (ACM ICFP '18)",
       location: "St. Louis, Missouri, USA",
       publisher: "ACM",
     },
@@ -486,16 +487,15 @@ const papers: ReadonlyArray<Paper> = [
     year: 2010,
     abstract:
       "Existing package and system configuration management tools suffer from an imperative model, where system administration actions such as upgrading packages or changes to system configuration files are stateful: they destructively update the state of the system. This leads to many problems, such as the inability to roll back changes easily, to deploy multiple versions of a package side-by-side, to reproduce a configuration deterministically on another machine, or to reliably upgrade a system. In this article we show that we can overcome these problems by moving to a purely functional system configuration model. This means that all static parts of a system (such as software packages, configuration files and system startup scripts) are built by pure functions and are immutable, stored in a way analogously to a heap in a purely functional language. We have implemented this model in NixOS, a non-trivial Linux distribution that uses the Nix package manager to build the entire system configuration from a modular, purely functional specification.",
-    preprintOrArchiveUrl:
-      "https://nixos.org/~eelco/pubs/nixos-jfp-final.pdf",
+    preprintOrArchiveUrl: "https://nixos.org/~eelco/pubs/nixos-jfp-final.pdf",
     doiOrPublisherUrl: "10.1017/S0956796810000195",
     publicationInfo: {
-      "type": "journal",
-      "journal": "Journal of Functional Programming",
-      "volume": "20",
-      "number": "5-6",
-      "publisher": "Cambridge University Press",
-      "pages": "577-615"
+      type: "journal",
+      journal: "Journal of Functional Programming",
+      volume: "20",
+      number: "5-6",
+      publisher: "Cambridge University Press",
+      pages: "577-615",
     },
   },
   {
@@ -614,8 +614,7 @@ const papers: ReadonlyArray<Paper> = [
     year: 2007,
     abstract:
       "System configuration management is difficult because systems evolve in an undisciplined way: packages are upgraded, configuration files are edited, and so on. The management of existing operating systems is strongly imperative in nature, since software packages and configuration data (e.g., /bin and /etc in Unix) can be seen as imperative data structures: they are updated in-place by system administration actions. In this paper we present an alternative approach to system configuration management: a purely functional method, analogous to languages like Haskell. In this approach, the static parts of a configuration — software packages, configuration files, control scripts — are built from pure functions, i.e., the results depend solely on the specified inputs of the function and are immutable. As a result, realising a system configuration becomes deterministic and reproducible. Upgrading to a new configuration is mostly atomic and doesn't overwrite anything of the old configuration, thus enabling rollbacks. We have implemented the purely functional model in a small but realistic Linux-based operating system distribution called NixOS.",
-    preprintOrArchiveUrl:
-      "https://nixos.org/~eelco/pubs/hotos-final.pdf",
+    preprintOrArchiveUrl: "https://nixos.org/~eelco/pubs/hotos-final.pdf",
     doiOrPublisherUrl: "https://dl.acm.org/doi/abs/10.5555/1361397.1361410",
     publicationInfo: {
       type: "conference",
@@ -677,7 +676,7 @@ const papers: ReadonlyArray<Paper> = [
     authors: [{ name: "Eelco Dolstra" }],
     year: 2005,
     abstract:
-      "The Nix software deployment system is based on the paradigm of transparent source/binary deployment: distributors deploy descriptors that build components from source, while client machines can transparently optimise such source builds by downloading pre-built binaries from remote repositories. This model combines the simplicity and flexibility of source deployment with the efficiency of binary deployment. A desirable property is sharing of components: if multiple users install from the same source descriptors, ideally only one remotely built binary should be installed. The problem is that users must trust that remotely downloaded binaries were built from the sources they are claimed to have been built from, while users in general do not have a trust relation with each other or with the same remote repositories. This paper presents three models that enable sharing: the extensional model that requires that all users on a system have the same remote trust relations, the intensional model that does not have this requirement but may be suboptimal in terms of space use, and the mixed model that merges the best properties of both. The latter two models are achieved through a novel technique of {\em hash rewriting} in content-addressable component stores, and were implemented in the context of the Nix system.",
+      "The Nix software deployment system is based on the paradigm of transparent source/binary deployment: distributors deploy descriptors that build components from source, while client machines can transparently optimise such source builds by downloading pre-built binaries from remote repositories. This model combines the simplicity and flexibility of source deployment with the efficiency of binary deployment. A desirable property is sharing of components: if multiple users install from the same source descriptors, ideally only one remotely built binary should be installed. The problem is that users must trust that remotely downloaded binaries were built from the sources they are claimed to have been built from, while users in general do not have a trust relation with each other or with the same remote repositories. This paper presents three models that enable sharing: the extensional model that requires that all users on a system have the same remote trust relations, the intensional model that does not have this requirement but may be suboptimal in terms of space use, and the mixed model that merges the best properties of both. The latter two models are achieved through a novel technique of {em hash rewriting} in content-addressable component stores, and were implemented in the context of the Nix system.",
     preprintOrArchiveUrl:
       "https://nixos.org/~eelco/pubs/secsharing-ase2005-final.pdf",
     publicationInfo: {
@@ -800,7 +799,7 @@ const papers: ReadonlyArray<Paper> = [
 const sponsors = await getEntry("sponsors", "info");
 
 function getToggleAbstractId(paper) {
-    return `toggle-abstract-${paper.id}`;
+  return `toggle-abstract-${paper.id}`;
 }
 
 const papersByYear = papers.reduce((acc, paper, index) => {
@@ -834,11 +833,15 @@ function getVenueString(pubInfo: PublicationType) {
       class="flex flex-col justify-center font-extralight gap-4 leading-relaxed"
     >
       <p>
-        Nix started as a research project by Eelco Dolstra and his collaborators at Utrecht University around 2003.
-        Since then, scientists from multiple institutions have published their work on repeatable computation and reliable, secure software distribution.
+        Nix started as a research project by Eelco Dolstra and his collaborators
+        at Utrecht University around 2003. Since then, scientists from multiple
+        institutions have published their work on repeatable computation and
+        reliable, secure software distribution.
       </p>
       <p>
-        This collection traces the continued exploration of theoretical foundations and practical applications of the ideas underlying Nix and its ecosystem.
+        This collection traces the continued exploration of theoretical
+        foundations and practical applications of the ideas underlying Nix and
+        its ecosystem.
       </p>
     </div>
     <div class="flex flex-col items-center justify-center">
@@ -862,10 +865,13 @@ function getVenueString(pubInfo: PublicationType) {
               <div class="space-y-6">
                 {papersByYear[year].map((paper) => (
                   <article class="paper-entry bg-white shadow-sm rounded-lg p-6 transition hover:shadow-md">
-                    <!-- Hidden Checkbox -->
-                    <input type="checkbox" id={getToggleAbstractId(paper)} class="abstract-toggle-checkbox hidden" />
-                    <div class="flex justify-between items-start">
-                      <div class="space-y-2">
+                    <input
+                      type="checkbox"
+                      id={getToggleAbstractId(paper)}
+                      class="abstract-toggle-checkbox hidden"
+                    />
+                    <div class="content-container">
+                      <div class="paper-info space-y-2 flex-1">
                         <h3 class="text-lg font-medium text-gray-900 max-w-[650px]">
                           {paper.title}
                         </h3>
@@ -890,75 +896,112 @@ function getVenueString(pubInfo: PublicationType) {
                           {getVenueString(paper.publicationInfo)}
                         </p>
                       </div>
-                      <div class="action-buttons flex">
-                        <div class="flex gap-2">
-                          {paper.bibtex && (
-                            <button
-                              class="btn-action flex items-center"
-                              aria-label="Show BibTeX"
-                              data-bibtex={paper.bibtex}
+                      <div class="buttons-container flex gap-2 ml-4">
+                        {paper.bibtex && (
+                          <button
+                            class="btn-action flex items-center"
+                            aria-label="Show BibTeX"
+                            data-bibtex={paper.bibtex}
+                          >
+                            <span class="sr-only">Show BibTeX</span>
+                            <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                              CITE
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
                             >
-                              <span class="sr-only">Show BibTeX</span>
-                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
-                                CITE
-                              </span>
-                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <!-- source https://heroicons.com v1.0.6, MIT licensed -->
-                                <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                              </svg>
-                            </button>
-                          )}
-                          {paper.preprintOrArchiveUrl && (
-                            <a
-                              href={paper.preprintOrArchiveUrl}
-                              class="btn-action flex items-center"
-                              aria-label="Download preprint"
+                              {/* source https://heroicons.com v1.0.6, MIT licensed */}
+                              <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                              <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                            </svg>
+                          </button>
+                        )}
+                        {paper.preprintOrArchiveUrl && (
+                          <a
+                            href={paper.preprintOrArchiveUrl}
+                            class="btn-action flex items-center"
+                            aria-label="Download preprint"
+                          >
+                            <span class="sr-only">Download preprint</span>
+                            <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                              PREPRINT
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
                             >
-                              <span class="sr-only">Download preprint</span>
-                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
-                                PREPRINT
-                              </span>
-                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <!-- source https://heroicons.com v1.0.6, MIT licensed -->
-                                <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd" />
-                              </svg>
-                            </a>
-                          )}
-                          {paper.doiOrPublisherUrl && (
-                            <a
-                              href={
-                                paper.doiOrPublisherUrl.startsWith("10.")
-                                  ? `https://doi.org/${paper.doiOrPublisherUrl}`
-                                  : paper.doiOrPublisherUrl
-                              }
-                              class="btn-action flex items-center"
-                              aria-label="View publisher version"
+                              {/* source https://heroicons.com v1.0.6, MIT licensed */}
+                              <path
+                                fill-rule="evenodd"
+                                d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        )}
+                        {paper.doiOrPublisherUrl && (
+                          <a
+                            href={
+                              paper.doiOrPublisherUrl.startsWith("10.")
+                                ? `https://doi.org/${paper.doiOrPublisherUrl}`
+                                : paper.doiOrPublisherUrl
+                            }
+                            class="btn-action flex items-center"
+                            aria-label="View publisher version"
+                          >
+                            <span class="sr-only">View publisher version</span>
+                            <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                              DOI
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-width="2"
                             >
-                              <span class="sr-only">
-                                View publisher version
-                              </span>
-                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
-                                DOI
-                              </span>
-                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <!-- source https://heroicons.com v1.0.6, MIT licensed -->
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                              </svg>
-                            </a>
-                          )}
-                          {paper.abstract && (
-                            <label for={getToggleAbstractId(paper)} class="btn-action abstract-toggle" aria-label="Toggle abstract" aria-expanded="false">
-                              <span class="ml-2 text-sm font-bold text-gray-400 move-button">
-                                ABSTRACT
-                              </span>
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 transform transition-transform duration-200" stroke="currentColor" stroke-width="2">
-                                <!-- source https://heroicons.com v1.0.6, MIT licensed -->
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                              </svg>
-                            </label>
-                          )}
-                        </div>
+                              {/* source https://heroicons.com v1.0.6, MIT licensed */}
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                              />
+                            </svg>
+                          </a>
+                        )}
+                        {paper.abstract && (
+                          <label
+                            for={getToggleAbstractId(paper)}
+                            class="btn-action abstract-toggle"
+                            aria-label="Toggle abstract"
+                            aria-expanded="false"
+                          >
+                            <span class="ml-2 text-sm font-bold text-gray-400 move-button">
+                              ABSTRACT
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              class="h-6 w-6 transform transition-transform duration-200"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              {/* source https://heroicons.com v1.0.6, MIT licensed */}
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M19 9l-7 7-7-7"
+                              />
+                            </svg>
+                          </label>
+                        )}
                       </div>
                     </div>
                     {paper.abstract && (
@@ -1024,50 +1067,49 @@ function getVenueString(pubInfo: PublicationType) {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  /* Layout adjustments for touch devices */
-  @media (hover: none) {
-    .paper-entry > div:first-child {
+  .content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 640px) {
+    .content-container {
       flex-direction: column;
     }
 
-    .paper-entry .action-buttons {
+    .buttons-container {
+      margin-left: 0;
       margin-top: 1rem;
-      display: flex;
-      margin-left: auto;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      width: 100%;
+      justify-content: flex-end;
     }
   }
 
-.hidden {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+  /* Abstract Content Hidden by Default */
+  .abstract-content {
+    max-height: 0;
+    max-width: 600px;
+    overflow: hidden;
+    transition:
+      max-height 0.3s ease-out,
+      opacity 0.3s ease-out,
+      padding 0.3s ease-out;
+    opacity: 0;
+    text-align: justify;
+    margin: 0 auto;
+  }
 
-/* Abstract Content Hidden by Default */
-.abstract-content {
-  max-height: 0;
-  max-width: 600px;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
-  opacity: 0;
-  padding-top: 30px;
-  text-align: justify;
-  margin: 0 auto;
-}
-
-/* When Checkbox is Checked, Show Abstract Content */
-.abstract-toggle-checkbox:checked ~ .abstract-content {
-  max-height: 1000px; /* Adjust as needed */
-  opacity: 1;
-}
-/* Rotate the SVG Icon When Checked */
-.abstract-toggle-checkbox:checked + div .abstract-toggle svg {
-  transform: rotate(-180deg);
-}
-
+  /* When Checkbox is Checked, Show Abstract Content */
+  .abstract-toggle-checkbox:checked ~ .abstract-content {
+    max-height: 1000px; /* Adjust as needed */
+    padding-top: 30px;
+    opacity: 1;
+  }
+  /* Rotate the SVG Icon When Checked */
+  .abstract-toggle-checkbox:checked + div .abstract-toggle svg {
+    transform: rotate(-180deg);
+  }
 </style>
 
 <script>
