@@ -985,6 +985,7 @@ function getVenueString(pubInfo: PublicationType) {
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
+    gap: 0.5rem;
   }
 
   /* Default styles - buttons always visible */
@@ -1048,29 +1049,25 @@ function getVenueString(pubInfo: PublicationType) {
 /* Abstract Content Hidden by Default */
 .abstract-content {
   max-height: 0;
+  max-width: 600px;
   overflow: hidden;
-  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
   opacity: 0;
+  padding-top: 30px;
+  text-align: justify;
+  margin: 0 auto;
 }
 
 /* When Checkbox is Checked, Show Abstract Content */
 .abstract-toggle-checkbox:checked ~ .abstract-content {
   max-height: 1000px; /* Adjust as needed */
   opacity: 1;
-  margin: 0 auto;
-  padding-top: 30px;
-  text-align: justify;
 }
-
 /* Rotate the SVG Icon When Checked */
-.abstract-toggle-checkbox:checked + .ml-2 .abstract-toggle svg {
+.abstract-toggle-checkbox:checked + div .abstract-toggle svg {
   transform: rotate(-180deg);
 }
 
-/* Transition for the SVG Icon */
-.abstract-toggle svg {
-  transition: transform 0.2s ease;
-}
 </style>
 
 <script>
