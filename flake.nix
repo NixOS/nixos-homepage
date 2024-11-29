@@ -8,7 +8,7 @@ rec {
 
     # These inputs are used for the manuals and release artifacts
     released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    released-nixpkgs-stable.url = "nixpkgs/nixos-24.05";
+    released-nixpkgs-stable.url = "nixpkgs/nixos-24.11";
     released-nix-unstable.url = "github:nixos/nix/master";
     released-nix-stable.url = "github:nixos/nix/latest-release";
     nix-pills.url = "github:NixOS/nix-pills";
@@ -152,7 +152,7 @@ rec {
           mv $nix_dir $out
 
           nixpkgs_dir=$PWD/nixpkgs && mkdir -p $nixpkgs_dir
-          cp -R --no-preserve=mode,ownership ${released-nixpkgs-stable.htmlDocs.nixpkgsManual}/share/doc/nixpkgs $nixpkgs_dir/stable
+          cp -R --no-preserve=mode,ownership ${released-nixpkgs-stable.htmlDocs.nixpkgsManual.${system}}/share/doc/nixpkgs $nixpkgs_dir/stable
           cp -R --no-preserve=mode,ownership ${released-nixpkgs-unstable.htmlDocs.nixpkgsManual.${system}}/share/doc/nixpkgs $nixpkgs_dir/unstable
           mv $nixpkgs_dir/stable/manual.html $nixpkgs_dir/stable/index.html
           mv $nixpkgs_dir/unstable/manual.html $nixpkgs_dir/unstable/index.html
@@ -161,7 +161,7 @@ rec {
           mv $nixpkgs_dir $out
 
           nixos_dir=$PWD/nixos && mkdir -p $nixos_dir
-          cp -R --no-preserve=mode,ownership ${released-nixpkgs-stable.htmlDocs.nixosManual}/share/doc/nixos $nixos_dir/stable
+          cp -R --no-preserve=mode,ownership ${released-nixpkgs-stable.htmlDocs.nixosManual.${system}}/share/doc/nixos $nixos_dir/stable
           cp -R --no-preserve=mode,ownership ${released-nixpkgs-unstable.htmlDocs.nixosManual.${system}}/share/doc/nixos $nixos_dir/unstable
           ${manualVersionSwitch "$nixos_dir" "stable"}
           ${redirectManualHTML "/manual/nixos/stable" "$nixos_dir/index.html"}
