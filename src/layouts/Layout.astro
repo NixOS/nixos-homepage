@@ -80,10 +80,13 @@ const headFeedLinks = blogMenu.data.map((e) => {
   </head>
   <body class="flex min-h-screen flex-col bg-white text-gray-950">
     <Header />
+
     <main class="flex-1">
       <slot />
     </main>
+
     <Footer />
+
     <script>
       import 'htmx.org';
 
