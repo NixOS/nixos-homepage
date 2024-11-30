@@ -4,7 +4,7 @@ rec {
   inputs = {
     # This is used to build the site.
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     # These inputs are used for the manuals and release artifacts
     released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
@@ -27,17 +27,24 @@ rec {
   };
 
   outputs =
-    { self
+    inputs@{ 
+      self
+    , flake-parts
     , nixpkgs
-    , flake-utils
     , released-nixpkgs-unstable
     , released-nixpkgs-stable
     , released-nix-unstable
     , released-nix-stable
     , nix-pills
     }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
+  flake-parts.lib.mkFlake { inherit inputs; } {
+    flake = {};
+    systems = [
+      # systems for which you want to build the `perSystem` attributes
+      "x86_64-linux"
+      # ...
+    ];
+    perSystem = { config, system, ... }: let
         overlay = final: prev: {
           asciinema-scenario = final.rustPlatform.buildRustPackage rec {
             pname = "asciinema-scenario";
@@ -87,7 +94,6 @@ rec {
           </html>
           EOT
         '';
-
         manualVersionSwitch = dir: canonical:
           let
             baseUrl = "https://nixos.org/${dir}/${canonical}";
@@ -185,7 +191,6 @@ rec {
             sed -i -e "s|<nixpkgs|\&lt;nixpkgs|g" $scenarioFileName.svg
           done
         '';
-
       in {
         packages.manuals = manuals;
         packages.pills = pills;
@@ -228,5 +233,6 @@ rec {
             EOF
           '';
         };
-    });
+    };
+  };
 }
