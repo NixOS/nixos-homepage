@@ -1,14 +1,14 @@
 ---
 import { SEO } from 'astro-seo';
-
-import Footer from './Footer.astro';
-import Header from './Header.astro';
-
 import { getImage } from 'astro:assets';
-import '../styles/base.css';
-
 import { getEntry } from 'astro:content';
-import faviconSvgSrc from '../assets/image/flake-blue.svg';
+
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header.astro';
+
+import '@/styles/base.css';
+
+import faviconSvgSrc from '@/assets/image/flake-blue.svg';
 
 const {
   title = 'Nix &amp; NixOS | Declarative builds and deployments',

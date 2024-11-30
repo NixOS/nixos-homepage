@@ -1,15 +1,18 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { getEntry } from 'astro:content';
-import Container from '../components/layout/Container.astro';
-import InlineSVG from '../components/util/InlineSVG.astro';
+
+import Container from '@/components/layout/Container.astro';
+import InlineSVG from '@/components/util/InlineSVG.astro';
+import Link from '@/components/util/Link.astro';
+
 const footerMenu = await getEntry('menus', 'footer');
 ---
 
 <footer>
   <div class="clear-both bg-nix-blue-darker font-light text-white">
     <Container>
-      <div class="flex flex-col flex-wrap gap-y-8 py-8 sm:flex-row">
+      <div class="flex flex-col flex-wrap gap-y-8 py-14 sm:flex-row">
         {
           footerMenu.data.sections.map((menu) => (
             <div class="basis-1/2 lg:basis-1/4">
@@ -19,7 +22,7 @@ const footerMenu = await getEntry('menus', 'footer');
               <ul class="space-y-2 font-extralight">
                 {menu.items.map((item) => (
                   <li>
-                    <a href={item.link}>{item.name}</a>
+                    <Link href={item.link}>{item.name}</Link>
                   </li>
                 ))}
               </ul>
@@ -27,20 +30,22 @@ const footerMenu = await getEntry('menus', 'footer');
           ))
         }
       </div>
+
       <hr class="border-nix-blue-light" />
+
       <div
-        class="flex flex-col flex-wrap gap-8 py-8 font-extralight lg:flex-row lg:gap-0"
+        class="flex flex-col flex-wrap gap-4 py-4 font-extralight lg:flex-row lg:gap-0"
       >
-        <div class="flex basis-1/2 flex-row gap-2">
+        <div class="flex basis-1/2 gap-2">
           <InlineSVG
             src="/src/assets/image/flake-white.svg"
-            class="inline-block h-16 w-16"
+            class="inline-block h-14 w-14"
           />
           <div class="flex flex-col justify-center">
             <div>
               Copyright © {new Date().getFullYear()} NixOS contributors
             </div>
-            <a
+            <Link
               href="https://github.com/NixOS/nixos-homepage/blob/master/LICENSES/CC-BY-SA-4.0.txt"
             >
               <abbr
@@ -48,27 +53,28 @@ const footerMenu = await getEntry('menus', 'footer');
               >
                 CC-BY-SA-4.0
               </abbr>
-            </a>
+            </Link>
           </div>
         </div>
+
         <hr class="border-nix-blue-light lg:hidden" />
+
         <div
-          class="flex basis-1/2 flex-row justify-between gap-4 font-extralight lg:justify-end"
+          class="flex basis-1/2 justify-between gap-4 font-extralight lg:justify-end"
         >
           <h4 class="my-auto">Connect with us:</h4>
-          <div class="my-auto flex flex-row gap-3">
+          <div class="my-auto flex gap-4">
             {
               footerMenu.data.social.map((item) => (
-                <a
+                <Link
                   href={item.link}
                   aria-label={`Connect with us on ${item.name}`}
                 >
                   <Icon
-                    alt={item.name}
-                    class="h-7 w-7"
+                    class="h-5 w-5"
                     name={`simple-icons:${item.name.toLowerCase()}`}
                   />
-                </a>
+                </Link>
               ))
             }
           </div>

@@ -1,8 +1,11 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { getEntry } from 'astro:content';
-import Container from '../components/layout/Container.astro';
-import InlineSVG from '../components/util/InlineSVG.astro';
+
+import Container from '@/components/layout/Container.astro';
+import InlineSVG from '@/components/util/InlineSVG.astro';
+import Link from '@/components/util/Link.astro';
+
 const headerMenu = await getEntry('menus', 'header');
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
@@ -20,7 +23,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
     <div
       class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start"
     >
-      <a
+      <Link
         href="/"
         class="flex select-none items-center justify-between gap-2 md:justify-start"
       >
@@ -34,7 +37,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
           src="/src/assets/image/nixos-logo-text.svg"
           alt="Nixos Logo Text"
         />
-      </a>
+      </Link>
       <button
         aria-label="Main Navigation Toggle"
         class="block rounded-lg bg-nix-blue-light p-4 md:hidden"
@@ -53,7 +56,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
     >
       {
         headerMenu.data.items.map((item) => (
-          <a
+          <Link
             class:list={[
               'pb-6 pt-8',
               navbarItemStyle,
@@ -64,28 +67,22 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
             href={item.link}
           >
             {item.name}
-          </a>
+          </Link>
         ))
       }
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
+      <Link
         class={`pt-8 md:pt-7 pb-6 ${navbarItemStyle} ${navbarItemInactiveStyle}`}
         href="https://search.nixos.org"
         arial-label="Nixos package and options search"
       >
-        <Icon
-          alt="Search"
-          class="hidden h-8 w-8 text-nix-blue md:block"
-          name="mdi:search"
-        />
+        <Icon class="hidden h-8 w-8 text-nix-blue md:block" name="mdi:search" />
         <span class="inline-block md:hidden">Search</span>
-      </a>
+      </Link>
     </nav>
   </Container>
 </header>
 
-<script lang="ts">
+<script>
   const navigationToggle = document.getElementById('navigation-toggle');
   const navbarMenu = document.getElementById('navbar-menu');
 
