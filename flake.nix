@@ -5,6 +5,7 @@ rec {
     # This is used to build the site.
     nixpkgs.url = "nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    git-hooks-nix.url = "github:cachix/git-hooks.nix";
 
     # These inputs are used for the manuals and release artifacts
     released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
@@ -30,6 +31,7 @@ rec {
     inputs@{ 
       self
     , flake-parts
+    , git-hooks-nix
     , nixpkgs
     , released-nixpkgs-unstable
     , released-nixpkgs-stable
@@ -39,10 +41,11 @@ rec {
     }:
   flake-parts.lib.mkFlake { inherit inputs; } {
     flake = {};
+    imports = [
+      inputs.git-hooks-nix.flakeModule
+    ];
     systems = [
-      # systems for which you want to build the `perSystem` attributes
       "x86_64-linux"
-      # ...
     ];
     perSystem = { config, system, ... }: let
         overlay = final: prev: {
@@ -195,6 +198,14 @@ rec {
         packages.manuals = manuals;
         packages.pills = pills;
         packages.demos = demos;
+
+        pre-commit.settings.hooks.prettier-check = {
+          enable = true;
+          name = "check-formatting";
+          src = "src/**/*";
+          entry = "${pkgs.nodejs_20}/bin/npm run format:check";
+          stages = [ "pre-push" ];
+        };
 
         devShells.default = pkgs.mkShell {
           name = "nixos-homepage";
