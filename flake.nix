@@ -222,6 +222,9 @@ rec {
                 npm run build
                 cd dist
                 netlify dev
+
+            To re-format the source code:
+                npm run format
             EOF
           '';
         };
