@@ -2,7 +2,7 @@
 date: 2018-08-22
 description: |
   Modesty forbids what the law does not
-title: "#07 - NixOS in production, nix-devel is now Discourse"
+title: '#07 - NixOS in production, nix-devel is now Discourse'
 ---
 
 # News

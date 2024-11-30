@@ -3,7 +3,7 @@ date: 2017-04-14
 description: |
   I\'ve never wished a man dead, but I have read some obituaries with
   great pleasure. - Mark Twain (maybe)
-title: "#06 - I never wished a man dead"
+title: '#06 - I never wished a man dead'
 ---
 
 Or in other words: no more Perl in Nix! Shea Levy\'s last branch for his

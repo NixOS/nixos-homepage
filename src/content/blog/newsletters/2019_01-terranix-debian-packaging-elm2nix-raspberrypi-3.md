@@ -1,5 +1,5 @@
 ---
-title: "#01 - TerraNix, Debian packaging, elm2nix, RaspberryPi 3+"
+title: '#01 - TerraNix, Debian packaging, elm2nix, RaspberryPi 3+'
 date: 2019-01-17
 description: What we think, we become
 ---

@@ -4,9 +4,9 @@ family: nixos
 platform: iso
 ---
 
-import Button from "../../components/ui/Button.astro";
-import Tag from "../../components/ui/Tag.astro";
-import { nixosDownloadLink } from "../../lib/links";
+import Button from '../../components/ui/Button.astro';
+import Tag from '../../components/ui/Tag.astro';
+import { nixosDownloadLink } from '../../lib/links';
 
 You can install NixOS on physical hardware by burning one of the CD images onto a blank CD/DVD disk, or [by copying it onto a USB stick](/manual/nixos/stable#sec-booting-from-usb). For **installation instructions**, please see the [manual](/manual/nixos/stable).
 
@@ -33,17 +33,17 @@ The graphical installation ISO image **contains the graphical NixOS installer** 
 <span>
   <Button
     color="semidarkblue"
-    href={nixosDownloadLink("gnome", "aarch64-linux", "iso", false)}
-    shaHref={nixosDownloadLink("gnome", "aarch64-linux", "iso", true)}
+    href={nixosDownloadLink('gnome', 'aarch64-linux', 'iso', false)}
+    shaHref={nixosDownloadLink('gnome', 'aarch64-linux', 'iso', true)}
     shaText="(SHA-256)"
     size="sm-mobfull"
     classList={[
-      "w-full",
-      "md:w-auto",
-      "block",
-      "md:inline",
-      "text-center",
-      "md:text-left",
+      'w-full',
+      'md:w-auto',
+      'block',
+      'md:inline',
+      'text-center',
+      'md:text-left',
     ]}
     label="Download (GNOME, 64-bit ARM)"
   />
@@ -54,17 +54,17 @@ The graphical installation ISO image **contains the graphical NixOS installer** 
 <span>
   <Button
     color="semidarkblue"
-    href={nixosDownloadLink("plasma6", "x86_64-linux", "iso", false)}
-    shaHref={nixosDownloadLink("plasma6", "x86_64-linux", "iso", true)}
+    href={nixosDownloadLink('plasma6', 'x86_64-linux', 'iso', false)}
+    shaHref={nixosDownloadLink('plasma6', 'x86_64-linux', 'iso', true)}
     shaText="(SHA-256)"
     size="sm-mobfull"
     classList={[
-      "w-full",
-      "md:w-auto",
-      "block",
-      "md:inline",
-      "text-center",
-      "md:text-left",
+      'w-full',
+      'md:w-auto',
+      'block',
+      'md:inline',
+      'text-center',
+      'md:text-left',
     ]}
     label="Download (Plasma Desktop, 64-bit Intel/AMD)"
   />

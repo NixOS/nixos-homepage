@@ -1,16 +1,16 @@
 ---
-import { getCollection } from "astro:content";
-import Container from "../../../components/layout/Container.astro";
-import PageHeader from "../../../components/layout/PageHeader.astro";
-import Layout from "../../../layouts/Layout.astro";
-import BlogListEntry from "../../../components/pages/blog/BlogListEntry.astro";
-import BlogList from "../../../components/pages/blog/BlogList.astro";
+import { getCollection } from 'astro:content';
+import Container from '../../../components/layout/Container.astro';
+import PageHeader from '../../../components/layout/PageHeader.astro';
+import BlogList from '../../../components/pages/blog/BlogList.astro';
+import BlogListEntry from '../../../components/pages/blog/BlogListEntry.astro';
+import Layout from '../../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("blog");
+  const blogEntries = await getCollection('blog');
 
   const filteredEntries = blogEntries.reduce((groups, entry) => {
-    const category = entry.slug.split("/")[0];
+    const category = entry.slug.split('/')[0];
     const postYear = new Date(entry.data.date).getFullYear();
     if (!groups[category + postYear]) {
       groups[category + postYear] = {

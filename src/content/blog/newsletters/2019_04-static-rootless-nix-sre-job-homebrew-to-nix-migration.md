@@ -1,5 +1,5 @@
 ---
-ditle: "#04 - Static rootless Nix, SRE job, homebrew to Nix migration"
+ditle: '#04 - Static rootless Nix, SRE job, homebrew to Nix migration'
 date: 2019-02-27
 description: I love those who yearn for the impossible
 ---

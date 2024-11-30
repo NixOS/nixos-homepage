@@ -1,5 +1,5 @@
 ---
-title: "#12 - Mobile NixOS, import-from-derivation, one-page introduction, runtime type-checker, a job"
+title: '#12 - Mobile NixOS, import-from-derivation, one-page introduction, runtime type-checker, a job'
 date: 2019-09-04
 description: No act of kindness, no matter how small, is ever wasted. - Aesop
 ---

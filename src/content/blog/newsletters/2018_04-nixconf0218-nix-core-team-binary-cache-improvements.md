@@ -2,7 +2,7 @@
 date: 2018-07-25
 description: |
   back in black
-title: "#04 - NixCon2018, Nix Core Team, binary cache improvements"
+title: '#04 - NixCon2018, Nix Core Team, binary cache improvements'
 ---
 
 NixOS weekly project is rebooting, expect a newsletter every Wednesday

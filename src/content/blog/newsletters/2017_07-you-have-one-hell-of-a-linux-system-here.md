@@ -3,7 +3,7 @@ date: 2017-05-02
 description: |
   You have one hell of a Linux system here - someone on #nixos IRC
   channel
-title: "#07 - You have one hell of a Linux system here"
+title: '#07 - You have one hell of a Linux system here'
 ---
 
 A few months ago a proposal to define improvements process

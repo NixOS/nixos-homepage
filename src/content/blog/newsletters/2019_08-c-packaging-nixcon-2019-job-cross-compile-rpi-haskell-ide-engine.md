@@ -1,5 +1,5 @@
 ---
-title: "#08 - C++ packaging, NixCon 2019, job, cross-compile RPI, Haskell IDE Engine"
+title: '#08 - C++ packaging, NixCon 2019, job, cross-compile RPI, Haskell IDE Engine'
 date: 2019-05-01
 description: Observation is a passive science, experimentation an active science - Claude Bernard
 ---

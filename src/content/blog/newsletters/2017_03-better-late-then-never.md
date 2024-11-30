@@ -2,7 +2,7 @@
 date: 2017-02-22
 description: |
   Better late than never (me), but never late is better (my wife).
-title: "#03 - Better Late Than Never"
+title: '#03 - Better Late Than Never'
 ---
 
 Another two weeks have passed and it is time for our summary.

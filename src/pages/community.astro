@@ -1,170 +1,170 @@
 ---
-import { getEntry, getCollection } from "astro:content";
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets';
+import { getCollection, getEntry } from 'astro:content';
 
-import Layout from "../layouts/Layout.astro";
-import PageHeader from "../components/layout/PageHeader.astro";
-import Container from "../components/layout/Container.astro";
-import Divider from "../components/layout/Divider.astro";
-import Button from "../components/ui/Button.astro";
-import Banner from "../components/ui/Banner.astro";
-import RfcDiagram from "../components/ui/RfcDiagram.astro";
-import NixConEntry from "../components/pages/community/NixConEntry.astro";
-import OfficialCommunityLink from "../components/pages/community/OfficialCommunityLink.astro";
-import UnofficialCommunityLink from "../components/pages/community/UnofficialCommunityLink.astro";
+import Container from '../components/layout/Container.astro';
+import Divider from '../components/layout/Divider.astro';
+import PageHeader from '../components/layout/PageHeader.astro';
+import NixConEntry from '../components/pages/community/NixConEntry.astro';
+import OfficialCommunityLink from '../components/pages/community/OfficialCommunityLink.astro';
+import UnofficialCommunityLink from '../components/pages/community/UnofficialCommunityLink.astro';
+import Banner from '../components/ui/Banner.astro';
+import Button from '../components/ui/Button.astro';
+import RfcDiagram from '../components/ui/RfcDiagram.astro';
+import Layout from '../layouts/Layout.astro';
 
-const meetups = await getEntry("community", "meetups");
-const teams = await getCollection("teams");
+const meetups = await getEntry('community', 'meetups');
+const teams = await getCollection('teams');
 
 const nixcons = [
   {
-    title: "NixCon 2024 - Berlin",
-    date: "25-27 October 2024",
-    href: "https://2024.nixcon.org/",
+    title: 'NixCon 2024 - Berlin',
+    date: '25-27 October 2024',
+    href: 'https://2024.nixcon.org/',
     description:
       "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
-    imagePath: "/images/nixcon/nixcon.2024.svg",
+    imagePath: '/images/nixcon/nixcon.2024.svg',
   },
   {
-    title: "NixCon 2023 - Darmstadt",
-    date: "8-10 September 2023",
-    href: "https://2023.nixcon.org/",
+    title: 'NixCon 2023 - Darmstadt',
+    date: '8-10 September 2023',
+    href: 'https://2023.nixcon.org/',
     description:
       "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
-    imagePath: "/images/nixcon/nixcon.2023.svg",
+    imagePath: '/images/nixcon/nixcon.2023.svg',
   },
   {
-    title: "NixCon 2022 - Paris",
-    date: "20-22 October 2022",
-    href: "https://2022.nixcon.org/",
+    title: 'NixCon 2022 - Paris',
+    date: '20-22 October 2022',
+    href: 'https://2022.nixcon.org/',
     description:
       "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
-    imagePath: "/images/nixcon/nixcon.2022.svg",
+    imagePath: '/images/nixcon/nixcon.2022.svg',
   },
   {
-    title: "NixCon 2020 - Online",
-    date: "16-18 October 2020",
-    href: "https://2019.nixcon.org/",
+    title: 'NixCon 2020 - Online',
+    date: '16-18 October 2020',
+    href: 'https://2019.nixcon.org/',
     description:
       "NixCon is a community-oriented conference for contributors and users of Nix and NixOS. It's about sharing experiences, inspiring people and discussing future development.",
-    imagePath: "/images/nixcon/nixcon.2020.svg",
+    imagePath: '/images/nixcon/nixcon.2020.svg',
   },
   {
-    title: "NixCon 2019 - Brno",
-    date: "25-27 October 2019",
-    href: "https://2019.nixcon.org/",
+    title: 'NixCon 2019 - Brno',
+    date: '25-27 October 2019',
+    href: 'https://2019.nixcon.org/',
     description:
-      "NixCon is becoming a regular gathering that everybody expects to happen. This year we met at Brno, Czech Republic. This was the biggest conference so far.",
-    imagePath: "/images/nixcon/nixcon.2019.svg",
+      'NixCon is becoming a regular gathering that everybody expects to happen. This year we met at Brno, Czech Republic. This was the biggest conference so far.',
+    imagePath: '/images/nixcon/nixcon.2019.svg',
   },
   {
-    title: "NixCon 2018 - London",
-    date: "25-27 October 2018",
-    href: "https://nixcon2018.org/",
+    title: 'NixCon 2018 - London',
+    date: '25-27 October 2018',
+    href: 'https://nixcon2018.org/',
     description:
-      "For the first time a Nix conference outside the Germany. London was the first conference that was not run over the weekend, but during the week.",
-    imagePath: "/images/nixcon/nixcon.2018.svg",
+      'For the first time a Nix conference outside the Germany. London was the first conference that was not run over the weekend, but during the week.',
+    imagePath: '/images/nixcon/nixcon.2018.svg',
   },
   {
-    title: "NixCon 2017 - Munich",
-    date: "28-31 October 2017",
-    href: "http://nixcon2017.org/",
+    title: 'NixCon 2017 - Munich',
+    date: '28-31 October 2017',
+    href: 'http://nixcon2017.org/',
     description:
-      "After a year of a break, Nix community gathered at TNG Technology Consulting in Munich.",
+      'After a year of a break, Nix community gathered at TNG Technology Consulting in Munich.',
   },
   {
-    title: "NixCon 2015 - Berlin",
-    date: "14-17 November 2015",
-    href: "https://conf.nixos.org/",
+    title: 'NixCon 2015 - Berlin',
+    date: '14-17 November 2015',
+    href: 'https://conf.nixos.org/',
     description:
-      "Taking place in a Berlin-style converted loft, it was the first NixOS conference. It was the first time Nix community came together in such numbers. In two days there were many interesting talks.",
+      'Taking place in a Berlin-style converted loft, it was the first NixOS conference. It was the first time Nix community came together in such numbers. In two days there were many interesting talks.',
   },
 ];
 
 const platformsMain = [
   {
-    href: "https://discourse.nixos.org/",
-    name: "Discourse",
-    iconName: "simple-icons:discourse",
+    href: 'https://discourse.nixos.org/',
+    name: 'Discourse',
+    iconName: 'simple-icons:discourse',
     description:
-      "Our official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.",
+      'Our official forum is the right place to get help from other users and discuss the development of the projects. There are also Announcements, Job offers and Events.',
   },
   {
-    href: "https://matrix.to/#/#community:nixos.org",
-    name: "Matrix space",
-    iconName: "simple-icons:matrix",
+    href: 'https://matrix.to/#/#community:nixos.org',
+    name: 'Matrix space',
+    iconName: 'simple-icons:matrix',
     description:
-      "Real-time help, development chat, and off-topic community discussion takes place on Matrix.",
+      'Real-time help, development chat, and off-topic community discussion takes place on Matrix.',
   },
   {
-    href: "https://github.com/NixOS/",
-    name: "Github",
-    iconName: "simple-icons:github",
+    href: 'https://github.com/NixOS/',
+    name: 'Github',
+    iconName: 'simple-icons:github',
     description:
-      "Official organization page on Github, where you can find nix, nixpkgs, and other repositories.",
+      'Official organization page on Github, where you can find nix, nixpkgs, and other repositories.',
   },
 ];
 
 const socialMediaMain = [
   {
-    href: "https://chaos.social/@nixos_org",
-    name: "Mastodon",
-    iconName: "simple-icons:mastodon",
+    href: 'https://chaos.social/@nixos_org',
+    name: 'Mastodon',
+    iconName: 'simple-icons:mastodon',
   },
   {
-    href: "https://twitter.com/nixos_org",
-    name: "Twitter",
-    iconName: "simple-icons:twitter",
+    href: 'https://twitter.com/nixos_org',
+    name: 'Twitter',
+    iconName: 'simple-icons:twitter',
   },
   {
-    href: "https://www.linkedin.com/company/nixos-foundation/",
-    name: "LinkedIn",
-    iconName: "simple-icons:linkedin",
+    href: 'https://www.linkedin.com/company/nixos-foundation/',
+    name: 'LinkedIn',
+    iconName: 'simple-icons:linkedin',
   },
   {
-    href: "https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw",
-    name: "YouTube",
-    iconName: "simple-icons:youtube",
+    href: 'https://www.youtube.com/channel/UC3vIimi9q4AT8EgxYp_dWIw',
+    name: 'YouTube',
+    iconName: 'simple-icons:youtube',
   },
 ];
 
 const calendarsMain = [
   {
-    href: "https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com",
-    name: "Official NixOS Calendar",
-    iconName: "mdi:calendar",
+    href: 'https://calendar.google.com/calendar/u/0/embed?src=b9o52fobqjak8oq8lfkhg3t0qg@group.calendar.google.com',
+    name: 'Official NixOS Calendar',
+    iconName: 'mdi:calendar',
   },
   {
-    href: "https://discourse.nixos.org/t/community-calendar/18589",
-    name: "Community Calendar",
-    iconName: "mdi:calendar",
+    href: 'https://discourse.nixos.org/t/community-calendar/18589',
+    name: 'Community Calendar',
+    iconName: 'mdi:calendar',
   },
 ] as const;
 
 const platformsOutside = [
   {
-    href: "https://stackoverflow.com/questions/tagged/nix+or+nixpkgs+or+nixos+or+nixops",
-    name: "Stackoverflow",
-    iconName: "simple-icons:stackoverflow",
+    href: 'https://stackoverflow.com/questions/tagged/nix+or+nixpkgs+or+nixos+or+nixops',
+    name: 'Stackoverflow',
+    iconName: 'simple-icons:stackoverflow',
   },
   {
-    href: "https://discord.gg/BqdJJFER4H",
-    name: "Discord",
-    iconName: "simple-icons:discord",
+    href: 'https://discord.gg/BqdJJFER4H',
+    name: 'Discord',
+    iconName: 'simple-icons:discord',
   },
   {
-    href: "https://www.reddit.com/r/NixOS/",
-    name: "Reddit",
-    iconName: "simple-icons:reddit",
+    href: 'https://www.reddit.com/r/NixOS/',
+    name: 'Reddit',
+    iconName: 'simple-icons:reddit',
   },
 ];
 
-import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
+import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
 ---
 
 <Layout title="Community">
   <PageHeader text="Community" />
-  <Container class="font-extralight leading-relaxed space-y-4 mt-16">
+  <Container class="mt-16 space-y-4 font-extralight leading-relaxed">
     <p class="text-lg font-bold text-gray-700">
       Nix and NixOS are developed and used by a diverse and welcoming community
       from all around the world.
@@ -190,16 +190,16 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     </p>
   </Container>
   <Container>
-    <h2 class="text-4xl font-bold font-heading leading-none text-nix-blue mt-8">
+    <h2 class="mt-8 font-heading text-4xl font-bold leading-none text-nix-blue">
       Where to talk?
     </h2>
-    <p class="font-extralight leading-relaxed mt-2">
+    <p class="mt-2 font-extralight leading-relaxed">
       The Nix community is spread across various platforms. Here are the
       official and unofficial spaces where you can find help, discuss
       development, and chat with other users.
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div class="md:col-span-2">
-          <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">
+          <h3 class="mt-4 font-heading text-3xl font-bold text-nix-blue">
             Official spaces
           </h3>
           <p class="text-gray-700">
@@ -210,7 +210,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
               >here</a
             >.
 
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 flex-wrap">
+            <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-2">
               {
                 platformsMain.map((platform, i) => (
                   <OfficialCommunityLink
@@ -218,7 +218,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
                     name={platform.name}
                     iconName={platform.iconName}
                     description={platform.description}
-                    class={i === 0 && "md:col-span-2"}
+                    class={i === 0 && 'md:col-span-2'}
                   />
                 ))
               }
@@ -226,14 +226,14 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
           </p>
         </div>
         <div class="col-span-1">
-          <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">
+          <h3 class="mt-4 font-heading text-3xl font-bold text-nix-blue">
             Official social-media
           </h3>
           <p class="text-gray-700">
             These spaces are maintained by our NixOS Marketing Team though not
             monitored and not moderated by the NixOS Moderation Team.
 
-            <ul class="grid grid-cols-1 gap-4 mt-4 flex-wrap">
+            <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4">
               {
                 socialMediaMain.map((platform) => (
                   <OfficialCommunityLink
@@ -247,12 +247,12 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
           </p>
         </div>
         <div class="md:col-span-3">
-          <h3 class="text-3xl font-bold font-heading text-nix-blue mt-4">
+          <h3 class="mt-4 font-heading text-3xl font-bold text-nix-blue">
             Our calendars
           </h3>
           <p class="text-gray-700">
             We use these calendars to schedule events, meetings, and other.
-            <ul class="grid md:grid-cols-3 gap-4 mt-4 flex-wrap">
+            <ul class="mt-4 grid flex-wrap gap-4 md:grid-cols-3">
               {
                 calendarsMain.map((platform) => (
                   <OfficialCommunityLink
@@ -266,7 +266,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
           </p>
         </div>
       </div>
-      <h3 class="text-3xl font-bold font-heading text-nix-blue mt-6">
+      <h3 class="mt-6 font-heading text-3xl font-bold text-nix-blue">
         Unofficial spaces
       </h3>
       <p class="text-gray-700">
@@ -275,7 +275,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         these spaces. The NixOS moderation team may advise moderators in these
         spaces, though does not control or enforce our community values.
 
-        <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 flex-wrap">
+        <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
           {
             platformsOutside.map((platform) => (
               <UnofficialCommunityLink
@@ -297,17 +297,17 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     > that offer Nix related services.
   </Banner>
   <Divider mirrorY />
-  <div class="bg-nix-blue text-white py-8">
+  <div class="bg-nix-blue py-8 text-white">
     <Container>
-      <h2 class="text-4xl font-bold font-heading">NixCon</h2>
-      <p class="mt-2 text-xl font-bold mb-4">
+      <h2 class="font-heading text-4xl font-bold">NixCon</h2>
+      <p class="mb-4 mt-2 text-xl font-bold">
         The
         <a class="!text-white" href="/community/teams/nixcon">NixCon Team</a>
         organizes a conference once a year.
       </p>
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="col-span-2 md:col-span-1 bg-nix-blue-dark p-4 rounded-xl">
-          <h3 class="text-3xl font-heading font-bold mb-4">Next Conference</h3>
+      <div class="grid gap-4 md:grid-cols-3">
+        <div class="col-span-2 rounded-xl bg-nix-blue-dark p-4 md:col-span-1">
+          <h3 class="mb-4 font-heading text-3xl font-bold">Next Conference</h3>
           <NixConEntry
             imagePath={nixcons[0].imagePath}
             title={nixcons[0].title}
@@ -317,8 +317,8 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
           />
         </div>
         <div class="col-span-2 md:py-4">
-          <h3 class="text-3xl font-heading font-bold">Previous Conferences</h3>
-          <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <h3 class="font-heading text-3xl font-bold">Previous Conferences</h3>
+          <div class="mt-4 grid gap-4 md:grid-cols-2">
             {
               nixcons
                 .slice(1)
@@ -338,12 +338,12 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
   </div>
   <Divider />
   <Container>
-    <h2 class="text-4xl font-bold font-heading text-nix-blue mt-8">Meetups</h2>
+    <h2 class="mt-8 font-heading text-4xl font-bold text-nix-blue">Meetups</h2>
     <div
-      class="mt-4 grid md:grid-flow-col auto-cols-fr font-extralight text-center text-lg bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat"
+      class="mt-4 grid auto-cols-fr bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat text-center text-lg font-extralight md:grid-flow-col"
     >
       <div>
-        <h3 class="mt-4 md:mt-2 font-bold font-heading text-2xl text-nix-blue">
+        <h3 class="mt-4 font-heading text-2xl font-bold text-nix-blue md:mt-2">
           America
         </h3>
         <ul class="mt-2 space-y-4">
@@ -357,7 +357,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         </ul>
       </div>
       <div>
-        <h3 class="mt-4 md:mt-2 font-bold font-heading text-2xl text-nix-blue">
+        <h3 class="mt-4 font-heading text-2xl font-bold text-nix-blue md:mt-2">
           Europe
         </h3>
         <ul class="mt-2 space-y-4">
@@ -371,7 +371,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         </ul>
       </div>
       <div>
-        <h3 class="mt-4 md:mt-2 font-bold font-heading text-2xl text-nix-blue">
+        <h3 class="mt-4 font-heading text-2xl font-bold text-nix-blue md:mt-2">
           Asia
         </h3>
         <ul class="mt-2 space-y-4">
@@ -386,10 +386,10 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
       </div>
     </div>
     <div
-      class="flex flex-wrap-reverse gap-8 font-extralight leading-loose mt-16"
+      class="mt-16 flex flex-wrap-reverse gap-8 font-extralight leading-loose"
     >
-      <div class="flex-1 flex flex-col items-start gap-8 justify-center">
-        <h2 class="text-4xl font-bold text-nix-blue leading-none">
+      <div class="flex flex-1 flex-col items-start justify-center gap-8">
+        <h2 class="text-4xl font-bold leading-none text-nix-blue">
           RFC Process
         </h2>
         <p>
@@ -402,7 +402,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
           >Learn more</Button
         >
       </div>
-      <div class="flex-0 md:max-w-2xl w-full md:w-3/6 mt-2">
+      <div class="flex-0 mt-2 w-full md:w-3/6 md:max-w-2xl">
         <RfcDiagram />
       </div>
     </div>
@@ -412,25 +412,25 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
   </div>
   <div class="bg-nix-blue py-8">
     <Container>
-      <h2 class="text-4xl font-bold text-white mt-8" id="governance-teams">
+      <h2 class="mt-8 text-4xl font-bold text-white" id="governance-teams">
         Teams
       </h2>
-      <ul class="flex flex-wrap gap-x-6 gap-y-16 mt-8 justify-stretch">
+      <ul class="mt-8 flex flex-wrap justify-stretch gap-x-6 gap-y-16">
         {
           teams.map((team) => (
-            <li class="text-white [&>a]:inline-block basis-72 flex-grow flex flex-col items-center text-center md:items-start md:text-left gap-2">
+            <li class="flex flex-grow basis-72 flex-col items-center gap-2 text-center text-white md:items-start md:text-left [&>a]:inline-block">
               <img
-                src={`/images/teams/${team.slug.split("_")[1]}.svg`}
+                src={`/images/teams/${team.slug.split('_')[1]}.svg`}
                 alt={`${team.data.name} Logo`}
                 class="h-24"
               />
-              <h3 class="text-2xl font-bold font-heading">{team.data.name}</h3>
-              <p class="font-extralight leading-relaxed grow mb-2">
+              <h3 class="font-heading text-2xl font-bold">{team.data.name}</h3>
+              <p class="mb-2 grow font-extralight leading-relaxed">
                 {team.data.description}
               </p>
               <Button
                 color="green"
-                href={"/community/teams/" + team.slug.split("_")[1]}
+                href={'/community/teams/' + team.slug.split('_')[1]}
               >
                 Read more
               </Button>
@@ -441,8 +441,8 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
     </Container>
   </div>
   <Divider />
-  <Container class="grid md:grid-cols-2 mb-16 mt-8" id="foundation">
-    <div class="md:pb-0 text-center pb-4">
+  <Container class="mb-16 mt-8 grid md:grid-cols-2" id="foundation">
+    <div class="pb-4 text-center md:pb-0">
       <div class="flex flex-col items-center justify-center">
         <Image
           src={nixosFoundationLogo}
@@ -450,17 +450,17 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
           class="h-72"
         />
       </div>
-      <div class="text-left inline-block mb-4 mt-4">
+      <div class="mb-4 mt-4 inline-block text-left">
         <h2
-          class="md:text-center text-3xl text-nix-blue font-bold font-heading"
+          class="font-heading text-3xl font-bold text-nix-blue md:text-center"
         >
           Board members:
         </h2>
-        <ul class="mt-2 md:w-72 mx-auto pl-8 md:pl-10 list-disc">
+        <ul class="mx-auto mt-2 list-disc pl-8 md:w-72 md:pl-10">
           {
             teams
               .filter(
-                (team) => team.slug.split("_")[1] === "foundation-board",
+                (team) => team.slug.split('_')[1] === 'foundation-board',
               )[0]
               .data.members.map((member) => (
                 <li class="mb-1">
@@ -478,7 +478,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
       </div>
     </div>
     <div class="space-y-4 font-extralight leading-relaxed">
-      <h2 class="text-3xl text-nix-blue font-heading font-bold">
+      <h2 class="font-heading text-3xl font-bold text-nix-blue">
         The mission!
       </h2>
       <p>
@@ -490,7 +490,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
         In particular, the foundation supports Nix, Nixpkgs, NixOS, and
         operates:
       </p>
-      <ul class="list-disc ml-4">
+      <ul class="ml-4 list-disc">
         <li>
           <a href="https://cache.nixos.org"> cache.nixos.org</a>
           - the NixOS binary cache, containing over 120TB of prebuilt Nix packages.
@@ -519,14 +519,14 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
 </Layout>
 <script>
   const boxes = document
-    .getElementById("rfc-diagram")
-    .getElementsByTagName("rect");
-  const diagram = document.getElementById("rfc-diagram");
+    .getElementById('rfc-diagram')
+    .getElementsByTagName('rect');
+  const diagram = document.getElementById('rfc-diagram');
   const durationMiliseconds = 1500;
-  const baseActivationClasses = ["stroke-nix-blue"];
-  const successActivationClasses = ["stroke-nix-green"];
-  const failureActivationClasses = ["stroke-nix-orange", "opacity-50"];
-  const fadedActivationClasses = ["opacity-50"];
+  const baseActivationClasses = ['stroke-nix-blue'];
+  const successActivationClasses = ['stroke-nix-green'];
+  const failureActivationClasses = ['stroke-nix-orange', 'opacity-50'];
+  const fadedActivationClasses = ['opacity-50'];
   const timeline = [
     {
       element: boxes[9], // New Submission
@@ -577,7 +577,7 @@ import nixosFoundationLogo from "../assets/image/nixos-foundation-logo.svg";
   let isAnimating = false;
 
   timeline.forEach((box) => {
-    box.element.classList.add("transition-all", "duration-500", "ease-in");
+    box.element.classList.add('transition-all', 'duration-500', 'ease-in');
   });
 
   let highestIndex = 0;

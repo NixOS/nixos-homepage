@@ -3,8 +3,8 @@ date: 2018-08-15
 description: |
   If we knew what it was we were doing, it would not be called research,
   would it?
-title: "#06 - Formalizing review workflow, OfBorg update, String Context
-  explanation"
+title: '#06 - Formalizing review workflow, OfBorg update, String Context
+  explanation'
 ---
 
 # News

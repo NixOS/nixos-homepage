@@ -5,11 +5,11 @@
 
 @layer base {
   main a:-webkit-any-link {
-    @apply underline decoration-1 underline-offset-4 text-nix-blue-dark;
+    @apply text-nix-blue-dark underline decoration-1 underline-offset-4;
   }
 
   main a:any-link {
-    @apply underline decoration-1 underline-offset-4 text-nix-blue-dark;
+    @apply text-nix-blue-dark underline decoration-1 underline-offset-4;
   }
 }
 
@@ -23,11 +23,11 @@
   }
 
   article {
-    @apply leading-7 font-light;
+    @apply font-light leading-7;
   }
 
   article ol {
-    @apply list-decimal list-outside mb-2 ml-6;
+    @apply mb-2 ml-6 list-outside list-decimal;
   }
 
   article ol > li {
@@ -35,7 +35,7 @@
   }
 
   article ul {
-    @apply list-disc list-outside mb-2 ml-6;
+    @apply mb-2 ml-6 list-outside list-disc;
   }
 
   article ul > li {
@@ -43,7 +43,7 @@
   }
 
   article ul > li > ul {
-    @apply list-circle list-outside mt-1;
+    @apply mt-1 list-outside list-circle;
   }
 
   article ul > li > p:first-child {
@@ -55,7 +55,7 @@
   }
 
   article ul.inlinelist {
-    @apply list-none flex flex-col ml-0 mb-0;
+    @apply mb-0 ml-0 flex list-none flex-col;
   }
 
   article ul.inlinelist ul {
@@ -66,10 +66,10 @@
     @apply inline-block;
   }
   article ul.inlinelist li::after {
-    content: ", ";
+    content: ', ';
   }
   article ul.inlinelist li:last-child::after {
-    content: "";
+    content: '';
   }
 
   article b,
@@ -78,7 +78,7 @@
   }
 
   article h3 {
-    @apply text-2xl font-bold text-nix-blue mb-4;
+    @apply mb-4 text-2xl font-bold text-nix-blue;
   }
 
   article p {
@@ -90,15 +90,15 @@
   }
 
   article code {
-    @apply bg-gray-100 border-1 border-gray-300 px-1 pt-1 pb-1 rounded text-black font-mono font-[500];
+    @apply rounded border-1 border-gray-300 bg-gray-100 px-1 pb-1 pt-1 font-mono font-[500] text-black;
   }
 
   article pre {
-    @apply border-1 bg-[#3a3a3a] border-[#3a3a3a] px-4 py-4 rounded-3xl my-2 mb-4 overflow-x-auto;
+    @apply my-2 mb-4 overflow-x-auto rounded-3xl border-1 border-[#3a3a3a] bg-[#3a3a3a] px-4 py-4;
   }
 
   article pre code {
-    @apply bg-transparent border-none w-full p-0;
+    @apply w-full border-none bg-transparent p-0;
   }
 
   article .astro-code {
@@ -106,11 +106,11 @@
   }
 
   article img:not(.img-noadjust) {
-    @apply float-right inline ml-8 h-48 w-auto;
+    @apply float-right ml-8 inline h-48 w-auto;
   }
 
   article blockquote {
-    @apply border-l-4 border-nix-blue-darker px-4 mb-4 bg-nix-blue-extralight pt-2;
+    @apply mb-4 border-l-4 border-nix-blue-darker bg-nix-blue-extralight px-4 pt-2;
   }
 
   article h1,
@@ -119,7 +119,7 @@
   article h4,
   article h5,
   article h6 {
-    @apply font-bold font-heading text-nix-blue leading-tight;
+    @apply font-heading font-bold leading-tight text-nix-blue;
   }
 
   article h1:not(:first-child),
@@ -132,18 +132,18 @@
   }
 
   article h1 {
-    @apply text-4xl mb-2;
+    @apply mb-2 text-4xl;
   }
 
   article h2 {
-    @apply text-3xl mb-2;
+    @apply mb-2 text-3xl;
   }
 
   article h3 {
-    @apply text-2xl mb-2;
+    @apply mb-2 text-2xl;
   }
 
   article h4 {
-    @apply text-xl mb-2;
+    @apply mb-2 text-xl;
   }
 }

@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets';
 
 interface Props {
   title: string;
@@ -16,19 +16,19 @@ const { title, date, description, href, imagePath = null } = Astro.props;
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="!no-underline !text-white font-extralight flex flex-col gap-1"
+  class="flex flex-col gap-1 font-extralight !text-white !no-underline"
 >
   {
     imagePath && (
-      <div class="flex justify-center bg-white rounded-xl mb-4 p-4 h-48">
+      <div class="mb-4 flex h-48 justify-center rounded-xl bg-white p-4">
         <Image src={imagePath} alt={`${title} Logo`} width="200" height="200" />
       </div>
     )
   }
-  <h4 class="text-lg font-bold font-heading">{title}</h4>
+  <h4 class="font-heading text-lg font-bold">{title}</h4>
   <div class="text-sm">{date}</div>
   <div class="leading-relaxed">{description}</div>
-  <div class="!text-white text-right font-bold">
+  <div class="text-right font-bold !text-white">
     <span class="underline">Read more...</span>
   </div>
 </a>

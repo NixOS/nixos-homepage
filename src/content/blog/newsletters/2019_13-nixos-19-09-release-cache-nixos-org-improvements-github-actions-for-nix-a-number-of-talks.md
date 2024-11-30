@@ -1,5 +1,5 @@
 ---
-title: "#13 - NixOS 19.09 release, cache.nixos.org improvements, github actions for Nix, a number of talks"
+title: '#13 - NixOS 19.09 release, cache.nixos.org improvements, github actions for Nix, a number of talks'
 date: 2019-10-10
 description: Adopting the right attitude can convert a negative stress into a positive one - Hans Selye
 ---

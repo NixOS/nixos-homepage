@@ -1,11 +1,11 @@
 ---
-import { Icon } from "astro-icon/components";
-import { getEntry } from "astro:content";
-import Container from "../components/layout/Container.astro";
-import InlineSVG from "../components/util/InlineSVG.astro";
-const headerMenu = await getEntry("menus", "header");
+import { Icon } from 'astro-icon/components';
+import { getEntry } from 'astro:content';
+import Container from '../components/layout/Container.astro';
+import InlineSVG from '../components/util/InlineSVG.astro';
+const headerMenu = await getEntry('menus', 'header');
 
-const currentTopRoute = `/${Astro.url.pathname.split("/")[1]}`;
+const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
 const navbarItemStyle = `text-center text-nix-blue-dark md:text-black md:hover:border-b-nix-blue-light border-b-4`;
 const navbarItemInactiveStyle = `border-b-nix-blue-extralight md:border-b-transparent bg-nix-blue-extralight md:bg-transparent`;
@@ -14,15 +14,15 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
 
 <header
   role="banner"
-  class="bg-white text-black font-extralight drop-shadow-md"
+  class="bg-white font-extralight text-black drop-shadow-md"
 >
-  <Container class="flex flex-col md:flex-row justify-between md:items-center">
+  <Container class="flex flex-col justify-between md:flex-row md:items-center">
     <div
-      class="text-4xl font-normal gap-2 flex justify-between md:justify-start items-center my-2"
+      class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start"
     >
       <a
         href="/"
-        class="select-none gap-2 flex justify-between md:justify-start items-center"
+        class="flex select-none items-center justify-between gap-2 md:justify-start"
       >
         <InlineSVG
           class="h-16 w-auto"
@@ -30,32 +30,32 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
           alt="Nixos Logo"
         />
         <InlineSVG
-          class="h-16 block md:hidden xl:block w-auto"
+          class="block h-16 w-auto md:hidden xl:block"
           src="/src/assets/image/nixos-logo-text.svg"
           alt="Nixos Logo Text"
         />
       </a>
       <button
         aria-label="Main Navigation Toggle"
-        class="bg-nix-blue-light block md:hidden p-4 rounded-lg"
+        class="block rounded-lg bg-nix-blue-light p-4 md:hidden"
         id="navigation-toggle"
       >
-        <span class="bg-white block w-8 h-1 mb-1.5"></span>
-        <span class="bg-white block w-8 h-1 mb-1.5"></span>
-        <span class="bg-white block w-8 h-1"></span>
+        <span class="mb-1.5 block h-1 w-8 bg-white"></span>
+        <span class="mb-1.5 block h-1 w-8 bg-white"></span>
+        <span class="block h-1 w-8 bg-white"></span>
       </button>
     </div>
     <nav
       aria-label="Main Navigation"
       role="menubar"
-      class="flex pb-4 md:pb-0 flex-col md:flex-row gap-0.5 md:gap-5 md:flex"
+      class="flex flex-col gap-0.5 pb-4 md:flex md:flex-row md:gap-5 md:pb-0"
       id="navbar-menu"
     >
       {
         headerMenu.data.items.map((item) => (
           <a
             class:list={[
-              "pt-8 pb-6",
+              'pb-6 pt-8',
               navbarItemStyle,
               currentTopRoute === item.link
                 ? navbarItemActiveStyle
@@ -76,7 +76,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
       >
         <Icon
           alt="Search"
-          class="h-8 w-8 text-nix-blue hidden md:block"
+          class="hidden h-8 w-8 text-nix-blue md:block"
           name="mdi:search"
         />
         <span class="inline-block md:hidden">Search</span>
@@ -86,14 +86,14 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
 </header>
 
 <script lang="ts">
-  const navigationToggle = document.getElementById("navigation-toggle");
-  const navbarMenu = document.getElementById("navbar-menu");
+  const navigationToggle = document.getElementById('navigation-toggle');
+  const navbarMenu = document.getElementById('navbar-menu');
 
   function toggleMenu() {
-    navbarMenu.classList.toggle("hidden");
-    navbarMenu.classList.toggle("flex");
+    navbarMenu.classList.toggle('hidden');
+    navbarMenu.classList.toggle('flex');
   }
   toggleMenu();
 
-  navigationToggle.addEventListener("click", () => toggleMenu());
+  navigationToggle.addEventListener('click', () => toggleMenu());
 </script>

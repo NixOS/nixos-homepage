@@ -1,16 +1,16 @@
 ---
-import { getEntry } from "astro:content";
+import { getEntry } from 'astro:content';
 
-import Layout from "../layouts/Layout.astro";
-import Container from "../components/layout/Container.astro";
-import PageHeader from "../components/layout/PageHeader.astro";
-import SponsorLogo from "../components/layout/SponsorLogo.astro";
-import Button from "../components/ui/Button.astro";
+import Container from '../components/layout/Container.astro';
+import PageHeader from '../components/layout/PageHeader.astro';
+import SponsorLogo from '../components/layout/SponsorLogo.astro';
+import Button from '../components/ui/Button.astro';
+import Layout from '../layouts/Layout.astro';
 
-import Divider from "../components/layout/Divider.astro";
-import InlineSVG from "../components/util/InlineSVG.astro";
+import Divider from '../components/layout/Divider.astro';
+import InlineSVG from '../components/util/InlineSVG.astro';
 
-const sponsors = await getEntry("sponsors", "info");
+const sponsors = await getEntry('sponsors', 'info');
 ---
 
 <Layout title="Donate">
@@ -23,9 +23,9 @@ const sponsors = await getEntry("sponsors", "info");
     </p>
   </Container>
 
-  <Container class="grid md:grid-cols-2 gap-8 px-12 pt-8 pb-20">
+  <Container class="grid gap-8 px-12 pb-20 pt-8 md:grid-cols-2">
     <div
-      class="flex flex-col justify-center font-extralight gap-4 leading-relaxed"
+      class="flex flex-col justify-center gap-4 font-extralight leading-relaxed"
     >
       <p>
         Maintaining our build farm and binary cache is very expensive. We depend
@@ -46,19 +46,19 @@ const sponsors = await getEntry("sponsors", "info");
     </div>
   </Container>
   <Divider style="slope" mirrorX mirrorY />
-  <div class="bg-nix-blue py-16 md:py-16 md:px-12 text-white">
-    <Container class="grid md:grid-cols-2 gap-8 md:px-12">
+  <div class="bg-nix-blue py-16 text-white md:px-12 md:py-16">
+    <Container class="grid gap-8 md:grid-cols-2 md:px-12">
       <div class="flex flex-col gap-4">
         <img src="/images/donate/merch.svg" class="h-64 md:h-full" />
       </div>
       <div class="flex flex-col justify-center gap-4">
-        <h1 class="text-4xl leading-tight font-bold font-heading max-w-96">
+        <h1 class="max-w-96 font-heading text-4xl font-bold leading-tight">
           NixOS T-shirts, mugs and more...
         </h1>
         <p class="font-extralight">
           Donate to NixOS foundation by purchasing NixOS merchandise.
         </p>
-        <div class="flex flex-col md:flex-row justify-stretch gap-4">
+        <div class="flex flex-col justify-stretch gap-4 md:flex-row">
           <Button
             color="green"
             size="sm"
@@ -71,9 +71,9 @@ const sponsors = await getEntry("sponsors", "info");
     </Container>
   </div>
   <Divider style="slope" mirrorX />
-  <Container class="grid md:grid-cols-2 gap-8 py-16 px-12">
+  <Container class="grid gap-8 px-12 py-16 md:grid-cols-2">
     <div class="flex flex-col gap-4">
-      <h2 class="text-3xl font-bold font-heading text-nix-blue pb-2">
+      <h2 class="pb-2 font-heading text-3xl font-bold text-nix-blue">
         Donate using Open Collective
       </h2>
       <p class="font-extralight leading-relaxed">
@@ -82,13 +82,13 @@ const sponsors = await getEntry("sponsors", "info");
         to manage the finances so everyone can see where money comes from and where
         money goes.
       </p>
-      <p class="font-extralight text-light-bold leading-relaxed">
+      <p class="text-light-bold font-extralight leading-relaxed">
         With Open Collective you can make a <strong>single</strong> or <strong
           >recurring</strong
         > contribution by credit card transfer.
       </p>
       <p class="font-extralight leading-relaxed">Thank you!</p>
-      <div class="flex flex-col md:flex-row justify-stretch gap-4">
+      <div class="flex flex-col justify-stretch gap-4 md:flex-row">
         <Button
           color="semidarkblue"
           size="sm"
@@ -98,8 +98,8 @@ const sponsors = await getEntry("sponsors", "info");
         </Button>
       </div>
     </div>
-    <div class="flex flex-col gap-4 justify-center">
-      <h2 class="text-3xl font-bold text-nix-blue pb-2">
+    <div class="flex flex-col justify-center gap-4">
+      <h2 class="pb-2 text-3xl font-bold text-nix-blue">
         Donate with SEPA bank transfer
       </h2>
       <p class="font-extralight">
@@ -107,7 +107,7 @@ const sponsors = await getEntry("sponsors", "info");
         Please send payments to:
       </p>
       <pre
-        class="font-mono bg-nix-blue-extralight text-nix-blue-darker font-bold whitespace-pre-line p-8 rounded-3xl">
+        class="whitespace-pre-line rounded-3xl bg-nix-blue-extralight p-8 font-mono font-bold text-nix-blue-darker">
 Stichting NixOS Foundation, Utrecht, The Netherlands
 
 IBAN: NL13 BUNQ 2061 2530 32
@@ -126,10 +126,10 @@ BIC:  BUNQNL2AXXX</pre>
   </Container>
   <Divider style="slope" mirrorY />
   <div class="bg-nix-blue py-16 text-white">
-    <Container class="grid md:grid-cols-2 gap-8 px-12">
+    <Container class="grid gap-8 px-12 md:grid-cols-2">
       <div class="flex flex-col justify-center">
         <div
-          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         >
           {
             sponsors.data.items.map((item) => (
@@ -143,8 +143,8 @@ BIC:  BUNQNL2AXXX</pre>
           }
         </div>
       </div>
-      <div class="flex flex-col gap-4 justify-center">
-        <h2 class="text-3xl sm:text-4xl font-bold font-heading sm:pb-2">
+      <div class="flex flex-col justify-center gap-4">
+        <h2 class="font-heading text-3xl font-bold sm:pb-2 sm:text-4xl">
           Acknowledgements
         </h2>
         <p class="font-extralight">

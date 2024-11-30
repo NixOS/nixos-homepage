@@ -2,7 +2,7 @@
 date: 2017-04-03
 description: |
   Tonight We Ride - Said The King To The River from La Dispute
-title: "#05 - Tonight We Ride"
+title: '#05 - Tonight We Ride'
 ---
 
 The [17.03 \"Gorilla\"

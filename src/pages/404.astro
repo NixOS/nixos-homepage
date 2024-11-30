@@ -1,12 +1,12 @@
 ---
-import Container from "../components/layout/Container.astro";
-import Layout from "../layouts/Layout.astro";
+import Container from '../components/layout/Container.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Not Found">
   <Container>
     <h1
-      class="mt-10 text-4xl text-nix-blue font-heading font-extrabold leading-none mb-4"
+      class="mb-4 mt-10 font-heading text-4xl font-extrabold leading-none text-nix-blue"
     >
       Not found
     </h1>
@@ -14,7 +14,7 @@ import Layout from "../layouts/Layout.astro";
       The requested content<span id="signpost"></span> could not be found.
     </p>
     <script is:inline>
-      document.getElementById("signpost").innerHTML =
+      document.getElementById('signpost').innerHTML =
         ` at <code>${window.location.pathname}</code>`;
     </script>
   </Container>

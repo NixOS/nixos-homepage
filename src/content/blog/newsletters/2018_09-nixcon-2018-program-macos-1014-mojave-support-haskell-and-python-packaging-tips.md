@@ -2,8 +2,8 @@
 date: 2018-09-26
 description: |
   There is nothing impossible to them who will try.
-title: "#09 - NixCon 2018 program, macOS 10.14 Mojave support, Haskell
-  and Python packaging tips"
+title: '#09 - NixCon 2018 program, macOS 10.14 Mojave support, Haskell
+  and Python packaging tips'
 ---
 
 # News

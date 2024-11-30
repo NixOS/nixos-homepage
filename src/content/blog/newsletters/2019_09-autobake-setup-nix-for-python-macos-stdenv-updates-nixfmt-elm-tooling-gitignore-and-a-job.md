@@ -1,5 +1,5 @@
 ---
-title: "#09 - autobake, setup.nix for Python, macOS stdenv updates, nixfmt, Elm tooling, gitignore and a job"
+title: '#09 - autobake, setup.nix for Python, macOS stdenv updates, nixfmt, Elm tooling, gitignore and a job'
 date: 2019-05-15
 description: The essence of all art is to have pleasure in giving pleasure - Dale Carnegie
 ---

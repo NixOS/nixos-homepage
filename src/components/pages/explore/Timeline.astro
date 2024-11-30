@@ -1,7 +1,7 @@
 ---
 interface Props {
   number: string;
-  imageLocation?: "left" | "right";
+  imageLocation?: 'left' | 'right';
   imageSrc: string;
   heading: string;
   subHeading: string;
@@ -12,25 +12,25 @@ interface Props {
 
 const {
   number = 0,
-  imageLocation = "left",
+  imageLocation = 'left',
   imageSrc,
   ...textProps
 } = Astro.props;
 
-import TimelineCenter from "./TimelineCenter.astro";
-import TimelineText from "./TimelineText.astro";
+import TimelineCenter from './TimelineCenter.astro';
+import TimelineText from './TimelineText.astro';
 
-const textCommonClasses = "flex flex-col justify-start font-extralight gap-4";
-const imageCommonClasses = "px-12 mx-auto my-12 w-10/12 md:w-full";
+const textCommonClasses = 'flex flex-col justify-start font-extralight gap-4';
+const imageCommonClasses = 'px-12 mx-auto my-12 w-10/12 md:w-full';
 ---
 
 {
-  imageLocation === "left" ? (
+  imageLocation === 'left' ? (
     <>
       <div class="justify-self-center md:justify-self-end">
         <img src={imageSrc} class:list={[imageCommonClasses]} />
       </div>
-      <div class:list={[textCommonClasses, "text-left", "relative"]}>
+      <div class:list={[textCommonClasses, 'text-left', 'relative']}>
         <TimelineCenter number={number} />
         <TimelineText location="right" {...textProps} />
       </div>
@@ -40,13 +40,13 @@ const imageCommonClasses = "px-12 mx-auto my-12 w-10/12 md:w-full";
       <div
         class:list={[
           textCommonClasses,
-          "order-last md:order-first",
-          "text-left md:text-right",
+          'order-last md:order-first',
+          'text-left md:text-right',
         ]}
       >
         <TimelineText location="left" {...textProps} />
       </div>
-      <div class="justify-self-center md:justify-self-start relative">
+      <div class="relative justify-self-center md:justify-self-start">
         <TimelineCenter number={number} />
         <img src={imageSrc} class:list={[imageCommonClasses]} />
       </div>

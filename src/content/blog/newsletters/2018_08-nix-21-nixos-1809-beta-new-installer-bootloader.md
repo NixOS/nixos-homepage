@@ -3,7 +3,7 @@ date: 2018-09-05
 description: |
   The free sharing and teaching of open source is incompatible with the
   notion of the solitary genius.
-title: "#08 - Nix 2.1, NixOS 18.09 beta, new installer bootloader"
+title: '#08 - Nix 2.1, NixOS 18.09 beta, new installer bootloader'
 ---
 
 # News

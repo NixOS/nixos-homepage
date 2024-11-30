@@ -1,5 +1,5 @@
 ---
-title: "#11 - Nixery, nixfmt and Cachix releases, NixCon 2019 tickets, a job and first impressions post"
+title: '#11 - Nixery, nixfmt and Cachix releases, NixCon 2019 tickets, a job and first impressions post'
 date: 2019-07-31
 description: The things that we love tell us what we are - Thomas Aquinas
 ---

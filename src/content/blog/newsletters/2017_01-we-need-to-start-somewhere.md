@@ -3,7 +3,7 @@ date: 2017-01-23
 description: |
   Almost all good writing begins with terrible first efforts. You need
   to start somewhere. (Anne Lamott)
-title: "#01 - We need to start somewhere"
+title: '#01 - We need to start somewhere'
 ---
 
 Welcome to the first edition of NixOS weekly. We will do our best to

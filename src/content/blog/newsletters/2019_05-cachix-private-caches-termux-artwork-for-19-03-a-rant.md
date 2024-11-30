@@ -1,5 +1,5 @@
 ---
-title: "#05 - Cachix private caches, Termux, Artwork for 19.03, a rant"
+title: '#05 - Cachix private caches, Termux, Artwork for 19.03, a rant'
 date: 2019-03-13
 description: My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.
 ---

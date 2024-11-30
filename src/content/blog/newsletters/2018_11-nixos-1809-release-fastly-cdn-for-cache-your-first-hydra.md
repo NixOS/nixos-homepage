@@ -2,8 +2,8 @@
 date: 2018-10-10
 description: |
   No act of kindness, no matter how small, is ever wasted.
-title: "#11 - NixOS 18.09 release, Fastly CDN for cache, your first
-  Hydra"
+title: '#11 - NixOS 18.09 release, Fastly CDN for cache, your first
+  Hydra'
 ---
 
 # News

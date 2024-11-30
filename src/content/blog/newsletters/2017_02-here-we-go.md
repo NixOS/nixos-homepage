@@ -2,7 +2,7 @@
 date: 2017-02-06
 description: |
   Here we go. (Super Mario)
-title: "#02 - Here we go"
+title: '#02 - Here we go'
 ---
 
 Let us together review what happened in NixOS community in last 2 weeks.

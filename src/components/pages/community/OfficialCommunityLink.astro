@@ -1,48 +1,48 @@
 ---
-import { Icon } from "astro-icon/components";
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   href: string;
   iconName: string;
   name?: string;
   description?: string;
-  type?: "full" | "mobile_icon_desktop_name" | "icon";
+  type?: 'full' | 'mobile_icon_desktop_name' | 'icon';
   class?: string;
 }
 
 const {
   href,
   iconName,
-  name = "",
-  description = "",
-  type = "full",
+  name = '',
+  description = '',
+  type = 'full',
   class: extraClasses,
 } = Astro.props;
 ---
 
 <li
   class:list={[
-    "bg-nix-blue flex-1 rounded-xl p-4 hover:bg-nix-blue-dark transition-all cursor-pointer",
-    type === "icon" && "flex flex-col items-center justify-center",
+    'flex-1 cursor-pointer rounded-xl bg-nix-blue p-4 transition-all hover:bg-nix-blue-dark',
+    type === 'icon' && 'flex flex-col items-center justify-center',
     extraClasses,
   ]}
 >
-  <a href={href} class="!no-underline !text-white">
+  <a href={href} class="!text-white !no-underline">
     <div
       class:list={[
-        "flex gap-2 text-xl font-bold",
-        (type !== "full" || description === "") && "h-full",
-        type === "mobile_icon_desktop_name" &&
-          "flex-col md:flex-row items-center justify-center md:justify-start",
+        'flex gap-2 text-xl font-bold',
+        (type !== 'full' || description === '') && 'h-full',
+        type === 'mobile_icon_desktop_name' &&
+          'flex-col items-center justify-center md:flex-row md:justify-start',
       ]}
     >
-      <Icon name={iconName} alt={"logo of " + name} class="w-8 h-8" />
+      <Icon name={iconName} alt={'logo of ' + name} class="h-8 w-8" />
       {
-        type !== "icon" && (
+        type !== 'icon' && (
           <span
             class:list={[
-              "leading-8 ml-2",
-              type === "mobile_icon_desktop_name" && "hidden md:block",
+              'ml-2 leading-8',
+              type === 'mobile_icon_desktop_name' && 'hidden md:block',
             ]}
           >
             {name}
@@ -51,7 +51,7 @@ const {
       }
     </div>
     {
-      description !== "" && type === "full" && (
+      description !== '' && type === 'full' && (
         <div class="mt-2">{description}</div>
       )
     }

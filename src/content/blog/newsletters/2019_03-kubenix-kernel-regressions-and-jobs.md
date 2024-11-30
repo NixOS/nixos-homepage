@@ -1,5 +1,5 @@
 ---
-title: "#03 - Kubenix, kernel regressions and jobs"
+title: '#03 - Kubenix, kernel regressions and jobs'
 date: 2019-02-20
 description: From what we get, we can make a living; what we give, however, makes a life.
 ---

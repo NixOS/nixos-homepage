@@ -2,7 +2,7 @@
 date: 2017-03-13
 description: |
   Everything not saved will be lost. (Nintendo Quit Screen message)
-title: "#04 - Everything not saved will be lost"
+title: '#04 - Everything not saved will be lost'
 ---
 
 Nix, NixOS and nixpkgs are all moving ahead at good speed. The [17.03

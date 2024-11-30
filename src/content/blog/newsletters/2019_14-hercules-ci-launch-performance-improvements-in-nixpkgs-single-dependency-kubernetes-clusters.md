@@ -1,5 +1,5 @@
 ---
-title: "#14 - Hercules CI launch, performance improvements in nixpkgs, single dependency kubernetes clusters"
+title: '#14 - Hercules CI launch, performance improvements in nixpkgs, single dependency kubernetes clusters'
 date: 2019-11-13
 description: Be the change that you wish to see in the world. - Mahatma Gandhi
 ---

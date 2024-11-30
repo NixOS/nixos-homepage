@@ -1,11 +1,11 @@
-import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
-import sanitizeHtml from "sanitize-html";
-import MarkdownIt from "markdown-it";
-import { getEntry } from "astro:content";
-import { generatePathFromPost } from "../../lib/utils";
+import rss from '@astrojs/rss';
+import { getCollection } from 'astro:content';
+import sanitizeHtml from 'sanitize-html';
+import MarkdownIt from 'markdown-it';
+import { getEntry } from 'astro:content';
+import { generatePathFromPost } from '../../lib/utils';
 const parser = new MarkdownIt();
-const blogMenu = await getEntry("menus", "blog");
+const blogMenu = await getEntry('menus', 'blog');
 
 export function getStaticPaths() {
   return blogMenu.data.map((e) => {
@@ -14,7 +14,7 @@ export function getStaticPaths() {
 }
 
 export async function GET(context) {
-  const blog = await getCollection("blog");
+  const blog = await getCollection('blog');
   const title =
     context.params.id.charAt(0).toUpperCase() + context.params.id.slice(1);
   const numOfPosts = 10;
@@ -32,7 +32,7 @@ export async function GET(context) {
     site: `${context.site}/blog`,
     description: `${title} on NixOS, the purely functional Linux distribution.`,
     items: posts.slice(0, numOfPosts).map((post) => ({
-      title: post.data.title ?? "Untitled",
+      title: post.data.title ?? 'Untitled',
       pubDate: post.data.date ?? new Date().toISOString(),
       content: sanitizeHtml(parser.render(post.body)),
       link: generatePathFromPost(post),

@@ -1,5 +1,5 @@
 ---
-title: "#14 - Reproducible builds summit, Gnome 3.30, RFC process, linter, Arion"
+title: '#14 - Reproducible builds summit, Gnome 3.30, RFC process, linter, Arion'
 date: 2018-12-19
 description: Start by doing what's necessary; then do what's possible; and suddenly you are doing the impossible.
 ---

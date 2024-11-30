@@ -1,15 +1,15 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection } from 'astro:content';
 
-import Layout from "../../../layouts/Layout.astro";
-import PageHeader from "../../../components/layout/PageHeader.astro";
-import Container from "../../../components/layout/Container.astro";
-import MembersDisplay from "../../../components/pages/community/teams/MembersDisplay.astro";
+import Container from '../../../components/layout/Container.astro';
+import PageHeader from '../../../components/layout/PageHeader.astro';
+import MembersDisplay from '../../../components/pages/community/teams/MembersDisplay.astro';
+import Layout from '../../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
-  const teamEntries = await getCollection("teams");
+  const teamEntries = await getCollection('teams');
   return teamEntries.map((entry) => ({
-    params: { slug: entry.slug.split("_")[1] },
+    params: { slug: entry.slug.split('_')[1] },
     props: { entry },
   }));
 }
@@ -32,7 +32,7 @@ const { Content } = await entry.render();
     {
       entry.data.subteams && entry.data.subteams.length > 0 && (
         <>
-          <div class="flex gap-4 flex-wrap pt-4">
+          <div class="flex flex-wrap gap-4 pt-4">
             {entry.data.subteams.map((subteam) => (
               <MembersDisplay
                 key={subteam.name}

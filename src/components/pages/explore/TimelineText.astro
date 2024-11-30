@@ -5,7 +5,7 @@ interface Props {
   tags: Array<{ href: string | null; text: string }>;
   paragraphs: string[];
   emphasis?: string | null;
-  location?: "left" | "right";
+  location?: 'left' | 'right';
 }
 
 const {
@@ -14,22 +14,22 @@ const {
   tags,
   paragraphs,
   emphasis = null,
-  location = "left",
+  location = 'left',
 } = Astro.props;
 
-import Tag from "../../ui/Tag.astro";
+import Tag from '../../ui/Tag.astro';
 ---
 
-<h2 class="text-[2rem] leading-[2.2rem] font-heading font-bold text-nix-blue">
+<h2 class="font-heading text-[2rem] font-bold leading-[2.2rem] text-nix-blue">
   {heading}
 </h2>
-<p class="text-xl leading-[2.2rem] font-bold text-neutral-500">{subHeading}</p>
+<p class="text-neutral-500 text-xl font-bold leading-[2.2rem]">{subHeading}</p>
 <div
   class="flex flex-wrap gap-1"
   class:list={[
     {
-      "justify-start md:justify-end": location === "left",
-      "justify-start": location === "right",
+      'justify-start md:justify-end': location === 'left',
+      'justify-start': location === 'right',
     },
   ]}
 >

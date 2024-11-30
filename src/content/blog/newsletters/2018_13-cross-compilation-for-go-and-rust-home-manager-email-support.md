@@ -1,5 +1,5 @@
 ---
-title: "#13 - Cross compilation for Go and Rust, home-manager email support"
+title: '#13 - Cross compilation for Go and Rust, home-manager email support'
 date: 2018-12-04
 description: No act of kindness, no matter how small, is ever wasted.
 ---

@@ -1,5 +1,5 @@
 ---
-title: "#10 - Redox on NixOS, ad-hoc container images, nix-mode.el, static site deploys, a job"
+title: '#10 - Redox on NixOS, ad-hoc container images, nix-mode.el, static site deploys, a job'
 date: 2019-06-27
 description: Someone is sitting in the shade today because someone planted a tree a long time ago - Warren Buffett
 ---

@@ -1,5 +1,5 @@
 ---
-title: "#12 - NixCon 2018 videos, Eris, NixDoc, Auto patching and jobs"
+title: '#12 - NixCon 2018 videos, Eris, NixDoc, Auto patching and jobs'
 date: 2018-11-16
 description: People Who Are Crazy Enough To Think They Can Change The World, Are The Ones Who Do
 ---

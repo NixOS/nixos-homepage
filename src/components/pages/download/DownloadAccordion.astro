@@ -1,10 +1,10 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection } from 'astro:content';
 
-const { family = "nix" } = Astro.props;
+const { family = 'nix' } = Astro.props;
 const accordionId = `download-${family}-accordion`;
 
-let downloadOptions = (await getCollection("download")).filter(
+let downloadOptions = (await getCollection('download')).filter(
   (option) => option.data.family === family,
 );
 ---
@@ -15,8 +15,8 @@ let downloadOptions = (await getCollection("download")).filter(
       downloadOptions.map(async (option) => {
         const { Content } = await option.render();
         const needsInstallInfix =
-          option.data.family === "nix" && option.data.platform !== "more";
-        const optionId = `${option.data.family}-${needsInstallInfix ? "install-" : ""}${option.data.platform}`;
+          option.data.family === 'nix' && option.data.platform !== 'more';
+        const optionId = `${option.data.family}-${needsInstallInfix ? 'install-' : ''}${option.data.platform}`;
 
         return (
           <>
@@ -26,18 +26,18 @@ let downloadOptions = (await getCollection("download")).filter(
                 aria-expanded="true"
                 aria-controls={optionId}
                 class:list={[
-                  "bg-nix-blue-extralight",
-                  "flex",
-                  "text-nix-blue-dark",
-                  "text-lg",
-                  "font-bold",
-                  "py-6",
-                  "px-8",
-                  "w-full",
-                  "rounded-2xl",
-                  "justify-start",
-                  "content-start",
-                  "my-4",
+                  'bg-nix-blue-extralight',
+                  'flex',
+                  'text-nix-blue-dark',
+                  'text-lg',
+                  'font-bold',
+                  'py-6',
+                  'px-8',
+                  'w-full',
+                  'rounded-2xl',
+                  'justify-start',
+                  'content-start',
+                  'my-4',
                 ]}
               >
                 {option.data.title}
@@ -62,31 +62,31 @@ let downloadOptions = (await getCollection("download")).filter(
 
 <script define:vars={{ id: accordionId }}>
   const acc = document.getElementById(id);
-  const panels = acc.querySelectorAll("[role=region]");
-  const triggers = acc.querySelectorAll("[aria-expanded]");
-  const menuContainer = acc.querySelector(".download-accordion-menu");
+  const panels = acc.querySelectorAll('[role=region]');
+  const triggers = acc.querySelectorAll('[aria-expanded]');
+  const menuContainer = acc.querySelector('.download-accordion-menu');
 
   let activePanel = panels[0];
 
-  if (id === "download-nix-accordion") {
+  if (id === 'download-nix-accordion') {
     const userPlatform = navigator.userAgent.toLowerCase();
-    let os = "linux";
-    if (userPlatform.includes("macintosh")) {
-      os = "macos";
-    } else if (userPlatform.includes("windows")) {
-      os = "windows";
+    let os = 'linux';
+    if (userPlatform.includes('macintosh')) {
+      os = 'macos';
+    } else if (userPlatform.includes('windows')) {
+      os = 'windows';
     }
     activePanel = acc.querySelector(`#nix-install-${os}`);
   }
 
   let currentWindowWidth = window.innerWidth;
-  const accContentArea = acc.appendChild(document.createElement("div"));
-  accContentArea.classList.add("col-span-2", "mt-4", "px-8");
+  const accContentArea = acc.appendChild(document.createElement('div'));
+  accContentArea.classList.add('col-span-2', 'mt-4', 'px-8');
   menuContainer.classList.add(
-    "md:bg-nix-blue-extralight",
-    "md:py-8",
-    "md:rounded-2xl",
-    "self-start",
+    'md:bg-nix-blue-extralight',
+    'md:py-8',
+    'md:rounded-2xl',
+    'self-start',
   );
 
   if (window.innerWidth > 768) {
@@ -95,7 +95,7 @@ let downloadOptions = (await getCollection("download")).filter(
     enterMobileMode();
   }
 
-  window.addEventListener("resize", () => {
+  window.addEventListener('resize', () => {
     if (window.innerWidth > 768 && currentWindowWidth <= 768) {
       enterDesktopMode();
     } else if (window.innerWidth <= 768 && currentWindowWidth > 768) {
@@ -105,11 +105,11 @@ let downloadOptions = (await getCollection("download")).filter(
   });
 
   acc.classList.add(
-    "md:grid",
-    "md:grid-cols-1",
-    "md:grid-cols-3",
-    "gap-4",
-    "md:py-8",
+    'md:grid',
+    'md:grid-cols-1',
+    'md:grid-cols-3',
+    'gap-4',
+    'md:py-8',
   );
 
   if (window.location.hash) {
@@ -144,19 +144,19 @@ let downloadOptions = (await getCollection("download")).filter(
 
   function togglePanelVisibility(panel, trigger, visible = false) {
     if (visible) {
-      panel.classList.remove("hidden");
-      panel.classList.add("block");
-      trigger.setAttribute("aria-expanded", "true");
+      panel.classList.remove('hidden');
+      panel.classList.add('block');
+      trigger.setAttribute('aria-expanded', 'true');
     } else {
-      panel.classList.remove("block");
-      panel.classList.add("hidden");
-      trigger.setAttribute("aria-expanded", "false");
+      panel.classList.remove('block');
+      panel.classList.add('hidden');
+      trigger.setAttribute('aria-expanded', 'false');
     }
   }
 
   function togglePanel(e) {
     const panel = acc.querySelector(
-      `#${e.target.getAttribute("aria-controls")}`,
+      `#${e.target.getAttribute('aria-controls')}`,
     );
     if (panel === activePanel) {
       return;
@@ -171,27 +171,27 @@ let downloadOptions = (await getCollection("download")).filter(
   }
 
   for (let i = 0; i < triggers.length; i++) {
-    triggers[i].addEventListener("click", togglePanel);
+    triggers[i].addEventListener('click', togglePanel);
     triggers[i].classList.add(
-      "md:my-0",
-      "md:text-nix-blue-light",
-      "md:rounded-none",
-      "md:aria-expanded:bg-white",
-      "md:aria-expanded:text-nix-blue-dark",
-      "before:icon-[mdi--arrow-up-drop-circle]",
-      "before:block",
-      "before:absolute",
-      "before:h-8",
-      "before:w-8",
-      "before:right-10",
-      "before:md:hidden",
-      "aria-expanded:before:block",
-      "aria-expanded:before:absolute",
-      "aria-expanded:before:h-8",
-      "aria-expanded:before:w-8",
-      "aria-expanded:before:right-10",
-      "aria-expanded:before:md:hidden",
-      "aria-expanded:before:icon-[mdi--arrow-down-drop-circle]",
+      'md:my-0',
+      'md:text-nix-blue-light',
+      'md:rounded-none',
+      'md:aria-expanded:bg-white',
+      'md:aria-expanded:text-nix-blue-dark',
+      'before:icon-[mdi--arrow-up-drop-circle]',
+      'before:block',
+      'before:absolute',
+      'before:h-8',
+      'before:w-8',
+      'before:right-10',
+      'before:md:hidden',
+      'aria-expanded:before:block',
+      'aria-expanded:before:absolute',
+      'aria-expanded:before:h-8',
+      'aria-expanded:before:w-8',
+      'aria-expanded:before:right-10',
+      'aria-expanded:before:md:hidden',
+      'aria-expanded:before:icon-[mdi--arrow-down-drop-circle]',
     );
   }
 

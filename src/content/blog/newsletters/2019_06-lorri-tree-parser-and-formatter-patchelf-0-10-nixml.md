@@ -1,5 +1,5 @@
 ---
-title: "#06 - Lorri, tree parser and formatter, patchelf 0.10, NixML"
+title: '#06 - Lorri, tree parser and formatter, patchelf 0.10, NixML'
 date: 2019-04-03
 description: Let us sacrifice our today so that our children can have a better tomorrow
 ---

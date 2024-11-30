@@ -2,7 +2,7 @@
 date: 2017-05-19
 description: |
   Not all those who wander are lost - J.R.R. Tolkien
-title: "#08 - Not all those who wander are lost"
+title: '#08 - Not all those who wander are lost'
 ---
 
 Welcome to another edition of NixOS Weekly.

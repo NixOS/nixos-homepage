@@ -1,5 +1,5 @@
 ---
-title: "#02 - 19.03 feature freeze, EU grants, reproducibility, Nix in Debian"
+title: '#02 - 19.03 feature freeze, EU grants, reproducibility, Nix in Debian'
 date: 2019-02-07
 description: Today is the only day. Yesterday is gone.
 ---

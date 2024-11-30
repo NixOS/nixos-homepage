@@ -1,6 +1,6 @@
 ---
 const {
-  title = "Members",
+  title = 'Members',
   isSubteam = false,
   members,
   contact,
@@ -11,12 +11,12 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
 
 <aside
   class:list={[
-    !isSubteam && "bg-nix-blue-extralight rounded-xl px-4 py-3 w-full",
+    !isSubteam && 'w-full rounded-xl bg-nix-blue-extralight px-4 py-3',
     extraClasses,
   ]}
 >
   <h2 class={titleClasses}>{title}</h2>
-  <ul class="mt-2 list-disc ml-4 font-light">
+  <ul class="ml-4 mt-2 list-disc font-light">
     {
       members.map((member) => (
         <li class="mb-1 last:mb-0">
@@ -24,7 +24,7 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
           {member.discourse && (
             <>
               (
-              <a href={"https://discourse.nixos.org/u/" + member.discourse}>
+              <a href={'https://discourse.nixos.org/u/' + member.discourse}>
                 @{member.discourse}
               </a>
               )
@@ -33,7 +33,7 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
           {member.github && (
             <>
               (
-              <a href={"https://github.com/" + member.github}>
+              <a href={'https://github.com/' + member.github}>
                 @{member.github}
               </a>
               )
@@ -52,10 +52,10 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
   {
     contact && (
       <>
-        <h2 class="text-3xl font-heading font-bold text-nix-blue mt-4">
+        <h2 class="mt-4 font-heading text-3xl font-bold text-nix-blue">
           Contact
         </h2>
-        <ul class="mt-2 list-disc ml-4">
+        <ul class="ml-4 mt-2 list-disc">
           {contact.map((contact) => (
             <li class="mb-1 last:mb-0">
               <a href={contact.href}>{contact.name}</a>
