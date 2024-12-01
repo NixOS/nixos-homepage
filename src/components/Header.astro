@@ -1,8 +1,11 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { getEntry } from 'astro:content';
-import Container from '../components/layout/Container.astro';
-import InlineSVG from '../components/util/InlineSVG.astro';
+
+import Container from '@/components/layout/Container.astro';
+import InlineSVG from '@/components/util/InlineSVG.astro';
+import Link from '@/components/util/Link.astro';
+
 const headerMenu = await getEntry('menus', 'header');
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
@@ -14,27 +17,28 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
 
 <header
   role="banner"
-  class="bg-white font-extralight text-black drop-shadow-md"
+  class="sticky top-0 z-50 bg-white font-extralight text-black drop-shadow-md"
 >
   <Container class="flex flex-col justify-between md:flex-row md:items-center">
     <div
       class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start"
     >
-      <a
+      <Link
         href="/"
         class="flex select-none items-center justify-between gap-2 md:justify-start"
       >
         <InlineSVG
-          class="h-16 w-auto"
+          class="h-12 w-auto"
           src="/src/assets/image/nixos-logo-notext.svg"
           alt="Nixos Logo"
         />
         <InlineSVG
-          class="block h-16 w-auto md:hidden xl:block"
+          class="block h-12 w-auto md:hidden xl:block"
           src="/src/assets/image/nixos-logo-text.svg"
           alt="Nixos Logo Text"
         />
-      </a>
+      </Link>
+
       <button
         aria-label="Main Navigation Toggle"
         class="block rounded-lg bg-nix-blue-light p-4 md:hidden"
@@ -45,17 +49,18 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
         <span class="block h-1 w-8 bg-white"></span>
       </button>
     </div>
+
     <nav
       aria-label="Main Navigation"
       role="menubar"
-      class="flex flex-col gap-0.5 pb-4 md:flex md:flex-row md:gap-5 md:pb-0"
+      class="flex flex-col gap-0.5 pb-4 leading-none md:flex md:flex-row md:gap-5 md:pb-0"
       id="navbar-menu"
     >
       {
         headerMenu.data.items.map((item) => (
-          <a
+          <Link
             class:list={[
-              'pb-6 pt-8',
+              'pb-6 pt-7',
               navbarItemStyle,
               currentTopRoute === item.link
                 ? navbarItemActiveStyle
@@ -64,28 +69,22 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
             href={item.link}
           >
             {item.name}
-          </a>
+          </Link>
         ))
       }
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
-        class={`pt-8 md:pt-7 pb-6 ${navbarItemStyle} ${navbarItemInactiveStyle}`}
+      <Link
+        class={`pt-7 pb-6 md:pt-5 md:pb-3 ${navbarItemStyle} ${navbarItemInactiveStyle}`}
         href="https://search.nixos.org"
         arial-label="Nixos package and options search"
       >
-        <Icon
-          alt="Search"
-          class="hidden h-8 w-8 text-nix-blue md:block"
-          name="mdi:search"
-        />
+        <Icon class="hidden h-8 w-8 text-nix-blue md:block" name="mdi:search" />
         <span class="inline-block md:hidden">Search</span>
-      </a>
+      </Link>
     </nav>
   </Container>
 </header>
 
-<script lang="ts">
+<script>
   const navigationToggle = document.getElementById('navigation-toggle');
   const navbarMenu = document.getElementById('navbar-menu');
 

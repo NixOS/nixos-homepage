@@ -1,8 +1,8 @@
 ---
 import type { MarkdownLayoutProps } from 'astro';
 
-import Container from '../components/layout/Container.astro';
-import PageHeader from '../components/layout/PageHeader.astro';
+import Container from '@/components/layout/Container.astro';
+import PageHeader from '@/components/layout/PageHeader.astro';
 import Layout from './Layout.astro';
 
 type Props = MarkdownLayoutProps<{
@@ -10,7 +10,7 @@ type Props = MarkdownLayoutProps<{
   parentPath?: string;
 }>;
 
-const { frontmatter, url } = Astro.props;
+const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
