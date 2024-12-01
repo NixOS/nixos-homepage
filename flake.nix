@@ -4,7 +4,8 @@ rec {
   inputs = {
     # This is used to build the site.
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    git-hooks-nix.url = "github:cachix/git-hooks.nix";
 
     # These inputs are used for the manuals and release artifacts
     released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
@@ -27,17 +28,29 @@ rec {
   };
 
   outputs =
-    { self
+    inputs@{ 
+      self
+    , flake-parts
+    , git-hooks-nix
     , nixpkgs
-    , flake-utils
     , released-nixpkgs-unstable
     , released-nixpkgs-stable
     , released-nix-unstable
     , released-nix-stable
     , nix-pills
     }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
+  flake-parts.lib.mkFlake { inherit inputs; } {
+    flake = {};
+    imports = [
+      inputs.git-hooks-nix.flakeModule
+    ];
+    systems = [
+      "aarch64-darwin"
+      "x86_64-darwin"
+      "aarch64-linux"
+      "x86_64-linux"
+    ];
+    perSystem = { config, system, ... }: let
         overlay = final: prev: {
           asciinema-scenario = final.rustPlatform.buildRustPackage rec {
             pname = "asciinema-scenario";
@@ -58,6 +71,8 @@ rec {
 
         nix_stable = released-nix-stable.packages."${system}".nix;
         nix_unstable = released-nix-unstable.packages."${system}".nix;
+
+        nodejs_current = pkgs.nodejs_20;
 
         nixPills = import nix-pills {
           inherit pkgs;
@@ -87,7 +102,6 @@ rec {
           </html>
           EOT
         '';
-
         manualVersionSwitch = dir: canonical:
           let
             baseUrl = "https://nixos.org/${dir}/${canonical}";
@@ -185,17 +199,25 @@ rec {
             sed -i -e "s|<nixpkgs|\&lt;nixpkgs|g" $scenarioFileName.svg
           done
         '';
-
       in {
         packages.manuals = manuals;
         packages.pills = pills;
         packages.demos = demos;
 
+        pre-commit.settings.hooks.prettier-check = {
+          enable = true;
+          name = "check-formatting";
+          entry = "${nodejs_current}/bin/npm run format:check";
+          stages = [ "pre-push" ];
+        };
+
         devShells.default = pkgs.mkShell {
           name = "nixos-homepage";
 
+          inputsFrom = [ config.pre-commit.devShell ];
+
           packages = with pkgs; [
-            nodejs_20
+            nodejs_current
             netlify-cli
           ];
 
@@ -205,6 +227,10 @@ rec {
             export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
             export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
             export NIXOS_AMIS="${NIXOS_AMIS}"
+
+            if [ ! -d node_modules ]; then
+              ${nodejs_current}/bin/npm install
+            fi
 
             cat >&2 << EOF
             To fetch all dependencies:
@@ -228,5 +254,6 @@ rec {
             EOF
           '';
         };
-    });
+    };
+  };
 }
