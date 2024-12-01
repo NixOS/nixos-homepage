@@ -45,6 +45,9 @@ rec {
       inputs.git-hooks-nix.flakeModule
     ];
     systems = [
+      "aarch64-darwin"
+      "x86_64-darwin"
+      "aarch64-linux"
       "x86_64-linux"
     ];
     perSystem = { config, system, ... }: let
@@ -224,6 +227,10 @@ rec {
             export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
             export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
             export NIXOS_AMIS="${NIXOS_AMIS}"
+
+            if [ ! -d node_modules ]; then
+              ${nodejs_current}/bin/npm install
+            fi
 
             cat >&2 << EOF
             To fetch all dependencies:
