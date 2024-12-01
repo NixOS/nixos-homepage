@@ -69,6 +69,8 @@ rec {
         nix_stable = released-nix-stable.packages."${system}".nix;
         nix_unstable = released-nix-unstable.packages."${system}".nix;
 
+        nodejs_current = pkgs.nodejs_20;
+
         nixPills = import nix-pills {
           inherit pkgs;
         };
@@ -202,16 +204,17 @@ rec {
         pre-commit.settings.hooks.prettier-check = {
           enable = true;
           name = "check-formatting";
-          src = "src/**/*";
-          entry = "${pkgs.nodejs_20}/bin/npm run format:check";
+          entry = "${nodejs_current}/bin/npm run format:check";
           stages = [ "pre-push" ];
         };
 
         devShells.default = pkgs.mkShell {
           name = "nixos-homepage";
 
+          inputsFrom = [ config.pre-commit.devShell ];
+
           packages = with pkgs; [
-            nodejs_20
+            nodejs_current
             netlify-cli
           ];
 
