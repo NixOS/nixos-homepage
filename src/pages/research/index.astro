@@ -1,0 +1,356 @@
+---
+import { getEntry, z } from 'astro:content';
+import Container from '../../components/layout/Container.astro';
+import PageHeader from '../../components/layout/PageHeader.astro';
+import Layout from '../../layouts/Layout.astro';
+
+import Divider from '../../components/layout/Divider.astro';
+
+import { papersSchema } from './papersSchema';
+import { papers } from './papers';
+
+let validatedPapers;
+try {
+  validatedPapers = papersSchema.parse(papers);
+} catch (error) {
+  if (error instanceof z.ZodError) {
+    console.error('Papers validation failed:');
+    console.error(JSON.stringify(error.errors, null, 2));
+    throw new Error('Papers data validation failed. Check console for details.');
+  }
+  throw error;
+}
+
+const sponsors = await getEntry('sponsors', 'info');
+
+function getToggleAbstractId(paper) {
+  return `toggle-abstract-${paper.id}`;
+}
+
+const papersByYear = validatedPapers.reduce((acc, paper, index) => {
+  const year = paper.year;
+  if (!acc[year]) acc[year] = [];
+  paper.id = index;
+  acc[year].push(paper);
+  return acc;
+}, {});
+
+const sortedYears = Object.keys(papersByYear).sort((a, b) => b - a);
+
+function getVenueString(pubInfo: PublicationType) {
+  switch (pubInfo.type) {
+    case 'conference':
+      return `${pubInfo.conference}, ${pubInfo.location}`;
+    case 'journal':
+      return `${pubInfo.journal}${pubInfo.volume ? `, vol. ${pubInfo.volume}` : ''}${pubInfo.number ? `, no. ${pubInfo.number}` : ''}`;
+    case 'thesis':
+      return `${pubInfo.thesisType} thesis, ${pubInfo.institution}, ${pubInfo.location}`;
+  }
+}
+---
+
+<Layout title="Research and Scientific Publications">
+  <PageHeader text="Research and Scientific Publications" />
+
+  <Container class="grid gap-8 px-12 pb-20 pt-8 md:grid-cols-2">
+    <div
+      class="flex flex-col justify-center gap-4 font-extralight leading-relaxed"
+    >
+      <p>
+        Nix started as a research project by Eelco Dolstra and his collaborators
+        at Utrecht University around 2003. Since then, scientists from multiple
+        institutions have published their work on repeatable computation and
+        reliable, secure software distribution.
+      </p>
+      <p>
+        This collection traces the continued exploration of theoretical
+        foundations and practical applications of the ideas underlying Nix and
+        its ecosystem.
+      </p>
+    </div>
+    <div class="flex flex-col items-center justify-center">
+      <img src="/images/explore/experiment.svg" class="max-h-96" />
+    </div>
+  </Container>
+  <Divider style="slope" mirrorX mirrorY />
+  <div class="bg-nix-blue py-16 text-white md:px-12 md:py-16">
+    <Container
+      class="mt-16 space-y-8 bg-nix-blue font-extralight leading-relaxed"
+    >
+      <h1 class="font-heading text-4xl font-bold leading-tight">
+        Scientific publications about Nix and associated projects
+      </h1>
+
+      <div class="space-y-12">
+        {
+          sortedYears.map((year) => (
+            <section>
+              <h2 class="mb-6 text-2xl font-semibold">{year}</h2>
+              <div class="space-y-6">
+                {papersByYear[year].map((paper) => (
+                  <article class="paper-entry shadow-sm rounded-lg bg-white p-6 transition hover:shadow-md">
+                    <input
+                      type="checkbox"
+                      id={getToggleAbstractId(paper)}
+                      class="abstract-toggle-checkbox hidden"
+                    />
+                    <div class="content-container">
+                      <div class="paper-info flex-1 space-y-2">
+                        <h3 class="max-w-[650px] text-lg font-medium text-gray-900">
+                          {paper.title}
+                        </h3>
+                        <p class="text-sm text-gray-700">
+                          {paper.authors.map((a, i) => (
+                            <>
+                              {a.orcidUrl ? (
+                                <a
+                                  href={a.orcidUrl}
+                                  class="hover:text-blue-600 transition-colors"
+                                  target="_blank"
+                                >
+                                  <span class="whitespace-nowrap">
+                                    {a.name}
+                                    {i < paper.authors.length - 1 ? ',' : ''}
+                                  </span>
+                                </a>
+                              ) : (
+                                <span class="whitespace-nowrap">
+                                  {a.name}
+                                  {i < paper.authors.length - 1 ? ',' : ''}
+                                </span>
+                              )}
+                              {i < paper.authors.length - 1 ? ' ' : ''}
+                            </>
+                          ))}
+                        </p>
+                        <p class="text-sm text-gray-700">
+                          {getVenueString(paper.publicationInfo)}
+                        </p>
+                      </div>
+                      <div class="buttons-container ml-4 flex gap-2">
+                        {paper.bibtex && (
+                          <button
+                            class="btn-action flex items-center"
+                            aria-label="Show BibTeX"
+                            data-bibtex={paper.bibtex}
+                          >
+                            <span class="sr-only">Show BibTeX</span>
+                            <span class="move-button ml-2 text-sm font-bold">
+                              CITE
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              {/* source https://heroicons.com v1.0.6, MIT licensed */}
+                              <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                              <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                            </svg>
+                          </button>
+                        )}
+                        {paper.preprintOrArchiveUrl && (
+                          <a
+                            href={paper.preprintOrArchiveUrl}
+                            class="btn-action flex items-center"
+                            aria-label="Download preprint"
+                            target="_blank"
+                          >
+                            <span class="sr-only">Download preprint</span>
+                            <span class="move-button ml-2 text-sm font-bold">
+                              PREPRINT
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              {/* source https://heroicons.com v1.0.6, MIT licensed */}
+                              <path
+                                fill-rule="evenodd"
+                                d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        )}
+                        {paper.doiOrPublisherUrl && (
+                          <a
+                            href={
+                              paper.doiOrPublisherUrl.startsWith('10.')
+                                ? `https://doi.org/${paper.doiOrPublisherUrl}`
+                                : paper.doiOrPublisherUrl
+                            }
+                            class="btn-action flex items-center"
+                            aria-label="View publisher version"
+                            target="_blank"
+                          >
+                            <span class="sr-only">View publisher version</span>
+                            <span class="move-button ml-2 text-sm font-bold">
+                              DOI
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              {/* source https://heroicons.com v1.0.6, MIT licensed */}
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                              />
+                            </svg>
+                          </a>
+                        )}
+                        {paper.abstract && (
+                          <label
+                            for={getToggleAbstractId(paper)}
+                            class="btn-action abstract-toggle"
+                            aria-label="Toggle abstract"
+                            aria-expanded="false"
+                          >
+                            <span class="move-button ml-2 text-sm font-bold">
+                              ABSTRACT
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              class="h-6 w-6 transform transition-transform duration-200"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              {/* source https://heroicons.com v1.0.6, MIT licensed */}
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M19 9l-7 7-7-7"
+                              />
+                            </svg>
+                          </label>
+                        )}
+                      </div>
+                    </div>
+                    <div class="abstract-content mt-4 text-sm text-gray-700">
+                      {paper.abstract &&
+                        paper.abstract
+                          .split('\n\n')
+                          .map((paragraph, i) => (
+                            <p class={i > 0 ? 'mt-4' : ''}>{paragraph}</p>
+                          ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </Container>
+  </div>
+</Layout>
+
+<style>
+  .btn-action {
+    @apply rounded-full p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-600;
+    padding: 0.5rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Default styles - buttons always visible */
+  .btn-action .move-button {
+    width: auto;
+    opacity: 1;
+    margin-left: 0.5rem;
+    white-space: nowrap;
+  }
+
+  /* Only apply hover animations on devices that support hover */
+  @media (hover: hover) {
+    .btn-action .move-button {
+      width: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+      margin-left: 0;
+    }
+
+    .paper-entry:hover .btn-action .move-button {
+      width: auto;
+      opacity: 1;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .paper-entry {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .paper-entry:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 640px) {
+    .content-container {
+      flex-direction: column;
+    }
+
+    .buttons-container {
+      margin-left: 0;
+      margin-top: 1rem;
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
+  /* Abstract Content Hidden by Default */
+  .abstract-content {
+    max-height: 0;
+    max-width: 600px;
+    overflow: hidden;
+    transition:
+      max-height 0.3s ease-out,
+      opacity 0.3s ease-out,
+      padding 0.3s ease-out;
+    opacity: 0;
+    text-align: justify;
+    margin: 0 auto;
+  }
+
+  /* When Checkbox is Checked, Show Abstract Content */
+  .abstract-toggle-checkbox:checked ~ .abstract-content {
+    max-height: 2000px; /* Adjust as needed */
+    padding-top: 30px;
+    opacity: 1;
+  }
+  /* Rotate the SVG Icon When Checked */
+  .abstract-toggle-checkbox:checked + div .abstract-toggle svg {
+    transform: rotate(-180deg);
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.move-button').forEach((button) => {
+    const textWidth = button.offsetWidth;
+    button.closest('.btn-action').style.setProperty('--text-width', textWidth);
+  });
+</script>
