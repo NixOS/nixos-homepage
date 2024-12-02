@@ -2,7 +2,7 @@ import { z } from 'astro:content';
 
 export const authorSchema = z.object({
   name: z.string(),
-  orcidUrl: z.string().url().optional()
+  orcidUrl: z.string().url().optional(),
 });
 
 export const publicationInfoSchema = z.discriminatedUnion('type', [
@@ -11,7 +11,7 @@ export const publicationInfoSchema = z.discriminatedUnion('type', [
     conference: z.string(),
     location: z.string(),
     publisher: z.string().optional(),
-    pages: z.string().optional()
+    pages: z.string().optional(),
   }),
   z.object({
     type: z.literal('journal'),
@@ -19,14 +19,14 @@ export const publicationInfoSchema = z.discriminatedUnion('type', [
     volume: z.string().optional(),
     number: z.string().optional(),
     publisher: z.string().optional(),
-    pages: z.string().optional()
+    pages: z.string().optional(),
   }),
   z.object({
     type: z.literal('thesis'),
     thesisType: z.enum(['PhD', "Master's", "Bachelor's", 'Diplomarbeit']),
     institution: z.string(),
-    location: z.string()
-  })
+    location: z.string(),
+  }),
 ]);
 
 export const paperSchema = z.object({
@@ -37,7 +37,7 @@ export const paperSchema = z.object({
   doiOrPublisherUrl: z.string().optional(),
   preprintOrArchiveUrl: z.string().optional(),
   bibtex: z.string().optional(),
-  publicationInfo: publicationInfoSchema
+  publicationInfo: publicationInfoSchema,
 });
 
 export const papersSchema = z.array(paperSchema);
