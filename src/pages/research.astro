@@ -256,7 +256,10 @@ const papers: ReadonlyArray<Paper> = [
   {
     title: 'Source Code Archiving to the Rescue of Reproducible Deployment',
     authors: [
-      { name: 'Ludovic Courtès' },
+      {
+        name: 'Ludovic Courtès',
+        orcidUrl: 'https://orcid.org/0000-0003-4472-154X',
+      },
       {
         name: 'Timothy Sample',
         orcidUrl: 'https://orcid.org/0009-0007-1813-4073',
@@ -294,7 +297,7 @@ const papers: ReadonlyArray<Paper> = [
     year: 2024,
     abstract:
       "The concept of reproducibility has long been a cornerstone in scientific research, ensuring that results are robust, repeatable, and can be independently verified. This concept has been extended to computer science, focusing on the ability to recreate identical software artefacts. However, the importance of reproducibility in software engineering is often overlooked, leading to challenges in the validation, security, and reliability of software products.\n\nThis master's thesis aims to investigate the current state of reproducibility in software engineering, exploring both the barriers and potential solutions to making software more reproducible and raising awareness. It identifies key factors that impede reproducibility such as inconsistent environments, lack of standardisation, and incomplete documentation. To tackle these issues, I propose an empirical comparison of tools facilitating software reproducibility.\n\nTo provide a comprehensive assessment of reproducibility in software engineering, this study adopts a methodology that involves a hands-on evaluation of four different methods and tools. Through a systematic evaluation of these tools, this research seeks to determine their effectiveness in establishing and maintaining identical software environments and builds.\n\nThis study contributes to academic knowledge and offers practical insights that could influence future software development protocols and standards.",
-    doiOrPublisherUrl: 'https://doi.org/10.5281/zenodo.13894231',
+    doiOrPublisherUrl: '10.5281/zenodo.12666898',
     publicationInfo: {
       type: 'thesis',
       thesisType: "Master's",
@@ -646,6 +649,7 @@ const papers: ReadonlyArray<Paper> = [
     year: 2006,
     abstract:
       "The subject of this thesis is how the Nix package management system can be applied to manage a whole Linux distribution. Many conventional package management systems have drawbacks that Nix ﬁxes. But, Nix has never been used to deploy and manage a whole system.\n\nIn this thesis a proof of concept Linux distribution called NixOS is described. NixOS uses the Nix package management system to manage all software that is installed on the system, including the Linux kernel, all software and system services.\n\nUsing Nix to manage all software on a system, as is done on NixOS, has several advantages. Developers don't need to be worried that unwanted dependencies are picked up during the build of a software package, since these are completely eliminated. System administrators get the possibility to deploy services using Nix and how they can immediately use all beneﬁts from Nix, including atomic upgrades and rollbacks, without going through a painful cycle of rolling back a service, with all its, possibly also updated, dependencies.\n\nThis thesis describes the implementation NixOS, including pitfalls that were encountered and choices that were made. Also shown are some concrete results of running NixOS and how NixOS can be bettered.",
+    doiOrPublisherUrl: '10.5281/zenodo.12906987',
     preprintOrArchiveUrl: 'http://nixos.org/docs/SCR-2005-091.pdf',
     publicationInfo: {
       type: 'thesis',
