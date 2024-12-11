@@ -38,18 +38,13 @@ rec {
     , released-nix-unstable
     , released-nix-stable
     , nix-pills
+    , systems
     }:
   flake-parts.lib.mkFlake { inherit inputs; } {
-    flake = {};
     imports = [
       inputs.git-hooks-nix.flakeModule
     ];
-    systems = [
-      "aarch64-darwin"
-      "x86_64-darwin"
-      "aarch64-linux"
-      "x86_64-linux"
-    ];
+    systems = import systems;
     perSystem = { config, system, ... }: let
         overlay = final: prev: {
           asciinema-scenario = final.rustPlatform.buildRustPackage rec {
