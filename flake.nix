@@ -238,6 +238,7 @@ rec {
               name = "check-formatting";
               entry = "${nodejs_current}/bin/npm run format:check";
               stages = [ "pre-push" ];
+              pass_filenames = false;
             };
           };
 
