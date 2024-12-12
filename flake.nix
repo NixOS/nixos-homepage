@@ -232,7 +232,10 @@ rec {
           packages.demos = demos;
 
           pre-commit.settings.hooks = {
-            nixfmt-rfc-style.enable = true;
+            nixfmt-rfc-style = {
+              enable = true;
+              files = "\\.nix$";
+            };
             prettier-check = {
               enable = true;
               name = "check-formatting";
