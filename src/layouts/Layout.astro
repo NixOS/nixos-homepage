@@ -1,14 +1,14 @@
 ---
 import { SEO } from 'astro-seo';
-
-import Footer from './Footer.astro';
-import Header from './Header.astro';
-
 import { getImage } from 'astro:assets';
-import '../styles/base.css';
-
 import { getEntry } from 'astro:content';
-import faviconSvgSrc from '../assets/image/flake-blue.svg';
+
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header.astro';
+
+import '@/styles/base.css';
+
+import faviconSvgSrc from '@/assets/image/flake-blue.svg';
 
 const {
   title = 'Nix &amp; NixOS | Declarative builds and deployments',
@@ -47,7 +47,7 @@ const headFeedLinks = blogMenu.data.map((e) => {
 });
 ---
 
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <SEO
       title={title}
@@ -80,10 +80,13 @@ const headFeedLinks = blogMenu.data.map((e) => {
   </head>
   <body class="flex min-h-screen flex-col bg-white text-gray-950">
     <Header />
+
     <main class="flex-1">
       <slot />
     </main>
+
     <Footer />
+
     <script>
       import 'htmx.org';
 

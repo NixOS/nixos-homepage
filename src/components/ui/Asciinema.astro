@@ -61,15 +61,15 @@ const demoId = 'asciinema-demo-' + src.split('/').pop().split('.')[0];
 
       document.fonts.load('1em ' + settings.terminalFontFamily).then(() => {
         const player = AsciinemaPlayer.create(src, this, settings);
-      });
 
-      if (this.dataset.title) {
-        document
-          .getElementById(`${this.id}-link`)
-          .addEventListener('click', (e) => {
-            player.play();
-          });
-      }
+        if (this.dataset.title) {
+          document
+            .getElementById(`${this.id}-link`)
+            .addEventListener('click', (e) => {
+              player.play();
+            });
+        }
+      });
     }
   }
 

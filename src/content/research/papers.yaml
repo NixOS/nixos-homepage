@@ -37,6 +37,7 @@
 - title: Source Code Archiving to the Rescue of Reproducible Deployment
   authors:
     - name: Ludovic Courtès
+      orcidUrl: https://orcid.org/0000-0003-4472-154X
     - name: Timothy Sample
       orcidUrl: https://orcid.org/0009-0007-1813-4073
     - name: Stefano Zacchiroli
@@ -101,7 +102,7 @@
 
     This study contributes to academic knowledge and offers practical insights
     that could influence future software development protocols and standards.
-  doiOrPublisherUrl: https://doi.org/10.5281/zenodo.13894231
+  doiOrPublisherUrl: 10.5281/zenodo.12666898
   publicationInfo:
     type: thesis
     thesisType: Master's
@@ -560,6 +561,7 @@
     This thesis describes the implementation NixOS, including pitfalls that were
     encountered and choices that were made. Also shown are some concrete results
     of running NixOS and how NixOS can be bettered.
+  doiOrPublisherUrl: 10.5281/zenodo.12906987
   preprintOrArchiveUrl: http://nixos.org/docs/SCR-2005-091.pdf
   publicationInfo:
     type: thesis
