@@ -23,6 +23,9 @@ export default defineConfig({
       },
     }),
   ],
+  legacy: {
+    collections: true, // TODO: migrate to Content Layer API
+  },
   markdown: {
     shikiConfig: {
       theme: syntaxTheme,
