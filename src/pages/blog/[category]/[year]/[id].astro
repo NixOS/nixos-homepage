@@ -20,7 +20,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<Layout title="Blog">
+<Layout title=`${entry.data.title} | Blog`>
   <PageHeader
     text={entry.data.title}
     subtext={entry.data.date
