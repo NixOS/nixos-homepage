@@ -17,17 +17,11 @@ const {
 
 const blogMenu = await getEntry('menus', 'blog');
 
-const faviconSvg = await getImage({ src: faviconSvgSrc, format: 'svg' });
 
 const headLinks = [
   {
     rel: 'sitemap',
     href: '/sitemap-index.xml',
-  },
-  {
-    rel: 'icon',
-    href: faviconSvg.src,
-    type: 'image/svg+xml',
   },
   {
     rel: 'alternate',

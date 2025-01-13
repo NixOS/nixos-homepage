@@ -20,9 +20,9 @@ export default defineConfig({
       simpleIcons: ["*"],
     },
   }), favicons({
+    name: "Nix & NixOS",
+    short_name: "Nix & NixOS",
     manifest: {
-      name: "Nix &amp; NixOS | Declarative builds and deployments",
-      short_name: "Nix &amp; NixOS",
       start_url: "/",
     }
   })],
