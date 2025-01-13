@@ -1,14 +1,16 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import Container from '../components/layout/Container.astro';
-import Button from '../components/ui/Button.astro';
-import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
-import Layout from '../layouts/Layout.astro';
-import { generatePathFromPost } from '../lib/utils';
 
-import Asciinema from '../components/ui/Asciinema.astro';
-import Banner from '../components/ui/Banner.astro';
-import InlineSVG from '../components/util/InlineSVG.astro';
+import Container from '@/components/layout/Container.astro';
+import Asciinema from '@/components/ui/Asciinema.astro';
+import Banner from '@/components/ui/Banner.astro';
+import Button from '@/components/ui/Button.astro';
+import Card from '@/components/ui/Card.astro';
+import NixosSearchInput from '@/components/ui/NixosSearchInput.astro';
+import InlineSVG from '@/components/util/InlineSVG.astro';
+import Layout from '@/layouts/Layout.astro';
+
+import { generatePathFromPost } from '@/lib/utils';
 
 const landingFeatures = await getCollection('landing-features');
 const demos = await getEntry('landing', 'demos');
@@ -32,19 +34,22 @@ posts
     <b>{posts[0].data.title}</b>
     <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
   </Banner>
-  <div class="bg-nix-blue bg-cover bg-left bg-no-repeat inline-svg-hero">
-    <Container
-      class="grid grid-cols-1 gap-8 py-16 text-white lg:grid-cols-2 lg:py-24"
-    >
+
+  <section
+    class="bg-nix-blue bg-cover bg-left bg-no-repeat py-16 inline-svg-hero lg:py-20"
+  >
+    <Container class="grid grid-cols-1 gap-8 text-white lg:grid-cols-2">
       <div class="mx-0 my-auto flex flex-col gap-4">
         <h1 class="font-heading text-5xl font-bold leading-none">
           Declarative builds<br class="hidden md:inline-block" /> and deployments.
         </h1>
+
         <p class="text-lg font-extralight leading-7">
           Nix is a tool that takes a unique approach to package management and
           system configuration. Learn how to make reproducible, declarative and
           reliable systems.
         </p>
+
         <div
           class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-stretch"
         >
@@ -52,9 +57,8 @@ posts
           <Button href="/learn" color="lightblue" size="lg">Get started</Button>
         </div>
       </div>
-      <div
-        class="min-h-[300px] rounded-3xl border-[1rem] border-white bg-[#121314] drop-shadow-md"
-      >
+
+      <Card class="min-h-[300px] bg-white/40 drop-shadow-md backdrop-blur-sm">
         <Asciinema
           src="/demos/cover.cast"
           settings={{
@@ -68,13 +72,14 @@ posts
             ],
           }}
         />
-      </div>
+      </Card>
     </Container>
-  </div>
-  <div
+  </section>
+
+  <section
     class="bg-[39%_100%] bg-no-repeat pb-48 pt-16 inline-svg-landing-search-top md:bg-bottom"
   >
-    <Container class="grid gap-8 md:grid-cols-3 md:gap-4">
+    <Container class="grid gap-8 md:grid-cols-3 md:gap-6">
       {
         landingFeatures.map(async (feature) => {
           const { Content } = await feature.render();
@@ -82,7 +87,7 @@ posts
             <div class="flex flex-col text-center">
               <InlineSVG
                 src={feature.data.img}
-                class="mx-auto mb-6 h-32 w-auto"
+                class="mx-auto mb-6 h-24 w-auto"
               />
               <h2 class="mb-2 font-heading text-3xl font-bold leading-none text-nix-blue">
                 {feature.data.title}
@@ -95,16 +100,15 @@ posts
         })
       }
     </Container>
-  </div>
-  <div
+  </section>
+
+  <section
     class="after:bsolute relative after:bottom-0 after:left-0 after:-mb-16 after:-mt-48 after:block after:h-[30rem] after:w-full after:overflow-hidden after:bg-[url(/divider/landing_search_bottom.svg)] after:bg-divider after:bg-[60%_100%] after:bg-no-repeat"
   >
     <div class="bg-nix-blue-extralight pt-4">
-      <Container
-        class="flex w-full flex-col items-center justify-center gap-4 pb-8 pt-8"
-      >
+      <Container class="flex flex-col items-center justify-center gap-4 py-8">
         <h2
-          class="pb-0 text-center font-heading text-4xl font-bold leading-tight text-nix-blue md:w-2/3"
+          class="text-center font-heading text-4xl font-bold leading-tight text-nix-blue md:w-2/3"
         >
           Choose from Thousands of Packages
         </h2>
@@ -122,15 +126,17 @@ posts
         <NixosSearchInput collection="packages" withSubmit />
       </Container>
     </div>
-  </div>
-  <div>
+  </section>
+
+  <section class="py-16 lg:py-20">
     <Container>
       <h2
-        class="w-full pb-2 text-center font-heading text-4xl font-bold text-nix-blue"
+        class="pb-2 text-center font-heading text-4xl font-bold text-nix-blue"
       >
         Examples
       </h2>
-      <div class="grid items-center gap-4 pb-8 md:grid-cols-2">
+
+      <div class="grid items-center gap-6 md:grid-cols-2">
         {
           demos.data.map((demo) => {
             return (
@@ -149,5 +155,5 @@ posts
         }
       </div>
     </Container>
-  </div>
+  </section>
 </Layout>
