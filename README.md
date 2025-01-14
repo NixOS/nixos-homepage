@@ -7,19 +7,50 @@
 
 Code and content for the [nixos.org](https://nixos.org) website.
 
+# Contributing
 
-# Help us!
+Thank you for your interest in contributing to the NixOS homepage!
+We value your time and effort in helping us improve this vital resource for the community.
 
+We want to make contributing as simple and welcoming as possible while ensuring the sustainability of the project.
+Our small team of volunteers prioritizes the [health and maintainability of the site over rushing features or catering to individual interests](https://github.com/NixOS/org/blob/main/doc/values.md).
+
+Here’s how you can help us achieve that:
+
+- Don’t hesitate to reach out! We’re here to guide you and get you started.
+- If you feel lost on where or how to contribute, ask the [Marketing Team](https://nixos.org/community/teams/marketing.html) on the [`#marketing` room on Matrix](https://matrix.to/#/#marketing:nixos.org).
+- Focus on contributions that align with the project's long-term goals and maintainable growth.
+- Be mindful of the maintainers’ capacity. We, like you, are here because we are passionate about the project.
+
+## All Work is Tracked in Issues
+
+All work, whether proposed or in progress, should be documented in Issues.
+This ensures transparency and makes it easier for anyone to pick up tasks or for maintainers to manage the workload.
 There are many ways how you can help:
 
-- if you are familiar with CSS look at the [issues tagged with `design` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Adesign).
-- if you are an native English speaker or just a person that is very good with words, please look at the [issues tagged with `content` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Acontent)
-- if you are developer and just eager to fix stuff please look at the [issues tagged with `bug` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+- If you are familiar with CSS look at the [issues tagged with `design` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Adesign).
+- If you are an native English speaker or just a person that is very good with words, please look at the [issues tagged with `content` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Acontent)
+- If you are developer and just eager to fix stuff please look at the [issues tagged with `bug` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
 
-If you feel lost where and how to contribute, ask the [marketing team](https://nixos.org/community/teams/marketing.html) on the [`#marketing` room on Matrix](https://matrix.to/#/#marketing:nixos.org).
+## Propose Changes in the Right Place
 
+It takes a lot of time and effort to keep the website running smoothly.
+If you want to submit a change that is not tracked by an issue, propose it first so the details and scope can be refined before you start working.
 
-# How to help?
+- For well-scoped ideas that you can implement, check if their is an existing issue. If not, create one.
+- For loosely defined ideas or if you lack the technical means to implement them, start a discussion in the Discussions section to refine the idea collaboratively.
+
+## Separate Pull Requests by Type
+
+When submitting pull requests, ensure they are categorized as one of the following:
+
+- Design changes
+- Content changes
+- Technical changes
+
+Avoid combining these types in a single pull request to make the review process smoother and more efficient.
+
+# Development
 
 To run local development instance follow this steps to start a local server
 
