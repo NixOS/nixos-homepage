@@ -34,5 +34,12 @@ export default defineConfig({
       theme: syntaxTheme,
     },
   },
+  vite: {
+    server: {
+      watch: {
+        ignored: ['**/.direnv/**']
+      }
+    }
+  },
   compressHTML: true,
 });
