@@ -1,4 +1,5 @@
 # Source for nixos.org
+
 [![CI](https://github.com/NixOS/nixos-homepage/actions/workflows/ci.yml/badge.svg)](https://github.com/NixOS/nixos-homepage/actions/workflows/ci.yml)
 [![Number of open GitHub issues](https://img.shields.io/github/issues/nixos/nixos-homepage?style=flat&color=red)](https://github.com/nixos/nixos-homepage/issues)
 [![Number of open GitHub pull requests](https://img.shields.io/github/issues-pr/nixos/nixos-homepage?style=flat&color=blue)](https://github.com/nixos/nixos-homepage/pulls)
@@ -21,6 +22,16 @@ Here’s how you can help us achieve that:
 - If you feel lost on where or how to contribute, ask the [Marketing Team](https://nixos.org/community/teams/marketing.html) on the [`#marketing` room on Matrix](https://matrix.to/#/#marketing:nixos.org).
 - Focus on contributions that align with the project's long-term goals and maintainable growth.
 - Be mindful of the maintainers’ capacity. We, like you, are here because we are passionate about the project.
+
+## Small Changes and Fixes
+
+If you find a bug or need to make a small content change, feel free to submit a pull request.
+There is no need to create an issue if the change is sufficiently small.
+Here are a few examples:
+
+- [An image was in the wrong location](https://github.com/NixOS/nixos-homepage/pull/1630)
+- [Updating team members](https://github.com/NixOS/nixos-homepage/pull/1636)
+- [Fixing the logic for asciinema-player](https://github.com/NixOS/nixos-homepage/pull/1597)
 
 ## All Work is Tracked in Issues
 
@@ -49,6 +60,12 @@ When submitting pull requests, ensure they are categorized as one of the followi
 - Technical changes
 
 Avoid combining these types in a single pull request to make the review process smoother and more efficient.
+
+Make sure to add a description in your pull request.
+A few words can help reviewers understand your intent.
+For example, if you are making design changes, you might want to answer why your changes are an improvement.
+Similarly, if you are making technical changes, you might want answer how your changes work.
+Add enough detail so we know what you know.
 
 # Development
 
@@ -94,7 +111,6 @@ Add the following to the `/etc/nix/nix.conf` or `~/.config/nix/nix.conf`:
 substituters = ... https://nixos-homepage.cachix.org
 trusted-public-keys = ... nixos-homepage.cachix.org-1:NHKBt7NjLcWfgkX4OR72q7LVldKJe/JOsfIWFDAn/tE=
 ```
-
 
 ## License
 
