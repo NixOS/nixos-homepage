@@ -8,9 +8,13 @@ const {
 ---
 
 <div
-  class=`flex min-h-24 xl:min-h-20 flex-col justify-center bg-white p-4 rounded-lg ${extraClasses}`
+  class=`flex flex-col justify-center items-center relative h-20 bg-white rounded-lg ${extraClasses}`
 >
   <a href={externalLink}>
-    <img class="h-full w-full" src={imageSource} alt={altText} />
+    <img
+      class="block max-h-16 w-full max-w-24"
+      src={imageSource}
+      alt={altText}
+    />
   </a>
 </div>

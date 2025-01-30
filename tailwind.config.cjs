@@ -64,18 +64,23 @@ module.exports = {
         extralight: '#f2f8fd', // nixlighterblue
         lighter: '#e6ecf5', // nixlighterblue-dimmed
         light: '#7ebae4', // nixlightblue
+        'light-hover': '#69a6d1',
         DEFAULT: '#5277c3', // nixdarkblue
+        hover: '#466cb9',
         dark: '#405D99', // nixsemidarkblue
+        'dark-hover': '#4e73bc',
         darker: '#27385d', // nixdarkerblue
       },
       'nix-orange': {
         lighter: '#fff5e1', // nixlightorange
         DEFAULT: '#ffab0d', // nixorange
+        hover: '#ec9d0c',
         dark: '#ff8657', // nixdarkorange
         darker: '#cc3900', // nixdarkerorange
       },
       'nix-green': {
         DEFAULT: '#6ad541', // nixgreen
+        hover: '#64c53d',
         dark: '#51ba29', // nixdarkgreen
       },
       gray: colors.gray,
