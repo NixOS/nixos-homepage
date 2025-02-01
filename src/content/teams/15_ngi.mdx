@@ -1,0 +1,124 @@
+---
+name: Nix@NGI
+description: Improves the Nix ecosystem with tools and libraries
+members:
+  - name: Valentin Gagarin
+    discourse: fricklerhandwerk
+  - name: wamirez
+    discourse: wamirez
+  - name: JulienMalka
+    discourse: JulienMalka
+  - name: OPNA2608
+    discourse: OPNA2608
+  - name: erictapen
+    discourse: erictapen
+  - name: wegank
+    discourse: wegank
+  - name: Erethon
+    discourse: Erethon
+  - name: Erethon
+    discourse: Erethon
+  - name: eljamm
+    discourse: eljamm
+  - name: idabzo
+    discourse: idabzo
+---
+## Mission
+
+Our main mission is to deliver on the promise of Nix: make open source software easy to run, both now and in the long term.
+
+For the NixOS Foundation’s collaboration with the NGI Zero consortium, this means getting as many as possible of the [more than 1200 NLnet-funded software projects](https://nlnet.nl/project/) to work smoothly with the Nix ecosystem by building a comprehensive collection of
+
+- Development environments
+- Libraries
+- Standalone executables
+- Networked or system services
+- Tested configuration examples
+
+updated regularly until mid 2027. To further increase transparency and accountability, we aim to make the state of completion, average cost of deliverables, and other metrics accessible at any time.
+
+We can’t do all of that on our own and have to be more than just a bit clever about it. Some applications are already packaged but not yet discoverable as such or not complete, others require different approaches completely: enabling their authors to wield the power of Nix to do it themselves, and rewarding volunteer contributors for helping out.
+
+As a side effect, we intend our work to benefit all contributors to NixOS by improving tools and simplifying processes as we go.
+
+We're also keeping the [Summer of Nix](https://github.com/ngi-nix/summer-of-nix) spirit alive with spots for trainees (more on that in the following weeks).
+
+It’s an ambitious undertaking, to say the least, but the setup is now more organized than ever. So we're hoping for some great candidates to join our adventure.
+
+## Background
+
+[NGI Zero](https://www.ngi.eu/ngi-projects/ngi-zero/) is a consortium advancing open technology commons, funded by the European Commission’s [Next Generation Internet](https://ngi.eu/) initiative that channels resources into free and open source software projects. While EU funding is often associated with building physical infrastructure like roads and bridges, it also plays a critical role in filling gaps in digital infrastructure, such as supporting the development of foundational free and open source software.
+
+![ngi-0|475x500](upload://47ORMWFIIoQvuFTe3ngVfyMLWZj.png)
+
+
+The [NixOS Foundation](https://github.com/NixOS/foundation) is a partner in the NGI Zero consortium, tasked with supporting authors of NGI-funded software in packaging their applications for NixOS and running another three editions of [Summer of Nix](https://github.com/ngi-nix/summer-of-nix).
+
+## Team
+
+This year we’ll have a small team focused on scaling up the coverage and improving contributor and user experience.
+
+@fricklerhandwerk leads the team as a stereotypical manager comically obsessed with metrics, processes, efficiency, big words, and one or another strong technical opinion. His role is focused on budget oversight, ensuring everyone knows what to do and why, granting permissions, answering strategic questions, quality control spot checks, and making it nice for everyone.
+
+@wamirez will slowly transition into handling day-to-day operations. He'll handle all the invisible organisational infrastructure - task triaging, janitoring our accounting system, and making sure nothing slips through the cracks between all the moving parts.
+
+@JulienMalka , an experienced Nixpkgs maintainer and enthusiastic teacher, will focus on bringing the light of Nix to software authors. His mission: make 10 projects self-sufficient this year. The team's goal is to remove roadblocks so he and the authors can focus on the essentials, and to amplify his work so others can repeat it and authors can eventually onboard themselves.
+
+@OPNA2608, a Summer of Nix 2024 graduate and now a highly proficient contributor, tackles the nasty NixOS service modules nobody else wants to touch. This year, she'll make at least 6 important-but-tricky NGI-funded applications work on NixOS. The rest of us need to make that smooth and support her where needed so she can focus on the hacking.
+
+@erictapen is here to make our jumble of software actually approachable for regular people. Our responsibility is to be available for her observation and interrogation, and to provide all the technical support possible so she can focus on serving our stakeholders' needs instead of fighting implementation details.
+
+@wegank is our true Nixpkgs maintainer who keeps the builds from breaking when dependencies go wild. He'll keep watching over all our NGIpkgs applications. Our job is to minimize his workload and publicly cultivate due appreciation for maintainers like him.
+
+@Erethon, our DevOps wizard, got us a smooth CI and infrastructure goodies in [NGIpkgs](https://github.com/ngi-nix/ngipkgs/) last year. He's our bridge to the NixOS infrastructure team and will help everyone get into production services we may need to get the job done. Everyone is encouraged to pester him with questions and ideas for improving our workflows.
+
+@eljamm evolved from Nix beginner to complex project slayer in Summer of Nix 2024. His role is to support the team with implementing automation, and take on various software development tasks to enable the project to scale. The team's job is to share their experience and requirements with him - we expect the senior Nixers to actively pull him into consultations or reviews, and everyone to request his services for process automation and developer tooling.
+
+@idabzo, our outreach specialist and NixOS marketing team veteran, will make sure everyone knows what we're doing. To help her, the team needs to:
+
+1. Keep an up-to-date paper trail in our accounting system
+2. Be available to brag about and explain our work in detail
+3. Support her with tooling to maximize reach and minimize manual effort
+
+And there's @Kate, the NixOS Foundation's admin assistant who keeps working behind the scenes so everyone receives their payments on time.
+
+We're almost complete now — getting a dedicated engineering lead to better coordinate technical development and do the occasional heavy lifting may take another while. If you’re interested in this role, please contact @fricklerhandwerk.
+
+# Stakeholders
+
+These are the people we work for and with:
+
+- Project authors: Their work is at the core of the NGI software ecosystem. Our main task is to support and amplify it.
+- Volunteer contributors: Most of the Nix ecosystem is built by volunteers, who donate their time to the community by making useful contributions. This is you! Your expertise and attention are our most valuable collective resources, and we owe it to you to help strengthen and grow the universe you’re tending to.
+- End users: Open source software is built for people, the users. The result of our work should be that more NGI-funded software is accessible to all users of NixOS.
+- European Commission: Funds the entire operation. We have to make the aggregate outcomes tangible for program coordinators and auditors and ensure tax money is spent effectively and efficiently.
+- NLnet: Leads the NGI Zero consortium, distributes grants to project authors, and coordinates the work of partners. They set our mid-term and strategic priorities, such as which (types of) projects to focus on with regards to packaging. We need to be able to provide detailed reports on our deliverables so they can more easily steer the program at large.
+- NixOS Foundation: The fiscal host for this project, and legally accountable in the NGI Zero consortium. The team thus represents the interests of the Nix community, and we have to ensure that what we do is transparent and beneficial to the ecosystem.
+- Paid contributors: Not all the necessary work gets done by volunteers, and the idea behind NGI Zero is to make source software development sustainable. Part of that is paying people to stick around and do what needs to be done, even if it’s not fun or exciting. In order to make that possible and repeatable, we want to be an exemplary business partner for our contractors.
+
+# Next steps
+
+We’ve started crafting a survey to better understand the needs and challenges faced by project authors. By listening to their experiences, we aim to ensure the tools and support we provide are impactful and relevant.
+
+We’ll also reach out to you, the community of Nix ecosystem contributors, how we can improve your workflows and make it easier to package and rely on the software you care about.
+
+Another plan is to issue rewards to volunteers for finishing important packages on their own. We’ll publish a comprehensive list of self-contained tasks in the coming weeks.
+
+In the next couple of months we want to
+
+- Build more automation for keeping track of the state of affairs
+- Involve project authors in improving the onboarding process for becoming a packager
+- Work on the user experience of deploying and running NGI software.
+
+## How to participate
+
+- Follow Nix@NGI activities on:
+    - [Summer of Nix on GitHub](https://github.com/ngi-nix/summer-of-nix)
+    - [NGIpkgs](https://github.com/ngi-nix/ngipkgs)
+    - [NGI Zero Discourse category](https://discourse.nixos.org/c/dev/ngi-zero/45)
+    - [Reports on past Summers of Nix](https://github.com/ngi-nix/summer-of-nix?#annual-reports)
+- If you’re a current or past NGI Zero grantee: Contact us for free Nix training, pair programming, or support with getting your software to NixOS.
+- If you’re a Nixpkgs maintainer with merge access: Apply for mentoring or the engineering lead role.
+- If you want to get into professional open source software development: Become a part-time or full-time trainee during Summer of Nix 2025 — [applications open in March 2025](https://github.com/ngi-nix/summer-of-nix?#applications).
+
+For questions or comments, please reply in this thread or [contact the organisation team](https://github.com/ngi-nix/summer-of-nix#contact).
