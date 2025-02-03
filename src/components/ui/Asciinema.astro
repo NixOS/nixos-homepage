@@ -33,7 +33,7 @@ const demoId = 'asciinema-demo-' + src.split('/').pop().split('.')[0];
   {
     title && (
       <a href={`#${demoId}`} class="no-underline!" id={`${demoId}-link`}>
-        <h3 class="font-heading text-xl font-bold text-nix-blue">{title}</h3>
+        <h3 class="font-heading text-nix-blue text-xl font-bold">{title}</h3>
       </a>
     )
   }
@@ -78,7 +78,7 @@ const demoId = 'asciinema-demo-' + src.split('/').pop().split('.')[0];
 
 <style is:global>
   @reference "./../../styles/base.css";
-  
+
   .ap-play-button {
     @apply !relative;
   }

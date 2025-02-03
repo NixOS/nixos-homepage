@@ -164,7 +164,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
 
 <Layout title="Community">
   <PageHeader text="Community" />
-  <Container class="mt-16 space-y-4 font-extralight leading-relaxed">
+  <Container class="mt-16 space-y-4 leading-relaxed font-extralight">
     <p class="text-lg font-bold text-gray-700">
       Nix and NixOS are developed and used by a diverse and welcoming community
       from all around the world.
@@ -190,16 +190,16 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     </p>
   </Container>
   <Container>
-    <h2 class="mt-8 font-heading text-4xl font-bold leading-none text-nix-blue">
+    <h2 class="font-heading text-nix-blue mt-8 text-4xl leading-none font-bold">
       Where to talk?
     </h2>
-    <p class="mt-2 font-extralight leading-relaxed">
+    <p class="mt-2 leading-relaxed font-extralight">
       The Nix community is spread across various platforms. Here are the
       official and unofficial spaces where you can find help, discuss
       development, and chat with other users.
       <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div class="md:col-span-2">
-          <h3 class="mt-4 font-heading text-3xl font-bold text-nix-blue">
+          <h3 class="font-heading text-nix-blue mt-4 text-3xl font-bold">
             Official spaces
           </h3>
           <p class="text-gray-700">
@@ -226,7 +226,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           </p>
         </div>
         <div class="col-span-1">
-          <h3 class="mt-4 font-heading text-3xl font-bold text-nix-blue">
+          <h3 class="font-heading text-nix-blue mt-4 text-3xl font-bold">
             Official social-media
           </h3>
           <p class="text-gray-700">
@@ -247,7 +247,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           </p>
         </div>
         <div class="md:col-span-3">
-          <h3 class="mt-4 font-heading text-3xl font-bold text-nix-blue">
+          <h3 class="font-heading text-nix-blue mt-4 text-3xl font-bold">
             Our calendars
           </h3>
           <p class="text-gray-700">
@@ -266,7 +266,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           </p>
         </div>
       </div>
-      <h3 class="mt-6 font-heading text-3xl font-bold text-nix-blue">
+      <h3 class="font-heading text-nix-blue mt-6 text-3xl font-bold">
         Unofficial spaces
       </h3>
       <p class="text-gray-700">
@@ -300,14 +300,14 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
   <div class="bg-nix-blue py-8 text-white">
     <Container>
       <h2 class="font-heading text-4xl font-bold">NixCon</h2>
-      <p class="mb-4 mt-2 text-xl font-bold">
+      <p class="mt-2 mb-4 text-xl font-bold">
         The
         <a class="text-white!" href="/community/teams/nixcon">NixCon Team</a>
         organizes a conference once a year.
       </p>
       <div class="grid gap-4 md:grid-cols-3">
-        <div class="col-span-2 rounded-xl bg-nix-blue-dark p-4 md:col-span-1">
-          <h3 class="mb-4 font-heading text-3xl font-bold">Next Conference</h3>
+        <div class="bg-nix-blue-dark col-span-2 rounded-xl p-4 md:col-span-1">
+          <h3 class="font-heading mb-4 text-3xl font-bold">Next Conference</h3>
           <NixConEntry
             imagePath={nixcons[0].imagePath}
             title={nixcons[0].title}
@@ -338,12 +338,12 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
   </div>
   <Divider />
   <Container>
-    <h2 class="mt-8 font-heading text-4xl font-bold text-nix-blue">Meetups</h2>
+    <h2 class="font-heading text-nix-blue mt-8 text-4xl font-bold">Meetups</h2>
     <div
       class="mt-4 grid auto-cols-fr bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat text-center text-lg font-extralight md:grid-flow-col"
     >
       <div>
-        <h3 class="mt-4 font-heading text-2xl font-bold text-nix-blue md:mt-2">
+        <h3 class="font-heading text-nix-blue mt-4 text-2xl font-bold md:mt-2">
           America
         </h3>
         <ul class="mt-2 space-y-4">
@@ -357,7 +357,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         </ul>
       </div>
       <div>
-        <h3 class="mt-4 font-heading text-2xl font-bold text-nix-blue md:mt-2">
+        <h3 class="font-heading text-nix-blue mt-4 text-2xl font-bold md:mt-2">
           Europe
         </h3>
         <ul class="mt-2 space-y-4">
@@ -371,7 +371,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         </ul>
       </div>
       <div>
-        <h3 class="mt-4 font-heading text-2xl font-bold text-nix-blue md:mt-2">
+        <h3 class="font-heading text-nix-blue mt-4 text-2xl font-bold md:mt-2">
           Asia
         </h3>
         <ul class="mt-2 space-y-4">
@@ -386,10 +386,10 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       </div>
     </div>
     <div
-      class="mt-16 flex flex-wrap-reverse gap-8 font-extralight leading-loose"
+      class="mt-16 flex flex-wrap-reverse gap-8 leading-loose font-extralight"
     >
       <div class="flex flex-1 flex-col items-start justify-center gap-8">
-        <h2 class="text-4xl font-bold leading-none text-nix-blue">
+        <h2 class="text-nix-blue text-4xl leading-none font-bold">
           RFC Process
         </h2>
         <p>
@@ -402,7 +402,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           >Learn more</Button
         >
       </div>
-      <div class="flex-0 mt-2 w-full md:w-3/6 md:max-w-2xl">
+      <div class="mt-2 w-full flex-0 md:w-3/6 md:max-w-2xl">
         <RfcDiagram />
       </div>
     </div>
@@ -425,7 +425,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
                 class="h-24"
               />
               <h3 class="font-heading text-2xl font-bold">{team.data.name}</h3>
-              <p class="mb-2 grow font-extralight leading-relaxed">
+              <p class="mb-2 grow leading-relaxed font-extralight">
                 {team.data.description}
               </p>
               <Button
@@ -441,7 +441,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     </Container>
   </div>
   <Divider />
-  <Container class="mb-16 mt-8 grid md:grid-cols-2" id="foundation">
+  <Container class="mt-8 mb-16 grid md:grid-cols-2" id="foundation">
     <div class="pb-4 text-center md:pb-0">
       <div class="flex flex-col items-center justify-center">
         <Image
@@ -450,9 +450,9 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           class="h-72"
         />
       </div>
-      <div class="mb-4 mt-4 inline-block text-left">
+      <div class="mt-4 mb-4 inline-block text-left">
         <h2
-          class="font-heading text-3xl font-bold text-nix-blue md:text-center"
+          class="font-heading text-nix-blue text-3xl font-bold md:text-center"
         >
           Board members:
         </h2>
@@ -477,8 +477,8 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         </ul>
       </div>
     </div>
-    <div class="space-y-4 font-extralight leading-relaxed">
-      <h2 class="font-heading text-3xl font-bold text-nix-blue">
+    <div class="space-y-4 leading-relaxed font-extralight">
+      <h2 class="font-heading text-nix-blue text-3xl font-bold">
         The mission!
       </h2>
       <p>

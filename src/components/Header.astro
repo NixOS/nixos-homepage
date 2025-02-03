@@ -25,7 +25,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
     >
       <Link
         href="/"
-        class="flex select-none items-center justify-between gap-2 md:justify-start"
+        class="flex items-center justify-between gap-2 select-none md:justify-start"
       >
         <InlineSVG
           class="h-12 w-auto"
@@ -41,7 +41,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
 
       <button
         aria-label="Main Navigation Toggle"
-        class="block rounded-lg bg-nix-blue-light p-4 md:hidden"
+        class="bg-nix-blue-light block rounded-lg p-4 md:hidden"
         id="navigation-toggle"
       >
         <span class="mb-1.5 block h-1 w-8 bg-white"></span>
@@ -60,7 +60,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
         headerMenu.data.items.map((item) => (
           <Link
             class:list={[
-              'pb-6 pt-7',
+              'pt-7 pb-6',
               navbarItemStyle,
               currentTopRoute === item.link
                 ? navbarItemActiveStyle
@@ -77,7 +77,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
         href="https://search.nixos.org"
         arial-label="Nixos package and options search"
       >
-        <Icon class="hidden h-8 w-8 text-nix-blue md:block" name="mdi:search" />
+        <Icon class="text-nix-blue hidden h-8 w-8 md:block" name="mdi:search" />
         <span class="inline-block md:hidden">Search</span>
       </Link>
     </nav>

@@ -10,8 +10,8 @@ interface Props {
 const { title, subTitle, currentVersion } = Astro.props;
 ---
 
-<Container class="mt-16 grid grid-cols-2 bg-nix-blue py-8 text-white md:py-6">
-  <h1 class="self-center font-heading text-3xl font-bold leading-none">
+<Container class="bg-nix-blue mt-16 grid grid-cols-2 py-8 text-white md:py-6">
+  <h1 class="font-heading self-center text-3xl leading-none font-bold">
     {title}
     <span class="hidden lg:inline">
       {subTitle}
@@ -19,12 +19,12 @@ const { title, subTitle, currentVersion } = Astro.props;
   </h1>
   <div class="flex flex-col justify-center self-center">
     <div class="text-end">
-      <h2 class="hidden pb-2 font-heading text-2xl font-bold md:inline">
+      <h2 class="font-heading hidden pb-2 text-2xl font-bold md:inline">
         Current version
       </h2>
       <a
         href="#"
-        class="rounded-2xl bg-nix-green px-4 py-2 text-center text-2xl font-bold text-white! no-underline!"
+        class="bg-nix-green rounded-2xl px-4 py-2 text-center text-2xl font-bold text-white! no-underline!"
         >{currentVersion}</a
       >
     </div>
