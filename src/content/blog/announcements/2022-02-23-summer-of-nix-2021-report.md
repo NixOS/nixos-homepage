@@ -1,6 +1,6 @@
 ---
 title: Summer of Nix 2021 report is out
-date: 2021-02-23
+date: 2022-02-23
 ---
 
 Happy to announce that the [Summer of Nix 2021 report is
