@@ -41,8 +41,8 @@ function shuffleArray(array) {
     <ul class="m-4 flex flex-row flex-wrap gap-4">
       {
         shuffleArray(companies.data).map((company) => (
-          <li class="flex-grow basis-72 rounded-xl border border-nix-blue p-4 font-light text-nix-blue xl:basis-80">
-            <a href={company.href} class="space-y-4 !no-underline">
+          <li class="grow basis-72 rounded-xl border border-nix-blue p-4 font-light text-nix-blue xl:basis-80">
+            <a href={company.href} class="space-y-4 no-underline!">
               <img
                 src={company.logo}
                 alt={company.name + ' logo'}

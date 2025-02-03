@@ -26,7 +26,7 @@ const exploreInfo = await getEntry('explore', 'info');
         const side = idx % 2 ? 'right' : 'left';
         const flexColDir = idx % 2 ? 'flex-col-reverse' : 'flex-col';
         return (
-          <div class="grid gap-x-[6rem] !px-0 md:grid-cols-2">
+          <div class="grid gap-x-[6rem] px-0! md:grid-cols-2">
             <Timeline number={idx + 1} imageLocation={side} {...item} />
           </div>
         );

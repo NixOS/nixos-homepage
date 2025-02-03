@@ -302,7 +302,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       <h2 class="font-heading text-4xl font-bold">NixCon</h2>
       <p class="mb-4 mt-2 text-xl font-bold">
         The
-        <a class="!text-white" href="/community/teams/nixcon">NixCon Team</a>
+        <a class="text-white!" href="/community/teams/nixcon">NixCon Team</a>
         organizes a conference once a year.
       </p>
       <div class="grid gap-4 md:grid-cols-3">
@@ -418,7 +418,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       <ul class="mt-8 flex flex-wrap justify-stretch gap-x-6 gap-y-16">
         {
           teams.map((team) => (
-            <li class="flex flex-grow basis-72 flex-col items-center gap-2 text-center text-white md:items-start md:text-left [&>a]:inline-block">
+            <li class="flex grow basis-72 flex-col items-center gap-2 text-center text-white md:items-start md:text-left [&>a]:inline-block">
               <img
                 src={`/images/teams/${team.slug.split('_')[1]}.svg`}
                 alt={`${team.data.name} Logo`}

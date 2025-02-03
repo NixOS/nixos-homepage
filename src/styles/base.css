@@ -1,7 +1,41 @@
 /* The integration's default injected base.css file */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../../tailwind.config.cjs';
+
+@utility text-light-bold {
+  @apply font-extralight;
+
+  & strong {
+    @apply font-extrabold;
+  }
+}
+
+@utility inlinelist {
+  article &ul {
+    @apply mb-0 ml-0 flex list-none flex-col;
+  }
+
+  article &ul ul {
+    @apply ml-0;
+  }
+
+  article &ul li {
+    @apply inline-block;
+  }
+  article &ul li::after {
+    content: ', ';
+  }
+  article &ul li:last-child::after {
+    content: '';
+  }
+}
+
+@utility astro-code {
+  article & {
+    @apply rounded-full;
+  }
+}
 
 @layer base {
   main a:-webkit-any-link {
@@ -90,7 +124,7 @@
   }
 
   article code {
-    @apply rounded border-1 border-gray-300 bg-gray-100 px-1 pb-1 pt-1 font-mono font-[500] text-black;
+    @apply rounded-sm border-1 border-gray-300 bg-gray-100 px-1 pb-1 pt-1 font-mono font-[500] text-black;
   }
 
   article pre {

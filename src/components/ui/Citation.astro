@@ -19,9 +19,9 @@ const { id, onBlueBackground } = Astro.props;
     </summary>
     <div
       class:list={[
-        'shadow-lg absolute mt-1 max-w-sm rounded border border-gray-300 p-2 text-sm',
-        !onBlueBackground && '!bg-white',
-        onBlueBackground && '!bg-nix-blue-darker',
+        'shadow-lg absolute mt-1 max-w-sm rounded-sm border border-gray-300 p-2 text-sm',
+        !onBlueBackground && 'bg-white!',
+        onBlueBackground && 'bg-nix-blue-darker!',
       ]}
     >
       <slot />
@@ -30,6 +30,8 @@ const { id, onBlueBackground } = Astro.props;
 </span>
 
 <style>
+  @reference "./../../styles/base.css";
+
   details[open] > summary > sup.text-white {
     @apply text-gray-100;
   }

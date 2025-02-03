@@ -34,11 +34,11 @@ const {
   />
   <input
     type="text"
-    class="outline-2 outline-nix-blue-light focus:border-nix-blue-light focus:outline"
+    class="outline-2 outline-transparent border-gray-200 focus:border-nix-blue-light focus:outline-nix-blue-light"
     class:list={[
       'text-normal rounded-full placeholder-gray-400',
       {
-        'placeholder-grey-200 text-nix-blue': color === 'nix-blue',
+        'placeholder-grey-200 text-nix-blue bg-white border-gray-200': color === 'nix-blue',
         'border-white bg-transparent text-white placeholder-nix-blue-extralight':
           color === 'white',
         'w-full border-2 py-3 pl-11 pr-4 text-xl md:w-[30rem]': size === 'lg',
