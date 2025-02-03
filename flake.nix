@@ -248,7 +248,7 @@ rec {
           devShells.default = pkgs.mkShell {
             name = "nixos-homepage";
 
-            inputsFrom = [ config.pre-commit.devShell ];
+            # inputsFrom = [ config.pre-commit.devShell ];
 
             packages = with pkgs; [
               nodejs_current
