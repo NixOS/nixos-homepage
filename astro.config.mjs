@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 
 // theme derivated from https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/main/packages/tm-themes/themes/vesper.json
@@ -14,7 +14,7 @@ import favicons from "astro-favicons";
 export default defineConfig({
   output: "static",
   site: "https://nixos.org",
-  integrations: [tailwind(), mdx(), sitemap(), icon({
+  integrations: [mdx(), sitemap(), icon({
     include: {
       mdi: ["*"],
       simpleIcons: ["*"],
@@ -35,4 +35,14 @@ export default defineConfig({
     },
   },
   compressHTML: true,
+  vite: {
+    plugins: [tailwindcss()],
+    server: {
+      watch: {
+        ignored: [
+          '**/.direnv/**'
+        ]
+      }
+    }
+  }
 });

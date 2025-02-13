@@ -1,7 +1,41 @@
 /* The integration's default injected base.css file */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../../tailwind.config.cjs';
+
+@utility text-light-bold {
+  @apply font-extralight;
+
+  & strong {
+    @apply font-extrabold;
+  }
+}
+
+@utility inlinelist {
+  article &ul {
+    @apply mb-0 ml-0 flex list-none flex-col;
+  }
+
+  article &ul ul {
+    @apply ml-0;
+  }
+
+  article &ul li {
+    @apply inline-block;
+  }
+  article &ul li::after {
+    content: ', ';
+  }
+  article &ul li:last-child::after {
+    content: '';
+  }
+}
+
+@utility astro-code {
+  article & {
+    @apply rounded-3xl;
+  }
+}
 
 @layer base {
   main a:-webkit-any-link {
@@ -23,7 +57,7 @@
   }
 
   article {
-    @apply font-light leading-7;
+    @apply leading-7 font-light;
   }
 
   article ol {
@@ -43,7 +77,7 @@
   }
 
   article ul > li > ul {
-    @apply mt-1 list-outside list-circle;
+    @apply list-circle mt-1 list-outside;
   }
 
   article ul > li > p:first-child {
@@ -78,7 +112,7 @@
   }
 
   article h3 {
-    @apply mb-4 text-2xl font-bold text-nix-blue;
+    @apply text-nix-blue mb-4 text-2xl font-bold;
   }
 
   article p {
@@ -90,7 +124,7 @@
   }
 
   article code {
-    @apply rounded border-1 border-gray-300 bg-gray-100 px-1 pb-1 pt-1 font-mono font-[500] text-black;
+    @apply rounded-sm border-1 border-gray-300 bg-gray-100 px-1 pt-1 pb-1 font-mono font-[500] text-black;
   }
 
   article pre {
@@ -102,7 +136,7 @@
   }
 
   article .astro-code {
-    @apply rounded-full;
+    @apply rounded-3xl;
   }
 
   article img:not(.img-noadjust) {
@@ -110,7 +144,7 @@
   }
 
   article blockquote {
-    @apply mb-4 border-l-4 border-nix-blue-darker bg-nix-blue-extralight px-4 pt-2;
+    @apply border-nix-blue-darker bg-nix-blue-extralight mb-4 border-l-4 px-4 pt-2;
   }
 
   article h1,
@@ -119,7 +153,7 @@
   article h4,
   article h5,
   article h6 {
-    @apply font-heading font-bold leading-tight text-nix-blue;
+    @apply font-heading text-nix-blue leading-tight font-bold;
   }
 
   article h1:not(:first-child),

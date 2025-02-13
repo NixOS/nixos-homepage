@@ -6,10 +6,10 @@ interface Props {
 const { number = 0 } = Astro.props;
 ---
 
-<div class="absolute left-[-3rem] top-0 hidden h-full w-1 bg-nix-blue md:block">
+<div class="bg-nix-blue absolute top-0 left-[-3rem] hidden h-full w-1 md:block">
 </div>
 <div
-  class="absolute left-[-5rem] top-0 hidden h-[4rem] w-[4rem] rounded-[2rem] bg-nix-green text-center text-[3rem] font-bold leading-[4rem] text-white md:block"
+  class="bg-nix-green absolute top-0 left-[-5rem] hidden h-[4rem] w-[4rem] rounded-[2rem] text-center text-[3rem] leading-[4rem] font-bold text-white md:block"
 >
   {number}
 </div>

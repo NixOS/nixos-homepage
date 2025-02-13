@@ -27,26 +27,26 @@ posts
 
 <Layout>
   <Banner
-    class="flex flex-col items-center justify-between gap-1 font-heading text-lg md:flex-row"
+    class="font-heading flex flex-col items-center justify-between gap-1 text-lg md:flex-row"
   >
     <b>{posts[0].data.title}</b>
     <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
   </Banner>
-  <div class="bg-nix-blue bg-cover bg-left bg-no-repeat inline-svg-hero">
+  <div class="bg-nix-blue inline-svg-hero bg-cover bg-left bg-no-repeat">
     <Container
       class="grid grid-cols-1 gap-8 py-16 text-white lg:grid-cols-2 lg:py-24"
     >
       <div class="mx-0 my-auto flex flex-col gap-4">
-        <h1 class="font-heading text-5xl font-bold leading-none">
+        <h1 class="font-heading text-5xl leading-none font-bold">
           Declarative builds<br class="hidden md:inline-block" /> and deployments.
         </h1>
-        <p class="text-lg font-extralight leading-7">
+        <p class="text-lg leading-7 font-extralight">
           Nix is a tool that takes a unique approach to package management and
           system configuration. Learn how to make reproducible, declarative and
           reliable systems.
         </p>
         <div
-          class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-stretch"
+          class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start"
         >
           <Button href="/download" color="green" size="lg">Download</Button>
           <Button href="/learn" color="lightblue" size="lg">Get started</Button>
@@ -72,7 +72,7 @@ posts
     </Container>
   </div>
   <div
-    class="bg-[39%_100%] bg-no-repeat pb-48 pt-16 inline-svg-landing-search-top md:bg-bottom"
+    class="inline-svg-landing-search-top bg-[39%_100%] bg-no-repeat pt-16 pb-48 md:bg-bottom"
   >
     <Container class="grid gap-8 md:grid-cols-3 md:gap-4">
       {
@@ -84,7 +84,7 @@ posts
                 src={feature.data.img}
                 class="mx-auto mb-6 h-32 w-auto"
               />
-              <h2 class="mb-2 font-heading text-3xl font-bold leading-none text-nix-blue">
+              <h2 class="font-heading text-nix-blue mb-2 text-3xl leading-none font-bold">
                 {feature.data.title}
               </h2>
               <div class="text-light-bold leading-loose">
@@ -97,24 +97,24 @@ posts
     </Container>
   </div>
   <div
-    class="after:bsolute relative after:bottom-0 after:left-0 after:-mb-16 after:-mt-48 after:block after:h-[30rem] after:w-full after:overflow-hidden after:bg-[url(/divider/landing_search_bottom.svg)] after:bg-divider after:bg-[60%_100%] after:bg-no-repeat"
+    class="after:bg-divider relative after:bottom-0 after:left-0 after:-mt-48 after:-mb-16 after:block after:h-[30rem] after:w-full after:overflow-hidden after:bg-[url(/divider/landing_search_bottom.svg)] after:bg-cover after:bg-[60%_100%] after:bg-no-repeat"
   >
     <div class="bg-nix-blue-extralight pt-4">
       <Container
-        class="flex w-full flex-col items-center justify-center gap-4 pb-8 pt-8"
+        class="flex w-full flex-col items-center justify-center gap-4 pt-8 pb-8"
       >
         <h2
-          class="pb-0 text-center font-heading text-4xl font-bold leading-tight text-nix-blue md:w-2/3"
+          class="font-heading text-nix-blue pb-0 text-center text-4xl leading-tight font-bold md:w-2/3"
         >
           Choose from Thousands of Packages
         </h2>
         <p
-          class="pb-2 text-center text-2xl font-extralight leading-relaxed md:w-5/6"
+          class="pb-2 text-center text-2xl leading-relaxed font-extralight md:w-5/6"
         >
           The Nix Packages collection (<a
-            class="font-bold !text-nix-blue"
+            class="text-nix-blue! font-bold"
             href="#">Nixpkgs</a
-          >) is a set of <span class="font-bold text-nix-green"
+          >) is a set of <span class="text-nix-green font-bold"
             >over 100 000 packages</span
           >
           for the Nix package manager.
@@ -126,7 +126,7 @@ posts
   <div>
     <Container>
       <h2
-        class="w-full pb-2 text-center font-heading text-4xl font-bold text-nix-blue"
+        class="font-heading text-nix-blue w-full pb-2 text-center text-4xl font-bold"
       >
         Examples
       </h2>

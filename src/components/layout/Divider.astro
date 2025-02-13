@@ -24,7 +24,7 @@ const { style = 'slope', mirrorX = false, mirrorY = false } = Astro.props;
   role="separator"
   src={styleMap[style]}
   class:list={[
-    'left-0 right-0 block h-16 w-full',
+    'right-0 left-0 block h-16 w-full',
     heightMap[style],
     mirrorY ? 'translate-y-[1px]' : 'translate-y-[-1px]',
     {

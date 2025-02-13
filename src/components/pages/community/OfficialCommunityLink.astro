@@ -22,12 +22,12 @@ const {
 
 <li
   class:list={[
-    'flex-1 cursor-pointer rounded-xl bg-nix-blue p-4 transition-all hover:bg-nix-blue-dark',
+    'bg-nix-blue hover:bg-nix-blue-dark flex-1 cursor-pointer rounded-xl p-4 transition-all',
     type === 'icon' && 'flex flex-col items-center justify-center',
     extraClasses,
   ]}
 >
-  <a href={href} class="!text-white !no-underline">
+  <a href={href} class="text-white! no-underline!">
     <div
       class:list={[
         'flex gap-2 text-xl font-bold',

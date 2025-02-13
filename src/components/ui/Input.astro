@@ -26,22 +26,23 @@ const {
       {
         'text-nix-blue': color === 'nix-blue',
         'text-white': color === 'white',
-        'left-3 top-3.5 md:block': size === 'lg',
-        'left-2.5 top-1.5': size === 'sm-full',
+        'top-3.5 left-3 md:block': size === 'lg',
+        'top-1.5 left-2.5': size === 'sm-full',
       },
     ]}
     name="mdi:search"
   />
   <input
     type="text"
-    class="outline-2 outline-nix-blue-light focus:border-nix-blue-light focus:outline"
+    class="focus:border-nix-blue-light focus:outline-nix-blue-light border-gray-200 outline-2 outline-transparent"
     class:list={[
       'text-normal rounded-full placeholder-gray-400',
       {
-        'placeholder-grey-200 text-nix-blue': color === 'nix-blue',
-        'border-white bg-transparent text-white placeholder-nix-blue-extralight':
+        'placeholder-grey-200 text-nix-blue border-gray-200 bg-white':
+          color === 'nix-blue',
+        'placeholder-nix-blue-extralight border-white bg-transparent text-white':
           color === 'white',
-        'w-full border-2 py-3 pl-11 pr-4 text-xl md:w-[30rem]': size === 'lg',
+        'w-full border-2 py-3 pr-4 pl-11 text-xl md:w-[30rem]': size === 'lg',
         'w-full border-1 px-10 py-2 md:pl-11': size === 'sm-full',
       },
     ]}

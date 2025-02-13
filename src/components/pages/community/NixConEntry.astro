@@ -16,7 +16,7 @@ const { title, date, description, href, imagePath = null } = Astro.props;
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="flex flex-col gap-1 font-extralight !text-white !no-underline"
+  class="flex flex-col gap-1 font-extralight text-white! no-underline!"
 >
   {
     imagePath && (
@@ -28,7 +28,7 @@ const { title, date, description, href, imagePath = null } = Astro.props;
   <h4 class="font-heading text-lg font-bold">{title}</h4>
   <div class="text-sm">{date}</div>
   <div class="leading-relaxed">{description}</div>
-  <div class="text-right font-bold !text-white">
+  <div class="text-right font-bold text-white!">
     <span class="underline">Read more...</span>
   </div>
 </a>
