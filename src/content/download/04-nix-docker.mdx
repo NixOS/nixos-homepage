@@ -22,6 +22,6 @@ The `workdir` example from above can be also used to start hacking on nixpkgs:
 ```bash
 $ git clone --depth=1 https://github.com/NixOS/nixpkgs.git
 $ docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix
-docker> nix-build -I nixpkgs=/nixpkgs -A hello
+docker> nix-build -I nixpkgs=/nixpkgs -A hello nixpkgs/default.nix
 docker> find ./result # this symlink points to the build package
 ```
