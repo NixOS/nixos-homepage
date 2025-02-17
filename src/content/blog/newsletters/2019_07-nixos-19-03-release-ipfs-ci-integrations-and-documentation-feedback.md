@@ -1,7 +1,7 @@
 ---
-Title: '#07 - NixOS 19.03 release, IPFS, CI integrations and documentation feedback'
-Date: 2019-04-17
-Description: With pride, there are many curses. With humility, there come many blessings - Ezra Taft Benso
+title: '#07 - NixOS 19.03 release, IPFS, CI integrations and documentation feedback'
+date: 2019-04-17
+description: With pride, there are many curses. With humility, there come many blessings - Ezra Taft Benso
 ---
 
 # News
