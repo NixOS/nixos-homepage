@@ -3,6 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import SHA from '@/components/ui/SHA.astro';
 import Link from '@/components/util/Link.astro';
+import { Icon } from 'astro-icon/components';
 
 export const buttonVariants = cva(
   'font-bold text-white drop-shadow transition-colors text-center',
@@ -32,6 +33,7 @@ interface Props extends VariantProps<typeof buttonVariants> {
   shaClassList?: string[];
   shaText?: string;
   label?: string;
+  nonPublic?: boolean;
 }
 
 const {
@@ -44,6 +46,7 @@ const {
   shaClassList = [],
   shaText = '',
   label,
+  nonPublic = false,
 } = Astro.props;
 ---
 
@@ -55,9 +58,11 @@ const {
         class:list={[
           'text-white! no-underline!',
           buttonVariants({ color, size }),
+          nonPublic && 'inline-flex items-center gap-2',
           classList,
         ]}
       >
+        {nonPublic && <Icon name="mdi:lock" />}
         {label || <slot />}
       </Link>
       {shaHref && (
