@@ -226,6 +226,32 @@ function validatePaper(paper: any): void {
 
 const papers: ReadonlyArray<Paper> = [
   {
+    title:
+      'Improving reproducibility of scientific software using Nix/NixOS: A case study on the preCICE ecosystem',
+    authors: [
+      {
+        name: 'Simon Hauser',
+      },
+      {
+        name: 'Max Hausch',
+      },
+      {
+        name: 'Benjamin Uekermann',
+        orcidUrl: 'https://orcid.org/0000-0002-1314-9969',
+      },
+    ],
+    year: 2025,
+    abstract:
+      'Ensuring reproducibility of scientific software is crucial for the advancement of research and the validation of scientific findings. However, achieving reproducibility in software-intensive scientific projects is often challenging due to dependencies, system configurations, and software environments. In this paper, we present a possible solution for these challenges by utilizing Nix and NixOS. Nix is a package manager and functional language, which guarantees that a package and all its dependencies can be built reproducibly. NixOS is a purely functional Linux distribution, built on top of Nix, which enables the build of reproducible systems including configuration files, packages, and their dependencies. We study the potential of Nix and NixOS by a case study on the reproducibility of the preCICE ecosystem. preCICE is a coupling library for partitioned multiphysics simulations. The ecosystem includes diverse legacy solvers, adapters, and language bindings be- sides the coupling library itself making it a challenging and representative testcase. We demonstrate how to create a reproducible and self-contained environment for this ecosystem and discuss the benefits and limitations of using Nix and NixOS.',
+    doiOrPublisherUrl: 'https://doi.org/10.14279/eceasst.v83.2613',
+    publicationInfo: {
+      type: 'conference',
+      conference: '4th Conference for Research Software Engineering (deRSE24)',
+      location: 'University of Würzburg, Germany',
+      publisher: 'Electronic Communications of the EASST',
+    },
+  },
+  {
     title: 'Extending Cloud Build Systems to Eliminate Transitive Trust',
     authors: [
       {
