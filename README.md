@@ -67,6 +67,15 @@ For example, if you are making design changes, you might want to answer why your
 Similarly, if you are making technical changes, you might want answer how your changes work.
 Add enough detail so we know what you know.
 
+## Adding your company to the commercial support page
+When adding your company to the commercial support page your company must...
+
+- ... offer commercial support for Nix
+- ... provide a clear description of their Nix services on their website (the descriptions have to explicitly mention Nix)
+- ... keep their info and logo up to date
+
+Please note that we will regularly check the commercial support page and will remove companies not adhering to this policy. The commercial support page is suited to finde companies that offer commercial Nix support and does not serve as advertising space.
+
 # Development
 
 To run local development instance follow this steps to start a local server
