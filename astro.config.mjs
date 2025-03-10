@@ -26,9 +26,6 @@ export default defineConfig({
       start_url: "/",
     }
   })],
-  legacy: {
-    collections: true, // TODO: migrate to Content Layer API
-  },
   markdown: {
     shikiConfig: {
       theme: syntaxTheme,
