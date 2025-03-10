@@ -213,7 +213,7 @@ rec {
             pkgs.runCommand "demos"
               {
                 nativeBuildInputs = with pkgs; [
-                  asciinema-scenario
+                  pkgs-stable.asciinema-scenario # TODO: this is done to keep builds running and should be removed when asciinema-scenario is fixed
                   gnused
                 ];
               }
