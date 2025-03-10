@@ -72,6 +72,9 @@ rec {
           nix_stable = released-nix-stable.packages."${system}".nix;
           nix_unstable = released-nix-unstable.packages."${system}".nix;
 
+          nix_doc_stable = released-nix-stable.packages."${system}".nix-manual;
+          nix_doc_unstable = released-nix-unstable.packages."${system}".nix-manual;
+
           nodejs_current = pkgs.nodejs_20;
 
           nixPills = import nix-pills {
@@ -169,8 +172,8 @@ rec {
                 ${redirectManualHTML "/learn" "$out/index.html"}
 
                 nix_dir=$PWD/nix && mkdir -p $nix_dir
-                cp -R --no-preserve=mode,ownership ${nix_stable.doc}/share/doc/nix/manual $nix_dir/stable
-                cp -R --no-preserve=mode,ownership ${nix_unstable.doc}/share/doc/nix/manual $nix_dir/unstable
+                cp -R --no-preserve=mode,ownership ${nix_doc_stable}/share/doc/nix/manual $nix_dir/stable
+                cp -R --no-preserve=mode,ownership ${nix_doc_unstable}/share/doc/nix/manual $nix_dir/unstable
                 ${manualVersionSwitch "$nix_dir" "stable"}
                 ${redirectManualHTML "/manual/nix/stable" "$nix_dir/index.html"}
                 mv $nix_dir $out
