@@ -48,21 +48,8 @@ rec {
       perSystem =
         { config, system, ... }:
         let
-          overlay = final: prev: {
-            asciinema-scenario = final.rustPlatform.buildRustPackage rec {
-              pname = "asciinema-scenario";
-              version = "0.2.0";
-              src = final.fetchCrate {
-                inherit pname version;
-                sha256 = "sha256-qMGi+myppWBapM7TkPeXC2g/M1FA1YGwESNrx8LVXkw=";
-              };
-              cargoSha256 = "0z4iwjm38xfgipl1pcrkl8277p627pls565k7cclrhxfcx3f513p";
-            };
-          };
-
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ overlay ];
           };
           inherit (pkgs.lib) getVersion;
 
@@ -213,7 +200,7 @@ rec {
             pkgs.runCommand "demos"
               {
                 nativeBuildInputs = with pkgs; [
-                  pkgs-stable.asciinema-scenario # TODO: this is done to keep builds running and should be removed when asciinema-scenario is fixed
+                  asciinema-scenario # TODO: this is done to keep builds running and should be removed when asciinema-scenario is fixed
                   gnused
                 ];
               }
