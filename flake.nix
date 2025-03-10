@@ -48,21 +48,8 @@ rec {
       perSystem =
         { config, system, ... }:
         let
-          overlay = final: prev: {
-            asciinema-scenario = final.rustPlatform.buildRustPackage rec {
-              pname = "asciinema-scenario";
-              version = "0.2.0";
-              src = final.fetchCrate {
-                inherit pname version;
-                sha256 = "sha256-qMGi+myppWBapM7TkPeXC2g/M1FA1YGwESNrx8LVXkw=";
-              };
-              cargoSha256 = "0z4iwjm38xfgipl1pcrkl8277p627pls565k7cclrhxfcx3f513p";
-            };
-          };
-
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ overlay ];
           };
           inherit (pkgs.lib) getVersion;
 
@@ -71,6 +58,9 @@ rec {
 
           nix_stable = released-nix-stable.packages."${system}".nix;
           nix_unstable = released-nix-unstable.packages."${system}".nix;
+
+          nix_doc_stable = released-nix-stable.packages."${system}".nix-manual;
+          nix_doc_unstable = released-nix-unstable.packages."${system}".nix-manual;
 
           nodejs_current = pkgs.nodejs_20;
 
@@ -169,8 +159,8 @@ rec {
                 ${redirectManualHTML "/learn" "$out/index.html"}
 
                 nix_dir=$PWD/nix && mkdir -p $nix_dir
-                cp -R --no-preserve=mode,ownership ${nix_stable.doc}/share/doc/nix/manual $nix_dir/stable
-                cp -R --no-preserve=mode,ownership ${nix_unstable.doc}/share/doc/nix/manual $nix_dir/unstable
+                cp -R --no-preserve=mode,ownership ${nix_doc_stable}/share/doc/nix/manual $nix_dir/stable
+                cp -R --no-preserve=mode,ownership ${nix_doc_unstable}/share/doc/nix/manual $nix_dir/unstable
                 ${manualVersionSwitch "$nix_dir" "stable"}
                 ${redirectManualHTML "/manual/nix/stable" "$nix_dir/index.html"}
                 mv $nix_dir $out
