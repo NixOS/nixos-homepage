@@ -11,11 +11,11 @@ On March 4th, 2025, we welcomed a new NixOS Foundation Board — marking the fir
 
 Following a thorough selection process, carefully coordinated with [the Steering Committee](https://github.com/NixOS/org/blob/23b3af2f7a3240c6a5343f3234e8e0befe26b7a0/doc/governance.md#governance), the new board members are:
 
-- President/Chair: [Ron Efroni Rotman](https://github.com/refroni) (continuing role)
-- Secretary:[ Silvan Mosberger](https://github.com/infinisil)
-- Director of Legal Affairs: [Ryan Trinkle](https://github.com/ryantrinkle)
-- Treasurer: [Maximilian Habryka](https://github.com/Lassulus)
-- Director of Community Support: [Sebastian Kraus](https://github.com/Ra33it0)
+- President/Chair: [Ron Efroni Rotman](https://github.com/refroni) (continuing role) ([@ron](https://discourse.nixos.org/u/ron/))
+- Secretary:[ Silvan Mosberger](https://github.com/infinisil) ([@infinisil](https://discourse.nixos.org/u/infinisil))
+- Director of Legal Affairs: [Ryan Trinkle](https://github.com/ryantrinkle) ([@ryantrinkle](https://discourse.nixos.org/u/ryantrinkle))
+- Treasurer: [Maximilian Habryka](https://github.com/Lassulus) ([@lassulus](https://discourse.nixos.org/u/lassulus/))
+- Director of Community Support: [Sebastian Kraus](https://github.com/Ra33it0) ([@ra33it0](https://discourse.nixos.org/u/ra33it0))
 
 This team is at the heart of the Foundation’s mission — to strengthen and support the Nix & NixOS community.
 
