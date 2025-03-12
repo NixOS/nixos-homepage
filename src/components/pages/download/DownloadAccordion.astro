@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 const { family = 'nix' } = Astro.props;
 const accordionId = `download-${family}-accordion`;
@@ -13,7 +13,7 @@ let downloadOptions = (await getCollection('download')).filter(
   <div class="download-accordion-menu">
     {
       downloadOptions.map(async (option) => {
-        const { Content } = await option.render();
+        const { Content } = await render(option);
         const needsInstallInfix =
           option.data.family === 'nix' && option.data.platform !== 'more';
         const optionId = `${option.data.family}-${needsInstallInfix ? 'install-' : ''}${option.data.platform}`;
