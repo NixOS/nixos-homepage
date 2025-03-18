@@ -4,9 +4,9 @@ import { getCollection, render } from 'astro:content';
 const { family = 'nix' } = Astro.props;
 const accordionId = `download-${family}-accordion`;
 
-let downloadOptions = (await getCollection('download')).filter(
-  (option) => option.data.family === family,
-);
+let downloadOptions = (await getCollection('download'))
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .filter((option) => option.data.family === family);
 ---
 
 <div id={accordionId} class="download-accordion">

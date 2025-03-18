@@ -13,6 +13,9 @@ import InlineSVG from '../components/util/InlineSVG.astro';
 const landingFeatures = await getCollection('landingFeatures');
 const demos = await getEntry('landing', 'demos');
 const posts = await getCollection('blog');
+
+landingFeatures.sort((a, b) => a.id.localeCompare(b.id));
+
 posts
   .sort((a, b) => {
     const dateA = new Date(a.data.date);

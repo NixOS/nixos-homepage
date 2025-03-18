@@ -16,6 +16,8 @@ import Layout from '../layouts/Layout.astro';
 const meetups = await getEntry('community', 'meetups');
 const teams = await getCollection('teams');
 
+teams.sort((a, b) => a.id.localeCompare(b.id));
+
 const nixcons = [
   {
     title: 'NixCon 2024 - Berlin',

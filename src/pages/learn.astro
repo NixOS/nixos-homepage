@@ -9,6 +9,8 @@ import InlineSVG from '../components/util/InlineSVG.astro';
 import Layout from '../layouts/Layout.astro';
 const learningManuals = await getCollection('learningManuals');
 
+learningManuals.sort((a, b) => a.id.localeCompare(b.id));
+
 const learningFeatures = [
   {
     imgUrl: '/src/assets/image/learn/installGfx.svg',
