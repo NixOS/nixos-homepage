@@ -9,7 +9,7 @@ import Layout from '../../../layouts/Layout.astro';
 export async function getStaticPaths() {
   const teamEntries = await getCollection('teams');
   return teamEntries.map((entry) => ({
-    params: { slug: entry.slug.split('_')[1] },
+    params: { slug: entry.id.split('_')[1] },
     props: { entry },
   }));
 }

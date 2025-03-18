@@ -422,7 +422,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           teams.map((team) => (
             <li class="flex grow basis-72 flex-col items-center gap-2 text-center text-white md:items-start md:text-left [&>a]:inline-block">
               <img
-                src={`/images/teams/${team.slug.split('_')[1]}.svg`}
+                src={`/images/teams/${team.id.split('_')[1]}.svg`}
                 alt={`${team.data.name} Logo`}
                 class="h-24"
               />
@@ -432,7 +432,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
               </p>
               <Button
                 color="green"
-                href={'/community/teams/' + team.slug.split('_')[1]}
+                href={'/community/teams/' + team.id.split('_')[1]}
               >
                 Read more
               </Button>
@@ -461,9 +461,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         <ul class="mx-auto mt-2 list-disc pl-8 md:w-72 md:pl-10">
           {
             teams
-              .filter(
-                (team) => team.slug.split('_')[1] === 'foundation-board',
-              )[0]
+              .find((team) => team.id.split('_')[1] === 'foundation-board')
               .data.members.map((member) => (
                 <li class="mb-1">
                   {member.name}

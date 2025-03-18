@@ -20,7 +20,7 @@ posts
     return dateA > dateB ? -1 : 1;
   })
   .filter((p) => {
-    return p.slug.split('/')?.[0] === 'announcements';
+    return p.id.split('/')?.[0] === 'announcements';
   })
   .reverse();
 ---
