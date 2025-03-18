@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Container from '../components/layout/Container.astro';
 import Divider from '../components/layout/Divider.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
@@ -96,7 +96,7 @@ const learningResources = [
   <Container class="grid items-start gap-4 py-16 md:grid-cols-3">
     {
       learningManuals.map(async (manual) => {
-        const { Content } = await manual.render();
+        const { Content } = await render(manual);
         return (
           <div class="border-0.5 border-nix-blue-darker flex flex-col items-center justify-start gap-4 rounded-2xl p-4">
             <article>
