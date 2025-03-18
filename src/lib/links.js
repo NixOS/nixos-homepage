@@ -11,7 +11,6 @@ export const nixosDownloadLink = (
   arch,
   format = 'iso',
   sha256 = false,
-  nixos_version = NIXOS_VERSION,
 ) => {
-  return `https://channels.nixos.org/nixos-${nixos_version}/latest-nixos-${variant ? `${variant}-` : ''}${arch}.${format}${sha256 ? '.sha256' : ''}`;
+  return `https://channels.nixos.org/nixos-${NIXOS_VERSION}/latest-nixos-${variant ? `${variant}-` : ''}${arch}.${format}${sha256 ? '.sha256' : ''}`;
 };
