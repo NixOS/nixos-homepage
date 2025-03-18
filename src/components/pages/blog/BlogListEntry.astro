@@ -5,7 +5,7 @@ const { post } = Astro.props;
 ---
 
 <article
-  data-category={post.slug.split('/')[0]}
+  data-category={post.id.split('/')[0]}
   class="font-light"
   aria-hidden="false"
 >

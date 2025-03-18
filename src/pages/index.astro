@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import Container from '../components/layout/Container.astro';
 import Button from '../components/ui/Button.astro';
 import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
@@ -10,9 +10,12 @@ import Asciinema from '../components/ui/Asciinema.astro';
 import Banner from '../components/ui/Banner.astro';
 import InlineSVG from '../components/util/InlineSVG.astro';
 
-const landingFeatures = await getCollection('landing-features');
+const landingFeatures = await getCollection('landingFeatures');
 const demos = await getEntry('landing', 'demos');
 const posts = await getCollection('blog');
+
+landingFeatures.sort((a, b) => a.id.localeCompare(b.id));
+
 posts
   .sort((a, b) => {
     const dateA = new Date(a.data.date);
@@ -20,7 +23,7 @@ posts
     return dateA > dateB ? -1 : 1;
   })
   .filter((p) => {
-    return p.slug.split('/')?.[0] === 'announcements';
+    return p.id.split('/')?.[0] === 'announcements';
   })
   .reverse();
 ---
@@ -77,7 +80,7 @@ posts
     <Container class="grid gap-8 md:grid-cols-3 md:gap-4">
       {
         landingFeatures.map(async (feature) => {
-          const { Content } = await feature.render();
+          const { Content } = await render(feature);
           return (
             <div class="flex flex-col text-center">
               <InlineSVG

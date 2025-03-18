@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 import Container from '../../../components/layout/Container.astro';
 import PageHeader from '../../../components/layout/PageHeader.astro';
@@ -9,13 +9,13 @@ import Layout from '../../../layouts/Layout.astro';
 export async function getStaticPaths() {
   const teamEntries = await getCollection('teams');
   return teamEntries.map((entry) => ({
-    params: { slug: entry.slug.split('_')[1] },
+    params: { slug: entry.id.split('_')[1] },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <Layout title={entry.data.name}>

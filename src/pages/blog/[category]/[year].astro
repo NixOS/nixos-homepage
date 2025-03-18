@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
 
   const filteredEntries = blogEntries.reduce((groups, entry) => {
-    const category = entry.slug.split('/')[0];
+    const category = entry.id.split('/')[0];
     const postYear = new Date(entry.data.date).getFullYear();
     if (!groups[category + postYear]) {
       groups[category + postYear] = {

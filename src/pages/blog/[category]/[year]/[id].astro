@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Container from '../../../../components/layout/Container.astro';
 import PageHeader from '../../../../components/layout/PageHeader.astro';
 import Layout from '../../../../layouts/Layout.astro';
@@ -8,16 +8,16 @@ export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
   return blogEntries.map((entry) => ({
     params: {
-      category: entry.slug.split('/')[0],
+      category: entry.id.split('/')[0],
       year: new Date(entry.data.date).getFullYear(),
-      id: entry.slug.split('/').pop().split('_').pop(),
+      id: entry.id.split('/').pop().split('_').pop(),
     },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <Layout title=`${entry.data.title} | Blog`>
