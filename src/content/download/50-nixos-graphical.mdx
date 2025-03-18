@@ -12,11 +12,11 @@ You can install NixOS on physical hardware by burning one of the CD images onto 
 
 The graphical installation ISO image **contains the graphical NixOS installer** as well as a **Desktop Environment** and several applications. It’s a _live CD_, so it allows you to get an impression of NixOS (and the Nix package manager) without installing it.
 
-Note that while the image itself only comes in GNOME and Plasma variations, the included installer also allows installing various other desktops, or installing without a desktop.
+Note that the installer allows installing various desktops, regardless of which desktop image has been booted. The stable image comes in GNOME and Plasma variations, while the unstable image includes both as options in the boot menu.
 
-### GNOME
+### Stable
 
-#### Stable
+#### GNOME
 
 <div class="flex flex-col gap-4 md:gap-6 my-4">
   <span class="flex items-center gap-2 lg:block">
@@ -55,63 +55,7 @@ Note that while the image itself only comes in GNOME and Plasma variations, the 
 
 {" "}
 
-#### Unstable
-
-<span class="flex items-center gap-2 lg:block">
-  <Button
-    color="semidarkblue"
-    href={nixosDownloadLink('gnome', 'x86_64-linux', 'iso', false, 'unstable')}
-    shaHref={nixosDownloadLink(
-      'gnome',
-      'x86_64-linux',
-      'iso',
-      true,
-      'unstable',
-    )}
-    shaText="(SHA-256)"
-    size="sm-mobfull"
-    classList={[
-      'w-full',
-      'md:w-auto',
-      'block',
-      'md:inline',
-      'text-center',
-      'md:text-left',
-    ]}
-    label="Download (GNOME, 64-bit Intel/AMD)"
-  />
-</span>
-
-{" "}
-
-<span>
-  <Button
-    color="semidarkblue"
-    href={nixosDownloadLink('gnome', 'aarch64-linux', 'iso', false, 'unstable')}
-    shaHref={nixosDownloadLink(
-      'gnome',
-      'aarch64-linux',
-      'iso',
-      true,
-      'unstable',
-    )}
-    shaText="(SHA-256)"
-    size="sm-mobfull"
-    classList={[
-      'w-full',
-      'md:w-auto',
-      'block',
-      'md:inline',
-      'text-center',
-      'md:text-left',
-    ]}
-    label="Download (GNOME, 64-bit ARM)"
-  />
-</span>
-
-### Plasma Desktop
-
-#### Stable
+#### Plasma Desktop
 
 <span>
   <Button
@@ -151,20 +95,20 @@ Note that while the image itself only comes in GNOME and Plasma variations, the 
   />
 </span>
 
-#### Unstable
+### Unstable
 
 <span>
   <Button
     color="semidarkblue"
     href={nixosDownloadLink(
-      'plasma6',
+      'graphical',
       'x86_64-linux',
       'iso',
       false,
       'unstable',
     )}
     shaHref={nixosDownloadLink(
-      'plasma6',
+      'graphical',
       'x86_64-linux',
       'iso',
       true,
@@ -180,19 +124,19 @@ Note that while the image itself only comes in GNOME and Plasma variations, the 
       'text-center',
       'md:text-left',
     ]}
-    label="Download (Plasma Desktop, 64-bit Intel/AMD)"
+    label="Download (Graphical, 64-bit Intel/AMD)"
   />
 </span>
 
   <span>
     <Button
       color="semidarkblue"
-      href={nixosDownloadLink("plasma6", "aarch64-linux", "iso", false, "unstable")}
-      shaHref={nixosDownloadLink("plasma6", "aarch64-linux", "iso", true, "unstable")}
+      href={nixosDownloadLink("graphical", "aarch64-linux", "iso", false, "unstable")}
+      shaHref={nixosDownloadLink("graphical", "aarch64-linux", "iso", true, "unstable")}
       shaText="(SHA-256)"
       size="sm-mobfull"
       classList = {["w-full", "md:w-auto", "block", "md:inline", "text-center", "md:text-left"]}
-      label="Download (Plasma Desktop, 64-bit ARM)"
+      label="Download (Graphical, 64-bit ARM)"
       />
   </span>
 </div>
