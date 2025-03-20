@@ -5,9 +5,9 @@ import { getCollection, getEntry } from 'astro:content';
 import Container from '../components/layout/Container.astro';
 import Divider from '../components/layout/Divider.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
+import CommunityPageListItem from '../components/pages/community/CommunityPageListItem.astro';
 import NixConEntry from '../components/pages/community/NixConEntry.astro';
 import OfficialCommunityLink from '../components/pages/community/OfficialCommunityLink.astro';
-import UnofficialCommunityLink from '../components/pages/community/UnofficialCommunityLink.astro';
 import Banner from '../components/ui/Banner.astro';
 import Button from '../components/ui/Button.astro';
 import RfcDiagram from '../components/ui/RfcDiagram.astro';
@@ -161,6 +161,29 @@ const platformsOutside = [
   },
 ];
 
+const widerEcosystem = [
+  {
+    href: 'https://guix.gnu.org/',
+    name: 'Guix',
+  },
+  {
+    href: 'https://tvix.dev/',
+    name: 'Tvix',
+  },
+  {
+    href: 'https://lix.systems',
+    name: 'Lix',
+  },
+  {
+    href: 'https://determinate.systems/nix/',
+    name: 'Determinate Nix',
+  },
+  {
+    href: 'https://snix.dev/',
+    name: 'Snix',
+  },
+];
+
 import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
 ---
 
@@ -280,7 +303,28 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
           {
             platformsOutside.map((platform) => (
-              <UnofficialCommunityLink
+              <CommunityPageListItem
+                href={platform.href}
+                name={platform.name}
+                iconName={platform.iconName}
+                description={platform.description}
+                type="mobile_icon_desktop_name"
+              />
+            ))
+          }
+        </ul>
+      </p>
+      <h3 id="forks" class="font-heading text-nix-blue mt-6 text-3xl font-bold">
+        The wider ecosystem
+      </h3>
+      <p class="text-gray-700">
+        There are a few alternative implementations of the idea of purely
+        functional package managers (sorted chronologically by appearance):
+
+        <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
+          {
+            widerEcosystem.map((platform) => (
+              <CommunityPageListItem
                 href={platform.href}
                 name={platform.name}
                 iconName={platform.iconName}

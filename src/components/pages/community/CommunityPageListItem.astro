@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon/components';
 
 interface Props {
   href: string;
-  iconName: string;
+  iconName?: string;
   name?: string;
   description?: string;
   type?: 'full' | 'mobile_icon_desktop_name' | 'icon';
@@ -33,13 +33,18 @@ const {
           'flex-col items-center justify-center md:flex-row md:justify-start',
       ]}
     >
-      <Icon name={iconName} alt={'logo of ' + name} class="h-8 w-8" />
+      {
+        iconName && (
+          <Icon name={iconName} alt={'logo of ' + name} class="h-8 w-8" />
+        )
+      }
       {
         type !== 'icon' && (
           <span
             class:list={[
               'ml-2 leading-8',
               type === 'mobile_icon_desktop_name' && 'hidden md:block',
+              !iconName && 'ml-0',
             ]}
           >
             {name}
