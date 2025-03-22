@@ -300,7 +300,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         these spaces. The NixOS moderation team may advise moderators in these
         spaces, though does not control or enforce our community values.
 
-        <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
+        <ul class="mt-4 grid grid-cols-3 flex-wrap gap-4">
           {
             platformsOutside.map((platform) => (
               <CommunityPageListItem
@@ -314,14 +314,11 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           }
         </ul>
       </p>
-      <h2
-        id="forks"
-        class="font-heading text-nix-blue mt-8 text-4xl leading-none font-bold"
-      >
+      <h3 id="forks" class="font-heading text-nix-blue mt-6 text-3xl font-bold">
         The wider ecosystem
-      </h2>
-      <p class="mt-2 text-gray-700">
-        There are a few independent implementations of the idea of purely
+      </h3>
+      <p class="text-gray-700">
+        There are a few alternative implementations of the idea of purely
         functional package managers (sorted chronologically by appearance):
 
         <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
