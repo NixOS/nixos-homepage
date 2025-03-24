@@ -45,10 +45,17 @@ jobs:
           name: "nixos-homepage"
           signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
 
-      - name: "Check formatting"
+      - name: "Install npm dependencies"
         run: |
           npm install
+
+      - name: "Check formatting"
+        run: |
           npm run format:check
+
+      - name: "Lint"
+        run: |
+          npm run lint
 
       - name: "Build"
         run: |
