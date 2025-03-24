@@ -16,7 +16,8 @@ export default defineConfig([
   tseslint.configs.base,
   eslintPluginAstro.configs.recommended,
   [globalIgnores([
-    "public/bootstrap/**/*",
+    'public/bootstrap/**/*',
+    'public/manual/**/*',
     '.astro/**/*',
   ])]
 ]);
