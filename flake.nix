@@ -169,12 +169,8 @@ rec {
                 mv $nixpkgs_dir $out
 
                 nixos_dir=$PWD/nixos && mkdir -p $nixos_dir
-                cp -R --no-preserve=mode,ownership ${
-                  released-nixpkgs-stable.htmlDocs.nixosManual.${system}
-                }/share/doc/nixos $nixos_dir/stable
-                cp -R --no-preserve=mode,ownership ${
-                  released-nixpkgs-unstable.htmlDocs.nixosManual.${system}
-                }/share/doc/nixos $nixos_dir/unstable
+                cp -R --no-preserve=mode,ownership ${released-nixpkgs-stable.htmlDocs.nixosManual.x86_64-linux}/share/doc/nixos $nixos_dir/stable
+                cp -R --no-preserve=mode,ownership ${released-nixpkgs-unstable.htmlDocs.nixosManual.x86_64-linux}/share/doc/nixos $nixos_dir/unstable
                 ${manualVersionSwitch "$nixos_dir" "stable"}
                 ${redirectManualHTML "/manual/nixos/stable" "$nixos_dir/index.html"}
                 mv $nixos_dir $out
