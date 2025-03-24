@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  statuses: write
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.head_ref || github.ref_name }}"
@@ -31,6 +32,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+          fetch-depth: 0
+
       - name: "Installing Nix"
         uses: "cachix/install-nix-action@v31"
 
