@@ -218,14 +218,14 @@ rec {
             };
             prettier-check = {
               enable = true;
-              name = "check-formatting";
+              name = "format check";
               entry = "${nodejs_current}/bin/npm run format:check";
               stages = [ "pre-push" ];
               pass_filenames = false;
             };
             eslint-check = {
               enable = true;
-              name = "check-js";
+              name = "linting";
               entry = "${nodejs_current}/bin/npm run lint";
               stages = [ "pre-push" ];
               pass_filenames = false;
