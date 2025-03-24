@@ -5,11 +5,8 @@ on:
   push:
     branches:
       - "main"
-  pull_request_target:
-
 permissions:
   contents: read
-  pull-requests: write
   statuses: write
   deployments: write
 
