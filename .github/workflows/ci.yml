@@ -22,9 +22,15 @@ jobs:
     steps:
       - name: "Checking out the repository"
         uses: "actions/checkout@v4"
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
         with:
           fetch-depth: 0
-
+      - name: "Checking out the PR repository"
+        uses: "actions/checkout@v4"
+        if: ${{ github.event_name == 'pull_request_target' }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: "Installing Nix"
         uses: "cachix/install-nix-action@v31"
 
