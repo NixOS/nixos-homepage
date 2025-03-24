@@ -23,7 +23,7 @@ const blogMenu = await getEntry('menus', 'blog');
   let categories = [];
 
   function refreshCategories() {
-    let categoryCheckboxes = Array.prototype.slice.call(
+    const categoryCheckboxes = Array.prototype.slice.call(
       document.getElementsByName('category'),
     );
     categories = categoryCheckboxes.map((checkbox) => {
@@ -41,8 +41,7 @@ const blogMenu = await getEntry('menus', 'blog');
   }
 
   document.getElementsByName('category').forEach((checkbox) => {
-    checkbox.addEventListener('change', (e) => {
-      const id = e.target.value;
+    checkbox.addEventListener('change', () => {
       refreshCategories();
       refreshArticles();
     });

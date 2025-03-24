@@ -53,7 +53,7 @@ const demoId = 'asciinema-demo-' + src.split('/').pop().split('.')[0];
     constructor() {
       super();
       const src = this.dataset.src;
-      let settings = JSON.parse(this.dataset.settings);
+      const settings = JSON.parse(this.dataset.settings);
 
       if (window.location.hash === `#${this.id}`) {
         settings.autoPlay = true;
@@ -65,7 +65,7 @@ const demoId = 'asciinema-demo-' + src.split('/').pop().split('.')[0];
         if (this.dataset.title) {
           document
             .getElementById(`${this.id}-link`)
-            .addEventListener('click', (e) => {
+            .addEventListener('click', () => {
               player.play();
             });
         }
