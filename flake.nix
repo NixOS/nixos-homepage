@@ -223,6 +223,13 @@ rec {
               stages = [ "pre-push" ];
               pass_filenames = false;
             };
+            eslint-check = {
+              enable = true;
+              name = "check-js";
+              entry = "${nodejs_current}/bin/npm run lint";
+              stages = [ "pre-push" ];
+              pass_filenames = false;
+            };
           };
 
           devShells.default = pkgs.mkShell {
