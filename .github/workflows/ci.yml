@@ -5,13 +5,12 @@ on:
   push:
     branches:
       - "main"
-  pull_request:
+  pull_request_target:
 
 permissions:
-  contents: "write"
-  pull-requests: "write"
-  statuses: "write"
-  deployments: "write"
+  contents: read
+  pull-requests: write
+  statuses: write
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.head_ref || github.ref_name }}"
@@ -21,19 +20,25 @@ jobs:
   build:
     name: "Build nixos.org"
     runs-on: "ubuntu-latest"
-
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
-
     steps:
       - name: "Checking out the repository"
         uses: "actions/checkout@v4"
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
         with:
+          fetch-depth: 0
+      - name: "Checking out the PR repository"
+        uses: "actions/checkout@v4"
+        if: ${{ github.event_name == 'pull_request_target' }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
           fetch-depth: 0
 
       - name: "Installing Nix"
         uses: "cachix/install-nix-action@v31"
 
       - name: "Setup Cachix"
+        if: ${{ github.event_name == 'push' && github.repository == 'NixOS/nixos-homepage' }}
         uses: "cachix/cachix-action@v16"
         with:
           name: "nixos-homepage"
@@ -52,7 +57,6 @@ jobs:
           cp -RL ./dist/* ./build/
 
       - name: "Publish to Netlify"
-        if: ${{ github.repository == 'NixOS/nixos-homepage' }}
         uses: "nwtgck/actions-netlify@v3.0.0"
         env:
           NETLIFY_AUTH_TOKEN: "${{ secrets.NETLIFY_AUTH_TOKEN }}"
@@ -68,7 +72,7 @@ jobs:
           enable-commit-status: true
 
           production-branch: "main"
-          production-deploy: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+          production-deploy: ${{ github.event_name == 'push' && github.ref_name == 'main' && github.repository == 'NixOS/nixos-homepage' }}
 
           alias: "${{ github.event_name == 'push' && github.ref_name || '' }}"
 
