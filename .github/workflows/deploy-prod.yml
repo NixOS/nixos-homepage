@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - "main"
-
 permissions:
   contents: read
   statuses: write
@@ -22,22 +21,38 @@ jobs:
     steps:
       - name: "Checking out the repository"
         uses: "actions/checkout@v4"
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
         with:
+          fetch-depth: 0
+      - name: "Checking out the PR repository"
+        uses: "actions/checkout@v4"
+        if: ${{ github.event_name == 'pull_request_target' }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
           fetch-depth: 0
 
       - name: "Installing Nix"
         uses: "cachix/install-nix-action@v31"
 
       - name: "Setup Cachix"
+        if: ${{ github.event_name == 'push' && github.repository == 'NixOS/nixos-homepage' }}
         uses: "cachix/cachix-action@v16"
         with:
           name: "nixos-homepage"
           signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
 
-      - name: "Check formatting"
+      - name: "Install npm dependencies"
         run: |
           npm install
+
+      - name: "Check formatting"
+        run: |
           npm run format:check
+
+      - name: "Lint"
+        run: |
+          npm run lint
 
       - name: "Build"
         run: |

@@ -1,12 +1,11 @@
-const { addDynamicIconSelectors } = require('@iconify/tailwind');
-const plugin = require('tailwindcss/plugin');
-const fs = require('node:fs');
-const path = require('node:path');
-const parser = require('node-html-parser');
-const svgo = require('svgo');
-const colors = require('tailwindcss/colors');
-
-const defaultTheme = require('tailwindcss/defaultTheme');
+import { addDynamicIconSelectors } from '@iconify/tailwind';
+import plugin from 'tailwindcss/plugin';
+import fs from 'node:fs';
+import path from 'node:path';
+import parser from 'node-html-parser';
+import svgo from 'svgo';
+import colors from 'tailwindcss/colors';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 const inlineSvgs = {
   hero: './src/assets/image/hero-bg.svg',
@@ -129,7 +128,7 @@ module.exports = {
   plugins: [
     addDynamicIconSelectors(),
     plugin(function ({ addUtilities }) {
-      res = {};
+      let res = {};
 
       for (const [key, value] of Object.entries(inlineSvgs)) {
         res[`.inline-svg-${key}`] = {

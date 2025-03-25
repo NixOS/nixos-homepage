@@ -15,7 +15,9 @@
     "linkcheck:minimal": "linkchecker http://localhost:4321 --ignore-url /manual --ignore-url /guides --ignore-url /tutorials",
     "linkcheck:full": "linkchecker http://localhost:4321",
     "format": "prettier --write ./src",
-    "format:check": "prettier --check ./src"
+    "format:check": "prettier --check ./src",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.1",
@@ -40,12 +42,18 @@
     "turndown": "^7.2.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.23.0",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/simple-icons": "^1.2.29",
     "@iconify/tailwind": "^1.2.0",
+    "@typescript-eslint/parser": "^8.27.0",
+    "eslint": "^9.23.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "globals": "^16.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-astro-organize-imports": "^0.4.11",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript-eslint": "^8.27.0"
   }
 }

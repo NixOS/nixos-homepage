@@ -1,7 +1,7 @@
 ---
 import crypto from 'node:crypto';
 
-export interface Props extends astroHTML.JSX.HTMLAttributes {}
+export type Props = astroHTML.JSX.HTMLAttributes;
 
 import Container from './Container.astro';
 
@@ -14,12 +14,9 @@ const panels: string[] = [];
 let inlineStyles = '';
 
 {
-  let index = 0;
   const classes: string[] = [];
   Object.entries(Astro.slots).forEach(([name]) => {
     if (name.startsWith('tab')) {
-      index += 1;
-
       tabs.push(name);
     } else {
       panels.push(name);
@@ -53,7 +50,7 @@ const uid = crypto.randomUUID();
   const buttons = document.querySelectorAll(['input.tab-selector']);
 
   buttons.forEach((button) => {
-    button.addEventListener('click', function (event) {
+    button.addEventListener('click', function () {
       const radioMatch = Array.from(this.classList).find((value) =>
         /^radio-\d+$/.test(value),
       );

@@ -214,8 +214,15 @@ rec {
             };
             prettier-check = {
               enable = true;
-              name = "check-formatting";
+              name = "format check";
               entry = "${nodejs_current}/bin/npm run format:check";
+              stages = [ "pre-push" ];
+              pass_filenames = false;
+            };
+            eslint-check = {
+              enable = true;
+              name = "linting";
+              entry = "${nodejs_current}/bin/npm run lint";
               stages = [ "pre-push" ];
               pass_filenames = false;
             };
@@ -262,6 +269,9 @@ rec {
 
               To re-format the source code:
                   npm run format
+
+              To lint the source code:
+                  npm run lint
               EOF
             '';
           };

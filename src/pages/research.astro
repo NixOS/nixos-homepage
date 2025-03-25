@@ -1,5 +1,4 @@
 ---
-import { getEntry } from 'astro:content';
 import Container from '../components/layout/Container.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
@@ -824,8 +823,6 @@ const papers: ReadonlyArray<Paper> = [
     preprintOrArchiveUrl: 'https://nixos.org/~eelco/pubs/iscsd-scm11-final.pdf',
   },
 ];
-
-const sponsors = await getEntry('sponsors', 'info');
 
 function getToggleAbstractId(paper) {
   return `toggle-abstract-${paper.id}`;
