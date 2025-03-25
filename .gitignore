@@ -2,7 +2,7 @@
 /result*
 /src/dist/
 /src/.astro/
-/src/node_modules/
+node_modules
 /src/npm-debug.log*
 .DS_Store
 /src/public/manual/

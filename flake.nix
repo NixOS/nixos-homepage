@@ -215,14 +215,14 @@ rec {
             prettier-check = {
               enable = true;
               name = "format check";
-              entry = "${nodejs_current}/bin/npm run format:check";
+              entry = "${nodejs_current}/bin/npm run format:check --workspace src";
               stages = [ "pre-push" ];
               pass_filenames = false;
             };
             eslint-check = {
               enable = true;
               name = "linting";
-              entry = "${nodejs_current}/bin/npm run lint";
+              entry = "${nodejs_current}/bin/npm run lint --workspace src";
               stages = [ "pre-push" ];
               pass_filenames = false;
             };
