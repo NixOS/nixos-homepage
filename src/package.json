@@ -1,7 +1,7 @@
 {
-  "name": "next",
+  "name": "nixos-homepage-src",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "npm run prebuild && astro dev",
     "start": "npm run prebuild && astro dev",
