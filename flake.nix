@@ -192,7 +192,7 @@ rec {
               }
               ''
                 mkdir -p $out
-                for scenario in ${./public/demos}/*.scenario; do
+                for scenario in ${./src/public/demos}/*.scenario; do
                   scenarioFileName=$out/$(basename $scenario .scenario)
                   echo "Generating $scenarioFileName.cast and $scenarioFileName.svg ..."
                   asciinema-scenario --preview-file $scenarioFileName.svg $scenario > $scenarioFileName.cast
