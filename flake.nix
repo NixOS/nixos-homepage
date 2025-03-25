@@ -247,6 +247,7 @@ rec {
               export NIXOS_AMIS="${NIXOS_AMIS}"
 
               if [ ! -d node_modules ]; then
+                cd src
                 ${nodejs_current}/bin/npm install
               fi
 

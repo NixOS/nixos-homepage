@@ -1,13 +1,13 @@
 /.direnv/
 /result*
-/dist/
-/.astro/
-/node_modules/
-/npm-debug.log*
+/src/dist/
+/src/.astro/
+/src/node_modules/
+/src/npm-debug.log*
 .DS_Store
-/public/manual/
-/public/guides/nix-pills/
-/public/demos/*.cast
-/public/demos/*.svg
+/src/public/manual/
+/src/public/guides/nix-pills/
+/src/public/demos/*.cast
+/src/public/demos/*.svg
 
 .pre-commit-config.yaml
