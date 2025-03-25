@@ -269,6 +269,9 @@ rec {
 
               To re-format the source code:
                   npm run format
+
+              To lint the source code:
+                  npm run lint
               EOF
             '';
           };
