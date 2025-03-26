@@ -6,6 +6,10 @@
     "type": "git",
     "url": "git+https://github.com/NixOS/nixos-homepage.git"
   },
+  "scripts": {
+    "dev": "npm run dev --workspace src",
+    "build": "npm run build --workspace src"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
