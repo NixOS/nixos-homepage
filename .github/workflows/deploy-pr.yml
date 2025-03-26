@@ -29,22 +29,22 @@ jobs:
 
       - name: "Install npm dependencies"
         run: |
-          npm install
+          npm install --workspaces
 
       - name: "Check formatting"
         run: |
-          npm run format:check
+          npm run format:check --workspaces
 
       - name: "Lint"
         run: |
-          npm run lint
+          npm run lint --workspaces
 
       - name: "Build"
         run: |
-          nix develop --accept-flake-config --command npm install
-          nix develop --accept-flake-config --command npm run build
+          nix develop --accept-flake-config --command npm install --workspaces
+          nix develop --accept-flake-config --command npm run build --workspaces
           mkdir build
-          cp -RL ./dist/* ./build/
+          cp -RL ./src/dist/* ./build/
 
       - name: "Publish to Netlify"
         uses: "nwtgck/actions-netlify@v3.0.0"
