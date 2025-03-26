@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "npm run prebuild && astro dev",
-    "start": "npm run prebuild && astro dev",
+    "start": "npm run dev",
     "prebuild:manuals": "nix build --extra-experimental-features flakes --extra-experimental-features nix-command .#manuals -o ./../result-manuals && mkdir -p ./public/manual && cp --no-preserve=mode,ownership -RL ./../result-manuals/* ./public/manual/",
     "prebuild:pills": "nix build --extra-experimental-features flakes --extra-experimental-features nix-command .#pills -o ./../result-pills && mkdir -p ./public/guides/nix-pills && cp --no-preserve=mode,ownership -RL ./../result-pills/* ./public/guides/nix-pills/",
     "prebuild:demos": "nix build --extra-experimental-features flakes --extra-experimental-features nix-command .#demos -o ./../result-demos && mkdir -p ./public/demos && cp --no-preserve=mode,ownership -RL ./../result-demos/* ./public/demos/",
