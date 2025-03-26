@@ -59,7 +59,7 @@ jobs:
           nix develop --accept-flake-config --command npm install --workspaces
           nix develop --accept-flake-config --command npm run build --workspaces
           mkdir build
-          cp -RL ./src/dist/* ./build/
+          cp -RL ./core/dist/* ./build/
 
       - name: "Publish to Netlify"
         uses: "nwtgck/actions-netlify@v3.0.0"

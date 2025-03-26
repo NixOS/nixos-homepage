@@ -192,7 +192,7 @@ rec {
               }
               ''
                 mkdir -p $out
-                for scenario in ${./src/public/demos}/*.scenario; do
+                for scenario in ${./core/public/demos}/*.scenario; do
                   scenarioFileName=$out/$(basename $scenario .scenario)
                   echo "Generating $scenarioFileName.cast and $scenarioFileName.svg ..."
                   asciinema-scenario --preview-file $scenarioFileName.svg $scenario > $scenarioFileName.cast
@@ -215,14 +215,14 @@ rec {
             prettier-check = {
               enable = true;
               name = "format check";
-              entry = "${nodejs_current}/bin/npm run format:check --workspace src";
+              entry = "${nodejs_current}/bin/npm run format:check --workspaces";
               stages = [ "pre-push" ];
               pass_filenames = false;
             };
             eslint-check = {
               enable = true;
               name = "linting";
-              entry = "${nodejs_current}/bin/npm run lint --workspace src";
+              entry = "${nodejs_current}/bin/npm run lint --workspaces";
               stages = [ "pre-push" ];
               pass_filenames = false;
             };
@@ -247,8 +247,7 @@ rec {
               export NIXOS_AMIS="${NIXOS_AMIS}"
 
               if [ ! -d node_modules ]; then
-                cd src
-                ${nodejs_current}/bin/npm install
+                ${nodejs_current}/bin/npm install --workspaces
               fi
 
               cat >&2 << EOF

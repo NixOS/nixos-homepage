@@ -7,8 +7,8 @@
     "url": "git+https://github.com/NixOS/nixos-homepage.git"
   },
   "scripts": {
-    "dev": "npm run dev --workspace src",
-    "build": "npm run build --workspace src"
+    "dev": "npm run dev --workspace core",
+    "build": "npm run build --workspace core"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +16,5 @@
     "url": "https://github.com/NixOS/nixos-homepage/issues"
   },
   "homepage": "https://github.com/NixOS/nixos-homepage#readme",
-  "workspaces": [ "src" ]
+  "workspaces": [ "core" ]
 }
