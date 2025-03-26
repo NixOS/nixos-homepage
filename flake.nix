@@ -247,12 +247,12 @@ rec {
               export NIXOS_AMIS="${NIXOS_AMIS}"
 
               if [ ! -d node_modules ]; then
-                ${nodejs_current}/bin/npm install --workspaces
+                ${nodejs_current}/bin/npm install --workspaces --include-workspace-root
               fi
 
               cat >&2 << EOF
               To fetch all dependencies:
-                  npm install
+                  npm install --workspaces --include-workspace-root
 
               Afterwards, to start a local development server:
                   npm run dev
