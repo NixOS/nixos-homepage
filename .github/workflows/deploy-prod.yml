@@ -48,16 +48,16 @@ jobs:
 
       - name: "Check formatting"
         run: |
-          npm run format:check --workspaces
+          npm run format:check
 
       - name: "Lint"
         run: |
-          npm run lint --workspaces
+          npm run lint
 
       - name: "Build"
         run: |
           nix develop --accept-flake-config --command npm install --workspaces
-          nix develop --accept-flake-config --command npm run build --workspaces
+          nix develop --accept-flake-config --command npm run build
           mkdir build
           cp -RL ./core/dist/* ./build/
 
