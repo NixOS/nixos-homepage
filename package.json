@@ -7,8 +7,12 @@
     "url": "git+https://github.com/NixOS/nixos-homepage.git"
   },
   "scripts": {
-    "dev": "npm run dev --workspace core",
-    "build": "npm run build --workspace core"
+    "prebuild:manuals": "nix build --extra-experimental-features flakes --extra-experimental-features nix-command .#manuals -o ./.result-manuals && mkdir -p ./core/public/manual && cp --no-preserve=mode,ownership -RL ./.result-manuals/* ./core/public/manual/",
+    "prebuild:pills": "nix build --extra-experimental-features flakes --extra-experimental-features nix-command .#pills -o ./.result-pills && mkdir -p ./core/public/guides/nix-pills && cp --no-preserve=mode,ownership -RL ./.result-pills/* ./core/public/guides/nix-pills/",
+    "prebuild:demos": "nix build --extra-experimental-features flakes --extra-experimental-features nix-command .#demos -o ./.result-demos && mkdir -p ./core/public/demos && cp --no-preserve=mode,ownership -RL ./.result-demos/* ./core/public/demos/",
+    "prebuild": "npm run prebuild:manuals && npm run prebuild:pills && npm run prebuild:demos",
+    "dev": "npm run prebuild && npm run dev --workspace core",
+    "build": "npm run prebuild && npm run build --workspace core"
   },
   "author": "",
   "license": "ISC",
