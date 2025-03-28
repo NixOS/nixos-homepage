@@ -29,7 +29,7 @@ jobs:
 
       - name: "Install npm dependencies"
         run: |
-          npm install --workspaces
+          npm install --workspaces --include-workspace-root
 
       - name: "Check formatting"
         run: |
