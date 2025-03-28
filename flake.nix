@@ -192,7 +192,7 @@ rec {
               }
               ''
                 mkdir -p $out
-                for scenario in ${./public/demos}/*.scenario; do
+                for scenario in ${./core/public/demos}/*.scenario; do
                   scenarioFileName=$out/$(basename $scenario .scenario)
                   echo "Generating $scenarioFileName.cast and $scenarioFileName.svg ..."
                   asciinema-scenario --preview-file $scenarioFileName.svg $scenario > $scenarioFileName.cast
@@ -247,12 +247,12 @@ rec {
               export NIXOS_AMIS="${NIXOS_AMIS}"
 
               if [ ! -d node_modules ]; then
-                ${nodejs_current}/bin/npm install
+                ${nodejs_current}/bin/npm install --workspaces --include-workspace-root
               fi
 
               cat >&2 << EOF
               To fetch all dependencies:
-                  npm install
+                  npm install --workspaces --include-workspace-root
 
               Afterwards, to start a local development server:
                   npm run dev

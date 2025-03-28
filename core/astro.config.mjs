@@ -34,12 +34,5 @@ export default defineConfig({
   compressHTML: true,
   vite: {
     plugins: [tailwindcss()],
-    server: {
-      watch: {
-        ignored: [
-          '**/.direnv/**'
-        ]
-      }
-    }
   }
 });

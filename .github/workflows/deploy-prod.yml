@@ -44,7 +44,7 @@ jobs:
 
       - name: "Install npm dependencies"
         run: |
-          npm install
+          npm install --workspaces --include-workspace-root
 
       - name: "Check formatting"
         run: |
@@ -56,10 +56,10 @@ jobs:
 
       - name: "Build"
         run: |
-          nix develop --accept-flake-config --command npm install
+          nix develop --accept-flake-config --command npm install --workspaces
           nix develop --accept-flake-config --command npm run build
           mkdir build
-          cp -RL ./dist/* ./build/
+          cp -RL ./core/dist/* ./build/
 
       - name: "Publish to Netlify"
         uses: "nwtgck/actions-netlify@v3.0.0"
