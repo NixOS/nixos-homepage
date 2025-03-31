@@ -23,25 +23,26 @@ console.log(currentBanner);
   role="banner"
   class="sticky top-0 z-50 bg-white font-extralight text-black drop-shadow-md"
 >
-  {currentBanner && (
-    <div class:list={[
-      "font-bold py-2",
-      currentBanner.data.sitewide.wrapperClasses
-    ]}>
-      <Container class:list={[
-        "flex justify-between items-center"
-      ]}>
-        <span>
-          {currentBanner.data.sitewide.message}
-        </span>
-        <a href={currentBanner.data.sitewide.link.url} class:list={[
-          "underline cursor-pointer"
-        ]}>
-          {currentBanner.data.sitewide.link.text}
-        </a>
-      </Container>
-    </div>
-  )}
+  {
+    currentBanner && (
+      <div
+        class:list={[
+          'py-2 font-bold',
+          currentBanner.data.sitewide.wrapperClasses,
+        ]}
+      >
+        <Container class:list={['flex items-center justify-between']}>
+          <span>{currentBanner.data.sitewide.message}</span>
+          <a
+            href={currentBanner.data.sitewide.link.url}
+            class:list={['cursor-pointer underline']}
+          >
+            {currentBanner.data.sitewide.link.text}
+          </a>
+        </Container>
+      </div>
+    )
+  }
   <Container class="flex flex-col justify-between md:flex-row md:items-center">
     <div
       class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start"

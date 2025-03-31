@@ -31,14 +31,16 @@ posts
 ---
 
 <Layout>
-  {currentBanner ? <CurrentBannerContent /> : (
-    <Banner
-      class="font-heading flex flex-col items-center justify-between gap-1 text-lg md:flex-row bg-nix-blue-extralight text-nix-blue-dark font-bold"
-    >
-      <b>{posts[0].data.title}</b>
-      <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
-    </Banner>
-  )}
+  {
+    currentBanner ? (
+      <CurrentBannerContent />
+    ) : (
+      <Banner class="font-heading bg-nix-blue-extralight text-nix-blue-dark flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row">
+        <b>{posts[0].data.title}</b>
+        <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
+      </Banner>
+    )
+  }
   <div class="bg-nix-blue inline-svg-hero bg-cover bg-left bg-no-repeat">
     <Container
       class="grid grid-cols-1 gap-8 py-16 text-white lg:grid-cols-2 lg:py-24"

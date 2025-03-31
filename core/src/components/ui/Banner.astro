@@ -4,12 +4,7 @@ const { class: extraClasses, wrapperClasses } = Astro.props;
 import Container from '../layout/Container.astro';
 ---
 
-<div
-  class:list={[
-    'clickable',
-    wrapperClasses,
-  ]}
->
+<div class:list={['clickable', wrapperClasses]}>
   <Container class:list={['p-4', extraClasses]}>
     <slot />
   </Container>
