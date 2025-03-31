@@ -1,0 +1,29 @@
+---
+sitewide:
+    message: "NixCon 2025 tickets are now available!"
+    link:
+        url: "https://2025.nixcon.org/tickets"
+        text: "Get your tickets now"
+    wrapperClasses: "bg-[#260D40] text-white"
+---
+import Banner from "@/components/ui/Banner.astro";
+
+  <Banner
+    wrapperClasses="bg-gradient-to-r from-[#260D40] to-nix-blue text-white"
+    class="font-heading font-bold flex flex-col items-center justify-between gap-1 text-lg md:flex-row"
+  >
+    <span>
+        <span class="font-bold text-2xl">
+            NixCon 2025 in Rapperswil, Switzerland
+        </span>
+        <span class="text-md">
+            Tickets are now available!
+        </span>
+    </span>
+    <a
+      href="https://2025.nixcon.org/tickets"
+      class="bg-white text-black rounded-md px-4 py-3 font-bold no-underline leading-none hover:bg-black hover:text-white"
+    >
+        Get your tickets now
+    </a>
+  </Banner>

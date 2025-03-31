@@ -8,18 +8,40 @@ import Link from '@/components/util/Link.astro';
 import { getNixLogoUrl } from '@/lib/themes';
 
 const headerMenu = await getEntry('menus', 'header');
+const currentBanner = await getEntry('banners', 'nixcon-2025-tickets');
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
 const navbarItemStyle = `text-center text-nix-blue-dark md:text-black md:hover:border-b-nix-blue-light border-b-4`;
 const navbarItemInactiveStyle = `border-b-nix-blue-extralight md:border-b-transparent bg-nix-blue-extralight md:bg-transparent`;
 const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-white md:text-black md:bg-transparent font-bold`;
+
+console.log(currentBanner);
 ---
 
 <header
   role="banner"
   class="sticky top-0 z-50 bg-white font-extralight text-black drop-shadow-md"
 >
+  {currentBanner && (
+    <div class:list={[
+      "font-bold py-2",
+      currentBanner.data.sitewide.wrapperClasses
+    ]}>
+      <Container class:list={[
+        "flex justify-between items-center"
+      ]}>
+        <span>
+          {currentBanner.data.sitewide.message}
+        </span>
+        <a href={currentBanner.data.sitewide.link.url} class:list={[
+          "underline cursor-pointer"
+        ]}>
+          {currentBanner.data.sitewide.link.text}
+        </a>
+      </Container>
+    </div>
+  )}
   <Container class="flex flex-col justify-between md:flex-row md:items-center">
     <div
       class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start"
