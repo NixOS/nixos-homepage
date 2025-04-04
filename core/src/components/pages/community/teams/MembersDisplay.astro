@@ -45,6 +45,12 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
               {member.title}
             </>
           )}
+          {member.affiliation && (
+            <>
+              &mdash;
+              {member.affiliation}
+            </>
+          )}
         </li>
       ))
     }
