@@ -1,23 +1,25 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
+import { BANNER } from 'astro:env/client';
 import Container from '../components/layout/Container.astro';
 import Button from '../components/ui/Button.astro';
 import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Layout from '../layouts/Layout.astro';
 import { generatePathFromPost } from '../lib/utils';
-import { BANNER } from 'astro:env/client'
 
+import { undefined } from 'astro:schema';
 import Asciinema from '../components/ui/Asciinema.astro';
 import Banner from '../components/ui/Banner.astro';
 import InlineSVG from '../components/util/InlineSVG.astro';
-import { undefined } from 'astro:schema';
 
 const landingFeatures = await getCollection('landingFeatures');
 const demos = await getEntry('landing', 'demos');
 const posts = await getCollection('blog');
 
 const currentBanner = await getEntry('banners', BANNER);
-const CurrentBannerContent = currentBanner ? (await render(currentBanner)).Content : undefined;
+const CurrentBannerContent = currentBanner
+  ? (await render(currentBanner)).Content
+  : undefined;
 
 landingFeatures.sort((a, b) => a.id.localeCompare(b.id));
 
