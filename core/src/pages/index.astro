@@ -5,16 +5,19 @@ import Button from '../components/ui/Button.astro';
 import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Layout from '../layouts/Layout.astro';
 import { generatePathFromPost } from '../lib/utils';
+import { BANNER } from 'astro:env/client'
 
 import Asciinema from '../components/ui/Asciinema.astro';
 import Banner from '../components/ui/Banner.astro';
 import InlineSVG from '../components/util/InlineSVG.astro';
+import { undefined } from 'astro:schema';
 
 const landingFeatures = await getCollection('landingFeatures');
 const demos = await getEntry('landing', 'demos');
-const currentBanner = await getEntry('banners', 'nixcon-2025-tickets');
-const { Content: CurrentBannerContent } = await render(currentBanner);
 const posts = await getCollection('blog');
+
+const currentBanner = await getEntry('banners', BANNER);
+const CurrentBannerContent = currentBanner ? (await render(currentBanner)).Content : undefined;
 
 landingFeatures.sort((a, b) => a.id.localeCompare(b.id));
 
@@ -32,7 +35,7 @@ posts
 
 <Layout>
   {
-    currentBanner ? (
+    CurrentBannerContent ? (
       <CurrentBannerContent />
     ) : (
       <Banner class="font-heading bg-nix-blue-extralight text-nix-blue-dark flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row">
