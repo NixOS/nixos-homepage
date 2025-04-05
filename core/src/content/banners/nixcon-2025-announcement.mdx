@@ -1,0 +1,30 @@
+---
+sitewide:
+  message: 'NixCon 2025 is coming!'
+  link:
+    url: 'https://discourse.nixos.org/t/nixcon-2025-5-7-september-in-rapperswil-jona-switzerland/62255'
+    text: 'Read Announcement'
+  wrapperClasses: 'bg-[#260D40] text-white'
+---
+
+import Banner from '@/components/ui/Banner.astro';
+
+<Banner
+  wrapperClasses="bg-gradient-to-r from-[#260D40] to-nix-blue text-white"
+  class="font-heading flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row"
+>
+  <span>
+    <span class="text-2xl font-bold">
+      NixCon 2025 in Rapperswil-Jona, Switzerland
+    </span>
+    <span class="text-md">Save the date: 5–7 September! </span>
+  </span>
+  <a
+    href="https://discourse.nixos.org/t/nixcon-2025-5-7-september-in-rapperswil-jona-switzerland/62255"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-1.5 w-full rounded-md bg-white px-4 py-3 text-center leading-none font-bold text-black no-underline hover:bg-black hover:text-white md:mt-0 md:w-auto"
+  >
+    Read Announcement
+  </a>
+</Banner>

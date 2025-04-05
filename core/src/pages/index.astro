@@ -1,5 +1,6 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
+import { BANNER } from 'astro:env/client';
 import Container from '../components/layout/Container.astro';
 import Button from '../components/ui/Button.astro';
 import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
@@ -13,6 +14,11 @@ import InlineSVG from '../components/util/InlineSVG.astro';
 const landingFeatures = await getCollection('landingFeatures');
 const demos = await getEntry('landing', 'demos');
 const posts = await getCollection('blog');
+
+const currentBanner = await getEntry('banners', BANNER);
+const CurrentBannerContent = currentBanner
+  ? (await render(currentBanner)).Content
+  : undefined;
 
 landingFeatures.sort((a, b) => a.id.localeCompare(b.id));
 
@@ -29,12 +35,16 @@ posts
 ---
 
 <Layout>
-  <Banner
-    class="font-heading flex flex-col items-center justify-between gap-1 text-lg md:flex-row"
-  >
-    <b>{posts[0].data.title}</b>
-    <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
-  </Banner>
+  {
+    CurrentBannerContent ? (
+      <CurrentBannerContent />
+    ) : (
+      <Banner class="font-heading bg-nix-blue-extralight text-nix-blue-dark flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row">
+        <b>{posts[0].data.title}</b>
+        <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
+      </Banner>
+    )
+  }
   <div class="bg-nix-blue inline-svg-hero bg-cover bg-left bg-no-repeat">
     <Container
       class="grid grid-cols-1 gap-8 py-16 text-white lg:grid-cols-2 lg:py-24"
