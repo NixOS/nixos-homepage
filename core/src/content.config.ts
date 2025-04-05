@@ -1,6 +1,10 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const banners = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.mdx', base: './src/content/banners' }),
+});
+
 const blog = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/blog' }),
 });
@@ -53,6 +57,7 @@ const teams = defineCollection({
 });
 
 export const collections = {
+  banners,
   blog,
   community,
   download,

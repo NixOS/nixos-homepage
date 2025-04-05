@@ -23,3 +23,12 @@ export function createExcerpt(post) {
     .flat()
     .join(' ');
 }
+
+export function getNixLogoUrlUniversal(theme, prefix) {
+  switch (theme) {
+    case 'pride':
+      return prefix + '/src/assets/image/nix-snowflake-rainbow.svg';
+    default:
+      return prefix + '/src/assets/image/nixos-logo-notext.svg';
+  }
+}
