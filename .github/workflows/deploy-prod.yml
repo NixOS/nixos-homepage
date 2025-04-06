@@ -1,42 +1,37 @@
-name: "CI"
+name: "CI - Production"
 
 on:
   workflow_dispatch:
   push:
     branches:
       - "main"
-permissions:
-  contents: read
-  statuses: write
-  deployments: write
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.head_ref || github.ref_name }}"
   cancel-in-progress: true
 
+permissions: 
+  contents: read
+
 jobs:
   build:
     name: "Build nixos.org"
     runs-on: "ubuntu-latest"
+    permissions:
+      contents: read
+      statuses: write
+      deployments: write
     steps:
       - name: "Checking out the repository"
         uses: "actions/checkout@v4"
-        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
         with:
           fetch-depth: 0
-      - name: "Checking out the PR repository"
-        uses: "actions/checkout@v4"
-        if: ${{ github.event_name == 'pull_request_target' }}
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          fetch-depth: 0
+          persist-credentials: false
 
       - name: "Installing Nix"
         uses: "cachix/install-nix-action@v31"
 
       - name: "Setup Cachix"
-        if: ${{ github.event_name == 'push' && github.repository == 'NixOS/nixos-homepage' }}
         uses: "cachix/cachix-action@v16"
         with:
           name: "nixos-homepage"

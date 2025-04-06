@@ -1,21 +1,23 @@
-name: "CI"
+name: "CI - Pull Request"
 
 on:
   pull_request_target:
-
-permissions:
-  contents: read
-  pull-requests: write
-  statuses: write
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.head_ref || github.ref_name }}"
   cancel-in-progress: true
 
+permissions: 
+  contents: read
+
 jobs:
   build:
     name: "Build nixos.org PR"
     runs-on: "ubuntu-latest"
+    permissions:
+      contents: read
+      pull-requests: write
+      statuses: write
     steps:
       - name: "Checking out the PR repository"
         uses: "actions/checkout@v4"
@@ -23,6 +25,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           fetch-depth: 0
+          persist-credentials: false
 
       - name: "Installing Nix"
         uses: "cachix/install-nix-action@v31"

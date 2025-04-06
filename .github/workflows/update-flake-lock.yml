@@ -4,12 +4,21 @@ on:
   schedule:
     - cron: '0 0 * * 0' # runs weekly on Sunday at 00:00
 
+permissions: 
+  contents: read
+
 jobs:
   lockfile:
     runs-on: "ubuntu-latest"
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: "Checkout repository"
         uses: "actions/checkout@v4"
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
       - name: "Install Nix"
         uses: "cachix/install-nix-action@v31"
