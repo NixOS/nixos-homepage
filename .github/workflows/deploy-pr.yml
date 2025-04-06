@@ -20,7 +20,7 @@ jobs:
       statuses: write
     steps:
       - name: "Checking out the PR repository"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683" # v4.2.2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
@@ -28,7 +28,7 @@ jobs:
           persist-credentials: false
 
       - name: "Installing Nix"
-        uses: "cachix/install-nix-action@v31"
+        uses: "cachix/install-nix-action@d1ca217b388ee87b2507a9a93bf01368bde7cec2" # v31.1.0
 
       - name: "Install npm dependencies"
         run: |
@@ -50,7 +50,7 @@ jobs:
           cp -RL ./core/dist/* ./build/
 
       - name: "Publish to Netlify"
-        uses: "nwtgck/actions-netlify@v3.0.0"
+        uses: "nwtgck/actions-netlify@4cbaf4c08f1a7bfa537d6113472ef4424e4eb654" # v3.0.0
         env:
           NETLIFY_AUTH_TOKEN: "${{ secrets.NETLIFY_AUTH_TOKEN }}"
           NETLIFY_SITE_ID: "${{ secrets.NETLIFY_SITE_ID }}"
