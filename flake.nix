@@ -237,6 +237,7 @@ rec {
               nodejs_current
               netlify-cli
               nixfmt-rfc-style
+              zizmor
             ];
 
             shellHook = ''
