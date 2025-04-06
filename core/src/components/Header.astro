@@ -1,12 +1,15 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { getEntry } from 'astro:content';
+import { BANNER } from 'astro:env/client';
 
 import Container from '@/components/layout/Container.astro';
 import InlineSVG from '@/components/util/InlineSVG.astro';
 import Link from '@/components/util/Link.astro';
+import { getNixLogoUrl } from '@/lib/themes';
 
 const headerMenu = await getEntry('menus', 'header');
+const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
@@ -19,6 +22,28 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
   role="banner"
   class="sticky top-0 z-50 bg-white font-extralight text-black drop-shadow-md"
 >
+  {
+    currentBanner && (
+      <a
+        href={currentBanner.data.sitewide.link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={[
+          'block py-2 font-bold',
+          currentBanner.data.sitewide.wrapperClasses,
+        ]}
+      >
+        <Container class:list={['flex items-center justify-between']}>
+          <span class="line-clamp-1">
+            {currentBanner.data.sitewide.message}
+          </span>
+          <span class:list={['line-clamp-1 cursor-pointer underline']}>
+            {currentBanner.data.sitewide.link.text}
+          </span>
+        </Container>
+      </a>
+    )
+  }
   <Container class="flex flex-col justify-between md:flex-row md:items-center">
     <div
       class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start"
@@ -27,11 +52,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
         href="/"
         class="flex items-center justify-between gap-2 select-none md:justify-start"
       >
-        <InlineSVG
-          class="h-12 w-auto"
-          src="/src/assets/image/nixos-logo-notext.svg"
-          alt="Nixos Logo"
-        />
+        <InlineSVG class="h-12 w-auto" src={getNixLogoUrl()} alt="Nixos Logo" />
         <InlineSVG
           class="block h-12 w-auto md:hidden xl:block"
           src="/src/assets/image/nixos-logo-text.svg"

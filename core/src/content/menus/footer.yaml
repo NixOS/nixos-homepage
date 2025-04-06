@@ -31,10 +31,10 @@ sections:
     items:
       - name: Blog
         link: /blog/
-      - name: Newsletter
-        link: https://weekly.nixos.org/
       - name: Research & Publications
         link: /research
+      - name: NixOS Weekly (Archive)
+        link: https://weekly.nixos.org/
 social:
   - name: Mastodon
     link: https://chaos.social/@nixos_org

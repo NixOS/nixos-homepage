@@ -271,6 +271,13 @@ rec {
               stages = [ "pre-push" ];
               pass_filenames = false;
             };
+            lint-github-actions = {
+              enable = true;
+              name = "lint github actions";
+              entry = "${pkgs.zizmor}/bin/zizmor --persona auditor";
+              files = "\\.github/workflows/.*\\.yml$";
+              stages = [ "pre-commit" ];
+            };
           };
 
           devShells.default = pkgs.mkShell {
@@ -282,6 +289,7 @@ rec {
               nodejs_current
               netlify-cli
               nixfmt-rfc-style
+              zizmor
             ];
 
             shellHook = ''

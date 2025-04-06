@@ -83,7 +83,7 @@ To run local development instance follow this steps to start a local server
     $ git clone git@github.com:NixOS/nixos-homepage.git
     $ cd nixos-homepage
     $ nix-shell
-    [nix-shell]$ npm install
+    [nix-shell]$ npm install --workspaces --include-workspace-root
     [nix-shell]$ npm run dev
 
 If you have [Docker] and [Docker Compose] installed, you can alternatively run
