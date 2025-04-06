@@ -7,8 +7,3 @@ rules:
       # safety is ensured by completely separating the deploy-prod and deploy-pr workflows
       # leaving no chance to branch out from any PR identifying logic in a shared workflow
       - deploy-pr.yml
-  unpinned-uses:
-    ignore:
-      - deploy-pr.yml
-      - deploy-prod.yml
-      - update-flake-lock.yml
