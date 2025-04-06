@@ -309,6 +309,14 @@ rec {
                 ${nodejs_current}/bin/npm install --workspaces --include-workspace-root
               fi
 
+              mkdir -p ./core/public/manual
+              mkdir -p ./core/public/guides/nix-pills
+              mkdir -p ./core/public/demos
+
+              cp --no-preserve=mode,ownership -RL ${manuals}/* ./core/public/manual
+              cp --no-preserve=mode,ownership -RL ${pills}/* ./core/public/guides/nix-pills
+              cp --no-preserve=mode,ownership -RL ${demos}/* ./core/public/demos
+
               cat >&2 << EOF
               To fetch all dependencies:
                   npm install --workspaces --include-workspace-root
