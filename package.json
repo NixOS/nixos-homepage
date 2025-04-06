@@ -9,7 +9,6 @@
   "scripts": {
     "dev": "npm run dev --workspace core",
     "build": "npm run build --workspace core",
-    "build:core": "npm run build --workspace core",
     "format": "prettier --write ./core/src",
     "format:check": "prettier --check ./core/src",
     "lint": "eslint",
