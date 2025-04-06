@@ -13,6 +13,7 @@
     "prebuild": "npm run prebuild:manuals && npm run prebuild:pills && npm run prebuild:demos",
     "dev": "npm run prebuild && npm run dev --workspace core",
     "build": "npm run prebuild && npm run build --workspace core",
+    "build:core": "npm run build --workspace core",
     "format": "prettier --write ./core/src",
     "format:check": "prettier --check ./core/src",
     "lint": "eslint",

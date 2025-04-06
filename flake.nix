@@ -205,22 +205,28 @@ rec {
             pname = "nixos-homepage-core";
             version = "0.0.0";
 
-            src = ./core;
+            src = ./.;
 
-            configurePhase = ''
+            npmDeps = pkgs.importNpmLock {
+              npmRoot = ./.;
+            };
+
+            npmConfigHook = pkgs.importNpmLock.npmConfigHook;
+
+            buildPhase = ''
               export NIX_STABLE_VERSION="${NIX_STABLE_VERSION}"
               export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
               export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
               export NIXOS_AMIS="${NIXOS_AMIS}"
+
+              npm run build --workspace core
             '';
 
             installPhase = ''
               mkdir -p $out
-              cp -r ./dist/* $out
+              cp -r ./core/dist/* $out
             '';
-
-            npmDepsHash = "sha256-z1lQLlkWIIhEOjkDoBH7YbM+UQ7CkyxHvm+ryK+UuZE=";
           };
         in
         {
