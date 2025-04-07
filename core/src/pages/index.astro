@@ -45,42 +45,52 @@ posts
       </Banner>
     )
   }
-  <div class="bg-nix-blue inline-svg-hero bg-cover bg-left bg-no-repeat">
-    <Container
-      class="grid grid-cols-1 gap-8 py-16 text-white lg:grid-cols-2 lg:py-24"
-    >
-      <div class="mx-0 my-auto flex flex-col gap-4">
+  <div
+    class="bg-nix-blue inline-svg-hero bg-cover bg-left bg-no-repeat text-white"
+  >
+    <Container class="pt-16">
+      <div class="mx-0 my-auto w-full gap-4">
         <h1 class="font-heading text-5xl leading-none font-bold">
-          Declarative builds<br class="hidden md:inline-block" /> and deployments.
+          Build reproducible development environments, simplify your
+          deployments!
         </h1>
+      </div>
+    </Container>
+
+    <Container class="grid grid-cols-1 gap-8 py-16 lg:grid-cols-2 lg:py-24">
+      <div class="mx-0 my-auto flex flex-col gap-4">
+        <h2 class="font-heading text-5xl leading-none font-bold">Nix</h2>
         <p class="text-lg leading-7 font-extralight">
-          Nix is a tool that takes a unique approach to package management and
-          system configuration. Learn how to make reproducible, declarative and
-          reliable systems.
+          The stand-alone package manager that ensures reproducible builds and
+          makes sure that everything that runs on one machine will also work on
+          another.
         </p>
         <div
           class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start"
         >
           <Button href="/download" color="green" size="lg">Download</Button>
-          <Button href="/learn" color="lightblue" size="lg">Get started</Button>
+          <Button
+            href="https://nix.dev/tutorials/first-steps/"
+            color="lightblue"
+            size="lg">Get started</Button
+          >
         </div>
       </div>
-      <div
-        class="min-h-[300px] rounded-3xl border-[1rem] border-white bg-[#121314] drop-shadow-md"
-      >
-        <Asciinema
-          src="/demos/cover.cast"
-          settings={{
-            cols: 84,
-            poster: 'npt:0:01:22',
-            markers: [
-              [11.5, 'Ad-Hoc development environments'],
-              [41.5, 'Declarative development environments'],
-              [85.0, 'Build docker image with Nix'],
-              [122.0, 'Build minimal docker image with Nix'],
-            ],
-          }}
-        />
+      <div class="mx-0 my-auto flex flex-col gap-4">
+        <h2 class="font-heading text-5xl leading-none font-bold">NixOS</h2>
+        <p class="text-lg leading-7 font-extralight">
+          Run your favourite webservice in 5 minutes: NixOS is a Linux
+          distrubition built on Nix and adds a powerful module system that
+          enables running your favourite application in no time.
+        </p>
+        <div
+          class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start"
+        >
+          <Button href="/download#nixos-iso" color="green" size="lg"
+            >Download</Button
+          >
+          <Button href="/learn" color="lightblue" size="lg">Get started</Button>
+        </div>
       </div>
     </Container>
   </div>
