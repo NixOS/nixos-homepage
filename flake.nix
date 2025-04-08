@@ -325,8 +325,8 @@ rec {
               It will rebuild the website on each change.
 
               To test redirects:
-                  npm run build
-                  cd dist
+                  nix build
+                  cd result
                   netlify dev
 
               To re-format the source code:
