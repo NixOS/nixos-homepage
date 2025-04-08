@@ -7,7 +7,7 @@
     "url": "git+https://github.com/NixOS/nixos-homepage.git"
   },
   "scripts": {
-    "dev": "npm run dev --workspace core",
+    "dev": "npm run dev:full --workspace core",
     "build": "npm run build --workspace core",
     "format": "prettier --write ./core/src",
     "format:check": "prettier --check ./core/src",
@@ -20,7 +20,9 @@
     "url": "https://github.com/NixOS/nixos-homepage/issues"
   },
   "homepage": "https://github.com/NixOS/nixos-homepage#readme",
-  "workspaces": [ "core" ],
+  "workspaces": [
+    "core"
+  ],
   "devDependencies": {
     "@eslint/js": "^9.24.0",
     "@typescript-eslint/parser": "^8.29.0",
@@ -31,6 +33,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-astro-organize-imports": "^0.4.11",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "typescript-eslint": "^8.29.0"
+    "typescript-eslint": "^8.29.0",
+    "express": "^5.1.0"
   }
 }
