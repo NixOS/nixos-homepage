@@ -16,34 +16,34 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
   ]}
 >
   <h2 class={titleClasses}>{title}</h2>
-  <ul class="mt-2 ml-4 list-disc font-light">
+  <ul class="mt-2 font-light">
     {
       members.map((member) => (
-        <li class="mb-1 last:mb-0">
-          {member.name}
-          {member.discourse && (
-            <>
-              (
-              <a href={'https://discourse.nixos.org/u/' + member.discourse}>
-                @{member.discourse}
-              </a>
-              )
-            </>
-          )}
-          {member.github && (
-            <>
-              (
-              <a href={'https://github.com/' + member.github}>
-                @{member.github}
-              </a>
-              )
-            </>
-          )}
-          {member.title && (
-            <>
-              &mdash;
-              {member.title}
-            </>
+        <li class="border-b-nix-blue-light-hover flex flex-col border-b-1 pt-2 pb-2 first:pt-0 last:border-b-0 last:pb-0">
+          <span class="font-medium">
+            {member.name}
+            {member.discourse && (
+              <>
+                (
+                <a href={'https://discourse.nixos.org/u/' + member.discourse}>
+                  @{member.discourse}
+                </a>
+                )
+              </>
+            )}
+            {member.github && (
+              <>
+                (
+                <a href={'https://github.com/' + member.github}>
+                  @{member.github}
+                </a>
+                )
+              </>
+            )}
+          </span>
+          {member.title && <span>{member.title}</span>}
+          {member.affiliation && (
+            <span class="text-sm text-gray-700">{member.affiliation}</span>
           )}
         </li>
       ))
