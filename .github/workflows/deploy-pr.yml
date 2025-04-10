@@ -44,10 +44,8 @@ jobs:
 
       - name: "Build"
         run: |
-          nix develop --accept-flake-config --command npm install --workspaces
-          nix develop --accept-flake-config --command npm run build
-          mkdir build
-          cp -RL ./core/dist/* ./build/
+          nix build
+          cp -RL ./result/* ./build/
 
       - name: "Publish to Netlify"
         uses: "nwtgck/actions-netlify@4cbaf4c08f1a7bfa537d6113472ef4424e4eb654" # v3.0.0
