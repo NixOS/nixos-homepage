@@ -52,6 +52,8 @@ jobs:
       - name: 'Build'
         run: |
           nix build
+          mkdir -p ./build
+          cp -RL ./result/* ./build/
 
       - name: 'Publish to Netlify'
         uses: 'nwtgck/actions-netlify@4cbaf4c08f1a7bfa537d6113472ef4424e4eb654' # v3.0.0
@@ -61,7 +63,7 @@ jobs:
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
           deploy-message: 'Published from GitHub Actions'
-          publish-dir: './result'
+          publish-dir: './build'
 
           enable-pull-request-comment: true
           overwrites-pull-request-comment: false
