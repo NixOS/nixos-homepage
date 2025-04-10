@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
+    "dev:full": "node --trace-warnings devserver.mjs",
     "start": "npm run dev",
     "build": "astro build",
     "preview": "astro preview",

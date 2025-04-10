@@ -5,5 +5,4 @@ npm-debug.log*
 .DS_Store
 public/manual/
 public/guides/nix-pills/
-public/demos/*.cast
-public/demos/*.svg
+public/demos
