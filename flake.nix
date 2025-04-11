@@ -219,6 +219,8 @@ rec {
               export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
               export NIXOS_AMIS="${NIXOS_AMIS}"
+              export THEME="${builtins.getEnv "THEME"}"
+              export BANNER="${builtins.getEnv "BANNER"}"
 
               npm run build --workspace core
             '';

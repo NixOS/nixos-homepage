@@ -51,7 +51,7 @@ jobs:
 
       - name: 'Build'
         run: |
-          nix build
+          nix build --impure
           mkdir -p ./build
           cp -RL ./result/* ./build/
         env:
