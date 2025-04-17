@@ -10,7 +10,10 @@ export default defineConfig([
     "core/*.{js,mjs,cjs,ts}",
     "core/src/**/*.{js,mjs,cjs,ts}",
   ], languageOptions: { globals: globals.node } },
-  { files: ["core/public/**/*.{js,mjs,cjs,ts}"], languageOptions: { globals: globals.browser } },
+  { files: [
+    "core/public/**/*.{js,mjs,cjs,ts}",
+    "core/src/lib/client/**/*.{js,mjs,cjs,ts}",
+  ], languageOptions: { globals: globals.browser } },
   { files: ["**/*.{js,mjs,cjs,ts}"], plugins: { js }, extends: ["js/recommended"] },
   tseslint.configs.base,
   eslintPluginAstro.configs.recommended,
