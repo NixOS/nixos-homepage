@@ -1,7 +1,7 @@
 ---
 id: nixos-logo-and-branding-update
 title: NixOS Logo and Branding Update
-date: 2025-05-01T11:00:00.000Z
+date: 2025-04-28T11:00:00.000Z
 category: announcements
 ---
 
@@ -123,6 +123,18 @@ A few example output products are shown below.
   loading="lazy"
 />
 
+All of these efforts - and the ones still underway - are being done to serve the community, which truly deserves to be treated as a mature and important organization.
+In today’s world, a clear visual identity and coherent narrative are must-haves for any serious project.
+Meeting the requirements of modern communication and marketing practices isn't about following trends for their own sake; it’s about giving NixOS the tools it needs to thrive and be recognized alongside other respected projects.
+
+We’re taking the steps that are expected - and needed - to ensure the health and growth of the project.
+Many other communities that invested early in structured branding benefit from easier outreach, clearer communication, and a stronger sense of belonging.
+On the other hand, projects that neglected this aspect have often faced issues with fragmentation, public confusion, and difficulty attracting new users and contributors.
+We're choosing the path that sets NixOS up for long-term success, while staying true to the spirit of openness and excellence that defines this community.
+
 There is still much more work to be done including: generating many more annotated drawings for the Branding Guide, creating the Branding Guide, and creating the Media Kit.
 I would like to thank [Ida Bzo](https://github.com/idabzo), [Sebastian Kraus](https://github.com/Ra33it0), [Ross Turk](https://github.com/rossturk), and [David Nuon](https://github.com/davidnuon) for their feedback and assistance throughout this process.
 This is just the beginning of building a more precise, flexible, and scalable visual identity for the NixOS project.
+
+Daniel Baker  
+Brand and Design Steward
