@@ -18,7 +18,12 @@ export function createExcerpt(post) {
     .split('\n')
     .slice(0, 8)
     .map((str) => {
-      return str.replace(/<\/?[^>]+(>|$)/g, '').split('\n');
+      return str
+        .replace(/<h1.*?>(.*?)<\/h1>/g, '') // remove h1 tag
+        .replace(/<h2.*?>(.*?)<\/h2>/g, '') // remove h2 tag
+        .replace(/<h3.*?>(.*?)<\/h3>/g, '') // remove h3 tag
+        .replace(/<\/?[^>]+(>|$)/g, '')
+        .split('\n');
     })
     .flat()
     .join(' ');
