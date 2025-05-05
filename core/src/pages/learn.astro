@@ -59,16 +59,32 @@ const learningResources = [
 <Layout title="Learn Nix | Nix & NixOS">
   <PageHeader text="Learn" />
   <Container class="grid gap-4 py-16 md:grid-cols-3">
-    {
-      learningFeatures.map((feature) => (
-        <div class="border-0.5 border-nix-blue-darker flex flex-col justify-center gap-8 rounded-2xl p-8">
-          <InlineSVG src={feature.imgUrl} class="h-28" />
-          <Button size="lg-full" color={feature.color} href={feature.url}>
-            {feature.title}
-          </Button>
-        </div>
-      ))
-    }
+    <div>
+      <h3 class="font-heading mb-4 text-2xl font-extrabold">Nix</h3>
+      <div>
+        Nix is a stand-alone package manager that enables Reproducibility,
+        installs packages in isolation to enable developer environments without
+        affecting system-wide configurations and is therefore rollback-friendly.
+        Interested? Take your <a href="https://nix.dev/tutorials/first-steps/">
+          here</a
+        >
+      </div>
+    </div>
+    <div>
+      <h3 class="font-heading mb-4 text-2xl font-extrabold">NixOS</h3>
+      <div>
+        NixOS is a Linux operating system, based on Nix. It has a powerful
+        declarative module system, allows for simple roll-backs and has a robust
+        integration test system, based on VMs.
+      </div>
+    </div>
+    <div>
+      <h3 class="font-heading mb-4 text-2xl font-extrabold">Nixpkgs</h3>
+      <div>
+        Nixpkgs is the package repository that feeds Nix and NixOS. It is freely
+        available on <a href="https://github.com/nixos/nixpkgs">GitHub</a>.
+      </div>
+    </div>
   </Container>
   <Divider style="slope" mirrorY mirrorX />
   <div class="bg-nix-blue py-8 text-white md:px-8">
