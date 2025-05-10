@@ -1,9 +1,9 @@
 ---
+import { createBlogSubheader } from '@/lib/utils';
 import { getCollection, render } from 'astro:content';
 import Container from '../../../../components/layout/Container.astro';
 import PageHeader from '../../../../components/layout/PageHeader.astro';
 import Layout from '../../../../layouts/Layout.astro';
-import { createBlogSubheader } from '@/lib/utils';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -22,10 +22,7 @@ const { Content } = await render(entry);
 ---
 
 <Layout title=`${entry.data.title} | Blog`>
-  <PageHeader
-    text={entry.data.title}
-    subtext={createBlogSubheader(entry)}
-  />
+  <PageHeader text={entry.data.title} subtext={createBlogSubheader(entry)} />
   <Container class="mt-8 mb-4 flex flex-col gap-8">
     <article class="text-light-bold">
       <Content />
