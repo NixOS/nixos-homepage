@@ -37,3 +37,12 @@ export function getNixLogoUrlUniversal(theme, prefix) {
       return prefix + '/src/assets/image/nixos-logo-notext.svg';
   }
 }
+
+export function createBlogSubheader(entry) {
+  if (!entry.data) {
+    return null;
+  }
+  const formattedDate = entry.data.date ? `Published on ${entry.data.date.toDateString()}` : null;
+  const formattedAuthor = entry.data.author ? `by ${entry.data.author}` : null;
+  return [formattedDate, formattedAuthor].filter(Boolean).join(' - ');
+}

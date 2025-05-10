@@ -19,6 +19,7 @@ export async function GET(context) {
     items: blog.map((post) => ({
       title: post.data.title ?? 'Untitled',
       pubDate: post.data.date ?? new Date().toISOString(),
+      author: post.data.author ?? 'NixOS',
       content: sanitizeHtml(parser.render(post.body)),
       link: generatePathFromPost(post),
     })),
