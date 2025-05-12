@@ -20,7 +20,7 @@ Install Nix via the **recommended** [multi-user installation](/manual/nix/stable
 Open a Terminal (by pressing [Cmd] + [Space] and typing `terminal`) and run the following command:
 
 ```bash
-$ sh <(curl -L https://nixos.org/nix/install)
+$ sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
 ```
 
 We believe we have ironed out how to cleanly support the read-only root on modern macOS. Please [consult the manual](/manual/nix/stable/installation/installing-binary#macos-installation) on details what the installation script does.
