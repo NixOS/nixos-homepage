@@ -22,7 +22,10 @@ const { Content } = await render(entry);
 ---
 
 <Layout title=`${entry.data.title} | Blog`>
-  <PageHeader text={entry.data.title} subtext={createBlogSubheader(entry)} />
+  <PageHeader
+    text={entry.data.title}
+    subtext={createBlogSubheader(entry, true, 'text-white')}
+  />
   <Container class="mt-8 mb-4 flex flex-col gap-8">
     <article class="text-light-bold">
       <Content />

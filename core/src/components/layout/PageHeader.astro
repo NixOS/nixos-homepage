@@ -28,7 +28,7 @@ import Container from './Container.astro';
       <h1 class="font-heading text-left text-4xl font-bold">
         {text}
       </h1>
-      {subtext && <p class="text text-left">{subtext}</p>}
+      {subtext && <p class="text text-left" set:html={subtext} />}
     </div>
   </Container>
 </div>
