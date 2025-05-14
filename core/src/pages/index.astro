@@ -39,7 +39,10 @@ posts
     CurrentBannerContent ? (
       <CurrentBannerContent />
     ) : (
-      <Banner wrapperClasses="bg-nix-blue-extralight" class="font-heading text-nix-blue-dark flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row">
+      <Banner
+        wrapperClasses="bg-nix-blue-extralight"
+        class="font-heading text-nix-blue-dark flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row"
+      >
         <b>{posts[0].data.title}</b>
         <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
       </Banner>
