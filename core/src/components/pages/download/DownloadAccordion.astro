@@ -29,6 +29,9 @@ let downloadOptions = (await getCollection('download'))
                   'bg-nix-blue-extralight',
                   'flex',
                   'text-nix-blue-dark',
+                  'hover:bg-nix-blue-lighter',
+                  'hover:text-nix-blue-darker',
+                  'cursor-pointer',
                   'text-lg',
                   'font-bold',
                   'py-6',
@@ -174,7 +177,7 @@ let downloadOptions = (await getCollection('download'))
     triggers[i].addEventListener('click', togglePanel);
     triggers[i].classList.add(
       'md:my-0',
-      'md:text-nix-blue-light',
+      'md:text-nix-blue',
       'md:rounded-none',
       'md:aria-expanded:bg-white',
       'md:aria-expanded:text-nix-blue-dark',
