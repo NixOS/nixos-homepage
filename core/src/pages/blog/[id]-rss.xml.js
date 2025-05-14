@@ -1,4 +1,5 @@
 import rss from '@astrojs/rss';
+import { createAuthorListRSS } from '@/lib/utils';
 import { getCollection } from 'astro:content';
 import sanitizeHtml from 'sanitize-html';
 import MarkdownIt from 'markdown-it';
@@ -34,7 +35,7 @@ export async function GET(context) {
     items: posts.slice(0, numOfPosts).map((post) => ({
       title: post.data.title ?? 'Untitled',
       pubDate: post.data.date ?? new Date().toISOString(),
-      author: post.data.author ?? 'NixOS',
+      author: createAuthorListRSS(post.data.authors),
       content: sanitizeHtml(parser.render(post.body)),
       link: generatePathFromPost(post),
     })),

@@ -38,13 +38,31 @@ export function getNixLogoUrlUniversal(theme, prefix) {
   }
 }
 
-export function createBlogSubheader(entry) {
+function authorDiscourse(author, link, linkClass) {
+  if (!author.name) return null;
+  if (!author.discourse) return author.name;
+  if (link)
+    return `<a class="${linkClass}" target="blank" rel="noopener noreferrer" href="https://discourse.nixos.org/u/${author.discourse}">${author.name} (${author.discourse})</a>`;
+  return `${author.name} (${author.discourse})`;
+}
+
+export function createAuthorListRSS(authors) {
+  return authors
+    ? authors.map((author) => authorDiscourse(author, false, null)).join(', ')
+    : 'NixOS';
+}
+
+export function createBlogSubheader(entry, link, linkClass) {
   if (!entry.data) {
     return null;
   }
   const formattedDate = entry.data.date
     ? `Published on ${entry.data.date.toDateString()}`
     : null;
-  const formattedAuthor = entry.data.author ? `by ${entry.data.author}` : null;
+  const formattedAuthor = entry.data.authors
+    ? entry.data.authors
+        .map((author) => authorDiscourse(author, link, linkClass))
+        .join(', ')
+    : null;
   return [formattedDate, formattedAuthor].filter(Boolean).join(' - ');
 }
