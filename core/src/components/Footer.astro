@@ -23,7 +23,7 @@ const footerMenu = await getEntry('menus', 'footer');
                 {menu.items.map((item) => (
                   <li class="border-nix-blue-dark border-b-1 last:border-b-0">
                     <Link
-                      class:list={['block py-2 hover:underline']}
+                      class:list={['block py-3 md:py-2 hover:underline']}
                       href={item.link}
                     >
                       {item.name}
