@@ -1,5 +1,9 @@
 ---
-import { createExcerpt, generatePathFromPost } from '../../../lib/utils';
+import {
+  createBlogSubheader,
+  createExcerpt,
+  generatePathFromPost,
+} from '../../../lib/utils';
 
 const { post } = Astro.props;
 ---
@@ -17,7 +21,7 @@ const { post } = Astro.props;
     </h2>
   </a>
   <p class="mb-2 text-xs text-gray-700">
-    - Published on {post.data.date ? post.data.date.toDateString() : ''}
+    {createBlogSubheader(post)}
   </p>
   <p class="font-extralight">{createExcerpt(post.body)}...</p>
 </article>

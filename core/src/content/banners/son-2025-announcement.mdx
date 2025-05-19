@@ -1,0 +1,25 @@
+---
+sitewide:
+  message: 'Summer of Nix is Here!'
+  link:
+    url: https://github.com/ngi-nix/summer-of-nix
+    text: 'Apply now'
+  wrapperClasses: 'bg-nix-blue-lighter text-nix-blue-darker'
+---
+
+import Banner from '@/components/ui/Banner.astro';
+
+<Banner
+  wrapperClasses="bg-nix-blue-lighter text-nix-blue-darker"
+  class="font-heading flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row"
+>
+  <span>Apply to Summer of Nix by May 12 to help build the future of FOSS</span>
+  <a
+    href="https://github.com/ngi-nix/summer-of-nix"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="bg-nix-blue-dark hover:bg-nix-blue-darker mt-1.5 w-full rounded-md px-4 py-3 text-center leading-none font-bold text-white no-underline md:mt-0 md:w-auto"
+  >
+    Learn more
+  </a>
+</Banner>

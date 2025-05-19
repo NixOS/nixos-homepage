@@ -12,17 +12,24 @@ const footerMenu = await getEntry('menus', 'footer');
 <footer>
   <div class="bg-nix-blue-darker clear-both font-light text-white">
     <Container>
-      <div class="flex flex-col flex-wrap gap-y-8 py-14 sm:flex-row">
+      <div
+        class="flex flex-col flex-wrap gap-x-4 gap-y-8 pt-12 pb-10 sm:flex-row"
+      >
         {
           footerMenu.data.sections.map((menu) => (
-            <div class="basis-1/2 lg:basis-1/4">
-              <h4 class="font-heading text-nix-blue mb-4 text-xl font-bold">
+            <div class="flex-1 basis-1/2 md:basis-0">
+              <h4 class="font-heading text-nix-blue-light mb-2 text-xl font-bold">
                 {menu.name}
               </h4>
-              <ul class="space-y-2 font-extralight">
+              <ul class="font-extralight">
                 {menu.items.map((item) => (
-                  <li>
-                    <Link href={item.link}>{item.name}</Link>
+                  <li class="border-nix-blue-dark border-b-1 last:border-b-0">
+                    <Link
+                      class:list={['block py-3 hover:underline md:py-2']}
+                      href={item.link}
+                    >
+                      {item.name}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -46,7 +53,7 @@ const footerMenu = await getEntry('menus', 'footer');
               Copyright © {new Date().getFullYear()} NixOS contributors
             </div>
             <Link
-              href="https://github.com/NixOS/nixos-homepage/blob/master/LICENSES/CC-BY-SA-4.0.txt"
+              href="https://github.com/NixOS/nixos-homepage/blob/main/LICENSES/CC-BY-SA-4.0.txt"
             >
               <abbr
                 title="Creative Commons Attribution Share Alike 4.0 International"
@@ -67,6 +74,7 @@ const footerMenu = await getEntry('menus', 'footer');
             {
               footerMenu.data.social.map((item) => (
                 <Link
+                  class="hover:text-nix-blue-light text-white"
                   href={item.link}
                   aria-label={`Connect with us on ${item.name}`}
                 >

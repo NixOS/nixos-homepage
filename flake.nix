@@ -192,7 +192,7 @@ rec {
               }
               ''
                 mkdir -p $out
-                for scenario in ${./core/public/demos}/*.scenario; do
+                for scenario in ${./demos}/*.scenario; do
                   scenarioFileName=$out/$(basename $scenario .scenario)
                   echo "Generating $scenarioFileName.cast and $scenarioFileName.svg ..."
                   asciinema-scenario --preview-file $scenarioFileName.svg $scenario > $scenarioFileName.cast
@@ -201,11 +201,64 @@ rec {
                   sed -i -e "s|<nixpkgs|\&lt;nixpkgs|g" $scenarioFileName.svg
                 done
               '';
+          core = pkgs.buildNpmPackage {
+            pname = "nixos-homepage-core";
+            version = "0.0.0";
+
+            src = ./.;
+
+            npmDeps = pkgs.importNpmLock {
+              npmRoot = ./.;
+            };
+
+            npmConfigHook = pkgs.importNpmLock.npmConfigHook;
+
+            buildPhase = ''
+              export NIX_STABLE_VERSION="${NIX_STABLE_VERSION}"
+              export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
+              export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
+              export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
+              export NIXOS_AMIS="${NIXOS_AMIS}"
+              export THEME="${builtins.getEnv "THEME"}"
+              export BANNER="${builtins.getEnv "BANNER"}"
+
+              npm run build --workspace core
+            '';
+
+            installPhase = ''
+              mkdir -p $out
+              cp -r ./core/dist/* $out
+            '';
+          };
         in
         {
           packages.manuals = manuals;
           packages.pills = pills;
           packages.demos = demos;
+          packages.core = core;
+          packages.default = pkgs.stdenv.mkDerivation {
+            name = "nixos-homepage";
+            buildInputs = [
+              core
+              manuals
+              pills
+              demos
+            ];
+
+            src = ./.;
+
+            installPhase = ''
+              mkdir -p $out
+              mkdir -p $out/manual
+              mkdir -p $out/guides/nix-pills
+              mkdir -p $out/demos
+
+              cp -r ${core}/* $out
+              cp -r ${manuals}/* $out/manual
+              cp -r ${pills}/* $out/guides/nix-pills
+              cp -r ${demos}/* $out/demos
+            '';
+          };
 
           pre-commit.settings.hooks = {
             nixfmt-rfc-style = {
@@ -253,6 +306,9 @@ rec {
               export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
               export NIXOS_AMIS="${NIXOS_AMIS}"
+              export PATH_MANUAL="${manuals}"
+              export PATH_PILLS="${pills}"
+              export PATH_DEMOS="${demos}"
 
               if [ ! -d node_modules ]; then
                 ${nodejs_current}/bin/npm install --workspaces --include-workspace-root
@@ -271,8 +327,8 @@ rec {
               It will rebuild the website on each change.
 
               To test redirects:
-                  npm run build
-                  cd dist
+                  nix build
+                  cd result
                   netlify dev
 
               To re-format the source code:
