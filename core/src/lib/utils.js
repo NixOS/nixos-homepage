@@ -32,9 +32,15 @@ export function createExcerpt(post) {
 export function getNixLogoUrlUniversal(theme, prefix) {
   switch (theme) {
     case 'pride':
-      return prefix + '/src/assets/image/nixos-logo-rainbow-gradient-black-regular-horizontal-none.svg';
+      return (
+        prefix +
+        '/src/assets/image/nixos-logo-rainbow-gradient-black-regular-horizontal-none.svg'
+      );
     default:
-      return prefix + '/src/assets/image/nixos-logo-default-gradient-black-regular-horizontal-none.svg';
+      return (
+        prefix +
+        '/src/assets/image/nixos-logo-default-gradient-black-regular-horizontal-none.svg'
+      );
   }
 }
 
