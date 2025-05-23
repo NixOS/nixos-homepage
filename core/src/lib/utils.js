@@ -32,6 +32,15 @@ export function createExcerpt(post) {
 export function getNixosLogosUrlUniversal(theme, prefix) {
   const assetPath = '/src/assets/image/';
   switch (theme) {
+    case 'black':
+      return {
+        logo:
+          prefix +
+          assetPath +
+          'nixos-logo-black-flat-black-regular-horizontal-none.svg',
+        logomark:
+          prefix + assetPath + 'nixos-logomark-black-flat-none.svg',
+      };
     case 'pride':
       return {
         logo:
@@ -40,6 +49,15 @@ export function getNixosLogosUrlUniversal(theme, prefix) {
           'nixos-logo-rainbow-gradient-black-regular-horizontal-none.svg',
         logomark:
           prefix + assetPath + 'nixos-logomark-rainbow-gradient-none.svg',
+      };
+    case 'white':
+      return {
+        logo:
+          prefix +
+          assetPath +
+          'nixos-logo-white-flat-white-regular-horizontal-none.svg',
+        logomark:
+          prefix + assetPath + 'nixos-logomark-white-flat-none.svg',
       };
     default:
       return {
