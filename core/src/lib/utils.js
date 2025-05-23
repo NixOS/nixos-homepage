@@ -29,18 +29,27 @@ export function createExcerpt(post) {
     .join(' ');
 }
 
-export function getNixLogoUrlUniversal(theme, prefix) {
+export function getNixosLogosUrlUniversal(theme, prefix) {
+  const assetPath = '/src/assets/image/';
   switch (theme) {
     case 'pride':
-      return (
-        prefix +
-        '/src/assets/image/nixos-logo-rainbow-gradient-black-regular-horizontal-none.svg'
-      );
+      return {
+        logo:
+          prefix +
+          assetPath +
+          'nixos-logo-rainbow-gradient-black-regular-horizontal-none.svg',
+        logomark:
+          prefix + assetPath + 'nixos-logomark-rainbow-gradient-none.svg',
+      };
     default:
-      return (
-        prefix +
-        '/src/assets/image/nixos-logo-default-gradient-black-regular-horizontal-none.svg'
-      );
+      return {
+        logo:
+          prefix +
+          assetPath +
+          'nixos-logo-default-gradient-black-regular-horizontal-none.svg',
+        logomark:
+          prefix + assetPath + 'nixos-logomark-default-gradient-none.svg',
+      };
   }
 }
 

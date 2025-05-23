@@ -8,7 +8,7 @@ import icon from "astro-icon";
 // theme derivated from https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/main/packages/tm-themes/themes/vesper.json
 import syntaxTheme from "./src/lib/shiki/theme.json";
 import favicons from "astro-favicons";
-import { getNixLogoUrlUniversal } from "./src/lib/utils.js";
+import { getNixosLogosUrlUniversal } from "./src/lib/utils.js";
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,7 +22,7 @@ export default defineConfig({
   }), favicons({
     input: {
       favicons: [
-        getNixLogoUrlUniversal(process.env.THEME, '.')
+        getNixosLogosUrlUniversal(process.env.THEME, '.')["logomark"]
       ],
     },
     name: "Nix & NixOS",
