@@ -9,7 +9,7 @@ rec {
 
     # These inputs are used for the manuals and release artifacts
     released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    released-nixpkgs-stable.url = "nixpkgs/nixos-24.11";
+    released-nixpkgs-stable.url = "nixpkgs/nixos-25.05";
     released-nix-unstable.url = "github:nixos/nix/master";
     released-nix-stable.url = "github:nixos/nix/latest-release";
     nix-pills.url = "github:NixOS/nix-pills";
@@ -66,10 +66,6 @@ rec {
           };
 
           # TODO: change structure to conform to ./src/content/download/aws-ec2.yaml but in json
-          NIXOS_AMIS = pkgs.writeText "ec2-amis.json" (
-            builtins.toJSON (import (released-nixpkgs-stable + "/nixos/modules/virtualisation/ec2-amis.nix"))
-          );
-
           NIX_STABLE_VERSION = getVersion nix_stable.name;
           NIX_UNSTABLE_VERSION = getVersion nix_unstable.name;
           NIXOS_STABLE_SERIES = pkgs-stable.lib.trivial.release;
@@ -218,7 +214,6 @@ rec {
               export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
               export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
-              export NIXOS_AMIS="${NIXOS_AMIS}"
               export THEME="${builtins.getEnv "THEME"}"
               export BANNER="${builtins.getEnv "BANNER"}"
 
@@ -305,7 +300,6 @@ rec {
               export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
               export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
-              export NIXOS_AMIS="${NIXOS_AMIS}"
               export PATH_MANUAL="${manuals}"
               export PATH_PILLS="${pills}"
               export PATH_DEMOS="${demos}"
