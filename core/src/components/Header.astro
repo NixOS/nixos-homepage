@@ -6,7 +6,7 @@ import { BANNER } from 'astro:env/client';
 import Container from '@/components/layout/Container.astro';
 import InlineSVG from '@/components/util/InlineSVG.astro';
 import Link from '@/components/util/Link.astro';
-import { getNixLogoUrl } from '@/lib/themes';
+import { getNixosLogoUrl } from '@/lib/themes';
 
 const headerMenu = await getEntry('menus', 'header');
 const currentBanner = await getEntry('banners', BANNER);
@@ -52,11 +52,10 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
         href="/"
         class="flex items-center justify-between gap-2 select-none md:justify-start"
       >
-        <InlineSVG class="h-12 w-auto" src={getNixLogoUrl()} alt="Nixos Logo" />
         <InlineSVG
-          class="block h-12 w-auto md:hidden xl:block"
-          src="/src/assets/image/nixos-logo-text.svg"
-          alt="Nixos Logo Text"
+          class="h-12 w-auto"
+          src={getNixosLogoUrl('logo')}
+          alt="Nixos Logo"
         />
       </Link>
 

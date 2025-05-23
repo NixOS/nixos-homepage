@@ -1,6 +1,6 @@
 import { THEME } from 'astro:env/client';
-import { getNixLogoUrlUniversal } from './utils';
+import { getNixosLogosUrlUniversal } from './utils';
 
-export function getNixLogoUrl(): string {
-  return getNixLogoUrlUniversal(THEME, '');
+export function getNixosLogoUrl(style): string {
+  return getNixosLogosUrlUniversal(THEME, '')[style];
 }
