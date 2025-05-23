@@ -38,8 +38,7 @@ export function getNixosLogosUrlUniversal(theme, prefix) {
           prefix +
           assetPath +
           'nixos-logo-black-flat-black-regular-horizontal-none.svg',
-        logomark:
-          prefix + assetPath + 'nixos-logomark-black-flat-none.svg',
+        logomark: prefix + assetPath + 'nixos-logomark-black-flat-none.svg',
       };
     case 'pride':
       return {
@@ -56,8 +55,7 @@ export function getNixosLogosUrlUniversal(theme, prefix) {
           prefix +
           assetPath +
           'nixos-logo-white-flat-white-regular-horizontal-none.svg',
-        logomark:
-          prefix + assetPath + 'nixos-logomark-white-flat-none.svg',
+        logomark: prefix + assetPath + 'nixos-logomark-white-flat-none.svg',
       };
     default:
       return {
