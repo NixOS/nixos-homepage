@@ -6,3 +6,5 @@ node_modules
 npm-debug.log*
 .DS_Store
 .pre-commit-config.yaml
+# Local Netlify folder
+.netlify
