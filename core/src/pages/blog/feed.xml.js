@@ -29,7 +29,7 @@ export async function GET(context) {
       <fh:complete xmlns:fh="http://purl.org/syndication/history/1.0"/>
       <image>
         <title>NixOS News</title>
-        <url>https://nixos.org/logo/nixos-logo-only-hires.png</url>
+        <url>https://nixos.org/logo/nixos-logomark-default-gradient-minimal.svg</url>
         <link>${context.site}/blog</link>
       </image>
     `,

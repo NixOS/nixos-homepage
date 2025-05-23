@@ -523,12 +523,6 @@
   force = true
 
 [[redirects]]
-  from = "/wiki/logo/nix-wiki.png"
-  to = "/logo/nix-wiki.png"
-  status = 302
-  force = true
-
-[[redirects]]
   from = "/wiki/js/jquery-ui.min.js"
   to = "/js/jquery-ui.min.js"
   status = 302
