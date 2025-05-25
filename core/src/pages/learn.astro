@@ -15,19 +15,19 @@ const learningFeatures = [
   {
     imgUrl: '/src/assets/image/learn/installGfx.svg',
     title: 'Install Nix',
-    color: 'green',
+    color: 'nixblue',
     url: '/download#download-nix',
   },
   {
     imgUrl: '/src/assets/image/learn/firstStepsGfx.svg',
     title: 'First steps with Nix',
-    color: 'orange',
+    color: 'nixblue',
     url: 'https://nix.dev/tutorials/first-steps/',
   },
   {
     imgUrl: '/src/assets/image/learn/howItWorksGfx.svg',
     title: 'How Nix works',
-    color: 'lightblue',
+    color: 'nixblue',
     url: '/guides/how-nix-works',
   },
 ] as const;
@@ -114,7 +114,7 @@ const learningResources = [
                 <Content />
               </div>
             </article>
-            <Button size="sm-mobfull" color="green" href={manual.data.url}>
+            <Button size="sm-mobfull" color="nixblue" href={manual.data.url}>
               Full {manual.data.title}
             </Button>
           </div>
@@ -136,7 +136,7 @@ const learningResources = [
                 {item.title}
               </h3>
               <p class="mb-4 leading-relaxed font-light">{item.description}</p>
-              <Button size="sm-mobfull" color="orange" href={item.url}>
+              <Button size="sm-mobfull" color="white-borders" href={item.url}>
                 {item.buttonText}
               </Button>
             </div>
