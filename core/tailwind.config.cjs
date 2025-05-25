@@ -82,7 +82,7 @@ module.exports = {
       },
       'nix-green': {
         DEFAULT: '#6ad541', // nixgreen
-        transparent: '##6ad54133',
+        transparent: '#6ad54133',
         hover: '#64c53d',
         dark: '#51ba29', // nixdarkgreen
       },

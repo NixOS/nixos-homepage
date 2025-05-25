@@ -474,7 +474,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       <ul class="mt-8 flex flex-wrap justify-stretch gap-x-6 gap-y-16">
         {
           teams.map((team) => (
-            <li class="flex grow basis-72 flex-col items-center gap-2 text-center text-white md:items-start md:text-left [&>a]:inline-block">
+            <li class="flex grow basis-72 flex-col items-center gap-2 text-center text-white md:items-start md:text-left">
               <img
                 src={`/images/teams/${team.id.split('_')[1]}.svg`}
                 alt={`${team.data.name} Logo`}
@@ -486,10 +486,10 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
               </p>
               <Button
                 color="white-borders"
+                size="sm-mobfull"
                 href={'/community/teams/' + team.id.split('_')[1]}
-              >
-                Read more
-              </Button>
+                label="Read more"
+              />
             </li>
           ))
         }
