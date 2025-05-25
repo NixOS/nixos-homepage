@@ -8,7 +8,8 @@ const { href, ...props } = Astro.props;
 let linkProps = { href, ...props };
 
 if (!!href && href.toString().startsWith('http')) {
-  linkProps = { ...linkProps, target: '_blank', rel: 'noopener noreferrer' };
+  linkProps = { ...linkProps, rel: 'noopener noreferrer' };
+  if(!linkProps.target) linkProps.target = '_blank';
 }
 ---
 
