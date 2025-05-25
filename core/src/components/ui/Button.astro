@@ -11,14 +11,15 @@ export const buttonVariants = cva(
     variants: {
       color: {
         orange:
-          'bg-nix-orange hover:bg-nix-orange-hover drop-shadow text-white',
+          'border-nix-orange border-3 text-black hover:bg-nix-orange-transparent',
         lightblue:
-          'bg-nix-blue-light hover:bg-nix-blue-light-hover drop-shadow text-white',
+          'border-nix-blue-light border-3 hover:border-nix-blue-light-transparent text-black',
         semidarkblue:
           'bg-nix-blue-dark hover:bg-nix-blue-dark-hover drop-shadow text-white',
-        green: 'bg-nix-green hover:bg-nix-green-hover drop-shadow text-white',
+        green:
+          'border-nix-green border-3 text-black hover:bg-nix-green-transparent',
         'white-borders':
-          'border-3 border-white-dark text-white hover:bg-nix-blue-transparent',
+          'border-3 border-green text-white hover:bg-nix-blue-transparent',
         white: 'bg-white hover:bg-nix-blue-lighter !text-nix-blue-dark',
         nixblue: 'bg-nix-blue hover:bg-nix-blue-hover drop-shadow text-white',
       },
