@@ -6,7 +6,7 @@ import Link from '@/components/util/Link.astro';
 import { Icon } from 'astro-icon/components';
 
 export const buttonVariants = cva(
-  'font-bold transition-colors text-center flex items-center gap-4 justify-start',
+  'font-bold transition-colors text-center gap-4',
   {
     variants: {
       color: {
@@ -18,7 +18,7 @@ export const buttonVariants = cva(
           'bg-nix-blue-dark hover:bg-nix-blue-dark-hover drop-shadow text-white',
         green: 'bg-nix-green hover:bg-nix-green-hover drop-shadow text-white',
         'white-borders':
-          'border-3 border-white-dark hover:border-nix-blue-light text-white ',
+          'border-3 border-white-dark text-white hover:bg-nix-blue-transparent',
         white: 'bg-white hover:bg-nix-blue-lighter !text-nix-blue-dark',
         nixblue: 'bg-nix-blue hover:bg-nix-blue-hover drop-shadow text-white',
       },
@@ -87,6 +87,7 @@ const setIconSize = (size: string) => {
           buttonVariants({ color, size }),
           nonPublic && 'inline-flex items-center gap-2',
           classList,
+          icon && 'flex items-center justify-start gap-4',
         ]}
       >
         {icon && <Icon name={icon} size={setIconSize(size)} />}
@@ -100,7 +101,14 @@ const setIconSize = (size: string) => {
       )}
     </>
   ) : (
-    <button type={type} class={buttonVariants({ color, size })}>
+    <button type={type}
+    class:list={[
+      'no-underline!',
+      buttonVariants({ color, size }),
+      nonPublic && 'inline-flex items-center gap-2',
+      classList,
+      icon && 'flex items-center justify-start gap-4',
+    ]}}>
       {icon && <Icon name={icon} />}
       <slot />
     </button>

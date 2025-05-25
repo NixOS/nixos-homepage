@@ -65,6 +65,7 @@ module.exports = {
         light: '#7ebae4', // nixlightblue
         'light-hover': '#69a6d1',
         DEFAULT: '#5277c3', // nixdarkblue
+        transparent: '#e6ecf533',
         hover: '#466cb9',
         dark: '#405D99', // nixsemidarkblue
         'dark-hover': '#4e73bc',
