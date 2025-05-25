@@ -101,14 +101,16 @@ const setIconSize = (size: string) => {
       )}
     </>
   ) : (
-    <button type={type}
-    class:list={[
-      'no-underline!',
-      buttonVariants({ color, size }),
-      nonPublic && 'inline-flex items-center gap-2',
-      classList,
-      icon && 'flex items-center justify-start gap-4',
-    ]}}>
+    <button
+      type={type}
+      class:list={[
+        'no-underline!',
+        buttonVariants({ color, size }),
+        nonPublic && 'inline-flex items-center gap-2',
+        classList,
+        icon && 'flex items-center justify-start gap-4',
+      ]}
+    >
       {icon && <Icon name={icon} />}
       <slot />
     </button>
