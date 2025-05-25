@@ -9,7 +9,7 @@ let linkProps = { href, ...props };
 
 if (!!href && href.toString().startsWith('http')) {
   linkProps = { ...linkProps, rel: 'noopener noreferrer' };
-  if(!linkProps.target) linkProps.target = '_blank';
+  if (!linkProps.target) linkProps.target = '_blank';
 }
 ---
 
