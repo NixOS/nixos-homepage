@@ -7,6 +7,7 @@ import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Layout from '../layouts/Layout.astro';
 import { generatePathFromPost } from '../lib/utils';
 
+import { Icon } from 'astro-icon/components';
 import Asciinema from '../components/ui/Asciinema.astro';
 import Banner from '../components/ui/Banner.astro';
 import InlineSVG from '../components/util/InlineSVG.astro';
@@ -41,10 +42,16 @@ posts
     ) : (
       <Banner
         wrapperClasses="bg-nix-blue-extralight"
-        class="font-heading text-nix-blue-dark flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row"
+        class="font-heading text-nix-blue-dark flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row md:pt-8 md:pb-7"
       >
         <b>{posts[0].data.title}</b>
-        <Button href={generatePathFromPost(posts[0])}>Announcement</Button>
+        <a
+          href={generatePathFromPost(posts[0])}
+          class="text-nix-blue-dark hover:text-nix-blue-light inline-flex items-center gap-2"
+        >
+          Read Announcement
+          <Icon name="mdi:arrow-right" />
+        </a>
       </Banner>
     )
   }
@@ -66,11 +73,21 @@ posts
         <div
           class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start"
         >
-          <Button href="/download" color="green" size="lg" classList="flex-1">
+          <Button
+            href="/download"
+            color="white"
+            size="log-nopadding"
+            classList="flex-1 text-xl"
+            icon="mdi:download"
+          >
             Download</Button
           >
-          <Button href="/learn" color="lightblue" size="lg" classList="flex-1"
-            >Get started</Button
+          <Button
+            href="/learn"
+            color="white-borders"
+            size="log-nopadding"
+            icon="mdi:learn-outline"
+            classList="flex-1 text-xl bg">Get started</Button
           >
         </div>
       </div>
@@ -128,7 +145,7 @@ posts
         <h2
           class="font-heading text-nix-blue pb-0 text-center text-4xl leading-tight font-bold md:w-2/3"
         >
-          Choose from Thousands of Packages
+          Choose from over 120 000 Packages
         </h2>
         <p
           class="pb-2 text-center text-2xl leading-relaxed font-extralight md:w-5/6"
@@ -136,10 +153,7 @@ posts
           The Nix Packages collection (<a
             class="text-nix-blue! font-bold"
             href="#">Nixpkgs</a
-          >) is a set of <span class="text-nix-green font-bold"
-            >over 120 000 packages</span
-          >
-          for the Nix package manager.
+          >) offers a large selection of packages for the Nix package manager.
         </p>
         <NixosSearchInput collection="packages" withSubmit />
       </Container>

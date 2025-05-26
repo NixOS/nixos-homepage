@@ -22,7 +22,8 @@ The graphical installation ISO image **contains the graphical NixOS installer** 
       shaHref={nixosDownloadLink("graphical", "x86_64-linux", "iso", true)}
       shaText="(SHA-256)"
       size="sm-mobfull"
-      classList = {["w-full", "md:w-auto", "block", "md:inline", "text-center", "md:text-left"]}
+      classList = {["w-full", "md:w-auto", "flex", "md:inline-flex", "text-center", "md:text-left"]}
+      icon="mdi:download"
       label="Download (Graphical, 64-bit Intel/AMD)"
       />
   </span>
@@ -39,11 +40,12 @@ The graphical installation ISO image **contains the graphical NixOS installer** 
     classList={[
       'w-full',
       'md:w-auto',
-      'block',
-      'md:inline',
+      'flex',
+      'md:inline-flex',
       'text-center',
       'md:text-left',
     ]}
+    icon="mdi:download"
     label="Download (Graphical, 64-bit ARM)"
   />
 </span>
@@ -66,7 +68,8 @@ The minimal installation ISO image **does not contain the graphical user interfa
       shaHref={nixosDownloadLink("minimal", "x86_64-linux", "iso", true)}
       shaText="(SHA-256)"
       size="sm-mobfull"
-      classList = {["w-full", "md:w-auto", "block", "md:inline", "text-center", "md:text-left"]}
+      classList = {["w-full", "md:w-auto", "flex", "md:inline-flex", "text-center", "md:text-left"]}
+      icon="mdi:download"
       label="Download (64-bit Intel/AMD)"
       />
   </span>
@@ -78,14 +81,8 @@ The minimal installation ISO image **does not contain the graphical user interfa
       shaHref={nixosDownloadLink("minimal", "aarch64-linux", "iso", true)}
       shaText="(SHA-256)"
       size="sm-mobfull"
-      classList={[
-        "w-full",
-        "md:w-auto",
-        "block",
-        "md:inline",
-        "text-center",
-        "md:text-left",
-      ]}
+      classList = {["w-full", "md:w-auto", "flex", "md:inline-flex", "text-center", "md:text-left"]}
+      icon="mdi:download"
       label="Download (64-bit ARM)"
       />
   </span>
