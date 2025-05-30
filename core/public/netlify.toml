@@ -42,7 +42,13 @@
 
 [[redirects]]
   from = "/teams/marketing.html"
-  to = "/community/teams/marketing.html"
+  to = "/community/teams/outreach.html"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/community/teams/marketing.html"
+  to = "/community/teams/outreach.html"
   status = 302
   force = true
 
