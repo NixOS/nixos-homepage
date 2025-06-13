@@ -38,7 +38,7 @@ function shuffleArray(array) {
         >submit a pull request</a
       > to add your company. The list is randomized at each page load.
     </p>
-    <ul class="m-4 flex flex-row flex-wrap gap-4">
+    <ul id="company-list" class="invisible m-4 flex flex-row flex-wrap gap-4">
       {
         shuffleArray(companies.data).map((company) => (
           <li class="border-nix-blue text-nix-blue grow basis-72 rounded-xl border p-4 font-light xl:basis-80">
@@ -60,5 +60,41 @@ function shuffleArray(array) {
         ))
       }
     </ul>
+
+    <noscript>
+      <style>
+        #company-list.invisible {
+          visibility: visible;
+        }
+      </style>
+    </noscript>
+
+    <!-- Client-side JavaScript to shuffle the DOM elements -->
+    <script is:client>
+      document.addEventListener('DOMContentLoaded', () => {
+        function shuffleArray(array) {
+          // source: https://stackoverflow.com/a/2450976
+
+          let currentIndex = array.length;
+          let randomIndex;
+
+          while (currentIndex > 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+              array[randomIndex],
+              array[currentIndex],
+            ];
+          }
+
+          return array;
+        }
+
+        const ul = document.getElementById('company-list');
+        const items = Array.from(ul.children);
+        shuffleArray(items).forEach((item) => ul.appendChild(item));
+        ul.classList.remove('invisible');
+      });
+    </script>
   </Container>
 </Layout>
