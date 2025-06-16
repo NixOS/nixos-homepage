@@ -3,7 +3,7 @@ const NIXOS_VERSION = import.meta.env.NIXOS_STABLE_SERIES;
 
 const NIX_VERSION_SANITIZED = NIX_VERSION.split('.').slice(0, -1).join('.');
 
-export const NIX_RELEASE_NOTES_LINK = `/manual/nix/stable/release-notes/rl-${NIX_VERSION_SANITIZED}`;
+export const NIX_RELEASE_NOTES_LINK = `/manual/nix/latest/release-notes/rl-${NIX_VERSION_SANITIZED}`;
 export const NIXOS_RELEASE_NOTES_LINK = `/manual/nixos/stable/release-notes#sec-release-${NIXOS_VERSION}`;
 
 export const nixosDownloadLink = (
