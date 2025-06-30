@@ -59,7 +59,7 @@ rec {
           nix_stable = released-nix-stable.packages."${system}".nix;
           nix_unstable = released-nix-unstable.packages."${system}".nix;
 
-          nodejs_current = pkgs.nodejs_20;
+          nodejs_current = pkgs.nodejs_24;
 
           nixPills = import nix-pills {
             inherit pkgs;

@@ -68,7 +68,6 @@ Some fun stats:
   Dublin, Ireland
 
   Two presentations:
-
   - Immutable deployments in Rapid7 by Ulrich Dangel
   - Basics of Nix by Kevin Cox
 

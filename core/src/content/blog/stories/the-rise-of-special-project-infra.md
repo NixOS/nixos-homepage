@@ -38,7 +38,6 @@ Controlling the narrative has always called for a bit of hardware. For this exer
 1. Choose a (preferably reputable and carbon negative) VPS provider.
 
 1. Provision an instance appropriate to the task and estimated audience.
-
    - To minimize latency, select the available region that best approximates the location of the source stream as well as the mean location of the majority of expected participants where applicable. Note that _object storage_ and _CDN caching_ additionally may be leveraged to accommodate participants; object storage enables the streaming service to serve media files when the concurrent user count exceeds available bandwidth, and CDN caching enables users to download these assets from the nearest available server.
    - Select a server with enough (preferably dedicated) vCPU cores to handle video transcoding, which is a highly processor-intensive operation. Note that this should correspond to the stream variants selected in the [streaming service configuration](#streaming-service-configuration).
 
@@ -101,7 +100,6 @@ With the instance provisioned and the configuration prepared, it was about time 
 1. Deploy the configuration. Note that several tools exist to automate this process: [deploy-rs](https://github.com/serokell/deploy-rs) is wildly popular for flake-based configurations, and [Cachix Deploy](https://blog.cachix.org/posts/2022-07-29-cachix-deploy-public-beta/) is a promising new offering (just to name two).
 
    We were quite frankly in a hurry, however, and found it perfectly acceptable to do it the old-fashioned way:
-
    1. Access the host over SSH.
    1. Clone the configuration.
    1. Run `nixos-rebuild switch` to build and activate the configuration (and make it the boot default).
@@ -113,7 +111,6 @@ With this, we had a fully operational production server. For the finishing touch
 As previously mentioned, much of the Owncast configuration is stored as mutable state, enabling the service to be modified on-the-fly from the administrative web UI. A suggested procedure follows:
 
 1.  Log in to the administrative web UI:
-
     - URL: `https://<target FQDN>/admin/` (e.g., `https://live.nixos.org/admin/`)
     - User name: `admin`
     - Password: `<stream key>` (`abc123` by default)
@@ -125,7 +122,6 @@ As previously mentioned, much of the Owncast configuration is stored as mutable 
 1.  In general settings, modify instance details, tags, and social handles as appropriate.
 
 1.  In video settings:
-
     - Add stream variants to enable adaptive bitrate streaming to accommodate users on various-quality networks.
 
       The following table may be used as a guideline:
@@ -146,7 +142,6 @@ As previously mentioned, much of the Owncast configuration is stored as mutable 
       Our stress tests showed that the use of standard variants with our VPS were reportedly adequate for most users but problematic for some in Japan, Thailand, and the UK. Based on these results, object storage and CDN caching are recommended.
 
       Additional notes:
-
       - For interactive live streams (e.g., lectures with Q&A sessions), consider decreasing the latency buffer to Low.
       - For further tuning, consider referring to a bitrate calculator (e.g., [Bitrate Calc](https://bitratecalc.com/)).
 
@@ -157,7 +152,6 @@ With the server side all set, it was time to get streaming! The basic procedure 
 1. On a local workstation, install and launch [OBS Studio](https://obsproject.com/) ([obs-studio](https://search.nixos.org/packages?channel=22.05&show=obs-studio&from=0&size=50&sort=relevance&type=options&query=obs-studio) in `nixpkgs`).
 
 1. In stream settings, set the following values:
-
    - Service: `Custom...`
    - Server: `rtmp://<target FQDN>` (e.g., `rtmp://live.nixos.org`)
    - Stream key: `abc123` (by default)
