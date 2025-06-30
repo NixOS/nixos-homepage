@@ -12,7 +12,6 @@ everyone who helped make this happen.
 
 - [Nix 2.0 has been
   released](https://nixos.org/nix/manual/#sec-relnotes)
-
   - [discussion on
     lobste.rs](https://lobste.rs/s/nodrls/nix_2_0_released)
   - [discussion on hacker
@@ -34,7 +33,6 @@ everyone who helped make this happen.
 
   Workgroups are used to facilitate working on components of the Nix
   ecosystems. As of this writing there exists:
-
   - [container
     workgroup](https://wiki.nixos.org/wiki/Workgroup:Container):
     \"building (minimal) OCI containers from the nixpkgs
@@ -49,7 +47,6 @@ everyone who helped make this happen.
   world](https://twitter.com/shlevy/status/965019194759761920)
 
   Note the followup message linking the publicly visible boards:
-
   - [RISC-V support for
     nix](https://github.com/NixOS/nix/projects/1)
   - [RISC-V support for

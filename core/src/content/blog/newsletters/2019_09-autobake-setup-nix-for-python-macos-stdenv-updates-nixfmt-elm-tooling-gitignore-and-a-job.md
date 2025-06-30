@@ -38,7 +38,6 @@ description: The essence of all art is to have pleasure in giving pleasure - Dal
   methods, Haskell, and NixOS to build processors.
 
 - [Hercules CI sprint #3 report](https://blog.hercules-ci.com/sprints,/hercules-ci/2019/05/14/sprint-3-report/)
-
   - hercules-agent-0.2 release
   - precise derivations support for upcoming multi-agent and multi-architecture support
   - focus for next two weeks is Cachix and Darwin support

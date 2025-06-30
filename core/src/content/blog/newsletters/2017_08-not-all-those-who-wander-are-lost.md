@@ -36,7 +36,6 @@ in addition to News, Jobs, Reading, and Events.
 - Nix has a thankful community.
 
   Profpatsch did some quick analysis of IRC messages. Summary:
-
   - [1.9% contain the word
     \"thank\"](https://twitter.com/Profpatsch/status/862303014601846784)
   - [2.4% last

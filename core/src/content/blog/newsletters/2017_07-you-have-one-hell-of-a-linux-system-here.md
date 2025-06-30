@@ -26,7 +26,6 @@ process and RFCs are starting to show up each week.
 
   And there is a good list of interesting RFCs which are being
   discussed:
-
   - (draft) RFC 0003: [SOS: Simple Override
     Strategy](https://github.com/NixOS/rfcs/pull/3)
   - (draft) RFC 0005: [Nix
