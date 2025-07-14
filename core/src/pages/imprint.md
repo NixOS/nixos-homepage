@@ -2,6 +2,7 @@
 layout: ../layouts/MDXLayout.astro
 title: Imprint
 ---
+
 This website is operated by:
 
 Stichting NixOS Foundation \
