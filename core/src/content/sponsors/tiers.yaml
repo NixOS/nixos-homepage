@@ -1,0 +1,52 @@
+- name: Community Tier
+  contribution: TBD
+  requirements: This tier is for small institutions, such as universities and startups, and requires a manual review.
+  benefits:
+    - description: Logo on the website
+      icon: mdi:image-outline
+- name: Small Orgs
+  contribution: €10,000 +
+  benefits:
+    - description: Logo on the website
+      icon: mdi:image-outline
+    - description: 1 NixCon ticket
+      icon: mdi:ticket-confirmation-outline
+- name: Medium Orgs
+  contribution: €50,000 +
+  benefits:
+    - description: Logo on the website
+      icon: mdi:image-outline
+    - description: 3 NixCon tickets
+      icon: mdi:ticket-confirmation-outline
+    - description: 'Blog article: How they use Nix (e.g., hardware case study)'
+      icon: mdi:format-text
+    - description: Featured in the newsletter (e.g., with a banner of your choice)
+      icon: mdi:newspaper-variant-outline
+- name: Large Orgs
+  contribution: €100,000 +
+  benefits:
+    - description: Large logo on the website
+      icon: mdi:image-outline
+    - description: 5 NixCon tickets
+      icon: mdi:ticket-confirmation-outline
+    - description: 'Blog article: How they use Nix (e.g., hardware case study)'
+      icon: mdi:format-text
+    - description: Featured in the newsletter (e.g., with a banner of your choice)
+      icon: mdi:newspaper-variant-outline
+    - description: Quarterly 1:1 call with Foundation representatives for feedback and updates
+      icon: mdi:call-outline
+- name: Extra Large Orgs
+  contribution: €150,000 +
+  benefits:
+    - description: Large logo on the website and in the footer
+      icon: mdi:image-outline
+    - description: 8 NixCon tickets
+      icon: mdi:ticket-confirmation-outline
+    - description: 'Blog article: How they use Nix (e.g., hardware case study)'
+      icon: mdi:format-text
+    - description: Featured in the newsletter (e.g., with a banner of your choice)
+      icon: mdi:newspaper-variant-outline
+    - description: Quarterly 1:1 call with Foundation representatives for feedback and updates
+      icon: mdi:call-outline
+    - description: Exclusive interview published on official NixOS channels
+      icon: mdi:account-tie-outline

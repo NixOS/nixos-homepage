@@ -3,14 +3,19 @@ layout: ../layouts/MDXLayout.astro
 title: Imprint
 ---
 
-This website is operated by:
+**Stichting NixOS Foundation**
 
-Stichting NixOS Foundation \
-Korte Lijnbaanssteeg 1-4318 \
-1012 SL, Amsterdam \
-The Netherlands
+**Email:** [foundation@nixos.org](mailto:foundation@nixos.org)
 
-**KvK** 63520583 \
-**VAT:** NL855271851B01 \
+## Commercial register entry
 
-foundation@nixos.org
+**KvK number:** 63520583
+
+**VAT ID:** NL855271851B01
+
+**Address:** Korte Lijnbaanssteeg 1-4318, 1012 SL, Amsterdam, Netherlands
+
+## Bank details
+
+- IBAN: NL13 BUNQ 2061 2530 32
+- BIC: BUNQNL2AXXX
