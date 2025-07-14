@@ -28,7 +28,7 @@ jobs:
           persist-credentials: false
 
       - name: 'Installing Nix'
-        uses: 'cachix/install-nix-action@cebd211ec2008b83bda8fb0b21c3c072f004fe04' # v31.5.0
+        uses: 'cachix/install-nix-action@c134e4c9e34bac6cab09cf239815f9339aaaf84e' # v31.5.1
 
       - name: 'Install npm dependencies'
         run: |
