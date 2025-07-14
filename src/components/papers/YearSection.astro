@@ -1,0 +1,18 @@
+---
+import type { Paper } from '../../types/papers';
+import PaperEntry from './PaperEntry.astro';
+
+interface Props {
+  year: string;
+  papers: Paper[];
+}
+
+const { year, papers } = Astro.props;
+---
+
+<section>
+  <h2 class="mb-6 text-2xl font-semibold">{year}</h2>
+  <div class="space-y-6">
+    {papers.map((paper, index) => <PaperEntry paper={paper} index={index} />)}
+  </div>
+</section>
