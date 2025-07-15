@@ -29,6 +29,11 @@ const tiers = await getEntry('sponsors', 'tiers');
                 {tier.contribution}
               </span>
             </h2>
+            {tier.requirements && (
+              <p class="text-nix-blue-lighter bg-nix-blue-light px-2 py-1 text-sm">
+                {tier.requirements}
+              </p>
+            )}
             <ul class="py-1">
               {tier.benefits.map((benefit) => (
                 <li class="border-b-nix-blue-light-hover inline-flex w-full items-center gap-2 border-b-1 p-2 last:border-b-0">
