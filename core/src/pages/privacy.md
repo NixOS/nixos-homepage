@@ -2,6 +2,7 @@
 layout: ../layouts/MDXLayout.astro
 title: Privacy Policy
 ---
+
 <h1>Privacy Policy</h1>
 
 <h2>1. Privacy at a Glance</h2>
