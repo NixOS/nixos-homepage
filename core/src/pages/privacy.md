@@ -7,7 +7,7 @@ title: Privacy Policy
 
 ### General Information
 
-The following notes provide a simple overview of what happens to your personal data when you vis it this website. Personal data is any in formation by which you can be personally identified. For detailed information on data protection, p lease refer to our privacy policy listed below this text.
+The following notes provide a simple overview of what happens to your personal data when you vis it this website. Personal data is any information by which you can be personally identified. For detailed information on data protection, please refer to our privacy policy listed below this text.
 
 ### Data Collection on this Website
 
@@ -19,15 +19,15 @@ Data processing on this website is carried out by the website operator. You can 
 
 Your data is collected in part because you provide it to us. This may include information you en ter into a contact form, for example.
 
-Other data is collected automatically or after your consent when you visit the website by our IT systems. These are mainly technical dat a (e.g., internet browser, operating system, or time of page access). The collection of this data t akes place automatically as soon as you enter this website.
+Other data is collected automatically or after your consent when you visit the website by our IT systems. These are mainly technical data (e.g., internet browser, operating system, or time of page access). The collection of this data takes place automatically as soon as you enter this website.
 
 #### What do we use your data for?
 
-A portion of the data is collected to ensure the website is provided free of errors. Other data may be used to analyze your usage behavi or. If contracts are concluded or initiated via the website, the transmitted data will also be proc essed for contract offers, orders, or ot her service inquiries.
+A portion of the data is collected to ensure the website is provided free of errors. Other data may be used to analyze your usage behavior. If contracts are concluded or initiated via the website, the transmitted data will also be proc essed for contract offers, orders, or ot her service inquiries.
 
 #### What rights do you have regarding your data?
 
-You have the right at any time to obtain free information about the origin, recipients, and purp ose of your stored personal data. You al so have the right to request the correction or deletion of this data. If you have given consent for data processing, you may revoke this co nsent at any time for the future. You also have the right, under certain circumstances, to request the restriction of the processing of you r personal data. Furthermore, you have the right to lodge a complaint with the competent supervisor y authority.
+You have the right at any time to obtain free information about the origin, recipients, and purp ose of your stored personal data. You also have the right to request the correction or deletion of this data. If you have given consent for data processing, you may revoke this consent at any time for the future. You also have the right, under certain circumstances, to request the restriction of the processing of your personal data. Furthermore, you have the right to lodge a complaint with the competent supervisory authority.
 
 You can contact us at any time for this purpose or with any other questions regarding data prote ction.
 
@@ -37,9 +37,9 @@ We host the content of our website with the following provider:
 
 ### External Hosting
 
-This website is hosted externally. The personal data collected on this website is stored on the servers of the hosting provider(s). This may include, in particular, IP addresses, contact requests, meta and communication data, contract data, contact details, names, website ac cesses, and other data generated via a website.
+This website is hosted externally. The personal data collected on this website is stored on the servers of the hosting provider(s). This may include, in particular, IP addresses, contact requests, meta and communication data, contract data, contact details, names, website accesses, and other data generated via a website.
 
-External hosting is carried out for the purpose of fulfilling the contract toward our potential and existing customers (Art. 6 (1)(b) GD PR) and in the interest of a secure, fast, and efficient provision of our online offering by a professional provider (Art. 6 (1)(f) GDPR). If the appropriate consent has been requested, the processing is carried out exclusively on the basis of Art. 6 (1)(a) GDPR and § 25 (1) TD DDG, insofar as the consent includes the storage of cookies or access to information on the user’s device (e.g., device fingerprinting) wit hin the meaning of the TDDDG. The consent is revocable at any time.
+External hosting is carried out for the purpose of fulfilling the contract toward our potential and existing customers (Art. 6 (1)(b) GDPR) and in the interest of a secure, fast, and efficient provision of our online offering by a professional provider (Art. 6 (1)(f) GDPR). If the appropriate consent has been requested, the processing is carried out exclusively on the basis of Art. 6 (1)(a) GDPR and § 25 (1) TD DDG, insofar as the consent includes the storage of cookies or access to information on the user’s device (e.g., device fingerprinting) within the meaning of the TDDDG. The consent is revocable at any time.
 
 Our hosting provider(s) will process your data only to the extent necessary to fulfill their performance obligations and will follow our instructions regarding this data.
 
@@ -56,9 +56,9 @@ USA
 
 The operators of these pages take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with the legal data protection regulations and this privacy policy.
 
-When you use this website, various personal data is collected. Personal data is information by which you can be personally identified. T his privacy policy explains what data we collect and why we use it. It also explains how and for what purpose this happens.
+When you use this website, various personal data is collected. Personal data is information by which you can be personally identified. This privacy policy explains what data we collect and why we use it. It also explains how and for what purpose this happens.
 
-We point out that data transmission over the Internet (e.g., when communicating by e-mail) can have security vulnerabilities. Complete p rotection of data against access by third parties is not possible.
+We point out that data transmission over the Internet (e.g., when communicating by e-mail) can have security vulnerabilities. Complete protection of data against access by third parties is not possible.
 
 ### Note on the Responsible Entity
 
@@ -73,15 +73,15 @@ The responsible entity is the natural or legal person who, alone or jointly with
 
 ### Storage Duration
 
-Unless a more specific storage period is specified within this privacy policy, your personal data will remain with us until the purpose for data processing no longer applies. If you assert a legitimate request for deletion or revoke your consent to data processing, your data will be deleted unless we have other legally permissible reasons for storing your personal data (e.g., retention periods under tax or comm ercial law); in the latter case, deletion will take place after these reasons have ceased to apply.
+Unless a more specific storage period is specified within this privacy policy, your personal data will remain with us until the purpose for data processing no longer applies. If you assert a legitimate request for deletion or revoke your consent to data processing, your data will be deleted unless we have other legally permissible reasons for storing your personal data (e.g., retention periods under tax or commercial law); in the latter case, deletion will take place after these reasons have ceased to apply.
 
 ### General Information on the Legal Bases for Data Processing on This Website
 
-If you have consented to data processing, we process your personal data based on Art. 6 para. 1 lit. a GDPR or Art. 9 para. 2 lit. a GDP R, provided that special categories of data under Art. 9 para. 1 GDPR are processed. In the case of express consent to the transfer of pers onal data to third countries, data processing is also based on Art. 49 para. 1 lit. a GDPR. If you have consented to the storage of cookies or access to information on your device (e.g., via device fingerprinting), data processing also takes place on the basis of § 25 para. 1 T DDDG. Consent is revocable at any time. If your data is required for the fulfillment of a contract or for the implementation of pre-contrac tual measures, we process your data based on Art. 6 para. 1 lit. b GDPR. Furthermore, we process your data if it is required to fulfill a l egal obligation on the basis of Art. 6 para. 1 lit. c GDPR. Data processing may also be based on our legitimate interest pursuant to Art. 6 para. 1 lit. f GDPR. The relevant legal basis in each individual case will be explained in the following sections of this privacy policy.< /p>
+If you have consented to data processing, we process your personal data based on Art. 6 para. 1 lit. a GDPR or Art. 9 para. 2 lit. a GDP R, provided that special categories of data under Art. 9 para. 1 GDPR are processed. In the case of express consent to the transfer of personal data to third countries, data processing is also based on Art. 49 para. 1 lit. a GDPR. If you have consented to the storage of cookies or access to information on your device (e.g., via device fingerprinting), data processing also takes place on the basis of § 25 para. 1 T DDDG. Consent is revocable at any time. If your data is required for the fulfillment of a contract or for the implementation of pre-contrac tual measures, we process your data based on Art. 6 para. 1 lit. b. GDPR. Furthermore, we process your data if it is required to fulfill a legal obligation on the basis of Art. 6 para. 1 lit. c GDPR. Data processing may also be based on our legitimate interest pursuant to Art. 6 para. 1 lit. f GDPR. The relevant legal basis in each individual case will be explained in the following sections of this privacy policy.< /p>
 
 ### Recipients of Personal Data
 
-In the course of our business activities, we cooperate with various external entities. In some cases, this also requires the transfer of personal data to these external parties. We only share personal data with external parties if it is necessary for fulfilling a contract, i f we are legally obligated (e.g., transfer of data to tax authorities), if we have a legitimate interest under Art. 6 para. 1 lit. f GDPR i n sharing the data, or if another legal basis permits the transfer. When using processors, we share our customers’ personal data only based on a valid processing agreement. In the case of joint processing, a joint processing agreement is concluded.
+In the course of our business activities, we cooperate with various external entities. In some cases, this also requires the transfer of personal data to these external parties. We only share personal data with external parties if it is necessary for fulfilling a contract, if we are legally obligated (e.g., transfer of data to tax authorities), if we have a legitimate interest under Art. 6 para. 1 lit. f GDPR in. sharing the data, or if another legal basis permits the transfer. When using processors, we share our customers’ personal data only based on a valid processing agreement. In the case of joint processing, a joint processing agreement is concluded.
 
 ### Revocation of Your Consent to Data Processing
 
