@@ -7,7 +7,7 @@ title: Privacy Policy
 
 ### General Information
 
-The following notes provide a simple overview of what happens to your personal data when you vis it this website. Personal data is any information by which you can be personally identified. For detailed information on data protection, please refer to our privacy policy listed below this text.
+The following notes provide a simple overview of what happens to your personal data when you visit this website. Personal data is any information by which you can be personally identified. For detailed information on data protection, please refer to our privacy policy listed below this text.
 
 ### Data Collection on this Website
 
@@ -17,19 +17,19 @@ Data processing on this website is carried out by the website operator. You can 
 
 #### How do we collect your data?
 
-Your data is collected in part because you provide it to us. This may include information you en ter into a contact form, for example.
+Your data is collected in part because you provide it to us. This may include information you enter into a contact form, for example.
 
 Other data is collected automatically or after your consent when you visit the website by our IT systems. These are mainly technical data (e.g., internet browser, operating system, or time of page access). The collection of this data takes place automatically as soon as you enter this website.
 
 #### What do we use your data for?
 
-A portion of the data is collected to ensure the website is provided free of errors. Other data may be used to analyze your usage behavior. If contracts are concluded or initiated via the website, the transmitted data will also be proc essed for contract offers, orders, or other service inquiries.
+A portion of the data is collected to ensure the website is provided free of errors. Other data may be used to analyze your usage behavior. If contracts are concluded or initiated via the website, the transmitted data will also be processed for contract offers, orders, or other service inquiries.
 
 #### What rights do you have regarding your data?
 
 You have the right at any time to obtain free information about the origin, recipients, and purpose of your stored personal data. You also have the right to request the correction or deletion of this data. If you have given consent for data processing, you may revoke this consent at any time for the future. You also have the right, under certain circumstances, to request the restriction of the processing of your personal data. Furthermore, you have the right to lodge a complaint with the competent supervisory authority.
 
-You can contact us at any time for this purpose or with any other questions regarding data prote ction.
+You can contact us at any time for this purpose or with any other questions regarding data protection.
 
 ## 2\. Hosting
 
@@ -69,7 +69,7 @@ Address: Korte Lijnbaanssteeg 1-4318, 1012 SL, Amsterdam, Netherlands
 
 E-mail: foundation@nixos.org
 
-The responsible entity is the natural or legal person who, alone or jointly with others, decides on the purposes and means of the proces sing of personal data (e.g., names, e-mail addresses, etc.).
+The responsible entity is the natural or legal person who, alone or jointly with others, decides on the purposes and means of the processing of personal data (e.g., names, e-mail addresses, etc.).
 
 ### Storage Duration
 
@@ -77,7 +77,7 @@ Unless a more specific storage period is specified within this privacy policy, y
 
 ### General Information on the Legal Bases for Data Processing on This Website
 
-If you have consented to data processing, we process your personal data based on Art. 6 para. 1 lit. a GDPR or Art. 9 para. 2 lit. a GDPR, provided that special categories of data under Art. 9 para. 1 GDPR are processed. In the case of express consent to the transfer of personal data to third countries, data processing is also based on Art. 49 para. 1 lit. a GDPR. If you have consented to the storage of cookies or access to information on your device (e.g., via device fingerprinting), data processing also takes place on the basis of § 25 para. 1 T DDDG. Consent is revocable at any time. If your data is required for the fulfillment of a contract or for the implementation of pre-contrac tual measures, we process your data based on Art. 6 para. 1 lit. b. GDPR. Furthermore, we process your data if it is required to fulfill a legal obligation on the basis of Art. 6 para. 1 lit. c GDPR. Data processing may also be based on our legitimate interest pursuant to Art. 6 para. 1 lit. f GDPR. The relevant legal basis in each individual case will be explained in the following sections of this privacy policy.< /p>
+If you have consented to data processing, we process your personal data based on Art. 6 para. 1 lit. a GDPR or Art. 9 para. 2 lit. a GDPR, provided that special categories of data under Art. 9 para. 1 GDPR are processed. In the case of express consent to the transfer of personal data to third countries, data processing is also based on Art. 49 para. 1 lit. a GDPR. If you have consented to the storage of cookies or access to information on your device (e.g., via device fingerprinting), data processing also takes place on the basis of § 25 para. 1 T DDDG. Consent is revocable at any time. If your data is required for the fulfillment of a contract or for the implementation of pre-contractual measures, we process your data based on Art. 6 para. 1 lit. b. GDPR. Furthermore, we process your data if it is required to fulfill a legal obligation on the basis of Art. 6 para. 1 lit. c GDPR. Data processing may also be based on our legitimate interest pursuant to Art. 6 para. 1 lit. f GDPR. The relevant legal basis in each individual case will be explained in the following sections of this privacy policy.< /p>
 
 ### Recipients of Personal Data
 
