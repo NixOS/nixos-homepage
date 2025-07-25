@@ -11,7 +11,7 @@ const footerMenu = await getEntry('menus', 'footer');
 ---
 
 <footer>
-  <div class="bg-nix-blue-darker clear-both font-light text-white">
+  <div class="bg-nix-blue-900 clear-both font-light text-white">
     <Container>
       <div
         class="flex flex-col flex-wrap gap-x-4 gap-y-8 pt-12 pb-10 sm:flex-row"
@@ -19,12 +19,12 @@ const footerMenu = await getEntry('menus', 'footer');
         {
           footerMenu.data.sections.map((menu) => (
             <div class="flex-1 basis-1/2 md:basis-0">
-              <h4 class="font-heading text-nix-blue-light mb-2 text-xl font-bold">
+              <h4 class="font-heading text-nix-blue-300 mb-2 text-xl font-bold">
                 {menu.name}
               </h4>
               <ul class="font-extralight">
                 {menu.items.map((item) => (
-                  <li class="border-nix-blue-dark border-b-1 last:border-b-0">
+                  <li class="border-nix-blue-700 border-b-1 last:border-b-0">
                     <Link
                       class:list={['block py-3 hover:underline md:py-2']}
                       href={item.link}
@@ -39,7 +39,7 @@ const footerMenu = await getEntry('menus', 'footer');
         }
       </div>
 
-      <hr class="border-nix-blue-light" />
+      <hr class="border-nix-blue-300" />
 
       <div
         class="flex flex-col flex-wrap gap-4 py-4 font-extralight lg:flex-row lg:gap-0"
@@ -65,7 +65,7 @@ const footerMenu = await getEntry('menus', 'footer');
           </div>
         </div>
 
-        <hr class="border-nix-blue-light lg:hidden" />
+        <hr class="border-nix-blue-300 lg:hidden" />
 
         <div
           class="flex basis-1/2 justify-between gap-4 font-extralight lg:justify-end"
@@ -75,7 +75,7 @@ const footerMenu = await getEntry('menus', 'footer');
             {
               footerMenu.data.social.map((item) => (
                 <Link
-                  class="hover:text-nix-blue-light text-white"
+                  class="hover:text-nix-blue-300 text-white"
                   href={item.link}
                   aria-label={`Connect with us on ${item.name}`}
                 >
@@ -97,7 +97,7 @@ const footerMenu = await getEntry('menus', 'footer');
     <a
       href="#"
       id="scroll-to-top"
-      class="bg-nix-blue-darker hover:bg-nix-blue-dark absolute right-4 bottom-4 z-50 rounded-xl text-white drop-shadow-md transition-all duration-100 md:-right-14 md:bottom-8"
+      class="bg-nix-blue-900 hover:bg-nix-blue-700 absolute right-4 bottom-4 z-50 rounded-xl text-white drop-shadow-md transition-all duration-100 md:-right-14 md:bottom-8"
     >
       <Icon class="h-14 w-14 p-1" name="mdi:keyboard-arrow-up" />
     </a>

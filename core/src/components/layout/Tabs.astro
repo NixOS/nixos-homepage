@@ -96,7 +96,7 @@ const uid = crypto.randomUUID();
   <Container class="grid w-full gap-8 px-12 pt-8 lg:grid-cols-[30%_auto]">
     <nav class:list={['tab-bar']}>
       <Container
-        class="bg-nix-blue-extralight grid gap-0 rounded-3xl px-0! py-8 md:grid-cols-1"
+        class="bg-nix-blue-100 grid gap-0 rounded-3xl px-0! py-8 md:grid-cols-1"
       >
         {
           tabs.map(async (name, idx) => {
@@ -125,7 +125,7 @@ const uid = crypto.randomUUID();
                   <label
                     class:list={[
                       'tab',
-                      'text-nix-blue-light',
+                      'text-nix-blue-300',
                       'text-lg',
                       'font-bold',
                       'peer-checked:text-nix-blue',

@@ -13,9 +13,9 @@ const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
-const navbarItemStyle = `text-center text-nix-blue-dark md:text-black md:hover:border-b-nix-blue-light border-b-4`;
-const navbarItemInactiveStyle = `border-b-nix-blue-extralight md:border-b-transparent bg-nix-blue-extralight md:bg-transparent`;
-const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-white md:text-black md:bg-transparent font-bold`;
+const navbarItemStyle = `text-center text-nix-blue-700 md:text-black md:hover:border-b-nix-blue-300 border-b-4`;
+const navbarItemInactiveStyle = `border-b-nix-blue-100 md:border-b-transparent bg-nix-blue-100 md:bg-transparent`;
+const navbarItemActiveStyle = `border-b-nix-blue-500 bg-nix-blue-300 text-white md:text-black md:bg-transparent font-bold`;
 ---
 
 <header
@@ -61,7 +61,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
 
       <button
         aria-label="Main Navigation Toggle"
-        class="bg-nix-blue-light block rounded-lg p-4 md:hidden"
+        class="bg-nix-blue-300 block rounded-lg p-4 md:hidden"
         id="navigation-toggle"
       >
         <span class="mb-1.5 block h-1 w-8 bg-white"></span>

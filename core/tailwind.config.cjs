@@ -70,17 +70,9 @@ module.exports = {
         700: '#193578',
         800: '#03185a',
         900: '#00052c',
-        extralight: '#e8effc', // nixlighterblue
-        lighter: '#b7cefd', // nixlighterblue-dimmed
-        light: '#87adfa', // nixlightblue
         'light-transparent': '#87adfa33',
-        'light-hover': '#698dd8',
-        DEFAULT: '#4d6fb7', // nixdarkblue
         transparent: '#e8effc33',
-        hover: '#325197',
-        dark: '#193578', // nixsemidarkblue
-        'dark-hover': '#03185a',
-        darker: '#03185a', // nixdarkerblue
+        DEFAULT: '#4d6fb7', // nixdarkblue
       },
       'nix-orange': {
         lighter: '#fff5e1', // nixlightorange
