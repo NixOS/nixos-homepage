@@ -60,17 +60,27 @@ module.exports = {
     },
     colors: {
       'nix-blue': {
-        extralight: '#f2f8fd', // nixlighterblue
-        lighter: '#e6ecf5', // nixlighterblue-dimmed
-        light: '#7ebae4', // nixlightblue
-        'light-transparent': '#7ebae433',
-        'light-hover': '#69a6d1',
-        DEFAULT: '#5277c3', // nixdarkblue
-        transparent: '#e6ecf533',
-        hover: '#466cb9',
-        dark: '#405D99', // nixsemidarkblue
-        'dark-hover': '#4e73bc',
-        darker: '#27385d', // nixdarkerblue
+        // NEW
+        100: '#e8effc',
+        200: '#b7cefd',
+        300: '#87adfa',
+        400: '#698dd8',
+        500: '#4d6fb7',
+        600: '#325197',
+        700: '#193578',
+        800: '#03185a',
+        900: '#00052c',
+        extralight: '#e8effc', // nixlighterblue
+        lighter: '#b7cefd', // nixlighterblue-dimmed
+        light: '#87adfa', // nixlightblue
+        'light-transparent': '#87adfa33',
+        'light-hover': '#698dd8',
+        DEFAULT: '#4d6fb7', // nixdarkblue
+        transparent: '#e8effc33',
+        hover: '#325197',
+        dark: '#193578', // nixsemidarkblue
+        'dark-hover': '#03185a',
+        darker: '#03185a', // nixdarkerblue
       },
       'nix-orange': {
         lighter: '#fff5e1', // nixlightorange
