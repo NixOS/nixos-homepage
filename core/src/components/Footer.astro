@@ -53,15 +53,31 @@ const footerMenu = await getEntry('menus', 'footer');
             <div>
               Copyright © {new Date().getFullYear()} NixOS contributors
             </div>
-            <Link
-              href="https://github.com/NixOS/nixos-homepage/blob/main/LICENSES/CC-BY-SA-4.0.txt"
-            >
-              <abbr
-                title="Creative Commons Attribution Share Alike 4.0 International"
+            <span class="flex gap-2">
+              <Link
+                href="/imprint"
+                aria-label="Imprint"
+                class:list={'underline decoration-dotted'}
               >
-                CC-BY-SA-4.0
-              </abbr>
-            </Link>
+                Imprint
+              </Link>
+              <Link
+                href="/privacy"
+                aria-label="Privacy Policy"
+                class:list={'underline decoration-dotted'}
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="https://github.com/NixOS/nixos-homepage/blob/main/LICENSES/CC-BY-SA-4.0.txt"
+              >
+                <abbr
+                  title="Creative Commons Attribution Share Alike 4.0 International"
+                >
+                  CC-BY-SA-4.0
+                </abbr>
+              </Link>
+            </span>
           </div>
         </div>
 
