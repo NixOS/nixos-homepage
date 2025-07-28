@@ -29,7 +29,7 @@ jobs:
           persist-credentials: false
 
       - name: 'Installing Nix'
-        uses: 'cachix/install-nix-action@c134e4c9e34bac6cab09cf239815f9339aaaf84e' # v31.5.1
+        uses: 'cachix/install-nix-action@fc6e360bedc9ee72d75e701397f0bb30dce77568' # v31.5.2
 
       - name: 'Setup Cachix'
         uses: 'cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad' # v16
