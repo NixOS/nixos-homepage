@@ -60,7 +60,6 @@ module.exports = {
     },
     colors: {
       'nix-blue': {
-        // NEW
         100: '#e8effc',
         200: '#b7cefd',
         300: '#87adfa',
@@ -75,18 +74,30 @@ module.exports = {
         DEFAULT: '#4d6fb7', // nixdarkblue
       },
       'nix-orange': {
-        lighter: '#fff5e1', // nixlightorange
-        DEFAULT: '#ffab0d', // nixorange
-        transparent: '#ffab0d33',
-        hover: '#ec9d0c',
-        dark: '#ff8657', // nixdarkorange
-        darker: '#cc3900', // nixdarkerorange
+        100: '#faebe2',
+        200: '#fdbe96',
+        300: '#e99861',
+        400: '#c77942',
+        500: '#a65b21',
+        600: '#834105',
+        700: '#5a2d09',
+        800: '#371802',
+        900: '#150702',
+        DEFAULT: '#e99861', // nixorange
+        transparent: '#e9986133',
       },
       'nix-green': {
-        DEFAULT: '#6ad541', // nixgreen
-        transparent: '#6ad54133',
-        hover: '#64c53d',
-        dark: '#51ba29', // nixdarkgreen
+        100: '#e0f5e5',
+        200: '#8fe5a7',
+        300: '#6fc488',
+        400: '#4fa46a',
+        500: '#2e854d',
+        600: '#126635',
+        700: '#034721',
+        800: '#042912',
+        900: '#030f05',
+        DEFAULT: '#2e854d', // nixgreen
+        transparent: '#2e854d33',
       },
       gray: colors.gray,
       white: colors.white,
