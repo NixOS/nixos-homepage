@@ -39,11 +39,15 @@
 
 @layer base {
   main a:-webkit-any-link {
-    @apply text-nix-blue-dark underline decoration-1 underline-offset-4;
+    @apply text-nix-blue-700 underline decoration-1 underline-offset-4;
   }
 
   main a:any-link {
-    @apply text-nix-blue-dark underline decoration-1 underline-offset-4;
+    @apply text-nix-blue-700 underline decoration-1 underline-offset-4;
+  }
+
+  ::selection {
+    @apply bg-nix-blue-700 text-nix-blue-100;
   }
 }
 
@@ -144,7 +148,7 @@
   }
 
   article blockquote {
-    @apply border-nix-blue-darker bg-nix-blue-extralight mb-4 border-l-4 px-4 pt-2;
+    @apply border-nix-blue-900 bg-nix-blue-100 mb-4 border-l-4 px-4 pt-2;
   }
 
   article h1,

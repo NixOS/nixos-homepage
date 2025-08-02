@@ -62,7 +62,7 @@ const learningResources = [
   <Container class="grid gap-4 py-16 md:grid-cols-3">
     {
       learningFeatures.map((feature) => (
-        <div class="border-0.5 border-nix-blue-darker flex flex-col justify-center gap-8 rounded-2xl p-8">
+        <div class="border-0.5 border-nix-blue-900 flex flex-col justify-center gap-8 rounded-2xl p-8">
           <InlineSVG src={feature.imgUrl} class="h-28" />
           <Button size="lg-full" color={feature.color} href={feature.url}>
             {feature.title}
@@ -72,7 +72,7 @@ const learningResources = [
     }
   </Container>
   <Divider style="slope" mirrorY mirrorX />
-  <div class="bg-nix-blue py-8 text-white md:px-8">
+  <div class="bg-nix-blue-600 py-8 text-white md:px-8">
     <Container>
       <h2 class="font-heading pb-8 text-4xl font-extrabold">Search</h2>
       <div class="grid gap-4 md:grid-cols-2">
@@ -101,7 +101,7 @@ const learningResources = [
       learningManuals.map(async (manual) => {
         const { Content } = await render(manual);
         return (
-          <div class="border-0.5 border-nix-blue-darker flex flex-col items-center justify-start gap-4 rounded-2xl p-4">
+          <div class="border-0.5 border-nix-blue-900 flex flex-col items-center justify-start gap-4 rounded-2xl p-4">
             <article>
               <InlineSVG
                 src="/src/assets/image/doc-icon.svg"
@@ -123,7 +123,7 @@ const learningResources = [
     }
   </Container>
   <Divider style="slope" mirrorY />
-  <div class="bg-nix-blue py-8 text-white md:px-8">
+  <div class="bg-nix-blue-600 py-8 text-white md:px-8">
     <Container>
       <h2 class="font-heading pb-8 text-4xl font-extrabold">
         Other learning resources

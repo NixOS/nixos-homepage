@@ -60,31 +60,44 @@ module.exports = {
     },
     colors: {
       'nix-blue': {
-        extralight: '#f2f8fd', // nixlighterblue
-        lighter: '#e6ecf5', // nixlighterblue-dimmed
-        light: '#7ebae4', // nixlightblue
-        'light-transparent': '#7ebae433',
-        'light-hover': '#69a6d1',
-        DEFAULT: '#5277c3', // nixdarkblue
-        transparent: '#e6ecf533',
-        hover: '#466cb9',
-        dark: '#405D99', // nixsemidarkblue
-        'dark-hover': '#4e73bc',
-        darker: '#27385d', // nixdarkerblue
+        100: '#e8effc',
+        200: '#b7cefd',
+        300: '#87adfa',
+        400: '#698dd8',
+        500: '#4d6fb7',
+        600: '#325197',
+        700: '#193578',
+        800: '#03185a',
+        900: '#00052c',
+        'light-transparent': '#87adfa33',
+        transparent: '#e8effc33',
+        DEFAULT: '#4d6fb7', // nixdarkblue
       },
       'nix-orange': {
-        lighter: '#fff5e1', // nixlightorange
-        DEFAULT: '#ffab0d', // nixorange
-        transparent: '#ffab0d33',
-        hover: '#ec9d0c',
-        dark: '#ff8657', // nixdarkorange
-        darker: '#cc3900', // nixdarkerorange
+        100: '#faebe2',
+        200: '#fdbe96',
+        300: '#e99861',
+        400: '#c77942',
+        500: '#a65b21',
+        600: '#834105',
+        700: '#5a2d09',
+        800: '#371802',
+        900: '#150702',
+        DEFAULT: '#e99861', // nixorange
+        transparent: '#e9986133',
       },
       'nix-green': {
-        DEFAULT: '#6ad541', // nixgreen
-        transparent: '#6ad54133',
-        hover: '#64c53d',
-        dark: '#51ba29', // nixdarkgreen
+        100: '#e0f5e5',
+        200: '#8fe5a7',
+        300: '#6fc488',
+        400: '#4fa46a',
+        500: '#2e854d',
+        600: '#126635',
+        700: '#034721',
+        800: '#042912',
+        900: '#030f05',
+        DEFAULT: '#2e854d', // nixgreen
+        transparent: '#2e854d33',
       },
       gray: colors.gray,
       white: colors.white,

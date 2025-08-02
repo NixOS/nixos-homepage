@@ -41,13 +41,13 @@ posts
       <CurrentBannerContent />
     ) : (
       <Banner
-        wrapperClasses="bg-nix-blue-extralight"
-        class="font-heading text-nix-blue-dark flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row md:pt-8 md:pb-7"
+        wrapperClasses="bg-nix-blue-100"
+        class="font-heading text-nix-blue-700 flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row md:pt-8 md:pb-7"
       >
         <b>{posts[0].data.title}</b>
         <a
           href={generatePathFromPost(posts[0])}
-          class="text-nix-blue-dark hover:text-nix-blue-light inline-flex items-center gap-2"
+          class="text-nix-blue-700 hover:text-nix-blue-300 inline-flex items-center gap-2"
         >
           Read Announcement
           <Icon name="mdi:arrow-right" />
@@ -55,7 +55,7 @@ posts
       </Banner>
     )
   }
-  <div class="bg-nix-blue-dark inline-svg-hero bg-cover bg-left bg-no-repeat">
+  <div class="bg-nix-blue-700 inline-svg-hero bg-cover bg-left bg-no-repeat">
     <Container
       class="grid grid-cols-1 gap-8 py-8 text-white md:py-16 lg:grid-cols-2 lg:py-24"
     >
@@ -138,7 +138,7 @@ posts
   <div
     class="after:bg-divider relative after:bottom-0 after:left-0 after:-mt-48 after:-mb-16 after:block after:h-[30rem] after:w-full after:overflow-hidden after:bg-[url(/divider/landing_search_bottom.svg)] after:bg-cover after:bg-[60%_100%] after:bg-no-repeat"
   >
-    <div class="bg-nix-blue-extralight pt-4">
+    <div class="bg-nix-blue-100 pt-4">
       <Container
         class="flex w-full flex-col items-center justify-center gap-4 pt-8 pb-8"
       >

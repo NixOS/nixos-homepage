@@ -76,14 +76,14 @@ const blogMenu = await getEntry('menus', 'blog');
               />
               <label
                 for={`check-${e.id}`}
-                class="border-nix-blue fill-nix-blue text-nix-blue before:icon-[mdi--checkbox-blank-outline] peer-checked:before:icon-[mdi--checkbox-marked-outline] hover:bg-nix-blue-darker peer-checked:bg-nix-blue peer-checked:hover:border-nix-blue-darker peer-checked:hover:bg-nix-blue-darker relative flex w-full cursor-pointer items-center gap-2 rounded-2xl border-1 p-4 peer-checked:fill-white peer-checked:text-white peer-focus:ring-2 peer-focus:ring-black peer-focus:ring-offset-2 before:absolute before:right-4 before:block before:h-8 before:w-8 peer-checked:before:absolute peer-checked:before:block peer-checked:before:h-8 peer-checked:before:w-8 hover:fill-white hover:text-white md:w-auto md:flex-col md:p-8 md:before:top-2 md:before:right-2"
+                class="border-nix-blue fill-nix-blue text-nix-blue before:icon-[mdi--checkbox-blank-outline] peer-checked:before:icon-[mdi--checkbox-marked-outline] hover:bg-nix-blue-900 peer-checked:bg-nix-blue peer-checked:hover:border-nix-blue-900 peer-checked:hover:bg-nix-blue-900 relative flex w-full cursor-pointer items-center gap-2 rounded-2xl border-1 p-4 peer-checked:fill-white peer-checked:text-white peer-focus:ring-2 peer-focus:ring-black peer-focus:ring-offset-2 before:absolute before:right-4 before:block before:h-8 before:w-8 peer-checked:before:absolute peer-checked:before:block peer-checked:before:h-8 peer-checked:before:w-8 hover:fill-white hover:text-white md:w-auto md:flex-col md:p-8 md:before:top-2 md:before:right-2"
               >
                 <InlineSVG src={e.icon} class="w-12 md:w-24" />
                 <span class="font-light">{e.title}</span>
               </label>
             </div>
             <div class="pt-6 md:hidden">
-              <label class="border-nix-blue fill-nix-blue text-nix-blue hover:bg-nix-blue-darker peer-checked:bg-nix-blue peer-checked:hover:border-nix-blue-darker peer-checked:hover:bg-nix-blue-darker relative flex w-full cursor-pointer items-center gap-2 rounded-2xl border-1 p-4 peer-checked:fill-white peer-checked:text-white peer-focus:ring-2 peer-focus:ring-black peer-focus:ring-offset-2 hover:fill-white hover:text-white md:w-auto md:flex-col md:p-8">
+              <label class="border-nix-blue fill-nix-blue text-nix-blue hover:bg-nix-blue-900 peer-checked:bg-nix-blue peer-checked:hover:border-nix-blue-900 peer-checked:hover:bg-nix-blue-900 relative flex w-full cursor-pointer items-center gap-2 rounded-2xl border-1 p-4 peer-checked:fill-white peer-checked:text-white peer-focus:ring-2 peer-focus:ring-black peer-focus:ring-offset-2 hover:fill-white hover:text-white md:w-auto md:flex-col md:p-8">
                 <a href={'/blog/' + e.id + '-rss.xml'}>
                   <InlineSVG
                     src="/src/assets/image/blog-menu/rss.svg"

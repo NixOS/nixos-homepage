@@ -26,11 +26,11 @@ let downloadOptions = (await getCollection('download'))
                 aria-expanded="true"
                 aria-controls={optionId}
                 class:list={[
-                  'bg-nix-blue-extralight',
+                  'bg-nix-blue-100',
                   'flex',
-                  'text-nix-blue-dark',
-                  'hover:bg-nix-blue-lighter',
-                  'hover:text-nix-blue-darker',
+                  'text-nix-blue-800',
+                  'hover:bg-nix-blue-200',
+                  'hover:text-nix-blue-900',
                   'cursor-pointer',
                   'text-lg',
                   'font-bold',
@@ -86,7 +86,7 @@ let downloadOptions = (await getCollection('download'))
   const accContentArea = acc.appendChild(document.createElement('div'));
   accContentArea.classList.add('col-span-2', 'mt-4', 'px-8');
   menuContainer.classList.add(
-    'md:bg-nix-blue-extralight',
+    'md:bg-nix-blue-100',
     'md:py-8',
     'md:rounded-2xl',
     'self-start',
@@ -180,7 +180,7 @@ let downloadOptions = (await getCollection('download'))
       'md:text-nix-blue',
       'md:rounded-none',
       'md:aria-expanded:bg-white',
-      'md:aria-expanded:text-nix-blue-dark',
+      'md:aria-expanded:text-nix-blue-700',
       'before:icon-[mdi--arrow-up-drop-circle]',
       'before:block',
       'before:absolute',

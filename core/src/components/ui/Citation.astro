@@ -21,7 +21,7 @@ const { id, onBlueBackground } = Astro.props;
       class:list={[
         'absolute mt-1 max-w-sm rounded-sm border border-gray-300 p-2 text-sm shadow-lg',
         !onBlueBackground && 'bg-white!',
-        onBlueBackground && 'bg-nix-blue-darker!',
+        onBlueBackground && 'bg-nix-blue-900!',
       ]}
     >
       <slot />
@@ -36,7 +36,7 @@ const { id, onBlueBackground } = Astro.props;
     @apply text-gray-100;
   }
   details[open] > summary > sup.text-nix-blue {
-    @apply text-nix-blue-dark;
+    @apply text-nix-blue-700;
   }
 </style>
 
