@@ -27,6 +27,7 @@ const devServer = await dev({
 app.use('/manual', express.static(process.env.PATH_MANUAL));
 app.use('/guides/nix-pills', express.static(process.env.PATH_PILLS));
 app.use('/demos', express.static(process.env.PATH_DEMOS));
+app.use('/branding', express.static(process.env.PATH_BRANDING));
 app.use(devServer.handle);
 
 app.listen(devServer.address.port + 1, () => {

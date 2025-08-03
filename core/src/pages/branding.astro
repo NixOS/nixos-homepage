@@ -1,0 +1,86 @@
+---
+import Container from '../components/layout/Container.astro';
+import PageHeader from '../components/layout/PageHeader.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Branding">
+  <PageHeader text="Branding" />
+  <Container class="mt-16 space-y-4 leading-relaxed font-extralight">
+    <h2 class="font-heading text-nix-blue mt-8 text-4xl leading-none font-bold">
+      NixOS Branding Guide
+    </h2>
+    The <a href="/branding/nixos-branding-guide.pdf" download
+      >NixOS Branding Guide</a
+    > outlines the official visual identity of the NixOS project. It provides clear
+    guidance on how to use the NixOS logo, colors, typography, and other brand elements
+    across digital and print media. Whether you're creating a blog post, a presentation,
+    a sticker, or a t-shirt, this guide helps ensure your materials reflect the NixOS
+    brand consistently and respectfully.
+  </Container>
+  <Container class="mt-16 space-y-4 leading-relaxed font-extralight">
+    <h2 class="font-heading text-nix-blue mt-8 text-4xl leading-none font-bold">
+      NixOS Logos
+    </h2>
+    <p>
+      Below are the official NixOS logo variants. These assets are available for
+      use in accordance with the guidelines set out in the Branding Guide. Each
+      version is designed for a specific use case—horizontal or vertical layout,
+      dark or light backgrounds.
+    </p>
+    <p>
+      Please refer to the Branding Guide for instructions on proper usage, clear
+      space, and background contrast requirements.
+    </p>
+    <div class="grid gap-12 pb-12 md:grid-cols-2 md:gap-4">
+      <img
+        src="/branding/nixos-logo-default-gradient-black-regular-horizontal-recommended.svg"
+        style="margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-default-gradient-white-regular-horizontal-recommended.svg"
+        style="background-color:black;margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-default-gradient-black-regular-vertical-recommended.svg"
+        style="margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-default-gradient-white-regular-vertical-recommended.svg"
+        style="background-color:black;margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-black-flat-black-regular-horizontal-recommended.svg"
+        style="margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-white-flat-white-regular-horizontal-recommended.svg"
+        style="background-color:black;margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-black-flat-black-regular-vertical-recommended.svg"
+        style="margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-white-flat-white-regular-vertical-recommended.svg"
+        style="background-color:black;margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-rainbow-gradient-black-regular-horizontal-recommended.svg"
+        style="margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-rainbow-gradient-white-regular-horizontal-recommended.svg"
+        style="background-color:black;margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-rainbow-gradient-black-regular-vertical-recommended.svg"
+        style="margin:20px;"
+      />
+      <img
+        src="/branding/nixos-logo-rainbow-gradient-white-regular-vertical-recommended.svg"
+        style="background-color:black;margin:20px;"
+      />
+    </div>
+  </Container>
+</Layout>
