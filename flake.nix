@@ -221,6 +221,10 @@ rec {
               export THEME="${builtins.getEnv "THEME"}"
               export BANNER="${builtins.getEnv "BANNER"}"
 
+              ${pkgs.toml2json}/bin/toml2json --pretty \
+                ${branding.hydraJobs.nixos-branding-all.${system}.nixos-color-palette}/colors.toml \
+                > colors.json
+
               npm run build --workspace core
             '';
 
