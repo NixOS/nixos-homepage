@@ -6,12 +6,12 @@ const {
   contact,
   class: extraClasses,
 } = Astro.props;
-const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
+const titleClasses = `text-3xl font-heading font-bold text-afghani-blue`;
 ---
 
 <aside
   class:list={[
-    !isSubteam && 'bg-nix-blue-100 w-full rounded-xl px-4 py-3',
+    !isSubteam && 'bg-afghani-blue-95 w-full rounded-xl px-4 py-3',
     extraClasses,
   ]}
 >
@@ -19,7 +19,7 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
   <ul class="mt-2 font-light">
     {
       members.map((member) => (
-        <li class="border-b-nix-blue-300-hover flex flex-col border-b-1 pt-2 pb-2 first:pt-0 last:border-b-0 last:pb-0">
+        <li class="border-b-afghani-blue-75-hover flex flex-col border-b-1 pt-2 pb-2 first:pt-0 last:border-b-0 last:pb-0">
           <span class="font-medium">
             {member.name}
             {member.discourse && (
@@ -43,7 +43,7 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
           </span>
           {member.title && <span>{member.title}</span>}
           {member.affiliation && (
-            <span class="text-sm text-gray-700">{member.affiliation}</span>
+            <span class="text-black-35 text-sm">{member.affiliation}</span>
           )}
         </li>
       ))
@@ -52,7 +52,7 @@ const titleClasses = `text-3xl font-heading font-bold text-nix-blue`;
   {
     contact && (
       <>
-        <h2 class="font-heading text-nix-blue mt-4 text-3xl font-bold">
+        <h2 class="font-heading text-afghani-blue mt-4 text-3xl font-bold">
           Contact
         </h2>
         <ul class="mt-2 ml-4 list-disc">

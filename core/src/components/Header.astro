@@ -13,9 +13,9 @@ const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
-const navbarItemStyle = `text-center text-nix-blue-700 md:text-black md:hover:border-b-nix-blue-300 border-b-4`;
-const navbarItemInactiveStyle = `border-b-nix-blue-100 md:border-b-transparent bg-nix-blue-100 md:bg-transparent`;
-const navbarItemActiveStyle = `border-b-nix-blue-500 bg-nix-blue-300 text-white md:text-black md:bg-transparent font-bold`;
+const navbarItemStyle = `text-center text-afghani-blue-45 md:text-black md:hover:border-b-afghani-blue-65 border-b-4`;
+const navbarItemInactiveStyle = `border-b-afghani-blue-95 md:border-b-transparent bg-afghani-blue-95 md:bg-transparent`;
+const navbarItemActiveStyle = `border-b-afghani-blue-45 bg-afghani-blue-65 text-white md:text-black md:bg-transparent font-bold`;
 ---
 
 <header
@@ -61,7 +61,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-500 bg-nix-blue-300 text-white 
 
       <button
         aria-label="Main Navigation Toggle"
-        class="bg-nix-blue-300 block rounded-lg p-4 md:hidden"
+        class="bg-afghani-blue block rounded-lg p-4 md:hidden"
         id="navigation-toggle"
       >
         <span class="mb-1.5 block h-1 w-8 bg-white"></span>
@@ -98,7 +98,10 @@ const navbarItemActiveStyle = `border-b-nix-blue-500 bg-nix-blue-300 text-white 
         arial-label="Nixos package and options search"
         target="_self"
       >
-        <Icon class="text-nix-blue hidden h-8 w-8 md:block" name="mdi:search" />
+        <Icon
+          class="text-afghani-blue hidden h-8 w-8 md:block"
+          name="mdi:search"
+        />
         <span class="inline-block md:hidden">Search</span>
       </Link>
     </nav>

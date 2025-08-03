@@ -2,7 +2,7 @@
 import { Icon } from 'astro-icon/components';
 
 interface Props {
-  color?: 'nix-blue' | 'white';
+  color?: 'afghani-blue' | 'white';
   size?: 'sm' | 'lg' | 'sm-full';
   icon?: 'search' | null;
   placeholder?: string;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const {
-  color = 'nix-blue',
+  color = 'afghani-blue',
   size = 'lg',
   icon = null,
   placeholder = '',
@@ -24,7 +24,7 @@ const {
     class:list={[
       'absolute h-8 w-8',
       {
-        'text-nix-blue': color === 'nix-blue',
+        'text-afghani-blue': color === 'afghani-blue',
         'text-white': color === 'white',
         'top-3.5 left-3 md:block': size === 'lg',
         'top-1.5 left-2.5': size === 'sm-full',
@@ -34,13 +34,13 @@ const {
   />
   <input
     type="text"
-    class="focus:border-nix-blue-300 focus:outline-nix-blue-300 border-gray-200 outline-2 outline-transparent"
+    class="focus:border-afghani-blue-75 focus:outline-afghani-blue-75 border-black-85 outline-2 outline-transparent"
     class:list={[
-      'text-normal rounded-full placeholder-gray-400',
+      'text-normal placeholder-black-95 rounded-full',
       {
-        'placeholder-grey-200 text-nix-blue border-gray-200 bg-white':
-          color === 'nix-blue',
-        'placeholder-nix-blue-100 border-white bg-transparent text-white':
+        'placeholder-black-85 text-afghani-blue border-black-85 bg-white':
+          color === 'afghani-blue',
+        'placeholder-afghani-blue-95 border-white bg-transparent text-white':
           color === 'white',
         'w-full border-2 py-3 pr-4 pl-11 text-xl md:w-[30rem]': size === 'lg',
         'w-full border-1 px-10 py-2 md:pl-11': size === 'sm-full',

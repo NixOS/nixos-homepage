@@ -12,16 +12,16 @@ const { id, onBlueBackground } = Astro.props;
     <summary class="inline-block cursor-pointer">
       <sup
         class:list={[
-          onBlueBackground && 'text-white hover:text-gray-100',
-          !onBlueBackground && 'text-nix-blue hover:text-nix-blue',
+          onBlueBackground && 'hover:bg-black-95 text-white',
+          !onBlueBackground && 'text-afghani-blue hover:text-afghani-blue',
         ]}>[{id}]</sup
       >
     </summary>
     <div
       class:list={[
-        'absolute mt-1 max-w-sm rounded-sm border border-gray-300 p-2 text-sm shadow-lg',
+        'bg-black-75 absolute mt-1 max-w-sm rounded-sm border p-2 text-sm shadow-lg',
         !onBlueBackground && 'bg-white!',
-        onBlueBackground && 'bg-nix-blue-900!',
+        onBlueBackground && 'bg-afghani-blue-15!',
       ]}
     >
       <slot />
@@ -33,10 +33,10 @@ const { id, onBlueBackground } = Astro.props;
   @reference "./../../styles/base.css";
 
   details[open] > summary > sup.text-white {
-    @apply text-gray-100;
+    @apply text-black-95;
   }
-  details[open] > summary > sup.text-nix-blue {
-    @apply text-nix-blue-700;
+  details[open] > summary > sup.text-afghani-blue {
+    @apply text-afghani-blue-45;
   }
 </style>
 
