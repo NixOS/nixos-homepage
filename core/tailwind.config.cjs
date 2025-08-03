@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import parser from 'node-html-parser';
 import svgo from 'svgo';
-import colors from 'tailwindcss/colors';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 import nixColors from '../colors.json';
