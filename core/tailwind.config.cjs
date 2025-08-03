@@ -7,6 +7,31 @@ import svgo from 'svgo';
 import colors from 'tailwindcss/colors';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
+import nixColors from '../colors.json';
+
+const nixColorsNew = [
+  nixColors.palette.accent,
+  nixColors.palette.primary,
+  nixColors.palette.secondary,
+]
+  .flat()
+  // convert to "name":  { DEFAULT: "#hex" } format
+  .reduce((acc, color) => {
+    const name = color.name.replace(/ /g, '-').toLowerCase();
+    acc[name] = {
+      DEFAULT: `oklch(${color.value[0]} ${color.value[1]} ${color.value[2]})`,
+      ...Object.fromEntries(
+        Object.entries(color.tints).map(([k, v]) => [
+          k.slice(1), // remove the leading `-`
+          `oklch(${v[0]} ${v[1]} ${v[2]})`,
+        ]),
+      ),
+    };
+    return acc;
+  }, {});
+
+console.log(nixColorsNew);
+
 const inlineSvgs = {
   hero: './src/assets/image/hero-bg.svg',
   'landing-search-top': './src/assets/image/divider/landing_search_top.svg',
@@ -103,6 +128,7 @@ module.exports = {
       white: colors.white,
       black: colors.black,
       transparent: colors.transparent,
+      ...nixColorsNew,
     },
     boxShadow: shadow,
     dropShadow: shadow,

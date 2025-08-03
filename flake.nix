@@ -14,6 +14,9 @@ rec {
     released-nix-stable.url = "github:nixos/nix/latest-release";
     nix-pills.url = "github:NixOS/nix-pills";
     nix-pills.flake = false;
+
+    # NixOS branding
+    branding.url = "github:NixOS/branding";
   };
 
   nixConfig = {
@@ -32,6 +35,7 @@ rec {
       self,
       flake-parts,
       git-hooks-nix,
+      branding,
       nixpkgs,
       released-nixpkgs-unstable,
       released-nixpkgs-stable,
@@ -307,6 +311,10 @@ rec {
               if [ ! -d node_modules ]; then
                 ${nodejs_current}/bin/npm install --workspaces --include-workspace-root
               fi
+
+              ${pkgs.toml2json}/bin/toml2json --pretty \
+                ${branding.hydraJobs.nixos-branding-all.${system}.nixos-color-palette}/colors.toml \
+                > colors.json
 
               cat >&2 << EOF
               To fetch all dependencies:
