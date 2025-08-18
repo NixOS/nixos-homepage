@@ -11,17 +11,20 @@ export const sectionVariants = cva('py-8', {
   },
 });
 
-export const titleVariants = cva('pb-2 text-4xl font-bold', {
-  variants: {
-    color: {
-      blue: 'text-white',
-      white: 'text-nix-blue-hover',
+export const titleVariants = cva(
+  'pb-1 pt-0.5 text-4xl font-bold font-heading',
+  {
+    variants: {
+      color: {
+        blue: 'text-white',
+        white: 'text-nix-blue-hover',
+      },
     },
   },
-});
+);
 
 interface Props extends VariantProps<typeof sectionVariants> {
-  title: string;
+  title?: string;
   pre?: string;
 }
 
@@ -30,12 +33,8 @@ const { title, pre, color = 'blue' } = Astro.props;
 
 <section class={sectionVariants({ color })}>
   <Container>
-    <p>
-      {pre}
-    </p>
-    <h1 class={titleVariants({ color })}>
-      {title}
-    </h1>
+    {pre ?? <p>{pre}</p>}
+    {title && <h1 class={titleVariants({ color })}>{title}</h1>}
     <slot />
   </Container>
 </section>
