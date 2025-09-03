@@ -5,6 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 export const sectionVariants = cva('py-8', {
   variants: {
     color: {
+      darkblue: 'bg-nix-blue-dark text-white',
       blue: 'bg-nix-blue text-white',
       white: 'bg-nix-blue-extralight text-nix-blue-darker',
     },
@@ -16,6 +17,7 @@ export const titleVariants = cva(
   {
     variants: {
       color: {
+        darkblue: 'text-white',
         blue: 'text-white',
         white: 'text-nix-blue-hover',
       },

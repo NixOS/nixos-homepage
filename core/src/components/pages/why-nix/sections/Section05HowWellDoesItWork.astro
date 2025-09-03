@@ -1,8 +1,8 @@
 ---
-
+import Button from '@/components/ui/Button.astro';
 ---
 
-<div class="grid grid-cols-3">
+<div class="grid grid-cols-3 gap-4">
   <div>
     <h3 class="font-heading text-2xl font-bold">... My Codebase?</h3>
     <p>
@@ -17,8 +17,14 @@
       working on the project has the same setup, reducing "it works on my machine"
       issues.
     </p>
-    <a>Learn more about devshells</a>
-    <a>Search nix packages</a>
+    <div class="flex gap-2 pt-4">
+      <Button href="https://nixos.org" size="sm" color="nixblue">
+        Devshells
+      </Button>
+      <Button href="https://search.nixos.org" size="sm" color="nixblue">
+        Packages
+      </Button>
+    </div>
   </div>
   <div>
     <h3 class="font-heading text-2xl font-bold">... My Operating System?</h3>
