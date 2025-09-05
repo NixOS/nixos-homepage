@@ -1,0 +1,31 @@
+---
+sitewide:
+  message: 'NixCon 2025 is live!'
+  link:
+    url: https://2025.nixcon.org/live
+    text: 'Watch Livestream'
+  wrapperClasses: 'bg-[#7330d3] text-white'
+---
+
+import Banner from '@/components/ui/Banner.astro';
+
+<Banner
+  wrapperClasses="bg-gradient-to-r from-[#bf4e87] to-[#7330d3] text-white"
+  class="font-heading flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row"
+>
+  <span>
+    <span class="text-2xl font-bold">NixCon 2025 is live!</span>
+    <span class="text-md">
+      Rapperswil-Jona, Switzerland, 5–7 September
+    </span>
+  </span>
+  <a
+    href="https://2025.nixcon.org/live"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-1.5 w-full rounded-md bg-white/20 backdrop-blur-md px-4 pt-3 pb-2.5 text-center leading-none font-bold text-white no-underline hover:bg-white/40
+    hover:text-white md:mt-0 md:w-auto transition-all duration-200"
+  >
+      Watch Livestream
+  </a>
+</Banner>
