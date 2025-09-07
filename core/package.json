@@ -1,0 +1,42 @@
+{
+  "name": "nixos-homepage-core",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "dev:full": "node --trace-warnings devserver.mjs",
+    "start": "npm run dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "linkcheck:minimal": "linkchecker http://localhost:4321 --ignore-url /manual --ignore-url /guides --ignore-url /tutorials",
+    "linkcheck:full": "linkchecker http://localhost:4321"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.4",
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.5.1",
+    "@fontsource-variable/fira-code": "^5.2.6",
+    "@fontsource-variable/overpass": "^5.2.6",
+    "@fontsource-variable/roboto-flex": "^5.2.6",
+    "@tailwindcss/vite": "^4.1.12",
+    "@xmldom/xmldom": "^0.9.8",
+    "asciinema-player": "^3.10.0",
+    "astro": "^5.13.5",
+    "astro-favicons": "^3.1.5",
+    "astro-icon": "^1.1.5",
+    "astro-seo": "^0.8.4",
+    "class-variance-authority": "^0.7.1",
+    "htmx.org": "^2.0.6",
+    "markdown-it": "^14.0.0",
+    "node-html-parser": "^7.0.1",
+    "sanitize-html": "^2.17.0",
+    "tailwindcss": "^4.0.0",
+    "turndown": "^7.2.1"
+  },
+  "devDependencies": {
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.50",
+    "@iconify/tailwind": "^1.2.0"
+  }
+}

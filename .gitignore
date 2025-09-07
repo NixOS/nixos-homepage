@@ -1,13 +1,10 @@
 /.direnv/
-/result*
-/dist/
-/.astro/
-/node_modules/
-/npm-debug.log*
+/.result*
+/result
+build/
+node_modules
+npm-debug.log*
 .DS_Store
-/public/manual/
-/public/guides/nix-pills/
-/public/demos/*.cast
-/public/demos/*.svg
-
 .pre-commit-config.yaml
+# Local Netlify folder
+.netlify

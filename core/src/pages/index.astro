@@ -1,0 +1,209 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import { BANNER } from 'astro:env/client';
+import Container from '../components/layout/Container.astro';
+import Button from '../components/ui/Button.astro';
+import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
+import Layout from '../layouts/Layout.astro';
+import { generatePathFromPost } from '../lib/utils';
+
+import { Icon } from 'astro-icon/components';
+import Asciinema from '../components/ui/Asciinema.astro';
+import Banner from '../components/ui/Banner.astro';
+import InlineSVG from '../components/util/InlineSVG.astro';
+
+const landingFeatures = await getCollection('landingFeatures');
+const demos = await getEntry('landing', 'demos');
+const sponsors = await getEntry('sponsors', 'info');
+const posts = await getCollection('blog');
+
+const currentBanner = await getEntry('banners', BANNER);
+const CurrentBannerContent = currentBanner
+  ? (await render(currentBanner)).Content
+  : undefined;
+
+landingFeatures.sort((a, b) => a.id.localeCompare(b.id));
+
+posts
+  .sort((a, b) => {
+    const dateA = new Date(a.data.date);
+    const dateB = new Date(b.data.date);
+    return dateA > dateB ? -1 : 1;
+  })
+  .filter((p) => {
+    return p.id.split('/')?.[0] === 'announcements';
+  })
+  .reverse();
+---
+
+<Layout>
+  {
+    CurrentBannerContent ? (
+      <CurrentBannerContent />
+    ) : (
+      <Banner
+        wrapperClasses="bg-nix-blue-extralight"
+        class="font-heading text-nix-blue-dark flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row md:pt-8 md:pb-7"
+      >
+        <b>{posts[0].data.title}</b>
+        <a
+          href={generatePathFromPost(posts[0])}
+          class="text-nix-blue-dark hover:text-nix-blue-light inline-flex items-center gap-2"
+        >
+          Read Announcement
+          <Icon name="mdi:arrow-right" />
+        </a>
+      </Banner>
+    )
+  }
+  <div class="bg-nix-blue-dark inline-svg-hero bg-cover bg-left bg-no-repeat">
+    <Container
+      class="grid grid-cols-1 gap-8 py-8 text-white md:py-16 lg:grid-cols-2 lg:py-24"
+    >
+      <div
+        class="mx-0 my-auto flex h-full flex-0 flex-col justify-between gap-3 md:gap-4 md:pr-12"
+      >
+        <h1 class="font-heading text-4xl leading-tight font-bold md:text-5xl">
+          Declarative builds<br class="hidden md:inline-block" /> and deployments.
+        </h1>
+        <p class="mb-4 text-xl font-normal md:leading-loose">
+          Nix is a tool that takes a unique approach to package management and
+          system configuration. Learn how to make reproducible, declarative and
+          reliable systems.
+        </p>
+        <div
+          class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start"
+        >
+          <Button
+            href="/download"
+            color="white"
+            size="log-nopadding"
+            classList="flex-1 text-xl"
+            icon="mdi:download"
+          >
+            Download</Button
+          >
+          <Button
+            href="/learn"
+            color="white-borders"
+            size="log-nopadding"
+            icon="mdi:learn-outline"
+            classList="flex-1 text-xl bg">Get started</Button
+          >
+        </div>
+      </div>
+      <div
+        class="min-h-[300px] rounded-3xl border-[1rem] border-white bg-[#121314] drop-shadow-md"
+      >
+        <Asciinema
+          src="/demos/cover.cast"
+          settings={{
+            cols: 84,
+            poster: 'npt:0:01:22',
+            markers: [
+              [11.5, 'Ad-Hoc development environments'],
+              [41.5, 'Declarative development environments'],
+              [85.0, 'Build docker image with Nix'],
+              [122.0, 'Build minimal docker image with Nix'],
+            ],
+          }}
+        />
+      </div>
+    </Container>
+  </div>
+  <div
+    class="inline-svg-landing-search-top bg-[39%_100%] bg-no-repeat pt-16 pb-48 md:bg-bottom"
+  >
+    <Container class="grid gap-8 md:grid-cols-3 md:gap-4">
+      {
+        landingFeatures.map(async (feature) => {
+          const { Content } = await render(feature);
+          return (
+            <div class="flex flex-col text-center">
+              <InlineSVG
+                src={feature.data.img}
+                class="mx-auto mb-6 h-32 w-auto"
+              />
+              <h2 class="font-heading text-nix-blue mb-2 text-3xl leading-none font-bold">
+                {feature.data.title}
+              </h2>
+              <div class="text-light-bold leading-loose">
+                <Content />
+              </div>
+            </div>
+          );
+        })
+      }
+    </Container>
+  </div>
+  <div
+    class="after:bg-divider relative after:bottom-0 after:left-0 after:-mt-48 after:-mb-16 after:block after:h-[30rem] after:w-full after:overflow-hidden after:bg-[url(/divider/landing_search_bottom.svg)] after:bg-cover after:bg-[60%_100%] after:bg-no-repeat"
+  >
+    <div class="bg-nix-blue-extralight pt-4">
+      <Container
+        class="flex w-full flex-col items-center justify-center gap-4 pt-8 pb-8"
+      >
+        <h2
+          class="font-heading text-nix-blue pb-0 text-center text-4xl leading-tight font-bold md:w-2/3"
+        >
+          Choose from over 120 000 Packages
+        </h2>
+        <p
+          class="pb-2 text-center text-2xl leading-relaxed font-extralight md:w-5/6"
+        >
+          The Nix Packages collection (<a
+            class="text-nix-blue! font-bold"
+            href="#">Nixpkgs</a
+          >) offers a large selection of packages for the Nix package manager.
+        </p>
+        <NixosSearchInput collection="packages" withSubmit />
+      </Container>
+    </div>
+  </div>
+  <div>
+    <Container
+      class:list={[
+        'flex flex-wrap items-center justify-center gap-8 pt-4 pb-16 md:justify-between',
+      ]}
+    >
+      {
+        sponsors.data.items.map((item) => (
+          <a href={item.href} target="_blank" rel="noopener noreferrer">
+            <img
+              class="max-h-16 max-w-32 opacity-65 grayscale-100 transition-all duration-100 hover:opacity-100 hover:grayscale-0 md:max-w-48"
+              src={item.src}
+              alt={item.alt}
+            />
+          </a>
+        ))
+      }
+    </Container>
+  </div>
+  <div>
+    <Container>
+      <h2
+        class="font-heading text-nix-blue w-full pb-2 text-center text-4xl font-bold"
+      >
+        Examples
+      </h2>
+      <div class="grid items-center gap-4 pb-8 md:grid-cols-2">
+        {
+          demos.data.map((demo) => {
+            return (
+              <div class="flex flex-col items-start gap-2 overflow-hidden">
+                <Asciinema
+                  title={demo.title}
+                  class="w-full self-center md:self-start"
+                  src={demo.file}
+                  settings={{
+                    poster: 'npt:0:00:30',
+                  }}
+                />
+              </div>
+            );
+          })
+        }
+      </div>
+    </Container>
+  </div>
+</Layout>

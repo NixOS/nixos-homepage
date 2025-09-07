@@ -1,0 +1,27 @@
+---
+import {
+  createBlogSubheader,
+  createExcerpt,
+  generatePathFromPost,
+} from '../../../lib/utils';
+
+const { post } = Astro.props;
+---
+
+<article
+  data-category={post.id.split('/')[0]}
+  class="font-light"
+  aria-hidden="false"
+>
+  <a href={generatePathFromPost(post)}>
+    <h2
+      class="font-ned, composition in a document, page, applicaextrabold font-heading text-nix-blue text-4xl leading-tight"
+    >
+      {post.data.title}
+    </h2>
+  </a>
+  <p class="mb-2 text-xs text-gray-700">
+    {createBlogSubheader(post)}
+  </p>
+  <p class="font-extralight">{createExcerpt(post.body)}...</p>
+</article>

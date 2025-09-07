@@ -1,0 +1,100 @@
+---
+import { getEntry } from 'astro:content';
+
+import Container from '../../components/layout/Container.astro';
+import PageHeader from '../../components/layout/PageHeader.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const companies = await getEntry('community', 'commercial-support');
+
+function shuffleArray(array) {
+  // source: https://stackoverflow.com/a/2450976
+
+  let currentIndex = array.length;
+  let randomIndex;
+
+  while (currentIndex > 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+}
+---
+
+<Layout title="Community">
+  <PageHeader text="Commercial support" />
+  <Container>
+    <p class="text-center text-xl font-bold text-gray-600">
+      Consulting companies are available for professional support.
+    </p>
+    <p class="mt-2 text-center">
+      Please <a
+        href="https://github.com/NixOS/nixos-homepage/edit/main/core/src/content/community/commercial-support.yaml"
+        >submit a pull request</a
+      > to add your company. The list is randomized at each page load.
+    </p>
+    <ul id="company-list" class="invisible m-4 flex flex-row flex-wrap gap-4">
+      {
+        shuffleArray(companies.data).map((company) => (
+          <li class="border-nix-blue text-nix-blue grow basis-72 rounded-xl border p-4 font-light xl:basis-80">
+            <a href={company.href} class="space-y-4 no-underline!">
+              <img
+                src={company.logo}
+                alt={company.name + ' logo'}
+                class="mx-auto h-80 object-contain"
+              />
+              <h3 class="text-4xl font-bold">{company.name}</h3>
+              <ul>
+                {company.locations.map((location) => (
+                  <li class="list-inside list-disc">{location}</li>
+                ))}
+              </ul>
+              <p>{company.description}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <noscript>
+      <style>
+        #company-list.invisible {
+          visibility: visible;
+        }
+      </style>
+    </noscript>
+
+    <!-- Client-side JavaScript to shuffle the DOM elements -->
+    <script is:client>
+      document.addEventListener('DOMContentLoaded', () => {
+        function shuffleArray(array) {
+          // source: https://stackoverflow.com/a/2450976
+
+          let currentIndex = array.length;
+          let randomIndex;
+
+          while (currentIndex > 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+              array[randomIndex],
+              array[currentIndex],
+            ];
+          }
+
+          return array;
+        }
+
+        const ul = document.getElementById('company-list');
+        const items = Array.from(ul.children);
+        shuffleArray(items).forEach((item) => ul.appendChild(item));
+        ul.classList.remove('invisible');
+      });
+    </script>
+  </Container>
+</Layout>

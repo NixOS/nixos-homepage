@@ -1,6 +1,6 @@
 # Source for nixos.org
 
-[![CI](https://github.com/NixOS/nixos-homepage/actions/workflows/ci.yml/badge.svg)](https://github.com/NixOS/nixos-homepage/actions/workflows/ci.yml)
+[![CI](https://github.com/NixOS/nixos-homepage/actions/workflows/deploy-prod.yml/badge.svg)](https://github.com/NixOS/nixos-homepage/actions/workflows/ci.yml)
 [![Number of open GitHub issues](https://img.shields.io/github/issues/nixos/nixos-homepage?style=flat&color=red)](https://github.com/nixos/nixos-homepage/issues)
 [![Number of open GitHub pull requests](https://img.shields.io/github/issues-pr/nixos/nixos-homepage?style=flat&color=blue)](https://github.com/nixos/nixos-homepage/pulls)
 [![Month of last commit](https://img.shields.io/github/last-commit/NixOS/nixos-homepage?style=flat)](https://github.com/NixOS/nixos-homepage/commits/main)
@@ -39,16 +39,16 @@ All work, whether proposed or in progress, should be documented in Issues.
 This ensures transparency and makes it easier for anyone to pick up tasks or for maintainers to manage the workload.
 There are many ways how you can help:
 
-- If you are familiar with CSS look at the [issues tagged with `design` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Adesign).
-- If you are an native English speaker or just a person that is very good with words, please look at the [issues tagged with `content` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Acontent)
-- If you are developer and just eager to fix stuff please look at the [issues tagged with `bug` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+- If you are familiar with CSS, look at the [issues tagged with `design` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Adesign).
+- If you are a native English speaker or just a person who is very good with words, please look at the [issues tagged with `content` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Acontent)
+- If you are a developer and just eager to fix stuff, please look at the [issues tagged with `bug` tag](https://github.com/NixOS/nixos-homepage/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
 
 ## Propose Changes in the Right Place
 
 It takes a lot of time and effort to keep the website running smoothly.
 If you want to submit a change that is not tracked by an issue, propose it first so the details and scope can be refined before you start working.
 
-- For well-scoped ideas that you can implement, check if their is an existing issue. If not, create one.
+- For well-scoped ideas that you can implement, check if there is an existing issue. If not, create one.
 - For loosely defined ideas or if you lack the technical means to implement them, start a discussion in the Discussions section to refine the idea collaboratively.
 
 ## Separate Pull Requests by Type
@@ -64,11 +64,11 @@ Avoid combining these types in a single pull request to make the review process 
 Make sure to add a description in your pull request.
 A few words can help reviewers understand your intent.
 For example, if you are making design changes, you might want to answer why your changes are an improvement.
-Similarly, if you are making technical changes, you might want answer how your changes work.
+Similarly, if you are making technical changes, you might want to answer how your changes work.
 Add enough detail so we know what you know.
 
 ## Adding your company to the commercial support page
-When adding your company to the commercial support page your company must...
+When adding your company to the commercial support page, your company must...
 
 - ... offer commercial support for Nix
 - ... provide a clear description of their Nix services on their website (the descriptions have to explicitly mention Nix)
@@ -78,12 +78,12 @@ Please note that we will regularly check the commercial support page and will re
 
 # Development
 
-To run local development instance follow this steps to start a local server
+To run local development instance, follow these steps to start a local server
 
     $ git clone git@github.com:NixOS/nixos-homepage.git
     $ cd nixos-homepage
     $ nix-shell
-    [nix-shell]$ npm install
+    [nix-shell]$ npm install --workspaces --include-workspace-root
     [nix-shell]$ npm run dev
 
 If you have [Docker] and [Docker Compose] installed, you can alternatively run
@@ -94,7 +94,7 @@ Once everything's ready, you'll be able to access
 
 Open your browser at: http://localhost:4321/
 
-Before creating a pull request make sure that `nix-build` runs successfully.
+Before creating a pull request, make sure that `nix-build` runs successfully.
 
 [Docker]: https://docs.docker.com/get-docker/
 [Docker Compose]: https://docs.docker.com/compose/install/
@@ -127,4 +127,4 @@ The content of the website is licensed under the [Creative Commons Attribution S
 
 The software (including sample code) is licensed under the [MIT](LICENSES/MIT.txt) license.
 
-Some files might have a different license. See the files content for details.
+Some files might have a different license. See the file's content for details.

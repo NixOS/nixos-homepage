@@ -1,0 +1,119 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getEntry } from 'astro:content';
+import { BANNER } from 'astro:env/client';
+
+import Container from '@/components/layout/Container.astro';
+import InlineSVG from '@/components/util/InlineSVG.astro';
+import Link from '@/components/util/Link.astro';
+import { getNixosLogoUrl } from '@/lib/themes';
+
+const headerMenu = await getEntry('menus', 'header');
+const currentBanner = await getEntry('banners', BANNER);
+
+const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
+
+const navbarItemStyle = `text-center text-nix-blue-dark md:text-black md:hover:border-b-nix-blue-light border-b-4`;
+const navbarItemInactiveStyle = `border-b-nix-blue-extralight md:border-b-transparent bg-nix-blue-extralight md:bg-transparent`;
+const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-white md:text-black md:bg-transparent font-bold`;
+---
+
+<header
+  role="banner"
+  class="sticky top-0 z-50 bg-white font-extralight text-black drop-shadow-md"
+>
+  {
+    currentBanner && (
+      <a
+        href={currentBanner.data.sitewide.link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={[
+          'block py-2 font-bold',
+          currentBanner.data.sitewide.wrapperClasses,
+        ]}
+      >
+        <Container class:list={['flex items-center justify-between']}>
+          <span class="line-clamp-1">
+            {currentBanner.data.sitewide.message}
+          </span>
+          <span class:list={['line-clamp-1 cursor-pointer underline']}>
+            {currentBanner.data.sitewide.link.text}
+          </span>
+        </Container>
+      </a>
+    )
+  }
+  <Container class="flex flex-col justify-between md:flex-row md:items-center">
+    <div
+      class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start"
+    >
+      <Link
+        href="/"
+        class="flex items-center justify-between gap-2 select-none md:justify-start"
+      >
+        <InlineSVG
+          class="h-12 w-auto"
+          src={getNixosLogoUrl('logo')}
+          alt="Nixos Logo"
+        />
+      </Link>
+
+      <button
+        aria-label="Main Navigation Toggle"
+        class="bg-nix-blue-light block rounded-lg p-4 md:hidden"
+        id="navigation-toggle"
+      >
+        <span class="mb-1.5 block h-1 w-8 bg-white"></span>
+        <span class="mb-1.5 block h-1 w-8 bg-white"></span>
+        <span class="block h-1 w-8 bg-white"></span>
+      </button>
+    </div>
+
+    <nav
+      aria-label="Main Navigation"
+      role="menubar"
+      class="flex flex-col gap-0.5 pb-4 leading-none md:flex md:flex-row md:gap-5 md:pb-0"
+      id="navbar-menu"
+    >
+      {
+        headerMenu.data.items.map((item) => (
+          <Link
+            class:list={[
+              'pt-7 pb-6',
+              navbarItemStyle,
+              currentTopRoute === item.link
+                ? navbarItemActiveStyle
+                : navbarItemInactiveStyle,
+            ]}
+            href={item.link}
+          >
+            {item.name}
+          </Link>
+        ))
+      }
+      <Link
+        class={`pt-7 pb-6 md:pt-5 md:pb-3 ${navbarItemStyle} ${navbarItemInactiveStyle}`}
+        href="https://search.nixos.org"
+        arial-label="Nixos package and options search"
+        target="_self"
+      >
+        <Icon class="text-nix-blue hidden h-8 w-8 md:block" name="mdi:search" />
+        <span class="inline-block md:hidden">Search</span>
+      </Link>
+    </nav>
+  </Container>
+</header>
+
+<script>
+  const navigationToggle = document.getElementById('navigation-toggle');
+  const navbarMenu = document.getElementById('navbar-menu');
+
+  function toggleMenu() {
+    navbarMenu.classList.toggle('hidden');
+    navbarMenu.classList.toggle('flex');
+  }
+  toggleMenu();
+
+  navigationToggle.addEventListener('click', () => toggleMenu());
+</script>

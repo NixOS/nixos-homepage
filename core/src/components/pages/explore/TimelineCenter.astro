@@ -1,0 +1,15 @@
+---
+interface Props {
+  number: string;
+}
+
+const { number = 0 } = Astro.props;
+---
+
+<div class="bg-nix-blue absolute top-0 left-[-3rem] hidden h-full w-1 md:block">
+</div>
+<div
+  class="bg-nix-blue-dark absolute top-0 left-[-5rem] hidden h-[4rem] w-[4rem] rounded-[2rem] text-center text-[3rem] leading-[4rem] font-bold text-white md:block"
+>
+  {number}
+</div>

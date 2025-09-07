@@ -1,0 +1,26 @@
+---
+title: Windows (WSL2)
+family: nix
+platform: windows
+---
+
+import CodeBlock from '../../components/layout/CodeBlock.astro';
+
+### Multi-user installation (Requires WSL with systemd enabled)
+
+WSL versions 0.67.6 and above has systemd support.
+Follow
+[Microsoft's systemd guide](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl)
+to configure it, and then install Nix using:
+
+```bash
+$ sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
+```
+
+### Single-user installation
+
+Install Nix via the [single-user installation](/manual/nix/stable/installation/single-user)
+
+```bash
+$ sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --no-daemon
+```

@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  href: string;
+  iconName?: string;
+  name?: string;
+  description?: string;
+  type?: 'full' | 'mobile_icon_desktop_name' | 'icon';
+}
+
+const {
+  href,
+  iconName,
+  name = '',
+  description = '',
+  type = 'full',
+} = Astro.props;
+
+const effectiveType =
+  !iconName && type === 'mobile_icon_desktop_name' ? 'full' : type;
+---
+
+<li
+  class:list={[
+    'border-nix-blue hover:bg-nix-blue-extralight flex-1 cursor-pointer rounded-xl border-2 bg-white p-4 transition-all',
+    effectiveType === 'icon' && 'flex flex-col items-center justify-center',
+  ]}
+>
+  <a href={href} class="text-nix-blue! flex h-full flex-col no-underline!">
+    <div
+      class:list={[
+        'flex gap-2 text-xl font-bold',
+        (effectiveType !== 'full' || description === '') && 'h-full',
+        effectiveType === 'mobile_icon_desktop_name' &&
+          'flex-col items-center justify-center md:flex-row md:justify-start',
+        !iconName && 'h-full items-center', // Center name if no icon
+      ]}
+    >
+      {
+        iconName && (
+          <Icon name={iconName} alt={'logo of ' + name} class="h-8 w-8" />
+        )
+      }
+      {
+        (effectiveType !== 'icon' || !iconName) && (
+          <span
+            class:list={[
+              'leading-8',
+              iconName ? 'ml-2' : 'text-center',
+              effectiveType === 'mobile_icon_desktop_name' && iconName
+                ? 'hidden md:block'
+                : '',
+            ]}
+          >
+            {name}
+          </span>
+        )
+      }
+    </div>
+    {
+      description !== '' && effectiveType === 'full' && (
+        <div class="mt-2">{description}</div>
+      )
+    }
+  </a>
+</li>

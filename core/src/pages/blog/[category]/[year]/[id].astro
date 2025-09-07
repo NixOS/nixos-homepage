@@ -1,0 +1,34 @@
+---
+import { createBlogSubheader } from '@/lib/utils';
+import { getCollection, render } from 'astro:content';
+import Container from '../../../../components/layout/Container.astro';
+import PageHeader from '../../../../components/layout/PageHeader.astro';
+import Layout from '../../../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map((entry) => ({
+    params: {
+      category: entry.id.split('/')[0],
+      year: new Date(entry.data.date).getFullYear(),
+      id: entry.id.split('/').pop().split('_').pop(),
+    },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title=`${entry.data.title} | Blog`>
+  <PageHeader
+    text={entry.data.title}
+    subtext={createBlogSubheader(entry, true, 'text-white')}
+  />
+  <Container class="mt-8 mb-4 flex flex-col gap-8">
+    <article class="text-light-bold">
+      <Content />
+    </article>
+  </Container>
+</Layout>

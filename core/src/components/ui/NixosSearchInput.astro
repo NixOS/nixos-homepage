@@ -1,0 +1,49 @@
+---
+import Button from './Button.astro';
+import Input from './Input.astro';
+
+interface Props {
+  color?: 'nix-blue' | 'white';
+  size?: 'sm' | 'lg' | 'sm-full';
+  collection?: 'packages' | 'options';
+  withSubmit?: boolean;
+  withSubmitClass?: string;
+}
+
+const collectionMap = {
+  packages: 'Nix packages',
+  options: 'NixOS options',
+};
+
+const {
+  color = 'nix-blue',
+  size = 'lg',
+  collection = 'packages',
+  withSubmit = false,
+} = Astro.props;
+---
+
+<form
+  method="get"
+  action={`https://search.nixos.org/${collection}`}
+  class:list={[
+    {
+      'flex w-full flex-col items-stretch justify-center gap-6 md:w-auto md:items-center':
+        withSubmit,
+    },
+  ]}
+>
+  <Input
+    color={color}
+    size={size}
+    placeholder={`Search for ${collectionMap[collection]}`}
+    name="query"
+  />
+  {
+    withSubmit && (
+      <Button color="nixblue" size="sm-mobfull" type="submit">
+        Search
+      </Button>
+    )
+  }
+</form>
