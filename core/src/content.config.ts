@@ -1,5 +1,5 @@
 import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 
 const banners = defineCollection({
   loader: glob({ pattern: '**/[^_]*.mdx', base: './src/content/banners' }),
@@ -56,6 +56,10 @@ const teams = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/teams' }),
 });
 
+const devices = defineCollection({
+  loader: file('./src/content/devices.yml'),
+});
+
 export const collections = {
   banners,
   blog,
@@ -68,4 +72,5 @@ export const collections = {
   menus,
   sponsors,
   teams,
+  devices,
 };

@@ -1,7 +1,13 @@
 ---
+import { Icon } from 'astro-icon/components';
+import { getCollection } from 'astro:content';
 import Container from '../components/layout/Container.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
+
+const devices = await getCollection('devices');
+
+console.log(devices);
 ---
 
 <Layout title="Devices">
@@ -15,60 +21,37 @@ import Layout from '../layouts/Layout.astro';
       their hardware may be supported.
     </p>
   </Container>
-  <Container>
-    <h2 class="font-heading text-nix-blue mt-8 text-4xl leading-none font-bold">
-      Ships with NixOS
-    </h2>
-    <p class="text-gray-700">
-      These devices ship with NixOS, this means you get full NixOS support and
-      don't need an installer image to begin using NixOS.
-    </p>
-    <ul class="m-4 flex flex-row flex-wrap gap-4">
-      <li>None at this time</li>
-    </ul>
-  </Container>
-  <Container>
-    <h2 class="font-heading text-nix-blue mt-8 text-4xl leading-none font-bold">
-      Official Support
-    </h2>
-    <p class="text-gray-700">
-      These devices have been tested by members of the hardware team and are
-      known to work.
-    </p>
-    <ul class="m-4 flex flex-row flex-wrap gap-4">
-      <li>
-        <a href="https://github.com/NixOS/nixos-hardware/tree/master/framework"
-          >Framework</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/NixOS/nixos-hardware/tree/master/fydetab/duo"
-          >Fydetab Duo</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/NixOS/nixos-hardware/tree/master/system76/thelio-mega"
-          >System76 Thelio Mega</a
-        >
-      </li>
-    </ul>
-  </Container>
-  <Container>
-    <h2 class="font-heading text-nix-blue mt-8 text-4xl leading-none font-bold">
-      Community Support
-    </h2>
-    <p class="text-gray-700">
-      These are popular devices which have been tested by members of the
-      community.
-    </p>
-    <ul class="m-4 flex flex-row flex-wrap gap-4">
-      <li>
-        <a href="https://github.com/nix-community/nixos-apple-silicon"
-          >Apple Silicon (M1, M2, etc.)</a
-        >
-      </li>
-    </ul>
-  </Container>
+  {
+    devices.map((category) => (
+      <Container>
+        <h2 class="font-heading text-nix-blue mt-8 mb-1 text-4xl leading-none font-bold">
+          {category.data.title}
+        </h2>
+        <p class="text-gray-700">{category.data.description}</p>
+        {(!category.data.devices || category.data.devices === 0) && (
+          <p class="mt-4 h-full list-none rounded-xl bg-gray-100 px-4 py-3">
+            No devices listed yet.
+          </p>
+        )}
+        {category.data.devices && (
+          <ul class="mt-4 grid list-inside list-disc gap-4 space-y-2 md:grid-cols-3">
+            {category.data.devices.map((device) => (
+              <li class="bg-nix-blue-extralight h-full list-none rounded-xl px-4 py-3">
+                <h3 class="font-heading text-nix-blue text-3xl font-bold">
+                  {device.name}
+                </h3>
+                {device.hwrepo && (
+                  <a href={device.hwrepo} class="text-nix-blue hover:underline">
+                    <Icon name="mdi:git" class="inline h-5 w-5" />
+                    Hardware Repository
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </Container>
+    ))
+  }
+  }
 </Layout>
