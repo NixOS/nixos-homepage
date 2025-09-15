@@ -14,7 +14,11 @@ import Container from '../layout/Container.astro';
   const clickables = document.querySelectorAll('.clickable');
   clickables.forEach((clickable) => {
     clickable.classList.add('cursor-pointer');
-    clickable.addEventListener('click', () => {
+    clickable.addEventListener('click', (e) => {
+      // Don't interfere when a user clicks on a button
+      if (e.target.matches('a, button') || e.target.closest('a, button')) {
+        return;
+      }
       clickable.querySelector('a, button').click();
     });
   });
