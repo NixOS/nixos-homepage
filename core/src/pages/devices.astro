@@ -32,7 +32,7 @@ const devices = await getCollection('devices');
           </p>
         )}
         {category.data.devices && (
-          <ul class="mt-4 grid list-inside list-disc gap-4 space-y-2 md:grid-cols-3">
+          <ul class="my-4 grid list-inside list-disc gap-4 space-y-2 md:grid-cols-3">
             {category.data.devices.map((device) => (
               <li class="bg-nix-blue-extralight h-full list-none rounded-xl px-4 py-3">
                 <h3 class="font-heading text-nix-blue text-3xl font-bold">
