@@ -57,7 +57,7 @@ const teams = defineCollection({
 });
 
 const devices = defineCollection({
-  loader: file('./src/content/devices.yml'),
+  loader: file('src/content/devices.yml'),
 });
 
 export const collections = {
