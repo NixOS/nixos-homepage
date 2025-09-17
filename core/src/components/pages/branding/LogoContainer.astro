@@ -1,0 +1,31 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const {
+  type = 'logo',
+  fillStyle = 'gradient',
+  color = 'rainbow',
+  fontColor = 'black',
+  orientation = 'horizontal',
+  style = 'regular',
+  variant = 'recommended',
+} = Astro.props;
+
+const brandUrl = `https://brand.nixos.org/logos/nixos-${type}-${color}-${fillStyle}-${fontColor}-${style}-${orientation}-${variant}.svg`;
+---
+
+<div>
+  <img src={brandUrl} class:list={fontColor === 'white' ? 'bg-black' : ''} />
+  <div class="flex items-center gap-2 pt-4">
+    <span> URL </span>
+    <span class="border-1 p-1 text-sm text-gray-800">{brandUrl}</span>
+    <button
+      class="cursor-pointer"
+      onclick={() => {
+        navigator.clipboard.writeText(brandUrl);
+      }}
+    >
+      <Icon name="mdi:clipboard" class="text-nix-blue inline h-4 w-4" />
+    </button>
+  </div>
+</div>
