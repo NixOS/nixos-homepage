@@ -1,0 +1,42 @@
+---
+import Container from '@/components/layout/Container.astro';
+import { cva, type VariantProps } from 'class-variance-authority';
+
+export const sectionVariants = cva('py-8', {
+  variants: {
+    color: {
+      darkblue: 'bg-nix-blue-dark text-white',
+      blue: 'bg-nix-blue text-white',
+      white: 'bg-nix-blue-extralight text-nix-blue-darker',
+    },
+  },
+});
+
+export const titleVariants = cva(
+  'pb-1 pt-0.5 text-4xl font-bold font-heading',
+  {
+    variants: {
+      color: {
+        darkblue: 'text-white',
+        blue: 'text-white',
+        white: 'text-nix-blue-hover',
+      },
+    },
+  },
+);
+
+interface Props extends VariantProps<typeof sectionVariants> {
+  title?: string;
+  pre?: string;
+}
+
+const { title, pre, color = 'blue' } = Astro.props;
+---
+
+<section class={sectionVariants({ color })}>
+  <Container>
+    {pre ?? <p>{pre}</p>}
+    {title && <h1 class={titleVariants({ color })}>{title}</h1>}
+    <slot />
+  </Container>
+</section>
