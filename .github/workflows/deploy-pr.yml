@@ -2,6 +2,10 @@ name: 'CI - Pull Request'
 
 on:
   pull_request_target:
+    paths-ignore:
+      - '**/package.json'
+      - '**/flake.nix'
+      - '**/default.nix'
 
 concurrency:
   group: '${{ github.workflow }}-${{ github.head_ref || github.ref_name }}'
@@ -15,9 +19,9 @@ jobs:
     name: 'Build nixos.org PR'
     runs-on: 'ubuntu-latest'
     permissions:
-      contents: read
-      pull-requests: write
-      statuses: write
+      contents: read # to fetch PR changes
+      pull-requests: write # to post PR comments
+      statuses: write # to set commit status
     steps:
       - name: 'Checking out the PR repository'
         uses: 'actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8' # v5.0.0
@@ -36,11 +40,11 @@ jobs:
 
       - name: 'Check formatting'
         run: |
-          npm run format:check
+          npm exec --package=prettier -c 'prettier --check ./core/src'
 
       - name: 'Lint'
         run: |
-          npm run lint
+          npm exec --package=eslint -c 'eslint'
 
       - name: 'Build'
         run: |
