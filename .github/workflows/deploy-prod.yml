@@ -19,8 +19,8 @@ jobs:
     runs-on: 'ubuntu-latest'
     permissions:
       contents: read
-      statuses: write
-      deployments: write
+      statuses: write # to set commit status
+      deployments: write # to create GitHub deployments for production deploys
     steps:
       - name: 'Checking out the repository'
         uses: 'actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8' # v5.0.0
@@ -29,7 +29,7 @@ jobs:
           persist-credentials: false
 
       - name: 'Installing Nix'
-        uses: 'cachix/install-nix-action@56a7bb7b56d9a92d4fd1bc05758de7eea4a370a8' # v31.6.0
+        uses: 'cachix/install-nix-action@a809471b5c7c913aa67bec8f459a11a0decc3fce' # v31.6.2
 
       - name: 'Setup Cachix'
         uses: 'cachix/cachix-action@0fc020193b5a1fa3ac4575aa3a7d3aa6a35435ad' # v16
@@ -43,11 +43,11 @@ jobs:
 
       - name: 'Check formatting'
         run: |
-          npm run format:check
+          npm exec --package=prettier -c 'prettier --check ./core/src'
 
       - name: 'Lint'
         run: |
-          npm run lint
+          npm exec --package=eslint -c 'eslint'
 
       - name: 'Build'
         run: |
