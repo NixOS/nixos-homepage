@@ -875,9 +875,11 @@ function getVenueString(pubInfo: PublicationType) {
     </div>
   </Container>
   <Divider style="slope" mirrorX mirrorY />
-  <div class="bg-afghani-blue py-16 text-white md:px-12 md:py-16">
+  <div
+    class="bg-secondary-afghani-blue text-primary-white py-16 md:px-12 md:py-16"
+  >
     <Container
-      class="bg-afghani-blue mt-16 space-y-8 leading-relaxed font-extralight"
+      class="bg-secondary-afghani-blue mt-16 space-y-8 leading-relaxed font-extralight"
     >
       <h1 class="font-heading text-4xl leading-tight font-bold">
         Scientific publications about Nix and associated projects
@@ -890,7 +892,7 @@ function getVenueString(pubInfo: PublicationType) {
               <h2 class="mb-6 text-2xl font-semibold">{year}</h2>
               <div class="space-y-6">
                 {papersByYear[year].map((paper) => (
-                  <article class="paper-entry rounded-lg bg-white p-6 shadow-sm transition hover:shadow-md">
+                  <article class="paper-entry bg-primary-white rounded-lg p-6 shadow-sm transition hover:shadow-md">
                     <input
                       type="checkbox"
                       id={getToggleAbstractId(paper)}
@@ -898,16 +900,16 @@ function getVenueString(pubInfo: PublicationType) {
                     />
                     <div class="content-container">
                       <div class="paper-info flex-1 space-y-2">
-                        <h3 class="text-black-15 max-w-[650px] text-lg font-medium">
+                        <h3 class="text-primary-black-15 max-w-[650px] text-lg font-medium">
                           {paper.title}
                         </h3>
-                        <p class="text-black-35 text-sm">
+                        <p class="text-primary-black-35 text-sm">
                           {paper.authors.map((a, i) => (
                             <>
                               {a.orcidUrl ? (
                                 <a
                                   href={a.orcidUrl}
-                                  class="hover:text-afghani-blue-45 transition-colors"
+                                  class="hover:text-secondary-afghani-blue-45 transition-colors"
                                   target="_blank"
                                 >
                                   <span class="whitespace-nowrap">
@@ -925,7 +927,7 @@ function getVenueString(pubInfo: PublicationType) {
                             </>
                           ))}
                         </p>
-                        <p class="text-black-35 text-sm">
+                        <p class="text-primary-black-35 text-sm">
                           {getVenueString(paper.publicationInfo)}
                         </p>
                       </div>
@@ -1039,7 +1041,7 @@ function getVenueString(pubInfo: PublicationType) {
                         )}
                       </div>
                     </div>
-                    <div class="abstract-content text-black-35 mt-4 text-sm">
+                    <div class="abstract-content text-primary-black-35 mt-4 text-sm">
                       {paper.abstract &&
                         paper.abstract
                           .split('\n\n')
@@ -1062,7 +1064,7 @@ function getVenueString(pubInfo: PublicationType) {
   @reference "./../styles/base.css";
 
   .btn-action {
-    @apply hover:bg-black-95 hover:text-black-45 text-black-55 rounded-full p-2 transition;
+    @apply hover:bg-primary-black-95 hover:text-primary-black-45 text-primary-black-55 rounded-full p-2 transition;
     padding: 0.5rem;
     border-radius: 9999px;
     transition: all 0.3s ease;

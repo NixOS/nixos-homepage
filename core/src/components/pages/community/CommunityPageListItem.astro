@@ -23,11 +23,14 @@ const effectiveType =
 
 <li
   class:list={[
-    'border-afghani-blue hover:bg-afghani-blue-95 flex-1 cursor-pointer rounded-xl border-2 bg-white p-4 transition-all',
+    'border-secondary-afghani-blue hover:bg-secondary-afghani-blue-95 bg-primary-white flex-1 cursor-pointer rounded-xl border-2 p-4 transition-all',
     effectiveType === 'icon' && 'flex flex-col items-center justify-center',
   ]}
 >
-  <a href={href} class="text-afghani-blue! flex h-full flex-col no-underline!">
+  <a
+    href={href}
+    class="text-secondary-afghani-blue! flex h-full flex-col no-underline!"
+  >
     <div
       class:list={[
         'flex gap-2 text-xl font-bold',

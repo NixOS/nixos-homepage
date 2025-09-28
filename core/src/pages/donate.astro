@@ -17,7 +17,7 @@ const sponsors = await getEntry('sponsors', 'info');
   <PageHeader text="Donate" />
 
   <Container class="grid px-12 pt-16">
-    <p class="text-black-55 text-xl font-bold">
+    <p class="text-primary-black-55 text-xl font-bold">
       The NixOS infrastructure, development and events are funded by its users
       and sponsors.
     </p>
@@ -46,7 +46,9 @@ const sponsors = await getEntry('sponsors', 'info');
     </div>
   </Container>
   <Divider style="slope" mirrorX mirrorY />
-  <div class="bg-afghani-blue-45 py-16 text-white md:px-12 md:py-16">
+  <div
+    class="bg-secondary-afghani-blue-45 text-primary-white py-16 md:px-12 md:py-16"
+  >
     <Container class="grid gap-8 md:grid-cols-2 md:px-12">
       <div class="flex flex-col gap-4">
         <img src="/images/donate/merch.svg" class="h-64 md:h-full" />
@@ -73,7 +75,9 @@ const sponsors = await getEntry('sponsors', 'info');
   <Divider style="slope" mirrorX />
   <Container class="grid gap-8 px-12 py-16 md:grid-cols-2">
     <div class="flex flex-col gap-4">
-      <h2 class="font-heading text-afghani-blue pb-2 text-3xl font-bold">
+      <h2
+        class="font-heading text-secondary-afghani-blue pb-2 text-3xl font-bold"
+      >
         Donate using Open Collective
       </h2>
       <p class="leading-relaxed font-extralight">
@@ -99,7 +103,7 @@ const sponsors = await getEntry('sponsors', 'info');
       </div>
     </div>
     <div class="flex flex-col justify-center gap-4">
-      <h2 class="text-afghani-blue pb-2 text-3xl font-bold">
+      <h2 class="text-secondary-afghani-blue pb-2 text-3xl font-bold">
         Donate with SEPA bank transfer
       </h2>
       <p class="font-extralight">
@@ -107,7 +111,7 @@ const sponsors = await getEntry('sponsors', 'info');
         Please send payments to:
       </p>
       <pre
-        class="bg-afghani-blue-95 text-afghani-blue-15 rounded-3xl p-8 font-mono font-bold whitespace-pre-line">
+        class="bg-secondary-afghani-blue-95 text-secondary-afghani-blue-15 rounded-3xl p-8 font-mono font-bold whitespace-pre-line">
 Stichting NixOS Foundation, Utrecht, The Netherlands
 
 IBAN: NL13 BUNQ 2061 2530 32
@@ -125,7 +129,7 @@ BIC:  BUNQNL2AXXX</pre>
     </div>
   </Container>
   <Divider style="slope" mirrorY />
-  <div class="bg-afghani-blue-45 py-16 text-white">
+  <div class="bg-secondary-afghani-blue-45 text-primary-white py-16">
     <Container class="grid gap-8 px-12 md:grid-cols-2">
       <div class="flex flex-col justify-center">
         <div
@@ -149,33 +153,39 @@ BIC:  BUNQNL2AXXX</pre>
         </h2>
         <p class="font-extralight">
           The Nix package manager was developed by
-          <a href="https://edolstra.github.io/" class="text-white!"
+          <a href="https://edolstra.github.io/" class="text-primary-white!"
             >Eelco Dolstra</a
           >
           as part of his PhD research in the
-          <a href="https://www.nwo.nl/en/projects/638001201" class="text-white!"
-            >TraCE project</a
+          <a
+            href="https://www.nwo.nl/en/projects/638001201"
+            class="text-primary-white!">TraCE project</a
           >, funded by the
-          <a href="http://www.jacquard.nl/" class="text-white!"
+          <a href="http://www.jacquard.nl/" class="text-primary-white!"
             >Jacquard programme</a
           >
           of the
-          <a href="http://www.nwo.nl/" class="text-white!"
+          <a href="http://www.nwo.nl/" class="text-primary-white!"
             >Netherlands Organisation for Scientific Research</a
           >
           (NWO) and SERC. The first prototype of NixOS was developed by
-          <a href="http://www.tjaldur.nl/" class="text-white!">Armijn Hemel</a>
+          <a href="http://www.tjaldur.nl/" class="text-primary-white!"
+            >Armijn Hemel</a
+          >
           as his master’s thesis project. Hydra, the Nix-based continuous build system,
           was developed as part of the LaQuSo Buildfarm project, funded by
-          <a href="https://www.4tu.nl/nirict/" class="text-white!">NIRICT</a>
+          <a href="https://www.4tu.nl/nirict/" class="text-primary-white!"
+            >NIRICT</a
+          >
           and
-          <a href="http://www.laquso.com/" class="text-white!">LaQuSo</a>.
+          <a href="http://www.laquso.com/" class="text-primary-white!">LaQuSo</a
+          >.
         </p>
         <p class="font-light">
           The following companies and institutes have supported the development
           of NixOS and hosting for its infrastructure. We are very grateful for
           that! If you would like to support us as well, please contact
-          <a href="mailto:foundation@nixos.org" class="text-white!"
+          <a href="mailto:foundation@nixos.org" class="text-primary-white!"
             >The NixOS Foundation</a
           >.
         </p>

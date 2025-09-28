@@ -37,15 +37,16 @@ export function getNixosLogosUrlUniversal(theme, prefix) {
         logo:
           prefix +
           assetPath +
-          'nixos-logo-black-flat-black-regular-horizontal-none.svg',
-        logomark: prefix + assetPath + 'nixos-logomark-black-flat-none.svg',
+          'nixos-logo-primary-black-flat-primary-black-regular-horizontal-none.svg',
+        logomark:
+          prefix + assetPath + 'nixos-logomark-primary-black-flat-none.svg',
       };
     case 'pride':
       return {
         logo:
           prefix +
           assetPath +
-          'nixos-logo-rainbow-gradient-black-regular-horizontal-none.svg',
+          'nixos-logo-rainbow-gradient-primary-black-regular-horizontal-none.svg',
         logomark:
           prefix + assetPath + 'nixos-logomark-rainbow-gradient-none.svg',
       };

@@ -70,9 +70,9 @@ const uid = crypto.randomUUID();
       panel.classList.add('panel-visible');
 
       Array.from(this.parentNode.parentNode.children).forEach((tab) =>
-        tab.classList.remove('bg-white'),
+        tab.classList.remove('bg-primary-white'),
       );
-      this.parentNode.classList.add('bg-white');
+      this.parentNode.classList.add('bg-primary-white');
     });
   });
 
@@ -84,7 +84,7 @@ const uid = crypto.randomUUID();
   // style the background of the first tab
   document
     .querySelectorAll('.tab-bar .tab-wrapper:first-child')
-    .forEach((tab) => tab.classList.add('bg-white'));
+    .forEach((tab) => tab.classList.add('bg-primary-white'));
 </script>
 
 <div
@@ -96,7 +96,7 @@ const uid = crypto.randomUUID();
   <Container class="grid w-full gap-8 px-12 pt-8 lg:grid-cols-[30%_auto]">
     <nav class:list={['tab-bar']}>
       <Container
-        class="bg-afghani-blue-95 grid gap-0 rounded-3xl px-0! py-8 md:grid-cols-1"
+        class="bg-secondary-afghani-blue-95 grid gap-0 rounded-3xl px-0! py-8 md:grid-cols-1"
       >
         {
           tabs.map(async (name, idx) => {
@@ -125,10 +125,10 @@ const uid = crypto.randomUUID();
                   <label
                     class:list={[
                       'tab',
-                      'text-afghani-blue-75',
+                      'text-secondary-afghani-blue-75',
                       'text-lg',
                       'font-bold',
-                      'peer-checked:text-afghani-blue',
+                      'peer-checked:text-secondary-afghani-blue',
                       'py-12',
                       'px-8',
                       'w-full',

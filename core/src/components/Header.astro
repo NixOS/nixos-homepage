@@ -13,14 +13,14 @@ const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
-const navbarItemStyle = `text-center text-afghani-blue-45 md:text-black md:hover:border-b-afghani-blue-65 border-b-4`;
-const navbarItemInactiveStyle = `border-b-afghani-blue-95 md:border-b-transparent bg-afghani-blue-95 md:bg-transparent`;
-const navbarItemActiveStyle = `border-b-afghani-blue-45 bg-afghani-blue-65 text-white md:text-black md:bg-transparent font-bold`;
+const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-black md:hover:border-b-secondary-afghani-blue-65 border-b-4`;
+const navbarItemInactiveStyle = `border-b-secondary-afghani-blue-95 md:border-b-transparent bg-secondary-afghani-blue-95 md:bg-transparent`;
+const navbarItemActiveStyle = `border-b-secondary-afghani-blue-45 bg-secondary-afghani-blue-65 text-primary-white md:text-primary-black md:bg-transparent font-bold`;
 ---
 
 <header
   role="banner"
-  class="sticky top-0 z-50 bg-white font-extralight text-black drop-shadow-md"
+  class="text-primary-black bg-primary-white sticky top-0 z-50 font-extralight drop-shadow-md"
 >
   {
     currentBanner && (
@@ -61,12 +61,12 @@ const navbarItemActiveStyle = `border-b-afghani-blue-45 bg-afghani-blue-65 text-
 
       <button
         aria-label="Main Navigation Toggle"
-        class="bg-afghani-blue block rounded-lg p-4 md:hidden"
+        class="bg-secondary-afghani-blue block rounded-lg p-4 md:hidden"
         id="navigation-toggle"
       >
-        <span class="mb-1.5 block h-1 w-8 bg-white"></span>
-        <span class="mb-1.5 block h-1 w-8 bg-white"></span>
-        <span class="block h-1 w-8 bg-white"></span>
+        <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
+        <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
+        <span class="bg-primary-white block h-1 w-8"></span>
       </button>
     </div>
 
@@ -99,7 +99,7 @@ const navbarItemActiveStyle = `border-b-afghani-blue-45 bg-afghani-blue-65 text-
         target="_self"
       >
         <Icon
-          class="text-afghani-blue hidden h-8 w-8 md:block"
+          class="text-secondary-afghani-blue hidden h-8 w-8 md:block"
           name="mdi:search"
         />
         <span class="inline-block md:hidden">Search</span>

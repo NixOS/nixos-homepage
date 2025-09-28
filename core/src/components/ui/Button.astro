@@ -9,15 +9,19 @@ export const buttonVariants = cva('font-bold transition-colors text-center', {
   variants: {
     color: {
       orange:
-        'border-persian-orange border-3 text-black hover:bg-persian-orange',
+        'border-accent-persian-orange border-3 text-primary-black hover:bg-persian-orange',
       lightblue:
-        'border-afghani-blue border-3 hover:bg-afghani-blue text-black',
-      semidarkblue: 'bg-afghani-blue-45 hover:bg-afghani-blue-25 text-white',
+        'border-secondary-afghani-blue border-3 hover:bg-secondary-afghani-blue text-primary-black',
+      semidarkblue:
+        'bg-secondary-afghani-blue-45 hover:bg-secondary-afghani-blue-25 text-primary-white',
       green:
-        'border-zambian-green border-3 text-black hover:bg-zambian-green hover:bg-opacity-25',
-      'white-borders': 'border-3 border-white text-white hover:bg-afghani-blue',
-      white: 'bg-white hover:bg-afghani-blue-85 !text-afghani-blue-45',
-      nixblue: 'bg-afghani-blue hover:bg-afghani-blue-45 text-white',
+        'border-accent-zambian-green border-3 text-primary-black hover:bg-accent-zambian-green hover:bg-opacity-25',
+      'white-borders':
+        'border-3 border-primary-white text-primary-white hover:bg-secondary-afghani-blue',
+      white:
+        'bg-primary-white hover:bg-secondary-afghani-blue-85 !text-secondary-afghani-blue-45',
+      nixblue:
+        'bg-secondary-afghani-blue hover:bg-secondary-afghani-blue-45 text-primary-white',
     },
     size: {
       sm: 'px-10 py-2.5 rounded-3xl',

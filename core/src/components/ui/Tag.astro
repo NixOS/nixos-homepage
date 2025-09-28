@@ -16,15 +16,17 @@ const {
 const colorMap = {
   orange: outline ? 'bg-transparent border-nix-orange' : 'bg-nix-orange',
   lightblue: outline
-    ? 'bg-transparent border-afghani-blue-75'
-    : 'bg-afghani-blue-75',
-  darkblue: outline ? 'bg-transparent border-afghani-blue' : 'bg-afghani-blue',
+    ? 'bg-transparent border-secondary-afghani-blue-75'
+    : 'bg-secondary-afghani-blue-75',
+  darkblue: outline
+    ? 'bg-transparent border-secondary-afghani-blue'
+    : 'bg-secondary-afghani-blue',
   darkgreen: outline
-    ? 'bg-transparent border-zambian-green-45'
-    : 'bg-zambian-green-45',
+    ? 'bg-transparent border-accent-zambian-green-45'
+    : 'bg-accent-zambian-green-45',
 };
 
-const localClassList = `${colorMap[color]} ${outline ? 'border-1 text-black! py-[0.125rem]' : 'border-0 text-white! py-[0.25rem]'} inline-block w-fit rounded-lg font-bold no-underline! text-sm px-[0.5rem]`;
+const localClassList = `${colorMap[color]} ${outline ? 'border-1 text-primary-black! py-[0.125rem]' : 'border-0 text-primary-white! py-[0.25rem]'} inline-block w-fit rounded-lg font-bold no-underline! text-sm px-[0.5rem]`;
 ---
 
 {

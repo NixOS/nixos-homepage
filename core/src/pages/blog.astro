@@ -54,7 +54,7 @@ const blogMenu = await getEntry('menus', 'blog');
 <Layout title="Blog">
   <PageHeader text="Blog" />
   <Container class="py-8">
-    <p class="text-afghani-blue mb-2 text-center text-2xl font-light">
+    <p class="text-secondary-afghani-blue mb-2 text-center text-2xl font-light">
       Click boxes to filter content
     </p>
     <div
@@ -76,14 +76,14 @@ const blogMenu = await getEntry('menus', 'blog');
               />
               <label
                 for={`check-${e.id}`}
-                class="border-afghani-blue-35 fill-afghani-blue-35 text-afghani-blue-45 before:icon-[mdi--checkbox-blank-outline] peer-checked:before:icon-[mdi--checkbox-marked-outline] hover:bg-afghani-blue-35 peer-checked:bg-afghani-blue-45 peer-checked:hover:border-afghani-blue-15 peer-checked:hover:bg-afghani-blue-15 relative flex w-full cursor-pointer items-center gap-2 rounded-2xl border-1 p-4 peer-checked:fill-white peer-checked:text-white peer-focus:ring-2 peer-focus:ring-black peer-focus:ring-offset-2 before:absolute before:right-4 before:block before:h-8 before:w-8 peer-checked:before:absolute peer-checked:before:block peer-checked:before:h-8 peer-checked:before:w-8 hover:fill-white hover:text-white md:w-auto md:flex-col md:p-8 md:before:top-2 md:before:right-2"
+                class="border-secondary-afghani-blue-35 fill-secondary-afghani-blue-35 text-secondary-afghani-blue-45 before:icon-[mdi--checkbox-blank-outline] peer-checked:before:icon-[mdi--checkbox-marked-outline] hover:bg-secondary-afghani-blue-35 peer-checked:bg-secondary-afghani-blue-45 peer-checked:hover:border-secondary-afghani-blue-15 peer-checked:hover:bg-secondary-afghani-blue-15 peer-focus:ring-primary-black peer-checked:fill-primary-white peer-checked:text-primary-white hover:fill-primary-white hover:text-primary-white relative flex w-full cursor-pointer items-center gap-2 rounded-2xl border-1 p-4 peer-focus:ring-2 peer-focus:ring-offset-2 before:absolute before:right-4 before:block before:h-8 before:w-8 peer-checked:before:absolute peer-checked:before:block peer-checked:before:h-8 peer-checked:before:w-8 md:w-auto md:flex-col md:p-8 md:before:top-2 md:before:right-2"
               >
                 <InlineSVG src={e.icon} class="w-12 md:w-24" />
                 <span class="font-light">{e.title}</span>
               </label>
             </div>
             <div class="pt-6 md:hidden">
-              <label class="border-afghani-blue fill-afghani-blue text-afghani-blue hover:bg-afghani-blue-15 peer-checked:bg-afghani-blue peer-checked:hover:border-afghani-blue-15 peer-checked:hover:bg-afghani-blue-15 relative flex w-full cursor-pointer items-center gap-2 rounded-2xl border-1 p-4 peer-checked:fill-white peer-checked:text-white peer-focus:ring-2 peer-focus:ring-black peer-focus:ring-offset-2 hover:fill-white hover:text-white md:w-auto md:flex-col md:p-8">
+              <label class="border-secondary-afghani-blue fill-secondary-afghani-blue text-secondary-afghani-blue hover:bg-secondary-afghani-blue-15 peer-checked:bg-secondary-afghani-blue peer-checked:hover:border-secondary-afghani-blue-15 peer-checked:hover:bg-secondary-afghani-blue-15 peer-focus:ring-primary-black hover:text-primary-white peer-checked:fill-primary-white relative flex w-full cursor-pointer items-center gap-2 rounded-2xl border-1 p-4 peer-checked:text-white peer-focus:ring-2 peer-focus:ring-offset-2 hover:fill-white md:w-auto md:flex-col md:p-8">
                 <a href={'/blog/' + e.id + '-rss.xml'}>
                   <InlineSVG
                     src="/src/assets/image/blog-menu/rss.svg"
