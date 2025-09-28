@@ -5,31 +5,7 @@ import path from 'node:path';
 import parser from 'node-html-parser';
 import svgo from 'svgo';
 import defaultTheme from 'tailwindcss/defaultTheme';
-
-import nixColors from '../colors.json';
-
-const nixColorsNew = [
-  nixColors.palette.accent,
-  nixColors.palette.primary,
-  nixColors.palette.secondary,
-]
-  .flat()
-  // convert to "name":  { DEFAULT: "#hex" } format
-  .reduce((acc, color) => {
-    const name = color.name.replace(/ /g, '-').toLowerCase();
-    acc[name] = {
-      DEFAULT: `oklch(${color.value[0]} ${color.value[1]} ${color.value[2]})`,
-      ...Object.fromEntries(
-        Object.entries(color.tints).map(([k, v]) => [
-          k.slice(1), // remove the leading `-`
-          `oklch(${v[0]} ${v[1]} ${v[2]})`,
-        ]),
-      ),
-    };
-    return acc;
-  }, {});
-
-console.log(nixColorsNew);
+import colors from '@NixOS/branding/colors/tailwind.js';
 
 const inlineSvgs = {
   hero: './src/assets/image/hero-bg.svg',
@@ -82,7 +58,7 @@ module.exports = {
       heading: ['Overpass Variable', ...defaultTheme.fontFamily.sans],
       mono: ['Fira Code Variable', ...defaultTheme.fontFamily.mono],
     },
-    colors: nixColorsNew,
+    colors: colors,
     boxShadow: shadow,
     dropShadow: shadow,
     extend: {

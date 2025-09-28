@@ -221,9 +221,9 @@ rec {
               export THEME="${builtins.getEnv "THEME"}"
               export BANNER="${builtins.getEnv "BANNER"}"
 
-              ${pkgs.toml2json}/bin/toml2json --pretty \
-                ${branding.hydraJobs.nixos-branding-all.${system}.nixos-color-palette}/colors.toml \
-                > colors.json
+              cp -R --no-preserve=mode,ownership ${
+                branding.hydraJobs.nixos-branding.${system}.npm-package
+              } ./branding
 
               npm run build --workspace core
             '';
@@ -312,13 +312,13 @@ rec {
               export PATH_PILLS="${pills}"
               export PATH_DEMOS="${demos}"
 
+              cp -R --no-preserve=mode,ownership ${
+                branding.hydraJobs.nixos-branding.${system}.npm-package
+              } ./branding
+
               if [ ! -d node_modules ]; then
                 ${nodejs_current}/bin/npm install --workspaces --include-workspace-root
               fi
-
-              ${pkgs.toml2json}/bin/toml2json --pretty \
-                ${branding.hydraJobs.nixos-branding-all.${system}.nixos-color-palette}/colors.toml \
-                > colors.json
 
               cat >&2 << EOF
               To fetch all dependencies:
