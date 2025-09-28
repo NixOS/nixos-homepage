@@ -7,8 +7,6 @@ import svgo from 'svgo';
 import defaultTheme from 'tailwindcss/defaultTheme';
 import colors from '@NixOS/branding/colors/tailwind.js';
 
-console.log(colors);
-
 const inlineSvgs = {
   hero: './src/assets/image/hero-bg.svg',
   'landing-search-top': './src/assets/image/divider/landing_search_top.svg',
