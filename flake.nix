@@ -322,6 +322,8 @@ rec {
                 ${nodejs_current}/bin/npm install --workspaces --include-workspace-root
               fi
 
+              npm install ${branding.hydraJobs.nixos-branding.${system}.npm-package} --no-save --no-package-lock
+
               cat >&2 << EOF
               To fetch all dependencies:
                   npm install --workspaces --include-workspace-root
