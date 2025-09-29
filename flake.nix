@@ -201,38 +201,49 @@ rec {
                   sed -i -e "s|<nixpkgs|\&lt;nixpkgs|g" $scenarioFileName.svg
                 done
               '';
-          core = pkgs.buildNpmPackage {
-            pname = "nixos-homepage-core";
-            version = "0.0.0";
+          core =
+            let
+              src = pkgs.runCommand "merged-src" { } ''
+                mkdir -p $out/branding
 
-            src = ./.;
+                cp -r ${./.}/* $out/
+                cp -r ${branding.hydraJobs.nixos-branding.${system}.npm-package}/* $out/branding/
 
-            npmDeps = pkgs.importNpmLock {
-              npmRoot = ./.;
+                ls -la $out/branding
+              '';
+            in
+            pkgs.buildNpmPackage {
+              pname = "nixos-homepage-core";
+              version = "0.0.0";
+
+              src = src;
+
+              npmDeps = pkgs.importNpmLock {
+                npmRoot = src;
+              };
+
+              npmConfigHook = pkgs.importNpmLock.npmConfigHook;
+
+              # cp -r --no-preserve=mode,ownership ${
+              # branding.hydraJobs.nixos-branding.${system}.npm-package
+              # } branding
+
+              buildPhase = ''
+                export NIX_STABLE_VERSION="${NIX_STABLE_VERSION}"
+                export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
+                export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
+                export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
+                export THEME="${builtins.getEnv "THEME"}"
+                export BANNER="${builtins.getEnv "BANNER"}"
+
+                npm run build --workspace core
+              '';
+
+              installPhase = ''
+                mkdir -p $out
+                cp -r ./core/dist/* $out
+              '';
             };
-
-            npmConfigHook = pkgs.importNpmLock.npmConfigHook;
-
-            buildPhase = ''
-              export NIX_STABLE_VERSION="${NIX_STABLE_VERSION}"
-              export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
-              export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
-              export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
-              export THEME="${builtins.getEnv "THEME"}"
-              export BANNER="${builtins.getEnv "BANNER"}"
-
-              cp -R --no-preserve=mode,ownership ${
-                branding.hydraJobs.nixos-branding.${system}.npm-package
-              } ./branding
-
-              npm run build --workspace core
-            '';
-
-            installPhase = ''
-              mkdir -p $out
-              cp -r ./core/dist/* $out
-            '';
-          };
         in
         {
           packages.manuals = manuals;
