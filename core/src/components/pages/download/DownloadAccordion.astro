@@ -26,11 +26,11 @@ let downloadOptions = (await getCollection('download'))
                 aria-expanded="true"
                 aria-controls={optionId}
                 class:list={[
-                  'bg-nix-blue-extralight',
+                  'bg-secondary-afghani-blue-95',
                   'flex',
-                  'text-nix-blue-dark',
-                  'hover:bg-nix-blue-lighter',
-                  'hover:text-nix-blue-darker',
+                  'text-secondary-afghani-blue-25',
+                  'hover:bg-secondary-afghani-blue-85',
+                  'hover:text-secondary-afghani-blue-15',
                   'cursor-pointer',
                   'text-lg',
                   'font-bold',
@@ -86,7 +86,7 @@ let downloadOptions = (await getCollection('download'))
   const accContentArea = acc.appendChild(document.createElement('div'));
   accContentArea.classList.add('col-span-2', 'mt-4', 'px-8');
   menuContainer.classList.add(
-    'md:bg-nix-blue-extralight',
+    'md:bg-secondary-afghani-blue-95',
     'md:py-8',
     'md:rounded-2xl',
     'self-start',
@@ -177,10 +177,10 @@ let downloadOptions = (await getCollection('download'))
     triggers[i].addEventListener('click', togglePanel);
     triggers[i].classList.add(
       'md:my-0',
-      'md:text-nix-blue',
+      'md:text-secondary-afghani-blue',
       'md:rounded-none',
-      'md:aria-expanded:bg-white',
-      'md:aria-expanded:text-nix-blue-dark',
+      'md:aria-expanded:bg-primary-white',
+      'md:aria-expanded:text-secondary-afghani-blue-45',
       'before:icon-[mdi--arrow-up-drop-circle]',
       'before:block',
       'before:absolute',

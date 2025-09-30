@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/NixOS/nixos-homepage#readme",
   "workspaces": [
-    "core"
+    "core",
+    "@NixOS/branding"
   ],
   "devDependencies": {
     "@eslint/js": "^9.36.0",
@@ -38,6 +39,7 @@
     "typescript-eslint": "^8.44.1"
   },
   "dependencies": {
-    "chalk": "^5.6.2"
+    "chalk": "^5.6.2",
+    "folder": "^0.0.4"
   }
 }

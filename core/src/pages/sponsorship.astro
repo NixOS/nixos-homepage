@@ -21,20 +21,20 @@ const tiers = await getEntry('sponsors', 'tiers');
   <Container class="my-4 grid gap-4 md:grid-cols-3">
     {
       tiers.data.map((tier) => (
-        <div class="bg-nix-blue-lighter flex flex-col justify-between rounded-b-xl">
+        <div class="bg-secondary-afghani-blue-95 flex flex-col justify-between rounded-b-xl">
           <div class="flex-1">
-            <h2 class="bg-nix-blue-dark flex items-center justify-between rounded-t-xl p-2 text-lg font-bold text-white">
+            <h2 class="bg-secondary-afghani-blue-45 text-primary-white flex items-center justify-between rounded-t-xl p-2 text-lg font-bold">
               {tier.name}{' '}
-              <span class="bg-nix-blue-darker rounded-xl px-2 py-1 text-base">
+              <span class="bg-secondary-afghani-blue-15 rounded-xl px-2 py-1 text-base">
                 {tier.contribution}
               </span>
             </h2>
             <ul class="py-1">
               {tier.benefits.map((benefit) => (
-                <li class="border-b-nix-blue-light-hover inline-flex w-full items-center gap-2 border-b-1 p-2 last:border-b-0">
+                <li class="border-b-secondary-afghani-blue-45 inline-flex w-full items-center gap-2 border-b-1 p-2 last:border-b-0">
                   <Icon
                     name={benefit.icon}
-                    class="text-nix-blue-dark min-h-5 min-w-5"
+                    class="text-secondary-afghani-blue-45 min-h-5 min-w-5"
                   />{' '}
                   {benefit.description}
                 </li>
@@ -42,7 +42,7 @@ const tiers = await getEntry('sponsors', 'tiers');
             </ul>
           </div>
           {tier.requirements && (
-            <p class="bg-nix-blue-darker px-2 py-1 text-sm text-white">
+            <p class="bg-secondary-afghani-blue-35 text-primary-white px-2 py-1 text-sm">
               {tier.requirements}
             </p>
           )}

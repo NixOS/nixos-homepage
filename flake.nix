@@ -14,6 +14,9 @@ rec {
     released-nix-stable.url = "github:nixos/nix/latest-release";
     nix-pills.url = "github:NixOS/nix-pills";
     nix-pills.flake = false;
+
+    # NixOS branding
+    branding.url = "github:NixOS/branding";
   };
 
   nixConfig = {
@@ -32,6 +35,7 @@ rec {
       self,
       flake-parts,
       git-hooks-nix,
+      branding,
       nixpkgs,
       released-nixpkgs-unstable,
       released-nixpkgs-stable,
@@ -209,6 +213,8 @@ rec {
 
             npmConfigHook = pkgs.importNpmLock.npmConfigHook;
 
+            makeCacheWritable = true;
+
             buildPhase = ''
               export NIX_STABLE_VERSION="${NIX_STABLE_VERSION}"
               export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
@@ -216,6 +222,10 @@ rec {
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
               export THEME="${builtins.getEnv "THEME"}"
               export BANNER="${builtins.getEnv "BANNER"}"
+
+              # install the branding package locally while
+              # workspace is not working
+              npm install file:${branding.hydraJobs.nixos-branding.${system}.npm-package}
 
               npm run build --workspace core
             '';
@@ -303,6 +313,10 @@ rec {
               export PATH_MANUAL="${manuals}"
               export PATH_PILLS="${pills}"
               export PATH_DEMOS="${demos}"
+
+              cp -R --no-preserve=mode,ownership ${
+                branding.hydraJobs.nixos-branding.${system}.npm-package
+              } ./branding
 
               if [ ! -d node_modules ]; then
                 ${nodejs_current}/bin/npm install --workspaces --include-workspace-root

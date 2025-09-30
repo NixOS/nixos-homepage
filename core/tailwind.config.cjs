@@ -4,8 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import parser from 'node-html-parser';
 import svgo from 'svgo';
-import colors from 'tailwindcss/colors';
 import defaultTheme from 'tailwindcss/defaultTheme';
+import colors from '@NixOS/branding/colors/tailwind.js';
 
 const inlineSvgs = {
   hero: './src/assets/image/hero-bg.svg',
@@ -58,39 +58,7 @@ module.exports = {
       heading: ['Overpass Variable', ...defaultTheme.fontFamily.sans],
       mono: ['Fira Code Variable', ...defaultTheme.fontFamily.mono],
     },
-    colors: {
-      'nix-blue': {
-        extralight: '#f2f8fd', // nixlighterblue
-        lighter: '#e6ecf5', // nixlighterblue-dimmed
-        light: '#7ebae4', // nixlightblue
-        'light-transparent': '#7ebae433',
-        'light-hover': '#69a6d1',
-        DEFAULT: '#5277c3', // nixdarkblue
-        transparent: '#e6ecf533',
-        hover: '#466cb9',
-        dark: '#405D99', // nixsemidarkblue
-        'dark-hover': '#4e73bc',
-        darker: '#27385d', // nixdarkerblue
-      },
-      'nix-orange': {
-        lighter: '#fff5e1', // nixlightorange
-        DEFAULT: '#ffab0d', // nixorange
-        transparent: '#ffab0d33',
-        hover: '#ec9d0c',
-        dark: '#ff8657', // nixdarkorange
-        darker: '#cc3900', // nixdarkerorange
-      },
-      'nix-green': {
-        DEFAULT: '#6ad541', // nixgreen
-        transparent: '#6ad54133',
-        hover: '#64c53d',
-        dark: '#51ba29', // nixdarkgreen
-      },
-      gray: colors.gray,
-      white: colors.white,
-      black: colors.black,
-      transparent: colors.transparent,
-    },
+    colors: colors,
     boxShadow: shadow,
     dropShadow: shadow,
     extend: {
