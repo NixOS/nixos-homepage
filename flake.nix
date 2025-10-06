@@ -215,6 +215,13 @@ rec {
 
             makeCacheWritable = true;
 
+            preConfigure = ''
+              mkdir -p @NixOS/branding
+              cp -R --no-preserve=mode,ownership ${
+                branding.hydraJobs.nixos-branding.${system}.npm-package
+              }/* ./@NixOS/branding
+            '';
+
             buildPhase = ''
               export NIX_STABLE_VERSION="${NIX_STABLE_VERSION}"
               export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
@@ -222,10 +229,6 @@ rec {
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
               export THEME="${builtins.getEnv "THEME"}"
               export BANNER="${builtins.getEnv "BANNER"}"
-
-              # install the branding package locally while
-              # workspace is not working
-              npm install file:${branding.hydraJobs.nixos-branding.${system}.npm-package}
 
               npm run build --workspace core
             '';
@@ -314,15 +317,17 @@ rec {
               export PATH_PILLS="${pills}"
               export PATH_DEMOS="${demos}"
 
+              if [ -d @NixOS/branding ]; then
+                rm -rf @NixOS/branding
+              fi
+              mkdir -p @NixOS/branding
               cp -R --no-preserve=mode,ownership ${
                 branding.hydraJobs.nixos-branding.${system}.npm-package
-              } ./branding
+              }/* ./@NixOS/branding
 
               if [ ! -d node_modules ]; then
                 ${nodejs_current}/bin/npm install --workspaces --include-workspace-root
               fi
-
-              npm install ${branding.hydraJobs.nixos-branding.${system}.npm-package} --no-save --no-package-lock
 
               cat >&2 << EOF
               To fetch all dependencies:

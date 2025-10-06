@@ -16,11 +16,11 @@ function selectFavicon(theme = 'default') {
   switch (theme) {
     case 'pride':
       return require.resolve(
-        `@NixOS/branding/artifacts/internal/nixos-logomark-rainbow-gradient-none.svg`,
+        `${process.env.npm_config_local_prefix}/@NixOS/branding/artifacts/internal/nixos-logomark-rainbow-gradient-none.svg`,
       );
     default:
       return require.resolve(
-        `@NixOS/branding/artifacts/internal/nixos-logomark-default-gradient-none.svg`,
+        `${process.env.npm_config_local_prefix}/@NixOS/branding/artifacts/internal/nixos-logomark-default-gradient-none.svg`,
       );
   }
 }
