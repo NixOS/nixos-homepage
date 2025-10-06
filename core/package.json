@@ -19,9 +19,9 @@
     "@fontsource-variable/fira-code": "^5.2.7",
     "@fontsource-variable/overpass": "^5.2.8",
     "@fontsource-variable/roboto-flex": "^5.2.8",
-    "@tailwindcss/vite": "^4.1.13",
+    "@tailwindcss/vite": "^4.1.14",
     "@xmldom/xmldom": "^0.9.8",
-    "asciinema-player": "^3.10.0",
+    "asciinema-player": "^3.11.0",
     "astro": "^5.14.1",
     "astro-favicons": "^3.1.5",
     "astro-icon": "^1.1.5",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.53",
+    "@iconify-json/simple-icons": "^1.2.54",
     "@iconify/tailwind": "^1.2.0"
   }
 }
