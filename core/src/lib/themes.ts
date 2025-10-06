@@ -2,7 +2,7 @@ import logoDefault from '@NixOS/branding/artifacts/internal/nixos-logo-default-g
 import logoRainbow from '@NixOS/branding/artifacts/internal/nixos-logo-rainbow-gradient-black-regular-horizontal-none.svg';
 import { THEME } from 'astro:env/client';
 
-export function getNixosLogoUrl(style) {
+export function getNixosLogoUrl() {
   switch (THEME) {
     case 'pride':
       return logoRainbow;

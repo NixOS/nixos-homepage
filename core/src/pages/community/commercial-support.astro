@@ -29,10 +29,10 @@ function shuffleArray(array) {
 <Layout title="Community">
   <PageHeader text="Commercial support" />
   <Container>
-    <p class="text-primary-black-45 text-center text-xl font-bold">
+    <p class="mt-8 text-center text-xl font-bold">
       Consulting companies are available for professional support.
     </p>
-    <p class="mt-2 text-center">
+    <p class="mt-2 mb-8 text-center">
       Please <a
         href="https://github.com/NixOS/nixos-homepage/edit/main/core/src/content/community/commercial-support.yaml"
         >submit a pull request</a
@@ -41,17 +41,24 @@ function shuffleArray(array) {
     <ul id="company-list" class="invisible m-4 flex flex-row flex-wrap gap-4">
       {
         shuffleArray(companies.data).map((company) => (
-          <li class="border-secondary-afghani-blue text-secondary-afghani-blue grow basis-72 rounded-xl border p-4 font-light xl:basis-80">
-            <a href={company.href} class="space-y-4 no-underline!">
+          <li class="bg-secondary-afghani-blue-95 grow basis-72 rounded-2xl p-4 font-light xl:basis-80">
+            <a
+              href={company.href}
+              class="text-primary-black! space-y-4 no-underline!"
+            >
               <img
                 src={company.logo}
                 alt={company.name + ' logo'}
-                class="mx-auto h-80 object-contain"
+                class="bg-trans-white mx-auto h-80 rounded-2xl object-contain p-8"
               />
-              <h3 class="text-4xl font-bold">{company.name}</h3>
-              <ul>
+              <h3 class="text-secondary-afghani-blue text-3xl leading-none font-bold">
+                {company.name}
+              </h3>
+              <ul class="flex flex-wrap gap-2">
                 {company.locations.map((location) => (
-                  <li class="list-inside list-disc">{location}</li>
+                  <li class="bg-secondary-afghani-blue-45 text-trans-white rounded-2xl px-3 py-0.5 font-bold">
+                    {location}
+                  </li>
                 ))}
               </ul>
               <p>{company.description}</p>
