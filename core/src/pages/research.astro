@@ -226,6 +226,32 @@ function validatePaper(paper: any): void {
 const papers: ReadonlyArray<Paper> = [
   {
     title:
+      'Verified Interpreters for Dynamic Languages with Applications to the Nix Expression Language',
+    authors: [
+      {
+        name: 'Rutger Broekhoff',
+        orcidUrl: 'https://orcid.org/0009-0009-3716-5638',
+      },
+      {
+        name: 'Robbert Krebbers',
+        orcidUrl: 'https://orcid.org/0000-0002-1185-5237',
+      },
+    ],
+    year: 2025,
+    abstract:
+      "To study the semantics of a programming language, it is useful to consider different specification forms—e.g., a substitution-based small-step operational semantics and an environment-based interpreter—because they have mutually exclusive benefits. Developing these specifications and proving correspondences is challenging for 'dynamic'/'scripting' languages such as JavaScript, PHP and Bash. We study this challenge in the context of the Nix expression language, a dynamic language used in the eponymous package manager and operating system. Nix is a Turing-complete, untyped functional language designed for the manipulation of JSON-style attribute sets, with tricky features such as overloaded use of variables for lambda bindings and attribute members, subtle shadowing rules, a mixture of evaluation strategies, and tricky mechanisms for recursion.\n\nWe show that our techniques are applicable beyond Nix by starting from the call-by-name lambda calculus, which we extend to a core lambda calculus with dynamically computed variable names and dynamic binder names, and finally to Nix. Our key novelty is the use of a form of deferred substitutions, which enables us to give a concise substitution-based semantics for dynamic variable binding. We develop corresponding environment-based interpreters, which we prove to be sound and complete (for terminating, faulty and diverging programs) w.r.t. our operational semantics based on deferred substitutions.\n\nWe mechanize all our results in the Rocq prover and showcase a new feature of the Rocq-std++ library for representing syntax with maps in recursive positions. We use Rocq's extraction mechanism to turn our Nix interpreter into executable OCaml code, which we apply to the official Nix language tests. Altogether this gives rise to the most comprehensive formal semantics for the Nix expression language to date.",
+    doiOrPublisherUrl: 'https://doi.org/10.1145/3747537',
+    publicationInfo: {
+      type: 'journal',
+      journal: 'ACM on Programming Languages',
+      volume: '9',
+      number: 'ICFP',
+      publisher: 'ACM',
+      pages: '268',
+    },
+  },
+  {
+    title:
       'Improving reproducibility of scientific software using Nix/NixOS: A case study on the preCICE ecosystem',
     authors: [
       {
@@ -875,10 +901,10 @@ function getVenueString(pubInfo: PublicationType) {
     </div>
   </Container>
   <Divider style="slope" mirrorX mirrorY />
-  <div class="bg-nix-blue py-16 text-white md:px-12 md:py-16">
-    <Container
-      class="bg-nix-blue mt-16 space-y-8 leading-relaxed font-extralight"
-    >
+  <div
+    class="bg-secondary-afghani-blue-45 text-primary-white py-16 md:px-12 md:py-16"
+  >
+    <Container class="mt-16 space-y-8 leading-relaxed font-extralight">
       <h1 class="font-heading text-4xl leading-tight font-bold">
         Scientific publications about Nix and associated projects
       </h1>
@@ -890,7 +916,7 @@ function getVenueString(pubInfo: PublicationType) {
               <h2 class="mb-6 text-2xl font-semibold">{year}</h2>
               <div class="space-y-6">
                 {papersByYear[year].map((paper) => (
-                  <article class="paper-entry rounded-lg bg-white p-6 shadow-sm transition hover:shadow-md">
+                  <article class="paper-entry bg-primary-white rounded-lg p-6 shadow-sm transition hover:shadow-md">
                     <input
                       type="checkbox"
                       id={getToggleAbstractId(paper)}
@@ -898,16 +924,16 @@ function getVenueString(pubInfo: PublicationType) {
                     />
                     <div class="content-container">
                       <div class="paper-info flex-1 space-y-2">
-                        <h3 class="max-w-[650px] text-lg font-medium text-gray-900">
+                        <h3 class="text-primary-black-15 max-w-[650px] text-lg font-medium">
                           {paper.title}
                         </h3>
-                        <p class="text-sm text-gray-700">
+                        <p class="text-primary-black-35 text-sm">
                           {paper.authors.map((a, i) => (
                             <>
                               {a.orcidUrl ? (
                                 <a
                                   href={a.orcidUrl}
-                                  class="transition-colors hover:text-blue-600"
+                                  class="hover:text-secondary-afghani-blue-45 transition-colors"
                                   target="_blank"
                                 >
                                   <span class="whitespace-nowrap">
@@ -925,7 +951,7 @@ function getVenueString(pubInfo: PublicationType) {
                             </>
                           ))}
                         </p>
-                        <p class="text-sm text-gray-700">
+                        <p class="text-primary-black-35 text-sm">
                           {getVenueString(paper.publicationInfo)}
                         </p>
                       </div>
@@ -1039,7 +1065,7 @@ function getVenueString(pubInfo: PublicationType) {
                         )}
                       </div>
                     </div>
-                    <div class="abstract-content mt-4 text-sm text-gray-700">
+                    <div class="abstract-content text-primary-black-35 mt-4 text-sm">
                       {paper.abstract &&
                         paper.abstract
                           .split('\n\n')
@@ -1062,7 +1088,7 @@ function getVenueString(pubInfo: PublicationType) {
   @reference "./../styles/base.css";
 
   .btn-action {
-    @apply rounded-full p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-600;
+    @apply hover:bg-primary-black-95 hover:text-primary-black-45 text-primary-black-55 rounded-full p-2 transition;
     padding: 0.5rem;
     border-radius: 9999px;
     transition: all 0.3s ease;

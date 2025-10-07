@@ -1,0 +1,24 @@
+- title: Ships with NixOS
+  id: ships-with
+  description:
+    These devices ship with NixOS, this means you get full NixOS support and
+    don't need an installer image to begin using NixOS.
+  devices:
+- title: Official Support
+  id: official
+  description:
+    These devices have been tested by members of the hardware team and are
+    known to work.
+  devices:
+    - name: Framework
+      hwrepo: https://github.com/NixOS/nixos-hardware/tree/master/framework
+    - name: Fydetab Duo
+      hwrepo: https://github.com/NixOS/nixos-hardware/tree/master/fydetab/duo
+    - name: System76 Thelio Mega
+      hwrepo: https://github.com/NixOS/nixos-hardware/tree/master/system76/thelio-mega
+- title: Community Support
+  id: community
+  description: These are popular devices which have been tested by members of the community.
+  devices:
+    - name: Apple Silicon (M1, M2, etc.)
+      hwrepo: https://github.com/nix-community/nixos-apple-silicon

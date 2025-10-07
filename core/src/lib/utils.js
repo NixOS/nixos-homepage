@@ -29,46 +29,6 @@ export function createExcerpt(post) {
     .join(' ');
 }
 
-export function getNixosLogosUrlUniversal(theme, prefix) {
-  const assetPath = '/src/assets/image/';
-  switch (theme) {
-    case 'black':
-      return {
-        logo:
-          prefix +
-          assetPath +
-          'nixos-logo-black-flat-black-regular-horizontal-none.svg',
-        logomark: prefix + assetPath + 'nixos-logomark-black-flat-none.svg',
-      };
-    case 'pride':
-      return {
-        logo:
-          prefix +
-          assetPath +
-          'nixos-logo-rainbow-gradient-black-regular-horizontal-none.svg',
-        logomark:
-          prefix + assetPath + 'nixos-logomark-rainbow-gradient-none.svg',
-      };
-    case 'white':
-      return {
-        logo:
-          prefix +
-          assetPath +
-          'nixos-logo-white-flat-white-regular-horizontal-none.svg',
-        logomark: prefix + assetPath + 'nixos-logomark-white-flat-none.svg',
-      };
-    default:
-      return {
-        logo:
-          prefix +
-          assetPath +
-          'nixos-logo-default-gradient-black-regular-horizontal-none.svg',
-        logomark:
-          prefix + assetPath + 'nixos-logomark-default-gradient-none.svg',
-      };
-  }
-}
-
 function authorDiscourse(author, link, linkClass) {
   if (!author.name) return null;
   if (!author.discourse) return author.name;

@@ -4,23 +4,23 @@ import { getEntry } from 'astro:content';
 import { BANNER } from 'astro:env/client';
 
 import Container from '@/components/layout/Container.astro';
-import InlineSVG from '@/components/util/InlineSVG.astro';
 import Link from '@/components/util/Link.astro';
 import { getNixosLogoUrl } from '@/lib/themes';
+import { Image } from 'astro:assets';
 
 const headerMenu = await getEntry('menus', 'header');
 const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
-const navbarItemStyle = `text-center text-nix-blue-dark md:text-black md:hover:border-b-nix-blue-light border-b-4`;
-const navbarItemInactiveStyle = `border-b-nix-blue-extralight md:border-b-transparent bg-nix-blue-extralight md:bg-transparent`;
-const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-white md:text-black md:bg-transparent font-bold`;
+const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-black md:hover:border-b-secondary-afghani-blue-65 border-b-4`;
+const navbarItemInactiveStyle = `border-b-secondary-afghani-blue-95 md:border-b-transparent bg-secondary-afghani-blue-95 md:bg-transparent`;
+const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-afghani-blue-85 text-primary-white md:text-primary-black md:bg-transparent font-bold`;
 ---
 
 <header
   role="banner"
-  class="sticky top-0 z-50 bg-white font-extralight text-black drop-shadow-md"
+  class="text-primary-black bg-primary-white sticky top-0 z-50 font-extralight drop-shadow-md"
 >
   {
     currentBanner && (
@@ -52,7 +52,7 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
         href="/"
         class="flex items-center justify-between gap-2 select-none md:justify-start"
       >
-        <InlineSVG
+        <Image
           class="h-12 w-auto"
           src={getNixosLogoUrl('logo')}
           alt="Nixos Logo"
@@ -61,12 +61,12 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
 
       <button
         aria-label="Main Navigation Toggle"
-        class="bg-nix-blue-light block rounded-lg p-4 md:hidden"
+        class="bg-secondary-afghani-blue block rounded-lg p-4 md:hidden"
         id="navigation-toggle"
       >
-        <span class="mb-1.5 block h-1 w-8 bg-white"></span>
-        <span class="mb-1.5 block h-1 w-8 bg-white"></span>
-        <span class="block h-1 w-8 bg-white"></span>
+        <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
+        <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
+        <span class="bg-primary-white block h-1 w-8"></span>
       </button>
     </div>
 
@@ -98,7 +98,10 @@ const navbarItemActiveStyle = `border-b-nix-blue-light bg-nix-blue-light text-wh
         arial-label="Nixos package and options search"
         target="_self"
       >
-        <Icon class="text-nix-blue hidden h-8 w-8 md:block" name="mdi:search" />
+        <Icon
+          class="text-secondary-afghani-blue hidden h-8 w-8 md:block"
+          name="mdi:search"
+        />
         <span class="inline-block md:hidden">Search</span>
       </Link>
     </nav>

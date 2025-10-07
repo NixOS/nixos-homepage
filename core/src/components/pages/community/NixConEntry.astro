@@ -16,11 +16,11 @@ const { title, date, description, href, imagePath = null } = Astro.props;
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="flex flex-col gap-1 font-extralight text-white! no-underline!"
+  class="text-primary-white! flex flex-col gap-1 font-extralight no-underline!"
 >
   {
     imagePath && (
-      <div class="mb-4 flex h-48 justify-center rounded-xl bg-white p-4">
+      <div class="bg-primary-white mb-4 flex h-48 justify-center rounded-xl p-4">
         <Image src={imagePath} alt={`${title} Logo`} width="200" height="200" />
       </div>
     )
@@ -28,7 +28,7 @@ const { title, date, description, href, imagePath = null } = Astro.props;
   <h4 class="font-heading text-lg font-bold">{title}</h4>
   <div class="text-sm">{date}</div>
   <div class="leading-relaxed">{description}</div>
-  <div class="text-right font-bold text-white!">
+  <div class="text-primary-white! text-right font-bold">
     <span class="underline">Read more...</span>
   </div>
 </a>
