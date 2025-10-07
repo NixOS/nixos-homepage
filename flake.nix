@@ -1,4 +1,4 @@
-{
+rec {
   description = "The nixos.org homepage";
 
   inputs = {
@@ -7,8 +7,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
 
-    # These inputs are used for the branding, manuals and release artifacts
-    nixos-branding.url = "github:nixos/branding";
+    # These inputs are used for the manuals and release artifacts
     released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     released-nixpkgs-stable.url = "nixpkgs/nixos-25.05";
     released-nix-unstable.url = "github:nixos/nix/master";
@@ -38,7 +37,6 @@
       git-hooks-nix,
       branding,
       nixpkgs,
-      nixos-branding,
       released-nixpkgs-unstable,
       released-nixpkgs-stable,
       released-nix-unstable,
@@ -203,13 +201,6 @@
                   sed -i -e "s|<nixpkgs|\&lt;nixpkgs|g" $scenarioFileName.svg
                 done
               '';
-
-          branding = pkgs.runCommand "branding" { } ''
-            mkdir -p $out
-            cp ${nixos-branding.legacyPackages.${system}.nixos-branding.nixos-media-kit}/* $out
-            cp ${nixos-branding.legacyPackages.${system}.nixos-branding.nixos-branding-guide}/* $out
-          '';
-
           core = pkgs.buildNpmPackage {
             pname = "nixos-homepage-core";
             version = "0.0.0";
@@ -253,7 +244,6 @@
           packages.pills = pills;
           packages.demos = demos;
           packages.core = core;
-          packages.branding = branding;
           packages.default = pkgs.stdenv.mkDerivation {
             name = "nixos-homepage";
             buildInputs = [
@@ -270,13 +260,11 @@
               mkdir -p $out/manual
               mkdir -p $out/guides/nix-pills
               mkdir -p $out/demos
-              mkdir -p $out/branding
 
               cp -r ${core}/* $out
               cp -r ${manuals}/* $out/manual
               cp -r ${pills}/* $out/guides/nix-pills
               cp -r ${demos}/* $out/demos
-              cp -r ${branding}/* $out/branding
             '';
           };
 
@@ -328,7 +316,6 @@
               export PATH_MANUAL="${manuals}"
               export PATH_PILLS="${pills}"
               export PATH_DEMOS="${demos}"
-              export PATH_BRANDING="${branding}"
 
               if [ -d @NixOS/branding ]; then
                 rm -rf @NixOS/branding
