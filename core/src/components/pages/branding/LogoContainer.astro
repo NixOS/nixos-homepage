@@ -1,5 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components';
+import Button from '@/components/ui/Button.astro';
+import { Code } from 'astro:components';
 
 const {
   type = 'logo',
@@ -14,18 +15,34 @@ const {
 const brandUrl = `https://brand.nixos.org/logos/nixos-${type}-${color}-${fillStyle}-${fontColor}-${style}-${orientation}-${variant}.svg`;
 ---
 
-<div>
-  <img src={brandUrl} class:list={fontColor === 'white' ? 'bg-black' : ''} />
-  <div class="flex items-center gap-2 pt-4">
-    <span> URL </span>
-    <span class="border-1 p-1 text-sm text-gray-800">{brandUrl}</span>
-    <button
-      class="cursor-pointer"
+<div class="bg-secondary-afghani-blue-95 rounded-2xl p-4">
+  <img
+    src={brandUrl}
+    class:list={[
+      'rounded-2xl',
+      fontColor === 'white' ? 'bg-primary-black' : 'bg-primary-white',
+    ]}
+  />
+  <div class="items-c/enter mb-3 flex gap-2 pt-4">
+    <span class="text-default-nixos-dark-blue font-bold"> URL </span>
+    <Code code={brandUrl} />
+  </div>
+  <div class="flex w-full gap-2">
+    <Button
+      color="semidarkblue"
+      size="sm-mobfull"
+      href={brandUrl}
+      icon="mdi:download"
+      label="Download"
+    />
+    <Button
+      color="semidarkblue"
+      size="sm-mobfull"
       onclick={() => {
         navigator.clipboard.writeText(brandUrl);
       }}
-    >
-      <Icon name="mdi:clipboard" class="text-nix-blue inline h-4 w-4" />
-    </button>
+      icon="mdi:content-copy"
+      label="Copy URL"
+    />
   </div>
 </div>
