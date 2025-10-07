@@ -14,6 +14,9 @@ rec {
     released-nix-stable.url = "github:nixos/nix/latest-release";
     nix-pills.url = "github:NixOS/nix-pills";
     nix-pills.flake = false;
+
+    # NixOS branding
+    branding.url = "github:NixOS/branding";
   };
 
   nixConfig = {
@@ -32,6 +35,7 @@ rec {
       self,
       flake-parts,
       git-hooks-nix,
+      branding,
       nixpkgs,
       released-nixpkgs-unstable,
       released-nixpkgs-stable,
@@ -209,6 +213,15 @@ rec {
 
             npmConfigHook = pkgs.importNpmLock.npmConfigHook;
 
+            makeCacheWritable = true;
+
+            preConfigure = ''
+              mkdir -p @NixOS/branding
+              cp -R --no-preserve=mode,ownership ${
+                branding.hydraJobs.nixos-branding.${system}.npm-package
+              }/* ./@NixOS/branding
+            '';
+
             buildPhase = ''
               export NIX_STABLE_VERSION="${NIX_STABLE_VERSION}"
               export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
@@ -303,6 +316,14 @@ rec {
               export PATH_MANUAL="${manuals}"
               export PATH_PILLS="${pills}"
               export PATH_DEMOS="${demos}"
+
+              if [ -d @NixOS/branding ]; then
+                rm -rf @NixOS/branding
+              fi
+              mkdir -p @NixOS/branding
+              cp -R --no-preserve=mode,ownership ${
+                branding.hydraJobs.nixos-branding.${system}.npm-package
+              }/* ./@NixOS/branding
 
               if [ ! -d node_modules ]; then
                 ${nodejs_current}/bin/npm install --workspaces --include-workspace-root

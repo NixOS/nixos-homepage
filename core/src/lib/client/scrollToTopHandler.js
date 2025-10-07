@@ -10,7 +10,7 @@ document.addEventListener('scroll', () => {
       'md:bottom-8',
       'md:-right-14',
       'right-4',
-      'bg-nix-blue-darker',
+      'bg-secondary-afghani-blue-15',
     );
     scrollTop.classList.add(
       'md:bottom-4',
@@ -30,7 +30,7 @@ document.addEventListener('scroll', () => {
       'md:bottom-8',
       'md:-right-14',
       'right-4',
-      'bg-nix-blue-darker',
+      'bg-secondary-afghani-blue-15',
     );
   }
 

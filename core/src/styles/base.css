@@ -39,11 +39,15 @@
 
 @layer base {
   main a:-webkit-any-link {
-    @apply text-nix-blue-dark underline decoration-1 underline-offset-4;
+    @apply text-secondary-afghani-blue-45 underline decoration-1 underline-offset-4;
   }
 
   main a:any-link {
-    @apply text-nix-blue-dark underline decoration-1 underline-offset-4;
+    @apply text-secondary-afghani-blue-45 underline decoration-1 underline-offset-4;
+  }
+
+  ::selection {
+    @apply bg-secondary-afghani-blue-45 text-secondary-afghani-blue-95;
   }
 }
 
@@ -112,7 +116,7 @@
   }
 
   article h3 {
-    @apply text-nix-blue mb-4 text-2xl font-bold;
+    @apply text-secondary-afghani-blue mb-4 text-2xl font-bold;
   }
 
   article p {
@@ -124,7 +128,7 @@
   }
 
   article code {
-    @apply rounded-sm border-1 border-gray-300 bg-gray-100 px-1 pt-1 pb-1 font-mono font-[500] text-black;
+    @apply border-primary-black-85 bg-primary-black-95 text-primary-black rounded-sm border-1 px-1 pt-1 pb-1 font-mono font-[500];
   }
 
   article pre {
@@ -144,7 +148,7 @@
   }
 
   article blockquote {
-    @apply border-nix-blue-darker bg-nix-blue-extralight mb-4 border-l-4 px-4 pt-2;
+    @apply border-secondary-afghani-blue-15 bg-secondary-afghani-blue-95 mb-4 border-l-4 px-4 pt-2;
   }
 
   article h1,
@@ -153,7 +157,7 @@
   article h4,
   article h5,
   article h6 {
-    @apply font-heading text-nix-blue leading-tight font-bold;
+    @apply font-heading text-secondary-afghani-blue leading-tight font-bold;
   }
 
   article h1:not(:first-child),
