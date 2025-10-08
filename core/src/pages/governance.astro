@@ -31,11 +31,19 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         >
           The Steering Committee
         </h3>
-        <span>
-          <b>Description:</b> 7 elected individuals to represent the community
+        <span class="text-secondary-afghani-blue-35 text-lg">
+          7 elected individuals to represent the community
         </span>
         <span>
           <b>Responsibilities:</b> Technical and community decisions and delegation
+        </span>
+        <span>
+          <b>Members:</b>
+          {
+            steeringCommittee.data.members
+              .map((member) => member.name)
+              .join(', ')
+          }
         </span>
         <a href="/community/teams/steering-committee">More Info</a>
       </div>
@@ -47,13 +55,17 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         >
           The Foundation Board
         </h3>
-        <span>
-          <b>Description:</b> board members of the Stichting NixOS Foundation, a
-          non-profit organisation in Utrecht, the Netherlands
+        <span class="text-secondary-afghani-blue-35 text-lg">
+          Board members of the Stichting NixOS Foundation, a non-profit
+          organisation in Utrecht, the Netherlands
         </span>
         <span>
           <b>Responsibilities:</b> Legal, financial and partnership decisions and
           delegation
+        </span>
+        <span>
+          <b>Members:</b>
+          {foundationBoard.data.members.map((member) => member.name).join(', ')}
         </span>
         <a href="/community/teams/foundation-board">More Info</a>
       </div>
@@ -101,7 +113,9 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
     </p>
   </Container>
   <Divider mirrorY />
-  <div class="bg-secondary-afghani-blue-45 text-primary-white py-8">
+  <div
+    class="bg-secondary-afghani-blue-45 text-primary-white py-8 font-extralight"
+  >
     <Container class="space-y-2">
       <h2
         class="font-heading text-primary-white mt-4 text-4xl font-bold"
