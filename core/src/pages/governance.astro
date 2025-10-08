@@ -17,15 +17,17 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
   <PageHeader text="Governance" />
   <Container class="space-y-2 py-8 leading-relaxed font-extralight">
     <h2
-      class="font-heading text-secondary-afghani-blue mt-8 text-3xl leading-none font-bold"
+      class="font-heading text-secondary-afghani-blue mt-8 text-4xl leading-none font-bold"
     >
       Nix Leadership Bodies
     </h2>
-    <p>The Nix community is guided by two leadership bodies:</p>
+    <p class="mb-4">The Nix community is guided by two leadership bodies:</p>
     <div class="mt-2 mb-3 grid gap-4 md:grid-cols-2">
-      <div class="bg-secondary-afghani-blue-95 w-full rounded-xl px-4 py-3">
+      <div
+        class="bg-secondary-afghani-blue-95 flex w-full flex-col gap-2 rounded-xl p-4"
+      >
         <h3
-          class="font-heading text-secondary-afghani-blue text-2xl leading-none font-bold"
+          class="font-heading text-secondary-afghani-blue text-3xl leading-none font-bold"
         >
           The Steering Committee
         </h3>
@@ -37,18 +39,22 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         </span>
         <a href="/community/teams/steering-committee">More Info</a>
       </div>
-      <div class="bg-secondary-afghani-blue-95 w-full rounded-xl px-4 py-3">
+      <div
+        class="bg-secondary-afghani-blue-95 flex w-full flex-col gap-2 rounded-xl p-4"
+      >
         <h3
-          class="font-heading text-secondary-afghani-blue text-2xl leading-none font-bold"
+          class="font-heading text-secondary-afghani-blue text-3xl leading-none font-bold"
         >
           The Foundation Board
         </h3>
-        <strong>Description:</strong> board members of the Stichting NixOS Foundation,
-        a non-profit organisation in Utrecht, the Netherlands
-
-        <strong>Responsibilities:</strong> Legal, financial and partnership decisions
-        and delegation
-
+        <span>
+          <b>Description:</b> board members of the Stichting NixOS Foundation, a
+          non-profit organisation in Utrecht, the Netherlands
+        </span>
+        <span>
+          <b>Responsibilities:</b> Legal, financial and partnership decisions and
+          delegation
+        </span>
         <a href="/community/teams/foundation-board">More Info</a>
       </div>
     </div>
@@ -59,7 +65,7 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
       >.
     </p>
     <h3
-      class="font-heading text-secondary-afghani-blue mt-4 text-2xl leading-none font-bold"
+      class="font-heading text-secondary-afghani-blue mt-4 text-3xl leading-none font-bold"
     >
       Governance Constitution
     </h3>
@@ -70,7 +76,7 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
       and how decisions are made inside the steering committee.
     </p>
     <h3
-      class="font-heading text-secondary-afghani-blue mt-4 text-2xl leading-none font-bold"
+      class="font-heading text-secondary-afghani-blue mt-4 text-3xl leading-none font-bold"
     >
       Steering Committee Elections
     </h3>
@@ -119,7 +125,7 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         </p>
       </Quotation>
 
-      <p class="mt-2 leading-relaxed font-extralight">
+      <p>
         Our common purpose is to develop, propagate, and promote the adoption of
         the <a href="https://edolstra.github.io/pubs/phd-thesis.pdf"
           >purely functional software deployment model</a
@@ -137,7 +143,7 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         <a href="#community-values-whatis" class="text-lg">🔗</a>
       </h3>
 
-      <p class="mt-2 leading-relaxed font-extralight">
+      <p>
         Values are <span class="italic">not</span> a Code of Conduct, they do not
         define governance structures, and they do not provide specific policies.
         Instead, values inform the decisions we make about these things. A good test
@@ -154,28 +160,28 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         work that way, then it’s not a value.
       </Quotation>
 
-      <p class="mt-2 leading-relaxed font-extralight">
+      <p>
         To apply in many situations, values must be high-level, abstract
         concepts. Therefore, in the text below, each value is presented as a
         heading followed by an elaboration of its meaning. This is meant as a
         starting point for interpretation, not a comprehensive definition. The
         heading and the elaboration have equal importance.
       </p>
-      <h2
+      <h3
         class="font-heading mt-4 text-3xl font-bold"
         id="community-values-values"
       >
         The values
         <a href="#community-values-values" class="text-lg">🔗</a>
-      </h2>
+      </h3>
 
-      <h3
+      <h4
         class="font-heading mt-4 text-2xl font-bold"
         id="community-values-respect"
       >
         Respect and civility
         <a href="#community-values-respect" class="text-lg">🔗</a>
-      </h3>
+      </h4>
 
       <p>
         We treat each other with respect and civility. No matter one's
@@ -187,13 +193,13 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         conduct.
       </p>
 
-      <h3
+      <h4
         class="font-heading mt-4 text-2xl font-bold"
         id="community-values-people"
       >
         People come first
         <a href="#community-values-people" class="text-lg">🔗</a>
-      </h3>
+      </h4>
 
       <p>
         We are here, first and foremost, as individuals working together. Our
@@ -204,13 +210,13 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         individuals and providing resources to support the project.
       </p>
 
-      <h3
+      <h4
         class="font-heading mt-4 text-2xl font-bold"
         id="community-values-choice"
       >
         Free software and choice over lock-in
         <a href="#community-values-choice" class="text-lg">🔗</a>
-      </h3>
+      </h4>
 
       <p>
         Nix projects are and will always remain <a
@@ -221,13 +227,13 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         use non-free software, when practical.
       </p>
 
-      <h3
+      <h4
         class="font-heading mt-4 text-2xl font-bold"
         id="community-values-decisionmaking"
       >
         Distribute decisionmaking widely
         <a href="#community-values-decisionmaking" class="text-lg">🔗</a>
-      </h3>
+      </h4>
 
       <p>
         We are a synthesis of varied but overlapping communities. We rely on
@@ -238,7 +244,7 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         primarily by working together on Nix projects.
       </p>
 
-      <h3
+      <h4
         class="font-heading mt-4 text-2xl font-bold"
         id="community-values-automation"
       >
@@ -251,7 +257,7 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
           > is work that tends to be manual, repetitive, automatable, interrupt-driven,
           devoid of enduring value, and scaling linearly with growth.
         </Citation>
-      </h3>
+      </h4>
 
       <p>
         We are a global community, and disseminating information and maintaining
@@ -263,13 +269,13 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         best use of our contributors' limited time and energy.
       </p>
 
-      <h3
+      <h4
         class="font-heading mt-4 text-2xl font-bold"
         id="community-values-stability"
       >
         Stable evolution over stagnation or chaos
         <a href="#community-values-stability" class="text-lg">🔗</a>
-      </h3>
+      </h4>
 
       <p>
         Openness to new ideas and evolution is part of what made Nix great. We
