@@ -1,0 +1,178 @@
+---
+import LogoContainer from '@/components/pages/branding/LogoContainer.astro';
+import Container from '../components/layout/Container.astro';
+import PageHeader from '../components/layout/PageHeader.astro';
+import Layout from '../layouts/Layout.astro';
+
+import BrandingGuideTitlePage from '@/assets/image/branding_guide_title_page.png';
+import Button from '@/components/ui/Button.astro';
+import { Image } from 'astro:assets';
+---
+
+<Layout title="Branding">
+  <PageHeader text="Branding" />
+  <Container>
+    <div
+      class="bg-secondary-afghani-blue-95 mt-16 flex flex-col gap-4 rounded-2xl p-4 md:flex-row"
+    >
+      <Image
+        class="w-auto md:h-56"
+        src={BrandingGuideTitlePage}
+        alt="Branding Guide Title Page"
+      />
+      <div
+        class="flex flex-2 flex-col items-start space-y-3 self-center leading-relaxed font-extralight"
+      >
+        <h2
+          class="font-heading text-secondary-afghani-blue text-4xl leading-none font-bold"
+        >
+          NixOS Branding Guide
+        </h2>
+        <p class="mb-4">
+          The <a
+            href="https://brand.nixos.org/documents/nixos-branding-guide.pdf"
+            download>NixOS Branding Guide</a
+          > outlines the official visual identity of the NixOS project. It provides
+          clear guidance on how to use the NixOS logo, colors, typography, and other
+          brand elements across digital and print media. Whether you're creating
+          a blog post, a presentation, a sticker, or a t-shirt, this guide helps
+          ensure your materials reflect the NixOS brand consistently and respectfully.
+        </p>
+        <Button
+          color="semidarkblue"
+          size="sm-mobfull"
+          href="https://brand.nixos.org/documents/nixos-branding-guide.pdf"
+          icon="mdi:download"
+          label="Download Branding Guide"
+        />
+      </div>
+    </div>
+  </Container>
+  <Container class="mt-16 space-y-4 leading-relaxed font-extralight">
+    <h2
+      class="font-heading text-secondary-afghani-blue mt-8 text-4xl leading-none font-bold"
+    >
+      NixOS Logos
+    </h2>
+    <p>
+      Below are the official NixOS logo variants. These assets are available for
+      use in accordance with the guidelines set out in the Branding Guide. Each
+      version is designed for a specific use case—horizontal or vertical layout,
+      dark or light backgrounds.
+    </p>
+    <p>
+      Please refer to the Branding Guide for instructions on proper usage, clear
+      space, and background contrast requirements.
+    </p>
+    <div class="grid grid-cols-1 gap-12 pb-12 md:grid-cols-2 md:gap-4">
+      <LogoContainer
+        type="logo"
+        fillStyle="gradient"
+        color="default"
+        fontColor="black"
+        orientation="horizontal"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="gradient"
+        color="default"
+        fontColor="white"
+        orientation="horizontal"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="gradient"
+        color="default"
+        fontColor="black"
+        orientation="vertical"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="gradient"
+        color="default"
+        fontColor="white"
+        orientation="vertical"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="flat"
+        color="black"
+        fontColor="black"
+        orientation="horizontal"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="flat"
+        color="white"
+        fontColor="white"
+        orientation="horizontal"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="flat"
+        color="black"
+        fontColor="black"
+        orientation="vertical"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="flat"
+        color="white"
+        fontColor="white"
+        orientation="vertical"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="gradient"
+        color="rainbow"
+        fontColor="black"
+        orientation="horizontal"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="gradient"
+        color="rainbow"
+        fontColor="white"
+        orientation="horizontal"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="gradient"
+        color="rainbow"
+        fontColor="black"
+        orientation="vertical"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="gradient"
+        color="rainbow"
+        fontColor="white"
+        orientation="vertical"
+        style="regular"
+        variant="recommended"
+      />
+    </div>
+  </Container>
+</Layout>
