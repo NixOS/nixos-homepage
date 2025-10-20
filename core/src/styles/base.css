@@ -1,5 +1,6 @@
 /* The integration's default injected base.css file */
 @import 'tailwindcss';
+@import './route159-fonts.css';
 
 @config '../../tailwind.config.cjs';
 
