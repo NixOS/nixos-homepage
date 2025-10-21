@@ -11,6 +11,17 @@ import Citation from '../components/ui/Citation.astro';
 const teams = await getCollection('teams');
 const foundationBoard = await getEntry('teams', '010_foundation-board');
 const steeringCommittee = await getEntry('teams', '000_steering-committee');
+
+const getMemberLink = (member) => {
+  if (member.github)
+    return [`https://github.com/${member.github}`, member.github];
+  else if (member.discourse)
+    return [
+      `https://discourse.nixos.org/u/${member.discourse}`,
+      member.discourse,
+    ];
+  else return [null, member.name];
+};
 ---
 
 <Layout title="Governance">
@@ -40,9 +51,20 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         <span>
           <b>Members:</b>
           {
-            steeringCommittee.data.members
-              .map((member) => member.name)
-              .join(', ')
+            steeringCommittee.data.members.map((member, idx) => {
+              const data = getMemberLink(member);
+              if (data[0]) {
+                return (
+                  <>
+                    {' '}
+                    <a href={data[0]}>${data[1]}</a>
+                    {idx < foundationBoard.data.members.length - 1 ? ',' : ''}
+                  </>
+                );
+              } else {
+                return data[1];
+              }
+            })
           }
         </span>
         <a href="/community/teams/steering-committee">More Info</a>
@@ -65,14 +87,33 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
         </span>
         <span>
           <b>Members:</b>
-          {foundationBoard.data.members.map((member) => member.name).join(', ')}
+          {
+            foundationBoard.data.members.map((member, idx) => {
+              const data = getMemberLink(member);
+              if (data[0]) {
+                return (
+                  <>
+                    {' '}
+                    <a href={data[0]}>${data[1]}</a>
+                    {idx < foundationBoard.data.members.length - 1 ? ',' : ''}
+                  </>
+                );
+              } else {
+                return data[1];
+              }
+            })
+          }
         </span>
         <a href="/community/teams/foundation-board">More Info</a>
       </div>
     </div>
     <p>
-      Local decisions are made in a distributed way by the <a href="/community">{teams.length} teams</a>, among many other ones not listed on the website and many more individual specialists, responsible for various areas.
-      From the leadership bodies down to individual contributors, almost everybody is here as a passionate volunteer.
+      Local decisions are made in a distributed way by the <a href="/community"
+        >{teams.length} teams</a
+      >, among many other ones not listed on the website and many more
+      individual specialists, responsible for various areas. From the leadership
+      bodies down to individual contributors, almost everybody is here as a
+      passionate volunteer.
     </p>
     <h3
       class="font-heading text-secondary-afghani-blue mt-4 text-3xl font-bold"
@@ -92,9 +133,9 @@ const steeringCommittee = await getEntry('teams', '000_steering-committee');
     </h3>
     <p class="mb-2">
       Every year, the Nix community elects members to the steering committee.
-      Each member holds a two-year term, with elections held annually to fill
-      at least half of the seats. You can read more about the election process in the <a
-        href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
+      Each member holds a two-year term, with elections held annually to fill at
+      least half of the seats. You can read more about the election process in
+      the <a href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
         >Nix Governance Constitution</a
       >.
     </p>
