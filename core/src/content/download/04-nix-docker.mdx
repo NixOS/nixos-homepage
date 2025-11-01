@@ -6,20 +6,20 @@ platform: docker
 
 Start a Docker shell with Nix:
 
-```bash
+```bash prompt
 $ docker run -it nixos/nix
 ```
 
 Or start a Docker shell with Nix exposing a `workdir` directory:
 
-```bash
+```bash prompt
 $ mkdir workdir
 $ docker run -it -v $(pwd)/workdir:/workdir nixos/nix
 ```
 
 The `workdir` example from above can be also used to start hacking on nixpkgs:
 
-```bash
+```bash prompt
 $ git clone --depth=1 https://github.com/NixOS/nixpkgs.git
 $ docker run -it -v $(pwd)/nixpkgs:/nixpkgs nixos/nix
 docker> nix-build -I nixpkgs=/nixpkgs -A hello nixpkgs/default.nix
