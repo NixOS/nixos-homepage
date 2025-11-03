@@ -13,7 +13,7 @@
     "linkcheck:full": "linkchecker http://localhost:4321"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.8",
+    "@astrojs/mdx": "^4.3.9",
     "@astrojs/rss": "^4.0.13",
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource-variable/fira-code": "^5.2.7",
@@ -22,7 +22,7 @@
     "@tailwindcss/vite": "^4.1.16",
     "@xmldom/xmldom": "^0.9.8",
     "asciinema-player": "^3.12.1",
-    "astro": "^5.15.1",
+    "astro": "^5.15.3",
     "astro-favicons": "^3.1.5",
     "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.55",
+    "@iconify-json/simple-icons": "^1.2.56",
     "@iconify/tailwind": "^1.2.0"
   }
 }
