@@ -1,14 +1,18 @@
-name: 'CI - Pull Request'
+name: "CI - Pull Request"
 
 on:
   pull_request_target:
     paths-ignore:
-      - '**/package.json'
-      - '**/flake.nix'
-      - '**/default.nix'
+      - "**.nix"
+      - "core/i18n/**"
+      - "package.json"
+      - "package-lock.json"
+      - "core/package.json"
+    branches:
+      - main
 
 concurrency:
-  group: '${{ github.workflow }}-${{ github.head_ref || github.ref_name }}'
+  group: "${{ github.workflow }}-${{ github.head_ref || github.ref_name }}"
   cancel-in-progress: true
 
 permissions:
@@ -16,71 +20,76 @@ permissions:
 
 jobs:
   check:
-    name: 'Check nixos.org PR'
-    runs-on: 'ubuntu-latest'
+    name: "Check nixos.org PR"
+    runs-on: "ubuntu-latest"
     permissions:
       contents: read
     steps:
-      - name: 'Checking out the PR repository'
-        uses: 'actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8' # v5.0.0
+      - name: "Checking out the PR repository"
+        uses: "actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8" # v5.0.0
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           fetch-depth: 0
           persist-credentials: false
           clean: true
-
-      - name: 'Installing Nix'
-        uses: 'cachix/install-nix-action@456688f15bc354bef6d396e4a35f4f89d40bf2b7' # v31.8.2
-
-      - name: 'Install npm dependencies'
+      - name: "Install npm dependencies"
         run: |
           npm install --workspaces --include-workspace-root
-
-      - name: 'Check formatting'
+      - name: "Check formatting"
         run: |
           npm exec --package=prettier -c 'prettier --check ./core/src'
-
-      - name: 'Lint'
+      - name: "Lint"
         run: |
           npm exec --package=eslint -c 'eslint'
 
   build:
-    name: 'Build nixos.org PR'
-    runs-on: 'ubuntu-latest'
+    name: "Build nixos.org PR"
+    runs-on: "ubuntu-latest"
     needs: check
+    permissions:
+      contents: read
+    steps:
+      - name: "Checking out the PR repository"
+        uses: "actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8" # v5.0.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          fetch-depth: 0
+          persist-credentials: false
+          clean: true
+      - name: "Installing Nix"
+        uses: "cachix/install-nix-action@456688f15bc354bef6d396e4a35f4f89d40bf2b7" # v31.8.2
+      - name: "Build"
+        run: nix build
+      - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: nixos-homepage-artifact
+          path: ./result
+
+  publish:
+    name: "Publish nixos.org PR"
+    runs-on: "ubuntu-latest"
+    needs: build
     permissions:
       contents: read # to fetch PR changes
       pull-requests: write # to post PR comments
       statuses: write # to set commit status
     steps:
-      - name: 'Checking out the PR repository'
-        uses: 'actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8' # v5.0.0
+      - name: "Download build artifact"
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          fetch-depth: 0
-          persist-credentials: false
-          clean: true
-
-      - name: 'Installing Nix'
-        uses: 'cachix/install-nix-action@456688f15bc354bef6d396e4a35f4f89d40bf2b7' # v31.8.2
-
-      - name: 'Build'
-        run: |
-          nix build
-          mkdir -p ./build
-          cp -RL ./result/* ./build/
-
-      - name: 'Publish to Netlify'
-        uses: 'nwtgck/actions-netlify@4cbaf4c08f1a7bfa537d6113472ef4424e4eb654' # v3.0.0
+          name: nixos-homepage-artifact
+          path: ./build
+      - name: "Publish to Netlify"
+        uses: "nwtgck/actions-netlify@4cbaf4c08f1a7bfa537d6113472ef4424e4eb654" # v3.0.0
         env:
-          NETLIFY_AUTH_TOKEN: '${{ secrets.NETLIFY_AUTH_TOKEN }}'
-          NETLIFY_SITE_ID: '${{ secrets.NETLIFY_SITE_ID }}'
+          NETLIFY_AUTH_TOKEN: "${{ secrets.NETLIFY_AUTH_TOKEN }}"
+          NETLIFY_SITE_ID: "${{ secrets.NETLIFY_SITE_ID }}"
         with:
-          github-token: '${{ secrets.GITHUB_TOKEN }}'
-          deploy-message: 'Published from GitHub Actions'
-          publish-dir: './build'
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          deploy-message: "Published from GitHub Actions"
+          publish-dir: "./build"
 
           enable-pull-request-comment: true
           overwrites-pull-request-comment: false
