@@ -59,6 +59,9 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  redirects: {
+    '/values': '/governance',
+  },
   env: {
     schema: {
       THEME: envField.string({
