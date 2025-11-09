@@ -62,7 +62,8 @@ jobs:
         uses: "cachix/install-nix-action@456688f15bc354bef6d396e4a35f4f89d40bf2b7" # v31.8.2
       - name: "Build"
         run: nix build
-      - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+      - name: "Upload build artifact"
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: nixos-homepage-artifact
           path: ./result
