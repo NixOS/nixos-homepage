@@ -26,17 +26,17 @@
     "@NixOS/branding"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.39.0",
-    "@typescript-eslint/parser": "^8.46.2",
-    "eslint": "^9.39.0",
-    "eslint-plugin-astro": "^1.4.0",
+    "@eslint/js": "^9.39.1",
+    "@typescript-eslint/parser": "^8.46.3",
+    "eslint": "^9.39.1",
+    "eslint-plugin-astro": "^1.5.0",
     "express": "^5.1.0",
     "globals": "^16.5.0",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-astro-organize-imports": "^0.4.11",
     "prettier-plugin-tailwindcss": "^0.7.1",
-    "typescript-eslint": "^8.46.2"
+    "typescript-eslint": "^8.46.3"
   },
   "dependencies": {
     "chalk": "^5.6.2"
