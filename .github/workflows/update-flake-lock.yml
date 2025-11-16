@@ -22,7 +22,7 @@ jobs:
           persist-credentials: false
 
       - name: 'Install Nix'
-        uses: 'cachix/install-nix-action@7ab6e7fd29da88e74b1e314a4ae9ac6b5cda3801' # v31.8.0
+        uses: 'cachix/install-nix-action@7ec16f2c061ab07b235a7245e06ed46fe9a1cab6' # v31.8.3
         with:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}

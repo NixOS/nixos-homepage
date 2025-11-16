@@ -13,30 +13,30 @@
     "linkcheck:full": "linkchecker http://localhost:4321"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.7",
-    "@astrojs/rss": "^4.0.12",
+    "@astrojs/mdx": "^4.3.10",
+    "@astrojs/rss": "^4.0.13",
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource-variable/fira-code": "^5.2.7",
     "@fontsource-variable/overpass": "^5.2.8",
     "@fontsource-variable/roboto-flex": "^5.2.8",
-    "@tailwindcss/vite": "^4.1.14",
+    "@tailwindcss/vite": "^4.1.17",
     "@xmldom/xmldom": "^0.9.8",
     "asciinema-player": "^3.12.1",
-    "astro": "^5.14.4",
+    "astro": "^5.15.4",
     "astro-favicons": "^3.1.5",
     "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
     "class-variance-authority": "^0.7.1",
-    "htmx.org": "^2.0.7",
+    "htmx.org": "^2.0.8",
     "markdown-it": "^14.0.0",
     "node-html-parser": "^7.0.1",
     "sanitize-html": "^2.17.0",
     "tailwindcss": "^4.0.0",
-    "turndown": "^7.2.1"
+    "turndown": "^7.2.2"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.54",
+    "@iconify-json/simple-icons": "^1.2.58",
     "@iconify/tailwind": "^1.2.0"
   }
 }

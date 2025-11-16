@@ -10,6 +10,7 @@ import syntaxTheme from './src/lib/shiki/theme.json';
 import favicons from 'astro-favicons';
 
 import { createRequire } from 'module';
+import shellPromptTransformer from './src/lib/shiki/shellPromptTransformer';
 const require = createRequire(import.meta.url);
 
 function selectFavicon(theme = 'default') {
@@ -51,6 +52,7 @@ export default defineConfig({
   markdown: {
     shikiConfig: {
       theme: syntaxTheme,
+      transformers: [shellPromptTransformer],
     },
   },
   compressHTML: true,

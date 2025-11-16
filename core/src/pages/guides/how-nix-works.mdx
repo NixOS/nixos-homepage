@@ -38,7 +38,7 @@ Since package management operations never overwrite packages in the Nix store bu
 
 And since packages aren’t overwritten, the old versions are still there after an upgrade. This means that you can _roll back_ to the old version:
 
-```bash
+```bash prompt
 $ nix-env --upgrade _some-packages_
 $ nix-env --rollback
 ```
@@ -47,13 +47,13 @@ $ nix-env --rollback
 
 When you uninstall a package like this…
 
-```bash
+```bash prompt
 $ nix-env --uninstall firefox
 ```
 
 the package isn’t deleted from the system right away (after all, you might want to do a rollback, or it might be in the profiles of other users). Instead, unused packages can be deleted safely by running the _garbage collector_:
 
-```bash
+```bash prompt
 $ nix-collect-garbage
 ```
 
@@ -69,7 +69,7 @@ Because it’s a functional language, it’s easy to support building variants o
 
 Nix expressions generally describe how to build a package from source, so an installation action like
 
-```bash
+```bash prompt
 $ nix-env --install firefox
 ```
 
@@ -113,7 +113,7 @@ You configure a NixOS system by writing a specification of the functionality tha
 
 After changing `/etc/nixos/configuration.nix`, you realise the configuration by running this command:
 
-```bash
+```bash prompt
 $ nixos-rebuild switch
 ```
 
@@ -131,7 +131,7 @@ NixOS has a _transactional_ approach to configuration management: configuration 
 
 Because the files of a new configuration don’t overwrite old ones, you can (atomically) roll back to a previous configuration. For instance, if after a `nixos-rebuild switch` you discover that you don’t like the new configuration, you can just go back:
 
-```bash
+```bash prompt
 $ nixos-rebuild switch --rollback
 ```
 
@@ -147,7 +147,7 @@ NixOS’ declarative configuration model makes it easy to reproduce a system con
 
 NixOS makes it safe to test potentially dangerous changes to the system, because you can always roll back. (Unless you screw up the boot loader, that is…) For instance, whether the change is as simple as enabling a system service, or as large as rebuilding the entire system with a new version of Glibc, you can test it by doing:
 
-```bash
+```bash prompt
 $ nixos-rebuild test
 ```
 
@@ -155,7 +155,7 @@ This builds and activates the new configuration, but doesn’t make it the boot 
 
 An even nicer way to test changes is the following:
 
-```bash
+```bash prompt
 $ nixos-rebuild build-vm
 $ ./result/bin/run-\*-vm
 ```

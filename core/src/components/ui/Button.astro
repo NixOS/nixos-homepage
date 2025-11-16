@@ -57,6 +57,7 @@ const {
   label,
   nonPublic = false,
   icon = undefined,
+  ...other
 } = Astro.props;
 
 const setIconSize = (size: string) => {
@@ -90,6 +91,7 @@ const setIconSize = (size: string) => {
           icon && 'flex items-center justify-start gap-4',
           !icon && 'flex items-center justify-center gap-1',
         ]}
+        {...other}
       >
         {icon && <Icon name={icon} size={setIconSize(size)} />}
         {nonPublic && <Icon name="mdi:lock" />}
@@ -112,9 +114,10 @@ const setIconSize = (size: string) => {
         classList,
         icon && 'flex items-center justify-start gap-4',
       ]}
+      {...other}
     >
       {icon && <Icon name={icon} />}
-      <slot />
+      {label || <slot />}
     </button>
   )
 }
