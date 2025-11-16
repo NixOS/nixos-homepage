@@ -1,0 +1,70 @@
+---
+import Button from '@/components/ui/Button.astro';
+import { Code } from 'astro:components';
+
+const {
+  type = 'logo',
+  fillStyle = 'gradient',
+  color = 'rainbow',
+  fontColor = 'black',
+  orientation = 'horizontal',
+  style = 'regular',
+  variant = 'recommended',
+} = Astro.props;
+
+const brandUrl = `https://brand.nixos.org/logos/nixos-${type}-${color}-${fillStyle}-${fontColor}-${style}-${orientation}-${variant}.svg`;
+---
+
+<div class="bg-secondary-afghani-blue-95 rounded-2xl p-4">
+  <img
+    src={brandUrl}
+    class:list={[
+      'w-auto rounded-2xl',
+      fontColor === 'white' ? 'bg-primary-black' : 'bg-primary-white',
+    ]}
+  />
+  <div class="mb-3 flex items-center gap-2 pt-4">
+    <Code class="rounded-xl px-2 py-1" code={brandUrl} />
+  </div>
+  <div class="flex w-full justify-end gap-2">
+    <Button
+      color="semidarkblue"
+      size="sm-mobfull"
+      href={brandUrl}
+      icon="mdi:download"
+      label="Download"
+    />
+    <Button
+      color="semidarkblue"
+      size="sm-mobfull"
+      data-url={brandUrl}
+      classList={['hidden']}
+      icon="mdi:content-copy"
+      label="Copy URL"
+    />
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('button[data-url]').forEach((button) => {
+    button.classList.remove('hidden');
+    button.addEventListener('click', () => {
+      const url = button.getAttribute('data-url');
+      navigator.clipboard.writeText(url).then(
+        function () {
+          button.classList.toggle('bg-accent-zambian-green-55!');
+          setTimeout(() => {
+            button.classList.toggle('bg-accent-zambian-green-55!');
+          }, 1000);
+        },
+        function (err) {
+          console.error('Async: Could not copy text: ', err);
+          button.classList.toggle('bg-accent-persian-orange-55!');
+          setTimeout(() => {
+            button.classList.toggle('bg-accent-persian-orange-55!');
+          }, 1000);
+        },
+      );
+    });
+  });
+</script>

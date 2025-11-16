@@ -22,24 +22,24 @@ const devices = await getCollection('devices');
   {
     devices.map((category) => (
       <Container>
-        <h2 class="font-heading text-nix-blue mt-8 mb-1 text-4xl leading-none font-bold">
+        <h2 class="font-heading text-secondary-afghani-blue mt-8 mb-1 text-4xl leading-none font-bold">
           {category.data.title}
         </h2>
-        <p class="text-gray-700">{category.data.description}</p>
+        <p>{category.data.description}</p>
         {(!category.data.devices || category.data.devices === 0) && (
-          <p class="mt-4 h-full list-none rounded-xl bg-gray-100 px-4 py-3">
+          <p class="bg-primary-black-95 mt-4 h-full list-none rounded-xl px-4 py-3">
             No devices listed yet.
           </p>
         )}
         {category.data.devices && (
           <ul class="my-4 grid list-inside list-disc gap-4 space-y-2 md:grid-cols-3">
             {category.data.devices.map((device) => (
-              <li class="bg-nix-blue-extralight h-full list-none rounded-xl px-4 py-3">
-                <h3 class="font-heading text-nix-blue text-3xl font-bold">
+              <li class="bg-secondary-afghani-blue-95 h-full list-none rounded-xl px-4 py-3">
+                <h3 class="font-heading text-secondary-afghani-blue text-3xl font-bold">
                   {device.name}
                 </h3>
                 {device.hwrepo && (
-                  <a href={device.hwrepo} class="text-nix-blue hover:underline">
+                  <a href={device.hwrepo} class="hover:underline">
                     <Icon name="mdi:git" class="inline h-5 w-5" />
                     Hardware Repository
                   </a>

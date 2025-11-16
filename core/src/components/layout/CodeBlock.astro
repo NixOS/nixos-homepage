@@ -10,9 +10,9 @@ const { lines, type = 'code' } = Astro.props;
 <pre
   class:list={[
     'my-2 mb-4 overflow-x-auto rounded-3xl border-1 bg-[#3a3a3a] px-4 py-4',
-    { 'bg-[#3a3a3a] text-white': type === 'code' },
+    { 'text-primary-white bg-[#3a3a3a]': type === 'code' },
     {
-      'border-nix-blue-extralight bg-nix-blue-extralight font-mono font-[500] text-black shadow-inner':
+      'border-secondary-afghani-blue-95 bg-secondary-afghani-blue-95 text-primary-black font-mono font-[500] shadow-inner':
         type === 'storepath',
     },
   ]}>

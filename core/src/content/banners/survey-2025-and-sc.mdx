@@ -1,6 +1,6 @@
 ---
 sitewide:
-  message: 'Nix Community Survey 2025 is still running!'
+  message: 'Nix Community Survey 2025 is here!'
   link:
     url: https://survey.nixos.org/759934
     text: 'Take the Survey'
@@ -10,21 +10,24 @@ sitewide:
 import Banner from '@/components/ui/Banner.astro';
 
 <Banner
-  wrapperClasses="bg-gradient-to-r from-[#260D40] to-secondary-afghani-blue text-primary-white"
+  wrapperClasses="bg-gradient-to-r from-[#260D40] to-secondary-afghani-blue text-white"
   class="font-heading flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row"
 >
   <span class="flex flex-col">
-    <span class="text-2xl font-bold">
-      Nix Community Survey 2025 is still running!
+    <span class="text-primary-white text-2xl font-bold">
+      Second Steering Committee Election
     </span>
-    <span class="text-md">Help us improve by sharing your feedback.</span>
+    <span class="text-md text-primary-white">
+      Voter registration is still open and voting has started. Click for
+      details.
+    </span>
   </span>
   <a
-    href="https://survey.nixos.org/759934"
+    href="https://github.com/NixOS/SC-election-2025/?tab=readme-ov-file#timeline"
     target="_blank"
     rel="noopener noreferrer"
     class="bg-primary-white hover:bg-primary-black hover:text-primary-white mt-1.5 w-full rounded-md px-4 py-3 text-center leading-none font-bold text-black no-underline md:mt-0 md:w-auto"
   >
-    Take the Survey
+    Read more
   </a>
 </Banner>
