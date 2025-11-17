@@ -53,7 +53,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ['Roboto Flex Variable', ...defaultTheme.fontFamily.sans],
+      sans: ['Epilogue Variable', ...defaultTheme.fontFamily.sans],
       serif: ['Route159', ...defaultTheme.fontFamily.serif],
       heading: ['Route159', ...defaultTheme.fontFamily.sans],
       mono: ['Fira Code Variable', ...defaultTheme.fontFamily.mono],

@@ -5,10 +5,10 @@
 @config '../../tailwind.config.cjs';
 
 @utility text-light-bold {
-  @apply font-extralight;
+  @apply font-light;
 
   & strong {
-    @apply font-extrabold;
+    @apply font-semibold;
   }
 }
 
@@ -24,9 +24,11 @@
   article &ul li {
     @apply inline-block;
   }
+
   article &ul li::after {
     content: ', ';
   }
+
   article &ul li:last-child::after {
     content: '';
   }
@@ -44,7 +46,7 @@
   }
 
   main a:any-link {
-    @apply text-secondary-afghani-blue-45 underline decoration-1 underline-offset-4;
+    @apply text-secondary-afghani-blue-45 font-normal underline decoration-1 underline-offset-4;
   }
 
   ::selection {
@@ -104,20 +106,22 @@
   article ul.inlinelist li {
     @apply inline-block;
   }
+
   article ul.inlinelist li::after {
     content: ', ';
   }
+
   article ul.inlinelist li:last-child::after {
     content: '';
   }
 
   article b,
   article strong {
-    @apply font-bold;
+    @apply font-semibold;
   }
 
   article h3 {
-    @apply text-secondary-afghani-blue mb-4 text-2xl font-bold;
+    @apply text-secondary-afghani-blue mb-4 text-2xl font-semibold;
   }
 
   article p {
@@ -158,7 +162,7 @@
   article h4,
   article h5,
   article h6 {
-    @apply font-heading text-secondary-afghani-blue leading-tight font-bold;
+    @apply font-heading text-secondary-afghani-blue leading-tight font-semibold;
   }
 
   article h1:not(:first-child),

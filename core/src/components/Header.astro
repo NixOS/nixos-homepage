@@ -15,12 +15,12 @@ const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
 const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-black md:hover:border-b-secondary-afghani-blue-65 border-b-4`;
 const navbarItemInactiveStyle = `border-b-secondary-afghani-blue-95 md:border-b-transparent bg-secondary-afghani-blue-95 md:bg-transparent`;
-const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-afghani-blue-85 text-primary-white md:text-primary-black md:bg-transparent font-bold`;
+const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-afghani-blue-85 text-primary-white md:text-primary-black md:bg-transparent font-semibold`;
 ---
 
 <header
   role="banner"
-  class="text-primary-black bg-primary-white sticky top-0 z-50 font-extralight drop-shadow-md"
+  class="text-primary-black bg-primary-white sticky top-0 z-50 font-light drop-shadow-md"
 >
   {
     currentBanner && (
@@ -29,7 +29,7 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
         target="_blank"
         rel="noopener noreferrer"
         class:list={[
-          'block py-2 font-bold',
+          'block py-2 font-semibold',
           currentBanner.data.sitewide.wrapperClasses,
         ]}
       >
