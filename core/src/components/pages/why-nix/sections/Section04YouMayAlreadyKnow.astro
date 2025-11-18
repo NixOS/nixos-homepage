@@ -2,78 +2,92 @@
 
 ---
 
-<div class="grid grid-cols-2 gap-4">
-  <div>
-    <span class="text-nix-blue-darker block rounded-t-xl bg-white px-2 py-1">
-      <b>Containers</b> like
-    </span>
-    <h3
-      class="bg-nix-blue-darker font-heading block px-2 py-1 text-2xl font-bold"
-    >
-      Docker, Dev/Container…
-    </h3>
-    <p class="bg-nix-blue-lighter text-nix-blue-darker rounded-b-xl p-2">
-      OCI-Containers are commonly declared by specifying the build steps Nix
-      takes a different approach by declaring its state in a single
-      configuration file. This ensures not only makes the build process more
-      efficient but also improves reproducibility and auditability.
-    </p>
-  </div>
-  <div>
-    <span class="text-nix-blue-darker block rounded-t-xl bg-white px-2 py-1">
-      <b>Languages</b> like
-    </span>
-    <h3
-      class="bg-nix-blue-darker font-heading block px-2 py-1 text-2xl font-bold"
-    >
-      YAML/JSON, HCL, CUE…
-    </h3>
-    <p class="bg-nix-blue-lighter text-nix-blue-darker rounded-b-xl p-2">
-      While traditional configuration languages like YAML/JSON, HCL, and CUE
-      focus on describing the desired state of a system, Nix goes a step further
-      by providing a functional programming approach to configuration. This
-      allows for more powerful abstractions and composability, making it easier
-      to manage complex configurations.
-    </p>
-  </div>
-  <div>
-    <span class="text-nix-blue-darker block rounded-t-xl bg-white px-2 py-1">
-      <b>Build-Software</b> like...
-    </span>
-    <h3
-      class="bg-nix-blue-darker font-heading block px-2 py-1 text-2xl font-bold"
-    >
-      Bazel, Buck…
-    </h3>
-    <p class="bg-nix-blue-lighter text-nix-blue-darker rounded-b-xl p-2">
-      While build systems like Bazel and Buck focus on efficiently building and
-      testing software projects, Nix takes a more holistic approach by managing
-      not only the build process but also the entire software environment. This
-      includes dependencies, configurations, and even the operating system
-      itself, ensuring that builds are reproducible and consistent across
-      different environments. Nix also allows you to combine different build
-      tools and workflows seamlessly, making it easier to integrate with
-      existing projects and ecosystems.
-    </p>
-  </div>
-  <div>
-    <span class="text-nix-blue-darker block rounded-t-xl bg-white px-2 py-1">
-      <b>Package Managers</b> like
-    </span>
-    <h3
-      class="bg-nix-blue-darker font-heading block px-2 py-1 text-2xl font-bold"
-    >
-      GPF, homebrew, pacman, choco/rate…
-    </h3>
-    <p class="bg-nix-blue-lighter text-nix-blue-darker rounded-b-xl p-2">
-      While traditional package managers like Homebrew, Pacman, and Chocolatey
-      focus on installing and managing software packages, Nix takes a more
-      declarative approach by allowing you to define your entire system
-      configuration in a single file. This means you can specify not only the
-      packages you want to install but also their dependencies, configurations,
-      and even the operating system itself. Nix also provides powerful features
-      like atomic upgrades and rollbacks, making it easy to manage your system
-      and recover from failures.
-    </p>
-  </div>
-</div>
+<p class="mb-4">
+  If you are already familiar with modern build and infrasctructure tools, the
+  following table highlights how Nix's declarative and functional approach
+  aligns with concepts you may already know, while also showcasing the unique
+  benefits that Nix brings to the table.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> Category </th>
+      <th> Examples </th>
+      <th> Traditional Approach </th>
+      <th> Nix Approach </th>
+      <th> Benefits </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> OCI-Containers </td>
+      <td> Docker, Dev/Container… </td>
+      <td> Specify build steps to reach the desired state </td>
+      <td> Declare the desired state as a evaluatable expression </td>
+      <td>
+        <ul>
+          <li>Predictability</li>
+          <li>Reproducibility</li>
+          <li>Auditability</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td> Languages </td>
+      <td> YAML/JSON, HCL, CUE… </td>
+      <td> Descriptive but often limited in abstraction </td>
+      <td> Use functional programming for powerful abstractions </td>
+      <td>
+        <ul>
+          <li>Composability</li>
+          <li>Reusability</li>
+          <li>Maintainability</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td> Build-Software </td>
+      <td> Bazel, Buck… </td>
+      <td>
+        Focus on the build process, often limited to specific ecosystems
+      </td>
+      <td>
+        Manage entire software environment including dependencies across
+        ecosystems
+      </td>
+      <td>
+        <ul>
+          <li>Reproducibility</li>
+          <li>Flexibility</li>
+          <li>Integration</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td> Package Managers </td>
+      <td> GPF, homebrew, pacman, choco/rate… </td>
+      <td> Install and manage software packages imperatively </td>
+      <td>
+        Declaratively define the desired system state in a functional
+        programming expression
+      </td>
+      <td>
+        <ul>
+          <li>Atomic upgrades</li>
+          <li>Rollbacks</li>
+          <li>Consistency</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="mt-4">
+  It is important to note that while this table positions Nix as an alternative
+  to these tools, Nix can also complement and integrate with them, enhancing
+  their capabilities through its unique approach to package and environment
+  management. The strength of Nix lies in its ability to provide a consistent
+  and reliable foundation, regardless of the specific tools or ecosystems in
+  use.
+</p>
