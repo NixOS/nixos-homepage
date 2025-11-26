@@ -16,13 +16,9 @@ const require = createRequire(import.meta.url);
 function selectFavicon(theme = 'default') {
   switch (theme) {
     case 'pride':
-      return require.resolve(
-        `${process.env.npm_config_local_prefix}/@NixOS/branding/artifacts/internal/nixos-logomark-rainbow-gradient-none.svg`,
-      );
+      return require.resolve("@nixos/branding/artifacts/internal/nixos-logomark-rainbow-gradient-none.svg");
     default:
-      return require.resolve(
-        `${process.env.npm_config_local_prefix}/@NixOS/branding/artifacts/internal/nixos-logomark-default-gradient-none.svg`,
-      );
+      return require.resolve("@nixos/branding/artifacts/internal/nixos-logomark-default-gradient-none.svg");
   }
 }
 // https://astro.build/config

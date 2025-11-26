@@ -35,6 +35,7 @@
     "turndown": "^7.2.2"
   },
   "devDependencies": {
+    "@nixos/branding": "^0.1.0",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/simple-icons": "^1.2.59",
     "@iconify/tailwind": "^1.2.0"
