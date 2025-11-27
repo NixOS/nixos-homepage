@@ -8,10 +8,11 @@ import { Image } from 'astro:assets';
 
 const footerMenu = await getEntry('menus', 'footer');
 
-import logoWHite from '@NixOS/branding/artifacts/internal/nixos-logomark-white-flat-none.svg';
+import logoWHite from '@nixos/branding/artifacts/internal/nixos-logomark-white-flat-none.svg';
 ---
 
 <footer>
+  <h2 class="sr-only">Footer</h2>
   <div
     class="bg-secondary-afghani-blue-25 text-primary-white-95 clear-both font-light"
   >
@@ -22,9 +23,9 @@ import logoWHite from '@NixOS/branding/artifacts/internal/nixos-logomark-white-f
         {
           footerMenu.data.sections.map((menu) => (
             <div class="flex-1 basis-1/2 md:basis-0">
-              <h4 class="font-heading text-secondary-afghani-blue-85 mb-2 text-xl font-semibold">
+              <h3 class="font-heading text-secondary-afghani-blue-85 mb-2 text-xl font-bold">
                 {menu.name}
-              </h4>
+              </h3>
               <ul class="font-light">
                 {menu.items.map((item) => (
                   <li class="border-secondary-afghani-blue-55 border-b-1 last:border-b-0">
@@ -115,6 +116,7 @@ import logoWHite from '@NixOS/branding/artifacts/internal/nixos-logomark-white-f
       id="scroll-to-top"
       class="bg-secondary-afghani-blue-25 hover:bg-secondary-afghani-blue-45 text-primary-white absolute right-4 bottom-4 z-50 rounded-xl drop-shadow-md transition-all duration-100 md:-right-14 md:bottom-8"
     >
+      <span class="sr-only">Scroll to top</span>
       <Icon class="h-14 w-14 p-1" name="mdi:keyboard-arrow-up" />
     </a>
   </Container>
