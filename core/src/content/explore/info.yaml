@@ -19,7 +19,7 @@ content:
         You will no longer have to hear:
     emphasis: But it works on my machine!
   - imageSrc: '/images/explore/multi.svg'
-    imageAlt: An octopus holding multiple flags with different programming language logos on them. These include Python, Rust, Go, JS and Scala.
+    imageAlt: An octopus holding multiple flags with different programming language logos on them.
     heading: One tool, many languages.
     subHeading: >
       With today's polyglot development environments, each language has its own way of building and testing.
@@ -37,7 +37,7 @@ content:
         Language specific package managers are good at dependencies in their specific language.
         But they cannot provide other dependencies, like the ones you would usually have to install system-wide.
   - imageSrc: '/images/explore/disaster.svg'
-    imageAlt: Three server racks. The outer two are on fire, while the middle one is safe. The outer ones are grey while the middle one is blue and has a NixOS logo.
+    imageAlt: Three server racks. The outer two are on fire, while the NixOS server in the middle is safe.
     heading: Continuous integration for free.
     subHeading: >
       Your development environment is your continuous integration environment.
@@ -107,7 +107,7 @@ content:
       - >
         No need to turn your system upside down just because you want to test some experimental and bleeding edge versions of software.
   - imageSrc: '/images/explore/community.svg'
-    imageAlt: A monkey sitting in front of a laptop raising his fist in the air with joy surrounded by hands clapping.
+    imageAlt: A monkey sitting in front of a laptop raising his fist in the air with joy.
     heading: Contributing is only a pull request away.
     subHeading: >
       Community is at the core of Nix.

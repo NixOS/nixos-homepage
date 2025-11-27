@@ -12,6 +12,7 @@ import logoWHite from '@nixos/branding/artifacts/internal/nixos-logomark-white-f
 ---
 
 <footer>
+  <h2 class="sr-only">Footer</h2>
   <div
     class="bg-secondary-afghani-blue-25 text-primary-white-95 clear-both font-light"
   >
@@ -22,9 +23,9 @@ import logoWHite from '@nixos/branding/artifacts/internal/nixos-logomark-white-f
         {
           footerMenu.data.sections.map((menu) => (
             <div class="flex-1 basis-1/2 md:basis-0">
-              <h4 class="font-heading text-secondary-afghani-blue-85 mb-2 text-xl font-bold">
+              <h3 class="font-heading text-secondary-afghani-blue-85 mb-2 text-xl font-bold">
                 {menu.name}
-              </h4>
+              </h3>
               <ul class="font-extralight">
                 {menu.items.map((item) => (
                   <li class="border-secondary-afghani-blue-55 border-b-1 last:border-b-0">
