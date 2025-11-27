@@ -57,7 +57,7 @@ const getMemberLink = (member) => {
                 return (
                   <>
                     {' '}
-                    <a href={data[0]}>${data[1]}</a>
+                    <a href={data[0]}>@{data[1]}</a>
                     {idx < foundationBoard.data.members.length - 1 ? ',' : ''}
                   </>
                 );
