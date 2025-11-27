@@ -22,21 +22,20 @@
   },
   "homepage": "https://github.com/NixOS/nixos-homepage#readme",
   "workspaces": [
-    "core",
-    "@NixOS/branding"
+    "core"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.37.0",
-    "@typescript-eslint/parser": "^8.45.0",
-    "eslint": "^9.37.0",
-    "eslint-plugin-astro": "^1.3.1",
+    "@eslint/js": "^9.39.1",
+    "@typescript-eslint/parser": "^8.47.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-astro": "^1.5.0",
     "express": "^5.1.0",
-    "globals": "^16.4.0",
+    "globals": "^16.5.0",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-astro-organize-imports": "^0.4.11",
-    "prettier-plugin-tailwindcss": "^0.6.14",
-    "typescript-eslint": "^8.45.0"
+    "prettier-plugin-tailwindcss": "^0.7.1",
+    "typescript-eslint": "^8.47.0"
   },
   "dependencies": {
     "chalk": "^5.6.2"

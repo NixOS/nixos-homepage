@@ -1,5 +1,6 @@
 content:
   - imageSrc: '/images/explore/works.svg'
+    imageAlt: A lion sitting in front of a laptop, raising his hands in the sky with joy screaming "Yes!"
     heading: Always working development environment.
     subHeading: >
       Nix provides developers with a complete and consistent development environment.
@@ -18,6 +19,7 @@ content:
         You will no longer have to hear:
     emphasis: But it works on my machine!
   - imageSrc: '/images/explore/multi.svg'
+    imageAlt: An octopus holding multiple flags with different programming language logos on them.
     heading: One tool, many languages.
     subHeading: >
       With today's polyglot development environments, each language has its own way of building and testing.
@@ -35,6 +37,7 @@ content:
         Language specific package managers are good at dependencies in their specific language.
         But they cannot provide other dependencies, like the ones you would usually have to install system-wide.
   - imageSrc: '/images/explore/disaster.svg'
+    imageAlt: Three server racks. The outer two are on fire, while the NixOS server in the middle is safe.
     heading: Continuous integration for free.
     subHeading: >
       Your development environment is your continuous integration environment.
@@ -49,6 +52,7 @@ content:
         Trying to keep system dependencies of development environments in sync with continuous integration is a disaster waiting to happen.
     emphasis: Don't wait for the disaster, prevent it.
   - imageSrc: '/images/explore/cloud.svg'
+    imageAlt: A rocket taking off to a cloud with a NixOS logo inside. The text below says "3... 2... 1... GO"
     heading: From zero to cloud.
     subHeading: >
       Use the same tool to build projects, configure machines and deploy to the cloud.
@@ -64,6 +68,7 @@ content:
         Forget Dockerfiles and build docker images with Nix in a declarative and efficient way.
     emphasis: Nix and Docker is a match made in heaven.
   - imageSrc: '/images/explore/timemachine.svg'
+    imageAlt: A Delorean car with a Nixos logo on the door and a speeach bubble saying "Previous version!".
     heading: Is the previous version better? Roll back anytime.
     subHeading: >
       Always be able to roll back to the version that you want.
@@ -84,6 +89,7 @@ content:
         And since nothing is overwritten, the old versions are still there after an upgrade.
         This means that you can quickly roll back to the old version.
   - imageSrc: '/images/explore/experiment.svg'
+    imageAlt: A rabbit scientist mixing colorful liquids in a lab wearing a NixOS shirt.
     heading: Experiment without fear.
     subHeading: >
       There should be no fear of breaking your system when experimenting with new software.
@@ -101,6 +107,7 @@ content:
       - >
         No need to turn your system upside down just because you want to test some experimental and bleeding edge versions of software.
   - imageSrc: '/images/explore/community.svg'
+    imageAlt: A monkey sitting in front of a laptop raising his fist in the air with joy.
     heading: Contributing is only a pull request away.
     subHeading: >
       Community is at the core of Nix.
