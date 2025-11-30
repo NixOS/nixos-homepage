@@ -5,7 +5,7 @@ import path from 'node:path';
 import parser from 'node-html-parser';
 import svgo from 'svgo';
 import defaultTheme from 'tailwindcss/defaultTheme';
-import colors from '@NixOS/branding/colors/tailwind.js';
+import colors from '@nixos/branding/colors/tailwind.js';
 
 const inlineSvgs = {
   hero: './src/assets/image/hero-bg.svg',

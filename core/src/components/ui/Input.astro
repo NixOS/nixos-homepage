@@ -7,6 +7,7 @@ interface Props {
   icon?: 'search' | null;
   placeholder?: string;
   name?: string;
+  title?: string;
 }
 
 const {
@@ -15,10 +16,12 @@ const {
   icon = null,
   placeholder = '',
   name = null,
+  title,
 } = Astro.props;
 ---
 
-<div class="relative">
+<label class="relative block">
+  <span class="sr-only">{title}</span>
   <Icon
     alt="Search"
     class:list={[
@@ -34,6 +37,7 @@ const {
   />
   <input
     type="text"
+    title={title}
     class="focus:border-secondary-afghani-blue-75 focus:outline-secondary-afghani-blue-95 border-primary-black-85 outline-2 outline-transparent"
     class:list={[
       'text-normal rounded-full',
@@ -49,4 +53,4 @@ const {
     name={name}
     placeholder={placeholder}
   />
-</div>
+</label>
