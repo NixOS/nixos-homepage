@@ -1,123 +1,64 @@
 ---
-import { Icon } from 'astro-icon/components';
+import FeatureBox from '../FeatureBox.astro';
 ---
 
 <div class="grid grid-cols-3 gap-4 pt-3">
-  <div
-    class="bg-secondary-afghani-blue-95 relative z-0 w-full overflow-hidden rounded-xl px-4 py-3"
-  >
-    <h3 class="font-heading text-nix-blue-dark text-2xl font-bold">
-      Long-term savings
-    </h3>
-    <p>
-      While there may be initial costs associated with adopting Nix, the
-      long-term savings can be significant. By reducing the time and effort
-      required for managing dependencies, environments, and deployments, Nix can
-      lead to increased productivity and reduced operational costs over time.
-    </p>
-    <Icon
-      name="mdi:attach-money"
-      class="text-secondary-afghani-blue-75 absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30"
-    />
-  </div>
-  <div
-    class="bg-secondary-afghani-blue-95 relative z-0 w-full overflow-hidden rounded-xl px-4 py-3"
-  >
-    <h3 class="font-heading text-nix-blue-dark text-2xl font-bold">
-      Job security
-    </h3>
-    <p>
-      By adopting Nix, organizations can reduce their reliance on specific
-      individuals or teams for managing environments and deployments. The
-      declarative nature of Nix allows for easier knowledge transfer and reduces
-      the risk of key personnel leaving the organization.
-    </p>
-    <Icon
-      name="mdi:briefcase"
-      class="text-secondary-afghani-blue-75 absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30"
-    />
-  </div>
-  <div
-    class="bg-secondary-afghani-blue-95 relative z-0 w-full overflow-hidden rounded-xl px-4 py-3"
-  >
-    <h3 class="font-heading text-nix-blue-dark text-2xl font-bold">
-      Availability
-    </h3>
-    <p>
-      Nix's declarative nature and ability to roll back changes can enhance the
-      availability of systems and applications. In the event of a failure or
-      misconfiguration, Nix allows for quick recovery to a known good state,
-      minimizing downtime and ensuring continuous availability.
-    </p>
-    <Icon
-      name="mdi:clock-time-two"
-      class="text-secondary-afghani-blue-75 absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30"
-    />
-  </div>
-  <div
-    class="bg-secondary-afghani-blue-95 relative z-0 w-full overflow-hidden rounded-xl px-4 py-3"
-  >
-    <h3 class="font-heading text-nix-blue-dark text-2xl font-bold">
-      Uniformity
-    </h3>
-    <p>
-      Nix provides a consistent and uniform way of managing environments and
-      deployments across different projects, languages and tools within an
-      organization. This uniformity can lead to reduced complexity, easier
-      collaboration, and improved overall efficiency.
-    </p>
-    <Icon
-      name="mdi:bricks"
-      class="text-secondary-afghani-blue-75 absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30"
-    />
-  </div>
-  <div
-    class="bg-secondary-afghani-blue-95 relative z-0 w-full overflow-hidden rounded-xl px-4 py-3"
-  >
-    <h3 class="font-heading text-nix-blue-dark text-2xl font-bold">Control</h3>
-    <p>
-      Nix allows you to have full control over your environments and
-      dependencies. You can specify exact versions of packages, control build
-      processes, and control how your developent shell or machine is set up and
-      optionally isolate everything.
-    </p>
-    <Icon
-      name="mdi:steering"
-      class="text-secondary-afghani-blue-75 absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30"
-    />
-  </div>
-  <div
-    class="bg-secondary-afghani-blue-95 relative z-0 w-full overflow-hidden rounded-xl px-4 py-3"
-  >
-    <h3 class="font-heading text-nix-blue-dark text-2xl font-bold">
-      Customisation
-    </h3>
-    <p>
-      Nix's flexibility allows for extensive customization of environments and
-      deployments. You can tailor your setups to meet specific requirements,
-      ensuring that your systems are optimized for your unique use cases and fit
-      your teams and projects requirements.
-    </p>
-    <Icon
-      name="mdi:brush"
-      class="text-secondary-afghani-blue-75 absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30"
-    />
-  </div>
-  <div
-    class="bg-secondary-afghani-blue-95 relative z-0 w-full overflow-hidden rounded-xl px-4 py-3"
-  >
-    <h3 class="font-heading text-nix-blue-dark text-2xl font-bold">
-      Auditability
-    </h3>
-    <p>
-      Due to everything being declarative and versioned, you can easily track
-      changes to your environments and deployments over time. This not only
-      allows for easier debugging and troubleshooting, but also provides a clear
-      audit trail for compliance and security purposes.
-    </p>
-    <Icon
-      name="mdi:clipboard"
-      class="text-secondary-afghani-blue-75 absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30"
-    />
-  </div>
+    <FeatureBox title="Long-term savings" icon="mdi:attach-money">
+        <p>
+            While there may be initial costs associated with adopting Nix, the
+            long-term savings can be significant. By reducing the time and
+            effort required for managing dependencies, environments, and
+            deployments, Nix can lead to increased productivity and reduced
+            operational costs over time.
+        </p>
+    </FeatureBox>
+    <FeatureBox title="Job security" icon="mdi:briefcase">
+        <p>
+            By adopting Nix, organizations can reduce their reliance on specific
+            individuals or teams for managing environments and deployments. The
+            declarative nature of Nix allows for easier knowledge transfer and
+            reduces the risk of key personnel leaving the organization.
+        </p>
+    </FeatureBox>
+    <FeatureBox title="Availability" icon="mdi:clock-time-two">
+        <p>
+            Nix's declarative nature and ability to roll back changes can
+            enhance the availability of systems and applications. In the event
+            of a failure or misconfiguration, Nix allows for quick recovery to a
+            known good state, minimizing downtime and ensuring continuous
+            availability.
+        </p>
+    </FeatureBox>
+    <FeatureBox title="Uniformity" icon="mdi:bricks">
+        <p>
+            Nix provides a consistent and uniform way of managing environments
+            and deployments across different projects, languages and tools
+            within an organization. This uniformity can lead to reduced
+            complexity, easier collaboration, and improved overall efficiency.
+        </p>
+    </FeatureBox>
+    <FeatureBox title="Control" icon="mdi:steering">
+        <p>
+            Nix allows you to have full control over your environments and
+            dependencies. You can specify exact versions of packages, control
+            build processes, and control how your developent shell or machine is
+            set up and optionally isolate everything.
+        </p>
+    </FeatureBox>
+    <FeatureBox title="Customisation" icon="mdi:brush">
+        <p>
+            Nix's flexibility allows for extensive customization of environments
+            and deployments. You can tailor your setups to meet specific
+            requirements, ensuring that your systems are optimized for your
+            unique use cases and fit your teams and projects requirements.
+        </p>
+    </FeatureBox>
+    <FeatureBox title="Auditability" icon="mdi:clipboard">
+        <p>
+            Due to everything being declarative and versioned, you can easily
+            track changes to your environments and deployments over time. This
+            not only allows for easier debugging and troubleshooting, but also
+            provides a clear audit trail for compliance and security purposes.
+        </p>
+    </FeatureBox>
 </div>
