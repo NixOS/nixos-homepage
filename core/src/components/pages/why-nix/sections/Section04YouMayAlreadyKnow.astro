@@ -9,24 +9,38 @@
   benefits that Nix brings to the table.
 </p>
 
-<table>
-  <thead>
+<table class="table-auto">
+  <thead class="font-blold border-b-secondary-afghani-blue-45 border-b-2">
     <tr>
-      <th> Category </th>
-      <th> Examples </th>
-      <th> Traditional Approach </th>
-      <th> Nix Approach </th>
-      <th> Benefits </th>
+      <th class="p-2"> Category </th>
+      <th class="p-2"> Examples </th>
+      <th class="w-max p-2"> Traditional Approach </th>
+      <th class="w-max p-2"> Nix Approach </th>
+      <th class="p-2"> Benefits </th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="bg-secondary-afghani-blue-95">
     <tr>
-      <td> OCI-Containers </td>
-      <td> Docker, Dev/Container… </td>
-      <td> Specify build steps to reach the desired state </td>
-      <td> Declare the desired state as a evaluatable expression </td>
-      <td>
+      <td
+        class="bg-secondary-afghani-blue-45 text-primary-white w-max p-2 font-bold"
+      >
+        OCI-Containers
+      </td>
+      <td class="text-secondary-afghani-blue-25 max-w-min p-2 font-bold">
         <ul>
+          <li>Docker</li>
+          <li>Podman</li>
+          <li>Buildah</li>
+        </ul>
+      </td>
+      <td class="bg-accent-norwegian-pink-95 p-2">
+        Specify build steps to reach the desired state
+      </td>
+      <td class="bg-accent-zambian-green-95 p-2">
+        Declare the desired state as a evaluatable expression
+      </td>
+      <td>
+        <ul class="list-inside list-disc">
           <li>Predictability</li>
           <li>Reproducibility</li>
           <li>Auditability</li>
@@ -34,12 +48,26 @@
       </td>
     </tr>
     <tr>
-      <td> Languages </td>
-      <td> YAML/JSON, HCL, CUE… </td>
-      <td> Descriptive but often limited in abstraction </td>
-      <td> Use functional programming for powerful abstractions </td>
-      <td>
+      <td
+        class="bg-secondary-afghani-blue-45 text-primary-white w-max p-2 font-bold"
+      >
+        Languages
+      </td>
+      <td class="text-secondary-afghani-blue-25 max-w-min p-2 font-bold">
         <ul>
+          <li>YAML/JSON</li>
+          <li>HCL</li>
+          <li>CUE</li>
+        </ul>
+      </td>
+      <td class="bg-accent-norwegian-pink-95 p-2">
+        Descriptive but often limited in abstraction
+      </td>
+      <td class="bg-accent-zambian-green-95 p-2">
+        Use functional programming for powerful abstractions
+      </td>
+      <td class="min-w-max">
+        <ul class="list-inside list-disc">
           <li>Composability</li>
           <li>Reusability</li>
           <li>Maintainability</li>
@@ -47,17 +75,26 @@
       </td>
     </tr>
     <tr>
-      <td> Build-Software </td>
-      <td> Bazel, Buck… </td>
-      <td>
+      <td
+        class="bg-secondary-afghani-blue-45 text-primary-white w-max p-2 font-bold"
+      >
+        Build-Software
+      </td>
+      <td class="text-secondary-afghani-blue-25 max-w-min p-2 font-bold">
+        <ul>
+          <li>Bazel</li>
+          <li>Buck</li>
+        </ul>
+      </td>
+      <td class="bg-accent-norwegian-pink-95 p-2">
         Focus on the build process, often limited to specific ecosystems
       </td>
-      <td>
+      <td class="bg-accent-zambian-green-95 p-2">
         Manage entire software environment including dependencies across
         ecosystems
       </td>
-      <td>
-        <ul>
+      <td class="min-w-max">
+        <ul class="list-inside list-disc">
           <li>Reproducibility</li>
           <li>Flexibility</li>
           <li>Integration</li>
@@ -65,15 +102,27 @@
       </td>
     </tr>
     <tr>
-      <td> Package Managers </td>
-      <td> GPF, homebrew, pacman, choco/rate… </td>
-      <td> Install and manage software packages imperatively </td>
-      <td>
+      <td
+        class="bg-secondary-afghani-blue-45 text-primary-white w-max p-2 font-bold"
+      >
+        Package Managers
+      </td>
+      <td class="text-secondary-afghani-blue-25 max-w-min p-2 font-bold">
+        <ul>
+          <li>homebrew</li>
+          <li>apt/rpm</li>
+          <li>choco/winget</li>
+        </ul>
+      </td>
+      <td class="bg-accent-norwegian-pink-95 p-2">
+        Install and manage software packages imperatively
+      </td>
+      <td class="bg-accent-zambian-green-95 p-2">
         Declaratively define the desired system state in a functional
         programming expression
       </td>
-      <td>
-        <ul>
+      <td class="min-w-max">
+        <ul class="list-inside list-disc">
           <li>Atomic upgrades</li>
           <li>Rollbacks</li>
           <li>Consistency</li>
