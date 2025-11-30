@@ -6,6 +6,7 @@ import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 
 import '@/styles/base.css';
+import '@/styles/route159-fonts.css';
 
 const {
   title = 'Nix &amp; NixOS | Declarative builds and deployments',
@@ -85,13 +86,13 @@ const headFeedLinks = blogMenu.data.map((e) => {
       // Fonts
       import '@fontsource-variable/overpass';
       import '@fontsource-variable/fira-code';
-      import '@fontsource-variable/roboto-flex/wdth.css';
+      import '@fontsource-variable/epilogue';
       import '@/lib/client/scrollToTopHandler.js';
     </script>
 
     <style>
       @font-face {
-        font-family: 'Roboto Flex Variable';
+        font-family: 'Epilogue Variable';
       }
     </style>
   </body>
