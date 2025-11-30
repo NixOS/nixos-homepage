@@ -1,9 +1,14 @@
 ---
-
+const { dark } = Astro.props;
 ---
 
 <div
-  class="bg-secondary-afghani-blue-95 text-secondary-afghani-blue-15 rounded-3xl p-8 font-bold"
+  class:list={[
+    'my-4 rounded-xl p-8 font-bold',
+    dark
+      ? 'dark bg-secondary-afghani-blue-35 text-secondary-afghani-blue-95!'
+      : 'bg-secondary-afghani-blue-95 text-secondary-afghani-blue-15',
+  ]}
 >
   <slot />
 </div>
