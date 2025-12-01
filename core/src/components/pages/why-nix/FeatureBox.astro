@@ -3,41 +3,41 @@ import { Icon } from 'astro-icon/components';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 export const boxVariants = cva(
-    'relative z-0 w-full overflow-hidden rounded-xl px-4 py-3',
-    {
-        variants: {
-            color: {
-                light: 'bg-secondary-afghani-blue-95',
-                dark: 'bg-secondary-afghani-blue-35',
-            },
-        },
+  'relative z-0 w-full overflow-hidden rounded-xl px-4 py-3',
+  {
+    variants: {
+      color: {
+        light: 'bg-secondary-afghani-blue-95',
+        dark: 'bg-secondary-afghani-blue-35',
+      },
     },
+  },
 );
 
 export const iconVariants = cva(
-    'absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30',
-    {
-        variants: {
-            color: {
-                light: 'text-secondary-afghani-blue-75',
-                dark: 'text-secondary-afghani-blue-15',
-            },
-        },
+  'absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30',
+  {
+    variants: {
+      color: {
+        light: 'text-secondary-afghani-blue-75',
+        dark: 'text-secondary-afghani-blue-15',
+      },
     },
+  },
 );
 
 interface Props extends VariantProps<typeof boxVariants> {
-    title?: string;
-    icon?: string;
+  title?: string;
+  icon?: string;
 }
 
 const { title, icon, color = 'light' } = Astro.props;
 ---
 
 <div class={boxVariants({ color })}>
-    <h3 class="font-heading text-nix-blue-dark text-2xl font-bold">
-        {title}
-    </h3>
-    <slot />
-    <Icon name={icon} class={iconVariants({ color })} />
+  <h3 class="font-heading text-nix-blue-dark text-2xl font-bold">
+    {title}
+  </h3>
+  <slot />
+  <Icon name={icon} class={iconVariants({ color })} />
 </div>
