@@ -55,16 +55,12 @@
 }
 
 @layer components {
-  .text-light-bold {
-    @apply font-extralight;
-  }
-
   .text-light-bold strong {
     @apply font-extrabold;
   }
 
   article {
-    @apply leading-7 font-light;
+    @apply leading-7 font-normal tracking-wide;
   }
 
   article ol {
@@ -162,7 +158,7 @@
   article h4,
   article h5,
   article h6 {
-    @apply font-heading text-secondary-afghani-blue leading-tight font-semibold;
+    @apply font-heading text-secondary-afghani-blue leading-tight font-bold;
   }
 
   article h1:not(:first-child),
