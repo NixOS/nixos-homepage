@@ -60,7 +60,7 @@
   }
 
   article {
-    @apply leading-7 font-normal tracking-wide;
+    @apply leading-7 tracking-wide;
   }
 
   article ol {
