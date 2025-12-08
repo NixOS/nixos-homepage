@@ -13,348 +13,368 @@ const foundationBoard = await getEntry('teams', '010_foundation-board');
 const steeringCommittee = await getEntry('teams', '000_steering-committee');
 
 const getMemberLink = (member) => {
-  if (member.github)
-    return [`https://github.com/${member.github}`, member.github];
-  else if (member.discourse)
-    return [
-      `https://discourse.nixos.org/u/${member.discourse}`,
-      member.discourse,
-    ];
-  else return [null, member.name];
+    if (member.github)
+        return [`https://github.com/${member.github}`, member.github];
+    else if (member.discourse)
+        return [
+            `https://discourse.nixos.org/u/${member.discourse}`,
+            member.discourse,
+        ];
+    else return [null, member.name];
 };
 ---
 
 <Layout title="Governance">
-  <PageHeader text="Governance" />
-  <Container class="py-8 leading-relaxed font-extralight">
-    <h2
-      class="font-heading text-secondary-afghani-blue mt-8 text-4xl font-bold"
-    >
-      Nix Leadership Bodies
-    </h2>
-    <p>
-      We use the term Nix community as an umbrella term for the broader
-      project; not just the package manager implementation.
-    </p>
-    <p class="mb-6">The Nix community is guided by two leadership bodies:</p>
-    <div class="mt-2 mb-3 grid gap-4 md:grid-cols-2">
-      <div
-        class="bg-secondary-afghani-blue-95 flex w-full flex-col gap-2 rounded-xl p-4"
-      >
-        <h3
-          class="font-heading text-secondary-afghani-blue text-3xl leading-none font-bold"
+    <PageHeader text="Governance" />
+    <Container class="py-8 leading-relaxed font-extralight">
+        <h2
+            class="font-heading text-secondary-afghani-blue mt-8 text-4xl font-bold"
         >
-          The Steering Committee (SC)
-        </h3>
-        <span class="text-secondary-afghani-blue-35 text-lg">
-          7 elected individuals to represent the community
-        </span>
-        <span>
-          <b>Responsibilities:</b> Technical and community decisions, delegation
-          and guidance on partnership decisions
-        </span>
-        <span>
-          <b>Members:</b>
-          {
-            steeringCommittee.data.members.map((member, idx) => {
-              const data = getMemberLink(member);
-              if (data[0]) {
-                return (
-                  <>
-                    {' '}
-                    <a href={data[0]}>@{data[1]}</a>
-                    {idx < foundationBoard.data.members.length - 1 ? ',' : ''}
-                  </>
-                );
-              } else {
-                return data[1];
-              }
-            })
-          }
-        </span>
-        <a href="/community/teams/steering-committee">More Info</a>
-      </div>
-      <div
-        class="bg-secondary-afghani-blue-95 flex w-full flex-col gap-2 rounded-xl p-4"
-      >
-        <h3
-          class="font-heading text-secondary-afghani-blue text-3xl leading-none font-bold"
-        >
-          The Foundation Board
-        </h3>
-        <span class="text-secondary-afghani-blue-35 text-lg">
-          Board members of the Stichting NixOS Foundation, a non-profit
-          organisation in the Netherlands
-        </span>
-        <span>
-          <b>Responsibilities:</b> Legal, financial and partnership decisions and
-          delegation
-        </span>
-        <span>
-          <b>Members:</b>
-          {
-            foundationBoard.data.members.map((member, idx) => {
-              const data = getMemberLink(member);
-              if (data[0]) {
-                return (
-                  <>
-                    {' '}
-                    <a href={data[0]}>@{data[1]}</a>
-                    {idx < foundationBoard.data.members.length - 1 ? ',' : ''}
-                  </>
-                );
-              } else {
-                return data[1];
-              }
-            })
-          }
-        </span>
-        <a href="/community/teams/foundation-board">More Info</a>
-      </div>
-    </div>
-    <p>
-      Many decisions are made in a distributed way by the <a href="/community"
-        >{teams.length} teams</a
-      >, among many other ones not listed on the website and many more
-      individual specialists, responsible for various areas. From the leadership
-      bodies down to individual contributors, almost everybody is here as a
-      passionate volunteer.
-    </p>
-    <h3
-      class="font-heading text-secondary-afghani-blue mt-4 text-3xl font-bold"
-    >
-      Governance Constitution
-    </h3>
-    <p class="mb-2">
-      The <a href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
-        >Nix Governance Constitution</a
-      > describes each body's responsibilities, how the steering committee is elected,
-      and how decisions are made inside the steering committee.
-    </p>
-    <h3
-      class="font-heading text-secondary-afghani-blue mt-4 text-3xl font-bold"
-    >
-      Steering Committee Elections
-    </h3>
-    <p class="mb-2">
-      Every year, the Nix community elects members to the steering committee.
-      Members generally hold a two-year term, with elections held annually to
-      fill at least half of the seats. You can read more about the election
-      process in the <a
-        href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
-        >Nix Governance Constitution</a
-      >.
-    </p>
-    <p>
-      The elections are documented in GitHub repositories under the <a
-        href="https://github.com/NixOS">NixOS organization</a
-      >.
-    </p>
-    <p>
-      <b>Current and past elections:</b>
-      <a href="https://github.com/NixOS/SC-election-2025">2025</a>, <a
-        href="https://github.com/NixOS/SC-election-2024">2024</a
-      >
-    </p>
-  </Container>
-  <Divider mirrorY />
-  <div
-    class="bg-secondary-afghani-blue-45 text-primary-white py-8 font-extralight"
-  >
-    <Container class="space-y-2">
-      <h2
-        class="font-heading text-primary-white mt-4 text-4xl font-bold"
-        id="community-values-intro"
-      >
-        Values
-        <a href="#community-values-intro" class="text-lg">🔗</a>
-      </h2>
-
-      <Quotation dark>
+            Nix Leadership Bodies
+        </h2>
         <p>
-          Communities form when different people unite around a common purpose.
-          Shared values guide decision making, and community goals supersede
-          individual interests and agendas.
+            We use the term Nix community as an umbrella term for the broader
+            project; not just the package manager implementation.
         </p>
-
-        <p class="py-2 text-right italic">
-          <a href="https://opensource.com/open-source-way" class="text-lg"
-            >The Open Source Way</a
-          >
+        <p class="mb-6">
+            The Nix community is guided by two leadership bodies:
         </p>
-      </Quotation>
-
-      <p>
-        Our common purpose is to develop, propagate, and promote the adoption of
-        the <a href="https://edolstra.github.io/pubs/phd-thesis.pdf"
-          >purely functional software deployment model</a
-        >. Our values help us achieve this purpose by guiding decisionmaking
-        across the community, keeping us moving in a common direction. This
-        document captures our core values so that they can be shared and
-        referenced by everyone in the community.
-      </p>
-
-      <h3
-        class="font-heading text-primary-white mt-4 text-3xl font-bold"
-        id="community-values-whatis"
-      >
-        What is a value?
-        <a href="#community-values-whatis" class="text-lg">🔗</a>
-      </h3>
-
-      <p>
-        Values are <span class="italic">not</span> a Code of Conduct, they do not
-        define governance structures, and they do not provide specific policies.
-        Instead, values inform the decisions we make about these things. A good test
-        for <a
-          href="https://medium.com/the-u-s-digital-service/our-values-1fc02b53598"
-          >whether something is a value</a
-        > is:
-      </p>
-
-      <p>
-        If a statement can be invoked by anyone in an organization, and cause a
-        decision to be re-evaluated or changed, without regard to anyone’s rank
-        or title, then you have a bona fide [i.e. genuine] value. If it doesn’t
-        work that way, then it’s not a value.
-      </p>
-
-      <p>
-        To apply in many situations, values must be high-level, abstract
-        concepts. Therefore, in the text below, each value is presented as a
-        heading followed by an elaboration of its meaning. This is meant as a
-        starting point for interpretation, not a comprehensive definition. The
-        heading and the elaboration have equal importance.
-      </p>
-      <h3
-        class="font-heading mt-4 text-3xl font-bold"
-        id="community-values-values"
-      >
-        The values
-        <a href="#community-values-values" class="text-lg">🔗</a>
-      </h3>
-
-      <h4
-        class="font-heading mt-4 text-2xl font-bold"
-        id="community-values-respect"
-      >
-        Respect and civility
-        <a href="#community-values-respect" class="text-lg">🔗</a>
-      </h4>
-
-      <p>
-        We treat each other with respect and civility. No matter one's
-        individual identity, circumstances, level of contribution to the
-        project, or status, everyone has the right to respect, and everyone has
-        the duty to treat others with respect. We prioritise project health over
-        individual interests. People with higher visibility within the project
-        or towards the public are subject to higher expectations for their
-        conduct.
-      </p>
-
-      <h4
-        class="font-heading mt-4 text-2xl font-bold"
-        id="community-values-people"
-      >
-        People come first
-        <a href="#community-values-people" class="text-lg">🔗</a>
-      </h4>
-
-      <p>
-        We are here, first and foremost, as individuals working together. Our
-        priority here is to work on Nix projects for the benefit of all their
-        contributors and users. We value building excellent software with a
-        vibrant and diverse community. Individuals gain trust and status by
-        doing the work. Organisations gain prestige by funding the work of
-        individuals and providing resources to support the project.
-      </p>
-
-      <h4
-        class="font-heading mt-4 text-2xl font-bold"
-        id="community-values-choice"
-      >
-        Free software and choice over lock-in
-        <a href="#community-values-choice" class="text-lg">🔗</a>
-      </h4>
-
-      <p>
-        Nix projects are and will always remain <a
-          href="https://www.gnu.org/philosophy/free-sw.en.html"
-          class="text-primary-white">free software</a
-        >. We value working together with the broader free software community.
-        Free software is our priority, but we also support our users' needs to
-        use non-free software, when practical.
-      </p>
-
-      <h4
-        class="font-heading mt-4 text-2xl font-bold"
-        id="community-values-decisionmaking"
-      >
-        Distribute decisionmaking widely
-        <a href="#community-values-decisionmaking" class="text-lg">🔗</a>
-      </h4>
-
-      <p>
-        We are a synthesis of varied but overlapping communities. We rely on
-        distributed approaches: asynchronous communication, clear ownership,
-        deep-dive taskforces, and local decisionmaking. We focus our attention
-        on working together on our shared goals and working separately in a
-        non-interfering way when our goals are independent. We build trust
-        primarily by working together on Nix projects.
-      </p>
-
-      <h4
-        class="font-heading mt-4 text-2xl font-bold"
-        id="community-values-automation"
-      >
-        Automation over process and toil
-        <a href="#community-values-automation" class="text-lg">🔗</a>
-        <Citation id={1} onBlueBackground>
-          <a
-            href="https://web.archive.org/web/20240717145635/https://sre.google/sre-book/eliminating-toil/"
-            >Toil</a
-          > is work that tends to be manual, repetitive, automatable, interrupt-driven,
-          devoid of enduring value, and scaling linearly with growth.
-        </Citation>
-      </h4>
-
-      <p>
-        We are a global community, and disseminating information and maintaining
-        processes can be difficult. We are also a large project with a lot of
-        hard and repetitive work. Therefore, we value automation over toil,
-        while recognizing that not all toil can be automated. Automation reduces
-        toil, but people are still accountable. Adding new toil needs a very
-        strong justification. We build automation and processes that make the
-        best use of our contributors' limited time and energy.
-      </p>
-
-      <h4
-        class="font-heading mt-4 text-2xl font-bold"
-        id="community-values-stability"
-      >
-        Stable evolution over stagnation or chaos
-        <a href="#community-values-stability" class="text-lg">🔗</a>
-      </h4>
-
-      <p>
-        Openness to new ideas and evolution is part of what made Nix great. We
-        continue to foster that evolution while encouraging development of
-        re-usable building blocks and well-defined, stable interfaces. We value
-        experimenting with designs and concepts, and folding successful
-        experiments back into continuous improvement for stable components. The
-        larger the impact an action has, the more care and discussion is
-        warranted before taking the action. Our leaders have a duty to find,
-        support, and promote new contributors — and eventually step aside for
-        new leaders.
-      </p>
+        <div class="mt-2 mb-3 grid gap-4 md:grid-cols-2">
+            <div
+                class="bg-secondary-afghani-blue-95 flex w-full flex-col gap-2 rounded-xl p-4"
+            >
+                <h3
+                    class="font-heading text-secondary-afghani-blue text-3xl leading-none font-bold"
+                >
+                    The Steering Committee (SC)
+                </h3>
+                <span class="text-secondary-afghani-blue-35 text-lg">
+                    Elected members forming the governing body for technical and
+                    community leadership.
+                </span>
+                <span>
+                    <b>Responsibilities:</b> Technical and community decisions, delegation
+                    and guidance on partnership decisions
+                </span>
+                <span>
+                    <b>Members:</b>
+                    {
+                        steeringCommittee.data.members.map((member, idx) => {
+                            const data = getMemberLink(member);
+                            if (data[0]) {
+                                return (
+                                    <>
+                                        {' '}
+                                        <a href={data[0]}>@{data[1]}</a>
+                                        {idx <
+                                        steeringCommittee.data.members.length -
+                                            1
+                                            ? ','
+                                            : ''}
+                                    </>
+                                );
+                            } else {
+                                return data[1];
+                            }
+                        })
+                    }
+                </span>
+                <a href="/community/teams/steering-committee">More Info</a>
+            </div>
+            <div
+                class="bg-secondary-afghani-blue-95 flex w-full flex-col gap-2 rounded-xl p-4"
+            >
+                <h3
+                    class="font-heading text-secondary-afghani-blue text-3xl leading-none font-bold"
+                >
+                    The Foundation Board
+                </h3>
+                <span class="text-secondary-afghani-blue-35 text-lg">
+                    Board members of the Stichting NixOS Foundation, a
+                    non-profit organisation in the Netherlands
+                </span>
+                <span>
+                    <b>Responsibilities:</b> Legal, financial and partnership decisions
+                    and delegation
+                </span>
+                <span>
+                    <b>Members:</b>
+                    {
+                        foundationBoard.data.members.map((member, idx) => {
+                            const data = getMemberLink(member);
+                            if (data[0]) {
+                                return (
+                                    <>
+                                        {' '}
+                                        <a href={data[0]}>@{data[1]}</a>
+                                        {idx <
+                                        foundationBoard.data.members.length - 1
+                                            ? ','
+                                            : ''}
+                                    </>
+                                );
+                            } else {
+                                return data[1];
+                            }
+                        })
+                    }
+                </span>
+                <a href="/community/teams/foundation-board">More Info</a>
+            </div>
+        </div>
+        <p>
+            Many decisions are made in a distributed way by the <a
+                href="/community">{teams.length} teams</a
+            >, among many other ones not listed on the website and many more
+            individual specialists, responsible for various areas. From the
+            leadership bodies down to individual contributors, almost everybody
+            is here as a passionate volunteer.
+        </p>
+        <h3
+            class="font-heading text-secondary-afghani-blue mt-4 text-3xl font-bold"
+        >
+            Governance Constitution
+        </h3>
+        <p class="mb-2">
+            The <a
+                href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
+                >Nix Governance Constitution</a
+            > describes each body's responsibilities, how the steering committee
+            is elected, and how decisions are made inside the steering committee.
+        </p>
+        <h3
+            class="font-heading text-secondary-afghani-blue mt-4 text-3xl font-bold"
+        >
+            Steering Committee Elections
+        </h3>
+        <p class="mb-2">
+            Every year, the Nix community elects members to the steering
+            committee. Members generally hold a two-year term, with elections
+            held annually to fill at least half of the seats. You can read more
+            about the election process in the <a
+                href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
+                >Nix Governance Constitution</a
+            >.
+        </p>
+        <p>
+            The elections are documented in GitHub repositories under the <a
+                href="https://github.com/NixOS">NixOS organization</a
+            >.
+        </p>
+        <p>
+            <b>Current and past elections:</b>
+            <a href="https://github.com/NixOS/SC-election-2025">2025</a>, <a
+                href="https://github.com/NixOS/SC-election-2024">2024</a
+            >
+        </p>
     </Container>
-  </div>
+    <Divider mirrorY />
+    <div
+        class="bg-secondary-afghani-blue-45 text-primary-white py-8 font-extralight"
+    >
+        <Container class="space-y-2">
+            <h2
+                class="font-heading text-primary-white mt-4 text-4xl font-bold"
+                id="community-values-intro"
+            >
+                Values
+                <a href="#community-values-intro" class="text-lg">🔗</a>
+            </h2>
+
+            <Quotation dark>
+                <p>
+                    Communities form when different people unite around a common
+                    purpose. Shared values guide decision making, and community
+                    goals supersede individual interests and agendas.
+                </p>
+
+                <p class="py-2 text-right italic">
+                    <a
+                        href="https://opensource.com/open-source-way"
+                        class="text-lg">The Open Source Way</a
+                    >
+                </p>
+            </Quotation>
+
+            <p>
+                Our common purpose is to develop, propagate, and promote the
+                adoption of the <a
+                    href="https://edolstra.github.io/pubs/phd-thesis.pdf"
+                    >purely functional software deployment model</a
+                >. Our values help us achieve this purpose by guiding
+                decisionmaking across the community, keeping us moving in a
+                common direction. This document captures our core values so that
+                they can be shared and referenced by everyone in the community.
+            </p>
+
+            <h3
+                class="font-heading text-primary-white mt-4 text-3xl font-bold"
+                id="community-values-whatis"
+            >
+                What is a value?
+                <a href="#community-values-whatis" class="text-lg">🔗</a>
+            </h3>
+
+            <p>
+                Values are <span class="italic">not</span> a Code of Conduct, they
+                do not define governance structures, and they do not provide specific
+                policies. Instead, values inform the decisions we make about these
+                things. A good test for <a
+                    href="https://medium.com/the-u-s-digital-service/our-values-1fc02b53598"
+                    >whether something is a value</a
+                > is:
+            </p>
+
+            <p>
+                If a statement can be invoked by anyone in an organization, and
+                cause a decision to be re-evaluated or changed, without regard
+                to anyone’s rank or title, then you have a bona fide [i.e.
+                genuine] value. If it doesn’t work that way, then it’s not a
+                value.
+            </p>
+
+            <p>
+                To apply in many situations, values must be high-level, abstract
+                concepts. Therefore, in the text below, each value is presented
+                as a heading followed by an elaboration of its meaning. This is
+                meant as a starting point for interpretation, not a
+                comprehensive definition. The heading and the elaboration have
+                equal importance.
+            </p>
+            <h3
+                class="font-heading mt-4 text-3xl font-bold"
+                id="community-values-values"
+            >
+                The values
+                <a href="#community-values-values" class="text-lg">🔗</a>
+            </h3>
+
+            <h4
+                class="font-heading mt-4 text-2xl font-bold"
+                id="community-values-respect"
+            >
+                Respect and civility
+                <a href="#community-values-respect" class="text-lg">🔗</a>
+            </h4>
+
+            <p>
+                We treat each other with respect and civility. No matter one's
+                individual identity, circumstances, level of contribution to the
+                project, or status, everyone has the right to respect, and
+                everyone has the duty to treat others with respect. We
+                prioritise project health over individual interests. People with
+                higher visibility within the project or towards the public are
+                subject to higher expectations for their conduct.
+            </p>
+
+            <h4
+                class="font-heading mt-4 text-2xl font-bold"
+                id="community-values-people"
+            >
+                People come first
+                <a href="#community-values-people" class="text-lg">🔗</a>
+            </h4>
+
+            <p>
+                We are here, first and foremost, as individuals working
+                together. Our priority here is to work on Nix projects for the
+                benefit of all their contributors and users. We value building
+                excellent software with a vibrant and diverse community.
+                Individuals gain trust and status by doing the work.
+                Organisations gain prestige by funding the work of individuals
+                and providing resources to support the project.
+            </p>
+
+            <h4
+                class="font-heading mt-4 text-2xl font-bold"
+                id="community-values-choice"
+            >
+                Free software and choice over lock-in
+                <a href="#community-values-choice" class="text-lg">🔗</a>
+            </h4>
+
+            <p>
+                Nix projects are and will always remain <a
+                    href="https://www.gnu.org/philosophy/free-sw.en.html"
+                    class="text-primary-white">free software</a
+                >. We value working together with the broader free software
+                community. Free software is our priority, but we also support
+                our users' needs to use non-free software, when practical.
+            </p>
+
+            <h4
+                class="font-heading mt-4 text-2xl font-bold"
+                id="community-values-decisionmaking"
+            >
+                Distribute decisionmaking widely
+                <a href="#community-values-decisionmaking" class="text-lg">🔗</a
+                >
+            </h4>
+
+            <p>
+                We are a synthesis of varied but overlapping communities. We
+                rely on distributed approaches: asynchronous communication,
+                clear ownership, deep-dive taskforces, and local decisionmaking.
+                We focus our attention on working together on our shared goals
+                and working separately in a non-interfering way when our goals
+                are independent. We build trust primarily by working together on
+                Nix projects.
+            </p>
+
+            <h4
+                class="font-heading mt-4 text-2xl font-bold"
+                id="community-values-automation"
+            >
+                Automation over process and toil
+                <a href="#community-values-automation" class="text-lg">🔗</a>
+                <Citation id={1} onBlueBackground>
+                    <a
+                        href="https://web.archive.org/web/20240717145635/https://sre.google/sre-book/eliminating-toil/"
+                        >Toil</a
+                    > is work that tends to be manual, repetitive, automatable, interrupt-driven,
+                    devoid of enduring value, and scaling linearly with growth.
+                </Citation>
+            </h4>
+
+            <p>
+                We are a global community, and disseminating information and
+                maintaining processes can be difficult. We are also a large
+                project with a lot of hard and repetitive work. Therefore, we
+                value automation over toil, while recognizing that not all toil
+                can be automated. Automation reduces toil, but people are still
+                accountable. Adding new toil needs a very strong justification.
+                We build automation and processes that make the best use of our
+                contributors' limited time and energy.
+            </p>
+
+            <h4
+                class="font-heading mt-4 text-2xl font-bold"
+                id="community-values-stability"
+            >
+                Stable evolution over stagnation or chaos
+                <a href="#community-values-stability" class="text-lg">🔗</a>
+            </h4>
+
+            <p>
+                Openness to new ideas and evolution is part of what made Nix
+                great. We continue to foster that evolution while encouraging
+                development of re-usable building blocks and well-defined,
+                stable interfaces. We value experimenting with designs and
+                concepts, and folding successful experiments back into
+                continuous improvement for stable components. The larger the
+                impact an action has, the more care and discussion is warranted
+                before taking the action. Our leaders have a duty to find,
+                support, and promote new contributors — and eventually step
+                aside for new leaders.
+            </p>
+        </Container>
+    </div>
 </Layout>
 
 <style>
-  @reference "./../styles/base.css";
+    @reference "./../styles/base.css";
 
-  .bg-secondary-afghani-blue-45 a {
-    @apply hover:text-primary-black-75 text-primary-white;
-  }
+    .bg-secondary-afghani-blue-45 a {
+        @apply hover:text-primary-black-75 text-primary-white;
+    }
 </style>
