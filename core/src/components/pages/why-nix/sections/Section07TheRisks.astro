@@ -3,28 +3,40 @@ import FeatureBox from '../FeatureBox.astro';
 ---
 
 <div class="grid grid-cols-3 gap-4">
-  <FeatureBox title="Talent pool" icon="mdi:account-group" color="dark">
-    <p>
-      Due to its steep learning curve and niche popularity in comparison to
-      other package managers, finding experienced Nix users may be more
-      challenging. However, the Nix community is active and growing, with many
-      resources available for learning and support. Investing in training and
-      development can help build a skilled team over time.
-    </p>
-  </FeatureBox>
-  <FeatureBox title="Supply chain security" icon="mdi:shield-lock" color="dark">
-    <p></p>
-  </FeatureBox>
-  <FeatureBox
-    title="Packaging overhead"
-    icon="mdi:package-variant"
-    color="dark"
-  >
-    <p>
-      Creating and maintaining Nix expressions for packages can require
-      additional effort. Projects with many different dependencies, multiple
-      build tools or build processes that require an active internet connection
-      may require significant initial setup and ongoing maintenance.
-    </p>
-  </FeatureBox>
+    <FeatureBox title="Talent pool" icon="mdi:account-group" color="dark">
+        <p>
+            Due to its steep learning curve and niche popularity in comparison
+            to other package managers, finding experienced Nix users may be more
+            challenging. However, the Nix community is active and growing, with
+            many resources available for learning and support. Investing in
+            training and development can help build a skilled team over time.
+        </p>
+    </FeatureBox>
+    <FeatureBox
+        title="Supply chain security"
+        icon="mdi:shield-lock"
+        color="dark"
+    >
+        <p>
+            While Nix's declarative and reproducible nature enhances security,
+            it also introduces some supply chain risks. E.g. while most of
+            nixpkgs is built from source, some packages rely on pre-compiled
+            binaries or external sources, which, as well as binary caches, could
+            potentially be compromised. It's important to vet and monitor these
+            sources to ensure the integrity of your software supply chain.
+        </p>
+    </FeatureBox>
+    <FeatureBox
+        title="Packaging overhead"
+        icon="mdi:package-variant"
+        color="dark"
+    >
+        <p>
+            Creating and maintaining Nix expressions for packages can require
+            additional effort. Projects with many different dependencies,
+            multiple build tools or build processes that require an active
+            internet connection may require significant initial setup and
+            ongoing maintenance.
+        </p>
+    </FeatureBox>
 </div>
