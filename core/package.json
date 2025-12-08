@@ -22,7 +22,7 @@
     "@tailwindcss/vite": "^4.1.17",
     "@xmldom/xmldom": "^0.9.8",
     "asciinema-player": "^3.12.1",
-    "astro": "^5.16.3",
+    "astro": "^5.16.4",
     "astro-favicons": "^3.1.5",
     "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@nixos/branding": "^0.1.0",
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.60",
+    "@iconify-json/simple-icons": "^1.2.61",
     "@iconify/tailwind": "^1.2.0"
   }
 }
