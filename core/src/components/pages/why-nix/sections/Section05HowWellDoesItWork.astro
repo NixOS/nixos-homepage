@@ -3,98 +3,95 @@ import InlineSVG from '@/components/util/InlineSVG.astro';
 ---
 
 <div class="parent gap-4">
-    <div class="c-h-codebase">Codebase</div>
-    <div class="c-h-os">OS</div>
-    <div class="c-h-infrastructure">Infrastructure</div>
-    <div class="c-triangle">
-        <InlineSVG
-            role="separator"
-            src={'/src/assets/image/divider/slope_white.svg'}
-            class:list={['h-full w-full -scale-y-100']}
-            aria-hidden="true"
-        />
-    </div>
-    <div class="c-codebase">
-        <h3 class="font-heading text-2xl font-bold">... My Codebase?</h3>
-        <p>
-            Due to its functional nature and large package ecosystem, Nix can
-            handle many different types of environments. From small bash scripts
-            to large monorepos with multiple languages and frameworks, Nix can
-            manage the dependencies and build processes effectively. Allowing
-            for easy packaging of your application. The build instructions are
-            called "derivations" in Nix terminology.
-        </p>
-    </div>
-    <div class="c-os">
-        <h3 class="font-heading text-2xl font-bold">
-            ... My Operating System?
-        </h3>
-        <p>
-            Multiple packages in place can form an environment that may be used
-            in terms of a specific project or in a broader user- or os-wide
-            context. In addition nix offers many tools for "trivial" packaging,
-            covering things like simple files, shell-scripts etc. Nixpkgs, the
-            main package repository for Nix, contains thousands of packages for
-            Linux and MacOS, targeting either x86_64 or aarch64 architectures.
-        </p>
-    </div>
-    <div class="c-infrastructure">
-        <h3 class="font-heading text-2xl font-bold">... My Hardware?</h3>
-        <p>
-            This combination of packages and environments can be used to define
-            entire system configurations, including services, users, and system
-            settings. NixOS, a Linux distribution built on top of Nix, allows
-            for declarative configuration of the entire operating system, making
-            it easy to manage and reproduce system setups across different
-            machines.
-        </p>
-        <p>
-            The same principles can be applied to other infrastructure
-            components, such as containers and virtual machines, enabling
-            consistent and reproducible setups across various environments.
-        </p>
-    </div>
+  <div class="c-h-codebase">Codebase</div>
+  <div class="c-h-os">OS</div>
+  <div class="c-h-infrastructure">Infrastructure</div>
+  <div class="c-triangle">
+    <InlineSVG
+      role="separator"
+      src={'/src/assets/image/divider/slope_white.svg'}
+      class:list={['h-full w-full -scale-y-100']}
+      aria-hidden="true"
+    />
+  </div>
+  <div class="c-codebase">
+    <h3 class="font-heading text-2xl font-bold">... My Codebase?</h3>
+    <p>
+      Due to its functional nature and large package ecosystem, Nix can handle
+      many different types of environments. From small bash scripts to large
+      monorepos with multiple languages and frameworks, Nix can manage the
+      dependencies and build processes effectively. Allowing for easy packaging
+      of your application. The build instructions are called "derivations" in
+      Nix terminology.
+    </p>
+  </div>
+  <div class="c-os">
+    <h3 class="font-heading text-2xl font-bold">... My Operating System?</h3>
+    <p>
+      Multiple packages in place can form an environment that may be used in
+      terms of a specific project or in a broader user- or os-wide context. In
+      addition nix offers many tools for "trivial" packaging, covering things
+      like simple files, shell-scripts etc. Nixpkgs, the main package repository
+      for Nix, contains thousands of packages for Linux and MacOS, targeting
+      either x86_64 or aarch64 architectures.
+    </p>
+  </div>
+  <div class="c-infrastructure">
+    <h3 class="font-heading text-2xl font-bold">... My Hardware?</h3>
+    <p>
+      This combination of packages and environments can be used to define entire
+      system configurations, including services, users, and system settings.
+      NixOS, a Linux distribution built on top of Nix, allows for declarative
+      configuration of the entire operating system, making it easy to manage and
+      reproduce system setups across different machines.
+    </p>
+    <p>
+      The same principles can be applied to other infrastructure components,
+      such as containers and virtual machines, enabling consistent and
+      reproducible setups across various environments.
+    </p>
+  </div>
 </div>
 
 <style>
-    .parent {
-        display: grid;
-        grid-template-columns:
-            repeat(3, minmax(auto, 6rem))
-            1fr;
-        grid-template-rows: auto repeat(3, 1fr);
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
-    }
+  .parent {
+    display: grid;
+    grid-template-columns:
+      repeat(3, minmax(auto, 6rem))
+      1fr;
+    grid-template-rows: auto repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
 
-    .c-h-codebase {
-        grid-area: 1 / 1 / 2 / 2;
-        align-self: center;
-        justify-self: center;
-    }
-    .c-h-os {
-        grid-area: 1 / 2 / 2 / 3;
-        align-self: center;
-        justify-self: center;
-    }
-    .c-h-infrastructure {
-        grid-area: 1 / 3 / 2 / 4;
-        align-self: center;
-        justify-self: center;
-    }
-    .c-triangle {
-        grid-area: 2 / 1 / 5 / 4;
-    }
-    .c-codebase {
-        grid-area: 2 / 4 / 3 / 5;
-        align-self: center;
-    }
-    .c-os {
-        grid-area: 3 / 4 / 4 / 5;
-        align-self: center;
-    }
-    .c-infrastructure {
-        grid-area: 4 / 4 / 5 / 5;
-        align-self: center;
-    }
+  .c-h-codebase {
+    grid-area: 1 / 1 / 2 / 2;
+    align-self: center;
+    justify-self: center;
+  }
+  .c-h-os {
+    grid-area: 1 / 2 / 2 / 3;
+    align-self: center;
+    justify-self: center;
+  }
+  .c-h-infrastructure {
+    grid-area: 1 / 3 / 2 / 4;
+    align-self: center;
+    justify-self: center;
+  }
+  .c-triangle {
+    grid-area: 2 / 1 / 5 / 4;
+  }
+  .c-codebase {
+    grid-area: 2 / 4 / 3 / 5;
+    align-self: center;
+  }
+  .c-os {
+    grid-area: 3 / 4 / 4 / 5;
+    align-self: center;
+  }
+  .c-infrastructure {
+    grid-area: 4 / 4 / 5 / 5;
+    align-self: center;
+  }
 </style>
