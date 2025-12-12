@@ -3,10 +3,10 @@ import InlineSVG from '@/components/util/InlineSVG.astro';
 ---
 
 <div class="parent gap-4">
-  <div class="c-h-codebase">Codebase</div>
-  <div class="c-h-os">OS</div>
-  <div class="c-h-infrastructure">Infrastructure</div>
-  <div class="c-triangle">
+  <div class="c-h-codebase hidden md:block">Codebase</div>
+  <div class="c-h-os hidden md:block">OS</div>
+  <div class="c-h-infrastructure hidden md:block">Infrastructure</div>
+  <div class="c-triangle hidden md:block">
     <InlineSVG
       role="separator"
       src={'/src/assets/image/divider/slope_white.svg'}
@@ -54,44 +54,46 @@ import InlineSVG from '@/components/util/InlineSVG.astro';
 </div>
 
 <style>
-  .parent {
-    display: grid;
-    grid-template-columns:
-      repeat(3, minmax(auto, 6rem))
-      1fr;
-    grid-template-rows: auto repeat(3, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-  }
+  @media screen and (min-width: 1024px) {
+    .parent {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(auto, 6rem))
+        1fr;
+      grid-template-rows: auto repeat(3, 1fr);
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+    }
 
-  .c-h-codebase {
-    grid-area: 1 / 1 / 2 / 2;
-    align-self: center;
-    justify-self: center;
-  }
-  .c-h-os {
-    grid-area: 1 / 2 / 2 / 3;
-    align-self: center;
-    justify-self: center;
-  }
-  .c-h-infrastructure {
-    grid-area: 1 / 3 / 2 / 4;
-    align-self: center;
-    justify-self: center;
-  }
-  .c-triangle {
-    grid-area: 2 / 1 / 5 / 4;
-  }
-  .c-codebase {
-    grid-area: 2 / 4 / 3 / 5;
-    align-self: center;
-  }
-  .c-os {
-    grid-area: 3 / 4 / 4 / 5;
-    align-self: center;
-  }
-  .c-infrastructure {
-    grid-area: 4 / 4 / 5 / 5;
-    align-self: center;
+    .c-h-codebase {
+      grid-area: 1 / 1 / 2 / 2;
+      align-self: center;
+      justify-self: center;
+    }
+    .c-h-os {
+      grid-area: 1 / 2 / 2 / 3;
+      align-self: center;
+      justify-self: center;
+    }
+    .c-h-infrastructure {
+      grid-area: 1 / 3 / 2 / 4;
+      align-self: center;
+      justify-self: center;
+    }
+    .c-triangle {
+      grid-area: 2 / 1 / 5 / 4;
+    }
+    .c-codebase {
+      grid-area: 2 / 4 / 3 / 5;
+      align-self: center;
+    }
+    .c-os {
+      grid-area: 3 / 4 / 4 / 5;
+      align-self: center;
+    }
+    .c-infrastructure {
+      grid-area: 4 / 4 / 5 / 5;
+      align-self: center;
+    }
   }
 </style>
