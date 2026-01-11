@@ -26,12 +26,22 @@ export const iconVariants = cva(
   },
 );
 
+export const linkVariants = cva('flex flex-col gap-2', {
+  variants: {
+    color: {
+      light: 'text-secondary-afghani-blue-35',
+      dark: 'text-secondary-afghani-blue-95',
+    },
+  },
+});
+
 interface Props extends VariantProps<typeof boxVariants> {
   title?: string;
   icon?: string;
+  links?: Record<string, string>;
 }
 
-const { title, icon, color = 'light' } = Astro.props;
+const { title, icon, color = 'light', links } = Astro.props;
 ---
 
 <div class={boxVariants({ color })}>
@@ -42,6 +52,19 @@ const { title, icon, color = 'light' } = Astro.props;
   </h3>
   <div class="feature-box-contents">
     <slot />
+    {
+      links && (
+        <ul class="flex gap-2">
+          {Object.entries(links).map(([text, href]) => (
+            <li>
+              <a class={linkVariants({ color })} href={href}>
+                {text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
   </div>
   {icon && <Icon name={icon} class={iconVariants({ color })} />}
 </div>
