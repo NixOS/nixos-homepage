@@ -1,7 +1,7 @@
 ---
 id: framework-partnership
 title: Framework Partnership Announcement
-date: 2025-12-27T16:00:00.000Z
+date: 2026-01-12T19:00:00.000Z
 category: announcements
 ---
 
