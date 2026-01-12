@@ -7,7 +7,7 @@ category: announcements
 
 **Official Partnership between NixOS Foundation and [Framework](https://frame.work/)**
 
-**TL;DR:** Since April 2025, The NixOS Foundation and Framework have officially partnered to improve NixOS support on Framework devices. This formalizes earlier community efforts, enabling selected community members to contribute to testing, documentation, and support for current and future hardware.
+**TL;DR:** Since April 2025, The NixOS Foundation and Framework are officially partnering to improve NixOS support on Framework devices. This formalizes earlier community efforts, enabling selected community members to contribute to testing, documentation, and support for current and future hardware.
 
 ## From Community Effort to Official Partnership
 
