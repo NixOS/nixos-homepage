@@ -57,6 +57,7 @@ export default defineConfig({
   },
   redirects: {
     '/values': '/governance',
+    '/qr01': '/' // QR code on the NixOS banner
   },
   env: {
     schema: {
