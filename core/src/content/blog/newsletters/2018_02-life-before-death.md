@@ -29,7 +29,7 @@ you\'ll agree.
   This includes [renaming Nix 1.12 to
   2.0](https://github.com/NixOS/nix/commit/c287d7312103bae5e154c0c4dd493371a22ea207)
 
-  Relevant are Eelco\'s [slides fron
+  Relevant are Eelco\'s [slides from
   NixCon](https://schedule.nixcon2017.org//system/event_attachments/attachments/000/000/004/original/talk.pdf?1509289391)
   and [associated
   talk](https://www.youtube.com/watch?v=XVIKScU7Uf4&index=4&list=PLgknCdxP89ReQzhfKwMYjLdwWsc7us8ns)
@@ -97,7 +97,7 @@ you\'ll agree.
 
   A collection of NixOS modules covering hardware quirks.
 
-  The respository has been seeing a lot of work being done in last
+  The repository has been seeing a lot of work being done in last
   months leading by
   [\@yegortimoshenko](https://github.com/yegortimoshenko) (Yegor
   Timoshenko).

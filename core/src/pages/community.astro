@@ -612,7 +612,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     .getElementById('rfc-diagram')
     .getElementsByTagName('rect');
   const diagram = document.getElementById('rfc-diagram');
-  const durationMiliseconds = 1500;
+  const durationMilliseconds = 1500;
   const baseActivationClasses = ['stroke-secondary-afghani-blue'];
   const successActivationClasses = ['stroke-nix-green'];
   const failureActivationClasses = ['stroke-nix-orange', 'opacity-50'];
@@ -687,14 +687,14 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       () => {
         isAnimating = false;
       },
-      (highestIndex + 1) * durationMiliseconds,
+      (highestIndex + 1) * durationMilliseconds,
     );
 
     // trigger animation on each box
     timeline.forEach((box) => {
       setTimeout(() => {
         box.element.classList.add(...box.classes);
-      }, box.index * durationMiliseconds);
+      }, box.index * durationMilliseconds);
     });
   }
 
