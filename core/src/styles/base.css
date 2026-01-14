@@ -1,13 +1,14 @@
 /* The integration's default injected base.css file */
 @import 'tailwindcss';
+@import './route159-fonts.css';
 
 @config '../../tailwind.config.cjs';
 
 @utility text-light-bold {
-  @apply font-extralight;
+  @apply font-light;
 
   & strong {
-    @apply font-extrabold;
+    @apply font-semibold;
   }
 }
 
@@ -23,9 +24,11 @@
   article &ul li {
     @apply inline-block;
   }
+
   article &ul li::after {
     content: ', ';
   }
+
   article &ul li:last-child::after {
     content: '';
   }
@@ -43,7 +46,7 @@
   }
 
   main a:any-link {
-    @apply text-secondary-afghani-blue-45 underline decoration-1 underline-offset-4;
+    @apply text-secondary-afghani-blue-45 font-normal underline decoration-1 underline-offset-4;
   }
 
   ::selection {
@@ -52,16 +55,12 @@
 }
 
 @layer components {
-  .text-light-bold {
-    @apply font-extralight;
-  }
-
   .text-light-bold strong {
     @apply font-extrabold;
   }
 
   article {
-    @apply leading-7 font-light;
+    @apply leading-7 tracking-wide;
   }
 
   article ol {
@@ -103,20 +102,22 @@
   article ul.inlinelist li {
     @apply inline-block;
   }
+
   article ul.inlinelist li::after {
     content: ', ';
   }
+
   article ul.inlinelist li:last-child::after {
     content: '';
   }
 
   article b,
   article strong {
-    @apply font-bold;
+    @apply font-semibold;
   }
 
   article h3 {
-    @apply text-secondary-afghani-blue mb-4 text-2xl font-bold;
+    @apply text-secondary-afghani-blue mb-4 text-2xl font-semibold;
   }
 
   article p {
