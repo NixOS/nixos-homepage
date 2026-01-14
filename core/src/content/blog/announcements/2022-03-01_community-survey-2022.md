@@ -5,7 +5,7 @@ date: 2022-03-01T18:00:00.000Z
 category: announcements
 ---
 
-The NixOS Marketing Team is pleased to announce the first offical [NixOS Community Survey](https://survey.nixos.org/2022). Please take 5-10 minutes to complete [it](https://survey.nixos.org/2022).
+The NixOS Marketing Team is pleased to announce the first official [NixOS Community Survey](https://survey.nixos.org/2022). Please take 5-10 minutes to complete [it](https://survey.nixos.org/2022).
 
 Since the Nix community has been growing faster and larger every month, it's gotten harder to understand who makes up the community and what everyone cares about. So we're conducting this survey to improve our understanding of those questions. We hope to use your responses to develop Nix, NixOS, and Nixpkgs to match your needs and come up with new ideas for growing and serving the community. And we'll publish major findings on Discourse and nixos.org.
 

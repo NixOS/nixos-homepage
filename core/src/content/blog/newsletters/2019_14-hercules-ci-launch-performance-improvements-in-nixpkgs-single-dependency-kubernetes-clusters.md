@@ -34,7 +34,7 @@ description: Be the change that you wish to see in the world. - Mahatma Gandhi
 
 - [Single dependency Kubernetes clusters for local testing, experimenting and development](https://github.com/saschagrunert/kubernix)
 
-- [RFC steering commitee nominations](https://discourse.nixos.org/t/rfc-steering-committee-rotation-2019-20/4589/2)
+- [RFC steering committee nominations](https://discourse.nixos.org/t/rfc-steering-committee-rotation-2019-20/4589/2)
 
 # Contribute to NixOS Weekly Newsletter
 
