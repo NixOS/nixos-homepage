@@ -56,7 +56,7 @@ Some fun stats:
   dynamic language inspired by Python and E. It uses Nix, _under the
   hook_, for its
   [packaging](https://monte.readthedocs.io/en/latest/packaging.html).
-  Worth checking out if you are writing a new languge and want to see
+  Worth checking out if you are writing a new language and want to see
   how Nix help you.
 - [A Gentle Introduction to the Nix Family](http://ebzzry.io/en/nix/)
   by Rommel Martinez.
