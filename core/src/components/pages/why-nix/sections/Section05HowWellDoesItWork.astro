@@ -1,22 +1,21 @@
 ---
-import InlineSVG from '@/components/util/InlineSVG.astro';
+import { Image } from 'astro:assets';
+
+import integrateCodeSvg from '../../../../assets/image/why-nix/integrate-code.svg';
+import integrateInfraSvg from '../../../../assets/image/why-nix/integrate-infra.svg';
+import integrateOsSvg from '../../../../assets/image/why-nix/integrate-os.svg';
 ---
 
-<div class="parent gap-4">
-    <div class="c-h-codebase hidden md:block">Codebase</div>
-    <div class="c-h-os hidden md:block">OS</div>
-    <div class="c-h-infrastructure hidden md:block">Infrastructure</div>
-    <div class="c-triangle hidden md:block">
-        <InlineSVG
-            role="separator"
-            src={'/src/assets/image/divider/slope_white.svg'}
-            class:list={['h-full w-full -scale-y-100']}
-            aria-hidden="true"
-        />
-    </div>
-    <div class="c-codebase bg-secondary-afghani-blue-15 ml-4">
-        <h3 class="font-heading text-2xl font-bold">... My Codebase?</h3>
-        <p>
+<div
+    class="border-secondary-afghani-blue-65 grid grid-cols-3 rounded-2xl border-2"
+>
+    <div
+        class="c-codebase bg-secondary-afghani-blue-25 flex flex-col rounded-l-2xl"
+    >
+        <h3 class="font-heading px-4 pt-4 text-2xl font-bold">
+            ... My Codebase?
+        </h3>
+        <p class="flex-1 px-4 pt-2 pb-6">
             Due to its functional nature and large package ecosystem, Nix can
             handle many different types of environments. From small bash scripts
             to large monorepos with multiple languages and frameworks, Nix can
@@ -24,12 +23,17 @@ import InlineSVG from '@/components/util/InlineSVG.astro';
             for easy packaging of your application. The build instructions are
             called "derivations" in Nix terminology.
         </p>
+        <Image
+            src={integrateCodeSvg}
+            alt="Integrate with Cloud"
+            class="rounded-bl-2xl"
+        />
     </div>
-    <div class="c-os bg-secondary-afghani-blue-25 ml-4">
-        <h3 class="font-heading text-2xl font-bold">
+    <div class="c-os bg-secondary-afghani-blue-35 flex flex-col">
+        <h3 class="font-heading px-4 pt-4 text-2xl font-bold">
             ... My Operating System?
         </h3>
-        <p>
+        <p class="flex-1 px-4 pt-2 pb-6">
             Multiple packages in place can form an environment that may be used
             in terms of a specific project or in a broader user- or os-wide
             context. In addition nix offers many tools for "trivial" packaging,
@@ -37,10 +41,15 @@ import InlineSVG from '@/components/util/InlineSVG.astro';
             main package repository for Nix, contains thousands of packages for
             Linux and MacOS, targeting either x86_64 or aarch64 architectures.
         </p>
+        <Image src={integrateOsSvg} alt="Integrate with Cloud" />
     </div>
-    <div class="c-infrastructure bg-secondary-afghani-blue-35 ml-4">
-        <h3 class="font-heading text-2xl font-bold">... My Hardware?</h3>
-        <p>
+    <div
+        class="c-infrastructure bg-secondary-afghani-blue-45 flex flex-col rounded-r-2xl"
+    >
+        <h3 class="font-heading px-4 pt-4 text-2xl font-bold">
+            ... My Hardware?
+        </h3>
+        <p class="flex-1 px-4 pt-2 pb-6">
             This combination of packages and environments can be used to define
             entire system configurations, including services, users, and system
             settings. NixOS, a Linux distribution built on top of Nix, allows
@@ -48,62 +57,10 @@ import InlineSVG from '@/components/util/InlineSVG.astro';
             it easy to manage and reproduce system setups across different
             machines.
         </p>
-        <p>
-            The same principles can be applied to other infrastructure
-            components, such as containers and virtual machines, enabling
-            consistent and reproducible setups across various environments.
-        </p>
+        <Image
+            src={integrateInfraSvg}
+            alt="Integrate with Cloud"
+            class="rounded-br-2xl"
+        />
     </div>
 </div>
-
-<style>
-    @media screen and (min-width: 1024px) {
-        .parent {
-            display: grid;
-            grid-template-columns:
-                repeat(3, minmax(auto, 6rem))
-                1fr;
-            grid-template-rows: auto repeat(3, 1fr);
-            grid-column-gap: 0px;
-            grid-row-gap: 0px;
-        }
-
-        .row-codebase {
-            grid-area: 1 / 1 / 2 / 2;
-        }
-        .row-os {
-            grid-area: 1 / 2 / 2 / 3;
-        }
-        .row-infrastructure {
-            grid-area: 1 / 3 / 2 / 4;
-        }
-
-        .c-h-codebase {
-            grid-area: 1 / 1 / 2 / 2;
-            align-self: center;
-            justify-self: center;
-        }
-        .c-h-os {
-            grid-area: 1 / 2 / 2 / 3;
-            align-self: center;
-            justify-self: center;
-        }
-        .c-h-infrastructure {
-            grid-area: 1 / 3 / 2 / 4;
-            align-self: center;
-            justify-self: center;
-        }
-        .c-triangle {
-            grid-area: 2 / 1 / 5 / 4;
-        }
-        .c-codebase {
-            grid-area: 2 / 4 / 3 / 5;
-        }
-        .c-os {
-            grid-area: 3 / 4 / 4 / 5;
-        }
-        .c-infrastructure {
-            grid-area: 4 / 4 / 5 / 5;
-        }
-    }
-</style>
