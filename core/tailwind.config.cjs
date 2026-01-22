@@ -11,6 +11,10 @@ const inlineSvgs = {
   hero: './src/assets/image/hero-bg.svg',
   'landing-search-top': './src/assets/image/divider/landing_search_top.svg',
   'header-nixdarkblue': './src/assets/image/divider/header_nixdarkblue.svg',
+  'why-nix-bg-seatbelt': './src/assets/image/why-nix/seatbelt-bg.svg',
+  'why-nix-bg-money': './src/assets/image/why-nix/money-bg.svg',
+  'why-nix-bg-hero': './src/assets/image/why-nix/hero-bg-path.svg',
+  'why-nix-bg-whatisnix': './src/assets/image/why-nix/whatisnix-bg.svg'
 };
 
 const shadow = {
