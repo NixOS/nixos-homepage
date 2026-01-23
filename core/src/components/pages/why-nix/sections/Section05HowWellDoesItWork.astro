@@ -7,55 +7,62 @@ import integrateOsSvg from '../../../../assets/image/why-nix/integrate-os.svg';
 ---
 
 <div
-  class="border-secondary-afghani-blue-65 grid grid-cols-3 rounded-2xl border-2"
+    class="border-secondary-afghani-blue-65 grid rounded-2xl border-2 md:grid-cols-3"
 >
-  <div
-    class="c-codebase bg-secondary-afghani-blue-25 flex flex-col rounded-l-2xl"
-  >
-    <h3 class="font-heading px-4 pt-4 text-2xl font-bold">... My Codebase?</h3>
-    <p class="flex-1 px-4 pt-2 pb-6">
-      Due to its functional nature and large package ecosystem, Nix can handle
-      many different types of environments. From small bash scripts to large
-      monorepos with multiple languages and frameworks, Nix can manage the
-      dependencies and build processes effectively. Allowing for easy packaging
-      of your application. The build instructions are called "derivations" in
-      Nix terminology.
-    </p>
-    <Image
-      src={integrateCodeSvg}
-      alt="Integrate with Cloud"
-      class="rounded-bl-2xl"
-    />
-  </div>
-  <div class="c-os bg-secondary-afghani-blue-35 flex flex-col">
-    <h3 class="font-heading px-4 pt-4 text-2xl font-bold">
-      ... My Operating System?
-    </h3>
-    <p class="flex-1 px-4 pt-2 pb-6">
-      Multiple packages in place can form an environment that may be used in
-      terms of a specific project or in a broader user- or os-wide context. In
-      addition nix offers many tools for "trivial" packaging, covering things
-      like simple files, shell-scripts etc. Nixpkgs, the main package repository
-      for Nix, contains thousands of packages for Linux and MacOS, targeting
-      either x86_64 or aarch64 architectures.
-    </p>
-    <Image src={integrateOsSvg} alt="Integrate with Cloud" />
-  </div>
-  <div
-    class="c-infrastructure bg-secondary-afghani-blue-45 flex flex-col rounded-r-2xl"
-  >
-    <h3 class="font-heading px-4 pt-4 text-2xl font-bold">... My Hardware?</h3>
-    <p class="flex-1 px-4 pt-2 pb-6">
-      This combination of packages and environments can be used to define entire
-      system configurations, including services, users, and system settings.
-      NixOS, a Linux distribution built on top of Nix, allows for declarative
-      configuration of the entire operating system, making it easy to manage and
-      reproduce system setups across different machines.
-    </p>
-    <Image
-      src={integrateInfraSvg}
-      alt="Integrate with Cloud"
-      class="rounded-br-2xl"
-    />
-  </div>
+    <div
+        class="c-codebase bg-secondary-afghani-blue-25 flex flex-col rounded-l-2xl rounded-r-2xl md:rounded-r-none"
+    >
+        <h3 class="font-heading px-4 pt-4 text-2xl font-bold">
+            ... My Codebase?
+        </h3>
+        <p class="flex-1 px-4 pt-2 pb-6">
+            Due to its functional nature and large package ecosystem, Nix can
+            handle many different types of environments. From small bash scripts
+            to large monorepos with multiple languages and frameworks, Nix can
+            manage the dependencies and build processes effectively. Allowing
+            for easy packaging of your application. The build instructions are
+            called "derivations" in Nix terminology.
+        </p>
+        <Image
+            src={integrateCodeSvg}
+            alt="Integrate with Cloud"
+            class="md:rounded-bl-2xl"
+        />
+    </div>
+    <div
+        class="c-os bg-secondary-afghani-blue-15 md:bg-secondary-afghani-blue-35 flex flex-col"
+    >
+        <h3 class="font-heading px-4 pt-4 text-2xl font-bold">
+            ... My Operating System?
+        </h3>
+        <p class="flex-1 px-4 pt-2 pb-6">
+            Multiple packages in place can form an environment that may be used
+            in terms of a specific project or in a broader user- or os-wide
+            context. In addition nix offers many tools for "trivial" packaging,
+            covering things like simple files, shell-scripts etc. Nixpkgs, the
+            main package repository for Nix, contains thousands of packages for
+            Linux and MacOS, targeting either x86_64 or aarch64 architectures.
+        </p>
+        <Image src={integrateOsSvg} alt="Integrate with Cloud" />
+    </div>
+    <div
+        class="c-infrastructure bg-secondary-afghani-blue-25 md:bg-secondary-afghani-blue-45 flex flex-col rounded-br-2xl rounded-bl-2xl md:rounded-tr-2xl md:rounded-bl-none"
+    >
+        <h3 class="font-heading px-4 pt-4 text-2xl font-bold">
+            ... My Hardware?
+        </h3>
+        <p class="flex-1 px-4 pt-2 pb-6">
+            This combination of packages and environments can be used to define
+            entire system configurations, including services, users, and system
+            settings. NixOS, a Linux distribution built on top of Nix, allows
+            for declarative configuration of the entire operating system, making
+            it easy to manage and reproduce system setups across different
+            machines.
+        </p>
+        <Image
+            src={integrateInfraSvg}
+            alt="Integrate with Cloud"
+            class="rounded-br-2xl rounded-bl-2xl md:rounded-bl-none"
+        />
+    </div>
 </div>
