@@ -1,17 +1,19 @@
 ---
 interface Props {
-  items: string[];
+    items: string[];
 }
 
 const { items } = Astro.props;
 ---
 
-<ul class="w-full px-2 text-center">
-  {
-    items.map((item) => (
-      <li class="border-b-secondary-afghani-blue-65 border-b-2 py-1 last:border-b-0">
-        {item}
-      </li>
-    ))
-  }
+<ul
+    class="flex w-full justify-center gap-3 px-2 text-center md:flex-col md:gap-0"
+>
+    {
+        items.map((item) => (
+            <li class="border-b-secondary-afghani-blue-65 bg-secondary-afghani-blue-45 text-primary-white rounded-2xl px-3 py-1 last:border-b-0 md:rounded-none md:border-b-2 md:bg-transparent md:text-inherit">
+                {item}
+            </li>
+        ))
+    }
 </ul>
