@@ -3,104 +3,105 @@ import { Icon } from 'astro-icon/components';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 export const boxVariants = cva(
-    'relative z-0 w-full overflow-hidden rounded-xl px-4 py-3 feature-box relative',
-    {
-        variants: {
-            color: {
-                light: 'bg-secondary-afghani-blue-95 border-2 border-secondary-afghani-blue-75',
-                dark: 'bg-secondary-afghani-blue-35 border-2 border-secondary-afghani-blue-55',
-            },
-        },
+  'relative z-0 w-full overflow-hidden rounded-xl px-4 py-3 feature-box relative',
+  {
+    variants: {
+      color: {
+        light:
+          'bg-secondary-afghani-blue-95 border-2 border-secondary-afghani-blue-75',
+        dark: 'bg-secondary-afghani-blue-35 border-2 border-secondary-afghani-blue-55',
+      },
     },
+  },
 );
 
 export const iconVariants = cva(
-    'absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30',
-    {
-        variants: {
-            color: {
-                light: 'text-secondary-afghani-blue-75',
-                dark: 'text-secondary-afghani-blue-15',
-            },
-        },
+  'absolute top-0 right-0 -z-10 h-64 w-64 translate-x-12 -translate-y-8 bg-clip-content opacity-30',
+  {
+    variants: {
+      color: {
+        light: 'text-secondary-afghani-blue-75',
+        dark: 'text-secondary-afghani-blue-15',
+      },
     },
+  },
 );
 
 export const linkVariants = cva('flex flex-col gap-2', {
-    variants: {
-        color: {
-            light: 'text-secondary-afghani-blue-35',
-            dark: 'text-secondary-afghani-blue-95',
-        },
+  variants: {
+    color: {
+      light: 'text-secondary-afghani-blue-35',
+      dark: 'text-secondary-afghani-blue-95',
     },
+  },
 });
 
 interface Props extends VariantProps<typeof boxVariants> {
-    title?: string;
-    icon?: string;
-    links?: Record<string, string>;
+  title?: string;
+  icon?: string;
+  links?: Record<string, string>;
 }
 
 const { title, icon, color = 'light', links } = Astro.props;
 ---
 
 <div class={boxVariants({ color })}>
-    <h3
-        class="font-heading text-nix-blue-dark feature-box-header flex cursor-pointer items-center justify-between text-2xl font-bold"
-    >
-        {title}
-    </h3>
-    <div class="feature-box-contents">
-        <slot />
-        {
-            links && (
-                <ul class="flex gap-2">
-                    {Object.entries(links).map(([text, href]) => (
-                        <li>
-                            <a class={linkVariants({ color })} href={href}>
-                                {text}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            )
-        }
-    </div>
-    {icon && <Icon name={icon} class={iconVariants({ color })} />}
+  <h3
+    class="font-heading text-nix-blue-dark feature-box-header flex cursor-pointer items-center justify-between text-2xl font-bold"
+  >
+    {title}
+  </h3>
+  <div class="feature-box-contents">
+    <slot />
+    {
+      links && (
+        <ul class="flex gap-2">
+          {Object.entries(links).map(([text, href]) => (
+            <li>
+              <a class={linkVariants({ color })} href={href}>
+                {text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+  {icon && <Icon name={icon} class={iconVariants({ color })} />}
 </div>
 
 <script>
-    const featureBoxes = document.querySelectorAll('.feature-box');
+  const featureBoxes = document.querySelectorAll('.feature-box');
 
-    featureBoxes.forEach((box) => {
-        box.ariaExpanded = 'false';
+  featureBoxes.forEach((box) => {
+    box.ariaExpanded = 'false';
 
-        box.classList.add(
-            'before:icon-[mdi--arrow-up-drop-circle]',
-            'before:block',
-            'before:absolute',
-            'before:h-8',
-            'before:w-8',
-            'before:text-nix-blue-dark',
-            'before:top-3.5',
-            'before:right-4',
-            'md:before:hidden',
-            'aria-expanded:before:block',
-            'aria-expanded:before:absolute',
-            'aria-expanded:before:h-8',
-            'aria-expanded:before:w-8',
-            'aria-expanded:before:top-3.5',
-            'aria-expanded:before:right-4',
-            'md:aria-expanded:before:hidden',
-            'aria-expanded:before:icon-[mdi--arrow-down-drop-circle]',
-            'aria-expanded:before:icon-[mdi--arrow-down-drop-circle]',
-            'aria-expanded:[&>.feature-box-contents]:block',
-            '[&>.feature-box-contents]:hidden',
-            'md:[&>.feature-box-contents]:block',
-        );
+    box.classList.add(
+      'before:icon-[mdi--arrow-up-drop-circle]',
+      'before:block',
+      'before:absolute',
+      'before:h-8',
+      'before:w-8',
+      'before:text-nix-blue-dark',
+      'before:top-3.5',
+      'before:right-4',
+      'md:before:hidden',
+      'aria-expanded:before:block',
+      'aria-expanded:before:absolute',
+      'aria-expanded:before:h-8',
+      'aria-expanded:before:w-8',
+      'aria-expanded:before:top-3.5',
+      'aria-expanded:before:right-4',
+      'md:aria-expanded:before:hidden',
+      'aria-expanded:before:icon-[mdi--arrow-down-drop-circle]',
+      'aria-expanded:before:icon-[mdi--arrow-down-drop-circle]',
+      'aria-expanded:[&>.feature-box-contents]:block',
+      '[&>.feature-box-contents]:hidden',
+      'md:[&>.feature-box-contents]:block',
+    );
 
-        box.addEventListener('click', () => {
-            box.ariaExpanded = box.ariaExpanded === 'true' ? 'false' : 'true';
-        });
+    box.addEventListener('click', () => {
+      box.ariaExpanded = box.ariaExpanded === 'true' ? 'false' : 'true';
     });
+  });
 </script>
