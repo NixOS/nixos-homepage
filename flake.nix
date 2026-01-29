@@ -62,7 +62,7 @@ rec {
           nodejs_current = pkgs.nodejs_24;
 
           nixPills = import nix-pills {
-            inherit pkgs;
+            pkgs = pkgs-stable;
           };
 
           # TODO: change structure to conform to ./src/content/download/aws-ec2.yaml but in json

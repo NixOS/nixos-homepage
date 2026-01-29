@@ -4,6 +4,9 @@ family: nixos
 platform: amazon
 ---
 
+import { Code } from 'astro:components';
+import { aweTerraform, awsCommand } from '../../lib/downloadAwsCode';
+
 ## NixOS AMIs
 
 NixOS can be deployed to Amazon EC2 using our official AMI. We publish
@@ -18,39 +21,14 @@ for the latest AMI.
 
 You can easily query for the latest AMI using a data source:
 
-```terraform
-provider "aws" {
-  region = "eu-central-1"
-}
-
-data "aws_ami" "nixos_arm64" {
-  owners      = ["427812963091"]
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["nixos/25.11*"]
-  }
-  filter {
-    name   = "architecture"
-    values = ["arm64"] # or "x86_64"
-  }
-}
-
-resource "aws_instance" "nixos_arm64" {
-  ami           = data.aws_ami.nixos_arm64.id
-  instance_type = "t4g.nano"
-}
-```
+<Code code={aweTerraform} lang="terraform" />
 
 ### Via Command Line / AWS API
 
 The [DescribeImages](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html) API
 can be used to query the latest AMI too:
 
-```bash
-aws ec2 describe-images --owners 427812963091  --filter 'Name=name,Values=nixos/25.11*' 'Name=architecture,Values=arm64' --query 'sort_by(Images, &CreationDate)'
-```
+<Code code={awsCommand} lang="bash" />
 
 ### Search for specific AMIs
 
