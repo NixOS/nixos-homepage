@@ -3,7 +3,10 @@ const { class: extraClasses, id = null } = Astro.props;
 ---
 
 <div
-  class={`md:mx-auto px-4 sm:max-w-[736px] md:max-w-[960px] lg:max-w-[1168px] ${extraClasses}`}
+  class:list={[
+    'px-4 sm:max-w-[736px] md:mx-auto md:max-w-[960px] lg:max-w-[1168px]',
+    extraClasses,
+  ]}
   id={id}
 >
   <slot />

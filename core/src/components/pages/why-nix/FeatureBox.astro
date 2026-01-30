@@ -52,7 +52,9 @@ const { title, icon, color = 'light', links } = Astro.props;
     {title}
   </h3>
   <div class="feature-box-contents">
-    <slot />
+    <div class="flex-1">
+      <slot />
+    </div>
     {
       links && (
         <ul class="flex gap-2">
@@ -97,7 +99,10 @@ const { title, icon, color = 'light', links } = Astro.props;
       'aria-expanded:before:icon-[mdi--arrow-down-drop-circle]',
       'aria-expanded:[&>.feature-box-contents]:block',
       '[&>.feature-box-contents]:hidden',
-      'md:[&>.feature-box-contents]:block',
+      'md:[&>.feature-box-contents]:flex',
+      'md:[&>.feature-box-contents]:flex-col',
+      'md:[&>.feature-box-contents]:gap-4',
+      'md:[&>.feature-box-contents]:justify-between',
     );
 
     box.addEventListener('click', () => {

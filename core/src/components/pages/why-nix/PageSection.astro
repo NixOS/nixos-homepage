@@ -12,6 +12,19 @@ export const sectionVariants = cva('py-8', {
   },
 });
 
+export const containerVariants = cva(
+  'bg-radial from-50% to-transparent to-80% bg-contain',
+  {
+    variants: {
+      color: {
+        darkblue: 'from-secondary-afghani-blue-35',
+        blue: 'from-secondary-afghani-blue-45',
+        white: 'from-primary-white',
+      },
+    },
+  },
+);
+
 export const titleVariants = cva(
   'pb-1 pt-0.5 text-4xl font-bold font-heading',
   {
@@ -35,7 +48,7 @@ const { title, pre, color = 'blue', class: extraClasses } = Astro.props;
 ---
 
 <section class:list={['py-12', sectionVariants({ color }), extraClasses]}>
-  <Container>
+  <Container class:list={[containerVariants({ color })]}>
     {pre ?? <p>{pre}</p>}
     {title && <h1 class={titleVariants({ color })}>{title}</h1>}
     <slot />
