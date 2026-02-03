@@ -248,6 +248,7 @@ rec {
           devShells.default = pkgs.mkShell {
             name = "nixos-homepage";
 
+            # This line triggers the presence of .pre-commit-config.yaml
             inputsFrom = [ config.pre-commit.devShell ];
 
             packages = with pkgs; [
