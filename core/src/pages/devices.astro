@@ -44,6 +44,12 @@ const devices = await getCollection('devices');
                     Hardware Repository
                   </a>
                 )}
+                {device.manufacturerPage && (
+                  <a href={device.manufacturerPage} class="hover:underline">
+                    <Icon name="mdi:web" class="inline h-5 w-5" />
+                    Manufacturer Page
+                  </a>
+                )}
               </li>
             ))}
           </ul>
