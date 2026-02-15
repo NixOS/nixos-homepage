@@ -19,7 +19,6 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
 ---
 
 <header
-  role="banner"
   class="text-primary-black bg-primary-white sticky top-0 z-50 font-extralight drop-shadow-md"
 >
   {
@@ -55,12 +54,14 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
         <Image
           class="h-12 w-auto"
           src={getNixosLogoUrl('logo')}
-          alt="Nixos Logo"
+          alt="NixOS - Go to homepage"
         />
       </Link>
 
       <button
         aria-label="Main Navigation Toggle"
+        aria-controls="navbar-menu"
+        aria-expanded="true"
         class="bg-secondary-afghani-blue block rounded-lg p-4 md:hidden"
         id="navigation-toggle"
       >
@@ -72,14 +73,12 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
 
     <nav
       aria-label="Main Navigation"
-      role="menubar"
       class="flex flex-col gap-0.5 pb-4 leading-none md:flex md:flex-row md:gap-5 md:pb-0"
       id="navbar-menu"
     >
       {
         headerMenu.data.items.map((item) => (
           <Link
-            role="menuitem"
             class:list={[
               'pt-7 pb-6',
               navbarItemStyle,
@@ -87,6 +86,7 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
                 ? navbarItemActiveStyle
                 : navbarItemInactiveStyle,
             ]}
+            aria-current={currentTopRoute === item.link ? 'page' : undefined}
             href={item.link}
           >
             {item.name}
@@ -96,7 +96,7 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
       <Link
         class={`pt-7 pb-6 md:pt-5 md:pb-3 ${navbarItemStyle} ${navbarItemInactiveStyle}`}
         href="https://search.nixos.org"
-        arial-label="Nixos package and options search"
+        aria-label="Nixos package and options search"
         target="_self"
       >
         <Icon
@@ -114,6 +114,8 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
   const navbarMenu = document.getElementById('navbar-menu');
 
   function toggleMenu() {
+    navigationToggle.ariaExpanded =
+      navigationToggle.ariaExpanded === 'true' ? 'false' : 'true';
     navbarMenu.classList.toggle('hidden');
     navbarMenu.classList.toggle('flex');
   }

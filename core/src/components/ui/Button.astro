@@ -93,10 +93,18 @@ const setIconSize = (size: string) => {
         ]}
         {...other}
       >
-        {icon && <Icon name={icon} size={setIconSize(size)} />}
-        {nonPublic && <Icon name="mdi:lock" />}
+        {icon && (
+          <Icon name={icon} size={setIconSize(size)} aria-hidden="true" />
+        )}
+        {nonPublic && <Icon name="mdi:lock" aria-label="not public" />}
         {label || <slot />}
-        {!icon && <Icon name="mdi:chevron-right" size={setIconSize(size)} />}
+        {!icon && (
+          <Icon
+            name="mdi:chevron-right"
+            aria-hidden="true"
+            size={setIconSize(size)}
+          />
+        )}
       </Link>
       {shaHref && (
         <SHA href={shaHref} classList={shaClassList}>
@@ -116,7 +124,7 @@ const setIconSize = (size: string) => {
       ]}
       {...other}
     >
-      {icon && <Icon name={icon} />}
+      {icon && <Icon name={icon} aria-hidden="true" />}
       {label || <slot />}
     </button>
   )

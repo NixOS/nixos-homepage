@@ -46,10 +46,12 @@ const { title, icon, color = 'light', links } = Astro.props;
 ---
 
 <div class={boxVariants({ color })}>
-  <h3
-    class="font-heading text-nix-blue-dark feature-box-header flex w-4/5 cursor-pointer items-center justify-between text-2xl font-bold md:w-full"
-  >
-    {title}
+  <h3>
+    <button
+      class="font-heading text-nix-blue-dark feature-box-header flex w-4/5 cursor-pointer items-center justify-between text-2xl font-bold md:w-full"
+    >
+      {title}
+    </button>
   </h3>
   <div class="feature-box-contents">
     <div class="flex-1">

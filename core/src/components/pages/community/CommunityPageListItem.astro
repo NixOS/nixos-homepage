@@ -40,11 +40,7 @@ const effectiveType =
         !iconName && 'h-full items-center', // Center name if no icon
       ]}
     >
-      {
-        iconName && (
-          <Icon name={iconName} alt={'logo of ' + name} class="h-8 w-8" />
-        )
-      }
+      {iconName && <Icon name={iconName} aria-hidden="true" class="h-8 w-8" />}
       {
         (effectiveType !== 'icon' || !iconName) && (
           <span
@@ -52,7 +48,7 @@ const effectiveType =
               'leading-8',
               iconName ? 'ml-2' : 'text-center',
               effectiveType === 'mobile_icon_desktop_name' && iconName
-                ? 'hidden md:block'
+                ? 'sr-only md:not-sr-only'
                 : '',
             ]}
           >

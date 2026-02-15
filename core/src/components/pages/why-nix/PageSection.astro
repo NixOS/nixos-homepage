@@ -50,7 +50,7 @@ const { title, pre, color = 'blue', class: extraClasses } = Astro.props;
 <section class:list={['py-12', sectionVariants({ color }), extraClasses]}>
   <Container class:list={[containerVariants({ color })]}>
     {pre ?? <p>{pre}</p>}
-    {title && <h1 class={titleVariants({ color })}>{title}</h1>}
+    {title && <h2 class={titleVariants({ color })}>{title}</h2>}
     <slot />
   </Container>
 </section>

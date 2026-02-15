@@ -20,32 +20,30 @@ let downloadOptions = (await getCollection('download'))
 
         return (
           <>
-            <h3>
-              <button
-                id={`${optionId}-trigger`}
-                aria-expanded="true"
-                aria-controls={optionId}
-                class:list={[
-                  'bg-secondary-afghani-blue-95',
-                  'flex',
-                  'text-secondary-afghani-blue-25',
-                  'hover:bg-secondary-afghani-blue-85',
-                  'hover:text-secondary-afghani-blue-15',
-                  'cursor-pointer',
-                  'text-lg',
-                  'font-bold',
-                  'py-6',
-                  'px-8',
-                  'w-full',
-                  'rounded-2xl',
-                  'justify-start',
-                  'content-start',
-                  'my-4',
-                ]}
-              >
-                {option.data.title}
-              </button>
-            </h3>
+            <button
+              id={`${optionId}-trigger`}
+              aria-expanded="true"
+              aria-controls={optionId}
+              class:list={[
+                'bg-secondary-afghani-blue-95',
+                'flex',
+                'text-secondary-afghani-blue-25',
+                'hover:bg-secondary-afghani-blue-85',
+                'hover:text-secondary-afghani-blue-15',
+                'cursor-pointer',
+                'text-lg',
+                'font-bold',
+                'py-6',
+                'px-8',
+                'w-full',
+                'rounded-2xl',
+                'justify-start',
+                'content-start',
+                'my-4',
+              ]}
+            >
+              {option.data.title}
+            </button>
             <div
               id={optionId}
               role="region"

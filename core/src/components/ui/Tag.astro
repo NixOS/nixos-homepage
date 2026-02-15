@@ -35,7 +35,7 @@ const localClassList = `${colorMap[color]} ${outline ? 'border-1 text-primary-bl
       <slot />
     </a>
   ) : (
-    <span href={href} class:list={[localClassList, classList]}>
+    <span class:list={[localClassList, classList]}>
       <slot />
     </span>
   )

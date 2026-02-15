@@ -11,7 +11,7 @@ import Container from './Container.astro';
 ---
 
 <div
-  class="inline-svg-header-nixdarkblue hidden bg-cover bg-bottom bg-no-repeat py-24 md:block"
+  class="md:inline-svg-header-nixdarkblue bg-secondary-afghani-blue-45 block bg-cover bg-bottom bg-no-repeat py-16 md:bg-transparent md:py-24"
 >
   <Container class="text-primary-white grid grid-cols-3">
     <div class="col-span-2 flex flex-col gap-4">
@@ -19,7 +19,7 @@ import Container from './Container.astro';
         parentPath && (
           <a
             href={parentPath}
-            class="text-primary-white! invisible -mt-6 -mb-4 md:visible"
+            class="text-primary-white! -mt-6 -mb-4 hidden md:inline"
           >
             <span class="text-nixblue">←</span> Back
           </a>
@@ -30,13 +30,5 @@ import Container from './Container.astro';
       </h1>
       {subtext && <p class="text text-left" set:html={subtext} />}
     </div>
-  </Container>
-</div>
-
-<div class="bg-secondary-afghani-blue-45 text-primary-white md:hidden">
-  <Container class="px-12 py-16">
-    <h1 class="text-center text-3xl font-bold">
-      {text}
-    </h1>
   </Container>
 </div>
