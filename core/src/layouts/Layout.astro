@@ -1,6 +1,7 @@
 ---
 import { SEO } from 'astro-seo';
 import { getEntry } from 'astro:content';
+import { getImagePath } from "astro-takumi";
 
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
@@ -13,6 +14,8 @@ const {
 } = Astro.props;
 
 const blogMenu = await getEntry('menus', 'blog');
+
+const { url, site } = Astro;
 
 const headLinks = [
     {
@@ -51,7 +54,7 @@ const headFeedLinks = blogMenu.data.map((e) => {
                 basic: {
                     title: title,
                     type: 'website',
-                    image: 'https://brand.nixos.org/logos/nixos-logo-black-flat-black-regular-horizontal-minimal.svg',
+                    image: getImagePath({ url, site }),
                 },
                 optional: {
                     description: description,
