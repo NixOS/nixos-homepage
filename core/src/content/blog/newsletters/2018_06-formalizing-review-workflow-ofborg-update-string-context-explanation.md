@@ -61,7 +61,7 @@ title: '#06 - Formalizing review workflow, OfBorg update, String Context
   A proposal for a new review workflow based on a set of pull-request
   states (needs:review, needs:work). It is intended to help reviewers
   and contributors get PRs merged quicker and reduce likelihood of PRs
-  getting lost. It also greatly increases the value of non-commiter
+  getting lost. It also greatly increases the value of non-committer
   reviews.
 
 - [libnix-haskell 0.2.0.1

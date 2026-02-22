@@ -8,14 +8,10 @@ import {
 const { post } = Astro.props;
 ---
 
-<article
-  data-category={post.id.split('/')[0]}
-  class="font-light"
-  aria-hidden="false"
->
+<article data-category={post.id.split('/')[0]} class="font-light">
   <a href={generatePathFromPost(post)}>
     <h2
-      class="font-ned, composition in a document, page, applicaextrabold font-heading text-secondary-afghani-blue text-4xl leading-tight"
+      class="font-heading text-secondary-afghani-blue text-4xl leading-tight font-extrabold"
     >
       {post.data.title}
     </h2>

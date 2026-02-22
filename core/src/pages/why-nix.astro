@@ -1,0 +1,106 @@
+---
+import Divider from '@/components/layout/Divider.astro';
+import PageSection from '@/components/pages/why-nix/PageSection.astro';
+import Section01Hero from '@/components/pages/why-nix/sections/Section01Hero.astro';
+import Section02WhyNix from '@/components/pages/why-nix/sections/Section02WhyNix.astro';
+import Section03WhoIsNix from '@/components/pages/why-nix/sections/Section03WhoIsNix.astro';
+import Section04YouMayAlreadyKnow from '@/components/pages/why-nix/sections/Section04YouMayAlreadyKnow.astro';
+import Section05HowWellDoesItWork from '@/components/pages/why-nix/sections/Section05HowWellDoesItWork.astro';
+import Section06TheCosts from '@/components/pages/why-nix/sections/Section06TheCosts.astro';
+import Section07TheRisks from '@/components/pages/why-nix/sections/Section07TheRisks.astro';
+import Section08TheBenefits from '@/components/pages/why-nix/sections/Section08TheBenefits.astro';
+import Section09UseCases from '@/components/pages/why-nix/sections/Section09UseCases.astro';
+import Section10CallToAction from '@/components/pages/why-nix/sections/Section10CallToAction.astro';
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout>
+  <PageSection
+    color="white"
+    class="inline-svg-why-nix-bg-hero bg-cover bg-center"
+  >
+    <Section01Hero />
+  </PageSection>
+  <Divider
+    style="slope"
+    mirrorX
+    mirrorY
+    backgroundClass="bg-nix-blue-extralight"
+  />
+  <PageSection
+    title="What is Nix?"
+    pre="So your probably ask yourself"
+    color="blue"
+    class="inline-svg-why-nix-bg-whatisnix bg-cover bg-center bg-repeat-x md:bg-contain"
+  >
+    <Section02WhyNix />
+  </PageSection>
+  <Divider style="slope" mirrorX backgroundClass="bg-nix-blue-extralight" />
+  <PageSection
+    pre="Examples are great, so"
+    title="You may already know"
+    color="white"
+  >
+    <Section04YouMayAlreadyKnow />
+  </PageSection>
+  <Divider style="slope" mirrorY backgroundClass="bg-nix-blue-extralight" />
+  <PageSection
+    pre="That's all great, but"
+    title="How well does it integrate with"
+    color="blue"
+  >
+    <Section05HowWellDoesItWork />
+  </PageSection>
+  <Divider style="slope" backgroundClass="bg-nix-blue-extralight" />
+  <PageSection
+    pre="And what about"
+    title="The costs?"
+    color="white"
+    class="inline-svg-why-nix-bg-money bg-cover bg-center bg-no-repeat md:bg-contain"
+  >
+    <Section06TheCosts />
+  </PageSection>
+  <Divider
+    style="slope"
+    mirrorX
+    mirrorY
+    backgroundClass="bg-nix-blue-extralight"
+  />
+  <PageSection
+    pre="But as with any tool"
+    title="There are some Risks"
+    color="blue"
+    class="inline-svg-why-nix-bg-seatbelt bg-cover bg-center bg-no-repeat md:bg-cover"
+  >
+    <Section07TheRisks />
+  </PageSection>
+  <Divider style="slope" mirrorX backgroundClass="bg-nix-blue-extralight" />
+  <PageSection
+    pre="But once you are in it"
+    title="There are many benefits"
+    color="white"
+    class="inline-svg-why-nix-bg-benefits bg-contain bg-center bg-no-repeat"
+  >
+    <Section08TheBenefits />
+  </PageSection>
+  <Divider style="slope" mirrorY backgroundClass="bg-nix-blue-extralight" />
+  <PageSection
+    pre="With all that said, let's show some"
+    title="Use Cases"
+    color="blue"
+    class="bg-contain bg-center bg-no-repeat"
+  >
+    <Section09UseCases />
+  </PageSection>
+  <PageSection
+    pre="In the end"
+    title="We are a global community"
+    color="blue"
+    class="pb-0"
+  >
+    <Section03WhoIsNix />
+  </PageSection>
+  <PageSection title="Are you interested?" color="darkblue">
+    <Section10CallToAction />
+  </PageSection>
+</Layout>

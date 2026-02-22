@@ -87,16 +87,24 @@ const setIconSize = (size: string) => {
           'no-underline!',
           buttonVariants({ color, size }),
           nonPublic && 'inline-flex items-center gap-2',
-          classList,
           icon && 'flex items-center justify-start gap-4',
           !icon && 'flex items-center justify-center gap-1',
+          classList,
         ]}
         {...other}
       >
-        {icon && <Icon name={icon} size={setIconSize(size)} />}
-        {nonPublic && <Icon name="mdi:lock" />}
+        {icon && (
+          <Icon name={icon} size={setIconSize(size)} aria-hidden="true" />
+        )}
+        {nonPublic && <Icon name="mdi:lock" aria-label="not public" />}
         {label || <slot />}
-        {!icon && <Icon name="mdi:chevron-right" size={setIconSize(size)} />}
+        {!icon && (
+          <Icon
+            name="mdi:chevron-right"
+            aria-hidden="true"
+            size={setIconSize(size)}
+          />
+        )}
       </Link>
       {shaHref && (
         <SHA href={shaHref} classList={shaClassList}>
@@ -111,12 +119,12 @@ const setIconSize = (size: string) => {
         'cursor-pointer no-underline!',
         buttonVariants({ color, size }),
         nonPublic && 'inline-flex items-center gap-2',
-        classList,
         icon && 'flex items-center justify-start gap-4',
+        classList,
       ]}
       {...other}
     >
-      {icon && <Icon name={icon} />}
+      {icon && <Icon name={icon} aria-hidden="true" />}
       {label || <slot />}
     </button>
   )

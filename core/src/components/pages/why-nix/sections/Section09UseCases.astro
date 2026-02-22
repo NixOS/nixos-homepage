@@ -1,0 +1,53 @@
+---
+import FeatureBox from '../FeatureBox.astro';
+---
+
+<div class="grid gap-4 md:grid-cols-3">
+  <FeatureBox
+    title="Dev Environments"
+    icon="mdi:code-braces"
+    color="dark"
+    links={{
+      'Nix Shells': '/manual/nix/2.28/command-ref/nix-shell',
+    }}
+  >
+    <p>
+      Nix allows developers to create isolated and reproducible development
+      environments using so called "nix shells". These environments can be
+      defined declaratively, specifying the exact versions of tools, libraries,
+      and dependencies needed for a project.
+    </p>
+  </FeatureBox>
+  <FeatureBox
+    title="Reproducable Builds"
+    icon="mdi:hammer-wrench"
+    color="dark"
+    links={{
+      'Build Helpers': '/manual/nixpkgs/stable/#chap-language-support',
+    }}
+  >
+    <p>
+      Nix ensures that software builds are reproducible by capturing all
+      dependencies and build instructions in a declarative manner. This allows
+      you to recreate the same build environment consistently, reducing issues
+      related to dependency conflicts or version mismatches.
+    </p>
+  </FeatureBox>
+  <FeatureBox
+    title="Reproducible Infrastructure"
+    icon="mdi:server-network"
+    color="dark"
+    links={{
+      'NixOS Configuration Syntax':
+        'manual/nixos/stable/#sec-configuration-syntax',
+    }}
+  >
+    <p>
+      Nix can be used to define and manage entire system configurations
+      declaratively, enabling reproducible infrastructure setups. The NixOS
+      Linux distribution allows you to specify system services, users, and
+      settings in a single configuration file, making it easy to reproduce and
+      manage system setups across different machines.
+    </p>
+  </FeatureBox>
+</div>

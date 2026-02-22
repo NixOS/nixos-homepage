@@ -4,6 +4,8 @@
     These devices ship with NixOS, this means you get full NixOS support and
     don't need an installer image to begin using NixOS.
   devices:
+    - name: NovaCustom
+      manufacturerPage: https://novacustom.com
 - title: Official Support
   id: official
   description:

@@ -25,17 +25,17 @@
     "core"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@typescript-eslint/parser": "^8.48.1",
-    "eslint": "^9.39.1",
+    "@eslint/js": "^9.39.2",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
     "express": "^5.2.1",
-    "globals": "^16.5.0",
-    "prettier": "^3.7.4",
+    "globals": "^17.3.0",
+    "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-astro-organize-imports": "^0.4.11",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "typescript-eslint": "^8.48.1"
+    "typescript-eslint": "^8.54.0"
   },
   "dependencies": {
     "@fontsource-variable/epilogue": "^5.2.8",

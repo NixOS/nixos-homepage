@@ -18,6 +18,7 @@ const brandUrl = `https://brand.nixos.org/logos/nixos-${type}-${color}-${fillSty
 <div class="bg-secondary-afghani-blue-95 rounded-2xl p-4">
   <img
     src={brandUrl}
+    alt={`${style} styled NixOS ${type} in the ${variant} variant filled with ${fillStyle} ${color} colors in a ${orientation} orientation using a ${fontColor} font`}
     class:list={[
       'w-auto rounded-2xl',
       fontColor === 'white' ? 'bg-primary-black' : 'bg-primary-white',

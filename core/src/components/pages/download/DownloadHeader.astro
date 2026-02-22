@@ -13,17 +13,17 @@ const { title, subTitle, currentVersion } = Astro.props;
 <Container
   class="bg-secondary-afghani-blue-45 text-primary-white mt-16 grid grid-cols-2 py-8 md:py-6"
 >
-  <h1 class="font-heading self-center text-3xl leading-none font-bold">
+  <h2 class="font-heading self-center text-3xl leading-none font-bold">
     {title}
     <span class="hidden lg:inline">
       {subTitle}
     </span>
-  </h1>
+  </h2>
   <div class="flex flex-col justify-center self-center">
     <div class="text-end">
-      <h2 class="font-heading hidden pb-2 text-2xl font-bold md:inline">
+      <span class="font-heading hidden pb-2 text-2xl font-bold md:inline">
         Current version
-      </h2>
+      </span>
       <span
         class="bg-secondary-afghani-blue-15 text-primary-white rounded-2xl px-4 py-2 text-center text-2xl font-bold! no-underline!"
         >{currentVersion}</span

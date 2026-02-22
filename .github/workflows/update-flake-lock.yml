@@ -16,13 +16,13 @@ jobs:
       pull-requests: write # used to create a PR if needed
     steps:
       - name: 'Checkout repository'
-        uses: 'actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8' # v6.0.1
+        uses: 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd' # v6.0.2
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: 'Install Nix'
-        uses: 'cachix/install-nix-action@0b0e072294b088b73964f1d72dfdac0951439dbd' # v31.8.4
+        uses: 'cachix/install-nix-action@2126ae7fc54c9df00dd18f7f18754393182c73cd' # v31.9.1
         with:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}

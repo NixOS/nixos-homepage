@@ -228,7 +228,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     >
       Where to talk?
     </h2>
-    <p class="mt-2 leading-relaxed">
+    <div class="mt-2 leading-relaxed">
       The Nix community is spread across various platforms. Here are the
       official and unofficial spaces where you can find help, discuss
       development, and chat with other users.
@@ -239,7 +239,8 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           >
             Official spaces
           </h3>
-          <p>
+
+          <div>
             These spaces are monitored and moderated by the NixOS Moderation
             Team. This means they are moderated in such a way that they follow
             the standards and moral values of our community. You can find out
@@ -260,7 +261,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
                 ))
               }
             </ul>
-          </p>
+          </div>
         </div>
         <div class="col-span-1">
           <h3
@@ -268,460 +269,477 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           >
             Official social-media
           </h3>
+          <<<<<<< HEAD
           <p>
-            These spaces are maintained by our NixOS Marketing Team though not
-            monitored and not moderated by the NixOS Moderation Team.
+            =======
+            <div class="text-primary-black-35">
+              >>>>>>> main These spaces are maintained by our NixOS Marketing
+              Team though not monitored and not moderated by the NixOS
+              Moderation Team.
 
-            <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4">
-              {
-                socialMediaMain.map((platform) => (
-                  <OfficialCommunityLink
-                    href={platform.href}
-                    name={platform.name}
-                    iconName={platform.iconName}
-                  />
-                ))
-              }
-            </ul>
+              <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4">
+                {
+                  socialMediaMain.map((platform) => (
+                    <OfficialCommunityLink
+                      href={platform.href}
+                      name={platform.name}
+                      iconName={platform.iconName}
+                    />
+                  ))
+                }
+              </ul>
+            </div>
           </p>
-        </div>
-        <div class="md:col-span-3">
-          <h3
-            class="font-heading text-secondary-afghani-blue mt-4 text-3xl font-bold"
-          >
-            Our calendars
-          </h3>
-          <p>
-            We use these calendars to schedule events, meetings, and other.
-            <ul class="mt-4 grid flex-wrap gap-4 md:grid-cols-3">
-              {
-                calendarsMain.map((platform) => (
-                  <OfficialCommunityLink
-                    href={platform.href}
-                    name={platform.name}
-                    iconName={platform.iconName}
-                  />
-                ))
-              }
-            </ul>
-          </p>
-        </div>
-      </div>
-      <h3
-        class="font-heading text-secondary-afghani-blue mt-6 text-3xl font-bold"
-      >
-        Unofficial spaces
-      </h3>
-      <p>
-        These spaces are not monitored and not moderated by the NixOS Moderation
-        Team. Please be aware that different moral values and rules may apply in
-        these spaces. The NixOS moderation team may advise moderators in these
-        spaces, though does not control or enforce our community values.
+          <div class="md:col-span-3">
+            <h3
+              class="font-heading text-secondary-afghani-blue mt-4 text-3xl font-bold"
+            >
+              Our calendars
+            </h3>
 
-        <ul class="mt-4 grid grid-cols-3 flex-wrap gap-4">
-          {
-            platformsOutside.map((platform) => (
-              <CommunityPageListItem
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-                description={platform.description}
-                type="mobile_icon_desktop_name"
-              />
-            ))
-          }
-        </ul>
-      </p>
-      <h3
-        id="forks"
-        class="font-heading text-secondary-afghani-blue mt-6 text-3xl font-bold"
-      >
-        The wider ecosystem
-      </h3>
-      <p>
-        There are a few alternative implementations of the idea of purely
-        functional package managers (sorted chronologically by appearance):
-
-        <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
-          {
-            widerEcosystem.map((platform) => (
-              <CommunityPageListItem
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-                description={platform.description}
-                type="mobile_icon_desktop_name"
-              />
-            ))
-          }
-        </ul>
-      </p>
-    </p>
-  </Container>
-  <Banner wrapperClasses="my-8">
-    If you are looking for professional help, <a
-      href="/community/commercial-support">check out companies</a
-    > that offer Nix related services.
-  </Banner>
-  <Divider mirrorY />
-  <div class="bg-secondary-afghani-blue-45 text-primary-white py-8">
-    <Container>
-      <h2 class="font-heading text-4xl font-bold">NixCon</h2>
-      <p class="mt-2 mb-4 text-xl font-bold">
-        The
-        <a class="text-primary-white!" href="/community/teams/nixcon"
-          >NixCon Team</a
-        >
-        organizes a conference once a year.
-      </p>
-      <div class="grid gap-4 md:grid-cols-3">
-        <div
-          class="bg-secondary-afghani-blue-35 col-span-2 rounded-xl p-4 md:col-span-1"
-        >
-          <h3 class="font-heading mb-4 text-3xl font-bold">Next Conference</h3>
-          <NixConEntry
-            imagePath={nixcons[0].imagePath}
-            title={nixcons[0].title}
-            date={nixcons[0].date}
-            description={nixcons[0].description}
-            href={nixcons[0].href}
-          />
-        </div>
-        <div class="col-span-2 md:py-4">
-          <h3 class="font-heading text-3xl font-bold">Previous Conferences</h3>
-          <div class="mt-4 grid gap-4 md:grid-cols-2">
-            {
-              nixcons
-                .slice(1)
-                .map((nixcon) => (
-                  <NixConEntry
-                    title={nixcon.title}
-                    date={nixcon.date}
-                    description={nixcon.description}
-                    href={nixcon.href}
-                  />
-                ))
-            }
+            <div>
+              We use these calendars to schedule events, meetings, and other.
+              <ul class="mt-4 grid flex-wrap gap-4 md:grid-cols-3">
+                {
+                  calendarsMain.map((platform) => (
+                    <OfficialCommunityLink
+                      href={platform.href}
+                      name={platform.name}
+                      iconName={platform.iconName}
+                    />
+                  ))
+                }
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </Container>
-  </div>
-  <Divider />
-  <Container>
-    <h2
-      class="font-heading text-secondary-afghani-blue mt-8 text-4xl font-bold"
-    >
-      Meetups
-    </h2>
-    <p class="text-l text-secondary-afghani-blue mt-2 mb-4 font-bold">
-      Discover a comprehensive list of
-      <a class="text-secondary-afghani-blue" href="https://nix.ug/">
-        Nix User Groups
-      </a>
-    </p>
-    <div
-      class="mt-4 grid auto-cols-fr bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat text-center text-lg md:grid-flow-col"
-    >
-      <div>
         <h3
-          class="font-heading text-secondary-afghani-blue mt-4 text-2xl font-bold md:mt-2"
+          class="font-heading text-secondary-afghani-blue mt-6 text-3xl font-bold"
         >
-          America
+          Unofficial spaces
         </h3>
-        <ul class="mt-2 space-y-4">
-          {
-            meetups.data.america.map((meetup) => (
-              <li>
-                <a href={meetup.href}>{meetup.location}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div>
+
+        <div>
+          These spaces are not monitored and not moderated by the NixOS
+          Moderation Team. Please be aware that different moral values and rules
+          may apply in these spaces. The NixOS moderation team may advise
+          moderators in these spaces, though does not control or enforce our
+          community values.
+
+          <ul class="mt-4 grid grid-cols-3 flex-wrap gap-4">
+            {
+              platformsOutside.map((platform) => (
+                <CommunityPageListItem
+                  href={platform.href}
+                  name={platform.name}
+                  iconName={platform.iconName}
+                  description={platform.description}
+                  type="mobile_icon_desktop_name"
+                />
+              ))
+            }
+          </ul>
+        </div>
         <h3
-          class="font-heading text-secondary-afghani-blue mt-4 text-2xl font-bold md:mt-2"
+          id="forks"
+          class="font-heading text-secondary-afghani-blue mt-6 text-3xl font-bold"
         >
-          Europe
+          The wider ecosystem
         </h3>
-        <ul class="mt-2 space-y-4">
-          {
-            meetups.data.europe.map((meetup) => (
-              <li>
-                <a href={meetup.href}>{meetup.location}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div>
-        <h3
-          class="font-heading text-secondary-afghani-blue mt-4 text-2xl font-bold md:mt-2"
-        >
-          Asia
-        </h3>
-        <ul class="mt-2 space-y-4">
-          {
-            meetups.data.asia.map((meetup) => (
-              <li>
-                <a href={meetup.href}>{meetup.location}</a>
-              </li>
-            ))
-          }
-        </ul>
+
+        <div>
+          There are a few alternative implementations of the idea of purely
+          functional package managers (sorted chronologically by appearance):
+
+          <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
+            {
+              widerEcosystem.map((platform) => (
+                <CommunityPageListItem
+                  href={platform.href}
+                  name={platform.name}
+                  iconName={platform.iconName}
+                  description={platform.description}
+                  type="mobile_icon_desktop_name"
+                />
+              ))
+            }
+          </ul>
+        </div>
       </div>
     </div>
-    <div class="mt-16 flex flex-wrap-reverse gap-8 leading-loose">
-      <div class="flex flex-1 flex-col items-start justify-center gap-8">
-        <h2 class="text-secondary-afghani-blue text-4xl leading-none font-bold">
-          RFC Process
-        </h2>
-        <p>
-          The "RFC" (request for comments) process is intended to provide a
-          consistent and controlled path for new features to enter the Nix
-          language, packages and OS, so that all community can be confident
-          about the direction the ecosystem is evolving in.
-        </p>
-        <Button color="nixblue" size="lg" href="https://github.com/NixOS/rfcs"
-          >Learn more</Button
-        >
-      </div>
-      <div
-        class="mt-2 block w-full md:w-3/6 md:max-w-2xl md:min-w-3/6 md:flex-0"
-      >
-        <RfcDiagram />
-      </div>
-    </div>
-  </Container>
-  <div class="mt-8">
+    <Banner wrapperClasses="my-8">
+      If you are looking for professional help, <a
+        href="/community/commercial-support">check out companies</a
+      > that offer Nix related services.
+    </Banner>
     <Divider mirrorY />
-  </div>
-  <div class="bg-secondary-afghani-blue-45 py-8">
+    <div class="bg-secondary-afghani-blue-45 text-primary-white py-8">
+      <Container>
+        <h2 class="font-heading text-4xl font-bold">NixCon</h2>
+        <p class="mt-2 mb-4 text-xl font-bold">
+          The
+          <a class="text-primary-white!" href="/community/teams/nixcon"
+            >NixCon Team</a
+          >
+          organizes a conference once a year.
+        </p>
+        <div class="grid gap-4 md:grid-cols-3">
+          <div
+            class="bg-secondary-afghani-blue-35 col-span-2 rounded-xl p-4 md:col-span-1"
+          >
+            <h3 class="font-heading mb-4 text-3xl font-bold">
+              Next Conference
+            </h3>
+            <NixConEntry
+              imagePath={nixcons[0].imagePath}
+              title={nixcons[0].title}
+              date={nixcons[0].date}
+              description={nixcons[0].description}
+              href={nixcons[0].href}
+            />
+          </div>
+          <div class="col-span-2 md:py-4">
+            <h3 class="font-heading text-3xl font-bold">
+              Previous Conferences
+            </h3>
+            <div class="mt-4 grid gap-4 md:grid-cols-2">
+              {
+                nixcons
+                  .slice(1)
+                  .map((nixcon) => (
+                    <NixConEntry
+                      title={nixcon.title}
+                      date={nixcon.date}
+                      description={nixcon.description}
+                      href={nixcon.href}
+                    />
+                  ))
+              }
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
+    <Divider />
     <Container>
       <h2
-        class="text-primary-white mt-8 text-4xl font-bold"
-        id="governance-teams"
+        class="font-heading text-secondary-afghani-blue mt-8 text-4xl font-bold"
       >
-        Teams
+        Meetups
       </h2>
-      <ul class="mt-8 flex flex-wrap justify-stretch gap-x-6 gap-y-16">
-        {
-          teams.map((team) => (
-            <li class="text-primary-white flex grow basis-72 flex-col items-center gap-2 text-center md:items-start md:text-left">
-              <img
-                src={`/images/teams/${team.id.split('_')[1]}.svg`}
-                alt={`${team.data.name} Logo`}
-                class="h-24"
-              />
-              <h3 class="font-heading text-2xl font-bold">{team.data.name}</h3>
-              <p class="mb-2 grow leading-relaxed">{team.data.description}</p>
-              <Button
-                color="white-borders"
-                size="sm-mobfull"
-                href={'/community/teams/' + team.id.split('_')[1]}
-                label="Read more"
-              />
-            </li>
-          ))
-        }
-      </ul>
-    </Container>
-  </div>
-  <Divider />
-  <Container class="mt-8 mb-16 grid md:grid-cols-2" id="foundation">
-    <div class="pb-4 text-center md:pb-0">
-      <div class="flex flex-col items-center justify-center">
-        <Image
-          src={nixosFoundationLogo}
-          alt="NixOS Foundation Logo"
-          class="h-72"
-        />
-      </div>
-      <div class="mt-4 mb-4 inline-block text-left">
-        <h2
-          class="font-heading text-secondary-afghani-blue text-3xl font-bold md:text-center"
-        >
-          Board members:
-        </h2>
-        <ul class="mx-auto mt-2 list-disc pl-8 md:w-72 md:pl-10">
-          {
-            teams
-              .find((team) => team.id.split('_')[1] === 'foundation-board')
-              .data.members.map((member) => (
-                <li class="mb-1">
-                  {member.name}
-                  {member.title && (
-                    <>
-                      &mdash;
-                      {member.title}
-                    </>
-                  )}
+      <p class="text-l text-secondary-afghani-blue mt-2 mb-4 font-bold">
+        Discover a comprehensive list of
+        <a class="text-secondary-afghani-blue" href="https://nix.ug/">
+          Nix User Groups
+        </a>
+      </p>
+      <div
+        class="mt-4 grid auto-cols-fr bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat text-center text-lg md:grid-flow-col"
+      >
+        <div>
+          <h3
+            class="font-heading text-secondary-afghani-blue mt-4 text-2xl font-bold md:mt-2"
+          >
+            America
+          </h3>
+          <ul class="mt-2 space-y-4">
+            {
+              meetups.data.america.map((meetup) => (
+                <li>
+                  <a href={meetup.href}>{meetup.location}</a>
                 </li>
               ))
+            }
+          </ul>
+        </div>
+        <div>
+          <h3
+            class="font-heading text-secondary-afghani-blue mt-4 text-2xl font-bold md:mt-2"
+          >
+            Europe
+          </h3>
+          <ul class="mt-2 space-y-4">
+            {
+              meetups.data.europe.map((meetup) => (
+                <li>
+                  <a href={meetup.href}>{meetup.location}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <h3
+            class="font-heading text-secondary-afghani-blue mt-4 text-2xl font-bold md:mt-2"
+          >
+            Asia
+          </h3>
+          <ul class="mt-2 space-y-4">
+            {
+              meetups.data.asia.map((meetup) => (
+                <li>
+                  <a href={meetup.href}>{meetup.location}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <div class="mt-16 flex flex-wrap-reverse gap-8 leading-loose">
+        <div class="flex flex-1 flex-col items-start justify-center gap-8">
+          <h2
+            class="text-secondary-afghani-blue text-4xl leading-none font-bold"
+          >
+            RFC Process
+          </h2>
+          <p>
+            The "RFC" (request for comments) process is intended to provide a
+            consistent and controlled path for new features to enter the Nix
+            language, packages and OS, so that all community can be confident
+            about the direction the ecosystem is evolving in.
+          </p>
+          <Button color="nixblue" size="lg" href="https://github.com/NixOS/rfcs"
+            >Learn more</Button
+          >
+        </div>
+        <div
+          class="mt-2 block w-full md:w-3/6 md:max-w-2xl md:min-w-3/6 md:flex-0"
+        >
+          <RfcDiagram />
+        </div>
+      </div>
+    </Container>
+    <div class="mt-8">
+      <Divider mirrorY />
+    </div>
+    <div class="bg-secondary-afghani-blue-45 py-8">
+      <Container>
+        <h2
+          class="text-primary-white mt-8 text-4xl font-bold"
+          id="governance-teams"
+        >
+          Teams
+        </h2>
+        <ul class="mt-8 flex flex-wrap justify-stretch gap-x-6 gap-y-16">
+          {
+            teams.map((team) => (
+              <li class="text-primary-white flex grow basis-72 flex-col items-center gap-2 text-center md:items-start md:text-left">
+                <img
+                  src={`/images/teams/${team.id.split('_')[1]}.svg`}
+                  alt={`${team.data.name} Logo`}
+                  class="h-24"
+                />
+                <h3 class="font-heading text-2xl font-bold">
+                  {team.data.name}
+                </h3>
+                <p class="mb-2 grow leading-relaxed">{team.data.description}</p>
+                <Button
+                  color="white-borders"
+                  size="sm-mobfull"
+                  href={'/community/teams/' + team.id.split('_')[1]}
+                  label="Read more"
+                />
+              </li>
+            ))
           }
         </ul>
+      </Container>
+    </div>
+    <Divider />
+    <Container class="mt-8 mb-16 grid md:grid-cols-2" id="foundation">
+      <div class="pb-4 text-center md:pb-0">
+        <div class="flex flex-col items-center justify-center">
+          <Image
+            src={nixosFoundationLogo}
+            alt="NixOS Foundation Logo"
+            class="h-72"
+          />
+        </div>
+        <div class="mt-4 mb-4 inline-block text-left">
+          <h2
+            class="font-heading text-secondary-afghani-blue text-3xl font-bold md:text-center"
+          >
+            Board members:
+          </h2>
+          <ul class="mx-auto mt-2 list-disc pl-8 md:w-72 md:pl-10">
+            {
+              teams
+                .find((team) => team.id.split('_')[1] === 'foundation-board')
+                .data.members.map((member) => (
+                  <li class="mb-1">
+                    {member.name}
+                    {member.title && (
+                      <>
+                        &mdash;
+                        {member.title}
+                      </>
+                    )}
+                  </li>
+                ))
+            }
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="space-y-4 leading-relaxed">
-      <h2 class="font-heading text-secondary-afghani-blue text-3xl font-bold">
-        The mission!
-      </h2>
-      <p>
-        The mission of the foundation is to support the Nix ecosystem's
-        infrastructure, and projects implementing the purely functional
-        deployment model.
-      </p>
-      <p>
-        In particular, the foundation supports Nix, Nixpkgs, NixOS, and
-        operates:
-      </p>
-      <ul class="ml-4 list-disc">
-        <li>
-          <a href="https://cache.nixos.org"> cache.nixos.org</a>
-          - the NixOS binary cache, containing over 120TB of prebuilt Nix packages.
-        </li>
-        <li>
-          <a href="https://hydra.nixos.org"> hydra.nixos.org</a>
-          - a Nix build farm, consisting of hundreds of macOS, x86-64 (Linux) and
-          aarch64 (Linux) build cores. Hydra executes over 350,000 builds each week.
-        </li>
-        <li>
-          <a href="/community/event-funding"> Event Funding</a>
-        </li>
-      </ul>
-      <p>
-        The NixOS Foundation is a registered non-profit organisation at the
-        Chamber of commerce (Kamer van Koophandel) in Utrecht, The Netherlands.
-        The KvK number is <code>63520583</code>.
-      </p>
-      <p>
-        You can contact the foundation by writing an email to <a
-          href="mailto:foundation@nixos.org">foundation@nixos.org</a
-        >.
-      </p>
-    </div>
+      <div class="space-y-4 leading-relaxed">
+        <h2 class="font-heading text-secondary-afghani-blue text-3xl font-bold">
+          The mission!
+        </h2>
+        <p>
+          The mission of the foundation is to support the Nix ecosystem's
+          infrastructure, and projects implementing the purely functional
+          deployment model.
+        </p>
+        <p>
+          In particular, the foundation supports Nix, Nixpkgs, NixOS, and
+          operates:
+        </p>
+        <ul class="ml-4 list-disc">
+          <li>
+            <a href="https://cache.nixos.org"> cache.nixos.org</a>
+            - the NixOS binary cache, containing over 120TB of prebuilt Nix packages.
+          </li>
+          <li>
+            <a href="https://hydra.nixos.org"> hydra.nixos.org</a>
+            - a Nix build farm, consisting of hundreds of macOS, x86-64 (Linux) and
+            aarch64 (Linux) build cores. Hydra executes over 350,000 builds each week.
+          </li>
+          <li>
+            <a href="/community/event-funding"> Event Funding</a>
+          </li>
+        </ul>
+        <p>
+          The NixOS Foundation is a registered non-profit organisation at the
+          Chamber of commerce (Kamer van Koophandel) in Utrecht, The
+          Netherlands. The KvK number is <code>63520583</code>.
+        </p>
+        <p>
+          You can contact the foundation by writing an email to <a
+            href="mailto:foundation@nixos.org">foundation@nixos.org</a
+          >.
+        </p>
+      </div>
+    </Container>
   </Container>
-</Layout>
-<script>
-  const boxes = document
-    .getElementById('rfc-diagram')
-    .getElementsByTagName('rect');
-  const diagram = document.getElementById('rfc-diagram');
-  const durationMiliseconds = 1500;
-  const baseActivationClasses = ['stroke-secondary-afghani-blue'];
-  const successActivationClasses = ['stroke-nix-green'];
-  const failureActivationClasses = ['stroke-nix-orange', 'opacity-50'];
-  const fadedActivationClasses = ['opacity-50'];
-  const timeline = [
-    {
-      element: boxes[9], // New Submission
-      index: 0,
-      classes: baseActivationClasses,
-    },
-    {
-      element: boxes[8], // Nomination Phase
-      index: 1,
-      classes: baseActivationClasses,
-    },
-    {
-      element: boxes[7], // Discussion Phase
-      index: 2,
-      classes: baseActivationClasses,
-    },
-    {
-      element: boxes[0], // Final Comment Phase
-      index: 3,
-      classes: baseActivationClasses,
-    },
-    {
-      element: boxes[3], // Submission Rejected
-      index: 4,
-      classes: failureActivationClasses,
-    },
-    {
-      element: boxes[1], // New Submission 2
-      index: 4,
-      classes: fadedActivationClasses,
-    },
-    {
-      element: boxes[5], // FCP Canceled
-      index: 4,
-      classes: failureActivationClasses,
-    },
-    {
-      element: boxes[2], // Refine Submission
-      index: 4,
-      classes: fadedActivationClasses,
-    },
-    {
-      element: boxes[4], // Submission Accepted
-      index: 4,
-      classes: successActivationClasses,
-    },
-  ];
-  let isAnimating = false;
-
-  timeline.forEach((box) => {
-    box.element.classList.add('transition-all', 'duration-500', 'ease-in');
-  });
-
-  let highestIndex = 0;
-  timeline.forEach((box) => {
-    if (box.index > highestIndex) {
-      highestIndex = box.index;
-    }
-  });
-
-  function triggerAnimation() {
-    // prevent multiple animations at the same time
-    if (isAnimating) {
-      return;
-    }
-    isAnimating = true;
-    setTimeout(
-      () => {
-        isAnimating = false;
+  <script>
+    const boxes = document
+      .getElementById('rfc-diagram')
+      .getElementsByTagName('rect');
+    const diagram = document.getElementById('rfc-diagram');
+    const durationMilliseconds = 1500;
+    const baseActivationClasses = ['stroke-secondary-afghani-blue'];
+    const successActivationClasses = ['stroke-nix-green'];
+    const failureActivationClasses = ['stroke-nix-orange', 'opacity-50'];
+    const fadedActivationClasses = ['opacity-50'];
+    const timeline = [
+      {
+        element: boxes[9], // New Submission
+        index: 0,
+        classes: baseActivationClasses,
       },
-      (highestIndex + 1) * durationMiliseconds,
-    );
+      {
+        element: boxes[8], // Nomination Phase
+        index: 1,
+        classes: baseActivationClasses,
+      },
+      {
+        element: boxes[7], // Discussion Phase
+        index: 2,
+        classes: baseActivationClasses,
+      },
+      {
+        element: boxes[0], // Final Comment Phase
+        index: 3,
+        classes: baseActivationClasses,
+      },
+      {
+        element: boxes[3], // Submission Rejected
+        index: 4,
+        classes: failureActivationClasses,
+      },
+      {
+        element: boxes[1], // New Submission 2
+        index: 4,
+        classes: fadedActivationClasses,
+      },
+      {
+        element: boxes[5], // FCP Canceled
+        index: 4,
+        classes: failureActivationClasses,
+      },
+      {
+        element: boxes[2], // Refine Submission
+        index: 4,
+        classes: fadedActivationClasses,
+      },
+      {
+        element: boxes[4], // Submission Accepted
+        index: 4,
+        classes: successActivationClasses,
+      },
+    ];
+    let isAnimating = false;
 
-    // trigger animation on each box
     timeline.forEach((box) => {
-      setTimeout(() => {
-        box.element.classList.add(...box.classes);
-      }, box.index * durationMiliseconds);
+      box.element.classList.add('transition-all', 'duration-500', 'ease-in');
     });
-  }
 
-  const activatorObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (isAnimating || !entry.isIntersecting) {
-          return;
-        }
-        triggerAnimation();
+    let highestIndex = 0;
+    timeline.forEach((box) => {
+      if (box.index > highestIndex) {
+        highestIndex = box.index;
+      }
+    });
+
+    function triggerAnimation() {
+      // prevent multiple animations at the same time
+      if (isAnimating) {
+        return;
+      }
+      isAnimating = true;
+      setTimeout(
+        () => {
+          isAnimating = false;
+        },
+        (highestIndex + 1) * durationMilliseconds,
+      );
+
+      // trigger animation on each box
+      timeline.forEach((box) => {
+        setTimeout(() => {
+          box.element.classList.add(...box.classes);
+        }, box.index * durationMilliseconds);
       });
-    },
-    {
-      threshold: 1,
-    },
-  );
-  const deactivatorObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (isAnimating || entry.isIntersecting) {
-          return;
-        }
-        timeline.forEach((box) => {
-          box.element.classList.remove(...box.classes);
+    }
+
+    const activatorObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (isAnimating || !entry.isIntersecting) {
+            return;
+          }
+          triggerAnimation();
         });
-      });
-    },
-    {
-      threshold: 0,
-    },
-  );
-  activatorObserver.observe(diagram);
-  deactivatorObserver.observe(diagram);
-</script>
+      },
+      {
+        threshold: 1,
+      },
+    );
+    const deactivatorObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (isAnimating || entry.isIntersecting) {
+            return;
+          }
+          timeline.forEach((box) => {
+            box.element.classList.remove(...box.classes);
+          });
+        });
+      },
+      {
+        threshold: 0,
+      },
+    );
+    activatorObserver.observe(diagram);
+    deactivatorObserver.observe(diagram);
+  </script>
+</Layout>

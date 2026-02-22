@@ -12,4 +12,6 @@ services:
       - nix
       - develop
       - --command
-      - serve
+      - npm
+      - run
+      - dev

@@ -1,0 +1,105 @@
+---
+import VerticalBorderList from '../VerticalBorderList.astro';
+
+const content = [
+  {
+    title: 'OCI-Containers',
+    examples: ['Docker', 'Podman', 'Buildah'],
+    traditional: 'Specify build steps to reach the desired state',
+    nix: 'Declare the desired state as a evaluatable expression',
+    benefits: ['Productivity', 'Reproducibility', 'Auditability'],
+  },
+  {
+    title: 'Languages',
+    examples: ['YAML/JSON', 'HCL', 'CUE'],
+    traditional: 'Descriptive but often limited in abstraction',
+    nix: 'Use functional programming for powerful abstractions',
+    benefits: ['Composability', 'Reusability', 'Maintainability'],
+  },
+  {
+    title: 'Build-Software',
+    examples: ['Bazel', 'Buck'],
+    traditional:
+      'Focus on the build process, often limited to specific ecosystems',
+    nix: 'Manage entire software environment including dependencies across ecosystems',
+    benefits: ['Reproducibility', 'Flexibility', 'Integration'],
+  },
+  {
+    title: 'Package Managers',
+    examples: ['homebrew', 'apt/rpm', 'choco/winget'],
+    traditional: 'Install and manage software packages imperatively',
+    nix: 'Declaratively define the desired system state in a functional programming expression',
+    benefits: ['Atomic upgrades', 'Rollbacks', 'Consistency'],
+  },
+];
+---
+
+<p class="mb-4">
+  If you are already familiar with modern build and infrasctructure tools, the
+  following table highlights how Nix's declarative and functional approach
+  aligns with concepts you may already know, while also showcasing the unique
+  benefits that Nix brings to the table.
+</p>
+
+<div class="overflow-x-auto">
+  <table class="table-auto">
+    <thead
+      class="font-blold border-b-secondary-afghani-blue-45 hidden border-b-2 md:table-header-group"
+    >
+      <tr>
+        <th class="p-2"> Category </th>
+        <th class="p-2"> Examples </th>
+        <th class="w-max p-2"> Traditional Approach </th>
+        <th class="w-max p-2"> Nix Approach </th>
+        <th class="p-2"> Benefits </th>
+      </tr>
+    </thead>
+    <tbody class="flex gap-4 md:table-row-group">
+      {
+        content.map((item) => (
+          <tr class="border-b-secondary-afghani-blue-55 bg-secondary-afghani-blue-95 flex min-w-96 flex-col rounded-2xl last:border-b-0 md:table-row md:min-w-auto md:rounded-none md:border-b-2">
+            <td
+              data-label="Title"
+              class="bg-secondary-afghani-blue-45 text-primary-white block w-full rounded-t-2xl p-2 text-center font-bold md:table-cell md:w-max md:rounded-t-none md:text-right"
+            >
+              {item.title}
+            </td>
+            <td
+              data-label="Examples"
+              class="before-w-full text-secondary-afghani-blue-25 before:text-secondary-afghani-blue-35 p-2 before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] md:max-w-min before:md:hidden"
+            >
+              <VerticalBorderList items={item.examples} />
+            </td>
+            <td
+              data-label="Traditional Approach"
+              class="before-w-full bg-accent-norwegian-pink-95 before:text-secondary-afghani-blue-35 p-2 text-center before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] before:md:hidden"
+            >
+              {item.traditional}
+            </td>
+            <td
+              data-label="Nix Approach"
+              class="before-w-full bg-accent-zambian-green-95 before:text-secondary-afghani-blue-35 p-2 text-center before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] before:md:hidden"
+            >
+              {item.nix}
+            </td>
+            <td
+              data-label="Benefits"
+              class="before-w-full before:text-secondary-afghani-blue-35 min-w-max pb-4 before:mt-2 before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] md:pb-0 before:md:hidden"
+            >
+              <VerticalBorderList items={item.benefits} />
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<p class="mt-4">
+  It is important to note that while this table positions Nix as an alternative
+  to these tools, Nix can also complement and integrate with them, enhancing
+  their capabilities through its unique approach to package and environment
+  management. The strength of Nix lies in its ability to provide a consistent
+  and reliable foundation, regardless of the specific tools or ecosystems in
+  use.
+</p>
