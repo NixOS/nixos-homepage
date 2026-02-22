@@ -13,7 +13,7 @@ import favicons from 'astro-favicons';
 
 import { createRequire } from 'module';
 import shellPromptTransformer from './src/lib/shiki/shellPromptTransformer';
-import takumi, { presets } from 'astro-takumi';
+import takumi from 'astro-takumi';
 import { nixOg } from './src/lib/takumi-og';
 const require = createRequire(import.meta.url);
 
