@@ -8,91 +8,105 @@ import Header from '@/components/Header.astro';
 import '@/styles/base.css';
 
 const {
-  title = 'Nix & NixOS | Declarative builds and deployments',
-  description = 'Nix is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems.',
+    title = 'Nix & NixOS | Declarative builds and deployments',
+    description = 'Nix is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems.',
 } = Astro.props;
 
 const blogMenu = await getEntry('menus', 'blog');
 
 const headLinks = [
-  {
-    rel: 'sitemap',
-    href: '/sitemap-index.xml',
-  },
-  {
-    rel: 'alternate',
-    type: 'application/rss+xml',
-    title: 'Complete RSS Feed',
-    href: '/blog/feed.xml',
-  },
+    {
+        rel: 'sitemap',
+        href: '/sitemap-index.xml',
+    },
+    {
+        rel: 'alternate',
+        type: 'application/rss+xml',
+        title: 'Complete RSS Feed',
+        href: '/blog/feed.xml',
+    },
 ];
 
 const headFeedLinks = blogMenu.data.map((e) => {
-  return {
-    rel: 'alternate',
-    type: 'application/rss+xml',
-    title: `${e.title} RSS Feed`,
-    href: `/blog/${e.id}-rss.xml`,
-  };
+    return {
+        rel: 'alternate',
+        type: 'application/rss+xml',
+        title: `${e.title} RSS Feed`,
+        href: `/blog/${e.id}-rss.xml`,
+    };
 });
 ---
 
 <html lang="en" class="scroll-smooth">
-  <head>
-    <SEO
-      title={title}
-      titleTemplate={Astro.url.pathname === '/' ? title : '%s | Nix & NixOS'}
-      titleDefault={title}
-      description={description}
-      charset="utf-8"
-      extend={{
-        link: headLinks.concat(headFeedLinks),
-        meta: [
-          {
-            name: 'viewport',
-            content: 'width=device-width',
-          },
-          {
-            name: 'generator',
-            content: Astro.generator,
-          },
-          {
-            name: 'google-site-verification',
-            content: 'ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE',
-          },
-          {
-            httpEquiv: 'Content-Type',
-            content: 'text/html; charset=utf-8',
-          },
-        ],
-      }}
-    />
-  </head>
-  <body
-    class="text-primary-black-15 bg-primary-white flex min-h-screen flex-col"
-  >
-    <Header />
+    <head>
+        <SEO
+            title={title}
+            titleTemplate={Astro.url.pathname === '/'
+                ? title
+                : '%s | Nix & NixOS'}
+            titleDefault={title}
+            description={description}
+            charset="utf-8"
+            openGraph={{
+                basic: {
+                    title: title,
+                    type: 'website',
+                    image: 'https://brand.nixos.org/logos/nixos-logo-black-flat-black-regular-horizontal-minimal.svg',
+                },
+                optional: {
+                    description: description,
+                    locale: 'en_US',
+                    siteName: 'nixos.org',
+                },
+            }}
+            extend={{
+                link: headLinks.concat(headFeedLinks),
+                meta: [
+                    {
+                        name: 'viewport',
+                        content: 'width=device-width',
+                    },
+                    {
+                        name: 'generator',
+                        content: Astro.generator,
+                    },
+                    {
+                        name: 'google-site-verification',
+                        content: 'ir-07nYvo3u3x_VmkTO1wCfYJ8uC-SrVBGR7hZgqPSE',
+                    },
+                    {
+                        httpEquiv: 'Content-Type',
+                        content: 'text/html; charset=utf-8',
+                    },
+                ],
+            }}
+        />
+    </head>
+    <body
+        class="text-primary-black-15 bg-primary-white flex min-h-screen flex-col"
+    >
+        <Header />
 
-    <main class="flex-1">
-      <slot />
-    </main>
+        <main class="flex-1">
+            <slot />
+        </main>
 
-    <Footer />
+        <Footer />
 
-    <script>
-      import 'htmx.org';
+        <script>
+            import 'htmx.org';
 
-      // Fonts
-      import '@fontsource-variable/overpass';
-      import '@fontsource-variable/fira-code';
-      import '@fontsource-variable/roboto-flex/wdth.css';
-      import '@/lib/client/scrollToTopHandler.js';
-    </script>
+            // Fonts
+            import '@fontsource-variable/overpass';
+            import '@fontsource-variable/fira-code';
+            import '@fontsource-variable/roboto-flex/wdth.css';
+            import '@/lib/client/scrollToTopHandler.js';
+        </script>
 
-    <style>
-      @font-face {
-        font-family: 'Roboto Flex Variable';
-      }
-    </style>
-  </body>
+        <style>
+            @font-face {
+                font-family: 'Roboto Flex Variable';
+            }
+        </style>
+    </body>
 </html>
