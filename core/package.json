@@ -19,25 +19,25 @@
     "@fontsource-variable/fira-code": "^5.2.7",
     "@fontsource-variable/overpass": "^5.2.8",
     "@fontsource-variable/roboto-flex": "^5.2.8",
-    "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/vite": "^4.2.0",
     "@xmldom/xmldom": "^0.9.8",
-    "asciinema-player": "^3.14.0",
-    "astro": "^5.17.1",
+    "asciinema-player": "^3.15.0",
+    "astro": "^5.17.3",
     "astro-favicons": "^3.1.5",
     "astro-icon": "^1.1.5",
     "astro-seo": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "htmx.org": "^2.0.8",
-    "markdown-it": "^14.0.0",
+    "markdown-it": "^14.1.1",
     "node-html-parser": "^7.0.2",
-    "sanitize-html": "^2.17.0",
+    "sanitize-html": "^2.17.1",
     "tailwindcss": "^4.0.0",
     "turndown": "^7.2.2"
   },
   "devDependencies": {
     "@nixos/branding": "^0.1.0",
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.69",
+    "@iconify-json/simple-icons": "^1.2.71",
     "@iconify/tailwind": "^1.2.0"
   }
 }
