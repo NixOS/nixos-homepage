@@ -74,12 +74,10 @@ const learningResources = [
   <Divider style="slope" mirrorY mirrorX />
   <div class="bg-secondary-afghani-blue-45 text-primary-white py-8 md:px-8">
     <Container>
-      <h2 class="font-heading pb-8 text-4xl font-extrabold">Search</h2>
+      <h2 class="font-heading pb-8 text-4xl font-bold">Search</h2>
       <div class="grid gap-4 md:grid-cols-2">
         <div>
-          <h3 class="font-heading mb-4 text-2xl font-extrabold">
-            Nix packages
-          </h3>
+          <h3 class="font-heading mb-4 text-2xl font-bold">Nix packages</h3>
           <NixosSearchInput
             color="white"
             size="sm-full"
@@ -87,9 +85,7 @@ const learningResources = [
           />
         </div>
         <div>
-          <h3 class="font-heading mb-4 text-2xl font-extrabold">
-            NixOS options
-          </h3>
+          <h3 class="font-heading mb-4 text-2xl font-bold">NixOS options</h3>
           <NixosSearchInput color="white" size="sm-full" collection="options" />
         </div>
       </div>
@@ -110,7 +106,7 @@ const learningResources = [
               <h2 class="font-heading text-secondary-afghani-blue mb-4 text-3xl leading-none font-bold">
                 {manual.data.title}
               </h2>
-              <div class="leading-relaxed font-extralight">
+              <div class="leading-relaxed">
                 <Content />
               </div>
             </article>
@@ -125,17 +121,15 @@ const learningResources = [
   <Divider style="slope" mirrorY />
   <div class="bg-secondary-afghani-blue-45 text-primary-white py-8 md:px-8">
     <Container>
-      <h2 class="font-heading pb-8 text-4xl font-extrabold">
+      <h2 class="font-heading pb-8 text-4xl font-bold">
         Other learning resources
       </h2>
       <div class="grid gap-12 pb-12 md:grid-cols-3 md:gap-4">
         {
           learningResources.map((item) => (
             <div class="flex flex-col items-start">
-              <h3 class="font-heading mb-2 text-2xl font-extrabold">
-                {item.title}
-              </h3>
-              <p class="mb-4 leading-relaxed font-light">{item.description}</p>
+              <h3 class="font-heading mb-2 text-2xl font-bold">{item.title}</h3>
+              <p class="mb-4 leading-relaxed">{item.description}</p>
               <Button size="sm-mobfull" color="white-borders" href={item.url}>
                 {item.buttonText}
               </Button>
