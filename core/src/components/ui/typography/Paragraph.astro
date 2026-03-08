@@ -2,7 +2,7 @@
 interface Props {
     tag?: string;
     size?: 'xl' | 'lg' | 'md' | 'sm';
-    variant?: 'black' | 'white' | 'sr-only';
+    variant?: 'black' | 'white' | 'sr-only' | 'darkblue';
     class?: string;
     center?: boolean;
 }
@@ -22,6 +22,7 @@ const Tag = tag;
         'font-sans',
         variant === 'black' && 'text-black',
         variant === 'white' && 'text-white',
+        variant === 'darkblue' && 'text-secondary-afghani-blue-35',
         variant === 'sr-only' && 'sr-only',
         size === 'xl' && 'text-xl leading-loose',
         size === 'lg' && 'text-lg',
