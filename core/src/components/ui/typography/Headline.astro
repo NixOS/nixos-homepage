@@ -1,0 +1,40 @@
+---
+interface Props {
+  tag?: string;
+  level: number;
+  variant: 'blue' | 'white' | 'sr-only';
+  center?: boolean;
+  class?: string;
+}
+
+let {
+  tag,
+  level = 1,
+  variant = 'blue',
+  center = false,
+  class: extraClasses,
+} = Astro.props;
+
+if (tag === undefined) {
+  tag = `h${level}`;
+}
+
+const Tag = tag;
+---
+
+<Tag
+  class:list={[
+    'font-heading leading-tight font-bold',
+    level === 1 && 'text-4xl md:text-5xl',
+    level === 2 && 'text-4xl',
+    level === 3 && 'text-3xl',
+    level === 4 && 'text-xl',
+    variant === 'blue' && 'text-secondary-afghani-blue',
+    variant === 'white' && 'text-white',
+    variant === 'sr-only' && 'sr-only',
+    center && 'text-center',
+    extraClasses,
+  ]}
+>
+  <slot />
+</Tag>

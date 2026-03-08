@@ -7,6 +7,7 @@ import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Layout from '../layouts/Layout.astro';
 import { generatePathFromPost } from '../lib/utils';
 
+import Headline from '@/components/ui/typography/Headline.astro';
 import { Icon } from 'astro-icon/components';
 import Asciinema from '../components/ui/Asciinema.astro';
 import Banner from '../components/ui/Banner.astro';
@@ -64,9 +65,9 @@ posts
       <div
         class="mx-0 my-auto flex h-full flex-0 flex-col justify-between gap-3 md:gap-4 md:pr-12"
       >
-        <h1 class="font-heading text-4xl leading-tight font-bold md:text-5xl">
+        <Headline level={1} variant="white">
           Declarative builds<br class="hidden md:inline-block" /> and deployments.
-        </h1>
+        </Headline>
         <p class="mb-4 text-xl font-normal md:leading-loose">
           Nix is a tool that takes a unique approach to package management and
           system configuration. Learn how to make reproducible, declarative and
@@ -125,9 +126,9 @@ posts
                 src={feature.data.img}
                 class="mx-auto mb-6 h-32 w-auto"
               />
-              <h2 class="font-heading text-secondary-afghani-blue mb-2 text-3xl leading-none font-bold">
+              <Headline level={3} tag="b" variant="blue" class="mb-2">
                 {feature.data.title}
-              </h2>
+              </Headline>
               <div class="text-light-bold leading-loose">
                 <Content />
               </div>
@@ -144,11 +145,9 @@ posts
       <Container
         class="flex w-full flex-col items-center justify-center gap-4 pt-8 pb-8"
       >
-        <h2
-          class="font-heading text-secondary-afghani-blue pb-0 text-center text-4xl leading-tight font-bold md:w-2/3"
-        >
+        <Headline level={2} center variant="blue" class="text-4xl">
           Choose from over 120 000 Packages
-        </h2>
+        </Headline>
         <p
           class="pb-2 text-center text-2xl leading-relaxed font-extralight md:w-5/6"
         >
@@ -163,11 +162,9 @@ posts
   </div>
   <div>
     <Container>
-      <h2
-        class="font-heading text-secondary-afghani-blue w-full pb-2 text-center text-4xl font-bold"
-      >
+      <Headline variant="blue" level={2} center class="pb-2">
         Examples
-      </h2>
+      </Headline>
       <div class="grid items-center gap-4 pb-8 md:grid-cols-2">
         {
           demos.data.map((demo) => {
