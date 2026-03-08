@@ -1,13 +1,19 @@
 ---
-const { class: extraClasses, id = null } = Astro.props;
+interface Props {
+    class?: string;
+    id?: string;
+    tag?: string;
+}
+
+const { tag: Tag = 'div', class: extraClasses, id = null } = Astro.props;
 ---
 
-<div
-  class:list={[
-    'px-4 sm:max-w-[736px] md:mx-auto md:max-w-[960px] lg:max-w-[1168px]',
-    extraClasses,
-  ]}
-  id={id}
+<Tag
+    class:list={[
+        'px-4 sm:max-w-[736px] md:mx-auto md:max-w-[960px] lg:max-w-[1168px]',
+        extraClasses,
+    ]}
+    id={id}
 >
-  <slot />
-</div>
+    <slot />
+</Tag>

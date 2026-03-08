@@ -7,6 +7,7 @@ import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Layout from '../layouts/Layout.astro';
 import { generatePathFromPost } from '../lib/utils';
 
+import Segment from '@/components/layout/Segment.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import { Icon } from 'astro-icon/components';
@@ -57,11 +58,9 @@ posts
             </Banner>
         )
     }
-    <div
-        class="bg-secondary-afghani-blue-45 inline-svg-hero bg-cover bg-left bg-no-repeat"
-    >
+    <Segment variant="blue-lambada">
         <Container
-            class="text-primary-white grid grid-cols-1 gap-8 py-8 md:py-16 lg:grid-cols-2 lg:py-24"
+            class="grid grid-cols-1 gap-8 py-8 md:py-16 lg:grid-cols-2 lg:py-24"
         >
             <div
                 class="mx-0 my-auto flex h-full flex-0 flex-col justify-between gap-3 md:gap-4 md:pr-12"
@@ -113,16 +112,19 @@ posts
                 />
             </div>
         </Container>
-    </div>
+    </Segment>
     <div
-        class="inline-svg-landing-search-top bg-[39%_100%] bg-no-repeat pt-16 pb-48 md:bg-bottom"
+        class="inline-svg-landing-search-top bg-[39%_100%] bg-no-repeat md:bg-bottom"
     >
-        <Container class="grid gap-8 md:grid-cols-3 md:gap-4">
+        <Container
+            class="grid gap-8 pt-16 pb-48 md:grid-cols-3 md:gap-4"
+            tag="ul"
+        >
             {
                 landingFeatures.map(async (feature) => {
                     const { Content } = await render(feature);
                     return (
-                        <div class="flex flex-col text-center">
+                        <li class="list-none text-center">
                             <InlineSVG
                                 src={feature.data.img}
                                 class="mx-auto mb-6 h-32 w-auto"
@@ -132,13 +134,14 @@ posts
                                 tag="b"
                                 variant="blue"
                                 class="mb-2"
+                                center
                             >
                                 {feature.data.title}
                             </Headline>
-                            <Paragraph size="md" variant="black">
+                            <Paragraph size="md" variant="black" center>
                                 <Content />
                             </Paragraph>
-                        </div>
+                        </li>
                     );
                 })
             }
@@ -165,7 +168,7 @@ posts
             </Container>
         </div>
     </div>
-    <div>
+    <Segment variant="white">
         <Container>
             <Headline variant="blue" level={2} center class="pb-2">
                 Examples
@@ -189,5 +192,5 @@ posts
                 }
             </div>
         </Container>
-    </div>
+    </Segment>
 </Layout>

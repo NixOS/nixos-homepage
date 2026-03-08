@@ -1,55 +1,55 @@
 ---
 interface Props {
-  heading: string;
-  subHeading: string;
-  tags: Array<{ href: string | null; text: string }>;
-  paragraphs: string[];
-  emphasis?: string | null;
-  location?: 'left' | 'right';
+    heading: string;
+    subHeading: string;
+    tags: Array<{ href: string | null; text: string }>;
+    paragraphs: string[];
+    emphasis?: string | null;
+    location?: 'left' | 'right';
 }
 
 const {
-  heading,
-  subHeading,
-  tags,
-  paragraphs,
-  emphasis = null,
-  location = 'left',
+    heading,
+    subHeading,
+    tags,
+    paragraphs,
+    emphasis = null,
+    location = 'left',
 } = Astro.props;
 
 import Tag from '../../ui/Tag.astro';
 ---
 
 <h2
-  class="font-heading text-secondary-afghani-bluesecondary-afghani-blue text-[2rem] leading-[2.2rem] font-bold"
+    class="font-heading text-secondary-afghani-bluesecondary-afghani-blue text-[2rem] leading-[2.2rem] font-bold"
 >
-  {heading}
+    {heading}
 </h2>
 <p class="text-primary-black-55 text-xl leading-[2.2rem] font-bold">
-  {subHeading}
+    {subHeading}
 </p>
 <div
-  class="flex flex-wrap gap-1"
-  class:list={[
-    {
-      'justify-start md:justify-end': location === 'left',
-      'justify-start': location === 'right',
-    },
-  ]}
+    class="flex flex-wrap gap-1"
+    class:list={[
+        {
+            'justify-start md:justify-end': location === 'left',
+            'justify-start': location === 'right',
+        },
+    ]}
 >
-  {tags.map((tag) => <Tag href={tag.href}>{tag.text}</Tag>)}
+    {tags.map((tag) => <Tag href={tag.href}>{tag.text}</Tag>)}
 </div>
 {
-  paragraphs.map((paragraph, idx, array) => {
-    return (
-      <p class="leading-[1.75rem]">
-        {paragraph}
-        {idx + 1 === array.length && emphasis && (
-          <>
-            &nbsp;<span class="font-bold">{emphasis}</span>
-          </>
-        )}
-      </p>
-    );
-  })
+    paragraphs.map((paragraph, idx, array) => {
+        return (
+            <p class="leading-[1.75rem]">
+                {paragraph}
+                {idx + 1 === array.length && emphasis && (
+                    <>
+                        &nbsp;<span class="font-bold">{emphasis}</span>
+                    </>
+                )}
+            </p>
+        );
+    })
 }
