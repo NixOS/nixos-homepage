@@ -1,0 +1,35 @@
+---
+interface Props {
+    tag?: string;
+    size?: 'xl' | 'lg' | 'md' | 'sm';
+    variant?: 'black' | 'white' | 'sr-only';
+    class?: string;
+    center?: boolean;
+}
+const {
+    tag = 'p',
+    size = 'md',
+    variant = 'black',
+    center = false,
+    class: extraClasses,
+} = Astro.props;
+
+const Tag = tag;
+---
+
+<Tag
+    class:list={[
+        'font-sans',
+        variant === 'black' && 'text-black',
+        variant === 'white' && 'text-white',
+        variant === 'sr-only' && 'sr-only',
+        size === 'xl' && 'text-xl leading-loose',
+        size === 'lg' && 'text-lg',
+        size === 'md' && 'text-md',
+        size === 'sm' && 'text-sm',
+        center && 'text-center',
+        extraClasses,
+    ]}
+>
+    <slot />
+</Tag>
