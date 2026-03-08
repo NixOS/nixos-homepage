@@ -1,8 +1,8 @@
 ---
 interface Props {
-    text?: string;
-    subtext?: string;
-    parentPath?: string;
+  text?: string;
+  subtext?: string;
+  parentPath?: string;
 }
 
 const { text = '', subtext, parentPath = undefined }: Props = Astro.props;
@@ -13,24 +13,24 @@ import Container from './Container.astro';
 ---
 
 <div
-    class="md:inline-svg-header-nixdarkblue bg-secondary-afghani-blue-45 block bg-cover bg-bottom bg-no-repeat py-16 md:bg-transparent md:py-24"
+  class="md:inline-svg-header-nixdarkblue bg-secondary-afghani-blue-45 block bg-cover bg-bottom bg-no-repeat py-16 md:bg-transparent md:py-24"
 >
-    <Container class="text-primary-white grid grid-cols-3">
-        <div class="col-span-2 flex flex-col gap-4">
-            {
-                parentPath && (
-                    <a
-                        href={parentPath}
-                        class="text-primary-white! -mt-6 -mb-4 hidden md:inline"
-                    >
-                        <span class="text-nixblue">←</span> Back
-                    </a>
-                )
-            }
-            <Headline level={1} variant="white">
-                {text}
-            </Headline>
-            {subtext && <Paragraph size="sm" set:html={subtext} />}
-        </div>
-    </Container>
+  <Container class="text-primary-white grid grid-cols-3">
+    <div class="col-span-2 flex flex-col gap-4">
+      {
+        parentPath && (
+          <a
+            href={parentPath}
+            class="text-primary-white! -mt-6 -mb-4 hidden md:inline"
+          >
+            <span class="text-nixblue">←</span> Back
+          </a>
+        )
+      }
+      <Headline level={1} variant="white">
+        {text}
+      </Headline>
+      {subtext && <Paragraph size="sm" set:html={subtext} />}
+    </div>
+  </Container>
 </div>

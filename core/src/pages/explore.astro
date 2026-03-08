@@ -13,31 +13,27 @@ const exploreInfo = await getEntry('explore', 'info');
 ---
 
 <Layout title="Explore">
-    <PageHeader text="Explore" />
-    <Segment variant="white">
-        <Container class="py-16">
-            <Paragraph size="xl" class="leading-normal">
-                Find out why so many developers, system administrators and other
-                enthusiasts use Nix and cannot imagine a world without it.
-            </Paragraph>
-        </Container>
-    </Segment>
-    <Segment variant="white">
-        <Container class="pb-16">
-            {
-                exploreInfo.data.content.map((item, idx) => {
-                    const side = idx % 2 ? 'right' : 'left';
-                    return (
-                        <div class="grid gap-x-[6rem] px-0! md:grid-cols-2">
-                            <Timeline
-                                number={idx + 1}
-                                imageLocation={side}
-                                {...item}
-                            />
-                        </div>
-                    );
-                })
-            }
-        </Container>
-    </Segment>
+  <PageHeader text="Explore" />
+  <Segment variant="white">
+    <Container class="py-16">
+      <Paragraph size="xl" class="leading-normal">
+        Find out why so many developers, system administrators and other
+        enthusiasts use Nix and cannot imagine a world without it.
+      </Paragraph>
+    </Container>
+  </Segment>
+  <Segment variant="white">
+    <Container class="pb-16">
+      {
+        exploreInfo.data.content.map((item, idx) => {
+          const side = idx % 2 ? 'right' : 'left';
+          return (
+            <div class="grid gap-x-[6rem] px-0! md:grid-cols-2">
+              <Timeline number={idx + 1} imageLocation={side} {...item} />
+            </div>
+          );
+        })
+      }
+    </Container>
+  </Segment>
 </Layout>

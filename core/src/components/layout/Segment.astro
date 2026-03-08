@@ -1,28 +1,28 @@
 ---
 interface Props {
-    variant: 'white' | 'blue' | 'blue-lambada';
-    id?: string;
-    tag?: string;
-    class?: string;
+  variant: 'white' | 'blue' | 'blue-lambada';
+  id?: string;
+  tag?: string;
+  class?: string;
 }
 
 const {
-    variant = 'white',
-    tag: Tag = 'section',
-    class: extraClasses,
-    id = null,
+  variant = 'white',
+  tag: Tag = 'section',
+  class: extraClasses,
+  id = null,
 } = Astro.props;
 ---
 
 <Tag
-    class:list={[
-        variant == 'white' && 'bg-white',
-        variant == 'blue' && 'text-primary-white bg-secondary-afghani-blue-45',
-        variant == 'blue-lambada' &&
-            'text-primary-white bg-secondary-afghani-blue-45 inline-svg-hero bg-cover bg-left bg-no-repeat',
-        extraClasses,
-    ]}
-    id={id}
+  class:list={[
+    variant == 'white' && 'bg-white',
+    variant == 'blue' && 'text-primary-white bg-secondary-afghani-blue-45',
+    variant == 'blue-lambada' &&
+      'text-primary-white bg-secondary-afghani-blue-45 inline-svg-hero bg-cover bg-left bg-no-repeat',
+    extraClasses,
+  ]}
+  id={id}
 >
-    <slot />
+  <slot />
 </Tag>
