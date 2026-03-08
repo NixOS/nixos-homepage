@@ -1,34 +1,47 @@
 ---
+import Headline from '@/components/ui/typography/Headline.astro';
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import { Image } from 'astro:assets';
 
 interface Props {
-  title: string;
-  date: string;
-  description: string;
-  href: string;
-  imagePath?: string;
+    title: string;
+    date: string;
+    description: string;
+    href: string;
+    imagePath?: string;
 }
 
 const { title, date, description, href, imagePath = null } = Astro.props;
 ---
 
 <a
-  href={href}
-  target="_blank"
-  rel="noopener noreferrer"
-  class="text-primary-white! flex flex-col gap-1 font-extralight no-underline!"
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="text-primary-white! flex flex-col gap-1 font-extralight no-underline!"
 >
-  {
-    imagePath && (
-      <div class="bg-primary-white mb-4 flex h-48 justify-center rounded-xl p-4">
-        <Image src={imagePath} alt={`${title} Logo`} width="200" height="200" />
-      </div>
-    )
-  }
-  <h4 class="font-heading text-lg font-bold">{title}</h4>
-  <div class="text-sm">{date}</div>
-  <div class="leading-relaxed">{description}</div>
-  <div class="text-primary-white! text-right font-bold">
-    <span class="underline">Read more...</span>
-  </div>
+    {
+        imagePath && (
+            <div class="bg-primary-white mb-4 flex h-48 justify-center rounded-xl p-4">
+                <Image
+                    src={imagePath}
+                    alt={`${title} Logo`}
+                    width="200"
+                    height="200"
+                />
+            </div>
+        )
+    }
+    <Headline level={4} variant="white">
+        {title}
+    </Headline>
+    <Paragraph variant="white" size="sm">
+        {date}
+    </Paragraph>
+    <Paragraph variant="white">
+        {description}
+    </Paragraph>
+    <Paragraph variant="white" class="text-right">
+        <span class="underline">Read more...</span>
+    </Paragraph>
 </a>
