@@ -13,9 +13,9 @@
     "linkcheck:full": "linkchecker http://localhost:4321"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
-    "@astrojs/rss": "^4.0.15",
-    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/mdx": "^5.0.0",
+    "@astrojs/rss": "^4.0.17",
+    "@astrojs/sitemap": "^3.7.1",
     "@fontsource-variable/fira-code": "^5.2.7",
     "@fontsource-variable/overpass": "^5.2.8",
     "@fontsource-variable/roboto-flex": "^5.2.8",
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@nixos/branding": "^0.1.0",
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.72",
+    "@iconify-json/simple-icons": "^1.2.74",
     "@iconify/tailwind": "^1.2.0"
   }
 }
