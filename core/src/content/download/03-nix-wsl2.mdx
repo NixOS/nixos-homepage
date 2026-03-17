@@ -14,7 +14,7 @@ Follow
 to configure it, and then install Nix using:
 
 ```bash prompt
-$ curl -L https://nixos.org/nix/install | sh -s -- --daemon
+$ curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
 ```
 
 ### Single-user installation
@@ -22,5 +22,5 @@ $ curl -L https://nixos.org/nix/install | sh -s -- --daemon
 Install Nix via the [single-user installation](/manual/nix/stable/installation/single-user)
 
 ```bash prompt
-$ curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+$ curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --no-daemon
 ```

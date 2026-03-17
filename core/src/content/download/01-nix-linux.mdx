@@ -9,7 +9,7 @@ platform: linux
 Install Nix via the <span class="font-bold">recommended</span> [multi-user installation](/manual/nix/stable/installation/multi-user):
 
 ```bash prompt
-$ curl -L https://nixos.org/nix/install | sh -s -- --daemon
+$ curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
 ```
 
 On Arch Linux, you can alternatively [install Nix through `pacman`](https://wiki.archlinux.org/title/Nix#Installation).
@@ -23,7 +23,7 @@ We recommend the multi-user install if you are on Linux running systemd, with SE
 Install Nix via the [single-user installation](/manual/nix/stable/installation/single-user):
 
 ```bash prompt
-$ curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+$ curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --no-daemon
 ```
 
 Above command will perform a single-user installation of Nix, meaning that `nix` is owned by the invoking user. You should run this under your usual user account, not as `root`. The script will invoke `sudo` to create `/nix` if it doesn’t already exist.
