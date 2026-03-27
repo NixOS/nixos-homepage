@@ -1,8 +1,0 @@
----
-export const prerender = false;
-const { slug } = Astro.params;
-return Astro.redirect(
-  `https://wiki.nixos.org/wiki/${slug ?? 'Main_Page'}`,
-  301,
-);
----
