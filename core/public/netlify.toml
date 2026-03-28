@@ -535,6 +535,18 @@
   force = true
 
 [[redirects]]
+  from = "/wiki"
+  to = "https://wiki.nixos.org/wiki/Main_Page"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wiki/*"
+  to = "https://wiki.nixos.org/wiki/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from  = "/~eelco/*"
   to = "https://edolstra.github.io/:splat"
   status = 301
