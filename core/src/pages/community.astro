@@ -231,8 +231,8 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       official and unofficial spaces where you can find help, discuss
       development, and chat with other users.
     </Paragraph>
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-      <div class="md:col-span-2">
+    <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div class="space-y-2 md:col-span-2">
         <Headline level={3} variant="blue"> Official spaces </Headline>
         <Paragraph>
           These spaces are monitored and moderated by the NixOS Moderation Team.
@@ -256,7 +256,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           }
         </ul>
       </div>
-      <div class="col-span-1">
+      <div class="col-span-1 space-y-2">
         <Headline level={3} variant="blue"> Official social-media </Headline>
         <Paragraph>
           These spaces are maintained by our NixOS Marketing Team though not
@@ -274,7 +274,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           }
         </ul>
       </div>
-      <div class="md:col-span-3">
+      <div class="space-y-2 md:col-span-3">
         <Headline level={3} variant="blue"> Our calendars </Headline>
         <Paragraph>
           We use these calendars to schedule events, meetings, and other.
@@ -292,7 +292,9 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         </ul>
       </div>
     </div>
-    <Headline level={3} variant="blue"> Unofficial spaces </Headline>
+    <Headline level={3} class="mt-4 mb-2" variant="blue">
+      Unofficial spaces
+    </Headline>
     <Paragraph>
       These spaces are not monitored and not moderated by the NixOS Moderation
       Team. Please be aware that different moral values and rules may apply in
@@ -312,7 +314,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         ))
       }
     </ul>
-    <Headline level={3} variant="blue" id="forks">
+    <Headline level={3} variant="blue" class="mt-4 mb-2" id="forks">
       The wider ecosystem
     </Headline>
     <Paragraph>
@@ -438,7 +440,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     <div class="mt-16 flex flex-wrap-reverse gap-8">
       <div class="flex flex-1 flex-col items-start justify-center gap-4">
         <Headline level={2} variant="blue"> RFC Process </Headline>
-        <Paragraph>
+        <Paragraph class="mb-3">
           The "RFC" (request for comments) process is intended to provide a
           consistent and controlled path for new features to enter the Nix
           language, packages and OS, so that all community can be confident
@@ -466,13 +468,13 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       <ul class="mt-8 flex flex-wrap justify-stretch gap-x-6 gap-y-16">
         {
           teams.map((team) => (
-            <li class="flex grow basis-72 flex-col items-center gap-2 text-center md:items-start md:text-left">
+            <li class="flex grow basis-72 flex-col items-center gap-2 space-y-1 text-center md:items-start md:text-left">
               <img
                 src={`/images/teams/${team.id.split('_')[1]}.svg`}
                 alt={`${team.data.name} Logo`}
-                class="h-24"
+                class="mb-2.5 h-20"
               />
-              <Headline level={3} variant="white">
+              <Headline level={3} variant="white" class="mb-0">
                 {team.data.name}
               </Headline>
               <Paragraph variant="white" class="mb-2.5 flex-1">

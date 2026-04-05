@@ -17,17 +17,17 @@ const {
   location = 'left',
 } = Astro.props;
 
+import Headline from '@/components/ui/typography/Headline.astro';
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import Tag from '../../ui/Tag.astro';
 ---
 
-<h2
-  class="font-heading text-secondary-afghani-bluesecondary-afghani-blue text-[2rem] leading-[2.2rem] font-bold"
->
+<Headline level={2} variant="blue" class="mt-3">
   {heading}
-</h2>
-<p class="text-primary-black-55 text-xl leading-[2.2rem] font-bold">
+</Headline>
+<Paragraph size="lg">
   {subHeading}
-</p>
+</Paragraph>
 <div
   class="flex flex-wrap gap-1"
   class:list={[
@@ -42,14 +42,14 @@ import Tag from '../../ui/Tag.astro';
 {
   paragraphs.map((paragraph, idx, array) => {
     return (
-      <p class="leading-[1.75rem]">
+      <Paragraph>
         {paragraph}
         {idx + 1 === array.length && emphasis && (
           <>
             &nbsp;<span class="font-bold">{emphasis}</span>
           </>
         )}
-      </p>
+      </Paragraph>
     );
   })
 }
