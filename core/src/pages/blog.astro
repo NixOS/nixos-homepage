@@ -1,4 +1,5 @@
 ---
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import { getCollection, getEntry } from 'astro:content';
 import Container from '../components/layout/Container.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
@@ -54,9 +55,10 @@ const blogMenu = await getEntry('menus', 'blog');
 <Layout title="Blog">
   <PageHeader text="Blog" />
   <Container class="py-8">
-    <p class="text-secondary-afghani-blue mb-2 text-center text-2xl font-light">
+    <Paragraph size="xl" class="leading-normal" center>
       Click boxes to filter content
-    </p>
+    </Paragraph>
+
     <div
       role="group"
       class="flex flex-col justify-center pb-8 md:flex-row md:items-center md:gap-4"
@@ -108,11 +110,12 @@ const blogMenu = await getEntry('menus', 'blog');
         ))
       }
     </div>
-    <BlogList />
-    {
-      posts.reverse().map(async (post) => {
-        return <BlogListEntry post={post} />;
-      })
-    }
+    <BlogList>
+      {
+        posts.reverse().map(async (post) => {
+          return <BlogListEntry post={post} />;
+        })
+      }
+    </BlogList>
   </Container>
 </Layout>

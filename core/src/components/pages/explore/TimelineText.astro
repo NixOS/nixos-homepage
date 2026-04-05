@@ -42,7 +42,7 @@ import Tag from '../../ui/Tag.astro';
 {
   paragraphs.map((paragraph, idx, array) => {
     return (
-      <Paragraph>
+      <Paragraph class:list={[idx + 1 === array.length && 'mb-3']}>
         {paragraph}
         {idx + 1 === array.length && emphasis && (
           <>
