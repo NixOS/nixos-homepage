@@ -2,41 +2,41 @@
 import Container from './Container.astro';
 
 interface Props {
-    variant: 'white' | 'blue' | 'blue-lambada';
-    id?: string;
-    tag?: string;
-    class?: string;
-    yPadding?: boolean;
-    container?: boolean;
-    innerClass?: string;
+  variant: 'white' | 'blue' | 'blue-lambada';
+  id?: string;
+  tag?: string;
+  class?: string;
+  yPadding?: boolean;
+  container?: boolean;
+  innerClass?: string;
 }
 
 const {
-    variant = 'white',
-    tag: Tag = 'section',
-    yPadding = false,
-    container = false,
-    class: extraClasses,
-    innerClass = '',
-    id = null,
+  variant = 'white',
+  tag: Tag = 'section',
+  yPadding = false,
+  container = false,
+  class: extraClasses,
+  innerClass = '',
+  id = null,
 } = Astro.props;
 
 const Wrapper = container ? Container : Fragment;
 ---
 
 <Tag
-    class:list={[
-        variant == 'white' && 'bg-white',
-        variant == 'blue' &&
-            'text-primary-white bg-secondary-afghani-blue-45 relative',
-        variant == 'blue-lambada' &&
-            'text-primary-white bg-secondary-afghani-blue-45 inline-svg-hero bg-cover bg-left bg-no-repeat',
-        yPadding && 'py-4 first-of-type:pt-8 last-of-type:pb-8',
-        extraClasses,
-    ]}
-    id={id}
+  class:list={[
+    variant == 'white' && 'bg-white',
+    variant == 'blue' &&
+      'text-primary-white bg-secondary-afghani-blue-45 relative',
+    variant == 'blue-lambada' &&
+      'text-primary-white bg-secondary-afghani-blue-45 inline-svg-hero bg-cover bg-left bg-no-repeat',
+    yPadding && 'py-4 first-of-type:pt-8 last-of-type:pb-8',
+    extraClasses,
+  ]}
+  id={id}
 >
-    <Wrapper class={innerClass}>
-        <slot />
-    </Wrapper>
+  <Wrapper class={innerClass}>
+    <slot />
+  </Wrapper>
 </Tag>

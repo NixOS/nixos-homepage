@@ -1,26 +1,26 @@
 ---
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import {
-    createBlogSubheader,
-    createExcerpt,
-    generatePathFromPost,
+  createBlogSubheader,
+  createExcerpt,
+  generatePathFromPost,
 } from '../../../lib/utils';
 
 const { post } = Astro.props;
 ---
 
 <article data-category={post.id.split('/')[0]} class="font-light">
-    <a href={generatePathFromPost(post)}>
-        <h2
-            class="font-heading text-secondary-afghani-blue text-4xl leading-tight font-extrabold"
-        >
-            {post.data.title}
-        </h2>
-    </a>
-    <p class="text-primary-black-35 mb-2 text-xs">
-        {createBlogSubheader(post)}
-    </p>
-    <Paragraph variant="black">
-        {createExcerpt(post.body)}...
-    </Paragraph>
+  <a href={generatePathFromPost(post)}>
+    <h2
+      class="font-heading text-secondary-afghani-blue text-4xl leading-tight font-extrabold"
+    >
+      {post.data.title}
+    </h2>
+  </a>
+  <p class="text-primary-black-35 mb-2 text-xs">
+    {createBlogSubheader(post)}
+  </p>
+  <Paragraph variant="black">
+    {createExcerpt(post.body)}...
+  </Paragraph>
 </article>

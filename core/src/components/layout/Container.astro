@@ -1,16 +1,16 @@
 ---
 interface Props {
-    class?: string;
-    id?: string;
-    tag?: string;
+  class?: string;
+  id?: string;
+  tag?: string;
 }
 
 export const containerClass =
-    'px-4 sm:max-w-[736px] md:mx-auto md:max-w-[960px] lg:max-w-[1168px]';
+  'px-4 sm:max-w-[736px] md:mx-auto md:max-w-[960px] lg:max-w-[1168px]';
 
 const { tag: Tag = 'div', class: extraClasses, id = null } = Astro.props;
 ---
 
 <Tag class:list={[containerClass, extraClasses]} id={id}>
-    <slot />
+  <slot />
 </Tag>

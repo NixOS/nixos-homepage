@@ -12,64 +12,52 @@ const devices = await getCollection('devices');
 ---
 
 <Layout title="Devices">
-    <PageHeader text="Devices" />
-    <Segment variant="white" yPadding container>
-        <Paragraph>
-            Like any distro, NixOS can run on a wide variety of devices. Due to
-            the unique nature of many devices (e.g. Arm & RISC-V), the NixOS
-            Hardware team has gone through and certified hardware which may be
-            difficult to run Linux on. This page serves as a reference for users
-            to find out how well their hardware may be supported.
-        </Paragraph>
-    </Segment>
-    {
-        devices.map((category) => (
-            <Segment variant="white" yPadding container>
-                <Headline variant="blue" level={2}>
-                    {category.data.title}
+  <PageHeader text="Devices" />
+  <Segment variant="white" yPadding container>
+    <Paragraph>
+      Like any distro, NixOS can run on a wide variety of devices. Due to the
+      unique nature of many devices (e.g. Arm & RISC-V), the NixOS Hardware team
+      has gone through and certified hardware which may be difficult to run
+      Linux on. This page serves as a reference for users to find out how well
+      their hardware may be supported.
+    </Paragraph>
+  </Segment>
+  {
+    devices.map((category) => (
+      <Segment variant="white" yPadding container>
+        <Headline variant="blue" level={2}>
+          {category.data.title}
+        </Headline>
+        <Paragraph>{category.data.description}</Paragraph>
+        {(!category.data.devices || category.data.devices === 0) && (
+          <p class="bg-primary-black-95 mt-4 h-full list-none rounded-xl px-4 py-3">
+            No devices listed yet.
+          </p>
+        )}
+        {category.data.devices && (
+          <ul class="my-4 grid list-inside list-disc gap-4 space-y-2 md:grid-cols-3">
+            {category.data.devices.map((device) => (
+              <li class="bg-secondary-afghani-blue-95 h-full list-none rounded-xl px-4 py-3">
+                <Headline variant="blue" level={3}>
+                  {device.name}
                 </Headline>
-                <Paragraph>{category.data.description}</Paragraph>
-                {(!category.data.devices || category.data.devices === 0) && (
-                    <p class="bg-primary-black-95 mt-4 h-full list-none rounded-xl px-4 py-3">
-                        No devices listed yet.
-                    </p>
+                {device.hwrepo && (
+                  <a href={device.hwrepo} class="hover:underline">
+                    <Icon name="mdi:git" class="inline h-5 w-5" />
+                    Hardware Repository
+                  </a>
                 )}
-                {category.data.devices && (
-                    <ul class="my-4 grid list-inside list-disc gap-4 space-y-2 md:grid-cols-3">
-                        {category.data.devices.map((device) => (
-                            <li class="bg-secondary-afghani-blue-95 h-full list-none rounded-xl px-4 py-3">
-                                <Headline variant="blue" level={3}>
-                                    {device.name}
-                                </Headline>
-                                {device.hwrepo && (
-                                    <a
-                                        href={device.hwrepo}
-                                        class="hover:underline"
-                                    >
-                                        <Icon
-                                            name="mdi:git"
-                                            class="inline h-5 w-5"
-                                        />
-                                        Hardware Repository
-                                    </a>
-                                )}
-                                {device.manufacturerPage && (
-                                    <a
-                                        href={device.manufacturerPage}
-                                        class="hover:underline"
-                                    >
-                                        <Icon
-                                            name="mdi:web"
-                                            class="inline h-5 w-5"
-                                        />
-                                        Manufacturer Page
-                                    </a>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
+                {device.manufacturerPage && (
+                  <a href={device.manufacturerPage} class="hover:underline">
+                    <Icon name="mdi:web" class="inline h-5 w-5" />
+                    Manufacturer Page
+                  </a>
                 )}
-            </Segment>
-        ))
-    }
+              </li>
+            ))}
+          </ul>
+        )}
+      </Segment>
+    ))
+  }
 </Layout>
