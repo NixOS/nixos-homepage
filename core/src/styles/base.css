@@ -61,7 +61,7 @@
   }
 
   article {
-    @apply leading-7;
+    @apply leading-normal;
   }
 
   article ol {
@@ -117,10 +117,6 @@
     @apply font-bold;
   }
 
-  article h3 {
-    @apply text-secondary-afghani-blue mb-4 text-2xl font-bold;
-  }
-
   article p {
     @apply pb-2;
   }
@@ -172,11 +168,11 @@
   }
 
   article h1 {
-    @apply mb-2 text-4xl;
+    @apply mb-2 text-4xl md:text-5xl;
   }
 
   article h2 {
-    @apply mb-2 text-3xl;
+    @apply mb-2 text-3xl md:text-4xl;
   }
 
   article h3 {
