@@ -61,7 +61,7 @@
   }
 
   article {
-    @apply leading-7 font-light;
+    @apply leading-7;
   }
 
   article ol {
