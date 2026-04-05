@@ -194,8 +194,4 @@
   article a:any-link {
     @apply link link-blue;
   }
-
-  ::selection {
-    @apply bg-secondary-afghani-blue-45 text-secondary-afghani-blue-95;
-  }
 }
