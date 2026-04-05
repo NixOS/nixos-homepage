@@ -3,6 +3,7 @@ import Segment from '@/components/layout/Segment.astro';
 import LogoContainer from '@/components/pages/branding/LogoContainer.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Link from '@/components/util/Link.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 
@@ -27,9 +28,10 @@ import { Image } from 'astro:assets';
       >
         <Headline variant="blue" level={2}> NixOS Branding Guide </Headline>
         <Paragraph>
-          The <a
+          The <Link
+            variant="blue"
             href="https://brand.nixos.org/documents/nixos-branding-guide.pdf"
-            download>NixOS Branding Guide</a
+            download>NixOS Branding Guide</Link
           > outlines the official visual identity of the NixOS project. It provides
           clear guidance on how to use the NixOS logo, colors, typography, and other
           brand elements across digital and print media. Whether you're creating a

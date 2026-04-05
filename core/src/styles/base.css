@@ -11,6 +11,18 @@
   }
 }
 
+@utility link {
+  @apply underline decoration-1 underline-offset-4;
+}
+
+@utility link-blue {
+  @apply text-secondary-afghani-blue-45 hover:text-secondary-afghani-blue-15;
+}
+
+@utility link-white {
+  @apply text-primary-white hover:text-primary-white-75;
+}
+
 @utility inlinelist {
   article &ul {
     @apply mb-0 ml-0 flex list-none flex-col;
@@ -23,9 +35,11 @@
   article &ul li {
     @apply inline-block;
   }
+
   article &ul li::after {
     content: ', ';
   }
+
   article &ul li:last-child::after {
     content: '';
   }
@@ -34,20 +48,6 @@
 @utility astro-code {
   article & {
     @apply rounded-3xl;
-  }
-}
-
-@layer base {
-  main a:-webkit-any-link {
-    @apply text-secondary-afghani-blue-45 underline decoration-1 underline-offset-4;
-  }
-
-  main a:any-link {
-    @apply text-secondary-afghani-blue-45 underline decoration-1 underline-offset-4;
-  }
-
-  ::selection {
-    @apply bg-secondary-afghani-blue-45 text-secondary-afghani-blue-95;
   }
 }
 
@@ -103,9 +103,11 @@
   article ul.inlinelist li {
     @apply inline-block;
   }
+
   article ul.inlinelist li::after {
     content: ', ';
   }
+
   article ul.inlinelist li:last-child::after {
     content: '';
   }
@@ -183,5 +185,17 @@
 
   article h4 {
     @apply mb-2 text-xl;
+  }
+
+  article a:-webkit-any-link {
+    @apply link link-blue;
+  }
+
+  article a:any-link {
+    @apply link link-blue;
+  }
+
+  ::selection {
+    @apply bg-secondary-afghani-blue-45 text-secondary-afghani-blue-95;
   }
 }

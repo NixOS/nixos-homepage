@@ -3,6 +3,7 @@ import { getEntry } from 'astro:content';
 
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Link from '@/components/util/Link.astro';
 import Container from '../../components/layout/Container.astro';
 import PageHeader from '../../components/layout/PageHeader.astro';
 import Layout from '../../layouts/Layout.astro';
@@ -35,9 +36,10 @@ function shuffleArray(array) {
       Consulting companies are available for professional support.
     </Paragraph>
     <Paragraph size="lg" class="leading-normal" center class="mb-8">
-      Please <a
+      Please <Link
+        variant="blue"
         href="https://github.com/NixOS/nixos-homepage/edit/main/core/src/content/community/commercial-support.yaml"
-        >submit a pull request</a
+        >submit a pull request</Link
       > to add your company. The list is randomized at each page load.
     </Paragraph>
     <ul id="company-list" class="invisible m-4 flex flex-row flex-wrap gap-4">

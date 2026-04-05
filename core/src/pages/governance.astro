@@ -8,6 +8,7 @@ import Segment from '@/components/layout/Segment.astro';
 import Quotation from '@/components/ui/Quotation.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Link from '@/components/util/Link.astro';
 import { getCollection, getEntry } from 'astro:content';
 import Citation from '../components/ui/Citation.astro';
 
@@ -62,7 +63,9 @@ const getMemberLink = (member) => {
                 return (
                   <>
                     {' '}
-                    <a href={data[0]}>@{data[1]}</a>
+                    <Link variant="blue" href={data[0]}>
+                      @{data[1]}
+                    </Link>
                     {idx < steeringCommittee.data.members.length - 1 ? ',' : ''}
                   </>
                 );
@@ -72,7 +75,9 @@ const getMemberLink = (member) => {
             })
           }
         </Paragraph>
-        <a href="/community/teams/steering-committee">More Info</a>
+        <Link variant="blue" href="/community/teams/steering-committee"
+          >More Info</Link
+        >
       </div>
       <div class="bg-secondary-afghani-blue-95 w-full space-y-2 rounded-xl p-4">
         <Headline level={3} variant="blue"> The Foundation Board </Headline>
@@ -93,7 +98,9 @@ const getMemberLink = (member) => {
                 return (
                   <>
                     {' '}
-                    <a href={data[0]}>@{data[1]}</a>
+                    <Link variant="blue" href={data[0]}>
+                      @{data[1]}
+                    </Link>
                     {idx < foundationBoard.data.members.length - 1 ? ',' : ''}
                   </>
                 );
@@ -103,12 +110,15 @@ const getMemberLink = (member) => {
             })
           }
         </Paragraph>
-        <a href="/community/teams/foundation-board">More Info</a>
+        <Link variant="blue" href="/community/teams/foundation-board"
+          >More Info</Link
+        >
       </div>
     </div>
     <Paragraph>
-      Many decisions are made in a distributed way by the <a href="/community"
-        >{teams.length} teams</a
+      Many decisions are made in a distributed way by the <Link
+        variant="blue"
+        href="/community">{teams.length} teams</Link
       >, among many other ones not listed on the website and many more
       individual specialists, responsible for various areas. From the leadership
       bodies down to individual contributors, almost everybody is here as a
@@ -118,8 +128,10 @@ const getMemberLink = (member) => {
       Governance Constitution
     </Headline>
     <Paragraph>
-      The <a href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
-        >Nix Governance Constitution</a
+      The <Link
+        variant="blue"
+        href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
+        >Nix Governance Constitution</Link
       > describes each body's responsibilities, how the steering committee is elected,
       and how decisions are made inside the steering committee.
     </Paragraph>
@@ -130,25 +142,29 @@ const getMemberLink = (member) => {
       Every year, the Nix community elects members to the steering committee.
       Members generally hold a two-year term, with elections held annually to
       fill at least half of the seats. You can read more about the election
-      process in the <a
+      process in the <Link
+        variant="blue"
         href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
-        >Nix Governance Constitution</a
+        >Nix Governance Constitution</Link
       >.
     </Paragraph>
     <Paragraph>
-      The elections are documented in GitHub repositories under the <a
-        href="https://github.com/NixOS">NixOS organization</a
+      The elections are documented in GitHub repositories under the <Link
+        variant="blue"
+        href="https://github.com/NixOS">NixOS organization</Link
       >.
     </Paragraph>
     <Paragraph>
       <b>Current and past elections:</b>
-      <a href="https://github.com/NixOS/SC-election-2025">2025</a>, <a
-        href="https://github.com/NixOS/SC-election-2024">2024</a
+      <Link variant="blue" href="https://github.com/NixOS/SC-election-2025"
+        >2025</Link
+      >, <Link variant="blue" href="https://github.com/NixOS/SC-election-2024"
+        >2024</Link
       >
     </Paragraph>
   </Container>
   <Divider mirrorY />
-  <Segment variant="blue">
+  <Segment variant="blue" class="pb-8">
     <Container class="space-y-2">
       <Headline level={2} variant="white" id="community-values-intro" anchor>
         Values
@@ -162,16 +178,18 @@ const getMemberLink = (member) => {
         </p>
 
         <p class="py-2 text-right italic">
-          <a href="https://opensource.com/open-source-way" class="text-lg"
-            >The Open Source Way</a
+          <Link variant="white" href="https://opensource.com/open-source-way"
+            >The Open Source Way</Link
           >
         </p>
       </Quotation>
 
       <Paragraph variant="white">
         Our common purpose is to develop, propagate, and promote the adoption of
-        the <a href="https://edolstra.github.io/pubs/phd-thesis.pdf"
-          >purely functional software deployment model</a
+        the <Link
+          variant="white"
+          href="https://edolstra.github.io/pubs/phd-thesis.pdf"
+          >purely functional software deployment model</Link
         >. Our values help us achieve this purpose by guiding decisionmaking
         across the community, keeping us moving in a common direction. This
         document captures our core values so that they can be shared and
@@ -185,9 +203,10 @@ const getMemberLink = (member) => {
       <Paragraph variant="white">
         Values are <span class="italic">not</span> a Code of Conduct, they do not
         define governance structures, and they do not provide specific policies. Instead,
-        values inform the decisions we make about these things. A good test for <a
+        values inform the decisions we make about these things. A good test for <Link
+          variant="white"
           href="https://medium.com/the-u-s-digital-service/our-values-1fc02b53598"
-          >whether something is a value</a
+          >whether something is a value</Link
         > is:
       </Paragraph>
 
@@ -242,9 +261,10 @@ const getMemberLink = (member) => {
       </Headline>
 
       <Paragraph variant="white">
-        Nix projects are and will always remain <a
+        Nix projects are and will always remain <Link
+          variant="white"
           href="https://www.gnu.org/philosophy/free-sw.en.html"
-          class="text-primary-white">free software</a
+          >free software</Link
         >. We value working together with the broader free software community.
         Free software is our priority, but we also support our users' needs to
         use non-free software, when practical.
@@ -276,9 +296,10 @@ const getMemberLink = (member) => {
       >
         Automation over process and toil
         <Citation id={1} onBlueBackground>
-          <a
+          <Link
+            variant="white"
             href="https://web.archive.org/web/20240717145635/https://sre.google/sre-book/eliminating-toil/"
-            >Toil</a
+            >Toil</Link
           > is work that tends to be manual, repetitive, automatable, interrupt-driven,
           devoid of enduring value, and scaling linearly with growth.
         </Citation>
@@ -317,11 +338,3 @@ const getMemberLink = (member) => {
     </Container>
   </Segment>
 </Layout>
-
-<style>
-  @reference "./../styles/base.css";
-
-  .bg-secondary-afghani-blue-45 a {
-    @apply hover:text-primary-black-75 text-primary-white;
-  }
-</style>

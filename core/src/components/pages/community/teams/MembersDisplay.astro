@@ -1,4 +1,8 @@
 ---
+import Headline from '@/components/ui/typography/Headline.astro';
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Link from '@/components/util/Link.astro';
+
 const {
   title = 'Members',
   isSubteam = false,
@@ -15,57 +19,64 @@ const titleClasses = `text-3xl font-heading font-bold text-secondary-afghani-blu
     extraClasses,
   ]}
 >
-  <h2 class={titleClasses}>{title}</h2>
-  {
-    Astro.props.paragraph && (
-      <p class="mt-2 inline text-gray-700">{Astro.props.paragraph}</p>
-    )
-  }
+  <Headline level={2} variant="blue">{title}</Headline>
+  {Astro.props.paragraph && <Paragraph>{Astro.props.paragraph}</Paragraph>}
   <ul class="mt-2 pt-1">
     {
       members.map((member) => (
         <li class="border-b-secondary-afghani-blue-75-hover flex flex-col border-b-1 pt-2 pb-2 first:pt-0 last:border-b-0 last:pb-0">
-          <span class="font-medium">
-            {member.name}
+          <span>
+            <Paragraph tag="span" class="font-medium">
+              {member.name}
+            </Paragraph>
             {member.discourse && (
               <>
                 (
-                <a href={'https://discourse.nixos.org/u/' + member.discourse}>
+                <Link
+                  variant="blue"
+                  href={'https://discourse.nixos.org/u/' + member.discourse}
+                >
                   @{member.discourse}
-                </a>
+                </Link>
                 )
               </>
             )}
             {member.github && (
               <>
                 (
-                <a href={'https://github.com/' + member.github}>
+                <Link
+                  variant="blue"
+                  href={'https://github.com/' + member.github}
+                >
                   @{member.github}
-                </a>
+                </Link>
                 )
               </>
             )}
           </span>
-          {member.title && <span>{member.title}</span>}
+          {member.title && <Paragraph tag="span">{member.title}</Paragraph>}
           {member.affiliation && (
-            <span class="text-primary-black-35 text-sm">
+            <Paragraph tag="span" size="sm">
               {member.affiliation}
-            </span>
+            </Paragraph>
           )}
         </li>
       ))
     }
   </ul>
+  <hr class="mt-2 mb-2" />
   {
     contact && (
       <>
-        <h2 class="font-heading text-secondary-afghani-blue mt-4 text-3xl font-bold">
+        <Headline level={2} variant="blue">
           Contact
-        </h2>
+        </Headline>
         <ul class="mt-2 ml-4 list-disc">
           {contact.map((contact) => (
             <li class="mb-1 last:mb-0">
-              <a href={contact.href}>{contact.name}</a>
+              <Link variant="blue" href={contact.href}>
+                {contact.name}
+              </Link>
             </li>
           ))}
         </ul>

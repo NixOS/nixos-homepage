@@ -9,6 +9,7 @@ const { text = '', subtext, parentPath = undefined }: Props = Astro.props;
 
 import Headline from '../ui/typography/Headline.astro';
 import Paragraph from '../ui/typography/Paragraph.astro';
+import Link from '../util/Link.astro';
 import Container from './Container.astro';
 ---
 
@@ -19,12 +20,9 @@ import Container from './Container.astro';
     <div class="col-span-2 flex flex-col gap-4">
       {
         parentPath && (
-          <a
-            href={parentPath}
-            class="text-primary-white! -mt-6 -mb-4 hidden md:inline"
-          >
+          <Link variant="white" href={parentPath}>
             <span class="text-nixblue">←</span> Back
-          </a>
+          </Link>
         )
       }
       <Headline level={1} variant="white">

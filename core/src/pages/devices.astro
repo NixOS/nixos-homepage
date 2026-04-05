@@ -1,4 +1,5 @@
 ---
+import Link from '@/components/util/Link.astro';
 import { Icon } from 'astro-icon/components';
 import { getCollection } from 'astro:content';
 import PageHeader from '../components/layout/PageHeader.astro';
@@ -42,16 +43,16 @@ const devices = await getCollection('devices');
                   {device.name}
                 </Headline>
                 {device.hwrepo && (
-                  <a href={device.hwrepo} class="hover:underline">
+                  <Link variant="blue" href={device.hwrepo}>
                     <Icon name="mdi:git" class="inline h-5 w-5" />
                     Hardware Repository
-                  </a>
+                  </Link>
                 )}
                 {device.manufacturerPage && (
-                  <a href={device.manufacturerPage} class="hover:underline">
+                  <Link variant="blue" href={device.manufacturerPage}>
                     <Icon name="mdi:web" class="inline h-5 w-5" />
                     Manufacturer Page
-                  </a>
+                  </Link>
                 )}
               </li>
             ))}
