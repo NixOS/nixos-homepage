@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   return blogEntries.map((entry) => ({
     params: {
       category: entry.id.split('/')[0],
-      year: new Date(entry.data.date).getFullYear(),
+      year: new Date(entry.data.date).getFullYear().toString(),
       id: entry.id.split('/').pop().split('_').pop(),
     },
     props: { entry },
