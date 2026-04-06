@@ -2,7 +2,7 @@
 import Container from './Container.astro';
 
 interface Props {
-  variant: 'white' | 'blue' | 'blue-lambada';
+  variant: 'white' | 'blue' | 'blue-lambda';
   id?: string;
   tag?: string;
   class?: string;
@@ -29,7 +29,7 @@ const Wrapper = container ? Container : Fragment;
     variant == 'white' && 'bg-white',
     variant == 'blue' &&
       'text-primary-white bg-secondary-afghani-blue-45 relative',
-    variant == 'blue-lambada' &&
+    variant == 'blue-lambda' &&
       'text-primary-white bg-secondary-afghani-blue-45 inline-svg-hero bg-cover bg-left bg-no-repeat',
     yPadding && 'py-4 first-of-type:pt-8 last-of-type:pb-8',
     extraClasses,
