@@ -1,4 +1,5 @@
 ---
+import Headline from '@/components/ui/typography/Headline.astro';
 import Container from '../../layout/Container.astro';
 
 interface Props {
@@ -11,14 +12,14 @@ const { title, subTitle, currentVersion } = Astro.props;
 ---
 
 <Container
-  class="bg-secondary-afghani-blue-45 text-primary-white mt-16 grid grid-cols-2 py-8 md:py-6"
+  class="bg-secondary-afghani-blue-45 text-primary-white mt-16 flex items-center justify-between py-8 md:py-6"
 >
-  <h2 class="font-heading self-center text-3xl leading-none font-bold">
+  <Headline level={2} variant="white" class="-mt-1 leading-none">
     {title}
     <span class="hidden lg:inline">
       {subTitle}
     </span>
-  </h2>
+  </Headline>
   <div class="flex flex-col justify-center self-center">
     <div class="text-end">
       <span class="font-heading hidden pb-2 text-2xl font-bold md:inline">

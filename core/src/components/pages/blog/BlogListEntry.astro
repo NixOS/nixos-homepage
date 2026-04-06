@@ -1,4 +1,6 @@
 ---
+import Headline from '@/components/ui/typography/Headline.astro';
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import {
   createBlogSubheader,
   createExcerpt,
@@ -8,16 +10,16 @@ import {
 const { post } = Astro.props;
 ---
 
-<article data-category={post.id.split('/')[0]} class="font-light">
+<article class="article" data-category={post.id.split('/')[0]}>
   <a href={generatePathFromPost(post)}>
-    <h2
-      class="font-heading text-secondary-afghani-blue text-4xl leading-tight font-extrabold"
-    >
+    <Headline level={2} variant="blue">
       {post.data.title}
-    </h2>
+    </Headline>
   </a>
-  <p class="text-primary-black-35 mb-2 text-xs">
+  <Paragraph size="sm">
     {createBlogSubheader(post)}
-  </p>
-  <p class="font-extralight">{createExcerpt(post.body)}...</p>
+  </Paragraph>
+  <Paragraph variant="black">
+    {createExcerpt(post.body)}...
+  </Paragraph>
 </article>

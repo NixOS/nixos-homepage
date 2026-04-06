@@ -1,6 +1,9 @@
 ---
 import { getEntry } from 'astro:content';
 
+import Headline from '@/components/ui/typography/Headline.astro';
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Link from '@/components/util/Link.astro';
 import Container from '../../components/layout/Container.astro';
 import PageHeader from '../../components/layout/PageHeader.astro';
 import Layout from '../../layouts/Layout.astro';
@@ -29,19 +32,20 @@ function shuffleArray(array) {
 <Layout title="Community">
   <PageHeader text="Commercial support" />
   <Container>
-    <p class="mt-8 text-center text-xl font-bold">
+    <Paragraph size="xl" class="leading-normal" center class="mt-4">
       Consulting companies are available for professional support.
-    </p>
-    <p class="mt-2 mb-8 text-center">
-      Please <a
+    </Paragraph>
+    <Paragraph size="lg" class="leading-normal" center class="mb-8">
+      Please <Link
+        variant="blue"
         href="https://github.com/NixOS/nixos-homepage/edit/main/core/src/content/community/commercial-support.yaml"
-        >submit a pull request</a
+        >submit a pull request</Link
       > to add your company. The list is randomized at each page load.
-    </p>
+    </Paragraph>
     <ul id="company-list" class="invisible m-4 flex flex-row flex-wrap gap-4">
       {
         shuffleArray(companies.data).map((company) => (
-          <li class="bg-secondary-afghani-blue-95 grow basis-72 rounded-2xl p-4 font-light xl:basis-80">
+          <li class="bg-secondary-afghani-blue-95 grow basis-72 rounded-2xl p-4 xl:basis-80">
             <a
               href={company.href}
               class="text-primary-black! space-y-4 no-underline!"
@@ -51,9 +55,13 @@ function shuffleArray(array) {
                 alt={company.name + ' logo'}
                 class="bg-trans-white mx-auto h-80 rounded-2xl object-contain p-8"
               />
-              <h3 class="text-secondary-afghani-blue text-3xl leading-none font-bold">
+              <Headline
+                level={2}
+                variant="blue"
+                class="text-secondary-afghani-blue text-3xl leading-none font-bold"
+              >
                 {company.name}
-              </h3>
+              </Headline>
               <ul class="flex flex-wrap gap-2">
                 {company.locations.map((location) => (
                   <li class="bg-secondary-afghani-blue-45 text-trans-white rounded-2xl px-3 py-0.5 font-bold">
@@ -61,7 +69,9 @@ function shuffleArray(array) {
                   </li>
                 ))}
               </ul>
-              <p>{company.description}</p>
+              <Paragraph class="leading-normal">
+                {company.description}
+              </Paragraph>
             </a>
           </li>
         ))

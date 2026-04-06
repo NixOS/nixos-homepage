@@ -1,18 +1,16 @@
 ---
+import Headline from '@/components/ui/typography/Headline.astro';
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import Container from '../components/layout/Container.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Not Found">
-  <Container>
-    <h1
-      class="font-heading text-secondary-afghani-blue mt-10 mb-4 text-4xl leading-none font-extrabold"
-    >
-      Not found
-    </h1>
-    <p class="font-light">
+  <Container class="my-16 space-y-4">
+    <Headline variant="blue" level={1}>Not found</Headline>
+    <Paragraph>
       The requested content<span id="signpost"></span> could not be found.
-    </p>
+    </Paragraph>
     <script is:inline>
       document.getElementById('signpost').innerHTML =
         ` at <code>${window.location.pathname}</code>`;

@@ -26,7 +26,7 @@ import logoWHite from '@nixos/branding/artifacts/internal/nixos-logomark-white-f
               <h3 class="font-heading text-secondary-afghani-blue-85 mb-2 text-xl font-bold">
                 {menu.name}
               </h3>
-              <ul class="font-extralight">
+              <ul>
                 {menu.items.map((item) => (
                   <li class="border-secondary-afghani-blue-55 border-b-1 last:border-b-0">
                     <Link
@@ -45,9 +45,7 @@ import logoWHite from '@nixos/branding/artifacts/internal/nixos-logomark-white-f
 
       <hr class="border-secondary-afghani-blue-55" />
 
-      <div
-        class="flex flex-col flex-wrap gap-4 py-4 font-extralight lg:flex-row lg:gap-0"
-      >
+      <div class="flex flex-col flex-wrap gap-4 py-4 lg:flex-row lg:gap-0">
         <div class="flex basis-1/2 gap-2">
           <Image src={logoWHite} alt="NixOS" class="inline-block h-14 w-14" />
           <div class="flex flex-col justify-center">
@@ -55,14 +53,11 @@ import logoWHite from '@nixos/branding/artifacts/internal/nixos-logomark-white-f
               Copyright © {new Date().getFullYear()} NixOS contributors
             </div>
             <span class="flex gap-2">
-              <Link href="/imprint" class:list={'underline decoration-dotted'}>
-                Imprint
-              </Link>
-              <Link href="/privacy" class:list={'underline decoration-dotted'}>
-                Privacy Policy
-              </Link>
+              <Link href="/imprint" variant="white"> Imprint </Link>
+              <Link href="/privacy" variant="white"> Privacy Policy </Link>
               <Link
                 href="https://github.com/NixOS/nixos-homepage/blob/main/LICENSES/CC-BY-SA-4.0.txt"
+                variant="white"
               >
                 <abbr
                   title="Creative Commons Attribution Share Alike 4.0 International"
@@ -76,9 +71,7 @@ import logoWHite from '@nixos/branding/artifacts/internal/nixos-logomark-white-f
 
         <hr class="border-secondary-afghani-blue-75 lg:hidden" />
 
-        <div
-          class="flex basis-1/2 justify-between gap-4 font-extralight lg:justify-end"
-        >
+        <div class="flex basis-1/2 justify-between gap-4 lg:justify-end">
           <h4 class="my-auto">Connect with us:</h4>
           <div class="my-auto flex gap-4">
             {

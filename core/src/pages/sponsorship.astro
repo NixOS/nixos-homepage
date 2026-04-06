@@ -2,6 +2,7 @@
 import Container from '@/components/layout/Container.astro';
 import PageHeader from '@/components/layout/PageHeader.astro';
 import Button from '@/components/ui/Button.astro';
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import { Icon } from 'astro-icon/components';
 import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
@@ -11,12 +12,12 @@ const tiers = await getEntry('sponsors', 'tiers');
 <Layout title="Become a Sponsor">
   <PageHeader text="Become a Sponsor" />
   <Container>
-    <p class="mt-8">
+    <Paragraph class="mt-8">
       Help us keep NixOS and Nixpkgs sustainable by becoming a sponsor. Your
       support helps us maintain the infrastructure, improve the project, and
       organize events. We offer various sponsorship tiers, each with its own set
       of benefits.
-    </p>
+    </Paragraph>
   </Container>
   <Container class="my-4 grid gap-4 md:grid-cols-3">
     {
@@ -56,5 +57,5 @@ const tiers = await getEntry('sponsors', 'tiers');
         </div>
       ))
     }
-  </Container>
-</Layout>
+  </Container></Layout
+>

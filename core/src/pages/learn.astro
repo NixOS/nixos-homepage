@@ -3,8 +3,12 @@ import { getCollection, render } from 'astro:content';
 import Container from '../components/layout/Container.astro';
 import Divider from '../components/layout/Divider.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
+import Segment from '../components/layout/Segment.astro';
 import Button from '../components/ui/Button.astro';
 import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
+import Headline from '../components/ui/typography/Headline.astro';
+import Paragraph from '../components/ui/typography/Paragraph.astro';
+
 import InlineSVG from '../components/util/InlineSVG.astro';
 import Layout from '../layouts/Layout.astro';
 const learningManuals = await getCollection('learningManuals');
@@ -72,14 +76,14 @@ const learningResources = [
     }
   </Container>
   <Divider style="slope" mirrorY mirrorX />
-  <div class="bg-secondary-afghani-blue-45 text-primary-white py-8 md:px-8">
+  <Segment variant="blue" class="py-8">
     <Container>
-      <h2 class="font-heading pb-8 text-4xl font-extrabold">Search</h2>
+      <Headline level={2} class="pb-4" variant="white">Search</Headline>
       <div class="grid gap-4 md:grid-cols-2">
         <div>
-          <h3 class="font-heading mb-4 text-2xl font-extrabold">
-            Nix packages
-          </h3>
+          <Headline level={3} class="mb-4" variant="white"
+            >Nix packages</Headline
+          >
           <NixosSearchInput
             color="white"
             size="sm-full"
@@ -87,32 +91,32 @@ const learningResources = [
           />
         </div>
         <div>
-          <h3 class="font-heading mb-4 text-2xl font-extrabold">
-            NixOS options
-          </h3>
+          <Headline level={3} class="mb-4" variant="white"
+            >NixOS options</Headline
+          >
           <NixosSearchInput color="white" size="sm-full" collection="options" />
         </div>
       </div>
     </Container>
-  </div>
+  </Segment>
   <Divider style="slope" mirrorX />
+  <Headline variant="sr-only" level={2}> Manuals </Headline>
   <Container class="grid items-start gap-4 py-16 md:grid-cols-3">
     {
       learningManuals.map(async (manual) => {
         const { Content } = await render(manual);
         return (
           <div class="border-0.5 border-secondary-afghani-blue-15 flex flex-col items-center justify-start gap-4 rounded-2xl p-4">
-            <article>
+            <article class="article">
               <InlineSVG
                 src="/src/assets/image/doc-icon.svg"
                 class="img-noadjust float-left inline h-20 w-20 pr-6"
               />
-              <h2 class="font-heading text-secondary-afghani-blue mb-4 text-3xl leading-none font-bold">
+
+              <Headline level={3} class="mb-2" variant="blue">
                 {manual.data.title}
-              </h2>
-              <div class="leading-relaxed font-extralight">
-                <Content />
-              </div>
+              </Headline>
+              <Content />
             </article>
             <Button size="sm-mobfull" color="nixblue" href={manual.data.url}>
               Full {manual.data.title}
@@ -123,19 +127,21 @@ const learningResources = [
     }
   </Container>
   <Divider style="slope" mirrorY />
-  <div class="bg-secondary-afghani-blue-45 text-primary-white py-8 md:px-8">
-    <Container>
-      <h2 class="font-heading pb-8 text-4xl font-extrabold">
+  <Segment variant="blue">
+    <Container class="pt-4">
+      <Headline level={2} class="pb-8" variant="white">
         Other learning resources
-      </h2>
+      </Headline>
       <div class="grid gap-12 pb-12 md:grid-cols-3 md:gap-4">
         {
           learningResources.map((item) => (
             <div class="flex flex-col items-start">
-              <h3 class="font-heading mb-2 text-2xl font-extrabold">
+              <Headline level={3} class="mb-2" variant="white">
                 {item.title}
-              </h3>
-              <p class="mb-4 leading-relaxed font-light">{item.description}</p>
+              </Headline>
+              <Paragraph class="mb-4" variant="white">
+                {item.description}
+              </Paragraph>
               <Button size="sm-mobfull" color="white-borders" href={item.url}>
                 {item.buttonText}
               </Button>
@@ -144,5 +150,5 @@ const learningResources = [
         }
       </div>
     </Container>
-  </div>
+  </Segment>
 </Layout>

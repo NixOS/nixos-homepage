@@ -1,0 +1,65 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  tag?: string;
+  level: number;
+  variant: 'blue' | 'white' | 'sr-only';
+  center?: boolean;
+  class?: string;
+  id?: string;
+  anchor?: boolean;
+}
+
+let {
+  tag,
+  level = 1,
+  variant = 'blue',
+  center = false,
+  class: extraClasses,
+  id,
+  anchor = false,
+} = Astro.props;
+
+if (tag === undefined) {
+  tag = `h${level}`;
+}
+
+const Tag = tag;
+const Anchor = anchor && id ? 'a' : Fragment;
+---
+
+<Tag
+  class:list={[
+    'font-heading relative leading-tight font-bold',
+    level === 1 && 'text-4xl md:text-5xl',
+    level === 2 && 'text-4xl',
+    level === 3 && 'text-2xl',
+    level === 4 && 'text-xl',
+    level === 5 && 'text-lg',
+    variant === 'blue' && 'text-secondary-afghani-blue',
+    variant === 'white' && 'text-primary-white',
+    variant === 'sr-only' && 'sr-only',
+    center && 'text-center',
+    extraClasses,
+  ]}
+>
+  <Anchor
+    href={anchor && id ? `#${id}` : undefined}
+    class:list={[
+      'group relative no-underline',
+      variant === 'white' && 'text-primary-white',
+      variant === 'blue' && 'text-secondary-afghani-blue',
+    ]}
+  >
+    <slot />
+    {
+      id && anchor && (
+        <Icon
+          class="invisible absolute top-1 -left-2 h-[1.1em] w-[1.1em] -translate-x-full group-hover:visible"
+          name="mdi:link"
+        />
+      )
+    }
+  </Anchor>
+</Tag>

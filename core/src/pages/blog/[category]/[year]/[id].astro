@@ -26,9 +26,7 @@ const { Content } = await render(entry);
     text={entry.data.title}
     subtext={createBlogSubheader(entry, true, 'text-primary-white')}
   />
-  <Container class="mt-8 mb-4 flex flex-col gap-8">
-    <article class="text-light-bold">
-      <Content />
-    </article>
+  <Container tag="article" class="article mt-8 mb-4">
+    <Content />
   </Container>
 </Layout>

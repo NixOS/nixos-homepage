@@ -7,6 +7,9 @@ import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Layout from '../layouts/Layout.astro';
 import { generatePathFromPost } from '../lib/utils';
 
+import Segment from '@/components/layout/Segment.astro';
+import Headline from '@/components/ui/typography/Headline.astro';
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import { Icon } from 'astro-icon/components';
 import Asciinema from '../components/ui/Asciinema.astro';
 import Banner from '../components/ui/Banner.astro';
@@ -55,23 +58,21 @@ posts
       </Banner>
     )
   }
-  <div
-    class="bg-secondary-afghani-blue-45 inline-svg-hero bg-cover bg-left bg-no-repeat"
-  >
+  <Segment variant="blue-lambda">
     <Container
-      class="text-primary-white grid grid-cols-1 gap-8 py-8 md:py-16 lg:grid-cols-2 lg:py-24"
+      class="grid grid-cols-1 gap-8 py-8 md:py-16 lg:grid-cols-2 lg:py-24"
     >
       <div
         class="mx-0 my-auto flex h-full flex-0 flex-col justify-between gap-3 md:gap-4 md:pr-12"
       >
-        <h1 class="font-heading text-4xl leading-tight font-bold md:text-5xl">
+        <Headline level={1} variant="white">
           Declarative builds<br class="hidden md:inline-block" /> and deployments.
-        </h1>
-        <p class="mb-4 text-xl font-normal md:leading-loose">
+        </Headline>
+        <Paragraph class="mb-4" variant="white" size="xl">
           Nix is a tool that takes a unique approach to package management and
           system configuration. Learn how to make reproducible, declarative and
           reliable systems.
-        </p>
+        </Paragraph>
         <div
           class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start"
         >
@@ -111,27 +112,27 @@ posts
         />
       </div>
     </Container>
-  </div>
+  </Segment>
   <div
-    class="inline-svg-landing-search-top bg-[39%_100%] bg-no-repeat pt-16 pb-48 md:bg-bottom"
+    class="inline-svg-landing-search-top bg-[39%_100%] bg-no-repeat md:bg-bottom"
   >
-    <Container class="grid gap-8 md:grid-cols-3 md:gap-4">
+    <Container class="grid gap-8 pt-16 pb-48 md:grid-cols-3 md:gap-4" tag="ul">
       {
         landingFeatures.map(async (feature) => {
           const { Content } = await render(feature);
           return (
-            <div class="flex flex-col text-center">
+            <li class="list-none text-center">
               <InlineSVG
                 src={feature.data.img}
                 class="mx-auto mb-6 h-32 w-auto"
               />
-              <h2 class="font-heading text-secondary-afghani-blue mb-2 text-3xl leading-none font-bold">
+              <Headline level={3} tag="b" variant="blue" center>
                 {feature.data.title}
-              </h2>
-              <div class="text-light-bold leading-loose">
+              </Headline>
+              <div class="article mt-2 leading-relaxed">
                 <Content />
               </div>
-            </div>
+            </li>
           );
         })
       }
@@ -144,30 +145,24 @@ posts
       <Container
         class="flex w-full flex-col items-center justify-center gap-4 pt-8 pb-8"
       >
-        <h2
-          class="font-heading text-secondary-afghani-blue pb-0 text-center text-4xl leading-tight font-bold md:w-2/3"
-        >
+        <Headline level={2} center variant="blue" class="text-4xl">
           Choose from over 120 000 Packages
-        </h2>
-        <p
-          class="pb-2 text-center text-2xl leading-relaxed font-extralight md:w-5/6"
-        >
+        </Headline>
+        <Paragraph size="xl" class="pb-3 md:w-5/8" center>
           The Nix Packages collection (<a
             class="text-secondary-afghani-blue! font-bold"
             href="#">Nixpkgs</a
           >) offers a large selection of packages for the Nix package manager.
-        </p>
+        </Paragraph>
         <NixosSearchInput collection="packages" withSubmit />
       </Container>
     </div>
   </div>
-  <div>
+  <Segment variant="white">
     <Container>
-      <h2
-        class="font-heading text-secondary-afghani-blue w-full pb-2 text-center text-4xl font-bold"
-      >
+      <Headline variant="blue" level={2} center class="pb-8">
         Examples
-      </h2>
+      </Headline>
       <div class="grid items-center gap-4 pb-8 md:grid-cols-2">
         {
           demos.data.map((demo) => {
@@ -187,5 +182,5 @@ posts
         }
       </div>
     </Container>
-  </div>
+  </Segment>
 </Layout>

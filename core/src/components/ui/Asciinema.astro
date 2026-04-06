@@ -1,6 +1,7 @@
 ---
 import { AsciinemaSettings } from 'asciinema-player';
 import 'asciinema-player/dist/bundle/asciinema-player.css';
+import Headline from './typography/Headline.astro';
 
 interface Props {
   src: string;
@@ -33,9 +34,9 @@ const demoId = 'asciinema-demo-' + src.split('/').pop().split('.')[0];
   {
     title && (
       <a href={`#${demoId}`} class="no-underline!" id={`${demoId}-link`}>
-        <h3 class="font-heading text-secondary-afghani-blue text-xl font-bold">
+        <Headline level={3} variant="blue">
           {title}
-        </h3>
+        </Headline>
       </a>
     )
   }
