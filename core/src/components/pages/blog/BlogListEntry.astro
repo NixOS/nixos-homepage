@@ -10,7 +10,7 @@ import {
 const { post } = Astro.props;
 ---
 
-<article data-category={post.id.split('/')[0]}>
+<article class="article" data-category={post.id.split('/')[0]}>
   <a href={generatePathFromPost(post)}>
     <Headline level={2} variant="blue">
       {post.data.title}
