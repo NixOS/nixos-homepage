@@ -126,7 +126,7 @@
   }
 
   .article code {
-    @apply border-primary-black-85 bg-primary-black-95 text-primary-black rounded-sm border-1 px-1 pt-1 pb-1 font-mono font-[500];
+    @apply border-primary-black-85 bg-primary-black-95 text-primary-black rounded-sm border px-1 pt-px pb-px font-mono;
   }
 
   .article pre {
