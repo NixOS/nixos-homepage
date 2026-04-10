@@ -4,6 +4,7 @@ on:
   pull_request_target:
     paths-ignore:
       - "**.nix"
+      - 'flake.lock'
       - "core/i18n/**"
       - "package.json"
       - "package-lock.json"
