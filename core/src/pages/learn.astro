@@ -9,7 +9,10 @@ import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Headline from '../components/ui/typography/Headline.astro';
 import Paragraph from '../components/ui/typography/Paragraph.astro';
 
-import InlineSVG from '../components/util/InlineSVG.astro';
+import IconDoc from '@/components/graphics/icons/IconDoc.astro';
+import IconFirstStepsGfx from '@/components/graphics/icons/learn/IconFirstStepsGfx.astro';
+import IconHowItWorksGfx from '@/components/graphics/icons/learn/IconHowItWorksGfx.astro';
+import IconInstallGfx from '@/components/graphics/icons/learn/IconInstallGfx.astro';
 import Layout from '../layouts/Layout.astro';
 const learningManuals = await getCollection('learningManuals');
 
@@ -17,19 +20,19 @@ learningManuals.sort((a, b) => a.id.localeCompare(b.id));
 
 const learningFeatures = [
   {
-    imgUrl: '/src/assets/image/learn/installGfx.svg',
+    img: IconInstallGfx,
     title: 'Install Nix',
     color: 'green',
     url: '/download#download-nix',
   },
   {
-    imgUrl: '/src/assets/image/learn/firstStepsGfx.svg',
+    img: IconFirstStepsGfx,
     title: 'First steps with Nix',
     color: 'orange',
     url: 'https://nix.dev/tutorials/first-steps/',
   },
   {
-    imgUrl: '/src/assets/image/learn/howItWorksGfx.svg',
+    img: IconHowItWorksGfx,
     title: 'How Nix works',
     color: 'lightblue',
     url: '/guides/how-nix-works',
@@ -65,14 +68,18 @@ const learningResources = [
   <PageHeader text="Learn" />
   <Container class="grid gap-4 py-16 md:grid-cols-3">
     {
-      learningFeatures.map((feature) => (
-        <div class="border-0.5 border-secondary-afghani-blue-15 flex flex-col justify-center gap-8 rounded-2xl p-8">
-          <InlineSVG src={feature.imgUrl} class="h-28" />
-          <Button size="lg-full" color={feature.color} href={feature.url}>
-            {feature.title}
-          </Button>
-        </div>
-      ))
+      learningFeatures.map((feature) => {
+        const ItemIcon = feature.img;
+
+        return (
+          <div class="border-0.5 border-secondary-afghani-blue-15 flex flex-col justify-center gap-8 rounded-2xl p-8">
+            <ItemIcon class="h-28" />
+            <Button size="lg-full" color={feature.color} href={feature.url}>
+              {feature.title}
+            </Button>
+          </div>
+        );
+      })
     }
   </Container>
   <Divider style="slope" mirrorY mirrorX />
@@ -108,10 +115,7 @@ const learningResources = [
         return (
           <div class="border-0.5 border-secondary-afghani-blue-15 flex flex-col items-center justify-start gap-4 rounded-2xl p-4">
             <article class="article">
-              <InlineSVG
-                src="/src/assets/image/doc-icon.svg"
-                class="img-noadjust float-left inline h-20 w-20 pr-6"
-              />
+              <IconDoc class="float-left inline h-20 w-20 pr-6" />
 
               <Headline level={3} class="mb-2" variant="blue">
                 {manual.data.title}

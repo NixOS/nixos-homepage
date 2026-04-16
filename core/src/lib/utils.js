@@ -1,4 +1,5 @@
 import MarkdownIt from 'markdown-it';
+import colors from '@nixos/branding/colors/tailwind.js';
 
 export function generatePathFromPost(post, attachBlog = true) {
   const postDate = new Date(post.data.date);
@@ -56,4 +57,9 @@ export function createBlogSubheader(entry, link, linkClass) {
         .join(', ')
     : null;
   return [formattedDate, formattedAuthor].filter(Boolean).join(' - ');
+}
+
+export function fetchColor(space, name, shade) {
+  if (!shade) shade = 'DEFAULT';
+  return colors[space][name][shade];
 }
