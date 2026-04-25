@@ -1,9 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
 
+type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
 interface Props {
-  tag?: string;
-  level: number;
+  tag?: HeadingTag;
+  level: HeadingLevel;
   variant: 'blue' | 'white' | 'sr-only';
   center?: boolean;
   class?: string;
