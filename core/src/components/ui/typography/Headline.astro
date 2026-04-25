@@ -36,6 +36,7 @@ const Anchor = anchor && id ? 'a' : Fragment;
   id={id}
   class:list={[
     'font-heading relative leading-tight font-bold',
+    anchor && id && 'scroll-mt-24',
     level === 1 && 'text-4xl md:text-5xl',
     level === 2 && 'text-4xl',
     level === 3 && 'text-2xl',
