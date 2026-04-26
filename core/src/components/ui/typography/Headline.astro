@@ -1,9 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
 
+type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
 interface Props {
-  tag?: string;
-  level: number;
+  tag?: HeadingTag;
+  level: HeadingLevel;
   variant: 'blue' | 'white' | 'sr-only';
   center?: boolean;
   class?: string;
@@ -30,8 +33,10 @@ const Anchor = anchor && id ? 'a' : Fragment;
 ---
 
 <Tag
+  id={id}
   class:list={[
     'font-heading relative leading-tight font-bold',
+    anchor && id && 'scroll-mt-24',
     level === 1 && 'text-4xl md:text-5xl',
     level === 2 && 'text-4xl',
     level === 3 && 'text-2xl',
