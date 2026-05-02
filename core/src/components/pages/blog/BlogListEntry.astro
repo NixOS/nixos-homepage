@@ -19,7 +19,5 @@ const { post } = Astro.props;
   <Paragraph size="sm">
     {createBlogSubheader(post)}
   </Paragraph>
-  <Paragraph variant="black">
-    {createExcerpt(post.body)}...
-  </Paragraph>
+  <Paragraph variant="black" set:html={createExcerpt(post.body) + '...'} />
 </article>
