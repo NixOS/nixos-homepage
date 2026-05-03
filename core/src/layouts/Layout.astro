@@ -88,6 +88,54 @@ const headFeedLinks = blogMenu.data.map((e) => {
       import '@fontsource-variable/fira-code';
       import '@fontsource-variable/roboto-flex/wdth.css';
       import '@/lib/client/scrollToTopHandler.js';
+
+      for (const pre of document.querySelectorAll('pre.astro-code')) {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('relative');
+        pre.parentNode.insertBefore(wrapper, pre);
+        pre.classList.add('mb-0', 'rounded-b-none!');
+
+        wrapper.appendChild(pre);
+
+        const header = document.createElement('div');
+        header.classList.add(
+          'w-full',
+          'h-8',
+          'bg-primary-white-45',
+          'rounded-b-2xl',
+          'text-primary-white',
+          'mb-4',
+          'flex',
+          'items-center',
+          'justify-end',
+          'text-xs',
+          'px-4',
+        );
+        wrapper.appendChild(header);
+
+        const copyButton = document.createElement('button');
+        copyButton.innerText = 'Copy';
+        copyButton.classList.add('leading-0', '-mt-1', 'cursor-pointer');
+        header.appendChild(copyButton);
+
+        copyButton.addEventListener('click', () => {
+          let code = pre.querySelector('code')?.cloneNode(true);
+          if (!code) return;
+
+          for (const child of code.querySelectorAll('span')) {
+            if (child.style.userSelect === 'none') {
+              child.remove();
+            }
+          }
+
+          navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+            copyButton.innerText = 'Copied!';
+            setTimeout(() => {
+              copyButton.innerText = 'Copy';
+            }, 2000);
+          });
+        });
+      }
     </script>
 
     <style>
