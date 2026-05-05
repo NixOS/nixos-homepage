@@ -91,32 +91,58 @@ const headFeedLinks = blogMenu.data.map((e) => {
 
       for (const pre of document.querySelectorAll('pre.astro-code')) {
         const wrapper = document.createElement('div');
-        wrapper.classList.add('relative');
+
+        wrapper.classList.add(
+          'relative',
+          'flex',
+          'justify-stretch',
+          'items-stretch',
+        );
+
         pre.parentNode.insertBefore(wrapper, pre);
-        pre.classList.add('mb-0', 'rounded-b-none!');
+        pre.classList.add('flex-1');
 
         wrapper.appendChild(pre);
 
         const header = document.createElement('div');
-        header.classList.add(
-          'w-full',
-          'h-8',
-          'bg-primary-white-45',
-          'rounded-b-2xl',
-          'text-primary-white',
-          'mb-4',
-          'flex',
-          'items-center',
-          'justify-end',
-          'text-xs',
-          'px-4',
-        );
         wrapper.appendChild(header);
 
         const copyButton = document.createElement('button');
         copyButton.innerText = 'Copy';
-        copyButton.classList.add('leading-0', '-mt-1', 'cursor-pointer');
+        copyButton.classList.add('cursor-pointer');
         header.appendChild(copyButton);
+
+        header.classList.add(
+          'flex',
+          'items-center',
+          'justify-end',
+          'bg-secondary-afghani-blue-45',
+          'text-primary-white',
+        );
+
+        if (pre.querySelectorAll('.line').length > 1) {
+          pre.classList.add('rounded-b-none!', 'mb-0');
+          wrapper.classList.add('flex-col', 'mb-4');
+
+          header.classList.add(
+            'min-h-max',
+            'px-4',
+            'pt-1',
+            'pb-2',
+            '-mt-1',
+            'rounded-b-2xl',
+          );
+        } else {
+          pre.classList.add('rounded-r-none!');
+
+          header.classList.add(
+            'min-h-max',
+            'mt-2',
+            'mb-4',
+            'px-4',
+            'rounded-r-2xl',
+          );
+        }
 
         copyButton.addEventListener('click', () => {
           let code = pre.querySelector('code')?.cloneNode(true);
