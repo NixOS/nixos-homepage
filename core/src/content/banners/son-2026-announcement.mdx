@@ -1,0 +1,26 @@
+---
+sitewide:
+  message: 'Summer of Nix is Here!'
+  link:
+    url: https://discourse.nixos.org/t/summer-of-nix-2026-call-for-participants-and-mentors/77261
+    text: 'Apply now'
+  wrapperClasses: 'bg-secondary-afghani-blue-85 text-secondary-afghani-blue-15'
+---
+
+import Banner from '@/components/ui/Banner.astro';
+
+<Banner
+  wrapperClasses="bg-secondary-afghani-blue-85 text-secondary-afghani-blue-15"
+  class="font-heading flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row"
+>
+  <span>Applications for Summer of Nix 2026 are now open!</span>
+  <a
+    href="https://discourse.nixos.org/t/summer-of-nix-2026-call-for-participants-and-mentors/77261"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="bg-secondary-afghani-blue-45 hover:bg-secondary-afghani-blue-15 mt-1.5 w-full
+    text-primary-white rounded-md px-4 py-3 text-center leading-none font-bold text-white no-underline md:mt-0 md:w-auto"
+  >
+    Learn more
+  </a>
+</Banner>
