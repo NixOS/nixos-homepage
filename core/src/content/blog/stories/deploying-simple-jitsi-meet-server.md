@@ -80,7 +80,7 @@ you can skip to [Getting basic Jitsi Meet service running](#getting-basic-jitsi-
 For configuring and deploying it,
 [Nix](https://nixos.org) with flakes support is required to be installed on your local system.
 If you have Nix version 3 or above, everything is already set up.
-Otherwise, you need to [enable it explicitly](https://nixos.wiki/wiki/Flakes#Enable_flakes).
+Otherwise, you need to [enable it explicitly](https://wiki.nixos.org/wiki/Flakes#Setup).
 
 ## Setting up NixOS
 
