@@ -511,4 +511,4 @@ This means that somehow we need to make the compiler aware of the correct paths 
 This is where `NIX_LDFLAGS` (and its partner in compile `NIX_CFLAGS_COMPILE`) come in.
 The ALL CAPS should give you a clue that they are _environment variables_ which are used to furnish the compiler (by way of command line arguments) with these correct paths.
 This is all done using shell scripts that wrap around the actual compiler.
-For more information see the [C section](https://nixos.wiki/wiki/C) on the Nixos Wiki.
+For more information see the [C section](https://wiki.nixos.org/wiki/C) on the Nixos Wiki.
