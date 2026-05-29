@@ -174,7 +174,7 @@ rec {
 
           pills = pkgs.runCommand "pills" { } ''
             mkdir -p $out
-            cp -R ${nixPills.html-split}/share/doc/nix-pills/* $out
+            cp -R ${nixPills.html-split}/share/doc/nix-pills/html/* $out
             cp ${nixPills.epub}/share/doc/nix-pills/nix-pills.epub $out/nix-pills.epub
           '';
 
