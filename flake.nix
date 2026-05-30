@@ -9,7 +9,7 @@ rec {
 
     # These inputs are used for the manuals and release artifacts
     released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    released-nixpkgs-stable.url = "nixpkgs/nixos-25.11";
+    released-nixpkgs-stable.url = "nixpkgs/nixos-26.05";
     released-nix-unstable.url = "github:nixos/nix/master";
     released-nix-stable.url = "github:nixos/nix/latest-release";
     nix-pills.url = "github:NixOS/nix-pills";
@@ -174,7 +174,7 @@ rec {
 
           pills = pkgs.runCommand "pills" { } ''
             mkdir -p $out
-            cp -R ${nixPills.html-split}/share/doc/nix-pills/* $out
+            cp -R ${nixPills.html-split}/share/doc/nix-pills/html/* $out
             cp ${nixPills.epub}/share/doc/nix-pills/nix-pills.epub $out/nix-pills.epub
           '';
 
