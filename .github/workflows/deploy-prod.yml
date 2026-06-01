@@ -51,12 +51,17 @@ jobs:
 
       - name: 'Build'
         run: |
+          now=$(date +%s)
+          if [[ "$(date +%s --date="1 Jun")" <= "$now" && "$now" < "$(date +%s --date="15 July")" ]]; then
+            export THEME=pride
+          else
+            export THEME=default
+          fi
           nix build --impure
           mkdir -p ./build
           cp -RL ./result/* ./build/
         env:
           BANNER: ${{ vars.BANNER }}
-          THEME: ${{ vars.THEME }}
 
       - name: 'Publish to Netlify'
         uses: 'nwtgck/actions-netlify@4cbaf4c08f1a7bfa537d6113472ef4424e4eb654' # v3.0.0
