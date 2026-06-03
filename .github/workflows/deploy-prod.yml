@@ -52,7 +52,7 @@ jobs:
       - name: 'Build'
         run: |
           now=$(date +%s)
-          if [[ "$(date +%s --date="1 Jun")" <= "$now" && "$now" < "$(date +%s --date="15 July")" ]]; then
+          if [[ "$(date +%s --date="1 Jun")" < "$now" && "$now" < "$(date +%s --date="15 July")" ]]; then
             export THEME=pride
           else
             export THEME=default
