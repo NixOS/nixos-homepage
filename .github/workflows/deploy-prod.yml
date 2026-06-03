@@ -1,6 +1,9 @@
 name: 'CI - Production'
 
 on:
+  schedule:
+    - cron: '0 0 1 6 *'
+    - cron: '0 0 15 7 *'
   workflow_dispatch:
   push:
     branches:
