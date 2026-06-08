@@ -84,7 +84,7 @@ jobs:
           name: nixos-homepage-artifact
           path: ./build
       - name: "Publish to Netlify"
-        uses: "nwtgck/actions-netlify@4cbaf4c08f1a7bfa537d6113472ef4424e4eb654" # v3.0.0
+        uses: "nwtgck/actions-netlify@d22a32a27c918fe470bbc562e984f80ec48c2668" # v4.0.0
         env:
           NETLIFY_AUTH_TOKEN: "${{ secrets.NETLIFY_AUTH_TOKEN }}"
           NETLIFY_SITE_ID: "${{ secrets.NETLIFY_SITE_ID }}"
