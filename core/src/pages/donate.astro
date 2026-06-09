@@ -97,20 +97,20 @@ const tiers = await getEntry('sponsors', 'tiers');
             We offer a variety of sponsorship tiers to support NixOS
             development.
         </Paragraph>
-        <div class="grid md:grid-cols-4 mb-4">
+        <ul class="grid md:grid-cols-4 mb-4 gap-4 md:gap-0">
             {
                 tiers.data.map((tier) => (
-                    <div class="group flex flex-col justify-between">
+                    <li class="group flex flex-col justify-between">
                         <div class="flex flex-1 flex-col">
-                            <h2 class="bg-secondary-afghani-blue-25 text-primary-white flex items-center justify-between p-2 text-lg font-bold group-first:rounded-tl-xl group-last:rounded-tr-xl">
+                            <h4 class="bg-secondary-afghani-blue-25 text-primary-white flex items-center justify-between rounded-t-xl p-2 text-lg font-bold md:rounded-t-none md:group-first:rounded-tl-xl md:group-last:rounded-tr-xl">
                                 {tier.name}{' '}
                                 <span class="bg-secondary-afghani-blue-15 rounded-xl px-2 py-1 text-base">
                                     {tier.contribution}
                                 </span>
-                            </h2>
+                            </h4>
                             <ul class="bg-secondary-afghani-blue-35 flex-1 py-1">
                                 {tier.benefits.map((benefit) => (
-                                    <li class="border-b-secondary-afghani-blue-45 inline-flex w-full items-center gap-2 border-b-1 p-2 last:border-b-0">
+                                    <li class="border-b-secondary-afghani-blue-45 inline-flex w-full items-center gap-2 border-b-1 p-2 last:border-b-0 md:min-h-16">
                                         <Icon
                                             name={benefit.icon}
                                             class="text-secondary-afghani-blue-85 min-h-5 min-w-5"
@@ -128,17 +128,17 @@ const tiers = await getEntry('sponsors', 'tiers');
                         <Button
                             color="semidarkblue"
                             classList={[
-                                'rounded-none group-first:rounded-bl-xl group-last:rounded-br-xl',
+                                'rounded-none rounded-b-xl md:rounded-b-none md:group-first:rounded-bl-xl md:group-last:rounded-br-xl',
                                 'bg-secondary-afghani-blue-25!',
                             ]}
                             href="mailto:foundation@nixos.org"
                         >
                             Get in touch
                         </Button>
-                    </div>
+                    </li>
                 ))
             }
-        </div>
+        </ul>
         <Headline level={4} variant="white"
             >Are you a university or startup?</Headline
         >
