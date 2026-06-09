@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 
+import { Icon } from 'astro-icon/components';
 import PageHeader from '../components/layout/PageHeader.astro';
 import SponsorLogo from '../components/layout/SponsorLogo.astro';
 import Button from '../components/ui/Button.astro';
@@ -10,7 +11,6 @@ import Segment from '@/components/layout/Segment.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import Link from '@/components/util/Link.astro';
-import { Icon } from 'astro-icon/components';
 import Divider from '../components/layout/Divider.astro';
 import InlineSVG from '../components/util/InlineSVG.astro';
 
@@ -100,15 +100,15 @@ const tiers = await getEntry('sponsors', 'tiers');
         <div class="grid md:grid-cols-4 mb-4">
             {
                 tiers.data.map((tier) => (
-                    <div class="bg-secondary-afghani-blue-35 group flex flex-col justify-between">
-                        <div class="flex-1">
+                    <div class="group flex flex-col justify-between">
+                        <div class="flex flex-1 flex-col">
                             <h2 class="bg-secondary-afghani-blue-25 text-primary-white flex items-center justify-between p-2 text-lg font-bold group-first:rounded-tl-xl group-last:rounded-tr-xl">
                                 {tier.name}{' '}
                                 <span class="bg-secondary-afghani-blue-15 rounded-xl px-2 py-1 text-base">
                                     {tier.contribution}
                                 </span>
                             </h2>
-                            <ul class="py-1">
+                            <ul class="bg-secondary-afghani-blue-35 flex-1 py-1">
                                 {tier.benefits.map((benefit) => (
                                     <li class="border-b-secondary-afghani-blue-45 inline-flex w-full items-center gap-2 border-b-1 p-2 last:border-b-0">
                                         <Icon
@@ -192,19 +192,19 @@ const tiers = await getEntry('sponsors', 'tiers');
     IBAN: NL13 BUNQ 2061 2530 32
     BIC:  BUNQNL2AXXX</pre>
             </div>
-            <Paragraph size="sm" variant="white" class="col-span-2">
-                * Please add your name and purpose (donation) in the description
-                of the transfer.
-                <i>
-                    If you would like to support us with amounts above 2000 euro
-                    per year, please contact us at
-                    <Link variant="white" href="mailto:foundation@nixos.org"
-                        >foundation@nixos.org</Link
-                    >
-                    , as this will have tax implications.
-                </i>
-            </Paragraph>
         </div>
+        <Paragraph size="sm" variant="white" class="col-span-2 mt-2">
+            * Please add your name and purpose (donation) in the description of
+            the transfer.
+            <i>
+                If you would like to support us with amounts above 2000 euro per
+                year, please contact us at
+                <Link variant="white" href="mailto:foundation@nixos.org"
+                    >foundation@nixos.org</Link
+                >
+                , as this will have tax implications.
+            </i>
+        </Paragraph>
     </Segment>
     <Divider style="slope" mirrorX />
     <Segment
