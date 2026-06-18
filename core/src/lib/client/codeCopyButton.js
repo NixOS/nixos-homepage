@@ -26,7 +26,12 @@ for (const pre of document.querySelectorAll('pre.astro-code')) {
   copyButtonText.classList.add();
   copyButton.appendChild(copyButtonText);
 
-  copyButton.classList.add('cursor-pointer', 'text-white', 'h-full', 'hover:bg-secondary-afghani-blue-35');
+  copyButton.classList.add(
+    'cursor-pointer',
+    'text-white',
+    'h-full',
+    'hover:bg-secondary-afghani-blue-35',
+  );
   header.appendChild(copyButton);
 
   header.classList.add('bg-secondary-afghani-blue-45', 'text-primary-white');
@@ -80,24 +85,47 @@ for (const pre of document.querySelectorAll('pre.astro-code')) {
       }
     }
 
-    navigator.clipboard.writeText(code.innerText.trim()).then(() => {
-      copyButton.classList.add('bg-accent-zambian-green-55!');
-      copyButtonIcon.classList.remove('icon-[mdi--content-copy]');
-      copyButtonIcon.classList.add('icon-[mdi--check]');
-
-      if (isMultiLine) {
-        copyButtonText.innerText = 'Copied!';
-      }
-
-      setTimeout(() => {
-        copyButton.classList.remove('bg-accent-zambian-green-55!');
-        copyButtonIcon.classList.add('icon-[mdi--content-copy]');
-        copyButtonIcon.classList.remove('icon-[mdi--check]');
+    navigator.clipboard
+      .writeText(code.innerText.trim())
+      .then(() => {
+        copyButton.classList.add('bg-accent-zambian-green-55!');
+        copyButtonIcon.classList.remove('icon-[mdi--content-copy]');
+        copyButtonIcon.classList.add('icon-[mdi--check]');
 
         if (isMultiLine) {
-          copyButtonText.innerText = 'Copy';
+          copyButtonText.innerText = 'Copied!';
         }
-      }, 2000);
-    });
+
+        setTimeout(() => {
+          copyButton.classList.remove('bg-accent-zambian-green-55!');
+          copyButtonIcon.classList.add('icon-[mdi--content-copy]');
+          copyButtonIcon.classList.remove('icon-[mdi--check]');
+
+          if (isMultiLine) {
+            copyButtonText.innerText = 'Copy';
+          }
+        }, 2000);
+      })
+      .catch((e) => {
+        console.error(e);
+
+        copyButton.classList.add('bg-accent-chinese-magenta-55!');
+        copyButtonIcon.classList.remove('icon-[mdi--error-outline]');
+        copyButtonIcon.classList.add('icon-[mdi--check]');
+
+        if (isMultiLine) {
+          copyButtonText.innerText = 'Error!';
+        }
+
+        setTimeout(() => {
+          copyButton.classList.remove('bg-accent-chinese-magenta-55!');
+          copyButtonIcon.classList.add('icon-[mdi--content-copy]');
+          copyButtonIcon.classList.remove('icon-[mdi--error-outline]');
+
+          if (isMultiLine) {
+            copyButtonText.innerText = 'Copy';
+          }
+        }, 2000);
+      });
   });
 }
