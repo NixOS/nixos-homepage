@@ -134,7 +134,7 @@
   }
 
   .article pre code {
-    @apply w-full border-none bg-transparent p-0;
+    @apply text-primary-white w-full border-none bg-transparent p-0;
   }
 
   .article .astro-code {
