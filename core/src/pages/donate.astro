@@ -3,7 +3,6 @@ import { getEntry } from 'astro:content';
 
 import { Icon } from 'astro-icon/components';
 import PageHeader from '../components/layout/PageHeader.astro';
-import SponsorLogo from '../components/layout/SponsorLogo.astro';
 import Button from '../components/ui/Button.astro';
 import Layout from '../layouts/Layout.astro';
 
@@ -12,6 +11,7 @@ import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import Link from '@/components/util/Link.astro';
 import Divider from '../components/layout/Divider.astro';
+import SponsorGroup from '../components/ui/SponsorGroup.astro';
 import InlineSVG from '../components/util/InlineSVG.astro';
 
 const sponsors = await getEntry('sponsors', 'info');
@@ -19,279 +19,282 @@ const tiers = await getEntry('sponsors', 'tiers');
 ---
 
 <Layout title="Backing">
-  <PageHeader text="Backing" />
-  <Segment variant="white" container yPadding class="py-4 md:py-0 mb-8">
-    <Headline level={2} variant="blue"
-      >How to back the project financially?</Headline
-    >
-    <Paragraph size="lg" class="mt-2">
-      While NixOS is free and open-source, there are a lot of costs coming with
-      such a large project. Your support helps us keep it sustainable. There are
-      two main ways to support the project:
-    </Paragraph>
-    <div class="grid gap-8 pt-4 md:grid-cols-2">
-      <div class="flex flex-col gap-4">
-        <div
-          class="bg-secondary-afghani-blue-95 flex flex-col gap-2 rounded-2xl p-4"
+    <PageHeader text="Backing" />
+    <Segment variant="white" container yPadding class="py-4 md:py-0 mb-8">
+        <Headline level={2} class="text-center mb-8" variant="blue"
+            >Our awesome sponsors</Headline
         >
-          <Headline level={3} variant="blue"> Sponsorships </Headline>
-          <Paragraph size="lg">
-            Recurring support with perks in return.
-          </Paragraph>
-          <Paragraph>
-            Help us keep NixOS and Nixpkgs sustainable by becoming a sponsor.
-            Your support helps us maintain the infrastructure, improve the
-            project, and organize events. We offer various sponsorship tiers,
-            each with its own set of benefits.
-          </Paragraph>
-          <Paragraph class="font-semibold">
-            Ideal for organizations and businesses who want to make a long-term
-            commitment to the project.
-          </Paragraph>
-          <Button
-            color="semidarkblue"
-            size="sm"
-            href="/sponsorship"
-            classList={['mt-1']}
-          >
-            Read more about Sponsorships
-          </Button>
-        </div>
-      </div>
-      <div class="flex flex-col">
-        <div
-          class="bg-secondary-afghani-blue-95 flex flex-col gap-2 rounded-2xl p-4"
+        <SponsorGroup />
+    </Segment>
+    <Divider style="slope" mirrorY />
+    <Segment variant="blue" container yPadding class="py-4 md:pb-8 pb-8">
+        <Headline level={2} variant="white"
+            >How to back the project financially?</Headline
         >
-          <Headline level={3} variant="blue"> Donations </Headline>
-          <Paragraph size="lg">
-            Simple one-time or recurring payments.
-          </Paragraph>
-          <Paragraph>
-            Show your support by donating to the NixOS Foundation. This helps us
-            continue to provide free, open-source software to the community.
-            This is a regular donation with no perks in return. We accept
-            donations either via Open Collective or via bank transfer.
-          </Paragraph>
-          <Paragraph class="font-semibold">
-            Ideal for individuals and organizations who want to just say thank
-            you and secure the projects future.
-          </Paragraph>
-          <Button
-            color="semidarkblue"
-            size="sm"
-            href="/sponsorship"
-            classList={['mt-1']}
-          >
-            Read more about Ways to Donate
-          </Button>
-        </div>
-      </div>
-    </div>
-  </Segment>
-  <Divider style="slope" mirrorY />
-  <Segment variant="blue" container yPadding innerClass="py-4 md:py-0">
-    <Headline level={3} variant="white">Sponsorship Tiers</Headline>
-    <Paragraph variant="white" size="lg" class="mt-2 mb-2">
-      We offer a variety of sponsorship tiers to support NixOS development.
-    </Paragraph>
-    <ul class="grid md:grid-cols-4 mb-4 gap-4 md:gap-0">
-      {
-        tiers.data.map((tier) => (
-          <li class="group flex flex-col justify-between">
-            <div class="flex flex-1 flex-col">
-              <h4 class="bg-secondary-afghani-blue-25 text-primary-white flex items-center justify-between rounded-t-xl p-2 text-lg font-bold md:rounded-t-none md:group-first:rounded-tl-xl md:group-last:rounded-tr-xl">
-                {tier.name}{' '}
-                <span class="bg-secondary-afghani-blue-15 rounded-xl px-2 py-1 text-base">
-                  {tier.contribution}
-                </span>
-              </h4>
-              <ul class="bg-secondary-afghani-blue-35 flex-1 py-1">
-                {tier.benefits.map((benefit) => (
-                  <li class="border-b-secondary-afghani-blue-45 inline-flex w-full items-center gap-2 border-b-1 p-2 last:border-b-0 md:min-h-16">
-                    <Icon
-                      name={benefit.icon}
-                      class="text-secondary-afghani-blue-85 min-h-5 min-w-5"
-                    />{' '}
-                    {benefit.description}
-                  </li>
-                ))}
-              </ul>
+        <Paragraph size="lg" class="mt-2" variant="white">
+            While NixOS is free and open-source, there are a lot of costs coming
+            with such a large project. Your support helps us keep it
+            sustainable. There are two main ways to support the project:
+        </Paragraph>
+        <div class="grid gap-8 pt-4 md:grid-cols-2">
+            <div class="flex flex-col gap-4">
+                <div
+                    class="bg-secondary-afghani-blue-35 flex flex-col gap-2 rounded-2xl p-4"
+                >
+                    <Headline level={3} variant="white">
+                        Sponsorships
+                    </Headline>
+                    <Paragraph size="lg" variant="white">
+                        Recurring support with perks in return.
+                    </Paragraph>
+                    <Paragraph variant="white">
+                        Help us keep NixOS and Nixpkgs sustainable by becoming a
+                        sponsor. Your support helps us maintain the
+                        infrastructure, improve the project, and organize
+                        events. We offer various sponsorship tiers, each with
+                        its own set of benefits.
+                    </Paragraph>
+                    <Paragraph variant="white" class="font-semibold">
+                        Ideal for organizations and businesses who want to make
+                        a long-term commitment to the project.
+                    </Paragraph>
+                    <Button
+                        color="semidarkblue"
+                        size="sm"
+                        href="/sponsorship"
+                        classList={['mt-1']}
+                    >
+                        Read more about Sponsorships
+                    </Button>
+                </div>
             </div>
-            {tier.requirements && (
-              <p class="bg-secondary-afghani-blue-35 text-primary-white px-2 py-1 text-sm">
-                {tier.requirements}
-              </p>
-            )}
-            <Button
-              color="semidarkblue"
-              classList={[
-                'rounded-none rounded-b-xl md:rounded-b-none md:group-first:rounded-bl-xl md:group-last:rounded-br-xl',
-                'bg-secondary-afghani-blue-25!',
-              ]}
-              href="mailto:foundation@nixos.org"
-            >
-              Get in touch
-            </Button>
-          </li>
-        ))
-      }
-    </ul>
-    <Headline level={4} variant="white"
-      >Are you a university or startup?</Headline
-    >
-    <Paragraph size="lg" variant="white" class="mt-2">
-      We are aware that many universities and startups are interested in
-      supporting NixOS but may struggle with the finincial entrylevel. Get in
-      touch with us to learn about our community tier which will grant you a
-      logo on our website.
-    </Paragraph>
-  </Segment>
-  <Segment variant="blue" container yPadding innerClass="py-4 md:py-0">
-    <Headline level={3} variant="white">Ways to donate</Headline>
-    <Paragraph size="lg" class="mt-4" />
-    <div class="grid gap-8 md:grid-cols-2">
-      <div
-        class="bg-secondary-afghani-blue-35 flex flex-col gap-2 rounded-2xl p-4"
-      >
-        <Headline level={3} variant="white">Open Collective</Headline>
-        <Paragraph variant="white">
-          NixOS Foundation is using
-          <Link variant="white" href="https://opencollective.com/"
-            >Open Collective</Link
-          >
-          to manage the finances so everyone can see where money comes from and where
-          money goes.
+            <div class="flex flex-col">
+                <div
+                    class="bg-secondary-afghani-blue-35 flex flex-col gap-2 rounded-2xl p-4"
+                >
+                    <Headline level={3} variant="white"> Donations </Headline>
+                    <Paragraph size="lg" variant="white">
+                        Simple one-time or recurring payments.
+                    </Paragraph>
+                    <Paragraph variant="white">
+                        Show your support by donating to the NixOS Foundation.
+                        This helps us continue to provide free, open-source
+                        software to the community. This is a regular donation
+                        with no perks in return. We accept donations either via
+                        Open Collective or via bank transfer.
+                    </Paragraph>
+                    <Paragraph variant="white" class="font-semibold">
+                        Ideal for individuals and organizations who want to just
+                        say thank you and secure the projects future.
+                    </Paragraph>
+                    <Button
+                        color="semidarkblue"
+                        size="sm"
+                        href="/sponsorship"
+                        classList={['mt-1']}
+                    >
+                        Read more about Ways to Donate
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </Segment>
+    <Divider style="slope" mirrorX />
+    <Segment variant="white" container yPadding innerClass="py-4 md:py-0">
+        <Headline level={3} variant="blue">Sponsorship Tiers</Headline>
+        <Paragraph variant="black" size="lg" class="mt-2 mb-2">
+            We offer a variety of sponsorship tiers to support NixOS
+            development.
         </Paragraph>
-        <Paragraph variant="white">
-          With Open Collective you can make a <strong>single</strong> or
-          <strong>recurring</strong> contribution by credit card transfer.
-        </Paragraph>
-        <Button
-          color="semidarkblue"
-          classList={['mt-1']}
-          size="sm"
-          href="https://opencollective.com/nixos#support"
+        <ul class="grid md:grid-cols-4 mb-4 gap-4 md:gap-0">
+            {
+                tiers.data.map((tier) => (
+                    <li class="group flex flex-col justify-between">
+                        <div class="flex flex-1 flex-col">
+                            <h4 class="bg-secondary-afghani-blue-45 text-primary-white flex items-center justify-between rounded-t-xl p-2 text-lg font-bold md:rounded-t-none md:group-first:rounded-tl-xl md:group-last:rounded-tr-xl">
+                                {tier.name}{' '}
+                                <span class="bg-secondary-afghani-blue-25 rounded-xl px-2 py-1 text-base">
+                                    {tier.contribution}
+                                </span>
+                            </h4>
+                            <ul class="bg-secondary-afghani-blue-95 flex-1 py-1">
+                                {tier.benefits.map((benefit) => (
+                                    <li class="border-b-secondary-afghani-blue-45 inline-flex w-full items-center gap-2 border-b-1 p-2 last:border-b-0 md:min-h-16">
+                                        <Icon
+                                            name={benefit.icon}
+                                            class="text-secondary-afghani-blue-55 min-h-5 min-w-5"
+                                        />{' '}
+                                        {benefit.description}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        {tier.requirements && (
+                            <p class="bg-secondary-afghani-blue-35 text-primary-white px-2 py-1 text-sm">
+                                {tier.requirements}
+                            </p>
+                        )}
+                        <Button
+                            color="semidarkblue"
+                            classList={[
+                                'rounded-none rounded-b-xl md:rounded-b-none md:group-first:rounded-bl-xl md:group-last:rounded-br-xl',
+                            ]}
+                            href="mailto:foundation@nixos.org"
+                        >
+                            Get in touch
+                        </Button>
+                    </li>
+                ))
+            }
+        </ul>
+        <Headline level={4} variant="blue"
+            >Are you a university or startup?</Headline
         >
-          Donate using Open Collective
-        </Button>
-      </div>
+        <Paragraph size="lg" variant="black" class="mt-2">
+            We are aware that many universities and startups are interested in
+            supporting NixOS but may struggle with the finincial entrylevel. Get
+            in touch with us to learn about our community tier which will grant
+            you a logo on our website.
+        </Paragraph>
+    </Segment>
+    <Divider style="slope" mirrorY />
+    <Segment variant="blue" container yPadding innerClass="py-4 md:py-0">
+        <Headline level={3} variant="white">Ways to donate</Headline>
+        <Paragraph size="lg" class="mt-4" />
+        <div class="grid gap-8 md:grid-cols-2">
+            <div
+                class="bg-secondary-afghani-blue-35 flex flex-col gap-2 rounded-2xl p-4"
+            >
+                <Headline level={3} variant="white">Open Collective</Headline>
+                <Paragraph variant="white">
+                    NixOS Foundation is using
+                    <Link variant="white" href="https://opencollective.com/"
+                        >Open Collective</Link
+                    >
+                    to manage the finances so everyone can see where money comes from
+                    and where money goes.
+                </Paragraph>
+                <Paragraph variant="white">
+                    With Open Collective you can make a <strong>single</strong> or
+                    <strong>recurring</strong> contribution by credit card transfer.
+                </Paragraph>
+                <Button
+                    color="semidarkblue"
+                    classList={['mt-1']}
+                    size="sm"
+                    href="https://opencollective.com/nixos#support"
+                >
+                    Donate using Open Collective
+                </Button>
+            </div>
 
-      <div
-        class="bg-secondary-afghani-blue-35 flex flex-col gap-2 rounded-2xl p-4"
-      >
-        <Headline level={3} variant="white">SEPA Bank Transfer*</Headline>
-        <pre
-          class="bg-secondary-afghani-blue-25 text-nix-blue-darker my-2 rounded-3xl p-8 font-mono font-bold whitespace-pre-line">
+            <div
+                class="bg-secondary-afghani-blue-35 flex flex-col gap-2 rounded-2xl p-4"
+            >
+                <Headline level={3} variant="white"
+                    >SEPA Bank Transfer*</Headline
+                >
+                <pre
+                    class="bg-secondary-afghani-blue-25 text-nix-blue-darker my-2 rounded-3xl p-8 font-mono font-bold whitespace-pre-line">
     Stichting NixOS Foundation, Utrecht, The Netherlands
 
     IBAN: NL13 BUNQ 2061 2530 32
     BIC:  BUNQNL2AXXX</pre>
-      </div>
-    </div>
-    <Paragraph size="sm" variant="white" class="col-span-2 mt-2">
-      * Please add your name and purpose (donation) in the description of the
-      transfer.
-      <i>
-        If you would like to support us with amounts above 2000 euro per year,
-        please contact us at
-        <Link variant="white" href="mailto:foundation@nixos.org"
-          >foundation@nixos.org</Link
-        >
-        , as this will have tax implications.
-      </i>
-    </Paragraph>
-  </Segment>
-  <Divider style="slope" mirrorX />
-  <Segment
-    variant="white"
-    container
-    yPadding
-    innerClass="grid gap-8 md:grid-cols-2 py-4 md:py-0"
-  >
-    <div class="flex flex-col justify-center gap-4 leading-relaxed">
-      <Headline level={2} variant="blue"> The NixOS Foundation </Headline>
-      <Paragraph variant="black" size="lg">
-        The NixOS infrastructure, development and events are funded by its users
-        and sponsors.
-      </Paragraph>
-      <Paragraph variant="black">
-        Maintaining our build farm and binary cache is very expensive. We depend
-        on your support to ensure the continuous operation and expansion of the
-        NixOS infrastructure.
-      </Paragraph>
-      <Paragraph variant="black">
-        Please consider donating a small amount every month to contribute to
-        sustainable funding. Donations are handled by a nonprofit organization,
-        the <Link variant="blue" href="/community#foundation"
-          >NixOS Foundation</Link
-        >.
-      </Paragraph>
-    </div>
-    <div class="flex flex-col items-center justify-center">
-      <InlineSVG
-        src="/src/assets/image/nixos-foundation-logo.svg"
-        class="max-h-96"
-      />
-    </div>
-  </Segment>
-
-  <Divider style="slope" mirrorY />
-  <Segment
-    variant="blue"
-    container
-    yPadding
-    innerClass="grid gap-8 md:grid-cols-2 py-4 md:py-0"
-  >
-    <div class="flex flex-col justify-center">
-      <div
-        class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-      >
-        {
-          sponsors.data.items.map((item) => (
-            <SponsorLogo
-              class={item.class}
-              href={item.href}
-              src={item.src}
-              alt={item.alt}
+            </div>
+        </div>
+        <Paragraph size="sm" variant="white" class="col-span-2 mt-2">
+            * Please add your name and purpose (donation) in the description of
+            the transfer.
+            <i>
+                If you would like to support us with amounts above 2000 euro per
+                year, please contact us at
+                <Link variant="white" href="mailto:foundation@nixos.org"
+                    >foundation@nixos.org</Link
+                >
+                , as this will have tax implications.
+            </i>
+        </Paragraph>
+    </Segment>
+    <Divider style="slope" mirrorX />
+    <Segment
+        variant="white"
+        container
+        yPadding
+        innerClass="grid gap-8 md:grid-cols-2 py-4 md:py-0"
+    >
+        <div class="flex flex-col justify-center gap-4 leading-relaxed">
+            <Headline level={2} variant="blue"> The NixOS Foundation </Headline>
+            <Paragraph variant="black" size="lg">
+                The NixOS infrastructure, development and events are funded by
+                its users and sponsors.
+            </Paragraph>
+            <Paragraph variant="black">
+                Maintaining our build farm and binary cache is very expensive.
+                We depend on your support to ensure the continuous operation and
+                expansion of the NixOS infrastructure.
+            </Paragraph>
+            <Paragraph variant="black">
+                Please consider donating a small amount every month to
+                contribute to sustainable funding. Donations are handled by a
+                nonprofit organization, the <Link
+                    variant="blue"
+                    href="/community#foundation">NixOS Foundation</Link
+                >.
+            </Paragraph>
+        </div>
+        <div class="flex flex-col items-center justify-center">
+            <InlineSVG
+                src="/src/assets/image/nixos-foundation-logo.svg"
+                class="max-h-96"
             />
-          ))
-        }
-      </div>
-    </div>
-    <div class="flex flex-col justify-center gap-4">
-      <Headline level={2} variant="white">Acknowledgements</Headline>
-      <Paragraph variant="white">
-        The Nix package manager was developed by
-        <Link variant="white" href="https://edolstra.github.io/"
-          >Eelco Dolstra</Link
-        >
-        as part of his PhD research in the
-        <Link variant="white" href="https://www.nwo.nl/en/projects/638001201"
-          >TraCE project</Link
-        >, funded by the
-        <Link variant="white" href="http://www.jacquard.nl/"
-          >Jacquard programme</Link
-        >
-        of the
-        <Link variant="white" href="http://www.nwo.npx-l/"
-          >Netherlands Organisation for Scientific Research</Link
-        >
-        (NWO) and SERC. The first prototype of NixOS was developed by
-        <Link variant="white" href="http://www.tjaldur.nl/">Armijn Hemel</Link>
-        as his master’s thesis project. Hydra, the Nix-based continuous build system,
-        was developed as part of the LaQuSo Buildfarm project, funded by
-        <Link variant="white" href="https://www.4tu.nl/nirict/">NIRICT</Link>
-        and
-        <Link variant="white" href="http://www.laquso.com/">LaQuSo</Link>.
-      </Paragraph>
-      <Paragraph variant="white">
-        The following companies and institutes have supported the development of
-        NixOS and hosting for its infrastructure. We are very grateful for that!
-        If you would like to support us as well, please contact
-        <Link variant="white" href="mailto:foundation@nixos.org"
-          >The NixOS Foundation</Link
-        >.
-      </Paragraph>
-    </div>
-  </Segment>
+        </div>
+    </Segment>
+
+    <Divider style="slope" mirrorY />
+    <Segment variant="blue" container yPadding innerClass="py-4 md:py-0">
+        <div class="flex flex-col justify-center gap-4">
+            <Headline level={2} variant="white">Acknowledgements</Headline>
+            <Paragraph variant="white">
+                The Nix package manager was developed by
+                <Link variant="white" href="https://edolstra.github.io/"
+                    >Eelco Dolstra</Link
+                >
+                as part of his PhD research in the
+                <Link
+                    variant="white"
+                    href="https://www.nwo.nl/en/projects/638001201"
+                    >TraCE project</Link
+                >, funded by the
+                <Link variant="white" href="http://www.jacquard.nl/"
+                    >Jacquard programme</Link
+                >
+                of the
+                <Link variant="white" href="http://www.nwo.npx-l/"
+                    >Netherlands Organisation for Scientific Research</Link
+                >
+                (NWO) and SERC. The first prototype of NixOS was developed by
+                <Link variant="white" href="http://www.tjaldur.nl/"
+                    >Armijn Hemel</Link
+                >
+                as his master’s thesis project. Hydra, the Nix-based continuous build
+                system, was developed as part of the LaQuSo Buildfarm project, funded
+                by
+                <Link variant="white" href="https://www.4tu.nl/nirict/"
+                    >NIRICT</Link
+                >
+                and
+                <Link variant="white" href="http://www.laquso.com/">LaQuSo</Link
+                >.
+            </Paragraph>
+            <Paragraph variant="white">
+                The following companies and institutes have supported the
+                development of NixOS and hosting for its infrastructure. We are
+                very grateful for that! If you would like to support us as well,
+                please contact
+                <Link variant="white" href="mailto:foundation@nixos.org"
+                    >The NixOS Foundation</Link
+                >.
+            </Paragraph>
+        </div>
+    </Segment>
 </Layout>
