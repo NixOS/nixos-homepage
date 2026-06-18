@@ -26,7 +26,7 @@ for (const pre of document.querySelectorAll('pre.astro-code')) {
   copyButtonText.classList.add();
   copyButton.appendChild(copyButtonText);
 
-  copyButton.classList.add('cursor-pointer', 'text-white', 'h-full', 'px-4');
+  copyButton.classList.add('cursor-pointer', 'text-white', 'h-full');
   header.appendChild(copyButton);
 
   header.classList.add('bg-secondary-afghani-blue-45', 'text-primary-white');
@@ -43,6 +43,7 @@ for (const pre of document.querySelectorAll('pre.astro-code')) {
       'items-center',
       'justify-center',
       'gap-2',
+      'px-2',
     );
 
     copyButtonText.innerText = 'Copy';
@@ -53,7 +54,7 @@ for (const pre of document.querySelectorAll('pre.astro-code')) {
       'items-center',
       'justify-end',
       'min-h-max',
-      'px-4',
+      'px-2',
       'pt-2',
       'pb-2.5',
       '-mt-1',
@@ -62,7 +63,7 @@ for (const pre of document.querySelectorAll('pre.astro-code')) {
   } else {
     pre.classList.add('rounded-r-none!');
 
-    copyButton.classList.add('rounded-r-2xl', 'w-full');
+    copyButton.classList.add('rounded-r-2xl', 'w-full', 'px-4');
 
     copyButtonIcon.classList.add('mt-1.5');
 
