@@ -26,7 +26,7 @@ for (const pre of document.querySelectorAll('pre.astro-code')) {
   copyButtonText.classList.add();
   copyButton.appendChild(copyButtonText);
 
-  copyButton.classList.add('cursor-pointer', 'text-white', 'h-full');
+  copyButton.classList.add('cursor-pointer', 'text-white', 'h-full', 'hover:bg-secondary-afghani-blue-35');
   header.appendChild(copyButton);
 
   header.classList.add('bg-secondary-afghani-blue-45', 'text-primary-white');
