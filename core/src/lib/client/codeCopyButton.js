@@ -109,16 +109,16 @@ for (const pre of document.querySelectorAll('pre.astro-code')) {
       .catch((e) => {
         console.error(e);
 
-        copyButton.classList.add('bg-accent-chinese-magenta-55!');
-        copyButtonIcon.classList.remove('icon-[mdi--error-outline]');
-        copyButtonIcon.classList.add('icon-[mdi--check]');
+        copyButton.classList.add('bg-accent-norwegian-pink-55!');
+        copyButtonIcon.classList.remove('icon-[mdi--content-copy]');
+        copyButtonIcon.classList.add('icon-[mdi--error-outline]');
 
         if (isMultiLine) {
           copyButtonText.innerText = 'Error!';
         }
 
         setTimeout(() => {
-          copyButton.classList.remove('bg-accent-chinese-magenta-55!');
+          copyButton.classList.remove('bg-accent-norwegian-pink-55!');
           copyButtonIcon.classList.add('icon-[mdi--content-copy]');
           copyButtonIcon.classList.remove('icon-[mdi--error-outline]');
 
