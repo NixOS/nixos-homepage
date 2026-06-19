@@ -1,0 +1,142 @@
+/* Route159 Font Face Declarations */
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-Regular.eot');
+  src:
+    url('/fonts/route159/Route159-Regular.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/route159/Route159-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-Italic.eot');
+  src:
+    url('/fonts/route159/Route159-Italic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/route159/Route159-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-UltraLight.eot');
+  src:
+    url('/fonts/route159/Route159-UltraLight.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/route159/Route159-UltraLight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-UltraLightItalic.eot');
+  src:
+    url('/fonts/route159/Route159-UltraLightItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/route159/Route159-UltraLightItalic.woff') format('woff');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-Light.eot');
+  src:
+    url('/fonts/route159/Route159-Light.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/route159/Route159-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-LightItalic.eot');
+  src:
+    url('/fonts/route159/Route159-LightItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/route159/Route159-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-SemiBold.eot');
+  src:
+    url('/fonts/route159/Route159-SemiBold.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/route159/Route159-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-SemiBoldItalic.eot');
+  src:
+    url('/fonts/route159/Route159-SemiBoldItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/route159/Route159-SemiBoldItalic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-Bold.eot');
+  src:
+    url('/fonts/route159/Route159-Bold.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/route159/Route159-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-BoldItalic.eot');
+  src:
+    url('/fonts/route159/Route159-BoldItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/route159/Route159-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-Heavy.eot');
+  src:
+    url('/fonts/route159/Route159-Heavy.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/route159/Route159-Heavy.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Route159';
+  src: url('/fonts/route159/Route159-HeavyItalic.eot');
+  src:
+    url('/fonts/route159/Route159-HeavyItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/route159/Route159-HeavyItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}

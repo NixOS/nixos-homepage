@@ -1,4 +1,6 @@
 ---
+import Headline from '@/components/ui/typography/Headline.astro';
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import { Image } from 'astro:assets';
 
 interface Props {
@@ -16,7 +18,7 @@ const { title, date, description, href, imagePath = null } = Astro.props;
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="text-primary-white! flex flex-col gap-1 font-extralight no-underline!"
+  class="text-primary-white! flex flex-col gap-1 no-underline!"
 >
   {
     imagePath && (
@@ -25,10 +27,14 @@ const { title, date, description, href, imagePath = null } = Astro.props;
       </div>
     )
   }
-  <h4 class="font-heading text-lg font-bold">{title}</h4>
-  <div class="text-sm">{date}</div>
-  <div class="leading-relaxed">{description}</div>
-  <div class="text-primary-white! text-right font-bold">
-    <span class="underline">Read more...</span>
-  </div>
+  <Headline level={4} variant="white">
+    {title}
+  </Headline>
+  <Paragraph variant="white" size="sm">
+    {date}
+  </Paragraph>
+  <Paragraph variant="white">
+    {description}
+  </Paragraph>
+  <Paragraph variant="white" class="link text-right"> Read more... </Paragraph>
 </a>

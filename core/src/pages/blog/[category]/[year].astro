@@ -16,7 +16,7 @@ export async function getStaticPaths() {
       groups[category + postYear] = {
         params: {
           category: category,
-          year: postYear,
+          year: postYear.toString(),
         },
         props: { entries: [], category: category, year: postYear },
       };

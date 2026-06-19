@@ -1,6 +1,11 @@
 ---
 import Container from '../components/layout/Container.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
+import Segment from '../components/layout/Segment.astro';
+import Headline from '../components/ui/typography/Headline.astro';
+import Paragraph from '../components/ui/typography/Paragraph.astro';
+import Link from '../components/util/Link.astro';
+
 import Layout from '../layouts/Layout.astro';
 
 import Divider from '../components/layout/Divider.astro';
@@ -464,6 +469,30 @@ const papers: ReadonlyArray<Paper> = [
     },
   },
   {
+    title:
+      'Sustainable packaging of quantum chemistry software with the Nix package manager',
+    authors: [
+      {
+        name: 'Markus Kowalewski',
+        orcidUrl: 'https://orcid.org/0000-0002-2288-2548',
+      },
+      {
+        name: 'Phillip Seeber',
+        orcidUrl: 'https://orcid.org/0000-0002-4968-7726',
+      },
+    ],
+    year: 2022,
+    abstract:
+      'The installation of quantum chemistry software packages is commonly done manually and can be a time-consuming and complicated process. An update of the underlying Linux system requires a reinstallation in many cases and can quietly break software installed on the system. In this paper, we present an approach that allows for an easy installation of quantum chemistry software packages, which is also independent of operating system updates. The use of the Nix package manager allows building software in a reproducible manner, which allows for a reconstruction of the software for later reproduction of scientific results. The build recipes that are provided can be readily used by anyone to avoid complex installation procedures.',
+    doiOrPublisherUrl: '10.1002/qua.26872',
+    publicationInfo: {
+      type: 'journal',
+      journal: 'International Journal of Quantum Chemistry',
+      volume: '122',
+      pages: 'e26872',
+    },
+  },
+  {
     title: 'Build systems à la carte: Theory and practice',
     authors: [
       {
@@ -897,43 +926,42 @@ function getVenueString(pubInfo: PublicationType) {
 <Layout title="Research and Scientific Publications">
   <PageHeader text="Research and Scientific Publications" />
 
-  <Container class="grid gap-8 px-12 pt-8 pb-20 md:grid-cols-2">
-    <div
-      class="flex flex-col justify-center gap-4 leading-relaxed font-extralight"
-    >
-      <p>
+  <Container class="grid gap-8 py-10 md:grid-cols-2">
+    <div class="space-y-2 self-center">
+      <Paragraph size="lg">
         Nix started as a research project by Eelco Dolstra and his collaborators
         at Utrecht University around 2003. Since then, scientists from multiple
         institutions have published their work on repeatable computation and
         reliable, secure software distribution.
-      </p>
-      <p>
+      </Paragraph>
+      <Paragraph size="lg">
         This collection traces the continued exploration of theoretical
         foundations and practical applications of the ideas underlying Nix and
         its ecosystem.
-      </p>
+      </Paragraph>
     </div>
-    <div class="flex flex-col items-center justify-center">
-      <img src="/images/explore/experiment.svg" class="max-h-96" />
-    </div>
+    <img
+      src="/images/explore/experiment.svg"
+      class="max-h-64 self-center justify-self-center"
+    />
   </Container>
   <Divider style="slope" mirrorX mirrorY />
-  <div
-    class="bg-secondary-afghani-blue-45 text-primary-white py-16 md:px-12 md:py-16"
-  >
-    <Container class="mt-16 space-y-8 leading-relaxed font-extralight">
-      <h1 class="font-heading text-4xl leading-tight font-bold">
+  <Segment variant="blue" class="py-12">
+    <Container class="space-y-8 leading-relaxed">
+      <Headline level={2} variant="white">
         Scientific publications about Nix and associated projects
-      </h1>
+      </Headline>
 
       <div class="space-y-12">
         {
           sortedYears.map((year) => (
             <section>
-              <h2 class="mb-6 text-2xl font-semibold">{year}</h2>
+              <Headline level={3} variant="white" class="pb-6">
+                {year}
+              </Headline>
               <div class="space-y-6">
                 {papersByYear[year].map((paper) => (
-                  <article class="paper-entry bg-primary-white rounded-lg p-6 shadow-sm transition hover:shadow-md">
+                  <article class="article paper-entry bg-primary-white rounded-lg p-6 shadow-sm transition hover:shadow-md">
                     <input
                       type="checkbox"
                       id={getToggleAbstractId(paper)}
@@ -941,23 +969,19 @@ function getVenueString(pubInfo: PublicationType) {
                     />
                     <div class="content-container">
                       <div class="paper-info flex-1 space-y-2">
-                        <h3 class="text-primary-black-15 max-w-[650px] text-lg font-medium">
+                        <Headline level={4} variant="black">
                           {paper.title}
-                        </h3>
-                        <p class="text-primary-black-35 text-sm">
+                        </Headline>
+                        <p class="text-primary-black">
                           {paper.authors.map((a, i) => (
                             <>
                               {a.orcidUrl ? (
-                                <a
-                                  href={a.orcidUrl}
-                                  class="hover:text-secondary-afghani-blue-45 transition-colors"
-                                  target="_blank"
-                                >
+                                <Link href={a.orcidUrl} variant="blue">
                                   <span class="whitespace-nowrap">
                                     {a.name}
                                     {i < paper.authors.length - 1 ? ',' : ''}
                                   </span>
-                                </a>
+                                </Link>
                               ) : (
                                 <span class="whitespace-nowrap">
                                   {a.name}
@@ -968,9 +992,9 @@ function getVenueString(pubInfo: PublicationType) {
                             </>
                           ))}
                         </p>
-                        <p class="text-primary-black-35 text-sm">
+                        <Paragraph>
                           {getVenueString(paper.publicationInfo)}
-                        </p>
+                        </Paragraph>
                       </div>
                       <div class="buttons-container ml-4 flex gap-2">
                         {paper.bibtex && (
@@ -1082,7 +1106,11 @@ function getVenueString(pubInfo: PublicationType) {
                         )}
                       </div>
                     </div>
-                    <div class="abstract-content text-primary-black-35 mt-4 text-sm">
+                    <div class="abstract-content text-primary-black">
+                      <hr class="pb-2" />
+                      <Headline level={5} class="pb-2">
+                        Abstract
+                      </Headline>
                       {paper.abstract &&
                         paper.abstract
                           .split('\n\n')
@@ -1098,7 +1126,7 @@ function getVenueString(pubInfo: PublicationType) {
         }
       </div>
     </Container>
-  </div>
+  </Segment>
 </Layout>
 
 <style>
@@ -1172,7 +1200,6 @@ function getVenueString(pubInfo: PublicationType) {
   /* Abstract Content Hidden by Default */
   .abstract-content {
     max-height: 0;
-    max-width: 600px;
     overflow: hidden;
     transition:
       max-height 0.3s ease-out,

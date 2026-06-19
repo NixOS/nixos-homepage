@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { getCollection, render } from 'astro:content';
 
 const { family = 'nix' } = Astro.props;
@@ -39,9 +40,14 @@ let downloadOptions = (await getCollection('download'))
                 'rounded-2xl',
                 'justify-start',
                 'content-start',
+                'items-center',
                 'my-4',
               ]}
             >
+              <Icon
+                name={option.data.icon ?? 'mdi:more-horiz'}
+                class="bg-secondary-afghani-blue-45 text-secondary-afghani-blue-95 mr-4 h-10 w-10 rounded-xl p-1"
+              />
               {option.data.title}
             </button>
             <div
@@ -50,7 +56,7 @@ let downloadOptions = (await getCollection('download'))
               aria-labelledby={`${optionId}-trigger`}
               class="block scroll-mt-44 md:scroll-mt-52"
             >
-              <article>
+              <article class="article">
                 <Content />
               </article>
             </div>

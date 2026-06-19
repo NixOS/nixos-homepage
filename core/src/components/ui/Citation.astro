@@ -4,55 +4,28 @@ export interface Props {
   onBlueBackground?: boolean;
 }
 
+const citationId = Math.random().toString(12).slice(2, 11);
+
 const { id, onBlueBackground } = Astro.props;
 ---
 
-<span class="inline-block">
-  <details class="inline">
-    <summary class="inline-block cursor-pointer">
-      <sup
-        class:list={[
-          onBlueBackground && 'hover:bg-primary-black-95 text-primary-white',
-          !onBlueBackground &&
-            'text-secondary-afghani-blue hover:text-secondary-afghani-blue',
-        ]}>[{id}]</sup
-      >
-    </summary>
-    <div
-      class:list={[
-        'bg-primary-black-75 absolute mt-1 max-w-sm rounded-sm border p-2 text-sm shadow-lg',
-        !onBlueBackground && 'bg-primary-white!',
-        onBlueBackground && 'bg-secondary-afghani-blue-15!',
-      ]}
-    >
-      <slot />
-    </div>
-  </details>
+<span class="group relative" aria-describedby={citationId}>
+  <span>
+    [{id}]
+  </span>
+  <div
+    role="tooltip"
+    id={citationId}
+    class:list={[
+      'bg-primary-black-75 absolute top-full left-0 z-10 hidden w-64 max-w-sm rounded-sm border p-2 text-sm shadow-lg group-hover:block hover:block',
+      !onBlueBackground && 'bg-primary-white',
+      onBlueBackground && 'bg-secondary-afghani-blue-15',
+    ]}
+  >
+    <slot />
+  </div>
 </span>
 
 <style>
   @reference "./../../styles/base.css";
-
-  details[open] > summary > sup.text-white {
-    @apply text-primary-black-95;
-  }
-  details[open] > summary > sup.text-secondary-afghani-blue {
-    @apply text-secondary-afghani-blue-45;
-  }
 </style>
-
-<script>
-  // Optional: Close other open details when one is opened
-  document.addEventListener('click', (event) => {
-    if (
-      event.target instanceof HTMLElement &&
-      event.target.tagName === 'SUMMARY'
-    ) {
-      document.querySelectorAll('details[open]').forEach((detail) => {
-        if (detail !== event.target.parentElement) {
-          detail.removeAttribute('open');
-        }
-      });
-    }
-  });
-</script>

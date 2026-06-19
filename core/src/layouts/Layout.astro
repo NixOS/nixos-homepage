@@ -7,6 +7,7 @@ import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 
 import '@/styles/base.css';
+import '@/styles/route159.css';
 
 const {
   title = 'Nix & NixOS | Declarative builds and deployments',
@@ -95,13 +96,14 @@ const headFeedLinks = blogMenu.data.map((e) => {
     <Footer />
 
     <script>
-      import 'htmx.org';
-
       // Fonts
       import '@fontsource-variable/overpass';
       import '@fontsource-variable/fira-code';
       import '@fontsource-variable/roboto-flex/wdth.css';
+
+      // Client-Side Scripts
       import '@/lib/client/scrollToTopHandler.js';
+      import '@/lib/client/codeCopyButton.js';
     </script>
 
     <style>

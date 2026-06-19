@@ -1,4 +1,6 @@
 ---
+import Link from '../util/Link.astro';
+
 interface Props {
   href?: string;
   classList?: string[];
@@ -8,7 +10,7 @@ const { href = '#', classList = [] } = Astro.props;
 ---
 
 <span class="mx-[0.5rem] hidden md:inline">
-  <a href={href} class:list={[classList]}>
+  <Link variant="blue" href={href} class:list={[classList]}>
     <slot />
-  </a>
+  </Link>
 </span>

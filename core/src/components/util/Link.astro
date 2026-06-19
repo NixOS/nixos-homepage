@@ -1,9 +1,9 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-type Props = HTMLAttributes<'a'>;
+type Props = HTMLAttributes<'a'> & { variant?: 'blue' | 'white' };
 
-const { href, ...props } = Astro.props;
+const { href, variant = 'white', ...props } = Astro.props;
 
 let linkProps = { href, ...props };
 
@@ -13,6 +13,13 @@ if (!!href && href.toString().startsWith('http')) {
 }
 ---
 
-<a {...linkProps}>
+<a
+  {...linkProps}
+  class:list={[
+    'link',
+    variant == 'blue' && 'link-blue',
+    variant == 'white' && 'link-white',
+  ]}
+>
   <slot />
 </a>

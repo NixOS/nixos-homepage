@@ -4,7 +4,6 @@ import fs from "node:fs";
 
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 
 // theme derived from https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/main/packages/tm-themes/themes/vesper.json
@@ -60,9 +59,6 @@ export default defineConfig({
     },
   },
   compressHTML: true,
-  vite: {
-    plugins: [tailwindcss()],
-  },
   redirects: {
     '/values': '/governance',
     '/qr01': '/why-nix' // QR code on the NixOS banner

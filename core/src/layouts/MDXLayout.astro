@@ -16,7 +16,7 @@ const { frontmatter } = Astro.props;
 <Layout title={frontmatter.title}>
   <PageHeader text={frontmatter.title} parentPath={frontmatter.parentPath} />
   <Container class="my-8">
-    <article>
+    <article class="article">
       <slot />
     </article>
   </Container>
