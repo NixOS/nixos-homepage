@@ -59,7 +59,7 @@ export async function nixOg({
         <div
           style={{
             color: '#ffffff',
-            fontSize: 72,
+            fontSize: 64,
             fontWeight: 600,
             fontFamily: 'Roboto Flex',
           }}
