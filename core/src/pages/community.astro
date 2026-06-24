@@ -12,6 +12,7 @@ import Banner from '../components/ui/Banner.astro';
 import Button from '../components/ui/Button.astro';
 import RfcDiagram from '../components/ui/RfcDiagram.astro';
 import Link from '../components/util/Link.astro';
+import Card from '@/components/layout/Card.astro';
 import Layout from '../layouts/Layout.astro';
 
 const meetups = await getEntry('community', 'meetups');
@@ -363,9 +364,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         organizes a conference once a year.
       </Paragraph>
       <div class="grid gap-4 md:grid-cols-3">
-        <div
-          class="bg-secondary-afghani-blue-35 col-span-2 rounded-xl p-4 md:col-span-1"
-        >
+        <Card variant="dark" class="col-span-2 md:col-span-1">
           <Headline level={3} class="mb-4" variant="white">
             Next Conference
           </Headline>
@@ -376,7 +375,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
             description={nixcons[0].description}
             href={nixcons[0].href}
           />
-        </div>
+        </Card>
         <div class="col-span-2 md:py-4">
           <Headline level={3} class="mb-4" variant="white">
             Previous Conferences

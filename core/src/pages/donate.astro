@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 
+import Card from '../components/layout/Card.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
 import SponsorLogo from '../components/layout/SponsorLogo.astro';
 import Button from '../components/ui/Button.astro';
@@ -22,9 +23,7 @@ const sponsors = await getEntry('sponsors', 'info');
     <Headline level={2} variant="blue">Ways to Donate</Headline>
     <div class="grid gap-8 pt-4 md:grid-cols-2">
       <div class="flex flex-col gap-4">
-        <div
-          class="bg-secondary-afghani-blue-95 flex flex-col gap-2 rounded-2xl p-4"
-        >
+        <Card class="flex flex-col gap-2">
           <Headline level={3} variant="blue">... using Open Collective</Headline
           >
           <Paragraph>
@@ -47,10 +46,8 @@ const sponsors = await getEntry('sponsors', 'info');
           >
             Donate using Open Collective
           </Button>
-        </div>
-        <div
-          class="bg-secondary-afghani-blue-95 flex flex-col gap-2 rounded-2xl p-4"
-        >
+        </Card>
+        <Card class="flex flex-col gap-2">
           <Headline level={3} variant="blue">
             ... by becoming a Sponsor
           </Headline>
@@ -68,12 +65,10 @@ const sponsors = await getEntry('sponsors', 'info');
           >
             Read more about sponsorship tiers
           </Button>
-        </div>
+        </Card>
       </div>
       <div class="flex flex-col">
-        <div
-          class="bg-secondary-afghani-blue-95 flex flex-col gap-2 rounded-2xl p-4"
-        >
+        <Card class="flex flex-col gap-2">
           <Headline level={3} variant="blue">
             ... using SEPA bank transfer
           </Headline>
@@ -99,7 +94,7 @@ BIC:  BUNQNL2AXXX</pre>
               , as this will have tax implications.
             </i>
           </Paragraph>
-        </div>
+        </Card>
       </div>
     </div>
   </Segment>
