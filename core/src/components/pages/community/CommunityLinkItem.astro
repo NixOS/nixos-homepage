@@ -32,12 +32,12 @@ const liClasses =
 const aClasses =
   variant === 'official'
     ? 'text-primary-white no-underline!'
-    : 'text-secondary-afghani-blue! flex h-full flex-col no-underline!';
+    : 'text-secondary-afghani-blue flex h-full flex-col no-underline!';
 ---
 
 <li
   class:list={[
-    'flex-1 cursor-pointer rounded-xl p-4 transition-all',
+    'relative flex-1 cursor-pointer rounded-xl p-4 transition-all',
     liClasses,
     effectiveType === 'icon' && 'flex flex-col items-center justify-center',
     extraClasses,
