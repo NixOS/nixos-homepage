@@ -5,9 +5,8 @@ import { getCollection, getEntry } from 'astro:content';
 import Container from '../components/layout/Container.astro';
 import Divider from '../components/layout/Divider.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
-import CommunityPageListItem from '../components/pages/community/CommunityPageListItem.astro';
+import CommunityLinkItem from '../components/pages/community/CommunityLinkItem.astro';
 import NixConEntry from '../components/pages/community/NixConEntry.astro';
-import OfficialCommunityLink from '../components/pages/community/OfficialCommunityLink.astro';
 import Banner from '../components/ui/Banner.astro';
 import Button from '../components/ui/Button.astro';
 import RfcDiagram from '../components/ui/RfcDiagram.astro';
@@ -259,7 +258,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-2">
           {
             platformsMain.map((platform, i) => (
-              <OfficialCommunityLink
+              <CommunityLinkItem
                 href={platform.href}
                 name={platform.name}
                 iconName={platform.iconName}
@@ -279,7 +278,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4">
           {
             socialMediaMain.map((platform) => (
-              <OfficialCommunityLink
+              <CommunityLinkItem
                 href={platform.href}
                 name={platform.name}
                 iconName={platform.iconName}
@@ -296,7 +295,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         <ul class="mt-4 grid flex-wrap gap-4 md:grid-cols-3">
           {
             calendarsMain.map((platform) => (
-              <OfficialCommunityLink
+              <CommunityLinkItem
                 href={platform.href}
                 name={platform.name}
                 iconName={platform.iconName}
@@ -318,12 +317,13 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     <ul class="mt-4 grid grid-cols-3 flex-wrap gap-4">
       {
         platformsOutside.map((platform) => (
-          <CommunityPageListItem
+          <CommunityLinkItem
             href={platform.href}
             name={platform.name}
             iconName={platform.iconName}
             description={platform.description}
             type="mobile_icon_desktop_name"
+            variant="community"
           />
         ))
       }
@@ -338,12 +338,13 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
       {
         widerEcosystem.map((platform) => (
-          <CommunityPageListItem
+          <CommunityLinkItem
             href={platform.href}
             name={platform.name}
             iconName={platform.iconName}
             description={platform.description}
             type="mobile_icon_desktop_name"
+            variant="community"
           />
         ))
       }

@@ -7,6 +7,8 @@ interface Props {
   name?: string;
   description?: string;
   type?: 'full' | 'mobile_icon_desktop_name' | 'icon';
+  class?: string;
+  variant?: 'official' | 'community';
 }
 
 const {
@@ -15,29 +17,40 @@ const {
   name = '',
   description = '',
   type = 'full',
+  class: extraClasses,
+  variant = 'official',
 } = Astro.props;
 
 const effectiveType =
   !iconName && type === 'mobile_icon_desktop_name' ? 'full' : type;
+
+const liClasses =
+  variant === 'official'
+    ? 'bg-secondary-afghani-blue-45 hover:bg-secondary-afghani-blue-35'
+    : 'border-secondary-afghani-blue hover:bg-secondary-afghani-blue-95 bg-primary-white border-2';
+
+const aClasses =
+  variant === 'official'
+    ? 'text-primary-white no-underline!'
+    : 'text-secondary-afghani-blue! flex h-full flex-col no-underline!';
 ---
 
 <li
   class:list={[
-    'border-secondary-afghani-blue hover:bg-secondary-afghani-blue-95 bg-primary-white flex-1 cursor-pointer rounded-xl border-2 p-4 transition-all',
+    'flex-1 cursor-pointer rounded-xl p-4 transition-all',
+    liClasses,
     effectiveType === 'icon' && 'flex flex-col items-center justify-center',
+    extraClasses,
   ]}
 >
-  <a
-    href={href}
-    class="text-secondary-afghani-blue! flex h-full flex-col no-underline!"
-  >
+  <a href={href} class={aClasses}>
     <div
       class:list={[
         'flex gap-2 text-xl font-bold',
         (effectiveType !== 'full' || description === '') && 'h-full',
         effectiveType === 'mobile_icon_desktop_name' &&
           'flex-col items-center justify-center md:flex-row md:justify-start',
-        !iconName && 'h-full items-center', // Center name if no icon
+        !iconName && 'h-full items-center',
       ]}
     >
       {iconName && <Icon name={iconName} aria-hidden="true" class="h-8 w-8" />}
