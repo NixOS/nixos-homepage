@@ -26,6 +26,7 @@
     "astro-favicons": "^3.1.6",
     "astro-icon": "^1.1.5",
     "astro-seo": "^1.1.0",
+    "astro-takumi": "^1.1.10",
     "class-variance-authority": "^0.7.1",
     "markdown-it": "^14.2.0",
     "node-html-parser": "^7.1.0",
@@ -37,6 +38,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/simple-icons": "^1.2.86",
     "@iconify/tailwind": "^1.2.0",
-    "@nixos/branding": "^0.1.0"
+    "@nixos/branding": "^0.1.0",
+    "react": "^19.2.4"
   }
 }

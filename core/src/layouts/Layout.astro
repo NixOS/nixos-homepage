@@ -1,5 +1,6 @@
 ---
 import { SEO } from 'astro-seo';
+import { getImagePath } from 'astro-takumi';
 import { getEntry } from 'astro:content';
 
 import Footer from '@/components/Footer.astro';
@@ -14,6 +15,8 @@ const {
 } = Astro.props;
 
 const blogMenu = await getEntry('menus', 'blog');
+
+const { url, site } = Astro;
 
 const headLinks = [
   {
@@ -46,6 +49,18 @@ const headFeedLinks = blogMenu.data.map((e) => {
       titleDefault={title}
       description={description}
       charset="utf-8"
+      openGraph={{
+        basic: {
+          title: title,
+          type: 'website',
+          image: getImagePath({ url, site }),
+        },
+        optional: {
+          description: description,
+          locale: 'en_US',
+          siteName: 'nixos.org',
+        },
+      }}
       extend={{
         link: headLinks.concat(headFeedLinks),
         meta: [
