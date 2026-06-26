@@ -28,7 +28,6 @@ export async function nixOg({
         gridTemplateRows: '1fr 1fr',
         height: '100%',
         width: '100%',
-        padding: 32,
       }}
     >
       <div
