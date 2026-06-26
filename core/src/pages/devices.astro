@@ -1,4 +1,5 @@
 ---
+import Card from '@/components/layout/Card.astro';
 import Link from '@/components/util/Link.astro';
 import { Icon } from 'astro-icon/components';
 import { getCollection } from 'astro:content';
@@ -38,7 +39,7 @@ const devices = await getCollection('devices');
         {category.data.devices && (
           <ul class="my-4 grid list-inside list-disc gap-4 space-y-2 md:grid-cols-3">
             {category.data.devices.map((device) => (
-              <li class="bg-secondary-afghani-blue-95 h-full list-none rounded-xl px-4 py-3">
+              <Card tag="li" class="h-full list-none" padding="sm">
                 <Headline variant="blue" level={3}>
                   {device.name}
                 </Headline>
@@ -54,7 +55,7 @@ const devices = await getCollection('devices');
                     Manufacturer Page
                   </Link>
                 )}
-              </li>
+              </Card>
             ))}
           </ul>
         )}

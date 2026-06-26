@@ -1,4 +1,5 @@
 ---
+import Card from '@/components/layout/Card.astro';
 import Button from '@/components/ui/Button.astro';
 import { Code } from 'astro:components';
 
@@ -15,7 +16,7 @@ const {
 const brandUrl = `https://brand.nixos.org/logos/nixos-${type}-${color}-${fillStyle}-${fontColor}-${style}-${orientation}-${variant}.svg`;
 ---
 
-<div class="bg-secondary-afghani-blue-95 rounded-2xl p-4">
+<Card>
   <img
     src={brandUrl}
     alt={`${style} styled NixOS ${type} in the ${variant} variant filled with ${fillStyle} ${color} colors in a ${orientation} orientation using a ${fontColor} font`}
@@ -36,4 +37,4 @@ const brandUrl = `https://brand.nixos.org/logos/nixos-${type}-${color}-${fillSty
       label="Download"
     />
   </div>
-</div>
+</Card>
