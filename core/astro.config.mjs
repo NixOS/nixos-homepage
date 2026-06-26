@@ -48,6 +48,7 @@ export default defineConfig({
         fonts: [
           fs.readFileSync("./public/fonts/route159/Route159-Bold.woff"),
         ],
+        format: 'webp',
       },
       render: nixOg
     }
