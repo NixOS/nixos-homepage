@@ -46,7 +46,7 @@ export default defineConfig({
     {
       options: {
         fonts: [
-          fs.readFileSync("../node_modules/@fontsource-variable/roboto-flex/files/roboto-flex-latin-standard-normal.woff2"),
+          fs.readFileSync("./public/fonts/route159/Route159-Bold.woff"),
         ],
       },
       render: nixOg

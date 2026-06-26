@@ -28,44 +28,49 @@ export async function nixOg({
         gridTemplateRows: '1fr 1fr',
         height: '100%',
         width: '100%',
-        backgroundColor: '#4d6fb7',
         padding: 32,
       }}
     >
       <div
         style={{
-          gridRow: '1 / 2',
           display: 'flex',
           alignItems: 'center',
+          backgroundColor: '#4d6fb7',
+          color: '#ffffff',
           justifyContent: 'start',
         }}
       >
         <img
           src={imageBase64}
           style={{
+            paddingLeft: '2rem',
+            paddingRight: '2rem',
             height: 140,
-            marginBottom: '2rem',
           }}
         />
       </div>
       <div
         style={{
-          gridRow: '2 / 3',
           display: 'flex',
-          alignItems: 'start',
+          alignItems: 'center',
           justifyContent: 'start',
+          backgroundColor: '#ffffff',
         }}
       >
-        <div
+        <span
           style={{
-            color: '#ffffff',
+            color: '#4d6fb7',
             fontSize: 64,
-            fontWeight: 600,
-            fontFamily: 'Roboto Flex',
+            lineHeight: 1,
+            lineClamp: 3,
+            textWrap: 'balance',
+            marginTop: -8,
+            paddingLeft: '2rem',
+            paddingRight: '2rem',
           }}
         >
           {title}
-        </div>
+        </span>
       </div>
     </div>,
   );
