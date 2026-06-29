@@ -7,19 +7,20 @@ import Container from '@/components/layout/Container.astro';
 import Link from '@/components/util/Link.astro';
 import { getNixosLogoUrl } from '@/lib/themes';
 import { Image } from 'astro:assets';
+import DarkLightImage from './util/DarkLightImage.astro';
 
 const headerMenu = await getEntry('menus', 'header');
 const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
-const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-black md:hover:border-b-secondary-afghani-blue-65 border-b-4`;
+const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-black md:dark:text-primary-black-95 md:hover:border-b-secondary-afghani-blue-65 border-b-4`;
 const navbarItemInactiveStyle = `border-b-secondary-afghani-blue-95 md:border-b-transparent bg-secondary-afghani-blue-95 md:bg-transparent`;
 const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-afghani-blue-85 text-primary-white md:text-primary-black md:bg-transparent font-bold`;
 ---
 
 <header
-  class="text-primary-black bg-primary-white sticky top-0 z-50 font-light drop-shadow-md"
+  class="text-primary-black dark:text-primary-black-95 bg-primary-white dark:bg-secondary-afghani-blue-25 sticky top-0 z-50 font-light drop-shadow-md"
 >
   {
     currentBanner && (
@@ -51,9 +52,10 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
         href="/"
         class="flex items-center justify-between gap-2 select-none md:justify-start"
       >
-        <Image
+        <DarkLightImage
           class="h-12 w-auto"
-          src={getNixosLogoUrl('logo')}
+          sourceDarkMode={getNixosLogoUrl('white')}
+          sourceLightMode={getNixosLogoUrl('black')}
           alt="NixOS - Go to homepage"
         />
       </Link>

@@ -16,7 +16,7 @@
 }
 
 @utility link-blue {
-  @apply text-secondary-afghani-blue-45 hover:text-secondary-afghani-blue-15;
+  @apply text-secondary-afghani-blue-45 dark:text-secondary-afghani-blue-85 dark:hover:text-secondary-afghani-blue-75 hover:text-secondary-afghani-blue-15;
 }
 
 @utility link-white {
@@ -126,7 +126,7 @@
   }
 
   .article code {
-    @apply border-primary-black-85 bg-primary-black-95 text-primary-black rounded-sm border px-1 pt-px pb-px font-mono;
+    @apply border-primary-black-85 bg-primary-black-95 dark:text-primary-white dark:border-primary-black-35 dark:bg-primary-black-25 text-primary-black rounded-sm border px-1 pt-px pb-px font-mono;
   }
 
   .article pre {
@@ -155,7 +155,7 @@
   .article h4,
   .article h5,
   .article h6 {
-    @apply font-heading text-secondary-afghani-blue leading-tight font-bold;
+    @apply font-heading text-secondary-afghani-blue dark:text-secondary-afghani-blue-75 leading-tight font-bold;
   }
 
   .article h1:not(:first-child),

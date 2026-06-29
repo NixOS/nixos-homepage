@@ -20,9 +20,11 @@ const Tag = tag;
 <Tag
   class:list={[
     'font-sans',
-    variant === 'black' && 'text-primary-black',
+    variant === 'black' &&
+      'text-primary-black dark:text-secondary-afghani-blue-95',
     variant === 'white' && 'text-primary-white',
-    variant === 'darkblue' && 'text-secondary-afghani-blue-35',
+    variant === 'darkblue' &&
+      'text-secondary-afghani-blue-35 dark:text-secondary-afghani-blue-85',
     variant === 'sr-only' && 'sr-only',
     size === 'xl' && 'text-xl leading-loose',
     size === 'lg' && 'text-lg',
