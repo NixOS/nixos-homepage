@@ -146,7 +146,7 @@
   }
 
   .article blockquote {
-    @apply border-secondary-afghani-blue-15 bg-secondary-afghani-blue-95 mb-4 border-l-4 px-4 pt-2;
+    @apply border-secondary-afghani-blue-15 dark:border-secondary-afghani-blue-35 bg-secondary-afghani-blue-95 dark:bg-secondary-afghani-blue-25 mb-4 border-l-4 px-4 pt-2;
   }
 
   .article h1,

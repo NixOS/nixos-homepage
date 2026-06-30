@@ -22,7 +22,7 @@ const titleClasses = `text-3xl font-heading font-bold text-secondary-afghani-blu
   <ul class="mt-2 pt-1">
     {
       members.map((member) => (
-        <li class="border-b-secondary-afghani-blue-75-hover flex flex-col border-b-1 pt-2 pb-2 first:pt-0 last:border-b-0 last:pb-0">
+        <li class="border-b-secondary-afghani-blue-75 dark:border-b-secondary-afghani-blue-65 flex flex-col border-b-1 pt-2 pb-2 first:pt-0 last:border-b-0 last:pb-0">
           <span>
             <Paragraph tag="span" class="font-medium">
               {member.name}
@@ -62,7 +62,7 @@ const titleClasses = `text-3xl font-heading font-bold text-secondary-afghani-blu
       ))
     }
   </ul>
-  <hr class="mt-2 mb-2" />
+  <hr class="mt-2 mb-2 border-secondary-afghani-blue-55" />
   {
     contact && (
       <>
