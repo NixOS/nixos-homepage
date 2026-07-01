@@ -195,8 +195,17 @@ rec {
 
             npmConfigHook = pkgs.importNpmLock.npmConfigHook;
 
+            preBuild = ''
+              mkdir -p src/content/results                                                                   
+              cp ${
+                surveys.legacyPackages.${system}.nixos-surveys-community-2025-data
+              }/results-2025.json src/content/results/results-2025.json
+            '';
+
             buildPhase = ''
+              runHook preBuild
               npm run build -- --base /surveys
+              runHook postBuild
             '';
 
             installPhase = ''
