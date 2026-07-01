@@ -195,6 +195,10 @@ rec {
 
             npmConfigHook = pkgs.importNpmLock.npmConfigHook;
 
+            buildPhase = ''
+              npm run build -- --base /surveys
+            '';
+
             installPhase = ''
               mkdir -p $out
               cp -r ./dist/* $out
