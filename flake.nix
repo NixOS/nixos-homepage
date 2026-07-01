@@ -12,6 +12,10 @@ rec {
     released-nixpkgs-stable.url = "nixpkgs/nixos-26.05";
     released-nix-unstable.url = "github:nixos/nix/master";
     released-nix-stable.url = "github:nixos/nix/latest-release";
+
+    # survey
+    surveys.url = "github:NixOS/surveys";
+
     nix-pills.url = "github:NixOS/nix-pills";
     nix-pills.flake = false;
   };
@@ -38,6 +42,7 @@ rec {
       released-nix-unstable,
       released-nix-stable,
       nix-pills,
+      surveys,
       systems,
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -178,6 +183,24 @@ rec {
             cp ${nixPills.epub}/share/doc/nix-pills/nix-pills.epub $out/nix-pills.epub
           '';
 
+          surveySite = pkgs.buildNpmPackage {
+            pname = "nixos-surveys";
+            version = "0.0.0";
+
+            src = "${surveys}/lib/site";
+
+            npmDeps = pkgs.importNpmLock {
+              npmRoot = "${surveys}/lib/site";
+            };
+
+            npmConfigHook = pkgs.importNpmLock.npmConfigHook;
+
+            installPhase = ''
+              mkdir -p $out
+              cp -r ./dist/* $out
+            '';
+          };
+
           demos =
             pkgs.runCommand "demos"
               {
@@ -249,11 +272,14 @@ rec {
               mkdir -p $out/manual
               mkdir -p $out/guides/nix-pills
               mkdir -p $out/demos
+              mkdir -p $out/surveys
+
 
               cp -r ${core}/* $out
               cp -r ${manuals}/* $out/manual
               cp -r ${pills}/* $out/guides/nix-pills
               cp -r ${demos}/* $out/demos
+              cp -r ${surveySite}/* $out/surveys
             '';
           };
 
@@ -305,6 +331,7 @@ rec {
               export PATH_MANUAL="${manuals}"
               export PATH_PILLS="${pills}"
               export PATH_DEMOS="${demos}"
+              export PATH_SURVEYS="${surveySite}"
 
               if [ ! -d node_modules ]; then
                 ${nodejs_current}/bin/npm install --workspaces --include-workspace-root

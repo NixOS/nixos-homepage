@@ -286,6 +286,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib_2": {
+      "locked": {
+        "lastModified": 1780195591,
+        "narHash": "sha256-/LAL+E75c0ioCHxyVFGwzXorfuHzToKgqPUCRq4RTIY=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "49d924421d7c3175edc499fdc738bd70d69d97d5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "nixpkgs-regression": {
       "locked": {
         "lastModified": 1643052045,
@@ -357,6 +372,22 @@
       "original": {
         "type": "tarball",
         "url": "https://channels.nixos.org/nixos-26.05/nixexprs.tar.xz"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1770115704,
+        "narHash": "sha256-KHFT9UWOF2yRPlAnSXQJh6uVcgNcWlFqqiAZ7OVlHNc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "e6eae2ee2110f3d31110d5c222cd395303343b08",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "released-nix-stable": {
@@ -447,7 +478,27 @@
         "released-nix-unstable": "released-nix-unstable",
         "released-nixpkgs-stable": "released-nixpkgs-stable",
         "released-nixpkgs-unstable": "released-nixpkgs-unstable",
+        "surveys": "surveys",
         "systems": "systems"
+      }
+    },
+    "surveys": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5",
+        "nixpkgs-lib": "nixpkgs-lib_2"
+      },
+      "locked": {
+        "lastModified": 1782491402,
+        "narHash": "sha256-j0q+WaMg2gvIipw47MtSX1GQ7IbzGDLCXMY3K4TvpZk=",
+        "owner": "NixOS",
+        "repo": "surveys",
+        "rev": "638f255851a937c7ceba15b69fdf0e74b634d931",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "surveys",
+        "type": "github"
       }
     },
     "systems": {
