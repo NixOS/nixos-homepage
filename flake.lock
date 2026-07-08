@@ -463,16 +463,15 @@
         "nixpkgs-lib": "nixpkgs-lib_2"
       },
       "locked": {
-        "lastModified": 1782925076,
+        "lastModified": 1783264720,
         "narHash": "sha256-YF1jFZ97JNX11asxI9cW39iLBX4F6JM+SWTdGbNGBbE=",
         "owner": "NixOS",
         "repo": "surveys",
-        "rev": "3aa45ec2a8c7a3d3c41b659ff6d6d1445d07e58f",
+        "rev": "78c18f52957fe46b9f18a33b8db92aa601d3ab9b",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "djacu/base-aware-internal-links",
         "repo": "surveys",
         "type": "github"
       }

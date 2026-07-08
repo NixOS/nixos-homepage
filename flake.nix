@@ -14,7 +14,7 @@ rec {
     released-nix-stable.url = "github:nixos/nix/latest-release";
 
     # survey
-    surveys.url = "github:NixOS/surveys/djacu/base-aware-internal-links";
+    surveys.url = "github:NixOS/surveys";
 
     nix-pills.url = "github:NixOS/nix-pills";
     nix-pills.flake = false;
