@@ -15,6 +15,7 @@ import shellPromptTransformer from './src/lib/shiki/shellPromptTransformer';
 import takumi from 'astro-takumi';
 import { nixOg } from './src/lib/takumi-og';
 const require = createRequire(import.meta.url);
+import tailwindcss from "@tailwindcss/vite";
 
 function selectFavicon(theme = 'default') {
   switch (theme) {
@@ -63,6 +64,9 @@ export default defineConfig({
   redirects: {
     '/values': '/governance',
     '/qr01': '/why-nix' // QR code on the NixOS banner
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
   env: {
     schema: {
