@@ -12,7 +12,7 @@ const { title, subTitle, currentVersion } = Astro.props;
 ---
 
 <Container
-  class="bg-secondary-afghani-blue-45 text-primary-white mt-16 flex items-center justify-between py-8 md:py-6"
+  class="bg-secondary-afghani-blue-45 dark:bg-secondary-afghani-blue-35 text-primary-white dark:text-primary-black-95 mt-16 flex items-center justify-between py-8 md:py-6"
 >
   <Headline level={2} variant="white" class="-mt-1 leading-none">
     {title}
@@ -26,7 +26,7 @@ const { title, subTitle, currentVersion } = Astro.props;
         Current version
       </span>
       <span
-        class="bg-secondary-afghani-blue-15 text-primary-white rounded-2xl px-4 py-2 text-center text-2xl font-bold! no-underline!"
+        class="bg-secondary-afghani-blue-15 dark:bg-secondary-afghani-blue-25 text-primary-white dark:text-primary-black-95 rounded-2xl px-4 py-2 text-center text-2xl font-bold! no-underline!"
         >{currentVersion}</span
       >
     </div>

@@ -20,7 +20,7 @@
 }
 
 @utility link-white {
-  @apply text-primary-white hover:text-primary-white-75;
+  @apply text-primary-white dark:text-primary-black-95 hover:text-primary-white-75;
 }
 
 @utility inlinelist {
