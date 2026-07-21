@@ -44,13 +44,13 @@ posts
       <CurrentBannerContent />
     ) : (
       <Banner
-        wrapperClasses="bg-secondary-afghani-blue-95"
-        class="font-heading text-secondary-afghani-blue-45 flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row md:pt-8 md:pb-7"
+        wrapperClasses="bg-secondary-afghani-blue-95 dark:bg-secondary-afghani-blue-25"
+        class="font-heading text-secondary-afghani-blue-45 dark:text-secondary-afghani-blue-95 flex flex-col items-center justify-between gap-1 text-lg font-bold md:flex-row md:pt-8 md:pb-7"
       >
         <b>{posts[0].data.title}</b>
         <a
           href={generatePathFromPost(posts[0])}
-          class="text-secondary-afghani-blue-45 hover:text-secondary-afghani-blue-75 inline-flex items-center gap-2"
+          class="text-secondary-afghani-blue-45 dark:text-secondary-afghani-blue-95 hover:text-secondary-afghani-blue-75 inline-flex items-center gap-2"
         >
           Read Announcement
           <Icon name="mdi:arrow-right" />
@@ -95,7 +95,7 @@ posts
         </div>
       </div>
       <div
-        class="border-primary-white min-h-[300px] rounded-3xl border-[1rem] bg-[#121314] drop-shadow-md"
+        class="border-primary-white dark:border-secondary-afghani-blue-65 min-h-[300px] rounded-3xl border-[1rem] bg-[#121314] drop-shadow-md"
       >
         <Asciinema
           src="/demos/cover.cast"
@@ -141,7 +141,9 @@ posts
   <div
     class="after:bg-divider relative after:bottom-0 after:left-0 after:-mt-48 after:-mb-16 after:block after:h-[30rem] after:w-full after:overflow-hidden after:bg-[url(/divider/landing_search_bottom.svg)] after:bg-cover after:bg-[60%_100%] after:bg-no-repeat"
   >
-    <div class="bg-secondary-afghani-blue-95 pt-4">
+    <div
+      class="bg-secondary-afghani-blue-95 dark:bg-secondary-afghani-blue-25 pt-4"
+    >
       <Container
         class="flex w-full flex-col items-center justify-center gap-4 pt-8 pb-8"
       >
@@ -150,7 +152,7 @@ posts
         </Headline>
         <Paragraph size="xl" class="pb-3 md:w-5/8" center>
           The Nix Packages collection (<a
-            class="text-secondary-afghani-blue! font-bold"
+            class="text-secondary-afghani-blue! dark:text-secondary-afghani-blue-85! font-bold"
             href="https://github.com/nixos/nixpkgs">Nixpkgs</a
           >) offers a large selection of packages for the Nix package manager.
         </Paragraph>

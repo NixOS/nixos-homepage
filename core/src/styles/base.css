@@ -16,11 +16,11 @@
 }
 
 @utility link-blue {
-  @apply text-secondary-afghani-blue-45 hover:text-secondary-afghani-blue-15;
+  @apply text-secondary-afghani-blue-45 dark:text-secondary-afghani-blue-85 dark:hover:text-secondary-afghani-blue-75 hover:text-secondary-afghani-blue-15;
 }
 
 @utility link-white {
-  @apply text-primary-white hover:text-primary-white-75;
+  @apply text-primary-white dark:text-primary-black-95 hover:text-primary-white-75;
 }
 
 @utility inlinelist {
@@ -126,7 +126,7 @@
   }
 
   .article code {
-    @apply border-primary-black-85 bg-primary-black-95 text-primary-black rounded-sm border px-1 pt-px pb-px font-mono;
+    @apply border-primary-black-85 bg-primary-black-95 dark:text-primary-white dark:border-primary-black-35 dark:bg-primary-black-25 text-primary-black rounded-sm border px-1 pt-px pb-px font-mono;
   }
 
   .article pre {
@@ -146,7 +146,7 @@
   }
 
   .article blockquote {
-    @apply border-secondary-afghani-blue-15 bg-secondary-afghani-blue-95 mb-4 border-l-4 px-4 pt-2;
+    @apply border-secondary-afghani-blue-15 dark:border-secondary-afghani-blue-35 bg-secondary-afghani-blue-95 dark:bg-secondary-afghani-blue-25 mb-4 border-l-4 px-4 pt-2;
   }
 
   .article h1,
@@ -155,7 +155,7 @@
   .article h4,
   .article h5,
   .article h6 {
-    @apply font-heading text-secondary-afghani-blue leading-tight font-bold;
+    @apply font-heading text-secondary-afghani-blue dark:text-secondary-afghani-blue-75 leading-tight font-bold;
   }
 
   .article h1:not(:first-child),

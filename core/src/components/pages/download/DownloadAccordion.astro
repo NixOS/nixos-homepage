@@ -27,9 +27,13 @@ let downloadOptions = (await getCollection('download'))
               aria-controls={optionId}
               class:list={[
                 'bg-secondary-afghani-blue-95',
+                'dark:bg-secondary-afghani-blue-25',
                 'flex',
                 'text-secondary-afghani-blue-25',
+                'dark:text-secondary-afghani-blue-95',
                 'hover:bg-secondary-afghani-blue-85',
+                'dark:hover:bg-secondary-afghani-blue-45',
+                'dark:hover:text-secondary-afghani-blue-95',
                 'hover:text-secondary-afghani-blue-15',
                 'cursor-pointer',
                 'text-lg',
@@ -91,6 +95,7 @@ let downloadOptions = (await getCollection('download'))
   accContentArea.classList.add('col-span-2', 'mt-4', 'px-8');
   menuContainer.classList.add(
     'md:bg-secondary-afghani-blue-95',
+    'dark:md:bg-secondary-afghani-blue-25',
     'md:py-8',
     'md:rounded-2xl',
     'self-start',
@@ -184,6 +189,8 @@ let downloadOptions = (await getCollection('download'))
       'md:text-secondary-afghani-blue',
       'md:rounded-none',
       'md:aria-expanded:bg-primary-white',
+      'md:dark:aria-expanded:text-secondary-afghani-blue-75',
+      'md:dark:aria-expanded:bg-secondary-afghani-blue-15',
       'md:aria-expanded:text-secondary-afghani-blue-45',
       'before:icon-[mdi--arrow-up-drop-circle]',
       'before:block',

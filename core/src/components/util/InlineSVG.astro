@@ -34,6 +34,8 @@ const { data: optimized } = optimize(pre, {
         overrides: {
           removeViewBox: false,
           cleanupIds: false,
+          inlineStyles: false,
+          minifyStyles: false,
         },
       },
     },

@@ -28,7 +28,7 @@ const {
       'absolute h-8 w-8',
       {
         'text-secondary-afghani-blue': color === 'secondary-afghani-blue',
-        'text-primary-white': color === 'white',
+        'text-primary-white dark:text-primary-black-95': color === 'white',
         'top-3.5 left-3 md:block': size === 'lg',
         'top-1.5 left-2.5': size === 'sm-full',
       },
@@ -38,13 +38,13 @@ const {
   <input
     type="text"
     title={title}
-    class="focus:border-secondary-afghani-blue-75 focus:outline-secondary-afghani-blue-95 border-primary-black-85 outline-2 outline-transparent"
+    class="focus:border-secondary-afghani-blue-75 focus:outline-secondary-afghani-blue-95 border-primary-black-85 dark:border-secondary-afghani-blue-75 outline-2 outline-transparent"
     class:list={[
       'text-normal rounded-full',
       {
-        'placeholder-primary-black-65 text-secondary-afghani-blue border-primary-black-85 bg-primary-white':
+        'placeholder-primary-black-65 dark:placeholder-secondary-afghani-blue-55 text-secondary-afghani-blue dark:text-secondary-afghani-blue-95 border-primary-black-85 bg-primary-white dark:bg-secondary-afghani-blue-15':
           color === 'secondary-afghani-blue',
-        'placeholder-secondary-afghani-blue-95 border-primary-white text-primary-white bg-transparent':
+        'placeholder-secondary-afghani-blue-95 border-primary-white text-primary-white dark:text-primary-black-95 bg-transparent':
           color === 'white',
         'w-full border-2 py-3 pr-4 pl-11 text-xl md:w-[30rem]': size === 'lg',
         'w-full border-1 px-10 py-2 md:pl-11': size === 'sm-full',

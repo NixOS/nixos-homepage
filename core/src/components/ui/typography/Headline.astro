@@ -42,8 +42,9 @@ const Anchor = anchor && id ? 'a' : Fragment;
     level === 3 && 'text-2xl',
     level === 4 && 'text-xl',
     level === 5 && 'text-lg',
-    variant === 'blue' && 'text-secondary-afghani-blue',
-    variant === 'white' && 'text-primary-white',
+    variant === 'blue' &&
+      'text-secondary-afghani-blue dark:text-secondary-afghani-blue-75',
+    variant === 'white' && 'text-primary-white dark:text-primary-black-95',
     variant === 'sr-only' && 'sr-only',
     center && 'text-center',
     extraClasses,
@@ -53,7 +54,7 @@ const Anchor = anchor && id ? 'a' : Fragment;
     href={anchor && id ? `#${id}` : undefined}
     class:list={[
       'group relative no-underline',
-      variant === 'white' && 'text-primary-white',
+      variant === 'white' && 'text-primary-white dark:text-primary-black-95',
       variant === 'blue' && 'text-secondary-afghani-blue',
     ]}
   >
