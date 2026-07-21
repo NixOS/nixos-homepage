@@ -204,6 +204,7 @@ const widerEcosystem = [
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
+import Segment from '@/components/layout/Segment.astro';
 ---
 
 <Layout title="Community">
@@ -356,7 +357,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     > that offer Nix related services.
   </Banner>
   <Divider mirrorY />
-  <div class="bg-secondary-afghani-blue-45 text-primary-white py-8">
+  <Segment variant="blue" class="py-8">
     <Container>
       <Headline level={2} variant="white"> NixCon </Headline>
       <Paragraph variant="white" class="mb-4" size="xl">
@@ -398,7 +399,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         </div>
       </div>
     </Container>
-  </div>
+  </Segment>
   <Divider />
   <Container>
     <Headline level={2} variant="blue" class="mt-8"> Meetups </Headline>
@@ -475,7 +476,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
   <div class="mt-8">
     <Divider mirrorY />
   </div>
-  <div class="bg-secondary-afghani-blue-45 py-8">
+  <Segment variant="blue" class="py-8">
     <Container>
       <Headline level={2} variant="white" class="mt-8" id="teams">
         Teams
@@ -506,7 +507,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         }
       </ul>
     </Container>
-  </div>
+  </Segment>
   <Divider />
   <Container class="mt-8 mb-16 grid md:grid-cols-2" id="foundation">
     <div class="pb-4 text-center md:pb-0">

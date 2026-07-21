@@ -35,6 +35,8 @@ function inlineSvg({ svg }) {
           overrides: {
             removeViewBox: false,
             cleanupIds: false,
+            inlineStyles: false,
+            minifyStyles: false,
           },
         },
       },
