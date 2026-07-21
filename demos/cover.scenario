@@ -91,7 +91,7 @@ $ cat -n redis-minimal.nix
     1  {
     2    pkgs ? import <nixpkgs> { system = "x86_64-linux"; },
     3  }: # nixpkgs package set
-    4  pkgs.redis.override {
+    4  (pkgs.redis.override {
     5    withSystemd = false;  # Build without systemd
     6    tlsSupport = false;  # Build without tls support
     7    useSystemJemalloc = false;  # Dont use system jemalloc
