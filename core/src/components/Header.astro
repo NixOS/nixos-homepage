@@ -14,9 +14,9 @@ const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
-const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-black md:dark:text-primary-black-95 md:hover:border-b-secondary-afghani-blue-65 border-b-4`;
-const navbarItemInactiveStyle = `border-b-secondary-afghani-blue-95 md:border-b-transparent bg-secondary-afghani-blue-95 md:bg-transparent`;
-const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-afghani-blue-85 text-primary-white md:text-primary-black md:bg-transparent font-bold`;
+const navbarItemStyle = `text-center text-secondary-afghani-blue-45 dark:text-secondary-afghani-blue-95 md:text-primary-black md:dark:text-primary-black-95 md:hover:border-b-secondary-afghani-blue-65 border-b-4`;
+const navbarItemInactiveStyle = `border-b-secondary-afghani-blue-95 dark:border-b-secondary-afghani-blue-25 md:border-b-transparent bg-secondary-afghani-blue-95 dark:bg-secondary-afghani-blue-35 md:bg-transparent md:dark:bg-transparent`;
+const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 dark:border-b-secondary-afghani-blue-45 bg-secondary-afghani-blue-85 dark:bg-secondary-afghani-blue-45 text-primary-white md:text-primary-black md:bg-transparent md:dark:bg-transparent font-bold`;
 ---
 
 <header
@@ -64,7 +64,7 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
         aria-label="Main Navigation Toggle"
         aria-controls="navbar-menu"
         aria-expanded="true"
-        class="bg-secondary-afghani-blue block rounded-lg p-4 md:hidden"
+        class="bg-secondary-afghani-blue dark:bg-secondary-afghani-blue-45 block rounded-lg p-4 md:hidden"
         id="navigation-toggle"
       >
         <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>

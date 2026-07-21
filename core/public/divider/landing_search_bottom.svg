@@ -4,7 +4,7 @@
 		.feature { fill: oklch(0.65 0.12 264); }
 		.panel { fill: oklch(0.95 0.02 264); }
 		@media (prefers-color-scheme: dark) {
-			.bg { fill: oklch(0.25 0.05 264); }
+			.bg { fill: oklch(0.15 0.03 264); }
 			.feature { fill: oklch(0.45 0.09 264); }
 			.panel { fill: oklch(0.25 0.05 264); }
 		}
