@@ -13,6 +13,7 @@ import RfcDiagram from '../components/ui/RfcDiagram.astro';
 import Link from '../components/util/Link.astro';
 import Card from '@/components/layout/Card.astro';
 import Layout from '../layouts/Layout.astro';
+import FoundationLogo from '@/components/ui/FoundationLogo.astro';
 
 const meetups = await getEntry('community', 'meetups');
 const teams = await getCollection('teams');
@@ -512,11 +513,7 @@ import Segment from '@/components/layout/Segment.astro';
   <Container class="mt-8 mb-16 grid md:grid-cols-2" id="foundation">
     <div class="pb-4 text-center md:pb-0">
       <div class="flex flex-col items-center justify-center">
-        <Image
-          src={nixosFoundationLogo}
-          alt="NixOS Foundation Logo"
-          class="h-72"
-        />
+        <FoundationLogo />
       </div>
       <div class="mt-4 mb-4 inline-block text-left">
         <h2
