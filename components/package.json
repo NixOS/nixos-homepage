@@ -19,7 +19,9 @@
     "src"
   ],
   "dependencies": {
-    "class-variance-authority": "^0.7.1"
+    "class-variance-authority": "^0.7.1",
+    "node-html-parser": "^9.0.0",
+    "svgo": "^4.0.2"
   },
   "peerDependencies": {
     "astro": "^7.1.1",

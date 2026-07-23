@@ -2,16 +2,16 @@
 import { Image } from 'astro:assets';
 import { getCollection, getEntry } from 'astro:content';
 
-import Container from '../components/layout/Container.astro';
-import Divider from '../components/layout/Divider.astro';
-import PageHeader from '../components/layout/PageHeader.astro';
+import Container from '@nixos/ui/Container.astro';
+import Divider from '@nixos/ui/Divider.astro';
+import PageHeader from '@nixos/ui/PageHeader.astro';
 import CommunityLinkItem from '../components/pages/community/CommunityLinkItem.astro';
 import NixConEntry from '../components/pages/community/NixConEntry.astro';
-import Banner from '../components/ui/Banner.astro';
+import Banner from '@nixos/ui/Banner.astro';
 import Button from '@nixos/ui/Button.astro';
-import RfcDiagram from '../components/ui/RfcDiagram.astro';
+import RfcDiagram from '@nixos/ui/RfcDiagram.astro';
 import Link from '@nixos/ui/Link.astro';
-import Card from '@/components/layout/Card.astro';
+import Card from '@nixos/ui/Card.astro';
 import Layout from '../layouts/Layout.astro';
 
 const meetups = await getEntry('community', 'meetups');
@@ -201,8 +201,8 @@ const widerEcosystem = [
   },
 ];
 
-import Headline from '@/components/ui/typography/Headline.astro';
-import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Headline from '@nixos/ui/Headline.astro';
+import Paragraph from '@nixos/ui/Paragraph.astro';
 import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
 ---
 

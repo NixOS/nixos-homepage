@@ -1,16 +1,16 @@
 ---
-import Card from '@/components/layout/Card.astro';
 import Button from '@nixos/ui/Button.astro';
+import Card from '@nixos/ui/Card.astro';
+import Container from '@nixos/ui/Container.astro';
+import Divider from '@nixos/ui/Divider.astro';
+import Headline from '@nixos/ui/Headline.astro';
+import NixosSearchInput from '@nixos/ui/NixosSearchInput.astro';
+import PageHeader from '@nixos/ui/PageHeader.astro';
+import Paragraph from '@nixos/ui/Paragraph.astro';
+import Segment from '@nixos/ui/Segment.astro';
 import { getCollection, render } from 'astro:content';
-import Container from '../components/layout/Container.astro';
-import Divider from '../components/layout/Divider.astro';
-import PageHeader from '../components/layout/PageHeader.astro';
-import Segment from '../components/layout/Segment.astro';
-import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
-import Headline from '../components/ui/typography/Headline.astro';
-import Paragraph from '../components/ui/typography/Paragraph.astro';
 
-import InlineSVG from '../components/util/InlineSVG.astro';
+import InlineSVG from '@nixos/ui/InlineSVG.astro';
 import Layout from '../layouts/Layout.astro';
 const learningManuals = await getCollection('learningManuals');
 

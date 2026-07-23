@@ -2,17 +2,17 @@
 import { getEntry } from 'astro:content';
 
 import Button from '@nixos/ui/Button.astro';
-import Card from '../components/layout/Card.astro';
-import PageHeader from '../components/layout/PageHeader.astro';
-import SponsorLogo from '../components/layout/SponsorLogo.astro';
+import Card from '@nixos/ui/Card.astro';
+import PageHeader from '@nixos/ui/PageHeader.astro';
+import SponsorLogo from '@nixos/ui/SponsorLogo.astro';
 import Layout from '../layouts/Layout.astro';
 
-import Segment from '@/components/layout/Segment.astro';
-import Headline from '@/components/ui/typography/Headline.astro';
-import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Divider from '@nixos/ui/Divider.astro';
+import Headline from '@nixos/ui/Headline.astro';
+import InlineSVG from '@nixos/ui/InlineSVG.astro';
 import Link from '@nixos/ui/Link.astro';
-import Divider from '../components/layout/Divider.astro';
-import InlineSVG from '../components/util/InlineSVG.astro';
+import Paragraph from '@nixos/ui/Paragraph.astro';
+import Segment from '@nixos/ui/Segment.astro';
 
 const sponsors = await getEntry('sponsors', 'info');
 ---

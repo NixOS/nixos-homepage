@@ -1,12 +1,12 @@
 ---
-import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Paragraph from '@nixos/ui/Paragraph.astro';
 import Link from '@nixos/ui/Link.astro';
 import { getCollection, getEntry } from 'astro:content';
-import Container from '../components/layout/Container.astro';
-import PageHeader from '../components/layout/PageHeader.astro';
+import Container from '@nixos/ui/Container.astro';
+import PageHeader from '@nixos/ui/PageHeader.astro';
 import BlogList from '../components/pages/blog/BlogList.astro';
 import BlogListEntry from '../components/pages/blog/BlogListEntry.astro';
-import InlineSVG from '../components/util/InlineSVG.astro';
+import InlineSVG from '@nixos/ui/InlineSVG.astro';
 import Layout from '../layouts/Layout.astro';
 
 const posts = await getCollection('blog');

@@ -1,19 +1,19 @@
 ---
 import Button from '@nixos/ui/Button.astro';
+import Container from '@nixos/ui/Container.astro';
+import NixosSearchInput from '@nixos/ui/NixosSearchInput.astro';
 import { getCollection, getEntry, render } from 'astro:content';
 import { BANNER } from 'astro:env/client';
-import Container from '../components/layout/Container.astro';
-import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Layout from '../layouts/Layout.astro';
 import { generatePathFromPost } from '../lib/utils';
 
-import Segment from '@/components/layout/Segment.astro';
-import Headline from '@/components/ui/typography/Headline.astro';
-import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Banner from '@nixos/ui/Banner.astro';
+import Headline from '@nixos/ui/Headline.astro';
+import InlineSVG from '@nixos/ui/InlineSVG.astro';
+import Paragraph from '@nixos/ui/Paragraph.astro';
+import Segment from '@nixos/ui/Segment.astro';
 import { Icon } from 'astro-icon/components';
 import Asciinema from '../components/ui/Asciinema.astro';
-import Banner from '../components/ui/Banner.astro';
-import InlineSVG from '../components/util/InlineSVG.astro';
 
 const landingFeatures = await getCollection('landingFeatures');
 const demos = await getEntry('landing', 'demos');

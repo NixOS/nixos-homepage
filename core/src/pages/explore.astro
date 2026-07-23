@@ -1,12 +1,12 @@
 ---
 import { getEntry } from 'astro:content';
 
-import Container from '../components/layout/Container.astro';
-import PageHeader from '../components/layout/PageHeader.astro';
+import Container from '@nixos/ui/Container.astro';
+import PageHeader from '@nixos/ui/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 
-import Segment from '@/components/layout/Segment.astro';
-import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Paragraph from '@nixos/ui/Paragraph.astro';
+import Segment from '@nixos/ui/Segment.astro';
 import Timeline from '../components/pages/explore/Timeline.astro';
 
 const exploreInfo = await getEntry('explore', 'info');

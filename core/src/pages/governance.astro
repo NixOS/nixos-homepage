@@ -1,17 +1,17 @@
 ---
-import Card from '../components/layout/Card.astro';
-import Container from '../components/layout/Container.astro';
-import Divider from '../components/layout/Divider.astro';
-import PageHeader from '../components/layout/PageHeader.astro';
+import Card from '@nixos/ui/Card.astro';
+import Container from '@nixos/ui/Container.astro';
+import Divider from '@nixos/ui/Divider.astro';
+import PageHeader from '@nixos/ui/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 
-import Segment from '@/components/layout/Segment.astro';
-import Quotation from '@/components/ui/Quotation.astro';
-import Headline from '@/components/ui/typography/Headline.astro';
-import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Citation from '@nixos/ui/Citation.astro';
+import Headline from '@nixos/ui/Headline.astro';
 import Link from '@nixos/ui/Link.astro';
+import Paragraph from '@nixos/ui/Paragraph.astro';
+import Quotation from '@nixos/ui/Quotation.astro';
+import Segment from '@nixos/ui/Segment.astro';
 import { getCollection, getEntry } from 'astro:content';
-import Citation from '../components/ui/Citation.astro';
 
 const teams = await getCollection('teams');
 const foundationBoard = await getEntry('teams', '010_foundation-board');

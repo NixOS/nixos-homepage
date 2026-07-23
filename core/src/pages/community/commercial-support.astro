@@ -1,12 +1,12 @@
 ---
 import { getEntry } from 'astro:content';
 
-import Card from '@/components/layout/Card.astro';
-import Headline from '@/components/ui/typography/Headline.astro';
-import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Card from '@nixos/ui/Card.astro';
+import Headline from '@nixos/ui/Headline.astro';
+import Paragraph from '@nixos/ui/Paragraph.astro';
 import Link from '@nixos/ui/Link.astro';
-import Container from '../../components/layout/Container.astro';
-import PageHeader from '../../components/layout/PageHeader.astro';
+import Container from '@nixos/ui/Container.astro';
+import PageHeader from '@nixos/ui/PageHeader.astro';
 import Layout from '../../layouts/Layout.astro';
 
 const companies = await getEntry('community', 'commercial-support');
