@@ -7,9 +7,9 @@ interface Props {
 
 const { text = '', subtext, parentPath = undefined }: Props = Astro.props;
 
+import Link from '@nixos/ui/Link.astro';
 import Headline from '../ui/typography/Headline.astro';
 import Paragraph from '../ui/typography/Paragraph.astro';
-import Link from '../util/Link.astro';
 import Container from './Container.astro';
 ---
 

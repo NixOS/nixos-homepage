@@ -50,6 +50,7 @@ function inlineSvg({ svg }) {
 module.exports = {
   content: [
     './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
+    '../components/src/**/*.{astro,ts}',
     './node_modules/asciinema-player/**/*.js',
   ],
   theme: {

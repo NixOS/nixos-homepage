@@ -10,8 +10,10 @@
   "scripts": {
     "dev": "npm run dev:full --workspace core",
     "build": "npm run build --workspace core",
-    "format": "prettier --write ./core/src",
-    "format:check": "prettier --check ./core/src",
+    "pack:components": "mkdir -p dist-components && npm pack --workspace components --pack-destination dist-components",
+    "pack:components:dry": "npm pack --workspace components --dry-run",
+    "format": "prettier --write ./core/src ./components/src",
+    "format:check": "prettier --check ./core/src ./components/src",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
@@ -22,6 +24,7 @@
   },
   "homepage": "https://github.com/NixOS/nixos-homepage#readme",
   "workspaces": [
+    "components",
     "core"
   ],
   "devDependencies": {

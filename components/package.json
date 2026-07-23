@@ -1,0 +1,28 @@
+{
+  "name": "@nixos/ui",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Reusable Astro UI components NixOS frontend projects",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NixOS/nixos-homepage.git",
+    "directory": "components"
+  },
+  "exports": {
+    ".": "./index.ts",
+    "./*.astro": "./src/*.astro",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.ts",
+    "src"
+  ],
+  "dependencies": {
+    "class-variance-authority": "^0.7.1"
+  },
+  "peerDependencies": {
+    "astro": "^7.1.1",
+    "astro-icon": "^1.1.5"
+  }
+}
