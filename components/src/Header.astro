@@ -1,17 +1,17 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { getEntry } from 'astro:content';
-import { BANNER } from 'astro:env/client';
 
 import Container from '@nixos/ui/Container.astro';
 import Link from '@nixos/ui/Link.astro';
-import { getNixosLogoUrl } from '@/lib/themes';
 import { Image } from 'astro:assets';
 
-const headerMenu = await getEntry('menus', 'header');
-const currentBanner = await getEntry('banners', BANNER);
-
-const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
+interface Props {
+  menu?: any;
+  banner?: any;
+  currentTopRoute?: string;
+  logoUrl: ImageMetadata;
+}
+const { menu, banner, currentTopRoute, logoUrl } = Astro.props;
 
 const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-black md:hover:border-b-secondary-afghani-blue-65 border-b-4`;
 const navbarItemInactiveStyle = `border-b-secondary-afghani-blue-95 md:border-b-transparent bg-secondary-afghani-blue-95 md:bg-transparent`;
@@ -22,22 +22,17 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
   class="text-primary-black bg-primary-white sticky top-0 z-50 font-light drop-shadow-md"
 >
   {
-    currentBanner && (
+    banner && (
       <a
-        href={currentBanner.data.sitewide.link.url}
+        href={banner.sitewide.link.url}
         target="_blank"
         rel="noopener noreferrer"
-        class:list={[
-          'block py-2 font-bold',
-          currentBanner.data.sitewide.wrapperClasses,
-        ]}
+        class:list={['block py-2 font-bold', banner.sitewide.wrapperClasses]}
       >
         <Container class:list={['flex items-center justify-between']}>
-          <span class="line-clamp-1">
-            {currentBanner.data.sitewide.message}
-          </span>
+          <span class="line-clamp-1">{banner.sitewide.message}</span>
           <span class:list={['line-clamp-1 cursor-pointer underline']}>
-            {currentBanner.data.sitewide.link.text}
+            {banner.sitewide.link.text}
           </span>
         </Container>
       </a>
@@ -51,11 +46,7 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
         href="/"
         class="flex items-center justify-between gap-2 select-none md:justify-start"
       >
-        <Image
-          class="h-12 w-auto"
-          src={getNixosLogoUrl('logo')}
-          alt="NixOS - Go to homepage"
-        />
+        <Image class="h-12 w-auto" src={logoUrl} alt="NixOS - Go to homepage" />
       </Link>
 
       <button
@@ -77,7 +68,7 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
       id="navbar-menu"
     >
       {
-        headerMenu.data.items.map((item) => (
+        menu.map((item) => (
           <Link
             class:list={[
               'pt-7 pb-6',

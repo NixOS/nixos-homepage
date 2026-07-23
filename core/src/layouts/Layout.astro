@@ -2,9 +2,15 @@
 import { SEO } from 'astro-seo';
 import { getImagePath } from 'astro-takumi';
 import { getEntry } from 'astro:content';
+import { BANNER } from 'astro:env/client';
+
+const headerMenu = await getEntry('menus', 'header');
+const currentBanner = await getEntry('banners', BANNER);
+const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
+import { getNixosLogoUrl } from '@/lib/themes';
 
 import Footer from '@/components/Footer.astro';
-import Header from '@/components/Header.astro';
+import Header from '@nixos/ui/Header.astro';
 
 import '@/styles/base.css';
 import '@/styles/route159.css';
@@ -94,7 +100,12 @@ const headFeedLinks = blogMenu.data.map((e) => {
   <body
     class="text-primary-black-15 bg-primary-white flex min-h-screen flex-col"
   >
-    <Header />
+    <Header
+      menu={headerMenu.data}
+      banner={currentBanner && currentBanner.data}
+      logoUrl={getNixosLogoUrl()}
+      currentTopRoute={currentTopRoute}
+    />
 
     <main class="flex-1">
       <slot />
