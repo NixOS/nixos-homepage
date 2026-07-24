@@ -61,4 +61,4 @@ const preset = {
   plugins: [addDynamicIconSelectors()],
 };
 
-module.exports = preset;
+export default preset;
