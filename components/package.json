@@ -21,7 +21,8 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "node-html-parser": "^9.0.0",
-    "svgo": "^4.0.2"
+    "svgo": "^4.0.2",
+    "@nixos/branding": "^0.1.0"
   },
   "peerDependencies": {
     "astro": "^7.1.1",
