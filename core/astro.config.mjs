@@ -4,7 +4,7 @@ import fs from "node:fs";
 
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import icon from 'astro-icon';
+import nixosUi from '@nixos/ui/astroIntegration';
 
 // theme derived from https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/main/packages/tm-themes/themes/vesper.json
 import syntaxTheme from './src/lib/shiki/theme.json';
@@ -29,22 +29,21 @@ function selectFavicon(theme = 'default') {
 export default defineConfig({
   output: 'static',
   site: 'https://nixos.org',
-  integrations: [mdx(), sitemap(), icon({
-    include: {
-      mdi: ['*'],
-      simpleIcons: ['*'],
-    },
-  }), favicons({
-    input: {
-      favicons: [selectFavicon(process.env.THEME)],
-    },
-    name: 'Nix & NixOS',
-    short_name: 'Nix & NixOS',
-    manifest: {
-      start_url: '/',
-    },
-  }), takumi(
-    {
+  integrations: [
+    mdx(),
+    sitemap(),
+    nixosUi(),
+    favicons({
+      input: {
+        favicons: [selectFavicon(process.env.THEME)],
+      },
+      name: 'Nix & NixOS',
+      short_name: 'Nix & NixOS',
+      manifest: {
+        start_url: '/',
+      },
+    }),
+    takumi({
       options: {
         fonts: [
           fs.readFileSync("./public/fonts/route159/Route159-Bold.woff"),
