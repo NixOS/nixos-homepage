@@ -1,0 +1,135 @@
+---
+interface Props {
+  bibtex?: string;
+  preprintUrl?: string;
+  doiUrl?: string;
+  hasAbstract: boolean;
+  toggleId: string;
+}
+
+const { bibtex, preprintUrl, doiUrl, hasAbstract, toggleId } = Astro.props;
+---
+
+<div class="flex gap-2">
+  {
+    bibtex && (
+      <button
+        class="paper-action"
+        aria-label="Show BibTeX"
+        data-bibtex={bibtex}
+      >
+        <span class="paper-action-text">CITE</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          {' '}
+          {/* source https://heroicons.com v1.0.6, MIT licensed */}
+          <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+          <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+        </svg>
+      </button>
+    )
+  }
+  {
+    preprintUrl && (
+      <a
+        href={preprintUrl}
+        class="paper-action"
+        aria-label="Download preprint"
+        target="_blank"
+      >
+        {' '}
+        {/* source https://heroicons.com v1.0.6, MIT licensed */}
+        <span class="paper-action-text">PREPRINT</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </a>
+    )
+  }
+  {
+    doiUrl && (
+      <a
+        href={doiUrl.startsWith('10.') ? `https://doi.org/${doiUrl}` : doiUrl}
+        class="paper-action"
+        aria-label="View publisher version"
+        target="_blank"
+      >
+        {' '}
+        {/* source https://heroicons.com v1.0.6, MIT licensed */}
+        <span class="paper-action-text">DOI</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+          />
+        </svg>
+      </a>
+    )
+  }
+  {
+    hasAbstract && (
+      <label for={toggleId} class="paper-action" aria-label="Toggle abstract">
+        {' '}
+        {/* source https://heroicons.com v1.0.6, MIT licensed */}
+        <span class="paper-action-text">ABSTRACT</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 transform transition-transform duration-200 peer-checked:rotate-180"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </label>
+    )
+  }
+</div>
+
+<style>
+  .paper-action {
+    @apply flex items-center gap-2 rounded-full p-2 text-gray-500 transition-all duration-300 hover:bg-gray-100 hover:text-gray-600;
+  }
+
+  .paper-action-text {
+    @apply w-0 overflow-hidden whitespace-nowrap text-sm font-bold opacity-0 transition-all duration-300;
+  }
+
+  /* Use standard CSS color: currentColor instead of Tailwind class */
+  .paper-action svg {
+    color: currentColor;
+  }
+
+  /* For devices that don't support hover */
+  @media (hover: none) {
+    .paper-action-text {
+      @apply ml-2 w-auto opacity-100;
+    }
+  }
+</style>
