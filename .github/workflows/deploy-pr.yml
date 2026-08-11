@@ -34,6 +34,8 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           clean: true
+          # TODO: rework ci (or switch systems entirely) to circumvent this
+          allow-unsafe-pr-checkout: true
       - name: "Install npm dependencies"
         run: |
           npm install --workspaces --include-workspace-root
@@ -59,6 +61,8 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           clean: true
+          # TODO: rework ci (or switch systems entirely) to circumvent this
+          allow-unsafe-pr-checkout: true
       - name: "Installing Nix"
         uses: "cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342" # v31.11.0
       - name: "Build"
