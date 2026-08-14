@@ -1,0 +1,98 @@
+---
+import type { Paper } from '../../types/papers';
+import PaperActions from './PaperActions.astro';
+
+interface Props {
+  paper: Paper;
+  index: number;
+}
+
+const { paper, index } = Astro.props;
+
+function getToggleAbstractId(paper: Paper) {
+  return `toggle-abstract-${index}`;
+}
+
+function getVenueString(pubInfo: any) {
+  switch (pubInfo.type) {
+    case 'conference':
+      return `${pubInfo.conference}, ${pubInfo.location}`;
+    case 'journal':
+      return `${pubInfo.journal}${pubInfo.volume ? `, vol. ${pubInfo.volume}` : ''}${pubInfo.number ? `, no. ${pubInfo.number}` : ''}`;
+    case 'thesis':
+      return `${pubInfo.thesisType} thesis, ${pubInfo.institution}, ${pubInfo.location}`;
+  }
+}
+---
+
+<article
+  class="shadow-sm group relative rounded-lg bg-white p-6 transition-all duration-200 hover:shadow-md"
+>
+  <input type="checkbox" id={getToggleAbstractId(paper)} class="peer hidden" />
+
+  <div class="flex flex-col items-start justify-between sm:flex-row">
+    <div class="flex-1 space-y-2">
+      <h3 class="max-w-[650px] text-lg font-medium text-gray-900">
+        {paper.title}
+      </h3>
+      <p class="text-sm text-gray-700">
+        {
+          paper.authors.map((a, i) => (
+            <>
+              {a.orcidUrl ? (
+                <a
+                  href={a.orcidUrl}
+                  class="hover:text-blue-600 transition-colors duration-200"
+                  target="_blank"
+                >
+                  <span class="whitespace-nowrap">
+                    {a.name}
+                    {i < paper.authors.length - 1 ? ',' : ''}
+                  </span>
+                </a>
+              ) : (
+                <span class="whitespace-nowrap">
+                  {a.name}
+                  {i < paper.authors.length - 1 ? ',' : ''}
+                </span>
+              )}
+              {i < paper.authors.length - 1 ? ' ' : ''}
+            </>
+          ))
+        }
+      </p>
+      <p class="text-sm text-gray-700">
+        {getVenueString(paper.publicationInfo)}
+      </p>
+    </div>
+
+    <div class="mt-4 flex w-full justify-end gap-2 sm:ml-4 sm:mt-0 sm:w-auto">
+      <PaperActions
+        bibtex={paper.bibtex}
+        preprintUrl={paper.preprintOrArchiveUrl}
+        doiUrl={paper.doiOrPublisherUrl}
+        hasAbstract={!!paper.abstract}
+        toggleId={getToggleAbstractId(paper)}
+      />
+    </div>
+  </div>
+
+  {
+    paper.abstract && (
+      <div class="mt-4 max-h-0 overflow-hidden opacity-0 transition-all duration-300 peer-checked:max-h-[2000px] peer-checked:opacity-100">
+        <div class="mx-auto max-w-[600px] text-justify text-sm text-gray-700">
+          {paper.abstract.split('\n\n').map((paragraph, i) => (
+            <p class={i > 0 ? 'mt-4' : ''}>{paragraph}</p>
+          ))}
+        </div>
+      </div>
+    )
+  }
+</article>
+
+<style>
+  /* Group hover effect */
+  article:hover :global(.paper-action-text) {
+    @apply ml-2 w-auto opacity-100;
+  }
+</style>
