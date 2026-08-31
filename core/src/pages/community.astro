@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import { getCollection, getEntry } from 'astro:content';
 
+import Card from '@/components/layout/Card.astro';
 import Container from '../components/layout/Container.astro';
 import Divider from '../components/layout/Divider.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
@@ -11,7 +12,6 @@ import Banner from '../components/ui/Banner.astro';
 import Button from '../components/ui/Button.astro';
 import RfcDiagram from '../components/ui/RfcDiagram.astro';
 import Link from '../components/util/Link.astro';
-import Card from '@/components/layout/Card.astro';
 import Layout from '../layouts/Layout.astro';
 
 const meetups = await getEntry('community', 'meetups');
