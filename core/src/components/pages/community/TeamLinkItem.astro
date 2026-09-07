@@ -1,0 +1,29 @@
+---
+interface Props {
+  href: string;
+  iconSource: string;
+  name: string;
+  description: string;
+}
+
+const { href, iconSource, name, description } = Astro.props;
+---
+
+<li
+  class:list={[
+    'relative flex-1 cursor-pointer rounded-xl p-4 transition-all',
+    'bg-secondary-afghani-blue-45 hover:bg-secondary-afghani-blue-35',
+  ]}
+>
+  <a href={href} class="text-primary-white no-underline!">
+    <div
+      class="flex md:flex-col items-center md:items-start gap-2 text-xl font-bold"
+    >
+      <img src={iconSource} class="md:mb-2.5 h-10 md:h-20" />
+      <span class="leading-8">
+        {name}
+      </span>
+    </div>
+    <div class="mt-2">{description}</div>
+  </a>
+</li>
