@@ -10,9 +10,11 @@ import { generatePathFromPost } from '../lib/utils';
 import Segment from '@/components/layout/Segment.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import Link from '@/components/util/Link.astro';
 import { Icon } from 'astro-icon/components';
 import Asciinema from '../components/ui/Asciinema.astro';
 import Banner from '../components/ui/Banner.astro';
+import SponsorGroup from '../components/ui/SponsorGroup.astro';
 import InlineSVG from '../components/util/InlineSVG.astro';
 
 const landingFeatures = await getCollection('landingFeatures');
@@ -158,6 +160,18 @@ posts
       </Container>
     </div>
   </div>
+  <Segment variant="white">
+    <Container>
+      <Headline variant="blue" level={2} center class="pb-8">
+        Our awesome sponsors
+      </Headline>
+      <SponsorGroup />
+      <Paragraph class="my-8 text-center" variant="black" size="sm">
+        You want to be one of them?
+        <Link href="/donate" variant="blue">Become a sponsor!</Link>
+      </Paragraph>
+    </Container>
+  </Segment>
   <Segment variant="white">
     <Container>
       <Headline variant="blue" level={2} center class="pb-8">
