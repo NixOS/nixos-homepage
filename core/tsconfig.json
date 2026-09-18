@@ -3,8 +3,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
-    }
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "jsx": "react-jsx"
   },
-  "exclude": ["node_modules", "result-demos", "result-manuals", "result-pills"]
+  "exclude": [
+    "node_modules",
+    "result-demos",
+    "result-manuals",
+    "result-pills"
+  ]
 }

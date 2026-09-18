@@ -1,5 +1,7 @@
 import { defineConfig, envField } from 'astro/config';
 
+import fs from "node:fs";
+
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
@@ -10,7 +12,10 @@ import favicons from 'astro-favicons';
 
 import { createRequire } from 'module';
 import shellPromptTransformer from './src/lib/shiki/shellPromptTransformer';
+import takumi from 'astro-takumi';
+import { nixOg } from './src/lib/takumi-og';
 const require = createRequire(import.meta.url);
+import tailwindcss from "@tailwindcss/vite";
 
 function selectFavicon(theme = 'default') {
   switch (theme) {
@@ -24,26 +29,31 @@ function selectFavicon(theme = 'default') {
 export default defineConfig({
   output: 'static',
   site: 'https://nixos.org',
-  integrations: [
-    mdx(),
-    sitemap(),
-    icon({
-      include: {
-        mdi: ['*'],
-        simpleIcons: ['*'],
+  integrations: [mdx(), sitemap(), icon({
+    include: {
+      mdi: ['*'],
+      simpleIcons: ['*'],
+    },
+  }), favicons({
+    input: {
+      favicons: [selectFavicon(process.env.THEME)],
+    },
+    name: 'Nix & NixOS',
+    short_name: 'Nix & NixOS',
+    manifest: {
+      start_url: '/',
+    },
+  }), takumi(
+    {
+      options: {
+        fonts: [
+          fs.readFileSync("./public/fonts/route159/Route159-Bold.woff"),
+        ],
+        format: 'webp',
       },
-    }),
-    favicons({
-      input: {
-        favicons: [selectFavicon(process.env.THEME)],
-      },
-      name: 'Nix & NixOS',
-      short_name: 'Nix & NixOS',
-      manifest: {
-        start_url: '/',
-      },
-    }),
-  ],
+      render: nixOg
+    }
+  )],
   markdown: {
     shikiConfig: {
       theme: syntaxTheme,
@@ -54,6 +64,9 @@ export default defineConfig({
   redirects: {
     '/values': '/governance',
     '/qr01': '/why-nix' // QR code on the NixOS banner
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
   env: {
     schema: {

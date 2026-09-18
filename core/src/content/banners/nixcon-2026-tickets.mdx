@@ -1,0 +1,30 @@
+---
+sitewide:
+  message: 'NixCon 2026 ticket sales open!'
+  link:
+    url: https://tickets.nixcon.org/nixcon-2026/
+    text: 'Ticket-Shop'
+  wrapperClasses: 'bg-[#260D40] text-primary-white'
+---
+
+import Banner from '@/components/ui/Banner.astro';
+
+<Banner
+  wrapperClasses="bg-gradient-to-r from-[#260D40] to-secondary-afghani-blue text-primary-white"
+  class="font-heading flex flex-col items-start justify-between gap-1 text-lg font-bold md:flex-row md:items-center"
+>
+  <span>
+    <span class="text-2xl font-bold">NixCon 2026 ticket sales open!</span>
+    <span class="text-md">
+      NixCon 2026 in Kraków, Poland, 25–28 September!{' '}
+    </span>
+  </span>
+  <a
+    href="https://tickets.nixcon.org/nixcon-2026/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="bg-primary-white text-primary-black hover:bg-primary-black hover:text-primary-white mt-1.5 w-full rounded-md px-4 py-3 text-center leading-none font-bold no-underline md:mt-0 md:w-auto"
+  >
+    Get tickets here
+  </a>
+</Banner>

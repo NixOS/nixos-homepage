@@ -5,7 +5,7 @@ interface Props {
   tag?: string;
 }
 
-export const containerClass =
+const containerClass =
   'px-4 sm:max-w-[736px] md:mx-auto md:max-w-[960px] lg:max-w-[1168px]';
 
 const { tag: Tag = 'div', class: extraClasses, id = null } = Astro.props;

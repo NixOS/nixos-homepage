@@ -69,8 +69,8 @@ merged](https://github.com/NixOS/nix/pull/1027)
 - [Using Nix to manage multiple Ruby
   versions](https://labs.uswitch.com/using-nix-to-manage-multiple-ruby-versions/)
 - [With alternative package management: Linux distribution NixOS 17.03
-  published]() / [Mit alternativer Paketverwaltung: Linux-Distribution
-  NixOS 17.03 erschienen]()
+  published](<>) / [Mit alternativer Paketverwaltung: Linux-Distribution
+  NixOS 17.03 erschienen](<>)
 - [Using NixOS (As Your Main Desktop
   OS](http://www.calebgossler.com/posts/using-nixos.html)
 - [Using Nix (NixOS) as a build system for Rust, and caching binary

@@ -1,4 +1,5 @@
 ---
+import Card from '../components/layout/Card.astro';
 import Container from '../components/layout/Container.astro';
 import Divider from '../components/layout/Divider.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
@@ -42,7 +43,7 @@ const getMemberLink = (member) => {
       The Nix community is guided by two leadership bodies:
     </Paragraph>
     <div class="mt-2 mb-3 grid gap-4 md:grid-cols-2">
-      <div class="bg-secondary-afghani-blue-95 w-full space-y-2 rounded-xl p-4">
+      <Card class="space-y-2">
         <Headline level={3} variant="blue">
           The Steering Committee (SC)
         </Headline>
@@ -78,8 +79,8 @@ const getMemberLink = (member) => {
         <Link variant="blue" href="/community/teams/steering-committee"
           >More Info</Link
         >
-      </div>
-      <div class="bg-secondary-afghani-blue-95 w-full space-y-2 rounded-xl p-4">
+      </Card>
+      <Card class="space-y-2">
         <Headline level={3} variant="blue"> The Foundation Board </Headline>
         <Paragraph size="lg" variant="darkblue">
           Board members of the Stichting NixOS Foundation, a non-profit
@@ -113,7 +114,7 @@ const getMemberLink = (member) => {
         <Link variant="blue" href="/community/teams/foundation-board"
           >More Info</Link
         >
-      </div>
+      </Card>
     </div>
     <Paragraph>
       Many decisions are made in a distributed way by the <Link

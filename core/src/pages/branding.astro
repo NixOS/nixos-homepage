@@ -1,4 +1,5 @@
 ---
+import Card from '@/components/layout/Card.astro';
 import Segment from '@/components/layout/Segment.astro';
 import LogoContainer from '@/components/pages/branding/LogoContainer.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
@@ -15,9 +16,7 @@ import { Image } from 'astro:assets';
 <Layout title="Branding">
   <PageHeader text="Branding" />
   <Segment variant="white" container>
-    <div
-      class="bg-secondary-afghani-blue-95 mt-16 flex flex-col gap-4 rounded-2xl p-4 md:flex-row"
-    >
+    <Card class="mt-16 flex flex-col gap-4 md:flex-row">
       <Image
         class="w-auto md:h-56"
         src={BrandingGuideTitlePage}
@@ -46,7 +45,7 @@ import { Image } from 'astro:assets';
           label="Download Branding Guide"
         />
       </div>
-    </div>
+    </Card>
   </Segment>
   <Segment variant="white" container innerClass="space-y-4 pt-8">
     <Headline level={2} variant="blue"> NixOS Logos </Headline>

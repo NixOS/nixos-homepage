@@ -1,4 +1,5 @@
 ---
+import Card from '@/components/layout/Card.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import Link from '@/components/util/Link.astro';
@@ -13,11 +14,11 @@ const {
 const titleClasses = `text-3xl font-heading font-bold text-secondary-afghani-blue`;
 ---
 
-<aside
-  class:list={[
-    !isSubteam && 'bg-secondary-afghani-blue-95 w-full rounded-xl px-4 py-3',
-    extraClasses,
-  ]}
+<Card
+  variant="light"
+  padding={!isSubteam && 'sm'}
+  tag="aside"
+  class:list={[extraClasses, isSubteam && 'bg-transparent']}
 >
   <Headline level={2} variant="blue">{title}</Headline>
   {Astro.props.paragraph && <Paragraph>{Astro.props.paragraph}</Paragraph>}
@@ -83,4 +84,4 @@ const titleClasses = `text-3xl font-heading font-bold text-secondary-afghani-blu
       </>
     )
   }
-</aside>
+</Card>

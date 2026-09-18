@@ -13,6 +13,8 @@ sections:
         link: /community/teams/security
       - name: Branding
         link: /branding
+      - name: Surveys
+        link: /surveys
       - name: Summer of Nix
         link: https://github.com/ngi-nix/summer-of-nix
       - name: Devices
@@ -42,6 +44,8 @@ sections:
       - name: NixOS Weekly (Archive)
         link: https://weekly.nixos.org/
 social:
+  - name: Bluesky
+    link: https://bsky.app/profile/nixos.org
   - name: Mastodon
     link: https://chaos.social/@nixos_org
   - name: X

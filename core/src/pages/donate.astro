@@ -2,6 +2,7 @@
 import { getEntry } from 'astro:content';
 
 import { Icon } from 'astro-icon/components';
+import Card from '../components/layout/Card.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
 import Button from '../components/ui/Button.astro';
 import Layout from '../layouts/Layout.astro';
@@ -38,9 +39,7 @@ const tiers = await getEntry('sponsors', 'tiers');
     </Paragraph>
     <div class="grid gap-8 pt-4 md:grid-cols-2">
       <div class="flex flex-col gap-4">
-        <div
-          class="bg-secondary-afghani-blue-35 flex flex-col gap-2 rounded-2xl p-4"
-        >
+        <Card class="flex flex-col gap-2" variant="dark">
           <Headline level={3} variant="white"> Sponsorships </Headline>
           <Paragraph size="lg" variant="white">
             Recurring support with perks in return.
@@ -63,12 +62,10 @@ const tiers = await getEntry('sponsors', 'tiers');
           >
             Read more about Sponsorships
           </Button>
-        </div>
+        </Card>
       </div>
       <div class="flex flex-col">
-        <div
-          class="bg-secondary-afghani-blue-35 flex flex-col gap-2 rounded-2xl p-4"
-        >
+        <Card class="flex flex-col gap-2" variant="dark">
           <Headline level={3} variant="white"> Donations </Headline>
           <Paragraph size="lg" variant="white">
             Simple one-time or recurring payments.
@@ -91,7 +88,7 @@ const tiers = await getEntry('sponsors', 'tiers');
           >
             Read more about Ways to Donate
           </Button>
-        </div>
+        </Card>
       </div>
     </div>
   </Segment>
@@ -157,9 +154,7 @@ const tiers = await getEntry('sponsors', 'tiers');
     <Headline level={3} variant="white">Ways to donate</Headline>
     <Paragraph size="lg" class="mt-4" />
     <div class="grid gap-8 md:grid-cols-2">
-      <div
-        class="bg-secondary-afghani-blue-35 flex flex-col gap-2 rounded-2xl p-4"
-      >
+      <Card class="flex flex-col gap-2" variant="dark">
         <Headline level={3} variant="white">Open Collective</Headline>
         <Paragraph variant="white">
           NixOS Foundation is using
@@ -181,11 +176,9 @@ const tiers = await getEntry('sponsors', 'tiers');
         >
           Donate using Open Collective
         </Button>
-      </div>
+      </Card>
 
-      <div
-        class="bg-secondary-afghani-blue-35 flex flex-col gap-2 rounded-2xl p-4"
-      >
+      <Card class="flex flex-col gap-2" variant="dark">
         <Headline level={3} variant="white">SEPA Bank Transfer*</Headline>
         <pre
           class="bg-secondary-afghani-blue-25 text-nix-blue-darker my-2 rounded-3xl p-8 font-mono font-bold whitespace-pre-line">
@@ -193,7 +186,7 @@ const tiers = await getEntry('sponsors', 'tiers');
 
     IBAN: NL13 BUNQ 2061 2530 32
     BIC:  BUNQNL2AXXX</pre>
-      </div>
+      </Card>
     </div>
     <Paragraph size="sm" variant="white" class="col-span-2 mt-2">
       * Please add your name and purpose (donation) in the description of the

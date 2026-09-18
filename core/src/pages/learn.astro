@@ -1,4 +1,5 @@
 ---
+import Card from '@/components/layout/Card.astro';
 import { getCollection, render } from 'astro:content';
 import Container from '../components/layout/Container.astro';
 import Divider from '../components/layout/Divider.astro';
@@ -66,12 +67,16 @@ const learningResources = [
   <Container class="grid gap-4 py-16 md:grid-cols-3">
     {
       learningFeatures.map((feature) => (
-        <div class="border-0.5 border-secondary-afghani-blue-15 flex flex-col justify-center gap-8 rounded-2xl p-8">
+        <Card
+          variant="outline"
+          class="flex flex-col justify-center gap-8"
+          padding="lg"
+        >
           <InlineSVG src={feature.imgUrl} class="h-28" />
           <Button size="lg-full" color={feature.color} href={feature.url}>
             {feature.title}
           </Button>
-        </div>
+        </Card>
       ))
     }
   </Container>
@@ -106,7 +111,10 @@ const learningResources = [
       learningManuals.map(async (manual) => {
         const { Content } = await render(manual);
         return (
-          <div class="border-0.5 border-secondary-afghani-blue-15 flex flex-col items-center justify-start gap-4 rounded-2xl p-4">
+          <Card
+            variant="outline"
+            class="flex flex-col items-center justify-start gap-4"
+          >
             <article class="article">
               <InlineSVG
                 src="/src/assets/image/doc-icon.svg"
@@ -121,7 +129,7 @@ const learningResources = [
             <Button size="sm-mobfull" color="nixblue" href={manual.data.url}>
               Full {manual.data.title}
             </Button>
-          </div>
+          </Card>
         );
       })
     }

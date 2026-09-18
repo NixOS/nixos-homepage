@@ -1,5 +1,6 @@
 ---
 import { SEO } from 'astro-seo';
+import { getImagePath } from 'astro-takumi';
 import { getEntry } from 'astro:content';
 
 import Footer from '@/components/Footer.astro';
@@ -14,6 +15,8 @@ const {
 } = Astro.props;
 
 const blogMenu = await getEntry('menus', 'blog');
+
+const { url, site } = Astro;
 
 const headLinks = [
   {
@@ -46,6 +49,25 @@ const headFeedLinks = blogMenu.data.map((e) => {
       titleDefault={title}
       description={description}
       charset="utf-8"
+      openGraph={{
+        basic: {
+          title: title,
+          type: 'website',
+          image: getImagePath({ url, site, format: 'webp' }),
+        },
+        optional: {
+          description: description,
+          locale: 'en_US',
+          siteName: 'nixos.org',
+        },
+        image: {
+          width: 1200,
+          height: 630,
+        },
+      }}
+      twitter={{
+        card: 'summary_large_image',
+      }}
       extend={{
         link: headLinks.concat(headFeedLinks),
         meta: [
@@ -81,13 +103,14 @@ const headFeedLinks = blogMenu.data.map((e) => {
     <Footer />
 
     <script>
-      import 'htmx.org';
-
       // Fonts
       import '@fontsource-variable/overpass';
       import '@fontsource-variable/fira-code';
       import '@fontsource-variable/roboto-flex/wdth.css';
+
+      // Client-Side Scripts
       import '@/lib/client/scrollToTopHandler.js';
+      import '@/lib/client/codeCopyButton.js';
     </script>
 
     <style>

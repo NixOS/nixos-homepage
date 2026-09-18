@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 
+import Card from '@/components/layout/Card.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import Link from '@/components/util/Link.astro';
@@ -45,7 +46,7 @@ function shuffleArray(array) {
     <ul id="company-list" class="invisible m-4 flex flex-row flex-wrap gap-4">
       {
         shuffleArray(companies.data).map((company) => (
-          <li class="bg-secondary-afghani-blue-95 grow basis-72 rounded-2xl p-4 xl:basis-80">
+          <Card tag="li" class="grow basis-72 xl:basis-80">
             <a
               href={company.href}
               class="text-primary-black! space-y-4 no-underline!"
@@ -73,7 +74,7 @@ function shuffleArray(array) {
                 {company.description}
               </Paragraph>
             </a>
-          </li>
+          </Card>
         ))
       }
     </ul>

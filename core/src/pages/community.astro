@@ -2,12 +2,13 @@
 import { Image } from 'astro:assets';
 import { getCollection, getEntry } from 'astro:content';
 
+import Card from '@/components/layout/Card.astro';
 import Container from '../components/layout/Container.astro';
 import Divider from '../components/layout/Divider.astro';
 import PageHeader from '../components/layout/PageHeader.astro';
-import CommunityPageListItem from '../components/pages/community/CommunityPageListItem.astro';
+import CommunityLinkItem from '../components/pages/community/CommunityLinkItem.astro';
 import NixConEntry from '../components/pages/community/NixConEntry.astro';
-import OfficialCommunityLink from '../components/pages/community/OfficialCommunityLink.astro';
+import TeamLinkItem from '../components/pages/community/TeamLinkItem.astro';
 import Banner from '../components/ui/Banner.astro';
 import Button from '../components/ui/Button.astro';
 import RfcDiagram from '../components/ui/RfcDiagram.astro';
@@ -126,6 +127,11 @@ const platformsMain = [
 
 const socialMediaMain = [
   {
+    href: 'https://bsky.app/profile/nixos.org',
+    name: 'Bluesky',
+    iconName: 'simple-icons:bluesky',
+  },
+  {
     href: 'https://chaos.social/@nixos_org',
     name: 'Mastodon',
     iconName: 'simple-icons:mastodon',
@@ -170,11 +176,6 @@ const platformsOutside = [
     href: 'https://discord.gg/BqdJJFER4H',
     name: 'Discord',
     iconName: 'simple-icons:discord',
-  },
-  {
-    href: 'https://www.reddit.com/r/NixOS/',
-    name: 'Reddit',
-    iconName: 'simple-icons:reddit',
   },
 ];
 
@@ -258,7 +259,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-2">
           {
             platformsMain.map((platform, i) => (
-              <OfficialCommunityLink
+              <CommunityLinkItem
                 href={platform.href}
                 name={platform.name}
                 iconName={platform.iconName}
@@ -278,7 +279,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4">
           {
             socialMediaMain.map((platform) => (
-              <OfficialCommunityLink
+              <CommunityLinkItem
                 href={platform.href}
                 name={platform.name}
                 iconName={platform.iconName}
@@ -295,7 +296,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         <ul class="mt-4 grid flex-wrap gap-4 md:grid-cols-3">
           {
             calendarsMain.map((platform) => (
-              <OfficialCommunityLink
+              <CommunityLinkItem
                 href={platform.href}
                 name={platform.name}
                 iconName={platform.iconName}
@@ -317,12 +318,13 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     <ul class="mt-4 grid grid-cols-3 flex-wrap gap-4">
       {
         platformsOutside.map((platform) => (
-          <CommunityPageListItem
+          <CommunityLinkItem
             href={platform.href}
             name={platform.name}
             iconName={platform.iconName}
             description={platform.description}
             type="mobile_icon_desktop_name"
+            variant="community"
           />
         ))
       }
@@ -337,12 +339,13 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
       {
         widerEcosystem.map((platform) => (
-          <CommunityPageListItem
+          <CommunityLinkItem
             href={platform.href}
             name={platform.name}
             iconName={platform.iconName}
             description={platform.description}
             type="mobile_icon_desktop_name"
+            variant="community"
           />
         ))
       }
@@ -363,9 +366,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         organizes a conference once a year.
       </Paragraph>
       <div class="grid gap-4 md:grid-cols-3">
-        <div
-          class="bg-secondary-afghani-blue-35 col-span-2 rounded-xl p-4 md:col-span-1"
-        >
+        <Card variant="dark" class="col-span-2 md:col-span-1">
           <Headline level={3} class="mb-4" variant="white">
             Next Conference
           </Headline>
@@ -376,7 +377,7 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
             description={nixcons[0].description}
             href={nixcons[0].href}
           />
-        </div>
+        </Card>
         <div class="col-span-2 md:py-4">
           <Headline level={3} class="mb-4" variant="white">
             Previous Conferences
@@ -480,28 +481,15 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       <Headline level={2} variant="white" class="mt-8" id="teams">
         Teams
       </Headline>
-      <ul class="mt-8 flex flex-wrap justify-stretch gap-x-6 gap-y-16">
+      <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
         {
-          teams.map((team) => (
-            <li class="flex grow basis-72 flex-col items-center gap-2 space-y-1 text-center md:items-start md:text-left">
-              <img
-                src={`/images/teams/${team.id.split('_')[1]}.svg`}
-                alt={`${team.data.name} Logo`}
-                class="mb-2.5 h-20"
-              />
-              <Headline level={3} variant="white" class="mb-0">
-                {team.data.name}
-              </Headline>
-              <Paragraph variant="white" class="mb-2.5 flex-1">
-                {team.data.description}
-              </Paragraph>
-              <Button
-                color="white-borders"
-                size="sm-mobfull"
-                href={'/community/teams/' + team.id.split('_')[1]}
-                label="Read more"
-              />
-            </li>
+          teams.map((team, i) => (
+            <TeamLinkItem
+              href={'/community/teams/' + team.id.split('_')[1]}
+              name={team.data.name}
+              iconSource={`/images/teams/${team.id.split('_')[1]}.svg`}
+              description={team.data.description}
+            />
           ))
         }
       </ul>
