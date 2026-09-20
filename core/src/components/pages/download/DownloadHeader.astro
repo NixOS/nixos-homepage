@@ -11,24 +11,19 @@ interface Props {
 const { title, subTitle, currentVersion } = Astro.props;
 ---
 
-<Container
-  class="bg-secondary-afghani-blue-45 text-primary-white mt-16 flex items-center justify-between py-8 md:py-6"
->
+<Container class="bg-secondary-afghani-blue-45 text-primary-white mt-16 flex items-center justify-between py-8 md:py-6">
   <Headline level={2} variant="white" class="-mt-1 leading-none">
     {title}
-    <span class="hidden lg:inline">
-      {subTitle}
-    </span>
+    <span class="hidden lg:inline">{subTitle}</span>
   </Headline>
   <div class="flex flex-col justify-center self-center">
     <div class="text-end">
       <span class="font-heading hidden pb-2 text-2xl font-bold md:inline">
         Current version
       </span>
-      <span
-        class="bg-secondary-afghani-blue-15 text-primary-white rounded-2xl px-4 py-2 text-center text-2xl font-bold! no-underline!"
-        >{currentVersion}</span
-      >
+      <span class="bg-secondary-afghani-blue-15 text-primary-white rounded-2xl px-4 py-2 text-center text-2xl font-bold! no-underline!">
+        {currentVersion}
+      </span>
     </div>
   </div>
 </Container>

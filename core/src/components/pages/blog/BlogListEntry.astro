@@ -16,8 +16,6 @@ const { post } = Astro.props;
       {post.data.title}
     </Headline>
   </a>
-  <Paragraph size="sm">
-    {createBlogSubheader(post)}
-  </Paragraph>
+  <Paragraph size="sm">{createBlogSubheader(post)}</Paragraph>
   <Paragraph variant="black" set:html={createExcerpt(post.body) + '...'} />
 </article>

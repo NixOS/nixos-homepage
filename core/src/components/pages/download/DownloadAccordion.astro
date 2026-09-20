@@ -12,58 +12,56 @@ let downloadOptions = (await getCollection('download'))
 
 <div id={accordionId} class="download-accordion">
   <div class="download-accordion-menu">
-    {
-      downloadOptions.map(async (option) => {
-        const { Content } = await render(option);
-        const needsInstallInfix =
-          option.data.family === 'nix' && option.data.platform !== 'more';
-        const optionId = `${option.data.family}-${needsInstallInfix ? 'install-' : ''}${option.data.platform}`;
+    {downloadOptions.map(async (option) => {
+      const { Content } = await render(option);
+      const needsInstallInfix =
+        option.data.family === 'nix' && option.data.platform !== 'more';
+      const optionId = `${option.data.family}-${needsInstallInfix ? 'install-' : ''}${option.data.platform}`;
 
-        return (
-          <>
-            <button
-              id={`${optionId}-trigger`}
-              aria-expanded="true"
-              aria-controls={optionId}
-              class:list={[
-                'bg-secondary-afghani-blue-95',
-                'flex',
-                'text-secondary-afghani-blue-25',
-                'hover:bg-secondary-afghani-blue-85',
-                'hover:text-secondary-afghani-blue-15',
-                'cursor-pointer',
-                'text-lg',
-                'font-bold',
-                'py-6',
-                'px-8',
-                'w-full',
-                'rounded-2xl',
-                'justify-start',
-                'content-start',
-                'items-center',
-                'my-4',
-              ]}
-            >
-              <Icon
-                name={option.data.icon ?? 'mdi:more-horiz'}
-                class="bg-secondary-afghani-blue-45 text-secondary-afghani-blue-95 mr-4 h-10 w-10 rounded-xl p-1"
-              />
-              {option.data.title}
-            </button>
-            <div
-              id={optionId}
-              role="region"
-              aria-labelledby={`${optionId}-trigger`}
-              class="block scroll-mt-44 md:scroll-mt-52"
-            >
-              <article class="article">
-                <Content />
-              </article>
-            </div>
-          </>
-        );
-      })
-    }
+      return (
+        <>
+          <button
+            id={`${optionId}-trigger`}
+            aria-expanded="true"
+            aria-controls={optionId}
+            class:list={[
+              'bg-secondary-afghani-blue-95',
+              'flex',
+              'text-secondary-afghani-blue-25',
+              'hover:bg-secondary-afghani-blue-85',
+              'hover:text-secondary-afghani-blue-15',
+              'cursor-pointer',
+              'text-lg',
+              'font-bold',
+              'py-6',
+              'px-8',
+              'w-full',
+              'rounded-2xl',
+              'justify-start',
+              'content-start',
+              'items-center',
+              'my-4',
+            ]}
+          >
+            <Icon
+              name={option.data.icon ?? 'mdi:more-horiz'}
+              class="bg-secondary-afghani-blue-45 text-secondary-afghani-blue-95 mr-4 h-10 w-10 rounded-xl p-1"
+            />
+            {option.data.title}
+          </button>
+          <div
+            id={optionId}
+            role="region"
+            aria-labelledby={`${optionId}-trigger`}
+            class="block scroll-mt-44 md:scroll-mt-52"
+          >
+            <article class="article">
+              <Content />
+            </article>
+          </div>
+        </>
+      );
+    })}
   </div>
 </div>
 

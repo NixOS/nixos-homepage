@@ -24,42 +24,40 @@ const devices = await getCollection('devices');
       their hardware may be supported.
     </Paragraph>
   </Segment>
-  {
-    devices.map((category) => (
-      <Segment variant="white" yPadding container>
-        <Headline variant="blue" level={2}>
-          {category.data.title}
-        </Headline>
-        <Paragraph>{category.data.description}</Paragraph>
-        {(!category.data.devices || category.data.devices === 0) && (
-          <p class="bg-primary-black-95 mt-4 h-full list-none rounded-xl px-4 py-3">
-            No devices listed yet.
-          </p>
-        )}
-        {category.data.devices && (
-          <ul class="my-4 grid list-inside list-disc gap-4 space-y-2 md:grid-cols-3">
-            {category.data.devices.map((device) => (
-              <Card tag="li" class="h-full list-none" padding="sm">
-                <Headline variant="blue" level={3}>
-                  {device.name}
-                </Headline>
-                {device.hwrepo && (
-                  <Link variant="blue" href={device.hwrepo}>
-                    <Icon name="mdi:git" class="inline h-5 w-5" />
-                    Hardware Repository
-                  </Link>
-                )}
-                {device.manufacturerPage && (
-                  <Link variant="blue" href={device.manufacturerPage}>
-                    <Icon name="mdi:web" class="inline h-5 w-5" />
-                    Manufacturer Page
-                  </Link>
-                )}
-              </Card>
-            ))}
-          </ul>
-        )}
-      </Segment>
-    ))
-  }
+  {devices.map((category) => (
+    <Segment variant="white" yPadding container>
+      <Headline variant="blue" level={2}>
+        {category.data.title}
+      </Headline>
+      <Paragraph>{category.data.description}</Paragraph>
+      {(!category.data.devices || category.data.devices === 0) && (
+        <p class="bg-primary-black-95 mt-4 h-full list-none rounded-xl px-4 py-3">
+          No devices listed yet.
+        </p>
+      )}
+      {category.data.devices && (
+        <ul class="my-4 grid list-inside list-disc gap-4 space-y-2 md:grid-cols-3">
+          {category.data.devices.map((device) => (
+            <Card tag="li" class="h-full list-none" padding="sm">
+              <Headline variant="blue" level={3}>
+                {device.name}
+              </Headline>
+              {device.hwrepo && (
+                <Link variant="blue" href={device.hwrepo}>
+                  <Icon name="mdi:git" class="inline h-5 w-5" />
+                  Hardware Repository
+                </Link>
+              )}
+              {device.manufacturerPage && (
+                <Link variant="blue" href={device.manufacturerPage}>
+                  <Icon name="mdi:web" class="inline h-5 w-5" />
+                  Manufacturer Page
+                </Link>
+              )}
+            </Card>
+          ))}
+        </ul>
+      )}
+    </Segment>
+  ))}
 </Layout>

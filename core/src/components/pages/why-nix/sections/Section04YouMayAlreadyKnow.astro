@@ -43,54 +43,50 @@ const content = [
 
 <div class="overflow-x-auto">
   <table class="table-auto">
-    <thead
-      class="font-blold border-b-secondary-afghani-blue-45 hidden border-b-2 md:table-header-group"
-    >
+    <thead class="font-blold border-b-secondary-afghani-blue-45 hidden border-b-2 md:table-header-group">
       <tr>
-        <th class="p-2"> Category </th>
-        <th class="p-2"> Examples </th>
-        <th class="w-max p-2"> Traditional Approach </th>
-        <th class="w-max p-2"> Nix Approach </th>
-        <th class="p-2"> Benefits </th>
+        <th class="p-2">Category</th>
+        <th class="p-2">Examples</th>
+        <th class="w-max p-2">Traditional Approach</th>
+        <th class="w-max p-2">Nix Approach</th>
+        <th class="p-2">Benefits</th>
       </tr>
     </thead>
     <tbody class="flex gap-4 md:table-row-group">
-      {
-        content.map((item) => (
-          <tr class="border-b-secondary-afghani-blue-55 bg-secondary-afghani-blue-95 flex min-w-96 flex-col rounded-2xl last:border-b-0 md:table-row md:min-w-auto md:rounded-none md:border-b-2">
-            <td
-              data-label="Title"
-              class="bg-secondary-afghani-blue-45 text-primary-white block w-full rounded-t-2xl p-2 text-center font-bold md:table-cell md:w-max md:rounded-t-none md:text-right"
-            >
-              {item.title}
-            </td>
-            <td
-              data-label="Examples"
-              class="before-w-full text-secondary-afghani-blue-25 before:text-secondary-afghani-blue-35 p-2 before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] md:max-w-min before:md:hidden"
-            >
-              <VerticalBorderList items={item.examples} />
-            </td>
-            <td
-              data-label="Traditional Approach"
-              class="before-w-full bg-accent-norwegian-pink-95 before:text-secondary-afghani-blue-35 p-2 text-center before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] before:md:hidden"
-            >
-              {item.traditional}
-            </td>
-            <td
-              data-label="Nix Approach"
-              class="before-w-full bg-accent-zambian-green-95 before:text-secondary-afghani-blue-35 p-2 text-center before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] before:md:hidden"
-            >
-              {item.nix}
-            </td>
-            <td
-              data-label="Benefits"
-              class="before-w-full before:text-secondary-afghani-blue-35 min-w-max pb-4 before:mt-2 before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] md:pb-0 before:md:hidden"
-            >
-              <VerticalBorderList items={item.benefits} />
-            </td>
-          </tr>
-        ))
-      }
+      {content.map((item) => (
+        <tr class="border-b-secondary-afghani-blue-55 bg-secondary-afghani-blue-95 flex min-w-96 flex-col rounded-2xl last:border-b-0 md:table-row md:min-w-auto md:rounded-none md:border-b-2">
+          <td
+            data-label="Title"
+            class="bg-secondary-afghani-blue-45 text-primary-white block w-full rounded-t-2xl p-2 text-center font-bold md:table-cell md:w-max md:rounded-t-none md:text-right"
+          >
+            {item.title}
+          </td>
+          <td
+            data-label="Examples"
+            class="before-w-full text-secondary-afghani-blue-25 before:text-secondary-afghani-blue-35 p-2 before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] md:max-w-min before:md:hidden"
+          >
+            <VerticalBorderList items={item.examples} />
+          </td>
+          <td
+            data-label="Traditional Approach"
+            class="before-w-full bg-accent-norwegian-pink-95 before:text-secondary-afghani-blue-35 p-2 text-center before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] before:md:hidden"
+          >
+            {item.traditional}
+          </td>
+          <td
+            data-label="Nix Approach"
+            class="before-w-full bg-accent-zambian-green-95 before:text-secondary-afghani-blue-35 p-2 text-center before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] before:md:hidden"
+          >
+            {item.nix}
+          </td>
+          <td
+            data-label="Benefits"
+            class="before-w-full before:text-secondary-afghani-blue-35 min-w-max pb-4 before:mt-2 before:mb-2 before:block before:text-center before:font-bold before:content-[attr(data-label)] md:pb-0 before:md:hidden"
+          >
+            <VerticalBorderList items={item.benefits} />
+          </td>
+        </tr>
+      ))}
     </tbody>
   </table>
 </div>

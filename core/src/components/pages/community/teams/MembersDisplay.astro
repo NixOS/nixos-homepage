@@ -20,68 +20,63 @@ const titleClasses = `text-3xl font-heading font-bold text-secondary-afghani-blu
   tag="aside"
   class:list={[extraClasses, isSubteam && 'bg-transparent']}
 >
-  <Headline level={2} variant="blue">{title}</Headline>
+  <Headline level={2} variant="blue">
+    {title}
+  </Headline>
   {Astro.props.paragraph && <Paragraph>{Astro.props.paragraph}</Paragraph>}
   <ul class="mt-2 pt-1">
-    {
-      members.map((member) => (
-        <li class="border-b-secondary-afghani-blue-75-hover flex flex-col border-b-1 pt-2 pb-2 first:pt-0 last:border-b-0 last:pb-0">
-          <span>
-            <Paragraph tag="span" class="font-medium">
-              {member.name}
-            </Paragraph>
-            {member.discourse && (
-              <>
-                (
-                <Link
-                  variant="blue"
-                  href={'https://discourse.nixos.org/u/' + member.discourse}
-                >
-                  @{member.discourse}
-                </Link>
-                )
-              </>
-            )}
-            {member.github && (
-              <>
-                (
-                <Link
-                  variant="blue"
-                  href={'https://github.com/' + member.github}
-                >
-                  @{member.github}
-                </Link>
-                )
-              </>
-            )}
-          </span>
-          {member.title && <Paragraph tag="span">{member.title}</Paragraph>}
-          {member.affiliation && (
-            <Paragraph tag="span" size="sm">
-              {member.affiliation}
-            </Paragraph>
+    {members.map((member) => (
+      <li class="border-b-secondary-afghani-blue-75-hover flex flex-col border-b-1 pt-2 pb-2 first:pt-0 last:border-b-0 last:pb-0">
+        <span>
+          <Paragraph tag="span" class="font-medium">
+            {member.name}
+          </Paragraph>
+          {member.discourse && (
+            <>
+              (
+              <Link
+                variant="blue"
+                href={'https://discourse.nixos.org/u/' + member.discourse}
+              >
+                @{member.discourse}
+              </Link>
+              )
+            </>
           )}
-        </li>
-      ))
-    }
+          {member.github && (
+            <>
+              (
+              <Link variant="blue" href={'https://github.com/' + member.github}>
+                @{member.github}
+              </Link>
+              )
+            </>
+          )}
+        </span>
+        {member.title && <Paragraph tag="span">{member.title}</Paragraph>}
+        {member.affiliation && (
+          <Paragraph tag="span" size="sm">
+            {member.affiliation}
+          </Paragraph>
+        )}
+      </li>
+    ))}
   </ul>
   <hr class="mt-2 mb-2" />
-  {
-    contact && (
-      <>
-        <Headline level={2} variant="blue">
-          Contact
-        </Headline>
-        <ul class="mt-2 ml-4 list-disc">
-          {contact.map((contact) => (
-            <li class="mb-1 last:mb-0">
-              <Link variant="blue" href={contact.href}>
-                {contact.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </>
-    )
-  }
+  {contact && (
+    <>
+      <Headline level={2} variant="blue">
+        Contact
+      </Headline>
+      <ul class="mt-2 ml-4 list-disc">
+        {contact.map((contact) => (
+          <li class="mb-1 last:mb-0">
+            <Link variant="blue" href={contact.href}>
+              {contact.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
 </Card>

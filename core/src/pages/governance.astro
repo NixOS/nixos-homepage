@@ -52,89 +52,92 @@ const getMemberLink = (member) => {
           leadership.
         </Paragraph>
         <Paragraph>
-          <b>Responsibilities:</b> Technical and community decisions, delegation and
-          guidance on partnership decisions
+          <b>Responsibilities:</b> Technical and community decisions, delegation
+          and guidance on partnership decisions
         </Paragraph>
         <Paragraph>
           <b>Members:</b>
-          {
-            steeringCommittee.data.members.map((member, idx) => {
-              const data = getMemberLink(member);
-              if (data[0]) {
-                return (
-                  <>
-                    {' '}
-                    <Link variant="blue" href={data[0]}>
-                      @{data[1]}
-                    </Link>
-                    {idx < steeringCommittee.data.members.length - 1 ? ',' : ''}
-                  </>
-                );
-              } else {
-                return data[1];
-              }
-            })
-          }
+          {steeringCommittee.data.members.map((member, idx) => {
+            const data = getMemberLink(member);
+            if (data[0]) {
+              return (
+                <>
+                  {' '}
+                  <Link variant="blue" href={data[0]}>
+                    @{data[1]}
+                  </Link>
+                  {idx < steeringCommittee.data.members.length - 1 ? ',' : ''}
+                </>
+              );
+            } else {
+              return data[1];
+            }
+          })}
         </Paragraph>
-        <Link variant="blue" href="/community/teams/steering-committee"
-          >More Info</Link
-        >
+        <Link variant="blue" href="/community/teams/steering-committee">
+          More Info
+        </Link>
       </Card>
       <Card class="space-y-2">
-        <Headline level={3} variant="blue"> The Foundation Board </Headline>
+        <Headline level={3} variant="blue">
+          {' '}
+          The Foundation Board{' '}
+        </Headline>
         <Paragraph size="lg" variant="darkblue">
           Board members of the Stichting NixOS Foundation, a non-profit
           organisation in the Netherlands
         </Paragraph>
         <Paragraph>
-          <b>Responsibilities:</b> Legal, financial and partnership decisions and
-          delegation
+          <b>Responsibilities:</b> Legal, financial and partnership decisions
+          and delegation
         </Paragraph>
         <Paragraph>
           <b>Members:</b>
-          {
-            foundationBoard.data.members.map((member, idx) => {
-              const data = getMemberLink(member);
-              if (data[0]) {
-                return (
-                  <>
-                    {' '}
-                    <Link variant="blue" href={data[0]}>
-                      @{data[1]}
-                    </Link>
-                    {idx < foundationBoard.data.members.length - 1 ? ',' : ''}
-                  </>
-                );
-              } else {
-                return data[1];
-              }
-            })
-          }
+          {foundationBoard.data.members.map((member, idx) => {
+            const data = getMemberLink(member);
+            if (data[0]) {
+              return (
+                <>
+                  {' '}
+                  <Link variant="blue" href={data[0]}>
+                    @{data[1]}
+                  </Link>
+                  {idx < foundationBoard.data.members.length - 1 ? ',' : ''}
+                </>
+              );
+            } else {
+              return data[1];
+            }
+          })}
         </Paragraph>
-        <Link variant="blue" href="/community/teams/foundation-board"
-          >More Info</Link
-        >
+        <Link variant="blue" href="/community/teams/foundation-board">
+          More Info
+        </Link>
       </Card>
     </div>
     <Paragraph>
-      Many decisions are made in a distributed way by the <Link
-        variant="blue"
-        href="/community">{teams.length} teams</Link
-      >, among many other ones not listed on the website and many more
-      individual specialists, responsible for various areas. From the leadership
-      bodies down to individual contributors, almost everybody is here as a
-      passionate volunteer.
+      Many decisions are made in a distributed way by the{' '}
+      <Link variant="blue" href="/community">
+        {teams.length} teams
+      </Link>
+      , among many other ones not listed on the website and many more individual
+      specialists, responsible for various areas. From the leadership bodies
+      down to individual contributors, almost everybody is here as a passionate
+      volunteer.
     </Paragraph>
     <Headline level={3} variant="blue" class="pt-4 pb-2">
       Governance Constitution
     </Headline>
     <Paragraph>
-      The <Link
+      The{' '}
+      <Link
         variant="blue"
         href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
-        >Nix Governance Constitution</Link
-      > describes each body's responsibilities, how the steering committee is elected,
-      and how decisions are made inside the steering committee.
+      >
+        Nix Governance Constitution
+      </Link>{' '}
+      describes each body's responsibilities, how the steering committee is
+      elected, and how decisions are made inside the steering committee.
     </Paragraph>
     <Headline level={3} variant="blue" class="pt-4 pb-2">
       Steering Committee Elections
@@ -143,25 +146,31 @@ const getMemberLink = (member) => {
       Every year, the Nix community elects members to the steering committee.
       Members generally hold a two-year term, with elections held annually to
       fill at least half of the seats. You can read more about the election
-      process in the <Link
+      process in the{' '}
+      <Link
         variant="blue"
         href="https://github.com/NixOS/org/blob/main/doc/constitution.md"
-        >Nix Governance Constitution</Link
-      >.
+      >
+        Nix Governance Constitution
+      </Link>
+      .
     </Paragraph>
     <Paragraph>
-      The elections are documented in GitHub repositories under the <Link
-        variant="blue"
-        href="https://github.com/NixOS">NixOS organization</Link
-      >.
+      The elections are documented in GitHub repositories under the{' '}
+      <Link variant="blue" href="https://github.com/NixOS">
+        NixOS organization
+      </Link>
+      .
     </Paragraph>
     <Paragraph>
       <b>Current and past elections:</b>
-      <Link variant="blue" href="https://github.com/NixOS/SC-election-2025"
-        >2025</Link
-      >, <Link variant="blue" href="https://github.com/NixOS/SC-election-2024"
-        >2024</Link
-      >
+      <Link variant="blue" href="https://github.com/NixOS/SC-election-2025">
+        2025
+      </Link>
+      ,{' '}
+      <Link variant="blue" href="https://github.com/NixOS/SC-election-2024">
+        2024
+      </Link>
     </Paragraph>
   </Container>
   <Divider mirrorY />
@@ -179,19 +188,22 @@ const getMemberLink = (member) => {
         </p>
 
         <p class="py-2 text-right italic">
-          <Link variant="white" href="https://opensource.com/open-source-way"
-            >The Open Source Way</Link
-          >
+          <Link variant="white" href="https://opensource.com/open-source-way">
+            The Open Source Way
+          </Link>
         </p>
       </Quotation>
 
       <Paragraph variant="white">
         Our common purpose is to develop, propagate, and promote the adoption of
-        the <Link
+        the{' '}
+        <Link
           variant="white"
           href="https://edolstra.github.io/pubs/phd-thesis.pdf"
-          >purely functional software deployment model</Link
-        >. Our values help us achieve this purpose by guiding decisionmaking
+        >
+          purely functional software deployment model
+        </Link>
+        . Our values help us achieve this purpose by guiding decisionmaking
         across the community, keeping us moving in a common direction. This
         document captures our core values so that they can be shared and
         referenced by everyone in the community.
@@ -202,13 +214,17 @@ const getMemberLink = (member) => {
       </Headline>
 
       <Paragraph variant="white">
-        Values are <span class="italic">not</span> a Code of Conduct, they do not
-        define governance structures, and they do not provide specific policies. Instead,
-        values inform the decisions we make about these things. A good test for <Link
+        Values are <span class="italic">not</span> a Code of Conduct, they do
+        not define governance structures, and they do not provide specific
+        policies. Instead, values inform the decisions we make about these
+        things. A good test for{' '}
+        <Link
           variant="white"
           href="https://medium.com/the-u-s-digital-service/our-values-1fc02b53598"
-          >whether something is a value</Link
-        > is:
+        >
+          whether something is a value
+        </Link>{' '}
+        is:
       </Paragraph>
 
       <Paragraph variant="white">
@@ -262,11 +278,14 @@ const getMemberLink = (member) => {
       </Headline>
 
       <Paragraph variant="white">
-        Nix projects are and will always remain <Link
+        Nix projects are and will always remain{' '}
+        <Link
           variant="white"
           href="https://www.gnu.org/philosophy/free-sw.en.html"
-          >free software</Link
-        >. We value working together with the broader free software community.
+        >
+          free software
+        </Link>
+        . We value working together with the broader free software community.
         Free software is our priority, but we also support our users' needs to
         use non-free software, when practical.
       </Paragraph>
@@ -302,9 +321,12 @@ const getMemberLink = (member) => {
         <Link
           variant="white"
           href="https://web.archive.org/web/20240717145635/https://sre.google/sre-book/eliminating-toil/"
-          >Toil</Link
-        > is work that tends to be manual, repetitive, automatable, interrupt-driven,
-        devoid of enduring value, and scaling linearly with growth.
+        >
+          Toil
+        </Link>{' '}
+        is work that tends to be manual, repetitive, automatable,
+        interrupt-driven, devoid of enduring value, and scaling linearly with
+        growth.
       </Citation>
 
       <Paragraph variant="white">
