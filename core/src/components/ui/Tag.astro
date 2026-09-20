@@ -29,14 +29,12 @@ const colorMap = {
 const localClassList = `${colorMap[color]} ${outline ? 'border-1 text-primary-black! py-[0.125rem]' : 'border-0 text-primary-white! py-[0.25rem]'} inline-block w-fit rounded-lg font-bold no-underline! text-sm px-[0.5rem]`;
 ---
 
-{
-  href ? (
-    <a href={href} class:list={[localClassList, classList]}>
-      <slot />
-    </a>
-  ) : (
-    <span class:list={[localClassList, classList]}>
-      <slot />
-    </span>
-  )
-}
+{href ? (
+  <a href={href} class:list={[localClassList, classList]}>
+    <slot />
+  </a>
+) : (
+  <span class:list={[localClassList, classList]}>
+    <slot />
+  </span>
+)}

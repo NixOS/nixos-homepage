@@ -20,21 +20,20 @@ const { title, date, description, href, imagePath = null } = Astro.props;
   rel="noopener noreferrer"
   class="text-primary-white! flex flex-col gap-1 no-underline!"
 >
-  {
-    imagePath && (
-      <div class="bg-primary-white mb-4 flex h-48 justify-center rounded-xl p-4">
-        <Image src={imagePath} alt={`${title} Logo`} width="200" height="200" />
-      </div>
-    )
-  }
+  {imagePath && (
+    <div class="bg-primary-white mb-4 flex h-48 justify-center rounded-xl p-4">
+      <Image src={imagePath} alt={`${title} Logo`} width="200" height="200" />
+    </div>
+  )}
   <Headline level={4} variant="white">
     {title}
   </Headline>
   <Paragraph variant="white" size="sm">
     {date}
   </Paragraph>
-  <Paragraph variant="white">
-    {description}
+  <Paragraph variant="white">{description}</Paragraph>
+  <Paragraph variant="white" class="link text-right">
+    {' '}
+    Read more...{' '}
   </Paragraph>
-  <Paragraph variant="white" class="link text-right"> Read more... </Paragraph>
 </a>

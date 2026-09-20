@@ -24,16 +24,14 @@ const exploreInfo = await getEntry('explore', 'info');
   </Segment>
   <Segment variant="white">
     <Container class="pb-16">
-      {
-        exploreInfo.data.content.map((item, idx) => {
-          const side = idx % 2 ? 'right' : 'left';
-          return (
-            <div class="grid gap-x-24 md:grid-cols-2">
-              <Timeline number={idx + 1} imageLocation={side} {...item} />
-            </div>
-          );
-        })
-      }
+      {exploreInfo.data.content.map((item, idx) => {
+        const side = idx % 2 ? 'right' : 'left';
+        return (
+          <div class="grid gap-x-24 md:grid-cols-2">
+            <Timeline number={idx + 1} imageLocation={side} {...item} />
+          </div>
+        );
+      })}
     </Container>
   </Segment>
 </Layout>

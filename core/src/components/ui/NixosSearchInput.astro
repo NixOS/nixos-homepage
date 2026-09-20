@@ -40,11 +40,9 @@ const {
     placeholder={`Search for ${collectionMap[collection]}`}
     name="query"
   />
-  {
-    withSubmit && (
-      <Button color="nixblue" size="sm-mobfull" type="submit">
-        Search
-      </Button>
-    )
-  }
+  {withSubmit && (
+    <Button color="nixblue" size="sm-mobfull" type="submit">
+      Search
+    </Button>
+  )}
 </form>

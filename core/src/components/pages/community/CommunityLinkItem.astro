@@ -54,26 +54,22 @@ const aClasses =
       ]}
     >
       {iconName && <Icon name={iconName} aria-hidden="true" class="h-8 w-8" />}
-      {
-        (effectiveType !== 'icon' || !iconName) && (
-          <span
-            class:list={[
-              'leading-8',
-              iconName ? 'ml-2' : 'text-center',
-              effectiveType === 'mobile_icon_desktop_name' && iconName
-                ? 'sr-only md:not-sr-only'
-                : '',
-            ]}
-          >
-            {name}
-          </span>
-        )
-      }
+      {(effectiveType !== 'icon' || !iconName) && (
+        <span
+          class:list={[
+            'leading-8',
+            iconName ? 'ml-2' : 'text-center',
+            effectiveType === 'mobile_icon_desktop_name' && iconName
+              ? 'sr-only md:not-sr-only'
+              : '',
+          ]}
+        >
+          {name}
+        </span>
+      )}
     </div>
-    {
-      description !== '' && effectiveType === 'full' && (
-        <div class="mt-2">{description}</div>
-      )
-    }
+    {description !== '' && effectiveType === 'full' && (
+      <div class="mt-2">{description}</div>
+    )}
   </a>
 </li>

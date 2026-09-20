@@ -65,30 +65,30 @@ const learningResources = [
 <Layout title="Learn Nix | Nix & NixOS">
   <PageHeader text="Learn" />
   <Container class="grid gap-4 py-16 md:grid-cols-3">
-    {
-      learningFeatures.map((feature) => (
-        <Card
-          variant="outline"
-          class="flex flex-col justify-center gap-8"
-          padding="lg"
-        >
-          <InlineSVG src={feature.imgUrl} class="h-28" />
-          <Button size="lg-full" color={feature.color} href={feature.url}>
-            {feature.title}
-          </Button>
-        </Card>
-      ))
-    }
+    {learningFeatures.map((feature) => (
+      <Card
+        variant="outline"
+        class="flex flex-col justify-center gap-8"
+        padding="lg"
+      >
+        <InlineSVG src={feature.imgUrl} class="h-28" />
+        <Button size="lg-full" color={feature.color} href={feature.url}>
+          {feature.title}
+        </Button>
+      </Card>
+    ))}
   </Container>
   <Divider style="slope" mirrorY mirrorX />
   <Segment variant="blue" class="py-8">
     <Container>
-      <Headline level={2} class="pb-4" variant="white">Search</Headline>
+      <Headline level={2} class="pb-4" variant="white">
+        Search
+      </Headline>
       <div class="grid gap-4 md:grid-cols-2">
         <div>
-          <Headline level={3} class="mb-4" variant="white"
-            >Nix packages</Headline
-          >
+          <Headline level={3} class="mb-4" variant="white">
+            Nix packages
+          </Headline>
           <NixosSearchInput
             color="white"
             size="sm-full"
@@ -96,43 +96,44 @@ const learningResources = [
           />
         </div>
         <div>
-          <Headline level={3} class="mb-4" variant="white"
-            >NixOS options</Headline
-          >
+          <Headline level={3} class="mb-4" variant="white">
+            NixOS options
+          </Headline>
           <NixosSearchInput color="white" size="sm-full" collection="options" />
         </div>
       </div>
     </Container>
   </Segment>
   <Divider style="slope" mirrorX />
-  <Headline variant="sr-only" level={2}> Manuals </Headline>
+  <Headline variant="sr-only" level={2}>
+    {' '}
+    Manuals{' '}
+  </Headline>
   <Container class="grid items-start gap-4 py-16 md:grid-cols-3">
-    {
-      learningManuals.map(async (manual) => {
-        const { Content } = await render(manual);
-        return (
-          <Card
-            variant="outline"
-            class="flex flex-col items-center justify-start gap-4"
-          >
-            <article class="article">
-              <InlineSVG
-                src="/src/assets/image/doc-icon.svg"
-                class="img-noadjust float-left inline h-20 w-20 pr-6"
-              />
+    {learningManuals.map(async (manual) => {
+      const { Content } = await render(manual);
+      return (
+        <Card
+          variant="outline"
+          class="flex flex-col items-center justify-start gap-4"
+        >
+          <article class="article">
+            <InlineSVG
+              src="/src/assets/image/doc-icon.svg"
+              class="img-noadjust float-left inline h-20 w-20 pr-6"
+            />
 
-              <Headline level={3} class="mb-2" variant="blue">
-                {manual.data.title}
-              </Headline>
-              <Content />
-            </article>
-            <Button size="sm-mobfull" color="nixblue" href={manual.data.url}>
-              Full {manual.data.title}
-            </Button>
-          </Card>
-        );
-      })
-    }
+            <Headline level={3} class="mb-2" variant="blue">
+              {manual.data.title}
+            </Headline>
+            <Content />
+          </article>
+          <Button size="sm-mobfull" color="nixblue" href={manual.data.url}>
+            Full {manual.data.title}
+          </Button>
+        </Card>
+      );
+    })}
   </Container>
   <Divider style="slope" mirrorY />
   <Segment variant="blue">
@@ -141,21 +142,19 @@ const learningResources = [
         Other learning resources
       </Headline>
       <div class="grid gap-12 pb-12 md:grid-cols-3 md:gap-4">
-        {
-          learningResources.map((item) => (
-            <div class="flex flex-col items-start">
-              <Headline level={3} class="mb-2" variant="white">
-                {item.title}
-              </Headline>
-              <Paragraph class="mb-4" variant="white">
-                {item.description}
-              </Paragraph>
-              <Button size="sm-mobfull" color="white-borders" href={item.url}>
-                {item.buttonText}
-              </Button>
-            </div>
-          ))
-        }
+        {learningResources.map((item) => (
+          <div class="flex flex-col items-start">
+            <Headline level={3} class="mb-2" variant="white">
+              {item.title}
+            </Headline>
+            <Paragraph class="mb-4" variant="white">
+              {item.description}
+            </Paragraph>
+            <Button size="sm-mobfull" color="white-borders" href={item.url}>
+              {item.buttonText}
+            </Button>
+          </div>
+        ))}
       </div>
     </Container>
   </Segment>

@@ -58,13 +58,11 @@ const Anchor = anchor && id ? 'a' : Fragment;
     ]}
   >
     <slot />
-    {
-      id && anchor && (
-        <Icon
-          class="invisible absolute top-1 -left-2 h-[1.1em] w-[1.1em] -translate-x-full group-hover:visible"
-          name="mdi:link"
-        />
-      )
-    }
+    {id && anchor && (
+      <Icon
+        class="invisible absolute top-1 -left-2 h-[1.1em] w-[1.1em] -translate-x-full group-hover:visible"
+        name="mdi:link"
+      />
+    )}
   </Anchor>
 </Tag>

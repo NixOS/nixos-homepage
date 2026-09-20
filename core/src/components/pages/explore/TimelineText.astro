@@ -25,9 +25,7 @@ import Tag from '../../ui/Tag.astro';
 <Headline level={2} variant="blue" class="mt-3">
   {heading}
 </Headline>
-<Paragraph size="lg">
-  {subHeading}
-</Paragraph>
+<Paragraph size="lg">{subHeading}</Paragraph>
 <div
   class="flex flex-wrap gap-1"
   class:list={[
@@ -37,19 +35,19 @@ import Tag from '../../ui/Tag.astro';
     },
   ]}
 >
-  {tags.map((tag) => <Tag href={tag.href}>{tag.text}</Tag>)}
+  {tags.map((tag) => (
+    <Tag href={tag.href}>{tag.text}</Tag>
+  ))}
 </div>
-{
-  paragraphs.map((paragraph, idx, array) => {
-    return (
-      <Paragraph class:list={[idx + 1 === array.length && 'mb-3']}>
-        {paragraph}
-        {idx + 1 === array.length && emphasis && (
-          <>
-            &nbsp;<span class="font-bold">{emphasis}</span>
-          </>
-        )}
-      </Paragraph>
-    );
-  })
-}
+{paragraphs.map((paragraph, idx, array) => {
+  return (
+    <Paragraph class:list={[idx + 1 === array.length && 'mb-3']}>
+      {paragraph}
+      {idx + 1 === array.length && emphasis && (
+        <>
+          &nbsp;<span class="font-bold">{emphasis}</span>
+        </>
+      )}
+    </Paragraph>
+  );
+})}

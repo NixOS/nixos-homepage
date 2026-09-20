@@ -37,46 +37,45 @@ function shuffleArray(array) {
       Consulting companies are available for professional support.
     </Paragraph>
     <Paragraph size="lg" class="leading-normal" center class="mb-8">
-      Please <Link
+      Please{' '}
+      <Link
         variant="blue"
         href="https://github.com/NixOS/nixos-homepage/edit/main/core/src/content/community/commercial-support.yaml"
-        >submit a pull request</Link
-      > to add your company. The list is randomized at each page load.
+      >
+        submit a pull request
+      </Link>{' '}
+      to add your company. The list is randomized at each page load.
     </Paragraph>
     <ul id="company-list" class="invisible m-4 flex flex-row flex-wrap gap-4">
-      {
-        shuffleArray(companies.data).map((company) => (
-          <Card tag="li" class="grow basis-72 xl:basis-80">
-            <a
-              href={company.href}
-              class="text-primary-black! space-y-4 no-underline!"
+      {shuffleArray(companies.data).map((company) => (
+        <Card tag="li" class="grow basis-72 xl:basis-80">
+          <a
+            href={company.href}
+            class="text-primary-black! space-y-4 no-underline!"
+          >
+            <img
+              src={company.logo}
+              alt={company.name + ' logo'}
+              class="bg-trans-white mx-auto h-80 rounded-2xl object-contain p-8"
+            />
+            <Headline
+              level={2}
+              variant="blue"
+              class="text-secondary-afghani-blue text-3xl leading-none font-bold"
             >
-              <img
-                src={company.logo}
-                alt={company.name + ' logo'}
-                class="bg-trans-white mx-auto h-80 rounded-2xl object-contain p-8"
-              />
-              <Headline
-                level={2}
-                variant="blue"
-                class="text-secondary-afghani-blue text-3xl leading-none font-bold"
-              >
-                {company.name}
-              </Headline>
-              <ul class="flex flex-wrap gap-2">
-                {company.locations.map((location) => (
-                  <li class="bg-secondary-afghani-blue-45 text-trans-white rounded-2xl px-3 py-0.5 font-bold">
-                    {location}
-                  </li>
-                ))}
-              </ul>
-              <Paragraph class="leading-normal">
-                {company.description}
-              </Paragraph>
-            </a>
-          </Card>
-        ))
-      }
+              {company.name}
+            </Headline>
+            <ul class="flex flex-wrap gap-2">
+              {company.locations.map((location) => (
+                <li class="bg-secondary-afghani-blue-45 text-trans-white rounded-2xl px-3 py-0.5 font-bold">
+                  {location}
+                </li>
+              ))}
+            </ul>
+            <Paragraph class="leading-normal">{company.description}</Paragraph>
+          </a>
+        </Card>
+      ))}
     </ul>
 
     <noscript>
