@@ -20,19 +20,22 @@ const sponsors = await getEntry('sponsors', 'info');
 <Layout title="Donate">
   <PageHeader text="Donate" />
   <Segment variant="white" container yPadding class="py-4 md:py-0">
-    <Headline level={2} variant="blue">Ways to Donate</Headline>
+    <Headline level={2} variant="blue">
+      Ways to Donate
+    </Headline>
     <div class="grid gap-8 pt-4 md:grid-cols-2">
       <div class="flex flex-col gap-4">
         <Card class="flex flex-col gap-2">
-          <Headline level={3} variant="blue">... using Open Collective</Headline
-          >
+          <Headline level={3} variant="blue">
+            ... using Open Collective
+          </Headline>
           <Paragraph>
             NixOS Foundation is using
-            <Link variant="blue" href="https://opencollective.com/"
-              >Open Collective</Link
-            >
-            to manage the finances so everyone can see where money comes from and
-            where money goes.
+            <Link variant="blue" href="https://opencollective.com/">
+              Open Collective
+            </Link>
+            to manage the finances so everyone can see where money comes from
+            and where money goes.
           </Paragraph>
           <Paragraph>
             With Open Collective you can make a <strong>single</strong> or
@@ -76,8 +79,7 @@ const sponsors = await getEntry('sponsors', 'info');
             The NixOS Foundation also accepts donations via SEPA bank transfer.
             Please send payments to:
           </Paragraph>
-          <pre
-            class="bg-primary-white text-nix-blue-darker my-2 rounded-3xl p-8 font-mono font-bold whitespace-pre-line">
+          <pre class="bg-primary-white text-nix-blue-darker my-2 rounded-3xl p-8 font-mono font-bold whitespace-pre-line">
 Stichting NixOS Foundation, Utrecht, The Netherlands
 
 IBAN: NL13 BUNQ 2061 2530 32
@@ -88,9 +90,9 @@ BIC:  BUNQNL2AXXX</pre>
             <i>
               If you would like to support us with amounts above 2000 euro per
               year, please contact us at
-              <Link variant="blue" href="mailto:foundation@nixos.org"
-                >foundation@nixos.org</Link
-              >
+              <Link variant="blue" href="mailto:foundation@nixos.org">
+                foundation@nixos.org
+              </Link>
               , as this will have tax implications.
             </i>
           </Paragraph>
@@ -134,7 +136,10 @@ BIC:  BUNQNL2AXXX</pre>
     innerClass="grid gap-8 md:grid-cols-2 py-4 md:py-0"
   >
     <div class="flex flex-col justify-center gap-4 leading-relaxed">
-      <Headline level={2} variant="blue"> The NixOS Foundation </Headline>
+      <Headline level={2} variant="blue">
+        {' '}
+        The NixOS Foundation{' '}
+      </Headline>
       <Paragraph variant="black" size="lg">
         The NixOS infrastructure, development and events are funded by its users
         and sponsors.
@@ -147,9 +152,11 @@ BIC:  BUNQNL2AXXX</pre>
       <Paragraph variant="black">
         Please consider donating a small amount every month to contribute to
         sustainable funding. Donations are handled by a nonprofit organization,
-        the <Link variant="blue" href="/community#foundation"
-          >NixOS Foundation</Link
-        >.
+        the{' '}
+        <Link variant="blue" href="/community#foundation">
+          NixOS Foundation
+        </Link>
+        .
       </Paragraph>
     </div>
     <div class="flex flex-col items-center justify-center">
@@ -167,54 +174,61 @@ BIC:  BUNQNL2AXXX</pre>
     innerClass="grid gap-8 md:grid-cols-2 py-4 md:py-0"
   >
     <div class="flex flex-col justify-center">
-      <div
-        class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-      >
-        {
-          sponsors.data.items.map((item) => (
-            <SponsorLogo
-              class={item.class}
-              href={item.href}
-              src={item.src}
-              alt={item.alt}
-            />
-          ))
-        }
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {sponsors.data.items.map((item) => (
+          <SponsorLogo
+            class={item.class}
+            href={item.href}
+            src={item.src}
+            alt={item.alt}
+          />
+        ))}
       </div>
     </div>
     <div class="flex flex-col justify-center gap-4">
-      <Headline level={2} variant="white">Acknowledgements</Headline>
+      <Headline level={2} variant="white">
+        Acknowledgements
+      </Headline>
       <Paragraph variant="white">
         The Nix package manager was developed by
-        <Link variant="white" href="https://edolstra.github.io/"
-          >Eelco Dolstra</Link
-        >
+        <Link variant="white" href="https://edolstra.github.io/">
+          Eelco Dolstra
+        </Link>
         as part of his PhD research in the
-        <Link variant="white" href="https://www.nwo.nl/en/projects/638001201"
-          >TraCE project</Link
-        >, funded by the
-        <Link variant="white" href="http://www.jacquard.nl/"
-          >Jacquard programme</Link
-        >
+        <Link variant="white" href="https://www.nwo.nl/en/projects/638001201">
+          TraCE project
+        </Link>
+        , funded by the
+        <Link variant="white" href="http://www.jacquard.nl/">
+          Jacquard programme
+        </Link>
         of the
-        <Link variant="white" href="http://www.nwo.npx-l/"
-          >Netherlands Organisation for Scientific Research</Link
-        >
+        <Link variant="white" href="http://www.nwo.npx-l/">
+          Netherlands Organisation for Scientific Research
+        </Link>
         (NWO) and SERC. The first prototype of NixOS was developed by
-        <Link variant="white" href="http://www.tjaldur.nl/">Armijn Hemel</Link>
-        as his master’s thesis project. Hydra, the Nix-based continuous build system,
-        was developed as part of the LaQuSo Buildfarm project, funded by
-        <Link variant="white" href="https://www.4tu.nl/nirict/">NIRICT</Link>
+        <Link variant="white" href="http://www.tjaldur.nl/">
+          Armijn Hemel
+        </Link>
+        as his master’s thesis project. Hydra, the Nix-based continuous build
+        system, was developed as part of the LaQuSo Buildfarm project, funded by
+        <Link variant="white" href="https://www.4tu.nl/nirict/">
+          NIRICT
+        </Link>
         and
-        <Link variant="white" href="http://www.laquso.com/">LaQuSo</Link>.
+        <Link variant="white" href="http://www.laquso.com/">
+          LaQuSo
+        </Link>
+        .
       </Paragraph>
       <Paragraph variant="white">
         The following companies and institutes have supported the development of
         NixOS and hosting for its infrastructure. We are very grateful for that!
         If you would like to support us as well, please contact
-        <Link variant="white" href="mailto:foundation@nixos.org"
-          >The NixOS Foundation</Link
-        >.
+        <Link variant="white" href="mailto:foundation@nixos.org">
+          The NixOS Foundation
+        </Link>
+        .
       </Paragraph>
     </div>
   </Segment>

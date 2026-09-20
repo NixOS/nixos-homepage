@@ -48,9 +48,7 @@ const { title, icon, color = 'light', links } = Astro.props;
 
 <div class={boxVariants({ color })}>
   <h3>
-    <button
-      class="font-heading text-nix-blue-dark feature-box-header flex w-4/5 cursor-pointer items-center justify-between text-2xl font-bold md:w-full"
-    >
+    <button class="font-heading text-nix-blue-dark feature-box-header flex w-4/5 cursor-pointer items-center justify-between text-2xl font-bold md:w-full">
       {title}
     </button>
   </h3>
@@ -58,19 +56,17 @@ const { title, icon, color = 'light', links } = Astro.props;
     <div class="flex-1">
       <slot />
     </div>
-    {
-      links && (
-        <ul class="flex gap-2">
-          {Object.entries(links).map(([text, href]) => (
-            <li>
-              <Link class={linkVariants({ color })} href={href}>
-                {text}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )
-    }
+    {links && (
+      <ul class="flex gap-2">
+        {Object.entries(links).map(([text, href]) => (
+          <li>
+            <Link class={linkVariants({ color })} href={href}>
+              {text}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
   {icon && <Icon name={icon} class={iconVariants({ color })} />}
 </div>

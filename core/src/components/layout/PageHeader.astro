@@ -13,18 +13,14 @@ import Link from '../util/Link.astro';
 import Container from './Container.astro';
 ---
 
-<div
-  class="md:inline-svg-header-nixdarkblue bg-secondary-afghani-blue-45 block bg-cover bg-bottom bg-no-repeat py-16 md:bg-transparent md:py-24"
->
+<div class="md:inline-svg-header-nixdarkblue bg-secondary-afghani-blue-45 block bg-cover bg-bottom bg-no-repeat py-16 md:bg-transparent md:py-24">
   <Container class="text-primary-white grid grid-cols-3">
     <div class="col-span-2 flex flex-col gap-4">
-      {
-        parentPath && (
-          <Link variant="white" href={parentPath}>
-            <span class="text-nixblue">←</span> Back
-          </Link>
-        )
-      }
+      {parentPath && (
+        <Link variant="white" href={parentPath}>
+          <span class="text-nixblue">←</span> Back
+        </Link>
+      )}
       <Headline level={1} variant="white">
         {text}
       </Headline>
