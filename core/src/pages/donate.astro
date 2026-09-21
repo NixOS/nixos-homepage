@@ -60,7 +60,7 @@ const tiers = await getEntry('sponsors', 'tiers');
           <Button
             color="semidarkblue"
             size="sm"
-            href="/sponsorship"
+            href="#sponsorship-tiers"
             classList={['mt-1']}
           >
             Read more about Sponsorships
@@ -89,7 +89,7 @@ const tiers = await getEntry('sponsors', 'tiers');
           <Button
             color="semidarkblue"
             size="sm"
-            href="/sponsorship"
+            href="#ways-to-donate"
             classList={['mt-1']}
           >
             Read more about Ways to Donate
@@ -100,7 +100,7 @@ const tiers = await getEntry('sponsors', 'tiers');
   </Segment>
   <Divider style="slope" mirrorX />
   <Segment variant="white" container yPadding innerClass="py-4 md:py-0">
-    <Headline level={3} variant="blue">
+    <Headline level={3} variant="blue" id="sponsorship-tiers">
       Sponsorship Tiers
     </Headline>
     <Paragraph variant="black" size="lg" class="mt-2 mb-2">
@@ -157,10 +157,9 @@ const tiers = await getEntry('sponsors', 'tiers');
   </Segment>
   <Divider style="slope" mirrorY />
   <Segment variant="blue" container yPadding innerClass="py-4 md:py-0">
-    <Headline level={3} variant="white">
+    <Headline level={3} variant="white" id="ways-to-donate">
       Ways to donate
     </Headline>
-    <Paragraph size="lg" class="mt-4" />
     <div class="grid gap-8 md:grid-cols-2">
       <Card class="flex flex-col gap-2" variant="dark">
         <Headline level={3} variant="white">
@@ -168,7 +167,7 @@ const tiers = await getEntry('sponsors', 'tiers');
         </Headline>
         <Paragraph variant="white">
           NixOS Foundation is using
-          <Link variant="white" href="https://opencollective.com/">
+          <Link variant="white" href="https://opencollective.com/nixos">
             Open Collective
           </Link>
           to manage the finances so everyone can see where money comes from and
@@ -199,7 +198,7 @@ const tiers = await getEntry('sponsors', 'tiers');
     BIC:  BUNQNL2AXXX</pre>
       </Card>
     </div>
-    <Paragraph size="sm" variant="white" class="col-span-2 mt-2">
+    <Paragraph size="sm" variant="white" class="mt-2">
       * Please add your name and purpose (donation) in the description of the
       transfer.
       <i>
@@ -271,7 +270,7 @@ const tiers = await getEntry('sponsors', 'tiers');
           Jacquard programme
         </Link>
         of the
-        <Link variant="white" href="http://www.nwo.npx-l/">
+        <Link variant="white" href="https://www.nwo.nl/">
           Netherlands Organisation for Scientific Research
         </Link>
         (NWO) and SERC. The first prototype of NixOS was developed by
