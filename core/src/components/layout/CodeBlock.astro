@@ -15,7 +15,8 @@ const { lines, type = 'code' } = Astro.props;
       'border-secondary-afghani-blue-95 bg-secondary-afghani-blue-95 text-primary-black font-mono font-[500] shadow-inner':
         type === 'storepath',
     },
-  ]}>
+  ]}
+>
 {lines.map((line, idx, {length}) => {
   if (length - 1 === idx) {
     return <code class="font-bold bg-transparent border-none w-full p-0">{line.shellPrompt}</code><span>{line.code}</span>} else {

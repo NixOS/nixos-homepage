@@ -78,54 +78,50 @@ const setIconSize = (size: string) => {
 };
 ---
 
-{
-  href ? (
-    <>
-      <Link
-        href={href}
-        class:list={[
-          'no-underline!',
-          buttonVariants({ color, size }),
-          nonPublic && 'inline-flex items-center gap-2',
-          icon && 'flex items-center justify-start gap-4',
-          !icon && 'flex items-center justify-center gap-1',
-          classList,
-        ]}
-        {...other}
-      >
-        {icon && (
-          <Icon name={icon} size={setIconSize(size)} aria-hidden="true" />
-        )}
-        {nonPublic && <Icon name="mdi:lock" aria-label="not public" />}
-        {label || <slot />}
-        {!icon && (
-          <Icon
-            name="mdi:chevron-right"
-            aria-hidden="true"
-            size={setIconSize(size)}
-          />
-        )}
-      </Link>
-      {shaHref && (
-        <SHA href={shaHref} classList={shaClassList}>
-          {shaText}
-        </SHA>
-      )}
-    </>
-  ) : (
-    <button
-      type={type}
+{href ? (
+  <>
+    <Link
+      href={href}
       class:list={[
-        'cursor-pointer no-underline!',
+        'no-underline!',
         buttonVariants({ color, size }),
         nonPublic && 'inline-flex items-center gap-2',
         icon && 'flex items-center justify-start gap-4',
+        !icon && 'flex items-center justify-center gap-1',
         classList,
       ]}
       {...other}
     >
-      {icon && <Icon name={icon} aria-hidden="true" />}
+      {icon && <Icon name={icon} size={setIconSize(size)} aria-hidden="true" />}
+      {nonPublic && <Icon name="mdi:lock" aria-label="not public" />}
       {label || <slot />}
-    </button>
-  )
-}
+      {!icon && (
+        <Icon
+          name="mdi:chevron-right"
+          aria-hidden="true"
+          size={setIconSize(size)}
+        />
+      )}
+    </Link>
+    {shaHref && (
+      <SHA href={shaHref} classList={shaClassList}>
+        {shaText}
+      </SHA>
+    )}
+  </>
+) : (
+  <button
+    type={type}
+    class:list={[
+      'cursor-pointer no-underline!',
+      buttonVariants({ color, size }),
+      nonPublic && 'inline-flex items-center gap-2',
+      icon && 'flex items-center justify-start gap-4',
+      classList,
+    ]}
+    {...other}
+  >
+    {icon && <Icon name={icon} aria-hidden="true" />}
+    {label || <slot />}
+  </button>
+)}

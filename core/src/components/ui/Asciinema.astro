@@ -31,23 +31,20 @@ const demoId = 'asciinema-demo-' + src.split('/').pop().split('.')[0];
 ---
 
 <>
-  {
-    title && (
-      <a href={`#${demoId}`} class="no-underline!" id={`${demoId}-link`}>
-        <Headline level={3} variant="blue">
-          {title}
-        </Headline>
-      </a>
-    )
-  }
+  {title && (
+    <a href={`#${demoId}`} class="no-underline!" id={`${demoId}-link`}>
+      <Headline level={3} variant="blue">
+        {title}
+      </Headline>
+    </a>
+  )}
   <asciinema-player
     id={demoId}
     class={extraClasses}
     data-src={src}
     data-title={title}
     data-settings={JSON.stringify({ ...defaultSettings, ...settings })}
-  >
-  </asciinema-player>
+  ></asciinema-player>
 </>
 
 <script>

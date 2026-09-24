@@ -29,23 +29,21 @@ const { Content } = await render(entry);
     <article class="article">
       <Content />
     </article>
-    {
-      entry.data.subteams && entry.data.subteams.length > 0 && (
-        <>
-          <div class="flex flex-wrap gap-4 pt-4">
-            {entry.data.subteams.map((subteam) => (
-              <MembersDisplay
-                key={subteam.name}
-                title={subteam.name}
-                paragraph={subteam.paragraph}
-                class="mb-4"
-                members={subteam.members}
-                isSubteam
-              />
-            ))}
-          </div>
-        </>
-      )
-    }
+    {entry.data.subteams && entry.data.subteams.length > 0 && (
+      <>
+        <div class="flex flex-wrap gap-4 pt-4">
+          {entry.data.subteams.map((subteam) => (
+            <MembersDisplay
+              key={subteam.name}
+              title={subteam.name}
+              paragraph={subteam.paragraph}
+              class="mb-4"
+              members={subteam.members}
+              isSubteam
+            />
+          ))}
+        </div>
+      </>
+    )}
   </Container>
 </Layout>

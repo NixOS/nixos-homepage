@@ -228,11 +228,12 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     </Paragraph>
     <Paragraph>
       Instances of abusive, harassing, or otherwise unacceptable behavior may be
-      reported by contacting the moderation team at <Link
-        variant="blue"
-        href="mailto:moderation@nixos.org">moderation@nixos.org</Link
-      >. The moderation team is obligated to maintain confidentiality with
-      regard to the reporter of an incident.
+      reported by contacting the moderation team at{' '}
+      <Link variant="blue" href="mailto:moderation@nixos.org">
+        moderation@nixos.org
+      </Link>
+      . The moderation team is obligated to maintain confidentiality with regard
+      to the reporter of an incident.
     </Paragraph>
   </Container>
   <Container>
@@ -246,63 +247,67 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
     </Paragraph>
     <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
       <div class="space-y-2 md:col-span-2">
-        <Headline level={3} variant="blue"> Official spaces </Headline>
+        <Headline level={3} variant="blue">
+          {' '}
+          Official spaces{' '}
+        </Headline>
         <Paragraph>
           These spaces are monitored and moderated by the NixOS Moderation Team.
           This means they are moderated in such a way that they follow the
           standards and moral values of our community. You can find out more
-          about our moderation team <Link
-            variant="blue"
-            href="/community/teams/moderation">here</Link
-          >.
+          about our moderation team{' '}
+          <Link variant="blue" href="/community/teams/moderation">
+            here
+          </Link>
+          .
         </Paragraph>
         <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-2">
-          {
-            platformsMain.map((platform, i) => (
-              <CommunityLinkItem
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-                description={platform.description}
-                class={i === 0 && 'md:col-span-2'}
-              />
-            ))
-          }
+          {platformsMain.map((platform, i) => (
+            <CommunityLinkItem
+              href={platform.href}
+              name={platform.name}
+              iconName={platform.iconName}
+              description={platform.description}
+              class={i === 0 && 'md:col-span-2'}
+            />
+          ))}
         </ul>
       </div>
       <div class="col-span-1 space-y-2">
-        <Headline level={3} variant="blue"> Official social-media </Headline>
+        <Headline level={3} variant="blue">
+          {' '}
+          Official social-media{' '}
+        </Headline>
         <Paragraph>
           These spaces are maintained by our NixOS Marketing Team though not
           monitored and not moderated by the NixOS Moderation Team.
         </Paragraph>
         <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4">
-          {
-            socialMediaMain.map((platform) => (
-              <CommunityLinkItem
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-              />
-            ))
-          }
+          {socialMediaMain.map((platform) => (
+            <CommunityLinkItem
+              href={platform.href}
+              name={platform.name}
+              iconName={platform.iconName}
+            />
+          ))}
         </ul>
       </div>
       <div class="space-y-2 md:col-span-3">
-        <Headline level={3} variant="blue"> Our calendars </Headline>
+        <Headline level={3} variant="blue">
+          {' '}
+          Our calendars{' '}
+        </Headline>
         <Paragraph>
           We use these calendars to schedule events, meetings, and other.
         </Paragraph>
         <ul class="mt-4 grid flex-wrap gap-4 md:grid-cols-3">
-          {
-            calendarsMain.map((platform) => (
-              <CommunityLinkItem
-                href={platform.href}
-                name={platform.name}
-                iconName={platform.iconName}
-              />
-            ))
-          }
+          {calendarsMain.map((platform) => (
+            <CommunityLinkItem
+              href={platform.href}
+              name={platform.name}
+              iconName={platform.iconName}
+            />
+          ))}
         </ul>
       </div>
     </div>
@@ -316,18 +321,16 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       spaces, though does not control or enforce our community values.
     </Paragraph>
     <ul class="mt-4 grid grid-cols-3 flex-wrap gap-4">
-      {
-        platformsOutside.map((platform) => (
-          <CommunityLinkItem
-            href={platform.href}
-            name={platform.name}
-            iconName={platform.iconName}
-            description={platform.description}
-            type="mobile_icon_desktop_name"
-            variant="community"
-          />
-        ))
-      }
+      {platformsOutside.map((platform) => (
+        <CommunityLinkItem
+          href={platform.href}
+          name={platform.name}
+          iconName={platform.iconName}
+          description={platform.description}
+          type="mobile_icon_desktop_name"
+          variant="community"
+        />
+      ))}
     </ul>
     <Headline level={3} variant="blue" class="mt-4 mb-2" id="forks">
       The wider ecosystem
@@ -337,32 +340,35 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       functional package managers (sorted chronologically by appearance):
     </Paragraph>
     <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
-      {
-        widerEcosystem.map((platform) => (
-          <CommunityLinkItem
-            href={platform.href}
-            name={platform.name}
-            iconName={platform.iconName}
-            description={platform.description}
-            type="mobile_icon_desktop_name"
-            variant="community"
-          />
-        ))
-      }
+      {widerEcosystem.map((platform) => (
+        <CommunityLinkItem
+          href={platform.href}
+          name={platform.name}
+          iconName={platform.iconName}
+          description={platform.description}
+          type="mobile_icon_desktop_name"
+          variant="community"
+        />
+      ))}
     </ul>
   </Container>
   <Banner wrapperClasses="my-8">
-    If you are looking for professional help, <a
-      href="/community/commercial-support">check out companies</a
-    > that offer Nix related services.
+    If you are looking for professional help,{' '}
+    <a href="/community/commercial-support">check out companies</a> that offer
+    Nix related services.
   </Banner>
   <Divider mirrorY />
   <div class="bg-secondary-afghani-blue-45 text-primary-white py-8">
     <Container>
-      <Headline level={2} variant="white"> NixCon </Headline>
+      <Headline level={2} variant="white">
+        {' '}
+        NixCon{' '}
+      </Headline>
       <Paragraph variant="white" class="mb-4" size="xl">
         The
-        <Link variant="white" href="/community/teams/nixcon">NixCon Team</Link>
+        <Link variant="white" href="/community/teams/nixcon">
+          NixCon Team
+        </Link>
         organizes a conference once a year.
       </Paragraph>
       <div class="grid gap-4 md:grid-cols-3">
@@ -383,18 +389,14 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
             Previous Conferences
           </Headline>
           <div class="mt-4 grid gap-4 md:grid-cols-2">
-            {
-              nixcons
-                .slice(1)
-                .map((nixcon) => (
-                  <NixConEntry
-                    title={nixcon.title}
-                    date={nixcon.date}
-                    description={nixcon.description}
-                    href={nixcon.href}
-                  />
-                ))
-            }
+            {nixcons.slice(1).map((nixcon) => (
+              <NixConEntry
+                title={nixcon.title}
+                date={nixcon.date}
+                description={nixcon.description}
+                href={nixcon.href}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -402,73 +404,81 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
   </div>
   <Divider />
   <Container>
-    <Headline level={2} variant="blue" class="mt-8"> Meetups </Headline>
+    <Headline level={2} variant="blue" class="mt-8">
+      {' '}
+      Meetups{' '}
+    </Headline>
     <Paragraph size="xl">
       Discover a comprehensive list of
-      <Link variant="blue" href="https://nix.ug/"> Nix User Groups </Link>
+      <Link variant="blue" href="https://nix.ug/">
+        {' '}
+        Nix User Groups{' '}
+      </Link>
     </Paragraph>
-    <div
-      class="mt-8 grid auto-cols-fr gap-8 bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat text-center text-lg md:grid-flow-col md:gap-0"
-    >
+    <div class="mt-8 grid auto-cols-fr gap-8 bg-[url(/images/world-map.svg)] bg-contain bg-no-repeat text-center text-lg md:grid-flow-col md:gap-0">
       <div>
-        <Headline level={3} variant="blue"> America </Headline>
+        <Headline level={3} variant="blue">
+          {' '}
+          America{' '}
+        </Headline>
         <ul class="mt-2 space-y-4">
-          {
-            meetups.data.america.map((meetup) => (
-              <li>
-                <Link variant="blue" href={meetup.href}>
-                  {meetup.location}
-                </Link>
-              </li>
-            ))
-          }
+          {meetups.data.america.map((meetup) => (
+            <li>
+              <Link variant="blue" href={meetup.href}>
+                {meetup.location}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
       <div>
-        <Headline level={3} variant="blue"> Europe </Headline>
+        <Headline level={3} variant="blue">
+          {' '}
+          Europe{' '}
+        </Headline>
         <ul class="mt-2 space-y-4">
-          {
-            meetups.data.europe.map((meetup) => (
-              <li>
-                <Link variant="blue" href={meetup.href}>
-                  {meetup.location}
-                </Link>
-              </li>
-            ))
-          }
+          {meetups.data.europe.map((meetup) => (
+            <li>
+              <Link variant="blue" href={meetup.href}>
+                {meetup.location}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
       <div>
-        <Headline level={3} variant="blue"> Asia </Headline>
+        <Headline level={3} variant="blue">
+          {' '}
+          Asia{' '}
+        </Headline>
         <ul class="mt-2 space-y-4">
-          {
-            meetups.data.asia.map((meetup) => (
-              <li>
-                <Link variant="blue" href={meetup.href}>
-                  {meetup.location}
-                </Link>
-              </li>
-            ))
-          }
+          {meetups.data.asia.map((meetup) => (
+            <li>
+              <Link variant="blue" href={meetup.href}>
+                {meetup.location}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
     <div class="mt-16 flex flex-wrap-reverse gap-8">
       <div class="flex flex-1 flex-col items-start justify-center gap-4">
-        <Headline level={2} variant="blue"> RFC Process </Headline>
+        <Headline level={2} variant="blue">
+          {' '}
+          RFC Process{' '}
+        </Headline>
         <Paragraph class="mb-3">
           The "RFC" (request for comments) process is intended to provide a
           consistent and controlled path for new features to enter the Nix
           language, packages and OS, so that all community can be confident
           about the direction the ecosystem is evolving in.
         </Paragraph>
-        <Button color="nixblue" size="lg" href="https://github.com/NixOS/rfcs"
-          >Learn more</Button
-        >
+        <Button color="nixblue" size="lg" href="https://github.com/NixOS/rfcs">
+          Learn more
+        </Button>
       </div>
-      <div
-        class="mt-2 block w-full md:w-3/6 md:max-w-2xl md:min-w-3/6 md:flex-0"
-      >
+      <div class="mt-2 block w-full md:w-3/6 md:max-w-2xl md:min-w-3/6 md:flex-0">
         <RfcDiagram />
       </div>
     </div>
@@ -482,16 +492,14 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         Teams
       </Headline>
       <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-3">
-        {
-          teams.map((team, i) => (
-            <TeamLinkItem
-              href={'/community/teams/' + team.id.split('_')[1]}
-              name={team.data.name}
-              iconSource={`/images/teams/${team.id.split('_')[1]}.svg`}
-              description={team.data.description}
-            />
-          ))
-        }
+        {teams.map((team, i) => (
+          <TeamLinkItem
+            href={'/community/teams/' + team.id.split('_')[1]}
+            name={team.data.name}
+            iconSource={`/images/teams/${team.id.split('_')[1]}.svg`}
+            description={team.data.description}
+          />
+        ))}
       </ul>
     </Container>
   </div>
@@ -506,27 +514,23 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         />
       </div>
       <div class="mt-4 mb-4 inline-block text-left">
-        <h2
-          class="font-heading text-secondary-afghani-blue text-3xl font-bold md:text-center"
-        >
+        <h2 class="font-heading text-secondary-afghani-blue text-3xl font-bold md:text-center">
           Board members:
         </h2>
         <ul class="mx-auto mt-2 list-disc pl-8 md:w-72 md:pl-10">
-          {
-            teams
-              .find((team) => team.id.split('_')[1] === 'foundation-board')
-              .data.members.map((member) => (
-                <li class="mb-1">
-                  {member.name}
-                  {member.title && (
-                    <>
-                      &mdash;
-                      {member.title}
-                    </>
-                  )}
-                </li>
-              ))
-          }
+          {teams
+            .find((team) => team.id.split('_')[1] === 'foundation-board')
+            .data.members.map((member) => (
+              <li class="mb-1">
+                {member.name}
+                {member.title && (
+                  <>
+                    &mdash;
+                    {member.title}
+                  </>
+                )}
+              </li>
+            ))}
         </ul>
       </div>
     </div>
@@ -546,21 +550,23 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       <ul class="ml-4 list-disc">
         <Paragraph tag="li">
           <Link variant="blue" href="https://cache.nixos.org">
-            cache.nixos.org</Link
-          >
-          - the NixOS binary cache, containing over 120TB of prebuilt Nix packages.
+            cache.nixos.org
+          </Link>
+          - the NixOS binary cache, containing over 120TB of prebuilt Nix
+          packages.
         </Paragraph>
         <Paragraph tag="li">
           <Link variant="blue" href="https://hydra.nixos.org">
-            hydra.nixos.org</Link
-          >
-          - a Nix build farm, consisting of hundreds of macOS, x86-64 (Linux) and
-          aarch64 (Linux) build cores. Hydra executes over 350,000 builds each week.
+            hydra.nixos.org
+          </Link>
+          - a Nix build farm, consisting of hundreds of macOS, x86-64 (Linux)
+          and aarch64 (Linux) build cores. Hydra executes over 350,000 builds
+          each week.
         </Paragraph>
         <Paragraph tag="li">
           <Link variant="blue" href="/community/event-funding">
-            Event Funding</Link
-          >
+            Event Funding
+          </Link>
         </Paragraph>
       </ul>
       <Paragraph>
@@ -569,9 +575,8 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         The KvK number is <code>63520583</code>.
       </Paragraph>
       <Paragraph>
-        You can contact the foundation by writing an email to <a
-          href="mailto:foundation@nixos.org">foundation@nixos.org</a
-        >.
+        You can contact the foundation by writing an email to{' '}
+        <a href="mailto:foundation@nixos.org">foundation@nixos.org</a>.
       </Paragraph>
     </div>
   </Container>

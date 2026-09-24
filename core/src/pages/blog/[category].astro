@@ -38,10 +38,8 @@ const upperCaseCategory = category.charAt(0).toUpperCase() + category.slice(1);
   <PageHeader text={`Blog / ${upperCaseCategory}`} />
   <Container class="py-8">
     <BlogList />
-    {
-      entries.map(async (post) => {
-        return <BlogListEntry post={post} />;
-      })
-    }
+    {entries.map(async (post) => {
+      return <BlogListEntry post={post} />;
+    })}
   </Container>
 </Layout>
