@@ -10,7 +10,7 @@ authors:
     discourse: reyows.evets
 ---
 
-AWS has renewed its support for `cache.nixos.org`, the public Nix binary cache, covering its hosting costs for another year. The cache is a foundational piece of Nix infrastructure, serving prebuilt packages to Nix and NixOS users worldwide at enormous scale. This is an excellent excuse for us to publish an article exploring what the binary cache is, how it works, how packages get into it, and why its architecture has remained both simple and effective for nearly two decades. This article also looks at the relationship between the cache and Nix’s core design, the infrastructure required to operate `cache.nixos.org` at global scale, and (most important) the people and organizations that help keep the binary cache running.
+AWS has renewed its support for `cache.nixos.org`, the public Nix binary cache, covering its hosting costs for another year. The cache is a foundational piece of Nix infrastructure, serving prebuilt packages to Nix and NixOS users worldwide at global scale.
 
 A few years ago, AWS's Open Source Strategy and Marketing group, joined by its OpenData group, stepped in at a crucial moment to help the NixOS Foundation cover a budget gap.
 
