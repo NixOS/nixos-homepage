@@ -149,7 +149,7 @@ To answer these questions in order:
 
 The cache is there because S3 works, because the rational, non-disruptive choice is to keep it where it works, and (yes) because AWS has a proven track record supporting the binary cache.
 
-The backstory to this is that even though `cache.nixos.org` has been hosted on S3 for almost two decades, Amazon and AWS weren’t always footing the bill. About two years ago, one of the NixOS Foundation’s principal financial sponsors discontinued its support. This happened just as usage of Nix was starting to ramp up, causing S3 costs to ramp up too. The NixOS Foundation responded to this crisis with radical transparency, opening its finances and asking both the Nix community and commercial vendors for help. The company we work for, Flox, was one of the vendors that stepped up, along with others in the Nix-adjacent space. And AWS Open Source stepped up in a big way, pledging credits to help fund `cache.nixos.org` for the fiscal year.
+The backstory to this is that even though `cache.nixos.org` has been hosted on S3 for almost two decades, Amazon and AWS weren’t always footing the bill. About three years ago, one of the NixOS Foundation’s principal financial sponsors discontinued its support. This happened just as usage of Nix was starting to ramp up, causing S3 costs to ramp up too. The NixOS Foundation responded to this crisis with radical transparency, opening its finances and asking both the Nix community and commercial vendors for help. The company we work for, Flox, was one of the vendors that stepped up, along with others in the Nix-adjacent space. And AWS Open Source stepped up in a big way, pledging credits to help fund `cache.nixos.org` for the fiscal year.
 
 ## Care and Feeding of the Binary Cache
 
