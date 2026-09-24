@@ -12,7 +12,7 @@ authors:
 
 AWS has renewed its support for `cache.nixos.org`, the public Nix binary cache, covering its hosting costs for another year. The cache is a foundational piece of Nix infrastructure, serving prebuilt packages to Nix and NixOS users worldwide at global scale.
 
-A few years ago, AWS's Open Source Strategy and Marketing group, joined by its OpenData group, stepped in at a crucial moment to help the NixOS Foundation cover a budget gap.
+In 2023, AWS's Open Source Strategy and Marketing group, joined by its Open Data group, helped the NixOS Foundation cover a budget gap.
 
 The relationship was kicked off by [a call-to-action post on NixOS Discourse](https://discourse.nixos.org/t/nixos-s3-short-term-resolution/29413), which led to a conversation between Ron Efroni–then a NixOS Foundation board member; now its president–and [Dave Nalley](https://www.linkedin.com/in/davidnalley/), director of developer experience with AWS. In just two weeks, and with heroic assists from several contributors across the Nix community, AWS agreed to sponsor the hosting costs for the Nix public binary cache for a 12-month period.
 
