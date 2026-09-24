@@ -17,6 +17,7 @@ import InlineSVG from '../components/util/InlineSVG.astro';
 
 const sponsors = await getEntry('sponsors', 'info');
 const tiers = await getEntry('sponsors', 'tiers');
+const contactHref = 'mailto:foundation@nixos.org';
 ---
 
 <Layout title="Backing">
@@ -106,9 +107,9 @@ const tiers = await getEntry('sponsors', 'tiers');
     <Paragraph variant="black" size="lg" class="mt-2 mb-4">
       We offer a variety of sponsorship tiers to support NixOS development.
     </Paragraph>
-    <ul class="grid md:grid-cols-4 mb-4 gap-4 md:gap-0">
+    <ul class="grid md:grid-cols-4 gap-4 md:gap-0">
       {tiers.data.map((tier) => (
-        <li class="group flex flex-col justify-between">
+        <li class="group flex flex-col">
           <div class="flex flex-1 flex-col">
             <h4 class="bg-secondary-afghani-blue-45 text-primary-white flex items-center justify-between rounded-t-xl p-2 text-lg font-bold md:rounded-t-none md:group-first:rounded-tl-xl md:group-last:rounded-tr-xl">
               {tier.name}{' '}
@@ -116,7 +117,13 @@ const tiers = await getEntry('sponsors', 'tiers');
                 {tier.contribution}
               </span>
             </h4>
-            <ul class="bg-secondary-afghani-blue-95 flex-1 py-1">
+            <ul
+              class:list={[
+                'bg-secondary-afghani-blue-95 flex-1 py-1',
+                !tier.requirements &&
+                  'rounded-b-xl md:rounded-b-none md:group-first:rounded-bl-xl md:group-last:rounded-br-xl',
+              ]}
+            >
               {tier.benefits.map((benefit) => (
                 <li class="border-b-secondary-afghani-blue-45 inline-flex w-full items-center gap-2 border-b-1 p-2 last:border-b-0 md:min-h-16">
                   <Icon
@@ -129,22 +136,21 @@ const tiers = await getEntry('sponsors', 'tiers');
             </ul>
           </div>
           {tier.requirements && (
-            <p class="bg-secondary-afghani-blue-35 text-primary-white px-2 py-1 text-sm">
+            <p class="bg-secondary-afghani-blue-35 text-primary-white rounded-b-xl px-2 py-1 text-sm md:rounded-b-none md:group-first:rounded-bl-xl md:group-last:rounded-br-xl">
               {tier.requirements}
             </p>
           )}
-          <Button
-            color="semidarkblue"
-            classList={[
-              'rounded-none rounded-b-xl md:rounded-b-none md:group-first:rounded-bl-xl md:group-last:rounded-br-xl',
-            ]}
-            href="mailto:foundation@nixos.org"
-          >
-            Get in touch
-          </Button>
         </li>
       ))}
     </ul>
+    <Card class="mt-4 mb-4 flex flex-col md:items-center justify-between gap-3 p-6 md:flex-row">
+      <Paragraph class="font-bold text-lg md:text-xl">
+        Interested in becoming a sponsor? Do not hesitate to reach out to us
+      </Paragraph>
+      <Button color="semidarkblue" size="sm" href={contactHref}>
+        Get in touch
+      </Button>
+    </Card>
     <Headline level={3} variant="blue" class="mt-6">
       Are you a university or startup?
     </Headline>
@@ -204,7 +210,7 @@ const tiers = await getEntry('sponsors', 'tiers');
       <i>
         If you would like to support us with amounts above 2000 euro per year,
         please contact us at
-        <Link variant="white" href="mailto:foundation@nixos.org">
+        <Link variant="white" href={contactHref}>
           foundation@nixos.org
         </Link>
         , as this will have tax implications.
@@ -293,7 +299,7 @@ const tiers = await getEntry('sponsors', 'tiers');
         supported the development of NixOS and hosting for its infrastructure.
         We are very grateful for that! If you would like to support us as well,
         please contact
-        <Link variant="white" href="mailto:foundation@nixos.org">
+        <Link variant="white" href={contactHref}>
           The NixOS Foundation
         </Link>
         .
