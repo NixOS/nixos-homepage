@@ -16,7 +16,7 @@ In 2023, AWS's Open Source Strategy and Marketing group, joined by its Open Data
 
 The search for a replacement began when LogicBlox's sponsorship ended, and it ran through a conversation between Ron Efroni, then a NixOS Foundation board member and now its president, and [Dave Nalley](https://www.linkedin.com/in/davidnalley/), director of developer experience at AWS. The resolution came together in about two weeks, with sustained work from contributors across the Nix community, and AWS agreed to cover the cache's hosting costs for 12 months. Efroni [announced it on Discourse](https://discourse.nixos.org/t/nixos-s3-short-term-resolution/29413) in June 2023.
 
-Since then, AWS picked up the hosting costs for the [2023, 2024, and 2025 fiscal years](https://discourse.nixos.org/t/2025-s3-sponsorship-more-resources-for-a-sustainable-nix/67019), too. For 2026, AWS agreed once again to cover the cost of hosting the binary cache for the next 12 months.
+AWS renewed that support for 2024 and [2025](https://discourse.nixos.org/t/2025-s3-sponsorship-more-resources-for-a-sustainable-nix/67019), and has committed again for 2026.
 
 This article explains what the Nix binary cache is, why it matters, how it works, and how it’s architected. It also talks a little bit about Nix itself, showing how the properties that make Nix _Nix_—atomicity, isolation, determinism, input-addressing, and declarativity—are integral to the design and operation of `cache.nixos.org`.
 
