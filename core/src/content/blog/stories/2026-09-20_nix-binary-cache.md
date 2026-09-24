@@ -18,7 +18,7 @@ The search for a replacement began when LogicBlox's sponsorship ended, and it ra
 
 AWS renewed that support for 2024 and [2025](https://discourse.nixos.org/t/2025-s3-sponsorship-more-resources-for-a-sustainable-nix/67019), and has committed again for 2026.
 
-This article explains what the Nix binary cache is, why it matters, how it works, and how it’s architected. It also talks a little bit about Nix itself, showing how the properties that make Nix _Nix_—atomicity, isolation, determinism, input-addressing, and declarativity—are integral to the design and operation of `cache.nixos.org`.
+This article explains what the Nix binary cache is, why it matters, and how it works. It also covers Nix itself, and how input-addressed store paths produce the guarantees that shape the cache's design: atomicity, consistency, isolation, durability, and determinism.
 
 ## About `cache.nixos.org`
 
