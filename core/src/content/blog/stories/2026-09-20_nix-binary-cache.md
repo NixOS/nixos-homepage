@@ -22,15 +22,9 @@ This article explains what the Nix binary cache is, why it matters, how it works
 
 ## About `cache.nixos.org`
 
-The Nix binary cache is the authoritative package repository for both NixOS and the Nix package manager.
+The cache is the authoritative package repository for both NixOS and the Nix package manager. Without it, every Nix client would build every package from source, which can take hours or days and needs hardware many users do not have. Most Nix workflows would stop.
 
-If it did not exist, every Nix client everywhere would need to build every package from source. Not only can this take hours, days, or even weeks, it can also require resources some users just don't have.
-
-So without `cache.nixos.org`, most Nix-based workflows would grind to a halt.
-
-The role of the binary cache is comparable to package repositories maintained by the Debian, Fedora, and Homebrew projects. Just like with those repos, clients rely on the Nix binary cache (also known as `cache.nixos.org`) to download prebuilt software, saving them the time and trouble of building it from source themselves. At this level of abstraction, the [Nix archives (NAR)](https://nix.dev/manual/nix/stable/protocols/nix-archive) you get from `cache.nixos.org` are comparable to the `.deb` and `.rpm` packages you get from Debian and Fedora repos, or the bottles you get from Homebrew. In a more fundamental sense, however, they’re radically different.
-
-Let’s talk a little bit about that difference.
+In that role the cache resembles the repositories Debian, Fedora, and Homebrew maintain: clients download prebuilt software instead of building it themselves. The [Nix archive (NAR)](https://nix.dev/manual/nix/stable/protocols/nix-archive) you fetch from `cache.nixos.org` plays roughly the part a `.deb`, an `.rpm`, or a Homebrew bottle does. Underneath, they have almost nothing in common.
 
 ## How Nix Is Different
 
