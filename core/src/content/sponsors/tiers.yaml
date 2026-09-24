@@ -1,5 +1,5 @@
 - name: Small Orgs
-  contribution: €10,000 +
+  contribution: €10,000/yr +
   benefits:
     - description: Logo on the website
       icon: mdi:image-outline
@@ -10,7 +10,7 @@
     - description: Social Media Posts
       icon: mdi:announcement-outline
 - name: Medium Orgs
-  contribution: €50,000 +
+  contribution: €50,000/yr +
   benefits:
     - description: Logo on the website
       icon: mdi:image-outline
@@ -25,7 +25,7 @@
     - description: Featured in the newsletter (e.g., with a banner of your choice)
       icon: mdi:newspaper-variant-outline
 - name: Large Orgs
-  contribution: €100,000 +
+  contribution: €100,000/yr +
   benefits:
     - description: Large logo on the website
       icon: mdi:image-outline
@@ -42,7 +42,7 @@
     - description: Quarterly 1:1 call with Foundation representatives for feedback and updates
       icon: mdi:call-outline
 - name: Extra Large Orgs
-  contribution: €150,000 +
+  contribution: €150,000/yr +
   benefits:
     - description: Large logo on the website and in the footer
       icon: mdi:image-outline
