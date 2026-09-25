@@ -15,7 +15,12 @@ const { post } = Astro.props;
 <a href={generatePathFromPost(post)}>
   <Card tag="article" class="article">
     <div class="flex flex-col md:flex-row justify-between gap-2 md:items-center mb-2">
-      <Headline level={3} tag="h2" variant="blue" class="leading-1 md:flex-3 mb-0 line-clamp-1">
+      <Headline
+        level={3}
+        tag="h2"
+        variant="blue"
+        class="leading-1 md:flex-3 mb-0 line-clamp-1"
+      >
         {post.data.title}
       </Headline>
       <span class="md:flex-1 md:text-right">
