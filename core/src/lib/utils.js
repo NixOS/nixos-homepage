@@ -16,7 +16,6 @@ export function createExcerpt(post) {
   return parser
     .render(post)
     .split('\n')
-    .slice(0, 8)
     .map((str) => {
       return str
         .replace(/<h1.*?>(.*?)<\/h1>/g, '') // remove h1 tag
@@ -26,7 +25,8 @@ export function createExcerpt(post) {
         .split('\n');
     })
     .flat()
-    .join(' ');
+    .join(' ')
+    .substring(0, 500);
 }
 
 function authorDiscourse(author, link, linkClass) {
@@ -48,7 +48,7 @@ export function createBlogSubheader(entry, link, linkClass) {
     return null;
   }
   const formattedDate = entry.data.date
-    ? `Published on ${entry.data.date.toDateString()}`
+    ? `${entry.data.date.toDateString()}`
     : null;
   const formattedAuthor = entry.data.authors
     ? entry.data.authors

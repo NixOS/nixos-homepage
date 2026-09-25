@@ -1,4 +1,6 @@
 ---
+import Card from '@/components/layout/Card.astro';
+import Tag from '@/components/ui/Tag.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import {
@@ -10,12 +12,21 @@ import {
 const { post } = Astro.props;
 ---
 
-<article class="article" data-category={post.id.split('/')[0]}>
-  <a href={generatePathFromPost(post)}>
-    <Headline level={2} variant="blue">
-      {post.data.title}
-    </Headline>
-  </a>
-  <Paragraph size="sm">{createBlogSubheader(post)}</Paragraph>
-  <Paragraph variant="black" set:html={createExcerpt(post.body) + '...'} />
-</article>
+<a href={generatePathFromPost(post)}>
+  <Card tag="article" class="article">
+    <div class="flex flex-row justify-between items-center mb-2">
+      <Headline level={3} tag="h2" variant="blue" class="leading-1 mb-0">
+        {post.data.title}
+      </Headline>
+      <span>
+        <Tag outline>{createBlogSubheader(post)}</Tag>
+        <Tag>{post.id.split('/')[0]}</Tag>
+      </span>
+    </div>
+    <Paragraph
+      size="md"
+      variant="black"
+      set:html={createExcerpt(post.body) + '...'}
+    />
+  </Card>
+</a>
