@@ -26,7 +26,7 @@ const { post } = Astro.props;
         <Paragraph
             size="md"
             variant="black"
-            set:html={createExcerpt(post.body) + '...'}
+            set:html={createExcerpt(post.body)}
         />
     </Card>
 </a>

@@ -11,22 +11,24 @@ export function generatePathFromPost(post, attachBlog = true) {
   }`;
 }
 
-export function createExcerpt(post) {
+export function createExcerpt(post, maxLength = 500) {
   const parser = new MarkdownIt();
-  return parser
+  const text = parser
     .render(post)
-    .split('\n')
-    .map((str) => {
-      return str
-        .replace(/<h1.*?>(.*?)<\/h1>/g, '') // remove h1 tag
-        .replace(/<h2.*?>(.*?)<\/h2>/g, '') // remove h2 tag
-        .replace(/<h3.*?>(.*?)<\/h3>/g, '') // remove h3 tag
-        .replace(/<\/?[^>]+(>|$)/g, '')
-        .split('\n');
-    })
-    .flat()
-    .join(' ')
-    .substring(0, 500);
+    .replace(/<h[1-3][^>]*>[\s\S]*?<\/h[1-3]>/g, ' ') // drop headings incl. multiline
+    .replace(/<\/?[^>]+(>|$)/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (text.length <= maxLength) return text;
+
+  const cut = text.slice(0, maxLength + 1);
+  const boundary = cut.lastIndexOf(' ');
+  const trimmed = (boundary > 0 ? cut.slice(0, boundary) : cut).replace(
+    /[,.;:\-\s]+$/,
+    '',
+  );
+  return `${trimmed}…`;
 }
 
 function authorDiscourse(author, link, linkClass) {
