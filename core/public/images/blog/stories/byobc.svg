@@ -1,5 +1,4 @@
-<svg viewBox="0 0 1400 1000" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
-  <!-- Background -->
+<svg viewBox="0 0 1400 1000" xmlns="http://www.w3.org/2000/svg"><!-- Background -->
   <rect width="1400" height="1000" fill="#eeeeee"/>
   
   <!-- Title -->
@@ -144,7 +143,7 @@
       Storage Requirements
     </text>
     <text x="1150" y="210" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#717171">
-      nix cache serve: ~1 PB
+      nix-serve: ~1 PB
     </text>
     <text x="1150" y="228" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#717171">
       (serves from /nix/store)
@@ -170,13 +169,13 @@
     <!-- Result -->
     <rect x="970" y="355" width="360" height="70" rx="8" fill="#f6eed8" stroke="#ac8b26" stroke-width="2"/>
     <text x="1150" y="380" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#695205">
-      Result: Bit-for-Bit Identical
+      Result: Same Expected Store Paths
     </text>
     <text x="1150" y="400" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#493802">
-      Same hashes = Same packages
+      Same derivation → same store path
     </text>
     <text x="1150" y="415" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#493802">
-      ~99.9% of packages
+      Bit identity requires reproducible builds
     </text>
   </g>
   
@@ -221,7 +220,7 @@
       Isolated environment
     </text>
     <text x="700" y="370" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#717171">
-      Deterministic execution
+      Reduces undeclared host inputs
     </text>
     
     <!-- Hash -->
@@ -243,7 +242,7 @@
     <!-- Equals sign -->
     <text x="700" y="510" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#ac8b26">=</text>
     <text x="700" y="540" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#695205">
-      Identical Packages
+      Same Store-Path Identity
     </text>
   </g>
   
@@ -251,17 +250,17 @@
   <g id="key-insight">
     <rect x="200" y="590" width="1000" height="140" rx="12" fill="#ededfc" stroke="#6f66ae" stroke-width="2"/>
     <text x="700" y="620" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#534c84">
-      Why This Works: Deterministic + Reproducible
+      Why This Works: Identity + Isolation
     </text>
     
     <text x="700" y="650" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3a3a3a">
-      • <tspan font-weight="600">Deterministic:</tspan> Same inputs → Same hash → Same /nix/store path
+      • <tspan font-weight="600">Input identity:</tspan> Same derivation → Same expected /nix/store path
     </text>
     <text x="700" y="675" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3a3a3a">
-      • <tspan font-weight="600">Reproducible:</tspan> Any change to inputs → Different hash → Different path
+      • <tspan font-weight="600">Isolation:</tspan> Sandboxing reduces undeclared host dependencies
     </text>
     <text x="700" y="700" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3a3a3a">
-      • <tspan font-weight="600">Input-Addressed:</tspan> Hash covers entire input graph + build metadata
+      • <tspan font-weight="600">Reproducibility:</tspan> Bit identity must be verified across independent builds
     </text>
   </g>
   
@@ -290,10 +289,10 @@
     <!-- Step A - Store Options -->
     <rect x="370" y="820" width="300" height="80" rx="6" fill="#fff" stroke="#ac8b26" stroke-width="1"/>
     <text x="520" y="840" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#493802">
-      a. Choose Your Store
+      a. Choose Cache Backend
     </text>
     <text x="390" y="860" font-family="monospace" font-size="10" fill="#717171">
-      • nix-serve
+      • HTTP: nix run nixpkgs#nix-serve -- -p 8080
     </text>
     <text x="390" y="875" font-family="monospace" font-size="10" fill="#717171">
       • Static server / MinIO (local)
@@ -307,14 +306,14 @@
     <text x="840" y="840" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#493802">
       b. Generate Signing Key
     </text>
-    <text x="840" y="858" font-family="monospace" font-size="10" text-anchor="middle" fill="#717171">
-      nix key generate-secret
+    <text x="840" y="858" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">
+      nix key generate-secret --key-name cache-1 \
     </text>
-    <text x="840" y="875" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle" fill="#717171">
-      Add to nix.conf
+    <text x="840" y="875" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">
+      &gt; secret-key
     </text>
     <text x="840" y="890" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle" fill="#717171">
-      Signs every .narinfo
+      Use key when writing a signed cache
     </text>
     
     <!-- Step C -->
@@ -322,11 +321,11 @@
     <text x="1170" y="840" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#493802">
       c. Copy Store Paths
     </text>
-    <text x="1170" y="858" font-family="monospace" font-size="10" text-anchor="middle" fill="#717171">
-      nix copy --to file:///cache
+    <text x="1170" y="858" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">
+      nix copy --to file:///cache nixpkgs#hello
     </text>
-    <text x="1170" y="875" font-family="monospace" font-size="10" text-anchor="middle" fill="#717171">
-      nix copy --to s3://bucket
+    <text x="1170" y="875" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">
+      nix copy --to s3://bucket nixpkgs#hello
     </text>
     <text x="1170" y="890" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle" fill="#717171">
       Creates .nar + .narinfo
