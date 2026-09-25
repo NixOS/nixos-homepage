@@ -25,6 +25,7 @@ import Container from './Container.astro';
         {text}
       </Headline>
       {subtext && <Paragraph size="sm" variant="white" set:html={subtext} />}
+      <slot />
     </div>
   </Container>
 </div>
