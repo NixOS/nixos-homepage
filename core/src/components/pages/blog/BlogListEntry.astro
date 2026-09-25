@@ -4,29 +4,25 @@ import Tag from '@/components/ui/Tag.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import {
-    createBlogSubheader,
-    createExcerpt,
-    generatePathFromPost,
+  createBlogSubheader,
+  createExcerpt,
+  generatePathFromPost,
 } from '../../../lib/utils';
 
 const { post } = Astro.props;
 ---
 
 <a href={generatePathFromPost(post)}>
-    <Card tag="article" class="article">
-        <div class="flex flex-col md:flex-row justify-between gap-2 md:items-center mb-2">
-            <Headline level={3} tag="h2" variant="blue" class="leading-1 mb-0">
-                {post.data.title}
-            </Headline>
-            <span>
-                <Tag outline>{createBlogSubheader(post)}</Tag>
-                <Tag>{post.id.split('/')[0]}</Tag>
-            </span>
-        </div>
-        <Paragraph
-            size="md"
-            variant="black"
-            set:html={createExcerpt(post.body)}
-        />
-    </Card>
+  <Card tag="article" class="article">
+    <div class="flex flex-col md:flex-row justify-between gap-2 md:items-center mb-2">
+      <Headline level={3} tag="h2" variant="blue" class="leading-1 mb-0">
+        {post.data.title}
+      </Headline>
+      <span>
+        <Tag outline>{createBlogSubheader(post)}</Tag>
+        <Tag>{post.id.split('/')[0]}</Tag>
+      </span>
+    </div>
+    <Paragraph size="md" variant="black" set:html={createExcerpt(post.body)} />
+  </Card>
 </a>
