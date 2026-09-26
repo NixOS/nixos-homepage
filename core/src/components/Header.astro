@@ -13,7 +13,7 @@ const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
-const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-white rounded-2xl`;
+const navbarItemStyle = `text-center text-primary-white rounded-2xl`;
 const navbarItemInactiveStyle = `bg-secondary-afghani-blue-35 hover:bg-secondary-afghani-blue-25`;
 const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-95 text-primary-black! font-bold`;
 ---
@@ -54,7 +54,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
         aria-label="Main Navigation Toggle"
         aria-controls="navbar-menu"
         aria-expanded="true"
-        class="bg-secondary-afghani-blue block rounded-lg p-4 md:hidden"
+        class="p-4 md:hidden"
         id="navigation-toggle"
       >
         <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
@@ -65,14 +65,14 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
 
     <nav
       aria-label="Main Navigation"
-      class="flex flex-col gap-0.5 justify-evenly items-center leading-none md:flex md:flex-row md:gap-3 md:pb-0"
+      class="grid pt-3 grid-cols-2 md:flex flex-col gap-1.5 justify-evenly items-center leading-none md:flex-row md:gap-3 md:pb-0"
       id="navbar-menu"
     >
       {headerMenu.data.items.map((item) => (
         <>
           <Link
             class:list={[
-              'h-min min-w-24 my-auto py-2.5 px-3.5 flex flex-col gap-1 items-center justify-center text-sm',
+              'h-min min-w-24 my-auto py-2.5 px-3.5 flex justify-between flex-row-reverse md:flex-col gap-1 items-center md:justify-center md:text-sm',
               navbarItemStyle,
               currentTopRoute === item.link
                 ? navbarItemActiveStyle
@@ -81,14 +81,14 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
             aria-current={currentTopRoute === item.link ? 'page' : undefined}
             href={item.link}
           >
-            <Icon class="hidden h-6 w-6 md:block pb-0.5" name={item.icon} />
+            <Icon class="h-6 w-6 block pb-0.5" name={item.icon} />
             {item.name}
           </Link>
         </>
       ))}
       <Link
         class:list={[
-          'h-min my-auto w-full py-2.5 px-3.5 flex flex-col gap-1 items-center justify-center text-sm',
+          'h-min min-w-24 my-auto py-2.5 px-3.5 flex justify-between flex-row-reverse md:flex-col gap-1 items-center md:justify-center md:text-sm',
           navbarItemStyle,
           navbarItemInactiveStyle,
         ]}
@@ -97,7 +97,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
         target="_self"
       >
         <Icon
-          class="text-primary-white hidden h-6 w-6 md:block"
+          class="text-primary-white h-6 w-6 block"
           name="mdi:search"
         />
         Search
