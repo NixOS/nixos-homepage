@@ -1,0 +1,328 @@
+<svg viewBox="0 0 1600 1100" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#15213a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b5487;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="1600" height="1100" fill="url(#bgGradient)"/>
+  
+  <!-- Title Section -->
+  <text x="800" y="60" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="44" font-weight="bold" text-anchor="middle" fill="white" filter="url(#shadow)">
+    cache.nixos.org: The Numbers Behind Nix
+  </text>
+  
+  <text x="800" y="95" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#b7cefd">
+    July 2026 • The backbone of global binary distribution
+  </text>
+  
+  <!-- Nix snowflake, white variant (NixOS/nixos-artwork, CC-BY) -->
+  <svg x="50" y="34" width="56" height="56" viewBox="0 0 501.56252 501.56251" overflow="visible">
+  <defs
+     id="nixmark-glance-defs4">
+    <linearGradient
+       y2="880.37714"
+       x2="-414.38654"
+       y1="782.33563"
+       x1="-584.19934"
+       gradientTransform="translate(864.69589,-1491.3405)"
+       gradientUnits="userSpaceOnUse"
+       id="nixmark-glance-linearGradient1299" >
+<stop
+         style="stop-color:#ffffff;stop-opacity:0"
+         offset="0"
+         id="nixmark-glance-stop915" />
+      <stop
+         id="nixmark-glance-stop917"
+         offset="0.23168644"
+         style="stop-color:#ffffff;stop-opacity:1" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="1"
+         id="nixmark-glance-stop919" />
+</linearGradient>
+    <linearGradient
+       y2="460.51822"
+       x2="389.57562"
+       y1="351.41116"
+       x1="200.59668"
+       gradientTransform="translate(210.82018,-765.27605)"
+       gradientUnits="userSpaceOnUse"
+       id="nixmark-glance-linearGradient1713" >
+<stop
+         style="stop-color:#ffffff;stop-opacity:0"
+         offset="0"
+         id="nixmark-glance-stop915" />
+      <stop
+         id="nixmark-glance-stop917"
+         offset="0.23168644"
+         style="stop-color:#ffffff;stop-opacity:1" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="1"
+         id="nixmark-glance-stop919" />
+</linearGradient>
+  </defs>
+  <g
+     transform="translate(-156.48372,537.56136)"
+     style="display:inline;opacity:1"
+     id="nixmark-glance-layer3">
+    <g
+       style="stroke-width:11.0512"
+       transform="matrix(0.09048806,0,0,0.09048806,142.32381,-419.8252)"
+       id="nixmark-glance-g955">
+      <g
+         transform="matrix(11.047619,0,0,11.047619,-1572.2888,9377.7107)"
+         id="nixmark-glance-g869">
+        <g
+           transform="rotate(-60,226.35754,-449.37199)"
+           id="nixmark-glance-g932"
+           style="stroke-width:11.0512">
+          <path
+             id="nixmark-glance-path3336-6"
+             d="m 449.71876,-420.51322 122.19683,211.67512 -56.15706,0.5268 -32.6236,-56.8692 -32.85645,56.5653 -27.90237,-0.011 -14.29086,-24.6896 46.81047,-80.4901 -33.22946,-57.8257 z"
+             style="opacity:1;fill:url(#nixmark-glance-linearGradient1713);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:33.1535;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        </g>
+        <path
+           id="nixmark-glance-path4260-0"
+           d="m 309.54892,-710.38827 122.19683,211.67512 -56.15706,0.5268 -32.6236,-56.8692 -32.85645,56.5653 -27.90237,-0.011 -14.29086,-24.6896 46.81047,-80.4901 -33.22946,-57.8256 z"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#nixmark-glance-linearGradient1299);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:33.1535;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+        <g transform="rotate(60,728.23563,-692.24036)"><path d="m 449.71876,-420.51322 122.19683,211.67512 -56.15706,0.5268 -32.6236,-56.8692 -32.85645,56.5653 -27.90237,-0.011 -14.29086,-24.6896 46.81047,-80.4901 -33.22946,-57.8257 z" style="opacity:1;fill:url(#nixmark-glance-linearGradient1713);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:33.1535;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"/></g>
+        <g transform="rotate(180,477.5036,-570.81898)"><path d="m 449.71876,-420.51322 122.19683,211.67512 -56.15706,0.5268 -32.6236,-56.8692 -32.85645,56.5653 -27.90237,-0.011 -14.29086,-24.6896 46.81047,-80.4901 -33.22946,-57.8257 z" style="opacity:1;fill:url(#nixmark-glance-linearGradient1713);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:33.1535;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"/></g>
+        <g transform="rotate(120,407.33916,-716.08356)"><path d="m 309.54892,-710.38827 122.19683,211.67512 -56.15706,0.5268 -32.6236,-56.8692 -32.85645,56.5653 -27.90237,-0.011 -14.29086,-24.6896 46.81047,-80.4901 -33.22946,-57.8256 z" style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#nixmark-glance-linearGradient1299);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:33.1535;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"/></g>
+        <g transform="rotate(-120,407.28823,-715.86995)"><path d="m 309.54892,-710.38827 122.19683,211.67512 -56.15706,0.5268 -32.6236,-56.8692 -32.85645,56.5653 -27.90237,-0.011 -14.29086,-24.6896 46.81047,-80.4901 -33.22946,-57.8256 z" style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#nixmark-glance-linearGradient1299);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:33.1535;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"/></g>
+      </g>
+    </g>
+  </g>
+</svg>
+
+  <!-- Main Statistics Grid - 3x3 -->
+  <g id="stats-grid">
+    <!-- Row 1 -->
+    <!-- Total Storage -->
+    <g transform="translate(50, 140)">
+      <rect x="0" y="0" width="480" height="200" rx="15" fill="white" opacity="0.95" filter="url(#shadow)"/>
+      <circle cx="80" cy="60" r="35" fill="#4d6fb7" opacity="0.15"/>
+      <g transform="translate(62,42) scale(1.5)" fill="none" stroke="#4d6fb7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 16h.01" />
+        <path d="M2.212 11.577a2 2 0 0 0-.212.896V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.527a2 2 0 0 0-.212-.896L18.55 5.11A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+        <path d="M21.946 12.013H2.054" />
+        <path d="M6 16h.01" />
+      </g>
+      <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">636 TB</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Total Storage</text>
+      <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
+      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">Managed by S3 Intelligent-Tiering</text>
+    </g>
+    
+    <!-- Monthly Requests -->
+    <g transform="translate(560, 140)">
+      <rect x="0" y="0" width="480" height="200" rx="15" fill="white" opacity="0.95" filter="url(#shadow)"/>
+      <circle cx="80" cy="60" r="35" fill="#a8545b" opacity="0.15"/>
+      <g transform="translate(62,42) scale(1.5)" fill="none" stroke="#a8545b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+        <path d="M2 12h20" />
+      </g>
+      <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">~15B</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Requests/Month</text>
+      <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
+      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">~5,700 requests per second • 24/7</text>
+    </g>
+    
+    <!-- Object Count -->
+    <g transform="translate(1070, 140)">
+      <rect x="0" y="0" width="480" height="200" rx="15" fill="white" opacity="0.95" filter="url(#shadow)"/>
+      <circle cx="80" cy="60" r="35" fill="#955890" opacity="0.15"/>
+      <g transform="translate(62,42) scale(1.5)" fill="none" stroke="#955890" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+        <path d="M12 22V12" />
+        <polyline points="3.29 7 12 12 20.71 7" />
+        <path d="m7.5 4.27 9 5.15" />
+      </g>
+      <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">&gt;1B</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Objects Stored</text>
+      <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
+      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">NAR files, narinfo, logs, realisations</text>
+    </g>
+    
+    <!-- Row 2 -->
+    <!-- Cache Hit Rate -->
+    <g transform="translate(50, 370)">
+      <rect x="0" y="0" width="480" height="200" rx="15" fill="white" opacity="0.95" filter="url(#shadow)"/>
+      <circle cx="80" cy="60" r="35" fill="#378450" opacity="0.15"/>
+      <g transform="translate(62,42) scale(1.5)" fill="none" stroke="#378450" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 14 4-4" />
+        <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+      </g>
+      <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">94.29%</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Cache Hit Ratio</text>
+      <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
+      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">Served from CDN • Minimal S3 load</text>
+    </g>
+    
+    <!-- Weekly Bandwidth -->
+    <g transform="translate(560, 370)">
+      <rect x="0" y="0" width="480" height="200" rx="15" fill="white" opacity="0.95" filter="url(#shadow)"/>
+      <circle cx="80" cy="60" r="35" fill="#8a6e08" opacity="0.15"/>
+      <g transform="translate(62,42) scale(1.5)" fill="none" stroke="#8a6e08" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
+      </g>
+      <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">892 TB</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Bandwidth/Week</text>
+      <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
+      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">~46 PB annually • Global reach</text>
+    </g>
+    
+    <!-- Metadata Size -->
+    <g transform="translate(1070, 370)">
+      <rect x="0" y="0" width="480" height="200" rx="15" fill="white" opacity="0.95" filter="url(#shadow)"/>
+      <circle cx="80" cy="60" r="35" fill="#c77942" opacity="0.15"/>
+      <g transform="translate(62,42) scale(1.5)" fill="none" stroke="#c77942" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+        <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+        <path d="M10 9H8" />
+        <path d="M16 13H8" />
+        <path d="M16 17H8" />
+      </g>
+      <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">90 GB</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Metadata Only</text>
+      <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
+      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">.narinfo files • 0.014% of total storage!</text>
+    </g>
+    
+    <!-- Row 3 -->
+    <!-- Weekly Requests -->
+    <g transform="translate(50, 600)">
+      <rect x="0" y="0" width="480" height="200" rx="15" fill="white" opacity="0.95" filter="url(#shadow)"/>
+      <circle cx="80" cy="60" r="35" fill="#3d98d1" opacity="0.18"/>
+      <g transform="translate(62,42) scale(1.5)" fill="none" stroke="#3d98d1" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 7h6v6" />
+        <path d="m22 7-8.5 8.5-5-5L2 17" />
+      </g>
+      <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">~3.45B</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Requests/Week</text>
+      <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
+      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">Sustained global demand • 24/7</text>
+    </g>
+    
+    <!-- Top Region -->
+    <g transform="translate(560, 600)">
+      <rect x="0" y="0" width="480" height="200" rx="15" fill="white" opacity="0.95" filter="url(#shadow)"/>
+      <circle cx="80" cy="60" r="35" fill="#378450" opacity="0.15"/>
+      <g transform="translate(62,42) scale(1.5)" fill="none" stroke="#378450" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+        <circle cx="12" cy="10" r="3" />
+      </g>
+      <text x="280" y="55" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#28395f">North America</text>
+      <text x="280" y="90" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Top Region</text>
+      <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
+      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">But requests span the entire globe</text>
+    </g>
+    
+    <!-- 20+ Years -->
+    <g transform="translate(1070, 600)">
+      <rect x="0" y="0" width="480" height="200" rx="15" fill="white" opacity="0.95" filter="url(#shadow)"/>
+      <circle cx="80" cy="60" r="35" fill="#803e44" opacity="0.15"/>
+      <g transform="translate(62,42) scale(1.5)" fill="none" stroke="#803e44" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+        <path d="M3 3v5h5" />
+        <path d="M12 7v5l4 2" />
+      </g>
+      <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">10+ Years</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Software History</text>
+      <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
+      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">Preserving lost software forever</text>
+    </g>
+  </g>
+  
+  <!-- Scale to Infinity Section -->
+  <g id="scale-infinity">
+    <rect x="50" y="840" width="1500" height="220" rx="15" fill="white" opacity="0.15"/>
+    
+    <!-- Infinity Symbol -->
+    <g transform="translate(100, 950)">
+      <g transform="translate(-6,-42) scale(4)" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8">
+        <path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8" />
+      </g>
+    </g>
+    
+    <text x="250" y="880" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="24" font-weight="bold" fill="white">
+      Built to Scale Without Limits
+    </text>
+    
+    <text x="250" y="910" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" fill="#b7cefd">
+      No database = No bottleneck. Just a massive key-value store where every key is a unique hash.
+    </text>
+    <text x="250" y="935" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" fill="#b7cefd">
+      The elegant simplicity of hash-addressed storage enables infinite horizontal scaling.
+    </text>
+    
+    <!-- Key insights -->
+    <text x="250" y="970" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="white">Key Architecture Wins:</text>
+    <text x="250" y="995" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" fill="#b7cefd">
+      • Simple S3 bucket design scales effortlessly to billions of objects
+    </text>
+    <text x="250" y="1015" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" fill="#b7cefd">
+      • Fastly CDN achieves 94%+ cache hits globally
+    </text>
+    <text x="250" y="1035" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" fill="#b7cefd">
+      • S3 Intelligent-Tiering moves objects between access tiers automatically
+    </text>
+    
+    <!-- Visual representation -->
+    <g transform="translate(950, 890)">
+      <!-- S3 provides -->
+      <rect x="0" y="0" width="550" height="120" rx="10" fill="white" opacity="0.1"/>
+      <text x="275" y="25" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">
+        S3 Provides Everything Needed
+      </text>
+      
+      <!-- Three pillars -->
+      <g transform="translate(50, 40)">
+        <!-- Storage -->
+        <rect x="0" y="0" width="140" height="60" rx="5" fill="#4d6fb7" opacity="0.3"/>
+        <text x="70" y="25" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">Unlimited</text>
+        <text x="70" y="45" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">Storage</text>
+        
+        <!-- Key-Value -->
+        <rect x="155" y="0" width="140" height="60" rx="5" fill="#378450" opacity="0.3"/>
+        <text x="225" y="25" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">Key-Value</text>
+        <text x="225" y="45" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">Store</text>
+        
+        <!-- HTTP API -->
+        <rect x="310" y="0" width="140" height="60" rx="5" fill="#955890" opacity="0.3"/>
+        <text x="380" y="25" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">Simple</text>
+        <text x="380" y="45" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">HTTP API</text>
+      </g>
+      
+      <text x="275" y="135" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#b7cefd" font-style="italic">
+        Dead simple design = Infinite scale
+      </text>
+    </g>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowWhite" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <polygon points="0 0, 10 5, 0 10" fill="white"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#378450"/>
+    </marker>
+  </defs>
+</svg>
