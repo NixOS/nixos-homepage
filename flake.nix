@@ -75,6 +75,7 @@ rec {
           NIX_UNSTABLE_VERSION = getVersion nix_unstable.name;
           NIXOS_STABLE_SERIES = pkgs-stable.lib.trivial.release;
           NIXOS_UNSTABLE_SERIES = pkgs-unstable.lib.trivial.release;
+          MACOS_MIN_VERSION = pkgs-stable.stdenv.hostPlatform.darwinMinVersion;
 
           redirectManualHTML = redirectURL: out: ''
             cat <<EOT > ${out}
@@ -252,6 +253,7 @@ rec {
               export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
               export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
+              export MACOS_MIN_VERSION="${MACOS_MIN_VERSION}"
               export THEME="${builtins.getEnv "THEME"}"
               export BANNER="${builtins.getEnv "BANNER"}"
 
@@ -341,6 +343,7 @@ rec {
               export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
               export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
+              export MACOS_MIN_VERSION="${MACOS_MIN_VERSION}"
               export PATH_MANUAL="${manuals}"
               export PATH_PILLS="${pills}"
               export PATH_DEMOS="${demos}"
