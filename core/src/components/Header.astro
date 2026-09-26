@@ -13,103 +13,117 @@ const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
-const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-black md:hover:border-b-secondary-afghani-blue-65 border-b-4`;
-const navbarItemInactiveStyle = `border-b-secondary-afghani-blue-95 md:border-b-transparent bg-secondary-afghani-blue-95 md:bg-transparent`;
-const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-afghani-blue-85 text-primary-white md:text-primary-black md:bg-transparent font-bold`;
+const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-white rounded-2xl`;
+const navbarItemInactiveStyle = `bg-secondary-afghani-blue-35 hover:bg-secondary-afghani-blue-25`;
+const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-95 text-primary-black! font-bold`;
 ---
 
-<header class="text-primary-black bg-primary-white sticky top-0 z-50 font-light drop-shadow-md">
-  {currentBanner && (
-    <a
-      href={currentBanner.data.sitewide.link.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      class:list={[
-        'block py-2 font-bold',
-        currentBanner.data.sitewide.wrapperClasses,
-      ]}
-    >
-      <Container class:list={['flex items-center justify-between']}>
-        <span class="line-clamp-1">{currentBanner.data.sitewide.message}</span>
-        <span class:list={['line-clamp-1 cursor-pointer underline']}>
-          {currentBanner.data.sitewide.link.text}
-        </span>
-      </Container>
-    </a>
-  )}
-  <Container class="flex flex-col justify-between md:flex-row md:items-center">
-    <div class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start">
-      <Link
-        href="/"
-        class="flex items-center justify-between gap-2 select-none md:justify-start"
-      >
-        <Image
-          class="h-12 w-auto"
-          src={getNixosLogoUrl('logo')}
-          alt="NixOS - Go to homepage"
-        />
-      </Link>
-
-      <button
-        aria-label="Main Navigation Toggle"
-        aria-controls="navbar-menu"
-        aria-expanded="true"
-        class="bg-secondary-afghani-blue block rounded-lg p-4 md:hidden"
-        id="navigation-toggle"
-      >
-        <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
-        <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
-        <span class="bg-primary-white block h-1 w-8"></span>
-      </button>
-    </div>
-
-    <nav
-      aria-label="Main Navigation"
-      class="flex flex-col gap-0.5 pb-4 leading-none md:flex md:flex-row md:gap-5 md:pb-0"
-      id="navbar-menu"
-    >
-      {headerMenu.data.items.map((item) => (
-        <Link
-          class:list={[
-            'pt-7 pb-6',
-            navbarItemStyle,
-            currentTopRoute === item.link
-              ? navbarItemActiveStyle
-              : navbarItemInactiveStyle,
-          ]}
-          aria-current={currentTopRoute === item.link ? 'page' : undefined}
-          href={item.link}
+<header class="text-primary-white bg-secondary-afghani-blue-45 py-4 top-0 z-50 font-light">
+    {currentBanner && (
+        <a
+            href={currentBanner.data.sitewide.link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[
+                'block font-bold',
+                currentBanner.data.sitewide.wrapperClasses,
+            ]}
         >
-          {item.name}
-        </Link>
-      ))}
-      <Link
-        class={`pt-7 pb-6 md:pt-5 md:pb-3 ${navbarItemStyle} ${navbarItemInactiveStyle}`}
-        href="https://search.nixos.org"
-        aria-label="Nixos package and options search"
-        target="_self"
-      >
-        <Icon
-          class="text-secondary-afghani-blue hidden h-8 w-8 md:block"
-          name="mdi:search"
-        />
-        <span class="inline-block md:hidden">Search</span>
-      </Link>
-    </nav>
-  </Container>
+            <Container class:list={['flex items-center justify-between']}>
+                <span class="line-clamp-1">
+                    {currentBanner.data.sitewide.message}
+                </span>
+                <span class:list={['line-clamp-1 cursor-pointer underline']}>
+                    {currentBanner.data.sitewide.link.text}
+                </span>
+            </Container>
+        </a>
+    )}
+    <Container class="flex flex-col justify-between md:flex-row md:items-center">
+        <div class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start">
+            <Link
+                href="/"
+                class="flex items-center justify-between gap-2 select-none md:justify-start"
+            >
+                <Image
+                    class="h-12 w-auto"
+                    src={getNixosLogoUrl('logo')}
+                    alt="NixOS - Go to homepage"
+                />
+            </Link>
+
+            <button
+                aria-label="Main Navigation Toggle"
+                aria-controls="navbar-menu"
+                aria-expanded="true"
+                class="bg-secondary-afghani-blue block rounded-lg p-4 md:hidden"
+                id="navigation-toggle"
+            >
+                <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
+                <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
+                <span class="bg-primary-white block h-1 w-8"></span>
+            </button>
+        </div>
+
+        <nav
+            aria-label="Main Navigation"
+            class="flex flex-col gap-0.5 justify-evenly items-center leading-none md:flex md:flex-row md:gap-3 md:pb-0"
+            id="navbar-menu"
+        >
+            {headerMenu.data.items.map((item) => (
+                <>
+                    <Link
+                        class:list={[
+                            'h-min min-w-24 my-auto py-2.5 px-3.5 flex flex-col gap-1 items-center justify-center text-sm',
+                            navbarItemStyle,
+                            currentTopRoute === item.link
+                                ? navbarItemActiveStyle
+                                : navbarItemInactiveStyle,
+                        ]}
+                        aria-current={
+                            currentTopRoute === item.link ? 'page' : undefined
+                        }
+                        href={item.link}
+                    >
+                        <Icon
+                            class="hidden h-6 w-6 md:block pb-0.5"
+                            name={item.icon}
+                        />
+                        {item.name}
+                    </Link>
+                </>
+            ))}
+            <Link
+                class:list={[
+                    'h-min my-auto w-full py-2.5 px-3.5 flex flex-col gap-1 items-center justify-center text-sm',
+                    navbarItemStyle,
+                    navbarItemInactiveStyle,
+                ]}
+                href="https://search.nixos.org"
+                aria-label="Nixos package and options search"
+                target="_self"
+            >
+                <Icon
+                    class="text-primary-white hidden h-6 w-6 md:block"
+                    name="mdi:search"
+                />
+                Search
+            </Link>
+        </nav>
+    </Container>
 </header>
 
 <script>
-  const navigationToggle = document.getElementById('navigation-toggle');
-  const navbarMenu = document.getElementById('navbar-menu');
+    const navigationToggle = document.getElementById('navigation-toggle');
+    const navbarMenu = document.getElementById('navbar-menu');
 
-  function toggleMenu() {
-    navigationToggle.ariaExpanded =
-      navigationToggle.ariaExpanded === 'true' ? 'false' : 'true';
-    navbarMenu.classList.toggle('hidden');
-    navbarMenu.classList.toggle('flex');
-  }
-  toggleMenu();
+    function toggleMenu() {
+        navigationToggle.ariaExpanded =
+            navigationToggle.ariaExpanded === 'true' ? 'false' : 'true';
+        navbarMenu.classList.toggle('hidden');
+        navbarMenu.classList.toggle('flex');
+    }
+    toggleMenu();
 
-  navigationToggle.addEventListener('click', () => toggleMenu());
+    navigationToggle.addEventListener('click', () => toggleMenu());
 </script>
