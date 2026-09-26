@@ -7,6 +7,7 @@ import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Layout from '../layouts/Layout.astro';
 import { generatePathFromPost } from '../lib/utils';
 
+import Card from '@/components/layout/Card.astro';
 import Segment from '@/components/layout/Segment.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
@@ -59,16 +60,53 @@ posts
     </Banner>
   )}
   <Segment variant="blue-lambda">
+    <Headline class="pt-16" level={1} variant="white" center>
+      Nix is the best!
+    </Headline>
     <Container class="grid grid-cols-1 gap-8 py-8 md:py-16 lg:grid-cols-2 lg:py-24">
-      <div class="mx-0 my-auto flex h-full flex-0 flex-col justify-between gap-3 md:gap-4 md:pr-12">
-        <Headline level={1} variant="white">
-          Declarative builds
-          <br class="hidden md:inline-block" /> and deployments.
+      <Card tag="li" class="flex flex-col h-full list-none" variant="light" padding="sm">
+        <Headline class="mb-4" level={1} variant="blue" center>
+          Nix
         </Headline>
-        <Paragraph class="mb-4" variant="white" size="xl">
-          Nix is a tool that takes a unique approach to package management and
-          system configuration. Learn how to make reproducible, declarative and
-          reliable systems.
+        <Headline level={3} variant="blue" center>
+          Declarative builds and deployments
+        </Headline>
+        <Paragraph class="flex-1 m-4" variant="black" size="xl">
+          Nix is a tool that takes a unique approach to package management and system configuration.
+          Learn how to make reproducible, declarative and reliable software.
+        </Paragraph>
+        <div class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start">
+          <Button
+            href="/download"
+            color="semidarkblue"
+            size="log-nopadding"
+            classList="flex-1 text-xl"
+            icon="mdi:download"
+          >
+            Download
+          </Button>
+          <Button
+            href="/learn"
+            color="nixblue"
+            size="log-nopadding"
+            icon="mdi:learn-outline"
+            classList="flex-1 text-xl bg"
+          >
+            Learn More
+          </Button>
+        </div>
+      </Card>
+
+      <Card tag="li" class="flex flex-col h-full list-none" variant="dark" padding="sm">
+        <Headline class="mb-4" level={1} variant="white" center>
+          NixOS
+        </Headline>
+        <Headline level={3} variant="white" center>
+          Declarative operating systems
+        </Headline>
+        <Paragraph class="flex-1 m-4" variant="white" size="xl">
+          NixOS is a Linux distribution built around the Nix package manager and Nixpkgs.
+          Learn how to make reproducible, declarative and reliable systems.
         </Paragraph>
         <div class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start">
           <Button
@@ -82,18 +120,21 @@ posts
           </Button>
           <Button
             href="/learn"
-            color="white-borders"
+            color="nixblue"
             size="log-nopadding"
             icon="mdi:learn-outline"
             classList="flex-1 text-xl bg"
           >
-            Get started
+            Learn More
           </Button>
         </div>
-      </div>
+      </Card>
     </Container>
   </Segment>
   <div class="inline-svg-landing-search-top bg-[39%_100%] bg-no-repeat md:bg-bottom">
+    <Headline level={2} center variant="blue" class="text-4xl mt-16">
+      Features of the Nix ecosystem
+    </Headline>
     <Container class="grid gap-8 pt-16 pb-48 md:grid-cols-3 md:gap-4" tag="ul">
       {landingFeatures.map(async (feature) => {
         const { Content } = await render(feature);
