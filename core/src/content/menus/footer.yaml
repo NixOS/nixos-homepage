@@ -1,24 +1,28 @@
 sections:
   - name: The Project
     items:
-      - name: Channel Status
-        link: https://status.nixos.org/
-      - name: Packages search
-        link: https://search.nixos.org/packages
-      - name: Options search
-        link: https://search.nixos.org/options
-      - name: Reproducible Builds Status
-        link: https://reproducible.nixos.org/
       - name: Security
         link: /community/teams/security
       - name: Branding
         link: /branding
       - name: Surveys
         link: /surveys
-      - name: Summer of Nix
-        link: https://github.com/ngi-nix/summer-of-nix
       - name: Devices
         link: /devices
+      - name: Merchandise
+        link: https://freewear.org/Nix
+  - name: Resources
+    items:
+      - name: Packages search
+        link: https://search.nixos.org/packages
+      - name: Options search
+        link: https://search.nixos.org/options
+      - name: Channel Status
+        link: https://status.nixos.org/
+      - name: Reproducible Builds Status
+        link: https://reproducible.nixos.org/
+      - name: NixOS Wiki
+        link: https://wiki.nixos.org/wiki/NixOS_Wiki
   - name: Get in Touch
     items:
       - name: Forum
@@ -31,6 +35,8 @@ sections:
     items:
       - name: Contributing Guide
         link: https://nix.dev/contributing/how-to-contribute
+      - name: Summer of Nix
+        link: https://github.com/ngi-nix/summer-of-nix
       - name: Donate
         link: /backing
       - name: Become a Sponsor
