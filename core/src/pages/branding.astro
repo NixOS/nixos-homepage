@@ -59,14 +59,22 @@ import { Image } from 'astro:assets';
       NixOS Logos{' '}
     </Headline>
     <Paragraph>
-      Below are the official NixOS logo variants. These assets are available for
+      The official NixOS brand assets consist of three types: the
+      <em>logo</em> (snowflake combined with the wordmark), the
+      <em>logomark</em> (standalone snowflake), and the
+      <em>logotype</em> (standalone wordmark). These assets are available for
       use in accordance with the guidelines set out in the Branding Guide. Each
       version is designed for a specific use case—horizontal or vertical layout,
       dark or light backgrounds.
     </Paragraph>
     <Paragraph>
       Please refer to the Branding Guide for instructions on proper usage, clear
-      space, and background contrast requirements.
+      space, and background contrast requirements. Additional variants are
+      listed in the
+      <Link variant="blue" href="https://brand.nixos.org/logos/">
+        full asset index
+      </Link>{' '}
+      on brand.nixos.org.
     </Paragraph>
     <div class="grid grid-cols-1 gap-12 pb-12 md:grid-cols-2 md:gap-4">
       <LogoContainer
@@ -175,6 +183,107 @@ import { Image } from 'astro:assets';
         fontColor="white"
         orientation="vertical"
         style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logo"
+        fillStyle="gradient"
+        color="trans"
+        fontColor="white"
+        orientation="vertical"
+        style="regular"
+        variant="recommended"
+      />
+    </div>
+  </Segment>
+  <Segment variant="white" container innerClass="space-y-4 pt-8">
+    <Headline level={2} variant="blue">
+      {' '}
+      NixOS Logomarks{' '}
+    </Headline>
+    <Paragraph>
+      The logomark is the standalone NixOS snowflake, without the wordmark. Use
+      it where the project name is already present nearby or where space is
+      limited.
+    </Paragraph>
+    <div class="grid grid-cols-1 gap-12 pb-12 md:grid-cols-2 md:gap-4">
+      <LogoContainer
+        type="logomark"
+        fillStyle="gradient"
+        color="default"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logomark"
+        fillStyle="gradient"
+        color="rainbow"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logomark"
+        fillStyle="flat"
+        color="default"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logomark"
+        fillStyle="flat"
+        color="rainbow"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logomark"
+        fillStyle="flat"
+        color="black"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logomark"
+        fillStyle="flat"
+        color="white"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logomark"
+        fillStyle="flat"
+        color="trans"
+        variant="recommended"
+      />
+    </div>
+  </Segment>
+  <Segment variant="white" container innerClass="space-y-4 pt-8">
+    <Headline level={2} variant="blue">
+      {' '}
+      NixOS Logotypes{' '}
+    </Headline>
+    <Paragraph>
+      The logotype is the standalone NixOS wordmark, without the snowflake. It
+      is available in the regular and the lambda prime (<code>{'λ'}</code>)
+      typeface styles.
+    </Paragraph>
+    <div class="grid grid-cols-1 gap-12 pb-12 md:grid-cols-2 md:gap-4">
+      <LogoContainer
+        type="logotype"
+        fontColor="black"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logotype"
+        fontColor="white"
+        style="regular"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logotype"
+        fontColor="black"
+        style="lambdaprime"
+        variant="recommended"
+      />
+      <LogoContainer
+        type="logotype"
+        fontColor="white"
+        style="lambdaprime"
         variant="recommended"
       />
     </div>
