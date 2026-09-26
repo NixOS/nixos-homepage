@@ -332,7 +332,7 @@ rec {
             packages = with pkgs; [
               nodejs_current
               netlify-cli
-              nixfmt-rfc-style
+              nixfmt
               zizmor
             ];
 
