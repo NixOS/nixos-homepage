@@ -297,7 +297,7 @@ rec {
           };
 
           pre-commit.settings.hooks = {
-            nixfmt-rfc-style = {
+            nixfmt = {
               enable = true;
               files = "\\.nix$";
             };
@@ -332,7 +332,7 @@ rec {
             packages = with pkgs; [
               nodejs_current
               netlify-cli
-              nixfmt-rfc-style
+              nixfmt
               zizmor
             ];
 
