@@ -7,12 +7,12 @@ import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Layout from '../layouts/Layout.astro';
 import { generatePathFromPost } from '../lib/utils';
 
+import Card from '@/components/layout/Card.astro';
 import Segment from '@/components/layout/Segment.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import Link from '@/components/util/Link.astro';
 import { Icon } from 'astro-icon/components';
-import Asciinema from '../components/ui/Asciinema.astro';
 import Banner from '../components/ui/Banner.astro';
 import SponsorGroup from '../components/ui/SponsorGroup.astro';
 import InlineSVG from '../components/util/InlineSVG.astro';
@@ -20,6 +20,9 @@ import InlineSVG from '../components/util/InlineSVG.astro';
 const landingFeatures = await getCollection('landingFeatures');
 const demos = await getEntry('landing', 'demos');
 const posts = await getCollection('blog');
+
+const NIX_VERSION = import.meta.env.NIX_STABLE_VERSION;
+const NIXOS_VERSION = import.meta.env.NIXOS_STABLE_SERIES;
 
 const currentBanner = await getEntry('banners', BANNER);
 const CurrentBannerContent = currentBanner
@@ -59,56 +62,97 @@ posts
     </Banner>
   )}
   <Segment variant="blue-lambda">
-    <Container class="grid grid-cols-1 gap-8 py-8 md:py-16 lg:grid-cols-2 lg:py-24">
-      <div class="mx-0 my-auto flex h-full flex-0 flex-col justify-between gap-3 md:gap-4 md:pr-12">
-        <Headline level={1} variant="white">
-          Declarative builds
-          <br class="hidden md:inline-block" /> and deployments.
+    <Container class="grid grid-cols-1 gap-8 py-8 md:py-16 lg:grid-rows-2 lg:py-24">
+      <Container class="grid gap-8 grid-cols-1 items-center">
+        <Headline level={1} variant="white" center>
+          <div class="text-balance">
+            Declarative
+            <span class="inline-flex h-[1lh] flex-col overflow-hidden">
+              <ul class="block animate-text-slide text-left leading-tight">
+                <li>Software</li>
+                <li>Operating Systems</li>
+                <li>Cloud Images</li>
+                <li>Dev Environments</li>
+                <li>Deployments</li>
+                <li aria-hidden="true">Software</li>
+              </ul>
+            </span>
+          </div>
         </Headline>
-        <Paragraph class="mb-4" variant="white" size="xl">
-          Nix is a tool that takes a unique approach to package management and
-          system configuration. Learn how to make reproducible, declarative and
-          reliable systems.
-        </Paragraph>
-        <div class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start">
-          <Button
-            href="/download"
-            color="white"
-            size="log-nopadding"
-            classList="flex-1 text-xl"
-            icon="mdi:download"
-          >
-            Download
-          </Button>
-          <Button
-            href="/learn"
-            color="white-borders"
-            size="log-nopadding"
-            icon="mdi:learn-outline"
-            classList="flex-1 text-xl bg"
-          >
-            Get started
-          </Button>
-        </div>
-      </div>
-      <div class="border-primary-white min-h-[300px] rounded-3xl border-[1rem] bg-[#121314] drop-shadow-md">
-        <Asciinema
-          src="/demos/cover.cast"
-          settings={{
-            cols: 84,
-            poster: 'npt:0:01:22',
-            markers: [
-              [11.5, 'Ad-Hoc development environments'],
-              [41.5, 'Declarative development environments'],
-              [85.0, 'Build docker image with Nix'],
-              [122.0, 'Build minimal docker image with Nix'],
-            ],
-          }}
-        />
-      </div>
+        <Headline level={3} variant="white" center>
+          Take control of your software: how it builds, when you upgrade, and
+          where dependencies come from.
+        </Headline>
+      </Container>
+      <Container class="grid gap-8 grid-cols-2">
+        <Card tag="li" class="h-full list-none" variant="light" padding="sm">
+          <Headline class="m-4" level={2} variant="blue" center>
+            Nix {NIX_VERSION}
+          </Headline>
+          <Paragraph class="m-4" variant="black" size="lg">
+            Nix is a tool that takes a unique approach to package management and
+            system configuration. Learn how to make reproducible, declarative
+            and reliable software.
+          </Paragraph>
+          <div class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start">
+            <Button
+              href="/download"
+              color="semidarkblue"
+              size="mini"
+              classList="flex-1 text-xl"
+              icon="mdi:download"
+            >
+              Download
+            </Button>
+            <Button
+              href="/learn"
+              color="nixblue"
+              size="mini"
+              icon="mdi:learn-outline"
+              classList="flex-1 text-xl bg"
+            >
+              Learn More
+            </Button>
+          </div>
+        </Card>
+
+        <Card tag="li" class="h-full list-none" variant="dark" padding="sm">
+          <Headline class="m-4" level={2} variant="white" center>
+            NixOS {NIXOS_VERSION}
+          </Headline>
+          <Paragraph class="m-4" variant="white" size="lg">
+            NixOS is a Linux distribution built around the Nix package manager
+            and Nixpkgs. Learn how to make reproducible, declarative and
+            reliable systems.
+          </Paragraph>
+          <div class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start">
+            <Button
+              href="/download"
+              color="white"
+              size="mini"
+              icon="mdi:download"
+              classList="flex-1 text-xl"
+            >
+              Download
+            </Button>
+            <Button
+              href="/learn"
+              color="nixblue"
+              size="mini"
+              icon="mdi:learn-outline"
+              classList="flex-1 text-xl bg"
+            >
+              Learn More
+            </Button>
+          </div>
+        </Card>
+      </Container>
     </Container>
   </Segment>
   <div class="inline-svg-landing-search-top bg-[39%_100%] bg-no-repeat md:bg-bottom">
+    <Headline level={2} center variant="blue" class="text-4xl mt-16">
+      Features of the Nix ecosystem
+    </Headline>
     <Container class="grid gap-8 pt-16 pb-48 md:grid-cols-3 md:gap-4" tag="ul">
       {landingFeatures.map(async (feature) => {
         const { Content } = await render(feature);
@@ -161,29 +205,6 @@ posts
           Become a sponsor!
         </Link>
       </Paragraph>
-    </Container>
-  </Segment>
-  <Segment variant="white">
-    <Container>
-      <Headline variant="blue" level={2} center class="pb-8">
-        Examples
-      </Headline>
-      <div class="grid items-center gap-4 pb-8 md:grid-cols-2">
-        {demos.data.map((demo) => {
-          return (
-            <div class="flex flex-col items-start gap-2 overflow-hidden">
-              <Asciinema
-                title={demo.title}
-                class="w-full self-center md:self-start"
-                src={demo.file}
-                settings={{
-                  poster: 'npt:0:00:30',
-                }}
-              />
-            </div>
-          );
-        })}
-      </div>
     </Container>
   </Segment>
 </Layout>
