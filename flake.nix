@@ -297,7 +297,7 @@ rec {
           };
 
           pre-commit.settings.hooks = {
-            nixfmt-rfc-style = {
+            nixfmt = {
               enable = true;
               files = "\\.nix$";
             };
