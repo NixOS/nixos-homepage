@@ -91,7 +91,7 @@ ${slidingWords
     </Banner>
   )}
   <Segment variant="blue-lambda">
-    <Container class="grid grid-cols-1 gap-8 py-8 md:py-16 lg:grid-rows-2 lg:py-24">
+    <Container class="grid grid-cols-1 gap-8 py-8 md:py-16">
       <Container class="grid gap-8 grid-cols-1 items-center">
         <Headline level={1} variant="white" center>
           <div class="grid grid-cols-1 justify-items-center text-3xl sm:text-4xl md:text-5xl lg:grid-cols-2 lg:items-start lg:gap-x-[0.25em]">
@@ -114,8 +114,13 @@ ${slidingWords
           where dependencies come from.
         </Headline>
       </Container>
-      <Container class="grid gap-8 grid-cols-2">
-        <Card tag="li" class="h-full list-none" variant="light" padding="sm">
+      <Container class="grid gap-8 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1">
+        <Card
+          tag="li"
+          class="h-full list-none flex flex-col justify-between"
+          variant="light"
+          padding="sm"
+        >
           <Headline class="m-4" level={2} variant="blue" center>
             Nix {NIX_VERSION}
           </Headline>
@@ -124,7 +129,7 @@ ${slidingWords
             system configuration. Learn how to make reproducible, declarative
             and reliable software.
           </Paragraph>
-          <div class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start">
+          <div class="flex flex-col justify-center gap-4 text-center md:flex-row md:justify-start">
             <Button
               href="/download"
               color="semidarkblue"
@@ -146,7 +151,12 @@ ${slidingWords
           </div>
         </Card>
 
-        <Card tag="li" class="h-full list-none" variant="dark" padding="sm">
+        <Card
+          tag="li"
+          class="h-full list-none flex flex-col justify-between"
+          variant="dark"
+          padding="sm"
+        >
           <Headline class="m-4" level={2} variant="white" center>
             NixOS {NIXOS_VERSION}
           </Headline>
@@ -155,7 +165,7 @@ ${slidingWords
             and Nixpkgs. Learn how to make reproducible, declarative and
             reliable systems.
           </Paragraph>
-          <div class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start">
+          <div class="flex flex-col justify-center gap-4 text-center md:flex-row md:justify-start">
             <Button
               href="/download"
               color="white"
