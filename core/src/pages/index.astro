@@ -41,9 +41,38 @@ posts
     return p.id.split('/')?.[0] === 'announcements';
   })
   .reverse();
+
+// The hero's rotating words. The keyframes below are derived from this list, so
+// adding or removing a word needs no other change. A duplicate of the first word
+// is appended in the markup so the loop point is invisible; that makes the number
+// of slides one less than the number of rendered <li>.
+const slidingWords = [
+  'Software',
+  'Operating Systems',
+  'Cloud Images',
+  'Dev Environments',
+  'Deployments',
+];
+
+const slideSlots = slidingWords.length;
+const slideSlotPct = 100 / slideSlots;
+const slideHold = 0.8;
+const slidePct = (v) => `${+v.toFixed(4)}%`;
+const slideOffset = (k) => (k === 0 ? '0' : `-${k}lh`);
+const slideKeyframes = `@keyframes text-slide {
+${slidingWords
+  .map((_, k) => {
+    const start = slidePct(k * slideSlotPct);
+    const held = slidePct(k * slideSlotPct + slideSlotPct * slideHold);
+    return `  ${start}, ${held} { transform: translateY(${slideOffset(k)}); }`;
+  })
+  .join('\n')}
+  100% { transform: translateY(${slideOffset(slideSlots)}); }
+}`;
 ---
 
 <Layout>
+  <style is:inline set:html={slideKeyframes} slot="head"></style>
   {CurrentBannerContent ? (
     <CurrentBannerContent />
   ) : (
@@ -68,13 +97,14 @@ posts
           <div class="grid grid-cols-1 justify-items-center text-3xl sm:text-4xl md:text-5xl lg:grid-cols-2 lg:items-start lg:gap-x-[0.25em]">
             <span class="lg:justify-self-end">Declarative</span>
             <span class="inline-flex h-[1lh] flex-col overflow-hidden lg:justify-self-start">
-              <ul class="block animate-text-slide text-center leading-tight motion-reduce:animate-none lg:text-left">
-                <li>Software</li>
-                <li>Operating Systems</li>
-                <li>Cloud Images</li>
-                <li>Dev Environments</li>
-                <li>Deployments</li>
-                <li aria-hidden="true">Software</li>
+              <ul
+                class="block animate-text-slide text-center leading-tight motion-reduce:animate-none lg:text-left"
+                style={`--slide-duration: ${slideSlots * 2.5}s`}
+              >
+                {slidingWords.map((word) => (
+                  <li>{word}</li>
+                ))}
+                <li aria-hidden="true">{slidingWords[0]}</li>
               </ul>
             </span>
           </div>
