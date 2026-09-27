@@ -42,11 +42,16 @@ posts
   })
   .reverse();
 
-// The hero's rotating words. The keyframes below are derived from this list, so
-// adding or removing a word needs no other change. A duplicate of the first word
-// is appended in the markup so the loop point is invisible; that makes the number
-// of slides one less than the number of rendered <li>.
-const slidingWords = [
+// The hero's two rotating halves. Both keyframe blocks are generated from these
+// lists, so adding or removing a word needs no other change.
+//
+// The adjectives scroll down and the nouns scroll up. Showing item i means
+// translating by -i lh, so scrolling down is i decreasing: the adjectives are
+// rendered in reverse and their duplicate leads instead of trails. Either way
+// the duplicate is a copy of the word displayed first, so the loop is invisible.
+const slidingAdjectives = ['Reproducible', 'Declarative', 'Reliable'];
+
+const slidingNouns = [
   'Software',
   'Operating Systems',
   'Cloud Images',
@@ -54,25 +59,34 @@ const slidingWords = [
   'Deployments',
 ];
 
-const slideSlots = slidingWords.length;
-const slideSlotPct = 100 / slideSlots;
+const SLIDE_DWELL = 2.5;
 const slideHold = 0.8;
 const slidePct = (v) => `${+v.toFixed(4)}%`;
-const slideOffset = (k) => (k === 0 ? '0' : `-${k}lh`);
-const slideKeyframes = `@keyframes text-slide {
-${slidingWords
-  .map((_, k) => {
-    const start = slidePct(k * slideSlotPct);
-    const held = slidePct(k * slideSlotPct + slideSlotPct * slideHold);
-    return `  ${start}, ${held} { transform: translateY(${slideOffset(k)}); }`;
-  })
-  .join('\n')}
-  100% { transform: translateY(${slideOffset(slideSlots)}); }
-}`;
+const slideOffset = (n) => (n === 0 ? '0' : `-${n}lh`);
+
+// offsetAt(k) gives the line the window sits on during slot k, in lh.
+const slideKeyframes = (name, slots, offsetAt) => {
+  const pct = 100 / slots;
+  const stops = Array.from({ length: slots }, (_, k) => {
+    const start = slidePct(k * pct);
+    const held = slidePct(k * pct + pct * slideHold);
+    return `  ${start}, ${held} { transform: translateY(${slideOffset(offsetAt(k))}); }`;
+  });
+  return `@keyframes ${name} {\n${stops.join('\n')}\n  100% { transform: translateY(${slideOffset(offsetAt(slots))}); }\n}`;
+};
+
+const heroKeyframes = [
+  slideKeyframes('text-slide', slidingNouns.length, (k) => k),
+  slideKeyframes(
+    'text-slide-down',
+    slidingAdjectives.length,
+    (k) => slidingAdjectives.length - k,
+  ),
+].join('\n');
 ---
 
 <Layout>
-  <style is:inline set:html={slideKeyframes} slot="head"></style>
+  <style is:inline set:html={heroKeyframes} slot="head"></style>
   {CurrentBannerContent ? (
     <CurrentBannerContent />
   ) : (
@@ -95,16 +109,26 @@ ${slidingWords
       <Container class="grid gap-8 grid-cols-1 items-center">
         <Headline level={1} variant="white" center>
           <div class="grid grid-cols-1 justify-items-center text-3xl sm:text-4xl md:text-5xl lg:grid-cols-2 lg:items-start lg:gap-x-[0.25em]">
-            <span class="lg:justify-self-end">Reproducible</span>
+            <span class="inline-flex h-[1lh] flex-col overflow-hidden lg:justify-self-end">
+              <ul
+                class="block animate-text-slide-down text-center leading-tight motion-reduce:animate-none lg:text-right"
+                style={`--slide-duration: ${slidingAdjectives.length * SLIDE_DWELL}s`}
+              >
+                <li aria-hidden="true">{slidingAdjectives[0]}</li>
+                {[...slidingAdjectives].reverse().map((word) => (
+                  <li>{word}</li>
+                ))}
+              </ul>
+            </span>
             <span class="text-secondary-argentinian-blue-85 inline-flex h-[1lh] flex-col overflow-hidden lg:justify-self-start">
               <ul
                 class="block animate-text-slide text-center leading-tight motion-reduce:animate-none lg:text-left"
-                style={`--slide-duration: ${slideSlots * 2.5}s`}
+                style={`--slide-duration: ${slidingNouns.length * SLIDE_DWELL}s`}
               >
-                {slidingWords.map((word) => (
+                {slidingNouns.map((word) => (
                   <li>{word}</li>
                 ))}
-                <li aria-hidden="true">{slidingWords[0]}</li>
+                <li aria-hidden="true">{slidingNouns[0]}</li>
               </ul>
             </span>
           </div>
