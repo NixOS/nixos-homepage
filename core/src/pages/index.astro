@@ -105,13 +105,17 @@ const heroKeyframes = [
     </Banner>
   )}
   <Segment variant="blue-lambda">
-    <Container class="grid grid-cols-1 gap-8 py-8 md:py-16">
-      <Container class="grid gap-8 grid-cols-1 items-center">
-        <Headline level={1} variant="white" center>
-          <div class="grid grid-cols-1 justify-items-center text-3xl sm:text-4xl md:text-5xl lg:grid-cols-2 lg:items-start lg:gap-x-[0.25em]">
-            <span class="inline-flex h-[1lh] flex-col overflow-hidden lg:justify-self-end">
+    <Container class="grid lg:grid-cols-2 gap-8 py-8 md:py-16">
+      <div class="flex flex-col justify-evenly">
+        <Headline
+          level={1}
+          variant="white"
+          class="lg:text-6xl! text-center lg:text-left"
+        >
+          <div>
+            <span class="inline-flex h-lh flex-col overflow-hidden lg:justify-self-end">
               <ul
-                class="block animate-text-slide-down text-center leading-tight motion-reduce:animate-none lg:text-right"
+                class="block animate-text-slide-down leading-tight motion-reduce:animate-none"
                 style={`--slide-duration: ${slidingAdjectives.length * SLIDE_DWELL}s`}
               >
                 <li aria-hidden="true">{slidingAdjectives[0]}</li>
@@ -133,48 +137,58 @@ const heroKeyframes = [
             </span>
           </div>
         </Headline>
-        <Headline level={3} variant="white" center class="text-balance">
-          <span class="block md:inline">Take control.</span>
-          <span class="block md:inline">Every package.</span>
-          <span class="block md:inline">Every dependency.</span>
-          <span class="block md:inline">Every machine.</span>
+        <Headline
+          level={3}
+          variant="white"
+          class="text-balance flex flex-col text-center lg:text-left flex-wrap justify-around lg:justify-start gap-1 mt-4 lg:text-4xl"
+        >
+          <span class="block md:inline">
+            Take{' '}
+            <span class="text-secondary-argentinian-blue-85">control.</span>
+          </span>
+          <span class="block md:inline">
+            Every{' '}
+            <span class="text-secondary-argentinian-blue-85">package.</span>
+          </span>
+          <span class="block md:inline">
+            Every{' '}
+            <span class="text-secondary-argentinian-blue-85">dependency.</span>
+          </span>
+          <span class="block md:inline">
+            Every{' '}
+            <span class="text-secondary-argentinian-blue-85">machine.</span>
+          </span>
         </Headline>
-      </Container>
-      <Container class="grid gap-8 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1">
+      </div>
+      <div class="flex flex-col gap-4">
         <Card
           tag="li"
           class="h-full list-none flex flex-col justify-between"
-          variant="light"
+          variant="dark"
           padding="sm"
         >
-          <Headline class="m-4" level={2} variant="blue" center>
-            Nix {NIX_VERSION}
-          </Headline>
-          <Paragraph class="m-4" variant="black" size="lg">
-            Nix is a tool that takes a unique approach to package management and
-            system configuration. Runs on Linux and macOS, next to the package
-            manager you already have.
-          </Paragraph>
-          <div class="flex flex-col justify-center gap-4 text-center md:flex-row md:justify-start">
+          <div class="flex justify-between items-center">
+            <Headline level={2} variant="blue" class="flex-1" variant="white">
+              Nix
+            </Headline>
             <Button
               href="/download"
               color="semidarkblue"
               size="mini"
-              classList="flex-1 text-xl"
               icon="mdi:download"
+              class="flex-0 min-w-max"
             >
-              Download
-            </Button>
-            <Button
-              href="/learn"
-              color="nixblue"
-              size="mini"
-              icon="mdi:learn-outline"
-              classList="flex-1 text-xl bg"
-            >
-              Learn More
+              Download Nix {NIX_VERSION}
             </Button>
           </div>
+          <Paragraph class="flex-1" variant="white" size="xl" class="font-bold">
+            The Package Manager
+          </Paragraph>
+          <Paragraph class="flex-1" variant="white" size="lg">
+            Nix is a tool that takes a unique approach to package management and
+            system configuration. Runs on Linux and macOS, next to the package
+            manager you already have.
+          </Paragraph>
         </Card>
 
         <Card
@@ -183,36 +197,31 @@ const heroKeyframes = [
           variant="dark"
           padding="sm"
         >
-          <Headline class="m-4" level={2} variant="white" center>
-            NixOS {NIXOS_VERSION}
-          </Headline>
-          <Paragraph class="m-4" variant="white" size="lg">
-            NixOS is a Linux distribution built around the Nix package manager
-            and Nixpkgs. Describe a laptop or a fleet of servers. Every upgrade
-            reversible, every machine repeatable.
-          </Paragraph>
-          <div class="flex flex-col justify-center gap-4 text-center md:flex-row md:justify-start">
+          <div class="flex justify-between items-center">
+            <Headline level={2} variant="blue" class="flex-1" variant="white">
+              NixOS
+            </Headline>
             <Button
               href="/download"
-              color="white"
+              color="semidarkblue"
               size="mini"
               icon="mdi:download"
-              classList="flex-1 text-xl"
+              class="flex-0 min-w-max"
             >
-              Download
-            </Button>
-            <Button
-              href="/learn"
-              color="nixblue"
-              size="mini"
-              icon="mdi:learn-outline"
-              classList="flex-1 text-xl bg"
-            >
-              Learn More
+              Download NixOS {NIXOS_VERSION}
             </Button>
           </div>
+          <Headline level={2} variant="white" />
+          <Paragraph class="flex-1" variant="white" size="xl" class="font-bold">
+            The Linux Distribution
+          </Paragraph>
+          <Paragraph variant="white" size="lg" class="pb-3">
+            NixOS is a Linux distribution built around the Nix package manager
+            and Nixpkgs. Describe a laptop or a fleet of servers in reversable
+            and repeatable.
+          </Paragraph>
         </Card>
-      </Container>
+      </div>
     </Container>
   </Segment>
   <div class="inline-svg-landing-search-top bg-[39%_100%] bg-no-repeat md:bg-bottom">
