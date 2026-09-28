@@ -1,15 +1,22 @@
 items:
   - name: Explore
     link: /explore
+    icon: mdi:compass-outline
   - name: Download
     link: /download
+    icon: mdi:download
   - name: Learn
     link: /learn
+    icon: mdi:book-open
   - name: Governance
     link: /governance
+    icon: mdi:scale-balance
   - name: Community
     link: /community
+    icon: mdi:account-group
   - name: Blog
     link: /blog
+    icon: mdi:blog
   - name: Backing
     link: /backing
+    icon: mdi:heart
