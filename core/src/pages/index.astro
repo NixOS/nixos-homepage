@@ -107,35 +107,35 @@ const heroKeyframes = [
   <Segment variant="blue-lambda">
     <Container class="grid lg:grid-cols-2 gap-8 py-8 md:py-16">
       <div class="flex flex-col justify-evenly">
+        <h1 class="sr-only">NixOS - Reproducible, Declarative, Reliable</h1>
         <Headline
+          tag="span"
           level={1}
           variant="white"
           class="lg:text-6xl! text-center lg:text-left"
         >
-          <div>
-            <span class="inline-flex h-lh flex-col overflow-hidden lg:justify-self-end">
-              <ul
-                class="block animate-text-slide-down leading-tight motion-reduce:animate-none"
-                style={`--slide-duration: ${slidingAdjectives.length * SLIDE_DWELL}s`}
-              >
-                <li aria-hidden="true">{slidingAdjectives[0]}</li>
-                {[...slidingAdjectives].reverse().map((word) => (
-                  <li>{word}</li>
-                ))}
-              </ul>
-            </span>
-            <span class="text-secondary-argentinian-blue-85 inline-flex h-[1lh] flex-col overflow-hidden lg:justify-self-start">
-              <ul
-                class="block animate-text-slide text-center leading-tight motion-reduce:animate-none lg:text-left"
-                style={`--slide-duration: ${slidingNouns.length * SLIDE_DWELL}s`}
-              >
-                {slidingNouns.map((word) => (
-                  <li>{word}</li>
-                ))}
-                <li aria-hidden="true">{slidingNouns[0]}</li>
-              </ul>
-            </span>
-          </div>
+          <span class="flex h-lh flex-col overflow-hidden lg:justify-self-end">
+            <ul
+              class="block animate-text-slide-down leading-tight motion-reduce:animate-none"
+              style={`--slide-duration: ${slidingAdjectives.length * SLIDE_DWELL}s`}
+            >
+              <li aria-hidden="true">{slidingAdjectives[0]}</li>
+              {[...slidingAdjectives].reverse().map((word) => (
+                <li>{word}</li>
+              ))}
+            </ul>
+          </span>
+          <span class="text-secondary-argentinian-blue-85 flex h-[1lh] flex-col overflow-hidden lg:justify-self-start">
+            <ul
+              class="block animate-text-slide text-center leading-tight motion-reduce:animate-none lg:text-left"
+              style={`--slide-duration: ${slidingNouns.length * SLIDE_DWELL}s`}
+            >
+              {slidingNouns.map((word) => (
+                <li>{word}</li>
+              ))}
+              <li aria-hidden="true">{slidingNouns[0]}</li>
+            </ul>
+          </span>
         </Headline>
         <Headline
           level={3}
