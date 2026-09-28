@@ -3,6 +3,16 @@
 
 @config '../../tailwind.config.cjs';
 
+@theme {
+  /* The @keyframes are generated from the word lists in the page that uses
+     these, so the step count follows each list. --slide-duration comes from
+     there too. text-slide scrolls up, text-slide-down scrolls down. */
+  --animate-text-slide: text-slide var(--slide-duration, 12.5s)
+    cubic-bezier(0.83, 0, 0.17, 1) infinite;
+  --animate-text-slide-down: text-slide-down var(--slide-duration, 7.5s)
+    cubic-bezier(0.83, 0, 0.17, 1) infinite;
+}
+
 @utility text-light-bold {
   @apply font-extralight;
 

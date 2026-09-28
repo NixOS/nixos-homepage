@@ -10,7 +10,7 @@ import '@/styles/base.css';
 import '@/styles/route159.css';
 
 const {
-  title = 'Nix & NixOS | Declarative builds and deployments',
+  title = 'Nix & NixOS | Reproducible builds and deployments',
   description = 'Nix is a tool that takes a unique approach to package management and system configuration. Learn how to make reproducible, declarative and reliable systems.',
 } = Astro.props;
 
@@ -90,6 +90,7 @@ const headFeedLinks = blogMenu.data.map((e) => {
         ],
       }}
     />
+    <slot name="head" />
   </head>
   <body class="text-primary-black-15 bg-primary-white flex min-h-screen flex-col">
     <Header />
