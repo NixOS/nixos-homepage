@@ -100,13 +100,6 @@ What’s _actually stored_ in the Nix binary cache? It’s pretty basic:
 
 **Side note**: The NAR format is an excellent example of simple, stable design: it hasn’t been revised or extended since its introduction—[more than 20 years ago](https://github.com/NixOS/nix/commit/a09e66da5af348dc25e3b372ec9f518d3532f863)! This simple-by-design continuity contrasts with that of archives like `.deb` or `.rpm`, both of which offer a rich set of features and metadata, but at a cost: each has seen a series of format revisions and breaking changes (like new compression methods, novel metadata fields, and other mods) over the same period.
 
-<img
-  src="/images/blog/stories/binary-cache-structure-explained.svg"
-  alt="Directory structure of the Nix binary cache, showing the nar/, log/, and realisations/ directories alongside top-level narinfo files and nix-cache-info."
-  style="display: block; margin: 0 auto; float: none; max-width: 100%; height: auto;"
-  decoding="async"
-  loading="lazy"
-/>
 
 ## How Does This Stuff Get There?
 
