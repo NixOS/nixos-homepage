@@ -11,18 +11,42 @@ const {
   orientation = 'horizontal',
   style = 'regular',
   variant = 'recommended',
+}: {
+  type?: 'logo' | 'logomark' | 'logotype';
+  fillStyle?: string;
+  color?: string;
+  fontColor?: string;
+  orientation?: string;
+  style?: string;
+  variant?: string;
 } = Astro.props;
 
-const brandUrl = `https://brand.nixos.org/logos/nixos-${type}-${color}-${fillStyle}-${fontColor}-${style}-${orientation}-${variant}.svg`;
+const urlParts = {
+  logo: [type, color, fillStyle, fontColor, style, orientation, variant],
+  logomark: [type, color, fillStyle, variant],
+  logotype: [type, fontColor, style, variant],
+}[type];
+
+const brandUrl = `https://brand.nixos.org/logos/nixos-${urlParts.join('-')}.svg`;
+
+const onDark =
+  fontColor === 'white' ||
+  (type === 'logomark' && (color === 'white' || color === 'trans'));
+
+const alt = {
+  logo: `${style} styled NixOS ${type} in the ${variant} variant filled with ${fillStyle} ${color} colors in a ${orientation} orientation using a ${fontColor} font`,
+  logomark: `NixOS ${type} in the ${variant} variant filled with ${fillStyle} ${color} colors`,
+  logotype: `NixOS ${type} in the ${variant} variant using the ${style} font in ${fontColor}`,
+}[type];
 ---
 
 <Card>
   <img
     src={brandUrl}
-    alt={`${style} styled NixOS ${type} in the ${variant} variant filled with ${fillStyle} ${color} colors in a ${orientation} orientation using a ${fontColor} font`}
+    alt={alt}
     class:list={[
       'w-auto rounded-2xl',
-      fontColor === 'white' ? 'bg-primary-black' : 'bg-primary-white',
+      onDark ? 'bg-primary-black' : 'bg-primary-white',
     ]}
   />
   <div class="mt-1.5 article">
