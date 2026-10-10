@@ -1,0 +1,179 @@
+<svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
+  <!-- Background -->
+  <rect width="1400" height="900" fill="#eeeeee"/>
+  
+  <!-- Title -->
+  <text x="700" y="40" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#0b0b0b">
+    Nix Binary Cache Build Pipeline
+  </text>
+  
+  <!-- Step 1: Maintainer Commit -->
+  <g id="maintainer">
+    <rect x="50" y="100" width="280" height="180" rx="8" fill="#fff" stroke="#6f66ae" stroke-width="2"/>
+    <rect x="50" y="100" width="280" height="40" rx="8" fill="#6f66ae"/>
+    <text x="190" y="125" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#fff">
+      1. Maintainer Commit
+    </text>
+    
+    <text x="70" y="165" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" fill="#3a3a3a">Updates to nixpkgs:</text>
+    <text x="70" y="190" font-family="monospace" font-size="12" fill="#717171">• Version changes</text>
+    <text x="70" y="210" font-family="monospace" font-size="12" fill="#717171">• Dependencies</text>
+    <text x="70" y="230" font-family="monospace" font-size="12" fill="#717171">• Patches/build instructions</text>
+    <text x="70" y="250" font-family="monospace" font-size="12" fill="#717171">• Tests/post-build actions</text>
+  </g>
+  
+  <!-- Step 2: Hydra CI System -->
+  <g id="hydra">
+    <rect x="450" y="100" width="500" height="400" rx="12" fill="#e3f1fb" stroke="#2579ab" stroke-width="3"/>
+    <rect x="450" y="100" width="500" height="45" rx="12" fill="#2579ab"/>
+    <text x="700" y="128" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" font-weight="600" text-anchor="middle" fill="#fff">
+      2. Hydra CI System
+    </text>
+    
+    <!-- Evaluation Phase -->
+    <rect x="470" y="165" width="460" height="100" rx="8" fill="#fff" stroke="#2579ab" stroke-width="1"/>
+    <text x="700" y="190" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#1a5b82">
+      Evaluation Phase
+    </text>
+    <text x="490" y="215" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" fill="#3a3a3a">• Evaluate Nix expressions (~211,000 packages)</text>
+    <text x="490" y="235" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" fill="#3a3a3a">• Calculate derivations</text>
+    <text x="490" y="255" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" fill="#3a3a3a">• Compare hashes with existing cache</text>
+    
+    <!-- Decision -->
+    <g transform="translate(700, 300)">
+      <polygon points="0,-20 30,0 0,20 -30,0" fill="#dfcc99" stroke="#ac8b26" stroke-width="2"/>
+      <text x="0" y="5" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#493802">
+        New?
+      </text>
+    </g>
+    
+    <!-- Queue Build -->
+    <rect x="470" y="350" width="460" height="80" rx="8" fill="#fff" stroke="#2579ab" stroke-width="1"/>
+    <text x="700" y="375" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#1a5b82">
+      Build Queue
+    </text>
+    <text x="700" y="400" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#3a3a3a">
+      New or changed derivations queued for building
+    </text>
+    <text x="700" y="418" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#717171">
+      (Different hash = needs rebuild)
+    </text>
+  </g>
+  
+  <!-- Step 3: Builder Machines -->
+  <g id="builders">
+    <rect x="450" y="550" width="500" height="220" rx="8" fill="#e0f5e5" stroke="#378450" stroke-width="2"/>
+    <rect x="450" y="550" width="500" height="40" rx="8" fill="#378450"/>
+    <text x="700" y="575" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#fff">
+      3. Distributed Builder Machines
+    </text>
+    
+    <text x="700" y="605" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#28633c" font-style="italic">
+      Geographically distributed across the EU • each build sandboxed
+    </text>
+    
+    <!-- Builder boxes -->
+    <g transform="translate(470, 625)">
+      <!-- Row 1 -->
+      <rect x="77" y="0" width="140" height="60" rx="6" fill="#fff" stroke="#378450" stroke-width="1"/>
+      <text x="147" y="20" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" font-weight="500" text-anchor="middle" fill="#28633c">Builder 1</text>
+      <text x="147" y="35" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">x86_64-linux</text>
+      <text x="147" y="48" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">Region: EU</text>
+
+      <rect x="232" y="0" width="140" height="60" rx="6" fill="#fff" stroke="#378450" stroke-width="1"/>
+      <text x="302" y="20" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" font-weight="500" text-anchor="middle" fill="#28633c">Builder 2</text>
+      <text x="302" y="35" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">aarch64-linux</text>
+      <text x="302" y="48" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">Region: EU</text>
+
+      <!-- Row 2 -->
+      <rect x="77" y="70" width="140" height="60" rx="6" fill="#fff" stroke="#378450" stroke-width="1"/>
+      <text x="147" y="90" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" font-weight="500" text-anchor="middle" fill="#28633c">Builder 3</text>
+      <text x="147" y="105" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">aarch64-darwin</text>
+      <text x="147" y="118" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">Region: EU</text>
+
+      <rect x="232" y="70" width="140" height="60" rx="6" fill="#fff" stroke="#378450" stroke-width="1"/>
+      <text x="302" y="90" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" font-weight="500" text-anchor="middle" fill="#28633c">Builder N</text>
+      <text x="302" y="105" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">...</text>
+      <text x="302" y="118" font-family="monospace" font-size="9" text-anchor="middle" fill="#717171">Region: EU</text>
+    </g>
+  </g>
+  
+  <!-- Step 4: Upload to Cache -->
+  <g id="cache-upload">
+    <rect x="1070" y="100" width="280" height="400" rx="8" fill="#f6eed8" stroke="#ac8b26" stroke-width="2"/>
+    <rect x="1070" y="100" width="280" height="40" rx="8" fill="#ac8b26"/>
+    <text x="1210" y="125" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#fff">
+      4. Cache Upload
+    </text>
+    
+    <!-- Build Success -->
+    <rect x="1090" y="160" width="240" height="90" rx="6" fill="#fff" stroke="#ac8b26" stroke-width="1"/>
+    <text x="1210" y="185" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#695205">
+      Build Success
+    </text>
+    <text x="1210" y="210" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#3a3a3a">Generated files:</text>
+    <text x="1210" y="230" font-family="monospace" font-size="11" text-anchor="middle" fill="#717171">.nar + .narinfo</text>
+    
+    <!-- Hydra Processing -->
+    <rect x="1090" y="270" width="240" height="100" rx="6" fill="#fff" stroke="#ac8b26" stroke-width="1"/>
+    <text x="1210" y="295" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#695205">
+      Hydra Processing
+    </text>
+    <text x="1110" y="320" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" fill="#3a3a3a">• Validate artifacts</text>
+    <text x="1110" y="340" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" fill="#3a3a3a">• Sign with keys</text>
+    <text x="1110" y="360" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" fill="#3a3a3a">• Upload to S3</text>
+    
+    <!-- Final destination -->
+    <rect x="1090" y="390" width="240" height="90" rx="6" fill="#f6eed8" stroke="#ac8b26" stroke-width="2"/>
+    <text x="1210" y="420" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#493802">
+      cache.nixos.org
+    </text>
+    <text x="1210" y="445" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#695205">
+      Available for clients
+    </text>
+    <text x="1210" y="465" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#695205">
+      to fetch and use
+    </text>
+  </g>
+  
+  <!-- Flow arrows using simple paths -->
+  
+  <!-- Maintainer to Hydra -->
+  <line x1="330" y1="190" x2="440" y2="190" stroke="#717171" stroke-width="2"/>
+  <polygon points="440,190 430,185 430,195" fill="#717171"/>
+  <text x="385" y="185" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#717171">triggers</text>
+  
+  <!-- Decision to Queue -->
+  <line x1="700" y1="320" x2="700" y2="340" stroke="#2579ab" stroke-width="2"/>
+  <polygon points="700,340 695,330 705,330" fill="#2579ab"/>
+  <text x="730" y="335" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" fill="#2579ab">yes</text>
+  
+  <!-- Queue to Builders -->
+  <line x1="700" y1="430" x2="700" y2="540" stroke="#378450" stroke-width="2"/>
+  <polygon points="700,540 695,530 705,530" fill="#378450"/>
+  <text x="720" y="490" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" fill="#378450">dispatch</text>
+  
+  <!-- Builders to Upload -->
+  <path d="M 950 640 Q 1010 640 1010 300 L 1060 300" stroke="#ac8b26" stroke-width="2" fill="none"/>
+  <polygon points="1060,300 1050,295 1050,305" fill="#ac8b26"/>
+  <text x="990" y="470" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" fill="#ac8b26">upload</text>
+  
+  <!-- Skip path for existing derivations -->
+  <path d="M 730 300 Q 990 300 990 180 Q 990 90 1100 90" stroke="#717171" stroke-width="1" stroke-dasharray="5,3" fill="none"/>
+  <polygon points="1100,90 1090,85 1090,95" fill="#717171"/>
+  <text x="860" y="295" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="11" fill="#717171">no (already cached)</text>
+  
+  <!-- Bottom summary -->
+  <g id="summary">
+    <rect x="50" y="780" width="1300" height="90" rx="8" fill="#ededfc" stroke="#6f66ae" stroke-width="2"/>
+    <text x="700" y="810" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#534c84">
+      Key Points
+    </text>
+    <text x="700" y="835" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3a3a3a">
+      Hydra CI orchestrates the entire pipeline: evaluating expressions, comparing hashes, dispatching builds to distributed workers,
+    </text>
+    <text x="700" y="855" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3a3a3a">
+      and ensuring all artifacts are validated and signed before making them available on cache.nixos.org.
+    </text>
+  </g>
+</svg>
