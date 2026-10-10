@@ -26,16 +26,16 @@
   ],
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@typescript-eslint/parser": "^8.71.0",
-    "eslint": "^10.11.0",
+    "@typescript-eslint/parser": "^8.71.1",
+    "eslint": "^10.12.0",
     "eslint-plugin-astro": "^3.2.1",
     "express": "^5.2.1",
-    "globals": "^17.12.0",
+    "globals": "^17.13.0",
     "prettier": "^3.9.9",
     "prettier-plugin-astro": "^1.1.0",
-    "prettier-plugin-astro-organize-imports": "^0.4.13",
+    "prettier-plugin-astro-organize-imports": "^0.4.14",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "typescript-eslint": "^8.71.0"
+    "typescript-eslint": "^8.71.1"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
