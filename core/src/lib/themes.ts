@@ -1,5 +1,5 @@
-import logoDefault from '@nixos/branding/artifacts/internal/nixos-logo-default-gradient-black-regular-horizontal-none.svg';
-import logoRainbow from '@nixos/branding/artifacts/internal/nixos-logo-rainbow-gradient-black-regular-horizontal-none.svg';
+import logoDefault from '@nixos/branding/artifacts/internal/nixos-logo-default-gradient-white-regular-horizontal-none.svg';
+import logoRainbow from '@nixos/branding/artifacts/internal/nixos-logo-rainbow-gradient-white-regular-horizontal-none.svg';
 import { THEME } from 'astro:env/client';
 
 export function getNixosLogoUrl() {

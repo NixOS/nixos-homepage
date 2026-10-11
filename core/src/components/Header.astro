@@ -13,19 +13,19 @@ const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
-const navbarItemStyle = `text-center text-secondary-afghani-blue-45 md:text-primary-black md:hover:border-b-secondary-afghani-blue-65 border-b-4`;
-const navbarItemInactiveStyle = `border-b-secondary-afghani-blue-95 md:border-b-transparent bg-secondary-afghani-blue-95 md:bg-transparent`;
-const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-afghani-blue-85 text-primary-white md:text-primary-black md:bg-transparent font-bold`;
+const navbarItemStyle = `text-center text-primary-white rounded-2xl`;
+const navbarItemInactiveStyle = `bg-secondary-afghani-blue-35 hover:bg-secondary-afghani-blue-25`;
+const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-95 text-primary-black! font-bold`;
 ---
 
-<header class="text-primary-black bg-primary-white sticky top-0 z-50 font-light drop-shadow-md">
+<header class="text-primary-white bg-secondary-afghani-blue-45 sticky top-0 z-50 py-4 font-light">
   {currentBanner && (
     <a
       href={currentBanner.data.sitewide.link.url}
       target="_blank"
       rel="noopener noreferrer"
       class:list={[
-        'block py-2 font-bold',
+        'block font-bold',
         currentBanner.data.sitewide.wrapperClasses,
       ]}
     >
@@ -54,7 +54,7 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
         aria-label="Main Navigation Toggle"
         aria-controls="navbar-menu"
         aria-expanded="true"
-        class="bg-secondary-afghani-blue block rounded-lg p-4 md:hidden"
+        class="p-4 md:hidden"
         id="navigation-toggle"
       >
         <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
@@ -65,35 +65,39 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
 
     <nav
       aria-label="Main Navigation"
-      class="flex flex-col gap-0.5 pb-4 leading-none md:flex md:flex-row md:gap-5 md:pb-0"
+      class="grid pt-3 md:pt-0 grid-cols-2 md:flex flex-col gap-1.5 justify-evenly items-center leading-none md:flex-row md:gap-3 md:pb-0"
       id="navbar-menu"
     >
       {headerMenu.data.items.map((item) => (
-        <Link
-          class:list={[
-            'pt-7 pb-6',
-            navbarItemStyle,
-            currentTopRoute === item.link
-              ? navbarItemActiveStyle
-              : navbarItemInactiveStyle,
-          ]}
-          aria-current={currentTopRoute === item.link ? 'page' : undefined}
-          href={item.link}
-        >
-          {item.name}
-        </Link>
+        <>
+          <Link
+            class:list={[
+              'h-min min-w-24 my-auto py-2.5 px-3.5 flex justify-between flex-row-reverse md:flex-col gap-1 items-center md:justify-center md:text-sm',
+              navbarItemStyle,
+              currentTopRoute === item.link
+                ? navbarItemActiveStyle
+                : navbarItemInactiveStyle,
+            ]}
+            aria-current={currentTopRoute === item.link ? 'page' : undefined}
+            href={item.link}
+          >
+            <Icon class="h-6 w-6 block pb-0.5" name={item.icon} />
+            {item.name}
+          </Link>
+        </>
       ))}
       <Link
-        class={`pt-7 pb-6 md:pt-5 md:pb-3 ${navbarItemStyle} ${navbarItemInactiveStyle}`}
+        class:list={[
+          'h-min min-w-24 my-auto py-2.5 px-3.5 flex justify-between flex-row-reverse md:flex-col gap-1 items-center md:justify-center md:text-sm',
+          navbarItemStyle,
+          navbarItemInactiveStyle,
+        ]}
         href="https://search.nixos.org"
         aria-label="Nixos package and options search"
         target="_self"
       >
-        <Icon
-          class="text-secondary-afghani-blue hidden h-8 w-8 md:block"
-          name="mdi:search"
-        />
-        <span class="inline-block md:hidden">Search</span>
+        <Icon class="text-primary-white h-6 w-6 block" name="mdi:search" />
+        Search
       </Link>
     </nav>
   </Container>
@@ -113,3 +117,22 @@ const navbarItemActiveStyle = `border-b-secondary-afghani-blue-85 bg-secondary-a
 
   navigationToggle.addEventListener('click', () => toggleMenu());
 </script>
+
+<style>
+  @supports (animation-timeline: scroll()) {
+    header {
+      border-bottom: 1px solid transparent;
+      animation: header-scrolled linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0px 1px;
+    }
+
+    @keyframes header-scrolled {
+      to {
+        border-bottom-color: oklch(15% 0.03 264);
+        transition: all 1s ease-in-out;
+        padding: 8 0;
+      }
+    }
+  }
+</style>
