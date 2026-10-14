@@ -3,13 +3,13 @@ rec {
 
   inputs = {
     # This is used to build the site.
-    nixpkgs.url = "nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
 
     # These inputs are used for the manuals and release artifacts
-    released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    released-nixpkgs-stable.url = "nixpkgs/nixos-26.05";
+    released-nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    released-nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     released-nix-unstable.url = "github:nixos/nix/master";
     released-nix-stable.url = "github:nixos/nix/latest-release";
 
