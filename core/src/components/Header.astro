@@ -45,10 +45,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
   )}
   <Container class="flex flex-col justify-between md:flex-row md:items-center">
     <div class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start">
-      <Link
-        href="/"
-        class="grid select-none"
-      >
+      <Link href="/" class="grid select-none">
         <Image
           class="col-start-1 row-start-1 h-12 w-auto transition-opacity duration-300 header-light:opacity-0"
           src={getNixosLogoUrl('dark')}
@@ -108,7 +105,10 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
         aria-label="Nixos package and options search"
         target="_self"
       >
-        <Icon class="text-primary-white header-light:text-secondary-afghani-blue-45 transition-colors duration-300 h-6 w-6 block" name="mdi:search" />
+        <Icon
+          class="text-primary-white header-light:text-secondary-afghani-blue-45 transition-colors duration-300 h-6 w-6 block"
+          name="mdi:search"
+        />
         Search
       </Link>
     </nav>
