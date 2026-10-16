@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection, getEntry } from 'astro:content';
 
 import Card from '@/components/layout/Card.astro';
@@ -10,8 +9,6 @@ import CommunityLinkItem from '../components/pages/community/CommunityLinkItem.a
 import NixConEntry from '../components/pages/community/NixConEntry.astro';
 import TeamLinkItem from '../components/pages/community/TeamLinkItem.astro';
 import Banner from '../components/ui/Banner.astro';
-import Button from '../components/ui/Button.astro';
-import RfcDiagram from '../components/ui/RfcDiagram.astro';
 import Link from '../components/util/Link.astro';
 import Layout from '../layouts/Layout.astro';
 
@@ -204,52 +201,25 @@ const widerEcosystem = [
 
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
-import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
 ---
 
 <Layout title="Community">
   <PageHeader text="Community" />
-  <Container class="mt-16 space-y-4">
-    <Paragraph size="xl">
-      Nix and NixOS are developed and used by a diverse and welcoming community
-      from all around the world.
-    </Paragraph>
-    <Paragraph>
-      The NixOS Foundation aims to promote participation without regard to
-      gender, sexual orientation, disability, ethnicity, age, or similar
-      personal characteristics.
-    </Paragraph>
-    <Paragraph>
-      We want to strive to create and foster community by providing an
-      intentionally welcoming and safe environment where all feel valued and
-      cared for, and where all are given opportunity to participate
-      meaningfully. The Foundation will work with the community in service of
-      this goal.
-    </Paragraph>
-    <Paragraph>
-      Instances of abusive, harassing, or otherwise unacceptable behavior may be
-      reported by contacting the moderation team at{' '}
-      <Link variant="blue" href="mailto:moderation@nixos.org">
-        moderation@nixos.org
-      </Link>
-      . The moderation team is obligated to maintain confidentiality with regard
-      to the reporter of an incident.
-    </Paragraph>
-  </Container>
-  <Container>
-    <Headline level={2} variant="blue" class="mt-4 mb-2">
-      Where to talk?
-    </Headline>
-    <Paragraph>
-      The Nix community is spread across various platforms. Here are the
-      official and unofficial spaces where you can find help, discuss
-      development, and chat with other users.
-    </Paragraph>
-    <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
-      <div class="space-y-2 md:col-span-2">
-        <Headline level={3} variant="blue">
-          {' '}
-          Official spaces{' '}
+  <Container class='mt-16 space-y-4'>
+    <div class="space-y-2 col-span-2">
+      <Headline level={2} variant="blue">
+        Spaces - Where we discuss.
+      </Headline>
+      <Paragraph size="lg">
+        The Nix community is spread across various platforms. Here are the
+        official and unofficial spaces where you can find help, discuss
+        development, and chat with other users.
+      </Paragraph>
+    </div>
+    <Card class="grid grid-cols-2 gap-4 list-none" tag="ul">
+      <div class="space-y-2">
+        <Headline level={3} variant="blue" class="mt-2">
+          Official spaces
         </Headline>
         <Paragraph>
           These spaces are monitored and moderated by the NixOS Moderation Team.
@@ -261,41 +231,75 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           </Link>
           .
         </Paragraph>
-        <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4 md:grid-cols-2">
-          {platformsMain.map((platform, i) => (
-            <CommunityLinkItem
-              href={platform.href}
-              name={platform.name}
-              iconName={platform.iconName}
-              description={platform.description}
-              class={i === 0 && 'md:col-span-2'}
-            />
-          ))}
-        </ul>
       </div>
-      <div class="col-span-1 space-y-2">
-        <Headline level={3} variant="blue">
-          {' '}
-          Official social-media{' '}
+      {platformsMain.map((platform, i) => (
+        <CommunityLinkItem
+          href={platform.href}
+          name={platform.name}
+          iconName={platform.iconName}
+          description={platform.description}
+        />
+      ))}
+    </Card>
+    <Card class="grid grid-cols-2 gap-4 list-none" tag="ul">
+      <div class="space-y-2 row-span-2">
+        <Headline level={3} variant="blue" class="mt-2">
+          Unofficial spaces
+        </Headline>
+        <Paragraph>
+          These spaces are not monitored and not moderated by the NixOS
+          Moderation Team. Please be aware that different moral values and rules
+          may apply in these spaces. The NixOS moderation team may advise
+          moderators in these spaces, though does not control or enforce our
+          community values.
+        </Paragraph>
+      </div>
+      {platformsOutside.map((platform) => (
+        <CommunityLinkItem
+          href={platform.href}
+          name={platform.name}
+          iconName={platform.iconName}
+          description={platform.description}
+          type="mobile_icon_desktop_name"
+          variant="community"
+        />
+      ))}
+    </Card>
+    <div class="space-y-2 col-span-2">
+      <Headline level={2} variant="blue">
+        Social Medie - Where we publish.
+      </Headline>
+      <Paragraph size="lg">
+        The Nix community is spread across various platforms. Here are the
+        official and unofficial spaces where you can find help, discuss
+        development, and chat with other users.
+      </Paragraph>
+    </div>
+  </Container>
+  <Container>
+    <Card class="mt-4 grid gap-4 md:grid-cols-2">
+      <div class="space-y-2">
+        <Headline level={3} variant="blue" class="mt-2">
+          Official social-media
         </Headline>
         <Paragraph>
           These spaces are maintained by our NixOS Marketing Team though not
           monitored and not moderated by the NixOS Moderation Team.
         </Paragraph>
-        <ul class="mt-4 grid grid-cols-1 flex-wrap gap-4">
-          {socialMediaMain.map((platform) => (
-            <CommunityLinkItem
-              href={platform.href}
-              name={platform.name}
-              iconName={platform.iconName}
-            />
-          ))}
-        </ul>
       </div>
+      <ul class="mt-4 grid grid-cols-2 flex-wrap gap-4">
+        {socialMediaMain.map((platform) => (
+          <CommunityLinkItem
+            href={platform.href}
+            name={platform.name}
+            iconName={platform.iconName}
+          />
+        ))}
+      </ul>
+    </Card>
       <div class="space-y-2 md:col-span-3">
         <Headline level={3} variant="blue">
-          {' '}
-          Our calendars{' '}
+          Our calendars
         </Headline>
         <Paragraph>
           We use these calendars to schedule events, meetings, and other.
@@ -310,28 +314,6 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
           ))}
         </ul>
       </div>
-    </div>
-    <Headline level={3} class="mt-4 mb-2" variant="blue">
-      Unofficial spaces
-    </Headline>
-    <Paragraph>
-      These spaces are not monitored and not moderated by the NixOS Moderation
-      Team. Please be aware that different moral values and rules may apply in
-      these spaces. The NixOS moderation team may advise moderators in these
-      spaces, though does not control or enforce our community values.
-    </Paragraph>
-    <ul class="mt-4 grid grid-cols-3 flex-wrap gap-4">
-      {platformsOutside.map((platform) => (
-        <CommunityLinkItem
-          href={platform.href}
-          name={platform.name}
-          iconName={platform.iconName}
-          description={platform.description}
-          type="mobile_icon_desktop_name"
-          variant="community"
-        />
-      ))}
-    </ul>
     <Headline level={3} variant="blue" class="mt-4 mb-2" id="forks">
       The wider ecosystem
     </Headline>
@@ -462,26 +444,6 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
         </ul>
       </div>
     </div>
-    <div class="mt-16 flex flex-wrap-reverse gap-8">
-      <div class="flex flex-1 flex-col items-start justify-center gap-4">
-        <Headline level={2} variant="blue">
-          {' '}
-          RFC Process{' '}
-        </Headline>
-        <Paragraph class="mb-3">
-          The "RFC" (request for comments) process is intended to provide a
-          consistent and controlled path for new features to enter the Nix
-          language, packages and OS, so that all community can be confident
-          about the direction the ecosystem is evolving in.
-        </Paragraph>
-        <Button color="nixblue" size="lg" href="https://github.com/NixOS/rfcs">
-          Learn more
-        </Button>
-      </div>
-      <div class="mt-2 block w-full md:w-3/6 md:max-w-2xl md:min-w-3/6 md:flex-0">
-        <RfcDiagram />
-      </div>
-    </div>
   </Container>
   <div class="mt-8">
     <Divider mirrorY />
@@ -503,203 +465,4 @@ import nixosFoundationLogo from '../assets/image/nixos-foundation-logo.svg';
       </ul>
     </Container>
   </div>
-  <Divider />
-  <Container class="mt-8 mb-16 grid md:grid-cols-2" id="foundation">
-    <div class="pb-4 text-center md:pb-0">
-      <div class="flex flex-col items-center justify-center">
-        <Image
-          src={nixosFoundationLogo}
-          alt="NixOS Foundation Logo"
-          class="h-72"
-        />
-      </div>
-      <div class="mt-4 mb-4 inline-block text-left">
-        <h2 class="font-heading text-secondary-afghani-blue text-3xl font-bold md:text-center">
-          Board members:
-        </h2>
-        <ul class="mx-auto mt-2 list-disc pl-8 md:w-72 md:pl-10">
-          {teams
-            .find((team) => team.id.split('_')[1] === 'foundation-board')
-            .data.members.map((member) => (
-              <li class="mb-1">
-                {member.name}
-                {member.title && (
-                  <>
-                    &mdash;
-                    {member.title}
-                  </>
-                )}
-              </li>
-            ))}
-        </ul>
-      </div>
-    </div>
-    <div class="space-y-4">
-      <Headline level={2} id="mission" variant="blue">
-        The NixOS Foundation Mission
-      </Headline>
-      <Paragraph>
-        The mission of the foundation is to support the Nix ecosystem's
-        infrastructure, and projects implementing the purely functional
-        deployment model.
-      </Paragraph>
-      <Paragraph>
-        In particular, the foundation supports Nix, Nixpkgs, NixOS, and
-        operates:
-      </Paragraph>
-      <ul class="ml-4 list-disc">
-        <Paragraph tag="li">
-          <Link variant="blue" href="https://cache.nixos.org">
-            cache.nixos.org
-          </Link>
-          - the NixOS binary cache, containing over 120TB of prebuilt Nix
-          packages.
-        </Paragraph>
-        <Paragraph tag="li">
-          <Link variant="blue" href="https://hydra.nixos.org">
-            hydra.nixos.org
-          </Link>
-          - a Nix build farm, consisting of hundreds of macOS, x86-64 (Linux)
-          and aarch64 (Linux) build cores. Hydra executes over 350,000 builds
-          each week.
-        </Paragraph>
-        <Paragraph tag="li">
-          <Link variant="blue" href="/community/event-funding">
-            Event Funding
-          </Link>
-        </Paragraph>
-      </ul>
-      <Paragraph>
-        The NixOS Foundation is a registered non-profit organisation at the
-        Chamber of commerce (Kamer van Koophandel) in Utrecht, The Netherlands.
-        The KvK number is <code>63520583</code>.
-      </Paragraph>
-      <Paragraph>
-        You can contact the foundation by writing an email to{' '}
-        <a href="mailto:foundation@nixos.org">foundation@nixos.org</a>.
-      </Paragraph>
-    </div>
-  </Container>
 </Layout>
-<script>
-  const boxes = document
-    .getElementById('rfc-diagram')
-    .getElementsByTagName('rect');
-  const diagram = document.getElementById('rfc-diagram');
-  const durationMilliseconds = 1500;
-  const baseActivationClasses = ['stroke-secondary-afghani-blue'];
-  const successActivationClasses = ['stroke-nix-green'];
-  const failureActivationClasses = ['stroke-nix-orange', 'opacity-50'];
-  const fadedActivationClasses = ['opacity-50'];
-  const timeline = [
-    {
-      element: boxes[9], // New Submission
-      index: 0,
-      classes: baseActivationClasses,
-    },
-    {
-      element: boxes[8], // Nomination Phase
-      index: 1,
-      classes: baseActivationClasses,
-    },
-    {
-      element: boxes[7], // Discussion Phase
-      index: 2,
-      classes: baseActivationClasses,
-    },
-    {
-      element: boxes[0], // Final Comment Phase
-      index: 3,
-      classes: baseActivationClasses,
-    },
-    {
-      element: boxes[3], // Submission Rejected
-      index: 4,
-      classes: failureActivationClasses,
-    },
-    {
-      element: boxes[1], // New Submission 2
-      index: 4,
-      classes: fadedActivationClasses,
-    },
-    {
-      element: boxes[5], // FCP Canceled
-      index: 4,
-      classes: failureActivationClasses,
-    },
-    {
-      element: boxes[2], // Refine Submission
-      index: 4,
-      classes: fadedActivationClasses,
-    },
-    {
-      element: boxes[4], // Submission Accepted
-      index: 4,
-      classes: successActivationClasses,
-    },
-  ];
-  let isAnimating = false;
-
-  timeline.forEach((box) => {
-    box.element.classList.add('transition-all', 'duration-500', 'ease-in');
-  });
-
-  let highestIndex = 0;
-  timeline.forEach((box) => {
-    if (box.index > highestIndex) {
-      highestIndex = box.index;
-    }
-  });
-
-  function triggerAnimation() {
-    // prevent multiple animations at the same time
-    if (isAnimating) {
-      return;
-    }
-    isAnimating = true;
-    setTimeout(
-      () => {
-        isAnimating = false;
-      },
-      (highestIndex + 1) * durationMilliseconds,
-    );
-
-    // trigger animation on each box
-    timeline.forEach((box) => {
-      setTimeout(() => {
-        box.element.classList.add(...box.classes);
-      }, box.index * durationMilliseconds);
-    });
-  }
-
-  const activatorObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (isAnimating || !entry.isIntersecting) {
-          return;
-        }
-        triggerAnimation();
-      });
-    },
-    {
-      threshold: 1,
-    },
-  );
-  const deactivatorObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (isAnimating || entry.isIntersecting) {
-          return;
-        }
-        timeline.forEach((box) => {
-          box.element.classList.remove(...box.classes);
-        });
-      });
-    },
-    {
-      threshold: 0,
-    },
-  );
-  activatorObserver.observe(diagram);
-  deactivatorObserver.observe(diagram);
-</script>
