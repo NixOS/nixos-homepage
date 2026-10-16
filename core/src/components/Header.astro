@@ -13,12 +13,18 @@ const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 
-const navbarItemStyle = `text-center text-primary-white rounded-2xl`;
-const navbarItemInactiveStyle = `bg-secondary-afghani-blue-35 hover:bg-secondary-afghani-blue-25`;
-const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-95 text-primary-black! font-bold`;
+const navbarItemStyle = `transition-colors duration-300 text-center text-primary-white header-light:text-secondary-afghani-blue-15 rounded-2xl`;
+const navbarItemInactiveStyle = `bg-secondary-afghani-blue-35 hover:bg-secondary-afghani-blue-25 header-light:bg-secondary-afghani-blue-95 header-light:hover:bg-secondary-afghani-blue-85`;
+const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-95 text-primary-black! font-medium header-light:bg-secondary-afghani-blue-85`;
 ---
 
-<header class="text-primary-white bg-secondary-afghani-blue-45 sticky top-0 z-50 py-4 font-light">
+<header
+  id="site-header"
+  class:list={[
+    'text-primary-white bg-secondary-afghani-blue-45 sticky top-0 z-50 border-b-2 py-4 font-light transition-[background-color,color,padding,border-color,border-width] duration-300 border-b-transparent',
+    'header-light:bg-primary-white header-light:text-primary-black header-light:border-b-secondary-afghani-blue-45 header-light:py-3',
+  ]}
+>
   {currentBanner && (
     <a
       href={currentBanner.data.sitewide.link.url}
@@ -41,12 +47,18 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
     <div class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start">
       <Link
         href="/"
-        class="flex items-center justify-between gap-2 select-none md:justify-start"
+        class="grid select-none"
       >
         <Image
-          class="h-12 w-auto"
-          src={getNixosLogoUrl('logo')}
+          class="col-start-1 row-start-1 h-12 w-auto transition-opacity duration-300 header-light:opacity-0"
+          src={getNixosLogoUrl('dark')}
           alt="NixOS - Go to homepage"
+        />
+        <Image
+          class="col-start-1 row-start-1 h-12 w-auto opacity-0 transition-opacity duration-300 header-light:opacity-100"
+          src={getNixosLogoUrl('light')}
+          alt=""
+          aria-hidden="true"
         />
       </Link>
 
@@ -57,9 +69,9 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
         class="p-4 md:hidden"
         id="navigation-toggle"
       >
-        <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
-        <span class="bg-primary-white mb-1.5 block h-1 w-8"></span>
-        <span class="bg-primary-white block h-1 w-8"></span>
+        <span class="bg-primary-white header-light:bg-secondary-afghani-blue transition-colors duration-300 mb-1.5 block h-1 w-8"></span>
+        <span class="bg-primary-white header-light:bg-secondary-afghani-blue transition-colors duration-300 mb-1.5 block h-1 w-8"></span>
+        <span class="bg-primary-white header-light:bg-secondary-afghani-blue transition-colors duration-300 block h-1 w-8"></span>
       </button>
     </div>
 
@@ -96,7 +108,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
         aria-label="Nixos package and options search"
         target="_self"
       >
-        <Icon class="text-primary-white h-6 w-6 block" name="mdi:search" />
+        <Icon class="text-primary-white header-light:text-secondary-afghani-blue-45 transition-colors duration-300 h-6 w-6 block" name="mdi:search" />
         Search
       </Link>
     </nav>
@@ -115,24 +127,14 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
   }
   toggleMenu();
 
+  // fallback for firefox (TODO: remove when timeline-scroll has landed in stable)
+  if (!CSS.supports('animation-timeline: scroll()')) {
+    const header = document.getElementById('site-header');
+    const updateScrolled = () =>
+      header.toggleAttribute('data-header-scrolled', window.scrollY > 0);
+    updateScrolled();
+    window.addEventListener('scroll', updateScrolled, { passive: true });
+  }
+
   navigationToggle.addEventListener('click', () => toggleMenu());
 </script>
-
-<style>
-  @supports (animation-timeline: scroll()) {
-    header {
-      border-bottom: 1px solid transparent;
-      animation: header-scrolled linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0px 1px;
-    }
-
-    @keyframes header-scrolled {
-      to {
-        border-bottom-color: oklch(15% 0.03 264);
-        transition: all 1s ease-in-out;
-        padding: 8 0;
-      }
-    }
-  }
-</style>
