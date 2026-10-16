@@ -205,7 +205,7 @@ import Paragraph from '@/components/ui/typography/Paragraph.astro';
 
 <Layout title="Community">
   <PageHeader text="Community" />
-  <Container class='mt-16 space-y-4'>
+  <Container class="mt-16 space-y-4">
     <div class="space-y-2 col-span-2">
       <Headline level={2} variant="blue">
         Spaces - Where we discuss.
@@ -297,23 +297,23 @@ import Paragraph from '@/components/ui/typography/Paragraph.astro';
         ))}
       </ul>
     </Card>
-      <div class="space-y-2 md:col-span-3">
-        <Headline level={3} variant="blue">
-          Our calendars
-        </Headline>
-        <Paragraph>
-          We use these calendars to schedule events, meetings, and other.
-        </Paragraph>
-        <ul class="mt-4 grid flex-wrap gap-4 md:grid-cols-3">
-          {calendarsMain.map((platform) => (
-            <CommunityLinkItem
-              href={platform.href}
-              name={platform.name}
-              iconName={platform.iconName}
-            />
-          ))}
-        </ul>
-      </div>
+    <div class="space-y-2 md:col-span-3">
+      <Headline level={3} variant="blue">
+        Our calendars
+      </Headline>
+      <Paragraph>
+        We use these calendars to schedule events, meetings, and other.
+      </Paragraph>
+      <ul class="mt-4 grid flex-wrap gap-4 md:grid-cols-3">
+        {calendarsMain.map((platform) => (
+          <CommunityLinkItem
+            href={platform.href}
+            name={platform.name}
+            iconName={platform.iconName}
+          />
+        ))}
+      </ul>
+    </div>
     <Headline level={3} variant="blue" class="mt-4 mb-2" id="forks">
       The wider ecosystem
     </Headline>
