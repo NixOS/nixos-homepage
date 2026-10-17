@@ -93,6 +93,9 @@ module.exports = {
       '3xl': '1.953rem',
       '4xl': '2.441rem',
       '5xl': '3.052rem',
+      '6xl': '3.815rem',
+      '7xl': '4.768rem',
+      '8xl': '5.96rem',
     },
     container: {
       center: true,
