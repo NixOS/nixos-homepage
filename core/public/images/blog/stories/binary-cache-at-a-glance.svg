@@ -1,4 +1,4 @@
-<svg viewBox="0 0 1600 1100" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
+<svg viewBox="0 0 1600 840" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
   <!-- Background with gradient -->
   <defs>
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -19,15 +19,15 @@
     </filter>
   </defs>
   
-  <rect width="1600" height="1100" fill="url(#bgGradient)"/>
+  <rect width="1600" height="840" fill="url(#bgGradient)"/>
   
   <!-- Title Section -->
   <text x="800" y="60" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="44" font-weight="bold" text-anchor="middle" fill="white" filter="url(#shadow)">
-    cache.nixos.org: The Numbers Behind Nix
+    The numbers behind cache.nixos.org
   </text>
   
-  <text x="800" y="95" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#b7cefd">
-    July 2026 • The backbone of global binary distribution
+  <text x="800" y="95" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" fill="#b7cefd">
+    The backbone of global binary distribution
   </text>
   
   <!-- Nix snowflake, white variant (NixOS/nixos-artwork, CC-BY) -->
@@ -124,9 +124,9 @@
         <path d="M6 16h.01" />
       </g>
       <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">636 TB</text>
-      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Total Storage</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#717171">Total Storage</text>
       <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
-      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">Managed by S3 Intelligent-Tiering</text>
+      <text x="240" y="160" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#3b5487">Managed by S3 Intelligent-Tiering</text>
     </g>
     
     <!-- Monthly Requests -->
@@ -139,9 +139,9 @@
         <path d="M2 12h20" />
       </g>
       <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">~15B</text>
-      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Requests/Month</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#717171">Requests/Month</text>
       <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
-      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">~5,700 requests per second • 24/7</text>
+      <text x="240" y="160" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#3b5487">~5,700 requests per second • 24/7</text>
     </g>
     
     <!-- Object Count -->
@@ -155,9 +155,9 @@
         <path d="m7.5 4.27 9 5.15" />
       </g>
       <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">&gt;1B</text>
-      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Objects Stored</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#717171">Objects Stored</text>
       <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
-      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">NAR files, narinfo, logs, realisations</text>
+      <text x="240" y="160" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#3b5487">NAR files, narinfo, logs, realisations</text>
     </g>
     
     <!-- Row 2 -->
@@ -170,9 +170,9 @@
         <path d="M3.34 19a10 10 0 1 1 17.32 0" />
       </g>
       <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">94.29%</text>
-      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Cache Hit Ratio</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#717171">Cache Hit Ratio</text>
       <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
-      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">Served from CDN • Minimal S3 load</text>
+      <text x="240" y="160" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#3b5487">Served from CDN • Minimal S3 load</text>
     </g>
     
     <!-- Weekly Bandwidth -->
@@ -183,9 +183,9 @@
         <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
       </g>
       <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">892 TB</text>
-      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Bandwidth/Week</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#717171">Bandwidth/Week</text>
       <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
-      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">~46 PB annually • Global reach</text>
+      <text x="240" y="160" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#3b5487">~46 PB annually • Global reach</text>
     </g>
     
     <!-- Metadata Size -->
@@ -200,9 +200,9 @@
         <path d="M16 17H8" />
       </g>
       <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">90 GB</text>
-      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Metadata Only</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#717171">Metadata Only</text>
       <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
-      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">.narinfo files • 0.014% of total storage!</text>
+      <text x="240" y="160" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#3b5487">.narinfo files • 0.014% of total storage!</text>
     </g>
     
     <!-- Row 3 -->
@@ -215,9 +215,9 @@
         <path d="m22 7-8.5 8.5-5-5L2 17" />
       </g>
       <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">~3.45B</text>
-      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Requests/Week</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#717171">Requests/Week</text>
       <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
-      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">Sustained global demand • 24/7</text>
+      <text x="240" y="160" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#3b5487">Sustained global demand • 24/7</text>
     </g>
     
     <!-- Top Region -->
@@ -228,13 +228,13 @@
         <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
         <circle cx="12" cy="10" r="3" />
       </g>
-      <text x="280" y="55" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#28395f">North America</text>
-      <text x="280" y="90" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Top Region</text>
+      <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="42" font-weight="bold" text-anchor="middle" fill="#28395f">North America</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#717171">Top Region</text>
       <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
-      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">But requests span the entire globe</text>
+      <text x="240" y="160" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#3b5487">But requests span the entire globe</text>
     </g>
     
-    <!-- 20+ Years -->
+    <!-- 10+ Years -->
     <g transform="translate(1070, 600)">
       <rect x="0" y="0" width="480" height="200" rx="15" fill="white" opacity="0.95" filter="url(#shadow)"/>
       <circle cx="80" cy="60" r="35" fill="#803e44" opacity="0.15"/>
@@ -244,85 +244,9 @@
         <path d="M12 7v5l4 2" />
       </g>
       <text x="280" y="70" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#28395f">10+ Years</text>
-      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#717171">Software History</text>
+      <text x="280" y="100" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#717171">Software History</text>
       <rect x="40" y="130" width="400" height="50" rx="5" fill="#eeeeee"/>
-      <text x="240" y="155" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="#3b5487">Preserving lost software forever</text>
+      <text x="240" y="160" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" fill="#3b5487">Preserving lost software forever</text>
     </g>
   </g>
-  
-  <!-- Scale to Infinity Section -->
-  <g id="scale-infinity">
-    <rect x="50" y="840" width="1500" height="220" rx="15" fill="white" opacity="0.15"/>
-    
-    <!-- Infinity Symbol -->
-    <g transform="translate(100, 950)">
-      <g transform="translate(-6,-42) scale(4)" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8">
-        <path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8" />
-      </g>
-    </g>
-    
-    <text x="250" y="880" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="24" font-weight="bold" fill="white">
-      Built to Scale Without Limits
-    </text>
-    
-    <text x="250" y="910" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" fill="#b7cefd">
-      No database = No bottleneck. Just a massive key-value store where every key is a unique hash.
-    </text>
-    <text x="250" y="935" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" fill="#b7cefd">
-      The elegant simplicity of hash-addressed storage enables infinite horizontal scaling.
-    </text>
-    
-    <!-- Key insights -->
-    <text x="250" y="970" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="white">Key Architecture Wins:</text>
-    <text x="250" y="995" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" fill="#b7cefd">
-      • Simple S3 bucket design scales effortlessly to billions of objects
-    </text>
-    <text x="250" y="1015" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" fill="#b7cefd">
-      • Fastly CDN achieves 94%+ cache hits globally
-    </text>
-    <text x="250" y="1035" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" fill="#b7cefd">
-      • S3 Intelligent-Tiering moves objects between access tiers automatically
-    </text>
-    
-    <!-- Visual representation -->
-    <g transform="translate(950, 890)">
-      <!-- S3 provides -->
-      <rect x="0" y="0" width="550" height="120" rx="10" fill="white" opacity="0.1"/>
-      <text x="275" y="25" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">
-        S3 Provides Everything Needed
-      </text>
-      
-      <!-- Three pillars -->
-      <g transform="translate(50, 40)">
-        <!-- Storage -->
-        <rect x="0" y="0" width="140" height="60" rx="5" fill="#4d6fb7" opacity="0.3"/>
-        <text x="70" y="25" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">Unlimited</text>
-        <text x="70" y="45" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">Storage</text>
-        
-        <!-- Key-Value -->
-        <rect x="155" y="0" width="140" height="60" rx="5" fill="#378450" opacity="0.3"/>
-        <text x="225" y="25" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">Key-Value</text>
-        <text x="225" y="45" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">Store</text>
-        
-        <!-- HTTP API -->
-        <rect x="310" y="0" width="140" height="60" rx="5" fill="#955890" opacity="0.3"/>
-        <text x="380" y="25" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">Simple</text>
-        <text x="380" y="45" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle" fill="white">HTTP API</text>
-      </g>
-      
-      <text x="275" y="135" font-family="'Route 159', Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#b7cefd" font-style="italic">
-        Dead simple design = Infinite scale
-      </text>
-    </g>
-  </g>
-  
-  <!-- Arrow markers -->
-  <defs>
-    <marker id="arrowWhite" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-      <polygon points="0 0, 10 5, 0 10" fill="white"/>
-    </marker>
-    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-      <polygon points="0 0, 8 4, 0 8" fill="#378450"/>
-    </marker>
-  </defs>
 </svg>
