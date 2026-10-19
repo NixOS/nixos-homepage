@@ -8,6 +8,7 @@ import Link from '@/components/util/Link.astro';
 import { getNixosLogoUrl } from '@/lib/themes';
 import { Image } from 'astro:assets';
 
+const { overlay = false } = Astro.props;
 const headerMenu = await getEntry('menus', 'header');
 const currentBanner = await getEntry('banners', BANNER);
 
@@ -21,7 +22,11 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
 <header
   id="site-header"
   class:list={[
-    'text-primary-white bg-secondary-afghani-blue-45 sticky top-0 z-50 border-b-2 py-4 font-light transition-[background-color,color,padding,border-color,border-width] duration-300 border-b-transparent',
+    'text-primary-white sticky top-0 z-50 border-b-2 py-4 font-light transition-[background-color,color,padding,border-color,border-width] duration-300 border-b-transparent',
+    overlay
+      ? 'bg-transparent max-md:has-aria-expanded:bg-secondary-afghani-blue-45 max-md:has-aria-expanded:transition-none'
+      : 'bg-secondary-afghani-blue-45',
+    overlay && 'header-light:max-md:has-aria-expanded:bg-primary-white',
     'header-light:bg-primary-white header-light:text-primary-black header-light:border-b-secondary-afghani-blue-45 header-light:py-3',
   ]}
 >

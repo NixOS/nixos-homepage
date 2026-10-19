@@ -6,12 +6,16 @@ interface Props {
   title: string;
   subTitle: string;
   currentVersion: string;
+  id: string;
 }
 
-const { title, subTitle, currentVersion } = Astro.props;
+const { title, subTitle, currentVersion, id } = Astro.props;
 ---
 
-<Container class="bg-secondary-afghani-blue-45 text-primary-white mt-16 flex items-center justify-between py-8 md:py-6">
+<Container
+  id={id}
+  class="bg-secondary-afghani-blue-45 text-primary-white mt-16 flex items-center justify-between py-8 md:py-6"
+>
   <Headline level={2} variant="white" class="-mt-1 leading-none">
     {title}
     <span class="hidden lg:inline">{subTitle}</span>

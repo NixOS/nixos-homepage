@@ -85,26 +85,26 @@ const heroKeyframes = [
 ].join('\n');
 ---
 
-<Layout>
+<Layout overlayHeader>
   <style is:inline set:html={heroKeyframes} slot="head"></style>
-  {CurrentBannerContent ? (
-    <CurrentBannerContent />
-  ) : (
-    <Banner
-      wrapperClasses="bg-secondary-afghani-blue-45 md:pt-4"
-      class="font-heading text-secondary-afghani-blue-45 bg-secondary-afghani-blue-95 rounded-2xl flex flex-col items-center justify-between gap-1 md:text-lg font-bold md:flex-row md:py-4"
-    >
-      <b>{posts[0].data.title}</b>
-      <a
-        href={generatePathFromPost(posts[0])}
-        class="text-secondary-afghani-blue-45 hover:text-secondary-afghani-blue-75 inline-flex items-center gap-2"
+  <Segment variant="blue-lambda" class="pt-(--header-h)">
+    {CurrentBannerContent ? (
+      <CurrentBannerContent />
+    ) : (
+      <Banner
+        wrapperClasses="md:pt-4 px-4"
+        class="font-heading text-secondary-afghani-blue-45 bg-secondary-afghani-blue-95 rounded-2xl flex flex-col items-center justify-between gap-1 md:text-lg font-bold md:flex-row md:py-4"
       >
-        Read Announcement
-        <Icon name="mdi:arrow-right" />
-      </a>
-    </Banner>
-  )}
-  <Segment variant="blue-lambda">
+        <b>{posts[0].data.title}</b>
+        <a
+          href={generatePathFromPost(posts[0])}
+          class="text-secondary-afghani-blue-45 hover:text-secondary-afghani-blue-75 inline-flex items-center gap-2"
+        >
+          Read Announcement
+          <Icon name="mdi:arrow-right" />
+        </a>
+      </Banner>
+    )}
     <Container class="grid lg:grid-cols-2 gap-8 py-8 md:py-16">
       <div class="flex flex-col justify-evenly">
         <h1 class="sr-only">NixOS - Reproducible, Declarative, Reliable</h1>
@@ -168,17 +168,24 @@ const heroKeyframes = [
           padding="sm"
         >
           <div class="flex justify-between items-center">
-            <Headline level={2} variant="blue" class="flex-1" variant="white">
+            <Headline
+              level={2}
+              variant="blue"
+              class="md:flex-1 flex-1"
+              variant="white"
+            >
               Nix
             </Headline>
             <Button
-              href="/download"
+              href="/download#nix"
               color="semidarkblue"
               size="mini"
               icon="mdi:download"
-              class="flex-0 min-w-max"
+              class="flex-0 md:min-w-max"
             >
-              Download Nix {NIX_VERSION}
+              <span>
+                Download <span class="hidden md:inline">Nix {NIX_VERSION}</span>
+              </span>
             </Button>
           </div>
           <Paragraph class="flex-1" variant="white" size="xl" class="font-bold">
@@ -202,20 +209,22 @@ const heroKeyframes = [
               NixOS
             </Headline>
             <Button
-              href="/download"
+              href="/download#nixos"
               color="semidarkblue"
               size="mini"
               icon="mdi:download"
-              class="flex-0 min-w-max"
+              class="flex-0 md:min-w-max"
             >
-              Download NixOS {NIXOS_VERSION}
+              <span>
+                Download{' '}
+                <span class="hidden md:inline">NixOS {NIXOS_VERSION}</span>
+              </span>
             </Button>
           </div>
-          <Headline level={2} variant="white" />
           <Paragraph class="flex-1" variant="white" size="xl" class="font-bold">
             The Linux Distribution
           </Paragraph>
-          <Paragraph variant="white" size="lg" class="pb-3">
+          <Paragraph class="flex-1" variant="white" size="lg">
             NixOS is a Linux distribution built around the Nix package manager
             and Nixpkgs. Describe a laptop or a fleet of servers in reversable
             and repeatable.
