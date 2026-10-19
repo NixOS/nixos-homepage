@@ -191,3 +191,33 @@
     @apply link link-blue;
   }
 }
+
+@keyframes header-scrolled {
+  to {
+    --header-scrolled: 1;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  :root {
+    animation-name: header-scrolled;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 1px;
+  }
+}
+
+@custom-variant header-light {
+  @supports (animation-timeline: scroll()) {
+    @container style(--header-scrolled: 1) {
+      @slot;
+    }
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    &:where([data-header-scrolled], [data-header-scrolled] *) {
+      @slot;
+    }
+  }
+}
