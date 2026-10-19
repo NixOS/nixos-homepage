@@ -7,12 +7,12 @@ import NixosSearchInput from '../components/ui/NixosSearchInput.astro';
 import Layout from '../layouts/Layout.astro';
 import { generatePathFromPost } from '../lib/utils';
 
+import Card from '@/components/layout/Card.astro';
 import Segment from '@/components/layout/Segment.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
 import Link from '@/components/util/Link.astro';
 import { Icon } from 'astro-icon/components';
-import Asciinema from '../components/ui/Asciinema.astro';
 import Banner from '../components/ui/Banner.astro';
 import SponsorGroup from '../components/ui/SponsorGroup.astro';
 import InlineSVG from '../components/util/InlineSVG.astro';
@@ -20,6 +20,9 @@ import InlineSVG from '../components/util/InlineSVG.astro';
 const landingFeatures = await getCollection('landingFeatures');
 const demos = await getEntry('landing', 'demos');
 const posts = await getCollection('blog');
+
+const NIX_VERSION = import.meta.env.NIX_STABLE_VERSION;
+const NIXOS_VERSION = import.meta.env.NIXOS_STABLE_SERIES;
 
 const currentBanner = await getEntry('banners', BANNER);
 const CurrentBannerContent = currentBanner
@@ -38,9 +41,52 @@ posts
     return p.id.split('/')?.[0] === 'announcements';
   })
   .reverse();
+
+// The hero's two rotating halves. Both keyframe blocks are generated from these
+// lists, so adding or removing a word needs no other change.
+//
+// The adjectives scroll down and the nouns scroll up. Showing item i means
+// translating by -i lh, so scrolling down is i decreasing: the adjectives are
+// rendered in reverse and their duplicate leads instead of trails. Either way
+// the duplicate is a copy of the word displayed first, so the loop is invisible.
+const slidingAdjectives = ['Reproducible', 'Declarative', 'Reliable'];
+
+const slidingNouns = [
+  'Software',
+  'Operating Systems',
+  'Cloud Images',
+  'Dev Environments',
+  'Deployments',
+];
+
+const SLIDE_DWELL = 2.5;
+const slideHold = 0.8;
+const slidePct = (v) => `${+v.toFixed(4)}%`;
+const slideOffset = (n) => (n === 0 ? '0' : `-${n}lh`);
+
+// offsetAt(k) gives the line the window sits on during slot k, in lh.
+const slideKeyframes = (name, slots, offsetAt) => {
+  const pct = 100 / slots;
+  const stops = Array.from({ length: slots }, (_, k) => {
+    const start = slidePct(k * pct);
+    const held = slidePct(k * pct + pct * slideHold);
+    return `  ${start}, ${held} { transform: translateY(${slideOffset(offsetAt(k))}); }`;
+  });
+  return `@keyframes ${name} {\n${stops.join('\n')}\n  100% { transform: translateY(${slideOffset(offsetAt(slots))}); }\n}`;
+};
+
+const heroKeyframes = [
+  slideKeyframes('text-slide', slidingNouns.length, (k) => k),
+  slideKeyframes(
+    'text-slide-down',
+    slidingAdjectives.length,
+    (k) => slidingAdjectives.length - k,
+  ),
+].join('\n');
 ---
 
 <Layout>
+  <style is:inline set:html={heroKeyframes} slot="head"></style>
   {CurrentBannerContent ? (
     <CurrentBannerContent />
   ) : (
@@ -59,56 +105,129 @@ posts
     </Banner>
   )}
   <Segment variant="blue-lambda">
-    <Container class="grid grid-cols-1 gap-8 py-8 md:py-16 lg:grid-cols-2 lg:py-24">
-      <div class="mx-0 my-auto flex h-full flex-0 flex-col justify-between gap-3 md:gap-4 md:pr-12">
-        <Headline level={1} variant="white">
-          Declarative builds
-          <br class="hidden md:inline-block" /> and deployments.
+    <Container class="grid lg:grid-cols-2 gap-8 py-8 md:py-16">
+      <div class="flex flex-col justify-evenly">
+        <h1 class="sr-only">NixOS - Reproducible, Declarative, Reliable</h1>
+        <Headline
+          tag="span"
+          level={1}
+          variant="white"
+          class="lg:text-6xl! text-center lg:text-left"
+        >
+          <span class="flex h-lh flex-col overflow-hidden lg:justify-self-end">
+            <ul
+              class="block animate-text-slide-down leading-tight motion-reduce:animate-none"
+              style={`--slide-duration: ${slidingAdjectives.length * SLIDE_DWELL}s`}
+            >
+              <li aria-hidden="true">{slidingAdjectives[0]}</li>
+              {[...slidingAdjectives].reverse().map((word) => (
+                <li>{word}</li>
+              ))}
+            </ul>
+          </span>
+          <span class="text-secondary-argentinian-blue-85 flex h-[1lh] flex-col overflow-hidden lg:justify-self-start">
+            <ul
+              class="block animate-text-slide text-center leading-tight motion-reduce:animate-none lg:text-left"
+              style={`--slide-duration: ${slidingNouns.length * SLIDE_DWELL}s`}
+            >
+              {slidingNouns.map((word) => (
+                <li>{word}</li>
+              ))}
+              <li aria-hidden="true">{slidingNouns[0]}</li>
+            </ul>
+          </span>
         </Headline>
-        <Paragraph class="mb-4" variant="white" size="xl">
-          Nix is a tool that takes a unique approach to package management and
-          system configuration. Learn how to make reproducible, declarative and
-          reliable systems.
-        </Paragraph>
-        <div class="flex flex-col justify-center gap-4 text-center md:flex-row lg:justify-start">
-          <Button
-            href="/download"
-            color="white"
-            size="log-nopadding"
-            classList="flex-1 text-xl"
-            icon="mdi:download"
-          >
-            Download
-          </Button>
-          <Button
-            href="/learn"
-            color="white-borders"
-            size="log-nopadding"
-            icon="mdi:learn-outline"
-            classList="flex-1 text-xl bg"
-          >
-            Get started
-          </Button>
-        </div>
+        <Headline
+          level={3}
+          variant="white"
+          class="text-balance flex flex-col text-center lg:text-left flex-wrap justify-around lg:justify-start gap-1 mt-4 lg:text-4xl"
+        >
+          <span class="block md:inline">
+            Take{' '}
+            <span class="text-secondary-argentinian-blue-85">control.</span>
+          </span>
+          <span class="block md:inline">
+            Every{' '}
+            <span class="text-secondary-argentinian-blue-85">package.</span>
+          </span>
+          <span class="block md:inline">
+            Every{' '}
+            <span class="text-secondary-argentinian-blue-85">dependency.</span>
+          </span>
+          <span class="block md:inline">
+            Every{' '}
+            <span class="text-secondary-argentinian-blue-85">machine.</span>
+          </span>
+        </Headline>
       </div>
-      <div class="border-primary-white min-h-[300px] rounded-3xl border-[1rem] bg-[#121314] drop-shadow-md">
-        <Asciinema
-          src="/demos/cover.cast"
-          settings={{
-            cols: 84,
-            poster: 'npt:0:01:22',
-            markers: [
-              [11.5, 'Ad-Hoc development environments'],
-              [41.5, 'Declarative development environments'],
-              [85.0, 'Build docker image with Nix'],
-              [122.0, 'Build minimal docker image with Nix'],
-            ],
-          }}
-        />
+      <div class="flex flex-col gap-4">
+        <Card
+          tag="li"
+          class="h-full list-none flex flex-col justify-between"
+          variant="dark"
+          padding="sm"
+        >
+          <div class="flex justify-between items-center">
+            <Headline level={2} variant="blue" class="flex-1" variant="white">
+              Nix
+            </Headline>
+            <Button
+              href="/download"
+              color="semidarkblue"
+              size="mini"
+              icon="mdi:download"
+              class="flex-0 min-w-max"
+            >
+              Download Nix {NIX_VERSION}
+            </Button>
+          </div>
+          <Paragraph class="flex-1" variant="white" size="xl" class="font-bold">
+            The Package Manager
+          </Paragraph>
+          <Paragraph class="flex-1" variant="white" size="lg">
+            Nix is a tool that takes a unique approach to package management and
+            system configuration. Runs on Linux and macOS, next to the package
+            manager you already have.
+          </Paragraph>
+        </Card>
+
+        <Card
+          tag="li"
+          class="h-full list-none flex flex-col justify-between"
+          variant="dark"
+          padding="sm"
+        >
+          <div class="flex justify-between items-center">
+            <Headline level={2} variant="blue" class="flex-1" variant="white">
+              NixOS
+            </Headline>
+            <Button
+              href="/download"
+              color="semidarkblue"
+              size="mini"
+              icon="mdi:download"
+              class="flex-0 min-w-max"
+            >
+              Download NixOS {NIXOS_VERSION}
+            </Button>
+          </div>
+          <Headline level={2} variant="white" />
+          <Paragraph class="flex-1" variant="white" size="xl" class="font-bold">
+            The Linux Distribution
+          </Paragraph>
+          <Paragraph variant="white" size="lg" class="pb-3">
+            NixOS is a Linux distribution built around the Nix package manager
+            and Nixpkgs. Describe a laptop or a fleet of servers in reversable
+            and repeatable.
+          </Paragraph>
+        </Card>
       </div>
     </Container>
   </Segment>
   <div class="inline-svg-landing-search-top bg-[39%_100%] bg-no-repeat md:bg-bottom">
+    <Headline level={2} center variant="blue" class="text-4xl mt-16">
+      Features of the Nix ecosystem
+    </Headline>
     <Container class="grid gap-8 pt-16 pb-48 md:grid-cols-3 md:gap-4" tag="ul">
       {landingFeatures.map(async (feature) => {
         const { Content } = await render(feature);
@@ -161,29 +280,6 @@ posts
           Become a sponsor!
         </Link>
       </Paragraph>
-    </Container>
-  </Segment>
-  <Segment variant="white">
-    <Container>
-      <Headline variant="blue" level={2} center class="pb-8">
-        Examples
-      </Headline>
-      <div class="grid items-center gap-4 pb-8 md:grid-cols-2">
-        {demos.data.map((demo) => {
-          return (
-            <div class="flex flex-col items-start gap-2 overflow-hidden">
-              <Asciinema
-                title={demo.title}
-                class="w-full self-center md:self-start"
-                src={demo.file}
-                settings={{
-                  poster: 'npt:0:00:30',
-                }}
-              />
-            </div>
-          );
-        })}
-      </div>
     </Container>
   </Segment>
 </Layout>
