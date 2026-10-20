@@ -10,34 +10,33 @@ authors:
     discourse: reyows.evets
 ---
 
-Amazon Web Services (AWS) has renewed its sponsorship for `cache.nixos.org`, the Nix public binary cache, enabling the operation of this foundational infrastructure for another year.
+Amazon Web Services (AWS) has renewed its sponsorship for `cache.nixos.org`, the Nix public binary cache, enabling the operation of this foundational piece of infrastructure for another year.
 
 AWS's support started in 2023, when its Open Source Strategy and Marketing team, along with its Open Data team, stepped in when a previous sponsorship was discontinued.
-At this time, the growth of the Nix ecosystem was reaching an inflection point, outpacing the NixOS Foundation's capacity to sustain it.
-The cache is a foundational piece of Nix infrastructure, depended on by Nix users worldwide, and its maintenance a high priority for the entire community.
-
-Ron Efroni, then a NixOS Foundation board member and now its president, in concert with [Dave Nalley](https://www.linkedin.com/in/davidnalley/), director of developer experience at AWS, led a conversation that, in the span of around two weeks, [resolved the concerns about the cache's stability](https://discourse.nixos.org/t/nixos-s3-short-term-resolution/29413).
-AWS agreed to cover the cache's hosting costs for 12 months, a substantial contribution which was renewed in [2024](https://discourse.nixos.org/t/s3-sponsorship-extension-more-resources-to-build-a-more-sustainable-nix/50936), [2025](https://discourse.nixos.org/t/2025-s3-sponsorship-more-resources-for-a-sustainable-nix/67019), and now again for 2026.
+At this time, the growth of the Nix ecosystem was reaching an inflection point, outpacing the capacity to sustain it without additional support.
+The cache is depended on by Nix users worldwide, and its maintenance is therefore a high priority for the entire community.
+At the time, Ron Efroni, then a NixOS Foundation board member and now its president, in concert with [Dave Nalley](https://www.linkedin.com/in/davidnalley/), director of developer experience at AWS, led a conversation that, in the span of around two weeks, [resolved the concerns about the cache's sustainability](https://discourse.nixos.org/t/nixos-s3-short-term-resolution/29413).
+AWS agreed to cover the cache's hosting costs for 12 months — a substantial contribution which was renewed in [2024](https://discourse.nixos.org/t/s3-sponsorship-extension-more-resources-to-build-a-more-sustainable-nix/50936), [2025](https://discourse.nixos.org/t/2025-s3-sponsorship-more-resources-for-a-sustainable-nix/67019), and again for 2026.
 
 ## Not just any package repository
 
 Users most often encounter the cache as the authoritative package repository for both NixOS and the Nix package manager.
-Without a cache, every Nix client would build every package from source, which can take hours or even days and needs hardware many users do not have.
+Without a cache, every Nix client would have to build every package from source, which can take hours or even days and needs hardware many users do not have.
 Most Nix workflows would grind to a halt.
 
 In serving prebuilt packages, the cache resembles the repositories maintained by Debian, Fedora, and Homebrew.
-For downloading and running software, the [Nix archive (NAR)](https://nix.dev/manual/nix/stable/protocols/nix-archive) fetched from `cache.nixos.org` is the same as a `.deb`, `.rpm`, or Homebrew bottle.
-But underneath, the Nix cache differs radically in its implementation, reflecting Nix's radically different approach to software packaging.
+For downloading and running software, the [Nix archive (NAR)](https://nix.dev/manual/nix/stable/protocols/nix-archive) fetched from `cache.nixos.org` is similar to a `.deb`, `.rpm`, or Homebrew bottle.
+But underneath, the Nix cache differs fundamentally in its implementation, reflecting Nix's radically different approach to software packaging.
 
 Traditionally, installing software on Linux meant extracting the necessary files from a package archive and distributing them to conventional locations around the filesystem.
 While simple, this approach has led to a number of inconveniences.
-When packages depend on conflicting versions of the same library, for example, they cannot be installed at the same time, since the two versions' files have to be placed at the same paths.
+For example, when packages depend on conflicting versions of the same library, they cannot be installed at the same time, since the two versions' files have to be placed at the same paths.
 This is a problem especially for developers, who routinely need to switch between different versions of their toolchains.
 
 Nix solves this problem by doing away with conventional locations: each package or dependency is placed in its own [dedicated path](https://nixos.org/guides/nix-pills/18-nix-store-paths.html) under `/nix/store/`.
-A NAR fetched from the cache contains the compressed contents of a unique Nix store path, the directories and files that make up a specific package, dependency, or build artifact.
-This store path is _always_ unique because it includes a [hash derived from all the inputs](https://nixos.org/guides/nix-pills/18-nix-store-paths.html?highlight=hash#output-paths) used to build its contents.
-Nix prepends this input-addressed hash to the package's name and version, like so: `/nix/store/s5w9gi7p8m7yx878yxkf8q8480i82qj7-cowsay-3.8.4`.
+A NAR fetched from the cache contains the compressed contents of a unique Nix store path: the directories and files that make up a specific package, dependency, or build artifact.
+This store path is _always_ unique, because it includes a [hash derived from all the inputs](https://nixos.org/guides/nix-pills/18-nix-store-paths.html?highlight=hash#output-paths) used to build its contents.
+Nix prepends this input-addressed hash to the package's name and version, like so: `/nix/store/4lbicqd70qlfdw2l5wbq23c9qj1m5nww-cowsay-3.8.4`.
 
 By using input-addressed store paths, Nix guarantees a set of properties that are analogous to the atomicity, consistency, isolation, and durability (ACID) guarantees of a relational database.
 
@@ -58,7 +57,7 @@ And once store objects (packages, build inputs, etc.) are no longer referenced b
 
 The Nix binary cache is populated by an automated build pipeline centered around Nix's [Hydra CI system](https://github.com/NixOS/hydra), which directs a pool of geographically distributed builder machines.
 
-When a maintainer makes a commit that updates a [Nix expression](https://nix.dev/manual/nix/stable/language/) in the [Nixpkgs GitHub repo](https://github.com/NixOS/nixpkgs), either by changing its version, dependencies, patches, build instructions, tests, or post-built actions, this triggers Hydra to:
+When a maintainer makes a commit that updates a [Nix expression](https://nix.dev/manual/nix/stable/language/) in the [Nixpkgs GitHub repo](https://github.com/NixOS/nixpkgs), either by changing its version, dependencies, patches, build instructions, tests, or post-build actions, this triggers Hydra to:
 
 - evaluate the commit's Nix expressions across the whole jobset (more than 211,000 packages);
 - generate derivations from those expressions;
@@ -69,7 +68,7 @@ Hydra runs many jobsets several times per day as new commits land on active bran
 It signs and uploads successful builds to `cache.nixos.org`, where they're then available as prebuilt binaries.
 
 Interestingly, since around July of 2026, Hydra runs nearly 40,000 _fewer_ build jobs than it did just a year ago.
-The reason for this is that Nixpkgs recently dropped support for macOS platforms running on `x86-64`.
+The reason for this is that Nixpkgs recently dropped support for macOS platforms running on `x86_64`.
 This coincides with Apple's planned transition away from Intel-based Macs — starting with the upcoming Golden Gate release, new versions of macOS will run only on Apple Silicon.
 
 <img
@@ -158,7 +157,8 @@ Just as impressive, `cache.nixos.org`, contains more than 1 billion objects, mak
 Such a feat requires careful design.
 Faced with this challenge, one may be tempted to start diagramming complex architectures with eventually-consistent distributed databases and the like.
 
-In a scene from American novelist Cormac McCarthy's _Blood Meridian_, a character exhibits a giant petrified dinosaur bone before a group of mystified, stupefied cowboys."Your heart's desire is to be told some mystery. The mystery is that there is no mystery", he tells them.
+In a scene from American novelist Cormac McCarthy's _Blood Meridian_, a character exhibits a giant petrified dinosaur bone before a group of mystified, stupefied cowboys.
+"Your heart's desire is to be told some mystery. The mystery is that there is no mystery", he tells them.
 
 There is no mystery to the Nix binary cache: it is just a huge, signed key–value store hosted in an Amazon S3 bucket.
 Every key is derived from a unique hash, and because there's no database lookup required, _there is no backing database_.
@@ -200,16 +200,13 @@ This was revolutionary at the time, and perfect for the "not trying to do too mu
 
 Today, the Nix binary cache could live in virtually any other hyperscale cloud.
 Its design ethos focused on simplicity means that it is not locked into a specific platform.
-The cache is there because S3 works, and the rational choice is to keep it where it works — `cache.nixos.org` has been hosted on S3 for almost two decades, after all.
-
-<!-- - **Yes**, the Nix community _is_ getting good infrastructure from AWS, and to the extent we can speak for the community, we're especially grateful for support from the AWS Open Source Strategy & Marketing and OpenData teams. That said, these facts cannot and should not influence the Nix community's and the Nix Infrastructure team's decision making. -->
+The cache is in S3 because S3 works, and the rational choice is to keep it where it works — this is how `cache.nixos.org` has been hosted for almost two decades, after all.
 
 This status quo was challenged in 2023, when one of the NixOS Foundation's principal financial sponsors discontinued its support.
 During this time, Nix saw enormous growth, meaning that stable infrastructure was a priority concern.
 The NixOS Foundation responded to this challenge with radical transparency, and issued a call for assistance from the Nix community and commercial vendors.
 Our employer, Flox, was one of the vendors that responded to this call, along with others in the Nix-adjacent space.
-
-AWS Open Source pledged credits to help fund `cache.nixos.org` for the fiscal year, a contribution which proved central to the sustainability of the Nix ecosystem and started what has become a proven track record of support for the binary cache.
+AWS Open Source also responded to this call, pledging credits to help fund `cache.nixos.org` for the fiscal year — a contribution which proved central to the sustainability of the Nix ecosystem and which started what has become a proven track record of support for the binary cache.
 
 ### Maintaining the cache
 
