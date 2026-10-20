@@ -13,6 +13,7 @@ const headerMenu = await getEntry('menus', 'header');
 const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
+const isHomepage = Astro.url.pathname === '/';
 
 const navbarItemStyle = `transition-colors duration-300 text-center text-primary-white header-light:text-secondary-afghani-blue-15 rounded-2xl`;
 const navbarItemInactiveStyle = `bg-secondary-afghani-blue-35 hover:bg-secondary-afghani-blue-25 header-light:bg-secondary-afghani-blue-95 header-light:hover:bg-secondary-afghani-blue-85`;
@@ -30,7 +31,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
     'header-light:bg-primary-white header-light:text-primary-black header-light:border-b-secondary-afghani-blue-45 header-light:py-3',
   ]}
 >
-  {currentBanner && (
+  {currentBanner && !isHomepage && (
     <a
       href={currentBanner.data.sitewide.link.url}
       target="_blank"
