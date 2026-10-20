@@ -13,6 +13,7 @@ const headerMenu = await getEntry('menus', 'header');
 const currentBanner = await getEntry('banners', BANNER);
 
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
+const isHomepage = Astro.url.pathname === '/';
 
 const navbarItemStyle = `transition-colors duration-300 text-center text-primary-white header-light:text-secondary-afghani-blue-15 rounded-2xl`;
 const navbarItemInactiveStyle = `bg-secondary-afghani-blue-35 hover:bg-secondary-afghani-blue-25 header-light:bg-secondary-afghani-blue-95 header-light:hover:bg-secondary-afghani-blue-85`;
@@ -22,21 +23,21 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
 <header
   id="site-header"
   class:list={[
-    'text-primary-white sticky top-0 z-50 border-b-2 py-4 font-light transition-[background-color,color,padding,border-color,border-width] duration-300 border-b-transparent',
+    'sticky top-0 z-50 border-b-2 font-light transition-[background-color,color,padding,border-color,border-width] duration-300 border-b-transparent',
     overlay
       ? 'bg-transparent max-md:has-aria-expanded:bg-secondary-afghani-blue-45 max-md:has-aria-expanded:transition-none'
       : 'bg-secondary-afghani-blue-45',
     overlay && 'header-light:max-md:has-aria-expanded:bg-primary-white',
-    'header-light:bg-primary-white header-light:text-primary-black header-light:border-b-secondary-afghani-blue-45 header-light:py-3',
+    'header-light:bg-primary-white header-light:text-primary-black header-light:border-b-secondary-afghani-blue-45',
   ]}
 >
-  {currentBanner && (
+  {currentBanner && !isHomepage && (
     <a
       href={currentBanner.data.sitewide.link.url}
       target="_blank"
       rel="noopener noreferrer"
       class:list={[
-        'block font-bold',
+        'block font-bold py-1',
         currentBanner.data.sitewide.wrapperClasses,
       ]}
     >
@@ -48,7 +49,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
       </Container>
     </a>
   )}
-  <Container class="flex flex-col justify-between md:flex-row md:items-center">
+  <Container class="flex py-1 md:py-4 flex-col justify-between md:flex-row md:items-center">
     <div class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start">
       <Link href="/" class="grid select-none">
         <Image
