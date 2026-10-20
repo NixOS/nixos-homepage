@@ -23,12 +23,12 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
 <header
   id="site-header"
   class:list={[
-    'text-primary-white sticky top-0 z-50 border-b-2 py-4 font-light transition-[background-color,color,padding,border-color,border-width] duration-300 border-b-transparent',
+    'sticky top-0 z-50 border-b-2 font-light transition-[background-color,color,padding,border-color,border-width] duration-300 border-b-transparent',
     overlay
       ? 'bg-transparent max-md:has-aria-expanded:bg-secondary-afghani-blue-45 max-md:has-aria-expanded:transition-none'
       : 'bg-secondary-afghani-blue-45',
     overlay && 'header-light:max-md:has-aria-expanded:bg-primary-white',
-    'header-light:bg-primary-white header-light:text-primary-black header-light:border-b-secondary-afghani-blue-45 header-light:py-3',
+    'header-light:bg-primary-white header-light:text-primary-black header-light:border-b-secondary-afghani-blue-45',
   ]}
 >
   {currentBanner && !isHomepage && (
@@ -37,7 +37,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
       target="_blank"
       rel="noopener noreferrer"
       class:list={[
-        'block font-bold',
+        'block font-bold py-1',
         currentBanner.data.sitewide.wrapperClasses,
       ]}
     >
@@ -49,7 +49,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
       </Container>
     </a>
   )}
-  <Container class="flex flex-col justify-between md:flex-row md:items-center">
+  <Container class="flex py-1 md:py-4 flex-col justify-between md:flex-row md:items-center">
     <div class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start">
       <Link href="/" class="grid select-none">
         <Image
