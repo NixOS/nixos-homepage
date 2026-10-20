@@ -15,7 +15,7 @@ const currentBanner = await getEntry('banners', BANNER);
 const currentTopRoute = `/${Astro.url.pathname.split('/')[1]}`;
 const isHomepage = Astro.url.pathname === '/';
 
-const navbarItemStyle = `transition-colors duration-300 text-center text-primary-white header-light:text-secondary-afghani-blue-15 rounded-2xl`;
+const navbarItemStyle = `transition-colors duration-300 motion-reduce:transition-none text-center text-primary-white header-light:text-secondary-afghani-blue-15 rounded-2xl`;
 const navbarItemInactiveStyle = `bg-secondary-afghani-blue-35 hover:bg-secondary-afghani-blue-25 header-light:bg-secondary-afghani-blue-95 header-light:hover:bg-secondary-afghani-blue-85`;
 const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-95 text-primary-black! font-medium header-light:bg-secondary-afghani-blue-85`;
 ---
@@ -23,7 +23,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
 <header
   id="site-header"
   class:list={[
-    'sticky top-0 z-50 border-b-2 font-light transition-[background-color,color,padding,border-color,border-width] duration-300 border-b-transparent',
+    'sticky top-0 z-50 border-b-2 font-light transition-[background-color,color,padding,border-color,border-width] duration-300 border-b-transparent motion-reduce:transition-none ',
     overlay
       ? 'bg-transparent max-md:has-aria-expanded:bg-secondary-afghani-blue-45 max-md:has-aria-expanded:transition-none'
       : 'bg-secondary-afghani-blue-45',
@@ -53,12 +53,12 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
     <div class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start">
       <Link href="/" class="grid select-none">
         <Image
-          class="col-start-1 row-start-1 h-12 w-auto transition-opacity duration-300 header-light:opacity-0"
+          class="col-start-1 row-start-1 h-12 w-auto transition-opacity duration-300 motion-reduce:transition-none header-light:opacity-0"
           src={getNixosLogoUrl('dark')}
           alt="NixOS - Go to homepage"
         />
         <Image
-          class="col-start-1 row-start-1 h-12 w-auto opacity-0 transition-opacity duration-300 header-light:opacity-100"
+          class="col-start-1 row-start-1 h-12 w-auto opacity-0 transition-opacity duration-300 motion-reduce:transition-none header-light:opacity-100"
           src={getNixosLogoUrl('light')}
           alt=""
           aria-hidden="true"
@@ -72,15 +72,15 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
         class="p-4 md:hidden"
         id="navigation-toggle"
       >
-        <span class="bg-primary-white header-light:bg-secondary-afghani-blue transition-colors duration-300 mb-1.5 block h-1 w-8"></span>
-        <span class="bg-primary-white header-light:bg-secondary-afghani-blue transition-colors duration-300 mb-1.5 block h-1 w-8"></span>
-        <span class="bg-primary-white header-light:bg-secondary-afghani-blue transition-colors duration-300 block h-1 w-8"></span>
+        <span class="bg-primary-white header-light:bg-secondary-afghani-blue transition-colors duration-300 motion-reduce:transition-none mb-1.5 block h-1 w-8"></span>
+        <span class="bg-primary-white header-light:bg-secondary-afghani-blue transition-colors duration-300 motion-reduce:transition-none mb-1.5 block h-1 w-8"></span>
+        <span class="bg-primary-white header-light:bg-secondary-afghani-blue transition-colors duration-300 motion-reduce:transition-none block h-1 w-8"></span>
       </button>
     </div>
 
     <nav
       aria-label="Main Navigation"
-      class="grid pt-3 md:pt-0 grid-cols-2 md:flex flex-col gap-1.5 justify-evenly items-center leading-none md:flex-row md:gap-3 md:pb-0"
+      class="grid pt-0 grid-cols-2 md:flex flex-col gap-1.5 justify-evenly items-center leading-none md:flex-row md:gap-3 md:pb-0 max-md:absolute max-md:inset-x-0 max-md:top-full max-md:px-4 max-md:pb-4 max-md:bg-secondary-afghani-blue-45 max-md:border-b-2 max-md:border-b-transparent max-md:transition-colors max-md:duration-300 motion-reduce:transition-none header-light:max-md:bg-primary-white header-light:max-md:border-b-secondary-afghani-blue-45"
       id="navbar-menu"
     >
       {headerMenu.data.items.map((item) => (
@@ -112,7 +112,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
         target="_self"
       >
         <Icon
-          class="text-primary-white header-light:text-secondary-afghani-blue-45 transition-colors duration-300 h-6 w-6 block"
+          class="text-primary-white header-light:text-secondary-afghani-blue-45 transition-colors duration-300 motion-reduce:transition-none h-6 w-6 block"
           name="mdi:search"
         />
         Search
