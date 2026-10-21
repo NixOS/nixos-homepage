@@ -3,11 +3,7 @@ import Card from '@/components/layout/Card.astro';
 import Tag from '@/components/ui/Tag.astro';
 import Headline from '@/components/ui/typography/Headline.astro';
 import Paragraph from '@/components/ui/typography/Paragraph.astro';
-import {
-  createBlogSubheader,
-  createExcerpt,
-  generatePathFromPost,
-} from '../../../lib/utils';
+import { createExcerpt, generatePathFromPost } from '../../../lib/utils';
 
 const { post } = Astro.props;
 ---
@@ -24,7 +20,7 @@ const { post } = Astro.props;
         {post.data.title}
       </Headline>
       <span class="md:flex-1 md:text-right">
-        <Tag outline>{createBlogSubheader(post)}</Tag>
+        <Tag outline>{post.data.date.toDateString()}</Tag>
         <Tag>{post.id.split('/')[0]}</Tag>
       </span>
     </div>
