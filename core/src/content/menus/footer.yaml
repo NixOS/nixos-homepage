@@ -3,9 +3,9 @@ sections:
     items:
       - name: Channel Status
         link: https://status.nixos.org/
-      - name: Packages search
+      - name: Packages Search
         link: https://search.nixos.org/packages
-      - name: Options search
+      - name: Options Search
         link: https://search.nixos.org/options
       - name: Reproducible Builds Status
         link: https://reproducible.nixos.org/
@@ -25,7 +25,7 @@ sections:
         link: https://discourse.nixos.org/
       - name: Matrix Chat
         link: https://matrix.to/#/#space:nixos.org
-      - name: Commercial support
+      - name: Commercial Support
         link: /community/commercial-support
   - name: Contribute
     items:
