@@ -1,0 +1,27 @@
+---
+sitewide:
+  message: 'Nix Community Survey 2026 is here!'
+  link:
+    url: https://survey.nixos.org/2026
+    text: 'Take the Survey'
+  wrapperClasses: 'bg-[#260D40] text-primary-white'
+---
+
+import Banner from '@/components/ui/Banner.astro';
+import { Icon } from 'astro-icon/components';
+
+<Banner
+  wrapperClasses="md:pt-4 px-4"
+  class="font-heading text-secondary-afghani-blue-45 bg-secondary-afghani-blue-95 flex flex-col items-center justify-between gap-1 rounded-2xl font-bold md:flex-row md:py-4 md:text-lg"
+>
+  <b>Nix Community Survey 2026 is here!</b>
+  <a
+    href="https://survey.nixos.org/2026"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="text-secondary-afghani-blue-45 hover:text-secondary-afghani-blue-75 inline-flex items-center gap-2"
+  >
+    Take the Survey
+    <Icon name="mdi:arrow-right" />
+  </a>
+</Banner>

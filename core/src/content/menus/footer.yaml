@@ -13,9 +13,9 @@ sections:
         link: https://freewear.org/Nix
   - name: Resources
     items:
-      - name: Packages search
+      - name: Packages Search
         link: https://search.nixos.org/packages
-      - name: Options search
+      - name: Options Search
         link: https://search.nixos.org/options
       - name: Channel Status
         link: https://status.nixos.org/
@@ -29,7 +29,7 @@ sections:
         link: https://discourse.nixos.org/
       - name: Matrix Chat
         link: https://matrix.to/#/#space:nixos.org
-      - name: Commercial support
+      - name: Commercial Support
         link: /community/commercial-support
   - name: Contribute
     items:
@@ -38,9 +38,9 @@ sections:
       - name: Summer of Nix
         link: https://github.com/ngi-nix/summer-of-nix
       - name: Donate
-        link: /donate
+        link: /backing
       - name: Become a Sponsor
-        link: /sponsorship
+        link: /backing#sponsorship-tiers
   - name: Stay up to Date
     items:
       - name: Blog

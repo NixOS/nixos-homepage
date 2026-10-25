@@ -64,11 +64,11 @@ jobs:
           # TODO: rework ci (or switch systems entirely) to circumvent this
           allow-unsafe-pr-checkout: true
       - name: "Installing Nix"
-        uses: "cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24" # v31.11.1
+        uses: "cachix/install-nix-action@448cde739abec1eaf0646249e3d25bb8d9bc7702" # v31.11.2
       - name: "Build"
         run: nix build
       - name: "Upload build artifact"
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: nixos-homepage-artifact
           path: ./result
@@ -83,7 +83,7 @@ jobs:
       statuses: write # to set commit status
     steps:
       - name: "Download build artifact"
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: nixos-homepage-artifact
           path: ./build

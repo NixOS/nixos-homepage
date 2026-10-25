@@ -3,6 +3,16 @@
 
 @config '../../tailwind.config.cjs';
 
+@theme {
+  /* The @keyframes are generated from the word lists in the page that uses
+     these, so the step count follows each list. --slide-duration comes from
+     there too. text-slide scrolls up, text-slide-down scrolls down. */
+  --animate-text-slide: text-slide var(--slide-duration, 12.5s)
+    cubic-bezier(0.83, 0, 0.17, 1) infinite;
+  --animate-text-slide-down: text-slide-down var(--slide-duration, 7.5s)
+    cubic-bezier(0.83, 0, 0.17, 1) infinite;
+}
+
 @utility text-light-bold {
   @apply font-extralight;
 
@@ -189,5 +199,35 @@
 
   .article a:any-link {
     @apply link link-blue;
+  }
+}
+
+@keyframes header-scrolled {
+  to {
+    --header-scrolled: 1;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  :root {
+    animation-name: header-scrolled;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 1px;
+  }
+}
+
+@custom-variant header-light {
+  @supports (animation-timeline: scroll()) {
+    @container style(--header-scrolled: 1) {
+      @slot;
+    }
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    &:where([data-header-scrolled], [data-header-scrolled] *) {
+      @slot;
+    }
   }
 }

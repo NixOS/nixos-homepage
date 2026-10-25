@@ -1,10 +1,11 @@
-- href: https://nixcademy.com
-  name: Nixcademy
-  logo: /images/commercial-support-logos/nixcademy.svg
+- href: https://applicative.systems
+  name: Applicative Systems Group & Nixcademy
+  logo: /images/commercial-support-logos/applicative-systems.svg
   locations:
     - Remote
     - Germany
-  description: Elevate your organization's expertise with Nix and NixOS through our comprehensive corporate training classes, personalized mentoring, and expert consulting services. Empower your team with the latest knowledge and best practices.
+    - USA
+  description: Nix and NixOS consulting, engineering and training, from first adoption to large-scale production. Particularly experienced with embedded systems, secure build infrastructure and NixOS integration testing. Corporate training through Nixcademy.
 - href: https://arnout.engelen.eu
   name: Engelen Open Source
   logo: /images/commercial-support-logos/engelen-open-source.png
@@ -109,3 +110,10 @@
     - Remote
     - Germany
   description: Software & Cloud Engineering Consulting — With ❤️ for Rust 🦀, Nix ❄️ & Open Source 🌐 We help teams build secure, scalable systems they can trust.
+- href: https://technative.eu/en/technology/nix-nixos/
+  name: TechNative
+  logo: /images/commercial-support-logos/technative.svg
+  locations:
+    - Remote
+    - Amersfoort, Netherlands
+  description: TechNative helps teams build and operate NixOS infrastructure on AWS and OpenStack. We develop reusable open source NixOS and Terraform modules and provide platform engineering, migrations, monitoring, security and ongoing operational support.

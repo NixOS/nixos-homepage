@@ -3,13 +3,13 @@ rec {
 
   inputs = {
     # This is used to build the site.
-    nixpkgs.url = "nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
 
     # These inputs are used for the manuals and release artifacts
-    released-nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    released-nixpkgs-stable.url = "nixpkgs/nixos-26.05";
+    released-nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    released-nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     released-nix-unstable.url = "github:nixos/nix/master";
     released-nix-stable.url = "github:nixos/nix/latest-release";
 
@@ -75,6 +75,7 @@ rec {
           NIX_UNSTABLE_VERSION = getVersion nix_unstable.name;
           NIXOS_STABLE_SERIES = pkgs-stable.lib.trivial.release;
           NIXOS_UNSTABLE_SERIES = pkgs-unstable.lib.trivial.release;
+          MACOS_MIN_VERSION = pkgs-stable.stdenv.hostPlatform.darwinMinVersion;
 
           redirectManualHTML = redirectURL: out: ''
             cat <<EOT > ${out}
@@ -252,6 +253,7 @@ rec {
               export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
               export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
+              export MACOS_MIN_VERSION="${MACOS_MIN_VERSION}"
               export THEME="${builtins.getEnv "THEME"}"
               export BANNER="${builtins.getEnv "BANNER"}"
 
@@ -297,7 +299,7 @@ rec {
           };
 
           pre-commit.settings.hooks = {
-            nixfmt-rfc-style = {
+            nixfmt = {
               enable = true;
               files = "\\.nix$";
             };
@@ -332,7 +334,7 @@ rec {
             packages = with pkgs; [
               nodejs_current
               netlify-cli
-              nixfmt-rfc-style
+              nixfmt
               zizmor
             ];
 
@@ -341,6 +343,7 @@ rec {
               export NIX_UNSTABLE_VERSION="${NIX_UNSTABLE_VERSION}"
               export NIXOS_STABLE_SERIES="${NIXOS_STABLE_SERIES}"
               export NIXOS_UNSTABLE_SERIES="${NIXOS_UNSTABLE_SERIES}"
+              export MACOS_MIN_VERSION="${MACOS_MIN_VERSION}"
               export PATH_MANUAL="${manuals}"
               export PATH_PILLS="${pills}"
               export PATH_DEMOS="${demos}"

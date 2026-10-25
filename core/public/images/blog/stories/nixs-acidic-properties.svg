@@ -1,0 +1,135 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" xmlns:c2pa="http://c2pa.org/manifest">
+  <defs>
+    <style>
+      .header-bg { fill: #4d6fb7; }
+      .header-text { fill: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 18px; font-weight: 600; }
+      .cell-text { fill: #3a3a3a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 16px; }
+      .footnote { fill: #717171; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; }
+      .bold { font-weight: 600; }
+      .code { font-family: 'Consolas', 'Monaco', monospace; font-size: 15px; fill: #717171; }
+      .row-bg { fill: white; }
+      .row-border { stroke: #cecece; stroke-width: 1; }
+      .title { fill: #28395f; font-size: 32px; font-weight: 600; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="1200" height="800" fill="#eeeeee"/>
+  
+  <!-- Title -->
+  <text x="600" y="50" text-anchor="middle" class="title">Nix's ACID²-like Guarantees</text>
+  
+  <!-- Table Background -->
+  <rect x="20" y="80" width="1160" height="670" fill="white" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.1))"/>
+  
+  <!-- Table Header -->
+  <rect x="20" y="80" width="1160" height="45" class="header-bg"/>
+  <text x="30" y="108" class="header-text">ACIDic Property</text>
+  <text x="250" y="108" class="header-text">What Nix Provides</text>
+  <text x="700" y="108" class="header-text">Caveats</text>
+  
+  <!-- Row borders -->
+  <line x1="20" y1="125" x2="1180" y2="125" class="row-border"/>
+  <line x1="20" y1="210" x2="1180" y2="210" class="row-border"/>
+  <line x1="20" y1="295" x2="1180" y2="295" class="row-border"/>
+  <line x1="20" y1="500" x2="1180" y2="500" class="row-border"/>
+  <line x1="20" y1="585" x2="1180" y2="585" class="row-border"/>
+  
+  <!-- Vertical dividers -->
+  <line x1="240" y1="125" x2="240" y2="750" class="row-border"/>
+  <line x1="690" y1="125" x2="690" y2="750" class="row-border"/>
+  
+  <!-- Row 1: Atomicity -->
+  <text x="30" y="160" class="cell-text bold">Atomicity</text>
+  <text x="250" y="145" class="cell-text">
+    <tspan x="250" dy="0">A store path becomes reachable only</tspan>
+    <tspan x="250" dy="20">after a successful build; profile switches</tspan>
+    <tspan x="250" dy="20">happen via atomic symlink updates*</tspan>
+  </text>
+  <text x="700" y="145" class="cell-text">
+    <tspan x="700" dy="0">Post-activation scripts that mutate </tspan>
+    <tspan class="code">/etc</tspan>
+    <tspan>,</tspan>
+    <tspan x="700" dy="20">run DB migrations, etc., sit outside this</tspan>
+    <tspan x="700" dy="20">atomic boundary unless wrapped</tspan>
+  </text>
+  
+  <!-- Row 2: Consistency -->
+  <text x="30" y="245" class="cell-text bold">Consistency</text>
+  <text x="250" y="235" class="cell-text">
+    <tspan x="250" dy="0">Every file in the store refers only to</tspan>
+    <tspan x="250" dy="20">other verified store paths, so a</tspan>
+    <tspan x="250" dy="20">completed closure has no dangling links</tspan>
+  </text>
+  <text x="700" y="235" class="cell-text">
+    <tspan x="700" dy="0">Nix says nothing about the functional</tspan>
+    <tspan x="700" dy="20">correctness of the software inside</tspan>
+  </text>
+  
+  <!-- Row 3: Isolation -->
+  <text x="30" y="380" class="cell-text bold">Isolation</text>
+  <text x="250" y="315" class="cell-text">
+    <tspan x="250" dy="0" class="bold">Build-time:</tspan>
+    <tspan> Sandboxed builds</tspan>
+    <tspan x="250" dy="20">restrict network, filesystem, and</tspan>
+    <tspan x="250" dy="20">process access to declared inputs only</tspan>
+    <tspan x="250" dy="30" class="bold">Run-time:</tspan>
+    <tspan> Store paths are immutable</tspan>
+    <tspan x="250" dy="20">and side-by-side; different users can</tspan>
+    <tspan x="250" dy="20">use different package versions</tspan>
+    <tspan x="250" dy="30" class="bold">Shell isolation:</tspan>
+    <tspan> nix-shell creates</tspan>
+    <tspan x="250" dy="20">per-session environments that avoid</tspan>
+    <tspan x="250" dy="20">contaminating the global environment</tspan>
+  </text>
+  <text x="700" y="315" class="cell-text">
+    <tspan x="700" dy="0">Sandboxing must be enabled, but</tspan>
+    <tspan x="700" dy="20">hermetic sandboxing isn't possible on</tspan>
+    <tspan x="700" dy="20">all platforms, e.g. macOS. Nix shells</tspan>
+    <tspan x="700" dy="20">enable bounded subshells by adjusting</tspan>
+    <tspan x="700" dy="20">PATH and related environment variables.</tspan>
+    <tspan x="700" dy="20">They do not isolate processes from</tspan>
+    <tspan x="700" dy="20">the rest of the system</tspan>
+  </text>
+  
+  <!-- Row 4: Durability -->
+  <text x="30" y="535" class="cell-text bold">Durability</text>
+  <text x="250" y="520" class="cell-text">
+    <tspan x="250" dy="0">Any path referenced by a GC root</tspan>
+    <tspan x="250" dy="20">(system generation, profile, manual</tspan>
+    <tspan x="250" dy="20">root) stays on disk; signed binary</tspan>
+    <tspan x="250" dy="20">caches can re-supply lost bits</tspan>
+  </text>
+  <text x="700" y="525" class="cell-text">
+    <tspan x="700" dy="0">If all roots and caches vanish, you</tspan>
+    <tspan x="700" dy="20">must rebuild or re-fetch sources</tspan>
+  </text>
+  
+  <!-- Row 5: Determinism (the extra D) -->
+  <text x="30" y="620" class="cell-text bold">Determinism</text>
+  <text x="30" y="640" class="cell-text">(the extra D)</text>
+  <text x="250" y="605" class="cell-text">
+    <tspan x="250" dy="0" class="bold">Build-time:</tspan>
+    <tspan> Given identical inputs,</tspan>
+    <tspan x="250" dy="20">the build graph yields the same bits</tspan>
+    <tspan x="250" dy="30" class="bold">Run-time:</tspan>
+    <tspan> Nix recreates exactly the</tspan>
+    <tspan x="250" dy="20">same binaries and environment, but</tspan>
+    <tspan x="250" dy="20">behavioral determinism depends on</tspan>
+    <tspan x="250" dy="20">the program itself</tspan>
+  </text>
+  <text x="700" y="605" class="cell-text">
+    <tspan x="700" dy="0"><tspan class="bold">Build-time:</tspan> Avoid impure steps, pin</tspan>
+    <tspan x="700" dy="20">sources, disable non-deterministic</tspan>
+    <tspan x="700" dy="20">build features. <tspan class="bold">Run-time:</tspan> Time, random</tspan>
+    <tspan x="700" dy="20">numbers, network, thread races, GPU</tspan>
+    <tspan x="700" dy="20">drivers, external services are outside</tspan>
+    <tspan x="700" dy="20">Nix's control</tspan>
+  </text>
+  
+  <!-- Footnote -->
+  <text x="600" y="770" text-anchor="middle" class="footnote">
+    <tspan x="600" dy="0">* Users see either the old or new generation—never a half-written state. This provides transactional installs, reproducible builds,</tspan>
+    <tspan x="600" dy="18">referential integrity, durable retention, and byte-level determinism of build artefacts.</tspan>
+  </text>
+</svg>

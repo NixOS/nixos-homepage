@@ -63,6 +63,8 @@ export default defineConfig({
   compressHTML: true,
   redirects: {
     '/values': '/governance',
+    '/donate': '/backing',
+    '/back': '/backing',
     '/qr01': '/why-nix' // QR code on the NixOS banner
   },
   vite: {
