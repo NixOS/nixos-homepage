@@ -1,0 +1,91 @@
+---
+import Container from '../../components/layout/Container.astro';
+import Divider from '../../components/layout/Divider.astro';
+import PageHeader from '../../components/layout/PageHeader.astro';
+import YearSection from '../../components/papers/YearSection.astro';
+import Layout from '../../layouts/Layout.astro';
+import { papers } from './papers';
+import { papersSchema } from './papersSchema';
+
+let validatedPapers;
+try {
+  validatedPapers = papersSchema.parse(papers);
+} catch (error) {
+  if (error instanceof z.ZodError) {
+    console.error('Papers validation failed:');
+    console.error(JSON.stringify(error.errors, null, 2));
+    throw new Error(
+      'Papers data validation failed. Check console for details.',
+    );
+  }
+  throw error;
+}
+
+const papersByYear = validatedPapers.reduce((acc, paper, index) => {
+  const year = paper.year;
+  if (!acc[year]) acc[year] = [];
+  paper.id = index;
+  acc[year].push(paper);
+  return acc;
+}, {});
+
+const sortedYears = Object.keys(papersByYear).sort((a, b) => b - a);
+---
+
+<Layout title="Research and Scientific Publications">
+  <PageHeader text="Research and Scientific Publications" />
+
+  <Container class="grid gap-8 px-12 pb-20 pt-8 md:grid-cols-2">
+    <div
+      class="flex flex-col justify-center gap-4 font-extralight leading-relaxed"
+    >
+      <p>
+        Nix started as a research project by Eelco Dolstra and his collaborators
+        at Utrecht University around 2003. Since then, scientists from multiple
+        institutions have published their work on repeatable computation and
+        reliable, secure software distribution.
+      </p>
+      <p>
+        This collection traces the continued exploration of theoretical
+        foundations and practical applications of the ideas underlying Nix and
+        its ecosystem.
+      </p>
+    </div>
+    <div class="flex flex-col items-center justify-center">
+      <img src="/images/explore/experiment.svg" class="max-h-96" />
+    </div>
+  </Container>
+
+  <Divider style="slope" mirrorX mirrorY />
+
+  <div class="bg-nix-blue py-16 text-white md:px-12 md:py-16">
+    <Container
+      class="mt-16 space-y-8 bg-nix-blue font-extralight leading-relaxed"
+    >
+      <h1 class="font-heading text-4xl font-bold leading-tight">
+        Scientific publications about Nix and associated projects
+      </h1>
+
+      <div class="space-y-12">
+        {
+          sortedYears.map((year) => (
+            <YearSection year={year} papers={papersByYear[year]} />
+          ))
+        }
+      </div>
+    </Container>
+  </div>
+</Layout>
+<script>
+  document.querySelectorAll('.group').forEach((group) => {
+    group.addEventListener('mouseenter', () => {
+      console.log('Group hover entered');
+      const texts = group.querySelectorAll('.paper-action-text');
+      texts.forEach((text) => {
+        console.log('Text element:', text);
+        console.log('Text width:', text.offsetWidth);
+        console.log('Text opacity:', window.getComputedStyle(text).opacity);
+      });
+    });
+  });
+</script>
