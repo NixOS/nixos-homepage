@@ -45,10 +45,8 @@ const { data: governments } = await getEntry('explore', 'governments');
     <div>
       {governments.quotes.items.map((quote) => (
         <Quotation dark>
-          <Paragraph variant='white'>
-            {quote.text}
-          </Paragraph>
-          <Paragraph variant='white' size='sm' class="text-right italic mt-2">
+          <Paragraph variant="white">{quote.text}</Paragraph>
+          <Paragraph variant="white" size="sm" class="text-right italic mt-2">
             {quote.author}
           </Paragraph>
         </Quotation>
