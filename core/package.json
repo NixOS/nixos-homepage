@@ -8,6 +8,7 @@
     "start": "npm run dev",
     "build": "astro build",
     "preview": "astro preview",
+    "dividers": "node generate-lambda-dividers.mjs",
     "astro": "astro",
     "linkcheck:minimal": "linkchecker http://localhost:4321 --ignore-url /manual --ignore-url /guides --ignore-url /tutorials",
     "linkcheck:full": "linkchecker http://localhost:4321"
