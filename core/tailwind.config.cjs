@@ -10,7 +10,6 @@ import colors from '@nixos/branding/colors/tailwind.js';
 const inlineSvgs = {
   hero: './src/assets/image/hero-bg.svg',
   'landing-search-top': './src/assets/image/divider/landing_search_top.svg',
-  'header-nixdarkblue': './src/assets/image/divider/header_nixdarkblue.svg',
   'why-nix-bg-usecases': './src/assets/image/why-nix/usecase-bg.svg'
 };
 
