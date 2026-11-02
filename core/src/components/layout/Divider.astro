@@ -2,57 +2,32 @@
 import tile from '../../assets/image/divider/lambda_stack_24_tile.svg';
 
 interface Props {
-  // Share of the divider height over which the ground fades from one section colour to
-  // the other, centred on the middle. 0 is a hard step.
+  // Share of the tile height over which the ground fades from one section colour to the
+  // other, centred on the middle. 0 is a hard step. The default is in the divider utility.
   gradient?: number;
   // Blue section above, white below.
   inverse?: boolean;
 }
 
-const { gradient = 0.7, inverse = false } = Astro.props;
+const { gradient, inverse = false } = Astro.props;
 
-// The divider tiles a transparent SVG of logomarks over a ground painted here. The tile's
-// lambdas are these two colours, which match the primary-white and
-// secondary-afghani-blue-45 tokens the sections use, so on each side of the line the
-// lambdas of that side's colour vanish into the ground.
-const WHITE = '#ffffff';
-const BLUE = '#3b5487';
-const TILE_HEIGHT = 120; // px, the h-30 content height; must match the generator
-const channels = (h: string) =>
-  [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
-const mix = (a: string, b: string, t: number) => {
-  const A = channels(a),
-    B = channels(b);
-  return (
-    '#' +
-    A.map((v, i) =>
-      Math.round(v + (B[i] - v) * t)
-        .toString(16)
-        .padStart(2, '0'),
-    ).join('')
-  );
-};
-const [above, below] = inverse ? [BLUE, WHITE] : [WHITE, BLUE];
-const stops = [];
-if (gradient === 0) {
-  stops.push(`${above} 50%`, `${below} 50%`);
-} else {
-  // Ease in and out, so the fade blends into the flat colour on both sides. Positions are
-  // pixel offsets from the centre, so the fade stays on the lambdas whatever the padding.
-  for (let k = 0; k <= 16; k++) {
-    const t = k / 16;
-    const px = ((t - 0.5) * gradient * TILE_HEIGHT).toFixed(2);
-    stops.push(`${mix(above, below, t * t * (3 - 2 * t))} calc(50% + ${px}px)`);
-  }
-}
-const ground = `linear-gradient(${stops.join(',')})`;
+// The ground is the `divider` utility in base.css; the tile is laid over it as a second
+// background layer. The padding keeps the sections' content clear of the lambdas; the
+// ground fills it in the right colour on each side.
+const style = [
+  gradient !== undefined && `--divider-gradient:${gradient}`,
+  `background-image:url(${tile.src}),var(--divider-ground)`,
+]
+  .filter(Boolean)
+  .join(';');
 ---
 
-<!-- The padding keeps the sections' content clear of the lambdas; the ground fills it in
-     the right colour on each side. -->
 <div
   role="separator"
   aria-hidden="true"
-  class="box-content h-30 w-full bg-center bg-repeat-x py-[96px]"
-  style={`background-image:url(${tile.src}),${ground}`}
+  class:list={[
+    'divider box-content h-30 w-full bg-center bg-repeat-x py-[96px]',
+    inverse && 'divider-inverse',
+  ]}
+  style={style}
 />

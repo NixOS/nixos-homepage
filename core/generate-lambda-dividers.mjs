@@ -4,9 +4,9 @@
 //
 // The tile is one horizontal period of a hex-lattice tiling of the NixOS logomark on a
 // transparent ground, sized for CSS background-repeat along x. The logomark's dark lambdas
-// are the section blue #3b5487 and its light lambdas white, so when the page paints white
-// above the middle and section blue below, each logo is half figure and half ground on
-// either side of the line. Divider.astro supplies that ground.
+// are the section blue and its light lambdas white, both from the brand palette, so when
+// the page paints white above the middle and section blue below, each logo is half figure
+// and half ground on either side of the line. Divider.astro supplies that ground.
 //
 // Logos alternate between a cell and its mirror image down each column, with a 0,1,1,0
 // column rhythm, so that every horizontal and 120-degree edge between neighbours meets as
@@ -18,6 +18,7 @@
 // in lattice units: x in R/9, y in (R*sqrt3/2)/9, where R is the circumradius of the
 // flat-top hexagon that bounds the logo.
 
+import colors from '@nixos/branding/colors/tailwind.js';
 import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -39,6 +40,37 @@ const CELL = 24; // circumradius of each logo's bounding hexagon, px
 const HEIGHT = 120; // tile height, px; must match the h-30 class in Divider.astro
 const GROUT = 0.75; // px inset on every lambda, so neighbouring logos stay distinct
 const FILE = 'lambda_stack_24_tile.svg';
+
+// The palette gives oklch; the tile gets hex so it stays usable in tools without modern
+// colour syntax. OKLab to linear sRGB, then the sRGB transfer curve.
+function oklchToHex(oklch) {
+  const [L, C, H] = oklch.match(/[\d.]+/g).map(Number);
+  const a = C * Math.cos((H * Math.PI) / 180),
+    b = C * Math.sin((H * Math.PI) / 180);
+  const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3,
+    m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3,
+    s = (L - 0.0894841775 * a - 1.291485548 * b) ** 3;
+  const linear = [
+    4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+    -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+    -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
+  ];
+  return (
+    '#' +
+    linear
+      .map((v) => {
+        const c = Math.min(1, Math.max(0, v));
+        const srgb =
+          c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055;
+        return Math.round(srgb * 255)
+          .toString(16)
+          .padStart(2, '0');
+      })
+      .join('')
+  );
+}
+const WHITE = oklchToHex(colors['primary-white'].DEFAULT);
+const BLUE = oklchToHex(colors['secondary-afghani-blue'][45]);
 
 const num = (v, digits) => {
   const f = 10 ** digits;
@@ -131,7 +163,7 @@ function tile() {
   const id = `lambda-stack-${R}-tile`;
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${period} ${HEIGHT}" width="${period}" height="${HEIGHT}">`,
-    `<style>.ld-a{fill:#ffffff}.ld-b{fill:#3b5487}</style>`,
+    `<style>.ld-a{fill:${WHITE}}.ld-b{fill:${BLUE}}</style>`,
     `<defs><g id="${id}">`,
     ...shapes,
     `</g></defs>`,

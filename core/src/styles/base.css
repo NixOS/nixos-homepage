@@ -61,6 +61,33 @@
   }
 }
 
+/* Section divider ground, used by Divider.astro, which lays the tile of lambdas over it
+   as a second background layer. */
+@utility divider {
+  /* Tile height; h-30 in Divider.astro and the generator use the same figure. */
+  --divider-tile: 120px;
+  /* Height of the fade: --divider-gradient (0 to 1, set by the component) of the tile. */
+  --divider-span: calc(var(--divider-gradient, 0.7) * var(--divider-tile));
+  /* Where each half of the fade reaches its halfway colour, as a share of the span from
+     the centre. 0.25 is a straight ramp; smaller values ease in and out more. */
+  --divider-ease: 0.15;
+  --divider-a: theme(colors.primary-white.DEFAULT);
+  --divider-b: theme(colors.secondary-afghani-blue.45);
+  --divider-ground: linear-gradient(
+    var(--divider-a) calc(50% - var(--divider-span) / 2),
+    calc(50% - var(--divider-span) * var(--divider-ease)),
+    color-mix(in oklab, var(--divider-a), var(--divider-b)) 50%,
+    calc(50% + var(--divider-span) * var(--divider-ease)),
+    var(--divider-b) calc(50% + var(--divider-span) / 2)
+  );
+}
+
+/* Blue section above, white below. */
+@utility divider-inverse {
+  --divider-a: theme(colors.secondary-afghani-blue.45);
+  --divider-b: theme(colors.primary-white.DEFAULT);
+}
+
 @layer components {
   .text-light-bold {
     @apply font-extralight;
