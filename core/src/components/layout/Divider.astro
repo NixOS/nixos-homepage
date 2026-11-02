@@ -1,30 +1,18 @@
 ---
 import tile from '../../assets/image/divider/lambda_stack_24_tile.svg';
-import InlineSVG from '../util/InlineSVG.astro';
 
 interface Props {
-  style?: 'lambda' | 'landing_search_bottom';
-  // lambda: share of the divider height over which the ground fades from one section
-  // colour to the other, centred on the middle. 0 is a hard step.
+  // Share of the divider height over which the ground fades from one section colour to
+  // the other, centred on the middle. 0 is a hard step.
   gradient?: number;
-  // lambda: blue section above, white below.
+  // Blue section above, white below.
   inverse?: boolean;
-  mirrorX?: boolean;
-  mirrorY?: boolean;
-  backgroundClass?: string;
 }
 
-const {
-  style = 'lambda',
-  gradient = 0.7,
-  inverse = false,
-  mirrorX = false,
-  mirrorY = false,
-  backgroundClass = undefined,
-} = Astro.props;
+const { gradient = 0.7, inverse = false } = Astro.props;
 
-// The lambda divider tiles a transparent SVG of logomarks over a ground painted here. The
-// tile's lambdas are these two colours, which match the primary-white and
+// The divider tiles a transparent SVG of logomarks over a ground painted here. The tile's
+// lambdas are these two colours, which match the primary-white and
 // secondary-afghani-blue-45 tokens the sections use, so on each side of the line the
 // lambdas of that side's colour vanish into the ground.
 const WHITE = '#ffffff';
@@ -60,28 +48,11 @@ if (gradient === 0) {
 const ground = `linear-gradient(${stops.join(',')})`;
 ---
 
-{style === 'lambda' ? (
-  // The padding keeps the sections' content clear of the lambdas; the ground fills it in
-  // the right colour on each side.
-  <div
-    role="separator"
-    aria-hidden="true"
-    class="box-content h-30 w-full bg-center bg-repeat-x py-[96px]"
-    style={`background-image:url(${tile.src}),${ground}`}
-  />
-) : (
-  <InlineSVG
-    role="separator"
-    src="/src/assets/image/divider/landing_search_bottom.svg"
-    class:list={[
-      'right-0 left-0 block h-16 w-full md:h-48',
-      backgroundClass,
-      mirrorY ? 'translate-y-[1px]' : 'translate-y-[-1px]',
-      {
-        '-scale-x-100': mirrorX,
-        '-scale-y-100': mirrorY,
-      },
-    ]}
-    aria-hidden="true"
-  />
-)}
+<!-- The padding keeps the sections' content clear of the lambdas; the ground fills it in
+     the right colour on each side. -->
+<div
+  role="separator"
+  aria-hidden="true"
+  class="box-content h-30 w-full bg-center bg-repeat-x py-[96px]"
+  style={`background-image:url(${tile.src}),${ground}`}
+/>
