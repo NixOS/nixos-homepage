@@ -64,9 +64,8 @@
 /* Section divider ground, used by Divider.astro, which lays the tile of lambdas over it
    as a second background layer. */
 @utility divider {
-  /* Tile height; h-30 in Divider.astro and the generator use the same figure. */
-  --divider-tile: 120px;
-  /* Height of the fade: --divider-gradient (0 to 1, set by the component) of the tile. */
+  /* Height of the fade: --divider-gradient (0 to 1) of --divider-tile, the tile height.
+     The component sets --divider-tile for its tile; the gradient defaults here. */
   --divider-span: calc(var(--divider-gradient, 0.7) * var(--divider-tile));
   /* Where each half of the fade reaches its halfway colour, as a share of the span from
      the centre. 0.25 is a straight ramp; smaller values ease in and out more. */

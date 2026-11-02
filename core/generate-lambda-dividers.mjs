@@ -1,8 +1,8 @@
-// Generates the section divider tile core/src/assets/image/divider/lambda_stack_24_tile.svg.
+// Generates the section divider tiles core/src/assets/image/divider/lambda_stack_<cell>_tile.svg.
 //
 // Run with: npm run dividers --workspace core
 //
-// The tile is one horizontal period of a hex-lattice tiling of the NixOS logomark on a
+// Each tile is one horizontal period of a hex-lattice tiling of the NixOS logomark on a
 // transparent ground, sized for CSS background-repeat along x. The logomark's dark lambdas
 // are the section blue and its light lambdas white, both from the brand palette, so when
 // the page paints white above the middle and section blue below, each logo is half figure
@@ -36,10 +36,13 @@ const LAMBDA = [
   [-4.875, 2.25],
 ];
 
-const CELL = 24; // circumradius of each logo's bounding hexagon, px
-const HEIGHT = 120; // tile height, px; must match the h-30 class in Divider.astro
+// cell: circumradius of each logo's bounding hexagon, px. height: tile height, px. The
+// tile map in Divider.astro uses the same figures.
+const TILES = [
+  { cell: 24, height: 120 },
+  { cell: 64, height: 192 },
+];
 const GROUT = 0.75; // px inset on every lambda, so neighbouring logos stay distinct
-const FILE = 'lambda_stack_24_tile.svg';
 
 // The palette gives oklch; the tile gets hex so it stays usable in tools without modern
 // colour syntax. OKLab to linear sRGB, then the sRGB transfer curve.
@@ -137,14 +140,13 @@ function inset(points, d) {
 
 // One period: four columns of logos. Rows are fitted so the top and bottom rows are
 // whole logos, centred vertically.
-function tile() {
-  const R = CELL;
+function tile({ cell: R, height: H }) {
   const dx = 1.5 * R,
     h = (R * SQ3) / 2,
     dy = 2 * h,
     pad = 6;
-  const rows = Math.max(1, Math.floor((HEIGHT - 2 * pad - h) / dy));
-  const y0 = (HEIGHT - (rows * dy + h)) / 2 + h;
+  const rows = Math.max(1, Math.floor((H - 2 * pad - h) / dy));
+  const y0 = (H - (rows * dy + h)) / 2 + h;
   const period = 4 * dx;
   const shapes = [];
   for (let i = 0; i < 4; i++) {
@@ -162,7 +164,7 @@ function tile() {
   }
   const id = `lambda-stack-${R}-tile`;
   return [
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${period} ${HEIGHT}" width="${period}" height="${HEIGHT}">`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${period} ${H}" width="${period}" height="${H}">`,
     `<style>.ld-a{fill:${WHITE}}.ld-b{fill:${BLUE}}</style>`,
     `<defs><g id="${id}">`,
     ...shapes,
@@ -174,13 +176,15 @@ function tile() {
   ].join('\n');
 }
 
-const file = join(
+const outDir = join(
   dirname(fileURLToPath(import.meta.url)),
   'src',
   'assets',
   'image',
   'divider',
-  FILE,
 );
-writeFileSync(file, tile());
-console.log(`wrote ${file}`);
+for (const t of TILES) {
+  const file = join(outDir, `lambda_stack_${t.cell}_tile.svg`);
+  writeFileSync(file, tile(t));
+  console.log(`wrote ${file}`);
+}
