@@ -66,7 +66,7 @@
 @utility divider {
   /* Height of the fade: --divider-gradient (0 to 1) of --divider-tile, the tile height.
      The component sets --divider-tile for its tile; the gradient defaults here. */
-  --divider-span: calc(var(--divider-gradient, 0.7) * var(--divider-tile));
+  --divider-span: calc(var(--divider-gradient, 0) * var(--divider-tile));
   /* Where each half of the fade reaches its halfway colour, as a share of the span from
      the centre. 0.25 is a straight ramp; smaller values ease in and out more. */
   --divider-ease: 0.15;
