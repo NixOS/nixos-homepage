@@ -17,7 +17,7 @@ const isHomepage = Astro.url.pathname === '/';
 
 const navbarItemStyle = `transition-colors duration-300 motion-reduce:transition-none text-center text-primary-white header-light:text-secondary-afghani-blue-15 rounded-2xl`;
 const navbarItemInactiveStyle = `bg-secondary-afghani-blue-35 hover:bg-secondary-afghani-blue-25 header-light:bg-secondary-afghani-blue-95 header-light:hover:bg-secondary-afghani-blue-85`;
-const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-95 text-primary-black! font-medium header-light:bg-secondary-afghani-blue-85`;
+const navbarItemActiveStyle = `xl:text-primary-black bg-secondary-afghani-blue-95 text-primary-black! font-medium header-light:bg-secondary-afghani-blue-85`;
 ---
 
 <header
@@ -25,9 +25,9 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
   class:list={[
     'sticky top-0 z-50 border-b-2 font-light transition-[background-color,color,padding,border-color,border-width] duration-300 border-b-transparent motion-reduce:transition-none ',
     overlay
-      ? 'bg-transparent max-md:has-aria-expanded:bg-secondary-afghani-blue-45 max-md:has-aria-expanded:transition-none'
+      ? 'bg-transparent max-xl:has-aria-expanded:bg-secondary-afghani-blue-45 max-xl:has-aria-expanded:transition-none'
       : 'bg-secondary-afghani-blue-45',
-    overlay && 'header-light:max-md:has-aria-expanded:bg-primary-white',
+    overlay && 'header-light:max-xl:has-aria-expanded:bg-primary-white',
     'header-light:bg-primary-white header-light:text-primary-black header-light:border-b-secondary-afghani-blue-45',
   ]}
 >
@@ -49,8 +49,8 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
       </Container>
     </a>
   )}
-  <Container class="flex py-1 md:py-4 flex-col justify-between md:flex-row md:items-center">
-    <div class="my-2 flex items-center justify-between gap-2 text-4xl font-normal md:justify-start">
+  <Container class="flex py-1 xl:py-4 flex-col justify-between xl:flex-row xl:items-center">
+    <div class="my-2 flex items-center justify-between gap-2 text-4xl font-normal xl:justify-start">
       <Link href="/" class="grid select-none">
         <Image
           class="col-start-1 row-start-1 h-12 w-auto transition-opacity duration-300 motion-reduce:transition-none header-light:opacity-0"
@@ -69,7 +69,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
         aria-label="Main Navigation Toggle"
         aria-controls="navbar-menu"
         aria-expanded="true"
-        class="p-4 md:hidden"
+        class="p-4 xl:hidden"
         id="navigation-toggle"
       >
         <span class="bg-primary-white header-light:bg-secondary-afghani-blue transition-colors duration-300 motion-reduce:transition-none mb-1.5 block h-1 w-8"></span>
@@ -80,14 +80,14 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
 
     <nav
       aria-label="Main Navigation"
-      class="grid pt-0 grid-cols-2 md:flex flex-col gap-1.5 justify-evenly items-center leading-none md:flex-row md:gap-3 md:pb-0 max-md:absolute max-md:inset-x-0 max-md:top-full max-md:px-4 max-md:pb-4 max-md:bg-secondary-afghani-blue-45 max-md:border-b-2 max-md:border-b-transparent max-md:transition-colors max-md:duration-300 motion-reduce:transition-none header-light:max-md:bg-primary-white header-light:max-md:border-b-secondary-afghani-blue-45"
+      class="grid pt-0 grid-cols-2 lg:grid-cols-4 xl:flex flex-col gap-1.5 justify-evenly items-center leading-none xl:flex-row xl:gap-3 xl:pb-0 max-xl:absolute max-xl:inset-x-0 max-xl:top-full max-xl:px-4 max-xl:pb-4 max-xl:bg-secondary-afghani-blue-45 max-xl:border-b-2 max-xl:border-b-transparent max-xl:transition-colors max-xl:duration-300 motion-reduce:transition-none header-light:max-xl:bg-primary-white header-light:max-xl:border-b-secondary-afghani-blue-45"
       id="navbar-menu"
     >
       {headerMenu.data.items.map((item) => (
         <>
           <Link
             class:list={[
-              'h-min min-w-24 my-auto py-2.5 px-3.5 flex justify-between flex-row-reverse md:flex-col gap-1 items-center md:justify-center md:text-sm',
+              'h-min min-w-24 my-auto py-2.5 px-3.5 flex justify-between flex-row-reverse xl:flex-col gap-1 items-center xl:justify-center xl:text-sm',
               navbarItemStyle,
               currentTopRoute === item.link
                 ? navbarItemActiveStyle
@@ -103,7 +103,7 @@ const navbarItemActiveStyle = `md:text-primary-black bg-secondary-afghani-blue-9
       ))}
       <Link
         class:list={[
-          'h-min min-w-24 my-auto py-2.5 px-3.5 flex justify-between flex-row-reverse md:flex-col gap-1 items-center md:justify-center md:text-sm',
+          'h-min min-w-24 my-auto py-2.5 px-3.5 flex justify-between flex-row-reverse xl:flex-col gap-1 items-center xl:justify-center xl:text-sm',
           navbarItemStyle,
           navbarItemInactiveStyle,
         ]}
