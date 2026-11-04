@@ -1,44 +1,45 @@
 ---
-import { undefined } from 'astro:schema';
-import InlineSVG from '../util/InlineSVG.astro';
+import tile24 from '../../assets/image/divider/lambda_stack_24_tile.svg';
+import tile64 from '../../assets/image/divider/lambda_stack_64_tile.svg';
 
 interface Props {
-  style?: 'slope' | 'landing_search_bottom';
-  mirrorX?: boolean;
-  mirrorY?: boolean;
-  backgroundClass?: string;
+  // Circumradius in px of the hexagon around each logomark; picks the tile.
+  cell?: 24 | 64;
+  // Share of the tile height over which the ground fades from one section colour to the
+  // other, centred on the middle. 0 is a hard step. The default is in the divider utility.
+  gradient?: number;
+  // Blue section above, white below.
+  inverse?: boolean;
 }
 
-const styleMap = {
-  slope: '/src/assets/image/divider/slope_down.svg',
-  landing_search_bottom: '/src/assets/image/divider/landing_search_bottom.svg',
-};
+const { cell = 64, gradient, inverse = false } = Astro.props;
 
-const heightMap = {
-  slope: 'h-16',
-  landing_search_bottom: 'h-16 md:h-48',
+// Tile height in px and the matching Tailwind class; the generator uses the same figures.
+const TILES = {
+  24: { src: tile24.src, height: 120, heightClass: 'h-30' },
+  64: { src: tile64.src, height: 192, heightClass: 'h-48' },
 };
+const tile = TILES[cell];
 
-const {
-  style = 'slope',
-  mirrorX = false,
-  mirrorY = false,
-  backgroundClass = undefined,
-} = Astro.props;
+// The ground is the `divider` utility in base.css; the tile is laid over it as a second
+// background layer. The padding keeps the sections' content clear of the lambdas; the
+// ground fills it in the right colour on each side.
+const style = [
+  `--divider-tile:${tile.height}px`,
+  gradient !== undefined && `--divider-gradient:${gradient}`,
+  `background-image:url(${tile.src}),var(--divider-ground)`,
+]
+  .filter(Boolean)
+  .join(';');
 ---
 
-<InlineSVG
+<div
   role="separator"
-  src={styleMap[style]}
-  class:list={[
-    'right-0 left-0 block h-16 w-full',
-    backgroundClass,
-    heightMap[style],
-    mirrorY ? 'translate-y-[1px]' : 'translate-y-[-1px]',
-    {
-      '-scale-x-100': mirrorX,
-      '-scale-y-100': mirrorY,
-    },
-  ]}
   aria-hidden="true"
+  class:list={[
+    'divider box-content w-full bg-center bg-repeat-x py-[96px]',
+    tile.heightClass,
+    inverse && 'divider-inverse',
+  ]}
+  style={style}
 />
