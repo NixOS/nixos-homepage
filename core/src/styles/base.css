@@ -61,6 +61,12 @@
   }
 }
 
+@layer base {
+  html {
+    @apply scroll-pt-28 xl:scroll-pt-32;
+  }
+}
+
 @layer components {
   .text-light-bold {
     @apply font-extralight;
