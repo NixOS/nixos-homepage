@@ -1,0 +1,108 @@
+intro: >
+  Government IT is hard to manage. Many departments, constantly changing
+  requirements and fleets that can grow to thousands of devices make it easy
+  to lose oversight. Over time, the resulting inconsistencies can lead to
+  breaches and malfunctions. NixOS can help solve these challenges.
+
+benefits:
+  heading: Why NixOS for governments?
+  items:
+    - title: Auditability
+      icon: mdi:clipboard
+      text: >
+        Because your NixOS infrastructure is fully described in code, oversight
+        and audits become much easier. See what runs on which machine and keep a
+        complete audit trail in a version control system (VCS). There's no need
+        to collect information from dozens of sources for compliance and
+        security reviews.
+    - title: Uniform fleets
+      icon: mdi:bricks
+      text: >
+        Departments have different needs, but they don't need separate setups.
+        Share a baseline for commonly used tools and VPN configuration across
+        the whole fleet, and extend it with modules for each department. This
+        keeps the fleet maintainable and prevents configuration drift.
+    - title: Resilience
+      icon: mdi:backup-restore
+      text: >
+        A failed system update can disrupt government operations. NixOS applies
+        updates atomically, so a system is always either fully on the old
+        generation or fully on the new one. If something goes wrong, devices can
+        be rolled back to their previous state, which reduces downtime and
+        enables fast recovery.
+    - title: Supply-chain transparency
+      icon: mdi:package-variant-closed
+      text: >
+        With NixOS, you can inspect the complete dependency tree of every
+        package, or of the whole system. This makes it easy to generate software
+        bills of materials and to see which parts are affected by a
+        vulnerability. Largely reproducible builds help you verify what you
+        deploy.
+    - title: Digital sovereignty
+      icon: mdi:shield-lock
+      text: >
+        NixOS is not tied to a single vendor, and all of its components are open
+        source and interchangeable. You can host your own package repositories,
+        or even swap the implementation of Nix itself. This helps you keep full
+        control over your infrastructure, costs and data.
+    - title: Long-term maintainability
+      icon: mdi:calendar-clock
+      text: >
+        Your configuration drives NixOS, so it doubles as living documentation
+        of your infrastructure. Instead of writing down how each system is set
+        up, the configuration shows it. New staff can be onboarded quickly, and
+        changing requirements are easy to handle across the whole fleet.
+
+quotes:
+  heading: What representatives say
+  items:
+    - text: >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero ipsum, bibendum et augue sit amet, congue accumsan leo. Duis in risus hendrerit, varius odio at, auctor nisi.
+      author: John Doe
+    - text: >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero ipsum, bibendum et augue sit amet, congue accumsan leo. Duis in risus hendrerit, varius odio at, auctor nisi.
+      author: Jane Doe
+    - text: >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla libero ipsum, bibendum et augue sit amet, congue accumsan leo. Duis in risus hendrerit, varius odio at, auctor nisi.
+      author: Jay Doe
+
+adopters:
+  heading: Governments already using NixOS
+  items:
+    - name: 'DAWO: Core'
+      meta: Netherlands · Digitaal Autonome Werkomgeving Overheid
+      flag: flag:nl-4x3
+      text: >
+        DAWO (Digitaal Autonome Werkomgeving Overheid) Core is a modular, open-source
+        workplace for public administration with a NixOS-based desktop. In July
+        2026, the state IT providers SSC-ICT, DICTU and DUO-ICT were
+        commissioned to develop a sovereign digital work environment for the
+        Dutch government. Several municipalities are piloting it.
+      links:
+        - label: Press release
+          href: https://www.ssc-ict.nl/actueel/nieuws/2026/8/6/ssc-ict-dictu-en-duo-ict-samen-aan-de-slag-voor-een-soevereine-digitale-werkomgeving
+        - label: Source code
+          href: https://codeberg.org/DAWO/DAWO-Core
+    - name: 'DINUM: Sécurix'
+      meta: France · Interministerial digital directorate
+      flag: flag:fr-4x3
+      text: >
+        DINUM, the French government's digital directorate, has announced its
+        move from Windows to Linux workstations. It develops Sécurix, a hardened
+        NixOS distribution built on ANSSI security recommendations, which is
+        currently in alpha.
+      links:
+        - label: Press release
+          href: https://www.numerique.gouv.fr/sinformer/espace-presse/souverainete-numerique-reduction-dependances-extra-europeennes/
+        - label: Source code
+          href: https://github.com/cloud-gouv/securix
+
+cta:
+  heading: Questions? Talk to us!
+  text: >
+    Planning to use NixOS for your government needs and have questions? The NixOS Foundation is happy to 
+    help you. Just schedule a call and we reach out to you with further information.
+  button:
+    label: Schedule a call
+    icon: mdi:calendar-clock
+    href: mailto:foundation@nixos.org?subject=NixOS%20for%20Governments%3A%20Call%20request
