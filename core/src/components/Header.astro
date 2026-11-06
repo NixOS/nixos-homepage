@@ -133,14 +133,13 @@ const navbarItemActiveStyle = `xl:text-primary-black bg-secondary-afghani-blue-9
   }
   toggleMenu();
 
-  // fallback for firefox (TODO: remove when timeline-scroll has landed in stable)
-  if (!CSS.supports('animation-timeline: scroll()')) {
-    const header = document.getElementById('site-header');
-    const updateScrolled = () =>
-      header.toggleAttribute('data-header-scrolled', window.scrollY > 0);
-    updateScrolled();
-    window.addEventListener('scroll', updateScrolled, { passive: true });
-  }
+  // TODO: Remove once firefox firefox scroll animation behavior is fixed
+  const header = document.getElementById('site-header');
+  const updateScrolled = () =>
+    header.toggleAttribute('data-header-scrolled', window.scrollY > 0);
+  updateScrolled();
+  window.addEventListener('scroll', updateScrolled, { passive: true });
+  window.addEventListener('pageshow', updateScrolled);
 
   navigationToggle.addEventListener('click', () => toggleMenu());
 </script>

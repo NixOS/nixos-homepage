@@ -231,9 +231,7 @@
     }
   }
 
-  @supports not (animation-timeline: scroll()) {
-    &:where([data-header-scrolled], [data-header-scrolled] *) {
-      @slot;
-    }
+  &:where([data-header-scrolled], [data-header-scrolled] *) {
+    @slot;
   }
 }
