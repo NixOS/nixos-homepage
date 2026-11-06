@@ -65,6 +65,7 @@ export default defineConfig({
     '/values': '/governance',
     '/donate': '/backing',
     '/back': '/backing',
+    '/sponsorship': '/backing/#sponsorship-tiers',
     '/qr01': '/why-nix' // QR code on the NixOS banner
   },
   vite: {
