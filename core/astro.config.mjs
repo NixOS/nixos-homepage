@@ -33,6 +33,7 @@ export default defineConfig({
     include: {
       mdi: ['*'],
       simpleIcons: ['*'],
+      flag: ['*'],
     },
   }), favicons({
     input: {
