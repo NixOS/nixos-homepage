@@ -97,10 +97,22 @@ adopters:
         - label: Source code
           href: https://github.com/cloud-gouv/securix
 
+faq:
+  heading: Frequently Asked Questions
+  text: >
+    Lorem Ipsum Dolor
+  questions:
+    - question: Quesiton 1
+      answer: Answer 1
+    - question: Quesiton 2
+      answer: Answer 2
+    - question: Quesiton 3
+      answer: Answer 3
+
 cta:
   heading: Questions? Talk to us!
   text: >
-    Planning to use NixOS for your government needs and have questions? The NixOS Foundation is happy to 
+    Planning to use NixOS for your government needs and have questions? The NixOS Foundation is happy to
     help you. Just schedule a call and we reach out to you with further information.
   button:
     label: Schedule a call
