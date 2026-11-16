@@ -1,0 +1,114 @@
+---
+import Card from '@/components/layout/Card.astro';
+import Divider from '@/components/layout/Divider.astro';
+import PageHeader from '@/components/layout/PageHeader.astro';
+import Button from '@/components/ui/Button.astro';
+import Quotation from '@/components/ui/Quotation.astro';
+import Headline from '@/components/ui/typography/Headline.astro';
+import Paragraph from '@/components/ui/typography/Paragraph.astro';
+import { Icon } from 'astro-icon/components';
+import { getEntry } from 'astro:content';
+
+import Segment from '@/components/layout/Segment.astro';
+import FeatureBox from '@/components/pages/why-nix/FeatureBox.astro';
+import Link from '@/components/util/Link.astro';
+import Layout from '@/layouts/Layout.astro';
+
+const { data: governments } = await getEntry('explore', 'governments');
+---
+
+<Layout title="NixOS for Governments">
+  <PageHeader text="NixOS for Governments" />
+  <Segment variant="white" container class="py-12">
+    <Paragraph class="mb-6">{governments.intro}</Paragraph>
+    <Headline variant="blue" level={2} class="mb-6">
+      {governments.benefits.heading}
+    </Headline>
+    <div class="grid gap-4 md:grid-cols-3">
+      {governments.benefits.items.map((benefit) => (
+        <FeatureBox title={benefit.title} icon={benefit.icon}>
+          {benefit.text}
+        </FeatureBox>
+      ))}
+    </div>
+  </Segment>
+  <Divider style="slope" mirrorX mirrorY />
+  <Segment variant="blue" container class="py-12">
+    <Headline variant="white" level={2} class="mb-6">
+      {governments.quotes.heading}
+    </Headline>
+    {governments.quotes.intro && (
+      <Paragraph variant="white" class="mb-6">
+        {governments.quotes.intro}
+      </Paragraph>
+    )}
+    <div>
+      {governments.quotes.items.map((quote) => (
+        <Quotation dark>
+          <Paragraph variant="white">{quote.text}</Paragraph>
+          <Paragraph variant="white" size="sm" class="text-right italic mt-2">
+            {quote.author}
+          </Paragraph>
+        </Quotation>
+      ))}
+    </div>
+  </Segment>
+  <Divider style="slope" mirrorX />
+  <Segment variant="white" container class="py-12">
+    <Headline variant="blue" level={2} class="mb-6">
+      {governments.adopters.heading}
+    </Headline>
+    {governments.adopters.intro && (
+      <Paragraph class="mb-6">{governments.adopters.intro}</Paragraph>
+    )}
+    <ul class="flex flex-col gap-4">
+      {governments.adopters.items.map((adopter) => (
+        <Card
+          tag="li"
+          variant="outline"
+          padding="lg"
+          class="flex flex-col gap-4"
+        >
+          <div class="flex items-center gap-4">
+            <Icon
+              name={adopter.flag}
+              class="h-9 w-12 shrink-0 rounded-sm ring-1 ring-secondary-afghani-blue"
+              aria-hidden="true"
+            />
+            <div>
+              <Headline level={3} variant="blue">
+                {adopter.name}
+              </Headline>
+              <Paragraph size="sm">{adopter.meta}</Paragraph>
+            </div>
+          </div>
+          <Paragraph class="flex-1">{adopter.text}</Paragraph>
+          <div class="flex flex-wrap gap-x-6 gap-y-2">
+            {adopter.links.map((link) => (
+              <Link variant="blue" href={link.href}>
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </Card>
+      ))}
+    </ul>
+  </Segment>
+  <Divider style="slope" mirrorY />
+  <Segment variant="blue" container class="py-12">
+    <Headline variant="white" level={2} class="mb-6">
+      {governments.cta.heading}
+    </Headline>
+    <Paragraph variant="white" size="lg" class="mb-6">
+      {governments.cta.text}
+    </Paragraph>
+    <Button
+      color="white"
+      icon={governments.cta.button.icon}
+      classList={['inline-flex']}
+      href={governments.cta.button.href}
+    >
+      {governments.cta.button.label}
+    </Button>
+  </Segment>
+</Layout>
