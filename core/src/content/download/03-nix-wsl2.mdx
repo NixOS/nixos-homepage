@@ -9,19 +9,29 @@ import CodeBlock from '../../components/layout/CodeBlock.astro';
 
 ### Multi-user installation (Requires WSL with systemd enabled)
 
-WSL versions 0.67.6 and above has systemd support.
+WSL versions 0.67.6 and above have systemd support.
 Follow
 [Microsoft's systemd guide](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl)
 to configure it, and then install Nix using:
 
 ```bash prompt
-$ curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
+$ curl --proto '=https' --tlsv1.2 -sSfL https://channels.nixos.org/nix-latest/nix-installer | sh -s -- install
 ```
 
 ### Single-user installation
 
-Install Nix via the [single-user installation](/manual/nix/stable/installation/single-user)
+For WSL2 without systemd, use the shell installer for a [single-user installation](/manual/nix/stable/installation/single-user):
 
 ```bash prompt
 $ curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --no-daemon
 ```
+
+### Uninstalling
+
+To remove Nix installed with the Nix Installer, run:
+
+```bash prompt
+$ /nix/nix-installer uninstall
+```
+
+For installations made with the shell installer, follow the [manual uninstallation instructions](/manual/nix/stable/installation/uninstall#single-user).
