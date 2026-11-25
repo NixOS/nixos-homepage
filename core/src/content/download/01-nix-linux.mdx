@@ -10,7 +10,7 @@ icon: mdi:linux
 Run the <span class="font-bold">recommended</span> multi-user installation:
 
 ```bash prompt
-$ curl --proto '=https' --tlsv1.2 -sSfL https://channels.nixos.org/nix-latest/nix-installer | sh -s -- install
+$ curl -sSfL https://channels.nixos.org/nix-latest/nix-installer | sh -s -- install
 ```
 
 We recommend the multi-user install if you are on Linux running systemd and you can authenticate with `sudo`.
@@ -21,7 +21,7 @@ For a single-user installation or a platform not supported by the Nix Installer,
 To perform a [single-user installation](/manual/nix/stable/installation/single-user):
 
 ```bash prompt
-$ curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --no-daemon
+$ curl -sSfL https://channels.nixos.org/nix-latest/install | sh -s -- --no-daemon
 ```
 
 Above command will perform a single-user installation of Nix, meaning that `nix` is owned by the invoking user. You should run this under your usual user account, not as `root`. The script will invoke `sudo` to create `/nix` if it doesn’t already exist.

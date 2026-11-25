@@ -15,7 +15,7 @@ Follow
 to configure it, and then install Nix using:
 
 ```bash prompt
-$ curl --proto '=https' --tlsv1.2 -sSfL https://channels.nixos.org/nix-latest/nix-installer | sh -s -- install
+$ curl -sSfL https://channels.nixos.org/nix-latest/nix-installer | sh -s -- install
 ```
 
 ### Single-user installation
@@ -23,7 +23,7 @@ $ curl --proto '=https' --tlsv1.2 -sSfL https://channels.nixos.org/nix-latest/ni
 For WSL2 without systemd, use the shell installer for a [single-user installation](/manual/nix/stable/installation/single-user):
 
 ```bash prompt
-$ curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --no-daemon
+$ curl -sSfL https://channels.nixos.org/nix-latest/install | sh -s -- --no-daemon
 ```
 
 ### Uninstalling
