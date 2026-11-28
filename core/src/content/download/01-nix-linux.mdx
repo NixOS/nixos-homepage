@@ -7,20 +7,21 @@ icon: mdi:linux
 
 ### Multi-user installation (recommended)
 
-Install Nix via the <span class="font-bold">recommended</span> [multi-user installation](/manual/nix/stable/installation/multi-user):
+Run the <span class="font-bold">recommended</span> multi-user installation:
 
 ```bash prompt
-$ curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
+$ curl -sSfL https://channels.nixos.org/nix-latest/nix-installer | sh -s -- install
 ```
 
-We recommend the multi-user install if you are on Linux running systemd, with SELinux disabled and you can authenticate with `sudo`.
+We recommend the multi-user install if you are on Linux running systemd and you can authenticate with `sudo`.
 
 ### Single-user installation
 
-Install Nix via the [single-user installation](/manual/nix/stable/installation/single-user):
+For a single-user installation or a platform not supported by the Nix Installer, use the shell installer.
+To perform a [single-user installation](/manual/nix/stable/installation/single-user):
 
 ```bash prompt
-$ curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --no-daemon
+$ curl -sSfL https://channels.nixos.org/nix-latest/install | sh -s -- --no-daemon
 ```
 
 Above command will perform a single-user installation of Nix, meaning that `nix` is owned by the invoking user. You should run this under your usual user account, not as `root`. The script will invoke `sudo` to create `/nix` if it doesn’t already exist.
@@ -38,5 +39,14 @@ This depends on your requirements, but here is a short list of reasons why <span
 #### Cons
 
 - Requires `root` to run the daemon
-- More involved installation (creation of `nixbld* users`, installing a systemd unit, ...
-- Harder to uninstall
+- The installer creates dedicated build users and installs a systemd unit.
+
+### Uninstalling
+
+To remove Nix installed with the Nix Installer, run:
+
+```bash prompt
+$ /nix/nix-installer uninstall
+```
+
+For installations made with the shell installer, follow the [manual uninstallation instructions](/manual/nix/stable/installation/uninstall#single-user).
