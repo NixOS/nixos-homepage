@@ -19,6 +19,11 @@ const { Content } = await render(entry);
 ---
 
 <Layout title={entry.data.name}>
+  {entry.data.contact
+    ?.filter((contact) => contact.relMe)
+    .map((contact) => (
+      <link slot="head" rel="me" href={contact.href} />
+    ))}
   <PageHeader text={entry.data.name} parentPath="/community" />
   <Container class="my-8">
     <MembersDisplay
